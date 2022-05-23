@@ -9,7 +9,7 @@ var searchData=
   ['histcell_6',['histcell',['../d4/d7d/jquant2_8c.html#ae627fdbc1e927fc218ba7c9e620967f3',1,'jquant2.c']]],
   ['histptr_7',['histptr',['../d4/d7d/jquant2_8c.html#a710cf6081e2a324067ee507966b7e44c',1,'jquant2.c']]],
   ['holder_8',['Holder',['../d4/d6e/classjuce_1_1_accessible_obj_c_class.html#a062d238de1461db5de06812a28fe07ec',1,'juce::AccessibleObjCClass']]],
-  ['hostedparameter_9',['HostedParameter',['../d1/d7b/class_audio_plugin_instance.html#ae9ca8827582b59698a65d5fca991db48',1,'AudioPluginInstance']]],
+  ['hostedparameter_9',['HostedParameter',['../da/db5/group__juce__audio__processors-processors.html#ae9ca8827582b59698a65d5fca991db48',1,'AudioPluginInstance']]],
   ['hstring_10',['HSTRING',['../d7/dcd/namespacejuce.html#a905beb03d3578324284c52e0a417f22c',1,'juce']]],
   ['htouchinput_11',['HTOUCHINPUT',['../d7/dcd/namespacejuce.html#aa5e4d9e9b16fd4aa3bb65424656a83bc',1,'juce']]],
   ['huff_5fentropy_5fptr_12',['huff_entropy_ptr',['../d5/da8/jchuff_8c.html#affce96a1cce448f0bd2b830395f68cca',1,'jchuff.c']]],

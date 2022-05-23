@@ -1,0 +1,88 @@
+var group__juce__gui__basics_desktop =
+[
+    [ "FocusChangeListener", "df/d9c/group__juce__gui__basics-desktop.html#dc/d2c/class_focus_change_listener", [
+      [ "~FocusChangeListener", "df/d9c/group__juce__gui__basics-desktop.html#a4a1966945000a9d79e2592d30c0bd49a", null ],
+      [ "globalFocusChanged", "df/d9c/group__juce__gui__basics-desktop.html#aea1c72e9c4d918e41c729d79592fa956", null ]
+    ] ],
+    [ "DarkModeSettingListener", "df/d9c/group__juce__gui__basics-desktop.html#d5/dc3/class_dark_mode_setting_listener", [
+      [ "~DarkModeSettingListener", "df/d9c/group__juce__gui__basics-desktop.html#a1b4c92f2c4a9db7b9c0e64fa26a6baf8", null ],
+      [ "darkModeSettingChanged", "df/d9c/group__juce__gui__basics-desktop.html#ad8907ba0d4d9ec206794a21ed8dde4b2", null ]
+    ] ],
+    [ "Desktop", "df/d9c/group__juce__gui__basics-desktop.html#d3/dee/class_desktop", [
+      [ "DisplayOrientation", "df/d9c/group__juce__gui__basics-desktop.html#a5e06947d2d1295bdb6f5c4fab7beb98a", [
+        [ "upright", "df/d9c/group__juce__gui__basics-desktop.html#a5e06947d2d1295bdb6f5c4fab7beb98aaced7253546b0f2e73e4dd08bcb60c9f8", null ],
+        [ "upsideDown", "df/d9c/group__juce__gui__basics-desktop.html#a5e06947d2d1295bdb6f5c4fab7beb98aa5820a6ffe2f7f012a16a1bd57e304b91", null ],
+        [ "rotatedClockwise", "df/d9c/group__juce__gui__basics-desktop.html#a5e06947d2d1295bdb6f5c4fab7beb98aae1e0629de1668ef16f700b7278fd0f04", null ],
+        [ "rotatedAntiClockwise", "df/d9c/group__juce__gui__basics-desktop.html#a5e06947d2d1295bdb6f5c4fab7beb98aab48176789b5764aae6aae6a393916712", null ],
+        [ "allOrientations", "df/d9c/group__juce__gui__basics-desktop.html#a5e06947d2d1295bdb6f5c4fab7beb98aacb260a5600c352a166edd836a2305a06", null ]
+      ] ],
+      [ "addDarkModeSettingListener", "df/d9c/group__juce__gui__basics-desktop.html#ab825c90941e7dd921f2bb524e4fc2b07", null ],
+      [ "addFocusChangeListener", "df/d9c/group__juce__gui__basics-desktop.html#a0db6055049b8268af05e51e55f377586", null ],
+      [ "addGlobalMouseListener", "df/d9c/group__juce__gui__basics-desktop.html#add528b1597a432f2e4cb9b10314fc210", null ],
+      [ "beginDragAutoRepeat", "df/d9c/group__juce__gui__basics-desktop.html#a484c8460c95255150aef4dbe1909ae9f", null ],
+      [ "findComponentAt", "df/d9c/group__juce__gui__basics-desktop.html#a60f4a595660beaa9a70581ddd28c19d3", null ],
+      [ "getAnimator", "df/d9c/group__juce__gui__basics-desktop.html#ad52c8dba1af50279acdfe5c7ff9ad9c0", null ],
+      [ "getComponent", "df/d9c/group__juce__gui__basics-desktop.html#a87658886a2fc539f49a8ea533b6db66f", null ],
+      [ "getCurrentOrientation", "df/d9c/group__juce__gui__basics-desktop.html#a02ae21e312faf1715e8311f1f53e5e00", null ],
+      [ "getDefaultLookAndFeel", "df/d9c/group__juce__gui__basics-desktop.html#aac7db53a2eaa85778363017a569f4afa", null ],
+      [ "getDisplays", "df/d9c/group__juce__gui__basics-desktop.html#a024778a0833810513d24a44e7306d117", null ],
+      [ "getDraggingMouseSource", "df/d9c/group__juce__gui__basics-desktop.html#aec6c1dff717c385403a11942297a585b", null ],
+      [ "getGlobalScaleFactor", "df/d9c/group__juce__gui__basics-desktop.html#a9d3762d46b652cd0249e6845229f3b4c", null ],
+      [ "getKioskModeComponent", "df/d9c/group__juce__gui__basics-desktop.html#ad996542b140ccbbf89b8ca79ef648ab5", null ],
+      [ "getMainMouseSource", "df/d9c/group__juce__gui__basics-desktop.html#a56b73809a55ec618201661f163ff00dc", null ],
+      [ "getMouseButtonClickCounter", "df/d9c/group__juce__gui__basics-desktop.html#aedc0ee3a5d19297c0163bc5a160b2ee4", null ],
+      [ "getMouseSource", "df/d9c/group__juce__gui__basics-desktop.html#ad3a66ce10921087395d259b8b3798849", null ],
+      [ "getMouseSources", "df/d9c/group__juce__gui__basics-desktop.html#a96bf71c027e3d743b157629acb463225", null ],
+      [ "getMouseWheelMoveCounter", "df/d9c/group__juce__gui__basics-desktop.html#aca2d34fe675f71a0ba3a7335fd169e0e", null ],
+      [ "getNumComponents", "df/d9c/group__juce__gui__basics-desktop.html#a74081737d1c862fdcce6bb2eb24901f3", null ],
+      [ "getNumDraggingMouseSources", "df/d9c/group__juce__gui__basics-desktop.html#ab58864358ece4bdfea451efc7a308379", null ],
+      [ "getNumMouseSources", "df/d9c/group__juce__gui__basics-desktop.html#a7dc6e7f8c3c94ffa20584305d51133d2", null ],
+      [ "getOrientationsEnabled", "df/d9c/group__juce__gui__basics-desktop.html#ac18d391af21fd546fc059c77014a4c9b", null ],
+      [ "isDarkModeActive", "df/d9c/group__juce__gui__basics-desktop.html#a33ca1091178824b63a8e8eaf14f3e7bb", null ],
+      [ "isHeadless", "df/d9c/group__juce__gui__basics-desktop.html#ae05cdf7a1a2d4a78a17eb389653b1cd7", null ],
+      [ "isOrientationEnabled", "df/d9c/group__juce__gui__basics-desktop.html#a501649988905cfa81e1a5798b2bc5572", null ],
+      [ "removeDarkModeSettingListener", "df/d9c/group__juce__gui__basics-desktop.html#a171fe7bdeb42a1922f357ab65a71f4a8", null ],
+      [ "removeFocusChangeListener", "df/d9c/group__juce__gui__basics-desktop.html#af428140675315bed1cec0494ec70007a", null ],
+      [ "removeGlobalMouseListener", "df/d9c/group__juce__gui__basics-desktop.html#a6051a5203c21377974a1f65c0acd4acc", null ],
+      [ "setDefaultLookAndFeel", "df/d9c/group__juce__gui__basics-desktop.html#a726a6fd8120c6b64a85ca382a9208c67", null ],
+      [ "setGlobalScaleFactor", "df/d9c/group__juce__gui__basics-desktop.html#a1a10b63e1495aac17b5848335c6ea4cf", null ],
+      [ "setKioskModeComponent", "df/d9c/group__juce__gui__basics-desktop.html#a8fa4033714b5a9cd0714c9b9633b3366", null ],
+      [ "setOrientationsEnabled", "df/d9c/group__juce__gui__basics-desktop.html#a4c4e91683ca8ffef6724650b90b17293", null ],
+      [ "Component", "df/d9c/group__juce__gui__basics-desktop.html#a90717717700965c100968cff0188e244", null ],
+      [ "ComponentPeer", "df/d9c/group__juce__gui__basics-desktop.html#aeec6ceefbdc3b19e8f650d96f521cf3a", null ],
+      [ "DeletedAtShutdown", "df/d9c/group__juce__gui__basics-desktop.html#a66ca5fe10d82041860ba76363345fddd", null ],
+      [ "Displays", "df/d9c/group__juce__gui__basics-desktop.html#af2aa5afb6ba8acb24e156284fc503bd9", null ],
+      [ "MouseInputSourceInternal", "df/d9c/group__juce__gui__basics-desktop.html#ae2f97f56ad3546acd77f6715a8acad30", null ],
+      [ "TopLevelWindowManager", "df/d9c/group__juce__gui__basics-desktop.html#a9a4e1d9ecf22ab34b4c9ec0e44c7a3e1", null ]
+    ] ],
+    [ "Displays", "df/d9c/group__juce__gui__basics-desktop.html#d6/d3d/class_displays", [
+      [ "Display", "db/dd6/struct_displays_1_1_display.html", [
+        [ "dpi", "db/dd6/struct_displays_1_1_display.html#af9762583627b9e317179e9289bd1d4b8", null ],
+        [ "isMain", "db/dd6/struct_displays_1_1_display.html#ab2ff0443fdf8b1ff1c70fe4527d43436", null ],
+        [ "safeAreaInsets", "db/dd6/struct_displays_1_1_display.html#a1d9c2cbdd9e267917f05e4b9244496f1", null ],
+        [ "scale", "db/dd6/struct_displays_1_1_display.html#a611a3fe584fa04e86538866af0e5d788", null ],
+        [ "topLeftPhysical", "db/dd6/struct_displays_1_1_display.html#a7d63e713f65368172d13edce7827157a", null ],
+        [ "totalArea", "db/dd6/struct_displays_1_1_display.html#a9f1661992d7c25fa422738784f7d8b1e", null ],
+        [ "userArea", "db/dd6/struct_displays_1_1_display.html#aa4b3d9d1db526136b527aeb6f740bd9f", null ]
+      ] ],
+      [ "~Displays", "df/d9c/group__juce__gui__basics-desktop.html#a2cf05a69a989ae7eed8f677ac371392a", null ],
+      [ "findDisplayForPoint", "df/d9c/group__juce__gui__basics-desktop.html#a163e7d023a5bd3eab98df1927d9f0be2", null ],
+      [ "findDisplayForRect", "df/d9c/group__juce__gui__basics-desktop.html#a4d20743efb34b28de23cd53f1313c1f8", null ],
+      [ "getDisplayContaining", "df/d9c/group__juce__gui__basics-desktop.html#aaeb28c685384bbaeb973457e38be9685", null ],
+      [ "getDisplayForPoint", "df/d9c/group__juce__gui__basics-desktop.html#a285d4979829d55f019d457c423caa8ac", null ],
+      [ "getDisplayForRect", "df/d9c/group__juce__gui__basics-desktop.html#a740163af356e280ea60ffef59adc159e", null ],
+      [ "getMainDisplay", "df/d9c/group__juce__gui__basics-desktop.html#a9a515073db8f1a1a0a3a4cee826cf4b4", null ],
+      [ "getPrimaryDisplay", "df/d9c/group__juce__gui__basics-desktop.html#a9bf0b06e3918fbb21501389b82caacf5", null ],
+      [ "getRectangleList", "df/d9c/group__juce__gui__basics-desktop.html#ac8a978369c37a7f8da2d71e406b6bc1a", null ],
+      [ "getTotalBounds", "df/d9c/group__juce__gui__basics-desktop.html#af8ca8264e25a9f64027ec1ad1f88c0bf", null ],
+      [ "logicalToPhysical", "df/d9c/group__juce__gui__basics-desktop.html#aee0c1a82aab325d5fae2aab08563844e", null ],
+      [ "logicalToPhysical", "df/d9c/group__juce__gui__basics-desktop.html#a5ca6a2e73f933f2fb0967f3ffc0697b3", null ],
+      [ "logicalToPhysical", "df/d9c/group__juce__gui__basics-desktop.html#a45e7d33e8af3d656251d5bc14bb3097d", null ],
+      [ "physicalToLogical", "df/d9c/group__juce__gui__basics-desktop.html#a1b11eceaa72f77bceb0e03493207611b", null ],
+      [ "physicalToLogical", "df/d9c/group__juce__gui__basics-desktop.html#a1a04babcadb929c7f65679d1529846f0", null ],
+      [ "physicalToLogical", "df/d9c/group__juce__gui__basics-desktop.html#afee3881e513f761d574cdcacd613786a", null ],
+      [ "refresh", "df/d9c/group__juce__gui__basics-desktop.html#aa562f640a48af99d487c97a331bbc8a5", null ],
+      [ "Desktop", "df/d9c/group__juce__gui__basics-desktop.html#a64b53215e12b57b18e3259620a91aa51", null ],
+      [ "displays", "df/d9c/group__juce__gui__basics-desktop.html#a06cb25ef3be2ed477d2081e5a16369e2", null ]
+    ] ]
+];

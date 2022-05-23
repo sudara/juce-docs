@@ -1,9 +1,9 @@
 var searchData=
 [
   ['namedarea_0',['NamedArea',['../db/df1/structjuce_1_1_grid_1_1_placement_helpers_1_1_named_area.html',1,'juce::Grid::PlacementHelpers']]],
-  ['namedpipe_1',['NamedPipe',['../d5/d78/class_named_pipe.html',1,'']]],
+  ['namedpipe_1',['NamedPipe',['../db/d14/group__juce__core-network.html#d5/d78/class_named_pipe',1,'']]],
   ['namedvalue_2',['NamedValue',['../d7/da1/struct_named_value_set_1_1_named_value.html',1,'NamedValueSet']]],
-  ['namedvalueset_3',['NamedValueSet',['../d4/d60/class_named_value_set.html',1,'']]],
+  ['namedvalueset_3',['NamedValueSet',['../d9/dad/group__juce__core-containers.html#d4/d60/class_named_value_set',1,'']]],
   ['nameforwarder_4',['NameForwarder',['../d9/da5/structdetail_1_1_name_forwarder.html',1,'detail']]],
   ['nameforwarder_3c_20detail_3a_3afloatvectoroperationsbase_3c_20float_2c_20int_20_3e_2c_20detail_3a_3afloatvectoroperationsbase_3c_20float_2c_20size_5ft_20_3e_2c_20detail_3a_3afloatvectoroperationsbase_3c_20double_2c_20int_20_3e_2c_20detail_3a_3afloatvectoroperationsbase_3c_20double_2c_20size_5ft_20_3e_20_3e_5',['NameForwarder&lt; detail::FloatVectorOperationsBase&lt; float, int &gt;, detail::FloatVectorOperationsBase&lt; float, size_t &gt;, detail::FloatVectorOperationsBase&lt; double, int &gt;, detail::FloatVectorOperationsBase&lt; double, size_t &gt; &gt;',['../d9/da5/structdetail_1_1_name_forwarder.html',1,'detail']]],
   ['nameforwarder_3c_20head_20_3e_6',['NameForwarder&lt; Head &gt;',['../dc/d4e/structdetail_1_1_name_forwarder_3_01_head_01_4.html',1,'detail']]],
@@ -16,13 +16,13 @@ var searchData=
   ['nativedarkmodechangedetectorimpl_13',['NativeDarkModeChangeDetectorImpl',['../d1/d27/classjuce_1_1_desktop_1_1_native_dark_mode_change_detector_impl.html',1,'juce::Desktop']]],
   ['nativeendian_14',['NativeEndian',['../df/de0/class_audio_data_1_1_native_endian.html',1,'AudioData']]],
   ['nativefunctionargs_15',['NativeFunctionArgs',['../dd/d4e/structvar_1_1_native_function_args.html',1,'var']]],
-  ['nativeimagetype_16',['NativeImageType',['../d0/dbd/class_native_image_type.html',1,'']]],
+  ['nativeimagetype_16',['NativeImageType',['../de/ddc/group__juce__graphics-images.html#d0/dbd/class_native_image_type',1,'']]],
   ['nativeimpl_17',['NativeImpl',['../d4/db8/classjuce_1_1_scoped_thread_d_p_i_awareness_setter_1_1_native_impl.html',1,'juce::ScopedThreadDPIAwarenessSetter']]],
-  ['nativemessagebox_18',['NativeMessageBox',['../d2/d25/class_native_message_box.html',1,'']]],
+  ['nativemessagebox_18',['NativeMessageBox',['../da/ddc/group__juce__gui__basics-windows.html#d2/d25/class_native_message_box',1,'']]],
   ['naturalfilecomparator_19',['NaturalFileComparator',['../da/de1/struct_file_1_1_natural_file_comparator.html',1,'File']]],
   ['negate_20',['Negate',['../dc/d47/classjuce_1_1_expression_1_1_helpers_1_1_negate.html',1,'juce::Expression::Helpers']]],
-  ['networkservicediscovery_21',['NetworkServiceDiscovery',['../d1/d35/struct_network_service_discovery.html',1,'']]],
-  ['newline_22',['NewLine',['../dd/d93/class_new_line.html',1,'']]],
+  ['networkservicediscovery_21',['NetworkServiceDiscovery',['../da/ddc/group__juce__events-interprocess.html#d1/d35/struct_network_service_discovery',1,'']]],
+  ['newline_22',['NewLine',['../d1/de9/group__juce__core-text.html#dd/d93/class_new_line',1,'']]],
   ['newoperator_23',['NewOperator',['../df/d7f/structjuce_1_1_javascript_engine_1_1_root_object_1_1_new_operator.html',1,'juce::JavascriptEngine::RootObject']]],
   ['node_24',['Node',['../d2/de4/class_audio_processor_graph_1_1_node.html',1,'AudioProcessorGraph']]],
   ['nodeandchannel_25',['NodeAndChannel',['../d7/d5b/struct_audio_processor_graph_1_1_node_and_channel.html',1,'AudioProcessorGraph']]],
@@ -37,7 +37,7 @@ var searchData=
   ['nonshadercontext_34',['NonShaderContext',['../de/d9a/structjuce_1_1_open_g_l_rendering_1_1_non_shader_context.html',1,'juce::OpenGLRendering']]],
   ['nonuniform_35',['NonUniform',['../d6/d0d/structdsp_1_1_convolution_1_1_non_uniform.html',1,'dsp::Convolution']]],
   ['normalcomponentwrapper_36',['NormalComponentWrapper',['../db/db0/structjuce_1_1_popup_menu_1_1_helper_classes_1_1_normal_component_wrapper.html',1,'juce::PopupMenu::HelperClasses']]],
-  ['normalisablerange_37',['NormalisableRange',['../dd/d38/class_normalisable_range.html',1,'']]],
+  ['normalisablerange_37',['NormalisableRange',['../d6/dd8/group__juce__core-maths.html#dd/d38/class_normalisable_range',1,'']]],
   ['noteandvelocity_38',['NoteAndVelocity',['../d7/dc4/struct_keyboard_component_base_1_1_note_and_velocity.html',1,'KeyboardComponentBase']]],
   ['noteexpressiontextevent_39',['NoteExpressionTextEvent',['../d0/da9/struct_steinberg_1_1_vst_1_1_note_expression_text_event.html',1,'Steinberg::Vst']]],
   ['noteexpressiontypeinfo_40',['NoteExpressionTypeInfo',['../db/dea/struct_steinberg_1_1_vst_1_1_note_expression_type_info.html',1,'Steinberg::Vst']]],
@@ -55,5 +55,5 @@ var searchData=
   ['nsviewcomponentpeerwrapper_52',['NSViewComponentPeerWrapper',['../d5/df4/structjuce_1_1_n_s_view_component_peer_wrapper.html',1,'juce']]],
   ['nsviewcomponentpeerwrapper_3c_20objcclass_3c_20nsview_20_3e_20_3e_53',['NSViewComponentPeerWrapper&lt; ObjCClass&lt; NSView &gt; &gt;',['../d5/df4/structjuce_1_1_n_s_view_component_peer_wrapper.html',1,'juce']]],
   ['nsviewcomponentpeerwrapper_3c_20objcclass_3c_20nswindow_20_3e_20_3e_54',['NSViewComponentPeerWrapper&lt; ObjCClass&lt; NSWindow &gt; &gt;',['../d5/df4/structjuce_1_1_n_s_view_component_peer_wrapper.html',1,'juce']]],
-  ['nullcheckedinvocation_55',['NullCheckedInvocation',['../d2/d4a/struct_null_checked_invocation.html',1,'']]]
+  ['nullcheckedinvocation_55',['NullCheckedInvocation',['../dc/d57/group__juce__core-misc.html#d2/d4a/struct_null_checked_invocation',1,'']]]
 ];

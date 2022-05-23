@@ -1,0 +1,4 @@
+var struct_video_component_1_1_pimpl_1_1_player_controller_base_1_1_juce_player_status_observer_class =
+[
+    [ "JucePlayerStatusObserverClass", "da/d78/struct_video_component_1_1_pimpl_1_1_player_controller_base_1_1_juce_player_status_observer_class.html#ae2e9c9386eb2d027a8c5c0304c07ba6b", null ]
+];

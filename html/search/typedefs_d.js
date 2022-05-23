@@ -1,13 +1,13 @@
 var searchData=
 [
   ['nativefloat32_0',['NativeFloat32',['../d2/d02/structjuce_1_1_buffer_helpers_3_01int16_01_4.html#a42166689bbb7b61199a8898c9db47fae',1,'juce::BufferHelpers&lt; int16 &gt;::NativeFloat32()'],['../d7/d48/structjuce_1_1_buffer_helpers_3_01float_01_4.html#a3909c001f03522a13c88fee4e7900ac1',1,'juce::BufferHelpers&lt; float &gt;::NativeFloat32()'],['../de/d66/structjuce_1_1_oboe_audio_i_o_device_buffer_helpers_3_01int16_01_4.html#a73fe869e3fdae50acfce6b62c06541b2',1,'juce::OboeAudioIODeviceBufferHelpers&lt; int16 &gt;::NativeFloat32()']]],
-  ['nativefunction_1',['NativeFunction',['../da/dae/classvar.html#ae639f9a33534812a529a97740682d992',1,'var']]],
+  ['nativefunction_1',['NativeFunction',['../d9/dad/group__juce__core-containers.html#ae639f9a33534812a529a97740682d992',1,'var']]],
   ['nativeint16_2',['NativeInt16',['../de/d66/structjuce_1_1_oboe_audio_i_o_device_buffer_helpers_3_01int16_01_4.html#a54d305099ecf95a2ef34a4846bd77b0b',1,'juce::OboeAudioIODeviceBufferHelpers&lt; int16 &gt;']]],
   ['nativeops_3',['NativeOps',['../d3/d1c/structdsp_1_1_s_i_m_d_register.html#ab2a6e539ebdc6be03f6cd76cfca7ce53',1,'dsp::SIMDRegister']]],
   ['node_4',['Node',['../d4/d2b/structjuce_1_1_render_sequence_builder.html#ac51ce8b7cd652a634f7d0bb4a1619477',1,'juce::RenderSequenceBuilder']]],
   ['nodeid_5',['NodeID',['../d4/d2b/structjuce_1_1_render_sequence_builder.html#a15208a9a5bf0b92e3a477c4b583f852f',1,'juce::RenderSequenceBuilder']]],
-  ['noninterleaveddest_6',['NonInterleavedDest',['../d8/dca/class_audio_data.html#a137657dae595bb879f1d545443b8431e',1,'AudioData']]],
-  ['noninterleavedsource_7',['NonInterleavedSource',['../d8/dca/class_audio_data.html#a8d95164a5d691272b00fbad4f690ba23',1,'AudioData']]],
+  ['noninterleaveddest_6',['NonInterleavedDest',['../de/db7/group__juce__audio__basics-buffers.html#a137657dae595bb879f1d545443b8431e',1,'AudioData']]],
+  ['noninterleavedsource_7',['NonInterleavedSource',['../de/db7/group__juce__audio__basics-buffers.html#a8d95164a5d691272b00fbad4f690ba23',1,'AudioData']]],
   ['noteexpressiontypeid_8',['NoteExpressionTypeID',['../d6/dd2/namespace_steinberg_1_1_vst.html#a83c64b6b28833bdf0ce3dbd5923aff52',1,'Steinberg::Vst']]],
   ['noteexpressionvalue_9',['NoteExpressionValue',['../d6/dd2/namespace_steinberg_1_1_vst.html#a643cdf5e9530c8bf3f2f7d01ed5c1203',1,'Steinberg::Vst']]],
   ['nsaccessibilitynotificationname_10',['NSAccessibilityNotificationName',['../d7/dcd/namespacejuce.html#a16d0f04facdd11d07fdff75a3d9eb6f7',1,'juce']]],

@@ -9,10 +9,10 @@ var searchData=
   ['block_5fstate_6',['block_state',['../d2/d0e/deflate_8c.html#a1048c01fb24f2195a6b9a2a7c12e9454',1,'deflate.c']]],
   ['boundarytype_7',['BoundaryType',['../d8/d39/namespacejuce_1_1_accessibility_text_helpers.html#a0457151ade54fef761e98bf17098a104',1,'juce::AccessibilityTextHelpers']]],
   ['boxtype_8',['BoxType',['../de/d0c/classjuce_1_1_audio_device_settings_panel_1_1_channel_selector_list_box.html#a415429ecb7802b6ac55301a9208e5c81',1,'juce::AudioDeviceSettingsPanel::ChannelSelectorListBox']]],
-  ['bubbleplacement_9',['BubblePlacement',['../dc/df1/class_bubble_component.html#aba96d481d723fd2549f497ccd7ed41a3',1,'BubbleComponent']]],
+  ['bubbleplacement_9',['BubblePlacement',['../d8/d66/group__juce__gui__basics-misc.html#aba96d481d723fd2549f497ccd7ed41a3',1,'BubbleComponent']]],
   ['busdirections_10',['BusDirections',['../d6/dd2/namespace_steinberg_1_1_vst.html#a04ba14395371c3f140e3907486f43377',1,'Steinberg::Vst']]],
   ['busflags_11',['BusFlags',['../d5/d1d/struct_steinberg_1_1_vst_1_1_bus_info.html#a53f52e5bb2f8ced69c685a1acc0e564c',1,'Steinberg::Vst::BusInfo']]],
   ['bustypes_12',['BusTypes',['../d6/dd2/namespace_steinberg_1_1_vst.html#a13e61f897e08892104887db0b6b27462',1,'Steinberg::Vst']]],
-  ['buttonstate_13',['ButtonState',['../d4/d77/class_button.html#ad8312db93093c21df8b1d2be74ae1957',1,'Button']]],
-  ['buttonstyle_14',['ButtonStyle',['../d3/d88/class_drawable_button.html#a7da653337d7329405ef9865cc35f612e',1,'DrawableButton']]]
+  ['buttonstate_13',['ButtonState',['../d5/db6/group__juce__gui__basics-buttons.html#ad8312db93093c21df8b1d2be74ae1957',1,'Button']]],
+  ['buttonstyle_14',['ButtonStyle',['../d5/db6/group__juce__gui__basics-buttons.html#a7da653337d7329405ef9865cc35f612e',1,'DrawableButton']]]
 ];

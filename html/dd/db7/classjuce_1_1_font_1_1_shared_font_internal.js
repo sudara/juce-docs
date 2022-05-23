@@ -1,0 +1,27 @@
+var classjuce_1_1_font_1_1_shared_font_internal =
+[
+    [ "SharedFontInternal", "dd/db7/classjuce_1_1_font_1_1_shared_font_internal.html#a0b23831aaec63f0d8113c6ebf637687b", null ],
+    [ "SharedFontInternal", "dd/db7/classjuce_1_1_font_1_1_shared_font_internal.html#a8d0b7ba31bb5426bdad4251726a0be25", null ],
+    [ "SharedFontInternal", "dd/db7/classjuce_1_1_font_1_1_shared_font_internal.html#a75d9f8ad93053b22faa4996668e046c2", null ],
+    [ "SharedFontInternal", "dd/db7/classjuce_1_1_font_1_1_shared_font_internal.html#a0ed943a296a94468ba7e8220b68fe8c7", null ],
+    [ "SharedFontInternal", "dd/db7/classjuce_1_1_font_1_1_shared_font_internal.html#ae5b438a864b7a1c7b0a443a8ee72dcda", null ],
+    [ "SharedFontInternal", "dd/db7/classjuce_1_1_font_1_1_shared_font_internal.html#a859af071a5839f87b181a855825fb63c", null ],
+    [ "checkTypefaceSuitability", "dd/db7/classjuce_1_1_font_1_1_shared_font_internal.html#a8082b41f61a7d2c3f010715fff6d97af", null ],
+    [ "getAscent", "dd/db7/classjuce_1_1_font_1_1_shared_font_internal.html#ad96a3af7ad8e5adcbbba71d806872d80", null ],
+    [ "getHeight", "dd/db7/classjuce_1_1_font_1_1_shared_font_internal.html#a5cc322488f8f708079f163577e7bf307", null ],
+    [ "getHorizontalScale", "dd/db7/classjuce_1_1_font_1_1_shared_font_internal.html#ac90481a05f102dc91d2babffc65480bb", null ],
+    [ "getKerning", "dd/db7/classjuce_1_1_font_1_1_shared_font_internal.html#a167e1ed2136a3f3f2e40d6306e66acaf", null ],
+    [ "getTypefaceName", "dd/db7/classjuce_1_1_font_1_1_shared_font_internal.html#a80eecccc6f7caca1731cb6db4a573435", null ],
+    [ "getTypefacePtr", "dd/db7/classjuce_1_1_font_1_1_shared_font_internal.html#a6c0659389c38da08571249997ced7cb2", null ],
+    [ "getTypefaceStyle", "dd/db7/classjuce_1_1_font_1_1_shared_font_internal.html#abbcb6102b3575b00f6af411a4e9a3eeb", null ],
+    [ "getUnderline", "dd/db7/classjuce_1_1_font_1_1_shared_font_internal.html#a19701068a8a2bea1a283edb8f980990a", null ],
+    [ "operator==", "dd/db7/classjuce_1_1_font_1_1_shared_font_internal.html#af1aff7454c390c54c043c817cfe4dee8", null ],
+    [ "setAscent", "dd/db7/classjuce_1_1_font_1_1_shared_font_internal.html#a9f5ece11c92cd43d417142daf07544b9", null ],
+    [ "setHeight", "dd/db7/classjuce_1_1_font_1_1_shared_font_internal.html#a5618c25fca27d08dc1b8258bdfb6d964", null ],
+    [ "setHorizontalScale", "dd/db7/classjuce_1_1_font_1_1_shared_font_internal.html#a0308edc4f8d5e955227a9785e1359342", null ],
+    [ "setKerning", "dd/db7/classjuce_1_1_font_1_1_shared_font_internal.html#aeb93afb46f6cee97c9af335d8ed2e370", null ],
+    [ "setTypeface", "dd/db7/classjuce_1_1_font_1_1_shared_font_internal.html#ac26089d04fe6925b232c0e59095fa7c3", null ],
+    [ "setTypefaceName", "dd/db7/classjuce_1_1_font_1_1_shared_font_internal.html#ae3e03d4cccd8be3f960394cef6d94d04", null ],
+    [ "setTypefaceStyle", "dd/db7/classjuce_1_1_font_1_1_shared_font_internal.html#a73bc94bcfc3a01f8ba646c45f3b2127b", null ],
+    [ "setUnderline", "dd/db7/classjuce_1_1_font_1_1_shared_font_internal.html#a6658e76270b29f5288d31f84f3096725", null ]
+];

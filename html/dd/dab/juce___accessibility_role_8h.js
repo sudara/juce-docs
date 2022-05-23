@@ -1,0 +1,36 @@
+var juce___accessibility_role_8h =
+[
+    [ "AccessibilityRole", "d7/d98/group__juce__gui__basics-accessibility.html#gaf1349587ab6cac7e882cd63e1976682c", [
+      [ "button", "d7/d98/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682cace50a09343724eb82df11390e2c1de18", null ],
+      [ "toggleButton", "d7/d98/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682ca23288070d70bf4cab9c872a69122d194", null ],
+      [ "radioButton", "d7/d98/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682ca2e7008a595f5b685cf288c4614cdd6fb", null ],
+      [ "comboBox", "d7/d98/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682ca9ae1381b12869863de7558f3e409f76f", null ],
+      [ "image", "d7/d98/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682ca78805a221a988e79ef3f42d7c5bfd418", null ],
+      [ "slider", "d7/d98/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682ca10bf08f0bbd6689475be65b4ae441bd9", null ],
+      [ "label", "d7/d98/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682cad304ba20e96d87411588eeabac850e34", null ],
+      [ "staticText", "d7/d98/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682ca456e9043e812627e960fce45168f8f86", null ],
+      [ "editableText", "d7/d98/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682ca68e62dc347dc38cebaae9686ff4037ad", null ],
+      [ "menuItem", "d7/d98/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682ca23799cd556bc3311f8fc3e8dd83c8b47", null ],
+      [ "menuBar", "d7/d98/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682ca5772d4d0f93680f63cdd08b5eb3a8745", null ],
+      [ "popupMenu", "d7/d98/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682cabe27c2833cfbd7ffce9806dc77107f8e", null ],
+      [ "table", "d7/d98/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682caaab9e1de16f38176f86d7a92ba337a8d", null ],
+      [ "tableHeader", "d7/d98/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682ca26ba19743fa1b879878dd9e65d63c3b5", null ],
+      [ "column", "d7/d98/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682ca1afd32818d1c9525f82aff4c09efd254", null ],
+      [ "row", "d7/d98/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682caf1965a857bc285d26fe22023aa5ab50d", null ],
+      [ "cell", "d7/d98/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682ca8d27600b0cae5308441ddf6d9bb3c74c", null ],
+      [ "hyperlink", "d7/d98/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682ca0f6811b05660fde57651fda214919653", null ],
+      [ "list", "d7/d98/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682ca10ae9fc7d453b0dd525d0edf2ede7961", null ],
+      [ "listItem", "d7/d98/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682cab2ccae59a7c62d25a281ce1ab70ec47c", null ],
+      [ "tree", "d7/d98/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682cac0af77cf8294ff93a5cdb2963ca9f038", null ],
+      [ "treeItem", "d7/d98/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682ca7e45214b5b35a9c04ea957905bfbc475", null ],
+      [ "progressBar", "d7/d98/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682ca9e14d62b580f97f6e3a0ec502ab394e5", null ],
+      [ "group", "d7/d98/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682cadb0f6f37ebeb6ea09489124345af2a45", null ],
+      [ "dialogWindow", "d7/d98/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682ca50328b0a44f9941c3ff8f90c21483688", null ],
+      [ "window", "d7/d98/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682ca05b8c74cbd96fbf2de4c1a352702fbf4", null ],
+      [ "scrollBar", "d7/d98/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682ca5d1f5486649a4bad621b1c4b13a5092e", null ],
+      [ "tooltip", "d7/d98/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682caddbfc1b6aa0ad4d79c5dac7aa3b44888", null ],
+      [ "splashScreen", "d7/d98/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682ca4850d0c3f2f158533b60acdad4ff9922", null ],
+      [ "ignored", "d7/d98/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682caf3f98c5d41d7c992a6fb63799f700f2b", null ],
+      [ "unspecified", "d7/d98/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682cad415f0e30c471dfdd9bc4f827329ef48", null ]
+    ] ]
+];

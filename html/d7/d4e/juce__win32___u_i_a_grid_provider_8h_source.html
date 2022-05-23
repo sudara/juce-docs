@@ -9,10 +9,14 @@
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../resize.js"></script>
+<script type="text/javascript" src="../../navtreedata.js"></script>
+<script type="text/javascript" src="../../navtree.js"></script>
 <link href="../../search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../search/searchdata.js"></script>
 <script type="text/javascript" src="../../search/search.js"></script>
-<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../doxygen-awesome.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -46,6 +50,23 @@ $(function() {
 /* @license-end */
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('d7/d4e/juce__win32___u_i_a_grid_provider_8h_source.html','../../'); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -60,11 +81,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="../../dir_4fef79e7177ba769987a8da36c892c5f.html">build</a></li><li class="navelem"><a class="el" href="../../dir_2d445fded5cdca954ddefd6aa28da941.html">juce_gui_basics</a></li><li class="navelem"><a class="el" href="../../dir_348cd95576883d7846fa9605fb467030.html">native</a></li><li class="navelem"><a class="el" href="../../dir_fb8e1741ad246d2784f2b9d146f97e02.html">accessibility</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle"><div class="title">juce_win32_UIAGridProvider.h</div></div>
 </div><!--header-->
@@ -107,15 +123,15 @@ $(function() {
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="comment">//==============================================================================</span></div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="../../d8/d6a/classjuce_1_1_u_i_a_grid_provider.html#afd440dde9a31e177f03706315f1e7e10">   37</a></span>    <a class="code hl_define" href="../../df/dec/juce__win32___com_smart_ptr_8h.html#adf7ea5b8ae4dd1bb0ef1193c5c758eba">JUCE_COMRESULT</a> <a class="code hl_function" href="../../d8/d6a/classjuce_1_1_u_i_a_grid_provider.html#afd440dde9a31e177f03706315f1e7e10">GetItem</a> (<span class="keywordtype">int</span> row, <span class="keywordtype">int</span> column, IRawElementProviderSimple** pRetVal)<span class="keyword"> override</span></div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <span class="keywordflow">return</span> withTableInterface (pRetVal, [&amp;] (<span class="keyword">const</span> <a class="code hl_class" href="../../d1/d2f/class_accessibility_table_interface.html">AccessibilityTableInterface</a>&amp; tableInterface)</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <span class="keywordflow">return</span> withTableInterface (pRetVal, [&amp;] (<span class="keyword">const</span> <a class="code hl_class" href="../../d7/d98/group__juce__gui__basics-accessibility.html#d1/d2f/class_accessibility_table_interface">AccessibilityTableInterface</a>&amp; tableInterface)</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        {</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>            <span class="keywordflow">if</span> (! <a class="code hl_function" href="../../d6/dd8/group__juce__core-maths.html#ga5762396fe2a5aa4c39b68ee5b70a96f8">isPositiveAndBelow</a> (row, tableInterface.<a class="code hl_function" href="../../d1/d2f/class_accessibility_table_interface.html#a72b03c9550a794616987102b7c3da6ae">getNumRows</a>())</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>                || ! <a class="code hl_function" href="../../d6/dd8/group__juce__core-maths.html#ga5762396fe2a5aa4c39b68ee5b70a96f8">isPositiveAndBelow</a> (column, tableInterface.<a class="code hl_function" href="../../d1/d2f/class_accessibility_table_interface.html#a6663691b3e461afca939e043546692c6">getNumColumns</a>()))</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>            <span class="keywordflow">if</span> (! <a class="code hl_function" href="../../d6/dd8/group__juce__core-maths.html#ga5762396fe2a5aa4c39b68ee5b70a96f8">isPositiveAndBelow</a> (row, tableInterface.<a class="code hl_function" href="../../d7/d98/group__juce__gui__basics-accessibility.html#a72b03c9550a794616987102b7c3da6ae">getNumRows</a>())</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>                || ! <a class="code hl_function" href="../../d6/dd8/group__juce__core-maths.html#ga5762396fe2a5aa4c39b68ee5b70a96f8">isPositiveAndBelow</a> (column, tableInterface.<a class="code hl_function" href="../../d7/d98/group__juce__gui__basics-accessibility.html#a6663691b3e461afca939e043546692c6">getNumColumns</a>()))</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>                <span class="keywordflow">return</span> E_INVALIDARG;</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>            <a class="code hl_define" href="../../d3/d4a/group__juce__core-system.html#ga0112339834a6548e4123e394b9ed95e2">JUCE_BEGIN_IGNORE_WARNINGS_GCC_LIKE</a> (<span class="stringliteral">&quot;-Wlanguage-extension-token&quot;</span>)</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            <span class="keywordflow">if</span> (<span class="keyword">auto</span>* handler = tableInterface.<a class="code hl_function" href="../../d1/d2f/class_accessibility_table_interface.html#ae83b30083f2e71423d3f3ea2a3c9d607">getCellHandler</a> (row, column))</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            <span class="keywordflow">if</span> (<span class="keyword">auto</span>* handler = tableInterface.<a class="code hl_function" href="../../d7/d98/group__juce__gui__basics-accessibility.html#ae83b30083f2e71423d3f3ea2a3c9d607">getCellHandler</a> (row, column))</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>                handler-&gt;getNativeImplementation()-&gt;QueryInterface (IID_PPV_ARGS (pRetVal));</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            <a class="code hl_define" href="../../d3/d4a/group__juce__core-system.html#ga157f2229764b17137d8814bec95df109">JUCE_END_IGNORE_WARNINGS_GCC_LIKE</a></div>
@@ -126,25 +142,25 @@ $(function() {
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="../../d8/d6a/classjuce_1_1_u_i_a_grid_provider.html#a4accaafc2c4e4cffc96f68e1e610b568">   56</a></span>    <a class="code hl_define" href="../../df/dec/juce__win32___com_smart_ptr_8h.html#adf7ea5b8ae4dd1bb0ef1193c5c758eba">JUCE_COMRESULT</a> <a class="code hl_function" href="../../d8/d6a/classjuce_1_1_u_i_a_grid_provider.html#a4accaafc2c4e4cffc96f68e1e610b568">get_RowCount</a> (<span class="keywordtype">int</span>* pRetVal)<span class="keyword"> override</span></div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordflow">return</span> withTableInterface (pRetVal, [&amp;] (<span class="keyword">const</span> <a class="code hl_class" href="../../d1/d2f/class_accessibility_table_interface.html">AccessibilityTableInterface</a>&amp; tableInterface)</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordflow">return</span> withTableInterface (pRetVal, [&amp;] (<span class="keyword">const</span> <a class="code hl_class" href="../../d7/d98/group__juce__gui__basics-accessibility.html#d1/d2f/class_accessibility_table_interface">AccessibilityTableInterface</a>&amp; tableInterface)</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        {</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>            *pRetVal = tableInterface.<a class="code hl_function" href="../../d1/d2f/class_accessibility_table_interface.html#a72b03c9550a794616987102b7c3da6ae">getNumRows</a>();</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>            *pRetVal = tableInterface.<a class="code hl_function" href="../../d7/d98/group__juce__gui__basics-accessibility.html#a72b03c9550a794616987102b7c3da6ae">getNumRows</a>();</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>            <span class="keywordflow">return</span> S_OK;</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        });</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    }</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="../../d8/d6a/classjuce_1_1_u_i_a_grid_provider.html#a710544d5edc4d840c3eef22a7d8aae06">   65</a></span>    <a class="code hl_define" href="../../df/dec/juce__win32___com_smart_ptr_8h.html#adf7ea5b8ae4dd1bb0ef1193c5c758eba">JUCE_COMRESULT</a> <a class="code hl_function" href="../../d8/d6a/classjuce_1_1_u_i_a_grid_provider.html#a710544d5edc4d840c3eef22a7d8aae06">get_ColumnCount</a> (<span class="keywordtype">int</span>* pRetVal)<span class="keyword"> override</span></div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        <span class="keywordflow">return</span> withTableInterface (pRetVal, [&amp;] (<span class="keyword">const</span> <a class="code hl_class" href="../../d1/d2f/class_accessibility_table_interface.html">AccessibilityTableInterface</a>&amp; tableInterface)</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        <span class="keywordflow">return</span> withTableInterface (pRetVal, [&amp;] (<span class="keyword">const</span> <a class="code hl_class" href="../../d7/d98/group__juce__gui__basics-accessibility.html#d1/d2f/class_accessibility_table_interface">AccessibilityTableInterface</a>&amp; tableInterface)</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        {</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            *pRetVal = tableInterface.<a class="code hl_function" href="../../d1/d2f/class_accessibility_table_interface.html#a6663691b3e461afca939e043546692c6">getNumColumns</a>();</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            *pRetVal = tableInterface.<a class="code hl_function" href="../../d7/d98/group__juce__gui__basics-accessibility.html#a6663691b3e461afca939e043546692c6">getNumColumns</a>();</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>            <span class="keywordflow">return</span> S_OK;</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        });</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    }</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="keyword">private</span>:</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Value, <span class="keyword">typename</span> Callback&gt;</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <a class="code hl_define" href="../../df/dec/juce__win32___com_smart_ptr_8h.html#adf7ea5b8ae4dd1bb0ef1193c5c758eba">JUCE_COMRESULT</a> withTableInterface (<a class="code hl_class" href="../../d4/d72/class_value.html">Value</a>* pRetVal, Callback&amp;&amp; <a class="code hl_variable" href="../../d6/d64/juce__linux___a_l_s_a_8cpp.html#a7d161ccbd94169c2108f6a40711e3a76">callback</a>)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <a class="code hl_define" href="../../df/dec/juce__win32___com_smart_ptr_8h.html#adf7ea5b8ae4dd1bb0ef1193c5c758eba">JUCE_COMRESULT</a> withTableInterface (<a class="code hl_class" href="../../dc/d3a/group__juce__data__structures-values.html#d4/d72/class_value">Value</a>* pRetVal, Callback&amp;&amp; <a class="code hl_variable" href="../../d6/d64/juce__linux___a_l_s_a_8cpp.html#a7d161ccbd94169c2108f6a40711e3a76">callback</a>)<span class="keyword"> const</span></div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="keyword">    </span>{</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="../../d7/dcd/namespacejuce.html#a8bed7e9b52b4c0208d41ac6d2052d05e">withCheckedComArgs</a> (pRetVal, *<span class="keyword">this</span>, [&amp;]() -&gt; HRESULT</div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        {</div>
@@ -160,11 +176,6 @@ $(function() {
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>};</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>} <span class="comment">// namespace juce</span></div>
-<div class="ttc" id="aclass_accessibility_table_interface_html"><div class="ttname"><a href="../../d1/d2f/class_accessibility_table_interface.html">AccessibilityTableInterface</a></div><div class="ttdef"><b>Definition:</b> juce_AccessibilityTableInterface.h:38</div></div>
-<div class="ttc" id="aclass_accessibility_table_interface_html_a6663691b3e461afca939e043546692c6"><div class="ttname"><a href="../../d1/d2f/class_accessibility_table_interface.html#a6663691b3e461afca939e043546692c6">AccessibilityTableInterface::getNumColumns</a></div><div class="ttdeci">virtual int getNumColumns() const =0</div></div>
-<div class="ttc" id="aclass_accessibility_table_interface_html_a72b03c9550a794616987102b7c3da6ae"><div class="ttname"><a href="../../d1/d2f/class_accessibility_table_interface.html#a72b03c9550a794616987102b7c3da6ae">AccessibilityTableInterface::getNumRows</a></div><div class="ttdeci">virtual int getNumRows() const =0</div></div>
-<div class="ttc" id="aclass_accessibility_table_interface_html_ae83b30083f2e71423d3f3ea2a3c9d607"><div class="ttname"><a href="../../d1/d2f/class_accessibility_table_interface.html#ae83b30083f2e71423d3f3ea2a3c9d607">AccessibilityTableInterface::getCellHandler</a></div><div class="ttdeci">virtual const AccessibilityHandler * getCellHandler(int row, int column) const =0</div></div>
-<div class="ttc" id="aclass_value_html"><div class="ttname"><a href="../../d4/d72/class_value.html">Value</a></div><div class="ttdef"><b>Definition:</b> juce_Value.h:52</div></div>
 <div class="ttc" id="aclassjuce_1_1_com_base_class_helper_html"><div class="ttname"><a href="../../d0/dd2/classjuce_1_1_com_base_class_helper.html">juce::ComBaseClassHelper</a></div><div class="ttdef"><b>Definition:</b> juce_win32_ComSmartPtr.h:201</div></div>
 <div class="ttc" id="aclassjuce_1_1_u_i_a_grid_provider_html"><div class="ttname"><a href="../../d8/d6a/classjuce_1_1_u_i_a_grid_provider.html">juce::UIAGridProvider</a></div><div class="ttdef"><b>Definition:</b> juce_win32_UIAGridProvider.h:32</div></div>
 <div class="ttc" id="aclassjuce_1_1_u_i_a_grid_provider_html_a4accaafc2c4e4cffc96f68e1e610b568"><div class="ttname"><a href="../../d8/d6a/classjuce_1_1_u_i_a_grid_provider.html#a4accaafc2c4e4cffc96f68e1e610b568">juce::UIAGridProvider::get_RowCount</a></div><div class="ttdeci">JUCE_COMRESULT get_RowCount(int *pRetVal) override</div><div class="ttdef"><b>Definition:</b> juce_win32_UIAGridProvider.h:56</div></div>
@@ -177,14 +188,23 @@ $(function() {
 <div class="ttc" id="agroup__juce__core-system_html_ga0112339834a6548e4123e394b9ed95e2"><div class="ttname"><a href="../../d3/d4a/group__juce__core-system.html#ga0112339834a6548e4123e394b9ed95e2">JUCE_BEGIN_IGNORE_WARNINGS_GCC_LIKE</a></div><div class="ttdeci">#define JUCE_BEGIN_IGNORE_WARNINGS_GCC_LIKE(...)</div><div class="ttdef"><b>Definition:</b> juce_CompilerWarnings.h:185</div></div>
 <div class="ttc" id="agroup__juce__core-system_html_ga157f2229764b17137d8814bec95df109"><div class="ttname"><a href="../../d3/d4a/group__juce__core-system.html#ga157f2229764b17137d8814bec95df109">JUCE_END_IGNORE_WARNINGS_GCC_LIKE</a></div><div class="ttdeci">#define JUCE_END_IGNORE_WARNINGS_GCC_LIKE</div><div class="ttdef"><b>Definition:</b> juce_CompilerWarnings.h:186</div></div>
 <div class="ttc" id="agroup__juce__core-system_html_ga851b02724a8158a7f746c66b5758b3dd"><div class="ttname"><a href="../../d3/d4a/group__juce__core-system.html#ga851b02724a8158a7f746c66b5758b3dd">JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR</a></div><div class="ttdeci">#define JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(className)</div><div class="ttdef"><b>Definition:</b> juce_PlatformDefs.h:245</div></div>
+<div class="ttc" id="agroup__juce__data__structures-values_html_d4/d72/class_value"><div class="ttname"><a href="../../dc/d3a/group__juce__data__structures-values.html#d4/d72/class_value">Value</a></div><div class="ttdef"><b>Definition:</b> juce_Value.h:52</div></div>
+<div class="ttc" id="agroup__juce__gui__basics-accessibility_html_a6663691b3e461afca939e043546692c6"><div class="ttname"><a href="../../d7/d98/group__juce__gui__basics-accessibility.html#a6663691b3e461afca939e043546692c6">AccessibilityTableInterface::getNumColumns</a></div><div class="ttdeci">virtual int getNumColumns() const =0</div></div>
+<div class="ttc" id="agroup__juce__gui__basics-accessibility_html_a72b03c9550a794616987102b7c3da6ae"><div class="ttname"><a href="../../d7/d98/group__juce__gui__basics-accessibility.html#a72b03c9550a794616987102b7c3da6ae">AccessibilityTableInterface::getNumRows</a></div><div class="ttdeci">virtual int getNumRows() const =0</div></div>
+<div class="ttc" id="agroup__juce__gui__basics-accessibility_html_ae83b30083f2e71423d3f3ea2a3c9d607"><div class="ttname"><a href="../../d7/d98/group__juce__gui__basics-accessibility.html#ae83b30083f2e71423d3f3ea2a3c9d607">AccessibilityTableInterface::getCellHandler</a></div><div class="ttdeci">virtual const AccessibilityHandler * getCellHandler(int row, int column) const =0</div></div>
+<div class="ttc" id="agroup__juce__gui__basics-accessibility_html_d1/d2f/class_accessibility_table_interface"><div class="ttname"><a href="../../d7/d98/group__juce__gui__basics-accessibility.html#d1/d2f/class_accessibility_table_interface">AccessibilityTableInterface</a></div><div class="ttdef"><b>Definition:</b> juce_AccessibilityTableInterface.h:38</div></div>
 <div class="ttc" id="ajuce__linux___a_l_s_a_8cpp_html_a7d161ccbd94169c2108f6a40711e3a76"><div class="ttname"><a href="../../d6/d64/juce__linux___a_l_s_a_8cpp.html#a7d161ccbd94169c2108f6a40711e3a76">callback</a></div><div class="ttdeci">AudioIODeviceCallback * callback</div><div class="ttdef"><b>Definition:</b> juce_linux_ALSA.cpp:788</div></div>
 <div class="ttc" id="ajuce__win32___com_smart_ptr_8h_html_adf7ea5b8ae4dd1bb0ef1193c5c758eba"><div class="ttname"><a href="../../df/dec/juce__win32___com_smart_ptr_8h.html#adf7ea5b8ae4dd1bb0ef1193c5c758eba">JUCE_COMRESULT</a></div><div class="ttdeci">#define JUCE_COMRESULT</div><div class="ttdef"><b>Definition:</b> juce_win32_ComSmartPtr.h:54</div></div>
 <div class="ttc" id="anamespacejuce_html"><div class="ttname"><a href="../../d7/dcd/namespacejuce.html">juce</a></div><div class="ttdef"><b>Definition:</b> juce_Analytics.cpp:27</div></div>
 <div class="ttc" id="anamespacejuce_html_a8bed7e9b52b4c0208d41ac6d2052d05e"><div class="ttname"><a href="../../d7/dcd/namespacejuce.html#a8bed7e9b52b4c0208d41ac6d2052d05e">juce::withCheckedComArgs</a></div><div class="ttdeci">JUCE_COMRESULT withCheckedComArgs(Value *pRetVal, Object &amp;handle, Callback &amp;&amp;callback)</div><div class="ttdef"><b>Definition:</b> juce_win32_UIAHelpers.h:92</div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="../../dir_4fef79e7177ba769987a8da36c892c5f.html">build</a></li><li class="navelem"><a class="el" href="../../dir_2d445fded5cdca954ddefd6aa28da941.html">juce_gui_basics</a></li><li class="navelem"><a class="el" href="../../dir_348cd95576883d7846fa9605fb467030.html">native</a></li><li class="navelem"><a class="el" href="../../dir_fb8e1741ad246d2784f2b9d146f97e02.html">accessibility</a></li><li class="navelem"><a class="el" href="../../d7/d4e/juce__win32___u_i_a_grid_provider_8h.html">juce_win32_UIAGridProvider.h</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+  </ul>
+</div>
 </body>
 </html>

@@ -1,0 +1,25 @@
+var jchuff_8c =
+[
+    [ "savable_state", "d8/dde/structsavable__state.html", "d8/dde/structsavable__state" ],
+    [ "huff_entropy_encoder", "d2/df6/structhuff__entropy__encoder.html", "d2/df6/structhuff__entropy__encoder" ],
+    [ "working_state", "d2/ddb/structworking__state.html", "d2/ddb/structworking__state" ],
+    [ "ASSIGN_STATE", "d5/da8/jchuff_8c.html#a0aa59fa38553f2f947f0880637cf0865", null ],
+    [ "emit_byte", "d5/da8/jchuff_8c.html#abb7d8d00694e31aa9fb8b6a222acd34b", null ],
+    [ "JPEG_INTERNALS", "d5/da8/jchuff_8c.html#ad5c3cdfae3019b8223973041a2a1304b", null ],
+    [ "MAX_CLEN", "d5/da8/jchuff_8c.html#a82509103366dba59196d5c326a495766", null ],
+    [ "huff_entropy_ptr", "d5/da8/jchuff_8c.html#affce96a1cce448f0bd2b830395f68cca", null ],
+    [ "dump_buffer", "d5/da8/jchuff_8c.html#aa2805132a531cf972869eb39d5a4f724", null ],
+    [ "emit_bits", "d5/da8/jchuff_8c.html#a812e1cbcd3af76239a0e8ebb0923a9d8", null ],
+    [ "emit_restart", "d5/da8/jchuff_8c.html#af7d99c3ac2571bac5e1f2549b189459c", null ],
+    [ "encode_mcu_gather", "d5/da8/jchuff_8c.html#a2d8ec90784ce5332ac0053b710d2059a", null ],
+    [ "encode_mcu_huff", "d5/da8/jchuff_8c.html#a5f17abbb322e422572e38aba28612a65", null ],
+    [ "encode_one_block", "d5/da8/jchuff_8c.html#ace50da25851d39478557d1cc19365f21", null ],
+    [ "finish_pass_gather", "d5/da8/jchuff_8c.html#a92d1ffa5f916814234009ccd220ef6da", null ],
+    [ "finish_pass_huff", "d5/da8/jchuff_8c.html#ab0f7f271927d5e929992cc4b3af7b131", null ],
+    [ "flush_bits", "d5/da8/jchuff_8c.html#a2f510ca46c87b004c651d6ecf65da254", null ],
+    [ "htest_one_block", "d5/da8/jchuff_8c.html#a047d325de5ab123028c4489c07c4db64", null ],
+    [ "jinit_huff_encoder", "d5/da8/jchuff_8c.html#a77341cca2feceb164c104fdf8b79756b", null ],
+    [ "jpeg_gen_optimal_table", "d5/da8/jchuff_8c.html#a3f40436fc5d3ec20e1124b84e3256b93", null ],
+    [ "jpeg_make_c_derived_tbl", "d5/da8/jchuff_8c.html#a6ba6c9dfe4c088663cdde4f09eaf11e8", null ],
+    [ "METHODDEF", "d5/da8/jchuff_8c.html#a1a64d09a8eaa504dd788c52dfb3cf6d6", null ]
+];

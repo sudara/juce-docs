@@ -1,0 +1,26 @@
+var juce__linux___a_l_s_a_8cpp =
+[
+    [ "JUCE_ALSA_FAILED", "d6/d64/juce__linux___a_l_s_a_8cpp.html#ad3a6538c405145ea6e631f5a5c95597b", null ],
+    [ "JUCE_ALSA_LOG", "d6/d64/juce__linux___a_l_s_a_8cpp.html#ae1ff9a19c3c6026166aa218a4e7dd8ad", null ],
+    [ "JUCE_ALSA_LOGGING", "d6/d64/juce__linux___a_l_s_a_8cpp.html#a804c28a578b5f02ecc8d555a7ddfddd3", null ],
+    [ "JUCE_CHECKED_RESULT", "d6/d64/juce__linux___a_l_s_a_8cpp.html#a82ad9dd94b80a4b3dc5bb52d98139d0f", null ],
+    [ "createAudioIODeviceType_ALSA_PCMDevices", "d6/d64/juce__linux___a_l_s_a_8cpp.html#ad91077e8a915a778d982a31fcd9af956", null ],
+    [ "createAudioIODeviceType_ALSA_Soundcards", "d6/d64/juce__linux___a_l_s_a_8cpp.html#a622d8fd3650f0089c32984324e4724c8", null ],
+    [ "bitDepth", "d6/d64/juce__linux___a_l_s_a_8cpp.html#ac77b590e38a8e565a52609ab911451d1", null ],
+    [ "bufferSize", "d6/d64/juce__linux___a_l_s_a_8cpp.html#a8556d19b129aa550f5b2819ed0320e83", null ],
+    [ "callback", "d6/d64/juce__linux___a_l_s_a_8cpp.html#a7d161ccbd94169c2108f6a40711e3a76", null ],
+    [ "channelNamesIn", "d6/d64/juce__linux___a_l_s_a_8cpp.html#ae8f4dfbc648a39f446a08ba295c10af8", null ],
+    [ "channelNamesOut", "d6/d64/juce__linux___a_l_s_a_8cpp.html#a3d26ebb54e2e6abb25e4a2e418a0b32f", null ],
+    [ "currentInputChans", "d6/d64/juce__linux___a_l_s_a_8cpp.html#a50de00f761ea13e32dcc9202d1dc7452", null ],
+    [ "currentOutputChans", "d6/d64/juce__linux___a_l_s_a_8cpp.html#a67d34e3a8818ed84b5431d649154d8d9", null ],
+    [ "error", "d6/d64/juce__linux___a_l_s_a_8cpp.html#af44443f87d7b66dff07b3d884445dca1", null ],
+    [ "handle", "d6/d64/juce__linux___a_l_s_a_8cpp.html#a8530736c0c7f7f4dc724c8246e301f83", null ],
+    [ "inputLatency", "d6/d64/juce__linux___a_l_s_a_8cpp.html#ab13391bc4d649bac7af10f909166d1ee", null ],
+    [ "latency", "d6/d64/juce__linux___a_l_s_a_8cpp.html#a9c5bf07170b5d91cfb44d4bfd0517128", null ],
+    [ "numChannelsRunning", "d6/d64/juce__linux___a_l_s_a_8cpp.html#ab18a3c2063d82187227821a4e2a33b5d", null ],
+    [ "outputLatency", "d6/d64/juce__linux___a_l_s_a_8cpp.html#a7495a5211989b528adad7432c26cddaf", null ],
+    [ "overrunCount", "d6/d64/juce__linux___a_l_s_a_8cpp.html#a5d37c7b425092266b61b113a58203486", null ],
+    [ "sampleRate", "d6/d64/juce__linux___a_l_s_a_8cpp.html#a2bd79d2ab2dfb6aeaf75c2878ad30e1f", null ],
+    [ "sampleRates", "d6/d64/juce__linux___a_l_s_a_8cpp.html#a7e83501f174513938fcd9ac04cf773f3", null ],
+    [ "underrunCount", "d6/d64/juce__linux___a_l_s_a_8cpp.html#acf853a1905cc4324c526323c98390cbb", null ]
+];

@@ -9,10 +9,14 @@
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../resize.js"></script>
+<script type="text/javascript" src="../../navtreedata.js"></script>
+<script type="text/javascript" src="../../navtree.js"></script>
 <link href="../../search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../search/searchdata.js"></script>
 <script type="text/javascript" src="../../search/search.js"></script>
-<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../doxygen-awesome.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -46,6 +50,23 @@ $(function() {
 /* @license-end */
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('de/d64/juce__win32___hidden_message_window_8h_source.html','../../'); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -60,11 +81,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="../../dir_4fef79e7177ba769987a8da36c892c5f.html">build</a></li><li class="navelem"><a class="el" href="../../dir_573e7b3b940397019ceede1dfa7eb842.html">juce_events</a></li><li class="navelem"><a class="el" href="../../dir_ae920d807e33cdd17959ad276c3386ce.html">native</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle"><div class="title">juce_win32_HiddenMessageWindow.h</div></div>
 </div><!--header-->
@@ -100,8 +116,8 @@ $(function() {
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keyword">public</span>:</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="../../d8/d23/classjuce_1_1_hidden_message_window.html#a46109e515cee945ffbab4082a6578513">   30</a></span>    <a class="code hl_function" href="../../d8/d23/classjuce_1_1_hidden_message_window.html#a46109e515cee945ffbab4082a6578513">HiddenMessageWindow</a> (<span class="keyword">const</span> TCHAR* <span class="keyword">const</span> messageWindowName, WNDPROC wndProc)</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    {</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <a class="code hl_class" href="../../de/d61/class_string.html">String</a> className (<span class="stringliteral">&quot;JUCE_&quot;</span>);</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        className &lt;&lt; <a class="code hl_function" href="../../de/d61/class_string.html#aab501daf0fa0bbba1479218447d1f936">String::toHexString</a> (<a class="code hl_function" href="../../d6/d2c/class_time.html#adcd3d5c5f46454a0cae726b1c8ba0426">Time::getHighResolutionTicks</a>());</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <a class="code hl_class" href="../../d1/de9/group__juce__core-text.html#de/d61/class_string">String</a> className (<span class="stringliteral">&quot;JUCE_&quot;</span>);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        className &lt;&lt; <a class="code hl_function" href="../../d1/de9/group__juce__core-text.html#aab501daf0fa0bbba1479218447d1f936">String::toHexString</a> (<a class="code hl_function" href="../../d3/d30/group__juce__core-time.html#adcd3d5c5f46454a0cae726b1c8ba0426">Time::getHighResolutionTicks</a>());</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        HMODULE moduleHandle = (HMODULE) Process::getCurrentModuleInstanceHandle();</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
@@ -110,7 +126,7 @@ $(function() {
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        wc.lpfnWndProc    = wndProc;</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        wc.cbWndExtra     = 4;</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        wc.hInstance      = moduleHandle;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        wc.lpszClassName  = className.<a class="code hl_function" href="../../de/d61/class_string.html#a1861bc68125754e7a0b30f1a3e91937f">toWideCharPointer</a>();</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        wc.lpszClassName  = className.<a class="code hl_function" href="../../d1/de9/group__juce__core-text.html#a1861bc68125754e7a0b30f1a3e91937f">toWideCharPointer</a>();</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        atom = RegisterClassEx (&amp;wc);</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <a class="code hl_define" href="../../d3/d4a/group__juce__core-system.html#ga1f96ab6751237979b907a54f52a7296a">jassert</a> (atom != 0);</div>
@@ -153,13 +169,13 @@ $(function() {
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="keyword">private</span>:</div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keyword">static</span> LONG_PTR getImprobableWindowNumber() noexcept</div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    {</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        <span class="keyword">static</span> <span class="keyword">auto</span> number = (LONG_PTR) <a class="code hl_class" href="../../d2/de7/class_random.html">Random</a>().<a class="code hl_function" href="../../d2/de7/class_random.html#aa78fa923adb76a168c5c67d072cfcef3">nextInt64</a>();</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        <span class="keyword">static</span> <span class="keyword">auto</span> number = (LONG_PTR) <a class="code hl_class" href="../../d6/dd8/group__juce__core-maths.html#d2/de7/class_random">Random</a>().<a class="code hl_function" href="../../d6/dd8/group__juce__core-maths.html#aa78fa923adb76a168c5c67d072cfcef3">nextInt64</a>();</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        <span class="keywordflow">return</span> number;</div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    }</div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>};</div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">//==============================================================================</span></div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="../../dd/d6f/classjuce_1_1_device_change_detector.html">   91</a></span><span class="keyword">class </span><a class="code hl_class" href="../../dd/d6f/classjuce_1_1_device_change_detector.html">DeviceChangeDetector</a>  : <span class="keyword">private</span> <a class="code hl_class" href="../../d8/d08/class_timer.html">Timer</a></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="../../dd/d6f/classjuce_1_1_device_change_detector.html">   91</a></span><span class="keyword">class </span><a class="code hl_class" href="../../dd/d6f/classjuce_1_1_device_change_detector.html">DeviceChangeDetector</a>  : <span class="keyword">private</span> <a class="code hl_class" href="../../d6/d45/group__juce__events-timers.html#d8/d08/class_timer">Timer</a></div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>{</div>
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="keyword">public</span>:</div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="../../dd/d6f/classjuce_1_1_device_change_detector.html#aaae78431ec0d1121bf53c1db40168ce5">   94</a></span>    <a class="code hl_function" href="../../dd/d6f/classjuce_1_1_device_change_detector.html#aaae78431ec0d1121bf53c1db40168ce5">DeviceChangeDetector</a> (<span class="keyword">const</span> <span class="keywordtype">wchar_t</span>* <span class="keyword">const</span> <a class="code hl_variable" href="../../d8/d30/namespacegl.html#a23f4d6c2fb3e8fdfb824894be7a695c2">name</a>)</div>
@@ -174,7 +190,7 @@ $(function() {
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    {</div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        <span class="comment">// We&#39;ll pause before sending a message, because on device removal, the OS hasn&#39;t always updated</span></div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        <span class="comment">// its device lists correctly at this point. This also helps avoid repeated callbacks.</span></div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        <a class="code hl_function" href="../../d8/d08/class_timer.html#a3b1a51ac348c56a55fcef4570214f057">startTimer</a> (500);</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        <a class="code hl_function" href="../../d6/d45/group__juce__events-timers.html#a3b1a51ac348c56a55fcef4570214f057">startTimer</a> (500);</div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    }</div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="keyword">private</span>:</div>
@@ -197,21 +213,12 @@ $(function() {
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <span class="keywordtype">void</span> timerCallback()<span class="keyword"> override</span></div>
 <div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        <a class="code hl_function" href="../../d8/d08/class_timer.html#ab918b8c1f80bf1de92dd1a5878f498bd">stopTimer</a>();</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        <a class="code hl_function" href="../../d6/d45/group__juce__events-timers.html#ab918b8c1f80bf1de92dd1a5878f498bd">stopTimer</a>();</div>
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        <a class="code hl_function" href="../../dd/d6f/classjuce_1_1_device_change_detector.html#a7c887b87262b4633b63bb5ec71bfdb0d">systemDeviceChanged</a>();</div>
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    }</div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>};</div>
 <div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
 <div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>} <span class="comment">// namespace juce</span></div>
-<div class="ttc" id="aclass_random_html"><div class="ttname"><a href="../../d2/de7/class_random.html">Random</a></div><div class="ttdef"><b>Definition:</b> juce_Random.h:36</div></div>
-<div class="ttc" id="aclass_random_html_aa78fa923adb76a168c5c67d072cfcef3"><div class="ttname"><a href="../../d2/de7/class_random.html#aa78fa923adb76a168c5c67d072cfcef3">Random::nextInt64</a></div><div class="ttdeci">int64 nextInt64() noexcept</div><div class="ttdef"><b>Definition:</b> juce_Random.cpp:92</div></div>
-<div class="ttc" id="aclass_string_html"><div class="ttname"><a href="../../de/d61/class_string.html">String</a></div><div class="ttdef"><b>Definition:</b> juce_String.h:54</div></div>
-<div class="ttc" id="aclass_string_html_a1861bc68125754e7a0b30f1a3e91937f"><div class="ttname"><a href="../../de/d61/class_string.html#a1861bc68125754e7a0b30f1a3e91937f">String::toWideCharPointer</a></div><div class="ttdeci">const wchar_t * toWideCharPointer() const</div><div class="ttdef"><b>Definition:</b> juce_String.cpp:2086</div></div>
-<div class="ttc" id="aclass_string_html_aab501daf0fa0bbba1479218447d1f936"><div class="ttname"><a href="../../de/d61/class_string.html#aab501daf0fa0bbba1479218447d1f936">String::toHexString</a></div><div class="ttdeci">static String toHexString(IntegerType number)</div><div class="ttdef"><b>Definition:</b> juce_String.h:1098</div></div>
-<div class="ttc" id="aclass_time_html_adcd3d5c5f46454a0cae726b1c8ba0426"><div class="ttname"><a href="../../d6/d2c/class_time.html#adcd3d5c5f46454a0cae726b1c8ba0426">Time::getHighResolutionTicks</a></div><div class="ttdeci">static int64 getHighResolutionTicks() noexcept</div><div class="ttdef"><b>Definition:</b> juce_android_SystemStats.cpp:217</div></div>
-<div class="ttc" id="aclass_timer_html"><div class="ttname"><a href="../../d8/d08/class_timer.html">Timer</a></div><div class="ttdef"><b>Definition:</b> juce_Timer.h:53</div></div>
-<div class="ttc" id="aclass_timer_html_a3b1a51ac348c56a55fcef4570214f057"><div class="ttname"><a href="../../d8/d08/class_timer.html#a3b1a51ac348c56a55fcef4570214f057">Timer::startTimer</a></div><div class="ttdeci">void startTimer(int intervalInMilliseconds) noexcept</div></div>
-<div class="ttc" id="aclass_timer_html_ab918b8c1f80bf1de92dd1a5878f498bd"><div class="ttname"><a href="../../d8/d08/class_timer.html#ab918b8c1f80bf1de92dd1a5878f498bd">Timer::stopTimer</a></div><div class="ttdeci">void stopTimer() noexcept</div></div>
 <div class="ttc" id="aclassjuce_1_1_device_change_detector_html"><div class="ttname"><a href="../../dd/d6f/classjuce_1_1_device_change_detector.html">juce::DeviceChangeDetector</a></div><div class="ttdef"><b>Definition:</b> juce_win32_HiddenMessageWindow.h:92</div></div>
 <div class="ttc" id="aclassjuce_1_1_device_change_detector_html_a7c887b87262b4633b63bb5ec71bfdb0d"><div class="ttname"><a href="../../dd/d6f/classjuce_1_1_device_change_detector.html#a7c887b87262b4633b63bb5ec71bfdb0d">juce::DeviceChangeDetector::systemDeviceChanged</a></div><div class="ttdeci">virtual void systemDeviceChanged()=0</div></div>
 <div class="ttc" id="aclassjuce_1_1_device_change_detector_html_a9b503e20df9c5de00d3abf4451a7a4af"><div class="ttname"><a href="../../dd/d6f/classjuce_1_1_device_change_detector.html#a9b503e20df9c5de00d3abf4451a7a4af">juce::DeviceChangeDetector::triggerAsyncDeviceChangeCallback</a></div><div class="ttdeci">void triggerAsyncDeviceChangeCallback()</div><div class="ttdef"><b>Definition:</b> juce_win32_HiddenMessageWindow.h:102</div></div>
@@ -223,8 +230,17 @@ $(function() {
 <div class="ttc" id="aclassjuce_1_1_juce_window_identifier_html"><div class="ttname"><a href="../../d2/d20/classjuce_1_1_juce_window_identifier.html">juce::JuceWindowIdentifier</a></div><div class="ttdef"><b>Definition:</b> juce_win32_HiddenMessageWindow.h:70</div></div>
 <div class="ttc" id="aclassjuce_1_1_juce_window_identifier_html_a787aaa19d69038401f54b247da153e68"><div class="ttname"><a href="../../d2/d20/classjuce_1_1_juce_window_identifier.html#a787aaa19d69038401f54b247da153e68">juce::JuceWindowIdentifier::isJUCEWindow</a></div><div class="ttdeci">static bool isJUCEWindow(HWND hwnd) noexcept</div><div class="ttdef"><b>Definition:</b> juce_win32_HiddenMessageWindow.h:72</div></div>
 <div class="ttc" id="aclassjuce_1_1_juce_window_identifier_html_aab512a67d2441fc6c1e8dd7bbdeedc7a"><div class="ttname"><a href="../../d2/d20/classjuce_1_1_juce_window_identifier.html#aab512a67d2441fc6c1e8dd7bbdeedc7a">juce::JuceWindowIdentifier::setAsJUCEWindow</a></div><div class="ttdeci">static void setAsJUCEWindow(HWND hwnd, bool isJuceWindow) noexcept</div><div class="ttdef"><b>Definition:</b> juce_win32_HiddenMessageWindow.h:77</div></div>
+<div class="ttc" id="agroup__juce__core-maths_html_aa78fa923adb76a168c5c67d072cfcef3"><div class="ttname"><a href="../../d6/dd8/group__juce__core-maths.html#aa78fa923adb76a168c5c67d072cfcef3">Random::nextInt64</a></div><div class="ttdeci">int64 nextInt64() noexcept</div><div class="ttdef"><b>Definition:</b> juce_Random.cpp:92</div></div>
+<div class="ttc" id="agroup__juce__core-maths_html_d2/de7/class_random"><div class="ttname"><a href="../../d6/dd8/group__juce__core-maths.html#d2/de7/class_random">Random</a></div><div class="ttdef"><b>Definition:</b> juce_Random.h:36</div></div>
 <div class="ttc" id="agroup__juce__core-maths_html_gafb24e6184dde2b29ecfb687686e8fec2"><div class="ttname"><a href="../../d6/dd8/group__juce__core-maths.html#gafb24e6184dde2b29ecfb687686e8fec2">pointer_sized_uint</a></div><div class="ttdeci">unsigned int pointer_sized_uint</div><div class="ttdef"><b>Definition:</b> juce_MathsFunctions.h:83</div></div>
 <div class="ttc" id="agroup__juce__core-system_html_ga1f96ab6751237979b907a54f52a7296a"><div class="ttname"><a href="../../d3/d4a/group__juce__core-system.html#ga1f96ab6751237979b907a54f52a7296a">jassert</a></div><div class="ttdeci">#define jassert(expression)</div><div class="ttdef"><b>Definition:</b> juce_PlatformDefs.h:184</div></div>
+<div class="ttc" id="agroup__juce__core-text_html_a1861bc68125754e7a0b30f1a3e91937f"><div class="ttname"><a href="../../d1/de9/group__juce__core-text.html#a1861bc68125754e7a0b30f1a3e91937f">String::toWideCharPointer</a></div><div class="ttdeci">const wchar_t * toWideCharPointer() const</div><div class="ttdef"><b>Definition:</b> juce_String.cpp:2086</div></div>
+<div class="ttc" id="agroup__juce__core-text_html_aab501daf0fa0bbba1479218447d1f936"><div class="ttname"><a href="../../d1/de9/group__juce__core-text.html#aab501daf0fa0bbba1479218447d1f936">String::toHexString</a></div><div class="ttdeci">static String toHexString(IntegerType number)</div><div class="ttdef"><b>Definition:</b> juce_String.h:1098</div></div>
+<div class="ttc" id="agroup__juce__core-text_html_de/d61/class_string"><div class="ttname"><a href="../../d1/de9/group__juce__core-text.html#de/d61/class_string">String</a></div><div class="ttdef"><b>Definition:</b> juce_String.h:54</div></div>
+<div class="ttc" id="agroup__juce__core-time_html_adcd3d5c5f46454a0cae726b1c8ba0426"><div class="ttname"><a href="../../d3/d30/group__juce__core-time.html#adcd3d5c5f46454a0cae726b1c8ba0426">Time::getHighResolutionTicks</a></div><div class="ttdeci">static int64 getHighResolutionTicks() noexcept</div><div class="ttdef"><b>Definition:</b> juce_android_SystemStats.cpp:217</div></div>
+<div class="ttc" id="agroup__juce__events-timers_html_a3b1a51ac348c56a55fcef4570214f057"><div class="ttname"><a href="../../d6/d45/group__juce__events-timers.html#a3b1a51ac348c56a55fcef4570214f057">Timer::startTimer</a></div><div class="ttdeci">void startTimer(int intervalInMilliseconds) noexcept</div></div>
+<div class="ttc" id="agroup__juce__events-timers_html_ab918b8c1f80bf1de92dd1a5878f498bd"><div class="ttname"><a href="../../d6/d45/group__juce__events-timers.html#ab918b8c1f80bf1de92dd1a5878f498bd">Timer::stopTimer</a></div><div class="ttdeci">void stopTimer() noexcept</div></div>
+<div class="ttc" id="agroup__juce__events-timers_html_d8/d08/class_timer"><div class="ttname"><a href="../../d6/d45/group__juce__events-timers.html#d8/d08/class_timer">Timer</a></div><div class="ttdef"><b>Definition:</b> juce_Timer.h:53</div></div>
 <div class="ttc" id="anamespacegl_html_a1243e1c99f08a099c7a70cc1a258034a"><div class="ttname"><a href="../../d8/d30/namespacegl.html#a1243e1c99f08a099c7a70cc1a258034a">gl::message</a></div><div class="ttdeci">GLuint GLsizei const GLchar * message</div><div class="ttdef"><b>Definition:</b> juce_gl.h:2967</div></div>
 <div class="ttc" id="anamespacegl_html_a23f4d6c2fb3e8fdfb824894be7a695c2"><div class="ttname"><a href="../../d8/d30/namespacegl.html#a23f4d6c2fb3e8fdfb824894be7a695c2">gl::name</a></div><div class="ttdeci">GLuint const GLchar * name</div><div class="ttdef"><b>Definition:</b> juce_gl.h:1565</div></div>
 <div class="ttc" id="anamespacegl_html_ae0306c9e6aca74fac45e19b5f64f7ba7"><div class="ttname"><a href="../../d8/d30/namespacegl.html#ae0306c9e6aca74fac45e19b5f64f7ba7">gl::h</a></div><div class="ttdeci">GLfloat GLfloat GLfloat GLfloat h</div><div class="ttdef"><b>Definition:</b> juce_gl.h:2524</div></div>
@@ -232,9 +248,13 @@ $(function() {
 <div class="ttc" id="anamespacejuce_html_a1b3c3cf7cdbe394e401d5db42e094ac5"><div class="ttname"><a href="../../d7/dcd/namespacejuce.html#a1b3c3cf7cdbe394e401d5db42e094ac5">juce::HWND</a></div><div class="ttdeci">HWND__ * HWND</div><div class="ttdef"><b>Definition:</b> juce_win32_Direct2DGraphicsContext.h:30</div></div>
 <div class="ttc" id="azconf_8h_html_a2c212835823e3c54a8ab6d95c652660e"><div class="ttname"><a href="../../de/d95/zconf_8h.html#a2c212835823e3c54a8ab6d95c652660e">const</a></div><div class="ttdeci">#define const</div><div class="ttdef"><b>Definition:</b> zconf.h:137</div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="../../dir_4fef79e7177ba769987a8da36c892c5f.html">build</a></li><li class="navelem"><a class="el" href="../../dir_573e7b3b940397019ceede1dfa7eb842.html">juce_events</a></li><li class="navelem"><a class="el" href="../../dir_ae920d807e33cdd17959ad276c3386ce.html">native</a></li><li class="navelem"><a class="el" href="../../de/d64/juce__win32___hidden_message_window_8h.html">juce_win32_HiddenMessageWindow.h</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+  </ul>
+</div>
 </body>
 </html>

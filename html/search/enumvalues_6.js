@@ -3,7 +3,7 @@ var searchData=
   ['gainreduction_0',['GainReduction',['../d8/df6/struct_audio_processor_1_1_curve_data.html#a40813f0ebb00a486ddab9f3a5ebfdcb1a301b5ee318f25aa3fc3773e07f3d6312',1,'AudioProcessor::CurveData']]],
   ['game_1',['Game',['../dd/de8/namespaceoboe.html#a104ee8396c173fefac429759ea3c21a0a63d72051e901c069f8aa1b32aa0c43bb',1,'oboe']]],
   ['generic_2',['Generic',['../dd/de8/namespaceoboe.html#a4477ed232b02e2694d9309baf55a8f06a0ba6f369e7f8a700c14afe2992290544',1,'oboe']]],
-  ['genericparameter_3',['genericParameter',['../d8/d3e/class_audio_processor_parameter.html#aef73dff71cb1abfdadd5b6f3649d7db2ac86017a29081bfb3405d7d5a4ed2c370',1,'AudioProcessorParameter']]],
+  ['genericparameter_3',['genericParameter',['../da/db5/group__juce__audio__processors-processors.html#aef73dff71cb1abfdadd5b6f3649d7db2ac86017a29081bfb3405d7d5a4ed2c370',1,'AudioProcessorParameter']]],
   ['gl_5f1pass_5fext_4',['GL_1PASS_EXT',['../d8/d30/namespacegl.html#a61b871417f630cfe891ce6ea75c212bda1b2b1d93b87980113a9a5d5e1ef18e97',1,'gl']]],
   ['gl_5f1pass_5fsgis_5',['GL_1PASS_SGIS',['../d8/d30/namespacegl.html#ab78ee22c13d5bc694b4ebe2b93df85a2ab4e1f7acd5a74e22122e11b923500460',1,'gl']]],
   ['gl_5f2_5fbytes_6',['GL_2_BYTES',['../d8/d30/namespacegl.html#aea2a81a58dff14d0c13953797797fcd9a292521b689f5a169b28f137edbbc4c92',1,'gl']]],
@@ -5750,9 +5750,9 @@ var searchData=
   ['gl_5fzero_5fto_5fone_5fext_5747',['GL_ZERO_TO_ONE_EXT',['../d8/d30/namespacegl.html#ac829d6e785141aa4b00728871a2990c5ac19a072f5f6cc890a20d82890e773419',1,'gl']]],
   ['gl_5fzoom_5fx_5748',['GL_ZOOM_X',['../d8/d30/namespacegl.html#aea2a81a58dff14d0c13953797797fcd9a7132bca01ce4fb3b60ff45d8a61f108a',1,'gl']]],
   ['gl_5fzoom_5fy_5749',['GL_ZOOM_Y',['../d8/d30/namespacegl.html#aea2a81a58dff14d0c13953797797fcd9ab2002b70310921819ad8249ad51522f3',1,'gl']]],
-  ['globalapplicationsdirectory_5750',['globalApplicationsDirectory',['../d1/d31/class_file.html#a3e19cafabb03c5838160263a6e76313dad4f66736251eab2cdaa21dd5a709ed21',1,'File']]],
+  ['globalapplicationsdirectory_5750',['globalApplicationsDirectory',['../d5/d8d/group__juce__core-files.html#a3e19cafabb03c5838160263a6e76313dad4f66736251eab2cdaa21dd5a709ed21',1,'File']]],
   ['gradienttexturesize_5751',['gradientTextureSize',['../d2/d42/structjuce_1_1_open_g_l_rendering_1_1_state_helpers_1_1_texture_cache.html#a7de8c32ce6344d75fa5ba3788e9d141aada6f2a6a1d3628bebfd935dae49639ba',1,'juce::OpenGLRendering::StateHelpers::TextureCache']]],
   ['group_5752',['group',['../d7/d98/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682cadb0f6f37ebeb6ea09489124345af2a45',1,'juce_AccessibilityRole.h']]],
   ['gzipdecompbuffersize_5753',['gzipDecompBufferSize',['../db/d29/classjuce_1_1_g_z_i_p_decompressor_input_stream_1_1_g_z_i_p_decompress_helper.html#a45b76d1d9cd7de2500fa749647b5c881af09ab9324748f5eeb7d6f5ca4d36a7cd',1,'juce::GZIPDecompressorInputStream::GZIPDecompressHelper']]],
-  ['gzipformat_5754',['gzipFormat',['../d3/d7b/class_g_z_i_p_decompressor_input_stream.html#a293d005b03d528a89ec13cfb07e31f94a1a578314b467b8f06a116da9d8cc52eb',1,'GZIPDecompressorInputStream']]]
+  ['gzipformat_5754',['gzipFormat',['../de/d3b/group__juce__core-zip.html#a293d005b03d528a89ec13cfb07e31f94a1a578314b467b8f06a116da9d8cc52eb',1,'GZIPDecompressorInputStream']]]
 ];

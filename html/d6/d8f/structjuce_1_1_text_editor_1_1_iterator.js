@@ -1,0 +1,26 @@
+var structjuce_1_1_text_editor_1_1_iterator =
+[
+    [ "Iterator", "d6/d8f/structjuce_1_1_text_editor_1_1_iterator.html#a41e53744932f95dc0a96daefddc00314", null ],
+    [ "Iterator", "d6/d8f/structjuce_1_1_text_editor_1_1_iterator.html#a58c2c719c7eea23b896d6e088e2741dc", null ],
+    [ "beginNewLine", "d6/d8f/structjuce_1_1_text_editor_1_1_iterator.html#ab83f1ad1f65b339fd7baf7c5f922ce0d", null ],
+    [ "draw", "d6/d8f/structjuce_1_1_text_editor_1_1_iterator.html#a9c95caa54ff02c3d65e9924892594308", null ],
+    [ "drawSelectedText", "d6/d8f/structjuce_1_1_text_editor_1_1_iterator.html#a1ec832993df196f2fbb6ae287363539e", null ],
+    [ "drawUnderline", "d6/d8f/structjuce_1_1_text_editor_1_1_iterator.html#ab1eadd885f1eaf38180fbb04f02e44ec", null ],
+    [ "getCharPosition", "d6/d8f/structjuce_1_1_text_editor_1_1_iterator.html#acdfbaac4a948ccb61b3e62693143091b", null ],
+    [ "getJustificationOffsetX", "d6/d8f/structjuce_1_1_text_editor_1_1_iterator.html#a58b48967a4d83e410bafbe37a0b42785", null ],
+    [ "getTextBounds", "d6/d8f/structjuce_1_1_text_editor_1_1_iterator.html#a8735740aaf9ffa2af97f0cf500c3f5fe", null ],
+    [ "getTextRight", "d6/d8f/structjuce_1_1_text_editor_1_1_iterator.html#acfb17791a4f6b4a71ef74ae72158d819", null ],
+    [ "getTotalTextHeight", "d6/d8f/structjuce_1_1_text_editor_1_1_iterator.html#a8b1f5867c17a48e07e47dfeae6c823d9", null ],
+    [ "getYOffset", "d6/d8f/structjuce_1_1_text_editor_1_1_iterator.html#a95b2d745fca9a095b23892302ce45162", null ],
+    [ "indexToX", "d6/d8f/structjuce_1_1_text_editor_1_1_iterator.html#ac08c45cc1f95525029e6d14bbc97cfe6", null ],
+    [ "next", "d6/d8f/structjuce_1_1_text_editor_1_1_iterator.html#ae1e1d1bb9f960ca39a5d449828e40116", null ],
+    [ "operator=", "d6/d8f/structjuce_1_1_text_editor_1_1_iterator.html#ab20e163e34cead5303a04e43462a5577", null ],
+    [ "xToIndex", "d6/d8f/structjuce_1_1_text_editor_1_1_iterator.html#ae0876402b914092064bb58863cbf2f24", null ],
+    [ "atom", "d6/d8f/structjuce_1_1_text_editor_1_1_iterator.html#a6052161ef2fa6205559af5d6641db19b", null ],
+    [ "atomRight", "d6/d8f/structjuce_1_1_text_editor_1_1_iterator.html#a921de749e0149fb6e6f4274b6f61a77c", null ],
+    [ "atomX", "d6/d8f/structjuce_1_1_text_editor_1_1_iterator.html#a13ef0ac8bc459c5da1af1ec7ca065604", null ],
+    [ "indexInText", "d6/d8f/structjuce_1_1_text_editor_1_1_iterator.html#a01e887433d78eb09722dfc3e00217067", null ],
+    [ "lineHeight", "d6/d8f/structjuce_1_1_text_editor_1_1_iterator.html#ab87ccb0d5b2366534c3c643f64518e70", null ],
+    [ "lineY", "d6/d8f/structjuce_1_1_text_editor_1_1_iterator.html#a27e5b5d4d8b8c8818b885e4843fecdf0", null ],
+    [ "maxDescent", "d6/d8f/structjuce_1_1_text_editor_1_1_iterator.html#a38ca0121a9afa0805d9079916ed51342", null ]
+];

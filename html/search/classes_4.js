@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['edgetable_0',['EdgeTable',['../d8/d4a/class_edge_table.html',1,'']]],
+  ['edgetable_0',['EdgeTable',['../d7/d21/group__juce__graphics-geometry.html#d8/d4a/class_edge_table',1,'']]],
   ['edgetableregion_1',['EdgeTableRegion',['../dc/dac/structjuce_1_1_rendering_helpers_1_1_clip_regions_1_1_edge_table_region.html',1,'juce::RenderingHelpers::ClipRegions']]],
   ['edgetablerenderer_2',['EdgeTableRenderer',['../dc/d14/structjuce_1_1_open_g_l_rendering_1_1_state_helpers_1_1_edge_table_renderer.html',1,'juce::OpenGLRendering::StateHelpers']]],
   ['editcontroller_3',['EditController',['../d8/dba/class_steinberg_1_1_vst_1_1_edit_controller.html',1,'Steinberg::Vst']]],
@@ -30,9 +30,9 @@ var searchData=
   ['event_27',['Event',['../db/d3f/struct_steinberg_1_1_vst_1_1_event.html',1,'Steinberg::Vst']]],
   ['eventbus_28',['EventBus',['../d6/d33/class_steinberg_1_1_vst_1_1_event_bus.html',1,'Steinberg::Vst']]],
   ['evr_29',['EVR',['../dc/d19/struct_video_renderers_1_1_e_v_r.html',1,'VideoRenderers']]],
-  ['expression_30',['Expression',['../df/d03/class_expression.html',1,'Expression'],['../d4/d86/structjuce_1_1_javascript_engine_1_1_root_object_1_1_expression.html',1,'juce::JavascriptEngine::RootObject::Expression']]],
+  ['expression_30',['Expression',['../d6/dd8/group__juce__core-maths.html#df/d03/class_expression',1,'Expression'],['../d4/d86/structjuce_1_1_javascript_engine_1_1_root_object_1_1_expression.html',1,'juce::JavascriptEngine::RootObject::Expression']]],
   ['expressiontreebuilder_31',['ExpressionTreeBuilder',['../de/d7f/structjuce_1_1_javascript_engine_1_1_root_object_1_1_expression_tree_builder.html',1,'juce::JavascriptEngine::RootObject']]],
   ['extensiblewavsubformat_32',['ExtensibleWavSubFormat',['../d9/d51/structjuce_1_1_wav_file_helpers_1_1_extensible_wav_sub_format.html',1,'juce::WavFileHelpers']]],
-  ['extensionsvisitor_33',['ExtensionsVisitor',['../dd/df8/struct_extensions_visitor.html',1,'']]],
-  ['extralookandfeelbaseclasses_34',['ExtraLookAndFeelBaseClasses',['../d2/dbd/struct_extra_look_and_feel_base_classes.html',1,'']]]
+  ['extensionsvisitor_33',['ExtensionsVisitor',['../d7/d7c/group__juce__audio__processors-utilities.html#dd/df8/struct_extensions_visitor',1,'']]],
+  ['extralookandfeelbaseclasses_34',['ExtraLookAndFeelBaseClasses',['../d9/d34/group__juce__gui__basics-lookandfeel.html#d2/dbd/struct_extra_look_and_feel_base_classes',1,'']]]
 ];

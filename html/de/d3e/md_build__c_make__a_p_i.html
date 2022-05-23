@@ -9,10 +9,14 @@
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../resize.js"></script>
+<script type="text/javascript" src="../../navtreedata.js"></script>
+<script type="text/javascript" src="../../navtree.js"></script>
 <link href="../../search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../search/searchdata.js"></script>
 <script type="text/javascript" src="../../search/search.js"></script>
-<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../doxygen-awesome.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -46,6 +50,23 @@ $(function() {
 /* @license-end */
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('de/d3e/md_build__c_make__a_p_i.html','../../'); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -60,7 +81,6 @@ $(function() {
 </iframe>
 </div>
 
-</div><!-- top -->
 <div><div class="header">
   <div class="headertitle"><div class="title">The JUCE CMake API </div></div>
 </div><!--header-->
@@ -262,7 +282,7 @@ juce_add_plugin(&lt;target&gt; [KEY value]...)
 <li>An email address for this target's author. The value of this argument will be inherited from the <code>JUCE_COMPANY_EMAIL</code> property, so if you want to use the same <code>COMPANY_EMAIL</code> for several targets in a build tree, you can call <code>set_directory_properties(PROPERTIES JUCE_COMPANY_EMAIL ...)</code> after including JUCE but before adding the targets, and then omit the <code>COMPANY_EMAIL</code> argument when creating the individual targets.</li>
 </ul>
 <p ><code>DOCUMENT_EXTENSIONS</code></p><ul>
-<li><a class="el" href="../../d1/d31/class_file.html">File</a> extensions that should be associated with this target. For example, the Projucer passes the string <code>jucer</code> because it wants to open <code>.jucer</code> files. If your target has several different document types, you can pass them as multiple arguments, e.g. <code>DOCUMENT_EXTENSIONS wav mp3 aif</code>.</li>
+<li><a class="el" href="../../d5/d8d/group__juce__core-files.html#d1/d31/class_file">File</a> extensions that should be associated with this target. For example, the Projucer passes the string <code>jucer</code> because it wants to open <code>.jucer</code> files. If your target has several different document types, you can pass them as multiple arguments, e.g. <code>DOCUMENT_EXTENSIONS wav mp3 aif</code>.</li>
 </ul>
 <p ><code>NEEDS_CURL</code></p><ul>
 <li>On Linux, JUCE may or may not need to link to Curl depending on the compile definitions that are set on a JUCE target. By default, we don't link Curl because you might not need it, but if you get linker or include errors that reference Curl, just set this argument to <code>TRUE</code>.</li>
@@ -358,7 +378,7 @@ juce_add_plugin(&lt;target&gt; [KEY value]...)
 <li>Should be one of: <code>kPlugCategUnknown</code>, <code>kPlugCategEffect</code>, <code>kPlugCategSynth</code>, <code>kPlugCategAnalysis</code>, <code>kPlugCategMatering</code>, <code>kPlugCategSpacializer</code>, <code>kPlugCategRoomFx</code>, <code>kPlugSurroundFx</code>, <code>kPlugCategRestoration</code>, <code>kPlugCategOfflineProcess</code>, <code>kPlugCategShell</code>, <code>kPlugCategGenerator</code>.</li>
 </ul>
 <p ><code>VST3_CATEGORIES</code></p><ul>
-<li>Should be one or more, separated by spaces, of the following: <code>Fx</code>, <code>Instrument</code>, <code>Analyzer</code>, <code>Delay</code>, <code>Distortion</code>, <code>Drum</code>, <code>Dynamics</code>, <code>EQ</code>, <code>External</code>, <code>Filter</code>, <code>Generator</code>, <code>Mastering</code>, <code>Modulation</code>, <code>Mono</code>, <code>Network</code>, <code>NoOfflineProcess</code>, <code>OnlyOfflineProcess</code>, <code>OnlyRT</code>, <code>Pitch Shift</code>, <code>Restoration</code>, <code><a class="el" href="../../d0/d6b/class_reverb.html">Reverb</a></code>, <code>Sampler</code>, <code>Spatial</code>, <code>Stereo</code>, <code>Surround</code>, <code>Synth</code>, <code>Tools</code>, <code>Up-Downmix</code></li>
+<li>Should be one or more, separated by spaces, of the following: <code>Fx</code>, <code>Instrument</code>, <code>Analyzer</code>, <code>Delay</code>, <code>Distortion</code>, <code>Drum</code>, <code>Dynamics</code>, <code>EQ</code>, <code>External</code>, <code>Filter</code>, <code>Generator</code>, <code>Mastering</code>, <code>Modulation</code>, <code>Mono</code>, <code>Network</code>, <code>NoOfflineProcess</code>, <code>OnlyOfflineProcess</code>, <code>OnlyRT</code>, <code>Pitch Shift</code>, <code>Restoration</code>, <code><a class="el" href="../../d3/d1f/group__juce__audio__basics-utilities.html#d0/d6b/class_reverb">Reverb</a></code>, <code>Sampler</code>, <code>Spatial</code>, <code>Stereo</code>, <code>Surround</code>, <code>Synth</code>, <code>Tools</code>, <code>Up-Downmix</code></li>
 </ul>
 <p ><code>AU_MAIN_TYPE</code></p><ul>
 <li>Should be one of: <code>kAudioUnitType_Effect</code>, <code>kAudioUnitType_FormatConverter</code>, <code>kAudioUnitType_Generator</code>, <code>kAudioUnitType_MIDIProcessor</code>, <code>kAudioUnitType_Mixer</code>, <code>kAudioUnitType_MusicDevice</code>, <code>kAudioUnitType_MusicEffect</code>, <code>kAudioUnitType_OfflineEffect</code>, <code>kAudioUnitType_Output</code>, <code>kAudioUnitType_Panner</code></li>
@@ -464,9 +484,12 @@ Targets</h2>
 <p >This target just sets compiler and linker flags, and doesn't have any associated libraries or include directories. When building plugins, it's probably desirable to link this to the shared code target with <code>PUBLIC</code> visibility, so that all the plugin wrappers inherit the same compile/link flags. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+  </ul>
+</div>
 </body>
 </html>

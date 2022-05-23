@@ -1,0 +1,25 @@
+var juce__android___windowing_8cpp =
+[
+    [ "juce::AndroidComponentPeer", "db/df9/classjuce_1_1_android_component_peer.html", "db/df9/classjuce_1_1_android_component_peer" ],
+    [ "juce::AndroidComponentPeer::StartupActivityCallbackListener", "d0/dad/structjuce_1_1_android_component_peer_1_1_startup_activity_callback_listener.html", "d0/dad/structjuce_1_1_android_component_peer_1_1_startup_activity_callback_listener" ],
+    [ "juce::Desktop::NativeDarkModeChangeDetectorImpl", "d1/d27/classjuce_1_1_desktop_1_1_native_dark_mode_change_detector_impl.html", "d1/d27/classjuce_1_1_desktop_1_1_native_dark_mode_change_detector_impl" ],
+    [ "juce::DialogListener", "d7/dcb/classjuce_1_1_dialog_listener.html", "d7/dcb/classjuce_1_1_dialog_listener" ],
+    [ "juce::LayoutChangeListener", "d8/db3/classjuce_1_1_layout_change_listener.html", "d8/db3/classjuce_1_1_layout_change_listener" ],
+    [ "juce::MainActivityWindowLayoutListener", "dc/d37/structjuce_1_1_main_activity_window_layout_listener.html", "dc/d37/structjuce_1_1_main_activity_window_layout_listener" ],
+    [ "juce::MouseCursor::PlatformSpecificHandle", "d5/d97/classjuce_1_1_mouse_cursor_1_1_platform_specific_handle.html", "d5/d97/classjuce_1_1_mouse_cursor_1_1_platform_specific_handle" ],
+    [ "JNI_CLASS_MEMBERS", "d0/d4f/juce__android___windowing_8cpp.html#a77ce814e6a25d70cf5c85dfc07cfdcbe", null ],
+    [ "JNI_CLASS_MEMBERS", "d0/d4f/juce__android___windowing_8cpp.html#a77ce814e6a25d70cf5c85dfc07cfdcbe", null ],
+    [ "JNI_CLASS_MEMBERS", "d0/d4f/juce__android___windowing_8cpp.html#a77ce814e6a25d70cf5c85dfc07cfdcbe", null ],
+    [ "JNI_CLASS_MEMBERS", "d0/d4f/juce__android___windowing_8cpp.html#a77ce814e6a25d70cf5c85dfc07cfdcbe", null ],
+    [ "JNI_CLASS_MEMBERS", "d0/d4f/juce__android___windowing_8cpp.html#a77ce814e6a25d70cf5c85dfc07cfdcbe", null ],
+    [ "JNI_CLASS_MEMBERS", "d0/d4f/juce__android___windowing_8cpp.html#a77ce814e6a25d70cf5c85dfc07cfdcbe", null ],
+    [ "JNI_CLASS_MEMBERS", "d0/d4f/juce__android___windowing_8cpp.html#a77ce814e6a25d70cf5c85dfc07cfdcbe", null ],
+    [ "JNI_CLASS_MEMBERS", "d0/d4f/juce__android___windowing_8cpp.html#a77ce814e6a25d70cf5c85dfc07cfdcbe", null ],
+    [ "JNI_CLASS_MEMBERS", "d0/d4f/juce__android___windowing_8cpp.html#a77ce814e6a25d70cf5c85dfc07cfdcbe", null ],
+    [ "JNI_CLASS_MEMBERS", "d0/d4f/juce__android___windowing_8cpp.html#a77ce814e6a25d70cf5c85dfc07cfdcbe", null ],
+    [ "JNI_CLASS_MEMBERS", "d0/d4f/juce__android___windowing_8cpp.html#a77ce814e6a25d70cf5c85dfc07cfdcbe", null ],
+    [ "JNI_CLASS_MEMBERS", "d0/d4f/juce__android___windowing_8cpp.html#a77ce814e6a25d70cf5c85dfc07cfdcbe", null ],
+    [ "juce_areThereAnyAlwaysOnTopWindows", "d0/d4f/juce__android___windowing_8cpp.html#a817b68fe0868d562c4e65e04d0308112", null ],
+    [ "juce_createIconForFile", "d0/d4f/juce__android___windowing_8cpp.html#a30b6a511ef40f08b4b90657435f5a933", null ],
+    [ "extendedKeyModifier", "d0/d4f/juce__android___windowing_8cpp.html#a0f35ff0bc01cb342ef48fd3593c67f43", null ]
+];

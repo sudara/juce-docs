@@ -1,0 +1,26 @@
+var namespace_type_helpers =
+[
+    [ "ParameterType", "d7/d38/struct_type_helpers_1_1_parameter_type.html", "d7/d38/struct_type_helpers_1_1_parameter_type" ],
+    [ "ParameterType< bool >", "d7/da0/struct_type_helpers_1_1_parameter_type_3_01bool_01_4.html", "d7/da0/struct_type_helpers_1_1_parameter_type_3_01bool_01_4" ],
+    [ "ParameterType< char >", "d1/deb/struct_type_helpers_1_1_parameter_type_3_01char_01_4.html", "d1/deb/struct_type_helpers_1_1_parameter_type_3_01char_01_4" ],
+    [ "ParameterType< double >", "dd/dc0/struct_type_helpers_1_1_parameter_type_3_01double_01_4.html", "dd/dc0/struct_type_helpers_1_1_parameter_type_3_01double_01_4" ],
+    [ "ParameterType< float >", "d2/dbe/struct_type_helpers_1_1_parameter_type_3_01float_01_4.html", "d2/dbe/struct_type_helpers_1_1_parameter_type_3_01float_01_4" ],
+    [ "ParameterType< int >", "de/d46/struct_type_helpers_1_1_parameter_type_3_01int_01_4.html", "de/d46/struct_type_helpers_1_1_parameter_type_3_01int_01_4" ],
+    [ "ParameterType< int64 >", "df/d33/struct_type_helpers_1_1_parameter_type_3_01int64_01_4.html", "df/d33/struct_type_helpers_1_1_parameter_type_3_01int64_01_4" ],
+    [ "ParameterType< long >", "db/ddf/struct_type_helpers_1_1_parameter_type_3_01long_01_4.html", "db/ddf/struct_type_helpers_1_1_parameter_type_3_01long_01_4" ],
+    [ "ParameterType< short >", "d3/d81/struct_type_helpers_1_1_parameter_type_3_01short_01_4.html", "d3/d81/struct_type_helpers_1_1_parameter_type_3_01short_01_4" ],
+    [ "ParameterType< Type & >", "da/d4c/struct_type_helpers_1_1_parameter_type_3_01_type_01_6_01_4.html", "da/d4c/struct_type_helpers_1_1_parameter_type_3_01_type_01_6_01_4" ],
+    [ "ParameterType< Type * >", "d9/dfd/struct_type_helpers_1_1_parameter_type_3_01_type_01_5_01_4.html", "d9/dfd/struct_type_helpers_1_1_parameter_type_3_01_type_01_5_01_4" ],
+    [ "ParameterType< uint64 >", "d9/d51/struct_type_helpers_1_1_parameter_type_3_01uint64_01_4.html", "d9/d51/struct_type_helpers_1_1_parameter_type_3_01uint64_01_4" ],
+    [ "ParameterType< unsigned char >", "db/d1d/struct_type_helpers_1_1_parameter_type_3_01unsigned_01char_01_4.html", "db/d1d/struct_type_helpers_1_1_parameter_type_3_01unsigned_01char_01_4" ],
+    [ "ParameterType< unsigned int >", "d2/d31/struct_type_helpers_1_1_parameter_type_3_01unsigned_01int_01_4.html", "d2/d31/struct_type_helpers_1_1_parameter_type_3_01unsigned_01int_01_4" ],
+    [ "ParameterType< unsigned long >", "d7/d1d/struct_type_helpers_1_1_parameter_type_3_01unsigned_01long_01_4.html", "d7/d1d/struct_type_helpers_1_1_parameter_type_3_01unsigned_01long_01_4" ],
+    [ "ParameterType< unsigned short >", "d0/dbc/struct_type_helpers_1_1_parameter_type_3_01unsigned_01short_01_4.html", "d0/dbc/struct_type_helpers_1_1_parameter_type_3_01unsigned_01short_01_4" ],
+    [ "SmallestFloatType", "d7/d07/struct_type_helpers_1_1_smallest_float_type.html", "d7/d07/struct_type_helpers_1_1_smallest_float_type" ],
+    [ "SmallestFloatType< double >", "d9/d6d/struct_type_helpers_1_1_smallest_float_type_3_01double_01_4.html", "d9/d6d/struct_type_helpers_1_1_smallest_float_type_3_01double_01_4" ],
+    [ "UnsignedTypeWithSize", "d5/dfc/struct_type_helpers_1_1_unsigned_type_with_size.html", null ],
+    [ "UnsignedTypeWithSize< 1 >", "d0/da9/struct_type_helpers_1_1_unsigned_type_with_size_3_011_01_4.html", "d0/da9/struct_type_helpers_1_1_unsigned_type_with_size_3_011_01_4" ],
+    [ "UnsignedTypeWithSize< 2 >", "da/d53/struct_type_helpers_1_1_unsigned_type_with_size_3_012_01_4.html", "da/d53/struct_type_helpers_1_1_unsigned_type_with_size_3_012_01_4" ],
+    [ "UnsignedTypeWithSize< 4 >", "de/d73/struct_type_helpers_1_1_unsigned_type_with_size_3_014_01_4.html", "de/d73/struct_type_helpers_1_1_unsigned_type_with_size_3_014_01_4" ],
+    [ "UnsignedTypeWithSize< 8 >", "de/d7d/struct_type_helpers_1_1_unsigned_type_with_size_3_018_01_4.html", "de/d7d/struct_type_helpers_1_1_unsigned_type_with_size_3_018_01_4" ]
+];

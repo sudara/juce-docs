@@ -1,0 +1,28 @@
+var codebook_8h =
+[
+    [ "static_codebook", "d0/d4d/structstatic__codebook.html", "d0/d4d/structstatic__codebook" ],
+    [ "codebook", "d9/d38/structcodebook.html", "d9/d38/structcodebook" ],
+    [ "codebook", "d9/d2d/codebook_8h.html#af43e04db7e9b7fef0d2c8d0a0c6d880e", null ],
+    [ "static_codebook", "d9/d2d/codebook_8h.html#a8072b8c8d9ef4218235616382a66d379", null ],
+    [ "_best", "d9/d2d/codebook_8h.html#a929187e9ff269e642758ad1f737d7e3d", null ],
+    [ "_book_logdist", "d9/d2d/codebook_8h.html#a5349ee2100562bf1222f5760d5471945", null ],
+    [ "_book_maptype1_quantvals", "d9/d2d/codebook_8h.html#aec05a8c0eabef16f1074fa1d596ce6e4", null ],
+    [ "_book_unquantize", "d9/d2d/codebook_8h.html#a94ad5cdea25a00f5c2fa0d4830c78333", null ],
+    [ "_float32_pack", "d9/d2d/codebook_8h.html#a16d0b0a2056b4288ceedcef15b35d3fe", null ],
+    [ "_float32_unpack", "d9/d2d/codebook_8h.html#a414000078eb7696277bab0bcede52a8b", null ],
+    [ "vorbis_book_besterror", "d9/d2d/codebook_8h.html#aa6bbd2467f16f0ce31ad363b45841bab", null ],
+    [ "vorbis_book_clear", "d9/d2d/codebook_8h.html#a694fd03843fc2c26272557d009f12daf", null ],
+    [ "vorbis_book_codelen", "d9/d2d/codebook_8h.html#a19abd9f8ad7e141510d918ffd96bb91a", null ],
+    [ "vorbis_book_codeword", "d9/d2d/codebook_8h.html#aa0174214ae42931d39dd11e3df333f3c", null ],
+    [ "vorbis_book_decode", "d9/d2d/codebook_8h.html#ab64c32ac3c21667daf48dff173999dd1", null ],
+    [ "vorbis_book_decodev_add", "d9/d2d/codebook_8h.html#ae3ec5eec5c8c323d4c928802ce0b6cb1", null ],
+    [ "vorbis_book_decodev_set", "d9/d2d/codebook_8h.html#a5c5bd9764a71f55ec58899ce5bfeeb47", null ],
+    [ "vorbis_book_decodevs_add", "d9/d2d/codebook_8h.html#a1e21765f57f5e92dd447a2c65639ebd0", null ],
+    [ "vorbis_book_decodevv_add", "d9/d2d/codebook_8h.html#aac565a12a24e25e13723600d4cb16dd5", null ],
+    [ "vorbis_book_encode", "d9/d2d/codebook_8h.html#aef10100390bdb0f59f150e45c5255afa", null ],
+    [ "vorbis_book_init_decode", "d9/d2d/codebook_8h.html#ad821fef31bb1a8da7303ec63befe6006", null ],
+    [ "vorbis_book_init_encode", "d9/d2d/codebook_8h.html#a042a0dce77fd02c52e095c266bb0afb7", null ],
+    [ "vorbis_staticbook_destroy", "d9/d2d/codebook_8h.html#a0ed7bb03c373f902d26796714fb97c5b", null ],
+    [ "vorbis_staticbook_pack", "d9/d2d/codebook_8h.html#a2e4cf9084f67bbbdf68500dc850e33b2", null ],
+    [ "vorbis_staticbook_unpack", "d9/d2d/codebook_8h.html#a12852b59ca55cc7b8b2674582055036d", null ]
+];

@@ -11,9 +11,9 @@ var searchData=
   ['bitrate_5fmanager_5fstate_8',['bitrate_manager_state',['../d2/d6d/bitrate_8h.html#ae36791fa8fe36f042eebad08f3f5f381',1,'bitrate.h']]],
   ['boolean_9',['boolean',['../d6/d32/jconfig_8h.html#a7670a4e8a07d9ebb00411948b0bbf86d',1,'boolean():&#160;jconfig.h'],['../d6/d5f/jmorecfg_8h.html#a621c38f1f10a1c565d897e3178b16d6e',1,'boolean():&#160;jmorecfg.h']]],
   ['boxptr_10',['boxptr',['../d4/d7d/jquant2_8c.html#a12de0f20fe275ef687682dce6b84cf65',1,'jquant2.c']]],
-  ['bus_11',['Bus',['../d7/d00/struct_v_s_t3_buffer_exchange.html#a89cfb0e38139f3a74c2e2797fc327483',1,'VST3BufferExchange']]],
+  ['bus_11',['Bus',['../dd/dfa/group__juce__audio__processors-format__types.html#a89cfb0e38139f3a74c2e2797fc327483',1,'VST3BufferExchange']]],
   ['busdirection_12',['BusDirection',['../d6/dd2/namespace_steinberg_1_1_vst.html#ab6726c6370253c99cb4f6cc939870b02',1,'Steinberg::Vst']]],
-  ['busmap_13',['BusMap',['../d7/d00/struct_v_s_t3_buffer_exchange.html#a79b91367d28988a90b66768b94c20527',1,'VST3BufferExchange']]],
+  ['busmap_13',['BusMap',['../dd/dfa/group__juce__audio__processors-format__types.html#a79b91367d28988a90b66768b94c20527',1,'VST3BufferExchange']]],
   ['bustype_14',['BusType',['../d6/dd2/namespace_steinberg_1_1_vst.html#a30cad2474dd7b175f36a2ecc14005b01',1,'Steinberg::Vst']]],
   ['byte_15',['Byte',['../de/d95/zconf_8h.html#ae3a497195d617519e5353ea7b417940f',1,'Byte():&#160;zconf.h'],['../d4/d0a/zconf_8in_8h.html#ae3a497195d617519e5353ea7b417940f',1,'Byte():&#160;zconf.in.h'],['../d6/d1f/namespacejuce_1_1pnglib_namespace.html#a7eb2bf0e194ed6b8002fcde61673019c',1,'juce::pnglibNamespace::Byte()']]],
   ['bytef_16',['Bytef',['../de/d95/zconf_8h.html#aeb722a888064be47e12d05f692e0f407',1,'Bytef():&#160;zconf.h'],['../d4/d0a/zconf_8in_8h.html#aeb722a888064be47e12d05f692e0f407',1,'Bytef():&#160;zconf.in.h']]]

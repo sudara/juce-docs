@@ -8,5 +8,5 @@ var searchData=
   ['noteexpressiontypeids_5',['NoteExpressionTypeIDs',['../d6/dd2/namespace_steinberg_1_1_vst.html#a74bfd4548e5ea034de6ea751b7a5cd3b',1,'Steinberg::Vst']]],
   ['noteiduserrange_6',['NoteIDUserRange',['../d6/dd2/namespace_steinberg_1_1_vst.html#a3e87ea43d1b6d2417dfbbcee586ec9ae',1,'Steinberg::Vst']]],
   ['notificationtype_7',['NotificationType',['../d2/d63/group__juce__events-messages.html#ga25a31a4bdc02a0d0adb743e26dd14ba9',1,'juce_NotificationType.h']]],
-  ['notify_8',['Notify',['../dc/d6b/class_interprocess_connection.html#a0db8c0f7c18e8f83c03d6d7b905a5adc',1,'InterprocessConnection']]]
+  ['notify_8',['Notify',['../da/ddc/group__juce__events-interprocess.html#a0db8c0f7c18e8f83c03d6d7b905a5adc',1,'InterprocessConnection']]]
 ];

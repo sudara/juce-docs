@@ -9,10 +9,14 @@
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../resize.js"></script>
+<script type="text/javascript" src="../../navtreedata.js"></script>
+<script type="text/javascript" src="../../navtree.js"></script>
 <link href="../../search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../search/searchdata.js"></script>
 <script type="text/javascript" src="../../search/search.js"></script>
-<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../doxygen-awesome.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -46,6 +50,23 @@ $(function() {
 /* @license-end */
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('dc/dcb/juce__osx___message_queue_8h_source.html','../../'); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -60,11 +81,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="../../dir_4fef79e7177ba769987a8da36c892c5f.html">build</a></li><li class="navelem"><a class="el" href="../../dir_573e7b3b940397019ceede1dfa7eb842.html">juce_events</a></li><li class="navelem"><a class="el" href="../../dir_ae920d807e33cdd17959ad276c3386ce.html">native</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle"><div class="title">juce_osx_MessageQueue.h</div></div>
 </div><!--header-->
@@ -128,7 +144,7 @@ $(function() {
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    }</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <a class="code hl_class" href="../../d9/d3b/class_reference_counted_array.html">ReferenceCountedArray&lt;MessageManager::MessageBase, CriticalSection&gt;</a> messages;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <a class="code hl_class" href="../../d9/dad/group__juce__core-containers.html#d9/d3b/class_reference_counted_array">ReferenceCountedArray&lt;MessageManager::MessageBase, CriticalSection&gt;</a> messages;</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    CFRunLoopRef runLoop;</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <a class="code hl_typedef" href="../../d7/dcd/namespacejuce.html#ab3e49ff7ef2dab489ce60ac5757fb077">CFUniquePtr&lt;CFRunLoopSourceRef&gt;</a> runLoopSource;</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
@@ -140,7 +156,7 @@ $(function() {
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keywordtype">bool</span> deliverNextMessage()</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    {</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <span class="keyword">const</span> <a class="code hl_class" href="../../d2/d6c/class_reference_counted_object_ptr.html">MessageManager::MessageBase::Ptr</a> nextMessage (messages.<a class="code hl_function" href="../../d9/d3b/class_reference_counted_array.html#aa9a388888e3c833af3e47b903edd0dfc">removeAndReturn</a> (0));</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <span class="keyword">const</span> <a class="code hl_class" href="../../d7/d48/group__juce__core-memory.html#d2/d6c/class_reference_counted_object_ptr">MessageManager::MessageBase::Ptr</a> nextMessage (messages.<a class="code hl_function" href="../../d9/dad/group__juce__core-containers.html#aa9a388888e3c833af3e47b903edd0dfc">removeAndReturn</a> (0));</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <span class="keywordflow">if</span> (nextMessage == <span class="keyword">nullptr</span>)</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
@@ -174,13 +190,13 @@ $(function() {
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>} <span class="comment">// namespace juce</span></div>
 <div class="ttc" id="aclass_message_manager_1_1_message_base_html"><div class="ttname"><a href="../../d2/d89/class_message_manager_1_1_message_base.html">MessageManager::MessageBase</a></div><div class="ttdef"><b>Definition:</b> juce_MessageManager.h:183</div></div>
-<div class="ttc" id="aclass_reference_counted_array_html"><div class="ttname"><a href="../../d9/d3b/class_reference_counted_array.html">ReferenceCountedArray</a></div><div class="ttdef"><b>Definition:</b> juce_ReferenceCountedArray.h:52</div></div>
-<div class="ttc" id="aclass_reference_counted_array_html_aa9a388888e3c833af3e47b903edd0dfc"><div class="ttname"><a href="../../d9/d3b/class_reference_counted_array.html#aa9a388888e3c833af3e47b903edd0dfc">ReferenceCountedArray::removeAndReturn</a></div><div class="ttdeci">ObjectClassPtr removeAndReturn(int indexToRemove)</div><div class="ttdef"><b>Definition:</b> juce_ReferenceCountedArray.h:631</div></div>
-<div class="ttc" id="aclass_reference_counted_object_ptr_html"><div class="ttname"><a href="../../d2/d6c/class_reference_counted_object_ptr.html">ReferenceCountedObjectPtr</a></div><div class="ttdef"><b>Definition:</b> juce_ReferenceCountedObject.h:248</div></div>
 <div class="ttc" id="aclassjuce_1_1_message_queue_html"><div class="ttname"><a href="../../df/dd6/classjuce_1_1_message_queue.html">juce::MessageQueue</a></div><div class="ttdef"><b>Definition:</b> juce_osx_MessageQueue.h:29</div></div>
 <div class="ttc" id="aclassjuce_1_1_message_queue_html_a4dfa21b9cd24d20ef4b398fa95185e14"><div class="ttname"><a href="../../df/dd6/classjuce_1_1_message_queue.html#a4dfa21b9cd24d20ef4b398fa95185e14">juce::MessageQueue::~MessageQueue</a></div><div class="ttdeci">~MessageQueue() noexcept</div><div class="ttdef"><b>Definition:</b> juce_osx_MessageQueue.h:47</div></div>
 <div class="ttc" id="aclassjuce_1_1_message_queue_html_a524a9d40ab49f8182764764db1ade4b7"><div class="ttname"><a href="../../df/dd6/classjuce_1_1_message_queue.html#a524a9d40ab49f8182764764db1ade4b7">juce::MessageQueue::post</a></div><div class="ttdeci">void post(MessageManager::MessageBase *const message)</div><div class="ttdef"><b>Definition:</b> juce_osx_MessageQueue.h:53</div></div>
 <div class="ttc" id="aclassjuce_1_1_message_queue_html_ab8b4f48b7499ed96bfbd87330b64f344"><div class="ttname"><a href="../../df/dd6/classjuce_1_1_message_queue.html#ab8b4f48b7499ed96bfbd87330b64f344">juce::MessageQueue::MessageQueue</a></div><div class="ttdeci">MessageQueue()</div><div class="ttdef"><b>Definition:</b> juce_osx_MessageQueue.h:31</div></div>
+<div class="ttc" id="agroup__juce__core-containers_html_aa9a388888e3c833af3e47b903edd0dfc"><div class="ttname"><a href="../../d9/dad/group__juce__core-containers.html#aa9a388888e3c833af3e47b903edd0dfc">ReferenceCountedArray::removeAndReturn</a></div><div class="ttdeci">ObjectClassPtr removeAndReturn(int indexToRemove)</div><div class="ttdef"><b>Definition:</b> juce_ReferenceCountedArray.h:631</div></div>
+<div class="ttc" id="agroup__juce__core-containers_html_d9/d3b/class_reference_counted_array"><div class="ttname"><a href="../../d9/dad/group__juce__core-containers.html#d9/d3b/class_reference_counted_array">ReferenceCountedArray</a></div><div class="ttdef"><b>Definition:</b> juce_ReferenceCountedArray.h:52</div></div>
+<div class="ttc" id="agroup__juce__core-memory_html_d2/d6c/class_reference_counted_object_ptr"><div class="ttname"><a href="../../d7/d48/group__juce__core-memory.html#d2/d6c/class_reference_counted_object_ptr">ReferenceCountedObjectPtr</a></div><div class="ttdef"><b>Definition:</b> juce_ReferenceCountedObject.h:248</div></div>
 <div class="ttc" id="agroup__juce__core-memory_html_ga1f3dbe374ad9280ed9ba72f510d8e5b0"><div class="ttname"><a href="../../d7/d48/group__juce__core-memory.html#ga1f3dbe374ad9280ed9ba72f510d8e5b0">zerostruct</a></div><div class="ttdeci">void zerostruct(Type &amp;structure) noexcept</div><div class="ttdef"><b>Definition:</b> juce_Memory.h:33</div></div>
 <div class="ttc" id="agroup__juce__core-memory_html_gad73fadcd76040b11a626d5bdf833ad49"><div class="ttname"><a href="../../d7/d48/group__juce__core-memory.html#gad73fadcd76040b11a626d5bdf833ad49">JUCE_AUTORELEASEPOOL</a></div><div class="ttdeci">#define JUCE_AUTORELEASEPOOL</div><div class="ttdef"><b>Definition:</b> juce_Memory.h:159</div></div>
 <div class="ttc" id="agroup__juce__events-messages_html_ga267fd4f83073fb084b389df70243c52e"><div class="ttname"><a href="../../d2/d63/group__juce__events-messages.html#ga267fd4f83073fb084b389df70243c52e">JUCE_TRY</a></div><div class="ttdeci">#define JUCE_TRY</div><div class="ttdef"><b>Definition:</b> juce_ApplicationBase.h:330</div></div>
@@ -190,9 +206,13 @@ $(function() {
 <div class="ttc" id="anamespacejuce_html"><div class="ttname"><a href="../../d7/dcd/namespacejuce.html">juce</a></div><div class="ttdef"><b>Definition:</b> juce_Analytics.cpp:27</div></div>
 <div class="ttc" id="anamespacejuce_html_ab3e49ff7ef2dab489ce60ac5757fb077"><div class="ttname"><a href="../../d7/dcd/namespacejuce.html#ab3e49ff7ef2dab489ce60ac5757fb077">juce::CFUniquePtr</a></div><div class="ttdeci">std::unique_ptr&lt; typename std::remove_pointer&lt; CFType &gt;::type, CFObjectDeleter&lt; CFType &gt; &gt; CFUniquePtr</div><div class="ttdef"><b>Definition:</b> juce_mac_CFHelpers.h:40</div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="../../dir_4fef79e7177ba769987a8da36c892c5f.html">build</a></li><li class="navelem"><a class="el" href="../../dir_573e7b3b940397019ceede1dfa7eb842.html">juce_events</a></li><li class="navelem"><a class="el" href="../../dir_ae920d807e33cdd17959ad276c3386ce.html">native</a></li><li class="navelem"><a class="el" href="../../dc/dcb/juce__osx___message_queue_8h.html">juce_osx_MessageQueue.h</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+  </ul>
+</div>
 </body>
 </html>

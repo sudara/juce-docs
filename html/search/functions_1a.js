@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['zaxis_0',['zAxis',['../d9/dd2/class_vector3_d.html#a645c37ceeed7b4962c27584acd56277f',1,'Vector3D']]],
+  ['zaxis_0',['zAxis',['../d3/dc8/group__juce__opengl-geometry.html#a645c37ceeed7b4962c27584acd56277f',1,'Vector3D']]],
   ['zcalloc_1',['zcalloc',['../d4/d49/zutil_8c.html#acd6de6ee77b7c44353e61511b6eb1d90',1,'zutil.c']]],
   ['zcfree_2',['zcfree',['../d4/d49/zutil_8c.html#ac5167b77f4a79cb68ba27c598b52485e',1,'zutil.c']]],
   ['zerobuffer_3',['ZeroBuffer',['../d3/de9/class_a_u_buffer_list.html#a820bbcdc274d91cb7718b1c8b268973c',1,'AUBufferList']]],
@@ -8,7 +8,7 @@ var searchData=
   ['zerostruct_5',['zerostruct',['../d7/d48/group__juce__core-memory.html#ga1f3dbe374ad9280ed9ba72f510d8e5b0',1,'juce_Memory.h']]],
   ['zerror_6',['zError',['../d4/d49/zutil_8c.html#ae18915a3028cbb78f6d7fffc813974b1',1,'zutil.c']]],
   ['zipentryholder_7',['ZipEntryHolder',['../d3/d31/structjuce_1_1_zip_file_1_1_zip_entry_holder.html#a70b06385990982354a1fd136851ca831',1,'juce::ZipFile::ZipEntryHolder']]],
-  ['zipfile_8',['ZipFile',['../dd/d14/class_zip_file.html#aed7c61ad49b425119915544015dab3e8',1,'ZipFile::ZipFile(const File &amp;file)'],['../dd/d14/class_zip_file.html#a8b251067cc8a29f88eeaf02dfe0e3658',1,'ZipFile::ZipFile(InputStream *inputStream, bool deleteStreamWhenDestroyed)'],['../dd/d14/class_zip_file.html#aafe1b3e2329e6af9c318d03d3aa88704',1,'ZipFile::ZipFile(InputStream &amp;inputStream)'],['../dd/d14/class_zip_file.html#aaaa0dfb96daf669363ef206b48cf889b',1,'ZipFile::ZipFile(InputSource *inputSource)']]],
+  ['zipfile_8',['ZipFile',['../de/d3b/group__juce__core-zip.html#aed7c61ad49b425119915544015dab3e8',1,'ZipFile::ZipFile(const File &amp;file)'],['../de/d3b/group__juce__core-zip.html#a8b251067cc8a29f88eeaf02dfe0e3658',1,'ZipFile::ZipFile(InputStream *inputStream, bool deleteStreamWhenDestroyed)'],['../de/d3b/group__juce__core-zip.html#aafe1b3e2329e6af9c318d03d3aa88704',1,'ZipFile::ZipFile(InputStream &amp;inputStream)'],['../de/d3b/group__juce__core-zip.html#aaaa0dfb96daf669363ef206b48cf889b',1,'ZipFile::ZipFile(InputSource *inputSource)']]],
   ['zipinputstream_9',['ZipInputStream',['../d1/de0/structjuce_1_1_zip_file_1_1_zip_input_stream.html#a2ffbb1ab5e814b7a37b00b13b1949534',1,'juce::ZipFile::ZipInputStream']]],
   ['zmemcmp_10',['zmemcmp',['../d4/d49/zutil_8c.html#a6590fb2f333a07dc593b873440d7c6ab',1,'zutil.c']]],
   ['zmemcpy_11',['zmemcpy',['../d4/d49/zutil_8c.html#aaeaf4c4bfd0bbb073ce42fe420bb828a',1,'zutil.c']]],

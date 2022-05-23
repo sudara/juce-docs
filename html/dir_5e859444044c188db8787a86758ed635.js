@@ -1,0 +1,28 @@
+var dir_5e859444044c188db8787a86758ed635 =
+[
+    [ "AAX", "dir_11a36b8433bf663673f7642b2570934d.html", "dir_11a36b8433bf663673f7642b2570934d" ],
+    [ "AU", "dir_19fbd1cd4cc2dd2fdcc51b626509980e.html", "dir_19fbd1cd4cc2dd2fdcc51b626509980e" ],
+    [ "RTAS", "dir_d55208d1bc084289f8f058a2fa469afa.html", "dir_d55208d1bc084289f8f058a2fa469afa" ],
+    [ "Standalone", "dir_4801db06befc582464e6844bfbf4a777.html", "dir_4801db06befc582464e6844bfbf4a777" ],
+    [ "Unity", "dir_1c3b5958a0f946cbd6cd720ee73db2e2.html", "dir_1c3b5958a0f946cbd6cd720ee73db2e2" ],
+    [ "utility", "dir_6d0caa7aee2488b716b38ab2bf2652f5.html", "dir_6d0caa7aee2488b716b38ab2bf2652f5" ],
+    [ "VST", "dir_3e4838581e1b725790d7e5ac7c215485.html", "dir_3e4838581e1b725790d7e5ac7c215485" ],
+    [ "VST3", "dir_adfb77cc7e70c31ad3980fa4e392570d.html", "dir_adfb77cc7e70c31ad3980fa4e392570d" ],
+    [ "juce_audio_plugin_client_AAX.cpp", "d6/d0a/juce__audio__plugin__client___a_a_x_8cpp.html", null ],
+    [ "juce_audio_plugin_client_AAX.mm", "de/d88/juce__audio__plugin__client___a_a_x_8mm.html", "de/d88/juce__audio__plugin__client___a_a_x_8mm" ],
+    [ "juce_audio_plugin_client_AU_1.mm", "dc/d7f/juce__audio__plugin__client___a_u__1_8mm.html", null ],
+    [ "juce_audio_plugin_client_AU_2.mm", "d3/d3e/juce__audio__plugin__client___a_u__2_8mm.html", null ],
+    [ "juce_audio_plugin_client_AUv3.mm", "d9/dc8/juce__audio__plugin__client___a_uv3_8mm.html", null ],
+    [ "juce_audio_plugin_client_RTAS_1.cpp", "d6/d23/juce__audio__plugin__client___r_t_a_s__1_8cpp.html", null ],
+    [ "juce_audio_plugin_client_RTAS_2.cpp", "d2/dab/juce__audio__plugin__client___r_t_a_s__2_8cpp.html", null ],
+    [ "juce_audio_plugin_client_RTAS_3.cpp", "dd/d43/juce__audio__plugin__client___r_t_a_s__3_8cpp.html", null ],
+    [ "juce_audio_plugin_client_RTAS_4.cpp", "d3/d9f/juce__audio__plugin__client___r_t_a_s__4_8cpp.html", null ],
+    [ "juce_audio_plugin_client_RTAS_utils.cpp", "d1/db0/juce__audio__plugin__client___r_t_a_s__utils_8cpp.html", null ],
+    [ "juce_audio_plugin_client_RTAS_utils.mm", "dc/da1/juce__audio__plugin__client___r_t_a_s__utils_8mm.html", null ],
+    [ "juce_audio_plugin_client_Standalone.cpp", "d8/d5a/juce__audio__plugin__client___standalone_8cpp.html", null ],
+    [ "juce_audio_plugin_client_Unity.cpp", "d8/d30/juce__audio__plugin__client___unity_8cpp.html", null ],
+    [ "juce_audio_plugin_client_utils.cpp", "d7/d2a/juce__audio__plugin__client__utils_8cpp.html", null ],
+    [ "juce_audio_plugin_client_VST2.cpp", "d8/d19/juce__audio__plugin__client___v_s_t2_8cpp.html", null ],
+    [ "juce_audio_plugin_client_VST3.cpp", "d5/d64/juce__audio__plugin__client___v_s_t3_8cpp.html", null ],
+    [ "juce_audio_plugin_client_VST_utils.mm", "df/da9/juce__audio__plugin__client___v_s_t__utils_8mm.html", null ]
+];

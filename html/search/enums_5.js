@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['factoryflags_0',['FactoryFlags',['../d5/ddf/struct_steinberg_1_1_p_factory_info.html#a507d22f3b229b2022f993bc7a7b59978',1,'Steinberg::PFactoryInfo']]],
-  ['filechooserflags_1',['FileChooserFlags',['../dd/d39/class_file_browser_component.html#a32888a950cc0e51c8e1350f53bea43d6',1,'FileBrowserComponent']]],
+  ['factoryflags_0',['FactoryFlags',['../d5/dbe/group__plugin_base.html#a507d22f3b229b2022f993bc7a7b59978',1,'Steinberg::PFactoryInfo']]],
+  ['filechooserflags_1',['FileChooserFlags',['../d4/d73/group__juce__gui__basics-filebrowser.html#a32888a950cc0e51c8e1350f53bea43d6',1,'FileBrowserComponent']]],
   ['filter_5fstate_2',['FILTER_STATE',['../d1/d68/namespacejuce_1_1_com_types.html#ab3abe9b6f2e7a079b9a9ec6343614e89',1,'juce::ComTypes']]],
   ['filtertype_3',['FilterType',['../db/d0f/classdsp_1_1_oversampling.html#ac3d048707b7807badec0df770c9778f8',1,'dsp::Oversampling']]],
   ['firstordertptfiltertype_4',['FirstOrderTPTFilterType',['../d0/d41/namespacedsp.html#ae95dedb418a8687b6f966f9dc92a4603',1,'dsp']]],
@@ -29,13 +29,13 @@ var searchData=
   ['flac_5f_5fstreamencoderwritestatus_26',['FLAC__StreamEncoderWriteStatus',['../d6/d4c/group__flac__stream__encoder.html#ga3737471fd49730bb8cf9b182bdeda05e',1,'stream_encoder.h']]],
   ['flac_5f_5fstreammetadata_5fpicture_5ftype_27',['FLAC__StreamMetadata_Picture_Type',['../d1/d91/group__flac__format.html#gaf6d3e836cee023e0b8d897f1fdc9825d',1,'format.h']]],
   ['flac_5f_5fsubframetype_28',['FLAC__SubframeType',['../d1/d91/group__flac__format.html#ga1f431eaf213e74d7747589932d263348',1,'format.h']]],
-  ['flags_29',['Flags',['../df/dd6/class_steinberg_1_1_vst_1_1_i_process_context_requirements.html#a631b2025316c1c6e1ddb4a3a4d316f20',1,'Steinberg::Vst::IProcessContextRequirements::Flags()'],['../d9/dba/struct_steinberg_1_1_vst_1_1_i_context_menu_item.html#ac6c99556b6b985989e627473a2e17666',1,'Steinberg::Vst::IContextMenuItem::Flags()'],['../d3/d50/class_justification.html#a1f8c07756c56fe8f31ed44964e51bfbc',1,'Justification::Flags()'],['../d6/db8/class_rectangle_placement.html#afd5464553fd6bb41d697f3fc1d7427ed',1,'RectanglePlacement::Flags()'],['../da/d40/class_modifier_keys.html#acdd2a85defa6a705d74e1a63d193678b',1,'ModifierKeys::Flags()']]],
-  ['focuschangetype_30',['FocusChangeType',['../d2/d00/class_component.html#a7fd775ea6b1190d5d694fdffa539dfac',1,'Component']]],
-  ['focuscontainertype_31',['FocusContainerType',['../d2/d00/class_component.html#af4b602b33a2f82e39560fcffb6a2bd9e',1,'Component']]],
-  ['followsymlinks_32',['FollowSymlinks',['../d1/d31/class_file.html#a0a1de7b7cf65e7502cac315b3d180aec',1,'File::FollowSymlinks()'],['../dd/d14/class_zip_file.html#a16ad335c8def5a80206070a64a42685e',1,'ZipFile::FollowSymlinks()']]],
-  ['fontstyleflags_33',['FontStyleFlags',['../de/d9f/class_font.html#a52a35b5dc1e6f782e25283c9283bae4f',1,'Font']]],
-  ['format_34',['Format',['../d3/d7b/class_g_z_i_p_decompressor_input_stream.html#a293d005b03d528a89ec13cfb07e31f94',1,'GZIPDecompressorInputStream']]],
+  ['flags_29',['Flags',['../df/dd6/class_steinberg_1_1_vst_1_1_i_process_context_requirements.html#a631b2025316c1c6e1ddb4a3a4d316f20',1,'Steinberg::Vst::IProcessContextRequirements::Flags()'],['../d9/dba/struct_steinberg_1_1_vst_1_1_i_context_menu_item.html#ac6c99556b6b985989e627473a2e17666',1,'Steinberg::Vst::IContextMenuItem::Flags()'],['../d7/d6e/group__juce__graphics-placement.html#a1f8c07756c56fe8f31ed44964e51bfbc',1,'Justification::Flags()'],['../d7/d6e/group__juce__graphics-placement.html#afd5464553fd6bb41d697f3fc1d7427ed',1,'RectanglePlacement::Flags()'],['../db/dd7/group__juce__gui__basics-keyboard.html#acdd2a85defa6a705d74e1a63d193678b',1,'ModifierKeys::Flags()']]],
+  ['focuschangetype_30',['FocusChangeType',['../d2/d51/group__juce__gui__basics-components.html#a7fd775ea6b1190d5d694fdffa539dfac',1,'Component']]],
+  ['focuscontainertype_31',['FocusContainerType',['../d2/d51/group__juce__gui__basics-components.html#af4b602b33a2f82e39560fcffb6a2bd9e',1,'Component']]],
+  ['followsymlinks_32',['FollowSymlinks',['../d5/d8d/group__juce__core-files.html#a0a1de7b7cf65e7502cac315b3d180aec',1,'File::FollowSymlinks()'],['../de/d3b/group__juce__core-zip.html#a16ad335c8def5a80206070a64a42685e',1,'ZipFile::FollowSymlinks()']]],
+  ['fontstyleflags_33',['FontStyleFlags',['../de/d7f/group__juce__graphics-fonts.html#a52a35b5dc1e6f782e25283c9283bae4f',1,'Font']]],
+  ['format_34',['Format',['../de/d3b/group__juce__core-zip.html#a293d005b03d528a89ec13cfb07e31f94',1,'GZIPDecompressorInputStream']]],
   ['framerateflags_35',['FrameRateFlags',['../db/d59/struct_steinberg_1_1_vst_1_1_frame_rate.html#a1cd3fb87001643e2f57779c333443fab',1,'Steinberg::Vst::FrameRate']]],
-  ['frameratetype_36',['FrameRateType',['../df/ddb/class_audio_play_head.html#a9afad1749c8002945b2a6921eef92b25',1,'AudioPlayHead']]],
+  ['frameratetype_36',['FrameRateType',['../d4/d05/group__juce__audio__basics-audio__play__head.html#a9afad1749c8002945b2a6921eef92b25',1,'AudioPlayHead']]],
   ['fseekmode_37',['FSeekMode',['../dc/d2a/namespace_steinberg.html#aad3130f4ec76bff57dee074998bb126e',1,'Steinberg']]]
 ];

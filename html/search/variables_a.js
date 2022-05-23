@@ -49,12 +49,12 @@ var searchData=
   ['juce_5fwebkit_5fweb_5fview_5fstop_5floading_46',['juce_webkit_web_view_stop_loading',['../d1/df4/classjuce_1_1_web_kit_symbols.html#abc75165ca46a26761bc171469980c3fd',1,'juce::WebKitSymbols']]],
   ['juceaudiohardwareservicedeviceproperty_5fvirtualmainvolume_47',['juceAudioHardwareServiceDeviceProperty_VirtualMainVolume',['../d7/dcd/namespacejuce.html#a303eddc36c2320659ddad0fe2bf65af2',1,'juce']]],
   ['juceaudioobjectpropertyelementmain_48',['juceAudioObjectPropertyElementMain',['../d7/dcd/namespacejuce.html#a0c30df91d2e7104934ada7d7a8a9fdc5',1,'juce']]],
-  ['jucepluginclientcurrentwrappertype_49',['jucePlugInClientCurrentWrapperType',['../d3/d04/class_plugin_host_type.html#a61ef44292db5a01e6c3aae804c3fb0ff',1,'PluginHostType']]],
-  ['jucepluginisrunninginaudiosuitefn_50',['jucePlugInIsRunningInAudioSuiteFn',['../d3/d04/class_plugin_host_type.html#a2f577c878aa6aa512437a4c7562cc4c3',1,'PluginHostType']]],
+  ['jucepluginclientcurrentwrappertype_49',['jucePlugInClientCurrentWrapperType',['../d7/d7c/group__juce__audio__processors-utilities.html#a61ef44292db5a01e6c3aae804c3fb0ff',1,'PluginHostType']]],
+  ['jucepluginisrunninginaudiosuitefn_50',['jucePlugInIsRunningInAudioSuiteFn',['../d7/d7c/group__juce__audio__processors-utilities.html#a2f577c878aa6aa512437a4c7562cc4c3',1,'PluginHostType']]],
   ['juceuiaccessibilitycontainertypedatatable_51',['juceUIAccessibilityContainerTypeDataTable',['../d7/dcd/namespacejuce.html#ad67e9ba77b83155bbed365961dbb08d3',1,'juce']]],
   ['juceuiaccessibilitycontainertypelist_52',['juceUIAccessibilityContainerTypeList',['../d7/dcd/namespacejuce.html#a90c80078daa0361e9fafb4bf8c7c7ad8',1,'juce']]],
   ['juceuiaccessibilitycontainertypenone_53',['juceUIAccessibilityContainerTypeNone',['../d7/dcd/namespacejuce.html#a1693e84b4c2ef3f02fe4c7f619e01034',1,'juce']]],
-  ['justifycontent_54',['justifyContent',['../da/d74/class_grid.html#a1ffb17b0278671325d144c18ad3d90d8',1,'Grid::justifyContent()'],['../d0/dc7/class_flex_box.html#a20627d266f82422c5e72152ba07e5bc1',1,'FlexBox::justifyContent()']]],
-  ['justifyitems_55',['justifyItems',['../da/d74/class_grid.html#afb7f619f54e013d739bf4eba008c6f8b',1,'Grid']]],
-  ['justifyself_56',['justifySelf',['../d6/d5d/class_grid_item.html#ad99b06aa55356196c54bf40321301147',1,'GridItem']]]
+  ['justifycontent_54',['justifyContent',['../d1/deb/group__juce__gui__basics-layout.html#a1ffb17b0278671325d144c18ad3d90d8',1,'Grid::justifyContent()'],['../d1/deb/group__juce__gui__basics-layout.html#a20627d266f82422c5e72152ba07e5bc1',1,'FlexBox::justifyContent()']]],
+  ['justifyitems_55',['justifyItems',['../d1/deb/group__juce__gui__basics-layout.html#afb7f619f54e013d739bf4eba008c6f8b',1,'Grid']]],
+  ['justifyself_56',['justifySelf',['../d1/deb/group__juce__gui__basics-layout.html#ad99b06aa55356196c54bf40321301147',1,'GridItem']]]
 ];

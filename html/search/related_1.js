@@ -20,5 +20,5 @@ var searchData=
   ['b2weldjoint_17',['b2WeldJoint',['../d7/db1/classb2_body.html#a9fafe51e7203fdb53358c75e1c41142b',1,'b2Body']]],
   ['b2wheeljoint_18',['b2WheelJoint',['../d7/db1/classb2_body.html#a715f06ed5bb576994cd50d0b99cc18ec',1,'b2Body']]],
   ['b2world_19',['b2World',['../d7/db1/classb2_body.html#a4bd536c5a7c0587913765bbc2693ceea',1,'b2Body::b2World()'],['../d9/d6f/classb2_fixture.html#a4bd536c5a7c0587913765bbc2693ceea',1,'b2Fixture::b2World()'],['../dd/d5e/classb2_contact.html#a4bd536c5a7c0587913765bbc2693ceea',1,'b2Contact::b2World()'],['../d0/d62/classb2_joint.html#a4bd536c5a7c0587913765bbc2693ceea',1,'b2Joint::b2World()']]],
-  ['bus_20',['Bus',['../d3/d4e/class_audio_processor.html#a96d8550db89cd8c6abb7e0d3e8923eb2',1,'AudioProcessor']]]
+  ['bus_20',['Bus',['../da/db5/group__juce__audio__processors-processors.html#a96d8550db89cd8c6abb7e0d3e8923eb2',1,'AudioProcessor']]]
 ];

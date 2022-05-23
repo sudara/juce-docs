@@ -6,7 +6,7 @@ var searchData=
   ['menuselectiondirection_3',['MenuSelectionDirection',['../de/d5b/structjuce_1_1_popup_menu_1_1_helper_classes_1_1_menu_window.html#a810511ec9c16684143c5aeb51f23ddb7',1,'juce::PopupMenu::HelperClasses::MenuWindow']]],
   ['messageboxicontype_4',['MessageBoxIconType',['../da/ddc/group__juce__gui__basics-windows.html#ga82b3ccfe63090a7818d1028e04b44bd0',1,'juce_MessageBoxOptions.h']]],
   ['mfvideoaspectratiomode_5',['MFVideoAspectRatioMode',['../d1/d68/namespacejuce_1_1_com_types.html#a06c7ea740e0e2821c847f9d6c8970275',1,'juce::ComTypes']]],
-  ['midimachinecontrolcommand_6',['MidiMachineControlCommand',['../d6/d87/class_midi_message.html#aa95b060274257522d1af40794ad1631d',1,'MidiMessage']]],
+  ['midimachinecontrolcommand_6',['MidiMachineControlCommand',['../de/d02/group__juce__audio__basics-midi.html#aa95b060274257522d1af40794ad1631d',1,'MidiMessage']]],
   ['midiprotocol_7',['MidiProtocol',['../d6/da1/namespaceuniversal__midi__packets.html#afb7a35bece9c2a54a8dca7aef081d5e4',1,'universal_midi_packets']]],
   ['missingopengldefinitions_8',['MissingOpenGLDefinitions',['../d7/dcd/namespacejuce.html#a12ee88afb732da8640ff4780a51e5147',1,'juce']]],
   ['monitor_5fdpi_5ftype_9',['Monitor_DPI_Type',['../d7/dcd/namespacejuce.html#a529b9c99170c8e9cfbe9f373ef567c38',1,'juce']]],

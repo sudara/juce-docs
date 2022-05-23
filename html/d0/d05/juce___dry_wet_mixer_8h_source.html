@@ -9,10 +9,14 @@
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../resize.js"></script>
+<script type="text/javascript" src="../../navtreedata.js"></script>
+<script type="text/javascript" src="../../navtree.js"></script>
 <link href="../../search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../search/searchdata.js"></script>
 <script type="text/javascript" src="../../search/search.js"></script>
-<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../doxygen-awesome.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -46,6 +50,23 @@ $(function() {
 /* @license-end */
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('d0/d05/juce___dry_wet_mixer_8h_source.html','../../'); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -60,11 +81,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="../../dir_4fef79e7177ba769987a8da36c892c5f.html">build</a></li><li class="navelem"><a class="el" href="../../dir_98cf10af9227f8e47bf96305a51ca366.html">juce_dsp</a></li><li class="navelem"><a class="el" href="../../dir_03babbf0c9993e7f754b7f1d964e5642.html">processors</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle"><div class="title">juce_DryWetMixer.h</div></div>
 </div><!--header-->
@@ -143,11 +159,11 @@ $(function() {
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keywordtype">void</span> update();</div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="comment">//==============================================================================</span></div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <a class="code hl_class" href="../../d0/d4a/class_smoothed_value.html">SmoothedValue&lt;SampleType, ValueSmoothingTypes::Linear&gt;</a> dryVolume, wetVolume;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <a class="code hl_class" href="../../d3/d1f/group__juce__audio__basics-utilities.html#d0/d4a/class_smoothed_value">SmoothedValue&lt;SampleType, ValueSmoothingTypes::Linear&gt;</a> dryVolume, wetVolume;</div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <a class="code hl_class" href="../../d3/df3/classdsp_1_1_delay_line.html">DelayLine&lt;SampleType, DelayLineInterpolationTypes::Thiran&gt;</a> dryDelayLine;</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <a class="code hl_class" href="../../d3/da6/class_audio_buffer.html">AudioBuffer&lt;SampleType&gt;</a> bufferDry;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <a class="code hl_class" href="../../de/db7/group__juce__audio__basics-buffers.html#d3/da6/class_audio_buffer">AudioBuffer&lt;SampleType&gt;</a> bufferDry;</div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <a class="code hl_class" href="../../d9/d1b/class_single_threaded_abstract_fifo.html">SingleThreadedAbstractFifo</a> fifo;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <a class="code hl_class" href="../../d9/dad/group__juce__core-containers.html#d9/d1b/class_single_threaded_abstract_fifo">SingleThreadedAbstractFifo</a> fifo;</div>
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    SampleType mix = 1.0;</div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <a class="code hl_enumeration" href="../../d0/d41/namespacedsp.html#a88d33c6b783d9a78aee07335dbf9a968">MixingRule</a> currentMixingRule = <a class="code hl_enumvalue" href="../../d0/d41/namespacedsp.html#a88d33c6b783d9a78aee07335dbf9a968a9a932b3cb396238423eb2f33ec17d6aa">MixingRule::linear</a>;</div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="keywordtype">double</span> sampleRate = 44100.0;</div>
@@ -157,9 +173,6 @@ $(function() {
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>} <span class="comment">// namespace dsp</span></div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> <span class="comment">// namespace juce</span></div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
-<div class="ttc" id="aclass_audio_buffer_html"><div class="ttname"><a href="../../d3/da6/class_audio_buffer.html">AudioBuffer</a></div><div class="ttdef"><b>Definition:</b> juce_AudioSampleBuffer.h:82</div></div>
-<div class="ttc" id="aclass_single_threaded_abstract_fifo_html"><div class="ttname"><a href="../../d9/d1b/class_single_threaded_abstract_fifo.html">SingleThreadedAbstractFifo</a></div><div class="ttdef"><b>Definition:</b> juce_SingleThreadedAbstractFifo.h:65</div></div>
-<div class="ttc" id="aclass_smoothed_value_html"><div class="ttname"><a href="../../d0/d4a/class_smoothed_value.html">SmoothedValue</a></div><div class="ttdef"><b>Definition:</b> juce_SmoothedValue.h:228</div></div>
 <div class="ttc" id="aclassdsp_1_1_audio_block_html"><div class="ttname"><a href="../../d1/d4b/classdsp_1_1_audio_block.html">dsp::AudioBlock&lt; const SampleType &gt;</a></div></div>
 <div class="ttc" id="aclassdsp_1_1_delay_line_html"><div class="ttname"><a href="../../d3/df3/classdsp_1_1_delay_line.html">dsp::DelayLine</a></div><div class="ttdef"><b>Definition:</b> juce_DelayLine.h:96</div></div>
 <div class="ttc" id="aclassdsp_1_1_dry_wet_mixer_html"><div class="ttname"><a href="../../d9/de5/classdsp_1_1_dry_wet_mixer.html">dsp::DryWetMixer</a></div><div class="ttdef"><b>Definition:</b> juce_DryWetMixer.h:55</div></div>
@@ -172,6 +185,9 @@ $(function() {
 <div class="ttc" id="aclassdsp_1_1_dry_wet_mixer_html_acf696b998b700df32d07208a8b301fc8"><div class="ttname"><a href="../../d9/de5/classdsp_1_1_dry_wet_mixer.html#acf696b998b700df32d07208a8b301fc8">dsp::DryWetMixer::DryWetMixer</a></div><div class="ttdeci">DryWetMixer()</div><div class="ttdef"><b>Definition:</b> juce_DryWetMixer.cpp:33</div></div>
 <div class="ttc" id="aclassdsp_1_1_dry_wet_mixer_html_af4a4cf4c18dd6c9c68035dc754fdefb0"><div class="ttname"><a href="../../d9/de5/classdsp_1_1_dry_wet_mixer.html#af4a4cf4c18dd6c9c68035dc754fdefb0">dsp::DryWetMixer::setMixingRule</a></div><div class="ttdeci">void setMixingRule(MixingRule newRule)</div><div class="ttdef"><b>Definition:</b> juce_DryWetMixer.cpp:51</div></div>
 <div class="ttc" id="aclassdsp_1_1_dry_wet_mixer_html_af7126c11db1f99aed3ffe5e60f6a74d6"><div class="ttname"><a href="../../d9/de5/classdsp_1_1_dry_wet_mixer.html#af7126c11db1f99aed3ffe5e60f6a74d6">dsp::DryWetMixer::reset</a></div><div class="ttdeci">void reset()</div><div class="ttdef"><b>Definition:</b> juce_DryWetMixer.cpp:89</div></div>
+<div class="ttc" id="agroup__juce__audio__basics-buffers_html_d3/da6/class_audio_buffer"><div class="ttname"><a href="../../de/db7/group__juce__audio__basics-buffers.html#d3/da6/class_audio_buffer">AudioBuffer</a></div><div class="ttdef"><b>Definition:</b> juce_AudioSampleBuffer.h:82</div></div>
+<div class="ttc" id="agroup__juce__audio__basics-utilities_html_d0/d4a/class_smoothed_value"><div class="ttname"><a href="../../d3/d1f/group__juce__audio__basics-utilities.html#d0/d4a/class_smoothed_value">SmoothedValue</a></div><div class="ttdef"><b>Definition:</b> juce_SmoothedValue.h:228</div></div>
+<div class="ttc" id="agroup__juce__core-containers_html_d9/d1b/class_single_threaded_abstract_fifo"><div class="ttname"><a href="../../d9/dad/group__juce__core-containers.html#d9/d1b/class_single_threaded_abstract_fifo">SingleThreadedAbstractFifo</a></div><div class="ttdef"><b>Definition:</b> juce_SingleThreadedAbstractFifo.h:65</div></div>
 <div class="ttc" id="anamespacedsp_html"><div class="ttname"><a href="../../d0/d41/namespacedsp.html">dsp</a></div><div class="ttdef"><b>Definition:</b> juce_AudioBlock.h:30</div></div>
 <div class="ttc" id="anamespacedsp_html_a88d33c6b783d9a78aee07335dbf9a968"><div class="ttname"><a href="../../d0/d41/namespacedsp.html#a88d33c6b783d9a78aee07335dbf9a968">dsp::DryWetMixingRule</a></div><div class="ttdeci">DryWetMixingRule</div><div class="ttdef"><b>Definition:</b> juce_DryWetMixer.h:33</div></div>
 <div class="ttc" id="anamespacedsp_html_a88d33c6b783d9a78aee07335dbf9a968a0f9a9215d4bf9fd51e11a65462846222"><div class="ttname"><a href="../../d0/d41/namespacedsp.html#a88d33c6b783d9a78aee07335dbf9a968a0f9a9215d4bf9fd51e11a65462846222">dsp::DryWetMixingRule::squareRoot4p5dB</a></div><div class="ttdeci">@ squareRoot4p5dB</div></div>
@@ -183,9 +199,13 @@ $(function() {
 <div class="ttc" id="anamespacedsp_html_a88d33c6b783d9a78aee07335dbf9a968ab336df698d12ac8e54570ba6ea2679f0"><div class="ttname"><a href="../../d0/d41/namespacedsp.html#a88d33c6b783d9a78aee07335dbf9a968ab336df698d12ac8e54570ba6ea2679f0">dsp::DryWetMixingRule::balanced</a></div><div class="ttdeci">@ balanced</div></div>
 <div class="ttc" id="astructdsp_1_1_process_spec_html"><div class="ttname"><a href="../../d8/d4e/structdsp_1_1_process_spec.html">dsp::ProcessSpec</a></div><div class="ttdef"><b>Definition:</b> juce_ProcessContext.h:39</div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="../../dir_4fef79e7177ba769987a8da36c892c5f.html">build</a></li><li class="navelem"><a class="el" href="../../dir_98cf10af9227f8e47bf96305a51ca366.html">juce_dsp</a></li><li class="navelem"><a class="el" href="../../dir_03babbf0c9993e7f754b7f1d964e5642.html">processors</a></li><li class="navelem"><a class="el" href="../../d0/d05/juce___dry_wet_mixer_8h.html">juce_DryWetMixer.h</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+  </ul>
+</div>
 </body>
 </html>
