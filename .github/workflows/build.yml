@@ -14,7 +14,14 @@ jobs:
         uses: actions/checkout@v3
         with: 
           submodules: true
-          
+      - name: Update JUCE
+        run: |-
+          git submodule update --remote --merge
+          git config --global user.email "actions@users.noreply.github.com"
+          git config --global user.name "Github Actions Cronjob"
+          git add JUCE
+          git commit -m "Update JUCE master"
+          git push    
       - name: Setup python
         uses: actions/setup-python@v3
         
@@ -37,4 +44,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+          publish_dir: ./public/html
