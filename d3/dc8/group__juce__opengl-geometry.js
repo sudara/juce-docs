@@ -1,0 +1,66 @@
+var group__juce__opengl_geometry =
+[
+    [ "Draggable3DOrientation", "d7/dc7/class_draggable3_d_orientation.html", [
+      [ "QuaternionType", "d7/dc7/class_draggable3_d_orientation.html#aac3238fcd660a2c81628e0ae2e4ba717", null ],
+      [ "VectorType", "d7/dc7/class_draggable3_d_orientation.html#aa93e8f8ea935cf7d06c99c27e745c5e3", null ],
+      [ "Draggable3DOrientation", "d7/dc7/class_draggable3_d_orientation.html#a926f24463e2a332a31897be82726e780", null ],
+      [ "Draggable3DOrientation", "d7/dc7/class_draggable3_d_orientation.html#a968881ef4fc0b522cb7dc33e8597de8a", null ],
+      [ "getQuaternion", "d7/dc7/class_draggable3_d_orientation.html#a7324255cd9a3244436645ea73aba4dc1", null ],
+      [ "getRotationMatrix", "d7/dc7/class_draggable3_d_orientation.html#a281662905045c96edf8964785aa6896a", null ],
+      [ "mouseDown", "d7/dc7/class_draggable3_d_orientation.html#a42b621b62a71657a5b02bc12e75f5a97", null ],
+      [ "mouseDrag", "d7/dc7/class_draggable3_d_orientation.html#a9a163aa63b7b834b0cab05d898a062c4", null ],
+      [ "reset", "d7/dc7/class_draggable3_d_orientation.html#a044ceada7a836f33ed3b5359fdfd7117", null ],
+      [ "setRadius", "d7/dc7/class_draggable3_d_orientation.html#aba3b29abef586953b0ab2dc709dc274c", null ],
+      [ "setViewport", "d7/dc7/class_draggable3_d_orientation.html#a63d93228909c5069e77512fcd8d3b5f9", null ]
+    ] ],
+    [ "Matrix3D< Type >", "da/d8b/class_matrix3_d.html", [
+      [ "Matrix3D", "da/d8b/class_matrix3_d.html#abff2f7b90514911e716c28b4a45f62b1", null ],
+      [ "Matrix3D", "da/d8b/class_matrix3_d.html#ab1217941d2532ab0576c592f64784e4b", null ],
+      [ "Matrix3D", "da/d8b/class_matrix3_d.html#a464baaac24d32e1abcc3f3491fd0d2c4", null ],
+      [ "Matrix3D", "da/d8b/class_matrix3_d.html#adea8dbce2ba1c50f3a6da8ee7326f2ed", null ],
+      [ "Matrix3D", "da/d8b/class_matrix3_d.html#a05918505e2adf83c18ea1e03e21d5b7b", null ],
+      [ "Matrix3D", "da/d8b/class_matrix3_d.html#a72fe46a33ee86bd9496e8518915b525c", null ],
+      [ "operator*", "da/d8b/class_matrix3_d.html#af89a13390868a61a007cefc53907900e", null ],
+      [ "operator*=", "da/d8b/class_matrix3_d.html#ac89309bf33f6c0b414109b4f8bffea30", null ],
+      [ "operator=", "da/d8b/class_matrix3_d.html#a1dd0d8932ddc3fea57367c13f0a0c981", null ],
+      [ "mat", "da/d8b/class_matrix3_d.html#ad7e9eecc94c0a33a029a5de12c5c056b", null ]
+    ] ],
+    [ "Quaternion< Type >", "dc/de3/class_quaternion.html", [
+      [ "Quaternion", "dc/de3/class_quaternion.html#ab6cfa17954ad0cf303877c8b7d578cc2", null ],
+      [ "Quaternion", "dc/de3/class_quaternion.html#a55df57ee8430a9b1b1581ace70e105e3", null ],
+      [ "Quaternion", "dc/de3/class_quaternion.html#a80054cbe7779c1237c1d08f53077bd43", null ],
+      [ "Quaternion", "dc/de3/class_quaternion.html#a1b5dab7556226d76040277dc8ee3f0a4", null ],
+      [ "getRotationMatrix", "dc/de3/class_quaternion.html#a334cc77999da951799d0a611c0c1293b", null ],
+      [ "length", "dc/de3/class_quaternion.html#aef1e525b9ed4bc89a21b4fadf1e4f54a", null ],
+      [ "normal", "dc/de3/class_quaternion.html#a27069720d50f0b9851eba38bf4339def", null ],
+      [ "normalised", "dc/de3/class_quaternion.html#a8cb6b7c2c79ecc69a5116b84d29e8fb2", null ],
+      [ "operator*=", "dc/de3/class_quaternion.html#ab7cfc23f043b71eb68532015b863c6fc", null ],
+      [ "operator=", "dc/de3/class_quaternion.html#a4916de95b37d3a3227171bd06045dc69", null ],
+      [ "scalar", "dc/de3/class_quaternion.html#adfe519277223a4cb9321dc7f0d3b5cca", null ],
+      [ "vector", "dc/de3/class_quaternion.html#aea2b69403fdef5dfde9c62c9aeac3925", null ]
+    ] ],
+    [ "Vector3D< Type >", "d9/dd2/class_vector3_d.html", [
+      [ "Vector3D", "d9/dd2/class_vector3_d.html#ae757048c8249a9e3cc7498f3c6f8bc69", null ],
+      [ "Vector3D", "d9/dd2/class_vector3_d.html#a78422ad1152c4532ca580c268f71017b", null ],
+      [ "Vector3D", "d9/dd2/class_vector3_d.html#a1e8a6a200eeb5185c4e3da7dafb1e9ff", null ],
+      [ "length", "d9/dd2/class_vector3_d.html#a3026219401ab9d094db78c0cf479cb68", null ],
+      [ "lengthIsBelowEpsilon", "d9/dd2/class_vector3_d.html#ae90aaba654b769a43d5d523cf0f462c9", null ],
+      [ "lengthSquared", "d9/dd2/class_vector3_d.html#a8df06f573da83007cd949515c940ed1f", null ],
+      [ "normalised", "d9/dd2/class_vector3_d.html#aa90015d0e69415881cb24e3f21be5a0d", null ],
+      [ "operator*", "d9/dd2/class_vector3_d.html#a8026c01b25f9b85da1d28181352a43de", null ],
+      [ "operator*", "d9/dd2/class_vector3_d.html#acda659e7b66e175d5171d9dfd61b70d4", null ],
+      [ "operator*=", "d9/dd2/class_vector3_d.html#a247cebf0b0fe113b7afbbc3fafa0ea39", null ],
+      [ "operator+", "d9/dd2/class_vector3_d.html#a4702ed6b048160d7f6a5e023b05f571c", null ],
+      [ "operator+=", "d9/dd2/class_vector3_d.html#a03b39620c7fc0f00e949bd13fe578038", null ],
+      [ "operator-", "d9/dd2/class_vector3_d.html#a2147dfdac96c71c0a93fc243569eb38c", null ],
+      [ "operator-", "d9/dd2/class_vector3_d.html#a88957c7b7d515e6835e2fb6baeda9ca1", null ],
+      [ "operator-=", "d9/dd2/class_vector3_d.html#ac81ab455159128fa3df7cbb79c1ab5c2", null ],
+      [ "operator/", "d9/dd2/class_vector3_d.html#a4e2a2705bc3cc46ac665f4f9e8d40a5d", null ],
+      [ "operator/=", "d9/dd2/class_vector3_d.html#a24ea0a6b2586915e31a25a589c62721f", null ],
+      [ "operator=", "d9/dd2/class_vector3_d.html#a39c81aa012df7a3f28ff09de6ff28ca3", null ],
+      [ "operator^", "d9/dd2/class_vector3_d.html#a3f74a4292826b23ffa7a25ec3f4104c5", null ],
+      [ "x", "d9/dd2/class_vector3_d.html#aa5d3c8c349b5603b1f71bb3eae33a882", null ],
+      [ "y", "d9/dd2/class_vector3_d.html#a49a2c9e33f95b6a7cb4147d5b9ee5e06", null ],
+      [ "z", "d9/dd2/class_vector3_d.html#a621ed1b40fb9605695c309355736ed9c", null ]
+    ] ]
+];

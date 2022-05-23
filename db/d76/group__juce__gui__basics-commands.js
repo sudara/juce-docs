@@ -1,0 +1,106 @@
+var group__juce__gui__basics_commands =
+[
+    [ "StandardApplicationCommandIDs", "df/db1/namespace_standard_application_command_i_ds.html", null ],
+    [ "ApplicationCommandInfo", "dd/d20/struct_application_command_info.html", [
+      [ "CommandFlags", "dd/d20/struct_application_command_info.html#ab9633f0a25ad57236fde726c98b29d72", [
+        [ "isDisabled", "dd/d20/struct_application_command_info.html#ab9633f0a25ad57236fde726c98b29d72a202cb5c15583e30f2f59b48e6c18c90b", null ],
+        [ "isTicked", "dd/d20/struct_application_command_info.html#ab9633f0a25ad57236fde726c98b29d72af0c8f1c0103edb7a8e9ea852d3d3dee2", null ],
+        [ "wantsKeyUpDownCallbacks", "dd/d20/struct_application_command_info.html#ab9633f0a25ad57236fde726c98b29d72ab8ea56bbed1d23f3df3cbd3c20f2a8d1", null ],
+        [ "hiddenFromKeyEditor", "dd/d20/struct_application_command_info.html#ab9633f0a25ad57236fde726c98b29d72a626b4f9f1aa2bd0761b89b376063d254", null ],
+        [ "readOnlyInKeyEditor", "dd/d20/struct_application_command_info.html#ab9633f0a25ad57236fde726c98b29d72a57e236658a383bd74c76fadfe6c49370", null ],
+        [ "dontTriggerVisualFeedback", "dd/d20/struct_application_command_info.html#ab9633f0a25ad57236fde726c98b29d72a362e5c4decffcd4c7ec6f508f672e443", null ]
+      ] ],
+      [ "ApplicationCommandInfo", "dd/d20/struct_application_command_info.html#a79d1e190c9157fa3bb96f8981858ca8c", null ],
+      [ "addDefaultKeypress", "dd/d20/struct_application_command_info.html#a46d8d91bd1e2ca8aa37b1d51f7aac914", null ],
+      [ "setActive", "dd/d20/struct_application_command_info.html#a68a043a95e058beeeddfba2441ee7306", null ],
+      [ "setInfo", "dd/d20/struct_application_command_info.html#a3e9cd7e72fbf617a0d70d6be3d513b82", null ],
+      [ "setTicked", "dd/d20/struct_application_command_info.html#aac92e704735d8013bf8b17450858f3fb", null ],
+      [ "categoryName", "dd/d20/struct_application_command_info.html#a38af85def791bf7f344d18ddb6f65f66", null ],
+      [ "commandID", "dd/d20/struct_application_command_info.html#ac8265d08896874e8aad4f9bfee9e7e03", null ],
+      [ "defaultKeypresses", "dd/d20/struct_application_command_info.html#acae1903bdfd8214162adb8326d1ee9da", null ],
+      [ "description", "dd/d20/struct_application_command_info.html#a9d36981d292001925176c0be0d2e6b3a", null ],
+      [ "flags", "dd/d20/struct_application_command_info.html#a45fa351a09f7a6df3e76fe466c476905", null ],
+      [ "shortName", "dd/d20/struct_application_command_info.html#a2da18de634cf7794fcd0b26e4121e3ec", null ]
+    ] ],
+    [ "ApplicationCommandManager", "d6/d59/class_application_command_manager.html", [
+      [ "ApplicationCommandManager", "d6/d59/class_application_command_manager.html#a71ba22aa70cc12a7ab52c4e531db32ad", null ],
+      [ "~ApplicationCommandManager", "d6/d59/class_application_command_manager.html#a185d7f03513b2749eef628530baf2d49", null ],
+      [ "addListener", "d6/d59/class_application_command_manager.html#ada313b4a4cdd787f5d3786b9102c483e", null ],
+      [ "clearCommands", "d6/d59/class_application_command_manager.html#a33f916c7f4ac00736958a83883057df0", null ],
+      [ "commandStatusChanged", "d6/d59/class_application_command_manager.html#a91fef61705d98da881276733e304e7af", null ],
+      [ "getCommandCategories", "d6/d59/class_application_command_manager.html#a49954859e2c4cee4473f814cb1907640", null ],
+      [ "getCommandForID", "d6/d59/class_application_command_manager.html#accb992d7acf4fd13f0336dc358e83043", null ],
+      [ "getCommandForIndex", "d6/d59/class_application_command_manager.html#af40d7e30131313482416ed64364132ef", null ],
+      [ "getCommandsInCategory", "d6/d59/class_application_command_manager.html#a9d4def75995ffc51923047282f5a195f", null ],
+      [ "getDescriptionOfCommand", "d6/d59/class_application_command_manager.html#ab4d21d8f1543a222bde11ba3bc859d03", null ],
+      [ "getFirstCommandTarget", "d6/d59/class_application_command_manager.html#a0dad2117cac15840028109a1d9344aea", null ],
+      [ "getKeyMappings", "d6/d59/class_application_command_manager.html#acaab9b68b87978372c18a29d18864892", null ],
+      [ "getNameOfCommand", "d6/d59/class_application_command_manager.html#ac0d3a5fbd431c188c65ac708d245a2bf", null ],
+      [ "getNumCommands", "d6/d59/class_application_command_manager.html#afe00b76a2faa9b625765d8ceac961d96", null ],
+      [ "getTargetForCommand", "d6/d59/class_application_command_manager.html#ab144d4d94d5cdb8a7a6f0d9a62ed73b5", null ],
+      [ "invoke", "d6/d59/class_application_command_manager.html#a6b506331c1cfb3d07b2925ac16b8141e", null ],
+      [ "invokeDirectly", "d6/d59/class_application_command_manager.html#a55f04432929174c2de6d622cb2d23c67", null ],
+      [ "registerAllCommandsForTarget", "d6/d59/class_application_command_manager.html#ac3f8c831583499556579848779e030cf", null ],
+      [ "registerCommand", "d6/d59/class_application_command_manager.html#a151be8c30a8339675ad5dcba5a5c4e62", null ],
+      [ "removeCommand", "d6/d59/class_application_command_manager.html#a910296ce97f93bc7fcd8a24085ac7ca6", null ],
+      [ "removeListener", "d6/d59/class_application_command_manager.html#a851148eb572ded776b1ba84a5de178fa", null ],
+      [ "setFirstCommandTarget", "d6/d59/class_application_command_manager.html#abebbbdd281b83f02a94c909f93b5347f", null ]
+    ] ],
+    [ "ApplicationCommandManagerListener", "d0/db2/class_application_command_manager_listener.html", [
+      [ "~ApplicationCommandManagerListener", "d0/db2/class_application_command_manager_listener.html#a8594b835b496fb8b9ae4000711cf4752", null ],
+      [ "applicationCommandInvoked", "d0/db2/class_application_command_manager_listener.html#a254f742a826d934f8c843bd87552dadb", null ],
+      [ "applicationCommandListChanged", "d0/db2/class_application_command_manager_listener.html#a918fb2446acd367655fe88815d3be5fe", null ]
+    ] ],
+    [ "ApplicationCommandTarget", "d5/d0e/class_application_command_target.html", [
+      [ "ApplicationCommandTarget", "d5/d0e/class_application_command_target.html#a87a924f9667311234b74292dcd737a98", null ],
+      [ "~ApplicationCommandTarget", "d5/d0e/class_application_command_target.html#aedcfa2f5c7f9798eaa717579d3d6e12a", null ],
+      [ "findFirstTargetParentComponent", "d5/d0e/class_application_command_target.html#ae22a2eb02affb6278074067f15abb58c", null ],
+      [ "getAllCommands", "d5/d0e/class_application_command_target.html#a12b1c7a6abe2e5a5f27fda4a292fe33d", null ],
+      [ "getCommandInfo", "d5/d0e/class_application_command_target.html#a54171f3ee599f0b508fed08e647edf89", null ],
+      [ "getNextCommandTarget", "d5/d0e/class_application_command_target.html#a8def2ea10aad1a34d37f9afe1675b06d", null ],
+      [ "getTargetForCommand", "d5/d0e/class_application_command_target.html#a3d2ac3792b5b3fa32b231bb1f2cc3b97", null ],
+      [ "invoke", "d5/d0e/class_application_command_target.html#aeffaac3af6c4922240e1e5e03ad0a1b5", null ],
+      [ "invokeDirectly", "d5/d0e/class_application_command_target.html#a93daac13c40f226ccab1e92a390ad61a", null ],
+      [ "isCommandActive", "d5/d0e/class_application_command_target.html#ab5ee995932e10bd18dc6fff111f3835e", null ],
+      [ "perform", "d5/d0e/class_application_command_target.html#a0e8f962cda82e8aa1207d38361ff96f9", null ],
+      [ "CommandMessage", "d5/d0e/class_application_command_target.html#ab90837e21f0132bde7724aff0f46667c", null ]
+    ] ],
+    [ "ApplicationCommandTarget::InvocationInfo", "d0/d00/struct_application_command_target_1_1_invocation_info.html", [
+      [ "InvocationMethod", "d0/d00/struct_application_command_target_1_1_invocation_info.html#a87e99a7b4b51787a40700bce2a7acc22", [
+        [ "direct", "d0/d00/struct_application_command_target_1_1_invocation_info.html#a87e99a7b4b51787a40700bce2a7acc22a5da64d78c06aae22ea9c1315e99f9557", null ],
+        [ "fromKeyPress", "d0/d00/struct_application_command_target_1_1_invocation_info.html#a87e99a7b4b51787a40700bce2a7acc22af89cceaaf6b2fbe277117d06f4c71cdf", null ],
+        [ "fromMenu", "d0/d00/struct_application_command_target_1_1_invocation_info.html#a87e99a7b4b51787a40700bce2a7acc22aa026666fb6700a11ab0822ca15ee0a9d", null ],
+        [ "fromButton", "d0/d00/struct_application_command_target_1_1_invocation_info.html#a87e99a7b4b51787a40700bce2a7acc22ad4374a114c5dc22c1767e03274176f1b", null ]
+      ] ],
+      [ "InvocationInfo", "d0/d00/struct_application_command_target_1_1_invocation_info.html#aa907354cb0e5c69320bf795bed2e13ef", null ],
+      [ "commandFlags", "d0/d00/struct_application_command_target_1_1_invocation_info.html#a26fba7d10531e7613beb8e3ad0ffc239", null ],
+      [ "commandID", "d0/d00/struct_application_command_target_1_1_invocation_info.html#a4416781aae4ac0dd75477ddd98cb31d4", null ],
+      [ "invocationMethod", "d0/d00/struct_application_command_target_1_1_invocation_info.html#a4e4ea7fee8feb65189634b26003e0fbb", null ],
+      [ "isKeyDown", "d0/d00/struct_application_command_target_1_1_invocation_info.html#a40f339e15279d78b003e3598f11c1424", null ],
+      [ "keyPress", "d0/d00/struct_application_command_target_1_1_invocation_info.html#a733ad27cfb5ad231add1b1c82cced236", null ],
+      [ "millisecsSinceKeyPressed", "d0/d00/struct_application_command_target_1_1_invocation_info.html#a0c1817f71536452a5d69a8e28ecc8534", null ],
+      [ "originatingComponent", "d0/d00/struct_application_command_target_1_1_invocation_info.html#a829cd8dbab1753320b750727df99ba41", null ]
+    ] ],
+    [ "KeyPressMappingSet", "da/d65/class_key_press_mapping_set.html", [
+      [ "KeyPressMappingSet", "da/d65/class_key_press_mapping_set.html#a809a42cae8d2bfaf754c369f01a03870", null ],
+      [ "KeyPressMappingSet", "da/d65/class_key_press_mapping_set.html#af094b874c041df2b6ba52855573e2437", null ],
+      [ "~KeyPressMappingSet", "da/d65/class_key_press_mapping_set.html#a9cbe9bb3052f574f6ad0f071bae2a6f9", null ],
+      [ "addKeyPress", "da/d65/class_key_press_mapping_set.html#ac2adbad788cddf223990617e00fbd7f1", null ],
+      [ "clearAllKeyPresses", "da/d65/class_key_press_mapping_set.html#a16e2d91480adcd22ee5dbfdce01c0156", null ],
+      [ "clearAllKeyPresses", "da/d65/class_key_press_mapping_set.html#a9f3803440dd3d36fd79680c8dc2cc779", null ],
+      [ "containsMapping", "da/d65/class_key_press_mapping_set.html#a452b1dd8851dd760fb52f97637f387a5", null ],
+      [ "createXml", "da/d65/class_key_press_mapping_set.html#a36fea8e522fbecda4ae67bbfe3a9037f", null ],
+      [ "findCommandForKeyPress", "da/d65/class_key_press_mapping_set.html#a748d3657cb192844b1ff7cfa1044231d", null ],
+      [ "getCommandManager", "da/d65/class_key_press_mapping_set.html#ab660e3235fe3d2529460541b36f1c923", null ],
+      [ "getKeyPressesAssignedToCommand", "da/d65/class_key_press_mapping_set.html#a0126359e2962a8f9948af1fc8507e376", null ],
+      [ "globalFocusChanged", "da/d65/class_key_press_mapping_set.html#a9a87b7a4ae2b7365723e47e29cf48500", null ],
+      [ "keyPressed", "da/d65/class_key_press_mapping_set.html#ab92a471a8cfc20ad036750cd3c19d5c5", null ],
+      [ "keyStateChanged", "da/d65/class_key_press_mapping_set.html#a0329856dd3e6ec50d64114f197045491", null ],
+      [ "removeKeyPress", "da/d65/class_key_press_mapping_set.html#a69386f2e687ced9630b24a745b6fa33a", null ],
+      [ "removeKeyPress", "da/d65/class_key_press_mapping_set.html#a0626523ca6a55cc5948531f0382e2ad8", null ],
+      [ "resetToDefaultMapping", "da/d65/class_key_press_mapping_set.html#a60fb5f6f71f8d4b9ef04627c625fb5b5", null ],
+      [ "resetToDefaultMappings", "da/d65/class_key_press_mapping_set.html#a11ec4b86290489da987e2fcc3455b140", null ],
+      [ "restoreFromXml", "da/d65/class_key_press_mapping_set.html#acd0da647bbd350e6daebcd8705a8b11e", null ]
+    ] ],
+    [ "CommandID", "db/d76/group__juce__gui__basics-commands.html#ga886f4569c2fa2b51e87775cbac89d4b8", null ]
+];

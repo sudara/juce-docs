@@ -1,0 +1,37 @@
+var class_alert_window =
+[
+    [ "AlertIconType", "dd/d72/class_alert_window.html#ac772713875db1d4038dd03f82d399df5", null ],
+    [ "ColourIds", "dd/d72/class_alert_window.html#ad2f8b8ba50ce8a744e37e05e9a40dce1", [
+      [ "backgroundColourId", "dd/d72/class_alert_window.html#ad2f8b8ba50ce8a744e37e05e9a40dce1ad8174d9e6fb186697dba3b380b1195c6", null ],
+      [ "textColourId", "dd/d72/class_alert_window.html#ad2f8b8ba50ce8a744e37e05e9a40dce1ae52947cad55bc25fee88e0e2a97d02c2", null ],
+      [ "outlineColourId", "dd/d72/class_alert_window.html#ad2f8b8ba50ce8a744e37e05e9a40dce1a4ca5b0e9de7b0838cf1358a85b551d10", null ]
+    ] ],
+    [ "AlertWindow", "dd/d72/class_alert_window.html#ac51dbf31f31a4942c0598629f6d8cd6e", null ],
+    [ "~AlertWindow", "dd/d72/class_alert_window.html#a8ad7c59de57c03d468c444ab60f4c0a3", null ],
+    [ "addButton", "dd/d72/class_alert_window.html#a783bbf81186dc21addde7e0fdb6f8001", null ],
+    [ "addComboBox", "dd/d72/class_alert_window.html#a0e7c7b4fe85d7ed4cdf34167d513ed44", null ],
+    [ "addCustomComponent", "dd/d72/class_alert_window.html#a18e5456aa067a106f8ecbb03dc01f032", null ],
+    [ "addProgressBarComponent", "dd/d72/class_alert_window.html#a9b7ccfa6a4b4d3e871d20b4690c35b34", null ],
+    [ "addTextBlock", "dd/d72/class_alert_window.html#a06c68ddf379fcd3247182d0fee87a7f4", null ],
+    [ "addTextEditor", "dd/d72/class_alert_window.html#ad3de30e292b03b2204c6faaeea55b9a9", null ],
+    [ "containsAnyExtraComponents", "dd/d72/class_alert_window.html#ae891b105265fac686c0fcdfcaa1af1c3", null ],
+    [ "getAlertType", "dd/d72/class_alert_window.html#ac9db3c6c667f7386d3bc553157b06b99", null ],
+    [ "getComboBoxComponent", "dd/d72/class_alert_window.html#a865856f3d1afc9c741bd5af9c511db01", null ],
+    [ "getCustomComponent", "dd/d72/class_alert_window.html#a13dcabd8441f719e9e06803f4dce16fc", null ],
+    [ "getDesktopScaleFactor", "dd/d72/class_alert_window.html#a6921c5f182147f036232278babccabfb", null ],
+    [ "getDesktopWindowStyleFlags", "dd/d72/class_alert_window.html#ac746247dc73678fab3fbf4836c98e49e", null ],
+    [ "getNumButtons", "dd/d72/class_alert_window.html#aa0c83bb153040ea916d5bb6ac0b67256", null ],
+    [ "getNumCustomComponents", "dd/d72/class_alert_window.html#acd8f31c5b95af022cfa72a49eee1917d", null ],
+    [ "getTextEditor", "dd/d72/class_alert_window.html#a20bfc535d4b1d27fa2e107fba7d7a6f4", null ],
+    [ "getTextEditorContents", "dd/d72/class_alert_window.html#a1700fd4defcdb75bfe748f4bc587a707", null ],
+    [ "keyPressed", "dd/d72/class_alert_window.html#ac12c82883bc4d054f7eb5b793c6425e5", null ],
+    [ "lookAndFeelChanged", "dd/d72/class_alert_window.html#ac4c2559255171d141a30c8a04299c8c1", null ],
+    [ "mouseDown", "dd/d72/class_alert_window.html#a0aef30be23c4018bfc8e11407d11aaa8", null ],
+    [ "mouseDrag", "dd/d72/class_alert_window.html#a16da21b6606246912135fd2e7cbc0bd1", null ],
+    [ "paint", "dd/d72/class_alert_window.html#a3b70db27d70ce9972928ece3b0f809ca", null ],
+    [ "removeCustomComponent", "dd/d72/class_alert_window.html#af0b3b3be781428b80745f1d39a423178", null ],
+    [ "setEscapeKeyCancels", "dd/d72/class_alert_window.html#a3b03c4f645e3f847a3226ac36ac1678b", null ],
+    [ "setMessage", "dd/d72/class_alert_window.html#a726f6cb55274959235efa16a0d18f794", null ],
+    [ "triggerButtonClick", "dd/d72/class_alert_window.html#abc59507f5e2ad04933736a8643ba7ef7", null ],
+    [ "userTriedToCloseWindow", "dd/d72/class_alert_window.html#ac8263176929ac925f0e4aee768094c55", null ]
+];

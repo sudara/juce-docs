@@ -1,0 +1,48 @@
+var class_keyboard_component_base =
+[
+    [ "ColourIds", "d8/d17/class_keyboard_component_base.html#ae72fd1997b9ac85415af99ad86256e92", [
+      [ "upDownButtonBackgroundColourId", "d8/d17/class_keyboard_component_base.html#ae72fd1997b9ac85415af99ad86256e92aa9b95ecc944c46efb4f27db39a6e93e5", null ],
+      [ "upDownButtonArrowColourId", "d8/d17/class_keyboard_component_base.html#ae72fd1997b9ac85415af99ad86256e92af439872aaaacb7c30014f53d8334c512", null ]
+    ] ],
+    [ "Orientation", "d8/d17/class_keyboard_component_base.html#aa131ceb312997c3b5f07c840772509be", [
+      [ "horizontalKeyboard", "d8/d17/class_keyboard_component_base.html#aa131ceb312997c3b5f07c840772509beaf80bf5e485b51c7341bdd505bb99df70", null ],
+      [ "verticalKeyboardFacingLeft", "d8/d17/class_keyboard_component_base.html#aa131ceb312997c3b5f07c840772509bea53491da413c85bca6b940594dabc4f13", null ],
+      [ "verticalKeyboardFacingRight", "d8/d17/class_keyboard_component_base.html#aa131ceb312997c3b5f07c840772509bea05a07057fec0cf694bdab07b8dc710c9", null ]
+    ] ],
+    [ "KeyboardComponentBase", "d8/d17/class_keyboard_component_base.html#abd9c05fe326475e8e176627a7f710220", null ],
+    [ "~KeyboardComponentBase", "d8/d17/class_keyboard_component_base.html#a998324b2a902e08e6170beda0eeb3a27", null ],
+    [ "drawBlackKey", "d8/d17/class_keyboard_component_base.html#a2e7e69d010b2666f8604d9b281142bab", null ],
+    [ "drawKeyboardBackground", "d8/d17/class_keyboard_component_base.html#a8f2453f02871e93739ad6de396b83046", null ],
+    [ "drawUpDownButton", "d8/d17/class_keyboard_component_base.html#a3877cb31e16e0038b4000bb735e774cd", null ],
+    [ "drawWhiteKey", "d8/d17/class_keyboard_component_base.html#a0bec13c0421e4c6aeb09cca5357fbada", null ],
+    [ "getBlackNoteLength", "d8/d17/class_keyboard_component_base.html#aaccc9126c817f9bc89799df7427bfbcd", null ],
+    [ "getBlackNoteLengthProportion", "d8/d17/class_keyboard_component_base.html#a8b0fe27fdf9afde0bf7c3a66d529f1f4", null ],
+    [ "getBlackNoteWidth", "d8/d17/class_keyboard_component_base.html#acb18c880ba4aa678bb845fb8333e4d11", null ],
+    [ "getBlackNoteWidthProportion", "d8/d17/class_keyboard_component_base.html#adf337735648a0a9be3d604c9668d12e9", null ],
+    [ "getKeyPosition", "d8/d17/class_keyboard_component_base.html#a6e764e0637c0d9ae86619119187c07f9", null ],
+    [ "getKeyStartPosition", "d8/d17/class_keyboard_component_base.html#a4d507877586672e18875b570af8d0e50", null ],
+    [ "getKeyWidth", "d8/d17/class_keyboard_component_base.html#a511bcf85111a70af3d93da184dcb0989", null ],
+    [ "getLowestVisibleKey", "d8/d17/class_keyboard_component_base.html#a3658485b11e32f221d788836d8541b3d", null ],
+    [ "getNoteAndVelocityAtPosition", "d8/d17/class_keyboard_component_base.html#a3ef8d483fccbebbe9936b2e468d9d3e7", null ],
+    [ "getOctaveForMiddleC", "d8/d17/class_keyboard_component_base.html#a603d902ed06733c1a8e009185c269240", null ],
+    [ "getOrientation", "d8/d17/class_keyboard_component_base.html#a121a9e317ff89f4aa66fac9f94c6d5ac", null ],
+    [ "getRangeEnd", "d8/d17/class_keyboard_component_base.html#ab817dc120f3241df0deedb471b6888cf", null ],
+    [ "getRangeStart", "d8/d17/class_keyboard_component_base.html#a37b05821a40e914eab9c4677ce906e79", null ],
+    [ "getRectangleForKey", "d8/d17/class_keyboard_component_base.html#a1606ce5feca7a6fd2b87e82bf1332dcc", null ],
+    [ "getScrollButtonWidth", "d8/d17/class_keyboard_component_base.html#aeb037cfb477e2c0253a303e1d5342346", null ],
+    [ "getTotalKeyboardWidth", "d8/d17/class_keyboard_component_base.html#a2c822da7b37efe03784b13dd8b145575", null ],
+    [ "getWhiteNoteLength", "d8/d17/class_keyboard_component_base.html#a9e9d7b87ebe16b59c79b96361ae64b32", null ],
+    [ "isHorizontal", "d8/d17/class_keyboard_component_base.html#a39c688276f96d0f1d1be9a04ee4a270c", null ],
+    [ "mouseWheelMove", "d8/d17/class_keyboard_component_base.html#a317a52a8453f777ffa0249a4bfd03e4d", null ],
+    [ "paint", "d8/d17/class_keyboard_component_base.html#a429e28c4b16829b1cefc283b6c4c7612", null ],
+    [ "resized", "d8/d17/class_keyboard_component_base.html#ad840509dede72308157714250a15f4ee", null ],
+    [ "setAvailableRange", "d8/d17/class_keyboard_component_base.html#a17b1153554e62e18790286b338b3ed68", null ],
+    [ "setBlackNoteLengthProportion", "d8/d17/class_keyboard_component_base.html#a5e3aac0200948efd182145b0e0272246", null ],
+    [ "setBlackNoteWidthProportion", "d8/d17/class_keyboard_component_base.html#a9531af4226da5e8fc39b4307d54a8115", null ],
+    [ "setKeyWidth", "d8/d17/class_keyboard_component_base.html#a88e12222a77789b4c0ea2fd9bf32840f", null ],
+    [ "setLowestVisibleKey", "d8/d17/class_keyboard_component_base.html#aedabffbfec843e1532ddc619b02bb8a4", null ],
+    [ "setOctaveForMiddleC", "d8/d17/class_keyboard_component_base.html#af9c2a4aba2af74f35c88f4c816a39d38", null ],
+    [ "setOrientation", "d8/d17/class_keyboard_component_base.html#a62c97676f2ebfc7b689e0f81f21cc545", null ],
+    [ "setScrollButtonsVisible", "d8/d17/class_keyboard_component_base.html#ac5fffd4ecd29e8c64ff01bd6cae4f4c2", null ],
+    [ "setScrollButtonWidth", "d8/d17/class_keyboard_component_base.html#a6da45094a7e9488ebff2c51413ef6892", null ]
+];

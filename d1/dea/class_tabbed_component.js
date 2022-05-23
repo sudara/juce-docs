@@ -1,0 +1,37 @@
+var class_tabbed_component =
+[
+    [ "ColourIds", "d1/dea/class_tabbed_component.html#ab154d5fdf269af82dfbe6e77b2f716cc", [
+      [ "backgroundColourId", "d1/dea/class_tabbed_component.html#ab154d5fdf269af82dfbe6e77b2f716ccaf220bcdf6bf79838e058ac1edc408e30", null ],
+      [ "outlineColourId", "d1/dea/class_tabbed_component.html#ab154d5fdf269af82dfbe6e77b2f716cca16a39be0a38f0544cba6c68051536b9f", null ]
+    ] ],
+    [ "TabbedComponent", "d1/dea/class_tabbed_component.html#a1702331b2ec7a34ebbfaf418f31415dd", null ],
+    [ "~TabbedComponent", "d1/dea/class_tabbed_component.html#ae4f32e4d00d44ee30d144d8a98d5ea6c", null ],
+    [ "addTab", "d1/dea/class_tabbed_component.html#a0d7761f1c372260ca4a2acb36a320e10", null ],
+    [ "clearTabs", "d1/dea/class_tabbed_component.html#a0c55d2ebde6cc67c693a607a91221ee3", null ],
+    [ "createTabButton", "d1/dea/class_tabbed_component.html#a0f94ff88a963e38a55a9980ce55ed831", null ],
+    [ "currentTabChanged", "d1/dea/class_tabbed_component.html#acb0ec8ee87c29825f9326aadb8302b72", null ],
+    [ "getCurrentContentComponent", "d1/dea/class_tabbed_component.html#af4610b5aa3286b5756d93130ced2a85a", null ],
+    [ "getCurrentTabIndex", "d1/dea/class_tabbed_component.html#a2c93c34fb32985d6df572456a8906beb", null ],
+    [ "getCurrentTabName", "d1/dea/class_tabbed_component.html#a8a864db40fe14a3a6f98520f5c0eb689", null ],
+    [ "getNumTabs", "d1/dea/class_tabbed_component.html#ac5f456bea7b56037aec76b429fed0118", null ],
+    [ "getOrientation", "d1/dea/class_tabbed_component.html#a91e6b4caa94e36a2824e8a71788b6bf9", null ],
+    [ "getTabBackgroundColour", "d1/dea/class_tabbed_component.html#acad26c68307c4d42730e9fd80c1ca2d1", null ],
+    [ "getTabBarDepth", "d1/dea/class_tabbed_component.html#a997accbfa03ce9b6273e67eea537c249", null ],
+    [ "getTabbedButtonBar", "d1/dea/class_tabbed_component.html#ae47612315b5ad6d7be6a61e3860ec2d2", null ],
+    [ "getTabContentComponent", "d1/dea/class_tabbed_component.html#abd448e7f93119245e954ffcf929e9f00", null ],
+    [ "getTabNames", "d1/dea/class_tabbed_component.html#a545c0448551b6a1e6727aa70a12badf4", null ],
+    [ "lookAndFeelChanged", "d1/dea/class_tabbed_component.html#a1a18762088811a70aa5e5a8c6b154be2", null ],
+    [ "moveTab", "d1/dea/class_tabbed_component.html#a8de06cabd1612af510a909af8dd2ee0e", null ],
+    [ "paint", "d1/dea/class_tabbed_component.html#a04b62223ce54ab0fa897487f1e63d8ae", null ],
+    [ "popupMenuClickOnTab", "d1/dea/class_tabbed_component.html#a5f938165e7ccc943c4503b817c31d89f", null ],
+    [ "removeTab", "d1/dea/class_tabbed_component.html#ac9a7f7fc03a69fa286772fb0589d9388", null ],
+    [ "resized", "d1/dea/class_tabbed_component.html#ae539255dc001ce506e0a9f1493be1a35", null ],
+    [ "setCurrentTabIndex", "d1/dea/class_tabbed_component.html#aff9209321e3c2993775a56edae31c026", null ],
+    [ "setIndent", "d1/dea/class_tabbed_component.html#a4b2ca2d5cb00208f7383455c5143fcad", null ],
+    [ "setOrientation", "d1/dea/class_tabbed_component.html#ad982540d7f5a188fa012550971ebb4d5", null ],
+    [ "setOutline", "d1/dea/class_tabbed_component.html#a685c149db58fefdf7894cd3ed378e0e2", null ],
+    [ "setTabBackgroundColour", "d1/dea/class_tabbed_component.html#aedf1b20a20fe265613c10f40204032c4", null ],
+    [ "setTabBarDepth", "d1/dea/class_tabbed_component.html#a06e222e02207dc35e297c236e175d46f", null ],
+    [ "setTabName", "d1/dea/class_tabbed_component.html#acbe9e10b90d011aa9d75ed0bef64103e", null ],
+    [ "tabs", "d1/dea/class_tabbed_component.html#a287d30ce93b315756f290e8b0511f87a", null ]
+];

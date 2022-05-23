@@ -1,0 +1,26 @@
+var class_cached_value =
+[
+    [ "CachedValue", "dc/d3a/group__juce__data__structures-values.html#gaa982fb4fefb3b0b7f802733cd2d17711", null ],
+    [ "CachedValue", "dc/d3a/group__juce__data__structures-values.html#ga43508969aaa4149c7d5668ad254fd9c0", null ],
+    [ "CachedValue", "dc/d3a/group__juce__data__structures-values.html#ga820d1245983942e804bec4facf607f7d", null ],
+    [ "forceUpdateOfCachedValue", "dc/d3a/group__juce__data__structures-values.html#gad1dd20dd34843f4bcfe8516e7a10e871", null ],
+    [ "get", "d9/d7c/class_cached_value.html#a3b985781bf4e9225dc37be8529390df0", null ],
+    [ "getDefault", "d9/d7c/class_cached_value.html#a9a7aaab6526d7cd5bb6e2a895fa84128", null ],
+    [ "getPropertyAsValue", "dc/d3a/group__juce__data__structures-values.html#gafd02fa783537a57a8c4e89b5d6fc0151", null ],
+    [ "getPropertyID", "d9/d7c/class_cached_value.html#aecedf0e1748119c9c1b41dbcbf8449b1", null ],
+    [ "getUndoManager", "d9/d7c/class_cached_value.html#a8fc5e4a303a4b41db3d0ebafe94c5c0c", null ],
+    [ "getValueTree", "d9/d7c/class_cached_value.html#a0981bacfcaadce2f477d8564b7ad8e57", null ],
+    [ "isUsingDefault", "dc/d3a/group__juce__data__structures-values.html#ga032a2eedc5ef836847371cea3b5e8963", null ],
+    [ "operator Type", "d9/d7c/class_cached_value.html#a18813b3c4f63e1744c9eb1355fc99295", null ],
+    [ "operator!=", "d9/d7c/class_cached_value.html#a6e967080fc9cbf1f71e841ccf0ef49b8", null ],
+    [ "operator*", "d9/d7c/class_cached_value.html#adf87c76ab884148a9b9fc12bb755ded8", null ],
+    [ "operator->", "d9/d7c/class_cached_value.html#ad7b6a1e2e47eb0a62c19aedd5e5830a4", null ],
+    [ "operator=", "dc/d3a/group__juce__data__structures-values.html#ga5019c13c04d5885610192c533faed8a6", null ],
+    [ "operator==", "d9/d7c/class_cached_value.html#a489aaaaae33f4955eac4d25fc136d365", null ],
+    [ "referTo", "dc/d3a/group__juce__data__structures-values.html#ga22c029d41ad7c38c01d91e8b77bdcae6", null ],
+    [ "referTo", "dc/d3a/group__juce__data__structures-values.html#gaf3326834ddf48fd194fce40355de46c7", null ],
+    [ "resetToDefault", "dc/d3a/group__juce__data__structures-values.html#ga0cc9c7ec676bb292f0bb8428eb579c27", null ],
+    [ "resetToDefault", "dc/d3a/group__juce__data__structures-values.html#gabf520f7db956e46018d027296488f8fd", null ],
+    [ "setDefault", "d9/d7c/class_cached_value.html#ab0365e5556090469b609bc8e18f7247d", null ],
+    [ "setValue", "dc/d3a/group__juce__data__structures-values.html#gaa30d36d0218f11c28398eb8c11de3768", null ]
+];

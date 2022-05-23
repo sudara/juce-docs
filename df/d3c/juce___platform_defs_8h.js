@@ -1,0 +1,24 @@
+var juce___platform_defs_8h =
+[
+    [ "DBG", "d3/d4a/group__juce__core-system.html#ga679635952a5d2eb25f3b31398f0fcc25", null ],
+    [ "forcedinline", "d3/d4a/group__juce__core-system.html#gac2535cb549b141b3a96b8a08014e46cb", null ],
+    [ "jassert", "d3/d4a/group__juce__core-system.html#ga1f96ab6751237979b907a54f52a7296a", null ],
+    [ "jassertfalse", "d3/d4a/group__juce__core-system.html#gadc044ce5efecbecf2f5a44cd00db67b3", null ],
+    [ "jassertquiet", "d3/d4a/group__juce__core-system.html#ga61fbc12f0f914e38d0d26e6b4f3ee760", null ],
+    [ "JUCE_ALIGN", "d3/d4a/group__juce__core-system.html#gacd5d010d01e78e318786ab060742acd1", null ],
+    [ "JUCE_ANALYZER_NORETURN", "d3/d4a/group__juce__core-system.html#ga0a4e8406ebaae14eb87c14f02131602d", null ],
+    [ "JUCE_BLOCK_WITH_FORCED_SEMICOLON", "d3/d4a/group__juce__core-system.html#gab6af009a60142d8c0cbd2ea4c121dc69", null ],
+    [ "JUCE_BREAK_IN_DEBUGGER", "d3/d4a/group__juce__core-system.html#ga5d46c7712166bbecddff4aa62323556b", null ],
+    [ "JUCE_CALLTYPE", "d3/d4a/group__juce__core-system.html#gaf0b3f78ca801d88a7912f4c6bbf50e58", null ],
+    [ "JUCE_CDECL", "d3/d4a/group__juce__core-system.html#gaf6815e7d8ca906bd8a6087d4d72d694c", null ],
+    [ "JUCE_COMPILER_WARNING", "d3/d4a/group__juce__core-system.html#ga8cde62e24a0b5fd34e82402175587739", null ],
+    [ "JUCE_DECLARE_NON_COPYABLE", "d3/d4a/group__juce__core-system.html#ga6ab7a603bf4435c7cb286b1744366eb2", null ],
+    [ "JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR", "d3/d4a/group__juce__core-system.html#ga851b02724a8158a7f746c66b5758b3dd", null ],
+    [ "JUCE_DECLARE_NON_MOVEABLE", "d3/d4a/group__juce__core-system.html#ga599c5e38096f3427fea328a9deb3fde7", null ],
+    [ "JUCE_FALLTHROUGH", "d3/d4a/group__juce__core-system.html#gae5a4983340a829e456bad83f0dc8e92b", null ],
+    [ "JUCE_JOIN_MACRO", "d3/d4a/group__juce__core-system.html#ga4dac24572cf8155c09d75f34c8297a47", null ],
+    [ "JUCE_LOG_CURRENT_ASSERTION", "d3/d4a/group__juce__core-system.html#ga5e6590da0ba1d0c109e96560289f5449", null ],
+    [ "JUCE_NO_ASSOCIATIVE_MATH_OPTIMISATIONS", "d3/d4a/group__juce__core-system.html#ga909bde880b0a0a8cde591314de213c0a", null ],
+    [ "JUCE_PREVENT_HEAP_ALLOCATION", "d3/d4a/group__juce__core-system.html#gabe12fb8b712ed0602dd1678599a3167b", null ],
+    [ "JUCE_STRINGIFY", "d3/d4a/group__juce__core-system.html#ga7fab1bb48f05df367f0a57bc6cf3d12f", null ]
+];

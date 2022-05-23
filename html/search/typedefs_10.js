@@ -1,4 +1,0 @@
-var searchData=
-[
-  ['quaterniontype_0',['QuaternionType',['../d3/dc8/group__juce__opengl-geometry.html#aac3238fcd660a2c81628e0ae2e4ba717',1,'Draggable3DOrientation']]]
-];

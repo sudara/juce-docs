@@ -1,0 +1,25 @@
+var struct_m_p_e_synthesiser_base =
+[
+    [ "TrackingMode", "d9/df4/struct_m_p_e_synthesiser_base.html#a96383e1fcbb61d70866f16402281a986", null ],
+    [ "MPESynthesiserBase", "d9/df4/struct_m_p_e_synthesiser_base.html#a74424e05c011bc07e8c626e6911b5fd6", null ],
+    [ "MPESynthesiserBase", "d9/df4/struct_m_p_e_synthesiser_base.html#a7369aa90b7ba10b058cf3e58b146f815", null ],
+    [ "enableLegacyMode", "d9/df4/struct_m_p_e_synthesiser_base.html#a4abccdd51b94666cd099d115152da4e5", null ],
+    [ "getLegacyModeChannelRange", "d9/df4/struct_m_p_e_synthesiser_base.html#a30cba7531b48bda83bed5824c8c4766a", null ],
+    [ "getLegacyModePitchbendRange", "d9/df4/struct_m_p_e_synthesiser_base.html#a5edf96cd4354ea30d38350f2f4b38647", null ],
+    [ "getSampleRate", "d9/df4/struct_m_p_e_synthesiser_base.html#aeeb6866efb815c5fecfaeee7a25df4f8", null ],
+    [ "getZoneLayout", "d9/df4/struct_m_p_e_synthesiser_base.html#aae3ea68ecf5083e8b12a89f59935c61e", null ],
+    [ "handleMidiEvent", "d9/df4/struct_m_p_e_synthesiser_base.html#a4d2ec25d39adbbe075cc73b16ac57350", null ],
+    [ "isLegacyModeEnabled", "d9/df4/struct_m_p_e_synthesiser_base.html#aaa7616a70ce2cb4e9253d85031caf309", null ],
+    [ "renderNextBlock", "d9/df4/struct_m_p_e_synthesiser_base.html#a6b0bfbf04857771b9df5c49ea7ba14df", null ],
+    [ "renderNextSubBlock", "d9/df4/struct_m_p_e_synthesiser_base.html#a7eb0cef08098b387967879d30efee749", null ],
+    [ "renderNextSubBlock", "d9/df4/struct_m_p_e_synthesiser_base.html#a35cb8fe7b87b603884ee3f4837be07aa", null ],
+    [ "setCurrentPlaybackSampleRate", "d9/df4/struct_m_p_e_synthesiser_base.html#aa4b7f08d7300b5fd4b7dee5afe0a5b6e", null ],
+    [ "setLegacyModeChannelRange", "d9/df4/struct_m_p_e_synthesiser_base.html#ac4695668d9cc9ad26f3bb1a5a370d582", null ],
+    [ "setLegacyModePitchbendRange", "d9/df4/struct_m_p_e_synthesiser_base.html#a9ed7113fa62ec1f9e979b568c6d99893", null ],
+    [ "setMinimumRenderingSubdivisionSize", "d9/df4/struct_m_p_e_synthesiser_base.html#a86d907030c48a8abf67810ba08a8ff98", null ],
+    [ "setPitchbendTrackingMode", "d9/df4/struct_m_p_e_synthesiser_base.html#a05a40ad0af91f7802f48c1c95182b62c", null ],
+    [ "setPressureTrackingMode", "d9/df4/struct_m_p_e_synthesiser_base.html#ad7c289b07c46f9a14bc7e921eda81428", null ],
+    [ "setTimbreTrackingMode", "d9/df4/struct_m_p_e_synthesiser_base.html#a1c7fa1570206a5158a872d52959d912c", null ],
+    [ "setZoneLayout", "d9/df4/struct_m_p_e_synthesiser_base.html#afeac8dac88466e65c1b86c94be91fe02", null ],
+    [ "instrument", "d9/df4/struct_m_p_e_synthesiser_base.html#a1a899a33f2da58c59abd100e111ba754", null ]
+];

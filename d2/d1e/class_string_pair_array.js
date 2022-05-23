@@ -1,0 +1,26 @@
+var class_string_pair_array =
+[
+    [ "StringPairArray", "d2/d1e/class_string_pair_array.html#a606a520b01b1c8505ae5bba847ac0d85", null ],
+    [ "StringPairArray", "d2/d1e/class_string_pair_array.html#ae9d7222fa917d07fa51815681bd61f50", null ],
+    [ "~StringPairArray", "d2/d1e/class_string_pair_array.html#a150895834d8eff16de1b017e382b3fae", null ],
+    [ "addArray", "d2/d1e/class_string_pair_array.html#a15be7425b909b9aded5eddf69f096466", null ],
+    [ "addMap", "d2/d1e/class_string_pair_array.html#afcd0db0b454d1bd48febac68403d6896", null ],
+    [ "addUnorderedMap", "d2/d1e/class_string_pair_array.html#af7ec5d35dab663c54f76bd11947ae63a", null ],
+    [ "clear", "d2/d1e/class_string_pair_array.html#a79f8a87870700e5cb53a5a4f5d05658f", null ],
+    [ "containsKey", "d2/d1e/class_string_pair_array.html#a8dfe1dba255e20925aa760fca094099d", null ],
+    [ "getAllKeys", "d2/d1e/class_string_pair_array.html#a79d4b4ad1f51bdaf80839b7d5d776087", null ],
+    [ "getAllValues", "d2/d1e/class_string_pair_array.html#af7d57929ecaae7185f1e685f72969a06", null ],
+    [ "getDescription", "d2/d1e/class_string_pair_array.html#a833b1ac920151776378a48d98f05cd70", null ],
+    [ "getIgnoresCase", "d2/d1e/class_string_pair_array.html#aded38a96bac7edd766b3b8337f3eaae1", null ],
+    [ "getValue", "d2/d1e/class_string_pair_array.html#a8510d46e9cbdeff9c662f97dac4ed0f4", null ],
+    [ "minimiseStorageOverheads", "d2/d1e/class_string_pair_array.html#a35917c28f68b33afe84e2a22a373a67d", null ],
+    [ "operator!=", "d2/d1e/class_string_pair_array.html#a35469469809624ad06f183feb33193a9", null ],
+    [ "operator=", "d2/d1e/class_string_pair_array.html#a6993cf52787fc95ab4a118df3615a1c8", null ],
+    [ "operator==", "d2/d1e/class_string_pair_array.html#a4139d51fd7847490f7ef5986d51858cb", null ],
+    [ "operator[]", "d2/d1e/class_string_pair_array.html#af62b901c97f0bf5e380fa8ddda0e5d95", null ],
+    [ "remove", "d2/d1e/class_string_pair_array.html#aafc00fcda71c9832f6f77f0fba7c781e", null ],
+    [ "remove", "d2/d1e/class_string_pair_array.html#a33110fcda0e416e0e7581387f6965678", null ],
+    [ "set", "d2/d1e/class_string_pair_array.html#a1a9a1f077d33f143b50628bd35f69516", null ],
+    [ "setIgnoresCase", "d2/d1e/class_string_pair_array.html#a6d884d5d61f3617e2290bba08fa4effa", null ],
+    [ "size", "d2/d1e/class_string_pair_array.html#ae488d0a644afedc40004d37c938f3e8e", null ]
+];

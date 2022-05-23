@@ -1,4 +1,0 @@
-var struct_video_component_1_1_pimpl_1_1_player_controller_base_1_1_juce_player_item_playback_status_observer_class =
-[
-    [ "JucePlayerItemPlaybackStatusObserverClass", "d5/dbd/struct_video_component_1_1_pimpl_1_1_player_controller_base_1_1_juce_player_item_playback_status_observer_class.html#ab8b8640bbf2997887a1b3678650fc4e0", null ]
-];

@@ -1,0 +1,36 @@
+var class_accessibility_handler =
+[
+    [ "AnnouncementPriority", "db/de7/class_accessibility_handler.html#aa4555f97063f6ff38a6bcda7cf8e8b7c", [
+      [ "low", "db/de7/class_accessibility_handler.html#aa4555f97063f6ff38a6bcda7cf8e8b7ca53cced8d281a1a0ace3cb6594daaa4f7", null ],
+      [ "medium", "db/de7/class_accessibility_handler.html#aa4555f97063f6ff38a6bcda7cf8e8b7ca075a3e36a0a52dcbc568c05788e8a713", null ],
+      [ "high", "db/de7/class_accessibility_handler.html#aa4555f97063f6ff38a6bcda7cf8e8b7ca8d966b2253a917086c8604959e152243", null ]
+    ] ],
+    [ "AccessibilityHandler", "db/de7/class_accessibility_handler.html#a003d64ca212b385ef71df99aa5583340", null ],
+    [ "~AccessibilityHandler", "db/de7/class_accessibility_handler.html#adfd8d5b30966412790a22428216b34e8", null ],
+    [ "getActions", "db/de7/class_accessibility_handler.html#aa077f680f79a2b5928cfa48f768c02b9", null ],
+    [ "getCellInterface", "db/de7/class_accessibility_handler.html#a59a5f4ffdd8c5f784c9a2f0046846403", null ],
+    [ "getChildAt", "db/de7/class_accessibility_handler.html#ae6bd6e8066411658d91eecd45bf1bd4f", null ],
+    [ "getChildFocus", "db/de7/class_accessibility_handler.html#a0688d6666acfe5097903a03c90914b67", null ],
+    [ "getChildren", "db/de7/class_accessibility_handler.html#a410325ebcfcf9b669933348bb24c8f0e", null ],
+    [ "getComponent", "db/de7/class_accessibility_handler.html#acb0f1a9ba27ae6d444307259ec1dfc62", null ],
+    [ "getComponent", "db/de7/class_accessibility_handler.html#a6772cb7fb7af229f1b3ae4798b67433b", null ],
+    [ "getCurrentState", "db/de7/class_accessibility_handler.html#abf086024d6f96f1d99d7675cbe3577d7", null ],
+    [ "getDescription", "db/de7/class_accessibility_handler.html#a206525900177f0488af941bb24f04692", null ],
+    [ "getHelp", "db/de7/class_accessibility_handler.html#a3dec53a8324f933863eb0e116f1cb530", null ],
+    [ "getNativeImplementation", "db/de7/class_accessibility_handler.html#acb4ef2be51fc274df1377a1c3ef099f5", null ],
+    [ "getParent", "db/de7/class_accessibility_handler.html#a59ba3208e0c33eb77bb89f0f87f2b3be", null ],
+    [ "getRole", "db/de7/class_accessibility_handler.html#a7106798072deb9953742a6aebd41559a", null ],
+    [ "getTableInterface", "db/de7/class_accessibility_handler.html#a3a457b21ea8bb9463527cc7a1fed7df3", null ],
+    [ "getTextInterface", "db/de7/class_accessibility_handler.html#a3e33a53bfdef1fdeec118ef54167a4c4", null ],
+    [ "getTitle", "db/de7/class_accessibility_handler.html#ac8e5cccf90033cc687f92350b2590584", null ],
+    [ "getTypeIndex", "db/de7/class_accessibility_handler.html#ae3cd997d66a56df5afe4ce675d4ee97e", null ],
+    [ "getValueInterface", "db/de7/class_accessibility_handler.html#a44b512fee21259f0760d324e29421599", null ],
+    [ "giveAwayFocus", "db/de7/class_accessibility_handler.html#a31f6e9da3778f0f74777fc970b646583", null ],
+    [ "grabFocus", "db/de7/class_accessibility_handler.html#a8b138c61bf7b648c94a1d451dae526bf", null ],
+    [ "hasFocus", "db/de7/class_accessibility_handler.html#a0ccacf2fd854ed39a4988039dd573054", null ],
+    [ "isIgnored", "db/de7/class_accessibility_handler.html#a2beba39a1683e80d745eef86a63ed9f1", null ],
+    [ "isParentOf", "db/de7/class_accessibility_handler.html#a091b8dae82dd57f95f28decadbd9f5e9", null ],
+    [ "isVisibleWithinParent", "db/de7/class_accessibility_handler.html#aeed69952148752e93994295438a22254", null ],
+    [ "notifyAccessibilityEvent", "db/de7/class_accessibility_handler.html#a168c16f933a115cbdf658a534d6fe3c6", null ],
+    [ "AccessibilityNativeHandle", "db/de7/class_accessibility_handler.html#ac15417c3dddfff57cb5e0ab997be692e", null ]
+];

@@ -1,0 +1,28 @@
+var class_plugin_description =
+[
+    [ "PluginDescription", "d6/d4f/class_plugin_description.html#aef940d9f699a0cd6a6111ff85ec3a02e", null ],
+    [ "PluginDescription", "d6/d4f/class_plugin_description.html#a0166bf910abe1f08b92ab7d5053efe69", null ],
+    [ "PluginDescription", "d6/d4f/class_plugin_description.html#a77b22a770a667ff7616f9bbd329b39b3", null ],
+    [ "createIdentifierString", "d6/d4f/class_plugin_description.html#a2a50b676326d8b6369afe2678d57b766", null ],
+    [ "createXml", "d6/d4f/class_plugin_description.html#a758e723291b6cfbb0cea96cd6f396d4b", null ],
+    [ "isDuplicateOf", "d6/d4f/class_plugin_description.html#acf20e29a869f64b9273a1840f7c5fba4", null ],
+    [ "loadFromXml", "d6/d4f/class_plugin_description.html#a5fae3bea93cc8398b3c114dfd52bfd42", null ],
+    [ "matchesIdentifierString", "d6/d4f/class_plugin_description.html#aa032afbdd691db957b29cfdf5fb8b62c", null ],
+    [ "operator=", "d6/d4f/class_plugin_description.html#a4df570eca60abdf109204ebe26cf20a4", null ],
+    [ "operator=", "d6/d4f/class_plugin_description.html#a2187d3d6ebb974b9a8b23c134af87a7e", null ],
+    [ "category", "d6/d4f/class_plugin_description.html#a744b7d9bd85c5b670905ce6c411fa815", null ],
+    [ "deprecatedUid", "d6/d4f/class_plugin_description.html#a90d2943418f89f7017050d79e1b3c799", null ],
+    [ "descriptiveName", "d6/d4f/class_plugin_description.html#a93ddf8b86e68316fc4746eb89c00b52c", null ],
+    [ "fileOrIdentifier", "d6/d4f/class_plugin_description.html#a067e44c64faac07ff146f65b375cec22", null ],
+    [ "hasSharedContainer", "d6/d4f/class_plugin_description.html#a87c408ae648128912fc8bb1a0cb9be2d", null ],
+    [ "isInstrument", "d6/d4f/class_plugin_description.html#ada0d12fe7d191f7cd315721f7b965720", null ],
+    [ "lastFileModTime", "d6/d4f/class_plugin_description.html#aa7143b1df0c657008ab9f3f196e63471", null ],
+    [ "lastInfoUpdateTime", "d6/d4f/class_plugin_description.html#a62b03da7c6d39e8b509561d11d98acbc", null ],
+    [ "manufacturerName", "d6/d4f/class_plugin_description.html#aa8c02c784dc999a1043877b29795fff0", null ],
+    [ "name", "d6/d4f/class_plugin_description.html#aea9757db9385b9398598bb65f07667fd", null ],
+    [ "numInputChannels", "d6/d4f/class_plugin_description.html#aae10fb65ec4fcbfcf35aed5d46b98932", null ],
+    [ "numOutputChannels", "d6/d4f/class_plugin_description.html#a3b04bfe9e7ede6557b7de388c70a8888", null ],
+    [ "pluginFormatName", "d6/d4f/class_plugin_description.html#a619a03af08e3904725e0255a28388a19", null ],
+    [ "uniqueId", "d6/d4f/class_plugin_description.html#a7abe84837430656e04053ebdc88b80f9", null ],
+    [ "version", "d6/d4f/class_plugin_description.html#ad5d55de3c1ad1646e5cc49d04e5c41e8", null ]
+];

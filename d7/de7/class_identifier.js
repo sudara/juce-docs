@@ -1,0 +1,26 @@
+var class_identifier =
+[
+    [ "Identifier", "d7/de7/class_identifier.html#a1c1912edf41af15a4e1d51798d6bb895", null ],
+    [ "Identifier", "d7/de7/class_identifier.html#a694f45d87dd86efb3d5f412e777f32c7", null ],
+    [ "Identifier", "d7/de7/class_identifier.html#ab607b123ad36c57c0e81cf0818fe1d9c", null ],
+    [ "Identifier", "d7/de7/class_identifier.html#a79d06ddf3e797be87110e561fcd92150", null ],
+    [ "Identifier", "d7/de7/class_identifier.html#abc24d2cc68eb9728bd88c5889cc2949a", null ],
+    [ "Identifier", "d7/de7/class_identifier.html#a8dfea4beaa943af65f6e9e3809819063", null ],
+    [ "~Identifier", "d7/de7/class_identifier.html#a1adbff731160d315bc940efe9535ffb6", null ],
+    [ "getCharPointer", "d7/de7/class_identifier.html#a7993832a5f43fb629065b7d5308b0866", null ],
+    [ "isNull", "d7/de7/class_identifier.html#a7917ad4ed89e4442b950a7fcf37df170", null ],
+    [ "isValid", "d7/de7/class_identifier.html#a2715e2deec78691c79af8ea81d5e6628", null ],
+    [ "operator String::CharPointerType", "d7/de7/class_identifier.html#ae5ef972983c99050e88f3e29cd5e4a4f", null ],
+    [ "operator StringRef", "d7/de7/class_identifier.html#a874632465b5d001d1b1e9cbd06ace01f", null ],
+    [ "operator!=", "d7/de7/class_identifier.html#ae05b1735aa748cd28ce1d2d3bed7f13d", null ],
+    [ "operator!=", "d7/de7/class_identifier.html#a6eb6d01ea80b5e6e3bae0b1de374db00", null ],
+    [ "operator<", "d7/de7/class_identifier.html#a9be2af82ad1b7f4800bf81fe24f51946", null ],
+    [ "operator<=", "d7/de7/class_identifier.html#a3f4930bc22c3f24c91d1c77c6dc76d5b", null ],
+    [ "operator=", "d7/de7/class_identifier.html#a825d8c9ca449605924051962734acd22", null ],
+    [ "operator=", "d7/de7/class_identifier.html#a172ed882bbf5c9b61d12b84774d28149", null ],
+    [ "operator==", "d7/de7/class_identifier.html#a9ddc8e162da333db929220659ebbfdd8", null ],
+    [ "operator==", "d7/de7/class_identifier.html#a89d4fadd40a2585d49c4f5fc00c3b9e3", null ],
+    [ "operator>", "d7/de7/class_identifier.html#a93267b29f686698e2699dd31055d8e87", null ],
+    [ "operator>=", "d7/de7/class_identifier.html#a3a507de11499ef20d39eb01d610931d8", null ],
+    [ "toString", "d7/de7/class_identifier.html#a427b5bac2a57007b6a96ff66bca875e6", null ]
+];

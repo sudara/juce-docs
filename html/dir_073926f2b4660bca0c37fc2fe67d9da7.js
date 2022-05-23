@@ -1,4 +1,0 @@
-var dir_073926f2b4660bca0c37fc2fe67d9da7 =
-[
-    [ "app", "dir_44e1615d70b57bc9837173f67353e0f5.html", "dir_44e1615d70b57bc9837173f67353e0f5" ]
-];
