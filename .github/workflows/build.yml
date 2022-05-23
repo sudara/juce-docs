@@ -10,15 +10,21 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout pepo and submodule
+      - name: Checkout repo and submodule
         uses: actions/checkout@v3
         with: 
           submodules: true
+          
+      - name: Setup python
+        uses: actions/setup-python@v3
+        
+      - name: Run process_source_files.py
+        run: python JUCE/docs/doxygen/process_source_files.py JUCE/modules build
+        
       - name: Build Doxygen
         uses: mattnotmitt/doxygen-action@v1.9.2
         with:
-            working-directory: 'JUCE/docs/doxygen'
-            doxyfile-path: './Doxygen'
+            doxyfile-path: './Doxyfile'
       # - name: Install Ruby and bundle
       #   uses: ruby/setup-ruby@v1
       #   with:
