@@ -1,0 +1,176 @@
+\hypertarget{classdsp_1_1_state_variable_t_p_t_filter}{}\doxysection{dsp\+::State\+Variable\+TPTFilter\texorpdfstring{$<$}{<} Sample\+Type \texorpdfstring{$>$}{>} Class Template Reference}
+\label{classdsp_1_1_state_variable_t_p_t_filter}\index{dsp::StateVariableTPTFilter$<$ SampleType $>$@{dsp::StateVariableTPTFilter$<$ SampleType $>$}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+State\+Variable\+TPTFilter.\+h$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classdsp_1_1_state_variable_t_p_t_filter_ad599824914d6a48568c552ed6475aa66}{Type}} = \mbox{\hyperlink{namespacedsp_a2812ed585354d3af60168fd6a9c14079}{State\+Variable\+TPTFilter\+Type}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classdsp_1_1_state_variable_t_p_t_filter_a2c6673876075ea336d79350096fdaca1}{State\+Variable\+TPTFilter}} ()
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{classdsp_1_1_state_variable_t_p_t_filter_aa5329db0a9c2d66689455640ca15b21e}{set\+Type}} (\mbox{\hyperlink{namespacedsp_a2812ed585354d3af60168fd6a9c14079}{Type}} new\+Type)
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{classdsp_1_1_state_variable_t_p_t_filter_ad158b406ed7a2fa87fd586efb7d1f0b7}{set\+Cutoff\+Frequency}} (Sample\+Type new\+Frequency\+Hz)
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{classdsp_1_1_state_variable_t_p_t_filter_a7b2837c851e3ba66b0b4594b8238e3f3}{set\+Resonance}} (Sample\+Type new\+Resonance)
+\item 
+\mbox{\hyperlink{namespacedsp_a2812ed585354d3af60168fd6a9c14079}{Type}} \mbox{\hyperlink{classdsp_1_1_state_variable_t_p_t_filter_a5bfbb36eecf19f1f901cdfa954e951de}{get\+Type}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+Sample\+Type \mbox{\hyperlink{classdsp_1_1_state_variable_t_p_t_filter_abc77d3de2dd72ce8a9172cedd144dbb3}{get\+Cutoff\+Frequency}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+Sample\+Type \mbox{\hyperlink{classdsp_1_1_state_variable_t_p_t_filter_ae4622bf7f47980472edd56ae5e307be2}{get\+Resonance}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{classdsp_1_1_state_variable_t_p_t_filter_ad448b214a1b7f598922641cea46a7282}{prepare}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{structdsp_1_1_process_spec}{Process\+Spec}} \&spec)
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{classdsp_1_1_state_variable_t_p_t_filter_a57d1f13f6ee768eb0606a05af3743cc7}{reset}} ()
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{classdsp_1_1_state_variable_t_p_t_filter_a3a80c62f8dc29ce1531879ca1214079d}{reset}} (Sample\+Type new\+Value)
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{classdsp_1_1_state_variable_t_p_t_filter_ab0f46924f126f89339cc0b7b530dd2f4}{snap\+To\+Zero}} () noexcept
+\item 
+{\footnotesize template$<$typename Process\+Context $>$ }\\\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{classdsp_1_1_state_variable_t_p_t_filter_a764bde02e87bc45cafbd8180cbf4e6ea}{process}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} Process\+Context \&context) noexcept
+\item 
+Sample\+Type \mbox{\hyperlink{classdsp_1_1_state_variable_t_p_t_filter_a52a7a2e317bac51c0c9dfedef491296f}{process\+Sample}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} channel, Sample\+Type input\+Value)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Sample\+Type$>$\newline
+class dsp\+::\+State\+Variable\+TPTFilter$<$ Sample\+Type $>$}
+An \mbox{\hyperlink{namespacedsp_1_1_i_i_r}{IIR}} filter that can perform low, band and high-\/pass filtering on an audio signal, with 12 dB of attenuation per octave, using a TPT structure, designed for fast modulation (see Vadim Zavalishin\textquotesingle{}s documentation about TPT structures for more information). Its behaviour is based on the analog state variable filter circuit.
+
+Note\+: The bandpass here is not the one in the RBJ Cook\+Book as its gain can be higher than 0 dB. For the classic 0 dB bandpass, we need to multiply the result by R2.
+
+Note 2\+: Using this class prevents some loud audio artefacts commonly encountered when changing the cutoff frequency using other filter simulation structures and \mbox{\hyperlink{namespacedsp_1_1_i_i_r}{IIR}} filter classes. However, this class may still require additional smoothing for cutoff frequency changes.
+
+see \mbox{\hyperlink{class_i_i_r_filter}{IIRFilter}}, \mbox{\hyperlink{class_smoothed_value}{Smoothed\+Value}}
+
+@tags\{DSP\} 
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{classdsp_1_1_state_variable_t_p_t_filter_ad599824914d6a48568c552ed6475aa66}\label{classdsp_1_1_state_variable_t_p_t_filter_ad599824914d6a48568c552ed6475aa66}} 
+\index{dsp::StateVariableTPTFilter$<$ SampleType $>$@{dsp::StateVariableTPTFilter$<$ SampleType $>$}!Type@{Type}}
+\index{Type@{Type}!dsp::StateVariableTPTFilter$<$ SampleType $>$@{dsp::StateVariableTPTFilter$<$ SampleType $>$}}
+\doxysubsubsection{\texorpdfstring{Type}{Type}}
+{\footnotesize\ttfamily template$<$typename Sample\+Type $>$ \\
+using \mbox{\hyperlink{classdsp_1_1_state_variable_t_p_t_filter}{dsp\+::\+State\+Variable\+TPTFilter}}$<$ Sample\+Type $>$\+::\mbox{\hyperlink{namespacedsp_a2812ed585354d3af60168fd6a9c14079}{Type}} =  \mbox{\hyperlink{namespacedsp_a2812ed585354d3af60168fd6a9c14079}{State\+Variable\+TPTFilter\+Type}}}
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classdsp_1_1_state_variable_t_p_t_filter_a2c6673876075ea336d79350096fdaca1}\label{classdsp_1_1_state_variable_t_p_t_filter_a2c6673876075ea336d79350096fdaca1}} 
+\index{dsp::StateVariableTPTFilter$<$ SampleType $>$@{dsp::StateVariableTPTFilter$<$ SampleType $>$}!StateVariableTPTFilter@{StateVariableTPTFilter}}
+\index{StateVariableTPTFilter@{StateVariableTPTFilter}!dsp::StateVariableTPTFilter$<$ SampleType $>$@{dsp::StateVariableTPTFilter$<$ SampleType $>$}}
+\doxysubsubsection{\texorpdfstring{StateVariableTPTFilter()}{StateVariableTPTFilter()}}
+{\footnotesize\ttfamily template$<$typename Sample\+Type $>$ \\
+juce\+::dsp\+::\+State\+Variable\+TPTFilter\+::\+State\+Variable\+TPTFilter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Constructor. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classdsp_1_1_state_variable_t_p_t_filter_abc77d3de2dd72ce8a9172cedd144dbb3}\label{classdsp_1_1_state_variable_t_p_t_filter_abc77d3de2dd72ce8a9172cedd144dbb3}} 
+\index{dsp::StateVariableTPTFilter$<$ SampleType $>$@{dsp::StateVariableTPTFilter$<$ SampleType $>$}!getCutoffFrequency@{getCutoffFrequency}}
+\index{getCutoffFrequency@{getCutoffFrequency}!dsp::StateVariableTPTFilter$<$ SampleType $>$@{dsp::StateVariableTPTFilter$<$ SampleType $>$}}
+\doxysubsubsection{\texorpdfstring{getCutoffFrequency()}{getCutoffFrequency()}}
+{\footnotesize\ttfamily template$<$typename Sample\+Type $>$ \\
+Sample\+Type \mbox{\hyperlink{classdsp_1_1_state_variable_t_p_t_filter}{dsp\+::\+State\+Variable\+TPTFilter}}$<$ Sample\+Type $>$\+::get\+Cutoff\+Frequency (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Returns the cutoff frequency of the filter. \mbox{\Hypertarget{classdsp_1_1_state_variable_t_p_t_filter_ae4622bf7f47980472edd56ae5e307be2}\label{classdsp_1_1_state_variable_t_p_t_filter_ae4622bf7f47980472edd56ae5e307be2}} 
+\index{dsp::StateVariableTPTFilter$<$ SampleType $>$@{dsp::StateVariableTPTFilter$<$ SampleType $>$}!getResonance@{getResonance}}
+\index{getResonance@{getResonance}!dsp::StateVariableTPTFilter$<$ SampleType $>$@{dsp::StateVariableTPTFilter$<$ SampleType $>$}}
+\doxysubsubsection{\texorpdfstring{getResonance()}{getResonance()}}
+{\footnotesize\ttfamily template$<$typename Sample\+Type $>$ \\
+Sample\+Type \mbox{\hyperlink{classdsp_1_1_state_variable_t_p_t_filter}{dsp\+::\+State\+Variable\+TPTFilter}}$<$ Sample\+Type $>$\+::get\+Resonance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Returns the resonance of the filter. \mbox{\Hypertarget{classdsp_1_1_state_variable_t_p_t_filter_a5bfbb36eecf19f1f901cdfa954e951de}\label{classdsp_1_1_state_variable_t_p_t_filter_a5bfbb36eecf19f1f901cdfa954e951de}} 
+\index{dsp::StateVariableTPTFilter$<$ SampleType $>$@{dsp::StateVariableTPTFilter$<$ SampleType $>$}!getType@{getType}}
+\index{getType@{getType}!dsp::StateVariableTPTFilter$<$ SampleType $>$@{dsp::StateVariableTPTFilter$<$ SampleType $>$}}
+\doxysubsubsection{\texorpdfstring{getType()}{getType()}}
+{\footnotesize\ttfamily template$<$typename Sample\+Type $>$ \\
+\mbox{\hyperlink{namespacedsp_a2812ed585354d3af60168fd6a9c14079}{Type}} \mbox{\hyperlink{classdsp_1_1_state_variable_t_p_t_filter}{dsp\+::\+State\+Variable\+TPTFilter}}$<$ Sample\+Type $>$\+::get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Returns the type of the filter. \mbox{\Hypertarget{classdsp_1_1_state_variable_t_p_t_filter_ad448b214a1b7f598922641cea46a7282}\label{classdsp_1_1_state_variable_t_p_t_filter_ad448b214a1b7f598922641cea46a7282}} 
+\index{dsp::StateVariableTPTFilter$<$ SampleType $>$@{dsp::StateVariableTPTFilter$<$ SampleType $>$}!prepare@{prepare}}
+\index{prepare@{prepare}!dsp::StateVariableTPTFilter$<$ SampleType $>$@{dsp::StateVariableTPTFilter$<$ SampleType $>$}}
+\doxysubsubsection{\texorpdfstring{prepare()}{prepare()}}
+{\footnotesize\ttfamily template$<$typename Sample\+Type $>$ \\
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} juce\+::dsp\+::\+State\+Variable\+TPTFilter\+::prepare (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{structdsp_1_1_process_spec}{Process\+Spec}} \&}]{spec }\end{DoxyParamCaption})}
+
+Initialises the filter. \mbox{\Hypertarget{classdsp_1_1_state_variable_t_p_t_filter_a764bde02e87bc45cafbd8180cbf4e6ea}\label{classdsp_1_1_state_variable_t_p_t_filter_a764bde02e87bc45cafbd8180cbf4e6ea}} 
+\index{dsp::StateVariableTPTFilter$<$ SampleType $>$@{dsp::StateVariableTPTFilter$<$ SampleType $>$}!process@{process}}
+\index{process@{process}!dsp::StateVariableTPTFilter$<$ SampleType $>$@{dsp::StateVariableTPTFilter$<$ SampleType $>$}}
+\doxysubsubsection{\texorpdfstring{process()}{process()}}
+{\footnotesize\ttfamily template$<$typename Sample\+Type $>$ \\
+template$<$typename Process\+Context $>$ \\
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{classdsp_1_1_state_variable_t_p_t_filter}{dsp\+::\+State\+Variable\+TPTFilter}}$<$ Sample\+Type $>$\+::process (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} Process\+Context \&}]{context }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Processes the input and output samples supplied in the processing context. \mbox{\Hypertarget{classdsp_1_1_state_variable_t_p_t_filter_a52a7a2e317bac51c0c9dfedef491296f}\label{classdsp_1_1_state_variable_t_p_t_filter_a52a7a2e317bac51c0c9dfedef491296f}} 
+\index{dsp::StateVariableTPTFilter$<$ SampleType $>$@{dsp::StateVariableTPTFilter$<$ SampleType $>$}!processSample@{processSample}}
+\index{processSample@{processSample}!dsp::StateVariableTPTFilter$<$ SampleType $>$@{dsp::StateVariableTPTFilter$<$ SampleType $>$}}
+\doxysubsubsection{\texorpdfstring{processSample()}{processSample()}}
+{\footnotesize\ttfamily template$<$typename Sample\+Type $>$ \\
+Sample\+Type juce\+::dsp\+::\+State\+Variable\+TPTFilter\+::process\+Sample (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{channel,  }\item[{Sample\+Type}]{input\+Value }\end{DoxyParamCaption})}
+
+Processes one sample at a time on a given channel. \mbox{\Hypertarget{classdsp_1_1_state_variable_t_p_t_filter_a57d1f13f6ee768eb0606a05af3743cc7}\label{classdsp_1_1_state_variable_t_p_t_filter_a57d1f13f6ee768eb0606a05af3743cc7}} 
+\index{dsp::StateVariableTPTFilter$<$ SampleType $>$@{dsp::StateVariableTPTFilter$<$ SampleType $>$}!reset@{reset}}
+\index{reset@{reset}!dsp::StateVariableTPTFilter$<$ SampleType $>$@{dsp::StateVariableTPTFilter$<$ SampleType $>$}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Sample\+Type $>$ \\
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} juce\+::dsp\+::\+State\+Variable\+TPTFilter\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Resets the internal state variables of the filter. \mbox{\Hypertarget{classdsp_1_1_state_variable_t_p_t_filter_a3a80c62f8dc29ce1531879ca1214079d}\label{classdsp_1_1_state_variable_t_p_t_filter_a3a80c62f8dc29ce1531879ca1214079d}} 
+\index{dsp::StateVariableTPTFilter$<$ SampleType $>$@{dsp::StateVariableTPTFilter$<$ SampleType $>$}!reset@{reset}}
+\index{reset@{reset}!dsp::StateVariableTPTFilter$<$ SampleType $>$@{dsp::StateVariableTPTFilter$<$ SampleType $>$}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Sample\+Type $>$ \\
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} juce\+::dsp\+::\+State\+Variable\+TPTFilter\+::reset (\begin{DoxyParamCaption}\item[{Sample\+Type}]{new\+Value }\end{DoxyParamCaption})}
+
+Resets the internal state variables of the filter to a given value. \mbox{\Hypertarget{classdsp_1_1_state_variable_t_p_t_filter_ad158b406ed7a2fa87fd586efb7d1f0b7}\label{classdsp_1_1_state_variable_t_p_t_filter_ad158b406ed7a2fa87fd586efb7d1f0b7}} 
+\index{dsp::StateVariableTPTFilter$<$ SampleType $>$@{dsp::StateVariableTPTFilter$<$ SampleType $>$}!setCutoffFrequency@{setCutoffFrequency}}
+\index{setCutoffFrequency@{setCutoffFrequency}!dsp::StateVariableTPTFilter$<$ SampleType $>$@{dsp::StateVariableTPTFilter$<$ SampleType $>$}}
+\doxysubsubsection{\texorpdfstring{setCutoffFrequency()}{setCutoffFrequency()}}
+{\footnotesize\ttfamily template$<$typename Sample\+Type $>$ \\
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} juce\+::dsp\+::\+State\+Variable\+TPTFilter\+::set\+Cutoff\+Frequency (\begin{DoxyParamCaption}\item[{Sample\+Type}]{new\+Frequency\+Hz }\end{DoxyParamCaption})}
+
+Sets the cutoff frequency of the filter.
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Frequency\+Hz} & the new cutoff frequency in Hz. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classdsp_1_1_state_variable_t_p_t_filter_a7b2837c851e3ba66b0b4594b8238e3f3}\label{classdsp_1_1_state_variable_t_p_t_filter_a7b2837c851e3ba66b0b4594b8238e3f3}} 
+\index{dsp::StateVariableTPTFilter$<$ SampleType $>$@{dsp::StateVariableTPTFilter$<$ SampleType $>$}!setResonance@{setResonance}}
+\index{setResonance@{setResonance}!dsp::StateVariableTPTFilter$<$ SampleType $>$@{dsp::StateVariableTPTFilter$<$ SampleType $>$}}
+\doxysubsubsection{\texorpdfstring{setResonance()}{setResonance()}}
+{\footnotesize\ttfamily template$<$typename Sample\+Type $>$ \\
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} juce\+::dsp\+::\+State\+Variable\+TPTFilter\+::set\+Resonance (\begin{DoxyParamCaption}\item[{Sample\+Type}]{new\+Resonance }\end{DoxyParamCaption})}
+
+Sets the resonance of the filter.
+
+Note\+: The bandwidth of the resonance increases with the value of the parameter. To have a standard 12 dB / octave filter, the value must be set at 1 / sqrt(2). \mbox{\Hypertarget{classdsp_1_1_state_variable_t_p_t_filter_aa5329db0a9c2d66689455640ca15b21e}\label{classdsp_1_1_state_variable_t_p_t_filter_aa5329db0a9c2d66689455640ca15b21e}} 
+\index{dsp::StateVariableTPTFilter$<$ SampleType $>$@{dsp::StateVariableTPTFilter$<$ SampleType $>$}!setType@{setType}}
+\index{setType@{setType}!dsp::StateVariableTPTFilter$<$ SampleType $>$@{dsp::StateVariableTPTFilter$<$ SampleType $>$}}
+\doxysubsubsection{\texorpdfstring{setType()}{setType()}}
+{\footnotesize\ttfamily template$<$typename Sample\+Type $>$ \\
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} juce\+::dsp\+::\+State\+Variable\+TPTFilter\+::set\+Type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacedsp_a2812ed585354d3af60168fd6a9c14079}{Type}}}]{new\+Type }\end{DoxyParamCaption})}
+
+Sets the filter type. \mbox{\Hypertarget{classdsp_1_1_state_variable_t_p_t_filter_ab0f46924f126f89339cc0b7b530dd2f4}\label{classdsp_1_1_state_variable_t_p_t_filter_ab0f46924f126f89339cc0b7b530dd2f4}} 
+\index{dsp::StateVariableTPTFilter$<$ SampleType $>$@{dsp::StateVariableTPTFilter$<$ SampleType $>$}!snapToZero@{snapToZero}}
+\index{snapToZero@{snapToZero}!dsp::StateVariableTPTFilter$<$ SampleType $>$@{dsp::StateVariableTPTFilter$<$ SampleType $>$}}
+\doxysubsubsection{\texorpdfstring{snapToZero()}{snapToZero()}}
+{\footnotesize\ttfamily template$<$typename Sample\+Type $>$ \\
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} juce\+::dsp\+::\+State\+Variable\+TPTFilter\+::snap\+To\+Zero (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Ensure that the state variables are rounded to zero if the state variables are denormals. This is only needed if you are doing sample by sample processing. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+dsp/processors/\mbox{\hyperlink{juce___state_variable_t_p_t_filter_8h}{juce\+\_\+\+State\+Variable\+TPTFilter.\+h}}\item 
+build/juce\+\_\+dsp/processors/\mbox{\hyperlink{juce___state_variable_t_p_t_filter_8cpp}{juce\+\_\+\+State\+Variable\+TPTFilter.\+cpp}}\end{DoxyCompactItemize}

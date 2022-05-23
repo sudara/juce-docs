@@ -1,0 +1,79 @@
+\hypertarget{class_midi_input_callback}{}\doxysection{Midi\+Input\+Callback Class Reference}
+\label{class_midi_input_callback}\index{MidiInputCallback@{MidiInputCallback}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Midi\+Devices.\+h$>$}
+
+Inheritance diagram for Midi\+Input\+Callback\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.362530cm]{dc/d10/class_midi_input_callback}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_midi_input_callback_a3a4ce6156cd3b82722d84d3dc43ef2de}{$\sim$\+Midi\+Input\+Callback}} ()=default
+\item 
+virtual \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_midi_input_callback_acdf6d7e27b96a50fe06922737f0d082e}{handle\+Incoming\+Midi\+Message}} (\mbox{\hyperlink{class_midi_input}{Midi\+Input}} $\ast$source, \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \&message)=0
+\item 
+virtual \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_midi_input_callback_af31fb0fe3195c72e76e9ebdfa89cf344}{handle\+Partial\+Sysex\+Message}} (\mbox{\hyperlink{class_midi_input}{Midi\+Input}} $\ast$source, \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} $\ast$message\+Data, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} num\+Bytes\+So\+Far, double timestamp)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Receives incoming messages from a physical MIDI input device.
+
+This class is overridden to handle incoming midi messages. See the \mbox{\hyperlink{class_midi_input}{Midi\+Input}} class for more details.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_input}{Midi\+Input}}
+\end{DoxySeeAlso}
+@tags\{Audio\} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_midi_input_callback_a3a4ce6156cd3b82722d84d3dc43ef2de}\label{class_midi_input_callback_a3a4ce6156cd3b82722d84d3dc43ef2de}} 
+\index{MidiInputCallback@{MidiInputCallback}!````~MidiInputCallback@{$\sim$MidiInputCallback}}
+\index{````~MidiInputCallback@{$\sim$MidiInputCallback}!MidiInputCallback@{MidiInputCallback}}
+\doxysubsubsection{\texorpdfstring{$\sim$MidiInputCallback()}{~MidiInputCallback()}}
+{\footnotesize\ttfamily virtual Midi\+Input\+Callback\+::$\sim$\+Midi\+Input\+Callback (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+Destructor. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_midi_input_callback_acdf6d7e27b96a50fe06922737f0d082e}\label{class_midi_input_callback_acdf6d7e27b96a50fe06922737f0d082e}} 
+\index{MidiInputCallback@{MidiInputCallback}!handleIncomingMidiMessage@{handleIncomingMidiMessage}}
+\index{handleIncomingMidiMessage@{handleIncomingMidiMessage}!MidiInputCallback@{MidiInputCallback}}
+\doxysubsubsection{\texorpdfstring{handleIncomingMidiMessage()}{handleIncomingMidiMessage()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Midi\+Input\+Callback\+::handle\+Incoming\+Midi\+Message (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_midi_input}{Midi\+Input}} $\ast$}]{source,  }\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \&}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Receives an incoming message.
+
+A \mbox{\hyperlink{class_midi_input}{Midi\+Input}} object will call this method when a midi event arrives. It\textquotesingle{}ll be called on a high-\/priority system thread, so avoid doing anything time-\/consuming in here, and avoid making any UI calls. You might find the \mbox{\hyperlink{class_midi_buffer}{Midi\+Buffer}} class helpful for queueing incoming messages for use later.
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & the \mbox{\hyperlink{class_midi_input}{Midi\+Input}} object that generated the message \\
+\hline
+{\em message} & the incoming message. The message\textquotesingle{}s timestamp is set to a value equivalent to (\mbox{\hyperlink{class_time_a66c3f2ac6b0a2693a8fc9506da584d27}{Time\+::get\+Millisecond\+Counter()}} / 1000.\+0) to specify the time when the message arrived \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_midi_message_collector_af76869b33248a78b2a580e63ec855773}{Midi\+Message\+Collector}}, and \mbox{\hyperlink{class_audio_processor_player_aa3f6a26339ac28951d252adf1b4a776e}{Audio\+Processor\+Player}}.
+
+\mbox{\Hypertarget{class_midi_input_callback_af31fb0fe3195c72e76e9ebdfa89cf344}\label{class_midi_input_callback_af31fb0fe3195c72e76e9ebdfa89cf344}} 
+\index{MidiInputCallback@{MidiInputCallback}!handlePartialSysexMessage@{handlePartialSysexMessage}}
+\index{handlePartialSysexMessage@{handlePartialSysexMessage}!MidiInputCallback@{MidiInputCallback}}
+\doxysubsubsection{\texorpdfstring{handlePartialSysexMessage()}{handlePartialSysexMessage()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Midi\+Input\+Callback\+::handle\+Partial\+Sysex\+Message (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_midi_input}{Midi\+Input}} $\ast$}]{source,  }\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} $\ast$}]{message\+Data,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{num\+Bytes\+So\+Far,  }\item[{double}]{timestamp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Notification sent each time a packet of a multi-\/packet sysex message arrives.
+
+If a long sysex message is broken up into multiple packets, this callback is made for each packet that arrives until the message is finished, at which point the normal \mbox{\hyperlink{class_midi_input_callback_acdf6d7e27b96a50fe06922737f0d082e}{handle\+Incoming\+Midi\+Message()}} callback will be made with the entire message.
+
+The message passed in will contain the start of a sysex, but won\textquotesingle{}t be finished with the terminating 0xf7 byte. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+audio\+\_\+devices/midi\+\_\+io/\mbox{\hyperlink{juce___midi_devices_8h}{juce\+\_\+\+Midi\+Devices.\+h}}\end{DoxyCompactItemize}

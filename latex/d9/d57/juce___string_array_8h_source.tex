@@ -1,0 +1,203 @@
+\hypertarget{juce___string_array_8h_source}{}\doxysection{juce\+\_\+\+String\+Array.\+h}
+\label{juce___string_array_8h_source}\index{build/juce\_core/text/juce\_StringArray.h@{build/juce\_core/text/juce\_StringArray.h}}
+\mbox{\hyperlink{juce___string_array_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{35 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_string_array}{StringArray}}}
+\DoxyCodeLine{36 \{}
+\DoxyCodeLine{37 \textcolor{keyword}{public}:}
+\DoxyCodeLine{38     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{40 \textcolor{comment}{}    \mbox{\hyperlink{class_string_array}{StringArray}}() \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{43     \mbox{\hyperlink{class_string_array}{StringArray}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string_array}{StringArray}}\&);}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{46     \mbox{\hyperlink{class_string_array}{StringArray}} (\mbox{\hyperlink{class_string_array}{StringArray}}\&\&) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{49     \mbox{\hyperlink{class_string_array}{StringArray}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& firstValue);}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{52     \textcolor{keyword}{template} <\textcolor{keyword}{typename}... OtherElements>}
+\DoxyCodeLine{53     \mbox{\hyperlink{class_string_array_abacd9eb0892a03dea2681e07b38c9a2d}{StringArray}} (\mbox{\hyperlink{class_string_ref}{StringRef}} firstValue, OtherElements\&\&... otherValues)}
+\DoxyCodeLine{54         : \mbox{\hyperlink{namespacegl_a8639a2c90be16742b8efb795d7c7a4ed}{strings}} (firstValue, \mbox{\hyperlink{namespacestd}{std}}::forward<OtherElements> (otherValues)...) \{\}}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{57     \mbox{\hyperlink{class_string_array}{StringArray}} (\textcolor{keyword}{const} std::initializer\_list<const char*>\& \mbox{\hyperlink{namespacegl_a8639a2c90be16742b8efb795d7c7a4ed}{strings}});}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{60     \mbox{\hyperlink{class_string_array}{StringArray}} (\mbox{\hyperlink{class_array}{Array<String>}}\&\&) noexcept;}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{63     template <typename Type>}
+\DoxyCodeLine{64     \mbox{\hyperlink{class_string_array}{StringArray}} (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_array}{Array}}<Type>\& stringArray)}
+\DoxyCodeLine{65     \{}
+\DoxyCodeLine{66         addArray (stringArray.begin(), stringArray.end());}
+\DoxyCodeLine{67     \}}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{73     \mbox{\hyperlink{class_string_array}{StringArray}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}* \mbox{\hyperlink{namespacegl_a8639a2c90be16742b8efb795d7c7a4ed}{strings}}, \textcolor{keywordtype}{int} numberOfStrings);}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{80     \mbox{\hyperlink{class_string_array}{StringArray}} (\textcolor{keyword}{const} \textcolor{keywordtype}{char}* \textcolor{keyword}{const}* \mbox{\hyperlink{namespacegl_a8639a2c90be16742b8efb795d7c7a4ed}{strings}}, \textcolor{keywordtype}{int} numberOfStrings);}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{87     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_string_array}{StringArray}} (\textcolor{keyword}{const} \textcolor{keywordtype}{char}* \textcolor{keyword}{const}* \mbox{\hyperlink{namespacegl_a8639a2c90be16742b8efb795d7c7a4ed}{strings}});}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{93     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_string_array}{StringArray}} (\textcolor{keyword}{const} \textcolor{keywordtype}{wchar\_t}* \textcolor{keyword}{const}* \mbox{\hyperlink{namespacegl_a8639a2c90be16742b8efb795d7c7a4ed}{strings}});}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{100     \mbox{\hyperlink{class_string_array}{StringArray}} (\textcolor{keyword}{const} \textcolor{keywordtype}{wchar\_t}* \textcolor{keyword}{const}* \mbox{\hyperlink{namespacegl_a8639a2c90be16742b8efb795d7c7a4ed}{strings}}, \textcolor{keywordtype}{int} numberOfStrings);}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{103     \mbox{\hyperlink{class_string_array_aa1a313ce82e65b99eb74d812c6f2dedd}{\string~StringArray}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{106     \mbox{\hyperlink{class_string_array}{StringArray}}\& operator= (\textcolor{keyword}{const} \mbox{\hyperlink{class_string_array}{StringArray}}\&);}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{109     \mbox{\hyperlink{class_string_array}{StringArray}}\& operator= (\mbox{\hyperlink{class_string_array}{StringArray}}\&\&) noexcept;}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{112     template <typename Type>}
+\DoxyCodeLine{113     \mbox{\hyperlink{class_string_array}{StringArray}}\& operator= (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_array}{Array}}<Type>\& stringArray)}
+\DoxyCodeLine{114     \{}
+\DoxyCodeLine{115         addArray (stringArray.begin(), stringArray.end());}
+\DoxyCodeLine{116         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{117     \}}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{120     \textcolor{keywordtype}{void} swapWith (\mbox{\hyperlink{class_string_array}{StringArray}}\&) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{122     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{127 \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_audio_channel_layout_8cpp_ad569fbf0e2ce80e9b92caaf1cbb3c257}{operator== }}(\textcolor{keyword}{const} \mbox{\hyperlink{class_string_array}{StringArray}}\&) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{133     \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_audio_channel_layout_8cpp_aa4ad43821a0285a3d7a5c840173f03ac}{operator!= }}(\textcolor{keyword}{const} \mbox{\hyperlink{class_string_array}{StringArray}}\&) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{137 \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_string_array_af1eb48dd90938eb34d9f43cf7d81510b}{size}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                                    \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a8639a2c90be16742b8efb795d7c7a4ed}{strings}}.size(); \}}
+\DoxyCodeLine{138 }
+\DoxyCodeLine{140     \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_string_array_a7843a71dbef31c4b03a1834ede2f83ed}{isEmpty}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                                \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}}() == 0; \}}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{149     \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& operator[] (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{155     \mbox{\hyperlink{class_string}{String}}\& getReference (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{161     \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& getReference (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{162 }
+\DoxyCodeLine{166     \textcolor{keyword}{inline} \mbox{\hyperlink{class_string}{String}}* \mbox{\hyperlink{class_string_array_af3ec56e2a5f9c8b7de1675e49e44f602}{begin}}() noexcept                 \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a8639a2c90be16742b8efb795d7c7a4ed}{strings}}.begin(); \}}
+\DoxyCodeLine{167 }
+\DoxyCodeLine{171     \textcolor{keyword}{inline} \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}* \mbox{\hyperlink{class_string_array_ae13b87d8c0275b7388656a5c5e8ef4e8}{begin}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept     \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a8639a2c90be16742b8efb795d7c7a4ed}{strings}}.begin(); \}}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{176     \textcolor{keyword}{inline} \mbox{\hyperlink{class_string}{String}}* \mbox{\hyperlink{class_string_array_a728f0cb183109f615e0a23184bb9bfac}{end}}() noexcept                  \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a8639a2c90be16742b8efb795d7c7a4ed}{strings}}.end(); \}}
+\DoxyCodeLine{177 }
+\DoxyCodeLine{181     \textcolor{keyword}{inline} \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}* \mbox{\hyperlink{class_string_array_aa5a08f4f67d44169c2e6ad9cbd9b0762}{end}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept       \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a8639a2c90be16742b8efb795d7c7a4ed}{strings}}.end(); \}}
+\DoxyCodeLine{182 }
+\DoxyCodeLine{183 }
+\DoxyCodeLine{190     \textcolor{keywordtype}{bool} contains (\mbox{\hyperlink{class_string_ref}{StringRef}} stringToLookFor,}
+\DoxyCodeLine{191                    \textcolor{keywordtype}{bool} ignoreCase = \textcolor{keyword}{false}) \textcolor{keyword}{const};}
+\DoxyCodeLine{192 }
+\DoxyCodeLine{203     \textcolor{keywordtype}{int} indexOf (\mbox{\hyperlink{class_string_ref}{StringRef}} stringToLookFor,}
+\DoxyCodeLine{204                  \textcolor{keywordtype}{bool} ignoreCase = \textcolor{keyword}{false},}
+\DoxyCodeLine{205                  \textcolor{keywordtype}{int} startIndex = 0) \textcolor{keyword}{const};}
+\DoxyCodeLine{206 }
+\DoxyCodeLine{207     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{209 \textcolor{comment}{}    \textcolor{keywordtype}{void} add (\mbox{\hyperlink{class_string}{String}} stringToAdd);}
+\DoxyCodeLine{210 }
+\DoxyCodeLine{218     \textcolor{keywordtype}{void} insert (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}, \mbox{\hyperlink{class_string}{String}} stringToAdd);}
+\DoxyCodeLine{219 }
+\DoxyCodeLine{225     \textcolor{keywordtype}{bool} addIfNotAlreadyThere (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& stringToAdd, \textcolor{keywordtype}{bool} ignoreCase = \textcolor{keyword}{false});}
+\DoxyCodeLine{226 }
+\DoxyCodeLine{232     \textcolor{keywordtype}{void} set (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}, \mbox{\hyperlink{class_string}{String}} newString);}
+\DoxyCodeLine{233 }
+\DoxyCodeLine{241     \textcolor{keywordtype}{void} addArray (\textcolor{keyword}{const} \mbox{\hyperlink{class_string_array}{StringArray}}\& other,}
+\DoxyCodeLine{242                    \textcolor{keywordtype}{int} startIndex = 0,}
+\DoxyCodeLine{243                    \textcolor{keywordtype}{int} numElementsToAdd = -\/1);}
+\DoxyCodeLine{244 }
+\DoxyCodeLine{248     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Iterator>}
+\DoxyCodeLine{249     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_string_array_a7506f8786617c66eaf32033c4e79082c}{addArray}} (Iterator\&\& \mbox{\hyperlink{namespacegl_adad3a3824fbe72fb0b01074bb01ebe75}{start}}, Iterator\&\& \mbox{\hyperlink{group__juce__core-files_ga4a3194f4f741f9bd653f28733358f62c}{end}})}
+\DoxyCodeLine{250     \{}
+\DoxyCodeLine{251         ensureStorageAllocated (\mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}}() + (\textcolor{keywordtype}{int}) \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>} (\mbox{\hyperlink{group__juce__core-files_ga4a3194f4f741f9bd653f28733358f62c}{end}} -\/ \mbox{\hyperlink{namespacegl_adad3a3824fbe72fb0b01074bb01ebe75}{start}}));}
+\DoxyCodeLine{252 }
+\DoxyCodeLine{253         \textcolor{keywordflow}{while} (\mbox{\hyperlink{namespacegl_adad3a3824fbe72fb0b01074bb01ebe75}{start}} != \mbox{\hyperlink{group__juce__core-files_ga4a3194f4f741f9bd653f28733358f62c}{end}})}
+\DoxyCodeLine{254             \mbox{\hyperlink{namespacegl_a8639a2c90be16742b8efb795d7c7a4ed}{strings}}.add (*\mbox{\hyperlink{namespacegl_adad3a3824fbe72fb0b01074bb01ebe75}{start}}++);}
+\DoxyCodeLine{255     \}}
+\DoxyCodeLine{256 }
+\DoxyCodeLine{263     \textcolor{keywordtype}{void} mergeArray (\textcolor{keyword}{const} \mbox{\hyperlink{class_string_array}{StringArray}}\& other,}
+\DoxyCodeLine{264                      \textcolor{keywordtype}{bool} ignoreCase = \textcolor{keyword}{false});}
+\DoxyCodeLine{265 }
+\DoxyCodeLine{273     \textcolor{keywordtype}{int} addTokens (\mbox{\hyperlink{class_string_ref}{StringRef}} stringToTokenise, \textcolor{keywordtype}{bool} preserveQuotedStrings);}
+\DoxyCodeLine{274 }
+\DoxyCodeLine{289     \textcolor{keywordtype}{int} addTokens (\mbox{\hyperlink{class_string_ref}{StringRef}} stringToTokenise,}
+\DoxyCodeLine{290                    \mbox{\hyperlink{class_string_ref}{StringRef}} breakCharacters,}
+\DoxyCodeLine{291                    \mbox{\hyperlink{class_string_ref}{StringRef}} quoteCharacters);}
+\DoxyCodeLine{292 }
+\DoxyCodeLine{299     \textcolor{keywordtype}{int} addLines (\mbox{\hyperlink{class_string_ref}{StringRef}} stringToBreakUp);}
+\DoxyCodeLine{300 }
+\DoxyCodeLine{307     \textcolor{keyword}{static} \mbox{\hyperlink{class_string_array}{StringArray}} fromTokens (\mbox{\hyperlink{class_string_ref}{StringRef}} stringToTokenise,}
+\DoxyCodeLine{308                                    \textcolor{keywordtype}{bool} preserveQuotedStrings);}
+\DoxyCodeLine{309 }
+\DoxyCodeLine{323     \textcolor{keyword}{static} \mbox{\hyperlink{class_string_array}{StringArray}} fromTokens (\mbox{\hyperlink{class_string_ref}{StringRef}} stringToTokenise,}
+\DoxyCodeLine{324                                    \mbox{\hyperlink{class_string_ref}{StringRef}} breakCharacters,}
+\DoxyCodeLine{325                                    \mbox{\hyperlink{class_string_ref}{StringRef}} quoteCharacters);}
+\DoxyCodeLine{326 }
+\DoxyCodeLine{333     \textcolor{keyword}{static} \mbox{\hyperlink{class_string_array}{StringArray}} fromLines (\mbox{\hyperlink{class_string_ref}{StringRef}} stringToBreakUp);}
+\DoxyCodeLine{334 }
+\DoxyCodeLine{335     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{337 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacedsp_1_1detail_a953fbe1bf6236c0f3a95d12aad7ffffb}{clear}}();}
+\DoxyCodeLine{338 }
+\DoxyCodeLine{342     \textcolor{keywordtype}{void} clearQuick();}
+\DoxyCodeLine{343 }
+\DoxyCodeLine{347     \textcolor{keywordtype}{void} remove (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}});}
+\DoxyCodeLine{348 }
+\DoxyCodeLine{353     \textcolor{keywordtype}{void} removeString (\mbox{\hyperlink{class_string_ref}{StringRef}} stringToRemove,}
+\DoxyCodeLine{354                        \textcolor{keywordtype}{bool} ignoreCase = \textcolor{keyword}{false});}
+\DoxyCodeLine{355 }
+\DoxyCodeLine{367     \textcolor{keywordtype}{void} removeRange (\textcolor{keywordtype}{int} startIndex, \textcolor{keywordtype}{int} numberToRemove);}
+\DoxyCodeLine{368 }
+\DoxyCodeLine{376     \textcolor{keywordtype}{void} removeDuplicates (\textcolor{keywordtype}{bool} ignoreCase);}
+\DoxyCodeLine{377 }
+\DoxyCodeLine{382     \textcolor{keywordtype}{void} removeEmptyStrings (\textcolor{keywordtype}{bool} removeWhitespaceStrings = \textcolor{keyword}{true});}
+\DoxyCodeLine{383 }
+\DoxyCodeLine{398     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{move}} (\textcolor{keywordtype}{int} currentIndex, \textcolor{keywordtype}{int} newIndex) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{399 }
+\DoxyCodeLine{401     \textcolor{keywordtype}{void} trim();}
+\DoxyCodeLine{402 }
+\DoxyCodeLine{418     \textcolor{keywordtype}{void} appendNumbersToDuplicates (\textcolor{keywordtype}{bool} ignoreCaseWhenComparing,}
+\DoxyCodeLine{419                                     \textcolor{keywordtype}{bool} appendNumberToFirstInstance,}
+\DoxyCodeLine{420                                     \mbox{\hyperlink{class_char_pointer___u_t_f8}{CharPointer\_UTF8}} preNumberString = \mbox{\hyperlink{class_char_pointer___u_t_f8}{CharPointer\_UTF8}} (\textcolor{keyword}{nullptr}),}
+\DoxyCodeLine{421                                     \mbox{\hyperlink{class_char_pointer___u_t_f8}{CharPointer\_UTF8}} postNumberString = \mbox{\hyperlink{class_char_pointer___u_t_f8}{CharPointer\_UTF8}} (\textcolor{keyword}{nullptr}));}
+\DoxyCodeLine{422 }
+\DoxyCodeLine{423     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{436 \textcolor{comment}{}    \mbox{\hyperlink{class_string}{String}} joinIntoString (\mbox{\hyperlink{class_string_ref}{StringRef}} separatorString,}
+\DoxyCodeLine{437                            \textcolor{keywordtype}{int} startIndex = 0,}
+\DoxyCodeLine{438                            \textcolor{keywordtype}{int} numberOfElements = -\/1) \textcolor{keyword}{const};}
+\DoxyCodeLine{439 }
+\DoxyCodeLine{440     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{444 \textcolor{comment}{}    \textcolor{keywordtype}{void} sort (\textcolor{keywordtype}{bool} ignoreCase);}
+\DoxyCodeLine{445 }
+\DoxyCodeLine{450     \textcolor{keywordtype}{void} sortNatural();}
+\DoxyCodeLine{451 }
+\DoxyCodeLine{452     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{459 \textcolor{comment}{}    \textcolor{keywordtype}{void} ensureStorageAllocated (\textcolor{keywordtype}{int} minNumElements);}
+\DoxyCodeLine{460 }
+\DoxyCodeLine{467     \textcolor{keywordtype}{void} minimiseStorageOverheads();}
+\DoxyCodeLine{468 }
+\DoxyCodeLine{472     \mbox{\hyperlink{class_array}{Array<String>}} \mbox{\hyperlink{class_string_array_ac10f010a31e1dcd6220d278a1603e37a}{strings}};}
+\DoxyCodeLine{473 }
+\DoxyCodeLine{474 \textcolor{keyword}{private}:}
+\DoxyCodeLine{475     \mbox{\hyperlink{group__juce__core-memory_gab3639a79598b35f2116f4572af0d93f1}{JUCE\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_string_array}{StringArray}})}
+\DoxyCodeLine{476 \};}
+\DoxyCodeLine{477 }
+\DoxyCodeLine{478  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{479 }
+
+\end{DoxyCode}

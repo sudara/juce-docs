@@ -1,0 +1,113 @@
+\hypertarget{class_parameter_attachment}{}\doxysection{Parameter\+Attachment Class Reference}
+\label{class_parameter_attachment}\index{ParameterAttachment@{ParameterAttachment}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Parameter\+Attachments.\+h$>$}
+
+Inheritance diagram for Parameter\+Attachment\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d0/d3f/class_parameter_attachment}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_parameter_attachment_a35086dd5037783e2896f26e312e297da}{Parameter\+Attachment}} (\mbox{\hyperlink{class_ranged_audio_parameter}{Ranged\+Audio\+Parameter}} \&parameter, std\+::function$<$ \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}}(float)$>$ parameter\+Changed\+Callback, \mbox{\hyperlink{class_undo_manager}{Undo\+Manager}} $\ast$undo\+Manager=nullptr)
+\item 
+\mbox{\hyperlink{class_parameter_attachment_ace88dac332ec410af02d0b93b1a1fe91}{$\sim$\+Parameter\+Attachment}} () override
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_parameter_attachment_af8b9b9c1cc93b2c66fe9ee33b7389fa0}{send\+Initial\+Update}} ()
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_parameter_attachment_a425ac2bdd3a12358969a70d8742f9602}{set\+Value\+As\+Complete\+Gesture}} (float new\+Denormalised\+Value)
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_parameter_attachment_aa1205d973f112771fa22e605ac007867}{begin\+Gesture}} ()
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_parameter_attachment_a7ce37df5c0e1dea020b256a4fdb0cbc4}{set\+Value\+As\+Part\+Of\+Gesture}} (float new\+Denormalised\+Value)
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_parameter_attachment_a4d579b9961e9c84ec65fa38cd8d6976a}{end\+Gesture}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Used to implement \textquotesingle{}attachments\textquotesingle{} or \textquotesingle{}controllers\textquotesingle{} that link a plug-\/in parameter to a UI element.
+
+To implement a new attachment type, create a new class which includes an instance of this class as a data member. Your class should pass a function to the constructor of the \mbox{\hyperlink{class_parameter_attachment}{Parameter\+Attachment}}, which will then be called on the message thread when the parameter changes. You can use this function to update the state of the UI control. Your class should also register as a listener of the UI control and respond to respond to changes in the UI element by calling either set\+Value\+As\+Complete\+Gesture or begin\+Gesture, set\+Value\+As\+Part\+Of\+Gesture and end\+Gesture.
+
+Make sure to call {\ttfamily send\+Initial\+Update} at the end of your new attachment\textquotesingle{}s constructor, so that the UI immediately reflects the state of the parameter.
+
+@tags\{Audio\} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_parameter_attachment_a35086dd5037783e2896f26e312e297da}\label{class_parameter_attachment_a35086dd5037783e2896f26e312e297da}} 
+\index{ParameterAttachment@{ParameterAttachment}!ParameterAttachment@{ParameterAttachment}}
+\index{ParameterAttachment@{ParameterAttachment}!ParameterAttachment@{ParameterAttachment}}
+\doxysubsubsection{\texorpdfstring{ParameterAttachment()}{ParameterAttachment()}}
+{\footnotesize\ttfamily Parameter\+Attachment\+::\+Parameter\+Attachment (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_ranged_audio_parameter}{Ranged\+Audio\+Parameter}} \&}]{parameter,  }\item[{std\+::function$<$ \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}}(float)$>$}]{parameter\+Changed\+Callback,  }\item[{\mbox{\hyperlink{class_undo_manager}{Undo\+Manager}} $\ast$}]{undo\+Manager = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+Listens to a parameter and calls the the provided function in response to parameter changes. If an undo\+Manager is supplied {\ttfamily begin\+New\+Transaction} will be called on it whenever the UI requests a parameter change via this attachment.
+
+
+\begin{DoxyParams}{Parameters}
+{\em parameter} & The parameter to which this attachment will listen \\
+\hline
+{\em parameter\+Changed\+Callback} & The function that will be called on the message thread in response to parameter changes \\
+\hline
+{\em undo\+Manager} & The \mbox{\hyperlink{class_undo_manager}{Undo\+Manager}} that will be used to begin transactions when the UI requests a parameter change. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_parameter_attachment_ace88dac332ec410af02d0b93b1a1fe91}\label{class_parameter_attachment_ace88dac332ec410af02d0b93b1a1fe91}} 
+\index{ParameterAttachment@{ParameterAttachment}!````~ParameterAttachment@{$\sim$ParameterAttachment}}
+\index{````~ParameterAttachment@{$\sim$ParameterAttachment}!ParameterAttachment@{ParameterAttachment}}
+\doxysubsubsection{\texorpdfstring{$\sim$ParameterAttachment()}{~ParameterAttachment()}}
+{\footnotesize\ttfamily Parameter\+Attachment\+::$\sim$\+Parameter\+Attachment (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+Destructor. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_parameter_attachment_aa1205d973f112771fa22e605ac007867}\label{class_parameter_attachment_aa1205d973f112771fa22e605ac007867}} 
+\index{ParameterAttachment@{ParameterAttachment}!beginGesture@{beginGesture}}
+\index{beginGesture@{beginGesture}!ParameterAttachment@{ParameterAttachment}}
+\doxysubsubsection{\texorpdfstring{beginGesture()}{beginGesture()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Parameter\+Attachment\+::begin\+Gesture (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Begins a gesture on the managed parameter.
+
+Call this when the UI is about to begin a continuous interaction, like when the mouse button is pressed on a slider. \mbox{\Hypertarget{class_parameter_attachment_a4d579b9961e9c84ec65fa38cd8d6976a}\label{class_parameter_attachment_a4d579b9961e9c84ec65fa38cd8d6976a}} 
+\index{ParameterAttachment@{ParameterAttachment}!endGesture@{endGesture}}
+\index{endGesture@{endGesture}!ParameterAttachment@{ParameterAttachment}}
+\doxysubsubsection{\texorpdfstring{endGesture()}{endGesture()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Parameter\+Attachment\+::end\+Gesture (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Ends a gesture on the managed parameter.
+
+Call this when the UI has finished a continuous interaction, like when the mouse button is released on a slider. \mbox{\Hypertarget{class_parameter_attachment_af8b9b9c1cc93b2c66fe9ee33b7389fa0}\label{class_parameter_attachment_af8b9b9c1cc93b2c66fe9ee33b7389fa0}} 
+\index{ParameterAttachment@{ParameterAttachment}!sendInitialUpdate@{sendInitialUpdate}}
+\index{sendInitialUpdate@{sendInitialUpdate}!ParameterAttachment@{ParameterAttachment}}
+\doxysubsubsection{\texorpdfstring{sendInitialUpdate()}{sendInitialUpdate()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Parameter\+Attachment\+::send\+Initial\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Calls the parameter\+Changed\+Callback function that was registered in the constructor, making the UI reflect the current parameter state.
+
+This function should be called after doing any necessary setup on the UI control that is being managed (e.\+g. adding \mbox{\hyperlink{class_combo_box}{Combo\+Box}} entries, making buttons toggle-\/able). \mbox{\Hypertarget{class_parameter_attachment_a425ac2bdd3a12358969a70d8742f9602}\label{class_parameter_attachment_a425ac2bdd3a12358969a70d8742f9602}} 
+\index{ParameterAttachment@{ParameterAttachment}!setValueAsCompleteGesture@{setValueAsCompleteGesture}}
+\index{setValueAsCompleteGesture@{setValueAsCompleteGesture}!ParameterAttachment@{ParameterAttachment}}
+\doxysubsubsection{\texorpdfstring{setValueAsCompleteGesture()}{setValueAsCompleteGesture()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Parameter\+Attachment\+::set\+Value\+As\+Complete\+Gesture (\begin{DoxyParamCaption}\item[{float}]{new\+Denormalised\+Value }\end{DoxyParamCaption})}
+
+Triggers a full gesture message on the managed parameter.
+
+Call this in the listener callback of the UI control in response to a one-\/off change in the UI like a button-\/press. \mbox{\Hypertarget{class_parameter_attachment_a7ce37df5c0e1dea020b256a4fdb0cbc4}\label{class_parameter_attachment_a7ce37df5c0e1dea020b256a4fdb0cbc4}} 
+\index{ParameterAttachment@{ParameterAttachment}!setValueAsPartOfGesture@{setValueAsPartOfGesture}}
+\index{setValueAsPartOfGesture@{setValueAsPartOfGesture}!ParameterAttachment@{ParameterAttachment}}
+\doxysubsubsection{\texorpdfstring{setValueAsPartOfGesture()}{setValueAsPartOfGesture()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Parameter\+Attachment\+::set\+Value\+As\+Part\+Of\+Gesture (\begin{DoxyParamCaption}\item[{float}]{new\+Denormalised\+Value }\end{DoxyParamCaption})}
+
+Updates the parameter value during a gesture.
+
+Call this during a continuous interaction, like a slider value changed callback. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+audio\+\_\+processors/utilities/\mbox{\hyperlink{juce___parameter_attachments_8h}{juce\+\_\+\+Parameter\+Attachments.\+h}}\item 
+build/juce\+\_\+audio\+\_\+processors/utilities/\mbox{\hyperlink{juce___parameter_attachments_8cpp}{juce\+\_\+\+Parameter\+Attachments.\+cpp}}\end{DoxyCompactItemize}

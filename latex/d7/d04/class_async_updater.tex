@@ -1,0 +1,125 @@
+\hypertarget{class_async_updater}{}\doxysection{Async\+Updater Class Reference}
+\label{class_async_updater}\index{AsyncUpdater@{AsyncUpdater}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Async\+Updater.\+h$>$}
+
+Inheritance diagram for Async\+Updater\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=12.000000cm]{d7/d04/class_async_updater}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_async_updater_a5cb530c31e68d13bbdf078ed54911e0c}{Async\+Updater}} ()
+\item 
+virtual \mbox{\hyperlink{class_async_updater_af28a6da5c2adf73e2c18286574939d4b}{$\sim$\+Async\+Updater}} ()
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_async_updater_a4eece806c6ba9f591382fed54c5983b2}{trigger\+Async\+Update}} ()
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_async_updater_a2e71a3b3172abca3567d2d2b75564323}{cancel\+Pending\+Update}} () noexcept
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_async_updater_a5f65e2ad091e96ce4e3979d2b701bc85}{handle\+Update\+Now\+If\+Needed}} ()
+\item 
+bool \mbox{\hyperlink{class_async_updater_a93c63f13659fc5acd41c3ec9b252bf01}{is\+Update\+Pending}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+virtual \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_async_updater_a446f3af793131f8772329f1f8b526578}{handle\+Async\+Update}} ()=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_async_updater_a359a209cff6fe2b725792b156f7dc739}{Reference\+Counted\+Object\+Ptr$<$ Async\+Updater\+Message $>$}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Has a callback method that is triggered asynchronously.
+
+This object allows an asynchronous callback function to be triggered, for tasks such as coalescing multiple updates into a single callback later on.
+
+Basically, one or more calls to the \mbox{\hyperlink{class_async_updater_a4eece806c6ba9f591382fed54c5983b2}{trigger\+Async\+Update()}} will result in the message thread calling \mbox{\hyperlink{class_async_updater_a446f3af793131f8772329f1f8b526578}{handle\+Async\+Update()}} as soon as it can.
+
+@tags\{Events\} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_async_updater_a5cb530c31e68d13bbdf078ed54911e0c}\label{class_async_updater_a5cb530c31e68d13bbdf078ed54911e0c}} 
+\index{AsyncUpdater@{AsyncUpdater}!AsyncUpdater@{AsyncUpdater}}
+\index{AsyncUpdater@{AsyncUpdater}!AsyncUpdater@{AsyncUpdater}}
+\doxysubsubsection{\texorpdfstring{AsyncUpdater()}{AsyncUpdater()}}
+{\footnotesize\ttfamily Async\+Updater\+::\+Async\+Updater (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Creates an \mbox{\hyperlink{class_async_updater}{Async\+Updater}} object. \mbox{\Hypertarget{class_async_updater_af28a6da5c2adf73e2c18286574939d4b}\label{class_async_updater_af28a6da5c2adf73e2c18286574939d4b}} 
+\index{AsyncUpdater@{AsyncUpdater}!````~AsyncUpdater@{$\sim$AsyncUpdater}}
+\index{````~AsyncUpdater@{$\sim$AsyncUpdater}!AsyncUpdater@{AsyncUpdater}}
+\doxysubsubsection{\texorpdfstring{$\sim$AsyncUpdater()}{~AsyncUpdater()}}
+{\footnotesize\ttfamily virtual Async\+Updater\+::$\sim$\+Async\+Updater (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Destructor. If there are any pending callbacks when the object is deleted, these are lost. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_async_updater_a2e71a3b3172abca3567d2d2b75564323}\label{class_async_updater_a2e71a3b3172abca3567d2d2b75564323}} 
+\index{AsyncUpdater@{AsyncUpdater}!cancelPendingUpdate@{cancelPendingUpdate}}
+\index{cancelPendingUpdate@{cancelPendingUpdate}!AsyncUpdater@{AsyncUpdater}}
+\doxysubsubsection{\texorpdfstring{cancelPendingUpdate()}{cancelPendingUpdate()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Async\+Updater\+::cancel\+Pending\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+This will stop any pending updates from happening.
+
+If called after \mbox{\hyperlink{class_async_updater_a4eece806c6ba9f591382fed54c5983b2}{trigger\+Async\+Update()}} and before the \mbox{\hyperlink{class_async_updater_a446f3af793131f8772329f1f8b526578}{handle\+Async\+Update()}} callback happens, this will cancel the \mbox{\hyperlink{class_async_updater_a446f3af793131f8772329f1f8b526578}{handle\+Async\+Update()}} callback.
+
+Note that this method simply cancels the next callback -\/ if a callback is already in progress on a different thread, this won\textquotesingle{}t block until the callback finishes, so there\textquotesingle{}s no guarantee that the callback isn\textquotesingle{}t still running when the method returns. \mbox{\Hypertarget{class_async_updater_a446f3af793131f8772329f1f8b526578}\label{class_async_updater_a446f3af793131f8772329f1f8b526578}} 
+\index{AsyncUpdater@{AsyncUpdater}!handleAsyncUpdate@{handleAsyncUpdate}}
+\index{handleAsyncUpdate@{handleAsyncUpdate}!AsyncUpdater@{AsyncUpdater}}
+\doxysubsubsection{\texorpdfstring{handleAsyncUpdate()}{handleAsyncUpdate()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Async\+Updater\+::handle\+Async\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Called back to do whatever your class needs to do.
+
+This method is called by the message thread at the next convenient time after the \mbox{\hyperlink{class_async_updater_a4eece806c6ba9f591382fed54c5983b2}{trigger\+Async\+Update()}} method has been called. 
+
+Implemented in \mbox{\hyperlink{classjuce_1_1_web_browser_component_1_1_pimpl_aa6b149065ad0fe7786f0c790b894104d}{juce\+::\+Web\+Browser\+Component\+::\+Pimpl}}, \mbox{\hyperlink{structjuce_1_1i_o_s_audio_i_o_device_1_1_pimpl_a8f8d94521d35be550d2fc1a3cd8ceee4}{juce\+::i\+OSAudio\+IODevice\+::\+Pimpl}}, \mbox{\hyperlink{class_modal_component_manager_a47d303fb64f3ae02deb986d58bfeb893}{Modal\+Component\+Manager}}, \mbox{\hyperlink{classjuce_1_1_file_list_component_1_1_item_component_a52fdb6c429ee454088cc2f972019e4e4}{juce\+::\+File\+List\+Component\+::\+Item\+Component}}, \mbox{\hyperlink{classjuce_1_1_file_list_tree_item_a459e2cd18cf221c307db0263fb75f44a}{juce\+::\+File\+List\+Tree\+Item}}, \mbox{\hyperlink{class_menu_bar_model_a0dddd32a4b5bd42c1313751bb13f882e}{Menu\+Bar\+Model}}, \mbox{\hyperlink{classjuce_1_1_mouse_input_source_internal_a34e481018bc09c49a0ddb99368e9c3a6}{juce\+::\+Mouse\+Input\+Source\+Internal}}, \mbox{\hyperlink{class_combo_box_a773b7375c6a370db67ed6fd16b4535a7}{Combo\+Box}}, and \mbox{\hyperlink{classjuce_1_1_slider_1_1_pimpl_a2fa5a1c4aa8843f2d2d282beed7e46a4}{juce\+::\+Slider\+::\+Pimpl}}.
+
+\mbox{\Hypertarget{class_async_updater_a5f65e2ad091e96ce4e3979d2b701bc85}\label{class_async_updater_a5f65e2ad091e96ce4e3979d2b701bc85}} 
+\index{AsyncUpdater@{AsyncUpdater}!handleUpdateNowIfNeeded@{handleUpdateNowIfNeeded}}
+\index{handleUpdateNowIfNeeded@{handleUpdateNowIfNeeded}!AsyncUpdater@{AsyncUpdater}}
+\doxysubsubsection{\texorpdfstring{handleUpdateNowIfNeeded()}{handleUpdateNowIfNeeded()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Async\+Updater\+::handle\+Update\+Now\+If\+Needed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+If an update has been triggered and is pending, this will invoke it synchronously.
+
+Use this as a kind of \char`\"{}flush\char`\"{} operation -\/ if an update is pending, the \mbox{\hyperlink{class_async_updater_a446f3af793131f8772329f1f8b526578}{handle\+Async\+Update()}} method will be called immediately; if no update is pending, then nothing will be done.
+
+Because this may invoke the callback, this method must only be called on the main event thread. \mbox{\Hypertarget{class_async_updater_a93c63f13659fc5acd41c3ec9b252bf01}\label{class_async_updater_a93c63f13659fc5acd41c3ec9b252bf01}} 
+\index{AsyncUpdater@{AsyncUpdater}!isUpdatePending@{isUpdatePending}}
+\index{isUpdatePending@{isUpdatePending}!AsyncUpdater@{AsyncUpdater}}
+\doxysubsubsection{\texorpdfstring{isUpdatePending()}{isUpdatePending()}}
+{\footnotesize\ttfamily bool Async\+Updater\+::is\+Update\+Pending (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if there\textquotesingle{}s an update callback in the pipeline. \mbox{\Hypertarget{class_async_updater_a4eece806c6ba9f591382fed54c5983b2}\label{class_async_updater_a4eece806c6ba9f591382fed54c5983b2}} 
+\index{AsyncUpdater@{AsyncUpdater}!triggerAsyncUpdate@{triggerAsyncUpdate}}
+\index{triggerAsyncUpdate@{triggerAsyncUpdate}!AsyncUpdater@{AsyncUpdater}}
+\doxysubsubsection{\texorpdfstring{triggerAsyncUpdate()}{triggerAsyncUpdate()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Async\+Updater\+::trigger\+Async\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Causes the callback to be triggered at a later time.
+
+This method returns immediately, after which a callback to the \mbox{\hyperlink{class_async_updater_a446f3af793131f8772329f1f8b526578}{handle\+Async\+Update()}} method will be made by the message thread as soon as possible.
+
+If an update callback is already pending but hasn\textquotesingle{}t happened yet, calling this method will have no effect.
+
+It\textquotesingle{}s thread-\/safe to call this method from any thread, BUT beware of calling it from a real-\/time (e.\+g. audio) thread, because it involves posting a message to the system queue, which means it may block (and in general will do on most OSes). 
+
+\doxysubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{class_async_updater_a359a209cff6fe2b725792b156f7dc739}\label{class_async_updater_a359a209cff6fe2b725792b156f7dc739}} 
+\index{AsyncUpdater@{AsyncUpdater}!ReferenceCountedObjectPtr$<$ AsyncUpdaterMessage $>$@{ReferenceCountedObjectPtr$<$ AsyncUpdaterMessage $>$}}
+\index{ReferenceCountedObjectPtr$<$ AsyncUpdaterMessage $>$@{ReferenceCountedObjectPtr$<$ AsyncUpdaterMessage $>$}!AsyncUpdater@{AsyncUpdater}}
+\doxysubsubsection{\texorpdfstring{ReferenceCountedObjectPtr$<$ AsyncUpdaterMessage $>$}{ReferenceCountedObjectPtr< AsyncUpdaterMessage >}}
+{\footnotesize\ttfamily friend class \mbox{\hyperlink{class_reference_counted_object_ptr}{Reference\+Counted\+Object\+Ptr}}$<$ Async\+Updater\+Message $>$\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+events/broadcasters/\mbox{\hyperlink{juce___async_updater_8h}{juce\+\_\+\+Async\+Updater.\+h}}\end{DoxyCompactItemize}

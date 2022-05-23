@@ -1,0 +1,87 @@
+\hypertarget{ivsttestplugprovider_8h_source}{}\doxysection{ivsttestplugprovider.\+h}
+\label{ivsttestplugprovider_8h_source}\index{build/juce\_audio\_processors/format\_types/VST3\_SDK/pluginterfaces/vst/ivsttestplugprovider.h@{build/juce\_audio\_processors/format\_types/VST3\_SDK/pluginterfaces/vst/ivsttestplugprovider.h}}
+\mbox{\hyperlink{ivsttestplugprovider_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{2 \textcolor{comment}{// Flags       : clang-\/format SMTGSequencer}}
+\DoxyCodeLine{3 \textcolor{comment}{// Project     : VST SDK}}
+\DoxyCodeLine{4 \textcolor{comment}{//}}
+\DoxyCodeLine{5 \textcolor{comment}{// Category    : Validator}}
+\DoxyCodeLine{6 \textcolor{comment}{// Filename    : public.sdk/source/vst/testsuite/iplugprovider.h}}
+\DoxyCodeLine{7 \textcolor{comment}{// Created by  : Steinberg, 04/2005}}
+\DoxyCodeLine{8 \textcolor{comment}{// Description : VST Test Suite}}
+\DoxyCodeLine{9 \textcolor{comment}{//}}
+\DoxyCodeLine{10 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{11 \textcolor{comment}{// LICENSE}}
+\DoxyCodeLine{12 \textcolor{comment}{// (c) 2020, Steinberg Media Technologies GmbH, All Rights Reserved}}
+\DoxyCodeLine{13 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{14 \textcolor{comment}{// Redistribution and use in source and binary forms, with or without modification,}}
+\DoxyCodeLine{15 \textcolor{comment}{// are permitted provided that the following conditions are met:}}
+\DoxyCodeLine{16 \textcolor{comment}{//}}
+\DoxyCodeLine{17 \textcolor{comment}{//   * Redistributions of source code must retain the above copyright notice,}}
+\DoxyCodeLine{18 \textcolor{comment}{//     this list of conditions and the following disclaimer.}}
+\DoxyCodeLine{19 \textcolor{comment}{//   * Redistributions in binary form must reproduce the above copyright notice,}}
+\DoxyCodeLine{20 \textcolor{comment}{//     this list of conditions and the following disclaimer in the documentation}}
+\DoxyCodeLine{21 \textcolor{comment}{//     and/or other materials provided with the distribution.}}
+\DoxyCodeLine{22 \textcolor{comment}{//   * Neither the name of the Steinberg Media Technologies nor the names of its}}
+\DoxyCodeLine{23 \textcolor{comment}{//     contributors may be used to endorse or promote products derived from this}}
+\DoxyCodeLine{24 \textcolor{comment}{//     software without specific prior written permission.}}
+\DoxyCodeLine{25 \textcolor{comment}{//}}
+\DoxyCodeLine{26 \textcolor{comment}{// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "{}AS IS"{} AND}}
+\DoxyCodeLine{27 \textcolor{comment}{// ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED}}
+\DoxyCodeLine{28 \textcolor{comment}{// WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.}}
+\DoxyCodeLine{29 \textcolor{comment}{// IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,}}
+\DoxyCodeLine{30 \textcolor{comment}{// INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,}}
+\DoxyCodeLine{31 \textcolor{comment}{// BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,}}
+\DoxyCodeLine{32 \textcolor{comment}{// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF}}
+\DoxyCodeLine{33 \textcolor{comment}{// LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE}}
+\DoxyCodeLine{34 \textcolor{comment}{// OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE  OF THIS SOFTWARE, EVEN IF ADVISED}}
+\DoxyCodeLine{35 \textcolor{comment}{// OF THE POSSIBILITY OF SUCH DAMAGE.}}
+\DoxyCodeLine{36 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{istringresult_8h}{pluginterfaces/base/istringresult.h}}"{}}}
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{ivstcomponent_8h}{pluginterfaces/vst/ivstcomponent.h}}"{}}}
+\DoxyCodeLine{42 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{ivsteditcontroller_8h}{pluginterfaces/vst/ivsteditcontroller.h}}"{}}}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{45 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespace_steinberg}{Steinberg}} \{}
+\DoxyCodeLine{46 \textcolor{keyword}{namespace }Vst \{}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{56 \textcolor{comment}{}\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{57 \textcolor{keyword}{class }\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_test_plug_provider}{ITestPlugProvider}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_steinberg_1_1_f_unknown}{FUnknown}}}
+\DoxyCodeLine{58 \{}
+\DoxyCodeLine{59 \textcolor{keyword}{public}:}
+\DoxyCodeLine{60 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{66 \textcolor{comment}{}    \textcolor{keyword}{virtual} \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_component}{IComponent}}* PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_test_plug_provider_aeb8d76c29a2a7ba4cf16ade3898abbff}{getComponent}} () = 0;}
+\DoxyCodeLine{72     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_edit_controller}{IEditController}}* PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_test_plug_provider_aa305cb0c63a04dd8882fcbcd6948fb1d}{getController}} () = 0;}
+\DoxyCodeLine{74     \textcolor{keyword}{virtual} \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_test_plug_provider_a2db40a92024b3ee610f4608ea051abfe}{releasePlugIn}} (\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_component}{IComponent}}* component,}
+\DoxyCodeLine{75                                               \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_edit_controller}{IEditController}}* controller) = 0;}
+\DoxyCodeLine{77     \textcolor{keyword}{virtual} \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_test_plug_provider_a53377d474449605019ae903bf409cc7d}{getSubCategories}} (\mbox{\hyperlink{class_steinberg_1_1_i_string_result}{IStringResult}}\& \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}) \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{79     \textcolor{keyword}{virtual} \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_test_plug_provider_a2c01e8bfae0ad092cdbfb31abac11d45}{getComponentUID}} (\mbox{\hyperlink{class_steinberg_1_1_f_u_i_d}{FUID}}\& uid) \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{82     \textcolor{keyword}{static} \textcolor{keyword}{const} \mbox{\hyperlink{class_steinberg_1_1_f_u_i_d}{FUID}} \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_test_plug_provider_a7e6a8bb6c3aa785ec1f337adaa4e402c}{iid}};}
+\DoxyCodeLine{83 \};}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85 \mbox{\hyperlink{funknown_8h_aae92a855975a91bb846f6e0f906745f1}{DECLARE\_CLASS\_IID}} (\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_test_plug_provider}{ITestPlugProvider}}, 0x86BE70EE, 0x4E99430F, 0x978F1E6E, 0xD68FB5BA)}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{91 \textcolor{comment}{}class \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_test_plug_provider2}{ITestPlugProvider2}} : public \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_test_plug_provider}{ITestPlugProvider}}}
+\DoxyCodeLine{92 \{}
+\DoxyCodeLine{93 \textcolor{keyword}{public}:}
+\DoxyCodeLine{99     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_steinberg_1_1_i_plugin_factory}{IPluginFactory}}* PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_test_plug_provider2_a162f92a470a30f88b3509bcaf6c78a00}{getPluginFactory}} () = 0;}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{102     \textcolor{keyword}{static} \textcolor{keyword}{const} \mbox{\hyperlink{class_steinberg_1_1_f_u_i_d}{FUID}} \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_test_plug_provider2_ae7dfe41de646d68df181d61ab0007d11}{iid}};}
+\DoxyCodeLine{103 \};}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105 \mbox{\hyperlink{funknown_8h_aae92a855975a91bb846f6e0f906745f1}{DECLARE\_CLASS\_IID}} (\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_test_plug_provider2}{ITestPlugProvider2}}, 0xC7C75364, 0x7B8343AC, 0xA4495B0A, 0x3E5A46C7)}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{107 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{108 \} \textcolor{comment}{// Vst}}
+\DoxyCodeLine{109 \} \textcolor{comment}{// Steinberg}}
+
+\end{DoxyCode}

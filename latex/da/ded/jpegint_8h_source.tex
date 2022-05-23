@@ -1,0 +1,398 @@
+\hypertarget{jpegint_8h_source}{}\doxysection{jpegint.\+h}
+\label{jpegint_8h_source}\index{build/juce\_graphics/image\_formats/jpglib/jpegint.h@{build/juce\_graphics/image\_formats/jpglib/jpegint.h}}
+\mbox{\hyperlink{jpegint_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{ * jpegint.h}}
+\DoxyCodeLine{3 \textcolor{comment}{ *}}
+\DoxyCodeLine{4 \textcolor{comment}{ * Copyright (C) 1991-\/1997, Thomas G. Lane.}}
+\DoxyCodeLine{5 \textcolor{comment}{ * This file is part of the Independent JPEG Group's software.}}
+\DoxyCodeLine{6 \textcolor{comment}{ * For conditions of distribution and use, see the accompanying README file.}}
+\DoxyCodeLine{7 \textcolor{comment}{ *}}
+\DoxyCodeLine{8 \textcolor{comment}{ * This file provides common declarations for the various JPEG modules.}}
+\DoxyCodeLine{9 \textcolor{comment}{ * These declarations are considered internal to the JPEG library; most}}
+\DoxyCodeLine{10 \textcolor{comment}{ * applications using the library shouldn't need to include this file.}}
+\DoxyCodeLine{11 \textcolor{comment}{ */}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{comment}{/* Declarations for both compression \& decompression */}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} \{          \textcolor{comment}{/* Operating modes for buffer controllers */}}
+\DoxyCodeLine{17     \mbox{\hyperlink{jpegint_8h_a1f0803342372ac62b6903c399399c874ac4537a68c2b4991aa0aa16bfd364faf4}{JBUF\_PASS\_THRU}},       \textcolor{comment}{/* Plain stripwise operation */}}
+\DoxyCodeLine{18     \textcolor{comment}{/* Remaining modes require a full-\/image buffer to have been created */}}
+\DoxyCodeLine{19     \mbox{\hyperlink{jpegint_8h_a1f0803342372ac62b6903c399399c874a9bd990af3f9fa4181bfb4783515c583d}{JBUF\_SAVE\_SOURCE}},   \textcolor{comment}{/* Run source subobject only, save output */}}
+\DoxyCodeLine{20     \mbox{\hyperlink{jpegint_8h_a1f0803342372ac62b6903c399399c874af6e4aa152203a774ee81024b994bc786}{JBUF\_CRANK\_DEST}}, \textcolor{comment}{/* Run dest subobject only, using saved data */}}
+\DoxyCodeLine{21     \mbox{\hyperlink{jpegint_8h_a1f0803342372ac62b6903c399399c874aedb54e7419f575f61531cd66a6eb2447}{JBUF\_SAVE\_AND\_PASS}}    \textcolor{comment}{/* Run both subobjects, save output */}}
+\DoxyCodeLine{22 \} \mbox{\hyperlink{jpegint_8h_a1f0803342372ac62b6903c399399c874}{J\_BUF\_MODE}};}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{comment}{/* Values of global\_state field (jdapi.c has some dependencies on ordering!) */}}
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#define CSTATE\_START    100 }\textcolor{comment}{/* after create\_compress */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#define CSTATE\_SCANNING 101 }\textcolor{comment}{/* start\_compress done, write\_scanlines OK */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#define CSTATE\_RAW\_OK   102 }\textcolor{comment}{/* start\_compress done, write\_raw\_data OK */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#define CSTATE\_WRCOEFS  103 }\textcolor{comment}{/* jpeg\_write\_coefficients done */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#define DSTATE\_START    200 }\textcolor{comment}{/* after create\_decompress */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#define DSTATE\_INHEADER 201 }\textcolor{comment}{/* reading header markers, no SOS yet */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#define DSTATE\_READY    202 }\textcolor{comment}{/* found SOS, ready for start\_decompress */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#define DSTATE\_PRELOAD  203 }\textcolor{comment}{/* reading multiscan file in start\_decompress*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#define DSTATE\_PRESCAN  204 }\textcolor{comment}{/* performing dummy pass for 2-\/pass quant */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#define DSTATE\_SCANNING 205 }\textcolor{comment}{/* start\_decompress done, read\_scanlines OK */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#define DSTATE\_RAW\_OK   206 }\textcolor{comment}{/* start\_decompress done, read\_raw\_data OK */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#define DSTATE\_BUFIMAGE 207 }\textcolor{comment}{/* expecting jpeg\_start\_output */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{37 \textcolor{preprocessor}{\#define DSTATE\_BUFPOST  208 }\textcolor{comment}{/* looking for SOS/EOI in jpeg\_finish\_output */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{38 \textcolor{preprocessor}{\#define DSTATE\_RDCOEFS  209 }\textcolor{comment}{/* reading file in jpeg\_read\_coefficients */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{39 \textcolor{preprocessor}{\#define DSTATE\_STOPPING 210 }\textcolor{comment}{/* looking for EOI in jpeg\_finish\_decompress */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42 \textcolor{comment}{/* Declarations for compression modules */}}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44 \textcolor{comment}{/* Master control module */}}
+\DoxyCodeLine{45 \textcolor{keyword}{struct }\mbox{\hyperlink{structjpeg__comp__master}{jpeg\_comp\_master}} \{}
+\DoxyCodeLine{46   \mbox{\hyperlink{structjpeg__comp__master_afdbee5aedaedd9c6c9837b6bfd834a63}{JMETHOD}}(\textcolor{keywordtype}{void}, \mbox{\hyperlink{jcmaster_8c_a811c02b8de42399196fc3e0eb08c40a5}{prepare\_for\_pass}}, (\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo));}
+\DoxyCodeLine{47   \mbox{\hyperlink{structjpeg__comp__master_ac7e4391d1afe92c685cb4ffea5383d2c}{JMETHOD}}(\textcolor{keywordtype}{void}, \mbox{\hyperlink{jcmaster_8c_a41d1d2da456f1cd859c69823965becbc}{pass\_startup}}, (\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo));}
+\DoxyCodeLine{48   \mbox{\hyperlink{structjpeg__comp__master_a81648a22581acb403aa707a5e56bf993}{JMETHOD}}(\textcolor{keywordtype}{void}, finish\_pass, (\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo));}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50   \textcolor{comment}{/* State variables made visible to other modules */}}
+\DoxyCodeLine{51   \textcolor{keywordtype}{boolean} \mbox{\hyperlink{structjpeg__comp__master_a72c70556604030b6b10d798f6c193e6f}{call\_pass\_startup}};   \textcolor{comment}{/* True if pass\_startup must be called */}}
+\DoxyCodeLine{52   \textcolor{keywordtype}{boolean} \mbox{\hyperlink{structjpeg__comp__master_aac35b3d9e718376d1aacdde9df32e75d}{is\_last\_pass}};     \textcolor{comment}{/* True during last pass */}}
+\DoxyCodeLine{53 \};}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55 \textcolor{comment}{/* Main buffer control (downsampled-\/data buffer) */}}
+\DoxyCodeLine{56 \textcolor{keyword}{struct }\mbox{\hyperlink{structjpeg__c__main__controller}{jpeg\_c\_main\_controller}} \{}
+\DoxyCodeLine{57   \mbox{\hyperlink{structjpeg__c__main__controller_a12d7c719a1598e04dafbddc0c3d6c1d5}{JMETHOD}}(\textcolor{keywordtype}{void}, \mbox{\hyperlink{jddctmgr_8c_a1964f006adb8fb80f57e455f6452aec1}{start\_pass}}, (\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo, \mbox{\hyperlink{jpegint_8h_a1f0803342372ac62b6903c399399c874}{J\_BUF\_MODE}} pass\_mode));}
+\DoxyCodeLine{58   \mbox{\hyperlink{structjpeg__c__main__controller_aefb0f62e18af1d6087803ac65bfd9bb9}{JMETHOD}}(\textcolor{keywordtype}{void}, process\_data, (\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo,}
+\DoxyCodeLine{59                    \mbox{\hyperlink{jpeglib_8h_ac9d5d1b829ed51769db69a37271a7e91}{JSAMPARRAY}} input\_buf, \mbox{\hyperlink{jmorecfg_8h_a04ed4674f6f1d0d50ec241531e38274f}{JDIMENSION}} *in\_row\_ctr,}
+\DoxyCodeLine{60                    \mbox{\hyperlink{jmorecfg_8h_a04ed4674f6f1d0d50ec241531e38274f}{JDIMENSION}} in\_rows\_avail));}
+\DoxyCodeLine{61 \};}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63 \textcolor{comment}{/* Compression preprocessing (downsampling input buffer control) */}}
+\DoxyCodeLine{64 \textcolor{keyword}{struct }\mbox{\hyperlink{structjpeg__c__prep__controller}{jpeg\_c\_prep\_controller}} \{}
+\DoxyCodeLine{65   \mbox{\hyperlink{structjpeg__c__prep__controller_af2fb43bbf035ffe6b1a28fb2382db63d}{JMETHOD}}(\textcolor{keywordtype}{void}, \mbox{\hyperlink{jddctmgr_8c_a1964f006adb8fb80f57e455f6452aec1}{start\_pass}}, (\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo, \mbox{\hyperlink{jpegint_8h_a1f0803342372ac62b6903c399399c874}{J\_BUF\_MODE}} pass\_mode));}
+\DoxyCodeLine{66   \mbox{\hyperlink{structjpeg__c__prep__controller_a84100e06666ea90e6734dce2a10af554}{JMETHOD}}(\textcolor{keywordtype}{void}, \mbox{\hyperlink{jcprepct_8c_a540c9d0777b0f72437600723ff78d9eb}{pre\_process\_data}}, (\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo,}
+\DoxyCodeLine{67                    \mbox{\hyperlink{jpeglib_8h_ac9d5d1b829ed51769db69a37271a7e91}{JSAMPARRAY}} input\_buf,}
+\DoxyCodeLine{68                    \mbox{\hyperlink{jmorecfg_8h_a04ed4674f6f1d0d50ec241531e38274f}{JDIMENSION}} *in\_row\_ctr,}
+\DoxyCodeLine{69                    \mbox{\hyperlink{jmorecfg_8h_a04ed4674f6f1d0d50ec241531e38274f}{JDIMENSION}} in\_rows\_avail,}
+\DoxyCodeLine{70                    \mbox{\hyperlink{jpeglib_8h_a4bf858e4d42202287e786bdec2f3b62b}{JSAMPIMAGE}} \mbox{\hyperlink{jdct_8h_ad7e4660a191b1a791748dd44d5a7a0ec}{output\_buf}},}
+\DoxyCodeLine{71                    \mbox{\hyperlink{jmorecfg_8h_a04ed4674f6f1d0d50ec241531e38274f}{JDIMENSION}} *out\_row\_group\_ctr,}
+\DoxyCodeLine{72                    \mbox{\hyperlink{jmorecfg_8h_a04ed4674f6f1d0d50ec241531e38274f}{JDIMENSION}} out\_row\_groups\_avail));}
+\DoxyCodeLine{73 \};}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75 \textcolor{comment}{/* Coefficient buffer control */}}
+\DoxyCodeLine{76 \textcolor{keyword}{struct }\mbox{\hyperlink{structjpeg__c__coef__controller}{jpeg\_c\_coef\_controller}} \{}
+\DoxyCodeLine{77   \mbox{\hyperlink{structjpeg__c__coef__controller_a975b8ac2bcd4ea8065eb676ea805d78e}{JMETHOD}}(\textcolor{keywordtype}{void}, \mbox{\hyperlink{jddctmgr_8c_a1964f006adb8fb80f57e455f6452aec1}{start\_pass}}, (\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo, \mbox{\hyperlink{jpegint_8h_a1f0803342372ac62b6903c399399c874}{J\_BUF\_MODE}} pass\_mode));}
+\DoxyCodeLine{78   \mbox{\hyperlink{structjpeg__c__coef__controller_a1aaf8a93ba0bd239b36f4d48657c88ee}{JMETHOD}}(\textcolor{keywordtype}{boolean}, \mbox{\hyperlink{jccoefct_8c_a1b0b1f4c0a7f4ce97c00607f23977d6c}{compress\_data}}, (\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo,}
+\DoxyCodeLine{79                    \mbox{\hyperlink{jpeglib_8h_a4bf858e4d42202287e786bdec2f3b62b}{JSAMPIMAGE}} input\_buf));}
+\DoxyCodeLine{80 \};}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82 \textcolor{comment}{/* Colorspace conversion */}}
+\DoxyCodeLine{83 \textcolor{keyword}{struct }\mbox{\hyperlink{structjpeg__color__converter}{jpeg\_color\_converter}} \{}
+\DoxyCodeLine{84   \mbox{\hyperlink{structjpeg__color__converter_a1c9f24e568c3d4f67cb2021066825997}{JMETHOD}}(\textcolor{keywordtype}{void}, \mbox{\hyperlink{jddctmgr_8c_a1964f006adb8fb80f57e455f6452aec1}{start\_pass}}, (\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo));}
+\DoxyCodeLine{85   \mbox{\hyperlink{structjpeg__color__converter_aed90a059ad823add4785973694ed5eb9}{JMETHOD}}(\textcolor{keywordtype}{void}, color\_convert, (\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo,}
+\DoxyCodeLine{86                 \mbox{\hyperlink{jpeglib_8h_ac9d5d1b829ed51769db69a37271a7e91}{JSAMPARRAY}} input\_buf, \mbox{\hyperlink{jpeglib_8h_a4bf858e4d42202287e786bdec2f3b62b}{JSAMPIMAGE}} \mbox{\hyperlink{jdct_8h_ad7e4660a191b1a791748dd44d5a7a0ec}{output\_buf}},}
+\DoxyCodeLine{87                 \mbox{\hyperlink{jmorecfg_8h_a04ed4674f6f1d0d50ec241531e38274f}{JDIMENSION}} \mbox{\hyperlink{jpegint_8h_a58518ef80cb2e9d15ba1837bef666ec6}{output\_row}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{jpegint_8h_ac5f8b57092da0f421713ba171c4c9f87}{num\_rows}}));}
+\DoxyCodeLine{88 \};}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90 \textcolor{comment}{/* Downsampling */}}
+\DoxyCodeLine{91 \textcolor{keyword}{struct }\mbox{\hyperlink{structjpeg__downsampler}{jpeg\_downsampler}} \{}
+\DoxyCodeLine{92   \mbox{\hyperlink{structjpeg__downsampler_a1ca33229e63cdb80020c714f1cd28ea0}{JMETHOD}}(\textcolor{keywordtype}{void}, \mbox{\hyperlink{jddctmgr_8c_a1964f006adb8fb80f57e455f6452aec1}{start\_pass}}, (\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo));}
+\DoxyCodeLine{93   \mbox{\hyperlink{structjpeg__downsampler_a611ebcb0ae11e4d1c6ba4222caacaec4}{JMETHOD}}(\textcolor{keywordtype}{void}, downsample, (\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo,}
+\DoxyCodeLine{94                  \mbox{\hyperlink{jpeglib_8h_a4bf858e4d42202287e786bdec2f3b62b}{JSAMPIMAGE}} input\_buf, \mbox{\hyperlink{jmorecfg_8h_a04ed4674f6f1d0d50ec241531e38274f}{JDIMENSION}} in\_row\_index,}
+\DoxyCodeLine{95                  \mbox{\hyperlink{jpeglib_8h_a4bf858e4d42202287e786bdec2f3b62b}{JSAMPIMAGE}} \mbox{\hyperlink{jdct_8h_ad7e4660a191b1a791748dd44d5a7a0ec}{output\_buf}},}
+\DoxyCodeLine{96                  \mbox{\hyperlink{jmorecfg_8h_a04ed4674f6f1d0d50ec241531e38274f}{JDIMENSION}} out\_row\_group\_index));}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98   \textcolor{keywordtype}{boolean} \mbox{\hyperlink{structjpeg__downsampler_ab177a119691924a4bdd2223df7f5ed08}{need\_context\_rows}};   \textcolor{comment}{/* TRUE if need rows above \& below */}}
+\DoxyCodeLine{99 \};}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101 \textcolor{comment}{/* Forward DCT (also controls coefficient quantization) */}}
+\DoxyCodeLine{102 \textcolor{keyword}{struct }\mbox{\hyperlink{structjpeg__forward__dct}{jpeg\_forward\_dct}} \{}
+\DoxyCodeLine{103   \mbox{\hyperlink{structjpeg__forward__dct_a51b3b61e60becc93a36b41e26fd2c616}{JMETHOD}}(\textcolor{keywordtype}{void}, \mbox{\hyperlink{jddctmgr_8c_a1964f006adb8fb80f57e455f6452aec1}{start\_pass}}, (\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo));}
+\DoxyCodeLine{104   \textcolor{comment}{/* perhaps this should be an array??? */}}
+\DoxyCodeLine{105   \mbox{\hyperlink{structjpeg__forward__dct_a974069fc30142baf958070a5f52d3486}{JMETHOD}}(\textcolor{keywordtype}{void}, \mbox{\hyperlink{jcdctmgr_8c_a82a7f3605434e9a84dad410931862852}{forward\_DCT}}, (\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo,}
+\DoxyCodeLine{106                   \mbox{\hyperlink{structjpeg__component__info}{jpeg\_component\_info}} * \mbox{\hyperlink{jdct_8h_ab5cf547b55e97e8dd207d5dad37cb9fc}{compptr}},}
+\DoxyCodeLine{107                   \mbox{\hyperlink{jpeglib_8h_ac9d5d1b829ed51769db69a37271a7e91}{JSAMPARRAY}} sample\_data, \mbox{\hyperlink{jpeglib_8h_a04dea0959d9bd9e8ddad83597161453b}{JBLOCKROW}} coef\_blocks,}
+\DoxyCodeLine{108                   \mbox{\hyperlink{jmorecfg_8h_a04ed4674f6f1d0d50ec241531e38274f}{JDIMENSION}} start\_row, \mbox{\hyperlink{jmorecfg_8h_a04ed4674f6f1d0d50ec241531e38274f}{JDIMENSION}} start\_col,}
+\DoxyCodeLine{109                   \mbox{\hyperlink{jmorecfg_8h_a04ed4674f6f1d0d50ec241531e38274f}{JDIMENSION}} \mbox{\hyperlink{jpegint_8h_ac794c67860ca56fc95e4f0f34632bdeb}{num\_blocks}}));}
+\DoxyCodeLine{110 \};}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112 \textcolor{comment}{/* Entropy encoding */}}
+\DoxyCodeLine{113 \textcolor{keyword}{struct }\mbox{\hyperlink{structjpeg__entropy__encoder}{jpeg\_entropy\_encoder}} \{}
+\DoxyCodeLine{114   \mbox{\hyperlink{structjpeg__entropy__encoder_aa42cc97f950746e53857b958e00519dd}{JMETHOD}}(\textcolor{keywordtype}{void}, \mbox{\hyperlink{jddctmgr_8c_a1964f006adb8fb80f57e455f6452aec1}{start\_pass}}, (\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo, \textcolor{keywordtype}{boolean} gather\_statistics));}
+\DoxyCodeLine{115   \mbox{\hyperlink{structjpeg__entropy__encoder_a6852c01b9a63cceaae5f1d0e4ef1185a}{JMETHOD}}(\textcolor{keywordtype}{boolean}, encode\_mcu, (\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo, \mbox{\hyperlink{jpeglib_8h_a04dea0959d9bd9e8ddad83597161453b}{JBLOCKROW}} *MCU\_data));}
+\DoxyCodeLine{116   \mbox{\hyperlink{structjpeg__entropy__encoder_a349e641fd2289448e8169b8aa8edefa5}{JMETHOD}}(\textcolor{keywordtype}{void}, finish\_pass, (\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo));}
+\DoxyCodeLine{117 \};}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{119 \textcolor{comment}{/* Marker writing */}}
+\DoxyCodeLine{120 \textcolor{keyword}{struct }\mbox{\hyperlink{structjpeg__marker__writer}{jpeg\_marker\_writer}} \{}
+\DoxyCodeLine{121   \mbox{\hyperlink{structjpeg__marker__writer_ac5570409054c19f502583dff69fb8fab}{JMETHOD}}(\textcolor{keywordtype}{void}, \mbox{\hyperlink{jcmarker_8c_a0a1af4c95150b6cc958ce4a04580800d}{write\_file\_header}}, (\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo));}
+\DoxyCodeLine{122   \mbox{\hyperlink{structjpeg__marker__writer_a16553ec95a48ff5d49a1c698541eb859}{JMETHOD}}(\textcolor{keywordtype}{void}, \mbox{\hyperlink{jcmarker_8c_a3ca174ee750f1f7a7d703f49cece9734}{write\_frame\_header}}, (\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo));}
+\DoxyCodeLine{123   \mbox{\hyperlink{structjpeg__marker__writer_a696bbc698ad5760bbeb1614f9e6a7509}{JMETHOD}}(\textcolor{keywordtype}{void}, \mbox{\hyperlink{jcmarker_8c_ade06dd93aedf31146a4833c22b7bd57b}{write\_scan\_header}}, (\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo));}
+\DoxyCodeLine{124   \mbox{\hyperlink{structjpeg__marker__writer_affc544100d40a2c75c8e438569ea7844}{JMETHOD}}(\textcolor{keywordtype}{void}, \mbox{\hyperlink{jcmarker_8c_ab695fb3ccfb33e10a7d80689cd08d166}{write\_file\_trailer}}, (\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo));}
+\DoxyCodeLine{125   \mbox{\hyperlink{structjpeg__marker__writer_ac0791e1ab4eb10f20144a84a1f0371dc}{JMETHOD}}(\textcolor{keywordtype}{void}, \mbox{\hyperlink{jcmarker_8c_af5564bc6ecf1f982f588f18637c73906}{write\_tables\_only}}, (\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo));}
+\DoxyCodeLine{126   \textcolor{comment}{/* These routines are exported to allow insertion of extra markers */}}
+\DoxyCodeLine{127   \textcolor{comment}{/* Probably only COM and APPn markers should be written this way */}}
+\DoxyCodeLine{128   \mbox{\hyperlink{structjpeg__marker__writer_a9719adf2a97800fee631854f46222889}{JMETHOD}}(\textcolor{keywordtype}{void}, \mbox{\hyperlink{jcmarker_8c_a8c03fbb86d90f4dddf41d4d7002ec881}{write\_marker\_header}}, (\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo, \textcolor{keywordtype}{int} \mbox{\hyperlink{jpeglib_8h_a55fc502015142062735ebfd18c825354}{marker}},}
+\DoxyCodeLine{129                       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \mbox{\hyperlink{jpeglib_8h_a37893c863bbe3ef78feca71570de3017}{datalen}}));}
+\DoxyCodeLine{130   \mbox{\hyperlink{structjpeg__marker__writer_a193395c80dab66a95681aff53cd5c468}{JMETHOD}}(\textcolor{keywordtype}{void}, \mbox{\hyperlink{jcmarker_8c_a6cbd2d536978f7c91a0ff7f2580e1a52}{write\_marker\_byte}}, (\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo, \textcolor{keywordtype}{int} \mbox{\hyperlink{jpeglib_8h_aa0ccb5ee6d882ee3605ff47745c6467b}{val}}));}
+\DoxyCodeLine{131 \};}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{133 }
+\DoxyCodeLine{134 \textcolor{comment}{/* Declarations for decompression modules */}}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{136 \textcolor{comment}{/* Master control module */}}
+\DoxyCodeLine{137 \textcolor{keyword}{struct }\mbox{\hyperlink{structjpeg__decomp__master}{jpeg\_decomp\_master}} \{}
+\DoxyCodeLine{138   \mbox{\hyperlink{structjpeg__decomp__master_ab0e51667ba436fad82e7cf95b1bd4120}{JMETHOD}}(\textcolor{keywordtype}{void}, \mbox{\hyperlink{jdmaster_8c_a67420f4157afdc9fdf730941dbaf8503}{prepare\_for\_output\_pass}}, (\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo));}
+\DoxyCodeLine{139   \mbox{\hyperlink{structjpeg__decomp__master_a7dec615b828e443ddddf99078d1edb9a}{JMETHOD}}(\textcolor{keywordtype}{void}, \mbox{\hyperlink{jdmaster_8c_a38d4530fe1a7a3442c983735c656dfd0}{finish\_output\_pass}}, (\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo));}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{141   \textcolor{comment}{/* State variables made visible to other modules */}}
+\DoxyCodeLine{142   \textcolor{keywordtype}{boolean} \mbox{\hyperlink{structjpeg__decomp__master_a93cbde036bd87ab00b0ac8214e27bbe1}{is\_dummy\_pass}};   \textcolor{comment}{/* True during 1st pass for 2-\/pass quant */}}
+\DoxyCodeLine{143 \};}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145 \textcolor{comment}{/* Input control module */}}
+\DoxyCodeLine{146 \textcolor{keyword}{struct }\mbox{\hyperlink{structjpeg__input__controller}{jpeg\_input\_controller}} \{}
+\DoxyCodeLine{147   \mbox{\hyperlink{structjpeg__input__controller_af742c796479db5dd8b3275307d76a103}{JMETHOD}}(\textcolor{keywordtype}{int}, consume\_input, (\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo));}
+\DoxyCodeLine{148   \mbox{\hyperlink{structjpeg__input__controller_aa2720adb6f991abedb2e8c03804cac4f}{JMETHOD}}(\textcolor{keywordtype}{void}, \mbox{\hyperlink{jdinput_8c_a93f58ee9099d00fef5d7e3891aa9e54f}{reset\_input\_controller}}, (\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo));}
+\DoxyCodeLine{149   \mbox{\hyperlink{structjpeg__input__controller_aef985c09924396a078c67592da47d679}{JMETHOD}}(\textcolor{keywordtype}{void}, \mbox{\hyperlink{jdcoefct_8c_abc0a94e24edf93bc7f914cf4a698a870}{start\_input\_pass}}, (\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo));}
+\DoxyCodeLine{150   \mbox{\hyperlink{structjpeg__input__controller_a70620c8e0ea8fd2f7b0243cd9bf395e1}{JMETHOD}}(\textcolor{keywordtype}{void}, \mbox{\hyperlink{jdinput_8c_a9777f7fabb58d9a42f34510bf0a71d1c}{finish\_input\_pass}}, (\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo));}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{152   \textcolor{comment}{/* State variables made visible to other modules */}}
+\DoxyCodeLine{153   \textcolor{keywordtype}{boolean} \mbox{\hyperlink{structjpeg__input__controller_a6f02f9c18464bfbf30b27f5a43c2665a}{has\_multiple\_scans}}; \textcolor{comment}{/* True if file has multiple scans */}}
+\DoxyCodeLine{154   \textcolor{keywordtype}{boolean} \mbox{\hyperlink{structjpeg__input__controller_a8e1c345f356d36f98c2ece4dc21549d7}{eoi\_reached}};       \textcolor{comment}{/* True when EOI has been consumed */}}
+\DoxyCodeLine{155 \};}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{157 \textcolor{comment}{/* Main buffer control (downsampled-\/data buffer) */}}
+\DoxyCodeLine{158 \textcolor{keyword}{struct }\mbox{\hyperlink{structjpeg__d__main__controller}{jpeg\_d\_main\_controller}} \{}
+\DoxyCodeLine{159   \mbox{\hyperlink{structjpeg__d__main__controller_a6fd68ad0d0296dcc299119db1128c294}{JMETHOD}}(\textcolor{keywordtype}{void}, \mbox{\hyperlink{jddctmgr_8c_a1964f006adb8fb80f57e455f6452aec1}{start\_pass}}, (\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo, \mbox{\hyperlink{jpegint_8h_a1f0803342372ac62b6903c399399c874}{J\_BUF\_MODE}} pass\_mode));}
+\DoxyCodeLine{160   \mbox{\hyperlink{structjpeg__d__main__controller_affd488d3ef78b5080ec5b2a00c8198a5}{JMETHOD}}(\textcolor{keywordtype}{void}, process\_data, (\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo,}
+\DoxyCodeLine{161                    \mbox{\hyperlink{jpeglib_8h_ac9d5d1b829ed51769db69a37271a7e91}{JSAMPARRAY}} \mbox{\hyperlink{jdct_8h_ad7e4660a191b1a791748dd44d5a7a0ec}{output\_buf}}, \mbox{\hyperlink{jmorecfg_8h_a04ed4674f6f1d0d50ec241531e38274f}{JDIMENSION}} *out\_row\_ctr,}
+\DoxyCodeLine{162                    \mbox{\hyperlink{jmorecfg_8h_a04ed4674f6f1d0d50ec241531e38274f}{JDIMENSION}} out\_rows\_avail));}
+\DoxyCodeLine{163 \};}
+\DoxyCodeLine{164 }
+\DoxyCodeLine{165 \textcolor{comment}{/* Coefficient buffer control */}}
+\DoxyCodeLine{166 \textcolor{keyword}{struct }\mbox{\hyperlink{structjpeg__d__coef__controller}{jpeg\_d\_coef\_controller}} \{}
+\DoxyCodeLine{167   \mbox{\hyperlink{structjpeg__d__coef__controller_ab4b18cfac761c7186363a845e36f342c}{JMETHOD}}(\textcolor{keywordtype}{void}, \mbox{\hyperlink{jdcoefct_8c_abc0a94e24edf93bc7f914cf4a698a870}{start\_input\_pass}}, (\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo));}
+\DoxyCodeLine{168   \mbox{\hyperlink{structjpeg__d__coef__controller_a4c0e8d307e0852eae338a0f4f3c96edb}{JMETHOD}}(\textcolor{keywordtype}{int}, \mbox{\hyperlink{jdcoefct_8c_a474c99ffcdc94688233e34f65e95c50d}{consume\_data}}, (\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo));}
+\DoxyCodeLine{169   \mbox{\hyperlink{structjpeg__d__coef__controller_addb7a363607be97630bf37175267fd58}{JMETHOD}}(\textcolor{keywordtype}{void}, \mbox{\hyperlink{jdcoefct_8c_adf23b9a09770b5e038955fa770f95060}{start\_output\_pass}}, (\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo));}
+\DoxyCodeLine{170   \mbox{\hyperlink{structjpeg__d__coef__controller_a5d61ba56d9f5d8de0662df091aa6d9e1}{JMETHOD}}(\textcolor{keywordtype}{int}, \mbox{\hyperlink{jdcoefct_8c_aeb3959a425ae15d61d141f82da1087aa}{decompress\_data}}, (\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo,}
+\DoxyCodeLine{171                  \mbox{\hyperlink{jpeglib_8h_a4bf858e4d42202287e786bdec2f3b62b}{JSAMPIMAGE}} \mbox{\hyperlink{jdct_8h_ad7e4660a191b1a791748dd44d5a7a0ec}{output\_buf}}));}
+\DoxyCodeLine{172   \textcolor{comment}{/* Pointer to array of coefficient virtual arrays, or NULL if none */}}
+\DoxyCodeLine{173   \mbox{\hyperlink{structjvirt__barray__control}{jvirt\_barray\_ptr}} *\mbox{\hyperlink{structjpeg__d__coef__controller_a6611f9e18fbbbb13d117caadb5d14dc1}{coef\_arrays}};}
+\DoxyCodeLine{174 \};}
+\DoxyCodeLine{175 }
+\DoxyCodeLine{176 \textcolor{comment}{/* Decompression postprocessing (color quantization buffer control) */}}
+\DoxyCodeLine{177 \textcolor{keyword}{struct }\mbox{\hyperlink{structjpeg__d__post__controller}{jpeg\_d\_post\_controller}} \{}
+\DoxyCodeLine{178   \mbox{\hyperlink{structjpeg__d__post__controller_a349b2ff7508568d13a9294f3e79163aa}{JMETHOD}}(\textcolor{keywordtype}{void}, \mbox{\hyperlink{jddctmgr_8c_a1964f006adb8fb80f57e455f6452aec1}{start\_pass}}, (\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo, \mbox{\hyperlink{jpegint_8h_a1f0803342372ac62b6903c399399c874}{J\_BUF\_MODE}} pass\_mode));}
+\DoxyCodeLine{179   \mbox{\hyperlink{structjpeg__d__post__controller_adb337adcfe3a314ceac4b626a73d87c3}{JMETHOD}}(\textcolor{keywordtype}{void}, post\_process\_data, (\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo,}
+\DoxyCodeLine{180                     \mbox{\hyperlink{jpeglib_8h_a4bf858e4d42202287e786bdec2f3b62b}{JSAMPIMAGE}} input\_buf,}
+\DoxyCodeLine{181                     \mbox{\hyperlink{jmorecfg_8h_a04ed4674f6f1d0d50ec241531e38274f}{JDIMENSION}} *in\_row\_group\_ctr,}
+\DoxyCodeLine{182                     \mbox{\hyperlink{jmorecfg_8h_a04ed4674f6f1d0d50ec241531e38274f}{JDIMENSION}} in\_row\_groups\_avail,}
+\DoxyCodeLine{183                     \mbox{\hyperlink{jpeglib_8h_ac9d5d1b829ed51769db69a37271a7e91}{JSAMPARRAY}} \mbox{\hyperlink{jdct_8h_ad7e4660a191b1a791748dd44d5a7a0ec}{output\_buf}},}
+\DoxyCodeLine{184                     \mbox{\hyperlink{jmorecfg_8h_a04ed4674f6f1d0d50ec241531e38274f}{JDIMENSION}} *out\_row\_ctr,}
+\DoxyCodeLine{185                     \mbox{\hyperlink{jmorecfg_8h_a04ed4674f6f1d0d50ec241531e38274f}{JDIMENSION}} out\_rows\_avail));}
+\DoxyCodeLine{186 \};}
+\DoxyCodeLine{187 }
+\DoxyCodeLine{188 \textcolor{comment}{/* Marker reading \& parsing */}}
+\DoxyCodeLine{189 \textcolor{keyword}{struct }\mbox{\hyperlink{structjpeg__marker__reader}{jpeg\_marker\_reader}} \{}
+\DoxyCodeLine{190   \mbox{\hyperlink{structjpeg__marker__reader_af23250da87f9da190c88459aa565f2b1}{JMETHOD}}(\textcolor{keywordtype}{void}, \mbox{\hyperlink{jdmarker_8c_a1c08f1ba460e1a19d2dbc877b47c8b5f}{reset\_marker\_reader}}, (\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo));}
+\DoxyCodeLine{191   \textcolor{comment}{/* Read markers until SOS or EOI.}}
+\DoxyCodeLine{192 \textcolor{comment}{   * Returns same codes as are defined for jpeg\_consume\_input:}}
+\DoxyCodeLine{193 \textcolor{comment}{   * JPEG\_SUSPENDED, JPEG\_REACHED\_SOS, or JPEG\_REACHED\_EOI.}}
+\DoxyCodeLine{194 \textcolor{comment}{   */}}
+\DoxyCodeLine{195   \mbox{\hyperlink{structjpeg__marker__reader_a6a2541cbeb37477c71ba6bc237e559a1}{JMETHOD}}(\textcolor{keywordtype}{int}, \mbox{\hyperlink{jdmarker_8c_a8ff81a078a99e98efe6051366512c5f6}{read\_markers}}, (\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo));}
+\DoxyCodeLine{196   \textcolor{comment}{/* Read a restart marker -\/-\/-\/ exported for use by entropy decoder only */}}
+\DoxyCodeLine{197   jpeg\_marker\_parser\_method \mbox{\hyperlink{structjpeg__marker__reader_a23e67f5a0fa37ea69483dad72217123e}{read\_restart\_marker}};}
+\DoxyCodeLine{198 }
+\DoxyCodeLine{199   \textcolor{comment}{/* State of marker reader -\/-\/-\/ nominally internal, but applications}}
+\DoxyCodeLine{200 \textcolor{comment}{   * supplying COM or APPn handlers might like to know the state.}}
+\DoxyCodeLine{201 \textcolor{comment}{   */}}
+\DoxyCodeLine{202   \textcolor{keywordtype}{boolean} \mbox{\hyperlink{structjpeg__marker__reader_ad67711d91054e97e76fbe5254aac644c}{saw\_SOI}};       \textcolor{comment}{/* found SOI? */}}
+\DoxyCodeLine{203   \textcolor{keywordtype}{boolean} \mbox{\hyperlink{structjpeg__marker__reader_a1bf77ef7dfb6dfe58a03d041eb0dcd40}{saw\_SOF}};       \textcolor{comment}{/* found SOF? */}}
+\DoxyCodeLine{204   \textcolor{keywordtype}{int} \mbox{\hyperlink{structjpeg__marker__reader_aac8d40171c73a18f129cd1b62d2fd06b}{next\_restart\_num}};     \textcolor{comment}{/* next restart number expected (0-\/7) */}}
+\DoxyCodeLine{205   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \mbox{\hyperlink{structjpeg__marker__reader_ad29dee6159ab74f195fe5d88139306ce}{discarded\_bytes}};  \textcolor{comment}{/* \# of bytes skipped looking for a marker */}}
+\DoxyCodeLine{206 \};}
+\DoxyCodeLine{207 }
+\DoxyCodeLine{208 \textcolor{comment}{/* Entropy decoding */}}
+\DoxyCodeLine{209 \textcolor{keyword}{struct }\mbox{\hyperlink{structjpeg__entropy__decoder}{jpeg\_entropy\_decoder}} \{}
+\DoxyCodeLine{210   \mbox{\hyperlink{structjpeg__entropy__decoder_ab1b90e7d9348599cecc7b6c86d291ae4}{JMETHOD}}(\textcolor{keywordtype}{void}, \mbox{\hyperlink{jddctmgr_8c_a1964f006adb8fb80f57e455f6452aec1}{start\_pass}}, (\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo));}
+\DoxyCodeLine{211   \mbox{\hyperlink{structjpeg__entropy__decoder_a151f6f7497ba68935cca4b28ee75a596}{JMETHOD}}(\textcolor{keywordtype}{boolean}, \mbox{\hyperlink{jdhuff_8c_a35432ad418198722f261a1f66b745595}{decode\_mcu}}, (\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo,}
+\DoxyCodeLine{212                 \mbox{\hyperlink{jpeglib_8h_a04dea0959d9bd9e8ddad83597161453b}{JBLOCKROW}} *MCU\_data));}
+\DoxyCodeLine{213 }
+\DoxyCodeLine{214   \textcolor{comment}{/* This is here to share code between baseline and progressive decoders; */}}
+\DoxyCodeLine{215   \textcolor{comment}{/* other modules probably should not use it */}}
+\DoxyCodeLine{216   \textcolor{keywordtype}{boolean} \mbox{\hyperlink{structjpeg__entropy__decoder_ad5783aa2964849a61098dda4d4ffd094}{insufficient\_data}};   \textcolor{comment}{/* set TRUE after emitting warning */}}
+\DoxyCodeLine{217 \};}
+\DoxyCodeLine{218 }
+\DoxyCodeLine{219 \textcolor{comment}{/* Inverse DCT (also performs dequantization) */}}
+\DoxyCodeLine{220 \textcolor{keyword}{typedef} \mbox{\hyperlink{jpegint_8h_a2cf4077bdaa30b725535bf0be165eecb}{JMETHOD}}(\textcolor{keywordtype}{void}, inverse\_DCT\_method\_ptr,}
+\DoxyCodeLine{221         (\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo, \mbox{\hyperlink{structjpeg__component__info}{jpeg\_component\_info}} * \mbox{\hyperlink{jdct_8h_ab5cf547b55e97e8dd207d5dad37cb9fc}{compptr}},}
+\DoxyCodeLine{222          \mbox{\hyperlink{jpeglib_8h_a7cffaee4be349c90c1d541f480aa62e3}{JCOEFPTR}} \mbox{\hyperlink{jdct_8h_a17b8d6b81a334819558a865f13b9d062}{coef\_block}},}
+\DoxyCodeLine{223          \mbox{\hyperlink{jpeglib_8h_ac9d5d1b829ed51769db69a37271a7e91}{JSAMPARRAY}} \mbox{\hyperlink{jdct_8h_ad7e4660a191b1a791748dd44d5a7a0ec}{output\_buf}}, \mbox{\hyperlink{jmorecfg_8h_a04ed4674f6f1d0d50ec241531e38274f}{JDIMENSION}} \mbox{\hyperlink{jdct_8h_a55430fe3b344cb676b3da8f1f46c0279}{output\_col}}));}
+\DoxyCodeLine{224 }
+\DoxyCodeLine{225 \textcolor{keyword}{struct }\mbox{\hyperlink{structjpeg__inverse__dct}{jpeg\_inverse\_dct}} \{}
+\DoxyCodeLine{226   \mbox{\hyperlink{structjpeg__inverse__dct_a2e9c37cdc48deba795ea5ede7834a3c0}{JMETHOD}}(\textcolor{keywordtype}{void}, \mbox{\hyperlink{jddctmgr_8c_a1964f006adb8fb80f57e455f6452aec1}{start\_pass}}, (\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo));}
+\DoxyCodeLine{227   \textcolor{comment}{/* It is useful to allow each component to have a separate IDCT method. */}}
+\DoxyCodeLine{228   inverse\_DCT\_method\_ptr \mbox{\hyperlink{structjpeg__inverse__dct_aa05e35a50f28daf199d2efa702a72c2a}{inverse\_DCT}}[\mbox{\hyperlink{jmorecfg_8h_a6d8c910a1fdb6d4762a05f7250e64322}{MAX\_COMPONENTS}}];}
+\DoxyCodeLine{229 \};}
+\DoxyCodeLine{230 }
+\DoxyCodeLine{231 \textcolor{comment}{/* Upsampling (note that upsampler must also call color converter) */}}
+\DoxyCodeLine{232 \textcolor{keyword}{struct }\mbox{\hyperlink{structjpeg__upsampler}{jpeg\_upsampler}} \{}
+\DoxyCodeLine{233   \mbox{\hyperlink{structjpeg__upsampler_a01ac725bfe78e05e7671547504a95346}{JMETHOD}}(\textcolor{keywordtype}{void}, \mbox{\hyperlink{jddctmgr_8c_a1964f006adb8fb80f57e455f6452aec1}{start\_pass}}, (\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo));}
+\DoxyCodeLine{234   \mbox{\hyperlink{structjpeg__upsampler_a23e9af5ee7259d39179063e3ece9fb8f}{JMETHOD}}(\textcolor{keywordtype}{void}, upsample, (\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo,}
+\DoxyCodeLine{235                \mbox{\hyperlink{jpeglib_8h_a4bf858e4d42202287e786bdec2f3b62b}{JSAMPIMAGE}} input\_buf,}
+\DoxyCodeLine{236                \mbox{\hyperlink{jmorecfg_8h_a04ed4674f6f1d0d50ec241531e38274f}{JDIMENSION}} *in\_row\_group\_ctr,}
+\DoxyCodeLine{237                \mbox{\hyperlink{jmorecfg_8h_a04ed4674f6f1d0d50ec241531e38274f}{JDIMENSION}} in\_row\_groups\_avail,}
+\DoxyCodeLine{238                \mbox{\hyperlink{jpeglib_8h_ac9d5d1b829ed51769db69a37271a7e91}{JSAMPARRAY}} \mbox{\hyperlink{jdct_8h_ad7e4660a191b1a791748dd44d5a7a0ec}{output\_buf}},}
+\DoxyCodeLine{239                \mbox{\hyperlink{jmorecfg_8h_a04ed4674f6f1d0d50ec241531e38274f}{JDIMENSION}} *out\_row\_ctr,}
+\DoxyCodeLine{240                \mbox{\hyperlink{jmorecfg_8h_a04ed4674f6f1d0d50ec241531e38274f}{JDIMENSION}} out\_rows\_avail));}
+\DoxyCodeLine{241 }
+\DoxyCodeLine{242   \textcolor{keywordtype}{boolean} \mbox{\hyperlink{structjpeg__upsampler_af1ed2e1ca01280221b9c1305fc557e45}{need\_context\_rows}};   \textcolor{comment}{/* TRUE if need rows above \& below */}}
+\DoxyCodeLine{243 \};}
+\DoxyCodeLine{244 }
+\DoxyCodeLine{245 \textcolor{comment}{/* Colorspace conversion */}}
+\DoxyCodeLine{246 \textcolor{keyword}{struct }\mbox{\hyperlink{structjpeg__color__deconverter}{jpeg\_color\_deconverter}} \{}
+\DoxyCodeLine{247   \mbox{\hyperlink{structjpeg__color__deconverter_a90ddfc502a2aadc44f157007a3e49056}{JMETHOD}}(\textcolor{keywordtype}{void}, \mbox{\hyperlink{jddctmgr_8c_a1964f006adb8fb80f57e455f6452aec1}{start\_pass}}, (\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo));}
+\DoxyCodeLine{248   \mbox{\hyperlink{structjpeg__color__deconverter_ab0fedad382d6b40b3698181271bb4ba4}{JMETHOD}}(\textcolor{keywordtype}{void}, color\_convert, (\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo,}
+\DoxyCodeLine{249                 \mbox{\hyperlink{jpeglib_8h_a4bf858e4d42202287e786bdec2f3b62b}{JSAMPIMAGE}} input\_buf, \mbox{\hyperlink{jmorecfg_8h_a04ed4674f6f1d0d50ec241531e38274f}{JDIMENSION}} input\_row,}
+\DoxyCodeLine{250                 \mbox{\hyperlink{jpeglib_8h_ac9d5d1b829ed51769db69a37271a7e91}{JSAMPARRAY}} \mbox{\hyperlink{jdct_8h_ad7e4660a191b1a791748dd44d5a7a0ec}{output\_buf}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{jpegint_8h_ac5f8b57092da0f421713ba171c4c9f87}{num\_rows}}));}
+\DoxyCodeLine{251 \};}
+\DoxyCodeLine{252 }
+\DoxyCodeLine{253 \textcolor{comment}{/* Color quantization or color precision reduction */}}
+\DoxyCodeLine{254 \textcolor{keyword}{struct }\mbox{\hyperlink{structjpeg__color__quantizer}{jpeg\_color\_quantizer}} \{}
+\DoxyCodeLine{255   \mbox{\hyperlink{structjpeg__color__quantizer_a3296d9d04a267c50808154ce6bdcef1b}{JMETHOD}}(\textcolor{keywordtype}{void}, \mbox{\hyperlink{jddctmgr_8c_a1964f006adb8fb80f57e455f6452aec1}{start\_pass}}, (\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo, \textcolor{keywordtype}{boolean} is\_pre\_scan));}
+\DoxyCodeLine{256   \mbox{\hyperlink{structjpeg__color__quantizer_ac11184c8e0fdc9c0ec200c0fab197b5f}{JMETHOD}}(\textcolor{keywordtype}{void}, \mbox{\hyperlink{jquant1_8c_a7cd0ab37d067e082d52761a72a34f393}{color\_quantize}}, (\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo,}
+\DoxyCodeLine{257                  \mbox{\hyperlink{jpeglib_8h_ac9d5d1b829ed51769db69a37271a7e91}{JSAMPARRAY}} input\_buf, \mbox{\hyperlink{jpeglib_8h_ac9d5d1b829ed51769db69a37271a7e91}{JSAMPARRAY}} \mbox{\hyperlink{jdct_8h_ad7e4660a191b1a791748dd44d5a7a0ec}{output\_buf}},}
+\DoxyCodeLine{258                  \textcolor{keywordtype}{int} \mbox{\hyperlink{jpegint_8h_ac5f8b57092da0f421713ba171c4c9f87}{num\_rows}}));}
+\DoxyCodeLine{259   \mbox{\hyperlink{structjpeg__color__quantizer_abb5268c27447bc9ae1876c5fffa94081}{JMETHOD}}(\textcolor{keywordtype}{void}, finish\_pass, (\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo));}
+\DoxyCodeLine{260   \mbox{\hyperlink{structjpeg__color__quantizer_a9531395d8c6f914f57bea01ff2b2c5b4}{JMETHOD}}(\textcolor{keywordtype}{void}, new\_color\_map, (\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo));}
+\DoxyCodeLine{261 \};}
+\DoxyCodeLine{262 }
+\DoxyCodeLine{263 }
+\DoxyCodeLine{264 \textcolor{comment}{/* Miscellaneous useful macros */}}
+\DoxyCodeLine{265 }
+\DoxyCodeLine{266 \textcolor{preprocessor}{\#undef MAX}}
+\DoxyCodeLine{267 \textcolor{preprocessor}{\#define MAX(a,b)    ((a) > (b) ? (a) : (b))}}
+\DoxyCodeLine{268 \textcolor{preprocessor}{\#undef MIN}}
+\DoxyCodeLine{269 \textcolor{preprocessor}{\#define MIN(a,b)    ((a) < (b) ? (a) : (b))}}
+\DoxyCodeLine{270 }
+\DoxyCodeLine{271 }
+\DoxyCodeLine{272 \textcolor{comment}{/* We assume that right shift corresponds to signed division by 2 with}}
+\DoxyCodeLine{273 \textcolor{comment}{ * rounding towards minus infinity.  This is correct for typical "{}arithmetic}}
+\DoxyCodeLine{274 \textcolor{comment}{ * shift"{} instructions that shift in copies of the sign bit.  But some}}
+\DoxyCodeLine{275 \textcolor{comment}{ * C compilers implement >> with an unsigned shift.  For these machines you}}
+\DoxyCodeLine{276 \textcolor{comment}{ * must define RIGHT\_SHIFT\_IS\_UNSIGNED.}}
+\DoxyCodeLine{277 \textcolor{comment}{ * RIGHT\_SHIFT provides a proper signed right shift of an INT32 quantity.}}
+\DoxyCodeLine{278 \textcolor{comment}{ * It is only applied with constant shift counts.  SHIFT\_TEMPS must be}}
+\DoxyCodeLine{279 \textcolor{comment}{ * included in the variables of any routine using RIGHT\_SHIFT.}}
+\DoxyCodeLine{280 \textcolor{comment}{ */}}
+\DoxyCodeLine{281 }
+\DoxyCodeLine{282 \textcolor{preprocessor}{\#ifdef RIGHT\_SHIFT\_IS\_UNSIGNED}}
+\DoxyCodeLine{283 \textcolor{preprocessor}{\#define SHIFT\_TEMPS INT32 shift\_temp;}}
+\DoxyCodeLine{284 \textcolor{preprocessor}{\#define RIGHT\_SHIFT(x,shft)  \(\backslash\)}}
+\DoxyCodeLine{285 \textcolor{preprocessor}{    ((shift\_temp = (x)) < 0 ? \(\backslash\)}}
+\DoxyCodeLine{286 \textcolor{preprocessor}{     (shift\_temp >> (shft)) | ((\string~((INT32) 0)) << (32-\/(shft))) : \(\backslash\)}}
+\DoxyCodeLine{287 \textcolor{preprocessor}{     (shift\_temp >> (shft)))}}
+\DoxyCodeLine{288 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{289 \textcolor{preprocessor}{\#define SHIFT\_TEMPS}}
+\DoxyCodeLine{290 \textcolor{preprocessor}{\#define RIGHT\_SHIFT(x,shft) ((x) >> (shft))}}
+\DoxyCodeLine{291 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{292 }
+\DoxyCodeLine{293 }
+\DoxyCodeLine{294 \textcolor{comment}{/* Short forms of external names for systems with brain-\/damaged linkers. */}}
+\DoxyCodeLine{295 }
+\DoxyCodeLine{296 \textcolor{preprocessor}{\#ifdef NEED\_SHORT\_EXTERNAL\_NAMES}}
+\DoxyCodeLine{297 \textcolor{preprocessor}{\#define jinit\_compress\_master   jICompress}}
+\DoxyCodeLine{298 \textcolor{preprocessor}{\#define jinit\_c\_master\_control  jICMaster}}
+\DoxyCodeLine{299 \textcolor{preprocessor}{\#define jinit\_c\_main\_controller jICMainC}}
+\DoxyCodeLine{300 \textcolor{preprocessor}{\#define jinit\_c\_prep\_controller jICPrepC}}
+\DoxyCodeLine{301 \textcolor{preprocessor}{\#define jinit\_c\_coef\_controller jICCoefC}}
+\DoxyCodeLine{302 \textcolor{preprocessor}{\#define jinit\_color\_converter   jICColor}}
+\DoxyCodeLine{303 \textcolor{preprocessor}{\#define jinit\_downsampler   jIDownsampler}}
+\DoxyCodeLine{304 \textcolor{preprocessor}{\#define jinit\_forward\_dct   jIFDCT}}
+\DoxyCodeLine{305 \textcolor{preprocessor}{\#define jinit\_huff\_encoder  jIHEncoder}}
+\DoxyCodeLine{306 \textcolor{preprocessor}{\#define jinit\_phuff\_encoder jIPHEncoder}}
+\DoxyCodeLine{307 \textcolor{preprocessor}{\#define jinit\_marker\_writer jIMWriter}}
+\DoxyCodeLine{308 \textcolor{preprocessor}{\#define jinit\_master\_decompress jIDMaster}}
+\DoxyCodeLine{309 \textcolor{preprocessor}{\#define jinit\_d\_main\_controller jIDMainC}}
+\DoxyCodeLine{310 \textcolor{preprocessor}{\#define jinit\_d\_coef\_controller jIDCoefC}}
+\DoxyCodeLine{311 \textcolor{preprocessor}{\#define jinit\_d\_post\_controller jIDPostC}}
+\DoxyCodeLine{312 \textcolor{preprocessor}{\#define jinit\_input\_controller  jIInCtlr}}
+\DoxyCodeLine{313 \textcolor{preprocessor}{\#define jinit\_marker\_reader jIMReader}}
+\DoxyCodeLine{314 \textcolor{preprocessor}{\#define jinit\_huff\_decoder  jIHDecoder}}
+\DoxyCodeLine{315 \textcolor{preprocessor}{\#define jinit\_phuff\_decoder jIPHDecoder}}
+\DoxyCodeLine{316 \textcolor{preprocessor}{\#define jinit\_inverse\_dct   jIIDCT}}
+\DoxyCodeLine{317 \textcolor{preprocessor}{\#define jinit\_upsampler     jIUpsampler}}
+\DoxyCodeLine{318 \textcolor{preprocessor}{\#define jinit\_color\_deconverter jIDColor}}
+\DoxyCodeLine{319 \textcolor{preprocessor}{\#define jinit\_1pass\_quantizer   jI1Quant}}
+\DoxyCodeLine{320 \textcolor{preprocessor}{\#define jinit\_2pass\_quantizer   jI2Quant}}
+\DoxyCodeLine{321 \textcolor{preprocessor}{\#define jinit\_merged\_upsampler  jIMUpsampler}}
+\DoxyCodeLine{322 \textcolor{preprocessor}{\#define jinit\_memory\_mgr    jIMemMgr}}
+\DoxyCodeLine{323 \textcolor{preprocessor}{\#define jdiv\_round\_up       jDivRound}}
+\DoxyCodeLine{324 \textcolor{preprocessor}{\#define jround\_up       jRound}}
+\DoxyCodeLine{325 \textcolor{preprocessor}{\#define jcopy\_sample\_rows   jCopySamples}}
+\DoxyCodeLine{326 \textcolor{preprocessor}{\#define jcopy\_block\_row     jCopyBlocks}}
+\DoxyCodeLine{327 \textcolor{preprocessor}{\#define jzero\_far       jZeroFar}}
+\DoxyCodeLine{328 \textcolor{preprocessor}{\#define jpeg\_zigzag\_order   jZIGTable}}
+\DoxyCodeLine{329 \textcolor{preprocessor}{\#define jpeg\_natural\_order  jZAGTable}}
+\DoxyCodeLine{330 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* NEED\_SHORT\_EXTERNAL\_NAMES */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{331 }
+\DoxyCodeLine{332 }
+\DoxyCodeLine{333 \textcolor{comment}{/* Compression module initialization routines */}}
+\DoxyCodeLine{334 \mbox{\hyperlink{jpegint_8h_aa3a8298bdcae6cafc587976d3bc19d27}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jcinit_8c_a9b434908559c6849283fcac944250b3b}{jinit\_compress\_master}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo));}
+\DoxyCodeLine{335 \mbox{\hyperlink{jpegint_8h_aa3a8298bdcae6cafc587976d3bc19d27}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jcmaster_8c_a7865042efd21561fa5b499d9c6391f23}{jinit\_c\_master\_control}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo,}
+\DoxyCodeLine{336                      \textcolor{keywordtype}{boolean} \mbox{\hyperlink{jpegint_8h_a5ccf354db2a2e4a0e103fd2daa675084}{transcode\_only}}));}
+\DoxyCodeLine{337 \mbox{\hyperlink{jpegint_8h_aa3a8298bdcae6cafc587976d3bc19d27}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jcmainct_8c_a0d6a60ea5dc981f67b5abcf8d786a1b2}{jinit\_c\_main\_controller}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo,}
+\DoxyCodeLine{338                       \textcolor{keywordtype}{boolean} \mbox{\hyperlink{jpegint_8h_a9f676e1b53dd5c4980de805fdd0bc853}{need\_full\_buffer}}));}
+\DoxyCodeLine{339 \mbox{\hyperlink{jpegint_8h_aa3a8298bdcae6cafc587976d3bc19d27}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jcprepct_8c_a1fc1aefb98fce350bea6e3664faceec8}{jinit\_c\_prep\_controller}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo,}
+\DoxyCodeLine{340                       \textcolor{keywordtype}{boolean} \mbox{\hyperlink{jpegint_8h_a9f676e1b53dd5c4980de805fdd0bc853}{need\_full\_buffer}}));}
+\DoxyCodeLine{341 \mbox{\hyperlink{jpegint_8h_aa3a8298bdcae6cafc587976d3bc19d27}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jccoefct_8c_a18e5ebb71aaee4d1cc8cbf31b1e4f728}{jinit\_c\_coef\_controller}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo,}
+\DoxyCodeLine{342                       \textcolor{keywordtype}{boolean} \mbox{\hyperlink{jpegint_8h_a9f676e1b53dd5c4980de805fdd0bc853}{need\_full\_buffer}}));}
+\DoxyCodeLine{343 \mbox{\hyperlink{jpegint_8h_aa3a8298bdcae6cafc587976d3bc19d27}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jccolor_8c_a3c3f43d8034fa9e59f2a0dfd1912b334}{jinit\_color\_converter}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo));}
+\DoxyCodeLine{344 \mbox{\hyperlink{jpegint_8h_aa3a8298bdcae6cafc587976d3bc19d27}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jcsample_8c_a70c17f06dccf0d8179062455c5af3f0d}{jinit\_downsampler}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo));}
+\DoxyCodeLine{345 \mbox{\hyperlink{jpegint_8h_aa3a8298bdcae6cafc587976d3bc19d27}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jcdctmgr_8c_a5ef01444bb5e9364b2e5c5c956209a07}{jinit\_forward\_dct}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo));}
+\DoxyCodeLine{346 \mbox{\hyperlink{jpegint_8h_aa3a8298bdcae6cafc587976d3bc19d27}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jchuff_8c_a77341cca2feceb164c104fdf8b79756b}{jinit\_huff\_encoder}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo));}
+\DoxyCodeLine{347 \mbox{\hyperlink{jpegint_8h_aa3a8298bdcae6cafc587976d3bc19d27}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jcphuff_8c_abf5eb09d95afb41b0257aaef084d8004}{jinit\_phuff\_encoder}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo));}
+\DoxyCodeLine{348 \mbox{\hyperlink{jpegint_8h_aa3a8298bdcae6cafc587976d3bc19d27}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jcmarker_8c_aa9195332f50b4cc182fa49c24abf9e22}{jinit\_marker\_writer}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo));}
+\DoxyCodeLine{349 \textcolor{comment}{/* Decompression module initialization routines */}}
+\DoxyCodeLine{350 \mbox{\hyperlink{jpegint_8h_aa3a8298bdcae6cafc587976d3bc19d27}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jdmaster_8c_a103160e5ec5fd80c654e74f633b14818}{jinit\_master\_decompress}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo));}
+\DoxyCodeLine{351 \mbox{\hyperlink{jpegint_8h_aa3a8298bdcae6cafc587976d3bc19d27}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jdmainct_8c_a5f0b8dbafa957d92568e72399faca8d6}{jinit\_d\_main\_controller}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo,}
+\DoxyCodeLine{352                       \textcolor{keywordtype}{boolean} \mbox{\hyperlink{jpegint_8h_a9f676e1b53dd5c4980de805fdd0bc853}{need\_full\_buffer}}));}
+\DoxyCodeLine{353 \mbox{\hyperlink{jpegint_8h_aa3a8298bdcae6cafc587976d3bc19d27}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jdcoefct_8c_a5c02753173d32b8acd4041b1cdf9e0d2}{jinit\_d\_coef\_controller}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo,}
+\DoxyCodeLine{354                       \textcolor{keywordtype}{boolean} \mbox{\hyperlink{jpegint_8h_a9f676e1b53dd5c4980de805fdd0bc853}{need\_full\_buffer}}));}
+\DoxyCodeLine{355 \mbox{\hyperlink{jpegint_8h_aa3a8298bdcae6cafc587976d3bc19d27}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jdpostct_8c_a33f15c6f203f733ee8d1eabcd85eeb58}{jinit\_d\_post\_controller}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo,}
+\DoxyCodeLine{356                       \textcolor{keywordtype}{boolean} \mbox{\hyperlink{jpegint_8h_a9f676e1b53dd5c4980de805fdd0bc853}{need\_full\_buffer}}));}
+\DoxyCodeLine{357 \mbox{\hyperlink{jpegint_8h_aa3a8298bdcae6cafc587976d3bc19d27}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jdinput_8c_a609b3a5a6b80e5481ba21ad6d00a046c}{jinit\_input\_controller}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo));}
+\DoxyCodeLine{358 \mbox{\hyperlink{jpegint_8h_aa3a8298bdcae6cafc587976d3bc19d27}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jdmarker_8c_a8fa54cb03525a09cd2a6121496895072}{jinit\_marker\_reader}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo));}
+\DoxyCodeLine{359 \mbox{\hyperlink{jpegint_8h_aa3a8298bdcae6cafc587976d3bc19d27}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jdhuff_8c_a499c7dbe17fbded1a5249083607a97d5}{jinit\_huff\_decoder}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo));}
+\DoxyCodeLine{360 \mbox{\hyperlink{jpegint_8h_aa3a8298bdcae6cafc587976d3bc19d27}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jdphuff_8c_a4498003fed52ffede15a2615b0d9c549}{jinit\_phuff\_decoder}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo));}
+\DoxyCodeLine{361 \mbox{\hyperlink{jpegint_8h_aa3a8298bdcae6cafc587976d3bc19d27}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jddctmgr_8c_aa58c9a57d35dfad33e10c13ff613c580}{jinit\_inverse\_dct}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo));}
+\DoxyCodeLine{362 \mbox{\hyperlink{jpegint_8h_aa3a8298bdcae6cafc587976d3bc19d27}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jdsample_8c_a777b16c9b0bce1703693ad988ec6c169}{jinit\_upsampler}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo));}
+\DoxyCodeLine{363 \mbox{\hyperlink{jpegint_8h_aa3a8298bdcae6cafc587976d3bc19d27}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jdcolor_8c_a6435424eeae845636860c7ff3667b770}{jinit\_color\_deconverter}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo));}
+\DoxyCodeLine{364 \mbox{\hyperlink{jpegint_8h_aa3a8298bdcae6cafc587976d3bc19d27}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jquant1_8c_a5a9591c850cb268bdac2969f67602c03}{jinit\_1pass\_quantizer}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo));}
+\DoxyCodeLine{365 \mbox{\hyperlink{jpegint_8h_aa3a8298bdcae6cafc587976d3bc19d27}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jquant2_8c_aab797e70ea934dea0d6409dc428f1e4d}{jinit\_2pass\_quantizer}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo));}
+\DoxyCodeLine{366 \mbox{\hyperlink{jpegint_8h_aa3a8298bdcae6cafc587976d3bc19d27}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jdmerge_8c_a672c840561890b5cc54e7e9059f6423a}{jinit\_merged\_upsampler}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo));}
+\DoxyCodeLine{367 \textcolor{comment}{/* Memory manager initialization */}}
+\DoxyCodeLine{368 \mbox{\hyperlink{jpegint_8h_aa3a8298bdcae6cafc587976d3bc19d27}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jmemmgr_8c_aab7ef31f834058db1d1f6b2ed3f46c85}{jinit\_memory\_mgr}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__common__struct}{j\_common\_ptr}} cinfo));}
+\DoxyCodeLine{369 }
+\DoxyCodeLine{370 \textcolor{comment}{/* Utility routines in jutils.c */}}
+\DoxyCodeLine{371 \mbox{\hyperlink{jpegint_8h_aa3a8298bdcae6cafc587976d3bc19d27}{EXTERN}}(\textcolor{keywordtype}{long}) \mbox{\hyperlink{jutils_8c_a0c5aa3b56cb24dd9ed819c8252c61b80}{jdiv\_round\_up}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\textcolor{keywordtype}{long} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \textcolor{keywordtype}{long} \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}));}
+\DoxyCodeLine{372 \mbox{\hyperlink{jpegint_8h_aa3a8298bdcae6cafc587976d3bc19d27}{EXTERN}}(\textcolor{keywordtype}{long}) \mbox{\hyperlink{jutils_8c_a9f91b295901b3868694a217759d073c4}{jround\_up}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\textcolor{keywordtype}{long} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \textcolor{keywordtype}{long} \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}));}
+\DoxyCodeLine{373 \mbox{\hyperlink{jpegint_8h_aa3a8298bdcae6cafc587976d3bc19d27}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jutils_8c_ae2a8a73df80d5302a5b524d048fa9fb5}{jcopy\_sample\_rows}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{jpeglib_8h_ac9d5d1b829ed51769db69a37271a7e91}{JSAMPARRAY}} input\_array, \textcolor{keywordtype}{int} \mbox{\hyperlink{jpegint_8h_ad84abcd48f39ce30a878dc2e900eb9f7}{source\_row}},}
+\DoxyCodeLine{374                     \mbox{\hyperlink{jpeglib_8h_ac9d5d1b829ed51769db69a37271a7e91}{JSAMPARRAY}} \mbox{\hyperlink{jpegint_8h_ad8327cda75d2d423f92ba7da5304b772}{output\_array}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{jpegint_8h_afae011342ef411f39c22dfbe9509373e}{dest\_row}},}
+\DoxyCodeLine{375                     \textcolor{keywordtype}{int} \mbox{\hyperlink{jpegint_8h_ac5f8b57092da0f421713ba171c4c9f87}{num\_rows}}, \mbox{\hyperlink{jmorecfg_8h_a04ed4674f6f1d0d50ec241531e38274f}{JDIMENSION}} \mbox{\hyperlink{jpegint_8h_acca252572c592a6643dbe8151f363412}{num\_cols}}));}
+\DoxyCodeLine{376 \mbox{\hyperlink{jpegint_8h_aa3a8298bdcae6cafc587976d3bc19d27}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jutils_8c_a6aad126647ba708534f3be1676d29efb}{jcopy\_block\_row}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{jpeglib_8h_a04dea0959d9bd9e8ddad83597161453b}{JBLOCKROW}} input\_row, \mbox{\hyperlink{jpeglib_8h_a04dea0959d9bd9e8ddad83597161453b}{JBLOCKROW}} \mbox{\hyperlink{jpegint_8h_a58518ef80cb2e9d15ba1837bef666ec6}{output\_row}},}
+\DoxyCodeLine{377                   \mbox{\hyperlink{jmorecfg_8h_a04ed4674f6f1d0d50ec241531e38274f}{JDIMENSION}} \mbox{\hyperlink{jpegint_8h_ac794c67860ca56fc95e4f0f34632bdeb}{num\_blocks}}));}
+\DoxyCodeLine{378 \mbox{\hyperlink{jpegint_8h_aa3a8298bdcae6cafc587976d3bc19d27}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jutils_8c_ac1ea2310a86d8dce3069ffe028524352}{jzero\_far}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\textcolor{keywordtype}{void} \mbox{\hyperlink{zconf_8h_aef060b3456fdcc093a7210a762d5f2ed}{FAR}} * \mbox{\hyperlink{namespacegl_a61228f5aa014ae6a6f7d537c7b0943b7}{target}}, \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{jpegint_8h_ae0774a28e91ca7c77cf42c2f96c1c304}{bytestozero}}));}
+\DoxyCodeLine{379 \textcolor{comment}{/* Constant tables in jutils.c */}}
+\DoxyCodeLine{380 \textcolor{preprocessor}{\#if 0               }\textcolor{comment}{/* This table is not actually needed in v6a */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{381 \textcolor{keyword}{extern} \textcolor{keyword}{const} \textcolor{keywordtype}{int} jpeg\_zigzag\_order[]; \textcolor{comment}{/* natural coef order to zigzag order */}}
+\DoxyCodeLine{382 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{383 \textcolor{keyword}{extern} \textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{jpegint_8h_a5f4ff2462a5937bfd72aba8bc680ece5}{jpeg\_natural\_order}}[]; \textcolor{comment}{/* zigzag coef order to natural order */}}
+\DoxyCodeLine{384 }
+\DoxyCodeLine{385 \textcolor{comment}{/* Suppress undefined-\/structure complaints if necessary. */}}
+\DoxyCodeLine{386 }
+\DoxyCodeLine{387 \textcolor{preprocessor}{\#ifdef INCOMPLETE\_TYPES\_BROKEN}}
+\DoxyCodeLine{388 \textcolor{preprocessor}{\#ifndef AM\_MEMORY\_MANAGER   }\textcolor{comment}{/* only jmemmgr.c defines these */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{389 \textcolor{keyword}{struct }\mbox{\hyperlink{structjvirt__sarray__control}{jvirt\_sarray\_control}} \{ \textcolor{keywordtype}{long} dummy; \};}
+\DoxyCodeLine{390 \textcolor{keyword}{struct }\mbox{\hyperlink{structjvirt__barray__control}{jvirt\_barray\_control}} \{ \textcolor{keywordtype}{long} dummy; \};}
+\DoxyCodeLine{391 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{392 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* INCOMPLETE\_TYPES\_BROKEN */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

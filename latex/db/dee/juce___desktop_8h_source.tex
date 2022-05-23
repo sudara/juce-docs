@@ -1,0 +1,244 @@
+\hypertarget{juce___desktop_8h_source}{}\doxysection{juce\+\_\+\+Desktop.\+h}
+\label{juce___desktop_8h_source}\index{build/juce\_gui\_basics/desktop/juce\_Desktop.h@{build/juce\_gui\_basics/desktop/juce\_Desktop.h}}
+\mbox{\hyperlink{juce___desktop_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{39 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_focus_change_listener}{FocusChangeListener}}}
+\DoxyCodeLine{40 \{}
+\DoxyCodeLine{41 \textcolor{keyword}{public}:}
+\DoxyCodeLine{43     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_focus_change_listener_a4a1966945000a9d79e2592d30c0bd49a}{\string~FocusChangeListener}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{46     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_focus_change_listener_aea1c72e9c4d918e41c729d79592fa956}{globalFocusChanged}} (\mbox{\hyperlink{class_component}{Component}}* focusedComponent) = 0;}
+\DoxyCodeLine{47 \};}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{60 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_dark_mode_setting_listener}{DarkModeSettingListener}}}
+\DoxyCodeLine{61 \{}
+\DoxyCodeLine{62 \textcolor{keyword}{public}:}
+\DoxyCodeLine{64     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_dark_mode_setting_listener_a1b4c92f2c4a9db7b9c0e64fa26a6baf8}{\string~DarkModeSettingListener}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{67     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_dark_mode_setting_listener_ad8907ba0d4d9ec206794a21ed8dde4b2}{darkModeSettingChanged}}() = 0;}
+\DoxyCodeLine{68 \};}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{76 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_desktop}{Desktop}}  : \textcolor{keyword}{private} \mbox{\hyperlink{class_deleted_at_shutdown}{DeletedAtShutdown}},}
+\DoxyCodeLine{77                            \textcolor{keyword}{private} \mbox{\hyperlink{class_timer}{Timer}},}
+\DoxyCodeLine{78                            \textcolor{keyword}{private} \mbox{\hyperlink{class_async_updater}{AsyncUpdater}}}
+\DoxyCodeLine{79 \{}
+\DoxyCodeLine{80 \textcolor{keyword}{public}:}
+\DoxyCodeLine{81     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{83 \textcolor{comment}{}    \textcolor{keyword}{static} \mbox{\hyperlink{class_desktop}{Desktop}}\& \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{class_desktop_aedeca95ef32376027263bd39c693eeda}{getInstance}}();}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{94 \textcolor{comment}{}    \textcolor{keyword}{static} \mbox{\hyperlink{class_point}{Point<int>}} \mbox{\hyperlink{class_desktop_a9197521ec0f311d86d84ce9bfb17b4e2}{getMousePosition}}();}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{101     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_desktop_ab8561129265571ab55b2b5a50faecf19}{setMousePosition}} (\mbox{\hyperlink{class_point}{Point<int>}} newPosition);}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{110     \textcolor{keyword}{static} \mbox{\hyperlink{class_point}{Point<int>}} \mbox{\hyperlink{class_desktop_acc72a2949716fe922f8081bf0f938873}{getLastMouseDownPosition}}();}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{116     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_desktop_aedc0ee3a5d19297c0163bc5a160b2ee4}{getMouseButtonClickCounter}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{122     \textcolor{keywordtype}{int} getMouseWheelMoveCounter() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{124     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{139 \textcolor{comment}{}    static \textcolor{keywordtype}{void} setScreenSaverEnabled (\textcolor{keywordtype}{bool} isEnabled);}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{149     static \textcolor{keywordtype}{bool} isScreenSaverEnabled();}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{151     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{157 \textcolor{comment}{}    \textcolor{keywordtype}{void} addGlobalMouseListener (\mbox{\hyperlink{class_mouse_listener}{MouseListener}}* listener);}
+\DoxyCodeLine{158 }
+\DoxyCodeLine{163     \textcolor{keywordtype}{void} removeGlobalMouseListener (\mbox{\hyperlink{class_mouse_listener}{MouseListener}}* listener);}
+\DoxyCodeLine{164 }
+\DoxyCodeLine{165     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{171 \textcolor{comment}{}    \textcolor{keywordtype}{void} addFocusChangeListener (\mbox{\hyperlink{class_focus_change_listener}{FocusChangeListener}}* listener);}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{177     \textcolor{keywordtype}{void} removeFocusChangeListener (\mbox{\hyperlink{class_focus_change_listener}{FocusChangeListener}}* listener);}
+\DoxyCodeLine{178 }
+\DoxyCodeLine{179     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{186 \textcolor{comment}{}    \textcolor{keywordtype}{void} addDarkModeSettingListener (\mbox{\hyperlink{class_dark_mode_setting_listener}{DarkModeSettingListener}}* listener);}
+\DoxyCodeLine{187 }
+\DoxyCodeLine{192     \textcolor{keywordtype}{void} removeDarkModeSettingListener (\mbox{\hyperlink{class_dark_mode_setting_listener}{DarkModeSettingListener}}* listener);}
+\DoxyCodeLine{193 }
+\DoxyCodeLine{201     \textcolor{keywordtype}{bool} isDarkModeActive() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{202 }
+\DoxyCodeLine{203     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{218 \textcolor{comment}{}    \textcolor{keywordtype}{void} setKioskModeComponent (\mbox{\hyperlink{class_component}{Component}}* componentToUse,}
+\DoxyCodeLine{219                                 \textcolor{keywordtype}{bool} allowMenusAndBars = \mbox{\hyperlink{ordinals_8h_a41f9c5fb8b08eb5dc3edce4dcb37fee7}{true}});}
+\DoxyCodeLine{220 }
+\DoxyCodeLine{226     \mbox{\hyperlink{class_component}{Component}}* getKioskModeComponent() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept               \{ \textcolor{keywordflow}{return} kioskModeComponent; \}}
+\DoxyCodeLine{227 }
+\DoxyCodeLine{228     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{234 \textcolor{comment}{}    \textcolor{keywordtype}{int} \mbox{\hyperlink{class_desktop_a74081737d1c862fdcce6bb2eb24901f3}{getNumComponents}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{235 }
+\DoxyCodeLine{243     \mbox{\hyperlink{class_component}{Component}}* getComponent (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{244 }
+\DoxyCodeLine{252     \mbox{\hyperlink{class_component}{Component}}* findComponentAt (\mbox{\hyperlink{class_point}{Point}}<\textcolor{keywordtype}{int}> screenPosition) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{253 }
+\DoxyCodeLine{263     \mbox{\hyperlink{class_component_animator}{ComponentAnimator}}\& getAnimator() noexcept                       \{ \textcolor{keywordflow}{return} animator; \}}
+\DoxyCodeLine{264 }
+\DoxyCodeLine{265     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{270 \textcolor{comment}{}    \mbox{\hyperlink{class_look_and_feel}{LookAndFeel}}\& \mbox{\hyperlink{class_desktop_aac7db53a2eaa85778363017a569f4afa}{getDefaultLookAndFeel}}() noexcept;}
+\DoxyCodeLine{271 }
+\DoxyCodeLine{279     \textcolor{keywordtype}{void} setDefaultLookAndFeel (\mbox{\hyperlink{class_look_and_feel}{LookAndFeel}}* newDefaultLookAndFeel);}
+\DoxyCodeLine{280 }
+\DoxyCodeLine{281     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{288 \textcolor{comment}{}    \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_array}{Array}}<\mbox{\hyperlink{class_mouse_input_source}{MouseInputSource}}>\& getMouseSources() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{289 }
+\DoxyCodeLine{297     \textcolor{keywordtype}{int} getNumMouseSources() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{298 }
+\DoxyCodeLine{305     \mbox{\hyperlink{class_mouse_input_source}{MouseInputSource}}* getMouseSource (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{306 }
+\DoxyCodeLine{310     \mbox{\hyperlink{class_mouse_input_source}{MouseInputSource}} getMainMouseSource() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{311 }
+\DoxyCodeLine{317     \textcolor{keywordtype}{int} getNumDraggingMouseSources() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{318 }
+\DoxyCodeLine{323     \mbox{\hyperlink{class_mouse_input_source}{MouseInputSource}}* getDraggingMouseSource (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{324 }
+\DoxyCodeLine{340     \textcolor{keywordtype}{void} beginDragAutoRepeat (\textcolor{keywordtype}{int} millisecondsBetweenCallbacks);}
+\DoxyCodeLine{341 }
+\DoxyCodeLine{342     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{344 \textcolor{comment}{}    enum \mbox{\hyperlink{class_desktop_a5e06947d2d1295bdb6f5c4fab7beb98a}{DisplayOrientation}}}
+\DoxyCodeLine{345     \{}
+\DoxyCodeLine{346         upright                 = 1,  }
+\DoxyCodeLine{347         upsideDown              = 2,  }
+\DoxyCodeLine{348         rotatedClockwise        = 4,  }
+\DoxyCodeLine{349         rotatedAntiClockwise    = 8,  }
+\DoxyCodeLine{351         allOrientations         = 1 + 2 + 4 + 8   }
+\DoxyCodeLine{352     \};}
+\DoxyCodeLine{353 }
+\DoxyCodeLine{355     \mbox{\hyperlink{class_desktop_a5e06947d2d1295bdb6f5c4fab7beb98a}{DisplayOrientation}} \mbox{\hyperlink{class_desktop_a02ae21e312faf1715e8311f1f53e5e00}{getCurrentOrientation}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{356 }
+\DoxyCodeLine{364     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_desktop_a4c4e91683ca8ffef6724650b90b17293}{setOrientationsEnabled}} (\textcolor{keywordtype}{int} allowedOrientations);}
+\DoxyCodeLine{365 }
+\DoxyCodeLine{369     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_desktop_ac18d391af21fd546fc059c77014a4c9b}{getOrientationsEnabled}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{370 }
+\DoxyCodeLine{374     \textcolor{keywordtype}{bool} isOrientationEnabled (\mbox{\hyperlink{class_desktop_a5e06947d2d1295bdb6f5c4fab7beb98a}{DisplayOrientation}} orientation) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{375 }
+\DoxyCodeLine{376     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{381 \textcolor{comment}{}    \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_displays}{Displays}}\& getDisplays() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept        \{ \textcolor{keywordflow}{return} *displays; \}}
+\DoxyCodeLine{382 }
+\DoxyCodeLine{383     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{387 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_desktop_a1a10b63e1495aac17b5848335c6ea4cf}{setGlobalScaleFactor}} (\textcolor{keywordtype}{float} newScaleFactor) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{388 }
+\DoxyCodeLine{392     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_desktop_a9d3762d46b652cd0249e6845229f3b4c}{getGlobalScaleFactor}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept         \{ \textcolor{keywordflow}{return} masterScaleFactor; \}}
+\DoxyCodeLine{393 }
+\DoxyCodeLine{394     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{396 \textcolor{comment}{}    \textcolor{keyword}{static} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_desktop_af15bdf2abd33c022d88f9335a5b5d098}{canUseSemiTransparentWindows}}() noexcept;}
+\DoxyCodeLine{397 }
+\DoxyCodeLine{398    \textcolor{preprocessor}{\#if JUCE\_MAC \&\& ! defined (DOXYGEN)}}
+\DoxyCodeLine{399     [[deprecated (\textcolor{stringliteral}{"{}This macOS-\/specific method has been deprecated in favour of the cross-\/platform "{}}}
+\DoxyCodeLine{400                   \textcolor{stringliteral}{"{} isDarkModeActive() method."{}})]]}
+\DoxyCodeLine{401     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} isOSXDarkModeActive()  \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_desktop_aedeca95ef32376027263bd39c693eeda}{Desktop::getInstance}}().\mbox{\hyperlink{class_desktop_a33ca1091178824b63a8e8eaf14f3e7bb}{isDarkModeActive}}(); \}}
+\DoxyCodeLine{402 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{403 }
+\DoxyCodeLine{404     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{406 \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_desktop_ae05cdf7a1a2d4a78a17eb389653b1cd7}{isHeadless}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{407 }
+\DoxyCodeLine{408 private:}
+\DoxyCodeLine{409     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{410     static \mbox{\hyperlink{class_desktop}{Desktop}}* instance;}
+\DoxyCodeLine{411 }
+\DoxyCodeLine{412     friend class \mbox{\hyperlink{class_component}{Component}};}
+\DoxyCodeLine{413     friend class \mbox{\hyperlink{class_component_peer}{ComponentPeer}};}
+\DoxyCodeLine{414     friend class MouseInputSourceInternal;}
+\DoxyCodeLine{415     friend class \mbox{\hyperlink{class_deleted_at_shutdown}{DeletedAtShutdown}};}
+\DoxyCodeLine{416     friend class TopLevelWindowManager;}
+\DoxyCodeLine{417     friend class \mbox{\hyperlink{class_displays}{Displays}};}
+\DoxyCodeLine{418 }
+\DoxyCodeLine{419     \mbox{\hyperlink{namespacestd}{std}}::unique\_ptr<\mbox{\hyperlink{class_mouse_input_source}{MouseInputSource}}::SourceList> mouseSources;}
+\DoxyCodeLine{420 }
+\DoxyCodeLine{421     \mbox{\hyperlink{class_listener_list}{ListenerList}}<\mbox{\hyperlink{class_mouse_listener}{MouseListener}}> mouseListeners;}
+\DoxyCodeLine{422     \mbox{\hyperlink{class_listener_list}{ListenerList}}<\mbox{\hyperlink{class_focus_change_listener}{FocusChangeListener}}> focusListeners;}
+\DoxyCodeLine{423     \mbox{\hyperlink{class_listener_list}{ListenerList}}<\mbox{\hyperlink{class_dark_mode_setting_listener}{DarkModeSettingListener}}> darkModeSettingListeners;}
+\DoxyCodeLine{424 }
+\DoxyCodeLine{425     \mbox{\hyperlink{class_array}{Array}}<\mbox{\hyperlink{class_component}{Component}}*> desktopComponents;}
+\DoxyCodeLine{426     \mbox{\hyperlink{class_array}{Array}}<\mbox{\hyperlink{class_component_peer}{ComponentPeer}}*> peers;}
+\DoxyCodeLine{427 }
+\DoxyCodeLine{428     \mbox{\hyperlink{namespacestd}{std}}::unique\_ptr<\mbox{\hyperlink{class_displays}{Displays}}> displays;}
+\DoxyCodeLine{429 }
+\DoxyCodeLine{430     \mbox{\hyperlink{class_point}{Point}}<\textcolor{keywordtype}{float}> lastFakeMouseMove;}
+\DoxyCodeLine{431     \textcolor{keywordtype}{void} sendMouseMove();}
+\DoxyCodeLine{432 }
+\DoxyCodeLine{433     \textcolor{keywordtype}{int} mouseClickCounter = 0, mouseWheelCounter = 0;}
+\DoxyCodeLine{434     \textcolor{keywordtype}{void} incrementMouseClickCounter() noexcept;}
+\DoxyCodeLine{435     \textcolor{keywordtype}{void} incrementMouseWheelCounter() noexcept;}
+\DoxyCodeLine{436 }
+\DoxyCodeLine{437     \mbox{\hyperlink{namespacestd}{std}}::unique\_ptr<\mbox{\hyperlink{class_look_and_feel}{LookAndFeel}}> defaultLookAndFeel;}
+\DoxyCodeLine{438     \mbox{\hyperlink{class_weak_reference}{WeakReference}}<\mbox{\hyperlink{class_look_and_feel}{LookAndFeel}}> currentLookAndFeel;}
+\DoxyCodeLine{439 }
+\DoxyCodeLine{440     \mbox{\hyperlink{namespacestd}{std}}::unique\_ptr<\mbox{\hyperlink{class_focus_outline}{FocusOutline}}> focusOutline;}
+\DoxyCodeLine{441 }
+\DoxyCodeLine{442     \mbox{\hyperlink{class_component}{Component}}* kioskModeComponent = \textcolor{keywordtype}{nullptr};}
+\DoxyCodeLine{443     \mbox{\hyperlink{class_rectangle}{Rectangle}}<\textcolor{keywordtype}{int}> kioskComponentOriginalBounds;}
+\DoxyCodeLine{444     \textcolor{keywordtype}{bool} kioskModeReentrant = \mbox{\hyperlink{ordinals_8h_a65e9886d74aaee76545e83dd09011727}{false}};}
+\DoxyCodeLine{445 }
+\DoxyCodeLine{446     \textcolor{keywordtype}{int} allowedOrientations = allOrientations;}
+\DoxyCodeLine{447     \textcolor{keywordtype}{void} allowedOrientationsChanged();}
+\DoxyCodeLine{448 }
+\DoxyCodeLine{449     \textcolor{keywordtype}{float} masterScaleFactor;}
+\DoxyCodeLine{450 }
+\DoxyCodeLine{451     \mbox{\hyperlink{class_component_animator}{ComponentAnimator}} animator;}
+\DoxyCodeLine{452 }
+\DoxyCodeLine{453     \textcolor{keywordtype}{void} timerCallback() override;}
+\DoxyCodeLine{454     \textcolor{keywordtype}{void} resetTimer();}
+\DoxyCodeLine{455     \mbox{\hyperlink{class_listener_list}{ListenerList}}<\mbox{\hyperlink{class_mouse_listener}{MouseListener}}>\& getMouseListeners();}
+\DoxyCodeLine{456 }
+\DoxyCodeLine{457     \textcolor{keywordtype}{void} addDesktopComponent (\mbox{\hyperlink{class_component}{Component}}*);}
+\DoxyCodeLine{458     \textcolor{keywordtype}{void} removeDesktopComponent (\mbox{\hyperlink{class_component}{Component}}*);}
+\DoxyCodeLine{459     \textcolor{keywordtype}{void} componentBroughtToFront (\mbox{\hyperlink{class_component}{Component}}*);}
+\DoxyCodeLine{460 }
+\DoxyCodeLine{461     \textcolor{keywordtype}{void} setKioskComponent (\mbox{\hyperlink{class_component}{Component}}*, \textcolor{keywordtype}{bool} shouldBeEnabled, \textcolor{keywordtype}{bool} allowMenusAndBars);}
+\DoxyCodeLine{462 }
+\DoxyCodeLine{463     \textcolor{keywordtype}{void} triggerFocusCallback();}
+\DoxyCodeLine{464     \textcolor{keywordtype}{void} updateFocusOutline();}
+\DoxyCodeLine{465     \textcolor{keywordtype}{void} handleAsyncUpdate() override;}
+\DoxyCodeLine{466 }
+\DoxyCodeLine{467     static \mbox{\hyperlink{class_point}{Point}}<\textcolor{keywordtype}{float}> getMousePositionFloat();}
+\DoxyCodeLine{468 }
+\DoxyCodeLine{469     static \textcolor{keywordtype}{double} getDefaultMasterScale();}
+\DoxyCodeLine{470 }
+\DoxyCodeLine{471     \mbox{\hyperlink{class_desktop}{Desktop}}();}
+\DoxyCodeLine{472     \string~\mbox{\hyperlink{class_desktop}{Desktop}}() override;}
+\DoxyCodeLine{473 }
+\DoxyCodeLine{474     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{475     class NativeDarkModeChangeDetectorImpl;}
+\DoxyCodeLine{476     \mbox{\hyperlink{namespacestd}{std}}::unique\_ptr<NativeDarkModeChangeDetectorImpl> nativeDarkModeChangeDetectorImpl;}
+\DoxyCodeLine{477 }
+\DoxyCodeLine{478     static \mbox{\hyperlink{namespacestd}{std}}::unique\_ptr<NativeDarkModeChangeDetectorImpl> createNativeDarkModeChangeDetectorImpl();}
+\DoxyCodeLine{479     \textcolor{keywordtype}{void} darkModeChanged();}
+\DoxyCodeLine{480 }
+\DoxyCodeLine{481     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{482     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_desktop}{Desktop}})}
+\DoxyCodeLine{483 \};}
+\DoxyCodeLine{484 }
+\DoxyCodeLine{485  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{486 }
+
+\end{DoxyCode}

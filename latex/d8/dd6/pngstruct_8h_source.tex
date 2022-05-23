@@ -1,0 +1,497 @@
+\hypertarget{pngstruct_8h_source}{}\doxysection{pngstruct.\+h}
+\label{pngstruct_8h_source}\index{build/juce\_graphics/image\_formats/pnglib/pngstruct.h@{build/juce\_graphics/image\_formats/pnglib/pngstruct.h}}
+\mbox{\hyperlink{pngstruct_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{2 \textcolor{comment}{/* pngstruct.h -\/ header file for PNG reference library}}
+\DoxyCodeLine{3 \textcolor{comment}{ *}}
+\DoxyCodeLine{4 \textcolor{comment}{ * Copyright (c) 2018-\/2019 Cosmin Truta}}
+\DoxyCodeLine{5 \textcolor{comment}{ * Copyright (c) 1998-\/2002,2004,2006-\/2018 Glenn Randers-\/Pehrson}}
+\DoxyCodeLine{6 \textcolor{comment}{ * Copyright (c) 1996-\/1997 Andreas Dilger}}
+\DoxyCodeLine{7 \textcolor{comment}{ * Copyright (c) 1995-\/1996 Guy Eric Schalnat, Group 42, Inc.}}
+\DoxyCodeLine{8 \textcolor{comment}{ *}}
+\DoxyCodeLine{9 \textcolor{comment}{ * This code is released under the libpng license.}}
+\DoxyCodeLine{10 \textcolor{comment}{ * For conditions of distribution and use, see the disclaimer}}
+\DoxyCodeLine{11 \textcolor{comment}{ * and license in png.h}}
+\DoxyCodeLine{12 \textcolor{comment}{ */}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{comment}{/* The structure that holds the information to read and write PNG files.}}
+\DoxyCodeLine{15 \textcolor{comment}{ * The only people who need to care about what is inside of this are the}}
+\DoxyCodeLine{16 \textcolor{comment}{ * people who will be modifying the library for their own special needs.}}
+\DoxyCodeLine{17 \textcolor{comment}{ * It should NOT be accessed directly by an application.}}
+\DoxyCodeLine{18 \textcolor{comment}{ */}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#ifndef PNGSTRUCT\_H}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#define PNGSTRUCT\_H}}
+\DoxyCodeLine{22 \textcolor{comment}{/* zlib.h defines the structure z\_stream, an instance of which is included}}
+\DoxyCodeLine{23 \textcolor{comment}{ * in this structure and is required for decompressing the LZ compressed}}
+\DoxyCodeLine{24 \textcolor{comment}{ * data in PNG files.}}
+\DoxyCodeLine{25 \textcolor{comment}{ */}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#ifndef ZLIB\_CONST}}
+\DoxyCodeLine{27    \textcolor{comment}{/* We must ensure that zlib uses 'const' in declarations. */}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#  define ZLIB\_CONST}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#if ! JUCE\_INCLUDE\_ZLIB\_CODE}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{zlib_8h}{zlib.h}}"{}}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#ifdef const}}
+\DoxyCodeLine{34    \textcolor{comment}{/* zlib.h sometimes \#defines const to nothing, undo this. */}}
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#  undef const}}
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38 \textcolor{comment}{/* zlib.h has mediocre z\_const use before 1.2.6, this stuff is for compatibility}}
+\DoxyCodeLine{39 \textcolor{comment}{ * with older builds.}}
+\DoxyCodeLine{40 \textcolor{comment}{ */}}
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#if ZLIB\_VERNUM < 0x1260}}
+\DoxyCodeLine{42 \textcolor{preprocessor}{\#  define PNGZ\_MSG\_CAST(s) png\_constcast(char*,s)}}
+\DoxyCodeLine{43 \textcolor{preprocessor}{\#  define PNGZ\_INPUT\_CAST(b) png\_constcast(png\_bytep,b)}}
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#  define PNGZ\_MSG\_CAST(s) (s)}}
+\DoxyCodeLine{46 \textcolor{preprocessor}{\#  define PNGZ\_INPUT\_CAST(b) (b)}}
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49 \textcolor{comment}{/* zlib.h declares a magic type 'uInt' that limits the amount of data that zlib}}
+\DoxyCodeLine{50 \textcolor{comment}{ * can handle at once.  This type need be no larger than 16 bits (so maximum of}}
+\DoxyCodeLine{51 \textcolor{comment}{ * 65535), this define allows us to discover how big it is, but limited by the}}
+\DoxyCodeLine{52 \textcolor{comment}{ * maximum for size\_t.  The value can be overridden in a library build}}
+\DoxyCodeLine{53 \textcolor{comment}{ * (pngusr.h, or set it in CPPFLAGS) and it works to set it to a considerably}}
+\DoxyCodeLine{54 \textcolor{comment}{ * lower value (e.g. 255 works).  A lower value may help memory usage (slightly)}}
+\DoxyCodeLine{55 \textcolor{comment}{ * and may even improve performance on some systems (and degrade it on others.)}}
+\DoxyCodeLine{56 \textcolor{comment}{ */}}
+\DoxyCodeLine{57 \textcolor{preprocessor}{\#ifndef ZLIB\_IO\_MAX}}
+\DoxyCodeLine{58 \textcolor{preprocessor}{\#  define ZLIB\_IO\_MAX ((uInt)-\/1)}}
+\DoxyCodeLine{59 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61 \textcolor{preprocessor}{\#ifdef PNG\_WRITE\_SUPPORTED}}
+\DoxyCodeLine{62 \textcolor{comment}{/* The type of a compression buffer list used by the write code. */}}
+\DoxyCodeLine{63 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }png\_compression\_buffer}
+\DoxyCodeLine{64 \{}
+\DoxyCodeLine{65    \textcolor{keyword}{struct }png\_compression\_buffer *next;}
+\DoxyCodeLine{66    png\_byte                       \mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}}[1]; \textcolor{comment}{/* actually zbuf\_size */}}
+\DoxyCodeLine{67 \} png\_compression\_buffer, *png\_compression\_bufferp;}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69 \textcolor{preprocessor}{\#define PNG\_COMPRESSION\_BUFFER\_SIZE(pp)\(\backslash\)}}
+\DoxyCodeLine{70 \textcolor{preprocessor}{   (offsetof(png\_compression\_buffer, output) + (pp)-\/>zbuffer\_size)}}
+\DoxyCodeLine{71 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73 \textcolor{comment}{/* Colorspace support; structures used in png\_struct, png\_info and in internal}}
+\DoxyCodeLine{74 \textcolor{comment}{ * functions to hold and communicate information about the color space.}}
+\DoxyCodeLine{75 \textcolor{comment}{ *}}
+\DoxyCodeLine{76 \textcolor{comment}{ * PNG\_COLORSPACE\_SUPPORTED is only required if the application will perform}}
+\DoxyCodeLine{77 \textcolor{comment}{ * colorspace corrections, otherwise all the colorspace information can be}}
+\DoxyCodeLine{78 \textcolor{comment}{ * skipped and the size of libpng can be reduced (significantly) by compiling}}
+\DoxyCodeLine{79 \textcolor{comment}{ * out the colorspace support.}}
+\DoxyCodeLine{80 \textcolor{comment}{ */}}
+\DoxyCodeLine{81 \textcolor{preprocessor}{\#ifdef PNG\_COLORSPACE\_SUPPORTED}}
+\DoxyCodeLine{82 \textcolor{comment}{/* The chromaticities of the red, green and blue colorants and the chromaticity}}
+\DoxyCodeLine{83 \textcolor{comment}{ * of the corresponding white point (i.e. of rgb(1.0,1.0,1.0)).}}
+\DoxyCodeLine{84 \textcolor{comment}{ */}}
+\DoxyCodeLine{85 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }png\_xy}
+\DoxyCodeLine{86 \{}
+\DoxyCodeLine{87    \mbox{\hyperlink{pngconf_8h_a23911f489715bb4644c9c9c808cbab5a}{png\_fixed\_point}} redx, redy;}
+\DoxyCodeLine{88    \mbox{\hyperlink{pngconf_8h_a23911f489715bb4644c9c9c808cbab5a}{png\_fixed\_point}} greenx, greeny;}
+\DoxyCodeLine{89    \mbox{\hyperlink{pngconf_8h_a23911f489715bb4644c9c9c808cbab5a}{png\_fixed\_point}} bluex, bluey;}
+\DoxyCodeLine{90    \mbox{\hyperlink{pngconf_8h_a23911f489715bb4644c9c9c808cbab5a}{png\_fixed\_point}} whitex, whitey;}
+\DoxyCodeLine{91 \} png\_xy;}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93 \textcolor{comment}{/* The same data as above but encoded as CIE XYZ values.  When this data comes}}
+\DoxyCodeLine{94 \textcolor{comment}{ * from chromaticities the sum of the Y values is assumed to be 1.0}}
+\DoxyCodeLine{95 \textcolor{comment}{ */}}
+\DoxyCodeLine{96 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }png\_XYZ}
+\DoxyCodeLine{97 \{}
+\DoxyCodeLine{98    \mbox{\hyperlink{pngconf_8h_a23911f489715bb4644c9c9c808cbab5a}{png\_fixed\_point}} \mbox{\hyperlink{png_8h_a0e068fb3df152aae6dc638fa71a03f6e}{red\_X}}, \mbox{\hyperlink{png_8h_a80b577159d8cd01bf68c523974f6a557}{red\_Y}}, \mbox{\hyperlink{png_8h_a419bfaa8a862d9ea4029b37276291966}{red\_Z}};}
+\DoxyCodeLine{99    \mbox{\hyperlink{pngconf_8h_a23911f489715bb4644c9c9c808cbab5a}{png\_fixed\_point}} \mbox{\hyperlink{png_8h_a7464c9d916b6d3ef9a99c8dd3aa8b0ac}{green\_X}}, \mbox{\hyperlink{png_8h_a732da663f463ba01de7640b8792997d3}{green\_Y}}, \mbox{\hyperlink{png_8h_a3cf9bbe89aea9340933b44f3ff40da99}{green\_Z}};}
+\DoxyCodeLine{100    \mbox{\hyperlink{pngconf_8h_a23911f489715bb4644c9c9c808cbab5a}{png\_fixed\_point}} \mbox{\hyperlink{png_8h_aa6111eb4904f92780f68bf1e7ef3b381}{blue\_X}}, \mbox{\hyperlink{png_8h_a0f1990601a8df136e10b23978fe83bd0}{blue\_Y}}, blue\_Z;}
+\DoxyCodeLine{101 \} png\_XYZ;}
+\DoxyCodeLine{102 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* COLORSPACE */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104 \textcolor{preprocessor}{\#if defined(PNG\_COLORSPACE\_SUPPORTED) || defined(PNG\_GAMMA\_SUPPORTED)}}
+\DoxyCodeLine{105 \textcolor{comment}{/* A colorspace is all the above plus, potentially, profile information;}}
+\DoxyCodeLine{106 \textcolor{comment}{ * however at present libpng does not use the profile internally so it is only}}
+\DoxyCodeLine{107 \textcolor{comment}{ * stored in the png\_info struct (if iCCP is supported.)  The rendering intent}}
+\DoxyCodeLine{108 \textcolor{comment}{ * is retained here and is checked.}}
+\DoxyCodeLine{109 \textcolor{comment}{ *}}
+\DoxyCodeLine{110 \textcolor{comment}{ * The file gamma encoding information is also stored here and gamma correction}}
+\DoxyCodeLine{111 \textcolor{comment}{ * is done by libpng, whereas color correction must currently be done by the}}
+\DoxyCodeLine{112 \textcolor{comment}{ * application.}}
+\DoxyCodeLine{113 \textcolor{comment}{ */}}
+\DoxyCodeLine{114 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }png\_colorspace}
+\DoxyCodeLine{115 \{}
+\DoxyCodeLine{116 \textcolor{preprocessor}{\#ifdef PNG\_GAMMA\_SUPPORTED}}
+\DoxyCodeLine{117    \mbox{\hyperlink{pngconf_8h_a23911f489715bb4644c9c9c808cbab5a}{png\_fixed\_point}} gamma;        \textcolor{comment}{/* File gamma */}}
+\DoxyCodeLine{118 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120 \textcolor{preprocessor}{\#ifdef PNG\_COLORSPACE\_SUPPORTED}}
+\DoxyCodeLine{121    png\_xy      end\_points\_xy;    \textcolor{comment}{/* End points as chromaticities */}}
+\DoxyCodeLine{122    png\_XYZ     end\_points\_XYZ;   \textcolor{comment}{/* End points as CIE XYZ colorant values */}}
+\DoxyCodeLine{123    \mbox{\hyperlink{pngrutil_8c_a7b67546e4211b127dd370e8ef197bc3f}{png\_uint\_16}} rendering\_intent; \textcolor{comment}{/* Rendering intent of a profile */}}
+\DoxyCodeLine{124 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126    \textcolor{comment}{/* Flags are always defined to simplify the code. */}}
+\DoxyCodeLine{127    \mbox{\hyperlink{pngrutil_8c_a7b67546e4211b127dd370e8ef197bc3f}{png\_uint\_16}} \mbox{\hyperlink{namespacejuce_a848bbbcf606d6a8175b2c2712055d209}{flags}};            \textcolor{comment}{/* As defined below */}}
+\DoxyCodeLine{128 \} png\_colorspace, * \mbox{\hyperlink{pngconf_8h_af21b002e402fd844f1767dc3e7e92756}{PNG\_RESTRICT}} png\_colorspacerp;}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{130 \textcolor{keyword}{typedef} \textcolor{keyword}{const} png\_colorspace * \mbox{\hyperlink{pngconf_8h_af21b002e402fd844f1767dc3e7e92756}{PNG\_RESTRICT}} png\_const\_colorspacerp;}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{132 \textcolor{comment}{/* General flags for the 'flags' field */}}
+\DoxyCodeLine{133 \textcolor{preprocessor}{\#define PNG\_COLORSPACE\_HAVE\_GAMMA           0x0001}}
+\DoxyCodeLine{134 \textcolor{preprocessor}{\#define PNG\_COLORSPACE\_HAVE\_ENDPOINTS       0x0002}}
+\DoxyCodeLine{135 \textcolor{preprocessor}{\#define PNG\_COLORSPACE\_HAVE\_INTENT          0x0004}}
+\DoxyCodeLine{136 \textcolor{preprocessor}{\#define PNG\_COLORSPACE\_FROM\_gAMA            0x0008}}
+\DoxyCodeLine{137 \textcolor{preprocessor}{\#define PNG\_COLORSPACE\_FROM\_cHRM            0x0010}}
+\DoxyCodeLine{138 \textcolor{preprocessor}{\#define PNG\_COLORSPACE\_FROM\_sRGB            0x0020}}
+\DoxyCodeLine{139 \textcolor{preprocessor}{\#define PNG\_COLORSPACE\_ENDPOINTS\_MATCH\_sRGB 0x0040}}
+\DoxyCodeLine{140 \textcolor{preprocessor}{\#define PNG\_COLORSPACE\_MATCHES\_sRGB         0x0080 }\textcolor{comment}{/* exact match on profile */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{141 \textcolor{preprocessor}{\#define PNG\_COLORSPACE\_INVALID              0x8000}}
+\DoxyCodeLine{142 \textcolor{preprocessor}{\#define PNG\_COLORSPACE\_CANCEL(flags)        (0xffff \string^ (flags))}}
+\DoxyCodeLine{143 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* COLORSPACE || GAMMA */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145 \textcolor{keyword}{struct }\mbox{\hyperlink{structpng__struct__def}{png\_struct\_def}}}
+\DoxyCodeLine{146 \{}
+\DoxyCodeLine{147 \textcolor{preprocessor}{\#ifdef PNG\_SETJMP\_SUPPORTED}}
+\DoxyCodeLine{148    jmp\_buf jmp\_buf\_local;     \textcolor{comment}{/* New name in 1.6.0 for jmp\_buf in png\_struct */}}
+\DoxyCodeLine{149    png\_longjmp\_ptr longjmp\_fn;\textcolor{comment}{/* setjmp non-\/local goto function. */}}
+\DoxyCodeLine{150    jmp\_buf *jmp\_buf\_ptr;      \textcolor{comment}{/* passed to longjmp\_fn */}}
+\DoxyCodeLine{151    \textcolor{keywordtype}{size\_t} jmp\_buf\_size;       \textcolor{comment}{/* size of the above, if allocated */}}
+\DoxyCodeLine{152 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{153    png\_error\_ptr \mbox{\hyperlink{structpng__struct__def_a2cc5bd1cf507373992a61cf725a730cd}{error\_fn}};    \textcolor{comment}{/* function for printing errors and aborting */}}
+\DoxyCodeLine{154 \textcolor{preprocessor}{\#ifdef PNG\_WARNINGS\_SUPPORTED}}
+\DoxyCodeLine{155    png\_error\_ptr warning\_fn;  \textcolor{comment}{/* function for printing warnings */}}
+\DoxyCodeLine{156 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{157    \mbox{\hyperlink{pngconf_8h_a9dc088c359b6d7e45682af63a3361b58}{png\_voidp}} \mbox{\hyperlink{structpng__struct__def_a06837611b772a6a44cf6306ea08d40a8}{error\_ptr}};       \textcolor{comment}{/* user supplied struct for error functions */}}
+\DoxyCodeLine{158    png\_rw\_ptr \mbox{\hyperlink{structpng__struct__def_acc53cd87f0ffc4d1f67da7e10a94af39}{write\_data\_fn}};  \textcolor{comment}{/* function for writing output data */}}
+\DoxyCodeLine{159    png\_rw\_ptr \mbox{\hyperlink{structpng__struct__def_a83804076437d1587fab947c056bb56ae}{read\_data\_fn}};   \textcolor{comment}{/* function for reading input data */}}
+\DoxyCodeLine{160    \mbox{\hyperlink{pngconf_8h_a9dc088c359b6d7e45682af63a3361b58}{png\_voidp}} \mbox{\hyperlink{structpng__struct__def_a996f6f8aaa00ede3bb147714ee7c480e}{io\_ptr}};          \textcolor{comment}{/* ptr to application struct for I/O functions */}}
+\DoxyCodeLine{161 }
+\DoxyCodeLine{162 \textcolor{preprocessor}{\#ifdef PNG\_READ\_USER\_TRANSFORM\_SUPPORTED}}
+\DoxyCodeLine{163    png\_user\_transform\_ptr read\_user\_transform\_fn; \textcolor{comment}{/* user read transform */}}
+\DoxyCodeLine{164 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{165 }
+\DoxyCodeLine{166 \textcolor{preprocessor}{\#ifdef PNG\_WRITE\_USER\_TRANSFORM\_SUPPORTED}}
+\DoxyCodeLine{167    png\_user\_transform\_ptr write\_user\_transform\_fn; \textcolor{comment}{/* user write transform */}}
+\DoxyCodeLine{168 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{169 }
+\DoxyCodeLine{170 \textcolor{comment}{/* These were added in libpng-\/1.0.2 */}}
+\DoxyCodeLine{171 \textcolor{preprocessor}{\#ifdef PNG\_USER\_TRANSFORM\_PTR\_SUPPORTED}}
+\DoxyCodeLine{172 \textcolor{preprocessor}{\#if defined(PNG\_READ\_USER\_TRANSFORM\_SUPPORTED) || \(\backslash\)}}
+\DoxyCodeLine{173 \textcolor{preprocessor}{    defined(PNG\_WRITE\_USER\_TRANSFORM\_SUPPORTED)}}
+\DoxyCodeLine{174    \mbox{\hyperlink{pngconf_8h_a9dc088c359b6d7e45682af63a3361b58}{png\_voidp}} user\_transform\_ptr; \textcolor{comment}{/* user supplied struct for user transform */}}
+\DoxyCodeLine{175    png\_byte user\_transform\_depth;    \textcolor{comment}{/* bit depth of user transformed pixels */}}
+\DoxyCodeLine{176    png\_byte user\_transform\_channels; \textcolor{comment}{/* channels in user transformed pixels */}}
+\DoxyCodeLine{177 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{178 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{179 }
+\DoxyCodeLine{180    \mbox{\hyperlink{png_8h_aed373ad2e16fd6df7ccfa96329441d0d}{png\_uint\_32}} \mbox{\hyperlink{structpng__struct__def_a6db33193ca2fdb01fa6d8da9756bd448}{mode}};          \textcolor{comment}{/* tells us where we are in the PNG file */}}
+\DoxyCodeLine{181    \mbox{\hyperlink{png_8h_aed373ad2e16fd6df7ccfa96329441d0d}{png\_uint\_32}} \mbox{\hyperlink{structpng__struct__def_aa7529cc3d13e759037c504fddd6e1ae8}{flags}};         \textcolor{comment}{/* flags indicating various things to libpng */}}
+\DoxyCodeLine{182    \mbox{\hyperlink{png_8h_aed373ad2e16fd6df7ccfa96329441d0d}{png\_uint\_32}} \mbox{\hyperlink{structpng__struct__def_a4ab3e33248dd4c32880609a1a10fa725}{transformations}}; \textcolor{comment}{/* which transformations to perform */}}
+\DoxyCodeLine{183 }
+\DoxyCodeLine{184    \mbox{\hyperlink{png_8h_aed373ad2e16fd6df7ccfa96329441d0d}{png\_uint\_32}} \mbox{\hyperlink{structpng__struct__def_a5bfc727f45873680edacf4d12bebc8f4}{zowner}};        \textcolor{comment}{/* ID (chunk type) of zstream owner, 0 if none */}}
+\DoxyCodeLine{185    \mbox{\hyperlink{structz__stream__s}{z\_stream}}    \mbox{\hyperlink{structpng__struct__def_aed56a6997ce7d1a90f0a143eb0964cd5}{zstream}};       \textcolor{comment}{/* decompression structure */}}
+\DoxyCodeLine{186 }
+\DoxyCodeLine{187 \textcolor{preprocessor}{\#ifdef PNG\_WRITE\_SUPPORTED}}
+\DoxyCodeLine{188    png\_compression\_bufferp zbuffer\_list; \textcolor{comment}{/* Created on demand during write */}}
+\DoxyCodeLine{189    \mbox{\hyperlink{zconf_8h_a87d141052bcd5ec8a80812a565c70369}{uInt}}                    zbuffer\_size; \textcolor{comment}{/* size of the actual buffer */}}
+\DoxyCodeLine{190 }
+\DoxyCodeLine{191    \textcolor{keywordtype}{int} zlib\_level;            \textcolor{comment}{/* holds zlib compression level */}}
+\DoxyCodeLine{192    \textcolor{keywordtype}{int} zlib\_method;           \textcolor{comment}{/* holds zlib compression method */}}
+\DoxyCodeLine{193    \textcolor{keywordtype}{int} zlib\_window\_bits;      \textcolor{comment}{/* holds zlib compression window bits */}}
+\DoxyCodeLine{194    \textcolor{keywordtype}{int} zlib\_mem\_level;        \textcolor{comment}{/* holds zlib compression memory level */}}
+\DoxyCodeLine{195    \textcolor{keywordtype}{int} zlib\_strategy;         \textcolor{comment}{/* holds zlib compression strategy */}}
+\DoxyCodeLine{196 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{197 \textcolor{comment}{/* Added at libpng 1.5.4 */}}
+\DoxyCodeLine{198 \textcolor{preprocessor}{\#ifdef PNG\_WRITE\_CUSTOMIZE\_ZTXT\_COMPRESSION\_SUPPORTED}}
+\DoxyCodeLine{199    \textcolor{keywordtype}{int} zlib\_text\_level;            \textcolor{comment}{/* holds zlib compression level */}}
+\DoxyCodeLine{200    \textcolor{keywordtype}{int} zlib\_text\_method;           \textcolor{comment}{/* holds zlib compression method */}}
+\DoxyCodeLine{201    \textcolor{keywordtype}{int} zlib\_text\_window\_bits;      \textcolor{comment}{/* holds zlib compression window bits */}}
+\DoxyCodeLine{202    \textcolor{keywordtype}{int} zlib\_text\_mem\_level;        \textcolor{comment}{/* holds zlib compression memory level */}}
+\DoxyCodeLine{203    \textcolor{keywordtype}{int} zlib\_text\_strategy;         \textcolor{comment}{/* holds zlib compression strategy */}}
+\DoxyCodeLine{204 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{205 \textcolor{comment}{/* End of material added at libpng 1.5.4 */}}
+\DoxyCodeLine{206 \textcolor{comment}{/* Added at libpng 1.6.0 */}}
+\DoxyCodeLine{207 \textcolor{preprocessor}{\#ifdef PNG\_WRITE\_SUPPORTED}}
+\DoxyCodeLine{208    \textcolor{keywordtype}{int} zlib\_set\_level;        \textcolor{comment}{/* Actual values set into the zstream on write */}}
+\DoxyCodeLine{209    \textcolor{keywordtype}{int} zlib\_set\_method;}
+\DoxyCodeLine{210    \textcolor{keywordtype}{int} zlib\_set\_window\_bits;}
+\DoxyCodeLine{211    \textcolor{keywordtype}{int} zlib\_set\_mem\_level;}
+\DoxyCodeLine{212    \textcolor{keywordtype}{int} zlib\_set\_strategy;}
+\DoxyCodeLine{213 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{214 }
+\DoxyCodeLine{215    \mbox{\hyperlink{png_8h_aed373ad2e16fd6df7ccfa96329441d0d}{png\_uint\_32}} \mbox{\hyperlink{structpng__struct__def_abb11531c781ea91b63d0fa1af122eaab}{width}};         \textcolor{comment}{/* width of image in pixels */}}
+\DoxyCodeLine{216    \mbox{\hyperlink{png_8h_aed373ad2e16fd6df7ccfa96329441d0d}{png\_uint\_32}} \mbox{\hyperlink{structpng__struct__def_a1dd47d897b96de5b8c12a242695adad5}{height}};        \textcolor{comment}{/* height of image in pixels */}}
+\DoxyCodeLine{217    \mbox{\hyperlink{png_8h_aed373ad2e16fd6df7ccfa96329441d0d}{png\_uint\_32}} \mbox{\hyperlink{structpng__struct__def_a209926649ef1f0bb46ea0f277041ce78}{num\_rows}};      \textcolor{comment}{/* number of rows in current pass */}}
+\DoxyCodeLine{218    \mbox{\hyperlink{png_8h_aed373ad2e16fd6df7ccfa96329441d0d}{png\_uint\_32}} \mbox{\hyperlink{structpng__struct__def_a6fb8c450c20bc0161211b00a18db173e}{usr\_width}};     \textcolor{comment}{/* width of row at start of write */}}
+\DoxyCodeLine{219    \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{structpng__struct__def_a319cabc2d22b60c302ad8071ce191340}{rowbytes}};           \textcolor{comment}{/* size of row in bytes */}}
+\DoxyCodeLine{220    \mbox{\hyperlink{png_8h_aed373ad2e16fd6df7ccfa96329441d0d}{png\_uint\_32}} \mbox{\hyperlink{structpng__struct__def_a6323d3dc2ce858895c889716aba45b17}{iwidth}};        \textcolor{comment}{/* width of current interlaced row in pixels */}}
+\DoxyCodeLine{221    \mbox{\hyperlink{png_8h_aed373ad2e16fd6df7ccfa96329441d0d}{png\_uint\_32}} \mbox{\hyperlink{structpng__struct__def_a0f06a454e8369cbbb90be4b5ab25654c}{row\_number}};    \textcolor{comment}{/* current row in interlace pass */}}
+\DoxyCodeLine{222    \mbox{\hyperlink{png_8h_aed373ad2e16fd6df7ccfa96329441d0d}{png\_uint\_32}} \mbox{\hyperlink{structpng__struct__def_a1a80d77019bdabf4a7c4848b9822cbfb}{chunk\_name}};    \textcolor{comment}{/* PNG\_CHUNK() id of current chunk */}}
+\DoxyCodeLine{223    \mbox{\hyperlink{pngconf_8h_a759e1c893f977ec7b67820bc3ca37524}{png\_bytep}} \mbox{\hyperlink{structpng__struct__def_af307f45d48c7900d1036388bccbed7bb}{prev\_row}};        \textcolor{comment}{/* buffer to save previous (unfiltered) row.}}
+\DoxyCodeLine{224 \textcolor{comment}{                               * While reading this is a pointer into}}
+\DoxyCodeLine{225 \textcolor{comment}{                               * big\_prev\_row; while writing it is separately}}
+\DoxyCodeLine{226 \textcolor{comment}{                               * allocated if needed.}}
+\DoxyCodeLine{227 \textcolor{comment}{                               */}}
+\DoxyCodeLine{228    \mbox{\hyperlink{pngconf_8h_a759e1c893f977ec7b67820bc3ca37524}{png\_bytep}} \mbox{\hyperlink{structpng__struct__def_a05b648068595d5cf4400c0709cb0012d}{row\_buf}};         \textcolor{comment}{/* buffer to save current (unfiltered) row.}}
+\DoxyCodeLine{229 \textcolor{comment}{                               * While reading, this is a pointer into}}
+\DoxyCodeLine{230 \textcolor{comment}{                               * big\_row\_buf; while writing it is separately}}
+\DoxyCodeLine{231 \textcolor{comment}{                               * allocated.}}
+\DoxyCodeLine{232 \textcolor{comment}{                               */}}
+\DoxyCodeLine{233 \textcolor{preprocessor}{\#ifdef PNG\_WRITE\_FILTER\_SUPPORTED}}
+\DoxyCodeLine{234    \mbox{\hyperlink{pngconf_8h_a759e1c893f977ec7b67820bc3ca37524}{png\_bytep}} try\_row;    \textcolor{comment}{/* buffer to save trial row when filtering */}}
+\DoxyCodeLine{235    \mbox{\hyperlink{pngconf_8h_a759e1c893f977ec7b67820bc3ca37524}{png\_bytep}} tst\_row;    \textcolor{comment}{/* buffer to save best trial row when filtering */}}
+\DoxyCodeLine{236 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{237    \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{structpng__struct__def_a5b11bd135991fc9aa80f255d83439658}{info\_rowbytes}};      \textcolor{comment}{/* Added in 1.5.4: cache of updated row bytes */}}
+\DoxyCodeLine{238 }
+\DoxyCodeLine{239    \mbox{\hyperlink{png_8h_aed373ad2e16fd6df7ccfa96329441d0d}{png\_uint\_32}} \mbox{\hyperlink{structpng__struct__def_ab6951f7357162b382c2647a8d577d5b3}{idat\_size}};     \textcolor{comment}{/* current IDAT size for read */}}
+\DoxyCodeLine{240    \mbox{\hyperlink{png_8h_aed373ad2e16fd6df7ccfa96329441d0d}{png\_uint\_32}} \mbox{\hyperlink{structpng__struct__def_a41e688627efdb841bb3c7e49b6872f0c}{crc}};           \textcolor{comment}{/* current chunk CRC value */}}
+\DoxyCodeLine{241    \mbox{\hyperlink{structpng__color__struct}{png\_colorp}} \mbox{\hyperlink{structpng__struct__def_ae79416e3df9e02b8a17eac57f91b6fc0}{palette}};        \textcolor{comment}{/* palette from the input file */}}
+\DoxyCodeLine{242    \mbox{\hyperlink{pngrutil_8c_a7b67546e4211b127dd370e8ef197bc3f}{png\_uint\_16}} \mbox{\hyperlink{structpng__struct__def_a55dc88ce7229269ae06c498e63a00ccc}{num\_palette}};   \textcolor{comment}{/* number of color entries in palette */}}
+\DoxyCodeLine{243 }
+\DoxyCodeLine{244 \textcolor{comment}{/* Added at libpng-\/1.5.10 */}}
+\DoxyCodeLine{245 \textcolor{preprocessor}{\#ifdef PNG\_CHECK\_FOR\_INVALID\_INDEX\_SUPPORTED}}
+\DoxyCodeLine{246    \textcolor{keywordtype}{int} num\_palette\_max;       \textcolor{comment}{/* maximum palette index found in IDAT */}}
+\DoxyCodeLine{247 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{248 }
+\DoxyCodeLine{249    \mbox{\hyperlink{pngrutil_8c_a7b67546e4211b127dd370e8ef197bc3f}{png\_uint\_16}} \mbox{\hyperlink{structpng__struct__def_a3988e717574b747396cb156e29895cb0}{num\_trans}};     \textcolor{comment}{/* number of transparency values */}}
+\DoxyCodeLine{250    png\_byte \mbox{\hyperlink{structpng__struct__def_a535707a3578321703642be999866f131}{compression}};      \textcolor{comment}{/* file compression type (always 0) */}}
+\DoxyCodeLine{251    png\_byte \mbox{\hyperlink{structpng__struct__def_a4680ad260ea37a0b69677ff537b1c8b1}{filter}};           \textcolor{comment}{/* file filter type (always 0) */}}
+\DoxyCodeLine{252    png\_byte \mbox{\hyperlink{structpng__struct__def_ac57d1535c25726a4080f4f471dbb7e17}{interlaced}};       \textcolor{comment}{/* PNG\_INTERLACE\_NONE, PNG\_INTERLACE\_ADAM7 */}}
+\DoxyCodeLine{253    png\_byte \mbox{\hyperlink{structpng__struct__def_a61226f1790d295a85fdd0ca8c195469c}{pass}};             \textcolor{comment}{/* current interlace pass (0 -\/ 6) */}}
+\DoxyCodeLine{254    png\_byte \mbox{\hyperlink{structpng__struct__def_abcbabd6f1568b3924af91556371d7b73}{do\_filter}};        \textcolor{comment}{/* row filter flags (see PNG\_FILTER\_ in png.h ) */}}
+\DoxyCodeLine{255    png\_byte \mbox{\hyperlink{structpng__struct__def_a01e64966deb22a659cce371cbf6af666}{color\_type}};       \textcolor{comment}{/* color type of file */}}
+\DoxyCodeLine{256    png\_byte \mbox{\hyperlink{structpng__struct__def_a8a18c35f00b4dff31c12306156f01ce3}{bit\_depth}};        \textcolor{comment}{/* bit depth of file */}}
+\DoxyCodeLine{257    png\_byte \mbox{\hyperlink{structpng__struct__def_af30e53e1cad0830302030152c81cc59f}{usr\_bit\_depth}};    \textcolor{comment}{/* bit depth of users row: write only */}}
+\DoxyCodeLine{258    png\_byte \mbox{\hyperlink{structpng__struct__def_ac7a7265bc00d1fd48a8eb20727f53fa1}{pixel\_depth}};      \textcolor{comment}{/* number of bits per pixel */}}
+\DoxyCodeLine{259    png\_byte \mbox{\hyperlink{structpng__struct__def_a6cc1ac2587b192b7220639ab719f2b73}{channels}};         \textcolor{comment}{/* number of channels in file */}}
+\DoxyCodeLine{260 \textcolor{preprocessor}{\#ifdef PNG\_WRITE\_SUPPORTED}}
+\DoxyCodeLine{261    png\_byte usr\_channels;     \textcolor{comment}{/* channels at start of write: write only */}}
+\DoxyCodeLine{262 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{263    png\_byte \mbox{\hyperlink{structpng__struct__def_a019243f63de45bd677d23f8ed533679d}{sig\_bytes}};        \textcolor{comment}{/* magic bytes read/written from start of file */}}
+\DoxyCodeLine{264    png\_byte \mbox{\hyperlink{structpng__struct__def_aab7b84c6ccac540be5df26a81654a009}{maximum\_pixel\_depth}};}
+\DoxyCodeLine{265                               \textcolor{comment}{/* pixel depth used for the row buffers */}}
+\DoxyCodeLine{266    png\_byte \mbox{\hyperlink{structpng__struct__def_aa4e37c14d96c7057389a7cb2ca839290}{transformed\_pixel\_depth}};}
+\DoxyCodeLine{267                               \textcolor{comment}{/* pixel depth after read/write transforms */}}
+\DoxyCodeLine{268 \textcolor{preprocessor}{\#if ZLIB\_VERNUM >= 0x1240}}
+\DoxyCodeLine{269    png\_byte zstream\_start;    \textcolor{comment}{/* at start of an input zlib stream */}}
+\DoxyCodeLine{270 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* Zlib >= 1.2.4 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{271 \textcolor{preprocessor}{\#if defined(PNG\_READ\_FILLER\_SUPPORTED) || defined(PNG\_WRITE\_FILLER\_SUPPORTED)}}
+\DoxyCodeLine{272    \mbox{\hyperlink{pngrutil_8c_a7b67546e4211b127dd370e8ef197bc3f}{png\_uint\_16}} filler;           \textcolor{comment}{/* filler bytes for pixel expansion */}}
+\DoxyCodeLine{273 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{274 }
+\DoxyCodeLine{275 \textcolor{preprocessor}{\#if defined(PNG\_bKGD\_SUPPORTED) || defined(PNG\_READ\_BACKGROUND\_SUPPORTED) ||\(\backslash\)}}
+\DoxyCodeLine{276 \textcolor{preprocessor}{   defined(PNG\_READ\_ALPHA\_MODE\_SUPPORTED)}}
+\DoxyCodeLine{277    png\_byte background\_gamma\_type;}
+\DoxyCodeLine{278    \mbox{\hyperlink{pngconf_8h_a23911f489715bb4644c9c9c808cbab5a}{png\_fixed\_point}} background\_gamma;}
+\DoxyCodeLine{279    \mbox{\hyperlink{structpng__color__16__struct}{png\_color\_16}} background;   \textcolor{comment}{/* background color in screen gamma space */}}
+\DoxyCodeLine{280 \textcolor{preprocessor}{\#ifdef PNG\_READ\_GAMMA\_SUPPORTED}}
+\DoxyCodeLine{281    \mbox{\hyperlink{structpng__color__16__struct}{png\_color\_16}} background\_1; \textcolor{comment}{/* background normalized to gamma 1.0 */}}
+\DoxyCodeLine{282 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{283 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* bKGD */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{284 }
+\DoxyCodeLine{285 \textcolor{preprocessor}{\#ifdef PNG\_WRITE\_FLUSH\_SUPPORTED}}
+\DoxyCodeLine{286    png\_flush\_ptr output\_flush\_fn; \textcolor{comment}{/* Function for flushing output */}}
+\DoxyCodeLine{287    \mbox{\hyperlink{png_8h_aed373ad2e16fd6df7ccfa96329441d0d}{png\_uint\_32}} flush\_dist;    \textcolor{comment}{/* how many rows apart to flush, 0 -\/ no flush */}}
+\DoxyCodeLine{288    \mbox{\hyperlink{png_8h_aed373ad2e16fd6df7ccfa96329441d0d}{png\_uint\_32}} flush\_rows;    \textcolor{comment}{/* number of rows written since last flush */}}
+\DoxyCodeLine{289 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{290 }
+\DoxyCodeLine{291 \textcolor{preprocessor}{\#ifdef PNG\_READ\_GAMMA\_SUPPORTED}}
+\DoxyCodeLine{292    \textcolor{keywordtype}{int} gamma\_shift;      \textcolor{comment}{/* number of "{}insignificant"{} bits in 16-\/bit gamma */}}
+\DoxyCodeLine{293    \mbox{\hyperlink{pngconf_8h_a23911f489715bb4644c9c9c808cbab5a}{png\_fixed\_point}} \mbox{\hyperlink{png_8h_a0882b4a99a573a63e265debbe5bc5b72}{screen\_gamma}}; \textcolor{comment}{/* screen gamma value (display\_exponent) */}}
+\DoxyCodeLine{294 }
+\DoxyCodeLine{295    \mbox{\hyperlink{pngconf_8h_a759e1c893f977ec7b67820bc3ca37524}{png\_bytep}} gamma\_table;     \textcolor{comment}{/* gamma table for 8-\/bit depth files */}}
+\DoxyCodeLine{296    \mbox{\hyperlink{pngconf_8h_ae2cbc4889061b5c3b8424c022d0e5fa7}{png\_uint\_16pp}} gamma\_16\_table; \textcolor{comment}{/* gamma table for 16-\/bit depth files */}}
+\DoxyCodeLine{297 \textcolor{preprocessor}{\#if defined(PNG\_READ\_BACKGROUND\_SUPPORTED) || \(\backslash\)}}
+\DoxyCodeLine{298 \textcolor{preprocessor}{   defined(PNG\_READ\_ALPHA\_MODE\_SUPPORTED) || \(\backslash\)}}
+\DoxyCodeLine{299 \textcolor{preprocessor}{   defined(PNG\_READ\_RGB\_TO\_GRAY\_SUPPORTED)}}
+\DoxyCodeLine{300    \mbox{\hyperlink{pngconf_8h_a759e1c893f977ec7b67820bc3ca37524}{png\_bytep}} gamma\_from\_1;    \textcolor{comment}{/* converts from 1.0 to screen */}}
+\DoxyCodeLine{301    \mbox{\hyperlink{pngconf_8h_a759e1c893f977ec7b67820bc3ca37524}{png\_bytep}} gamma\_to\_1;      \textcolor{comment}{/* converts from file to 1.0 */}}
+\DoxyCodeLine{302    \mbox{\hyperlink{pngconf_8h_ae2cbc4889061b5c3b8424c022d0e5fa7}{png\_uint\_16pp}} gamma\_16\_from\_1; \textcolor{comment}{/* converts from 1.0 to screen */}}
+\DoxyCodeLine{303    \mbox{\hyperlink{pngconf_8h_ae2cbc4889061b5c3b8424c022d0e5fa7}{png\_uint\_16pp}} gamma\_16\_to\_1; \textcolor{comment}{/* converts from file to 1.0 */}}
+\DoxyCodeLine{304 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* READ\_BACKGROUND || READ\_ALPHA\_MODE || RGB\_TO\_GRAY */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{305 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{306 }
+\DoxyCodeLine{307 \textcolor{preprocessor}{\#if defined(PNG\_READ\_GAMMA\_SUPPORTED) || defined(PNG\_sBIT\_SUPPORTED)}}
+\DoxyCodeLine{308    \mbox{\hyperlink{structpng__color__8__struct}{png\_color\_8}} sig\_bit;       \textcolor{comment}{/* significant bits in each available channel */}}
+\DoxyCodeLine{309 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{310 }
+\DoxyCodeLine{311 \textcolor{preprocessor}{\#if defined(PNG\_READ\_SHIFT\_SUPPORTED) || defined(PNG\_WRITE\_SHIFT\_SUPPORTED)}}
+\DoxyCodeLine{312    \mbox{\hyperlink{structpng__color__8__struct}{png\_color\_8}} \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_gga485dc2a0e5ed7da3d9f826367b36ee55aa844ac0d299bd083b2938e6cbf34743a}{shift}};         \textcolor{comment}{/* shift for significant bit transformation */}}
+\DoxyCodeLine{313 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{314 }
+\DoxyCodeLine{315 \textcolor{preprocessor}{\#if defined(PNG\_tRNS\_SUPPORTED) || defined(PNG\_READ\_BACKGROUND\_SUPPORTED) \(\backslash\)}}
+\DoxyCodeLine{316 \textcolor{preprocessor}{ || defined(PNG\_READ\_EXPAND\_SUPPORTED) || defined(PNG\_READ\_BACKGROUND\_SUPPORTED)}}
+\DoxyCodeLine{317    \mbox{\hyperlink{pngconf_8h_a759e1c893f977ec7b67820bc3ca37524}{png\_bytep}} trans\_alpha;           \textcolor{comment}{/* alpha values for paletted files */}}
+\DoxyCodeLine{318    \mbox{\hyperlink{structpng__color__16__struct}{png\_color\_16}} trans\_color;  \textcolor{comment}{/* transparent color for non-\/paletted files */}}
+\DoxyCodeLine{319 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{320 }
+\DoxyCodeLine{321    png\_read\_status\_ptr \mbox{\hyperlink{structpng__struct__def_a0d67c044d4088f4673b90c2109ff94c0}{read\_row\_fn}};   \textcolor{comment}{/* called after each row is decoded */}}
+\DoxyCodeLine{322    png\_write\_status\_ptr \mbox{\hyperlink{structpng__struct__def_a1ea44e185e0f8bdd7299f93fd017c32c}{write\_row\_fn}}; \textcolor{comment}{/* called after each row is encoded */}}
+\DoxyCodeLine{323 \textcolor{preprocessor}{\#ifdef PNG\_PROGRESSIVE\_READ\_SUPPORTED}}
+\DoxyCodeLine{324    png\_progressive\_info\_ptr info\_fn; \textcolor{comment}{/* called after header data fully read */}}
+\DoxyCodeLine{325    png\_progressive\_row\_ptr row\_fn;   \textcolor{comment}{/* called after a prog. row is decoded */}}
+\DoxyCodeLine{326    png\_progressive\_end\_ptr end\_fn;   \textcolor{comment}{/* called after image is complete */}}
+\DoxyCodeLine{327    \mbox{\hyperlink{pngconf_8h_a759e1c893f977ec7b67820bc3ca37524}{png\_bytep}} save\_buffer\_ptr;        \textcolor{comment}{/* current location in save\_buffer */}}
+\DoxyCodeLine{328    \mbox{\hyperlink{pngconf_8h_a759e1c893f977ec7b67820bc3ca37524}{png\_bytep}} save\_buffer;            \textcolor{comment}{/* buffer for previously read data */}}
+\DoxyCodeLine{329    \mbox{\hyperlink{pngconf_8h_a759e1c893f977ec7b67820bc3ca37524}{png\_bytep}} current\_buffer\_ptr;     \textcolor{comment}{/* current location in current\_buffer */}}
+\DoxyCodeLine{330    \mbox{\hyperlink{pngconf_8h_a759e1c893f977ec7b67820bc3ca37524}{png\_bytep}} current\_buffer;         \textcolor{comment}{/* buffer for recently used data */}}
+\DoxyCodeLine{331    \mbox{\hyperlink{png_8h_aed373ad2e16fd6df7ccfa96329441d0d}{png\_uint\_32}} push\_length;          \textcolor{comment}{/* size of current input chunk */}}
+\DoxyCodeLine{332    \mbox{\hyperlink{png_8h_aed373ad2e16fd6df7ccfa96329441d0d}{png\_uint\_32}} skip\_length;          \textcolor{comment}{/* bytes to skip in input data */}}
+\DoxyCodeLine{333    \textcolor{keywordtype}{size\_t} save\_buffer\_size;          \textcolor{comment}{/* amount of data now in save\_buffer */}}
+\DoxyCodeLine{334    \textcolor{keywordtype}{size\_t} save\_buffer\_max;           \textcolor{comment}{/* total size of save\_buffer */}}
+\DoxyCodeLine{335    \textcolor{keywordtype}{size\_t} buffer\_size;               \textcolor{comment}{/* total amount of available input data */}}
+\DoxyCodeLine{336    \textcolor{keywordtype}{size\_t} current\_buffer\_size;       \textcolor{comment}{/* amount of data now in current\_buffer */}}
+\DoxyCodeLine{337    \textcolor{keywordtype}{int} process\_mode;                 \textcolor{comment}{/* what push library is currently doing */}}
+\DoxyCodeLine{338    \textcolor{keywordtype}{int} cur\_palette;                  \textcolor{comment}{/* current push library palette index */}}
+\DoxyCodeLine{339 }
+\DoxyCodeLine{340 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* PROGRESSIVE\_READ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{341 }
+\DoxyCodeLine{342 \textcolor{preprocessor}{\#if defined(\_\_TURBOC\_\_) \&\& !defined(\_Windows) \&\& !defined(\_\_FLAT\_\_)}}
+\DoxyCodeLine{343 \textcolor{comment}{/* For the Borland special 64K segment handler */}}
+\DoxyCodeLine{344    \mbox{\hyperlink{pngconf_8h_a84797ddea34868883a274e458368a63b}{png\_bytepp}} offset\_table\_ptr;}
+\DoxyCodeLine{345    \mbox{\hyperlink{pngconf_8h_a759e1c893f977ec7b67820bc3ca37524}{png\_bytep}} offset\_table;}
+\DoxyCodeLine{346    \mbox{\hyperlink{pngrutil_8c_a7b67546e4211b127dd370e8ef197bc3f}{png\_uint\_16}} offset\_table\_number;}
+\DoxyCodeLine{347    \mbox{\hyperlink{pngrutil_8c_a7b67546e4211b127dd370e8ef197bc3f}{png\_uint\_16}} offset\_table\_count;}
+\DoxyCodeLine{348    \mbox{\hyperlink{pngrutil_8c_a7b67546e4211b127dd370e8ef197bc3f}{png\_uint\_16}} offset\_table\_count\_free;}
+\DoxyCodeLine{349 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{350 }
+\DoxyCodeLine{351 \textcolor{preprocessor}{\#ifdef PNG\_READ\_QUANTIZE\_SUPPORTED}}
+\DoxyCodeLine{352    \mbox{\hyperlink{pngconf_8h_a759e1c893f977ec7b67820bc3ca37524}{png\_bytep}} palette\_lookup; \textcolor{comment}{/* lookup table for quantizing */}}
+\DoxyCodeLine{353    \mbox{\hyperlink{pngconf_8h_a759e1c893f977ec7b67820bc3ca37524}{png\_bytep}} quantize\_index; \textcolor{comment}{/* index translation for palette files */}}
+\DoxyCodeLine{354 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{355 }
+\DoxyCodeLine{356 \textcolor{comment}{/* Options */}}
+\DoxyCodeLine{357 \textcolor{preprocessor}{\#ifdef PNG\_SET\_OPTION\_SUPPORTED}}
+\DoxyCodeLine{358    \mbox{\hyperlink{png_8h_aed373ad2e16fd6df7ccfa96329441d0d}{png\_uint\_32}} options;           \textcolor{comment}{/* On/off state (up to 16 options) */}}
+\DoxyCodeLine{359 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{360 }
+\DoxyCodeLine{361 \textcolor{preprocessor}{\#if PNG\_LIBPNG\_VER < 10700}}
+\DoxyCodeLine{362 \textcolor{comment}{/* To do: remove this from libpng-\/1.7 */}}
+\DoxyCodeLine{363 \textcolor{preprocessor}{\#ifdef PNG\_TIME\_RFC1123\_SUPPORTED}}
+\DoxyCodeLine{364    \textcolor{keywordtype}{char} time\_buffer[29]; \textcolor{comment}{/* String to hold RFC 1123 time text */}}
+\DoxyCodeLine{365 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{366 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{367 }
+\DoxyCodeLine{368 \textcolor{comment}{/* New members added in libpng-\/1.0.6 */}}
+\DoxyCodeLine{369 }
+\DoxyCodeLine{370    \mbox{\hyperlink{png_8h_aed373ad2e16fd6df7ccfa96329441d0d}{png\_uint\_32}} \mbox{\hyperlink{structpng__struct__def_a610bea16ff780c149d2756b60d2e6087}{free\_me}};    \textcolor{comment}{/* flags items libpng is responsible for freeing */}}
+\DoxyCodeLine{371 }
+\DoxyCodeLine{372 \textcolor{preprocessor}{\#ifdef PNG\_USER\_CHUNKS\_SUPPORTED}}
+\DoxyCodeLine{373    \mbox{\hyperlink{pngconf_8h_a9dc088c359b6d7e45682af63a3361b58}{png\_voidp}} user\_chunk\_ptr;}
+\DoxyCodeLine{374 \textcolor{preprocessor}{\#ifdef PNG\_READ\_USER\_CHUNKS\_SUPPORTED}}
+\DoxyCodeLine{375    png\_user\_chunk\_ptr read\_user\_chunk\_fn; \textcolor{comment}{/* user read chunk handler */}}
+\DoxyCodeLine{376 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{377 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{378 }
+\DoxyCodeLine{379 \textcolor{preprocessor}{\#ifdef PNG\_SET\_UNKNOWN\_CHUNKS\_SUPPORTED}}
+\DoxyCodeLine{380    \textcolor{keywordtype}{int}          unknown\_default; \textcolor{comment}{/* As PNG\_HANDLE\_* */}}
+\DoxyCodeLine{381    \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} num\_chunk\_list;  \textcolor{comment}{/* Number of entries in the list */}}
+\DoxyCodeLine{382    \mbox{\hyperlink{pngconf_8h_a759e1c893f977ec7b67820bc3ca37524}{png\_bytep}}    chunk\_list;      \textcolor{comment}{/* List of png\_byte[5]; the textual chunk name}}
+\DoxyCodeLine{383 \textcolor{comment}{                                  * followed by a PNG\_HANDLE\_* byte */}}
+\DoxyCodeLine{384 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{385 }
+\DoxyCodeLine{386 \textcolor{comment}{/* New members added in libpng-\/1.0.3 */}}
+\DoxyCodeLine{387 \textcolor{preprocessor}{\#ifdef PNG\_READ\_RGB\_TO\_GRAY\_SUPPORTED}}
+\DoxyCodeLine{388    png\_byte rgb\_to\_gray\_status;}
+\DoxyCodeLine{389    \textcolor{comment}{/* Added in libpng 1.5.5 to record setting of coefficients: */}}
+\DoxyCodeLine{390    png\_byte rgb\_to\_gray\_coefficients\_set;}
+\DoxyCodeLine{391    \textcolor{comment}{/* These were changed from png\_byte in libpng-\/1.0.6 */}}
+\DoxyCodeLine{392    \mbox{\hyperlink{pngrutil_8c_a7b67546e4211b127dd370e8ef197bc3f}{png\_uint\_16}} rgb\_to\_gray\_red\_coeff;}
+\DoxyCodeLine{393    \mbox{\hyperlink{pngrutil_8c_a7b67546e4211b127dd370e8ef197bc3f}{png\_uint\_16}} rgb\_to\_gray\_green\_coeff;}
+\DoxyCodeLine{394    \textcolor{comment}{/* deleted in 1.5.5: rgb\_to\_gray\_blue\_coeff; */}}
+\DoxyCodeLine{395 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{396 }
+\DoxyCodeLine{397 \textcolor{comment}{/* New member added in libpng-\/1.6.36 */}}
+\DoxyCodeLine{398 \textcolor{preprocessor}{\#if defined(PNG\_READ\_EXPAND\_SUPPORTED) \&\& \(\backslash\)}}
+\DoxyCodeLine{399 \textcolor{preprocessor}{    defined(PNG\_ARM\_NEON\_IMPLEMENTATION)}}
+\DoxyCodeLine{400    \mbox{\hyperlink{pngconf_8h_a759e1c893f977ec7b67820bc3ca37524}{png\_bytep}} riffled\_palette; \textcolor{comment}{/* buffer for accelerated palette expansion */}}
+\DoxyCodeLine{401 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{402 }
+\DoxyCodeLine{403 \textcolor{comment}{/* New member added in libpng-\/1.0.4 (renamed in 1.0.9) */}}
+\DoxyCodeLine{404 \textcolor{preprocessor}{\#if defined(PNG\_MNG\_FEATURES\_SUPPORTED)}}
+\DoxyCodeLine{405 \textcolor{comment}{/* Changed from png\_byte to png\_uint\_32 at version 1.2.0 */}}
+\DoxyCodeLine{406    \mbox{\hyperlink{png_8h_aed373ad2e16fd6df7ccfa96329441d0d}{png\_uint\_32}} mng\_features\_permitted;}
+\DoxyCodeLine{407 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{408 }
+\DoxyCodeLine{409 \textcolor{comment}{/* New member added in libpng-\/1.0.9, ifdef'ed out in 1.0.12, enabled in 1.2.0 */}}
+\DoxyCodeLine{410 \textcolor{preprocessor}{\#ifdef PNG\_MNG\_FEATURES\_SUPPORTED}}
+\DoxyCodeLine{411    png\_byte filter\_type;}
+\DoxyCodeLine{412 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{413 }
+\DoxyCodeLine{414 \textcolor{comment}{/* New members added in libpng-\/1.2.0 */}}
+\DoxyCodeLine{415 }
+\DoxyCodeLine{416 \textcolor{comment}{/* New members added in libpng-\/1.0.2 but first enabled by default in 1.2.0 */}}
+\DoxyCodeLine{417 \textcolor{preprocessor}{\#ifdef PNG\_USER\_MEM\_SUPPORTED}}
+\DoxyCodeLine{418    \mbox{\hyperlink{pngconf_8h_a9dc088c359b6d7e45682af63a3361b58}{png\_voidp}} mem\_ptr;             \textcolor{comment}{/* user supplied struct for mem functions */}}
+\DoxyCodeLine{419    png\_malloc\_ptr malloc\_fn;      \textcolor{comment}{/* function for allocating memory */}}
+\DoxyCodeLine{420    png\_free\_ptr free\_fn;          \textcolor{comment}{/* function for freeing memory */}}
+\DoxyCodeLine{421 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{422 }
+\DoxyCodeLine{423 \textcolor{comment}{/* New member added in libpng-\/1.0.13 and 1.2.0 */}}
+\DoxyCodeLine{424    \mbox{\hyperlink{pngconf_8h_a759e1c893f977ec7b67820bc3ca37524}{png\_bytep}} \mbox{\hyperlink{structpng__struct__def_a7248deb9bb1525d1d16ee9d6187128b9}{big\_row\_buf}};         \textcolor{comment}{/* buffer to save current (unfiltered) row */}}
+\DoxyCodeLine{425 }
+\DoxyCodeLine{426 \textcolor{preprocessor}{\#ifdef PNG\_READ\_QUANTIZE\_SUPPORTED}}
+\DoxyCodeLine{427 \textcolor{comment}{/* The following three members were added at version 1.0.14 and 1.2.4 */}}
+\DoxyCodeLine{428    \mbox{\hyperlink{pngconf_8h_a759e1c893f977ec7b67820bc3ca37524}{png\_bytep}} quantize\_sort;          \textcolor{comment}{/* working sort array */}}
+\DoxyCodeLine{429    \mbox{\hyperlink{pngconf_8h_a759e1c893f977ec7b67820bc3ca37524}{png\_bytep}} index\_to\_palette;       \textcolor{comment}{/* where the original index currently is}}
+\DoxyCodeLine{430 \textcolor{comment}{                                        in the palette */}}
+\DoxyCodeLine{431    \mbox{\hyperlink{pngconf_8h_a759e1c893f977ec7b67820bc3ca37524}{png\_bytep}} palette\_to\_index;       \textcolor{comment}{/* which original index points to this}}
+\DoxyCodeLine{432 \textcolor{comment}{                                         palette color */}}
+\DoxyCodeLine{433 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{434 }
+\DoxyCodeLine{435 \textcolor{comment}{/* New members added in libpng-\/1.0.16 and 1.2.6 */}}
+\DoxyCodeLine{436    png\_byte \mbox{\hyperlink{structpng__struct__def_ad448c2648c447212ff66a0ec48cf1394}{compression\_type}};}
+\DoxyCodeLine{437 }
+\DoxyCodeLine{438 \textcolor{preprocessor}{\#ifdef PNG\_USER\_LIMITS\_SUPPORTED}}
+\DoxyCodeLine{439    \mbox{\hyperlink{png_8h_aed373ad2e16fd6df7ccfa96329441d0d}{png\_uint\_32}} user\_width\_max;}
+\DoxyCodeLine{440    \mbox{\hyperlink{png_8h_aed373ad2e16fd6df7ccfa96329441d0d}{png\_uint\_32}} user\_height\_max;}
+\DoxyCodeLine{441 }
+\DoxyCodeLine{442    \textcolor{comment}{/* Added in libpng-\/1.4.0: Total number of sPLT, text, and unknown}}
+\DoxyCodeLine{443 \textcolor{comment}{    * chunks that can be stored (0 means unlimited).}}
+\DoxyCodeLine{444 \textcolor{comment}{    */}}
+\DoxyCodeLine{445    \mbox{\hyperlink{png_8h_aed373ad2e16fd6df7ccfa96329441d0d}{png\_uint\_32}} user\_chunk\_cache\_max;}
+\DoxyCodeLine{446 }
+\DoxyCodeLine{447    \textcolor{comment}{/* Total memory that a zTXt, sPLT, iTXt, iCCP, or unknown chunk}}
+\DoxyCodeLine{448 \textcolor{comment}{    * can occupy when decompressed.  0 means unlimited.}}
+\DoxyCodeLine{449 \textcolor{comment}{    */}}
+\DoxyCodeLine{450    \mbox{\hyperlink{pngconf_8h_a5f4e523d0194e10bd008d93b593ea989}{png\_alloc\_size\_t}} user\_chunk\_malloc\_max;}
+\DoxyCodeLine{451 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{452 }
+\DoxyCodeLine{453 \textcolor{comment}{/* New member added in libpng-\/1.0.25 and 1.2.17 */}}
+\DoxyCodeLine{454 \textcolor{preprocessor}{\#ifdef PNG\_READ\_UNKNOWN\_CHUNKS\_SUPPORTED}}
+\DoxyCodeLine{455    \textcolor{comment}{/* Temporary storage for unknown chunk that the library doesn't recognize,}}
+\DoxyCodeLine{456 \textcolor{comment}{    * used while reading the chunk.}}
+\DoxyCodeLine{457 \textcolor{comment}{    */}}
+\DoxyCodeLine{458    \mbox{\hyperlink{structpng__unknown__chunk__t}{png\_unknown\_chunk}} unknown\_chunk;}
+\DoxyCodeLine{459 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{460 }
+\DoxyCodeLine{461 \textcolor{comment}{/* New member added in libpng-\/1.2.26 */}}
+\DoxyCodeLine{462    \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{structpng__struct__def_a60d1e700b165cb08431080116aeedd45}{old\_big\_row\_buf\_size}};}
+\DoxyCodeLine{463 }
+\DoxyCodeLine{464 \textcolor{preprocessor}{\#ifdef PNG\_READ\_SUPPORTED}}
+\DoxyCodeLine{465 \textcolor{comment}{/* New member added in libpng-\/1.2.30 */}}
+\DoxyCodeLine{466   \mbox{\hyperlink{pngconf_8h_a759e1c893f977ec7b67820bc3ca37524}{png\_bytep}}        read\_buffer;      \textcolor{comment}{/* buffer for reading chunk data */}}
+\DoxyCodeLine{467   \mbox{\hyperlink{pngconf_8h_a5f4e523d0194e10bd008d93b593ea989}{png\_alloc\_size\_t}} read\_buffer\_size; \textcolor{comment}{/* current size of the buffer */}}
+\DoxyCodeLine{468 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{469 \textcolor{preprocessor}{\#ifdef PNG\_SEQUENTIAL\_READ\_SUPPORTED}}
+\DoxyCodeLine{470   \mbox{\hyperlink{zconf_8h_a87d141052bcd5ec8a80812a565c70369}{uInt}}             IDAT\_read\_size;   \textcolor{comment}{/* limit on read buffer size for IDAT */}}
+\DoxyCodeLine{471 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{472 }
+\DoxyCodeLine{473 \textcolor{preprocessor}{\#ifdef PNG\_IO\_STATE\_SUPPORTED}}
+\DoxyCodeLine{474 \textcolor{comment}{/* New member added in libpng-\/1.4.0 */}}
+\DoxyCodeLine{475    \mbox{\hyperlink{png_8h_aed373ad2e16fd6df7ccfa96329441d0d}{png\_uint\_32}} io\_state;}
+\DoxyCodeLine{476 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{477 }
+\DoxyCodeLine{478 \textcolor{comment}{/* New member added in libpng-\/1.5.6 */}}
+\DoxyCodeLine{479    \mbox{\hyperlink{pngconf_8h_a759e1c893f977ec7b67820bc3ca37524}{png\_bytep}} \mbox{\hyperlink{structpng__struct__def_a58ed983872249c948e063743eb18d427}{big\_prev\_row}};}
+\DoxyCodeLine{480 }
+\DoxyCodeLine{481 \textcolor{comment}{/* New member added in libpng-\/1.5.7 */}}
+\DoxyCodeLine{482    \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} (*\mbox{\hyperlink{structpng__struct__def_a669016ed081452035d16f3a93740d663}{read\_filter}}[\mbox{\hyperlink{png_8h_a9bcc6cc30ac1504e9c194b890c17ad94}{PNG\_FILTER\_VALUE\_LAST}}-\/1])(\mbox{\hyperlink{structpng__row__info__struct}{png\_row\_infop}} row\_info,}
+\DoxyCodeLine{483       \mbox{\hyperlink{pngconf_8h_a759e1c893f977ec7b67820bc3ca37524}{png\_bytep}} \mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682caf1965a857bc285d26fe22023aa5ab50d}{row}}, \mbox{\hyperlink{pngconf_8h_a2e608af822427492832d11909c2f3fee}{png\_const\_bytep}} \mbox{\hyperlink{structpng__struct__def_af307f45d48c7900d1036388bccbed7bb}{prev\_row}});}
+\DoxyCodeLine{484 }
+\DoxyCodeLine{485 \textcolor{preprocessor}{\#ifdef PNG\_READ\_SUPPORTED}}
+\DoxyCodeLine{486 \textcolor{preprocessor}{\#if defined(PNG\_COLORSPACE\_SUPPORTED) || defined(PNG\_GAMMA\_SUPPORTED)}}
+\DoxyCodeLine{487    png\_colorspace   \mbox{\hyperlink{jpeglib_8h_a642974faa466bfd50e12923ab7fb3a34}{colorspace}};}
+\DoxyCodeLine{488 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{489 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{490 \};}
+\DoxyCodeLine{491 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* PNGSTRUCT\_H */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

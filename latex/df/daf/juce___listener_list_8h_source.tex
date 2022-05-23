@@ -1,0 +1,249 @@
+\hypertarget{juce___listener_list_8h_source}{}\doxysection{juce\+\_\+\+Listener\+List.\+h}
+\label{juce___listener_list_8h_source}\index{build/juce\_core/containers/juce\_ListenerList.h@{build/juce\_core/containers/juce\_ListenerList.h}}
+\mbox{\hyperlink{juce___listener_list_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{67 \textcolor{comment}{}\textcolor{keyword}{template} <\textcolor{keyword}{class }ListenerClass,}
+\DoxyCodeLine{68           \textcolor{keyword}{class }ArrayType = \mbox{\hyperlink{class_array}{Array<ListenerClass*>}}>}
+\DoxyCodeLine{69 \textcolor{keyword}{class }\mbox{\hyperlink{class_listener_list}{ListenerList}}}
+\DoxyCodeLine{70 \{}
+\DoxyCodeLine{71 \textcolor{keyword}{public}:}
+\DoxyCodeLine{72     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{74 \textcolor{comment}{}    \mbox{\hyperlink{class_listener_list_acf0aade18875fe0806d280fe3676da53}{ListenerList}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{77     \mbox{\hyperlink{class_listener_list_a59805636bbf3d3abe28e7ee422a37582}{\string~ListenerList}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{85 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_listener_list_a426564389022f07722ed9e94e07aabfe}{add}} (ListenerClass* listenerToAdd)}
+\DoxyCodeLine{86     \{}
+\DoxyCodeLine{87         \textcolor{keywordflow}{if} (listenerToAdd != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{88             listeners.addIfNotAlreadyThere (listenerToAdd);}
+\DoxyCodeLine{89         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{90             \mbox{\hyperlink{group__juce__core-system_gadc044ce5efecbecf2f5a44cd00db67b3}{jassertfalse}};  \textcolor{comment}{// Listeners can't be null pointers!}}
+\DoxyCodeLine{91     \}}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{96     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_listener_list_aa9141e3b256139e330d4d21859a06f90}{remove}} (ListenerClass* listenerToRemove)}
+\DoxyCodeLine{97     \{}
+\DoxyCodeLine{98         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (listenerToRemove != \textcolor{keyword}{nullptr}); \textcolor{comment}{// Listeners can't be null pointers!}}
+\DoxyCodeLine{99         listeners.removeFirstMatchingValue (listenerToRemove);}
+\DoxyCodeLine{100     \}}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{103     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_listener_list_a4ced7631daac418522719e14a1d35b7d}{size}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                                \{ \textcolor{keywordflow}{return} listeners.size(); \}}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{106     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_listener_list_ac35c41903fa2ee45cb8f5666b6724d06}{isEmpty}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                            \{ \textcolor{keywordflow}{return} listeners.isEmpty(); \}}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{109     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_listener_list_a8e777917d86ac8f06c6ce97e00d3ef54}{clear}}()                                             \{ listeners.clear(); \}}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{112     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_listener_list_a6b6810df1e90e350447770e2a2c7d721}{contains}} (ListenerClass* listener) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}   \{ \textcolor{keywordflow}{return} listeners.contains (listener); \}}
+\DoxyCodeLine{113 }
+\DoxyCodeLine{115     \textcolor{keyword}{const} ArrayType\& \mbox{\hyperlink{class_listener_list_adbe675e7c4bed438f3150c5fd73f67f1}{getListeners}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept           \{ \textcolor{keywordflow}{return} listeners; \}}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{119 \textcolor{comment}{}    \textcolor{keyword}{template} <\textcolor{keyword}{typename} Callback>}
+\DoxyCodeLine{120     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_listener_list_adea25521b1707f2f5ae242b3353f5751}{call}} (Callback\&\& \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}})}
+\DoxyCodeLine{121     \{}
+\DoxyCodeLine{122         \textcolor{keyword}{typename} ArrayType::ScopedLockType lock (listeners.getLock());}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{124         \textcolor{keywordflow}{for} (\mbox{\hyperlink{struct_listener_list_1_1_iterator}{Iterator<DummyBailOutChecker, ThisType>}} iter (*\textcolor{keyword}{this}); iter.\mbox{\hyperlink{struct_listener_list_1_1_iterator_a9791ff087b9d8f7978fd9e3a68d713b6}{next}}();)}
+\DoxyCodeLine{125             \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}} (*iter.getListener());}
+\DoxyCodeLine{126     \}}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{131     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Callback>}
+\DoxyCodeLine{132     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_listener_list_ab7f8b943692ae24911271f796d7a86ac}{callExcluding}} (ListenerClass* listenerToExclude, Callback\&\& \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}})}
+\DoxyCodeLine{133     \{}
+\DoxyCodeLine{134         \textcolor{keyword}{typename} ArrayType::ScopedLockType lock (listeners.getLock());}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{136         \textcolor{keywordflow}{for} (\mbox{\hyperlink{struct_listener_list_1_1_iterator}{Iterator<DummyBailOutChecker, ThisType>}} iter (*\textcolor{keyword}{this}); iter.\mbox{\hyperlink{struct_listener_list_1_1_iterator_a9791ff087b9d8f7978fd9e3a68d713b6}{next}}();)}
+\DoxyCodeLine{137         \{}
+\DoxyCodeLine{138             \textcolor{keyword}{auto}* l = iter.getListener();}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140             \textcolor{keywordflow}{if} (l != listenerToExclude)}
+\DoxyCodeLine{141                 \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}} (*l);}
+\DoxyCodeLine{142         \}}
+\DoxyCodeLine{143     \}}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{148     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Callback, \textcolor{keyword}{typename} BailOutCheckerType>}
+\DoxyCodeLine{149     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_listener_list_ac89398e526d746817d7f2f488461bead}{callChecked}} (\textcolor{keyword}{const} BailOutCheckerType\& bailOutChecker, Callback\&\& \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}})}
+\DoxyCodeLine{150     \{}
+\DoxyCodeLine{151         \textcolor{keyword}{typename} ArrayType::ScopedLockType lock (listeners.getLock());}
+\DoxyCodeLine{152 }
+\DoxyCodeLine{153         \textcolor{keywordflow}{for} (\mbox{\hyperlink{struct_listener_list_1_1_iterator}{Iterator<BailOutCheckerType, ThisType>}} iter (*\textcolor{keyword}{this}); iter.\mbox{\hyperlink{struct_listener_list_1_1_iterator_a9791ff087b9d8f7978fd9e3a68d713b6}{next}} (bailOutChecker);)}
+\DoxyCodeLine{154             \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}} (*iter.getListener());}
+\DoxyCodeLine{155     \}}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{161     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Callback, \textcolor{keyword}{typename} BailOutCheckerType>}
+\DoxyCodeLine{162     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_listener_list_afc8735870369bc67b76a8dbf527b83ab}{callCheckedExcluding}} (ListenerClass* listenerToExclude,}
+\DoxyCodeLine{163                                \textcolor{keyword}{const} BailOutCheckerType\& bailOutChecker,}
+\DoxyCodeLine{164                                Callback\&\& \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}})}
+\DoxyCodeLine{165     \{}
+\DoxyCodeLine{166         \textcolor{keyword}{typename} ArrayType::ScopedLockType lock (listeners.getLock());}
+\DoxyCodeLine{167 }
+\DoxyCodeLine{168         \textcolor{keywordflow}{for} (\mbox{\hyperlink{struct_listener_list_1_1_iterator}{Iterator<BailOutCheckerType, ThisType>}} iter (*\textcolor{keyword}{this}); iter.\mbox{\hyperlink{struct_listener_list_1_1_iterator_a9791ff087b9d8f7978fd9e3a68d713b6}{next}} (bailOutChecker);)}
+\DoxyCodeLine{169         \{}
+\DoxyCodeLine{170             \textcolor{keyword}{auto}* l = iter.getListener();}
+\DoxyCodeLine{171 }
+\DoxyCodeLine{172             \textcolor{keywordflow}{if} (l != listenerToExclude)}
+\DoxyCodeLine{173                 \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}} (*l);}
+\DoxyCodeLine{174         \}}
+\DoxyCodeLine{175     \}}
+\DoxyCodeLine{176 }
+\DoxyCodeLine{177     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{181 \textcolor{comment}{}    \textcolor{keyword}{struct }\mbox{\hyperlink{struct_listener_list_1_1_dummy_bail_out_checker}{DummyBailOutChecker}}}
+\DoxyCodeLine{182     \{}
+\DoxyCodeLine{183         \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_listener_list_1_1_dummy_bail_out_checker_a8d8093b22c3d503e1aae0a5cd59766e3}{shouldBailOut}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                 \{ \textcolor{keywordflow}{return} \textcolor{keyword}{false}; \}}
+\DoxyCodeLine{184     \};}
+\DoxyCodeLine{185 }
+\DoxyCodeLine{186     \textcolor{keyword}{using} \mbox{\hyperlink{class_listener_list}{ThisType}}      = \mbox{\hyperlink{class_listener_list}{ListenerList<ListenerClass, ArrayType>}};}
+\DoxyCodeLine{187     \textcolor{keyword}{using} \mbox{\hyperlink{class_listener_list_ae3f6e5bae60479edf86ce6eff0419b82}{ListenerType}}  = ListenerClass;}
+\DoxyCodeLine{188 }
+\DoxyCodeLine{189     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{191 \textcolor{comment}{}    \textcolor{keyword}{template} <\textcolor{keyword}{class} BailOutCheckerType, \textcolor{keyword}{class} ListType>}
+\DoxyCodeLine{192     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_listener_list_1_1_iterator}{Iterator}}}
+\DoxyCodeLine{193     \{}
+\DoxyCodeLine{194         \mbox{\hyperlink{struct_listener_list_1_1_iterator_aec6ff5dcf548392d46dd38b26168c79d}{Iterator}} (\textcolor{keyword}{const} ListType\& listToIterate) noexcept}
+\DoxyCodeLine{195             : list (listToIterate), index (listToIterate.size())}
+\DoxyCodeLine{196         \{\}}
+\DoxyCodeLine{197 }
+\DoxyCodeLine{198         \mbox{\hyperlink{struct_listener_list_1_1_iterator_a3bb8ade3e768e165ac0c5675f02bb525}{\string~Iterator}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{199 }
+\DoxyCodeLine{200         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{201         \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_listener_list_1_1_iterator_a9791ff087b9d8f7978fd9e3a68d713b6}{next}}() noexcept}
+\DoxyCodeLine{202         \{}
+\DoxyCodeLine{203             \textcolor{keywordflow}{if} (index <= 0)}
+\DoxyCodeLine{204                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{205 }
+\DoxyCodeLine{206             \textcolor{keyword}{auto} listSize = list.size();}
+\DoxyCodeLine{207 }
+\DoxyCodeLine{208             \textcolor{keywordflow}{if} (-\/-\/index < listSize)}
+\DoxyCodeLine{209                 \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{210 }
+\DoxyCodeLine{211             index = listSize -\/ 1;}
+\DoxyCodeLine{212             \textcolor{keywordflow}{return} index >= 0;}
+\DoxyCodeLine{213         \}}
+\DoxyCodeLine{214 }
+\DoxyCodeLine{215         \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_listener_list_1_1_iterator_ae1c1247ae0215416f493b46f4a386eb9}{next}} (\textcolor{keyword}{const} BailOutCheckerType\& bailOutChecker) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{216         \{}
+\DoxyCodeLine{217             \textcolor{keywordflow}{return} (! bailOutChecker.shouldBailOut()) \&\& \mbox{\hyperlink{struct_listener_list_1_1_iterator_a9791ff087b9d8f7978fd9e3a68d713b6}{next}}();}
+\DoxyCodeLine{218         \}}
+\DoxyCodeLine{219 }
+\DoxyCodeLine{220         \textcolor{keyword}{typename} ListType::ListenerType* \mbox{\hyperlink{struct_listener_list_1_1_iterator_a3d17cb06f519b1f8156b5bd5c2484393}{getListener}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{221         \{}
+\DoxyCodeLine{222             \textcolor{keywordflow}{return} list.getListeners().getUnchecked (index);}
+\DoxyCodeLine{223         \}}
+\DoxyCodeLine{224 }
+\DoxyCodeLine{225         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{226     \textcolor{keyword}{private}:}
+\DoxyCodeLine{227         \textcolor{keyword}{const} ListType\& list;}
+\DoxyCodeLine{228         \textcolor{keywordtype}{int} index;}
+\DoxyCodeLine{229 }
+\DoxyCodeLine{230         \mbox{\hyperlink{group__juce__core-system_ga6ab7a603bf4435c7cb286b1744366eb2}{JUCE\_DECLARE\_NON\_COPYABLE}} (\mbox{\hyperlink{struct_listener_list_1_1_iterator}{Iterator}})}
+\DoxyCodeLine{231     \};}
+\DoxyCodeLine{232 }
+\DoxyCodeLine{233     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{234 \textcolor{preprocessor}{   \#ifndef DOXYGEN}}
+\DoxyCodeLine{235     \textcolor{comment}{// There are now lambda-\/based call functions that can be used to replace these old method-\/based versions.}}
+\DoxyCodeLine{236     \textcolor{comment}{// We'll eventually deprecate these old ones, so please begin moving your code to use lambdas!}}
+\DoxyCodeLine{237     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_listener_list_adb25c4b3880d1004072305edf2e08766}{call}} (\textcolor{keywordtype}{void} (ListenerClass::*callbackFunction) ())}
+\DoxyCodeLine{238     \{}
+\DoxyCodeLine{239         \mbox{\hyperlink{class_listener_list_adea25521b1707f2f5ae242b3353f5751}{call}} ([=] (ListenerClass\& l) \{ (l.*callbackFunction)(); \});}
+\DoxyCodeLine{240     \}}
+\DoxyCodeLine{241 }
+\DoxyCodeLine{242     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_listener_list_a610d0f516f84dd4b1536745bc514f0b5}{callExcluding}} (ListenerClass* listenerToExclude, \textcolor{keywordtype}{void} (ListenerClass::*callbackFunction) ())}
+\DoxyCodeLine{243     \{}
+\DoxyCodeLine{244         \mbox{\hyperlink{class_listener_list_ab7f8b943692ae24911271f796d7a86ac}{callExcluding}} (listenerToExclude, [=] (ListenerClass\& l) \{ (l.*callbackFunction)(); \});}
+\DoxyCodeLine{245     \}}
+\DoxyCodeLine{246 }
+\DoxyCodeLine{247     \textcolor{keyword}{template} <\textcolor{keyword}{class} BailOutCheckerType>}
+\DoxyCodeLine{248     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_listener_list_a5757f573480b5f86416f2c85bb985d7a}{callChecked}} (\textcolor{keyword}{const} BailOutCheckerType\& bailOutChecker, \textcolor{keywordtype}{void} (ListenerClass::*callbackFunction) ())}
+\DoxyCodeLine{249     \{}
+\DoxyCodeLine{250         \mbox{\hyperlink{class_listener_list_ac89398e526d746817d7f2f488461bead}{callChecked}} (bailOutChecker, [=] (ListenerClass\& l) \{ (l.*callbackFunction)(); \});}
+\DoxyCodeLine{251     \}}
+\DoxyCodeLine{252 }
+\DoxyCodeLine{253     \textcolor{keyword}{template} <\textcolor{keyword}{class} BailOutCheckerType>}
+\DoxyCodeLine{254     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_listener_list_a3c29675f6466e5a02e8f9cdf0a839796}{callCheckedExcluding}} (ListenerClass* listenerToExclude,}
+\DoxyCodeLine{255                                \textcolor{keyword}{const} BailOutCheckerType\& bailOutChecker,}
+\DoxyCodeLine{256                                \textcolor{keywordtype}{void} (ListenerClass::*callbackFunction) ())}
+\DoxyCodeLine{257     \{}
+\DoxyCodeLine{258         \mbox{\hyperlink{class_listener_list_afc8735870369bc67b76a8dbf527b83ab}{callCheckedExcluding}} (listenerToExclude, bailOutChecker, [=] (ListenerClass\& l) \{ (l.*callbackFunction)(); \});}
+\DoxyCodeLine{259     \}}
+\DoxyCodeLine{260 }
+\DoxyCodeLine{261     \textcolor{keyword}{template} <\textcolor{keyword}{typename}... MethodArgs, \textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{262     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_listener_list_a05bfc869b37734b48b749b39af78db83}{call}} (\textcolor{keywordtype}{void} (ListenerClass::*callbackFunction) (MethodArgs...), Args\&\&... args)}
+\DoxyCodeLine{263     \{}
+\DoxyCodeLine{264         \textcolor{keyword}{typename} ArrayType::ScopedLockType lock (listeners.getLock());}
+\DoxyCodeLine{265 }
+\DoxyCodeLine{266         \textcolor{keywordflow}{for} (\mbox{\hyperlink{struct_listener_list_1_1_iterator}{Iterator<DummyBailOutChecker, ThisType>}} iter (*\textcolor{keyword}{this}); iter.\mbox{\hyperlink{struct_listener_list_1_1_iterator_a9791ff087b9d8f7978fd9e3a68d713b6}{next}}();)}
+\DoxyCodeLine{267             (iter.getListener()-\/>*callbackFunction) (\textcolor{keyword}{static\_cast<}typename \mbox{\hyperlink{struct_type_helpers_1_1_parameter_type_ad57e75d9eb3f3f675b9156c3850636a6}{TypeHelpers::ParameterType<Args>::type}}\textcolor{keyword}{>} (args)...);}
+\DoxyCodeLine{268     \}}
+\DoxyCodeLine{269 }
+\DoxyCodeLine{270     \textcolor{keyword}{template} <\textcolor{keyword}{typename}... MethodArgs, \textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{271     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_listener_list_a4515eb2f31b95b4aa9d3f2ee3133a316}{callExcluding}} (ListenerClass* listenerToExclude,}
+\DoxyCodeLine{272                         \textcolor{keywordtype}{void} (ListenerClass::*callbackFunction) (MethodArgs...),}
+\DoxyCodeLine{273                         Args\&\&... args)}
+\DoxyCodeLine{274     \{}
+\DoxyCodeLine{275         \textcolor{keyword}{typename} ArrayType::ScopedLockType lock (listeners.getLock());}
+\DoxyCodeLine{276 }
+\DoxyCodeLine{277         \textcolor{keywordflow}{for} (\mbox{\hyperlink{struct_listener_list_1_1_iterator}{Iterator<DummyBailOutChecker, ThisType>}} iter (*\textcolor{keyword}{this}); iter.\mbox{\hyperlink{struct_listener_list_1_1_iterator_a9791ff087b9d8f7978fd9e3a68d713b6}{next}}();)}
+\DoxyCodeLine{278             \textcolor{keywordflow}{if} (iter.getListener() != listenerToExclude)}
+\DoxyCodeLine{279                 (iter.getListener()-\/>*callbackFunction) (\textcolor{keyword}{static\_cast<}typename \mbox{\hyperlink{struct_type_helpers_1_1_parameter_type_ad57e75d9eb3f3f675b9156c3850636a6}{TypeHelpers::ParameterType<Args>::type}}\textcolor{keyword}{>} (args)...);}
+\DoxyCodeLine{280     \}}
+\DoxyCodeLine{281 }
+\DoxyCodeLine{282     \textcolor{keyword}{template} <\textcolor{keyword}{typename} BailOutCheckerType, \textcolor{keyword}{typename}... MethodArgs, \textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{283     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_listener_list_ac88718c3e6cac7cefe7d882d75fe33fb}{callChecked}} (\textcolor{keyword}{const} BailOutCheckerType\& bailOutChecker,}
+\DoxyCodeLine{284                       \textcolor{keywordtype}{void} (ListenerClass::*callbackFunction) (MethodArgs...),}
+\DoxyCodeLine{285                       Args\&\&... args)}
+\DoxyCodeLine{286     \{}
+\DoxyCodeLine{287         \textcolor{keyword}{typename} ArrayType::ScopedLockType lock (listeners.getLock());}
+\DoxyCodeLine{288 }
+\DoxyCodeLine{289         \textcolor{keywordflow}{for} (\mbox{\hyperlink{struct_listener_list_1_1_iterator}{Iterator<BailOutCheckerType, ThisType>}} iter (*\textcolor{keyword}{this}); iter.\mbox{\hyperlink{struct_listener_list_1_1_iterator_a9791ff087b9d8f7978fd9e3a68d713b6}{next}} (bailOutChecker);)}
+\DoxyCodeLine{290             (iter.getListener()-\/>*callbackFunction) (\textcolor{keyword}{static\_cast<}typename \mbox{\hyperlink{struct_type_helpers_1_1_parameter_type_ad57e75d9eb3f3f675b9156c3850636a6}{TypeHelpers::ParameterType<Args>::type}}\textcolor{keyword}{>} (args)...);}
+\DoxyCodeLine{291     \}}
+\DoxyCodeLine{292 }
+\DoxyCodeLine{293     \textcolor{keyword}{template} <\textcolor{keyword}{typename} BailOutCheckerType, \textcolor{keyword}{typename}... MethodArgs, \textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{294     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_listener_list_a75717f4f411f3e95888e20f590a7c572}{callCheckedExcluding}} (ListenerClass* listenerToExclude,}
+\DoxyCodeLine{295                                \textcolor{keyword}{const} BailOutCheckerType\& bailOutChecker,}
+\DoxyCodeLine{296                                \textcolor{keywordtype}{void} (ListenerClass::*callbackFunction) (MethodArgs...),}
+\DoxyCodeLine{297                                Args\&\&... args)}
+\DoxyCodeLine{298     \{}
+\DoxyCodeLine{299         \textcolor{keyword}{typename} ArrayType::ScopedLockType lock (listeners.getLock());}
+\DoxyCodeLine{300 }
+\DoxyCodeLine{301         \textcolor{keywordflow}{for} (\mbox{\hyperlink{struct_listener_list_1_1_iterator}{Iterator<BailOutCheckerType, ThisType>}} iter (*\textcolor{keyword}{this}); iter.\mbox{\hyperlink{struct_listener_list_1_1_iterator_a9791ff087b9d8f7978fd9e3a68d713b6}{next}} (bailOutChecker);)}
+\DoxyCodeLine{302             \textcolor{keywordflow}{if} (iter.getListener() != listenerToExclude)}
+\DoxyCodeLine{303                 (iter.getListener()-\/>*callbackFunction) (\textcolor{keyword}{static\_cast<}typename \mbox{\hyperlink{struct_type_helpers_1_1_parameter_type_ad57e75d9eb3f3f675b9156c3850636a6}{TypeHelpers::ParameterType<Args>::type}}\textcolor{keyword}{>} (args)...);}
+\DoxyCodeLine{304     \}}
+\DoxyCodeLine{305 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{306 }
+\DoxyCodeLine{307 \textcolor{keyword}{private}:}
+\DoxyCodeLine{308     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{309     ArrayType listeners;}
+\DoxyCodeLine{310 }
+\DoxyCodeLine{311     \mbox{\hyperlink{group__juce__core-system_ga6ab7a603bf4435c7cb286b1744366eb2}{JUCE\_DECLARE\_NON\_COPYABLE}} (\mbox{\hyperlink{class_listener_list}{ListenerList}})}
+\DoxyCodeLine{312 \};}
+\DoxyCodeLine{313 }
+\DoxyCodeLine{314  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{315 }
+
+\end{DoxyCode}

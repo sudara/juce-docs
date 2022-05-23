@@ -1,0 +1,157 @@
+\hypertarget{class_result}{}\doxysection{Result Class Reference}
+\label{class_result}\index{Result@{Result}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Result.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_result_ad1cd6e48b8f41b1c5f6377109288cffe}{was\+Ok}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_result_a0bca10ed2b5416e33dfd027869c849ce}{failed}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{class_result_ae8e63cf847e9356f8909b4413a47e54f}{operator bool}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_result_a5824bcb0172e2f9a5f664b21a7aa08f2}{operator!}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \& \mbox{\hyperlink{class_result_a9ba5d7a2b55b60819b8b44d909dabef4}{get\+Error\+Message}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{class_result_a4457dd54f8a2854b2c1517c9583651c0}{Result}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_result}{Result}} \&)
+\item 
+\mbox{\hyperlink{class_result}{Result}} \& \mbox{\hyperlink{class_result_a215cb4c021aec40a1dc68be7e89efaba}{operator=}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_result}{Result}} \&)
+\item 
+\mbox{\hyperlink{class_result_a934eb96dbd852fe6926dd15d0c936054}{Result}} (\mbox{\hyperlink{class_result}{Result}} \&\&) noexcept
+\item 
+\mbox{\hyperlink{class_result}{Result}} \& \mbox{\hyperlink{class_result_a6c6bdb3695f30309efd61a24446255b2}{operator=}} (\mbox{\hyperlink{class_result}{Result}} \&\&) noexcept
+\item 
+bool \mbox{\hyperlink{class_result_abcaa1c7cf4f9fef6c0f00ab9ad43576c}{operator==}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_result}{Result}} \&other) \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_result_a787a681d1c6ef37bbd8b871020b12fde}{operator!=}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_result}{Result}} \&other) \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_result}{Result}} \mbox{\hyperlink{class_result_af20c96ffa94adac90e10a8395d8c8852}{ok}} () noexcept
+\item 
+static \mbox{\hyperlink{class_result}{Result}} \mbox{\hyperlink{class_result_a2b51de8f6f8c27c3de29f9da5cce8f75}{fail}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&error\+Message) noexcept
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents the \textquotesingle{}success\textquotesingle{} or \textquotesingle{}failure\textquotesingle{} of an operation, and holds an associated error message to describe the error when there\textquotesingle{}s a failure.
+
+E.\+g. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{class_result}{Result}} myOperation()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (doSomeKindOfFoobar())}
+\DoxyCodeLine{        \textcolor{keywordflow}{return} \mbox{\hyperlink{class_result_af20c96ffa94adac90e10a8395d8c8852}{Result::ok}}();}
+\DoxyCodeLine{    \textcolor{keywordflow}{else}}
+\DoxyCodeLine{        \textcolor{keywordflow}{return} \mbox{\hyperlink{class_result_a2b51de8f6f8c27c3de29f9da5cce8f75}{Result::fail}} (\textcolor{stringliteral}{"{}foobar didn't work!"{}});}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{const} \mbox{\hyperlink{class_result}{Result}} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} (myOperation());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}.wasOk())}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    ...it\textcolor{stringliteral}{'s all good...}}
+\DoxyCodeLine{\textcolor{stringliteral}{\}}}
+\DoxyCodeLine{\textcolor{stringliteral}{else}}
+\DoxyCodeLine{\textcolor{stringliteral}{\{}}
+\DoxyCodeLine{\textcolor{stringliteral}{    warnUserAboutFailure ("{}The foobar operation failed! Error message was: "{}}}
+\DoxyCodeLine{\textcolor{stringliteral}{                            + result.getErrorMessage());}}
+\DoxyCodeLine{\textcolor{stringliteral}{\}}}
+
+\end{DoxyCode}
+
+
+@tags\{Core\} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_result_a4457dd54f8a2854b2c1517c9583651c0}\label{class_result_a4457dd54f8a2854b2c1517c9583651c0}} 
+\index{Result@{Result}!Result@{Result}}
+\index{Result@{Result}!Result@{Result}}
+\doxysubsubsection{\texorpdfstring{Result()}{Result()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Result\+::\+Result (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_result}{Result}} \&}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_result_a934eb96dbd852fe6926dd15d0c936054}\label{class_result_a934eb96dbd852fe6926dd15d0c936054}} 
+\index{Result@{Result}!Result@{Result}}
+\index{Result@{Result}!Result@{Result}}
+\doxysubsubsection{\texorpdfstring{Result()}{Result()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Result\+::\+Result (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_result}{Result}} \&\&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_result_a2b51de8f6f8c27c3de29f9da5cce8f75}\label{class_result_a2b51de8f6f8c27c3de29f9da5cce8f75}} 
+\index{Result@{Result}!fail@{fail}}
+\index{fail@{fail}!Result@{Result}}
+\doxysubsubsection{\texorpdfstring{fail()}{fail()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_result}{Result}} Result\+::fail (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&}]{error\+Message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [noexcept]}}
+
+Creates a \textquotesingle{}failure\textquotesingle{} result. If you pass a blank error message in here, a default \char`\"{}\+Unknown Error\char`\"{} message will be used instead. \mbox{\Hypertarget{class_result_a0bca10ed2b5416e33dfd027869c849ce}\label{class_result_a0bca10ed2b5416e33dfd027869c849ce}} 
+\index{Result@{Result}!failed@{failed}}
+\index{failed@{failed}!Result@{Result}}
+\doxysubsubsection{\texorpdfstring{failed()}{failed()}}
+{\footnotesize\ttfamily bool Result\+::failed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if this result indicates a failure. You can use \mbox{\hyperlink{class_result_a9ba5d7a2b55b60819b8b44d909dabef4}{get\+Error\+Message()}} to retrieve the error message associated with the failure. \mbox{\Hypertarget{class_result_a9ba5d7a2b55b60819b8b44d909dabef4}\label{class_result_a9ba5d7a2b55b60819b8b44d909dabef4}} 
+\index{Result@{Result}!getErrorMessage@{getErrorMessage}}
+\index{getErrorMessage@{getErrorMessage}!Result@{Result}}
+\doxysubsubsection{\texorpdfstring{getErrorMessage()}{getErrorMessage()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \& Result\+::get\+Error\+Message (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns the error message that was set when this result was created. For a successful result, this will be an empty string; \mbox{\Hypertarget{class_result_af20c96ffa94adac90e10a8395d8c8852}\label{class_result_af20c96ffa94adac90e10a8395d8c8852}} 
+\index{Result@{Result}!ok@{ok}}
+\index{ok@{ok}!Result@{Result}}
+\doxysubsubsection{\texorpdfstring{ok()}{ok()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_result}{Result}} Result\+::ok (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [noexcept]}}
+
+Creates and returns a \textquotesingle{}successful\textquotesingle{} result. \mbox{\Hypertarget{class_result_ae8e63cf847e9356f8909b4413a47e54f}\label{class_result_ae8e63cf847e9356f8909b4413a47e54f}} 
+\index{Result@{Result}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!Result@{Result}}
+\doxysubsubsection{\texorpdfstring{operator bool()}{operator bool()}}
+{\footnotesize\ttfamily Result\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if this result indicates a success. This is equivalent to calling \mbox{\hyperlink{class_result_ad1cd6e48b8f41b1c5f6377109288cffe}{was\+Ok()}}. \mbox{\Hypertarget{class_result_a5824bcb0172e2f9a5f664b21a7aa08f2}\label{class_result_a5824bcb0172e2f9a5f664b21a7aa08f2}} 
+\index{Result@{Result}!operator"!@{operator"!}}
+\index{operator"!@{operator"!}!Result@{Result}}
+\doxysubsubsection{\texorpdfstring{operator"!()}{operator!()}}
+{\footnotesize\ttfamily bool Result\+::operator! (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if this result indicates a failure. This is equivalent to calling \mbox{\hyperlink{class_result_a0bca10ed2b5416e33dfd027869c849ce}{failed()}}. \mbox{\Hypertarget{class_result_a787a681d1c6ef37bbd8b871020b12fde}\label{class_result_a787a681d1c6ef37bbd8b871020b12fde}} 
+\index{Result@{Result}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!Result@{Result}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily bool \mbox{\hyperlink{class_result_a5824bcb0172e2f9a5f664b21a7aa08f2}{Result\+::operator!}}= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_result}{Result}} \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+\mbox{\Hypertarget{class_result_a215cb4c021aec40a1dc68be7e89efaba}\label{class_result_a215cb4c021aec40a1dc68be7e89efaba}} 
+\index{Result@{Result}!operator=@{operator=}}
+\index{operator=@{operator=}!Result@{Result}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_result}{Result}} \& Result\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_result}{Result}} \&}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_result_a6c6bdb3695f30309efd61a24446255b2}\label{class_result_a6c6bdb3695f30309efd61a24446255b2}} 
+\index{Result@{Result}!operator=@{operator=}}
+\index{operator=@{operator=}!Result@{Result}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_result}{Result}} \& Result\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_result}{Result}} \&\&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+\mbox{\Hypertarget{class_result_abcaa1c7cf4f9fef6c0f00ab9ad43576c}\label{class_result_abcaa1c7cf4f9fef6c0f00ab9ad43576c}} 
+\index{Result@{Result}!operator==@{operator==}}
+\index{operator==@{operator==}!Result@{Result}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool Result\+::operator== (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_result}{Result}} \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+\mbox{\Hypertarget{class_result_ad1cd6e48b8f41b1c5f6377109288cffe}\label{class_result_ad1cd6e48b8f41b1c5f6377109288cffe}} 
+\index{Result@{Result}!wasOk@{wasOk}}
+\index{wasOk@{wasOk}!Result@{Result}}
+\doxysubsubsection{\texorpdfstring{wasOk()}{wasOk()}}
+{\footnotesize\ttfamily bool Result\+::was\+Ok (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if this result indicates a success. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+core/misc/\mbox{\hyperlink{juce___result_8h}{juce\+\_\+\+Result.\+h}}\end{DoxyCompactItemize}

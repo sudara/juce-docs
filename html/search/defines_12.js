@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['r_5fcb_5foff_0',['R_CB_OFF',['../d2/d78/jccolor_8c.html#a434afb89a3c75c7a55d5d53cd03007aa',1,'jccolor.c']]],
+  ['r_5fcr_5foff_1',['R_CR_OFF',['../d2/d78/jccolor_8c.html#a59935a68ff56641c3d0946d63f707cbf',1,'jccolor.c']]],
+  ['r_5fscale_2',['R_SCALE',['../d4/d7d/jquant2_8c.html#aea32f931a8e5864ea61c37155e7905d7',1,'jquant2.c']]],
+  ['r_5fy_5foff_3',['R_Y_OFF',['../d2/d78/jccolor_8c.html#ab64f3c53a2f6aa67e2bd8cca753b2b23',1,'jccolor.c']]],
+  ['range_5fmask_4',['RANGE_MASK',['../db/d62/jdct_8h.html#a8e0972b97d5a5839a16ac9da1f021f90',1,'jdct.h']]],
+  ['readsize_5',['READSIZE',['../d3/db2/vorbisfile_8c.html#a54bf24043fc6dd562b2ce3597993943c',1,'vorbisfile.c']]],
+  ['refcount_5fmethods_6',['REFCOUNT_METHODS',['../d4/d34/fobject_8h.html#aebbb3846780fdaf18f8ee89b73ff149d',1,'fobject.h']]],
+  ['reg_5ftype_7',['REG_TYPE',['../d1/d7a/mdct_8h.html#ac7a9aee2010cd872db359d47f4fa562e',1,'mdct.h']]],
+  ['rep_5f3_5f6_8',['REP_3_6',['../d0/d90/trees_8c.html#a5d39bc5068c496733ec81b9d5543db40',1,'trees.c']]],
+  ['representation_5ftag_9',['REPRESENTATION_TAG',['../d0/db1/ivstrepresentation_8h.html#a1a019680fa393178818b157c21e29e28',1,'ivstrepresentation.h']]],
+  ['repz_5f11_5f138_10',['REPZ_11_138',['../d0/d90/trees_8c.html#a350267bb8ca6269fac9ba06057336788',1,'trees.c']]],
+  ['repz_5f3_5f10_11',['REPZ_3_10',['../d0/d90/trees_8c.html#a39f77126525d41c0155506e942365da8',1,'trees.c']]],
+  ['restore_12',['RESTORE',['../d0/deb/infback_8c.html#af3b6db2fe8b54bb9edf88c2002e4bf34',1,'RESTORE():&#160;infback.c'],['../d5/d6a/inflate_8c.html#af3b6db2fe8b54bb9edf88c2002e4bf34',1,'RESTORE():&#160;inflate.c']]],
+  ['restore_5fdenormals_13',['RESTORE_DENORMALS',['../d9/d9b/_a_u_base_8cpp.html#a12cf412cf363876f2fb9802c1eb0e643',1,'AUBase.cpp']]],
+  ['reverse_14',['REVERSE',['../d5/d6a/inflate_8c.html#a802df6861be59122fc6f9f8e47141359',1,'inflate.c']]],
+  ['right_5fshift_15',['RIGHT_SHIFT',['../da/ded/jpegint_8h.html#ad45c45ba0d42abd22b4a095dd972a4ba',1,'jpegint.h']]],
+  ['room_16',['ROOM',['../d0/deb/infback_8c.html#aa86fac2e845f337d5369513dea1759b0',1,'infback.c']]],
+  ['rootxml_5ftag_17',['ROOTXML_TAG',['../d0/db1/ivstrepresentation_8h.html#ad54c84678ca7e4ea9bb1159937436ff7',1,'ivstrepresentation.h']]]
+];

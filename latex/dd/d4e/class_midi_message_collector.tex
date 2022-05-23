@@ -1,0 +1,156 @@
+\hypertarget{class_midi_message_collector}{}\doxysection{Midi\+Message\+Collector Class Reference}
+\label{class_midi_message_collector}\index{MidiMessageCollector@{MidiMessageCollector}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Midi\+Message\+Collector.\+h$>$}
+
+Inheritance diagram for Midi\+Message\+Collector\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{dd/d4e/class_midi_message_collector}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_midi_message_collector_a81989229e6c29b6f3835a961195278d7}{Midi\+Message\+Collector}} ()
+\item 
+\mbox{\hyperlink{class_midi_message_collector_afcc7db24f51e1cd804a2d1baf91a49c8}{$\sim$\+Midi\+Message\+Collector}} () override
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_midi_message_collector_ab9f16c8ff3d5d1b45ec409a6fb297b51}{reset}} (double sample\+Rate)
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_midi_message_collector_ad1d42045ccbc9bbc4256d08a632a8fe2}{add\+Message\+To\+Queue}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \&message)
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_midi_message_collector_ac72b6cf4965e63b90d1a2402b73b1798}{remove\+Next\+Block\+Of\+Messages}} (\mbox{\hyperlink{class_midi_buffer}{Midi\+Buffer}} \&dest\+Buffer, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} num\+Samples)
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_midi_message_collector_a115f85350dafe186e516b087b7f09759}{ensure\+Storage\+Allocated}} (size\+\_\+t bytes)
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_midi_message_collector_a0e6368630ea8c456c79f86d8aebcaeb6}{handle\+Note\+On}} (\mbox{\hyperlink{class_midi_keyboard_state}{Midi\+Keyboard\+State}} $\ast$, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} midi\+Channel, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} midi\+Note\+Number, float velocity) override
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_midi_message_collector_a07e1a9bbeb9131dbe8d55431bb166ee8}{handle\+Note\+Off}} (\mbox{\hyperlink{class_midi_keyboard_state}{Midi\+Keyboard\+State}} $\ast$, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} midi\+Channel, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} midi\+Note\+Number, float velocity) override
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_midi_message_collector_af76869b33248a78b2a580e63ec855773}{handle\+Incoming\+Midi\+Message}} (\mbox{\hyperlink{class_midi_input}{Midi\+Input}} $\ast$, \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \&) override
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Collects incoming realtime MIDI messages and turns them into blocks suitable for processing by a block-\/based audio callback.
+
+The class can also be used as either a \mbox{\hyperlink{class_midi_keyboard_state_1_1_listener}{Midi\+Keyboard\+State\+::\+Listener}} or a \mbox{\hyperlink{class_midi_input_callback}{Midi\+Input\+Callback}} so it can easily use a midi input or keyboard component as its source.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message}{Midi\+Message}}, \mbox{\hyperlink{class_midi_input}{Midi\+Input}}
+\end{DoxySeeAlso}
+@tags\{Audio\} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_midi_message_collector_a81989229e6c29b6f3835a961195278d7}\label{class_midi_message_collector_a81989229e6c29b6f3835a961195278d7}} 
+\index{MidiMessageCollector@{MidiMessageCollector}!MidiMessageCollector@{MidiMessageCollector}}
+\index{MidiMessageCollector@{MidiMessageCollector}!MidiMessageCollector@{MidiMessageCollector}}
+\doxysubsubsection{\texorpdfstring{MidiMessageCollector()}{MidiMessageCollector()}}
+{\footnotesize\ttfamily Midi\+Message\+Collector\+::\+Midi\+Message\+Collector (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Creates a \mbox{\hyperlink{class_midi_message_collector}{Midi\+Message\+Collector}}. \mbox{\Hypertarget{class_midi_message_collector_afcc7db24f51e1cd804a2d1baf91a49c8}\label{class_midi_message_collector_afcc7db24f51e1cd804a2d1baf91a49c8}} 
+\index{MidiMessageCollector@{MidiMessageCollector}!````~MidiMessageCollector@{$\sim$MidiMessageCollector}}
+\index{````~MidiMessageCollector@{$\sim$MidiMessageCollector}!MidiMessageCollector@{MidiMessageCollector}}
+\doxysubsubsection{\texorpdfstring{$\sim$MidiMessageCollector()}{~MidiMessageCollector()}}
+{\footnotesize\ttfamily Midi\+Message\+Collector\+::$\sim$\+Midi\+Message\+Collector (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+Destructor. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_midi_message_collector_ad1d42045ccbc9bbc4256d08a632a8fe2}\label{class_midi_message_collector_ad1d42045ccbc9bbc4256d08a632a8fe2}} 
+\index{MidiMessageCollector@{MidiMessageCollector}!addMessageToQueue@{addMessageToQueue}}
+\index{addMessageToQueue@{addMessageToQueue}!MidiMessageCollector@{MidiMessageCollector}}
+\doxysubsubsection{\texorpdfstring{addMessageToQueue()}{addMessageToQueue()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Midi\+Message\+Collector\+::add\+Message\+To\+Queue (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \&}]{message }\end{DoxyParamCaption})}
+
+Takes an incoming real-\/time message and adds it to the queue.
+
+The message\textquotesingle{}s timestamp is taken, and it will be ready for retrieval as part of the block returned by the next call to \mbox{\hyperlink{class_midi_message_collector_ac72b6cf4965e63b90d1a2402b73b1798}{remove\+Next\+Block\+Of\+Messages()}}.
+
+This method is fully thread-\/safe when overlapping calls are made with \mbox{\hyperlink{class_midi_message_collector_ac72b6cf4965e63b90d1a2402b73b1798}{remove\+Next\+Block\+Of\+Messages()}}. \mbox{\Hypertarget{class_midi_message_collector_a115f85350dafe186e516b087b7f09759}\label{class_midi_message_collector_a115f85350dafe186e516b087b7f09759}} 
+\index{MidiMessageCollector@{MidiMessageCollector}!ensureStorageAllocated@{ensureStorageAllocated}}
+\index{ensureStorageAllocated@{ensureStorageAllocated}!MidiMessageCollector@{MidiMessageCollector}}
+\doxysubsubsection{\texorpdfstring{ensureStorageAllocated()}{ensureStorageAllocated()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Midi\+Message\+Collector\+::ensure\+Storage\+Allocated (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{bytes }\end{DoxyParamCaption})}
+
+Preallocates storage for collected messages.
+
+This can be called before audio processing begins to ensure that there is sufficient space for the expected MIDI messages, in order to avoid allocations within the audio callback. \mbox{\Hypertarget{class_midi_message_collector_af76869b33248a78b2a580e63ec855773}\label{class_midi_message_collector_af76869b33248a78b2a580e63ec855773}} 
+\index{MidiMessageCollector@{MidiMessageCollector}!handleIncomingMidiMessage@{handleIncomingMidiMessage}}
+\index{handleIncomingMidiMessage@{handleIncomingMidiMessage}!MidiMessageCollector@{MidiMessageCollector}}
+\doxysubsubsection{\texorpdfstring{handleIncomingMidiMessage()}{handleIncomingMidiMessage()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Midi\+Message\+Collector\+::handle\+Incoming\+Midi\+Message (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_midi_input}{Midi\+Input}} $\ast$}]{source,  }\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \&}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Receives an incoming message.
+
+A \mbox{\hyperlink{class_midi_input}{Midi\+Input}} object will call this method when a midi event arrives. It\textquotesingle{}ll be called on a high-\/priority system thread, so avoid doing anything time-\/consuming in here, and avoid making any UI calls. You might find the \mbox{\hyperlink{class_midi_buffer}{Midi\+Buffer}} class helpful for queueing incoming messages for use later.
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & the \mbox{\hyperlink{class_midi_input}{Midi\+Input}} object that generated the message \\
+\hline
+{\em message} & the incoming message. The message\textquotesingle{}s timestamp is set to a value equivalent to (\mbox{\hyperlink{class_time_a66c3f2ac6b0a2693a8fc9506da584d27}{Time\+::get\+Millisecond\+Counter()}} / 1000.\+0) to specify the time when the message arrived \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_midi_input_callback_acdf6d7e27b96a50fe06922737f0d082e}{Midi\+Input\+Callback}}.
+
+\mbox{\Hypertarget{class_midi_message_collector_a07e1a9bbeb9131dbe8d55431bb166ee8}\label{class_midi_message_collector_a07e1a9bbeb9131dbe8d55431bb166ee8}} 
+\index{MidiMessageCollector@{MidiMessageCollector}!handleNoteOff@{handleNoteOff}}
+\index{handleNoteOff@{handleNoteOff}!MidiMessageCollector@{MidiMessageCollector}}
+\doxysubsubsection{\texorpdfstring{handleNoteOff()}{handleNoteOff()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Midi\+Message\+Collector\+::handle\+Note\+Off (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_midi_keyboard_state}{Midi\+Keyboard\+State}} $\ast$}]{source,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{midi\+Channel,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{midi\+Note\+Number,  }\item[{float}]{velocity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Called when one of the \mbox{\hyperlink{class_midi_keyboard_state}{Midi\+Keyboard\+State}}\textquotesingle{}s keys is released.
+
+This will be called synchronously when the state is either processing a buffer in its \mbox{\hyperlink{class_midi_keyboard_state_aa7afad38f581c129c407a4d7d069bbbb}{Midi\+Keyboard\+State\+::process\+Next\+Midi\+Buffer()}} method, or when a note is being played with its \mbox{\hyperlink{class_midi_keyboard_state_aca0173180551f533327c1f8e4daa332e}{Midi\+Keyboard\+State\+::note\+Off()}} method.
+
+Note that this callback could happen from an audio callback thread, so be careful not to block, and avoid any UI activity in the callback. 
+
+Implements \mbox{\hyperlink{class_midi_keyboard_state_1_1_listener_aedc74bd79578cb19edba66d38e9a93cf}{Midi\+Keyboard\+State\+::\+Listener}}.
+
+\mbox{\Hypertarget{class_midi_message_collector_a0e6368630ea8c456c79f86d8aebcaeb6}\label{class_midi_message_collector_a0e6368630ea8c456c79f86d8aebcaeb6}} 
+\index{MidiMessageCollector@{MidiMessageCollector}!handleNoteOn@{handleNoteOn}}
+\index{handleNoteOn@{handleNoteOn}!MidiMessageCollector@{MidiMessageCollector}}
+\doxysubsubsection{\texorpdfstring{handleNoteOn()}{handleNoteOn()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Midi\+Message\+Collector\+::handle\+Note\+On (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_midi_keyboard_state}{Midi\+Keyboard\+State}} $\ast$}]{source,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{midi\+Channel,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{midi\+Note\+Number,  }\item[{float}]{velocity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Called when one of the \mbox{\hyperlink{class_midi_keyboard_state}{Midi\+Keyboard\+State}}\textquotesingle{}s keys is pressed.
+
+This will be called synchronously when the state is either processing a buffer in its \mbox{\hyperlink{class_midi_keyboard_state_aa7afad38f581c129c407a4d7d069bbbb}{Midi\+Keyboard\+State\+::process\+Next\+Midi\+Buffer()}} method, or when a note is being played with its \mbox{\hyperlink{class_midi_keyboard_state_a60e0e629d485466360bded04ad35025a}{Midi\+Keyboard\+State\+::note\+On()}} method.
+
+Note that this callback could happen from an audio callback thread, so be careful not to block, and avoid any UI activity in the callback. 
+
+Implements \mbox{\hyperlink{class_midi_keyboard_state_1_1_listener_a854381a64354389e0cb2c15ec1fb4b01}{Midi\+Keyboard\+State\+::\+Listener}}.
+
+\mbox{\Hypertarget{class_midi_message_collector_ac72b6cf4965e63b90d1a2402b73b1798}\label{class_midi_message_collector_ac72b6cf4965e63b90d1a2402b73b1798}} 
+\index{MidiMessageCollector@{MidiMessageCollector}!removeNextBlockOfMessages@{removeNextBlockOfMessages}}
+\index{removeNextBlockOfMessages@{removeNextBlockOfMessages}!MidiMessageCollector@{MidiMessageCollector}}
+\doxysubsubsection{\texorpdfstring{removeNextBlockOfMessages()}{removeNextBlockOfMessages()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Midi\+Message\+Collector\+::remove\+Next\+Block\+Of\+Messages (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_midi_buffer}{Midi\+Buffer}} \&}]{dest\+Buffer,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{num\+Samples }\end{DoxyParamCaption})}
+
+Removes all the pending messages from the queue as a buffer.
+
+This will also correct the messages\textquotesingle{} timestamps to make sure they\textquotesingle{}re in the range 0 to num\+Samples -\/ 1.
+
+This call should be made regularly by something like an audio processing callback, because the time that it happens is used in calculating the midi event positions.
+
+This method is fully thread-\/safe when overlapping calls are made with \mbox{\hyperlink{class_midi_message_collector_ad1d42045ccbc9bbc4256d08a632a8fe2}{add\+Message\+To\+Queue()}}.
+
+Precondition\+: num\+Samples must be greater than 0. \mbox{\Hypertarget{class_midi_message_collector_ab9f16c8ff3d5d1b45ec409a6fb297b51}\label{class_midi_message_collector_ab9f16c8ff3d5d1b45ec409a6fb297b51}} 
+\index{MidiMessageCollector@{MidiMessageCollector}!reset@{reset}}
+\index{reset@{reset}!MidiMessageCollector@{MidiMessageCollector}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Midi\+Message\+Collector\+::reset (\begin{DoxyParamCaption}\item[{double}]{sample\+Rate }\end{DoxyParamCaption})}
+
+Clears any messages from the queue.
+
+You need to call this method before starting to use the collector, so that it knows the correct sample rate to use. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+audio\+\_\+devices/midi\+\_\+io/\mbox{\hyperlink{juce___midi_message_collector_8h}{juce\+\_\+\+Midi\+Message\+Collector.\+h}}\item 
+build/juce\+\_\+audio\+\_\+devices/midi\+\_\+io/\mbox{\hyperlink{juce___midi_message_collector_8cpp}{juce\+\_\+\+Midi\+Message\+Collector.\+cpp}}\end{DoxyCompactItemize}

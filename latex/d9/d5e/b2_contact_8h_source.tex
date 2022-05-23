@@ -1,0 +1,302 @@
+\hypertarget{b2_contact_8h_source}{}\doxysection{b2\+Contact.\+h}
+\label{b2_contact_8h_source}\index{build/juce\_box2d/box2d/Dynamics/Contacts/b2Contact.h@{build/juce\_box2d/box2d/Dynamics/Contacts/b2Contact.h}}
+\mbox{\hyperlink{b2_contact_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{* Copyright (c) 2006-\/2009 Erin Catto http://www.box2d.org}}
+\DoxyCodeLine{3 \textcolor{comment}{*}}
+\DoxyCodeLine{4 \textcolor{comment}{* This software is provided 'as-\/is', without any express or implied}}
+\DoxyCodeLine{5 \textcolor{comment}{* warranty.  In no event will the authors be held liable for any damages}}
+\DoxyCodeLine{6 \textcolor{comment}{* arising from the use of this software.}}
+\DoxyCodeLine{7 \textcolor{comment}{* Permission is granted to anyone to use this software for any purpose,}}
+\DoxyCodeLine{8 \textcolor{comment}{* including commercial applications, and to alter it and redistribute it}}
+\DoxyCodeLine{9 \textcolor{comment}{* freely, subject to the following restrictions:}}
+\DoxyCodeLine{10 \textcolor{comment}{* 1. The origin of this software must not be misrepresented; you must not}}
+\DoxyCodeLine{11 \textcolor{comment}{* claim that you wrote the original software. If you use this software}}
+\DoxyCodeLine{12 \textcolor{comment}{* in a product, an acknowledgment in the product documentation would be}}
+\DoxyCodeLine{13 \textcolor{comment}{* appreciated but is not required.}}
+\DoxyCodeLine{14 \textcolor{comment}{* 2. Altered source versions must be plainly marked as such, and must not be}}
+\DoxyCodeLine{15 \textcolor{comment}{* misrepresented as being the original software.}}
+\DoxyCodeLine{16 \textcolor{comment}{* 3. This notice may not be removed or altered from any source distribution.}}
+\DoxyCodeLine{17 \textcolor{comment}{*/}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#ifndef B2\_CONTACT\_H}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#define B2\_CONTACT\_H}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#include "{}../../Common/b2Math.h"{}}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#include "{}../../Collision/b2Collision.h"{}}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#include "{}../../Collision/Shapes/b2Shape.h"{}}}
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#include "{}../b2Fixture.h"{}}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{keyword}{class }\mbox{\hyperlink{classb2_body}{b2Body}};}
+\DoxyCodeLine{28 \textcolor{keyword}{class }\mbox{\hyperlink{classb2_contact}{b2Contact}};}
+\DoxyCodeLine{29 \textcolor{keyword}{class }\mbox{\hyperlink{classb2_fixture}{b2Fixture}};}
+\DoxyCodeLine{30 \textcolor{keyword}{class }\mbox{\hyperlink{classb2_world}{b2World}};}
+\DoxyCodeLine{31 \textcolor{keyword}{class }\mbox{\hyperlink{classb2_block_allocator}{b2BlockAllocator}};}
+\DoxyCodeLine{32 \textcolor{keyword}{class }\mbox{\hyperlink{classb2_stack_allocator}{b2StackAllocator}};}
+\DoxyCodeLine{33 \textcolor{keyword}{class }\mbox{\hyperlink{classb2_contact_listener}{b2ContactListener}};}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{37 \textcolor{keyword}{inline} \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{b2_contact_8h_a25afe118bb01c7a2a7425deddb4a519e}{b2MixFriction}}(\mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} friction1, \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} friction2)}
+\DoxyCodeLine{38 \{}
+\DoxyCodeLine{39     \textcolor{keywordflow}{return} std::sqrt(friction1 * friction2);}
+\DoxyCodeLine{40 \}}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{44 \textcolor{keyword}{inline} \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{b2_contact_8h_a6ae248694dcabf79fbb0f4db15980b77}{b2MixRestitution}}(\mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} restitution1, \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} restitution2)}
+\DoxyCodeLine{45 \{}
+\DoxyCodeLine{46     \textcolor{keywordflow}{return} restitution1 > restitution2 ? restitution1 : restitution2;}
+\DoxyCodeLine{47 \}}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49 \textcolor{keyword}{typedef} \mbox{\hyperlink{classb2_contact}{b2Contact}}* \mbox{\hyperlink{b2_contact_8h_acd28a14bc9180746613e32fc8c792454}{b2ContactCreateFcn}}(   \mbox{\hyperlink{classb2_fixture}{b2Fixture}}* fixtureA, \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} indexA,}
+\DoxyCodeLine{50                                         \mbox{\hyperlink{classb2_fixture}{b2Fixture}}* fixtureB, \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} indexB,}
+\DoxyCodeLine{51                                         \mbox{\hyperlink{classb2_block_allocator}{b2BlockAllocator}}* allocator);}
+\DoxyCodeLine{52 \textcolor{keyword}{typedef} \textcolor{keywordtype}{void} \mbox{\hyperlink{b2_contact_8h_a13f1fcd7bbd3900e53e6ddf8a76428e7}{b2ContactDestroyFcn}}(\mbox{\hyperlink{classb2_contact}{b2Contact}}* contact, \mbox{\hyperlink{classb2_block_allocator}{b2BlockAllocator}}* allocator);}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54 \textcolor{keyword}{struct }\mbox{\hyperlink{structb2_contact_register}{b2ContactRegister}}}
+\DoxyCodeLine{55 \{}
+\DoxyCodeLine{56     \mbox{\hyperlink{b2_contact_8h_acd28a14bc9180746613e32fc8c792454}{b2ContactCreateFcn}}* \mbox{\hyperlink{structb2_contact_register_ae065de11ab2f164bd1b8e3a461b41824}{createFcn}};}
+\DoxyCodeLine{57     \mbox{\hyperlink{b2_contact_8h_a13f1fcd7bbd3900e53e6ddf8a76428e7}{b2ContactDestroyFcn}}* \mbox{\hyperlink{structb2_contact_register_a95862aec746f5fd6ffa00a6729dec61f}{destroyFcn}};}
+\DoxyCodeLine{58     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structb2_contact_register_a43f2d79909505b785b9034b21a56525e}{primary}};}
+\DoxyCodeLine{59 \};}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{66 \textcolor{keyword}{struct }\mbox{\hyperlink{structb2_contact_edge}{b2ContactEdge}}}
+\DoxyCodeLine{67 \{}
+\DoxyCodeLine{68     \mbox{\hyperlink{classb2_body}{b2Body}}* \mbox{\hyperlink{structb2_contact_edge_a69015fc22e064eac04ed74f27a13ae78}{other}};           }
+\DoxyCodeLine{69     \mbox{\hyperlink{classb2_contact}{b2Contact}}* \mbox{\hyperlink{structb2_contact_edge_a2fbfaffa0dfdf715fd1a709cff939dee}{contact}};     }
+\DoxyCodeLine{70     \mbox{\hyperlink{structb2_contact_edge}{b2ContactEdge}}* \mbox{\hyperlink{structb2_contact_edge_a606dfacb78dc5c51672e4d7449006b8c}{prev}};   }
+\DoxyCodeLine{71     \mbox{\hyperlink{structb2_contact_edge}{b2ContactEdge}}* \mbox{\hyperlink{structb2_contact_edge_a9af32b3cfadf35a927f4dffcf6338a6d}{next}};   }
+\DoxyCodeLine{72 \};}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{77 \textcolor{keyword}{class }\mbox{\hyperlink{classb2_contact}{b2Contact}}}
+\DoxyCodeLine{78 \{}
+\DoxyCodeLine{79 \textcolor{keyword}{public}:}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{83     \mbox{\hyperlink{structb2_manifold}{b2Manifold}}* \mbox{\hyperlink{classb2_contact_ab0597077b23615476327f9b32d9c4979}{GetManifold}}();}
+\DoxyCodeLine{84     \textcolor{keyword}{const} \mbox{\hyperlink{structb2_manifold}{b2Manifold}}* \mbox{\hyperlink{classb2_contact_ab0597077b23615476327f9b32d9c4979}{GetManifold}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{87     \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_contact_a7f5645863f6197fa28cc1baafbd11255}{GetWorldManifold}}(\mbox{\hyperlink{structb2_world_manifold}{b2WorldManifold}}* worldManifold) \textcolor{keyword}{const};}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{90     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classb2_contact_a681346f93e2a27403383775a752c06a0}{IsTouching}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{95     \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_contact_a6edf582f8c161d6632854cddefe55a0c}{SetEnabled}}(\textcolor{keywordtype}{bool} flag);}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{98     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classb2_contact_af81964f40dce556efbc83ae760f166b0}{IsEnabled}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{101     \mbox{\hyperlink{classb2_contact}{b2Contact}}* \mbox{\hyperlink{classb2_contact_aebfebb1e4b27dc0bd7aa120093e3d650}{GetNext}}();}
+\DoxyCodeLine{102     \textcolor{keyword}{const} \mbox{\hyperlink{classb2_contact}{b2Contact}}* \mbox{\hyperlink{classb2_contact_aebfebb1e4b27dc0bd7aa120093e3d650}{GetNext}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{105     \mbox{\hyperlink{classb2_fixture}{b2Fixture}}* \mbox{\hyperlink{classb2_contact_a707a3a5a14c2cdd4c6eb7fc648d76037}{GetFixtureA}}();}
+\DoxyCodeLine{106     \textcolor{keyword}{const} \mbox{\hyperlink{classb2_fixture}{b2Fixture}}* \mbox{\hyperlink{classb2_contact_a707a3a5a14c2cdd4c6eb7fc648d76037}{GetFixtureA}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{109     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} \mbox{\hyperlink{classb2_contact_a3748408088e9522cd0208b1f4654c69d}{GetChildIndexA}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{112     \mbox{\hyperlink{classb2_fixture}{b2Fixture}}* \mbox{\hyperlink{classb2_contact_a68464fe587d7e6a1f52763e965bb7361}{GetFixtureB}}();}
+\DoxyCodeLine{113     \textcolor{keyword}{const} \mbox{\hyperlink{classb2_fixture}{b2Fixture}}* \mbox{\hyperlink{classb2_contact_a68464fe587d7e6a1f52763e965bb7361}{GetFixtureB}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{116     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} \mbox{\hyperlink{classb2_contact_a61dd0be8d7ab274f850f7e78941a665a}{GetChildIndexB}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{120     \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_contact_a5e8fbb6bb2966ac84272bb0ea9d2e4c7}{SetFriction}}(\mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} friction);}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{123     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_contact_a7650ec27931c82f3914f37fdeb267b02}{GetFriction}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{126     \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_contact_ad66d9290da187cef4c9f48c5766d4460}{ResetFriction}}();}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{130     \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_contact_a24ca342c2bb766c53ef5ad04f5268fc1}{SetRestitution}}(\mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} restitution);}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{133     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_contact_a9fb6e637026914c8752f89f91122b561}{GetRestitution}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{136     \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_contact_a243501bc5c146e9eb1296162d328aef1}{ResetRestitution}}();}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{139     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_contact_ae3c2842e5325b2d4500f8ed1d4de2f72}{Evaluate}}(\mbox{\hyperlink{structb2_manifold}{b2Manifold}}* manifold, \textcolor{keyword}{const} \mbox{\hyperlink{structb2_transform}{b2Transform}}\& xfA, \textcolor{keyword}{const} \mbox{\hyperlink{structb2_transform}{b2Transform}}\& xfB) = 0;}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{141 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{142     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{classb2_contact_manager}{b2ContactManager}};}
+\DoxyCodeLine{143     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{classb2_world}{b2World}};}
+\DoxyCodeLine{144     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{classb2_contact_solver}{b2ContactSolver}};}
+\DoxyCodeLine{145     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{classb2_body}{b2Body}};}
+\DoxyCodeLine{146     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{classb2_fixture}{b2Fixture}};}
+\DoxyCodeLine{147 }
+\DoxyCodeLine{148     \textcolor{comment}{// Flags stored in m\_flags}}
+\DoxyCodeLine{149     \textcolor{keyword}{enum}}
+\DoxyCodeLine{150     \{}
+\DoxyCodeLine{151         \textcolor{comment}{// Used when crawling contact graph when forming islands.}}
+\DoxyCodeLine{152         \mbox{\hyperlink{classb2_contact_aef10038f1589be389f7aa3cb599d9749aad83700b4de33a2e3133ea0d98aa1c8b}{e\_islandFlag}}        = 0x0001,}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154         \textcolor{comment}{// Set when the shapes are touching.}}
+\DoxyCodeLine{155         \mbox{\hyperlink{classb2_contact_aef10038f1589be389f7aa3cb599d9749aff50bb5872ede1ef890c5b4d063c6378}{e\_touchingFlag}}        = 0x0002,}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{157         \textcolor{comment}{// This contact can be disabled (by user)}}
+\DoxyCodeLine{158         \mbox{\hyperlink{classb2_contact_aef10038f1589be389f7aa3cb599d9749a63ecc7ff371a26143b250e8f315576a7}{e\_enabledFlag}}      = 0x0004,}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160         \textcolor{comment}{// This contact needs filtering because a fixture filter was changed.}}
+\DoxyCodeLine{161         \mbox{\hyperlink{classb2_contact_aef10038f1589be389f7aa3cb599d9749ab8e92ae0c3f97e9d95aedb30238e6817}{e\_filterFlag}}        = 0x0008,}
+\DoxyCodeLine{162 }
+\DoxyCodeLine{163         \textcolor{comment}{// This bullet contact had a TOI event}}
+\DoxyCodeLine{164         \mbox{\hyperlink{classb2_contact_aef10038f1589be389f7aa3cb599d9749aa3f6336608fedaf5a3edd8d7199af567}{e\_bulletHitFlag}}      = 0x0010,}
+\DoxyCodeLine{165 }
+\DoxyCodeLine{166         \textcolor{comment}{// This contact has a valid TOI in m\_toi}}
+\DoxyCodeLine{167         \mbox{\hyperlink{classb2_contact_aef10038f1589be389f7aa3cb599d9749affeff4bfd177073172521d6be7e202de}{e\_toiFlag}}          = 0x0020}
+\DoxyCodeLine{168     \};}
+\DoxyCodeLine{169 }
+\DoxyCodeLine{171     \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_contact_a44a3d32149021269eb9dfd4015c98e0d}{FlagForFiltering}}();}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{173     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_contact_ad905650aab96ead0434c2bb449e4129c}{AddType}}(\mbox{\hyperlink{b2_contact_8h_acd28a14bc9180746613e32fc8c792454}{b2ContactCreateFcn}}* createFcn, \mbox{\hyperlink{b2_contact_8h_a13f1fcd7bbd3900e53e6ddf8a76428e7}{b2ContactDestroyFcn}}* destroyFcn,}
+\DoxyCodeLine{174                         \mbox{\hyperlink{classb2_shape_a4c1f3a9ad6b3150bb90ad9018ca4b1e0}{b2Shape::Type}} typeA, \mbox{\hyperlink{classb2_shape_a4c1f3a9ad6b3150bb90ad9018ca4b1e0}{b2Shape::Type}} typeB);}
+\DoxyCodeLine{175     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_contact_ac77031d85c2e06d5cdc1f5c774f8f3fd}{InitializeRegisters}}();}
+\DoxyCodeLine{176     \textcolor{keyword}{static} \mbox{\hyperlink{classb2_contact}{b2Contact}}* \mbox{\hyperlink{classb2_contact_abf8e79c764a2c9db6234ff0eaad4d7d4}{Create}}(\mbox{\hyperlink{classb2_fixture}{b2Fixture}}* fixtureA, \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} indexA, \mbox{\hyperlink{classb2_fixture}{b2Fixture}}* fixtureB, \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} indexB, \mbox{\hyperlink{classb2_block_allocator}{b2BlockAllocator}}* allocator);}
+\DoxyCodeLine{177     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_contact_a36c1f6767f212f2e4ddb4c4b2c7cdb75}{Destroy}}(\mbox{\hyperlink{classb2_contact}{b2Contact}}* contact, \mbox{\hyperlink{classb2_shape_a4c1f3a9ad6b3150bb90ad9018ca4b1e0}{b2Shape::Type}} typeA, \mbox{\hyperlink{classb2_shape_a4c1f3a9ad6b3150bb90ad9018ca4b1e0}{b2Shape::Type}} typeB, \mbox{\hyperlink{classb2_block_allocator}{b2BlockAllocator}}* allocator);}
+\DoxyCodeLine{178     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_contact_a36c1f6767f212f2e4ddb4c4b2c7cdb75}{Destroy}}(\mbox{\hyperlink{classb2_contact}{b2Contact}}* contact, \mbox{\hyperlink{classb2_block_allocator}{b2BlockAllocator}}* allocator);}
+\DoxyCodeLine{179 }
+\DoxyCodeLine{180     \mbox{\hyperlink{classb2_contact_a04b21bf6fcf41ba19866a2d57c4a2060}{b2Contact}}() : \mbox{\hyperlink{classb2_contact_aec94bbbb8862f09365a5af99650b5be4}{m\_fixtureA}}(NULL), \mbox{\hyperlink{classb2_contact_a83b18f0da1cfeb2c9dccc6aabed881d3}{m\_fixtureB}}(NULL) \{\}}
+\DoxyCodeLine{181     \mbox{\hyperlink{classb2_contact_a04b21bf6fcf41ba19866a2d57c4a2060}{b2Contact}}(\mbox{\hyperlink{classb2_fixture}{b2Fixture}}* fixtureA, \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} indexA, \mbox{\hyperlink{classb2_fixture}{b2Fixture}}* fixtureB, \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} indexB);}
+\DoxyCodeLine{182     \textcolor{keyword}{virtual} \mbox{\hyperlink{classb2_contact_a37368b233a5ac0d698310b300426ce16}{\string~b2Contact}}() \{\}}
+\DoxyCodeLine{183 }
+\DoxyCodeLine{184     \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_contact_a218a66a6c34e3de1c428aa73a0680dfe}{Update}}(\mbox{\hyperlink{classb2_contact_listener}{b2ContactListener}}* listener);}
+\DoxyCodeLine{185 }
+\DoxyCodeLine{186     \textcolor{keyword}{static} \mbox{\hyperlink{structb2_contact_register}{b2ContactRegister}} \mbox{\hyperlink{classb2_contact_a5e2beb4e435e1545ae043a7a2b77d1da}{s\_registers}}[\mbox{\hyperlink{classb2_shape_a4c1f3a9ad6b3150bb90ad9018ca4b1e0aad7c674a33e8ca4ee9b717f226553596}{b2Shape::e\_typeCount}}][\mbox{\hyperlink{classb2_shape_a4c1f3a9ad6b3150bb90ad9018ca4b1e0aad7c674a33e8ca4ee9b717f226553596}{b2Shape::e\_typeCount}}];}
+\DoxyCodeLine{187     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} \mbox{\hyperlink{classb2_contact_a672598c350694d7b9a89c45f8ad0dd90}{s\_initialized}};}
+\DoxyCodeLine{188 }
+\DoxyCodeLine{189     \mbox{\hyperlink{namespace_steinberg_af4518d725547bee20d4e185e8d3f1965}{juce::uint32}} \mbox{\hyperlink{classb2_contact_af7493da44236823a0c479c66ce528c05}{m\_flags}};}
+\DoxyCodeLine{190 }
+\DoxyCodeLine{191     \textcolor{comment}{// World pool and list pointers.}}
+\DoxyCodeLine{192     \mbox{\hyperlink{classb2_contact}{b2Contact}}* \mbox{\hyperlink{classb2_contact_adf3a3450e0fa9cf6d11ca22467c2370b}{m\_prev}};}
+\DoxyCodeLine{193     \mbox{\hyperlink{classb2_contact}{b2Contact}}* \mbox{\hyperlink{classb2_contact_a241fea000d26da8761b5520a9adcd87a}{m\_next}};}
+\DoxyCodeLine{194 }
+\DoxyCodeLine{195     \textcolor{comment}{// Nodes for connecting bodies.}}
+\DoxyCodeLine{196     \mbox{\hyperlink{structb2_contact_edge}{b2ContactEdge}} \mbox{\hyperlink{classb2_contact_a5f5ce747bb04f48843eb07304d47faab}{m\_nodeA}};}
+\DoxyCodeLine{197     \mbox{\hyperlink{structb2_contact_edge}{b2ContactEdge}} \mbox{\hyperlink{classb2_contact_a4887c3acb8cb857e2bec659027539c7a}{m\_nodeB}};}
+\DoxyCodeLine{198 }
+\DoxyCodeLine{199     \mbox{\hyperlink{classb2_fixture}{b2Fixture}}* \mbox{\hyperlink{classb2_contact_aec94bbbb8862f09365a5af99650b5be4}{m\_fixtureA}};}
+\DoxyCodeLine{200     \mbox{\hyperlink{classb2_fixture}{b2Fixture}}* \mbox{\hyperlink{classb2_contact_a83b18f0da1cfeb2c9dccc6aabed881d3}{m\_fixtureB}};}
+\DoxyCodeLine{201 }
+\DoxyCodeLine{202     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} \mbox{\hyperlink{classb2_contact_a998bbb6615cd58e2c2696721bee4d431}{m\_indexA}};}
+\DoxyCodeLine{203     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} \mbox{\hyperlink{classb2_contact_a31a65c67e3e24cb74cb9e7b7e6a6547e}{m\_indexB}};}
+\DoxyCodeLine{204 }
+\DoxyCodeLine{205     \mbox{\hyperlink{structb2_manifold}{b2Manifold}} \mbox{\hyperlink{classb2_contact_aebdc2c073d05ac8e544a591d2043b251}{m\_manifold}};}
+\DoxyCodeLine{206 }
+\DoxyCodeLine{207     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} \mbox{\hyperlink{classb2_contact_ae139067d725d3b8cad35d190fb81377a}{m\_toiCount}};}
+\DoxyCodeLine{208     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_contact_aa9e75253eaac6efdb6485a8646ac553f}{m\_toi}};}
+\DoxyCodeLine{209 }
+\DoxyCodeLine{210     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_contact_ac7915ef6f92d609ee0a43d518b4f9e75}{m\_friction}};}
+\DoxyCodeLine{211     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_contact_a6bc56522b4c04e28bee3542a7fc2f796}{m\_restitution}};}
+\DoxyCodeLine{212 \};}
+\DoxyCodeLine{213 }
+\DoxyCodeLine{214 \textcolor{keyword}{inline} \mbox{\hyperlink{structb2_manifold}{b2Manifold}}* \mbox{\hyperlink{classb2_contact_ab0597077b23615476327f9b32d9c4979}{b2Contact::GetManifold}}()}
+\DoxyCodeLine{215 \{}
+\DoxyCodeLine{216     \textcolor{keywordflow}{return} \&\mbox{\hyperlink{classb2_contact_aebdc2c073d05ac8e544a591d2043b251}{m\_manifold}};}
+\DoxyCodeLine{217 \}}
+\DoxyCodeLine{218 }
+\DoxyCodeLine{219 \textcolor{keyword}{inline} \textcolor{keyword}{const} \mbox{\hyperlink{structb2_manifold}{b2Manifold}}* \mbox{\hyperlink{classb2_contact_ab0597077b23615476327f9b32d9c4979}{b2Contact::GetManifold}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{220 \textcolor{keyword}{}\{}
+\DoxyCodeLine{221     \textcolor{keywordflow}{return} \&\mbox{\hyperlink{classb2_contact_aebdc2c073d05ac8e544a591d2043b251}{m\_manifold}};}
+\DoxyCodeLine{222 \}}
+\DoxyCodeLine{223 }
+\DoxyCodeLine{224 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_contact_a7f5645863f6197fa28cc1baafbd11255}{b2Contact::GetWorldManifold}}(\mbox{\hyperlink{structb2_world_manifold}{b2WorldManifold}}* worldManifold)\textcolor{keyword}{ const}}
+\DoxyCodeLine{225 \textcolor{keyword}{}\{}
+\DoxyCodeLine{226     \textcolor{keyword}{const} \mbox{\hyperlink{classb2_body}{b2Body}}* bodyA = \mbox{\hyperlink{classb2_contact_aec94bbbb8862f09365a5af99650b5be4}{m\_fixtureA}}-\/>\mbox{\hyperlink{classb2_fixture_a9d6536ef274d768e86ab0a8330921535}{GetBody}}();}
+\DoxyCodeLine{227     \textcolor{keyword}{const} \mbox{\hyperlink{classb2_body}{b2Body}}* bodyB = \mbox{\hyperlink{classb2_contact_a83b18f0da1cfeb2c9dccc6aabed881d3}{m\_fixtureB}}-\/>\mbox{\hyperlink{classb2_fixture_a9d6536ef274d768e86ab0a8330921535}{GetBody}}();}
+\DoxyCodeLine{228     \textcolor{keyword}{const} \mbox{\hyperlink{classb2_shape}{b2Shape}}* shapeA = \mbox{\hyperlink{classb2_contact_aec94bbbb8862f09365a5af99650b5be4}{m\_fixtureA}}-\/>\mbox{\hyperlink{classb2_fixture_aaa2b73fa212fa53b1c800cccd7a1d31e}{GetShape}}();}
+\DoxyCodeLine{229     \textcolor{keyword}{const} \mbox{\hyperlink{classb2_shape}{b2Shape}}* shapeB = \mbox{\hyperlink{classb2_contact_a83b18f0da1cfeb2c9dccc6aabed881d3}{m\_fixtureB}}-\/>\mbox{\hyperlink{classb2_fixture_aaa2b73fa212fa53b1c800cccd7a1d31e}{GetShape}}();}
+\DoxyCodeLine{230 }
+\DoxyCodeLine{231     worldManifold-\/>\mbox{\hyperlink{structb2_world_manifold_a896dd7e7d4d6f6a5bc69e19fbd6871bd}{Initialize}}(\&\mbox{\hyperlink{classb2_contact_aebdc2c073d05ac8e544a591d2043b251}{m\_manifold}}, bodyA-\/>\mbox{\hyperlink{classb2_body_afb316448e6e555ceb2df23ed216b2f53}{GetTransform}}(), shapeA-\/>\mbox{\hyperlink{classb2_shape_a5de7a9bd3f9e72ef7025a65c304aaf1a}{m\_radius}}, bodyB-\/>\mbox{\hyperlink{classb2_body_afb316448e6e555ceb2df23ed216b2f53}{GetTransform}}(), shapeB-\/>\mbox{\hyperlink{classb2_shape_a5de7a9bd3f9e72ef7025a65c304aaf1a}{m\_radius}});}
+\DoxyCodeLine{232 \}}
+\DoxyCodeLine{233 }
+\DoxyCodeLine{234 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_contact_a6edf582f8c161d6632854cddefe55a0c}{b2Contact::SetEnabled}}(\textcolor{keywordtype}{bool} flag)}
+\DoxyCodeLine{235 \{}
+\DoxyCodeLine{236     \textcolor{keywordflow}{if} (flag)}
+\DoxyCodeLine{237     \{}
+\DoxyCodeLine{238         \mbox{\hyperlink{classb2_contact_af7493da44236823a0c479c66ce528c05}{m\_flags}} |= \mbox{\hyperlink{classb2_contact_aef10038f1589be389f7aa3cb599d9749a63ecc7ff371a26143b250e8f315576a7}{e\_enabledFlag}};}
+\DoxyCodeLine{239     \}}
+\DoxyCodeLine{240     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{241     \{}
+\DoxyCodeLine{242         \mbox{\hyperlink{classb2_contact_af7493da44236823a0c479c66ce528c05}{m\_flags}} \&= \string~((\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}) \mbox{\hyperlink{classb2_contact_aef10038f1589be389f7aa3cb599d9749a63ecc7ff371a26143b250e8f315576a7}{e\_enabledFlag}});}
+\DoxyCodeLine{243     \}}
+\DoxyCodeLine{244 \}}
+\DoxyCodeLine{245 }
+\DoxyCodeLine{246 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{classb2_contact_af81964f40dce556efbc83ae760f166b0}{b2Contact::IsEnabled}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{247 \textcolor{keyword}{}\{}
+\DoxyCodeLine{248     \textcolor{keywordflow}{return} (\mbox{\hyperlink{classb2_contact_af7493da44236823a0c479c66ce528c05}{m\_flags}} \& \mbox{\hyperlink{classb2_contact_aef10038f1589be389f7aa3cb599d9749a63ecc7ff371a26143b250e8f315576a7}{e\_enabledFlag}}) == \mbox{\hyperlink{classb2_contact_aef10038f1589be389f7aa3cb599d9749a63ecc7ff371a26143b250e8f315576a7}{e\_enabledFlag}};}
+\DoxyCodeLine{249 \}}
+\DoxyCodeLine{250 }
+\DoxyCodeLine{251 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{classb2_contact_a681346f93e2a27403383775a752c06a0}{b2Contact::IsTouching}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{252 \textcolor{keyword}{}\{}
+\DoxyCodeLine{253     \textcolor{keywordflow}{return} (\mbox{\hyperlink{classb2_contact_af7493da44236823a0c479c66ce528c05}{m\_flags}} \& \mbox{\hyperlink{classb2_contact_aef10038f1589be389f7aa3cb599d9749aff50bb5872ede1ef890c5b4d063c6378}{e\_touchingFlag}}) == \mbox{\hyperlink{classb2_contact_aef10038f1589be389f7aa3cb599d9749aff50bb5872ede1ef890c5b4d063c6378}{e\_touchingFlag}};}
+\DoxyCodeLine{254 \}}
+\DoxyCodeLine{255 }
+\DoxyCodeLine{256 \textcolor{keyword}{inline} \mbox{\hyperlink{classb2_contact}{b2Contact}}* \mbox{\hyperlink{classb2_contact_aebfebb1e4b27dc0bd7aa120093e3d650}{b2Contact::GetNext}}()}
+\DoxyCodeLine{257 \{}
+\DoxyCodeLine{258     \textcolor{keywordflow}{return} \mbox{\hyperlink{classb2_contact_a241fea000d26da8761b5520a9adcd87a}{m\_next}};}
+\DoxyCodeLine{259 \}}
+\DoxyCodeLine{260 }
+\DoxyCodeLine{261 \textcolor{keyword}{inline} \textcolor{keyword}{const} \mbox{\hyperlink{classb2_contact}{b2Contact}}* \mbox{\hyperlink{classb2_contact_aebfebb1e4b27dc0bd7aa120093e3d650}{b2Contact::GetNext}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{262 \textcolor{keyword}{}\{}
+\DoxyCodeLine{263     \textcolor{keywordflow}{return} \mbox{\hyperlink{classb2_contact_a241fea000d26da8761b5520a9adcd87a}{m\_next}};}
+\DoxyCodeLine{264 \}}
+\DoxyCodeLine{265 }
+\DoxyCodeLine{266 \textcolor{keyword}{inline} \mbox{\hyperlink{classb2_fixture}{b2Fixture}}* \mbox{\hyperlink{classb2_contact_a707a3a5a14c2cdd4c6eb7fc648d76037}{b2Contact::GetFixtureA}}()}
+\DoxyCodeLine{267 \{}
+\DoxyCodeLine{268     \textcolor{keywordflow}{return} \mbox{\hyperlink{classb2_contact_aec94bbbb8862f09365a5af99650b5be4}{m\_fixtureA}};}
+\DoxyCodeLine{269 \}}
+\DoxyCodeLine{270 }
+\DoxyCodeLine{271 \textcolor{keyword}{inline} \textcolor{keyword}{const} \mbox{\hyperlink{classb2_fixture}{b2Fixture}}* \mbox{\hyperlink{classb2_contact_a707a3a5a14c2cdd4c6eb7fc648d76037}{b2Contact::GetFixtureA}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{272 \textcolor{keyword}{}\{}
+\DoxyCodeLine{273     \textcolor{keywordflow}{return} \mbox{\hyperlink{classb2_contact_aec94bbbb8862f09365a5af99650b5be4}{m\_fixtureA}};}
+\DoxyCodeLine{274 \}}
+\DoxyCodeLine{275 }
+\DoxyCodeLine{276 \textcolor{keyword}{inline} \mbox{\hyperlink{classb2_fixture}{b2Fixture}}* \mbox{\hyperlink{classb2_contact_a68464fe587d7e6a1f52763e965bb7361}{b2Contact::GetFixtureB}}()}
+\DoxyCodeLine{277 \{}
+\DoxyCodeLine{278     \textcolor{keywordflow}{return} \mbox{\hyperlink{classb2_contact_a83b18f0da1cfeb2c9dccc6aabed881d3}{m\_fixtureB}};}
+\DoxyCodeLine{279 \}}
+\DoxyCodeLine{280 }
+\DoxyCodeLine{281 \textcolor{keyword}{inline} \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} \mbox{\hyperlink{classb2_contact_a3748408088e9522cd0208b1f4654c69d}{b2Contact::GetChildIndexA}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{282 \textcolor{keyword}{}\{}
+\DoxyCodeLine{283     \textcolor{keywordflow}{return} \mbox{\hyperlink{classb2_contact_a998bbb6615cd58e2c2696721bee4d431}{m\_indexA}};}
+\DoxyCodeLine{284 \}}
+\DoxyCodeLine{285 }
+\DoxyCodeLine{286 \textcolor{keyword}{inline} \textcolor{keyword}{const} \mbox{\hyperlink{classb2_fixture}{b2Fixture}}* \mbox{\hyperlink{classb2_contact_a68464fe587d7e6a1f52763e965bb7361}{b2Contact::GetFixtureB}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{287 \textcolor{keyword}{}\{}
+\DoxyCodeLine{288     \textcolor{keywordflow}{return} \mbox{\hyperlink{classb2_contact_a83b18f0da1cfeb2c9dccc6aabed881d3}{m\_fixtureB}};}
+\DoxyCodeLine{289 \}}
+\DoxyCodeLine{290 }
+\DoxyCodeLine{291 \textcolor{keyword}{inline} \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} \mbox{\hyperlink{classb2_contact_a61dd0be8d7ab274f850f7e78941a665a}{b2Contact::GetChildIndexB}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{292 \textcolor{keyword}{}\{}
+\DoxyCodeLine{293     \textcolor{keywordflow}{return} \mbox{\hyperlink{classb2_contact_a31a65c67e3e24cb74cb9e7b7e6a6547e}{m\_indexB}};}
+\DoxyCodeLine{294 \}}
+\DoxyCodeLine{295 }
+\DoxyCodeLine{296 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_contact_a44a3d32149021269eb9dfd4015c98e0d}{b2Contact::FlagForFiltering}}()}
+\DoxyCodeLine{297 \{}
+\DoxyCodeLine{298     \mbox{\hyperlink{classb2_contact_af7493da44236823a0c479c66ce528c05}{m\_flags}} |= \mbox{\hyperlink{classb2_contact_aef10038f1589be389f7aa3cb599d9749ab8e92ae0c3f97e9d95aedb30238e6817}{e\_filterFlag}};}
+\DoxyCodeLine{299 \}}
+\DoxyCodeLine{300 }
+\DoxyCodeLine{301 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_contact_a5e8fbb6bb2966ac84272bb0ea9d2e4c7}{b2Contact::SetFriction}}(\mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} friction)}
+\DoxyCodeLine{302 \{}
+\DoxyCodeLine{303     \mbox{\hyperlink{classb2_contact_ac7915ef6f92d609ee0a43d518b4f9e75}{m\_friction}} = friction;}
+\DoxyCodeLine{304 \}}
+\DoxyCodeLine{305 }
+\DoxyCodeLine{306 \textcolor{keyword}{inline} \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_contact_a7650ec27931c82f3914f37fdeb267b02}{b2Contact::GetFriction}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{307 \textcolor{keyword}{}\{}
+\DoxyCodeLine{308     \textcolor{keywordflow}{return} \mbox{\hyperlink{classb2_contact_ac7915ef6f92d609ee0a43d518b4f9e75}{m\_friction}};}
+\DoxyCodeLine{309 \}}
+\DoxyCodeLine{310 }
+\DoxyCodeLine{311 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_contact_ad66d9290da187cef4c9f48c5766d4460}{b2Contact::ResetFriction}}()}
+\DoxyCodeLine{312 \{}
+\DoxyCodeLine{313     \mbox{\hyperlink{classb2_contact_ac7915ef6f92d609ee0a43d518b4f9e75}{m\_friction}} = \mbox{\hyperlink{b2_contact_8h_a25afe118bb01c7a2a7425deddb4a519e}{b2MixFriction}}(\mbox{\hyperlink{classb2_contact_aec94bbbb8862f09365a5af99650b5be4}{m\_fixtureA}}-\/>\mbox{\hyperlink{classb2_fixture_a314118ee973ebd14e083553fed1e0212}{m\_friction}}, \mbox{\hyperlink{classb2_contact_a83b18f0da1cfeb2c9dccc6aabed881d3}{m\_fixtureB}}-\/>\mbox{\hyperlink{classb2_fixture_a314118ee973ebd14e083553fed1e0212}{m\_friction}});}
+\DoxyCodeLine{314 \}}
+\DoxyCodeLine{315 }
+\DoxyCodeLine{316 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_contact_a24ca342c2bb766c53ef5ad04f5268fc1}{b2Contact::SetRestitution}}(\mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} restitution)}
+\DoxyCodeLine{317 \{}
+\DoxyCodeLine{318     \mbox{\hyperlink{classb2_contact_a6bc56522b4c04e28bee3542a7fc2f796}{m\_restitution}} = restitution;}
+\DoxyCodeLine{319 \}}
+\DoxyCodeLine{320 }
+\DoxyCodeLine{321 \textcolor{keyword}{inline} \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_contact_a9fb6e637026914c8752f89f91122b561}{b2Contact::GetRestitution}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{322 \textcolor{keyword}{}\{}
+\DoxyCodeLine{323     \textcolor{keywordflow}{return} \mbox{\hyperlink{classb2_contact_a6bc56522b4c04e28bee3542a7fc2f796}{m\_restitution}};}
+\DoxyCodeLine{324 \}}
+\DoxyCodeLine{325 }
+\DoxyCodeLine{326 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_contact_a243501bc5c146e9eb1296162d328aef1}{b2Contact::ResetRestitution}}()}
+\DoxyCodeLine{327 \{}
+\DoxyCodeLine{328     \mbox{\hyperlink{classb2_contact_a6bc56522b4c04e28bee3542a7fc2f796}{m\_restitution}} = \mbox{\hyperlink{b2_contact_8h_a6ae248694dcabf79fbb0f4db15980b77}{b2MixRestitution}}(\mbox{\hyperlink{classb2_contact_aec94bbbb8862f09365a5af99650b5be4}{m\_fixtureA}}-\/>\mbox{\hyperlink{classb2_fixture_a343a35683ce4a79d2151761611027d66}{m\_restitution}}, \mbox{\hyperlink{classb2_contact_a83b18f0da1cfeb2c9dccc6aabed881d3}{m\_fixtureB}}-\/>\mbox{\hyperlink{classb2_fixture_a343a35683ce4a79d2151761611027d66}{m\_restitution}});}
+\DoxyCodeLine{329 \}}
+\DoxyCodeLine{330 }
+\DoxyCodeLine{331 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

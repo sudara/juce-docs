@@ -1,0 +1,110 @@
+\hypertarget{class_steinberg_1_1_vst_1_1_i_stream_attributes}{}\doxysection{Steinberg\+::Vst\+::IStream\+Attributes Class Reference}
+\label{class_steinberg_1_1_vst_1_1_i_stream_attributes}\index{Steinberg::Vst::IStreamAttributes@{Steinberg::Vst::IStreamAttributes}}
+
+
+{\ttfamily \#include $<$ivstattributes.\+h$>$}
+
+Inheritance diagram for Steinberg\+::Vst\+::IStream\+Attributes\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d9/d8e/class_steinberg_1_1_vst_1_1_i_stream_attributes}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\+\_\+\+API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_stream_attributes_a565adb10ef9c6e555cd0d145c22a3dc6}{get\+File\+Name}} (\mbox{\hyperlink{namespace_steinberg_1_1_vst_a3304fa8513f23d66819bee647e6cb29c}{String128}} name)=0
+\item 
+virtual \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_attribute_list}{IAttribute\+List}} $\ast$PLUGIN\+\_\+\+API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_stream_attributes_ad4155cbc39e2236c7433740e53d566b5}{get\+Attributes}} ()=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_steinberg_1_1_f_u_i_d}{FUID}} \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_stream_attributes_ad67d87ee3bdc88d1171e5162644c0a58}{iid}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Meta attributes of a stream\+: \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_stream_attributes}{Vst\+::\+IStream\+Attributes}}
+
+
+\begin{DoxyItemize}
+\item \mbox{[}host imp\mbox{]}
+\item \mbox{[}extends \mbox{\hyperlink{class_steinberg_1_1_i_b_stream}{IBStream}}\mbox{]}
+\item \mbox{[}released\+: 3.\+6.\+0\mbox{]}
+\item \mbox{[}optional\mbox{]}
+\end{DoxyItemize}
+
+Interface to access preset meta information from stream, used, for example, in set\+State in order to inform the plug-\/in about the current context in which the preset loading occurs (Project context or Preset load (see State\+Type)) or used to get the full file path of the loaded preset (if available).
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{ustring_8h}{pluginterfaces/base/ustring.h}}"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}pluginterfaces/vst/vstpresetkeys.h"{}}}
+\DoxyCodeLine{...}
+\DoxyCodeLine{}
+\DoxyCodeLine{tresult PLUGIN\_API MyPlugin::setState (IBStream* state)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    FUnknownPtr<IStreamAttributes> \mbox{\hyperlink{namespacegl_a3a0f500782e4461d09f1e29189835b3d}{stream}} (state);}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a3a0f500782e4461d09f1e29189835b3d}{stream}})}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        IAttributeList* \mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca10ae9fc7d453b0dd525d0edf2ede7961}{list}} = \mbox{\hyperlink{namespacegl_a3a0f500782e4461d09f1e29189835b3d}{stream}}-\/>getAttributes ();}
+\DoxyCodeLine{        \textcolor{keywordflow}{if} (list)}
+\DoxyCodeLine{        \{}
+\DoxyCodeLine{            \textcolor{comment}{// get the current type (project/Default..) of this state}}
+\DoxyCodeLine{            \mbox{\hyperlink{namespace_steinberg_1_1_vst_a3304fa8513f23d66819bee647e6cb29c}{String128}} \mbox{\hyperlink{namespacegl_ad7acdf57d94829f964ff1dc581fc4705}{string}};}
+\DoxyCodeLine{            \textcolor{keywordflow}{if} (\mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca10ae9fc7d453b0dd525d0edf2ede7961}{list}}-\/>getString (PresetAttributes::kStateType, \textcolor{keywordtype}{string}, 128 * sizeof (\mbox{\hyperlink{namespace_steinberg_1_1_vst_a3598b6ccf094d9d65342935206000b3a}{TChar}})) == \mbox{\hyperlink{namespace_steinberg_aad984331dc0e96a8c373da4eedc8867fabe8a193950563af44d7042627097968b}{kResultTrue}})}
+\DoxyCodeLine{            \{}
+\DoxyCodeLine{                \mbox{\hyperlink{namespace_steinberg_a1015c828bfd14fe73f94c95d784b8977}{UString128}} tmp (\textcolor{keywordtype}{string});}
+\DoxyCodeLine{                \textcolor{keywordtype}{char} ascii[128];}
+\DoxyCodeLine{                tmp.toAscii (ascii, 128);}
+\DoxyCodeLine{                \textcolor{keywordflow}{if} (!strncmp (ascii, StateType::kProject, strlen (StateType::kProject)))}
+\DoxyCodeLine{                \{}
+\DoxyCodeLine{                    \textcolor{comment}{// we are in project loading context...}}
+\DoxyCodeLine{                \}}
+\DoxyCodeLine{            \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// get the full file path of this state}}
+\DoxyCodeLine{            \mbox{\hyperlink{namespace_steinberg_1_1_vst_a3598b6ccf094d9d65342935206000b3a}{TChar}} fullPath[1024];}
+\DoxyCodeLine{            \textcolor{keywordflow}{if} (\mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca10ae9fc7d453b0dd525d0edf2ede7961}{list}}-\/>getString (PresetAttributes::kFilePathStringType, fullPath, 1024 * sizeof (\mbox{\hyperlink{namespace_steinberg_1_1_vst_a3598b6ccf094d9d65342935206000b3a}{TChar}})) == \mbox{\hyperlink{namespace_steinberg_aad984331dc0e96a8c373da4eedc8867fabe8a193950563af44d7042627097968b}{kResultTrue}})}
+\DoxyCodeLine{            \{}
+\DoxyCodeLine{                \textcolor{comment}{// here we have the full path ...}}
+\DoxyCodeLine{            \}}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{comment}{//...read the state here.....}}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} \mbox{\hyperlink{namespace_steinberg_aad984331dc0e96a8c373da4eedc8867fabe8a193950563af44d7042627097968b}{kResultTrue}};}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_steinberg_1_1_vst_1_1_i_stream_attributes_ad4155cbc39e2236c7433740e53d566b5}\label{class_steinberg_1_1_vst_1_1_i_stream_attributes_ad4155cbc39e2236c7433740e53d566b5}} 
+\index{Steinberg::Vst::IStreamAttributes@{Steinberg::Vst::IStreamAttributes}!getAttributes@{getAttributes}}
+\index{getAttributes@{getAttributes}!Steinberg::Vst::IStreamAttributes@{Steinberg::Vst::IStreamAttributes}}
+\doxysubsubsection{\texorpdfstring{getAttributes()}{getAttributes()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_attribute_list}{IAttribute\+List}} $\ast$PLUGIN\+\_\+\+API Steinberg\+::\+Vst\+::\+IStream\+Attributes\+::get\+Attributes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Gets meta information list. \mbox{\Hypertarget{class_steinberg_1_1_vst_1_1_i_stream_attributes_a565adb10ef9c6e555cd0d145c22a3dc6}\label{class_steinberg_1_1_vst_1_1_i_stream_attributes_a565adb10ef9c6e555cd0d145c22a3dc6}} 
+\index{Steinberg::Vst::IStreamAttributes@{Steinberg::Vst::IStreamAttributes}!getFileName@{getFileName}}
+\index{getFileName@{getFileName}!Steinberg::Vst::IStreamAttributes@{Steinberg::Vst::IStreamAttributes}}
+\doxysubsubsection{\texorpdfstring{getFileName()}{getFileName()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\+\_\+\+API Steinberg\+::\+Vst\+::\+IStream\+Attributes\+::get\+File\+Name (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespace_steinberg_1_1_vst_a3304fa8513f23d66819bee647e6cb29c}{String128}}}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Gets filename (without file extension) of the stream. 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_steinberg_1_1_vst_1_1_i_stream_attributes_ad67d87ee3bdc88d1171e5162644c0a58}\label{class_steinberg_1_1_vst_1_1_i_stream_attributes_ad67d87ee3bdc88d1171e5162644c0a58}} 
+\index{Steinberg::Vst::IStreamAttributes@{Steinberg::Vst::IStreamAttributes}!iid@{iid}}
+\index{iid@{iid}!Steinberg::Vst::IStreamAttributes@{Steinberg::Vst::IStreamAttributes}}
+\doxysubsubsection{\texorpdfstring{iid}{iid}}
+{\footnotesize\ttfamily \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_steinberg_1_1_f_u_i_d}{FUID}} Steinberg\+::\+Vst\+::\+IStream\+Attributes\+::iid\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+audio\+\_\+processors/format\+\_\+types/\+VST3\+\_\+\+SDK/pluginterfaces/vst/\mbox{\hyperlink{ivstattributes_8h}{ivstattributes.\+h}}\end{DoxyCompactItemize}

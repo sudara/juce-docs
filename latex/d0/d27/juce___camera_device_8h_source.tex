@@ -1,0 +1,133 @@
+\hypertarget{juce___camera_device_8h_source}{}\doxysection{juce\+\_\+\+Camera\+Device.\+h}
+\label{juce___camera_device_8h_source}\index{build/juce\_video/capture/juce\_CameraDevice.h@{build/juce\_video/capture/juce\_CameraDevice.h}}
+\mbox{\hyperlink{juce___camera_device_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#if JUCE\_USE\_CAMERA || DOXYGEN}}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{43 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  CameraDevice}
+\DoxyCodeLine{44 \{}
+\DoxyCodeLine{45 \textcolor{keyword}{public}:}
+\DoxyCodeLine{47     \textcolor{keyword}{virtual} \string~CameraDevice();}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{54 \textcolor{comment}{}    \textcolor{keyword}{static} \mbox{\hyperlink{class_string_array}{StringArray}} getAvailableDevices();}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{70     \textcolor{keyword}{static} CameraDevice* openDevice (\textcolor{keywordtype}{int} deviceIndex,}
+\DoxyCodeLine{71                                      \textcolor{keywordtype}{int} minWidth = 128, \textcolor{keywordtype}{int} minHeight = 64,}
+\DoxyCodeLine{72                                      \textcolor{keywordtype}{int} maxWidth = 1024, \textcolor{keywordtype}{int} maxHeight = 768,}
+\DoxyCodeLine{73                                      \textcolor{keywordtype}{bool} highQuality = \textcolor{keyword}{true});}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75     \textcolor{keyword}{using} OpenCameraResultCallback = \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} (CameraDevice*, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& \textcolor{comment}{/*error*/})>;}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{101     \textcolor{keyword}{static} \textcolor{keywordtype}{void} openDeviceAsync (\textcolor{keywordtype}{int} deviceIndex,}
+\DoxyCodeLine{102                                  OpenCameraResultCallback resultCallback,}
+\DoxyCodeLine{103                                  \textcolor{keywordtype}{int} minWidth = 128, \textcolor{keywordtype}{int} minHeight = 64,}
+\DoxyCodeLine{104                                  \textcolor{keywordtype}{int} maxWidth = 1024, \textcolor{keywordtype}{int} maxHeight = 768,}
+\DoxyCodeLine{105                                  \textcolor{keywordtype}{bool} highQuality = \textcolor{keyword}{true});}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{107     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{109 \textcolor{comment}{}    \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& getName() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept          \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}; \}}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{118     \mbox{\hyperlink{class_component}{Component}}* createViewerComponent();}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{129 \textcolor{comment}{}    \textcolor{keywordtype}{void} takeStillPicture (\mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\textcolor{keywordtype}{void} (\textcolor{keyword}{const} \mbox{\hyperlink{class_image}{Image}}\&)> pictureTakenCallback);}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{155     \textcolor{keywordtype}{void} startRecordingToFile (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& file, \textcolor{keywordtype}{int} \mbox{\hyperlink{jpeglib_8h_acac7df77df55f2a1bfd8d8d18340b773}{quality}} = 2);}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{158     \textcolor{keywordtype}{void} stopRecording();}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{165     \textcolor{keyword}{static} \mbox{\hyperlink{class_string}{String}} getFileExtension();}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{170     \mbox{\hyperlink{class_time}{Time}} getTimeOfFirstRecordedFrame() \textcolor{keyword}{const};}
+\DoxyCodeLine{171 }
+\DoxyCodeLine{174     \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& \textcolor{comment}{/*error*/})> onErrorOccurred;}
+\DoxyCodeLine{175 }
+\DoxyCodeLine{176     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{186 \textcolor{comment}{}    \textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  Listener}
+\DoxyCodeLine{187     \{}
+\DoxyCodeLine{188     \textcolor{keyword}{public}:}
+\DoxyCodeLine{189         Listener() \{\}}
+\DoxyCodeLine{190         \textcolor{keyword}{virtual} \string~Listener() \{\}}
+\DoxyCodeLine{191 }
+\DoxyCodeLine{205         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} imageReceived (\textcolor{keyword}{const} \mbox{\hyperlink{class_image}{Image}}\& \mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca78805a221a988e79ef3f42d7c5bfd418}{image}}) = 0;}
+\DoxyCodeLine{206     \};}
+\DoxyCodeLine{207 }
+\DoxyCodeLine{213     \textcolor{keywordtype}{void} addListener (Listener* listenerToAdd);}
+\DoxyCodeLine{214 }
+\DoxyCodeLine{216     \textcolor{keywordtype}{void} removeListener (Listener* listenerToRemove);}
+\DoxyCodeLine{217 }
+\DoxyCodeLine{218 \textcolor{keyword}{private}:}
+\DoxyCodeLine{219     \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}};}
+\DoxyCodeLine{220 }
+\DoxyCodeLine{221     \textcolor{keyword}{struct }Pimpl;}
+\DoxyCodeLine{222     std::unique\_ptr<Pimpl> pimpl;}
+\DoxyCodeLine{223 }
+\DoxyCodeLine{224     \textcolor{keyword}{struct }ViewerComponent;}
+\DoxyCodeLine{225     \textcolor{keyword}{friend} \textcolor{keyword}{struct }ViewerComponent;}
+\DoxyCodeLine{226 }
+\DoxyCodeLine{227     CameraDevice (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}},}
+\DoxyCodeLine{228                   \textcolor{keywordtype}{int} minWidth, \textcolor{keywordtype}{int} minHeight, \textcolor{keywordtype}{int} maxWidth, \textcolor{keywordtype}{int} maxHeight, \textcolor{keywordtype}{bool} highQuality);}
+\DoxyCodeLine{229 }
+\DoxyCodeLine{230 \textcolor{preprocessor}{   \#if JUCE\_ANDROID || JUCE\_IOS}}
+\DoxyCodeLine{231     \textcolor{keyword}{class }CameraFactory;}
+\DoxyCodeLine{232 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{233 }
+\DoxyCodeLine{234 \textcolor{preprocessor}{   \#if JUCE\_ANDROID}}
+\DoxyCodeLine{235     \textcolor{keyword}{friend} \textcolor{keywordtype}{void} juce\_cameraDeviceStateClosed (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}});}
+\DoxyCodeLine{236     \textcolor{keyword}{friend} \textcolor{keywordtype}{void} juce\_cameraDeviceStateDisconnected (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}});}
+\DoxyCodeLine{237     \textcolor{keyword}{friend} \textcolor{keywordtype}{void} juce\_cameraDeviceStateError (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{238     \textcolor{keyword}{friend} \textcolor{keywordtype}{void} juce\_cameraDeviceStateOpened (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}, \textcolor{keywordtype}{void}*);}
+\DoxyCodeLine{239 }
+\DoxyCodeLine{240     \textcolor{keyword}{friend} \textcolor{keywordtype}{void} juce\_cameraCaptureSessionActive (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}, \textcolor{keywordtype}{void}*);}
+\DoxyCodeLine{241     \textcolor{keyword}{friend} \textcolor{keywordtype}{void} juce\_cameraCaptureSessionClosed (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}, \textcolor{keywordtype}{void}*);}
+\DoxyCodeLine{242     \textcolor{keyword}{friend} \textcolor{keywordtype}{void} juce\_cameraCaptureSessionConfigureFailed (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}, \textcolor{keywordtype}{void}*);}
+\DoxyCodeLine{243     \textcolor{keyword}{friend} \textcolor{keywordtype}{void} juce\_cameraCaptureSessionConfigured (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}, \textcolor{keywordtype}{void}*);}
+\DoxyCodeLine{244     \textcolor{keyword}{friend} \textcolor{keywordtype}{void} juce\_cameraCaptureSessionReady (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}, \textcolor{keywordtype}{void}*);}
+\DoxyCodeLine{245 }
+\DoxyCodeLine{246     \textcolor{keyword}{friend} \textcolor{keywordtype}{void} juce\_cameraCaptureSessionCaptureCompleted (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}, \textcolor{keywordtype}{bool}, \textcolor{keywordtype}{void}*, \textcolor{keywordtype}{void}*, \textcolor{keywordtype}{void}*);}
+\DoxyCodeLine{247     \textcolor{keyword}{friend} \textcolor{keywordtype}{void} juce\_cameraCaptureSessionCaptureFailed (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}, \textcolor{keywordtype}{bool}, \textcolor{keywordtype}{void}*, \textcolor{keywordtype}{void}*, \textcolor{keywordtype}{void}*);}
+\DoxyCodeLine{248     \textcolor{keyword}{friend} \textcolor{keywordtype}{void} juce\_cameraCaptureSessionCaptureProgressed (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}, \textcolor{keywordtype}{bool}, \textcolor{keywordtype}{void}*, \textcolor{keywordtype}{void}*, \textcolor{keywordtype}{void}*);}
+\DoxyCodeLine{249     \textcolor{keyword}{friend} \textcolor{keywordtype}{void} juce\_cameraCaptureSessionCaptureSequenceAborted (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}, \textcolor{keywordtype}{bool}, \textcolor{keywordtype}{void}*, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{250     \textcolor{keyword}{friend} \textcolor{keywordtype}{void} juce\_cameraCaptureSessionCaptureSequenceCompleted (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}, \textcolor{keywordtype}{bool}, \textcolor{keywordtype}{void}*, \textcolor{keywordtype}{int}, \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}});}
+\DoxyCodeLine{251     \textcolor{keyword}{friend} \textcolor{keywordtype}{void} juce\_cameraCaptureSessionCaptureStarted (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}, \textcolor{keywordtype}{bool}, \textcolor{keywordtype}{void}*, \textcolor{keywordtype}{void}*, \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}, \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}});}
+\DoxyCodeLine{252 }
+\DoxyCodeLine{253     \textcolor{keyword}{friend} \textcolor{keywordtype}{void} juce\_deviceOrientationChanged (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{254 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{255 }
+\DoxyCodeLine{256     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (CameraDevice)}
+\DoxyCodeLine{257 \};}
+\DoxyCodeLine{258 }
+\DoxyCodeLine{259 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{260 }
+\DoxyCodeLine{261  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{262 }
+
+\end{DoxyCode}

@@ -1,0 +1,94 @@
+\hypertarget{struct_open_g_l_graphics_context_custom_shader}{}\doxysection{Open\+GLGraphics\+Context\+Custom\+Shader Struct Reference}
+\label{struct_open_g_l_graphics_context_custom_shader}\index{OpenGLGraphicsContextCustomShader@{OpenGLGraphicsContextCustomShader}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Open\+GLGraphics\+Context.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_open_g_l_graphics_context_custom_shader_abe63206a00775b46b300d1583510f7d4}{Open\+GLGraphics\+Context\+Custom\+Shader}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&fragment\+Shader\+Code)
+\item 
+\mbox{\hyperlink{struct_open_g_l_graphics_context_custom_shader_a847370481b14927f5571dbb24bf4110b}{$\sim$\+Open\+GLGraphics\+Context\+Custom\+Shader}} ()
+\item 
+\mbox{\hyperlink{class_open_g_l_shader_program}{Open\+GLShader\+Program}} $\ast$ \mbox{\hyperlink{struct_open_g_l_graphics_context_custom_shader_a76471dd6887ff3a29e02bdfecab49393}{get\+Program}} (\mbox{\hyperlink{class_low_level_graphics_context}{Low\+Level\+Graphics\+Context}} \&) \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}}
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{struct_open_g_l_graphics_context_custom_shader_ac3e653247e892913b6509cdcedb8ca02}{fill\+Rect}} (\mbox{\hyperlink{class_low_level_graphics_context}{Low\+Level\+Graphics\+Context}} \&, \mbox{\hyperlink{class_rectangle}{Rectangle}}$<$ \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} $>$ area) \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}}
+\item 
+\mbox{\hyperlink{class_result}{Result}} \mbox{\hyperlink{struct_open_g_l_graphics_context_custom_shader_a5de4f059f36513f3c737f61788eb4429}{check\+Compilation}} (\mbox{\hyperlink{class_low_level_graphics_context}{Low\+Level\+Graphics\+Context}} \&)
+\item 
+\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \& \mbox{\hyperlink{struct_open_g_l_graphics_context_custom_shader_acd7e36fed8720c7f29483d01859e397b}{get\+Fragment\+Shader\+Code}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::function$<$ \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}}(\mbox{\hyperlink{class_open_g_l_shader_program}{Open\+GLShader\+Program}} \&)$>$ \mbox{\hyperlink{struct_open_g_l_graphics_context_custom_shader_aa01827296584a2932137b28e5419c3a6}{on\+Shader\+Activated}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Used to create custom shaders for use with an open\+GL 2D rendering context.
+
+Given a GL-\/based rendering context, you can write a fragment shader that applies some kind of per-\/pixel effect.
+
+@tags\{Open\+GL\} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{struct_open_g_l_graphics_context_custom_shader_abe63206a00775b46b300d1583510f7d4}\label{struct_open_g_l_graphics_context_custom_shader_abe63206a00775b46b300d1583510f7d4}} 
+\index{OpenGLGraphicsContextCustomShader@{OpenGLGraphicsContextCustomShader}!OpenGLGraphicsContextCustomShader@{OpenGLGraphicsContextCustomShader}}
+\index{OpenGLGraphicsContextCustomShader@{OpenGLGraphicsContextCustomShader}!OpenGLGraphicsContextCustomShader@{OpenGLGraphicsContextCustomShader}}
+\doxysubsubsection{\texorpdfstring{OpenGLGraphicsContextCustomShader()}{OpenGLGraphicsContextCustomShader()}}
+{\footnotesize\ttfamily Open\+GLGraphics\+Context\+Custom\+Shader\+::\+Open\+GLGraphics\+Context\+Custom\+Shader (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&}]{fragment\+Shader\+Code }\end{DoxyParamCaption})}
+
+Creates a custom shader.
+
+The shader code will not be compiled until actually needed, so it\textquotesingle{}s OK to call this constructor when no GL context is active.
+
+The code should be a normal fragment shader. As well as the usual GLSL variables, there is also an automatically declared varying vec2 called \char`\"{}pixel\+Pos\char`\"{}, which indicates the pixel position within the graphics context of the pixel being drawn. There is also a varying value \char`\"{}pixel\+Alpha\char`\"{}, which indicates the alpha by which the pixel should be multiplied, so that the edges of any clip-\/region masks are anti-\/aliased correctly. \mbox{\Hypertarget{struct_open_g_l_graphics_context_custom_shader_a847370481b14927f5571dbb24bf4110b}\label{struct_open_g_l_graphics_context_custom_shader_a847370481b14927f5571dbb24bf4110b}} 
+\index{OpenGLGraphicsContextCustomShader@{OpenGLGraphicsContextCustomShader}!````~OpenGLGraphicsContextCustomShader@{$\sim$OpenGLGraphicsContextCustomShader}}
+\index{````~OpenGLGraphicsContextCustomShader@{$\sim$OpenGLGraphicsContextCustomShader}!OpenGLGraphicsContextCustomShader@{OpenGLGraphicsContextCustomShader}}
+\doxysubsubsection{\texorpdfstring{$\sim$OpenGLGraphicsContextCustomShader()}{~OpenGLGraphicsContextCustomShader()}}
+{\footnotesize\ttfamily Open\+GLGraphics\+Context\+Custom\+Shader\+::$\sim$\+Open\+GLGraphics\+Context\+Custom\+Shader (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Destructor. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{struct_open_g_l_graphics_context_custom_shader_a5de4f059f36513f3c737f61788eb4429}\label{struct_open_g_l_graphics_context_custom_shader_a5de4f059f36513f3c737f61788eb4429}} 
+\index{OpenGLGraphicsContextCustomShader@{OpenGLGraphicsContextCustomShader}!checkCompilation@{checkCompilation}}
+\index{checkCompilation@{checkCompilation}!OpenGLGraphicsContextCustomShader@{OpenGLGraphicsContextCustomShader}}
+\doxysubsubsection{\texorpdfstring{checkCompilation()}{checkCompilation()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_result}{Result}} Open\+GLGraphics\+Context\+Custom\+Shader\+::check\+Compilation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_low_level_graphics_context}{Low\+Level\+Graphics\+Context}} \&}]{gc }\end{DoxyParamCaption})}
+
+Attempts to compile the program if necessary, and returns an error message if it fails. \mbox{\Hypertarget{struct_open_g_l_graphics_context_custom_shader_ac3e653247e892913b6509cdcedb8ca02}\label{struct_open_g_l_graphics_context_custom_shader_ac3e653247e892913b6509cdcedb8ca02}} 
+\index{OpenGLGraphicsContextCustomShader@{OpenGLGraphicsContextCustomShader}!fillRect@{fillRect}}
+\index{fillRect@{fillRect}!OpenGLGraphicsContextCustomShader@{OpenGLGraphicsContextCustomShader}}
+\doxysubsubsection{\texorpdfstring{fillRect()}{fillRect()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Open\+GLGraphics\+Context\+Custom\+Shader\+::fill\+Rect (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_low_level_graphics_context}{Low\+Level\+Graphics\+Context}} \&}]{gc,  }\item[{\mbox{\hyperlink{class_rectangle}{Rectangle}}$<$ \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} $>$}]{area }\end{DoxyParamCaption}) const}
+
+Applies the shader to a rectangle within the graphics context. \mbox{\Hypertarget{struct_open_g_l_graphics_context_custom_shader_acd7e36fed8720c7f29483d01859e397b}\label{struct_open_g_l_graphics_context_custom_shader_acd7e36fed8720c7f29483d01859e397b}} 
+\index{OpenGLGraphicsContextCustomShader@{OpenGLGraphicsContextCustomShader}!getFragmentShaderCode@{getFragmentShaderCode}}
+\index{getFragmentShaderCode@{getFragmentShaderCode}!OpenGLGraphicsContextCustomShader@{OpenGLGraphicsContextCustomShader}}
+\doxysubsubsection{\texorpdfstring{getFragmentShaderCode()}{getFragmentShaderCode()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \& Open\+GLGraphics\+Context\+Custom\+Shader\+::get\+Fragment\+Shader\+Code (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Returns the code that was used to create this object. \mbox{\Hypertarget{struct_open_g_l_graphics_context_custom_shader_a76471dd6887ff3a29e02bdfecab49393}\label{struct_open_g_l_graphics_context_custom_shader_a76471dd6887ff3a29e02bdfecab49393}} 
+\index{OpenGLGraphicsContextCustomShader@{OpenGLGraphicsContextCustomShader}!getProgram@{getProgram}}
+\index{getProgram@{getProgram}!OpenGLGraphicsContextCustomShader@{OpenGLGraphicsContextCustomShader}}
+\doxysubsubsection{\texorpdfstring{getProgram()}{getProgram()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_open_g_l_shader_program}{Open\+GLShader\+Program}} $\ast$ Open\+GLGraphics\+Context\+Custom\+Shader\+::get\+Program (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_low_level_graphics_context}{Low\+Level\+Graphics\+Context}} \&}]{gc }\end{DoxyParamCaption}) const}
+
+Returns the program, if it has been linked and is active. This can be called when you\textquotesingle{}re about to use fill\+Rect, to set up any uniforms/textures that the program may require. 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{struct_open_g_l_graphics_context_custom_shader_aa01827296584a2932137b28e5419c3a6}\label{struct_open_g_l_graphics_context_custom_shader_aa01827296584a2932137b28e5419c3a6}} 
+\index{OpenGLGraphicsContextCustomShader@{OpenGLGraphicsContextCustomShader}!onShaderActivated@{onShaderActivated}}
+\index{onShaderActivated@{onShaderActivated}!OpenGLGraphicsContextCustomShader@{OpenGLGraphicsContextCustomShader}}
+\doxysubsubsection{\texorpdfstring{onShaderActivated}{onShaderActivated}}
+{\footnotesize\ttfamily std\+::function$<$\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} (\mbox{\hyperlink{class_open_g_l_shader_program}{Open\+GLShader\+Program}}\&)$>$ Open\+GLGraphics\+Context\+Custom\+Shader\+::on\+Shader\+Activated}
+
+Optional lambda that will be called when the shader is activated, to allow user code to do setup tasks. 
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+opengl/opengl/\mbox{\hyperlink{juce___open_g_l_graphics_context_8h}{juce\+\_\+\+Open\+GLGraphics\+Context.\+h}}\item 
+build/juce\+\_\+opengl/opengl/\mbox{\hyperlink{juce___open_g_l_graphics_context_8cpp}{juce\+\_\+\+Open\+GLGraphics\+Context.\+cpp}}\end{DoxyCompactItemize}

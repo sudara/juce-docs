@@ -1,0 +1,311 @@
+\hypertarget{juce___component_peer_8h_source}{}\doxysection{juce\+\_\+\+Component\+Peer.\+h}
+\label{juce___component_peer_8h_source}\index{build/juce\_gui\_basics/windows/juce\_ComponentPeer.h@{build/juce\_gui\_basics/windows/juce\_ComponentPeer.h}}
+\mbox{\hyperlink{juce___component_peer_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{44 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_component_peer}{ComponentPeer}}}
+\DoxyCodeLine{45 \{}
+\DoxyCodeLine{46 \textcolor{keyword}{public}:}
+\DoxyCodeLine{47     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{49 \textcolor{comment}{}    \textcolor{keyword}{enum} \mbox{\hyperlink{class_component_peer_a94a21f91c61f8211774d6f43243a6ddc}{StyleFlags}}}
+\DoxyCodeLine{50     \{}
+\DoxyCodeLine{51         windowAppearsOnTaskbar      = (1 << 0),    }
+\DoxyCodeLine{53         windowIsTemporary           = (1 << 1),    }
+\DoxyCodeLine{55         windowIgnoresMouseClicks    = (1 << 2),    }
+\DoxyCodeLine{57         windowHasTitleBar           = (1 << 3),    }
+\DoxyCodeLine{60         windowIsResizable           = (1 << 4),    }
+\DoxyCodeLine{61         windowHasMinimiseButton     = (1 << 5),    }
+\DoxyCodeLine{63         windowHasMaximiseButton     = (1 << 6),    }
+\DoxyCodeLine{65         windowHasCloseButton        = (1 << 7),    }
+\DoxyCodeLine{67         windowHasDropShadow         = (1 << 8),    }
+\DoxyCodeLine{69         windowRepaintedExplictly    = (1 << 9),    }
+\DoxyCodeLine{72         windowIgnoresKeyPresses     = (1 << 10),   }
+\DoxyCodeLine{76         windowIsSemiTransparent     = (1 << 30)    }
+\DoxyCodeLine{78     \};}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{88     \textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_component_peer_1_1_optional_border_size}{OptionalBorderSize}} final}
+\DoxyCodeLine{89     \{}
+\DoxyCodeLine{90     \textcolor{keyword}{public}:}
+\DoxyCodeLine{92         \mbox{\hyperlink{class_component_peer_1_1_optional_border_size_a6bc133b36acfa428624882a79553ea4e}{OptionalBorderSize}}()                               : valid (\mbox{\hyperlink{ordinals_8h_a65e9886d74aaee76545e83dd09011727}{false}})                               \{\}}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{95         \textcolor{keyword}{explicit} \mbox{\hyperlink{class_component_peer_1_1_optional_border_size_a90ab09ec69545612fef3eebec62e7b2c}{OptionalBorderSize}} (\mbox{\hyperlink{class_border_size}{BorderSize<int>}} \mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}}) : valid (\mbox{\hyperlink{ordinals_8h_a41f9c5fb8b08eb5dc3edce4dcb37fee7}{true}}), borderSize (\mbox{\hyperlink{namespacestd}{std}}::\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{move}} (\mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}})) \{\}}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{98         \textcolor{keyword}{explicit} \textcolor{keyword}{operator} bool() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept \{ \textcolor{keywordflow}{return} valid; \}}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{105         \textcolor{keyword}{const} \textcolor{keyword}{auto}\& \mbox{\hyperlink{class_component_peer_1_1_optional_border_size_a95896791bf28a21f958b5107630a280f}{operator*}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{106         \{}
+\DoxyCodeLine{107             \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (valid);}
+\DoxyCodeLine{108             \textcolor{keywordflow}{return} borderSize;}
+\DoxyCodeLine{109         \}}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{116         \textcolor{keyword}{const} \textcolor{keyword}{auto}* \mbox{\hyperlink{class_component_peer_1_1_optional_border_size_a5c1c265eb7f61d71da690d8b47061f89}{operator-\/>}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{117         \{}
+\DoxyCodeLine{118             \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (valid);}
+\DoxyCodeLine{119             \textcolor{keywordflow}{return} \&borderSize;}
+\DoxyCodeLine{120         \}}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{122     \textcolor{keyword}{private}:}
+\DoxyCodeLine{123         \textcolor{keywordtype}{bool} valid;}
+\DoxyCodeLine{124         \mbox{\hyperlink{class_border_size}{BorderSize<int>}} borderSize;}
+\DoxyCodeLine{125     \};}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{127     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{133 \textcolor{comment}{}    \mbox{\hyperlink{class_component_peer}{ComponentPeer}} (\mbox{\hyperlink{class_component}{Component}}\& component, \textcolor{keywordtype}{int} styleFlags);}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{136     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_component_peer}{\string~ComponentPeer}}();}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{138     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{140 \textcolor{comment}{}    \mbox{\hyperlink{class_component}{Component}}\& \mbox{\hyperlink{class_component_peer_a1aa5d5bd183e5bf7e10fb2416cc62ef4}{getComponent}}() noexcept                      \{ \textcolor{keywordflow}{return} component; \}}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{145     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_component_peer_a47edec896c72e39f36e1be2bc03659cf}{getStyleFlags}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                      \{ \textcolor{keywordflow}{return} styleFlags; \}}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{150     \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} \mbox{\hyperlink{class_component_peer_af7797e064a137afcb3f72a35b95da7f6}{getUniqueID}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                     \{ \textcolor{keywordflow}{return} uniqueID; \}}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{152     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{158 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void}* \mbox{\hyperlink{class_component_peer_ab1b9ab5f58bebc5f0816edabf0f1f825}{getNativeHandle}}() \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{161     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_component_peer_a45cdae32b498158f5a353f0382b3afa5}{setVisible}} (\textcolor{keywordtype}{bool} shouldBeVisible) = 0;}
+\DoxyCodeLine{162 }
+\DoxyCodeLine{164     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_component_peer_a040f5c7bf60ea0081232888d0296fc77}{setTitle}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& title) = 0;}
+\DoxyCodeLine{165 }
+\DoxyCodeLine{172     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} setDocumentEditedStatus (\textcolor{keywordtype}{bool} edited);}
+\DoxyCodeLine{173 }
+\DoxyCodeLine{179     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} setRepresentedFile (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\&);}
+\DoxyCodeLine{180 }
+\DoxyCodeLine{181     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{189 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_component_peer_a2cf75982cd01d14d454a982410a576e3}{setBounds}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_rectangle}{Rectangle<int>}}\& newBounds, \textcolor{keywordtype}{bool} isNowFullScreen) = 0;}
+\DoxyCodeLine{190 }
+\DoxyCodeLine{192     \textcolor{keywordtype}{void} updateBounds();}
+\DoxyCodeLine{193 }
+\DoxyCodeLine{199     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_rectangle}{Rectangle<int>}} \mbox{\hyperlink{class_component_peer_a169802e23975827ae3de8c4aa94cd180}{getBounds}}() \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{200 }
+\DoxyCodeLine{202     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_point}{Point<float>}} \mbox{\hyperlink{class_component_peer_aaf531682861066ac43027f9c94a76e31}{localToGlobal}} (\mbox{\hyperlink{class_point}{Point<float>}} relativePosition) = 0;}
+\DoxyCodeLine{203 }
+\DoxyCodeLine{205     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_point}{Point<float>}} \mbox{\hyperlink{class_component_peer_a77a27dc77582a1b159c664d284c64fa3}{globalToLocal}} (\mbox{\hyperlink{class_point}{Point<float>}} screenPosition) = 0;}
+\DoxyCodeLine{206 }
+\DoxyCodeLine{208     \mbox{\hyperlink{class_point}{Point<int>}} localToGlobal (\mbox{\hyperlink{class_point}{Point<int>}} relativePosition);}
+\DoxyCodeLine{209 }
+\DoxyCodeLine{211     \mbox{\hyperlink{class_point}{Point<int>}} globalToLocal (\mbox{\hyperlink{class_point}{Point<int>}} screenPosition);}
+\DoxyCodeLine{212 }
+\DoxyCodeLine{214     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_rectangle}{Rectangle<int>}} localToGlobal (\textcolor{keyword}{const} \mbox{\hyperlink{class_rectangle}{Rectangle<int>}}\& relativePosition);}
+\DoxyCodeLine{215 }
+\DoxyCodeLine{217     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_rectangle}{Rectangle<int>}} globalToLocal (\textcolor{keyword}{const} \mbox{\hyperlink{class_rectangle}{Rectangle<int>}}\& screenPosition);}
+\DoxyCodeLine{218 }
+\DoxyCodeLine{220     \mbox{\hyperlink{class_rectangle}{Rectangle<float>}} localToGlobal (\textcolor{keyword}{const} \mbox{\hyperlink{class_rectangle}{Rectangle<float>}}\& relativePosition);}
+\DoxyCodeLine{221 }
+\DoxyCodeLine{223     \mbox{\hyperlink{class_rectangle}{Rectangle<float>}} globalToLocal (\textcolor{keyword}{const} \mbox{\hyperlink{class_rectangle}{Rectangle<float>}}\& screenPosition);}
+\DoxyCodeLine{224 }
+\DoxyCodeLine{228     \mbox{\hyperlink{class_rectangle}{Rectangle<int>}} getAreaCoveredBy (\textcolor{keyword}{const} \mbox{\hyperlink{class_component}{Component}}\& subComponent) \textcolor{keyword}{const};}
+\DoxyCodeLine{229 }
+\DoxyCodeLine{231     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_component_peer_aa9732a41b884d1e8021c69908ed72fdb}{setMinimised}} (\textcolor{keywordtype}{bool} shouldBeMinimised) = 0;}
+\DoxyCodeLine{232 }
+\DoxyCodeLine{234     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_component_peer_a89063a1ab796e670d56ff660c3de60ed}{isMinimised}}() \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{235 }
+\DoxyCodeLine{237     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_component_peer_ae14a735045acf686a945392d29cb1b2b}{setFullScreen}} (\textcolor{keywordtype}{bool} shouldBeFullScreen) = 0;}
+\DoxyCodeLine{238 }
+\DoxyCodeLine{240     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_component_peer_a0f649966fb18d9eb06e63ce0bcddf10d}{isFullScreen}}() \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{241 }
+\DoxyCodeLine{243     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} isKioskMode() \textcolor{keyword}{const};}
+\DoxyCodeLine{244 }
+\DoxyCodeLine{246     \textcolor{keywordtype}{void} setNonFullScreenBounds (\textcolor{keyword}{const} \mbox{\hyperlink{class_rectangle}{Rectangle<int>}}\& newBounds) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{247 }
+\DoxyCodeLine{249     \textcolor{keyword}{const} \mbox{\hyperlink{class_rectangle}{Rectangle<int>}}\& getNonFullScreenBounds() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{250 }
+\DoxyCodeLine{252     virtual \textcolor{keywordtype}{void} setIcon (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_image}{Image}}\& newIcon) = 0;}
+\DoxyCodeLine{253 }
+\DoxyCodeLine{257     \textcolor{keywordtype}{void} setConstrainer (\mbox{\hyperlink{class_component_bounds_constrainer}{ComponentBoundsConstrainer}}* newConstrainer) noexcept;}
+\DoxyCodeLine{258 }
+\DoxyCodeLine{260     \mbox{\hyperlink{class_component_bounds_constrainer}{ComponentBoundsConstrainer}}* getConstrainer() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept             \{ \textcolor{keywordflow}{return} constrainer; \}}
+\DoxyCodeLine{261 }
+\DoxyCodeLine{268     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_component_peer_ac8b799721e421dc4552b42957a9b9b82}{contains}} (\mbox{\hyperlink{class_point}{Point<int>}} localPos, \textcolor{keywordtype}{bool} trueIfInAChildWindow) \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{269 }
+\DoxyCodeLine{280     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_component_peer_1_1_optional_border_size}{OptionalBorderSize}} \mbox{\hyperlink{class_component_peer_a6fa5bd17198a1016f6c4143aaa86ab0e}{getFrameSizeIfPresent}}() \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{281 }
+\DoxyCodeLine{286 \textcolor{preprocessor}{   \#if JUCE\_LINUX || JUCE\_BSD}}
+\DoxyCodeLine{287     [[deprecated (\textcolor{stringliteral}{"{}Use getFrameSizeIfPresent instead."{}})]]}
+\DoxyCodeLine{288 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{289     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_border_size}{BorderSize<int>}} \mbox{\hyperlink{class_component_peer_a07a799337515e411c75b85c34062f870}{getFrameSize}}() \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{290 }
+\DoxyCodeLine{295     \textcolor{keywordtype}{void} handleMovedOrResized();}
+\DoxyCodeLine{296 }
+\DoxyCodeLine{301     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} handleScreenSizeChange();}
+\DoxyCodeLine{302 }
+\DoxyCodeLine{303     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{305 \textcolor{comment}{}    \textcolor{keywordtype}{void} handlePaint (\mbox{\hyperlink{class_low_level_graphics_context}{LowLevelGraphicsContext}}\& contextToPaintTo);}
+\DoxyCodeLine{306 }
+\DoxyCodeLine{307     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{311 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_component_peer_a0ddc8883fd6b5ece98fb422730bc3fe7}{setAlwaysOnTop}} (\textcolor{keywordtype}{bool} alwaysOnTop) = 0;}
+\DoxyCodeLine{312 }
+\DoxyCodeLine{314     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_component_peer_a09da771276ca9d90f3f2e294cd28ec50}{toFront}} (\textcolor{keywordtype}{bool} takeKeyboardFocus) = 0;}
+\DoxyCodeLine{315 }
+\DoxyCodeLine{317     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_component_peer_afd04fab397a9c85cb7251582d9c6b461}{toBehind}} (\mbox{\hyperlink{class_component_peer}{ComponentPeer}}* other) = 0;}
+\DoxyCodeLine{318 }
+\DoxyCodeLine{322     \textcolor{keywordtype}{void} handleBroughtToFront();}
+\DoxyCodeLine{323 }
+\DoxyCodeLine{324     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{326 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_component_peer_a86c19e5dcdc7fbeb932351af522512dd}{isFocused}}() \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{327 }
+\DoxyCodeLine{329     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_component_peer_a2a90a97e43c8ac0b98ea1151f8fde316}{grabFocus}}() = 0;}
+\DoxyCodeLine{330 }
+\DoxyCodeLine{332     \textcolor{keywordtype}{void} handleFocusGain();}
+\DoxyCodeLine{334     \textcolor{keywordtype}{void} handleFocusLoss();}
+\DoxyCodeLine{335 }
+\DoxyCodeLine{336     \mbox{\hyperlink{class_component}{Component}}* getLastFocusedSubcomponent() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{337 }
+\DoxyCodeLine{342     \textcolor{keywordtype}{bool} handleKeyPress (\textcolor{keywordtype}{int} keyCode, \mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} textCharacter);}
+\DoxyCodeLine{343 }
+\DoxyCodeLine{347     \textcolor{keywordtype}{bool} handleKeyPress (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_key_press}{KeyPress}}\& \mbox{\hyperlink{namespacegl_a45e4cfc4b70136c9a7e0000e34f4ed4e}{key}});}
+\DoxyCodeLine{348 }
+\DoxyCodeLine{352     \textcolor{keywordtype}{bool} handleKeyUpOrDown (\textcolor{keywordtype}{bool} isKeyDown);}
+\DoxyCodeLine{353 }
+\DoxyCodeLine{355     \textcolor{keywordtype}{void} handleModifierKeysChange();}
+\DoxyCodeLine{356 }
+\DoxyCodeLine{357     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{362 \textcolor{comment}{}    virtual \textcolor{keywordtype}{void} textInputRequired (\mbox{\hyperlink{class_point}{Point}}<\textcolor{keywordtype}{int}> position, \mbox{\hyperlink{class_text_input_target}{TextInputTarget}}\&) = 0;}
+\DoxyCodeLine{363 }
+\DoxyCodeLine{365     virtual \textcolor{keywordtype}{void} dismissPendingTextInput();}
+\DoxyCodeLine{366 }
+\DoxyCodeLine{368     \mbox{\hyperlink{class_text_input_target}{TextInputTarget}}* findCurrentTextInputTarget();}
+\DoxyCodeLine{369 }
+\DoxyCodeLine{370     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{372 \textcolor{comment}{}    virtual \textcolor{keywordtype}{void} repaint (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_rectangle}{Rectangle}}<\textcolor{keywordtype}{int}>\& area) = 0;}
+\DoxyCodeLine{373 }
+\DoxyCodeLine{380     virtual \textcolor{keywordtype}{void} performAnyPendingRepaintsNow() = 0;}
+\DoxyCodeLine{381 }
+\DoxyCodeLine{383     virtual \textcolor{keywordtype}{void} setAlpha (\textcolor{keywordtype}{float} newAlpha) = 0;}
+\DoxyCodeLine{384 }
+\DoxyCodeLine{385     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{386     \textcolor{keywordtype}{void} handleMouseEvent (\mbox{\hyperlink{class_mouse_input_source}{MouseInputSource}}::InputSourceType \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}}, \mbox{\hyperlink{class_point}{Point}}<\textcolor{keywordtype}{float}> positionWithinPeer, \mbox{\hyperlink{class_modifier_keys}{ModifierKeys}} newMods, \textcolor{keywordtype}{float} pressure,}
+\DoxyCodeLine{387                            \textcolor{keywordtype}{float} orientation, \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} time, \mbox{\hyperlink{struct_pen_details}{PenDetails}} pen = \{\}, \textcolor{keywordtype}{int} touchIndex = 0);}
+\DoxyCodeLine{388 }
+\DoxyCodeLine{389     \textcolor{keywordtype}{void} handleMouseWheel (\mbox{\hyperlink{class_mouse_input_source_abbe78de59be271b2b7a2b6d61e4d538b}{MouseInputSource::InputSourceType}} \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}}, \mbox{\hyperlink{class_point}{Point<float>}} positionWithinPeer,}
+\DoxyCodeLine{390                            \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} time, \textcolor{keyword}{const} \mbox{\hyperlink{struct_mouse_wheel_details}{MouseWheelDetails}}\&, \textcolor{keywordtype}{int} touchIndex = 0);}
+\DoxyCodeLine{391 }
+\DoxyCodeLine{392     \textcolor{keywordtype}{void} handleMagnifyGesture (\mbox{\hyperlink{class_mouse_input_source_abbe78de59be271b2b7a2b6d61e4d538b}{MouseInputSource::InputSourceType}} \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}}, \mbox{\hyperlink{class_point}{Point<float>}} positionWithinPeer,}
+\DoxyCodeLine{393                                \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} time, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a089af03aaf065f0071f68976412d5fcc}{scaleFactor}}, \textcolor{keywordtype}{int} touchIndex = 0);}
+\DoxyCodeLine{394 }
+\DoxyCodeLine{395     \textcolor{keywordtype}{void} handleUserClosingWindow();}
+\DoxyCodeLine{396 }
+\DoxyCodeLine{398     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_component_peer_1_1_drag_info}{DragInfo}}}
+\DoxyCodeLine{399     \{}
+\DoxyCodeLine{400         \mbox{\hyperlink{class_string_array}{StringArray}} \mbox{\hyperlink{struct_component_peer_1_1_drag_info_addae08e58daceff162d5003254f393ed}{files}};}
+\DoxyCodeLine{401         \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{struct_component_peer_1_1_drag_info_a9ef783609b4ae2ca44735a734759ccab}{text}};}
+\DoxyCodeLine{402         \mbox{\hyperlink{class_point}{Point<int>}} \mbox{\hyperlink{struct_component_peer_1_1_drag_info_ac83d9a513bd9e691d6b8afb1d33f9a3a}{position}};}
+\DoxyCodeLine{403 }
+\DoxyCodeLine{404         \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_component_peer_1_1_drag_info_a06d2c54a7b17a8ba2136595f86a111f9}{isEmpty}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept       \{ \textcolor{keywordflow}{return} files.\mbox{\hyperlink{class_string_array_af1eb48dd90938eb34d9f43cf7d81510b}{size}}() == 0 \&\& text.\mbox{\hyperlink{class_string_ab31a36bda8c789ba3c0ed37bb16c978c}{isEmpty}}(); \}}
+\DoxyCodeLine{405         \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_component_peer_1_1_drag_info_a477efd4543a4b35c8d01b7c2d6db8d34}{clear}}() noexcept               \{ files.\mbox{\hyperlink{class_string_array_a8fd0efd89f558e84cda917aa3ecc3525}{clear}}(); text.\mbox{\hyperlink{class_string_a8270e74db4c76725871abda0316d1bec}{clear}}(); \}}
+\DoxyCodeLine{406     \};}
+\DoxyCodeLine{407 }
+\DoxyCodeLine{408     \textcolor{keywordtype}{bool} handleDragMove (\textcolor{keyword}{const} DragInfo\&);}
+\DoxyCodeLine{409     \textcolor{keywordtype}{bool} handleDragExit (\textcolor{keyword}{const} DragInfo\&);}
+\DoxyCodeLine{410     \textcolor{keywordtype}{bool} handleDragDrop (\textcolor{keyword}{const} DragInfo\&);}
+\DoxyCodeLine{411 }
+\DoxyCodeLine{412     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{416 \textcolor{comment}{}    \textcolor{keyword}{static} \textcolor{keywordtype}{int} getNumPeers() noexcept;}
+\DoxyCodeLine{417 }
+\DoxyCodeLine{421     static \mbox{\hyperlink{class_component_peer}{ComponentPeer}}* getPeer (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) noexcept;}
+\DoxyCodeLine{422 }
+\DoxyCodeLine{424     static \mbox{\hyperlink{class_component_peer}{ComponentPeer}}* \mbox{\hyperlink{namespacejuce_af72b21506fb13b53321ba4426f5fe6ba}{getPeerFor}} (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_component}{Component}}*) noexcept;}
+\DoxyCodeLine{425 }
+\DoxyCodeLine{429     static \textcolor{keywordtype}{bool} isValidPeer (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_component_peer}{ComponentPeer}}* peer) noexcept;}
+\DoxyCodeLine{430 }
+\DoxyCodeLine{431     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{432     virtual \mbox{\hyperlink{class_string_array}{StringArray}} getAvailableRenderingEngines() = 0;}
+\DoxyCodeLine{433     virtual \textcolor{keywordtype}{int} getCurrentRenderingEngine() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{434     virtual \textcolor{keywordtype}{void} setCurrentRenderingEngine (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}});}
+\DoxyCodeLine{435 }
+\DoxyCodeLine{436     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{447 \textcolor{comment}{}    static \mbox{\hyperlink{class_modifier_keys}{ModifierKeys}} getCurrentModifiersRealtime() noexcept;}
+\DoxyCodeLine{448 }
+\DoxyCodeLine{449     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{456 \textcolor{comment}{}    struct \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{struct_component_peer_1_1_scale_factor_listener}{ScaleFactorListener}}}
+\DoxyCodeLine{457     \{}
+\DoxyCodeLine{459         \textcolor{keyword}{virtual} \mbox{\hyperlink{struct_component_peer_1_1_scale_factor_listener_ac39c3b155990cc0b9fa1c6b4e8212591}{\string~ScaleFactorListener}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{460 }
+\DoxyCodeLine{462         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_component_peer_1_1_scale_factor_listener_a6133e08cbcfe30381b2795510a3ecce2}{nativeScaleFactorChanged}} (\textcolor{keywordtype}{double} newScaleFactor) = 0;}
+\DoxyCodeLine{463     \};}
+\DoxyCodeLine{464 }
+\DoxyCodeLine{466     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_component_peer_a95c81c49b886b8eb404ae66c5ec270ba}{addScaleFactorListener}} (\mbox{\hyperlink{struct_component_peer_1_1_scale_factor_listener}{ScaleFactorListener}}* listenerToAdd)          \{ scaleFactorListeners.add (listenerToAdd); \}}
+\DoxyCodeLine{467 }
+\DoxyCodeLine{469     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_component_peer_a81cf3d13df6f5f8f55237ac9274f17bc}{removeScaleFactorListener}} (\mbox{\hyperlink{struct_component_peer_1_1_scale_factor_listener}{ScaleFactorListener}}* listenerToRemove)    \{ scaleFactorListeners.remove (listenerToRemove);  \}}
+\DoxyCodeLine{470 }
+\DoxyCodeLine{471     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{477 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{double} \mbox{\hyperlink{class_component_peer_aa56b66a5373b0ff6b98b7b3fbeee23a6}{getPlatformScaleFactor}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept    \{ \textcolor{keywordflow}{return} 1.0; \}}
+\DoxyCodeLine{478 }
+\DoxyCodeLine{482     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_component_peer_a88aa09447bb2da896e075ca8a7b78735}{setHasChangedSinceSaved}} (\textcolor{keywordtype}{bool}) \{\}}
+\DoxyCodeLine{483 }
+\DoxyCodeLine{484 }
+\DoxyCodeLine{485     \textcolor{keyword}{enum class} \mbox{\hyperlink{class_component_peer_af3f12e11d020aae24801145f0238e8ac}{Style}}}
+\DoxyCodeLine{486     \{}
+\DoxyCodeLine{488         automatic,}
+\DoxyCodeLine{489 }
+\DoxyCodeLine{491         light,}
+\DoxyCodeLine{492 }
+\DoxyCodeLine{494         dark}
+\DoxyCodeLine{495     \};}
+\DoxyCodeLine{496 }
+\DoxyCodeLine{503     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_component_peer_aa270ce212fb6a31b1e8a3877280bb53a}{setAppStyle}} (\mbox{\hyperlink{class_component_peer_af3f12e11d020aae24801145f0238e8ac}{Style}} \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}})}
+\DoxyCodeLine{504     \{}
+\DoxyCodeLine{505         \textcolor{keywordflow}{if} (std::exchange (style, \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}}) != style)}
+\DoxyCodeLine{506             appStyleChanged();}
+\DoxyCodeLine{507     \}}
+\DoxyCodeLine{508 }
+\DoxyCodeLine{510     \mbox{\hyperlink{class_component_peer_af3f12e11d020aae24801145f0238e8ac}{Style}} \mbox{\hyperlink{class_component_peer_abb92e4ff6430dd5b63a7817594e3510a}{getAppStyle}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} style; \}}
+\DoxyCodeLine{511 }
+\DoxyCodeLine{512 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{513     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{514     \textcolor{keyword}{static} \textcolor{keywordtype}{void} forceDisplayUpdate();}
+\DoxyCodeLine{515 }
+\DoxyCodeLine{516     \mbox{\hyperlink{class_component}{Component}}\& \mbox{\hyperlink{class_component_peer_a597272f3a78e8f1d02471692c2e2932a}{component}};}
+\DoxyCodeLine{517     \textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_component_peer_a8322b7cdb134bc52f443cd587ffc3f75}{styleFlags}};}
+\DoxyCodeLine{518     \mbox{\hyperlink{class_rectangle}{Rectangle<int>}} \mbox{\hyperlink{class_component_peer_a2aee1a16331876b88555838cd75caeda}{lastNonFullscreenBounds}};}
+\DoxyCodeLine{519     \mbox{\hyperlink{class_component_bounds_constrainer}{ComponentBoundsConstrainer}}* constrainer = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{520     \textcolor{keyword}{static} \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\mbox{\hyperlink{class_modifier_keys}{ModifierKeys}}()> \mbox{\hyperlink{class_component_peer_a48e76b5c18a85f0e962542c3e52a52dd}{getNativeRealtimeModifiers}};}
+\DoxyCodeLine{521     \mbox{\hyperlink{class_listener_list}{ListenerList<ScaleFactorListener>}} \mbox{\hyperlink{class_component_peer_a3c815b759167f87c6c9aead83b737b3f}{scaleFactorListeners}};}
+\DoxyCodeLine{522     \mbox{\hyperlink{class_component_peer_af3f12e11d020aae24801145f0238e8ac}{Style}} style = Style::automatic;}
+\DoxyCodeLine{523 }
+\DoxyCodeLine{524 \textcolor{keyword}{private}:}
+\DoxyCodeLine{525     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{526     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} appStyleChanged() \{\}}
+\DoxyCodeLine{527 }
+\DoxyCodeLine{528     \mbox{\hyperlink{class_component}{Component}}* getTargetForKeyPress();}
+\DoxyCodeLine{529 }
+\DoxyCodeLine{530     \mbox{\hyperlink{class_weak_reference}{WeakReference<Component>}} lastFocusedComponent, dragAndDropTargetComponent;}
+\DoxyCodeLine{531     \mbox{\hyperlink{class_component}{Component}}* lastDragAndDropCompUnderMouse = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{532     \textcolor{keyword}{const} \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} uniqueID;}
+\DoxyCodeLine{533     \textcolor{keywordtype}{bool} isWindowMinimised = \textcolor{keyword}{false};}
+\DoxyCodeLine{534 }
+\DoxyCodeLine{535     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{536     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_component_peer}{ComponentPeer}})}
+\DoxyCodeLine{537 \};}
+\DoxyCodeLine{538 }
+\DoxyCodeLine{539  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{540 }
+
+\end{DoxyCode}

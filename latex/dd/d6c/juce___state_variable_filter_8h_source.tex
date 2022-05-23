@@ -1,0 +1,209 @@
+\hypertarget{juce___state_variable_filter_8h_source}{}\doxysection{juce\+\_\+\+State\+Variable\+Filter.\+h}
+\label{juce___state_variable_filter_8h_source}\index{build/juce\_dsp/processors/juce\_StateVariableFilter.h@{build/juce\_dsp/processors/juce\_StateVariableFilter.h}}
+\mbox{\hyperlink{juce___state_variable_filter_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacedsp}{dsp}}}
+\DoxyCodeLine{30 \{}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{35 \textcolor{keyword}{namespace }StateVariableFilter}
+\DoxyCodeLine{36 \{}
+\DoxyCodeLine{37     \textcolor{keyword}{template} <\textcolor{keyword}{typename} NumericType>}
+\DoxyCodeLine{38     \textcolor{keyword}{struct }\mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters}{Parameters}};}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{60     \textcolor{keyword}{template} <\textcolor{keyword}{typename} SampleType>}
+\DoxyCodeLine{61     \textcolor{keyword}{class }\mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter}{Filter}}}
+\DoxyCodeLine{62     \{}
+\DoxyCodeLine{63     \textcolor{keyword}{public}:}
+\DoxyCodeLine{64         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{68 \textcolor{comment}{}        \textcolor{keyword}{using} \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_aaeb54a3b0b57c6edd7ea6d7abe354b59}{NumericType}} = \textcolor{keyword}{typename} \mbox{\hyperlink{structdsp_1_1_sample_type_helpers_1_1_element_type_a65d7742b9bc8bcc31efa26df071df244}{SampleTypeHelpers::ElementType<SampleType>::Type}};}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{71         \textcolor{keyword}{using} \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_a8df3f28abd45dd5d01c24c38ebfa0ae7}{ParametersPtr}} = \textcolor{keyword}{typename} \mbox{\hyperlink{class_reference_counted_object_ptr}{Parameters<NumericType>::Ptr}};}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{74 \textcolor{preprocessor}{       \#ifndef DOXYGEN}}
+\DoxyCodeLine{76         [[deprecated (\textcolor{stringliteral}{"{}The classes in the StateVariableFilter namespace are deprecated. you should "{}}}
+\DoxyCodeLine{77                      \textcolor{stringliteral}{"{}use the equivalent functionality in the StateVariableTPTFilter class."{}})]]}
+\DoxyCodeLine{78         \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_a4006a169d271867d8ef4ecfc33f5a622}{Filter}}() : \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_a126f873f372d6a07eac8b9e11e415218}{parameters}} (new \mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters}{Parameters}}<\mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_aaeb54a3b0b57c6edd7ea6d7abe354b59}{NumericType}}>) \{ \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_ab42720fdd6ec1b33af82d05ba73117a1}{reset}}(); \}}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{81         [[deprecated (\textcolor{stringliteral}{"{}The classes in the StateVariableFilter namespace are deprecated. you should "{}}}
+\DoxyCodeLine{82                      \textcolor{stringliteral}{"{}use the equivalent functionality in the StateVariableTPTFilter class."{}})]]}
+\DoxyCodeLine{83         \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_a3724e17901e1b333945d2194aa53a81f}{Filter}} (\mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_a8df3f28abd45dd5d01c24c38ebfa0ae7}{ParametersPtr}} parametersToUse) : \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_a126f873f372d6a07eac8b9e11e415218}{parameters}} (\mbox{\hyperlink{namespacestd}{std}}::\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{move}} (parametersToUse)) \{ \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_ab42720fdd6ec1b33af82d05ba73117a1}{reset}}(); \}}
+\DoxyCodeLine{84 \textcolor{preprocessor}{       \#endif}}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{87         \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_ab5315128bf35efc1b9361e93f2d9f3ba}{Filter}} (\textcolor{keyword}{const} \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter}{Filter}}\&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{90         \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_a58b5886ef09a00c4e77be32028f6ee7b}{Filter}} (\mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter}{Filter}}\&\&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{94 \textcolor{comment}{}        \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_a8a27c5f7e6331e78bffe637f6429cf9a}{prepare}} (\textcolor{keyword}{const} \mbox{\hyperlink{structdsp_1_1_process_spec}{ProcessSpec}}\&) \textcolor{keyword}{noexcept}     \{ \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_ab42720fdd6ec1b33af82d05ba73117a1}{reset}}(); \}}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{97         \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_ab42720fdd6ec1b33af82d05ba73117a1}{reset}}() noexcept                          \{ s1 = s2 = SampleType \{0\}; \}}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{103         \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_a50a83728541c4c4d88de9b5393352514}{snapToZero}}() noexcept                     \{ \mbox{\hyperlink{namespacedsp_1_1util_ac915069228ddc3448c5385c71bfe4728}{util::snapToZero}} (s1); \mbox{\hyperlink{namespacedsp_1_1util_ac915069228ddc3448c5385c71bfe4728}{util::snapToZero}} (s2); \}}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{108 \textcolor{comment}{}        \textcolor{keyword}{typename} \mbox{\hyperlink{class_reference_counted_object_ptr}{Parameters<NumericType>::Ptr}} \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_a126f873f372d6a07eac8b9e11e415218}{parameters}};}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{111         \textcolor{keyword}{template} <\textcolor{keyword}{typename} ProcessContext>}
+\DoxyCodeLine{112         \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_a0aadffe10e8c312b7cc06b688cc35ec4}{process}} (\textcolor{keyword}{const} ProcessContext\& context) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{113         \{}
+\DoxyCodeLine{114             \textcolor{keyword}{static\_assert} (\mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{std::is\_same<typename ProcessContext::SampleType, SampleType>::value}},}
+\DoxyCodeLine{115                            \textcolor{stringliteral}{"{}The sample-\/type of the filter must match the sample-\/type supplied to this process callback"{}});}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117             \textcolor{keywordflow}{if} (context.isBypassed)}
+\DoxyCodeLine{118                 processInternal<true, ProcessContext> (context);}
+\DoxyCodeLine{119             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{120                 processInternal<false, ProcessContext> (context);}
+\DoxyCodeLine{121         \}}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{125         SampleType JUCE\_VECTOR\_CALLTYPE \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_acc775af15e580f28d2fb45e4a34016fc}{processSample}} (SampleType sample) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{126         \{}
+\DoxyCodeLine{127             \textcolor{keywordflow}{switch} (\mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_a126f873f372d6a07eac8b9e11e415218}{parameters}}-\/>type)}
+\DoxyCodeLine{128             \{}
+\DoxyCodeLine{129                 \textcolor{keywordflow}{case} \mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters}{Parameters<NumericType>::Type::lowPass}}:  \textcolor{keywordflow}{return} processLoop<false, Parameters<NumericType>::Type::lowPass>  (sample, *\mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_a126f873f372d6a07eac8b9e11e415218}{parameters}}); \textcolor{keywordflow}{break};}
+\DoxyCodeLine{130                 \textcolor{keywordflow}{case} \mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters}{Parameters<NumericType>::Type::bandPass}}: \textcolor{keywordflow}{return} processLoop<false, Parameters<NumericType>::Type::bandPass> (sample, *\mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_a126f873f372d6a07eac8b9e11e415218}{parameters}}); \textcolor{keywordflow}{break};}
+\DoxyCodeLine{131                 \textcolor{keywordflow}{case} \mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters}{Parameters<NumericType>::Type::highPass}}: \textcolor{keywordflow}{return} processLoop<false, Parameters<NumericType>::Type::highPass> (sample, *\mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_a126f873f372d6a07eac8b9e11e415218}{parameters}}); \textcolor{keywordflow}{break};}
+\DoxyCodeLine{132                 \textcolor{keywordflow}{default}: \mbox{\hyperlink{group__juce__core-system_gadc044ce5efecbecf2f5a44cd00db67b3}{jassertfalse}};}
+\DoxyCodeLine{133             \}}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135             \textcolor{keywordflow}{return} SampleType\{0\};}
+\DoxyCodeLine{136         \}}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{138     \textcolor{keyword}{private}:}
+\DoxyCodeLine{139         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{140         template <bool isBypassed, typename Parameters<NumericType>::Type \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}}>}
+\DoxyCodeLine{141         SampleType JUCE\_VECTOR\_CALLTYPE processLoop (SampleType sample, \mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters}{Parameters<NumericType>}}\& state) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{142         \{}
+\DoxyCodeLine{143             y[2] = (sample -\/ s1 * state.R2 -\/ s1 * state.g -\/ s2) * state.h;}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145             y[1] = y[2] * state.g + s1;}
+\DoxyCodeLine{146             s1   = y[2] * state.g + y[1];}
+\DoxyCodeLine{147 }
+\DoxyCodeLine{148             y[0] = y[1] * state.g + s2;}
+\DoxyCodeLine{149             s2   = y[1] * state.g + y[0];}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{151             \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacedsp_a18bbc5840c500566f2cb30129497beda}{isBypassed}} ? sample : y[\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>} (\mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}})];}
+\DoxyCodeLine{152         \}}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154         template <bool isBypassed, typename Parameters<NumericType>::Type \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}}>}
+\DoxyCodeLine{155         \textcolor{keywordtype}{void} processBlock (\textcolor{keyword}{const} SampleType* \mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}}, SampleType* \mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}}, \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{156         \{}
+\DoxyCodeLine{157             \textcolor{keyword}{auto} state = *\mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_a126f873f372d6a07eac8b9e11e415218}{parameters}};}
+\DoxyCodeLine{158 }
+\DoxyCodeLine{159             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0 ; i < \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}}; ++i)}
+\DoxyCodeLine{160                 \mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}}[i] = processLoop<isBypassed, type> (\mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}}[i], state);}
+\DoxyCodeLine{161 }
+\DoxyCodeLine{162 \textcolor{preprocessor}{           \#if JUCE\_DSP\_ENABLE\_SNAP\_TO\_ZERO}}
+\DoxyCodeLine{163             \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_a50a83728541c4c4d88de9b5393352514}{snapToZero}}();}
+\DoxyCodeLine{164 \textcolor{preprocessor}{           \#endif}}
+\DoxyCodeLine{165 }
+\DoxyCodeLine{166             *\mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_a126f873f372d6a07eac8b9e11e415218}{parameters}} = state;}
+\DoxyCodeLine{167         \}}
+\DoxyCodeLine{168 }
+\DoxyCodeLine{169         \textcolor{keyword}{template} <\textcolor{keywordtype}{bool} isBypassed, \textcolor{keyword}{typename} ProcessContext>}
+\DoxyCodeLine{170         \textcolor{keywordtype}{void} processInternal (\textcolor{keyword}{const} ProcessContext\& context) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{171         \{}
+\DoxyCodeLine{172             \textcolor{keyword}{auto}\&\& inputBlock  = context.getInputBlock();}
+\DoxyCodeLine{173             \textcolor{keyword}{auto}\&\& outputBlock = context.getOutputBlock();}
+\DoxyCodeLine{174 }
+\DoxyCodeLine{175             \textcolor{comment}{// This class can only process mono signals. Use the ProcessorDuplicator class}}
+\DoxyCodeLine{176             \textcolor{comment}{// to apply this filter on a multi-\/channel audio stream.}}
+\DoxyCodeLine{177             \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (inputBlock.getNumChannels()  == 1);}
+\DoxyCodeLine{178             \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (outputBlock.getNumChannels() == 1);}
+\DoxyCodeLine{179 }
+\DoxyCodeLine{180             \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}} = inputBlock.getNumSamples();}
+\DoxyCodeLine{181             \textcolor{keyword}{auto}* \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}} = inputBlock .getChannelPointer (0);}
+\DoxyCodeLine{182             \textcolor{keyword}{auto}* \mbox{\hyperlink{namespacegl_a174f1a72ee763b6703711da180ac5d79}{dst}} = outputBlock.getChannelPointer (0);}
+\DoxyCodeLine{183 }
+\DoxyCodeLine{184             \textcolor{keywordflow}{switch} (\mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_a126f873f372d6a07eac8b9e11e415218}{parameters}}-\/>type)}
+\DoxyCodeLine{185             \{}
+\DoxyCodeLine{186                 \textcolor{keywordflow}{case} Parameters<NumericType>::Type::lowPass:  processBlock<isBypassed, Parameters<NumericType>::Type::lowPass>  (\mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, \mbox{\hyperlink{namespacegl_a174f1a72ee763b6703711da180ac5d79}{dst}}, \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}}); \textcolor{keywordflow}{break};}
+\DoxyCodeLine{187                 \textcolor{keywordflow}{case} Parameters<NumericType>::Type::bandPass: processBlock<isBypassed, Parameters<NumericType>::Type::bandPass> (\mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, \mbox{\hyperlink{namespacegl_a174f1a72ee763b6703711da180ac5d79}{dst}}, \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}}); \textcolor{keywordflow}{break};}
+\DoxyCodeLine{188                 \textcolor{keywordflow}{case} Parameters<NumericType>::Type::highPass: processBlock<isBypassed, Parameters<NumericType>::Type::highPass> (\mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, \mbox{\hyperlink{namespacegl_a174f1a72ee763b6703711da180ac5d79}{dst}}, \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}}); \textcolor{keywordflow}{break};}
+\DoxyCodeLine{189                 \textcolor{keywordflow}{default}: \mbox{\hyperlink{group__juce__core-system_gadc044ce5efecbecf2f5a44cd00db67b3}{jassertfalse}};}
+\DoxyCodeLine{190             \}}
+\DoxyCodeLine{191         \}}
+\DoxyCodeLine{192 }
+\DoxyCodeLine{193         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{194         std::array<SampleType, 3> y;}
+\DoxyCodeLine{195         SampleType s1, s2;}
+\DoxyCodeLine{196 }
+\DoxyCodeLine{197         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{198         \mbox{\hyperlink{group__juce__core-memory_gab3639a79598b35f2116f4572af0d93f1}{JUCE\_LEAK\_DETECTOR}} (\mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_a4006a169d271867d8ef4ecfc33f5a622}{Filter}})}
+\DoxyCodeLine{199     \};}
+\DoxyCodeLine{200 }
+\DoxyCodeLine{201     \textcolor{keyword}{enum class} \mbox{\hyperlink{namespacedsp_1_1_state_variable_filter_ae6c163b1aed0e44e5b19e9cc7f02926b}{StateVariableFilterType}}}
+\DoxyCodeLine{202     \{}
+\DoxyCodeLine{203         \mbox{\hyperlink{namespacedsp_1_1_state_variable_filter_ae6c163b1aed0e44e5b19e9cc7f02926ba30b882e8d16c0cebb115332d4b7652ec}{lowPass}},}
+\DoxyCodeLine{204         \mbox{\hyperlink{namespacedsp_1_1_state_variable_filter_ae6c163b1aed0e44e5b19e9cc7f02926ba0ac31e79a7db42140c66abe7cac0cf8e}{bandPass}},}
+\DoxyCodeLine{205         \mbox{\hyperlink{namespacedsp_1_1_state_variable_filter_ae6c163b1aed0e44e5b19e9cc7f02926ba6fd1c9967f998287b197099caa57bb6d}{highPass}}}
+\DoxyCodeLine{206     \};}
+\DoxyCodeLine{207 }
+\DoxyCodeLine{208     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{214 \textcolor{comment}{}    \textcolor{keyword}{template} <\textcolor{keyword}{typename} NumericType>}
+\DoxyCodeLine{215     \textcolor{keyword}{struct }\mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters}{Parameters}}  : \textcolor{keyword}{public} \mbox{\hyperlink{structdsp_1_1_processor_state}{ProcessorState}}}
+\DoxyCodeLine{216     \{}
+\DoxyCodeLine{217         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{218         \textcolor{keyword}{using} \mbox{\hyperlink{namespacedsp_1_1_state_variable_filter_ae6c163b1aed0e44e5b19e9cc7f02926b}{Type}} = \mbox{\hyperlink{namespacedsp_1_1_state_variable_filter_ae6c163b1aed0e44e5b19e9cc7f02926b}{StateVariableFilterType}};}
+\DoxyCodeLine{219 }
+\DoxyCodeLine{220         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{222 \textcolor{comment}{}        \mbox{\hyperlink{namespacedsp_1_1_state_variable_filter_ae6c163b1aed0e44e5b19e9cc7f02926b}{Type}} \mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters_ab7fc83b0e1d34874de1d376e66536652}{type}} = Type::lowPass;}
+\DoxyCodeLine{223 }
+\DoxyCodeLine{230         \textcolor{keywordtype}{void} \mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters_a3dabc7ffb25d127e2d2610e41d795b8b}{setCutOffFrequency}} (\textcolor{keywordtype}{double} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}}, NumericType frequency,}
+\DoxyCodeLine{231                                  NumericType resonance = \textcolor{keyword}{static\_cast<}NumericType\textcolor{keyword}{>} (1.0 / \mbox{\hyperlink{struct_math_constants}{MathConstants<double>::sqrt2}})) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{232         \{}
+\DoxyCodeLine{233             \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (\mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}} > 0);}
+\DoxyCodeLine{234             \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (resonance > NumericType (0));}
+\DoxyCodeLine{235             \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (frequency > NumericType (0) \&\& frequency <= NumericType (\mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}} * 0.5));}
+\DoxyCodeLine{236 }
+\DoxyCodeLine{237             \mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters_a93d09923d67b8d744550343cd38d262c}{g}}  = \textcolor{keyword}{static\_cast<}NumericType\textcolor{keyword}{>} (\mbox{\hyperlink{namespace_colours_a5b3628f9edec2085ffcde5af879da861}{std::tan}} (\mbox{\hyperlink{struct_math_constants}{MathConstants<double>::pi}} * frequency / \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}}));}
+\DoxyCodeLine{238             \mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters_a57dd35d631ff6bbca4b35de08e9180bf}{R2}} = \textcolor{keyword}{static\_cast<}NumericType\textcolor{keyword}{>} (1.0 / resonance);}
+\DoxyCodeLine{239             \mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters_a9dc1fa748dc91155adfdb031a00d4733}{h}}  = \textcolor{keyword}{static\_cast<}NumericType\textcolor{keyword}{>} (1.0 / (1.0 + \mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters_a57dd35d631ff6bbca4b35de08e9180bf}{R2}} * \mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters_a93d09923d67b8d744550343cd38d262c}{g}} + \mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters_a93d09923d67b8d744550343cd38d262c}{g}} * \mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters_a93d09923d67b8d744550343cd38d262c}{g}}));}
+\DoxyCodeLine{240         \}}
+\DoxyCodeLine{241 }
+\DoxyCodeLine{242         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{246 \textcolor{comment}{}        \textcolor{keyword}{using} \mbox{\hyperlink{class_reference_counted_object_ptr}{Ptr}} = \mbox{\hyperlink{class_reference_counted_object_ptr}{ReferenceCountedObjectPtr<Parameters>}};}
+\DoxyCodeLine{247 }
+\DoxyCodeLine{248         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{249         \mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters_a07a15039cfa1248081754bd68ebcd49f}{Parameters}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{250         \mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters_a10b00b78bb4999ec7c52486cb9044c8b}{Parameters}} (\textcolor{keyword}{const} \mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters}{Parameters}}\& o) : \mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters_a93d09923d67b8d744550343cd38d262c}{g}} (o.\mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters_a93d09923d67b8d744550343cd38d262c}{g}}), \mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters_a57dd35d631ff6bbca4b35de08e9180bf}{R2}} (o.\mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters_a57dd35d631ff6bbca4b35de08e9180bf}{R2}}), \mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters_a9dc1fa748dc91155adfdb031a00d4733}{h}} (o.\mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters_a9dc1fa748dc91155adfdb031a00d4733}{h}}) \{\}}
+\DoxyCodeLine{251         \mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters}{Parameters}}\& \mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters_a591171b75019fdfe6cab852bc96d2ec3}{operator= }}(\textcolor{keyword}{const} \mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters}{Parameters}}\& o) \textcolor{keyword}{noexcept}    \{ \mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters_a93d09923d67b8d744550343cd38d262c}{g}} = o.g; \mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters_a57dd35d631ff6bbca4b35de08e9180bf}{R2}} = o.R2; \mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters_a9dc1fa748dc91155adfdb031a00d4733}{h}} = o.h; \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{252 }
+\DoxyCodeLine{253         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{254         NumericType \mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters_a93d09923d67b8d744550343cd38d262c}{g}}   = \textcolor{keyword}{static\_cast<}NumericType\textcolor{keyword}{>} (\mbox{\hyperlink{namespace_colours_a5b3628f9edec2085ffcde5af879da861}{std::tan}} (\mbox{\hyperlink{struct_math_constants}{MathConstants<double>::pi}} * 200.0 / 44100.0));}
+\DoxyCodeLine{255         NumericType \mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters_a57dd35d631ff6bbca4b35de08e9180bf}{R2}}  = \textcolor{keyword}{static\_cast<}NumericType\textcolor{keyword}{>} (\mbox{\hyperlink{struct_math_constants}{MathConstants<double>::sqrt2}});}
+\DoxyCodeLine{256         NumericType \mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters_a9dc1fa748dc91155adfdb031a00d4733}{h}}   = \textcolor{keyword}{static\_cast<}NumericType\textcolor{keyword}{>} (1.0 / (1.0 + \mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters_a57dd35d631ff6bbca4b35de08e9180bf}{R2}} * \mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters_a93d09923d67b8d744550343cd38d262c}{g}} + \mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters_a93d09923d67b8d744550343cd38d262c}{g}} * \mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters_a93d09923d67b8d744550343cd38d262c}{g}}));}
+\DoxyCodeLine{257     \};}
+\DoxyCodeLine{258 \}}
+\DoxyCodeLine{259 }
+\DoxyCodeLine{260 \} \textcolor{comment}{// namespace dsp}}
+\DoxyCodeLine{261  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{262 }
+
+\end{DoxyCode}

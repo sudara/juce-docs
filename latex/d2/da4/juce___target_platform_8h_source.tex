@@ -1,0 +1,205 @@
+\hypertarget{juce___target_platform_8h_source}{}\doxysection{juce\+\_\+\+Target\+Platform.\+h}
+\label{juce___target_platform_8h_source}\index{build/juce\_core/system/juce\_TargetPlatform.h@{build/juce\_core/system/juce\_TargetPlatform.h}}
+\mbox{\hyperlink{juce___target_platform_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{30 \textcolor{comment}{/*  This file figures out which platform is being built, and defines some macros}}
+\DoxyCodeLine{31 \textcolor{comment}{    that the rest of the code can use for OS-\/specific compilation.}}
+\DoxyCodeLine{32 \textcolor{comment}{}}
+\DoxyCodeLine{33 \textcolor{comment}{    Macros that will be set here are:}}
+\DoxyCodeLine{34 \textcolor{comment}{}}
+\DoxyCodeLine{35 \textcolor{comment}{    -\/ One of JUCE\_WINDOWS, JUCE\_MAC JUCE\_LINUX, JUCE\_IOS, JUCE\_ANDROID, etc.}}
+\DoxyCodeLine{36 \textcolor{comment}{    -\/ Either JUCE\_32BIT or JUCE\_64BIT, depending on the architecture.}}
+\DoxyCodeLine{37 \textcolor{comment}{    -\/ Either JUCE\_LITTLE\_ENDIAN or JUCE\_BIG\_ENDIAN.}}
+\DoxyCodeLine{38 \textcolor{comment}{    -\/ Either JUCE\_INTEL or JUCE\_ARM}}
+\DoxyCodeLine{39 \textcolor{comment}{    -\/ Either JUCE\_GCC or JUCE\_CLANG or JUCE\_MSVC}}
+\DoxyCodeLine{40 \textcolor{comment}{*/}}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{43 \textcolor{preprocessor}{\#ifdef JUCE\_APP\_CONFIG\_HEADER}}
+\DoxyCodeLine{44 \textcolor{preprocessor}{ \#include JUCE\_APP\_CONFIG\_HEADER}}
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#elif ! defined (JUCE\_GLOBAL\_MODULE\_SETTINGS\_INCLUDED)}}
+\DoxyCodeLine{46  \textcolor{comment}{/*}}
+\DoxyCodeLine{47 \textcolor{comment}{    Most projects will contain a global header file containing various settings that}}
+\DoxyCodeLine{48 \textcolor{comment}{    should be applied to all the code in your project. If you use the projucer, it'll}}
+\DoxyCodeLine{49 \textcolor{comment}{    set up a global header file for you automatically, but if you're doing things manually,}}
+\DoxyCodeLine{50 \textcolor{comment}{    you may want to set the JUCE\_APP\_CONFIG\_HEADER macro with the name of a file to include,}}
+\DoxyCodeLine{51 \textcolor{comment}{    or just include one before all the module cpp files, in which you set}}
+\DoxyCodeLine{52 \textcolor{comment}{    JUCE\_GLOBAL\_MODULE\_SETTINGS\_INCLUDED=1 to silence this error.}}
+\DoxyCodeLine{53 \textcolor{comment}{    (Or if you don't need a global header, then you can just define JUCE\_GLOBAL\_MODULE\_SETTINGS\_INCLUDED}}
+\DoxyCodeLine{54 \textcolor{comment}{    globally to avoid this error).}}
+\DoxyCodeLine{55 \textcolor{comment}{}}
+\DoxyCodeLine{56 \textcolor{comment}{    Note for people who hit this error when trying to compile a JUCE project created by}}
+\DoxyCodeLine{57 \textcolor{comment}{    a pre-\/v4.2 version of the Introjucer/Projucer, it's very easy to fix: just re-\/save}}
+\DoxyCodeLine{58 \textcolor{comment}{    your project with the latest version of the Projucer, and it'll magically fix this!}}
+\DoxyCodeLine{59 \textcolor{comment}{ */}}
+\DoxyCodeLine{60 \textcolor{preprocessor}{ \#error "{}No global header file was included!"{}}}
+\DoxyCodeLine{61 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{64 \textcolor{preprocessor}{\#if defined (\_WIN32) || defined (\_WIN64)}}
+\DoxyCodeLine{65 \textcolor{preprocessor}{  \#define       JUCE\_WINDOWS 1}}
+\DoxyCodeLine{66 \textcolor{preprocessor}{\#elif defined (JUCE\_ANDROID)}}
+\DoxyCodeLine{67 \textcolor{preprocessor}{  \#undef        JUCE\_ANDROID}}
+\DoxyCodeLine{68 \textcolor{preprocessor}{  \#define       JUCE\_ANDROID 1}}
+\DoxyCodeLine{69 \textcolor{preprocessor}{\#elif defined (\_\_FreeBSD\_\_) || (\_\_OpenBSD\_\_)}}
+\DoxyCodeLine{70 \textcolor{preprocessor}{  \#define       JUCE\_BSD 1}}
+\DoxyCodeLine{71 \textcolor{preprocessor}{\#elif defined (LINUX) || defined (\_\_linux\_\_)}}
+\DoxyCodeLine{72 \textcolor{preprocessor}{  \#define       JUCE\_LINUX 1}}
+\DoxyCodeLine{73 \textcolor{preprocessor}{\#elif defined (\_\_APPLE\_CPP\_\_) || defined (\_\_APPLE\_CC\_\_)}}
+\DoxyCodeLine{74 \textcolor{preprocessor}{  \#define CF\_EXCLUDE\_CSTD\_HEADERS 1}}
+\DoxyCodeLine{75 \textcolor{preprocessor}{  \#include <TargetConditionals.h>} \textcolor{comment}{// (needed to find out what platform we're using)}}
+\DoxyCodeLine{76 \textcolor{preprocessor}{  \#include <AvailabilityMacros.h>}}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78 \textcolor{preprocessor}{  \#if TARGET\_OS\_IPHONE || TARGET\_IPHONE\_SIMULATOR}}
+\DoxyCodeLine{79 \textcolor{preprocessor}{    \#define     JUCE\_IPHONE 1}}
+\DoxyCodeLine{80 \textcolor{preprocessor}{    \#define     JUCE\_IOS 1}}
+\DoxyCodeLine{81 \textcolor{preprocessor}{  \#else}}
+\DoxyCodeLine{82 \textcolor{preprocessor}{    \#define     JUCE\_MAC 1}}
+\DoxyCodeLine{83 \textcolor{preprocessor}{  \#endif}}
+\DoxyCodeLine{84 \textcolor{preprocessor}{\#elif defined (\_\_wasm\_\_)}}
+\DoxyCodeLine{85 \textcolor{preprocessor}{  \#define       JUCE\_WASM 1}}
+\DoxyCodeLine{86 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{87 \textcolor{preprocessor}{  \#error "{}Unknown platform!"{}}}
+\DoxyCodeLine{88 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{91 \textcolor{preprocessor}{\#if JUCE\_WINDOWS}}
+\DoxyCodeLine{92 \textcolor{preprocessor}{  \#ifdef \_MSC\_VER}}
+\DoxyCodeLine{93 \textcolor{preprocessor}{    \#ifdef \_WIN64}}
+\DoxyCodeLine{94 \textcolor{preprocessor}{      \#define JUCE\_64BIT 1}}
+\DoxyCodeLine{95 \textcolor{preprocessor}{    \#else}}
+\DoxyCodeLine{96 \textcolor{preprocessor}{      \#define JUCE\_32BIT 1}}
+\DoxyCodeLine{97 \textcolor{preprocessor}{    \#endif}}
+\DoxyCodeLine{98 \textcolor{preprocessor}{  \#endif}}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100 \textcolor{preprocessor}{  \#ifdef \_DEBUG}}
+\DoxyCodeLine{101 \textcolor{preprocessor}{    \#define JUCE\_DEBUG 1}}
+\DoxyCodeLine{102 \textcolor{preprocessor}{  \#endif}}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104 \textcolor{preprocessor}{  \#ifdef \_\_MINGW32\_\_}}
+\DoxyCodeLine{105 \textcolor{preprocessor}{    \#define JUCE\_MINGW 1}}
+\DoxyCodeLine{106 \textcolor{preprocessor}{    \#ifdef \_\_MINGW64\_\_}}
+\DoxyCodeLine{107 \textcolor{preprocessor}{      \#define JUCE\_64BIT 1}}
+\DoxyCodeLine{108 \textcolor{preprocessor}{    \#else}}
+\DoxyCodeLine{109 \textcolor{preprocessor}{      \#define JUCE\_32BIT 1}}
+\DoxyCodeLine{110 \textcolor{preprocessor}{    \#endif}}
+\DoxyCodeLine{111 \textcolor{preprocessor}{  \#endif}}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{114 \textcolor{preprocessor}{  \#define JUCE\_LITTLE\_ENDIAN 1}}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{116 \textcolor{preprocessor}{  \#define JUCE\_INTEL 1}}
+\DoxyCodeLine{117 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{119 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{120 \textcolor{preprocessor}{\#if JUCE\_MAC || JUCE\_IOS}}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{122 \textcolor{preprocessor}{  \#if defined (DEBUG) || defined (\_DEBUG) || ! (defined (NDEBUG) || defined (\_NDEBUG))}}
+\DoxyCodeLine{123 \textcolor{preprocessor}{    \#define JUCE\_DEBUG 1}}
+\DoxyCodeLine{124 \textcolor{preprocessor}{  \#endif}}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126 \textcolor{preprocessor}{  \#if ! (defined (DEBUG) || defined (\_DEBUG) || defined (NDEBUG) || defined (\_NDEBUG))}}
+\DoxyCodeLine{127 \textcolor{preprocessor}{    \#warning "{}Neither NDEBUG or DEBUG has been defined -\/ you should set one of these to make it clear whether this is a release build,"{}}}
+\DoxyCodeLine{128 \textcolor{preprocessor}{  \#endif}}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{130 \textcolor{preprocessor}{  \#ifdef \_\_LITTLE\_ENDIAN\_\_}}
+\DoxyCodeLine{131 \textcolor{preprocessor}{    \#define JUCE\_LITTLE\_ENDIAN 1}}
+\DoxyCodeLine{132 \textcolor{preprocessor}{  \#else}}
+\DoxyCodeLine{133 \textcolor{preprocessor}{    \#define JUCE\_BIG\_ENDIAN 1}}
+\DoxyCodeLine{134 \textcolor{preprocessor}{  \#endif}}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{136 \textcolor{preprocessor}{  \#ifdef \_\_LP64\_\_}}
+\DoxyCodeLine{137 \textcolor{preprocessor}{    \#define JUCE\_64BIT 1}}
+\DoxyCodeLine{138 \textcolor{preprocessor}{  \#else}}
+\DoxyCodeLine{139 \textcolor{preprocessor}{    \#define JUCE\_32BIT 1}}
+\DoxyCodeLine{140 \textcolor{preprocessor}{  \#endif}}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{142 \textcolor{preprocessor}{  \#if defined (\_\_ppc\_\_) || defined (\_\_ppc64\_\_)}}
+\DoxyCodeLine{143 \textcolor{preprocessor}{    \#error "{}PowerPC is no longer supported by JUCE!"{}}}
+\DoxyCodeLine{144 \textcolor{preprocessor}{  \#elif defined (\_\_arm\_\_) || defined (\_\_arm64\_\_)}}
+\DoxyCodeLine{145 \textcolor{preprocessor}{    \#define JUCE\_ARM 1}}
+\DoxyCodeLine{146 \textcolor{preprocessor}{  \#else}}
+\DoxyCodeLine{147 \textcolor{preprocessor}{    \#define JUCE\_INTEL 1}}
+\DoxyCodeLine{148 \textcolor{preprocessor}{  \#endif}}
+\DoxyCodeLine{149 }
+\DoxyCodeLine{150 \textcolor{preprocessor}{  \#if JUCE\_MAC}}
+\DoxyCodeLine{151 \textcolor{preprocessor}{    \#if ! defined (MAC\_OS\_X\_VERSION\_10\_11)}}
+\DoxyCodeLine{152 \textcolor{preprocessor}{      \#error "{}The 10.11 SDK (Xcode 7.3.1+) is required to build JUCE apps. You can create apps that run on macOS 10.7+ by changing the deployment target."{}}}
+\DoxyCodeLine{153 \textcolor{preprocessor}{    \#elif MAC\_OS\_X\_VERSION\_MIN\_REQUIRED < MAC\_OS\_X\_VERSION\_10\_7}}
+\DoxyCodeLine{154 \textcolor{preprocessor}{      \#error "{}Building for OSX 10.6 is no longer supported!"{}}}
+\DoxyCodeLine{155 \textcolor{preprocessor}{    \#endif}}
+\DoxyCodeLine{156 \textcolor{preprocessor}{  \#endif}}
+\DoxyCodeLine{157 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{158 }
+\DoxyCodeLine{159 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{160 \textcolor{preprocessor}{\#if JUCE\_LINUX || JUCE\_ANDROID || JUCE\_BSD}}
+\DoxyCodeLine{161 }
+\DoxyCodeLine{162 \textcolor{preprocessor}{  \#ifdef \_DEBUG}}
+\DoxyCodeLine{163 \textcolor{preprocessor}{    \#define JUCE\_DEBUG 1}}
+\DoxyCodeLine{164 \textcolor{preprocessor}{  \#endif}}
+\DoxyCodeLine{165 }
+\DoxyCodeLine{166   \textcolor{comment}{// Allow override for big-\/endian Linux platforms}}
+\DoxyCodeLine{167 \textcolor{preprocessor}{  \#if defined (\_\_LITTLE\_ENDIAN\_\_) || ! defined (JUCE\_BIG\_ENDIAN)}}
+\DoxyCodeLine{168 \textcolor{preprocessor}{    \#define JUCE\_LITTLE\_ENDIAN 1}}
+\DoxyCodeLine{169 \textcolor{preprocessor}{    \#undef JUCE\_BIG\_ENDIAN}}
+\DoxyCodeLine{170 \textcolor{preprocessor}{  \#else}}
+\DoxyCodeLine{171 \textcolor{preprocessor}{    \#undef JUCE\_LITTLE\_ENDIAN}}
+\DoxyCodeLine{172 \textcolor{preprocessor}{    \#define JUCE\_BIG\_ENDIAN 1}}
+\DoxyCodeLine{173 \textcolor{preprocessor}{  \#endif}}
+\DoxyCodeLine{174 }
+\DoxyCodeLine{175 \textcolor{preprocessor}{  \#if defined (\_\_LP64\_\_) || defined (\_LP64) || defined (\_\_arm64\_\_)}}
+\DoxyCodeLine{176 \textcolor{preprocessor}{    \#define JUCE\_64BIT 1}}
+\DoxyCodeLine{177 \textcolor{preprocessor}{  \#else}}
+\DoxyCodeLine{178 \textcolor{preprocessor}{    \#define JUCE\_32BIT 1}}
+\DoxyCodeLine{179 \textcolor{preprocessor}{  \#endif}}
+\DoxyCodeLine{180 }
+\DoxyCodeLine{181 \textcolor{preprocessor}{  \#if defined (\_\_arm\_\_) || defined (\_\_arm64\_\_) || defined (\_\_aarch64\_\_)}}
+\DoxyCodeLine{182 \textcolor{preprocessor}{    \#define JUCE\_ARM 1}}
+\DoxyCodeLine{183 \textcolor{preprocessor}{  \#elif \_\_MMX\_\_ || \_\_SSE\_\_ || \_\_amd64\_\_}}
+\DoxyCodeLine{184 \textcolor{preprocessor}{    \#define JUCE\_INTEL 1}}
+\DoxyCodeLine{185 \textcolor{preprocessor}{  \#endif}}
+\DoxyCodeLine{186 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{187 }
+\DoxyCodeLine{188 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{189 \textcolor{comment}{// Compiler type macros.}}
+\DoxyCodeLine{190 }
+\DoxyCodeLine{191 \textcolor{preprocessor}{\#if defined (\_\_clang\_\_)}}
+\DoxyCodeLine{192 \textcolor{preprocessor}{  \#define JUCE\_CLANG 1}}
+\DoxyCodeLine{193 }
+\DoxyCodeLine{194 \textcolor{preprocessor}{\#elif defined (\_\_GNUC\_\_)}}
+\DoxyCodeLine{195 \textcolor{preprocessor}{  \#define JUCE\_GCC 1}}
+\DoxyCodeLine{196 }
+\DoxyCodeLine{197 \textcolor{preprocessor}{\#elif defined (\_MSC\_VER)}}
+\DoxyCodeLine{198 \textcolor{preprocessor}{  \#define JUCE\_MSVC 1}}
+\DoxyCodeLine{199 }
+\DoxyCodeLine{200 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{201 \textcolor{preprocessor}{  \#error unknown compiler}}
+\DoxyCodeLine{202 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{203 }
+
+\end{DoxyCode}

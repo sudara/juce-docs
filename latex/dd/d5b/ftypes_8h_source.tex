@@ -1,0 +1,197 @@
+\hypertarget{ftypes_8h_source}{}\doxysection{ftypes.\+h}
+\label{ftypes_8h_source}\index{build/juce\_audio\_processors/format\_types/VST3\_SDK/pluginterfaces/base/ftypes.h@{build/juce\_audio\_processors/format\_types/VST3\_SDK/pluginterfaces/base/ftypes.h}}
+\mbox{\hyperlink{ftypes_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{2 \textcolor{comment}{// Project     : SDK Core}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 \textcolor{comment}{// Category    : SDK Core Interfaces}}
+\DoxyCodeLine{5 \textcolor{comment}{// Filename    : pluginterfaces/base/ftypes.h}}
+\DoxyCodeLine{6 \textcolor{comment}{// Created by  : Steinberg, 01/2004}}
+\DoxyCodeLine{7 \textcolor{comment}{// Description : Basic data types}}
+\DoxyCodeLine{8 \textcolor{comment}{//}}
+\DoxyCodeLine{9 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{10 \textcolor{comment}{// This file is part of a Steinberg SDK. It is subject to the license terms}}
+\DoxyCodeLine{11 \textcolor{comment}{// in the LICENSE file found in the top-\/level directory of this distribution}}
+\DoxyCodeLine{12 \textcolor{comment}{// and at www.steinberg.net/sdklicenses. }}
+\DoxyCodeLine{13 \textcolor{comment}{// No part of the SDK, including this file, may be copied, modified, propagated,}}
+\DoxyCodeLine{14 \textcolor{comment}{// or distributed except according to the terms contained in the LICENSE file.}}
+\DoxyCodeLine{15 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{fplatform_8h}{fplatform.h}}"{}}}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21 \textcolor{comment}{//\#define UNICODE\_OFF   // disable / enable unicode}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#ifdef UNICODE\_OFF}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{    \#ifdef UNICODE}}
+\DoxyCodeLine{25 \textcolor{preprocessor}{    \#undef UNICODE}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{    \#endif}}
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{    \#define UNICODE 1}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#ifdef UNICODE}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#define \_UNICODE 1}}
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespace_steinberg}{Steinberg}}}
+\DoxyCodeLine{36 \{}
+\DoxyCodeLine{37 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{38 \textcolor{comment}{// Integral Types}}
+\DoxyCodeLine{39     \textcolor{keyword}{typedef} \textcolor{keywordtype}{char} \mbox{\hyperlink{namespace_steinberg_a76303c06c8689fb47178d9baabce246b}{int8}};}
+\DoxyCodeLine{40     \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} \mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}};}
+\DoxyCodeLine{41     \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} \mbox{\hyperlink{namespace_steinberg_ac51755538a5d39c7345c4987a3096440}{uchar}};}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43     \textcolor{keyword}{typedef} \textcolor{keywordtype}{short} \mbox{\hyperlink{namespace_steinberg_a091b21d361005029928d1a49e59f1fd9}{int16}};}
+\DoxyCodeLine{44     \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} \mbox{\hyperlink{namespace_steinberg_a5f06a8622e4753e2f9617feb26f625ae}{uint16}};}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46 \textcolor{preprocessor}{\#if SMTG\_OS\_WINDOWS \&\& !defined(\_\_GNUC\_\_)}}
+\DoxyCodeLine{47     \textcolor{keyword}{typedef} \textcolor{keywordtype}{long} \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{int32}};}
+\DoxyCodeLine{48     \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \mbox{\hyperlink{namespace_steinberg_af4518d725547bee20d4e185e8d3f1965}{uint32}};}
+\DoxyCodeLine{49 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{50     \textcolor{keyword}{typedef} \textcolor{keywordtype}{int} \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{int32}};}
+\DoxyCodeLine{51     \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \mbox{\hyperlink{namespace_steinberg_af4518d725547bee20d4e185e8d3f1965}{uint32}};}
+\DoxyCodeLine{52 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54     \textcolor{keyword}{static} \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{int32}} kMaxLong = 0x7fffffff;}
+\DoxyCodeLine{55     \textcolor{keyword}{static} \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{int32}} kMinLong = (-\/0x7fffffff -\/ 1);}
+\DoxyCodeLine{56     \textcolor{keyword}{static} \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{int32}} kMaxInt32 = kMaxLong;}
+\DoxyCodeLine{57     \textcolor{keyword}{static} \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{int32}} kMinInt32 = kMinLong;}
+\DoxyCodeLine{58     \textcolor{keyword}{static} \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_af4518d725547bee20d4e185e8d3f1965}{uint32}} kMaxInt32u = 0xffffffff;}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60 \textcolor{preprocessor}{\#if SMTG\_OS\_WINDOWS \&\& !defined(\_\_GNUC\_\_)}}
+\DoxyCodeLine{61     \textcolor{keyword}{typedef} \_\_int64 \mbox{\hyperlink{namespace_steinberg_a8e6d63a581d885f3e9a3e1642b0f75b3}{int64}};}
+\DoxyCodeLine{62     \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \_\_int64 \mbox{\hyperlink{namespace_steinberg_a04d83e9fd2cf38c5ca71f1359271476f}{uint64}};}
+\DoxyCodeLine{63     \textcolor{keyword}{static} \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a8e6d63a581d885f3e9a3e1642b0f75b3}{int64}} kMaxInt64 = 9223372036854775807i64;}
+\DoxyCodeLine{64     \textcolor{keyword}{static} \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a8e6d63a581d885f3e9a3e1642b0f75b3}{int64}} kMinInt64 = (-\/9223372036854775807i64 -\/ 1);}
+\DoxyCodeLine{65 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{66     \textcolor{keyword}{typedef} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} \mbox{\hyperlink{namespace_steinberg_a8e6d63a581d885f3e9a3e1642b0f75b3}{int64}};}
+\DoxyCodeLine{67     \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} \mbox{\hyperlink{namespace_steinberg_a04d83e9fd2cf38c5ca71f1359271476f}{uint64}};}
+\DoxyCodeLine{68     \textcolor{keyword}{static} \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a8e6d63a581d885f3e9a3e1642b0f75b3}{int64}} kMaxInt64 = 0x7fffffffffffffffLL;}
+\DoxyCodeLine{69     \textcolor{keyword}{static} \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a8e6d63a581d885f3e9a3e1642b0f75b3}{int64}} kMinInt64 = (-\/0x7fffffffffffffffLL-\/1);}
+\DoxyCodeLine{70 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{71     \textcolor{keyword}{static} \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a04d83e9fd2cf38c5ca71f1359271476f}{uint64}} kMaxInt64u = \mbox{\hyperlink{namespace_steinberg_a04d83e9fd2cf38c5ca71f1359271476f}{uint64}} (0xffffffff) | (\mbox{\hyperlink{namespace_steinberg_a04d83e9fd2cf38c5ca71f1359271476f}{uint64}} (0xffffffff) << 32);}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{74 \textcolor{comment}{// other Semantic Types}}
+\DoxyCodeLine{75     \textcolor{keyword}{typedef} \mbox{\hyperlink{namespace_steinberg_a8e6d63a581d885f3e9a3e1642b0f75b3}{int64}} \mbox{\hyperlink{namespace_steinberg_a32bafd3ffec4907b661ddcd0724846a0}{TSize}};   \textcolor{comment}{// byte (or other) sizes}}
+\DoxyCodeLine{76     \textcolor{keyword}{typedef} \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{int32}} \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}}; \textcolor{comment}{// result code}}
+\DoxyCodeLine{77 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{78     \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{float} kMaxFloat = 3.40282346638528860E38;}
+\DoxyCodeLine{79     \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{double} kMaxDouble = 1.7976931348623158E308;}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81 \textcolor{preprocessor}{\#if SMTG\_PLATFORM\_64}}
+\DoxyCodeLine{82     \textcolor{keyword}{typedef} \mbox{\hyperlink{namespace_steinberg_a04d83e9fd2cf38c5ca71f1359271476f}{uint64}} \mbox{\hyperlink{namespace_steinberg_a8b8518bce61dcab277a071466e1c71e1}{TPtrInt}};}
+\DoxyCodeLine{83 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{84     \textcolor{keyword}{typedef} \mbox{\hyperlink{namespace_steinberg_af4518d725547bee20d4e185e8d3f1965}{uint32}} \mbox{\hyperlink{namespace_steinberg_a8b8518bce61dcab277a071466e1c71e1}{TPtrInt}};}
+\DoxyCodeLine{85 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{88 \textcolor{comment}{// Boolean}}
+\DoxyCodeLine{89     \textcolor{keyword}{typedef} \mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}} \mbox{\hyperlink{namespace_steinberg_aa89abbc5b931de8ef6ef03ec0f342375}{TBool}};}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{92 \textcolor{comment}{// Char / Strings}}
+\DoxyCodeLine{93     \textcolor{keyword}{typedef} \textcolor{keywordtype}{char} \mbox{\hyperlink{namespace_steinberg_a4a83db7f2467f59f3050248287aef5fa}{char8}};}
+\DoxyCodeLine{94 \textcolor{preprocessor}{\#ifdef \_NATIVE\_WCHAR\_T\_DEFINED}}
+\DoxyCodeLine{95     \textcolor{keyword}{typedef} \_\_wchar\_t \mbox{\hyperlink{namespace_steinberg_a1d62754aa66db400e0a9ddf18dc912b5}{char16}};}
+\DoxyCodeLine{96 \textcolor{preprocessor}{\#elif defined(\_\_MINGW32\_\_)}}
+\DoxyCodeLine{97     \textcolor{keyword}{typedef} \textcolor{keywordtype}{wchar\_t} \mbox{\hyperlink{namespace_steinberg_a1d62754aa66db400e0a9ddf18dc912b5}{char16}};}
+\DoxyCodeLine{98 \textcolor{preprocessor}{\#elif SMTG\_CPP11}}
+\DoxyCodeLine{99     \textcolor{keyword}{typedef} char16\_t \mbox{\hyperlink{namespace_steinberg_a1d62754aa66db400e0a9ddf18dc912b5}{char16}};}
+\DoxyCodeLine{100 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{101     \textcolor{keyword}{typedef} \mbox{\hyperlink{namespace_steinberg_a091b21d361005029928d1a49e59f1fd9}{int16}} \mbox{\hyperlink{namespace_steinberg_a1d62754aa66db400e0a9ddf18dc912b5}{char16}};}
+\DoxyCodeLine{102 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104 \textcolor{preprocessor}{\#ifdef UNICODE}}
+\DoxyCodeLine{105     \textcolor{keyword}{typedef} \mbox{\hyperlink{namespace_steinberg_a1d62754aa66db400e0a9ddf18dc912b5}{char16}} \mbox{\hyperlink{namespace_steinberg_aa659520e55d6fadd25b885790651c044}{tchar}};}
+\DoxyCodeLine{106 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{107     \textcolor{keyword}{typedef} \mbox{\hyperlink{namespace_steinberg_a4a83db7f2467f59f3050248287aef5fa}{char8}} \mbox{\hyperlink{namespace_steinberg_aa659520e55d6fadd25b885790651c044}{tchar}};}
+\DoxyCodeLine{108 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110     \textcolor{keyword}{typedef} \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a4a83db7f2467f59f3050248287aef5fa}{char8}}* \mbox{\hyperlink{namespace_steinberg_a95bf7f0949d8a9419ac7281b386a279b}{CStringA}};}
+\DoxyCodeLine{111     \textcolor{keyword}{typedef} \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a1d62754aa66db400e0a9ddf18dc912b5}{char16}}* \mbox{\hyperlink{namespace_steinberg_adc199510a6f16e934a6bb602721204ea}{CStringW}};}
+\DoxyCodeLine{112     \textcolor{keyword}{typedef} \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_aa659520e55d6fadd25b885790651c044}{tchar}}* \mbox{\hyperlink{namespace_steinberg_a28d4bc947d0ec694f51dc362f91d666a}{CString}};}
+\DoxyCodeLine{113     \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespace_steinberg_a3572f18500281e77aa79ef51d9fd410a}{strEmpty}} (\textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_aa659520e55d6fadd25b885790651c044}{tchar}}* str) \{ \textcolor{keywordflow}{return} (!str || *str == 0); \}}
+\DoxyCodeLine{114     \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespace_steinberg_a107fdab7d7c86e4f5191a27005a6bbc3}{str8Empty}} (\textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a4a83db7f2467f59f3050248287aef5fa}{char8}}* str) \{ \textcolor{keywordflow}{return} (!str || *str == 0); \}}
+\DoxyCodeLine{115     \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespace_steinberg_a51822113d808dc2e0594f7f1c61fa823}{str16Empty}} (\textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a1d62754aa66db400e0a9ddf18dc912b5}{char16}}* str) \{ \textcolor{keywordflow}{return} (!str || *str == 0); \}}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117     \textcolor{keyword}{typedef} \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a4a83db7f2467f59f3050248287aef5fa}{char8}}* \mbox{\hyperlink{namespace_steinberg_a6ca68110b739e9a9bec4fe884cad394a}{FIDString}}; \textcolor{comment}{// identifier as string (used for attributes, messages)}}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{119     \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a6ca68110b739e9a9bec4fe884cad394a}{FIDString}} \mbox{\hyperlink{namespace_steinberg_a6605d81276d8182104fa7df6470b22af}{kPlatformStringWin}} = \textcolor{stringliteral}{"{}WIN"{}};}
+\DoxyCodeLine{120     \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a6ca68110b739e9a9bec4fe884cad394a}{FIDString}} \mbox{\hyperlink{namespace_steinberg_a11d7b5f02c2605bcde61a18d2d69f88b}{kPlatformStringMac}} = \textcolor{stringliteral}{"{}MAC"{}};}
+\DoxyCodeLine{121     \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a6ca68110b739e9a9bec4fe884cad394a}{FIDString}} \mbox{\hyperlink{namespace_steinberg_a6b28a09f0bf39e1a9354425c54f747ca}{kPlatformStringIOS}} = \textcolor{stringliteral}{"{}IOS"{}};}
+\DoxyCodeLine{122     \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a6ca68110b739e9a9bec4fe884cad394a}{FIDString}} \mbox{\hyperlink{namespace_steinberg_add9e951f6fd799035518542550c4f00f}{kPlatformStringLinux}} = \textcolor{stringliteral}{"{}Linux"{}};}
+\DoxyCodeLine{123 \textcolor{preprocessor}{\#if SMTG\_OS\_WINDOWS}}
+\DoxyCodeLine{124     \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a6ca68110b739e9a9bec4fe884cad394a}{FIDString}} kPlatformString = \mbox{\hyperlink{namespace_steinberg_a6605d81276d8182104fa7df6470b22af}{kPlatformStringWin}};}
+\DoxyCodeLine{125 \textcolor{preprocessor}{\#elif SMTG\_OS\_IOS}}
+\DoxyCodeLine{126     \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a6ca68110b739e9a9bec4fe884cad394a}{FIDString}} kPlatformString = \mbox{\hyperlink{namespace_steinberg_a6b28a09f0bf39e1a9354425c54f747ca}{kPlatformStringIOS}};}
+\DoxyCodeLine{127 \textcolor{preprocessor}{\#elif SMTG\_OS\_MACOS}}
+\DoxyCodeLine{128     \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a6ca68110b739e9a9bec4fe884cad394a}{FIDString}} kPlatformString = \mbox{\hyperlink{namespace_steinberg_a11d7b5f02c2605bcde61a18d2d69f88b}{kPlatformStringMac}};}
+\DoxyCodeLine{129 \textcolor{preprocessor}{\#elif SMTG\_OS\_LINUX}}
+\DoxyCodeLine{130     \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a6ca68110b739e9a9bec4fe884cad394a}{FIDString}} kPlatformString = \mbox{\hyperlink{namespace_steinberg_add9e951f6fd799035518542550c4f00f}{kPlatformStringLinux}};}
+\DoxyCodeLine{131 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{133 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{135 \textcolor{comment}{}    \textcolor{keyword}{typedef} \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{int32}} \mbox{\hyperlink{namespace_steinberg_a91e26bd765c8845ae5e3cf7871c842e7}{UCoord}};}
+\DoxyCodeLine{136     \textcolor{keyword}{static} \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a91e26bd765c8845ae5e3cf7871c842e7}{UCoord}} kMaxCoord = ((\mbox{\hyperlink{namespace_steinberg_a91e26bd765c8845ae5e3cf7871c842e7}{UCoord}})0x7FFFFFFF);}
+\DoxyCodeLine{137     \textcolor{keyword}{static} \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a91e26bd765c8845ae5e3cf7871c842e7}{UCoord}} kMinCoord = ((\mbox{\hyperlink{namespace_steinberg_a91e26bd765c8845ae5e3cf7871c842e7}{UCoord}})-\/0x7FFFFFFF);}
+\DoxyCodeLine{138 \}   \textcolor{comment}{// namespace Steinberg}}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140 }
+\DoxyCodeLine{141 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{144 \textcolor{comment}{}\textcolor{preprocessor}{\#define SWAP\_32(l) \{ \(\backslash\)}}
+\DoxyCodeLine{145 \textcolor{preprocessor}{    unsigned char* p = (unsigned char*)\& (l); \(\backslash\)}}
+\DoxyCodeLine{146 \textcolor{preprocessor}{    unsigned char t; \(\backslash\)}}
+\DoxyCodeLine{147 \textcolor{preprocessor}{    t = p[0]; p[0] = p[3]; p[3] = t; t = p[1]; p[1] = p[2]; p[2] = t; \}}}
+\DoxyCodeLine{148 }
+\DoxyCodeLine{149 \textcolor{preprocessor}{\#define SWAP\_16(w) \{ \(\backslash\)}}
+\DoxyCodeLine{150 \textcolor{preprocessor}{    unsigned char* p = (unsigned char*)\& (w); \(\backslash\)}}
+\DoxyCodeLine{151 \textcolor{preprocessor}{    unsigned char t; \(\backslash\)}}
+\DoxyCodeLine{152 \textcolor{preprocessor}{    t = p[0]; p[0] = p[1]; p[1] = t; \}}}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154 \textcolor{preprocessor}{\#define SWAP\_64(i) \{ \(\backslash\)}}
+\DoxyCodeLine{155 \textcolor{preprocessor}{    unsigned char* p = (unsigned char*)\& (i); \(\backslash\)}}
+\DoxyCodeLine{156 \textcolor{preprocessor}{    unsigned char t; \(\backslash\)}}
+\DoxyCodeLine{157 \textcolor{preprocessor}{    t = p[0]; p[0] = p[7]; p[7] = t; t = p[1]; p[1] = p[6]; p[6] = t; \(\backslash\)}}
+\DoxyCodeLine{158 \textcolor{preprocessor}{    t = p[2]; p[2] = p[5]; p[5] = t; t = p[3]; p[3] = p[4]; p[4] = t;\}}}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespace_steinberg}{Steinberg}}}
+\DoxyCodeLine{161 \{}
+\DoxyCodeLine{162     \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{void} FSwap (\mbox{\hyperlink{group__juce__core-maths_ga07fb256c1077eea7a7726e948cc8ff0e}{int8}}\&) \{\}}
+\DoxyCodeLine{163     \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{void} FSwap (\mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}}\&) \{\}}
+\DoxyCodeLine{164     \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{void} FSwap (\mbox{\hyperlink{juce__box2d_8cpp_a1336d6dad274f1bead955274a953c13d}{int16}}\& i16) \{ \mbox{\hyperlink{ftypes_8h_a178e2230dac3adf497d06c6f42abccad}{SWAP\_16}} (i16) \}}
+\DoxyCodeLine{165     \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{void} FSwap (\mbox{\hyperlink{juce__box2d_8cpp_acc2cb9a2f3246f6f4775ef16196fd983}{uint16}}\& i16) \{ \mbox{\hyperlink{ftypes_8h_a178e2230dac3adf497d06c6f42abccad}{SWAP\_16}} (i16) \}}
+\DoxyCodeLine{166     \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{void} FSwap (\mbox{\hyperlink{juce__box2d_8cpp_a6a5a8e94340b94579afb83ab477a983c}{int32}}\& i32) \{ \mbox{\hyperlink{ftypes_8h_ad0de6cd6cef290e9609feccdf002f51c}{SWAP\_32}} (i32) \}}
+\DoxyCodeLine{167     \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{void} FSwap (\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}}\& i32) \{ \mbox{\hyperlink{ftypes_8h_ad0de6cd6cef290e9609feccdf002f51c}{SWAP\_32}} (i32) \}}
+\DoxyCodeLine{168     \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{void} FSwap (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}\& i64) \{ \mbox{\hyperlink{ftypes_8h_ae7ff9262ec2cb91d49035bffbea62625}{SWAP\_64}} (i64) \}}
+\DoxyCodeLine{169     \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{void} FSwap (\mbox{\hyperlink{group__juce__core-maths_gaba41bf2b6f6da5945ee08fb99931aede}{uint64}}\& i64) \{ \mbox{\hyperlink{ftypes_8h_ae7ff9262ec2cb91d49035bffbea62625}{SWAP\_64}} (i64) \}}
+\DoxyCodeLine{170 \}}
+\DoxyCodeLine{171 }
+\DoxyCodeLine{172 \textcolor{comment}{// always inline macros (only when RELEASE is 1)}}
+\DoxyCodeLine{173 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{174 \textcolor{preprocessor}{\#if RELEASE}}
+\DoxyCodeLine{175 \textcolor{preprocessor}{    \#if SMTG\_OS\_MACOS || SMTG\_OS\_LINUX || defined(\_\_MINGW32\_\_)}}
+\DoxyCodeLine{176 \textcolor{preprocessor}{        \#define SMTG\_ALWAYS\_INLINE  \_\_inline\_\_ \_\_attribute\_\_((\_\_always\_inline\_\_))}}
+\DoxyCodeLine{177 \textcolor{preprocessor}{        \#define SMTG\_NEVER\_INLINE \_\_attribute\_\_((noinline))}}
+\DoxyCodeLine{178 \textcolor{preprocessor}{    \#elif SMTG\_OS\_WINDOWS}}
+\DoxyCodeLine{179 \textcolor{preprocessor}{        \#define SMTG\_ALWAYS\_INLINE  \_\_forceinline}}
+\DoxyCodeLine{180 \textcolor{preprocessor}{        \#define SMTG\_NEVER\_INLINE \_\_declspec(noinline)}}
+\DoxyCodeLine{181 \textcolor{preprocessor}{    \#endif}}
+\DoxyCodeLine{182 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{183 }
+\DoxyCodeLine{184 \textcolor{preprocessor}{\#ifndef SMTG\_ALWAYS\_INLINE}}
+\DoxyCodeLine{185 \textcolor{preprocessor}{    \#define SMTG\_ALWAYS\_INLINE  inline}}
+\DoxyCodeLine{186 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{187 \textcolor{preprocessor}{\#ifndef SMTG\_NEVER\_INLINE}}
+\DoxyCodeLine{188 \textcolor{preprocessor}{    \#define SMTG\_NEVER\_INLINE}}
+\DoxyCodeLine{189 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{190 }
+\DoxyCodeLine{191 \textcolor{preprocessor}{\#ifndef SMTG\_CPP11\_STDLIBSUPPORT}}
+\DoxyCodeLine{192 \textcolor{comment}{// Enable this for old compilers}}
+\DoxyCodeLine{193 \textcolor{comment}{// \#define nullptr NULL}}
+\DoxyCodeLine{194 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

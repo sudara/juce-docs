@@ -1,0 +1,76 @@
+\hypertarget{_clip_to_range_8h_source}{}\doxysection{Clip\+To\+Range.\+h}
+\label{_clip_to_range_8h_source}\index{build/juce\_audio\_devices/native/oboe/src/flowgraph/ClipToRange.h@{build/juce\_audio\_devices/native/oboe/src/flowgraph/ClipToRange.h}}
+\mbox{\hyperlink{_clip_to_range_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{ * Copyright 2015 The Android Open Source Project}}
+\DoxyCodeLine{3 \textcolor{comment}{ *}}
+\DoxyCodeLine{4 \textcolor{comment}{ * Licensed under the Apache License, Version 2.0 (the "{}License"{});}}
+\DoxyCodeLine{5 \textcolor{comment}{ * you may not use this file except in compliance with the License.}}
+\DoxyCodeLine{6 \textcolor{comment}{ * You may obtain a copy of the License at}}
+\DoxyCodeLine{7 \textcolor{comment}{ *}}
+\DoxyCodeLine{8 \textcolor{comment}{ *      http://www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{9 \textcolor{comment}{ *}}
+\DoxyCodeLine{10 \textcolor{comment}{ * Unless required by applicable law or agreed to in writing, software}}
+\DoxyCodeLine{11 \textcolor{comment}{ * distributed under the License is distributed on an "{}AS IS"{} BASIS,}}
+\DoxyCodeLine{12 \textcolor{comment}{ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.}}
+\DoxyCodeLine{13 \textcolor{comment}{ * See the License for the specific language governing permissions and}}
+\DoxyCodeLine{14 \textcolor{comment}{ * limitations under the License.}}
+\DoxyCodeLine{15 \textcolor{comment}{ */}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#ifndef FLOWGRAPH\_CLIP\_TO\_RANGE\_H}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#define FLOWGRAPH\_CLIP\_TO\_RANGE\_H}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#include <atomic>}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#include <unistd.h>}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#include <sys/types.h>}}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_flow_graph_node_8h}{FlowGraphNode.h}}"{}}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespace_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e}{FLOWGRAPH\_OUTER\_NAMESPACE}} \{}
+\DoxyCodeLine{27 \textcolor{keyword}{namespace }flowgraph \{}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29 \textcolor{comment}{// This is 3 dB, (10\string^(3/20)), to match the maximum headroom in AudioTrack for float data.}}
+\DoxyCodeLine{30 \textcolor{comment}{// It is designed to allow occasional transient peaks.}}
+\DoxyCodeLine{31 \textcolor{keyword}{constexpr} \textcolor{keywordtype}{float} \mbox{\hyperlink{namespace_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_ae71b18f35e50ef8baf0d105d0cc4395f}{kDefaultMaxHeadroom}} = 1.41253754f;}
+\DoxyCodeLine{32 \textcolor{keyword}{constexpr} \textcolor{keywordtype}{float} \mbox{\hyperlink{namespace_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_a56952fabecc6547ebde78b22de22a1ab}{kDefaultMinHeadroom}} = -\/\mbox{\hyperlink{namespace_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_ae71b18f35e50ef8baf0d105d0cc4395f}{kDefaultMaxHeadroom}};}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 \textcolor{keyword}{class }\mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_clip_to_range}{ClipToRange}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_filter}{FlowGraphFilter}} \{}
+\DoxyCodeLine{35 \textcolor{keyword}{public}:}
+\DoxyCodeLine{36     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_clip_to_range_a23d7be50c7e7cf63a912eb76c2d33a2b}{ClipToRange}}(int32\_t channelCount);}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_clip_to_range_aeaa395c69b29900146ffaa092bb8c97a}{\string~ClipToRange}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40     int32\_t \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_clip_to_range_ad6b1ca7fe32a20eed8846a1e0c3795aa}{onProcess}}(int32\_t numFrames) \textcolor{keyword}{override};}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_clip_to_range_acdfbdcde1a2e7affda2d9b26bd9f7a5b}{setMinimum}}(\textcolor{keywordtype}{float} \mbox{\hyperlink{os_8h_abb702d8b501669a23aa0ab3b281b9384}{min}}) \{}
+\DoxyCodeLine{43         mMinimum = \mbox{\hyperlink{os_8h_abb702d8b501669a23aa0ab3b281b9384}{min}};}
+\DoxyCodeLine{44     \}}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_clip_to_range_a373904bb35ee3c9f49bd910e77fa5889}{getMinimum}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{47         \textcolor{keywordflow}{return} mMinimum;}
+\DoxyCodeLine{48     \}}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_clip_to_range_a68d5e28961f542278e3b7650fc0581ff}{setMaximum}}(\textcolor{keywordtype}{float} \mbox{\hyperlink{os_8h_abb702d8b501669a23aa0ab3b281b9384}{min}}) \{}
+\DoxyCodeLine{51         mMaximum = \mbox{\hyperlink{os_8h_abb702d8b501669a23aa0ab3b281b9384}{min}};}
+\DoxyCodeLine{52     \}}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_clip_to_range_ab68fafe6ce091f391dd590a888009025}{getMaximum}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{55         \textcolor{keywordflow}{return} mMaximum;}
+\DoxyCodeLine{56     \}}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58     \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_clip_to_range_a9e483af0b37b67e4dc1109b25aadd38c}{getName}}()\textcolor{keyword}{ override }\{}
+\DoxyCodeLine{59         \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}ClipToRange"{}};}
+\DoxyCodeLine{60     \}}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62 \textcolor{keyword}{private}:}
+\DoxyCodeLine{63     \textcolor{keywordtype}{float} mMinimum = \mbox{\hyperlink{namespace_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_a56952fabecc6547ebde78b22de22a1ab}{kDefaultMinHeadroom}};}
+\DoxyCodeLine{64     \textcolor{keywordtype}{float} mMaximum = \mbox{\hyperlink{namespace_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_ae71b18f35e50ef8baf0d105d0cc4395f}{kDefaultMaxHeadroom}};}
+\DoxyCodeLine{65 \};}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67 \} \textcolor{comment}{/* namespace flowgraph */}}
+\DoxyCodeLine{68 \} \textcolor{comment}{/* namespace FLOWGRAPH\_OUTER\_NAMESPACE */}}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//FLOWGRAPH\_CLIP\_TO\_RANGE\_H}}
+
+\end{DoxyCode}

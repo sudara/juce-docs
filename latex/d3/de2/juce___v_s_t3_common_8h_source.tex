@@ -1,0 +1,1232 @@
+\hypertarget{juce___v_s_t3_common_8h_source}{}\doxysection{juce\+\_\+\+VST3\+Common.\+h}
+\label{juce___v_s_t3_common_8h_source}\index{build/juce\_audio\_processors/format\_types/juce\_VST3Common.h@{build/juce\_audio\_processors/format\_types/juce\_VST3Common.h}}
+\mbox{\hyperlink{juce___v_s_t3_common_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#ifndef DOXYGEN}}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \mbox{\hyperlink{group__juce__core-system_gae876f17e0ec68ad39f7a53064cb3c15b}{JUCE\_BEGIN\_NO\_SANITIZE}} (\textcolor{stringliteral}{"{}vptr"{}})}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#define JUCE\_DECLARE\_VST3\_COM\_REF\_METHODS \(\backslash\)}}
+\DoxyCodeLine{36 \textcolor{preprocessor}{    Steinberg::uint32 PLUGIN\_API addRef() override   \{ return (Steinberg::uint32) ++refCount; \} \(\backslash\)}}
+\DoxyCodeLine{37 \textcolor{preprocessor}{    Steinberg::uint32 PLUGIN\_API release() override  \{ const int r = -\/-\/refCount; if (r == 0) delete this; return (Steinberg::uint32) r; \}}}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 \textcolor{preprocessor}{\#define JUCE\_DECLARE\_VST3\_COM\_QUERY\_METHODS \(\backslash\)}}
+\DoxyCodeLine{40 \textcolor{preprocessor}{    Steinberg::tresult PLUGIN\_API queryInterface (const Steinberg::TUID, void** obj) override \(\backslash\)}}
+\DoxyCodeLine{41 \textcolor{preprocessor}{    \{ \(\backslash\)}}
+\DoxyCodeLine{42 \textcolor{preprocessor}{        jassertfalse; \(\backslash\)}}
+\DoxyCodeLine{43 \textcolor{preprocessor}{        *obj = nullptr; \(\backslash\)}}
+\DoxyCodeLine{44 \textcolor{preprocessor}{        return Steinberg::kNotImplemented; \(\backslash\)}}
+\DoxyCodeLine{45 \textcolor{preprocessor}{    \}}}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47 \textcolor{keyword}{static} \textcolor{keywordtype}{bool} doUIDsMatch (\textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a56b1a0450c9a583645f4e84d3806521c}{Steinberg::TUID}} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a56b1a0450c9a583645f4e84d3806521c}{Steinberg::TUID}} \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{48 \{}
+\DoxyCodeLine{49     \textcolor{keywordflow}{return} std::memcmp (\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}, \textcolor{keyword}{sizeof} (\mbox{\hyperlink{namespace_steinberg_a56b1a0450c9a583645f4e84d3806521c}{Steinberg::TUID}})) == 0;}
+\DoxyCodeLine{50 \}}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52 \textcolor{comment}{/*  Holds a tresult and a pointer to an object.}}
+\DoxyCodeLine{53 \textcolor{comment}{}}
+\DoxyCodeLine{54 \textcolor{comment}{    Useful for holding intermediate results of calls to queryInterface.}}
+\DoxyCodeLine{55 \textcolor{comment}{*/}}
+\DoxyCodeLine{56 \textcolor{keyword}{class }\mbox{\hyperlink{class_query_interface_result}{QueryInterfaceResult}}}
+\DoxyCodeLine{57 \{}
+\DoxyCodeLine{58 \textcolor{keyword}{public}:}
+\DoxyCodeLine{59     \mbox{\hyperlink{class_query_interface_result_a40a0455594ac99f28d19ebd4d6ed5556}{QueryInterfaceResult}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61     \mbox{\hyperlink{class_query_interface_result_a7fa31579c5a4b68d033d30e66318a1bd}{QueryInterfaceResult}} (\mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{Steinberg::tresult}} resultIn, \textcolor{keywordtype}{void}* ptrIn)}
+\DoxyCodeLine{62         : result (resultIn), ptr (ptrIn) \{\}}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_query_interface_result_a216be349e070a6362822857ae84ec51c}{isOk}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept   \{ \textcolor{keywordflow}{return} result == \mbox{\hyperlink{namespace_steinberg_aad984331dc0e96a8c373da4eedc8867fa186a780dc7f261ce261f6669ec20c64c}{Steinberg::kResultOk}}; \}}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66     \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{Steinberg::tresult}} \mbox{\hyperlink{class_query_interface_result_a275c9bd2a0a2e43ee99a13a9dbb1b4bf}{extract}} (\textcolor{keywordtype}{void}** \mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}})\textcolor{keyword}{ const}}
+\DoxyCodeLine{67 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{68         *\mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}} = result == \mbox{\hyperlink{namespace_steinberg_aad984331dc0e96a8c373da4eedc8867fa186a780dc7f261ce261f6669ec20c64c}{Steinberg::kResultOk}} ? ptr : \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{69         \textcolor{keywordflow}{return} result;}
+\DoxyCodeLine{70     \}}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72 \textcolor{keyword}{private}:}
+\DoxyCodeLine{73     \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{Steinberg::tresult}} result = \mbox{\hyperlink{namespace_steinberg_aad984331dc0e96a8c373da4eedc8867faaf8cabc311c10bb47d816dae21a06f4c}{Steinberg::kResultFalse}};}
+\DoxyCodeLine{74     \textcolor{keywordtype}{void}* ptr = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{75 \};}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77 \textcolor{comment}{/*  Holds a tresult and a pointer to an object.}}
+\DoxyCodeLine{78 \textcolor{comment}{}}
+\DoxyCodeLine{79 \textcolor{comment}{    Calling InterfaceResultWithDeferredAddRef::extract() will also call addRef}}
+\DoxyCodeLine{80 \textcolor{comment}{    on the pointed-\/to object. It is expected that users will use}}
+\DoxyCodeLine{81 \textcolor{comment}{    InterfaceResultWithDeferredAddRef to hold intermediate results of a queryInterface}}
+\DoxyCodeLine{82 \textcolor{comment}{    call. When a suitable interface is found, the function can be exited with}}
+\DoxyCodeLine{83 \textcolor{comment}{    `return suitableInterface.extract (obj)`, which will set the obj pointer,}}
+\DoxyCodeLine{84 \textcolor{comment}{    add a reference to the interface, and return the appropriate result code.}}
+\DoxyCodeLine{85 \textcolor{comment}{*/}}
+\DoxyCodeLine{86 \textcolor{keyword}{class }\mbox{\hyperlink{class_interface_result_with_deferred_add_ref}{InterfaceResultWithDeferredAddRef}}}
+\DoxyCodeLine{87 \{}
+\DoxyCodeLine{88 \textcolor{keyword}{public}:}
+\DoxyCodeLine{89     \mbox{\hyperlink{class_interface_result_with_deferred_add_ref_a12b4920506382b2a51c75bfc6aaeb10b}{InterfaceResultWithDeferredAddRef}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Ptr>}
+\DoxyCodeLine{92     \mbox{\hyperlink{class_interface_result_with_deferred_add_ref_a24542146d9b071c86579a3ddd90d0abc}{InterfaceResultWithDeferredAddRef}} (\mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{Steinberg::tresult}} resultIn, Ptr* ptrIn)}
+\DoxyCodeLine{93         : result (resultIn, ptrIn),}
+\DoxyCodeLine{94           addRefFn (doAddRef<Ptr>) \{\}}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{96     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_interface_result_with_deferred_add_ref_a2245f6811f2c5e2dcb3843740b291d1b}{isOk}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept   \{ \textcolor{keywordflow}{return} result.\mbox{\hyperlink{class_query_interface_result_a216be349e070a6362822857ae84ec51c}{isOk}}(); \}}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98     \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{Steinberg::tresult}} \mbox{\hyperlink{class_interface_result_with_deferred_add_ref_a8b11c0a8bfb2514c75297cf0719248dd}{extract}} (\textcolor{keywordtype}{void}** \mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}})\textcolor{keyword}{ const}}
+\DoxyCodeLine{99 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{100         \textcolor{keyword}{const} \textcolor{keyword}{auto} toReturn = result.\mbox{\hyperlink{class_query_interface_result_a275c9bd2a0a2e43ee99a13a9dbb1b4bf}{extract}} (\mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}});}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{102         \textcolor{keywordflow}{if} (result.\mbox{\hyperlink{class_query_interface_result_a216be349e070a6362822857ae84ec51c}{isOk}}() \&\& addRefFn != \textcolor{keyword}{nullptr} \&\& *\mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}} != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{103             addRefFn (*\mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}});}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105         \textcolor{keywordflow}{return} toReturn;}
+\DoxyCodeLine{106     \}}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{108 \textcolor{keyword}{private}:}
+\DoxyCodeLine{109     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Ptr>}
+\DoxyCodeLine{110     \textcolor{keyword}{static} \textcolor{keywordtype}{void} doAddRef (\textcolor{keywordtype}{void}* \mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}})   \{ \textcolor{keyword}{static\_cast<}Ptr*\textcolor{keyword}{>} (\mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}})-\/>addRef(); \}}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112     \mbox{\hyperlink{class_query_interface_result}{QueryInterfaceResult}} result;}
+\DoxyCodeLine{113     \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} (*addRefFn) (\textcolor{keywordtype}{void}*) = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{114 \};}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{116 \textcolor{keyword}{template} <\textcolor{keyword}{typename} ClassType>                                   \textcolor{keyword}{struct }\mbox{\hyperlink{struct_unique_base}{UniqueBase}} \{\};}
+\DoxyCodeLine{117 \textcolor{keyword}{template} <\textcolor{keyword}{typename} CommonClassType, \textcolor{keyword}{typename} SourceClassType>   \textcolor{keyword}{struct }\mbox{\hyperlink{struct_shared_base}{SharedBase}} \{\};}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{119 \textcolor{keyword}{template} <\textcolor{keyword}{typename} ToTest, \textcolor{keyword}{typename} CommonClassType, \textcolor{keyword}{typename} SourceClassType>}
+\DoxyCodeLine{120 \mbox{\hyperlink{class_interface_result_with_deferred_add_ref}{InterfaceResultWithDeferredAddRef}} \mbox{\hyperlink{group__juce__audio__processors-format__types_ga7a1ea1285797ae998ca75e25bdce6f5a}{testFor}} (ToTest\& toTest,}
+\DoxyCodeLine{121                                            \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a56b1a0450c9a583645f4e84d3806521c}{Steinberg::TUID}} targetIID,}
+\DoxyCodeLine{122                                            \mbox{\hyperlink{struct_shared_base}{SharedBase<CommonClassType, SourceClassType>}})}
+\DoxyCodeLine{123 \{}
+\DoxyCodeLine{124     \textcolor{keywordflow}{if} (! doUIDsMatch (targetIID, CommonClassType::iid))}
+\DoxyCodeLine{125         \textcolor{keywordflow}{return} \{\};}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{127     \textcolor{keywordflow}{return} \{ \mbox{\hyperlink{namespace_steinberg_aad984331dc0e96a8c373da4eedc8867fa186a780dc7f261ce261f6669ec20c64c}{Steinberg::kResultOk}}, \textcolor{keyword}{static\_cast<}CommonClassType*\textcolor{keyword}{>} (\textcolor{keyword}{static\_cast<}SourceClassType*\textcolor{keyword}{>} (std::addressof (toTest))) \};}
+\DoxyCodeLine{128 \}}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{130 \textcolor{keyword}{template} <\textcolor{keyword}{typename} ToTest, \textcolor{keyword}{typename} ClassType>}
+\DoxyCodeLine{131 \mbox{\hyperlink{class_interface_result_with_deferred_add_ref}{InterfaceResultWithDeferredAddRef}} \mbox{\hyperlink{group__juce__audio__processors-format__types_ga7a1ea1285797ae998ca75e25bdce6f5a}{testFor}} (ToTest\& toTest,}
+\DoxyCodeLine{132                                            \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a56b1a0450c9a583645f4e84d3806521c}{Steinberg::TUID}} targetIID,}
+\DoxyCodeLine{133                                            \mbox{\hyperlink{struct_unique_base}{UniqueBase<ClassType>}})}
+\DoxyCodeLine{134 \{}
+\DoxyCodeLine{135     \textcolor{keywordflow}{return} \mbox{\hyperlink{group__juce__audio__processors-format__types_ga7a1ea1285797ae998ca75e25bdce6f5a}{testFor}} (toTest, targetIID, \mbox{\hyperlink{struct_shared_base}{SharedBase<ClassType, ClassType>}}\{\});}
+\DoxyCodeLine{136 \}}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{138 \textcolor{keyword}{template} <\textcolor{keyword}{typename} ToTest>}
+\DoxyCodeLine{139 \mbox{\hyperlink{class_interface_result_with_deferred_add_ref}{InterfaceResultWithDeferredAddRef}} \mbox{\hyperlink{group__juce__audio__processors-format__types_ga17b226167d1cf0640a6bf5d32af8d2e2}{testForMultiple}} (ToTest\&, \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a56b1a0450c9a583645f4e84d3806521c}{Steinberg::TUID}}) \{ \textcolor{keywordflow}{return} \{\}; \}}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{141 \textcolor{keyword}{template} <\textcolor{keyword}{typename} ToTest, \textcolor{keyword}{typename} Head, \textcolor{keyword}{typename}... Tail>}
+\DoxyCodeLine{142 \mbox{\hyperlink{class_interface_result_with_deferred_add_ref}{InterfaceResultWithDeferredAddRef}} \mbox{\hyperlink{group__juce__audio__processors-format__types_ga17b226167d1cf0640a6bf5d32af8d2e2}{testForMultiple}} (ToTest\& toTest, \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a56b1a0450c9a583645f4e84d3806521c}{Steinberg::TUID}} targetIID, Head \mbox{\hyperlink{structhead}{head}}, Tail... tail)}
+\DoxyCodeLine{143 \{}
+\DoxyCodeLine{144     \textcolor{keyword}{const} \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = \mbox{\hyperlink{group__juce__audio__processors-format__types_ga7a1ea1285797ae998ca75e25bdce6f5a}{testFor}} (toTest, targetIID, \mbox{\hyperlink{structhead}{head}});}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{146     \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}.isOk())}
+\DoxyCodeLine{147         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}};}
+\DoxyCodeLine{148 }
+\DoxyCodeLine{149     \textcolor{keywordflow}{return} \mbox{\hyperlink{group__juce__audio__processors-format__types_ga17b226167d1cf0640a6bf5d32af8d2e2}{testForMultiple}} (toTest, targetIID, tail...);}
+\DoxyCodeLine{150 \}}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{152 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{153 \textcolor{preprocessor}{\#if VST\_VERSION < 0x030608}}
+\DoxyCodeLine{154 \textcolor{preprocessor}{ \#define kAmbi1stOrderACN kBFormat}}
+\DoxyCodeLine{155 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{157 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{158 \textcolor{keyword}{inline} juce::String \mbox{\hyperlink{group__juce__audio__processors-format__types_ga8f3527e6704741db4e2a281817d02522}{toString}} (\textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a4a83db7f2467f59f3050248287aef5fa}{Steinberg::char8}}* \textcolor{keywordtype}{string}) \textcolor{keyword}{noexcept}       \{ \textcolor{keywordflow}{return} juce::String (juce::CharPointer\_UTF8  ((juce::CharPointer\_UTF8::CharType*)  \textcolor{keywordtype}{string})); \}}
+\DoxyCodeLine{159 \textcolor{keyword}{inline} juce::String \mbox{\hyperlink{group__juce__audio__processors-format__types_ga8f3527e6704741db4e2a281817d02522}{toString}} (\textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a1d62754aa66db400e0a9ddf18dc912b5}{Steinberg::char16}}* \textcolor{keywordtype}{string}) \textcolor{keyword}{noexcept}      \{ \textcolor{keywordflow}{return} juce::String (juce::CharPointer\_UTF16 ((juce::CharPointer\_UTF16::CharType*) \textcolor{keywordtype}{string})); \}}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161 \textcolor{comment}{// NB: The casts are handled by a Steinberg::UString operator}}
+\DoxyCodeLine{162 \textcolor{keyword}{inline} juce::String \mbox{\hyperlink{group__juce__audio__processors-format__types_ga8f3527e6704741db4e2a281817d02522}{toString}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_steinberg_1_1_u_string_buffer}{Steinberg::UString128}}\& \textcolor{keywordtype}{string}) \textcolor{keyword}{noexcept}  \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{group__juce__audio__processors-format__types_ga8f3527e6704741db4e2a281817d02522}{toString}} (\textcolor{keyword}{static\_cast<}\textcolor{keyword}{const }\mbox{\hyperlink{namespace_steinberg_a1d62754aa66db400e0a9ddf18dc912b5}{Steinberg::char16}}*\textcolor{keyword}{>} (\textcolor{keywordtype}{string})); \}}
+\DoxyCodeLine{163 \textcolor{keyword}{inline} juce::String \mbox{\hyperlink{group__juce__audio__processors-format__types_ga8f3527e6704741db4e2a281817d02522}{toString}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_steinberg_1_1_u_string_buffer}{Steinberg::UString256}}\& \textcolor{keywordtype}{string}) \textcolor{keyword}{noexcept}  \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{group__juce__audio__processors-format__types_ga8f3527e6704741db4e2a281817d02522}{toString}} (\textcolor{keyword}{static\_cast<}\textcolor{keyword}{const }\mbox{\hyperlink{namespace_steinberg_a1d62754aa66db400e0a9ddf18dc912b5}{Steinberg::char16}}*\textcolor{keyword}{>} (\textcolor{keywordtype}{string})); \}}
+\DoxyCodeLine{164 }
+\DoxyCodeLine{165 \textcolor{keyword}{inline} \mbox{\hyperlink{namespace_steinberg_1_1_vst_a3598b6ccf094d9d65342935206000b3a}{Steinberg::Vst::TChar}}* \mbox{\hyperlink{group__juce__audio__processors-format__types_ga8f3527e6704741db4e2a281817d02522}{toString}} (\textcolor{keyword}{const} juce::String\& \mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}}) \textcolor{keyword}{noexcept} \{ \textcolor{keywordflow}{return} \textcolor{keyword}{reinterpret\_cast<}\mbox{\hyperlink{namespace_steinberg_1_1_vst_a3598b6ccf094d9d65342935206000b3a}{Steinberg::Vst::TChar}}*\textcolor{keyword}{>} (\mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}}.toUTF16().getAddress()); \}}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{167 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__audio__processors-format__types_ga7d893b946f7a4d21175f18fe3f1b5929}{toString128}} (\mbox{\hyperlink{namespace_steinberg_1_1_vst_a3304fa8513f23d66819bee647e6cb29c}{Steinberg::Vst::String128}} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* \mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}})}
+\DoxyCodeLine{168 \{}
+\DoxyCodeLine{169     \mbox{\hyperlink{class_steinberg_1_1_u_string}{Steinberg::UString}} (\mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}, 128).\mbox{\hyperlink{class_steinberg_1_1_u_string_a86f97198a08c10057ad60ee85d176feb}{fromAscii}} (\mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}});}
+\DoxyCodeLine{170 \}}
+\DoxyCodeLine{171 }
+\DoxyCodeLine{172 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__audio__processors-format__types_ga7d893b946f7a4d21175f18fe3f1b5929}{toString128}} (\mbox{\hyperlink{namespace_steinberg_1_1_vst_a3304fa8513f23d66819bee647e6cb29c}{Steinberg::Vst::String128}} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}, \textcolor{keyword}{const} juce::String\& \mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}})}
+\DoxyCodeLine{173 \{}
+\DoxyCodeLine{174     \mbox{\hyperlink{class_steinberg_1_1_u_string}{Steinberg::UString}} (\mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}, 128).\mbox{\hyperlink{class_steinberg_1_1_u_string_a9783caf31b521ff4f1f4e53d793bdfbf}{assign}} (\mbox{\hyperlink{group__juce__audio__processors-format__types_ga8f3527e6704741db4e2a281817d02522}{toString}} (\mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}}));}
+\DoxyCodeLine{175 \}}
+\DoxyCodeLine{176 }
+\DoxyCodeLine{177 \textcolor{preprocessor}{\#if JUCE\_WINDOWS}}
+\DoxyCodeLine{178  \textcolor{keyword}{static} \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a6ca68110b739e9a9bec4fe884cad394a}{Steinberg::FIDString}} defaultVST3WindowType = \mbox{\hyperlink{namespace_steinberg_ae08da665dd9c751a94f27e2fbacb2072}{Steinberg::kPlatformTypeHWND}};}
+\DoxyCodeLine{179 \textcolor{preprocessor}{\#elif JUCE\_MAC}}
+\DoxyCodeLine{180  \textcolor{keyword}{static} \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a6ca68110b739e9a9bec4fe884cad394a}{Steinberg::FIDString}} defaultVST3WindowType = \mbox{\hyperlink{namespace_steinberg_a47c353252a464695a14be91df88d8646}{Steinberg::kPlatformTypeNSView}};}
+\DoxyCodeLine{181 \textcolor{preprocessor}{\#elif JUCE\_LINUX || JUCE\_BSD}}
+\DoxyCodeLine{182  \textcolor{keyword}{static} \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a6ca68110b739e9a9bec4fe884cad394a}{Steinberg::FIDString}} defaultVST3WindowType = \mbox{\hyperlink{namespace_steinberg_acc99545f5d78bbf038b1136bc9b97c4f}{Steinberg::kPlatformTypeX11EmbedWindowID}};}
+\DoxyCodeLine{183 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{184 }
+\DoxyCodeLine{185 }
+\DoxyCodeLine{186 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{187 \textcolor{keyword}{static} \textcolor{keyword}{inline} \mbox{\hyperlink{namespace_steinberg_1_1_vst_adc3d27b66b0e01da7fbb69fdc32abaef}{Steinberg::Vst::SpeakerArrangement}} getArrangementForBus (\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_audio_processor}{Steinberg::Vst::IAudioProcessor}}* processor,}
+\DoxyCodeLine{188                                                                        \textcolor{keywordtype}{bool} isInput, \textcolor{keywordtype}{int} busIndex)}
+\DoxyCodeLine{189 \{}
+\DoxyCodeLine{190     \mbox{\hyperlink{namespace_steinberg_1_1_vst_adc3d27b66b0e01da7fbb69fdc32abaef}{Steinberg::Vst::SpeakerArrangement}} arrangement = \mbox{\hyperlink{group__speaker_arrangements_ga8127c0f082b4461166d196fb99c45076}{Steinberg::Vst::SpeakerArr::kEmpty}};}
+\DoxyCodeLine{191 }
+\DoxyCodeLine{192     \textcolor{keywordflow}{if} (processor != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{193         processor-\/>\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_audio_processor_ac7e5cfb8b97265c967f6a8c5a3de05df}{getBusArrangement}} (isInput ? \mbox{\hyperlink{namespace_steinberg_1_1_vst_a04ba14395371c3f140e3907486f43377acfe34dfd2f08180712ae4d3d5aebfa2e}{Steinberg::Vst::kInput}} : \mbox{\hyperlink{namespace_steinberg_1_1_vst_a04ba14395371c3f140e3907486f43377abf9201bd63b3a86973bbc7aa54651b5a}{Steinberg::Vst::kOutput}},}
+\DoxyCodeLine{194                                       (\mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{Steinberg::int32}}) busIndex, arrangement);}
+\DoxyCodeLine{195 }
+\DoxyCodeLine{196     \textcolor{keywordflow}{return} arrangement;}
+\DoxyCodeLine{197 \}}
+\DoxyCodeLine{198 }
+\DoxyCodeLine{199 \textcolor{keyword}{static} \mbox{\hyperlink{namespace_steinberg_1_1_vst_a1e4f586e2b89eeadb7ddfb07fce8330c}{Steinberg::Vst::Speaker}} getSpeakerType (\textcolor{keyword}{const} \mbox{\hyperlink{class_audio_channel_set}{AudioChannelSet}}\& set, \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652e}{AudioChannelSet::ChannelType}} \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{200 \{}
+\DoxyCodeLine{201     \textcolor{keywordflow}{switch} (\mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}})}
+\DoxyCodeLine{202     \{}
+\DoxyCodeLine{203         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea4dfc2355bdcf8afda92cfa388c543937}{AudioChannelSet::left}}:              \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_ga6fd198b26c5d0304d8d446b5b4a0d4a0}{Steinberg::Vst::kSpeakerL}};}
+\DoxyCodeLine{204         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea5cd28c0881d53656730afec3cb77a7a1}{AudioChannelSet::right}}:             \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_ga2e98af60342dc5c783f6aa32e88c5710}{Steinberg::Vst::kSpeakerR}};}
+\DoxyCodeLine{205         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652eae69498dc5874ee9f9d67d0479225d701}{AudioChannelSet::centre}}:            \textcolor{keywordflow}{return} (set == \mbox{\hyperlink{class_audio_channel_set_a23a6cacf7134152d85b00462116a55cf}{AudioChannelSet::mono}}() ? \mbox{\hyperlink{group__speaker_arrangements_ga6f421528eeee64107a0cfbc74fb2b9e4}{Steinberg::Vst::kSpeakerM}} : \mbox{\hyperlink{group__speaker_arrangements_gab1ad3081725c3f2548620d83118051f7}{Steinberg::Vst::kSpeakerC}});}
+\DoxyCodeLine{206 }
+\DoxyCodeLine{207         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652eae9c3c0d319ffaa4a452fefd1f04b0cc6}{AudioChannelSet::LFE}}:               \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_ga1f521bad9e4442d33c0a0c74f566b403}{Steinberg::Vst::kSpeakerLfe}};}
+\DoxyCodeLine{208         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea49bd221ff66a6ff182d6f502f70fc80a}{AudioChannelSet::leftSurround}}:      \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_ga73a41e5874153a3c582a65ed45723f8a}{Steinberg::Vst::kSpeakerLs}};}
+\DoxyCodeLine{209         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ead79363bee2db6b4552f5f6e5b5ae770f}{AudioChannelSet::rightSurround}}:     \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_gaad6513ce6101631cbf5bf882899e9b2e}{Steinberg::Vst::kSpeakerRs}};}
+\DoxyCodeLine{210         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea7a14bf0c194fc474f245b6852055e017}{AudioChannelSet::leftCentre}}:        \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_gadc170ac79bf8c9a6ccf44a05b61d4949}{Steinberg::Vst::kSpeakerLc}};}
+\DoxyCodeLine{211         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ead09531f815283fd9dd1e00e75b37f289}{AudioChannelSet::rightCentre}}:       \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_ga6a340fb1af51cd2cee823cf707423d88}{Steinberg::Vst::kSpeakerRc}};}
+\DoxyCodeLine{212         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea1dac16a2969777c1255fb1e074e0f452}{AudioChannelSet::centreSurround}}:    \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_ga1d1f410c99154b6c6ba217d7386a054b}{Steinberg::Vst::kSpeakerCs}};}
+\DoxyCodeLine{213         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea54489b794b5d8373245a97376c17cbcf}{AudioChannelSet::leftSurroundSide}}:  \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_ga72e9ca6607e923e9917e140c5d620aa8}{Steinberg::Vst::kSpeakerSl}};}
+\DoxyCodeLine{214         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea7f1ce89b09734bb05c4b4b303845cee9}{AudioChannelSet::rightSurroundSide}}: \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_ga88621c77264f24475ef0a2a41dbf293c}{Steinberg::Vst::kSpeakerSr}};}
+\DoxyCodeLine{215         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea06c75bddcac132ac47abe9d97c9db60a}{AudioChannelSet::topMiddle}}:         \textcolor{keywordflow}{return} (1ull << 11); \textcolor{comment}{/* kSpeakerTm */}}
+\DoxyCodeLine{216         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea9b18eed069cc65f40000bbe9f03a722e}{AudioChannelSet::topFrontLeft}}:      \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_gae027cfb43ca42b5512aad954f53701ea}{Steinberg::Vst::kSpeakerTfl}};}
+\DoxyCodeLine{217         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea26e6fed7ec52bca8896de254b6a1d53c}{AudioChannelSet::topFrontCentre}}:    \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_gae020501773526efad4ed8cba7677d0bd}{Steinberg::Vst::kSpeakerTfc}};}
+\DoxyCodeLine{218         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652eafe55ef181b8d826439b9c89257b72e0e}{AudioChannelSet::topFrontRight}}:     \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_ga92546d610948fcd73103d8271b2fda86}{Steinberg::Vst::kSpeakerTfr}};}
+\DoxyCodeLine{219         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea233a99aad9108e924c35ed144e09ec73}{AudioChannelSet::topRearLeft}}:       \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_ga97475b3cc0902aabd34423dbad24cab1}{Steinberg::Vst::kSpeakerTrl}};}
+\DoxyCodeLine{220         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652eabb299d68b9795bc88efe6543c51d08ff}{AudioChannelSet::topRearCentre}}:     \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_ga58fbaa2b00050b8fe136b8c43ecc0787}{Steinberg::Vst::kSpeakerTrc}};}
+\DoxyCodeLine{221         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea17c1d21499155e5bff232bc2c279f24d}{AudioChannelSet::topRearRight}}:      \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_gaee6b13577f1802597d098af37997661b}{Steinberg::Vst::kSpeakerTrr}};}
+\DoxyCodeLine{222         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea0fdd29070c1802006e6e0601614a5774}{AudioChannelSet::LFE2}}:              \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_gaa5aab2bcec0d84caa525550dcdb3a591}{Steinberg::Vst::kSpeakerLfe2}};}
+\DoxyCodeLine{223         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea7f97493c50eca058c713ebe9870732b6}{AudioChannelSet::leftSurroundRear}}:  \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_ga8b157eb3bdd6a159a1fd38c787147b39}{Steinberg::Vst::kSpeakerLcs}};}
+\DoxyCodeLine{224         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea42979a8c438351bc314f8df0194303a8}{AudioChannelSet::rightSurroundRear}}: \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_ga3e40d95500265f76f0d67e313378ca25}{Steinberg::Vst::kSpeakerRcs}};}
+\DoxyCodeLine{225         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652eaf3bdf38a52236efff9f0494f95c7f2ec}{AudioChannelSet::wideLeft}}:          \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_gaf2ee7f4ff35da3c610588bdf0783a050}{Steinberg::Vst::kSpeakerPl}};}
+\DoxyCodeLine{226         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652eaaf7b197484dd4e491605c4afcb42ff07}{AudioChannelSet::wideRight}}:         \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_ga1ceb645d872aaa7390a9da1c5a8ebda0}{Steinberg::Vst::kSpeakerPr}};}
+\DoxyCodeLine{227         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea6317ef1b580eeea2dd6af8bd1ef85141}{AudioChannelSet::ambisonicACN0}}:     \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_ga210fd989c438869869c5b1497ef1de7f}{Steinberg::Vst::kSpeakerACN0}};}
+\DoxyCodeLine{228         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea07376944a984744b61299a74c9aa9e24}{AudioChannelSet::ambisonicACN1}}:     \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_ga4f68b7956b16d03d8fb117cb4cb41874}{Steinberg::Vst::kSpeakerACN1}};}
+\DoxyCodeLine{229         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea343de42d5463caafa7b8b9e6ae63fea4}{AudioChannelSet::ambisonicACN2}}:     \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_ga476989dc59f255d1d3fefa98b3363974}{Steinberg::Vst::kSpeakerACN2}};}
+\DoxyCodeLine{230         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea5ce7078c939a589222e4d6f497f3bc45}{AudioChannelSet::ambisonicACN3}}:     \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_gab41d6b9b0c18f51c9aaa6b4f70f9aa3f}{Steinberg::Vst::kSpeakerACN3}};}
+\DoxyCodeLine{231         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea9edf8025712ab6039e662fe1d43b1f7e}{AudioChannelSet::ambisonicACN4}}:     \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_ga87779cfa6d0ad09df8ae71826c67d50c}{Steinberg::Vst::kSpeakerACN4}};}
+\DoxyCodeLine{232         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea4c17b8b085ff3979b766ba7c85a25e97}{AudioChannelSet::ambisonicACN5}}:     \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_ga8e15a18341c982aac6d4e64ecb05a5f9}{Steinberg::Vst::kSpeakerACN5}};}
+\DoxyCodeLine{233         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652eaed53fe1cc50e366b56502c5c6d4c12ce}{AudioChannelSet::ambisonicACN6}}:     \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_ga9acab55257da5b3c70d8646d2aa20d6d}{Steinberg::Vst::kSpeakerACN6}};}
+\DoxyCodeLine{234         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea1d4003ff53bfb763b414fc039c3d3402}{AudioChannelSet::ambisonicACN7}}:     \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_gad5cea03b2b9378a3239daf8535ffff89}{Steinberg::Vst::kSpeakerACN7}};}
+\DoxyCodeLine{235         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea611871a2c36ffc42056ad4281cc33029}{AudioChannelSet::ambisonicACN8}}:     \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_ga707772a15bf807cef479a27bfde1924d}{Steinberg::Vst::kSpeakerACN8}};}
+\DoxyCodeLine{236         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652eabeb74e3ba0c8716eb3fb85fac27de6b4}{AudioChannelSet::ambisonicACN9}}:     \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_gad834669df9236abd309a55ab3cf5c925}{Steinberg::Vst::kSpeakerACN9}};}
+\DoxyCodeLine{237         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea67428f3f80302da7ef1a01cf0ca25039}{AudioChannelSet::ambisonicACN10}}:    \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_gaf9a8232db2ad80064a64b1c1dc7d0e0b}{Steinberg::Vst::kSpeakerACN10}};}
+\DoxyCodeLine{238         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea0ea47f21fdddea009a532f63f4ee766a}{AudioChannelSet::ambisonicACN11}}:    \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_ga7f360d04a411ae0ffb8dfc7393ca1e33}{Steinberg::Vst::kSpeakerACN11}};}
+\DoxyCodeLine{239         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea6a6e2f6cfde01b1d0d3261d9ea2bb5a6}{AudioChannelSet::ambisonicACN12}}:    \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_gad1196a6c10555a70d7fda975e26fb040}{Steinberg::Vst::kSpeakerACN12}};}
+\DoxyCodeLine{240         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652eadd056bd3a692a97b87c2a10b2c7f41a3}{AudioChannelSet::ambisonicACN13}}:    \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_ga83c9c57b22a1e9451ab5f94b2b2bd990}{Steinberg::Vst::kSpeakerACN13}};}
+\DoxyCodeLine{241         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea061ba0b8864100c684575274591a7311}{AudioChannelSet::ambisonicACN14}}:    \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_ga67600be80e04fc21e0516389e0495055}{Steinberg::Vst::kSpeakerACN14}};}
+\DoxyCodeLine{242         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea2328f0279cd17313c13c47a41aea605f}{AudioChannelSet::ambisonicACN15}}:    \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_gad2ee6968dd47e4340939c33cb5242ee6}{Steinberg::Vst::kSpeakerACN15}};}
+\DoxyCodeLine{243         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea37eddf415c7ae57fab7046590f84be3a}{AudioChannelSet::topSideLeft}}:       \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_ga1fe8037055a47e2265aa64df6448a779}{Steinberg::Vst::kSpeakerTsl}};}
+\DoxyCodeLine{244         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652eaa3c70e675a692bab3cd160a0f6ad75a9}{AudioChannelSet::topSideRight}}:      \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_ga86ee679818e19885051e8702aaf15f3e}{Steinberg::Vst::kSpeakerTsr}};}
+\DoxyCodeLine{245         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea38da77e7cdd19ed8d12207a43f6d59a2}{AudioChannelSet::bottomFrontLeft}}:   \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_gaee03ff006f3143ec89460cd09432e65f}{Steinberg::Vst::kSpeakerBfl}};}
+\DoxyCodeLine{246         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea5859ffa5e5ed706578add264245f8760}{AudioChannelSet::bottomFrontCentre}}: \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_gab24aef95b71bca40d93b6ad5d1fdc618}{Steinberg::Vst::kSpeakerBfc}};}
+\DoxyCodeLine{247         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea25bd00433c1b90b7d68d827d719df1e6}{AudioChannelSet::bottomFrontRight}}:  \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_ga32764c94c43430e7a1f21f3cf0eb5b28}{Steinberg::Vst::kSpeakerBfr}};}
+\DoxyCodeLine{248         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea33a4c771619ca9fc83e6422b57bb299d}{AudioChannelSet::bottomSideLeft}}:    \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_ga8d4b1bdef533488e6f00212a75981123}{Steinberg::Vst::kSpeakerBsl}};}
+\DoxyCodeLine{249         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea2988d56ecd7e0220ee279717493b4862}{AudioChannelSet::bottomSideRight}}:   \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_gac297af9b26f3cace239147a9daff464a}{Steinberg::Vst::kSpeakerBsr}};}
+\DoxyCodeLine{250         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea126cbbfcdd476bb75a33f987a426e00f}{AudioChannelSet::bottomRearLeft}}:    \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_gab243dc0b8fa41ab87f2f972ff27e0035}{Steinberg::Vst::kSpeakerBrl}};}
+\DoxyCodeLine{251         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652eae158e53daf387a40baa751882d6425c0}{AudioChannelSet::bottomRearCentre}}:  \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_ga7e93ddf000df648b868b7933694ee5d6}{Steinberg::Vst::kSpeakerBrc}};}
+\DoxyCodeLine{252         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652eab87c52f6bffb46c238eea428e78d58e2}{AudioChannelSet::bottomRearRight}}:   \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_ga6b7e5b6f022c8d199f42b6441fa70f52}{Steinberg::Vst::kSpeakerBrr}};}
+\DoxyCodeLine{253 }
+\DoxyCodeLine{254         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ead39bcac579ad18bca050376e1696af4a}{AudioChannelSet::discreteChannel0}}:  \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_ga6f421528eeee64107a0cfbc74fb2b9e4}{Steinberg::Vst::kSpeakerM}};}
+\DoxyCodeLine{255 }
+\DoxyCodeLine{256         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea142ed1a41b50e82bbc6d529249799389}{AudioChannelSet::ambisonicACN16}}:}
+\DoxyCodeLine{257         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652eada71c859925ac6942bee917cd993dab1}{AudioChannelSet::ambisonicACN17}}:}
+\DoxyCodeLine{258         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea52ca08c1c29d6901c22e285bb5f1b3d5}{AudioChannelSet::ambisonicACN18}}:}
+\DoxyCodeLine{259         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652eaaf9f4481f098952610794716746b51f0}{AudioChannelSet::ambisonicACN19}}:}
+\DoxyCodeLine{260         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea848e84af8e2d046539e4daaeaec2707a}{AudioChannelSet::ambisonicACN20}}:}
+\DoxyCodeLine{261         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea75bcd5095eb6d46be5f1c8e5b7c76164}{AudioChannelSet::ambisonicACN21}}:}
+\DoxyCodeLine{262         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652eabb39c4dbca78da33465d6bf11ec98bed}{AudioChannelSet::ambisonicACN22}}:}
+\DoxyCodeLine{263         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652eae976b9b86f6a4993461c257924ca24e8}{AudioChannelSet::ambisonicACN23}}:}
+\DoxyCodeLine{264         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea224f58974cea358ff0cd1199f42c9292}{AudioChannelSet::ambisonicACN24}}:}
+\DoxyCodeLine{265         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea68d353de2e9419c10c01670f4b63da9d}{AudioChannelSet::ambisonicACN25}}:}
+\DoxyCodeLine{266         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652eaa98857e30d7eb96d864d36272d7cbfa9}{AudioChannelSet::ambisonicACN26}}:}
+\DoxyCodeLine{267         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea31fa7cb23335d3938e56beaa2b8f4a89}{AudioChannelSet::ambisonicACN27}}:}
+\DoxyCodeLine{268         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea13599df460347efef1335266e7c29e9b}{AudioChannelSet::ambisonicACN28}}:}
+\DoxyCodeLine{269         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ead3660416cafe2a04c2fc553268a67cdc}{AudioChannelSet::ambisonicACN29}}:}
+\DoxyCodeLine{270         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea54dbb40a59145ddd1aa6fd18a6ba2d7f}{AudioChannelSet::ambisonicACN30}}:}
+\DoxyCodeLine{271         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea7ea639115dca009bec0f9e6201995934}{AudioChannelSet::ambisonicACN31}}:}
+\DoxyCodeLine{272         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652eaba16d5a4a19119d7a72aff900f168980}{AudioChannelSet::ambisonicACN32}}:}
+\DoxyCodeLine{273         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea82b8e21efb598f78bbcd3d3de727aaba}{AudioChannelSet::ambisonicACN33}}:}
+\DoxyCodeLine{274         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea6c49a6c74785e06dae6f4cca2af79a99}{AudioChannelSet::ambisonicACN34}}:}
+\DoxyCodeLine{275         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea4bd8738c183ff4552768b1b59edf28f9}{AudioChannelSet::ambisonicACN35}}:}
+\DoxyCodeLine{276         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea240c7ad03e8ead6ebc22be71fb58b92c}{AudioChannelSet::proximityLeft}}:}
+\DoxyCodeLine{277         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652eae120c70d3986869e6493065dcec6ffa6}{AudioChannelSet::proximityRight}}:}
+\DoxyCodeLine{278         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652eaaa4afa88e8da74c57e088bb364518d6c}{AudioChannelSet::unknown}}:}
+\DoxyCodeLine{279         \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{280             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{281     \}}
+\DoxyCodeLine{282 }
+\DoxyCodeLine{283     \textcolor{keyword}{auto} channelIndex = \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{namespace_steinberg_1_1_vst_a1e4f586e2b89eeadb7ddfb07fce8330c}{Steinberg::Vst::Speaker}}\textcolor{keyword}{>} (\mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}}) -\/ (\textcolor{keyword}{static\_cast<}\mbox{\hyperlink{namespace_steinberg_1_1_vst_a1e4f586e2b89eeadb7ddfb07fce8330c}{Steinberg::Vst::Speaker}}\textcolor{keyword}{>} (\mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ead39bcac579ad18bca050376e1696af4a}{AudioChannelSet::discreteChannel0}}) + 6ull);}
+\DoxyCodeLine{284     \textcolor{keywordflow}{return} (1ull << (channelIndex + 33ull \textcolor{comment}{/* last speaker in vst layout + 1 */}));}
+\DoxyCodeLine{285 \}}
+\DoxyCodeLine{286 }
+\DoxyCodeLine{287 \textcolor{keyword}{static} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652e}{AudioChannelSet::ChannelType}} getChannelType (\mbox{\hyperlink{namespace_steinberg_1_1_vst_adc3d27b66b0e01da7fbb69fdc32abaef}{Steinberg::Vst::SpeakerArrangement}} arr, \mbox{\hyperlink{namespace_steinberg_1_1_vst_a1e4f586e2b89eeadb7ddfb07fce8330c}{Steinberg::Vst::Speaker}} \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{288 \{}
+\DoxyCodeLine{289     \textcolor{keywordflow}{switch} (\mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}})}
+\DoxyCodeLine{290     \{}
+\DoxyCodeLine{291         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_ga6fd198b26c5d0304d8d446b5b4a0d4a0}{Steinberg::Vst::kSpeakerL}}:     \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea4dfc2355bdcf8afda92cfa388c543937}{AudioChannelSet::left}};}
+\DoxyCodeLine{292         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_ga2e98af60342dc5c783f6aa32e88c5710}{Steinberg::Vst::kSpeakerR}}:     \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea5cd28c0881d53656730afec3cb77a7a1}{AudioChannelSet::right}};}
+\DoxyCodeLine{293         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_gab1ad3081725c3f2548620d83118051f7}{Steinberg::Vst::kSpeakerC}}:     \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652eae69498dc5874ee9f9d67d0479225d701}{AudioChannelSet::centre}};}
+\DoxyCodeLine{294         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_ga1f521bad9e4442d33c0a0c74f566b403}{Steinberg::Vst::kSpeakerLfe}}:   \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652eae9c3c0d319ffaa4a452fefd1f04b0cc6}{AudioChannelSet::LFE}};}
+\DoxyCodeLine{295         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_ga73a41e5874153a3c582a65ed45723f8a}{Steinberg::Vst::kSpeakerLs}}:    \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea49bd221ff66a6ff182d6f502f70fc80a}{AudioChannelSet::leftSurround}};}
+\DoxyCodeLine{296         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_gaad6513ce6101631cbf5bf882899e9b2e}{Steinberg::Vst::kSpeakerRs}}:    \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ead79363bee2db6b4552f5f6e5b5ae770f}{AudioChannelSet::rightSurround}};}
+\DoxyCodeLine{297         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_gadc170ac79bf8c9a6ccf44a05b61d4949}{Steinberg::Vst::kSpeakerLc}}:    \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea7a14bf0c194fc474f245b6852055e017}{AudioChannelSet::leftCentre}};}
+\DoxyCodeLine{298         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_ga6a340fb1af51cd2cee823cf707423d88}{Steinberg::Vst::kSpeakerRc}}:    \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ead09531f815283fd9dd1e00e75b37f289}{AudioChannelSet::rightCentre}};}
+\DoxyCodeLine{299         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_ga1d1f410c99154b6c6ba217d7386a054b}{Steinberg::Vst::kSpeakerCs}}:    \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea1dac16a2969777c1255fb1e074e0f452}{AudioChannelSet::centreSurround}};}
+\DoxyCodeLine{300         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_ga72e9ca6607e923e9917e140c5d620aa8}{Steinberg::Vst::kSpeakerSl}}:    \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea54489b794b5d8373245a97376c17cbcf}{AudioChannelSet::leftSurroundSide}};}
+\DoxyCodeLine{301         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_ga88621c77264f24475ef0a2a41dbf293c}{Steinberg::Vst::kSpeakerSr}}:    \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea7f1ce89b09734bb05c4b4b303845cee9}{AudioChannelSet::rightSurroundSide}};}
+\DoxyCodeLine{302         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_gae178a8a72850d1fcbed34d7bcf1db22d}{Steinberg::Vst::kSpeakerTc}}:    \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea06c75bddcac132ac47abe9d97c9db60a}{AudioChannelSet::topMiddle}};  \textcolor{comment}{/* kSpeakerTm */}}
+\DoxyCodeLine{303         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_gae027cfb43ca42b5512aad954f53701ea}{Steinberg::Vst::kSpeakerTfl}}:   \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea9b18eed069cc65f40000bbe9f03a722e}{AudioChannelSet::topFrontLeft}};}
+\DoxyCodeLine{304         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_gae020501773526efad4ed8cba7677d0bd}{Steinberg::Vst::kSpeakerTfc}}:   \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea26e6fed7ec52bca8896de254b6a1d53c}{AudioChannelSet::topFrontCentre}};}
+\DoxyCodeLine{305         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_ga92546d610948fcd73103d8271b2fda86}{Steinberg::Vst::kSpeakerTfr}}:   \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652eafe55ef181b8d826439b9c89257b72e0e}{AudioChannelSet::topFrontRight}};}
+\DoxyCodeLine{306         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_ga97475b3cc0902aabd34423dbad24cab1}{Steinberg::Vst::kSpeakerTrl}}:   \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea233a99aad9108e924c35ed144e09ec73}{AudioChannelSet::topRearLeft}};}
+\DoxyCodeLine{307         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_ga58fbaa2b00050b8fe136b8c43ecc0787}{Steinberg::Vst::kSpeakerTrc}}:   \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652eabb299d68b9795bc88efe6543c51d08ff}{AudioChannelSet::topRearCentre}};}
+\DoxyCodeLine{308         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_gaee6b13577f1802597d098af37997661b}{Steinberg::Vst::kSpeakerTrr}}:   \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea17c1d21499155e5bff232bc2c279f24d}{AudioChannelSet::topRearRight}};}
+\DoxyCodeLine{309         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_gaa5aab2bcec0d84caa525550dcdb3a591}{Steinberg::Vst::kSpeakerLfe2}}:  \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea0fdd29070c1802006e6e0601614a5774}{AudioChannelSet::LFE2}};}
+\DoxyCodeLine{310         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_ga6f421528eeee64107a0cfbc74fb2b9e4}{Steinberg::Vst::kSpeakerM}}:     \textcolor{keywordflow}{return} ((arr \& \mbox{\hyperlink{group__speaker_arrangements_gab1ad3081725c3f2548620d83118051f7}{Steinberg::Vst::kSpeakerC}}) != 0 ? \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ead39bcac579ad18bca050376e1696af4a}{AudioChannelSet::discreteChannel0}} : \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652eae69498dc5874ee9f9d67d0479225d701}{AudioChannelSet::centre}});}
+\DoxyCodeLine{311         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_ga210fd989c438869869c5b1497ef1de7f}{Steinberg::Vst::kSpeakerACN0}}:  \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea6317ef1b580eeea2dd6af8bd1ef85141}{AudioChannelSet::ambisonicACN0}};}
+\DoxyCodeLine{312         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_ga4f68b7956b16d03d8fb117cb4cb41874}{Steinberg::Vst::kSpeakerACN1}}:  \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea07376944a984744b61299a74c9aa9e24}{AudioChannelSet::ambisonicACN1}};}
+\DoxyCodeLine{313         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_ga476989dc59f255d1d3fefa98b3363974}{Steinberg::Vst::kSpeakerACN2}}:  \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea343de42d5463caafa7b8b9e6ae63fea4}{AudioChannelSet::ambisonicACN2}};}
+\DoxyCodeLine{314         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_gab41d6b9b0c18f51c9aaa6b4f70f9aa3f}{Steinberg::Vst::kSpeakerACN3}}:  \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea5ce7078c939a589222e4d6f497f3bc45}{AudioChannelSet::ambisonicACN3}};}
+\DoxyCodeLine{315         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_ga87779cfa6d0ad09df8ae71826c67d50c}{Steinberg::Vst::kSpeakerACN4}}:  \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea9edf8025712ab6039e662fe1d43b1f7e}{AudioChannelSet::ambisonicACN4}};}
+\DoxyCodeLine{316         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_ga8e15a18341c982aac6d4e64ecb05a5f9}{Steinberg::Vst::kSpeakerACN5}}:  \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea4c17b8b085ff3979b766ba7c85a25e97}{AudioChannelSet::ambisonicACN5}};}
+\DoxyCodeLine{317         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_ga9acab55257da5b3c70d8646d2aa20d6d}{Steinberg::Vst::kSpeakerACN6}}:  \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652eaed53fe1cc50e366b56502c5c6d4c12ce}{AudioChannelSet::ambisonicACN6}};}
+\DoxyCodeLine{318         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_gad5cea03b2b9378a3239daf8535ffff89}{Steinberg::Vst::kSpeakerACN7}}:  \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea1d4003ff53bfb763b414fc039c3d3402}{AudioChannelSet::ambisonicACN7}};}
+\DoxyCodeLine{319         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_ga707772a15bf807cef479a27bfde1924d}{Steinberg::Vst::kSpeakerACN8}}:  \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea611871a2c36ffc42056ad4281cc33029}{AudioChannelSet::ambisonicACN8}};}
+\DoxyCodeLine{320         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_gad834669df9236abd309a55ab3cf5c925}{Steinberg::Vst::kSpeakerACN9}}:  \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652eabeb74e3ba0c8716eb3fb85fac27de6b4}{AudioChannelSet::ambisonicACN9}};}
+\DoxyCodeLine{321         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_gaf9a8232db2ad80064a64b1c1dc7d0e0b}{Steinberg::Vst::kSpeakerACN10}}: \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea67428f3f80302da7ef1a01cf0ca25039}{AudioChannelSet::ambisonicACN10}};}
+\DoxyCodeLine{322         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_ga7f360d04a411ae0ffb8dfc7393ca1e33}{Steinberg::Vst::kSpeakerACN11}}: \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea0ea47f21fdddea009a532f63f4ee766a}{AudioChannelSet::ambisonicACN11}};}
+\DoxyCodeLine{323         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_gad1196a6c10555a70d7fda975e26fb040}{Steinberg::Vst::kSpeakerACN12}}: \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea6a6e2f6cfde01b1d0d3261d9ea2bb5a6}{AudioChannelSet::ambisonicACN12}};}
+\DoxyCodeLine{324         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_ga83c9c57b22a1e9451ab5f94b2b2bd990}{Steinberg::Vst::kSpeakerACN13}}: \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652eadd056bd3a692a97b87c2a10b2c7f41a3}{AudioChannelSet::ambisonicACN13}};}
+\DoxyCodeLine{325         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_ga67600be80e04fc21e0516389e0495055}{Steinberg::Vst::kSpeakerACN14}}: \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea061ba0b8864100c684575274591a7311}{AudioChannelSet::ambisonicACN14}};}
+\DoxyCodeLine{326         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_gad2ee6968dd47e4340939c33cb5242ee6}{Steinberg::Vst::kSpeakerACN15}}: \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea2328f0279cd17313c13c47a41aea605f}{AudioChannelSet::ambisonicACN15}};}
+\DoxyCodeLine{327         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_ga1fe8037055a47e2265aa64df6448a779}{Steinberg::Vst::kSpeakerTsl}}:   \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea37eddf415c7ae57fab7046590f84be3a}{AudioChannelSet::topSideLeft}};}
+\DoxyCodeLine{328         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_ga86ee679818e19885051e8702aaf15f3e}{Steinberg::Vst::kSpeakerTsr}}:   \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652eaa3c70e675a692bab3cd160a0f6ad75a9}{AudioChannelSet::topSideRight}};}
+\DoxyCodeLine{329         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_ga8b157eb3bdd6a159a1fd38c787147b39}{Steinberg::Vst::kSpeakerLcs}}:   \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea7f97493c50eca058c713ebe9870732b6}{AudioChannelSet::leftSurroundRear}};}
+\DoxyCodeLine{330         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_ga3e40d95500265f76f0d67e313378ca25}{Steinberg::Vst::kSpeakerRcs}}:   \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea42979a8c438351bc314f8df0194303a8}{AudioChannelSet::rightSurroundRear}};}
+\DoxyCodeLine{331         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_gaee03ff006f3143ec89460cd09432e65f}{Steinberg::Vst::kSpeakerBfl}}:   \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea38da77e7cdd19ed8d12207a43f6d59a2}{AudioChannelSet::bottomFrontLeft}};}
+\DoxyCodeLine{332         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_gab24aef95b71bca40d93b6ad5d1fdc618}{Steinberg::Vst::kSpeakerBfc}}:   \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea5859ffa5e5ed706578add264245f8760}{AudioChannelSet::bottomFrontCentre}};}
+\DoxyCodeLine{333         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_ga32764c94c43430e7a1f21f3cf0eb5b28}{Steinberg::Vst::kSpeakerBfr}}:   \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea25bd00433c1b90b7d68d827d719df1e6}{AudioChannelSet::bottomFrontRight}};}
+\DoxyCodeLine{334         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_gaf2ee7f4ff35da3c610588bdf0783a050}{Steinberg::Vst::kSpeakerPl}}:    \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652eaf3bdf38a52236efff9f0494f95c7f2ec}{AudioChannelSet::wideLeft}};}
+\DoxyCodeLine{335         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_ga1ceb645d872aaa7390a9da1c5a8ebda0}{Steinberg::Vst::kSpeakerPr}}:    \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652eaaf7b197484dd4e491605c4afcb42ff07}{AudioChannelSet::wideRight}};}
+\DoxyCodeLine{336         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_ga8d4b1bdef533488e6f00212a75981123}{Steinberg::Vst::kSpeakerBsl}}:   \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea33a4c771619ca9fc83e6422b57bb299d}{AudioChannelSet::bottomSideLeft}};}
+\DoxyCodeLine{337         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_gac297af9b26f3cace239147a9daff464a}{Steinberg::Vst::kSpeakerBsr}}:   \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea2988d56ecd7e0220ee279717493b4862}{AudioChannelSet::bottomSideRight}};}
+\DoxyCodeLine{338         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_gab243dc0b8fa41ab87f2f972ff27e0035}{Steinberg::Vst::kSpeakerBrl}}:   \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ea126cbbfcdd476bb75a33f987a426e00f}{AudioChannelSet::bottomRearLeft}};}
+\DoxyCodeLine{339         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_ga7e93ddf000df648b868b7933694ee5d6}{Steinberg::Vst::kSpeakerBrc}}:   \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652eae158e53daf387a40baa751882d6425c0}{AudioChannelSet::bottomRearCentre}};}
+\DoxyCodeLine{340         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_ga6b7e5b6f022c8d199f42b6441fa70f52}{Steinberg::Vst::kSpeakerBrr}}:   \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652eab87c52f6bffb46c238eea428e78d58e2}{AudioChannelSet::bottomRearRight}};}
+\DoxyCodeLine{341         \textcolor{keywordflow}{default}: \textcolor{keywordflow}{break};}
+\DoxyCodeLine{342     \}}
+\DoxyCodeLine{343 }
+\DoxyCodeLine{344     \textcolor{keyword}{auto} channelType = \mbox{\hyperlink{class_big_integer}{BigInteger}} (\textcolor{keyword}{static\_cast<}\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}\textcolor{keyword}{>} (\mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}})).\mbox{\hyperlink{class_big_integer_a288fc79aa972d1fd11fc4ff57b4b4d99}{findNextSetBit}} (0);}
+\DoxyCodeLine{345 }
+\DoxyCodeLine{346     \textcolor{comment}{// VST3 <-\/> JUCE layout conversion error: report this bug to the JUCE forum}}
+\DoxyCodeLine{347     \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (channelType >= 33);}
+\DoxyCodeLine{348 }
+\DoxyCodeLine{349     \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652e}{AudioChannelSet::ChannelType}}\textcolor{keyword}{>} (\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>} (\mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652ead39bcac579ad18bca050376e1696af4a}{AudioChannelSet::discreteChannel0}}) + 6 + (channelType -\/ 33));}
+\DoxyCodeLine{350 \}}
+\DoxyCodeLine{351 }
+\DoxyCodeLine{352 \textcolor{keyword}{static} \mbox{\hyperlink{namespace_steinberg_1_1_vst_adc3d27b66b0e01da7fbb69fdc32abaef}{Steinberg::Vst::SpeakerArrangement}} getVst3SpeakerArrangement (\textcolor{keyword}{const} \mbox{\hyperlink{class_audio_channel_set}{AudioChannelSet}}\& channels) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{353 \{}
+\DoxyCodeLine{354     \textcolor{keyword}{using namespace }\mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr}{Steinberg::Vst::SpeakerArr}};}
+\DoxyCodeLine{355 }
+\DoxyCodeLine{356     \textcolor{keywordflow}{if} (channels == \mbox{\hyperlink{class_audio_channel_set_a1a030ee87e03d286edf4be0f25201122}{AudioChannelSet::disabled}}())            \textcolor{keywordflow}{return} \mbox{\hyperlink{group__speaker_arrangements_ga8127c0f082b4461166d196fb99c45076}{kEmpty}};}
+\DoxyCodeLine{357     \textcolor{keywordflow}{if} (channels == \mbox{\hyperlink{class_audio_channel_set_a23a6cacf7134152d85b00462116a55cf}{AudioChannelSet::mono}}())                \textcolor{keywordflow}{return} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_plug_type_ae532d7a6d6e6fbe8d9f10463d9438f16}{kMono}};}
+\DoxyCodeLine{358     \textcolor{keywordflow}{if} (channels == \mbox{\hyperlink{class_audio_channel_set_a4982a2b76ee9fb5f0ea73ce8061e1404}{AudioChannelSet::stereo}}())              \textcolor{keywordflow}{return} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_plug_type_a8703171b469e2c8bcfca7d75a4538e47}{kStereo}};}
+\DoxyCodeLine{359     \textcolor{keywordflow}{if} (channels == \mbox{\hyperlink{class_audio_channel_set_a630c471bb70b675e5edb658d07123338}{AudioChannelSet::createLCR}}())           \textcolor{keywordflow}{return} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_af391f86f33bc9e7a036b037045a0ce95}{k30Cine}};}
+\DoxyCodeLine{360     \textcolor{keywordflow}{if} (channels == \mbox{\hyperlink{class_audio_channel_set_a8d96f94c406325f8820d42dfbf0027ef}{AudioChannelSet::createLRS}}())           \textcolor{keywordflow}{return} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_a981bf3c49ffcae0e3b24ad30eb8edd0d}{k30Music}};}
+\DoxyCodeLine{361     \textcolor{keywordflow}{if} (channels == \mbox{\hyperlink{class_audio_channel_set_a8505e9ec9048f8531cb10d62c62e9ec6}{AudioChannelSet::createLCRS}}())          \textcolor{keywordflow}{return} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_a351dc352dc258ee0096dd04b78594540}{k40Cine}};}
+\DoxyCodeLine{362     \textcolor{keywordflow}{if} (channels == \mbox{\hyperlink{class_audio_channel_set_a8fba65e261cd50ac59a2eaa7cc4c1848}{AudioChannelSet::create5point0}}())       \textcolor{keywordflow}{return} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_ad7b6e908d7ba6b2c857769c2ec84a14e}{k50}};}
+\DoxyCodeLine{363     \textcolor{keywordflow}{if} (channels == \mbox{\hyperlink{class_audio_channel_set_a3a379777348f62244d168ace883f06cb}{AudioChannelSet::create5point1}}())       \textcolor{keywordflow}{return} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_a03e6e158487b3225c1be7fb4ef33f443}{k51}};}
+\DoxyCodeLine{364     \textcolor{keywordflow}{if} (channels == \mbox{\hyperlink{class_audio_channel_set_abc309dad382b14f3ad4beb5970c1da66}{AudioChannelSet::create6point0}}())       \textcolor{keywordflow}{return} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_ab7c02496e643cdc52d024004454a4c1c}{k60Cine}};}
+\DoxyCodeLine{365     \textcolor{keywordflow}{if} (channels == \mbox{\hyperlink{class_audio_channel_set_a3b5aa86205df9a34de1d12b3e809c30a}{AudioChannelSet::create6point1}}())       \textcolor{keywordflow}{return} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_a3f87765e74f50e53122b36fca33a4e9d}{k61Cine}};}
+\DoxyCodeLine{366     \textcolor{keywordflow}{if} (channels == \mbox{\hyperlink{class_audio_channel_set_a4ebe9acc432aa1632d3d1c965c1fdf70}{AudioChannelSet::create6point0Music}}())  \textcolor{keywordflow}{return} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_a3fe1b3c259ef4a0732f9d17f94f0da82}{k60Music}};}
+\DoxyCodeLine{367     \textcolor{keywordflow}{if} (channels == \mbox{\hyperlink{class_audio_channel_set_a89e0d733f37cd96408a0d1f21151f182}{AudioChannelSet::create6point1Music}}())  \textcolor{keywordflow}{return} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_ae2adc2ad30130269873d090d472845f1}{k61Music}};}
+\DoxyCodeLine{368     \textcolor{keywordflow}{if} (channels == \mbox{\hyperlink{class_audio_channel_set_a31bf5aed07a9ec3ce7334b1849be198b}{AudioChannelSet::create7point0}}())       \textcolor{keywordflow}{return} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_a2e7a0fa6d629ef06efca36075ec832f0}{k70Music}};}
+\DoxyCodeLine{369     \textcolor{keywordflow}{if} (channels == \mbox{\hyperlink{class_audio_channel_set_a377d56af0d31d0450c572051305174ec}{AudioChannelSet::create7point0SDDS}}())   \textcolor{keywordflow}{return} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_a0e9ecfc72a96f2d11432614b0c6d34ce}{k70Cine}};}
+\DoxyCodeLine{370     \textcolor{keywordflow}{if} (channels == \mbox{\hyperlink{class_audio_channel_set_a04a923f463e28deb87c637774ad182b6}{AudioChannelSet::create7point1}}())       \textcolor{keywordflow}{return} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_a558695eee16fd0fa2102fa11181b35fc}{k71CineSideFill}};}
+\DoxyCodeLine{371     \textcolor{keywordflow}{if} (channels == \mbox{\hyperlink{class_audio_channel_set_a8f1b9c962edad8577b5745c5eb96a1c0}{AudioChannelSet::create7point1SDDS}}())   \textcolor{keywordflow}{return} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_a0f225564f8a5ac9cf44f4e69ca21f9ed}{k71Cine}};}
+\DoxyCodeLine{372     \textcolor{keywordflow}{if} (channels == \mbox{\hyperlink{class_audio_channel_set_ae88d19e0d6586bddb46dafdbe8367635}{AudioChannelSet::ambisonic}}())           \textcolor{keywordflow}{return} \mbox{\hyperlink{group__juce__audio__processors-format__types_gac5ef0dca4afba140fcd14aaa3c25c2ba}{kAmbi1stOrderACN}};}
+\DoxyCodeLine{373     \textcolor{keywordflow}{if} (channels == \mbox{\hyperlink{class_audio_channel_set_a888e749b2e050b764a4b6970e4048cae}{AudioChannelSet::quadraphonic}}())        \textcolor{keywordflow}{return} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_a88e4828a5ebc9af0f2523c3631fdbb38}{k40Music}};}
+\DoxyCodeLine{374     \textcolor{keywordflow}{if} (channels == \mbox{\hyperlink{class_audio_channel_set_ad3fdda3942b390fb6112a6d50cc530b5}{AudioChannelSet::create5point1point4}}()) \textcolor{keywordflow}{return} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_a75dcf22ce7238e004b500b69faf4e9b2}{k51\_4}};}
+\DoxyCodeLine{375     \textcolor{keywordflow}{if} (channels == \mbox{\hyperlink{class_audio_channel_set_a15a6ec404e3f9ec5da40603f81396dfb}{AudioChannelSet::create7point0point2}}()) \textcolor{keywordflow}{return} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_ae07681105ef5e84e23eb7920c81ec46b}{k71\_2}} \& \string~(\mbox{\hyperlink{group__speaker_arrangements_ga1f521bad9e4442d33c0a0c74f566b403}{Steinberg::Vst::kSpeakerLfe}});}
+\DoxyCodeLine{376     \textcolor{keywordflow}{if} (channels == \mbox{\hyperlink{class_audio_channel_set_a73b4f966186363ed75b6b51c8a6c6c72}{AudioChannelSet::create7point1point2}}()) \textcolor{keywordflow}{return} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_ae07681105ef5e84e23eb7920c81ec46b}{k71\_2}};}
+\DoxyCodeLine{377     \textcolor{keywordflow}{if} (channels == \mbox{\hyperlink{class_audio_channel_set_ab87886f0f9c54d752d23217369f0d217}{AudioChannelSet::create7point0point4}}()) \textcolor{keywordflow}{return} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_a82ba5cd13359a6da6ee916965dcd2d02}{k71\_4}} \& \string~(\mbox{\hyperlink{group__speaker_arrangements_ga1f521bad9e4442d33c0a0c74f566b403}{Steinberg::Vst::kSpeakerLfe}});}
+\DoxyCodeLine{378     \textcolor{keywordflow}{if} (channels == \mbox{\hyperlink{class_audio_channel_set_a7231226a318bf77f443b8b992a381ed9}{AudioChannelSet::create7point1point4}}()) \textcolor{keywordflow}{return} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_a82ba5cd13359a6da6ee916965dcd2d02}{k71\_4}};}
+\DoxyCodeLine{379     \textcolor{keywordflow}{if} (channels == \mbox{\hyperlink{class_audio_channel_set_acbad3f568b5451ad45ee2f5ae94e727e}{AudioChannelSet::create7point1point6}}()) \textcolor{keywordflow}{return} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_a013d5af22ea3c4a6cd6a491de35301a9}{k71\_6}};}
+\DoxyCodeLine{380     \textcolor{keywordflow}{if} (channels == \mbox{\hyperlink{class_audio_channel_set_a4e5c4f6c6c4a24c227d6fe0e311d4950}{AudioChannelSet::create9point1point6}}()) \textcolor{keywordflow}{return} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_afd4039a3ad905d73d7911f75c4472ca7}{k91\_6}};}
+\DoxyCodeLine{381     \textcolor{keywordflow}{if} (channels == \mbox{\hyperlink{class_audio_channel_set_ae88d19e0d6586bddb46dafdbe8367635}{AudioChannelSet::ambisonic}} (0))         \textcolor{keywordflow}{return} (1ull << 20);}
+\DoxyCodeLine{382     \textcolor{keywordflow}{if} (channels == \mbox{\hyperlink{class_audio_channel_set_ae88d19e0d6586bddb46dafdbe8367635}{AudioChannelSet::ambisonic}} (1))         \textcolor{keywordflow}{return} (1ull << 20) | (1ull << 21) | (1ull << 22) | (1ull << 23);}
+\DoxyCodeLine{383 \textcolor{preprocessor}{   \#if VST\_VERSION >= 0x030608}}
+\DoxyCodeLine{384     \textcolor{keywordflow}{if} (channels == \mbox{\hyperlink{class_audio_channel_set_ae88d19e0d6586bddb46dafdbe8367635}{AudioChannelSet::ambisonic}} (2))         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_ad02f4d0cd17304119cd7201123686a63}{kAmbi2cdOrderACN}};}
+\DoxyCodeLine{385     \textcolor{keywordflow}{if} (channels == \mbox{\hyperlink{class_audio_channel_set_ae88d19e0d6586bddb46dafdbe8367635}{AudioChannelSet::ambisonic}} (3))         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_a584acc07f8c30d4e0a226f8af2aefd0a}{kAmbi3rdOrderACN}};}
+\DoxyCodeLine{386 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{387 }
+\DoxyCodeLine{388     \mbox{\hyperlink{namespace_steinberg_1_1_vst_adc3d27b66b0e01da7fbb69fdc32abaef}{Steinberg::Vst::SpeakerArrangement}} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = 0;}
+\DoxyCodeLine{389 }
+\DoxyCodeLine{390     \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto}\& \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}} : channels.getChannelTypes())}
+\DoxyCodeLine{391         \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} |= getSpeakerType (channels, \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}});}
+\DoxyCodeLine{392 }
+\DoxyCodeLine{393     \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}};}
+\DoxyCodeLine{394 \}}
+\DoxyCodeLine{395 }
+\DoxyCodeLine{396 \textcolor{keyword}{static} \mbox{\hyperlink{class_audio_channel_set}{AudioChannelSet}} getChannelSetForSpeakerArrangement (\mbox{\hyperlink{namespace_steinberg_1_1_vst_adc3d27b66b0e01da7fbb69fdc32abaef}{Steinberg::Vst::SpeakerArrangement}} arr) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{397 \{}
+\DoxyCodeLine{398     \textcolor{keyword}{using namespace }\mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr}{Steinberg::Vst::SpeakerArr}};}
+\DoxyCodeLine{399 }
+\DoxyCodeLine{400     \textcolor{keywordflow}{switch} (arr)}
+\DoxyCodeLine{401     \{}
+\DoxyCodeLine{402         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__speaker_arrangements_ga8127c0f082b4461166d196fb99c45076}{kEmpty}}:                                          \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_a1a030ee87e03d286edf4be0f25201122}{AudioChannelSet::disabled}}();}
+\DoxyCodeLine{403         \textcolor{keywordflow}{case} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_plug_type_ae532d7a6d6e6fbe8d9f10463d9438f16}{kMono}}:                                           \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_a23a6cacf7134152d85b00462116a55cf}{AudioChannelSet::mono}}();}
+\DoxyCodeLine{404         \textcolor{keywordflow}{case} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_plug_type_a8703171b469e2c8bcfca7d75a4538e47}{kStereo}}:                                         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_a4982a2b76ee9fb5f0ea73ce8061e1404}{AudioChannelSet::stereo}}();}
+\DoxyCodeLine{405         \textcolor{keywordflow}{case} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_af391f86f33bc9e7a036b037045a0ce95}{k30Cine}}:                                         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_a630c471bb70b675e5edb658d07123338}{AudioChannelSet::createLCR}}();}
+\DoxyCodeLine{406         \textcolor{keywordflow}{case} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_a981bf3c49ffcae0e3b24ad30eb8edd0d}{k30Music}}:                                        \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_a8d96f94c406325f8820d42dfbf0027ef}{AudioChannelSet::createLRS}}();}
+\DoxyCodeLine{407         \textcolor{keywordflow}{case} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_a351dc352dc258ee0096dd04b78594540}{k40Cine}}:                                         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_a8505e9ec9048f8531cb10d62c62e9ec6}{AudioChannelSet::createLCRS}}();}
+\DoxyCodeLine{408         \textcolor{keywordflow}{case} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_ad7b6e908d7ba6b2c857769c2ec84a14e}{k50}}:                                             \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_a8fba65e261cd50ac59a2eaa7cc4c1848}{AudioChannelSet::create5point0}}();}
+\DoxyCodeLine{409         \textcolor{keywordflow}{case} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_a03e6e158487b3225c1be7fb4ef33f443}{k51}}:                                             \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_a3a379777348f62244d168ace883f06cb}{AudioChannelSet::create5point1}}();}
+\DoxyCodeLine{410         \textcolor{keywordflow}{case} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_ab7c02496e643cdc52d024004454a4c1c}{k60Cine}}:                                         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_abc309dad382b14f3ad4beb5970c1da66}{AudioChannelSet::create6point0}}();}
+\DoxyCodeLine{411         \textcolor{keywordflow}{case} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_a3f87765e74f50e53122b36fca33a4e9d}{k61Cine}}:                                         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_a3b5aa86205df9a34de1d12b3e809c30a}{AudioChannelSet::create6point1}}();}
+\DoxyCodeLine{412         \textcolor{keywordflow}{case} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_a3fe1b3c259ef4a0732f9d17f94f0da82}{k60Music}}:                                        \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_a4ebe9acc432aa1632d3d1c965c1fdf70}{AudioChannelSet::create6point0Music}}();}
+\DoxyCodeLine{413         \textcolor{keywordflow}{case} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_ae2adc2ad30130269873d090d472845f1}{k61Music}}:                                        \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_a89e0d733f37cd96408a0d1f21151f182}{AudioChannelSet::create6point1Music}}();}
+\DoxyCodeLine{414         \textcolor{keywordflow}{case} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_a2e7a0fa6d629ef06efca36075ec832f0}{k70Music}}:                                        \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_a31bf5aed07a9ec3ce7334b1849be198b}{AudioChannelSet::create7point0}}();}
+\DoxyCodeLine{415         \textcolor{keywordflow}{case} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_a0e9ecfc72a96f2d11432614b0c6d34ce}{k70Cine}}:                                         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_a377d56af0d31d0450c572051305174ec}{AudioChannelSet::create7point0SDDS}}();}
+\DoxyCodeLine{416         \textcolor{keywordflow}{case} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_a558695eee16fd0fa2102fa11181b35fc}{k71CineSideFill}}:                                 \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_a04a923f463e28deb87c637774ad182b6}{AudioChannelSet::create7point1}}();}
+\DoxyCodeLine{417         \textcolor{keywordflow}{case} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_a0f225564f8a5ac9cf44f4e69ca21f9ed}{k71Cine}}:                                         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_a8f1b9c962edad8577b5745c5eb96a1c0}{AudioChannelSet::create7point1SDDS}}();}
+\DoxyCodeLine{418         \textcolor{keywordflow}{case} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_a88e4828a5ebc9af0f2523c3631fdbb38}{k40Music}}:                                        \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_a888e749b2e050b764a4b6970e4048cae}{AudioChannelSet::quadraphonic}}();}
+\DoxyCodeLine{419         \textcolor{keywordflow}{case} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_ae07681105ef5e84e23eb7920c81ec46b}{k71\_2}}:                                           \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_a73b4f966186363ed75b6b51c8a6c6c72}{AudioChannelSet::create7point1point2}}();}
+\DoxyCodeLine{420         \textcolor{keywordflow}{case} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_ae07681105ef5e84e23eb7920c81ec46b}{k71\_2}} \& \string~(\mbox{\hyperlink{group__speaker_arrangements_ga1f521bad9e4442d33c0a0c74f566b403}{Steinberg::Vst::kSpeakerLfe}}):          \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_a15a6ec404e3f9ec5da40603f81396dfb}{AudioChannelSet::create7point0point2}}();}
+\DoxyCodeLine{421         \textcolor{keywordflow}{case} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_a82ba5cd13359a6da6ee916965dcd2d02}{k71\_4}}:                                           \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_a7231226a318bf77f443b8b992a381ed9}{AudioChannelSet::create7point1point4}}();}
+\DoxyCodeLine{422         \textcolor{keywordflow}{case} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_a82ba5cd13359a6da6ee916965dcd2d02}{k71\_4}} \& \string~(\mbox{\hyperlink{group__speaker_arrangements_ga1f521bad9e4442d33c0a0c74f566b403}{Steinberg::Vst::kSpeakerLfe}}):          \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ab87886f0f9c54d752d23217369f0d217}{AudioChannelSet::create7point0point4}}();}
+\DoxyCodeLine{423         \textcolor{keywordflow}{case} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_a013d5af22ea3c4a6cd6a491de35301a9}{k71\_6}}:                                           \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_acbad3f568b5451ad45ee2f5ae94e727e}{AudioChannelSet::create7point1point6}}();}
+\DoxyCodeLine{424         \textcolor{keywordflow}{case} (1 << 20):                                       \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ae88d19e0d6586bddb46dafdbe8367635}{AudioChannelSet::ambisonic}} (0);}
+\DoxyCodeLine{425         \textcolor{keywordflow}{case} \mbox{\hyperlink{group__juce__audio__processors-format__types_gac5ef0dca4afba140fcd14aaa3c25c2ba}{kAmbi1stOrderACN}}:                                \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ae88d19e0d6586bddb46dafdbe8367635}{AudioChannelSet::ambisonic}} (1);}
+\DoxyCodeLine{426 \textcolor{preprocessor}{       \#if VST\_VERSION >= 0x030608}}
+\DoxyCodeLine{427         \textcolor{keywordflow}{case} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_ad02f4d0cd17304119cd7201123686a63}{kAmbi2cdOrderACN}}:                                \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ae88d19e0d6586bddb46dafdbe8367635}{AudioChannelSet::ambisonic}} (2);}
+\DoxyCodeLine{428         \textcolor{keywordflow}{case} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_speaker_arr_a584acc07f8c30d4e0a226f8af2aefd0a}{kAmbi3rdOrderACN}}:                                \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_channel_set_ae88d19e0d6586bddb46dafdbe8367635}{AudioChannelSet::ambisonic}} (3);}
+\DoxyCodeLine{429 \textcolor{preprocessor}{       \#endif}}
+\DoxyCodeLine{430     \}}
+\DoxyCodeLine{431 }
+\DoxyCodeLine{432     \mbox{\hyperlink{class_audio_channel_set}{AudioChannelSet}} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}};}
+\DoxyCodeLine{433 }
+\DoxyCodeLine{434     \mbox{\hyperlink{class_big_integer}{BigInteger}} vstChannels (\textcolor{keyword}{static\_cast<}\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}\textcolor{keyword}{>} (arr));}
+\DoxyCodeLine{435     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} bit = vstChannels.findNextSetBit (0); bit != -\/1; bit = vstChannels.findNextSetBit (bit + 1))}
+\DoxyCodeLine{436     \{}
+\DoxyCodeLine{437         \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652e}{AudioChannelSet::ChannelType}} channelType = getChannelType (arr, 1ull << \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{group__juce__core-maths_gaba41bf2b6f6da5945ee08fb99931aede}{uint64}}\textcolor{keyword}{>} (bit));}
+\DoxyCodeLine{438         \textcolor{keywordflow}{if} (channelType != \mbox{\hyperlink{class_audio_channel_set_ab917e490df2e0edfb1087e4c4f8d652eaaa4afa88e8da74c57e088bb364518d6c}{AudioChannelSet::unknown}})}
+\DoxyCodeLine{439             \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}.addChannel (channelType);}
+\DoxyCodeLine{440     \}}
+\DoxyCodeLine{441 }
+\DoxyCodeLine{442     \textcolor{comment}{// VST3 <-\/> JUCE layout conversion error: report this bug to the JUCE forum}}
+\DoxyCodeLine{443     \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (\mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}.size() == vstChannels.countNumberOfSetBits());}
+\DoxyCodeLine{444 }
+\DoxyCodeLine{445     \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}};}
+\DoxyCodeLine{446 \}}
+\DoxyCodeLine{447 }
+\DoxyCodeLine{448 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{449 \textcolor{keyword}{template} <\textcolor{keyword}{class} ObjectType>}
+\DoxyCodeLine{450 \textcolor{keyword}{class }\mbox{\hyperlink{class_v_s_t_com_smart_ptr}{VSTComSmartPtr}}}
+\DoxyCodeLine{451 \{}
+\DoxyCodeLine{452 \textcolor{keyword}{public}:}
+\DoxyCodeLine{453     \mbox{\hyperlink{class_v_s_t_com_smart_ptr_ad1a880da5ff3421d4768514cfcc8cfc7}{VSTComSmartPtr}}() noexcept : source (\textcolor{keywordtype}{nullptr}) \{\}}
+\DoxyCodeLine{454     \mbox{\hyperlink{class_v_s_t_com_smart_ptr_a70e9127580eec060b98b82d7f9c263c9}{VSTComSmartPtr}} (ObjectType* \textcolor{keywordtype}{object}, \textcolor{keywordtype}{bool} autoAddRef = \textcolor{keyword}{true}) noexcept  : source (\textcolor{keywordtype}{object})  \{ \textcolor{keywordflow}{if} (source != \textcolor{keyword}{nullptr} \&\& autoAddRef) source-\/>addRef(); \}}
+\DoxyCodeLine{455     \mbox{\hyperlink{class_v_s_t_com_smart_ptr_a56bccb561db70dabcf618a6b5f76bd69}{VSTComSmartPtr}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_v_s_t_com_smart_ptr}{VSTComSmartPtr}}\& other) noexcept : source (other.source)            \{ \textcolor{keywordflow}{if} (source != \textcolor{keyword}{nullptr}) source-\/>addRef(); \}}
+\DoxyCodeLine{456     \mbox{\hyperlink{class_v_s_t_com_smart_ptr_ac533b1a1f2f4d804cdbe8d25cf4d98a8}{\string~VSTComSmartPtr}}()                                                                        \{ \textcolor{keywordflow}{if} (source != \textcolor{keyword}{nullptr}) source-\/>release(); \}}
+\DoxyCodeLine{457 }
+\DoxyCodeLine{458     \textcolor{keyword}{operator} ObjectType*() \textcolor{keyword}{const} \textcolor{keyword}{noexcept}    \{ \textcolor{keywordflow}{return} source; \}}
+\DoxyCodeLine{459     ObjectType* \mbox{\hyperlink{class_v_s_t_com_smart_ptr_a5a41dd55f0fd3314296f98cb290645de}{get}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept         \{ \textcolor{keywordflow}{return} source; \}}
+\DoxyCodeLine{460     ObjectType\& \mbox{\hyperlink{class_v_s_t_com_smart_ptr_a097480aed391c943a6a9a8b370525971}{operator*}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept   \{ \textcolor{keywordflow}{return} *source; \}}
+\DoxyCodeLine{461     ObjectType* \mbox{\hyperlink{class_v_s_t_com_smart_ptr_a7ec0ee491e1147d5a4c6c9b57dc1df5a}{operator-\/>}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept  \{ \textcolor{keywordflow}{return} source; \}}
+\DoxyCodeLine{462 }
+\DoxyCodeLine{463     \mbox{\hyperlink{class_v_s_t_com_smart_ptr}{VSTComSmartPtr}}\& \mbox{\hyperlink{class_v_s_t_com_smart_ptr_a19efbba5995f4880719b25e05a2013ba}{operator= }}(\textcolor{keyword}{const} \mbox{\hyperlink{class_v_s_t_com_smart_ptr}{VSTComSmartPtr}}\& other)       \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_v_s_t_com_smart_ptr_a19efbba5995f4880719b25e05a2013ba}{operator= }}(other.source); \}}
+\DoxyCodeLine{464 }
+\DoxyCodeLine{465     \mbox{\hyperlink{class_v_s_t_com_smart_ptr}{VSTComSmartPtr}}\& \mbox{\hyperlink{class_v_s_t_com_smart_ptr_a19efbba5995f4880719b25e05a2013ba}{operator= }}(ObjectType* \textcolor{keyword}{const} newObjectToTakePossessionOf)}
+\DoxyCodeLine{466     \{}
+\DoxyCodeLine{467         \mbox{\hyperlink{class_v_s_t_com_smart_ptr}{VSTComSmartPtr}} \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}} (newObjectToTakePossessionOf);}
+\DoxyCodeLine{468         std::swap (\mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}}.source, source);}
+\DoxyCodeLine{469         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{470     \}}
+\DoxyCodeLine{471 }
+\DoxyCodeLine{472     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_v_s_t_com_smart_ptr_a76c4ab9583c146e94299ef7458cd62a1}{operator== }}(ObjectType* \textcolor{keyword}{const} other) \textcolor{keyword}{noexcept} \{ \textcolor{keywordflow}{return} source == other; \}}
+\DoxyCodeLine{473     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_v_s_t_com_smart_ptr_a3a1ae8f4c9572d2bc5e676a05a4a7609}{operator!= }}(ObjectType* \textcolor{keyword}{const} other) \textcolor{keyword}{noexcept} \{ \textcolor{keywordflow}{return} source != other; \}}
+\DoxyCodeLine{474 }
+\DoxyCodeLine{475     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_v_s_t_com_smart_ptr_acd38baa2f9cd9ea10f7382466694ac57}{loadFrom}} (\mbox{\hyperlink{class_steinberg_1_1_f_unknown}{Steinberg::FUnknown}}* o)}
+\DoxyCodeLine{476     \{}
+\DoxyCodeLine{477         *\textcolor{keyword}{this} = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{478         \textcolor{keywordflow}{return} o != \textcolor{keyword}{nullptr} \&\& o-\/>\mbox{\hyperlink{class_steinberg_1_1_f_unknown_a784e44c90535adbbf7f83ca670e195db}{queryInterface}} (ObjectType::iid, (\textcolor{keywordtype}{void}**) \&source) == \mbox{\hyperlink{namespace_steinberg_aad984331dc0e96a8c373da4eedc8867fa186a780dc7f261ce261f6669ec20c64c}{Steinberg::kResultOk}};}
+\DoxyCodeLine{479     \}}
+\DoxyCodeLine{480 }
+\DoxyCodeLine{481     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_v_s_t_com_smart_ptr_ab91e47ee1289d6ee7c50c36ed931abeb}{loadFrom}} (\mbox{\hyperlink{class_steinberg_1_1_i_plugin_factory}{Steinberg::IPluginFactory}}* factory, \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a56b1a0450c9a583645f4e84d3806521c}{Steinberg::TUID}}\& uuid)}
+\DoxyCodeLine{482     \{}
+\DoxyCodeLine{483         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (factory != \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{484         *\textcolor{keyword}{this} = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{485         \textcolor{keywordflow}{return} factory-\/>\mbox{\hyperlink{class_steinberg_1_1_i_plugin_factory_af942c8ae3fd8e64f796a59af6197078b}{createInstance}} (uuid, ObjectType::iid, (\textcolor{keywordtype}{void}**) \&source) == \mbox{\hyperlink{namespace_steinberg_aad984331dc0e96a8c373da4eedc8867fa186a780dc7f261ce261f6669ec20c64c}{Steinberg::kResultOk}};}
+\DoxyCodeLine{486     \}}
+\DoxyCodeLine{487 }
+\DoxyCodeLine{488 \textcolor{keyword}{private}:}
+\DoxyCodeLine{489     ObjectType* source;}
+\DoxyCodeLine{490 \};}
+\DoxyCodeLine{491 }
+\DoxyCodeLine{492 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{493 \textcolor{comment}{/*  This class stores a plugin's preferred MIDI mappings.}}
+\DoxyCodeLine{494 \textcolor{comment}{}}
+\DoxyCodeLine{495 \textcolor{comment}{    The IMidiMapping is normally an extension of the IEditController which}}
+\DoxyCodeLine{496 \textcolor{comment}{    should only be accessed from the UI thread. If we're being strict about}}
+\DoxyCodeLine{497 \textcolor{comment}{    things, then we shouldn't call IMidiMapping functions from the audio thread.}}
+\DoxyCodeLine{498 \textcolor{comment}{}}
+\DoxyCodeLine{499 \textcolor{comment}{    This code is very similar to that found in the audioclient demo code in the}}
+\DoxyCodeLine{500 \textcolor{comment}{    VST3 SDK repo.}}
+\DoxyCodeLine{501 \textcolor{comment}{*/}}
+\DoxyCodeLine{502 \textcolor{keyword}{class }\mbox{\hyperlink{class_stored_midi_mapping}{StoredMidiMapping}}}
+\DoxyCodeLine{503 \{}
+\DoxyCodeLine{504 \textcolor{keyword}{public}:}
+\DoxyCodeLine{505     \mbox{\hyperlink{class_stored_midi_mapping_a62ab797b05ae521cae066e9d284423dc}{StoredMidiMapping}}()}
+\DoxyCodeLine{506     \{}
+\DoxyCodeLine{507         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}\& channel : channels)}
+\DoxyCodeLine{508             channel.resize (\mbox{\hyperlink{namespace_steinberg_1_1_vst_af1c04e80789d8e42a9b65e64869accd7a3a99469831497a8bb43af29d7d3589aa}{Steinberg::Vst::kCountCtrlNumber}});}
+\DoxyCodeLine{509     \}}
+\DoxyCodeLine{510 }
+\DoxyCodeLine{511     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_stored_midi_mapping_a49d25706e551b55fa3d7b737f80edef1}{storeMappings}} (\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_midi_mapping}{Steinberg::Vst::IMidiMapping}}\& \mbox{\hyperlink{namespacegl_a17a6af3b52c7a2574508ffacd8c66014}{mapping}})}
+\DoxyCodeLine{512     \{}
+\DoxyCodeLine{513         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} channelIndex = 0; channelIndex < channels.size(); ++channelIndex)}
+\DoxyCodeLine{514             storeControllers (\mbox{\hyperlink{namespacegl_a17a6af3b52c7a2574508ffacd8c66014}{mapping}}, channels[channelIndex], channelIndex);}
+\DoxyCodeLine{515     \}}
+\DoxyCodeLine{516 }
+\DoxyCodeLine{517     \textcolor{comment}{/* Returns kNoParamId if there is no mapping for this controller. */}}
+\DoxyCodeLine{518     \mbox{\hyperlink{namespace_steinberg_1_1_vst_a280d91906cce82932a36c0a92bcbeae0}{Steinberg::Vst::ParamID}} \mbox{\hyperlink{class_stored_midi_mapping_aac9b96526f2e69cd072465b5dd14c97c}{getMapping}} (\mbox{\hyperlink{namespace_steinberg_a091b21d361005029928d1a49e59f1fd9}{Steinberg::int16}} channel,}
+\DoxyCodeLine{519                                         \mbox{\hyperlink{namespace_steinberg_1_1_vst_a7cdcbf3982dea195392fe7949ba70d26}{Steinberg::Vst::CtrlNumber}} controller) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{520     \{}
+\DoxyCodeLine{521         \textcolor{keywordflow}{return} channels[(size\_t) channel][(\textcolor{keywordtype}{size\_t}) controller];}
+\DoxyCodeLine{522     \}}
+\DoxyCodeLine{523 }
+\DoxyCodeLine{524 \textcolor{keyword}{private}:}
+\DoxyCodeLine{525     \textcolor{comment}{// Maps controller numbers to ParamIDs}}
+\DoxyCodeLine{526     \textcolor{keyword}{using} Controllers = std::vector<Steinberg::Vst::ParamID>;}
+\DoxyCodeLine{527 }
+\DoxyCodeLine{528     \textcolor{comment}{// Each channel may have a different CC mapping}}
+\DoxyCodeLine{529     \textcolor{keyword}{using} Channels = std::array<Controllers, 16>;}
+\DoxyCodeLine{530 }
+\DoxyCodeLine{531     \textcolor{keyword}{static} \textcolor{keywordtype}{void} storeControllers (\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_midi_mapping}{Steinberg::Vst::IMidiMapping}}\& \mbox{\hyperlink{namespacegl_a17a6af3b52c7a2574508ffacd8c66014}{mapping}}, Controllers\& channel, \textcolor{keywordtype}{size\_t} channelIndex)}
+\DoxyCodeLine{532     \{}
+\DoxyCodeLine{533         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} controllerIndex = 0; controllerIndex < channel.size(); ++controllerIndex)}
+\DoxyCodeLine{534             channel[controllerIndex] = getSingleMapping (\mbox{\hyperlink{namespacegl_a17a6af3b52c7a2574508ffacd8c66014}{mapping}}, channelIndex, controllerIndex);}
+\DoxyCodeLine{535     \}}
+\DoxyCodeLine{536 }
+\DoxyCodeLine{537     \textcolor{keyword}{static} \mbox{\hyperlink{namespace_steinberg_1_1_vst_a280d91906cce82932a36c0a92bcbeae0}{Steinberg::Vst::ParamID}} getSingleMapping (\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_midi_mapping}{Steinberg::Vst::IMidiMapping}}\& \mbox{\hyperlink{namespacegl_a17a6af3b52c7a2574508ffacd8c66014}{mapping}},}
+\DoxyCodeLine{538                                                      \textcolor{keywordtype}{size\_t} channelIndex,}
+\DoxyCodeLine{539                                                      \textcolor{keywordtype}{size\_t} controllerIndex)}
+\DoxyCodeLine{540     \{}
+\DoxyCodeLine{541         \mbox{\hyperlink{namespace_steinberg_1_1_vst_a280d91906cce82932a36c0a92bcbeae0}{Steinberg::Vst::ParamID}} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}\{\};}
+\DoxyCodeLine{542         \textcolor{keyword}{const} \textcolor{keyword}{auto} returnCode = \mbox{\hyperlink{namespacegl_a17a6af3b52c7a2574508ffacd8c66014}{mapping}}.getMidiControllerAssignment (0,}
+\DoxyCodeLine{543                                                                      (\mbox{\hyperlink{juce__box2d_8cpp_a1336d6dad274f1bead955274a953c13d}{int16}}) channelIndex,}
+\DoxyCodeLine{544                                                                      (\mbox{\hyperlink{namespace_steinberg_1_1_vst_a7cdcbf3982dea195392fe7949ba70d26}{Steinberg::Vst::CtrlNumber}}) controllerIndex,}
+\DoxyCodeLine{545                                                                      \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}});}
+\DoxyCodeLine{546 }
+\DoxyCodeLine{547         \textcolor{keywordflow}{return} returnCode == \mbox{\hyperlink{namespace_steinberg_aad984331dc0e96a8c373da4eedc8867fabe8a193950563af44d7042627097968b}{Steinberg::kResultTrue}} ? \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} : Steinberg::Vst::kNoParamId;}
+\DoxyCodeLine{548     \}}
+\DoxyCodeLine{549 }
+\DoxyCodeLine{550     Channels channels;}
+\DoxyCodeLine{551 \};}
+\DoxyCodeLine{552 }
+\DoxyCodeLine{553 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{554 \textcolor{keyword}{class }\mbox{\hyperlink{class_midi_event_list}{MidiEventList}}  : \textcolor{keyword}{public} \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_event_list}{Steinberg::Vst::IEventList}}}
+\DoxyCodeLine{555 \{}
+\DoxyCodeLine{556 \textcolor{keyword}{public}:}
+\DoxyCodeLine{557     \mbox{\hyperlink{class_midi_event_list_a39cc3127863e3f071360f46253141957}{MidiEventList}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{558     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_midi_event_list_ab3e2abd4723c2d1b65fdaf2d632cd2f3}{\string~MidiEventList}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{559 }
+\DoxyCodeLine{560     \mbox{\hyperlink{group__juce__audio__processors-format__types_ga52081291a153c4ae5db62900492eacf8}{JUCE\_DECLARE\_VST3\_COM\_REF\_METHODS}}}
+\DoxyCodeLine{561     \mbox{\hyperlink{group__juce__audio__processors-format__types_gac28ed770da13aab54ddf2af4b4b8d754}{JUCE\_DECLARE\_VST3\_COM\_QUERY\_METHODS}}}
+\DoxyCodeLine{562 }
+\DoxyCodeLine{563     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{564     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_midi_event_list_ab2d507e21030ecf84d4df71d5da10bb9}{clear}}()}
+\DoxyCodeLine{565     \{}
+\DoxyCodeLine{566         events.clearQuick();}
+\DoxyCodeLine{567     \}}
+\DoxyCodeLine{568 }
+\DoxyCodeLine{569     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{Steinberg::int32}} PLUGIN\_API \mbox{\hyperlink{class_midi_event_list_a7a961a80412fbaf35e7055b7fa784847}{getEventCount}}()\textcolor{keyword}{ override}}
+\DoxyCodeLine{570 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{571         \textcolor{keywordflow}{return} (\mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{Steinberg::int32}}) events.size();}
+\DoxyCodeLine{572     \}}
+\DoxyCodeLine{573 }
+\DoxyCodeLine{574     \textcolor{comment}{// NB: This has to cope with out-\/of-\/range indexes from some plugins.}}
+\DoxyCodeLine{575     \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{Steinberg::tresult}} PLUGIN\_API \mbox{\hyperlink{class_midi_event_list_aa62ae834c05f755f2f723b4f1ded836e}{getEvent}} (\mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{Steinberg::int32}} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}, \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event}{Steinberg::Vst::Event}}\& e)\textcolor{keyword}{ override}}
+\DoxyCodeLine{576 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{577         \textcolor{keywordflow}{if} (\mbox{\hyperlink{group__juce__core-maths_ga5762396fe2a5aa4c39b68ee5b70a96f8}{isPositiveAndBelow}} ((\textcolor{keywordtype}{int}) \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}, events.size()))}
+\DoxyCodeLine{578         \{}
+\DoxyCodeLine{579             e = events.getReference ((\textcolor{keywordtype}{int}) \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}});}
+\DoxyCodeLine{580             \textcolor{keywordflow}{return} \mbox{\hyperlink{namespace_steinberg_aad984331dc0e96a8c373da4eedc8867fabe8a193950563af44d7042627097968b}{Steinberg::kResultTrue}};}
+\DoxyCodeLine{581         \}}
+\DoxyCodeLine{582 }
+\DoxyCodeLine{583         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespace_steinberg_aad984331dc0e96a8c373da4eedc8867faaf8cabc311c10bb47d816dae21a06f4c}{Steinberg::kResultFalse}};}
+\DoxyCodeLine{584     \}}
+\DoxyCodeLine{585 }
+\DoxyCodeLine{586     \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{Steinberg::tresult}} PLUGIN\_API \mbox{\hyperlink{class_midi_event_list_af1860baf47d3fc7436eabd8e22393fae}{addEvent}} (\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event}{Steinberg::Vst::Event}}\& e)\textcolor{keyword}{ override}}
+\DoxyCodeLine{587 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{588         events.add (e);}
+\DoxyCodeLine{589         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespace_steinberg_aad984331dc0e96a8c373da4eedc8867fabe8a193950563af44d7042627097968b}{Steinberg::kResultTrue}};}
+\DoxyCodeLine{590     \}}
+\DoxyCodeLine{591 }
+\DoxyCodeLine{592     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{593     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_midi_event_list_af1d1f8795ab050fc213aa84f97130d23}{toMidiBuffer}} (\mbox{\hyperlink{class_midi_buffer}{MidiBuffer}}\& \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}, \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_event_list}{Steinberg::Vst::IEventList}}\& eventList)}
+\DoxyCodeLine{594     \{}
+\DoxyCodeLine{595         \textcolor{keyword}{const} \textcolor{keyword}{auto} numEvents = eventList.\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_event_list_a45da5fa70103947014e42653b2732a80}{getEventCount}}();}
+\DoxyCodeLine{596 }
+\DoxyCodeLine{597         \textcolor{keywordflow}{for} (\mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{Steinberg::int32}} i = 0; i < numEvents; ++i)}
+\DoxyCodeLine{598         \{}
+\DoxyCodeLine{599             \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event}{Steinberg::Vst::Event}} e;}
+\DoxyCodeLine{600 }
+\DoxyCodeLine{601             \textcolor{keywordflow}{if} (eventList.\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_event_list_ad8c1f9f6e0822442ed05300392b84960}{getEvent}} (i, e) != \mbox{\hyperlink{namespace_steinberg_aad984331dc0e96a8c373da4eedc8867fa186a780dc7f261ce261f6669ec20c64c}{Steinberg::kResultOk}})}
+\DoxyCodeLine{602                 \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{603 }
+\DoxyCodeLine{604             \textcolor{keyword}{const} \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a1243e1c99f08a099c7a70cc1a258034a}{message}} = toMidiMessage (e);}
+\DoxyCodeLine{605 }
+\DoxyCodeLine{606             \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a1243e1c99f08a099c7a70cc1a258034a}{message}}.isValid)}
+\DoxyCodeLine{607                 \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}.addEvent (\mbox{\hyperlink{namespacegl_a1243e1c99f08a099c7a70cc1a258034a}{message}}.item, e.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event_a2046862ba074b9d9f66acc234bec7ff1}{sampleOffset}});}
+\DoxyCodeLine{608         \}}
+\DoxyCodeLine{609     \}}
+\DoxyCodeLine{610 }
+\DoxyCodeLine{611     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_midi_event_list_ab484ff0dcc33443be6103376ff33b3fa}{hostToPluginEventList}} (\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_event_list}{Steinberg::Vst::IEventList}}\& \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}, \mbox{\hyperlink{class_midi_buffer}{MidiBuffer}}\& midiBuffer,}
+\DoxyCodeLine{612                                        \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_parameter_changes}{Steinberg::Vst::IParameterChanges}}* parameterChanges,}
+\DoxyCodeLine{613                                        \textcolor{keyword}{const} \mbox{\hyperlink{class_stored_midi_mapping}{StoredMidiMapping}}\& midiMapping)}
+\DoxyCodeLine{614     \{}
+\DoxyCodeLine{615         toEventList (\mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}},}
+\DoxyCodeLine{616                      midiBuffer,}
+\DoxyCodeLine{617                      parameterChanges,}
+\DoxyCodeLine{618                      \&midiMapping,}
+\DoxyCodeLine{619                      EventConversionKind::hostToPlugin);}
+\DoxyCodeLine{620     \}}
+\DoxyCodeLine{621 }
+\DoxyCodeLine{622     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_midi_event_list_aa97193d29c701215ce8e922048c98246}{pluginToHostEventList}} (\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_event_list}{Steinberg::Vst::IEventList}}\& \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}, \mbox{\hyperlink{class_midi_buffer}{MidiBuffer}}\& midiBuffer)}
+\DoxyCodeLine{623     \{}
+\DoxyCodeLine{624         toEventList (\mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}},}
+\DoxyCodeLine{625                      midiBuffer,}
+\DoxyCodeLine{626                      \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{627                      \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{628                      EventConversionKind::pluginToHost);}
+\DoxyCodeLine{629     \}}
+\DoxyCodeLine{630 }
+\DoxyCodeLine{631 \textcolor{keyword}{private}:}
+\DoxyCodeLine{632     \textcolor{keyword}{enum class} EventConversionKind}
+\DoxyCodeLine{633     \{}
+\DoxyCodeLine{634         \textcolor{comment}{// Hosted plugins don't expect to receive LegacyMIDICCEvents messages from the host,}}
+\DoxyCodeLine{635         \textcolor{comment}{// so if we're converting midi from the host to an eventlist, this mode will avoid}}
+\DoxyCodeLine{636         \textcolor{comment}{// converting to Legacy events where possible.}}
+\DoxyCodeLine{637         hostToPlugin,}
+\DoxyCodeLine{638 }
+\DoxyCodeLine{639         \textcolor{comment}{// If plugins generate MIDI internally, then where possible we should preserve}}
+\DoxyCodeLine{640         \textcolor{comment}{// these messages as LegacyMIDICCOut events.}}
+\DoxyCodeLine{641         pluginToHost}
+\DoxyCodeLine{642     \};}
+\DoxyCodeLine{643 }
+\DoxyCodeLine{644     \textcolor{keyword}{static} \textcolor{keywordtype}{void} toEventList (\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_event_list}{Steinberg::Vst::IEventList}}\& \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}, \mbox{\hyperlink{class_midi_buffer}{MidiBuffer}}\& midiBuffer,}
+\DoxyCodeLine{645                              \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_parameter_changes}{Steinberg::Vst::IParameterChanges}}* parameterChanges,}
+\DoxyCodeLine{646                              \textcolor{keyword}{const} \mbox{\hyperlink{class_stored_midi_mapping}{StoredMidiMapping}}* midiMapping,}
+\DoxyCodeLine{647                              EventConversionKind kind)}
+\DoxyCodeLine{648     \{}
+\DoxyCodeLine{649         \textcolor{keyword}{enum} \{ maxNumEvents = 2048 \}; \textcolor{comment}{// Steinberg's Host Checker states that no more than 2048 events are allowed at once}}
+\DoxyCodeLine{650         \textcolor{keywordtype}{int} numEvents = 0;}
+\DoxyCodeLine{651 }
+\DoxyCodeLine{652         \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto} metadata : midiBuffer)}
+\DoxyCodeLine{653         \{}
+\DoxyCodeLine{654             \textcolor{keywordflow}{if} (++numEvents > maxNumEvents)}
+\DoxyCodeLine{655                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{656 }
+\DoxyCodeLine{657             \textcolor{keyword}{auto} msg = metadata.getMessage();}
+\DoxyCodeLine{658 }
+\DoxyCodeLine{659             \textcolor{keywordflow}{if} (midiMapping != \textcolor{keyword}{nullptr} \&\& parameterChanges != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{660             \{}
+\DoxyCodeLine{661                 Vst3MidiControlEvent controlEvent;}
+\DoxyCodeLine{662 }
+\DoxyCodeLine{663                 \textcolor{keywordflow}{if} (toVst3ControlEvent (msg, controlEvent))}
+\DoxyCodeLine{664                 \{}
+\DoxyCodeLine{665                     \textcolor{keyword}{const} \textcolor{keyword}{auto} controlParamID = midiMapping-\/>\mbox{\hyperlink{class_stored_midi_mapping_aac9b96526f2e69cd072465b5dd14c97c}{getMapping}} (createSafeChannel (msg.getChannel()),}
+\DoxyCodeLine{666                                                                          controlEvent.controllerNumber);}
+\DoxyCodeLine{667 }
+\DoxyCodeLine{668                     \textcolor{keywordflow}{if} (controlParamID != Steinberg::Vst::kNoParamId)}
+\DoxyCodeLine{669                     \{}
+\DoxyCodeLine{670                         \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{Steinberg::int32}} ignore;}
+\DoxyCodeLine{671 }
+\DoxyCodeLine{672                         \textcolor{keywordflow}{if} (\textcolor{keyword}{auto}* queue = parameterChanges-\/>\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_parameter_changes_af083b423dabc633d8880f09e02cb92ec}{addParameterData}} (controlParamID, ignore))}
+\DoxyCodeLine{673                             queue-\/>addPoint (metadata.samplePosition, controlEvent.paramValue, ignore);}
+\DoxyCodeLine{674                     \}}
+\DoxyCodeLine{675 }
+\DoxyCodeLine{676                     \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{677                 \}}
+\DoxyCodeLine{678             \}}
+\DoxyCodeLine{679 }
+\DoxyCodeLine{680             \textcolor{keyword}{auto} maybeEvent = createVstEvent (msg, metadata.data, kind);}
+\DoxyCodeLine{681 }
+\DoxyCodeLine{682             \textcolor{keywordflow}{if} (! maybeEvent.isValid)}
+\DoxyCodeLine{683                 \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{684 }
+\DoxyCodeLine{685             \textcolor{keyword}{auto}\& e = maybeEvent.item;}
+\DoxyCodeLine{686             e.busIndex = 0;}
+\DoxyCodeLine{687             e.sampleOffset = metadata.samplePosition;}
+\DoxyCodeLine{688             \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}.addEvent (e);}
+\DoxyCodeLine{689         \}}
+\DoxyCodeLine{690     \}}
+\DoxyCodeLine{691 }
+\DoxyCodeLine{692     \mbox{\hyperlink{class_array}{Array<Steinberg::Vst::Event, CriticalSection>}} events;}
+\DoxyCodeLine{693     \mbox{\hyperlink{struct_atomic}{Atomic<int>}} refCount;}
+\DoxyCodeLine{694 }
+\DoxyCodeLine{695     \textcolor{keyword}{static} \mbox{\hyperlink{namespace_steinberg_a091b21d361005029928d1a49e59f1fd9}{Steinberg::int16}} createSafeChannel (\textcolor{keywordtype}{int} channel) \textcolor{keyword}{noexcept}  \{ \textcolor{keywordflow}{return} (\mbox{\hyperlink{namespace_steinberg_a091b21d361005029928d1a49e59f1fd9}{Steinberg::int16}}) \mbox{\hyperlink{group__juce__core-maths_gacf7cd562ab136d15d3bf5c3be047cf96}{jlimit}} (0, 15, channel -\/ 1); \}}
+\DoxyCodeLine{696     \textcolor{keyword}{static} \textcolor{keywordtype}{int} createSafeChannel (\mbox{\hyperlink{namespace_steinberg_a091b21d361005029928d1a49e59f1fd9}{Steinberg::int16}} channel) \textcolor{keyword}{noexcept}  \{ \textcolor{keywordflow}{return} (\textcolor{keywordtype}{int}) \mbox{\hyperlink{group__juce__core-maths_gacf7cd562ab136d15d3bf5c3be047cf96}{jlimit}} (1, 16, channel + 1); \}}
+\DoxyCodeLine{697 }
+\DoxyCodeLine{698     \textcolor{keyword}{static} \mbox{\hyperlink{namespace_steinberg_a091b21d361005029928d1a49e59f1fd9}{Steinberg::int16}} createSafeNote (\textcolor{keywordtype}{int} note) \textcolor{keyword}{noexcept}        \{ \textcolor{keywordflow}{return} (\mbox{\hyperlink{namespace_steinberg_a091b21d361005029928d1a49e59f1fd9}{Steinberg::int16}}) \mbox{\hyperlink{group__juce__core-maths_gacf7cd562ab136d15d3bf5c3be047cf96}{jlimit}} (0, 127, note); \}}
+\DoxyCodeLine{699     \textcolor{keyword}{static} \textcolor{keywordtype}{int} createSafeNote (\mbox{\hyperlink{namespace_steinberg_a091b21d361005029928d1a49e59f1fd9}{Steinberg::int16}} note) \textcolor{keyword}{noexcept}        \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{group__juce__core-maths_gacf7cd562ab136d15d3bf5c3be047cf96}{jlimit}} (0, 127, (\textcolor{keywordtype}{int}) note); \}}
+\DoxyCodeLine{700 }
+\DoxyCodeLine{701     \textcolor{keyword}{static} \textcolor{keywordtype}{float} normaliseMidiValue (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}) \textcolor{keyword}{noexcept}              \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{group__juce__core-maths_gacf7cd562ab136d15d3bf5c3be047cf96}{jlimit}} (0.0f, 1.0f, (\textcolor{keywordtype}{float}) \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}} / 127.0f); \}}
+\DoxyCodeLine{702     \textcolor{keyword}{static} \textcolor{keywordtype}{int} denormaliseToMidiValue (\textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}) \textcolor{keyword}{noexcept}          \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{group__juce__core-maths_gafe8eb86381d389f4ba9f9931a38e1a44}{roundToInt}} (\mbox{\hyperlink{group__juce__core-maths_gacf7cd562ab136d15d3bf5c3be047cf96}{jlimit}} (0.0f, 127.0f, \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}} * 127.0f)); \}}
+\DoxyCodeLine{703 }
+\DoxyCodeLine{704     \textcolor{keyword}{static} \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event}{Steinberg::Vst::Event}} createNoteOnEvent (\textcolor{keyword}{const} \mbox{\hyperlink{class_midi_message}{MidiMessage}}\& msg) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{705     \{}
+\DoxyCodeLine{706         \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event}{Steinberg::Vst::Event}} e\{\};}
+\DoxyCodeLine{707         e.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event_abc5059abebf4c33c3d5f37b0105ae076}{type}}              = \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event_abc13e1dd00bf05236bb442085f7bf0f7ab8df1295f091c52aac5fe1cba6dc77c0}{Steinberg::Vst::Event::kNoteOnEvent}};}
+\DoxyCodeLine{708         e.noteOn.channel    = createSafeChannel (msg.getChannel());}
+\DoxyCodeLine{709         e.noteOn.pitch      = createSafeNote (msg.getNoteNumber());}
+\DoxyCodeLine{710         e.noteOn.velocity   = normaliseMidiValue (msg.getVelocity());}
+\DoxyCodeLine{711         e.noteOn.length     = 0;}
+\DoxyCodeLine{712         e.noteOn.tuning     = 0.0f;}
+\DoxyCodeLine{713         e.noteOn.noteId     = -\/1;}
+\DoxyCodeLine{714         \textcolor{keywordflow}{return} e;}
+\DoxyCodeLine{715     \}}
+\DoxyCodeLine{716 }
+\DoxyCodeLine{717     \textcolor{keyword}{static} \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event}{Steinberg::Vst::Event}} createNoteOffEvent (\textcolor{keyword}{const} \mbox{\hyperlink{class_midi_message}{MidiMessage}}\& msg) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{718     \{}
+\DoxyCodeLine{719         \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event}{Steinberg::Vst::Event}} e\{\};}
+\DoxyCodeLine{720         e.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event_abc5059abebf4c33c3d5f37b0105ae076}{type}}              = \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event_abc13e1dd00bf05236bb442085f7bf0f7a8af999a1439b8edc2690545c2dba5b71}{Steinberg::Vst::Event::kNoteOffEvent}};}
+\DoxyCodeLine{721         e.noteOff.channel   = createSafeChannel (msg.getChannel());}
+\DoxyCodeLine{722         e.noteOff.pitch     = createSafeNote (msg.getNoteNumber());}
+\DoxyCodeLine{723         e.noteOff.velocity  = normaliseMidiValue (msg.getVelocity());}
+\DoxyCodeLine{724         e.noteOff.tuning    = 0.0f;}
+\DoxyCodeLine{725         e.noteOff.noteId    = -\/1;}
+\DoxyCodeLine{726         \textcolor{keywordflow}{return} e;}
+\DoxyCodeLine{727     \}}
+\DoxyCodeLine{728 }
+\DoxyCodeLine{729     \textcolor{keyword}{static} \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event}{Steinberg::Vst::Event}} createSysExEvent (\textcolor{keyword}{const} \mbox{\hyperlink{class_midi_message}{MidiMessage}}\& msg, \textcolor{keyword}{const} \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}}* midiEventData) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{730     \{}
+\DoxyCodeLine{731         \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event}{Steinberg::Vst::Event}} e\{\};}
+\DoxyCodeLine{732         e.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event_abc5059abebf4c33c3d5f37b0105ae076}{type}}          = \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event_abc13e1dd00bf05236bb442085f7bf0f7af37252ddecc93190f6366947aab70c3c}{Steinberg::Vst::Event::kDataEvent}};}
+\DoxyCodeLine{733         e.data.bytes    = midiEventData + 1;}
+\DoxyCodeLine{734         e.data.size     = (\mbox{\hyperlink{namespace_steinberg_af4518d725547bee20d4e185e8d3f1965}{uint32}}) msg.getSysExDataSize();}
+\DoxyCodeLine{735         e.data.type     = \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_data_event_a6f0cabb43fcc3838159ad9c6f17fb478ab2f489708ea514e07cffd91045200351}{Steinberg::Vst::DataEvent::kMidiSysEx}};}
+\DoxyCodeLine{736         \textcolor{keywordflow}{return} e;}
+\DoxyCodeLine{737     \}}
+\DoxyCodeLine{738 }
+\DoxyCodeLine{739     \textcolor{keyword}{static} \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event}{Steinberg::Vst::Event}} createLegacyMIDIEvent (\textcolor{keywordtype}{int} channel, \textcolor{keywordtype}{int} controlNumber, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}, \textcolor{keywordtype}{int} value2 = 0)}
+\DoxyCodeLine{740     \{}
+\DoxyCodeLine{741         \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event}{Steinberg::Vst::Event}} e\{\};}
+\DoxyCodeLine{742         e.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event_abc5059abebf4c33c3d5f37b0105ae076}{type}}                      = \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event_abc13e1dd00bf05236bb442085f7bf0f7abb9ea0a1b7eb622dd370cdd68ad6c180}{Steinberg::Vst::Event::kLegacyMIDICCOutEvent}};}
+\DoxyCodeLine{743         e.midiCCOut.channel         = \mbox{\hyperlink{namespace_steinberg_a76303c06c8689fb47178d9baabce246b}{Steinberg::int8}} (createSafeChannel (channel));}
+\DoxyCodeLine{744         e.midiCCOut.controlNumber   = \mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}} (\mbox{\hyperlink{group__juce__core-maths_gacf7cd562ab136d15d3bf5c3be047cf96}{jlimit}} (0, 255, controlNumber));}
+\DoxyCodeLine{745         e.midiCCOut.value           = \mbox{\hyperlink{namespace_steinberg_a76303c06c8689fb47178d9baabce246b}{Steinberg::int8}} (createSafeNote (\mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}));}
+\DoxyCodeLine{746         e.midiCCOut.value2          = \mbox{\hyperlink{namespace_steinberg_a76303c06c8689fb47178d9baabce246b}{Steinberg::int8}} (createSafeNote (value2));}
+\DoxyCodeLine{747         \textcolor{keywordflow}{return} e;}
+\DoxyCodeLine{748     \}}
+\DoxyCodeLine{749 }
+\DoxyCodeLine{750     \textcolor{keyword}{static} \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event}{Steinberg::Vst::Event}} createPolyPressureEvent (\textcolor{keyword}{const} \mbox{\hyperlink{class_midi_message}{MidiMessage}}\& msg)}
+\DoxyCodeLine{751     \{}
+\DoxyCodeLine{752         \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event}{Steinberg::Vst::Event}} e\{\};}
+\DoxyCodeLine{753         e.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event_abc5059abebf4c33c3d5f37b0105ae076}{type}}                      = \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event_abc13e1dd00bf05236bb442085f7bf0f7a668fe8eec754d6ec7b7b333987cc09fc}{Steinberg::Vst::Event::kPolyPressureEvent}};}
+\DoxyCodeLine{754         e.polyPressure.channel      = createSafeChannel (msg.\mbox{\hyperlink{class_midi_message_a7d681b7417c52d29cb73c108ca2a83b7}{getChannel}}());}
+\DoxyCodeLine{755         e.polyPressure.pitch        = createSafeNote (msg.\mbox{\hyperlink{class_midi_message_a6a5f965e98254fb026c5a20b64edcbc1}{getNoteNumber}}());}
+\DoxyCodeLine{756         e.polyPressure.pressure     = normaliseMidiValue (msg.\mbox{\hyperlink{class_midi_message_a623eb143fab4c07d18106c8e4e40316f}{getAfterTouchValue}}());}
+\DoxyCodeLine{757         e.polyPressure.noteId       = -\/1;}
+\DoxyCodeLine{758         \textcolor{keywordflow}{return} e;}
+\DoxyCodeLine{759     \}}
+\DoxyCodeLine{760 }
+\DoxyCodeLine{761     \textcolor{keyword}{static} \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event}{Steinberg::Vst::Event}} createChannelPressureEvent (\textcolor{keyword}{const} \mbox{\hyperlink{class_midi_message}{MidiMessage}}\& msg) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{762     \{}
+\DoxyCodeLine{763         \textcolor{keywordflow}{return} createLegacyMIDIEvent (msg.getChannel(),}
+\DoxyCodeLine{764                                       \mbox{\hyperlink{namespace_steinberg_1_1_vst_af1c04e80789d8e42a9b65e64869accd7aabee4df61bbb9ef300e794fa33b963c6}{Steinberg::Vst::kAfterTouch}},}
+\DoxyCodeLine{765                                       msg.getChannelPressureValue());}
+\DoxyCodeLine{766     \}}
+\DoxyCodeLine{767 }
+\DoxyCodeLine{768     \textcolor{keyword}{static} \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event}{Steinberg::Vst::Event}} createControllerEvent (\textcolor{keyword}{const} \mbox{\hyperlink{class_midi_message}{MidiMessage}}\& msg) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{769     \{}
+\DoxyCodeLine{770         \textcolor{keywordflow}{return} createLegacyMIDIEvent (msg.getChannel(),}
+\DoxyCodeLine{771                                       msg.getControllerNumber(),}
+\DoxyCodeLine{772                                       msg.getControllerValue());}
+\DoxyCodeLine{773     \}}
+\DoxyCodeLine{774 }
+\DoxyCodeLine{775     \textcolor{keyword}{static} \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event}{Steinberg::Vst::Event}} createCtrlPolyPressureEvent (\textcolor{keyword}{const} \mbox{\hyperlink{class_midi_message}{MidiMessage}}\& msg) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{776     \{}
+\DoxyCodeLine{777         \textcolor{keywordflow}{return} createLegacyMIDIEvent (msg.getChannel(),}
+\DoxyCodeLine{778                                       \mbox{\hyperlink{namespace_steinberg_1_1_vst_af1c04e80789d8e42a9b65e64869accd7a450ba7a469efbafdea66f8b9f2a5ab21}{Steinberg::Vst::kCtrlPolyPressure}},}
+\DoxyCodeLine{779                                       msg.getNoteNumber(),}
+\DoxyCodeLine{780                                       msg.getAfterTouchValue());}
+\DoxyCodeLine{781     \}}
+\DoxyCodeLine{782 }
+\DoxyCodeLine{783     \textcolor{keyword}{static} \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event}{Steinberg::Vst::Event}} createPitchWheelEvent (\textcolor{keyword}{const} \mbox{\hyperlink{class_midi_message}{MidiMessage}}\& msg) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{784     \{}
+\DoxyCodeLine{785         \textcolor{keywordflow}{return} createLegacyMIDIEvent (msg.getChannel(),}
+\DoxyCodeLine{786                                       \mbox{\hyperlink{namespace_steinberg_1_1_vst_af1c04e80789d8e42a9b65e64869accd7a1b4b610104b1e6bd1bd8d306f40f7a83}{Steinberg::Vst::kPitchBend}},}
+\DoxyCodeLine{787                                       msg.getRawData()[1],}
+\DoxyCodeLine{788                                       msg.getRawData()[2]);}
+\DoxyCodeLine{789     \}}
+\DoxyCodeLine{790 }
+\DoxyCodeLine{791     \textcolor{keyword}{static} \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event}{Steinberg::Vst::Event}} createProgramChangeEvent (\textcolor{keyword}{const} \mbox{\hyperlink{class_midi_message}{MidiMessage}}\& msg) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{792     \{}
+\DoxyCodeLine{793         \textcolor{keywordflow}{return} createLegacyMIDIEvent (msg.getChannel(),}
+\DoxyCodeLine{794                                       \mbox{\hyperlink{namespace_steinberg_1_1_vst_af1c04e80789d8e42a9b65e64869accd7a25a4958286b3cd736148f4776c962af0}{Steinberg::Vst::kCtrlProgramChange}},}
+\DoxyCodeLine{795                                       msg.getProgramChangeNumber());}
+\DoxyCodeLine{796     \}}
+\DoxyCodeLine{797 }
+\DoxyCodeLine{798     \textcolor{keyword}{static} \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event}{Steinberg::Vst::Event}} createCtrlQuarterFrameEvent (\textcolor{keyword}{const} \mbox{\hyperlink{class_midi_message}{MidiMessage}}\& msg) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{799     \{}
+\DoxyCodeLine{800         \textcolor{keywordflow}{return} createLegacyMIDIEvent (msg.getChannel(),}
+\DoxyCodeLine{801                                       \mbox{\hyperlink{namespace_steinberg_1_1_vst_af1c04e80789d8e42a9b65e64869accd7a894b4e2dd5da67e0aa02ac6a0173b21d}{Steinberg::Vst::kCtrlQuarterFrame}},}
+\DoxyCodeLine{802                                       msg.getQuarterFrameValue());}
+\DoxyCodeLine{803     \}}
+\DoxyCodeLine{804 }
+\DoxyCodeLine{805     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Item>}
+\DoxyCodeLine{806     \textcolor{keyword}{struct }BasicOptional final}
+\DoxyCodeLine{807     \{}
+\DoxyCodeLine{808         BasicOptional() noexcept = default;}
+\DoxyCodeLine{809         BasicOptional (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} Item\& i) noexcept : item \{ i \}, isValid \{ \textcolor{keyword}{true} \} \{\}}
+\DoxyCodeLine{810 }
+\DoxyCodeLine{811         Item item;}
+\DoxyCodeLine{812         \textcolor{keywordtype}{bool} isValid\{\};}
+\DoxyCodeLine{813     \};}
+\DoxyCodeLine{814 }
+\DoxyCodeLine{815     \textcolor{keyword}{static} BasicOptional<Steinberg::Vst::Event> createVstEvent (\textcolor{keyword}{const} \mbox{\hyperlink{class_midi_message}{MidiMessage}}\& msg,}
+\DoxyCodeLine{816                                                                 \textcolor{keyword}{const} \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}}* midiEventData,}
+\DoxyCodeLine{817                                                                 EventConversionKind kind) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{818     \{}
+\DoxyCodeLine{819         \textcolor{keywordflow}{if} (msg.isNoteOn())}
+\DoxyCodeLine{820             \textcolor{keywordflow}{return} createNoteOnEvent (msg);}
+\DoxyCodeLine{821 }
+\DoxyCodeLine{822         \textcolor{keywordflow}{if} (msg.isNoteOff())}
+\DoxyCodeLine{823             \textcolor{keywordflow}{return} createNoteOffEvent (msg);}
+\DoxyCodeLine{824 }
+\DoxyCodeLine{825         \textcolor{keywordflow}{if} (msg.isSysEx())}
+\DoxyCodeLine{826             \textcolor{keywordflow}{return} createSysExEvent (msg, midiEventData);}
+\DoxyCodeLine{827 }
+\DoxyCodeLine{828         \textcolor{keywordflow}{if} (msg.isChannelPressure())}
+\DoxyCodeLine{829             \textcolor{keywordflow}{return} createChannelPressureEvent (msg);}
+\DoxyCodeLine{830 }
+\DoxyCodeLine{831         \textcolor{keywordflow}{if} (msg.isPitchWheel())}
+\DoxyCodeLine{832             \textcolor{keywordflow}{return} createPitchWheelEvent (msg);}
+\DoxyCodeLine{833 }
+\DoxyCodeLine{834         \textcolor{keywordflow}{if} (msg.isProgramChange())}
+\DoxyCodeLine{835             \textcolor{keywordflow}{return} createProgramChangeEvent (msg);}
+\DoxyCodeLine{836 }
+\DoxyCodeLine{837         \textcolor{keywordflow}{if} (msg.isController())}
+\DoxyCodeLine{838             \textcolor{keywordflow}{return} createControllerEvent (msg);}
+\DoxyCodeLine{839 }
+\DoxyCodeLine{840         \textcolor{keywordflow}{if} (msg.isQuarterFrame())}
+\DoxyCodeLine{841             \textcolor{keywordflow}{return} createCtrlQuarterFrameEvent (msg);}
+\DoxyCodeLine{842 }
+\DoxyCodeLine{843         \textcolor{keywordflow}{if} (msg.isAftertouch())}
+\DoxyCodeLine{844         \{}
+\DoxyCodeLine{845             \textcolor{keywordflow}{switch} (kind)}
+\DoxyCodeLine{846             \{}
+\DoxyCodeLine{847                 \textcolor{keywordflow}{case} EventConversionKind::hostToPlugin:}
+\DoxyCodeLine{848                     \textcolor{keywordflow}{return} createPolyPressureEvent (msg);}
+\DoxyCodeLine{849 }
+\DoxyCodeLine{850                 \textcolor{keywordflow}{case} EventConversionKind::pluginToHost:}
+\DoxyCodeLine{851                     \textcolor{keywordflow}{return} createCtrlPolyPressureEvent (msg);}
+\DoxyCodeLine{852             \}}
+\DoxyCodeLine{853 }
+\DoxyCodeLine{854             \mbox{\hyperlink{group__juce__core-system_gadc044ce5efecbecf2f5a44cd00db67b3}{jassertfalse}};}
+\DoxyCodeLine{855             \textcolor{keywordflow}{return} \{\};}
+\DoxyCodeLine{856         \}}
+\DoxyCodeLine{857 }
+\DoxyCodeLine{858         \textcolor{keywordflow}{return} \{\};}
+\DoxyCodeLine{859     \}}
+\DoxyCodeLine{860 }
+\DoxyCodeLine{861     \textcolor{keyword}{static} BasicOptional<MidiMessage> toMidiMessage (\textcolor{keyword}{const} \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_legacy_m_i_d_i_c_c_out_event}{Steinberg::Vst::LegacyMIDICCOutEvent}}\& e)}
+\DoxyCodeLine{862     \{}
+\DoxyCodeLine{863         \textcolor{keywordflow}{if} (e.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_legacy_m_i_d_i_c_c_out_event_a14d1de2d25d1575a90dbd3dfd685667d}{controlNumber}} <= 127)}
+\DoxyCodeLine{864             \textcolor{keywordflow}{return} \mbox{\hyperlink{class_midi_message_a3ec4f4757e99ca98667da599b97e93ac}{MidiMessage::controllerEvent}} (createSafeChannel (\mbox{\hyperlink{juce__box2d_8cpp_a1336d6dad274f1bead955274a953c13d}{int16}} (e.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_legacy_m_i_d_i_c_c_out_event_aa164cd79b43c4fee567207d50c375fdb}{channel}})),}
+\DoxyCodeLine{865                                                  createSafeNote (\mbox{\hyperlink{juce__box2d_8cpp_a1336d6dad274f1bead955274a953c13d}{int16}} (e.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_legacy_m_i_d_i_c_c_out_event_a14d1de2d25d1575a90dbd3dfd685667d}{controlNumber}})),}
+\DoxyCodeLine{866                                                  createSafeNote (\mbox{\hyperlink{juce__box2d_8cpp_a1336d6dad274f1bead955274a953c13d}{int16}} (e.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_legacy_m_i_d_i_c_c_out_event_a21fec692bea8ce0261f32597582379b2}{value}})));}
+\DoxyCodeLine{867 }
+\DoxyCodeLine{868         \textcolor{keywordflow}{switch} (e.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_legacy_m_i_d_i_c_c_out_event_a14d1de2d25d1575a90dbd3dfd685667d}{controlNumber}})}
+\DoxyCodeLine{869         \{}
+\DoxyCodeLine{870             \textcolor{keywordflow}{case} \mbox{\hyperlink{namespace_steinberg_1_1_vst_af1c04e80789d8e42a9b65e64869accd7aabee4df61bbb9ef300e794fa33b963c6}{Steinberg::Vst::kAfterTouch}}:}
+\DoxyCodeLine{871                 \textcolor{keywordflow}{return} \mbox{\hyperlink{class_midi_message_a4512f9ab1048b288b1b93680d6f24d13}{MidiMessage::channelPressureChange}} (createSafeChannel (\mbox{\hyperlink{juce__box2d_8cpp_a1336d6dad274f1bead955274a953c13d}{int16}} (e.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_legacy_m_i_d_i_c_c_out_event_aa164cd79b43c4fee567207d50c375fdb}{channel}})),}
+\DoxyCodeLine{872                                                            createSafeNote (\mbox{\hyperlink{juce__box2d_8cpp_a1336d6dad274f1bead955274a953c13d}{int16}} (e.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_legacy_m_i_d_i_c_c_out_event_a21fec692bea8ce0261f32597582379b2}{value}})));}
+\DoxyCodeLine{873 }
+\DoxyCodeLine{874             \textcolor{keywordflow}{case} \mbox{\hyperlink{namespace_steinberg_1_1_vst_af1c04e80789d8e42a9b65e64869accd7a1b4b610104b1e6bd1bd8d306f40f7a83}{Steinberg::Vst::kPitchBend}}:}
+\DoxyCodeLine{875                 \textcolor{keywordflow}{return} \mbox{\hyperlink{class_midi_message_a5e26e83ef29f13d6f7729ca5feb026d1}{MidiMessage::pitchWheel}} (createSafeChannel (\mbox{\hyperlink{juce__box2d_8cpp_a1336d6dad274f1bead955274a953c13d}{int16}} (e.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_legacy_m_i_d_i_c_c_out_event_aa164cd79b43c4fee567207d50c375fdb}{channel}})),}
+\DoxyCodeLine{876                                                 (e.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_legacy_m_i_d_i_c_c_out_event_a21fec692bea8ce0261f32597582379b2}{value}} \& 0x7f) | ((e.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_legacy_m_i_d_i_c_c_out_event_a4b183b0f5af7094d47f5f85287895cd1}{value2}} \& 0x7f) << 7));}
+\DoxyCodeLine{877 }
+\DoxyCodeLine{878             \textcolor{keywordflow}{case} \mbox{\hyperlink{namespace_steinberg_1_1_vst_af1c04e80789d8e42a9b65e64869accd7a25a4958286b3cd736148f4776c962af0}{Steinberg::Vst::kCtrlProgramChange}}:}
+\DoxyCodeLine{879                 \textcolor{keywordflow}{return} \mbox{\hyperlink{class_midi_message_a703ef4b9b6308b1f8aa72d20f9b95dbc}{MidiMessage::programChange}} (createSafeChannel (\mbox{\hyperlink{juce__box2d_8cpp_a1336d6dad274f1bead955274a953c13d}{int16}} (e.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_legacy_m_i_d_i_c_c_out_event_aa164cd79b43c4fee567207d50c375fdb}{channel}})),}
+\DoxyCodeLine{880                                                    createSafeNote (\mbox{\hyperlink{juce__box2d_8cpp_a1336d6dad274f1bead955274a953c13d}{int16}} (e.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_legacy_m_i_d_i_c_c_out_event_a21fec692bea8ce0261f32597582379b2}{value}})));}
+\DoxyCodeLine{881 }
+\DoxyCodeLine{882             \textcolor{keywordflow}{case} \mbox{\hyperlink{namespace_steinberg_1_1_vst_af1c04e80789d8e42a9b65e64869accd7a894b4e2dd5da67e0aa02ac6a0173b21d}{Steinberg::Vst::kCtrlQuarterFrame}}:}
+\DoxyCodeLine{883                 \textcolor{keywordflow}{return} \mbox{\hyperlink{class_midi_message_ae3bde183bd6663fee315b07b3866fa46}{MidiMessage::quarterFrame}} (createSafeChannel (\mbox{\hyperlink{juce__box2d_8cpp_a1336d6dad274f1bead955274a953c13d}{int16}} (e.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_legacy_m_i_d_i_c_c_out_event_aa164cd79b43c4fee567207d50c375fdb}{channel}})),}
+\DoxyCodeLine{884                                                   createSafeNote (\mbox{\hyperlink{juce__box2d_8cpp_a1336d6dad274f1bead955274a953c13d}{int16}} (e.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_legacy_m_i_d_i_c_c_out_event_a21fec692bea8ce0261f32597582379b2}{value}})));}
+\DoxyCodeLine{885 }
+\DoxyCodeLine{886             \textcolor{keywordflow}{case} \mbox{\hyperlink{namespace_steinberg_1_1_vst_af1c04e80789d8e42a9b65e64869accd7a450ba7a469efbafdea66f8b9f2a5ab21}{Steinberg::Vst::kCtrlPolyPressure}}:}
+\DoxyCodeLine{887                 \textcolor{keywordflow}{return} \mbox{\hyperlink{class_midi_message_a70b5fbedc4efb0c4e46d8f03e52672a9}{MidiMessage::aftertouchChange}} (createSafeChannel (\mbox{\hyperlink{juce__box2d_8cpp_a1336d6dad274f1bead955274a953c13d}{int16}} (e.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_legacy_m_i_d_i_c_c_out_event_aa164cd79b43c4fee567207d50c375fdb}{channel}})),}
+\DoxyCodeLine{888                                                       createSafeNote (\mbox{\hyperlink{juce__box2d_8cpp_a1336d6dad274f1bead955274a953c13d}{int16}} (e.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_legacy_m_i_d_i_c_c_out_event_a21fec692bea8ce0261f32597582379b2}{value}})),}
+\DoxyCodeLine{889                                                       createSafeNote (\mbox{\hyperlink{juce__box2d_8cpp_a1336d6dad274f1bead955274a953c13d}{int16}} (e.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_legacy_m_i_d_i_c_c_out_event_a4b183b0f5af7094d47f5f85287895cd1}{value2}})));}
+\DoxyCodeLine{890 }
+\DoxyCodeLine{891             \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{892                 \textcolor{comment}{// If this is hit, we're trying to convert a LegacyMIDICCOutEvent with an unknown controlNumber.}}
+\DoxyCodeLine{893                 \mbox{\hyperlink{group__juce__core-system_gadc044ce5efecbecf2f5a44cd00db67b3}{jassertfalse}};}
+\DoxyCodeLine{894                 \textcolor{keywordflow}{return} \{\};}
+\DoxyCodeLine{895         \}}
+\DoxyCodeLine{896     \}}
+\DoxyCodeLine{897 }
+\DoxyCodeLine{898     \textcolor{keyword}{static} BasicOptional<MidiMessage> toMidiMessage (\textcolor{keyword}{const} \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event}{Steinberg::Vst::Event}}\& e)}
+\DoxyCodeLine{899     \{}
+\DoxyCodeLine{900         \textcolor{keywordflow}{switch} (e.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event_abc5059abebf4c33c3d5f37b0105ae076}{type}})}
+\DoxyCodeLine{901         \{}
+\DoxyCodeLine{902             \textcolor{keywordflow}{case} \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event_abc13e1dd00bf05236bb442085f7bf0f7ab8df1295f091c52aac5fe1cba6dc77c0}{Steinberg::Vst::Event::kNoteOnEvent}}:}
+\DoxyCodeLine{903                 \textcolor{keywordflow}{return} \mbox{\hyperlink{class_midi_message_a9f189916aaff2533e115f6dc942aafc7}{MidiMessage::noteOn}} (createSafeChannel (e.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event_a6f57a2a38de5f1a5f3778b7cc421ceb7}{noteOn}}.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_note_on_event_a9c1049ce778b2d242333a2476803d7eb}{channel}}),}
+\DoxyCodeLine{904                                             createSafeNote (e.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event_a6f57a2a38de5f1a5f3778b7cc421ceb7}{noteOn}}.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_note_on_event_ab596a611f6febc2b87a554bbb61d1202}{pitch}}),}
+\DoxyCodeLine{905                                             (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{Steinberg::uint8}}) denormaliseToMidiValue (e.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event_a6f57a2a38de5f1a5f3778b7cc421ceb7}{noteOn}}.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_note_on_event_ac8bc1d9bf3db61b2aba8646aaea1e644}{velocity}}));}
+\DoxyCodeLine{906 }
+\DoxyCodeLine{907             \textcolor{keywordflow}{case} \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event_abc13e1dd00bf05236bb442085f7bf0f7a8af999a1439b8edc2690545c2dba5b71}{Steinberg::Vst::Event::kNoteOffEvent}}:}
+\DoxyCodeLine{908                 \textcolor{keywordflow}{return} \mbox{\hyperlink{class_midi_message_a8990f215f1befaad55c8c0e832f43175}{MidiMessage::noteOff}} (createSafeChannel (e.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event_ae20bfd6717787f8de0f010641fd43dda}{noteOff}}.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_note_off_event_a7cd0070ce91ec01079e34c651af964fa}{channel}}),}
+\DoxyCodeLine{909                                              createSafeNote (e.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event_ae20bfd6717787f8de0f010641fd43dda}{noteOff}}.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_note_off_event_acc359f1bea835d01341aeed06050a3da}{pitch}}),}
+\DoxyCodeLine{910                                              (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{Steinberg::uint8}}) denormaliseToMidiValue (e.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event_ae20bfd6717787f8de0f010641fd43dda}{noteOff}}.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_note_off_event_a06353ee2636e8cb955f3f917b80601ca}{velocity}}));}
+\DoxyCodeLine{911 }
+\DoxyCodeLine{912             \textcolor{keywordflow}{case} \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event_abc13e1dd00bf05236bb442085f7bf0f7a668fe8eec754d6ec7b7b333987cc09fc}{Steinberg::Vst::Event::kPolyPressureEvent}}:}
+\DoxyCodeLine{913                 \textcolor{keywordflow}{return} \mbox{\hyperlink{class_midi_message_a70b5fbedc4efb0c4e46d8f03e52672a9}{MidiMessage::aftertouchChange}} (createSafeChannel (e.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event_a5434fcd74c5284348b34403997f236c2}{polyPressure}}.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_poly_pressure_event_ad68a9edd3e17232f9959d8f631b3750a}{channel}}),}
+\DoxyCodeLine{914                                                       createSafeNote (e.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event_a5434fcd74c5284348b34403997f236c2}{polyPressure}}.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_poly_pressure_event_ad1a312c063c9e544361b413e357b0e16}{pitch}}),}
+\DoxyCodeLine{915                                                       (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{Steinberg::uint8}}) denormaliseToMidiValue (e.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event_a5434fcd74c5284348b34403997f236c2}{polyPressure}}.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_poly_pressure_event_a5fc355fb44e06b887f8a2bb6f594689c}{pressure}}));}
+\DoxyCodeLine{916 }
+\DoxyCodeLine{917             \textcolor{keywordflow}{case} \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event_abc13e1dd00bf05236bb442085f7bf0f7af37252ddecc93190f6366947aab70c3c}{Steinberg::Vst::Event::kDataEvent}}:}
+\DoxyCodeLine{918                 \textcolor{keywordflow}{return} \mbox{\hyperlink{class_midi_message_ad9cf216c12b52a87cfe490b51779416b}{MidiMessage::createSysExMessage}} (e.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event_a0582be49175d35c41e4ad84dc2eb2cc3}{data}}.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_data_event_a75c468567cebee29be02fbb9c8f0652d}{bytes}}, (\textcolor{keywordtype}{int}) e.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event_a0582be49175d35c41e4ad84dc2eb2cc3}{data}}.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_data_event_aa44ad32822ebbe63fbc66ab31078b115}{size}});}
+\DoxyCodeLine{919 }
+\DoxyCodeLine{920             \textcolor{keywordflow}{case} \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event_abc13e1dd00bf05236bb442085f7bf0f7abb9ea0a1b7eb622dd370cdd68ad6c180}{Steinberg::Vst::Event::kLegacyMIDICCOutEvent}}:}
+\DoxyCodeLine{921                 \textcolor{keywordflow}{return} toMidiMessage (e.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event_a32f46be723550cf191a060d2ee9725b0}{midiCCOut}});}
+\DoxyCodeLine{922 }
+\DoxyCodeLine{923             \textcolor{keywordflow}{case} \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event_abc13e1dd00bf05236bb442085f7bf0f7a5b9da47f67b02f68e04194c7af66f08e}{Steinberg::Vst::Event::kNoteExpressionValueEvent}}:}
+\DoxyCodeLine{924             \textcolor{keywordflow}{case} \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event_abc13e1dd00bf05236bb442085f7bf0f7a705bcdba9619380fc0695493bdc5fd05}{Steinberg::Vst::Event::kNoteExpressionTextEvent}}:}
+\DoxyCodeLine{925             \textcolor{keywordflow}{case} \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event_abc13e1dd00bf05236bb442085f7bf0f7a8f911d1ba59b808ac25d62b937f28534}{Steinberg::Vst::Event::kChordEvent}}:}
+\DoxyCodeLine{926             \textcolor{keywordflow}{case} \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_event_abc13e1dd00bf05236bb442085f7bf0f7a081bd236e4e259ffbeee4d6c7b12b323}{Steinberg::Vst::Event::kScaleEvent}}:}
+\DoxyCodeLine{927                 \textcolor{keywordflow}{return} \{\};}
+\DoxyCodeLine{928 }
+\DoxyCodeLine{929             \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{930                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{931         \}}
+\DoxyCodeLine{932 }
+\DoxyCodeLine{933         \textcolor{comment}{// If this is hit, we've been sent an event type that doesn't exist in the VST3 spec.}}
+\DoxyCodeLine{934         \mbox{\hyperlink{group__juce__core-system_gadc044ce5efecbecf2f5a44cd00db67b3}{jassertfalse}};}
+\DoxyCodeLine{935         \textcolor{keywordflow}{return} \{\};}
+\DoxyCodeLine{936     \}}
+\DoxyCodeLine{937 }
+\DoxyCodeLine{938     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{939     \textcolor{keyword}{struct }Vst3MidiControlEvent}
+\DoxyCodeLine{940     \{}
+\DoxyCodeLine{941         \mbox{\hyperlink{namespace_steinberg_1_1_vst_a7cdcbf3982dea195392fe7949ba70d26}{Steinberg::Vst::CtrlNumber}} controllerNumber;}
+\DoxyCodeLine{942         \mbox{\hyperlink{namespace_steinberg_1_1_vst_a4db0796162b8b9751ae472df998f8736}{Steinberg::Vst::ParamValue}} paramValue;}
+\DoxyCodeLine{943     \};}
+\DoxyCodeLine{944 }
+\DoxyCodeLine{945     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} toVst3ControlEvent (\textcolor{keyword}{const} \mbox{\hyperlink{class_midi_message}{MidiMessage}}\& msg, Vst3MidiControlEvent\& \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}})}
+\DoxyCodeLine{946     \{}
+\DoxyCodeLine{947         \textcolor{keywordflow}{if} (msg.\mbox{\hyperlink{class_midi_message_ac059a2234b67e28464a519632a1b31db}{isController}}())}
+\DoxyCodeLine{948         \{}
+\DoxyCodeLine{949             \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = \{ (\mbox{\hyperlink{namespace_steinberg_1_1_vst_a7cdcbf3982dea195392fe7949ba70d26}{Steinberg::Vst::CtrlNumber}}) msg.\mbox{\hyperlink{class_midi_message_a772acb26aa7f2cdc1992210b6d2d496a}{getControllerNumber}}(), msg.\mbox{\hyperlink{class_midi_message_aa301aa18dace968d5ebb2f809fd52522}{getControllerValue}}() / 127.0\};}
+\DoxyCodeLine{950             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{951         \}}
+\DoxyCodeLine{952 }
+\DoxyCodeLine{953         \textcolor{keywordflow}{if} (msg.\mbox{\hyperlink{class_midi_message_aaa504ef83e8d0c5fd8f652bf0712c4e1}{isPitchWheel}}())}
+\DoxyCodeLine{954         \{}
+\DoxyCodeLine{955             \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = \{ \mbox{\hyperlink{namespace_steinberg_1_1_vst_af1c04e80789d8e42a9b65e64869accd7a1b4b610104b1e6bd1bd8d306f40f7a83}{Steinberg::Vst::kPitchBend}}, msg.\mbox{\hyperlink{class_midi_message_aaa9675ccbce68b47067b512370e2ac20}{getPitchWheelValue}}() / 16383.0\};}
+\DoxyCodeLine{956             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{957         \}}
+\DoxyCodeLine{958 }
+\DoxyCodeLine{959         \textcolor{keywordflow}{if} (msg.\mbox{\hyperlink{class_midi_message_a49037c7f75318d83ab284708c682c843}{isChannelPressure}}())}
+\DoxyCodeLine{960         \{}
+\DoxyCodeLine{961             \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = \{ \mbox{\hyperlink{namespace_steinberg_1_1_vst_af1c04e80789d8e42a9b65e64869accd7aabee4df61bbb9ef300e794fa33b963c6}{Steinberg::Vst::kAfterTouch}}, msg.\mbox{\hyperlink{class_midi_message_aa9dc36194c26bb72f35d8522f60b3ac1}{getChannelPressureValue}}() / 127.0\};}
+\DoxyCodeLine{962             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{963         \}}
+\DoxyCodeLine{964 }
+\DoxyCodeLine{965         \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}.controllerNumber = -\/1;}
+\DoxyCodeLine{966         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{967     \}}
+\DoxyCodeLine{968 }
+\DoxyCodeLine{969     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_midi_event_list}{MidiEventList}})}
+\DoxyCodeLine{970 \};}
+\DoxyCodeLine{971 }
+\DoxyCodeLine{972 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{973 \textcolor{keyword}{template} <\textcolor{keyword}{typename} FloatType>}
+\DoxyCodeLine{974 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_v_s_t3_buffer_exchange}{VST3BufferExchange}}}
+\DoxyCodeLine{975 \{}
+\DoxyCodeLine{976     \textcolor{keyword}{using} \mbox{\hyperlink{class_array}{Bus}} = \mbox{\hyperlink{class_array}{Array<FloatType*>}};}
+\DoxyCodeLine{977     \textcolor{keyword}{using} \mbox{\hyperlink{class_array}{BusMap}} = \mbox{\hyperlink{class_array}{Array<Bus>}};}
+\DoxyCodeLine{978 }
+\DoxyCodeLine{979     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_v_s_t3_buffer_exchange_abc90234508851a83d6d63576297931cf}{assignRawPointer}} (\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_audio_bus_buffers}{Steinberg::Vst::AudioBusBuffers}}\& vstBuffers, \textcolor{keywordtype}{float}** raw)  \{ vstBuffers.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_audio_bus_buffers_ad142ac21c2c981d01a7146011649e9b7}{channelBuffers32}} = raw; \}}
+\DoxyCodeLine{980     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_v_s_t3_buffer_exchange_af2bb531c0b42c48324d164d379c465e4}{assignRawPointer}} (\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_audio_bus_buffers}{Steinberg::Vst::AudioBusBuffers}}\& vstBuffers, \textcolor{keywordtype}{double}** raw) \{ vstBuffers.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_audio_bus_buffers_a2affcd86d966dd86d8ee8c3f0889eee7}{channelBuffers64}} = raw; \}}
+\DoxyCodeLine{981 }
+\DoxyCodeLine{985     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_v_s_t3_buffer_exchange_a258f09e3c61c120d7c35e2c66bddd48a}{associateBufferTo}} (\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_audio_bus_buffers}{Steinberg::Vst::AudioBusBuffers}}\& vstBuffers,}
+\DoxyCodeLine{986                                    \mbox{\hyperlink{class_array}{Bus}}\& bus,}
+\DoxyCodeLine{987                                    \mbox{\hyperlink{class_audio_buffer}{AudioBuffer<FloatType>}}\& buffer,}
+\DoxyCodeLine{988                                    \textcolor{keywordtype}{int} numChannels, \textcolor{keywordtype}{int} channelStartOffset,}
+\DoxyCodeLine{989                                    \textcolor{keywordtype}{int} sampleOffset = 0)}
+\DoxyCodeLine{990     \{}
+\DoxyCodeLine{991         \textcolor{keyword}{const} \textcolor{keywordtype}{int} channelEnd = numChannels + channelStartOffset;}
+\DoxyCodeLine{992         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (channelEnd >= 0 \&\& channelEnd <= buffer.getNumChannels());}
+\DoxyCodeLine{993 }
+\DoxyCodeLine{994         bus.\mbox{\hyperlink{class_array_a96bcb7013ec2d56da8b918da7fc0809c}{clearQuick}}();}
+\DoxyCodeLine{995 }
+\DoxyCodeLine{996         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = channelStartOffset; i < channelEnd; ++i)}
+\DoxyCodeLine{997             bus.\mbox{\hyperlink{class_array_a52da22e285e44171b6d6fa785a7d536a}{add}} (buffer.getWritePointer (i, sampleOffset));}
+\DoxyCodeLine{998 }
+\DoxyCodeLine{999         \mbox{\hyperlink{struct_v_s_t3_buffer_exchange_abc90234508851a83d6d63576297931cf}{assignRawPointer}} (vstBuffers, (numChannels > 0 ? bus.\mbox{\hyperlink{class_array_a72183f1a9e7eac684ce85bf5760c7173}{getRawDataPointer}}() : \textcolor{keyword}{nullptr}));}
+\DoxyCodeLine{1000         vstBuffers.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_audio_bus_buffers_a0d71223402b0c24c59349cb67bef77a3}{numChannels}}      = numChannels;}
+\DoxyCodeLine{1001         vstBuffers.\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_audio_bus_buffers_a360aa4652a831528db8199976d0293c5}{silenceFlags}}     = 0;}
+\DoxyCodeLine{1002     \}}
+\DoxyCodeLine{1003 }
+\DoxyCodeLine{1004     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_v_s_t3_buffer_exchange_aef619a230b18ed73332f85a6e7e53b3f}{mapArrangementToBuses}} (\textcolor{keywordtype}{int}\& channelIndexOffset, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}},}
+\DoxyCodeLine{1005                                         \mbox{\hyperlink{class_array}{Array<Steinberg::Vst::AudioBusBuffers>}}\& \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}},}
+\DoxyCodeLine{1006                                         \mbox{\hyperlink{class_array}{BusMap}}\& busMapToUse, \textcolor{keyword}{const} \mbox{\hyperlink{class_audio_channel_set}{AudioChannelSet}}\& arrangement,}
+\DoxyCodeLine{1007                                         \mbox{\hyperlink{class_audio_buffer}{AudioBuffer<FloatType>}}\& \mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}})}
+\DoxyCodeLine{1008     \{}
+\DoxyCodeLine{1009         \textcolor{keyword}{const} \textcolor{keywordtype}{int} numChansForBus = arrangement.\mbox{\hyperlink{class_audio_channel_set_ad7be564dafc89bddf37dea65d7f014ba}{size}}();}
+\DoxyCodeLine{1010 }
+\DoxyCodeLine{1011         \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}} >= \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}.size())}
+\DoxyCodeLine{1012             \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}.add (\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_audio_bus_buffers}{Steinberg::Vst::AudioBusBuffers}}());}
+\DoxyCodeLine{1013 }
+\DoxyCodeLine{1014         \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}} >= busMapToUse.\mbox{\hyperlink{class_array_ae79ec3b32d0c9a80dfff8ffbc41f8523}{size}}())}
+\DoxyCodeLine{1015             busMapToUse.\mbox{\hyperlink{class_array_a52da22e285e44171b6d6fa785a7d536a}{add}} (\mbox{\hyperlink{struct_v_s_t3_buffer_exchange_a89cfb0e38139f3a74c2e2797fc327483}{Bus}}());}
+\DoxyCodeLine{1016 }
+\DoxyCodeLine{1017         \mbox{\hyperlink{struct_v_s_t3_buffer_exchange_a258f09e3c61c120d7c35e2c66bddd48a}{associateBufferTo}} (\mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}.getReference (\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}),}
+\DoxyCodeLine{1018                            busMapToUse.\mbox{\hyperlink{class_array_a56b441ad9d0ea576318120cd0088d2f2}{getReference}} (\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}),}
+\DoxyCodeLine{1019                            \mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}}, numChansForBus, channelIndexOffset);}
+\DoxyCodeLine{1020 }
+\DoxyCodeLine{1021         channelIndexOffset += numChansForBus;}
+\DoxyCodeLine{1022     \}}
+\DoxyCodeLine{1023 }
+\DoxyCodeLine{1024     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_v_s_t3_buffer_exchange_ae3fab60c5ce04946d6ae969134879d1c}{mapBufferToBuses}} (\mbox{\hyperlink{class_array}{Array<Steinberg::Vst::AudioBusBuffers>}}\& \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}, \mbox{\hyperlink{class_array}{BusMap}}\& busMapToUse,}
+\DoxyCodeLine{1025                                   \textcolor{keyword}{const} \mbox{\hyperlink{class_array}{Array<AudioChannelSet>}}\& arrangements,}
+\DoxyCodeLine{1026                                   \mbox{\hyperlink{class_audio_buffer}{AudioBuffer<FloatType>}}\& \mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}})}
+\DoxyCodeLine{1027     \{}
+\DoxyCodeLine{1028         \textcolor{keywordtype}{int} channelIndexOffset = 0;}
+\DoxyCodeLine{1029 }
+\DoxyCodeLine{1030         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < arrangements.\mbox{\hyperlink{class_array_ae79ec3b32d0c9a80dfff8ffbc41f8523}{size}}(); ++i)}
+\DoxyCodeLine{1031             \mbox{\hyperlink{struct_v_s_t3_buffer_exchange_aef619a230b18ed73332f85a6e7e53b3f}{mapArrangementToBuses}} (channelIndexOffset, i, \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}, busMapToUse,}
+\DoxyCodeLine{1032                                     arrangements.\mbox{\hyperlink{class_array_a0e36fd4f8eda27d10a7044a8fa8a2ae4}{getUnchecked}} (i), \mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}});}
+\DoxyCodeLine{1033     \}}
+\DoxyCodeLine{1034 }
+\DoxyCodeLine{1035     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_v_s_t3_buffer_exchange_a5e84948a416d4960906dce0f854debfa}{mapBufferToBuses}} (\mbox{\hyperlink{class_array}{Array<Steinberg::Vst::AudioBusBuffers>}}\& \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}},}
+\DoxyCodeLine{1036                                   \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_audio_processor}{Steinberg::Vst::IAudioProcessor}}\& processor,}
+\DoxyCodeLine{1037                                   \mbox{\hyperlink{class_array}{BusMap}}\& busMapToUse, \textcolor{keywordtype}{bool} isInput, \textcolor{keywordtype}{int} numBuses,}
+\DoxyCodeLine{1038                                   \mbox{\hyperlink{class_audio_buffer}{AudioBuffer<FloatType>}}\& \mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}})}
+\DoxyCodeLine{1039     \{}
+\DoxyCodeLine{1040         \textcolor{keywordtype}{int} channelIndexOffset = 0;}
+\DoxyCodeLine{1041 }
+\DoxyCodeLine{1042         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < numBuses; ++i)}
+\DoxyCodeLine{1043             \mbox{\hyperlink{struct_v_s_t3_buffer_exchange_aef619a230b18ed73332f85a6e7e53b3f}{mapArrangementToBuses}} (channelIndexOffset, i,}
+\DoxyCodeLine{1044                                     \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}, busMapToUse,}
+\DoxyCodeLine{1045                                     getArrangementForBus (\&processor, isInput, i),}
+\DoxyCodeLine{1046                                     \mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}});}
+\DoxyCodeLine{1047     \}}
+\DoxyCodeLine{1048 \};}
+\DoxyCodeLine{1049 }
+\DoxyCodeLine{1050 \textcolor{keyword}{template} <\textcolor{keyword}{typename} FloatType>}
+\DoxyCodeLine{1051 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_v_s_t3_float_and_double_bus_map_composite_helper}{VST3FloatAndDoubleBusMapCompositeHelper}} \{\};}
+\DoxyCodeLine{1052 }
+\DoxyCodeLine{1053 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_v_s_t3_float_and_double_bus_map_composite}{VST3FloatAndDoubleBusMapComposite}}}
+\DoxyCodeLine{1054 \{}
+\DoxyCodeLine{1055     \mbox{\hyperlink{class_array}{VST3BufferExchange<float>::BusMap}}  \mbox{\hyperlink{struct_v_s_t3_float_and_double_bus_map_composite_a9354fedd5a1aeb3869d72bc13aee3c0b}{floatVersion}};}
+\DoxyCodeLine{1056     \mbox{\hyperlink{class_array}{VST3BufferExchange<double>::BusMap}} \mbox{\hyperlink{struct_v_s_t3_float_and_double_bus_map_composite_a83882eec1260749ea6ecbb1d830f97f1}{doubleVersion}};}
+\DoxyCodeLine{1057 }
+\DoxyCodeLine{1058     \textcolor{keyword}{template} <\textcolor{keyword}{typename} FloatType>}
+\DoxyCodeLine{1059     \textcolor{keyword}{inline} \textcolor{keyword}{typename} \mbox{\hyperlink{class_array}{VST3BufferExchange<FloatType>::BusMap}}\& \mbox{\hyperlink{struct_v_s_t3_float_and_double_bus_map_composite_a95cfe28dea3e386e6873ef057a37ca71}{get}}()   \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacedsp_ab70e205bff92b09aa297e479676b5bc8}{VST3FloatAndDoubleBusMapCompositeHelper<FloatType>::get}} (*\textcolor{keyword}{this}); \}}
+\DoxyCodeLine{1060 \};}
+\DoxyCodeLine{1061 }
+\DoxyCodeLine{1062 }
+\DoxyCodeLine{1063 \textcolor{keyword}{template} <> \textcolor{keyword}{struct }\mbox{\hyperlink{struct_v_s_t3_float_and_double_bus_map_composite_helper}{VST3FloatAndDoubleBusMapCompositeHelper}}<float>}
+\DoxyCodeLine{1064 \{}
+\DoxyCodeLine{1065     \textcolor{keyword}{static} \mbox{\hyperlink{class_array}{VST3BufferExchange<float>::BusMap}}\& \mbox{\hyperlink{struct_v_s_t3_float_and_double_bus_map_composite_helper_3_01float_01_4_a98705a257432a9b353ef474b1d96b201}{get}} (\mbox{\hyperlink{struct_v_s_t3_float_and_double_bus_map_composite}{VST3FloatAndDoubleBusMapComposite}}\& impl)  \{ \textcolor{keywordflow}{return} impl.\mbox{\hyperlink{struct_v_s_t3_float_and_double_bus_map_composite_a9354fedd5a1aeb3869d72bc13aee3c0b}{floatVersion}}; \}}
+\DoxyCodeLine{1066 \};}
+\DoxyCodeLine{1067 }
+\DoxyCodeLine{1068 \textcolor{keyword}{template} <> \textcolor{keyword}{struct }\mbox{\hyperlink{struct_v_s_t3_float_and_double_bus_map_composite_helper}{VST3FloatAndDoubleBusMapCompositeHelper}}<double>}
+\DoxyCodeLine{1069 \{}
+\DoxyCodeLine{1070     \textcolor{keyword}{static} \mbox{\hyperlink{class_array}{VST3BufferExchange<double>::BusMap}}\& \mbox{\hyperlink{struct_v_s_t3_float_and_double_bus_map_composite_helper_3_01double_01_4_a11c21155e29c7ae4bbc7b7ba22f1ce4c}{get}} (\mbox{\hyperlink{struct_v_s_t3_float_and_double_bus_map_composite}{VST3FloatAndDoubleBusMapComposite}}\& impl) \{ \textcolor{keywordflow}{return} impl.\mbox{\hyperlink{struct_v_s_t3_float_and_double_bus_map_composite_a83882eec1260749ea6ecbb1d830f97f1}{doubleVersion}}; \}}
+\DoxyCodeLine{1071 \};}
+\DoxyCodeLine{1072 }
+\DoxyCodeLine{1073 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1074 \textcolor{keyword}{class }\mbox{\hyperlink{class_float_cache}{FloatCache}}}
+\DoxyCodeLine{1075 \{}
+\DoxyCodeLine{1076     \textcolor{keyword}{using} FlagType = uint32\_t;}
+\DoxyCodeLine{1077 }
+\DoxyCodeLine{1078 \textcolor{keyword}{public}:}
+\DoxyCodeLine{1079     \mbox{\hyperlink{class_float_cache_a33d03bc23a833790fde4527c9ae97b93}{FloatCache}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{1080 }
+\DoxyCodeLine{1081     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_float_cache_a45eb97afec406392eb1f95c755e61601}{FloatCache}} (\textcolor{keywordtype}{size\_t} sizeIn)}
+\DoxyCodeLine{1082         : values (sizeIn),}
+\DoxyCodeLine{1083           flags (divCeil (sizeIn, numFlagBits))}
+\DoxyCodeLine{1084     \{}
+\DoxyCodeLine{1085         std::fill (values.begin(), values.end(), 0.0f);}
+\DoxyCodeLine{1086         std::fill (flags.begin(), flags.end(), 0);}
+\DoxyCodeLine{1087     \}}
+\DoxyCodeLine{1088 }
+\DoxyCodeLine{1089     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_float_cache_a78ba7822bb6476ba7e221b953460d18a}{size}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept \{ \textcolor{keywordflow}{return} values.size(); \}}
+\DoxyCodeLine{1090 }
+\DoxyCodeLine{1091     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_float_cache_a67bb456092830d8e8d0b953750f30dc0}{setWithoutNotifying}} (\textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}})}
+\DoxyCodeLine{1092     \{}
+\DoxyCodeLine{1093         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}} < \mbox{\hyperlink{class_float_cache_a78ba7822bb6476ba7e221b953460d18a}{size}}());}
+\DoxyCodeLine{1094         values[\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}].store (\mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}, std::memory\_order\_relaxed);}
+\DoxyCodeLine{1095     \}}
+\DoxyCodeLine{1096 }
+\DoxyCodeLine{1097     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_float_cache_a88d8e97558a658ae4536f3e2ee316e9b}{set}} (\textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}})}
+\DoxyCodeLine{1098     \{}
+\DoxyCodeLine{1099         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}} < \mbox{\hyperlink{class_float_cache_a78ba7822bb6476ba7e221b953460d18a}{size}}());}
+\DoxyCodeLine{1100         \textcolor{keyword}{const} \textcolor{keyword}{auto} previous = values[\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}].exchange (\mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}, std::memory\_order\_relaxed);}
+\DoxyCodeLine{1101         \textcolor{keyword}{const} \textcolor{keyword}{auto} bit = previous == \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}} ? ((FlagType) 0) : ((FlagType) 1 << (\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}} \% numFlagBits));}
+\DoxyCodeLine{1102         flags[\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}} / numFlagBits].fetch\_or (bit, std::memory\_order\_acq\_rel);}
+\DoxyCodeLine{1103     \}}
+\DoxyCodeLine{1104 }
+\DoxyCodeLine{1105     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_float_cache_ae83936e294df3dd6a83f8d3d0b3038b9}{get}} (\textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{1106     \{}
+\DoxyCodeLine{1107         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}} < \mbox{\hyperlink{class_float_cache_a78ba7822bb6476ba7e221b953460d18a}{size}}());}
+\DoxyCodeLine{1108         \textcolor{keywordflow}{return} values[\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}].load (std::memory\_order\_relaxed);}
+\DoxyCodeLine{1109     \}}
+\DoxyCodeLine{1110 }
+\DoxyCodeLine{1111     \textcolor{comment}{/*  Calls the supplied callback for any entries which have been modified}}
+\DoxyCodeLine{1112 \textcolor{comment}{        since the last call to this function.}}
+\DoxyCodeLine{1113 \textcolor{comment}{    */}}
+\DoxyCodeLine{1114     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Callback>}
+\DoxyCodeLine{1115     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_float_cache_a276244e743e08e70faa0c76ad8005c5a}{ifSet}} (Callback\&\& \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}})}
+\DoxyCodeLine{1116     \{}
+\DoxyCodeLine{1117         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} flagIndex = 0; flagIndex < flags.size(); ++flagIndex)}
+\DoxyCodeLine{1118         \{}
+\DoxyCodeLine{1119             \textcolor{keyword}{const} \textcolor{keyword}{auto} prevFlags = flags[flagIndex].exchange (0, std::memory\_order\_acq\_rel);}
+\DoxyCodeLine{1120 }
+\DoxyCodeLine{1121             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} bit = 0; bit < numFlagBits; ++bit)}
+\DoxyCodeLine{1122             \{}
+\DoxyCodeLine{1123                 \textcolor{keywordflow}{if} (prevFlags \& ((FlagType) 1 << bit))}
+\DoxyCodeLine{1124                 \{}
+\DoxyCodeLine{1125                     \textcolor{keyword}{const} \textcolor{keyword}{auto} itemIndex = (flagIndex * numFlagBits) + bit;}
+\DoxyCodeLine{1126                     \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}} (itemIndex, values[itemIndex].load (std::memory\_order\_relaxed));}
+\DoxyCodeLine{1127                 \}}
+\DoxyCodeLine{1128             \}}
+\DoxyCodeLine{1129         \}}
+\DoxyCodeLine{1130     \}}
+\DoxyCodeLine{1131 }
+\DoxyCodeLine{1132 \textcolor{keyword}{private}:}
+\DoxyCodeLine{1133     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{size\_t} numFlagBits = 8 * \textcolor{keyword}{sizeof} (FlagType);}
+\DoxyCodeLine{1134 }
+\DoxyCodeLine{1135     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{size\_t} divCeil (\textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}})}
+\DoxyCodeLine{1136     \{}
+\DoxyCodeLine{1137         \textcolor{keywordflow}{return} (\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} / \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}) + ((\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} \% \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}) != 0);}
+\DoxyCodeLine{1138     \}}
+\DoxyCodeLine{1139 }
+\DoxyCodeLine{1140     std::vector<std::atomic<float>> values;}
+\DoxyCodeLine{1141     std::vector<std::atomic<FlagType>> flags;}
+\DoxyCodeLine{1142 \};}
+\DoxyCodeLine{1143 }
+\DoxyCodeLine{1144 \textcolor{comment}{/*  Provides very quick polling of all parameter states.}}
+\DoxyCodeLine{1145 \textcolor{comment}{}}
+\DoxyCodeLine{1146 \textcolor{comment}{    We must iterate all parameters on each processBlock call to check whether any}}
+\DoxyCodeLine{1147 \textcolor{comment}{    parameter value has changed. This class attempts to make this polling process}}
+\DoxyCodeLine{1148 \textcolor{comment}{    as quick as possible.}}
+\DoxyCodeLine{1149 \textcolor{comment}{}}
+\DoxyCodeLine{1150 \textcolor{comment}{    The indices here are of type Steinberg::int32, as they are expected to correspond}}
+\DoxyCodeLine{1151 \textcolor{comment}{    to parameter information obtained from the IEditController. These indices may not}}
+\DoxyCodeLine{1152 \textcolor{comment}{    match the indices of parameters returned from AudioProcessor::getParameters(), so}}
+\DoxyCodeLine{1153 \textcolor{comment}{    be careful!}}
+\DoxyCodeLine{1154 \textcolor{comment}{*/}}
+\DoxyCodeLine{1155 \textcolor{keyword}{class }\mbox{\hyperlink{class_cached_param_values}{CachedParamValues}}}
+\DoxyCodeLine{1156 \{}
+\DoxyCodeLine{1157 \textcolor{keyword}{public}:}
+\DoxyCodeLine{1158     \mbox{\hyperlink{class_cached_param_values_abd5a0044cde13746af4c9240d99db003}{CachedParamValues}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{1159 }
+\DoxyCodeLine{1160     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_cached_param_values_ae3ac1e96ade6a0ac176d58cf4f47f624}{CachedParamValues}} (std::vector<Steinberg::Vst::ParamID> paramIdsIn)}
+\DoxyCodeLine{1161         : paramIds (\mbox{\hyperlink{namespacestd}{std}}::\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{move}} (paramIdsIn)), floatCache (paramIds.\mbox{\hyperlink{class_cached_param_values_a3167601ba5487ee2cdec698c0d288079}{size}}()) \{\}}
+\DoxyCodeLine{1162 }
+\DoxyCodeLine{1163     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_cached_param_values_a3167601ba5487ee2cdec698c0d288079}{size}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept \{ \textcolor{keywordflow}{return} floatCache.\mbox{\hyperlink{class_float_cache_a78ba7822bb6476ba7e221b953460d18a}{size}}(); \}}
+\DoxyCodeLine{1164 }
+\DoxyCodeLine{1165     \mbox{\hyperlink{namespace_steinberg_1_1_vst_a280d91906cce82932a36c0a92bcbeae0}{Steinberg::Vst::ParamID}} \mbox{\hyperlink{class_cached_param_values_af3a7e54d62438039b578b720cfe487c4}{getParamID}} (\mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{Steinberg::int32}} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) \textcolor{keyword}{const} \textcolor{keyword}{noexcept} \{ \textcolor{keywordflow}{return} paramIds[(size\_t) \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}]; \}}
+\DoxyCodeLine{1166 }
+\DoxyCodeLine{1167     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_cached_param_values_a94e244d8e696a2212b9b6ef73fdb69cd}{set}}                 (\mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{Steinberg::int32}} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}})   \{ floatCache.\mbox{\hyperlink{class_float_cache_a88d8e97558a658ae4536f3e2ee316e9b}{set}}                 ((\textcolor{keywordtype}{size\_t}) \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}, \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}); \}}
+\DoxyCodeLine{1168     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_cached_param_values_ab22c0a4ac4ef1456f05f51ead005a070}{setWithoutNotifying}} (\mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{Steinberg::int32}} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}})   \{ floatCache.\mbox{\hyperlink{class_float_cache_a67bb456092830d8e8d0b953750f30dc0}{setWithoutNotifying}} ((\textcolor{keywordtype}{size\_t}) \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}, \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}); \}}
+\DoxyCodeLine{1169 }
+\DoxyCodeLine{1170     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_cached_param_values_a28b40ec3453ef4fe6d9d39df23bc3e81}{get}} (\mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{Steinberg::int32}} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) \textcolor{keyword}{const} \textcolor{keyword}{noexcept} \{ \textcolor{keywordflow}{return} floatCache.\mbox{\hyperlink{class_float_cache_ae83936e294df3dd6a83f8d3d0b3038b9}{get}} ((\textcolor{keywordtype}{size\_t}) \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}); \}}
+\DoxyCodeLine{1171 }
+\DoxyCodeLine{1172     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Callback>}
+\DoxyCodeLine{1173     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_cached_param_values_a6c3b5c60d841a24f948128d13d505ca3}{ifSet}} (Callback\&\& \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}})}
+\DoxyCodeLine{1174     \{}
+\DoxyCodeLine{1175         floatCache.\mbox{\hyperlink{class_float_cache_a276244e743e08e70faa0c76ad8005c5a}{ifSet}} ([\&] (\textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}})}
+\DoxyCodeLine{1176         \{}
+\DoxyCodeLine{1177             \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}} ((\mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{Steinberg::int32}}) \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}, \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}});}
+\DoxyCodeLine{1178         \});}
+\DoxyCodeLine{1179     \}}
+\DoxyCodeLine{1180 }
+\DoxyCodeLine{1181 \textcolor{keyword}{private}:}
+\DoxyCodeLine{1182     std::vector<Steinberg::Vst::ParamID> paramIds;}
+\DoxyCodeLine{1183     \mbox{\hyperlink{class_float_cache}{FloatCache}} floatCache;}
+\DoxyCodeLine{1184 \};}
+\DoxyCodeLine{1185 }
+\DoxyCodeLine{1186 \textcolor{comment}{/*  Ensures that a 'restart' call only ever happens on the main thread. */}}
+\DoxyCodeLine{1187 \textcolor{keyword}{class }\mbox{\hyperlink{class_component_restarter}{ComponentRestarter}} : \textcolor{keyword}{private} \mbox{\hyperlink{class_async_updater}{AsyncUpdater}}}
+\DoxyCodeLine{1188 \{}
+\DoxyCodeLine{1189 \textcolor{keyword}{public}:}
+\DoxyCodeLine{1190     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_component_restarter_1_1_listener}{Listener}}}
+\DoxyCodeLine{1191     \{}
+\DoxyCodeLine{1192         \textcolor{keyword}{virtual} \mbox{\hyperlink{struct_component_restarter_1_1_listener_a25be2606e4d1d10149f932146a8676a9}{\string~Listener}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{1193         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_component_restarter_1_1_listener_a723f3f95dd31cc92b4f93e3639850719}{restartComponentOnMessageThread}} (\mbox{\hyperlink{juce__box2d_8cpp_a6a5a8e94340b94579afb83ab477a983c}{int32}} flags) = 0;}
+\DoxyCodeLine{1194     \};}
+\DoxyCodeLine{1195 }
+\DoxyCodeLine{1196     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_component_restarter_ae7bbed8a02875d3c47574ba19fa43e54}{ComponentRestarter}} (\mbox{\hyperlink{struct_component_restarter_1_1_listener}{Listener}}\& listenerIn)}
+\DoxyCodeLine{1197         : listener (listenerIn) \{\}}
+\DoxyCodeLine{1198 }
+\DoxyCodeLine{1199     \mbox{\hyperlink{class_component_restarter_aaeaaeeeb0a1becfec391aab7e1087fff}{\string~ComponentRestarter}}() noexcept\textcolor{keyword}{ override}}
+\DoxyCodeLine{1200 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{1201         \mbox{\hyperlink{class_async_updater_a2e71a3b3172abca3567d2d2b75564323}{cancelPendingUpdate}}();}
+\DoxyCodeLine{1202     \}}
+\DoxyCodeLine{1203 }
+\DoxyCodeLine{1204     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_component_restarter_ab77ff59850a035fdbd0770c355ee7ffb}{restart}} (\mbox{\hyperlink{juce__box2d_8cpp_a6a5a8e94340b94579afb83ab477a983c}{int32}} newFlags)}
+\DoxyCodeLine{1205     \{}
+\DoxyCodeLine{1206         \textcolor{keywordflow}{if} (newFlags == 0)}
+\DoxyCodeLine{1207             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{1208 }
+\DoxyCodeLine{1209         flags.fetch\_or (newFlags);}
+\DoxyCodeLine{1210 }
+\DoxyCodeLine{1211         \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_message_manager_a4367fa495f95a5562b58dde1ad0e965b}{MessageManager::getInstance}}()-\/>isThisTheMessageThread())}
+\DoxyCodeLine{1212             handleAsyncUpdate();}
+\DoxyCodeLine{1213         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{1214             \mbox{\hyperlink{class_async_updater_a4eece806c6ba9f591382fed54c5983b2}{triggerAsyncUpdate}}();}
+\DoxyCodeLine{1215     \}}
+\DoxyCodeLine{1216 }
+\DoxyCodeLine{1217 \textcolor{keyword}{private}:}
+\DoxyCodeLine{1218     \textcolor{keywordtype}{void} handleAsyncUpdate()\textcolor{keyword}{ override}}
+\DoxyCodeLine{1219 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{1220         listener.\mbox{\hyperlink{struct_component_restarter_1_1_listener_a723f3f95dd31cc92b4f93e3639850719}{restartComponentOnMessageThread}} (flags.exchange (0));}
+\DoxyCodeLine{1221     \}}
+\DoxyCodeLine{1222 }
+\DoxyCodeLine{1223     Listener\& listener;}
+\DoxyCodeLine{1224     std::atomic<int32> flags \{ 0 \};}
+\DoxyCodeLine{1225 \};}
+\DoxyCodeLine{1226 }
+\DoxyCodeLine{1227 \mbox{\hyperlink{group__juce__core-system_ga4a1081829b89ac6409c75946f0fe0bff}{JUCE\_END\_NO\_SANITIZE}}}
+\DoxyCodeLine{1228 }
+\DoxyCodeLine{1229  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{1230 }
+\DoxyCodeLine{1231 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{1232 }
+
+\end{DoxyCode}

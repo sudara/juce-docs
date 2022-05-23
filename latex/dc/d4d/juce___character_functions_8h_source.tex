@@ -1,0 +1,764 @@
+\hypertarget{juce___character_functions_8h_source}{}\doxysection{juce\+\_\+\+Character\+Functions.\+h}
+\label{juce___character_functions_8h_source}\index{build/juce\_core/text/juce\_CharacterFunctions.h@{build/juce\_core/text/juce\_CharacterFunctions.h}}
+\mbox{\hyperlink{juce___character_functions_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#if JUCE\_WINDOWS \&\& ! defined (DOXYGEN)}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{ \#define JUCE\_NATIVE\_WCHAR\_IS\_UTF8      0}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{ \#define JUCE\_NATIVE\_WCHAR\_IS\_UTF16     1}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{ \#define JUCE\_NATIVE\_WCHAR\_IS\_UTF32     0}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{34 \textcolor{preprocessor}{ \#define JUCE\_NATIVE\_WCHAR\_IS\_UTF8      0}}
+\DoxyCodeLine{36 \textcolor{preprocessor}{ \#define JUCE\_NATIVE\_WCHAR\_IS\_UTF16     0}}
+\DoxyCodeLine{38 \textcolor{preprocessor}{ \#define JUCE\_NATIVE\_WCHAR\_IS\_UTF32     1}}
+\DoxyCodeLine{39 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#if JUCE\_NATIVE\_WCHAR\_IS\_UTF32 || DOXYGEN}}
+\DoxyCodeLine{43  \textcolor{keyword}{using} \mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} = wchar\_t;}
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{45  \textcolor{keyword}{using} \mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} = \mbox{\hyperlink{namespace_steinberg_af4518d725547bee20d4e185e8d3f1965}{uint32}};}
+\DoxyCodeLine{46 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48 \textcolor{preprocessor}{\#ifndef DOXYGEN}}
+\DoxyCodeLine{50 \textcolor{preprocessor}{ \#define JUCE\_T(stringLiteral)   (L\#\#stringLiteral)}}
+\DoxyCodeLine{51 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53 \textcolor{preprocessor}{\#if JUCE\_DEFINE\_T\_MACRO}}
+\DoxyCodeLine{61 \textcolor{preprocessor}{ \#define T(stringLiteral)   JUCE\_T(stringLiteral)}}
+\DoxyCodeLine{62 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64 \textcolor{preprocessor}{\#ifndef DOXYGEN}}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{67 \textcolor{comment}{// GNU libstdc++ does not have std::make\_unsigned}}
+\DoxyCodeLine{68 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceinternal}{internal}}}
+\DoxyCodeLine{69 \{}
+\DoxyCodeLine{70     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type> \textcolor{keyword}{struct }\mbox{\hyperlink{structinternal_1_1make__unsigned}{make\_unsigned}}               \{ \textcolor{keyword}{using} \mbox{\hyperlink{structinternal_1_1make__unsigned_a1370e2fc7b5594708247d09f6ee7ee0a}{type}} = Type; \};}
+\DoxyCodeLine{71     \textcolor{keyword}{template} <> \textcolor{keyword}{struct }\mbox{\hyperlink{structinternal_1_1make__unsigned}{make\_unsigned}}<signed char>               \{ \textcolor{keyword}{using} \mbox{\hyperlink{structinternal_1_1make__unsigned_3_01signed_01char_01_4_abffc8f2402aa21280855f9bd68ecf341}{type}} = \textcolor{keywordtype}{unsigned} char; \};}
+\DoxyCodeLine{72     \textcolor{keyword}{template} <> \textcolor{keyword}{struct }\mbox{\hyperlink{structinternal_1_1make__unsigned}{make\_unsigned}}<char>                      \{ \textcolor{keyword}{using} \mbox{\hyperlink{structinternal_1_1make__unsigned_3_01char_01_4_ae4ff647bd1feef44a13c48335ba38763}{type}} = \textcolor{keywordtype}{unsigned} char; \};}
+\DoxyCodeLine{73     \textcolor{keyword}{template} <> \textcolor{keyword}{struct }\mbox{\hyperlink{structinternal_1_1make__unsigned}{make\_unsigned}}<short>                     \{ \textcolor{keyword}{using} \mbox{\hyperlink{structinternal_1_1make__unsigned_3_01short_01_4_af12f424caa46c6b6597547696c785953}{type}} = \textcolor{keywordtype}{unsigned} short; \};}
+\DoxyCodeLine{74     \textcolor{keyword}{template} <> \textcolor{keyword}{struct }\mbox{\hyperlink{structinternal_1_1make__unsigned}{make\_unsigned}}<\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}>                       \{ \textcolor{keyword}{using} \mbox{\hyperlink{structinternal_1_1make__unsigned_3_01int_01_4_a55d3e57d5da29a6d775d1785008faa53}{type}} = \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}; \};}
+\DoxyCodeLine{75     \textcolor{keyword}{template} <> \textcolor{keyword}{struct }\mbox{\hyperlink{structinternal_1_1make__unsigned}{make\_unsigned}}<long>                      \{ \textcolor{keyword}{using} \mbox{\hyperlink{structinternal_1_1make__unsigned_3_01long_01_4_ac7d9de2129bc1cba0dd56696c429037f}{type}} = \textcolor{keywordtype}{unsigned} long; \};}
+\DoxyCodeLine{76     \textcolor{keyword}{template} <> \textcolor{keyword}{struct }\mbox{\hyperlink{structinternal_1_1make__unsigned}{make\_unsigned}}<long long>                 \{ \textcolor{keyword}{using} \mbox{\hyperlink{structinternal_1_1make__unsigned_3_01long_01long_01_4_a37cb8bdde9ed06d499fb9de0ca685165}{type}} = \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} long; \};}
+\DoxyCodeLine{77 \}}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{92 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_character_functions}{CharacterFunctions}}}
+\DoxyCodeLine{93 \{}
+\DoxyCodeLine{94 \textcolor{keyword}{public}:}
+\DoxyCodeLine{95     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{97 \textcolor{comment}{}    \textcolor{keyword}{static} \mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} toUpperCase (\mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} character) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{99     \textcolor{keyword}{static} \mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} toLowerCase (\mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} character) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{102     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} isUpperCase (\mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} character) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{104     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} isLowerCase (\mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} character) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{107     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} isWhitespace (\textcolor{keywordtype}{char} character) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{109     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} isWhitespace (\mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} character) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{112     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} isDigit (\textcolor{keywordtype}{char} character) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{114     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} isDigit (\mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} character) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{117     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} isLetter (\textcolor{keywordtype}{char} character) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{119     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} isLetter (\mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} character) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{122     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} isLetterOrDigit (\textcolor{keywordtype}{char} character) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{124     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} isLetterOrDigit (\mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} character) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{129     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} isPrintable (\textcolor{keywordtype}{char} character) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{134     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} isPrintable (\mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} character) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{137     \textcolor{keyword}{static} \textcolor{keywordtype}{int} getHexDigitValue (\mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} digit) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{138 }
+\DoxyCodeLine{140     \textcolor{keyword}{static} \mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} getUnicodeCharFromWindows1252Codepage (\mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} windows1252Char) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{142     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{147 \textcolor{comment}{}    \textcolor{keyword}{template} <\textcolor{keyword}{typename} CharPo\textcolor{keywordtype}{int}erType>}
+\DoxyCodeLine{148     \textcolor{keyword}{static} \textcolor{keywordtype}{double} \mbox{\hyperlink{class_character_functions_a8743d3c374a36a0fb0596ac0e259b9ed}{readDoubleValue}} (CharPointerType\& text) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{149     \{}
+\DoxyCodeLine{150         \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} inf = std::numeric\_limits<double>::infinity();}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{152         \textcolor{keywordtype}{bool} isNegative = \textcolor{keyword}{false};}
+\DoxyCodeLine{153 \textcolor{preprocessor}{       \#if ! JUCE\_MINGW}}
+\DoxyCodeLine{154         \textcolor{keyword}{constexpr} \textcolor{keyword}{const} \textcolor{keywordtype}{int} maxSignificantDigits = 17 + 1; \textcolor{comment}{// An additional digit for rounding}}
+\DoxyCodeLine{155         \textcolor{keyword}{constexpr} \textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8556d19b129aa550f5b2819ed0320e83}{bufferSize}} = maxSignificantDigits + 7 + 1; \textcolor{comment}{// -\/.E-\/XXX and a trailing null-\/terminator}}
+\DoxyCodeLine{156         \textcolor{keywordtype}{char} buffer[(size\_t) \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8556d19b129aa550f5b2819ed0320e83}{bufferSize}}] = \{\};}
+\DoxyCodeLine{157         \textcolor{keywordtype}{char}* writePtr = \&(buffer[0]);}
+\DoxyCodeLine{158 \textcolor{preprocessor}{       \#endif}}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160         \textcolor{keyword}{const} \textcolor{keyword}{auto} endOfWhitspace = text.findEndOfWhitespace();}
+\DoxyCodeLine{161         text = endOfWhitspace;}
+\DoxyCodeLine{162 }
+\DoxyCodeLine{163         \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} = *text;}
+\DoxyCodeLine{164 }
+\DoxyCodeLine{165         \textcolor{keywordflow}{switch} (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}})}
+\DoxyCodeLine{166         \{}
+\DoxyCodeLine{167             \textcolor{keywordflow}{case} \textcolor{charliteral}{'-\/'}:}
+\DoxyCodeLine{168                 isNegative = \textcolor{keyword}{true};}
+\DoxyCodeLine{169 \textcolor{preprocessor}{               \#if ! JUCE\_MINGW}}
+\DoxyCodeLine{170                 *writePtr++ = \textcolor{charliteral}{'-\/'};}
+\DoxyCodeLine{171 \textcolor{preprocessor}{               \#endif}}
+\DoxyCodeLine{172                 \mbox{\hyperlink{group__juce__core-system_gae5a4983340a829e456bad83f0dc8e92b}{JUCE\_FALLTHROUGH}}}
+\DoxyCodeLine{173             \textcolor{keywordflow}{case} \textcolor{charliteral}{'+'}:}
+\DoxyCodeLine{174                 \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} = *++text;}
+\DoxyCodeLine{175                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{176             \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{177                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{178         \}}
+\DoxyCodeLine{179 }
+\DoxyCodeLine{180         \textcolor{keywordflow}{switch} (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}})}
+\DoxyCodeLine{181         \{}
+\DoxyCodeLine{182             \textcolor{keywordflow}{case} \textcolor{charliteral}{'n'}:}
+\DoxyCodeLine{183             \textcolor{keywordflow}{case} \textcolor{charliteral}{'N'}:}
+\DoxyCodeLine{184             \{}
+\DoxyCodeLine{185                 \textcolor{keywordflow}{if} ((text[1] == \textcolor{charliteral}{'a'} || text[1] == \textcolor{charliteral}{'A'}) \&\& (text[2] == \textcolor{charliteral}{'n'} || text[2] == \textcolor{charliteral}{'N'}))}
+\DoxyCodeLine{186                 \{}
+\DoxyCodeLine{187                     text += 3;}
+\DoxyCodeLine{188                     \textcolor{keywordflow}{return} std::numeric\_limits<double>::quiet\_NaN();}
+\DoxyCodeLine{189                 \}}
+\DoxyCodeLine{190 }
+\DoxyCodeLine{191                 text = endOfWhitspace;}
+\DoxyCodeLine{192                 \textcolor{keywordflow}{return} 0.0;}
+\DoxyCodeLine{193             \}}
+\DoxyCodeLine{194 }
+\DoxyCodeLine{195             \textcolor{keywordflow}{case} \textcolor{charliteral}{'i'}:}
+\DoxyCodeLine{196             \textcolor{keywordflow}{case} \textcolor{charliteral}{'I'}:}
+\DoxyCodeLine{197             \{}
+\DoxyCodeLine{198                 \textcolor{keywordflow}{if} ((text[1] == \textcolor{charliteral}{'n'} || text[1] == \textcolor{charliteral}{'N'}) \&\& (text[2] == \textcolor{charliteral}{'f'} || text[2] == \textcolor{charliteral}{'F'}))}
+\DoxyCodeLine{199                 \{}
+\DoxyCodeLine{200                     text += 3;}
+\DoxyCodeLine{201                     \textcolor{keywordflow}{return} isNegative ? -\/inf : inf;}
+\DoxyCodeLine{202                 \}}
+\DoxyCodeLine{203 }
+\DoxyCodeLine{204                 text = endOfWhitspace;}
+\DoxyCodeLine{205                 \textcolor{keywordflow}{return} 0.0;}
+\DoxyCodeLine{206             \}}
+\DoxyCodeLine{207 }
+\DoxyCodeLine{208             \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{209                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{210         \}}
+\DoxyCodeLine{211 }
+\DoxyCodeLine{212 \textcolor{preprocessor}{       \#if JUCE\_MINGW}}
+\DoxyCodeLine{213         \textcolor{comment}{// MinGW does not have access to the locale functions required for strtold, so we parse the doubles}}
+\DoxyCodeLine{214         \textcolor{comment}{// ourselves. There are some edge cases where the least significant digit will be wrong!}}
+\DoxyCodeLine{215         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}[3] = \{ 0 \}, accumulator[2] = \{ 0 \};}
+\DoxyCodeLine{216         \textcolor{keywordtype}{int} exponentAdjustment[2] = \{ 0 \}, exponentAccumulator[2] = \{ -\/1, -\/1 \};}
+\DoxyCodeLine{217         \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a3e4f26913c422a31ce8fdce60a142d48}{exponent}} = 0, decPointIndex = 0, digit = 0;}
+\DoxyCodeLine{218         \textcolor{keywordtype}{int} lastDigit = 0, numSignificantDigits = 0;}
+\DoxyCodeLine{219         \textcolor{keywordtype}{bool} digitsFound = \textcolor{keyword}{false};}
+\DoxyCodeLine{220         \textcolor{keyword}{constexpr} \textcolor{keyword}{const} \textcolor{keywordtype}{int} maxSignificantDigits = 17 + 1;}
+\DoxyCodeLine{221 }
+\DoxyCodeLine{222         \textcolor{keywordflow}{for} (;;)}
+\DoxyCodeLine{223         \{}
+\DoxyCodeLine{224             \textcolor{keywordflow}{if} (text.isDigit())}
+\DoxyCodeLine{225             \{}
+\DoxyCodeLine{226                 lastDigit = digit;}
+\DoxyCodeLine{227                 digit = (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}) text.getAndAdvance() -\/ \textcolor{charliteral}{'0'};}
+\DoxyCodeLine{228                 digitsFound = \textcolor{keyword}{true};}
+\DoxyCodeLine{229 }
+\DoxyCodeLine{230                 \textcolor{keywordflow}{if} (decPointIndex != 0)}
+\DoxyCodeLine{231                     exponentAdjustment[1]++;}
+\DoxyCodeLine{232 }
+\DoxyCodeLine{233                 \textcolor{keywordflow}{if} (numSignificantDigits == 0 \&\& digit == 0)}
+\DoxyCodeLine{234                     \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{235 }
+\DoxyCodeLine{236                 \textcolor{keywordflow}{if} (++numSignificantDigits > maxSignificantDigits)}
+\DoxyCodeLine{237                 \{}
+\DoxyCodeLine{238                     \textcolor{keywordflow}{if} (digit > 5)}
+\DoxyCodeLine{239                         ++accumulator [decPointIndex];}
+\DoxyCodeLine{240                     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (digit == 5 \&\& (lastDigit \& 1) != 0)}
+\DoxyCodeLine{241                         ++accumulator [decPointIndex];}
+\DoxyCodeLine{242 }
+\DoxyCodeLine{243                     \textcolor{keywordflow}{if} (decPointIndex > 0)}
+\DoxyCodeLine{244                         exponentAdjustment[1]-\/-\/;}
+\DoxyCodeLine{245                     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{246                         exponentAdjustment[0]++;}
+\DoxyCodeLine{247 }
+\DoxyCodeLine{248                     \textcolor{keywordflow}{while} (text.isDigit())}
+\DoxyCodeLine{249                     \{}
+\DoxyCodeLine{250                         ++text;}
+\DoxyCodeLine{251                         \textcolor{keywordflow}{if} (decPointIndex == 0)}
+\DoxyCodeLine{252                             exponentAdjustment[0]++;}
+\DoxyCodeLine{253                     \}}
+\DoxyCodeLine{254                 \}}
+\DoxyCodeLine{255                 \textcolor{keywordflow}{else}}
+\DoxyCodeLine{256                 \{}
+\DoxyCodeLine{257                     \textcolor{keyword}{const} \textcolor{keyword}{auto} maxAccumulatorValue = (double) ((\mbox{\hyperlink{os_8h_ac39d9cef6a5e030ba8d9e11121054268}{std::numeric\_limits<unsigned int>::max}}() -\/ 9) / 10);}
+\DoxyCodeLine{258                     \textcolor{keywordflow}{if} (accumulator [decPointIndex] > maxAccumulatorValue)}
+\DoxyCodeLine{259                     \{}
+\DoxyCodeLine{260                         \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} [decPointIndex] = mulexp10 (\mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} [decPointIndex], exponentAccumulator [decPointIndex])}
+\DoxyCodeLine{261                                                  + accumulator [decPointIndex];}
+\DoxyCodeLine{262                         accumulator [decPointIndex] = 0;}
+\DoxyCodeLine{263                         exponentAccumulator [decPointIndex] = 0;}
+\DoxyCodeLine{264                     \}}
+\DoxyCodeLine{265 }
+\DoxyCodeLine{266                     accumulator [decPointIndex] = accumulator[decPointIndex] * 10 + digit;}
+\DoxyCodeLine{267                     exponentAccumulator [decPointIndex]++;}
+\DoxyCodeLine{268                 \}}
+\DoxyCodeLine{269             \}}
+\DoxyCodeLine{270             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (decPointIndex == 0 \&\& *text == \textcolor{charliteral}{'.'})}
+\DoxyCodeLine{271             \{}
+\DoxyCodeLine{272                 ++text;}
+\DoxyCodeLine{273                 decPointIndex = 1;}
+\DoxyCodeLine{274 }
+\DoxyCodeLine{275                 \textcolor{keywordflow}{if} (numSignificantDigits > maxSignificantDigits)}
+\DoxyCodeLine{276                 \{}
+\DoxyCodeLine{277                     \textcolor{keywordflow}{while} (text.isDigit())}
+\DoxyCodeLine{278                         ++text;}
+\DoxyCodeLine{279                     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{280                 \}}
+\DoxyCodeLine{281             \}}
+\DoxyCodeLine{282             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{283             \{}
+\DoxyCodeLine{284                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{285             \}}
+\DoxyCodeLine{286         \}}
+\DoxyCodeLine{287 }
+\DoxyCodeLine{288         \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}[0] = mulexp10 (\mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}[0], exponentAccumulator[0]) + accumulator[0];}
+\DoxyCodeLine{289 }
+\DoxyCodeLine{290         \textcolor{keywordflow}{if} (decPointIndex != 0)}
+\DoxyCodeLine{291             \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}[1] = mulexp10 (\mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}[1], exponentAccumulator[1]) + accumulator[1];}
+\DoxyCodeLine{292 }
+\DoxyCodeLine{293         \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} = *text;}
+\DoxyCodeLine{294         \textcolor{keywordflow}{if} ((\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} == \textcolor{charliteral}{'e'} || \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} == \textcolor{charliteral}{'E'}) \&\& digitsFound)}
+\DoxyCodeLine{295         \{}
+\DoxyCodeLine{296             \textcolor{keyword}{auto} negativeExponent = \textcolor{keyword}{false};}
+\DoxyCodeLine{297 }
+\DoxyCodeLine{298             \textcolor{keywordflow}{switch} (*++text)}
+\DoxyCodeLine{299             \{}
+\DoxyCodeLine{300                 \textcolor{keywordflow}{case} \textcolor{charliteral}{'-\/'}:   negativeExponent = \textcolor{keyword}{true}; \mbox{\hyperlink{group__juce__core-system_gae5a4983340a829e456bad83f0dc8e92b}{JUCE\_FALLTHROUGH}}}
+\DoxyCodeLine{301                 \textcolor{keywordflow}{case} \textcolor{charliteral}{'+'}:   ++text;}
+\DoxyCodeLine{302             \}}
+\DoxyCodeLine{303 }
+\DoxyCodeLine{304             \textcolor{keywordflow}{while} (text.isDigit())}
+\DoxyCodeLine{305                 \mbox{\hyperlink{namespacegl_a3e4f26913c422a31ce8fdce60a142d48}{exponent}} = (\mbox{\hyperlink{namespacegl_a3e4f26913c422a31ce8fdce60a142d48}{exponent}} * 10) + ((\textcolor{keywordtype}{int}) text.getAndAdvance() -\/ \textcolor{charliteral}{'0'});}
+\DoxyCodeLine{306 }
+\DoxyCodeLine{307             \textcolor{keywordflow}{if} (negativeExponent)}
+\DoxyCodeLine{308                 \mbox{\hyperlink{namespacegl_a3e4f26913c422a31ce8fdce60a142d48}{exponent}} = -\/\mbox{\hyperlink{namespacegl_a3e4f26913c422a31ce8fdce60a142d48}{exponent}};}
+\DoxyCodeLine{309         \}}
+\DoxyCodeLine{310 }
+\DoxyCodeLine{311         \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}} = mulexp10 (\mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}[0], \mbox{\hyperlink{namespacegl_a3e4f26913c422a31ce8fdce60a142d48}{exponent}} + exponentAdjustment[0]);}
+\DoxyCodeLine{312         \textcolor{keywordflow}{if} (decPointIndex != 0)}
+\DoxyCodeLine{313             \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}} += mulexp10 (\mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}[1], \mbox{\hyperlink{namespacegl_a3e4f26913c422a31ce8fdce60a142d48}{exponent}} -\/ exponentAdjustment[1]);}
+\DoxyCodeLine{314 }
+\DoxyCodeLine{315         \textcolor{keywordflow}{return} isNegative ? -\/\mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}} : \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}};}
+\DoxyCodeLine{316 }
+\DoxyCodeLine{317 \textcolor{preprocessor}{       \#else   }\textcolor{comment}{// ! JUCE\_MINGW}}
+\DoxyCodeLine{318 }
+\DoxyCodeLine{319         \textcolor{keywordtype}{int} numSigFigs = 0, extraExponent = 0;}
+\DoxyCodeLine{320         \textcolor{keywordtype}{bool} decimalPointFound = \textcolor{keyword}{false}, leadingZeros = \textcolor{keyword}{false};}
+\DoxyCodeLine{321 }
+\DoxyCodeLine{322         \textcolor{keywordflow}{for} (;;)}
+\DoxyCodeLine{323         \{}
+\DoxyCodeLine{324             \textcolor{keywordflow}{if} (text.isDigit())}
+\DoxyCodeLine{325             \{}
+\DoxyCodeLine{326                 \textcolor{keyword}{auto} digit = (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}) text.getAndAdvance() -\/ \textcolor{charliteral}{'0'};}
+\DoxyCodeLine{327 }
+\DoxyCodeLine{328                 \textcolor{keywordflow}{if} (decimalPointFound)}
+\DoxyCodeLine{329                 \{}
+\DoxyCodeLine{330                     \textcolor{keywordflow}{if} (numSigFigs >= maxSignificantDigits)}
+\DoxyCodeLine{331                         \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{332                 \}}
+\DoxyCodeLine{333                 \textcolor{keywordflow}{else}}
+\DoxyCodeLine{334                 \{}
+\DoxyCodeLine{335                     \textcolor{keywordflow}{if} (numSigFigs >= maxSignificantDigits)}
+\DoxyCodeLine{336                     \{}
+\DoxyCodeLine{337                         ++extraExponent;}
+\DoxyCodeLine{338                         \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{339                     \}}
+\DoxyCodeLine{340 }
+\DoxyCodeLine{341                     \textcolor{keywordflow}{if} (numSigFigs == 0 \&\& digit == 0)}
+\DoxyCodeLine{342                     \{}
+\DoxyCodeLine{343                         leadingZeros = \textcolor{keyword}{true};}
+\DoxyCodeLine{344                         \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{345                     \}}
+\DoxyCodeLine{346                 \}}
+\DoxyCodeLine{347 }
+\DoxyCodeLine{348                 *writePtr++ = (char) (\textcolor{charliteral}{'0'} + (\textcolor{keywordtype}{char}) digit);}
+\DoxyCodeLine{349                 numSigFigs++;}
+\DoxyCodeLine{350             \}}
+\DoxyCodeLine{351             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ((! decimalPointFound) \&\& *text == \textcolor{charliteral}{'.'})}
+\DoxyCodeLine{352             \{}
+\DoxyCodeLine{353                 ++text;}
+\DoxyCodeLine{354                 *writePtr++ = \textcolor{charliteral}{'.'};}
+\DoxyCodeLine{355                 decimalPointFound = \textcolor{keyword}{true};}
+\DoxyCodeLine{356             \}}
+\DoxyCodeLine{357             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{358             \{}
+\DoxyCodeLine{359                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{360             \}}
+\DoxyCodeLine{361         \}}
+\DoxyCodeLine{362 }
+\DoxyCodeLine{363         \textcolor{keywordflow}{if} ((! leadingZeros) \&\& (numSigFigs == 0))}
+\DoxyCodeLine{364         \{}
+\DoxyCodeLine{365             text = endOfWhitspace;}
+\DoxyCodeLine{366             \textcolor{keywordflow}{return} 0.0;}
+\DoxyCodeLine{367         \}}
+\DoxyCodeLine{368 }
+\DoxyCodeLine{369         \textcolor{keyword}{auto} writeExponentDigits = [] (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a3e4f26913c422a31ce8fdce60a142d48}{exponent}}, \textcolor{keywordtype}{char}* destination)}
+\DoxyCodeLine{370         \{}
+\DoxyCodeLine{371             \textcolor{keyword}{auto} exponentDivisor = 100;}
+\DoxyCodeLine{372 }
+\DoxyCodeLine{373             \textcolor{keywordflow}{while} (exponentDivisor > 1)}
+\DoxyCodeLine{374             \{}
+\DoxyCodeLine{375                 \textcolor{keyword}{auto} digit = \mbox{\hyperlink{namespacegl_a3e4f26913c422a31ce8fdce60a142d48}{exponent}} / exponentDivisor;}
+\DoxyCodeLine{376                 *destination++ = (char) (\textcolor{charliteral}{'0'} + (\textcolor{keywordtype}{char}) digit);}
+\DoxyCodeLine{377                 \mbox{\hyperlink{namespacegl_a3e4f26913c422a31ce8fdce60a142d48}{exponent}} -\/= digit * exponentDivisor;}
+\DoxyCodeLine{378                 exponentDivisor /= 10;}
+\DoxyCodeLine{379             \}}
+\DoxyCodeLine{380 }
+\DoxyCodeLine{381             *destination++ = (char) (\textcolor{charliteral}{'0'} + (\textcolor{keywordtype}{char}) \mbox{\hyperlink{namespacegl_a3e4f26913c422a31ce8fdce60a142d48}{exponent}});}
+\DoxyCodeLine{382         \};}
+\DoxyCodeLine{383 }
+\DoxyCodeLine{384         \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} = *text;}
+\DoxyCodeLine{385 }
+\DoxyCodeLine{386         \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} == \textcolor{charliteral}{'e'} || \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} == \textcolor{charliteral}{'E'})}
+\DoxyCodeLine{387         \{}
+\DoxyCodeLine{388             \textcolor{keyword}{const} \textcolor{keyword}{auto} startOfExponent = text;}
+\DoxyCodeLine{389             *writePtr++ = \textcolor{charliteral}{'e'};}
+\DoxyCodeLine{390             \textcolor{keywordtype}{bool} parsedExponentIsPositive = \textcolor{keyword}{true};}
+\DoxyCodeLine{391 }
+\DoxyCodeLine{392             \textcolor{keywordflow}{switch} (*++text)}
+\DoxyCodeLine{393             \{}
+\DoxyCodeLine{394                 \textcolor{keywordflow}{case} \textcolor{charliteral}{'-\/'}:}
+\DoxyCodeLine{395                     parsedExponentIsPositive = \textcolor{keyword}{false};}
+\DoxyCodeLine{396                     \mbox{\hyperlink{group__juce__core-system_gae5a4983340a829e456bad83f0dc8e92b}{JUCE\_FALLTHROUGH}}}
+\DoxyCodeLine{397                 \textcolor{keywordflow}{case} \textcolor{charliteral}{'+'}:}
+\DoxyCodeLine{398                     ++text;}
+\DoxyCodeLine{399                     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{400                 \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{401                     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{402             \}}
+\DoxyCodeLine{403 }
+\DoxyCodeLine{404             \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a3e4f26913c422a31ce8fdce60a142d48}{exponent}} = 0;}
+\DoxyCodeLine{405             \textcolor{keyword}{const} \textcolor{keyword}{auto} startOfExponentDigits = text;}
+\DoxyCodeLine{406 }
+\DoxyCodeLine{407             \textcolor{keywordflow}{while} (text.isDigit())}
+\DoxyCodeLine{408             \{}
+\DoxyCodeLine{409                 \textcolor{keyword}{auto} digit = (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}) text.getAndAdvance() -\/ \textcolor{charliteral}{'0'};}
+\DoxyCodeLine{410 }
+\DoxyCodeLine{411                 \textcolor{keywordflow}{if} (digit != 0 || \mbox{\hyperlink{namespacegl_a3e4f26913c422a31ce8fdce60a142d48}{exponent}} != 0)}
+\DoxyCodeLine{412                     \mbox{\hyperlink{namespacegl_a3e4f26913c422a31ce8fdce60a142d48}{exponent}} = (\mbox{\hyperlink{namespacegl_a3e4f26913c422a31ce8fdce60a142d48}{exponent}} * 10) + digit;}
+\DoxyCodeLine{413             \}}
+\DoxyCodeLine{414 }
+\DoxyCodeLine{415             \textcolor{keywordflow}{if} (text == startOfExponentDigits)}
+\DoxyCodeLine{416                 text = startOfExponent;}
+\DoxyCodeLine{417 }
+\DoxyCodeLine{418             \mbox{\hyperlink{namespacegl_a3e4f26913c422a31ce8fdce60a142d48}{exponent}} = extraExponent + (parsedExponentIsPositive ? \mbox{\hyperlink{namespacegl_a3e4f26913c422a31ce8fdce60a142d48}{exponent}} : -\/\mbox{\hyperlink{namespacegl_a3e4f26913c422a31ce8fdce60a142d48}{exponent}});}
+\DoxyCodeLine{419 }
+\DoxyCodeLine{420             \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a3e4f26913c422a31ce8fdce60a142d48}{exponent}} < 0)}
+\DoxyCodeLine{421             \{}
+\DoxyCodeLine{422                 \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a3e4f26913c422a31ce8fdce60a142d48}{exponent}} < std::numeric\_limits<double>::min\_exponent10 -\/ 1)}
+\DoxyCodeLine{423                     \textcolor{keywordflow}{return} isNegative ? -\/0.0 : 0.0;}
+\DoxyCodeLine{424 }
+\DoxyCodeLine{425                 *writePtr++ = \textcolor{charliteral}{'-\/'};}
+\DoxyCodeLine{426                 \mbox{\hyperlink{namespacegl_a3e4f26913c422a31ce8fdce60a142d48}{exponent}} = -\/\mbox{\hyperlink{namespacegl_a3e4f26913c422a31ce8fdce60a142d48}{exponent}};}
+\DoxyCodeLine{427             \}}
+\DoxyCodeLine{428             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a3e4f26913c422a31ce8fdce60a142d48}{exponent}} > std::numeric\_limits<double>::max\_exponent10 + 1)}
+\DoxyCodeLine{429             \{}
+\DoxyCodeLine{430                 \textcolor{keywordflow}{return} isNegative ? -\/inf : inf;}
+\DoxyCodeLine{431             \}}
+\DoxyCodeLine{432 }
+\DoxyCodeLine{433             writeExponentDigits (\mbox{\hyperlink{namespacegl_a3e4f26913c422a31ce8fdce60a142d48}{exponent}}, writePtr);}
+\DoxyCodeLine{434         \}}
+\DoxyCodeLine{435         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (extraExponent > 0)}
+\DoxyCodeLine{436         \{}
+\DoxyCodeLine{437             *writePtr++ = \textcolor{charliteral}{'e'};}
+\DoxyCodeLine{438             writeExponentDigits (extraExponent, writePtr);}
+\DoxyCodeLine{439         \}}
+\DoxyCodeLine{440 }
+\DoxyCodeLine{441 \textcolor{preprocessor}{       \#if JUCE\_WINDOWS}}
+\DoxyCodeLine{442         \textcolor{keyword}{static} \_locale\_t locale = \_create\_locale (LC\_ALL, \textcolor{stringliteral}{"{}C"{}});}
+\DoxyCodeLine{443         \textcolor{keywordflow}{return} \_strtod\_l (\&buffer[0], \textcolor{keyword}{nullptr}, locale);}
+\DoxyCodeLine{444 \textcolor{preprocessor}{       \#else}}
+\DoxyCodeLine{445         \textcolor{keyword}{static} locale\_t locale = newlocale (LC\_ALL\_MASK, \textcolor{stringliteral}{"{}C"{}}, \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{446 \textcolor{preprocessor}{        \#if JUCE\_ANDROID}}
+\DoxyCodeLine{447         \textcolor{keywordflow}{return} (\textcolor{keywordtype}{double}) strtold\_l (\&buffer[0], \textcolor{keyword}{nullptr}, locale);}
+\DoxyCodeLine{448 \textcolor{preprocessor}{        \#else}}
+\DoxyCodeLine{449         \textcolor{keywordflow}{return} strtod\_l (\&buffer[0], \textcolor{keyword}{nullptr}, locale);}
+\DoxyCodeLine{450 \textcolor{preprocessor}{        \#endif}}
+\DoxyCodeLine{451 \textcolor{preprocessor}{       \#endif}}
+\DoxyCodeLine{452 }
+\DoxyCodeLine{453 \textcolor{preprocessor}{       \#endif   }\textcolor{comment}{// JUCE\_MINGW}}
+\DoxyCodeLine{454     \}}
+\DoxyCodeLine{455 }
+\DoxyCodeLine{457     \textcolor{keyword}{template} <\textcolor{keyword}{typename} CharPo\textcolor{keywordtype}{int}erType>}
+\DoxyCodeLine{458     \textcolor{keyword}{static} \textcolor{keywordtype}{double} \mbox{\hyperlink{class_character_functions_ae58bda3f52f99ffe9d331a07ee0e60d9}{getDoubleValue}} (CharPointerType text) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{459     \{}
+\DoxyCodeLine{460         \textcolor{keywordflow}{return} readDoubleValue (text);}
+\DoxyCodeLine{461     \}}
+\DoxyCodeLine{462 }
+\DoxyCodeLine{463     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{465 \textcolor{comment}{}    \textcolor{keyword}{template} <\textcolor{keyword}{typename} IntType, \textcolor{keyword}{typename} CharPo\textcolor{keywordtype}{int}erType>}
+\DoxyCodeLine{466     \textcolor{keyword}{static} IntType \mbox{\hyperlink{class_character_functions_a1ad032242c425770875015f8f6d4b0e4}{getIntValue}} (\textcolor{keyword}{const} CharPointerType text) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{467     \{}
+\DoxyCodeLine{468         \textcolor{keyword}{using} UIntType = \textcolor{keyword}{typename} \mbox{\hyperlink{structinternal_1_1make__unsigned_a1370e2fc7b5594708247d09f6ee7ee0a}{internal::make\_unsigned<IntType>::type}};}
+\DoxyCodeLine{469 }
+\DoxyCodeLine{470         UIntType \mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}} = 0;}
+\DoxyCodeLine{471         \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}} = text.findEndOfWhitespace();}
+\DoxyCodeLine{472         \textcolor{keyword}{const} \textcolor{keywordtype}{bool} isNeg = *\mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}} == \textcolor{charliteral}{'-\/'};}
+\DoxyCodeLine{473 }
+\DoxyCodeLine{474         \textcolor{keywordflow}{if} (isNeg)}
+\DoxyCodeLine{475             ++\mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}};}
+\DoxyCodeLine{476 }
+\DoxyCodeLine{477         \textcolor{keywordflow}{for} (;;)}
+\DoxyCodeLine{478         \{}
+\DoxyCodeLine{479             \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} = \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}}.getAndAdvance();}
+\DoxyCodeLine{480 }
+\DoxyCodeLine{481             \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} >= \textcolor{charliteral}{'0'} \&\& \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} <= \textcolor{charliteral}{'9'})}
+\DoxyCodeLine{482                 \mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}} = \mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}} * 10 + (UIntType) (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} -\/ \textcolor{charliteral}{'0'});}
+\DoxyCodeLine{483             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{484                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{485         \}}
+\DoxyCodeLine{486 }
+\DoxyCodeLine{487         \textcolor{keywordflow}{return} isNeg ? -\/ (IntType) \mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}} : (IntType) \mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}};}
+\DoxyCodeLine{488     \}}
+\DoxyCodeLine{489 }
+\DoxyCodeLine{491     \textcolor{keyword}{template} <\textcolor{keyword}{typename} ResultType>}
+\DoxyCodeLine{492     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_character_functions_1_1_hex_parser}{HexParser}}}
+\DoxyCodeLine{493     \{}
+\DoxyCodeLine{494         \textcolor{keyword}{static\_assert} (\mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{std::is\_unsigned<ResultType>::value}}, \textcolor{stringliteral}{"{}ResultType must be unsigned because "{}}}
+\DoxyCodeLine{495                                                             \textcolor{stringliteral}{"{}left-\/shifting a negative value is UB"{}});}
+\DoxyCodeLine{496 }
+\DoxyCodeLine{497         \textcolor{keyword}{template} <\textcolor{keyword}{typename} CharPo\textcolor{keywordtype}{int}erType>}
+\DoxyCodeLine{498         \textcolor{keyword}{static} ResultType \mbox{\hyperlink{struct_character_functions_1_1_hex_parser_a6da02089ed151cf59b990394a1531879}{parse}} (CharPointerType \mbox{\hyperlink{namespacegl_ad0bd70fc9115453f6f5f5ac53accea65}{t}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{499         \{}
+\DoxyCodeLine{500             ResultType \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = 0;}
+\DoxyCodeLine{501 }
+\DoxyCodeLine{502             \textcolor{keywordflow}{while} (! \mbox{\hyperlink{namespacegl_ad0bd70fc9115453f6f5f5ac53accea65}{t}}.isEmpty())}
+\DoxyCodeLine{503             \{}
+\DoxyCodeLine{504                 \textcolor{keyword}{auto} hexValue = \mbox{\hyperlink{class_character_functions_a9597d24e55b3bc0053ebc274bb26ccbe}{CharacterFunctions::getHexDigitValue}} (\mbox{\hyperlink{namespacegl_ad0bd70fc9115453f6f5f5ac53accea65}{t}}.getAndAdvance());}
+\DoxyCodeLine{505 }
+\DoxyCodeLine{506                 \textcolor{keywordflow}{if} (hexValue >= 0)}
+\DoxyCodeLine{507                     \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = \textcolor{keyword}{static\_cast<}ResultType\textcolor{keyword}{>} (result << 4) | static\_cast<ResultType> (hexValue);}
+\DoxyCodeLine{508             \}}
+\DoxyCodeLine{509 }
+\DoxyCodeLine{510             \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}};}
+\DoxyCodeLine{511         \}}
+\DoxyCodeLine{512     \};}
+\DoxyCodeLine{513 }
+\DoxyCodeLine{514     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{517 \textcolor{comment}{}    \textcolor{keyword}{template} <\textcolor{keyword}{typename} CharPo\textcolor{keywordtype}{int}erType>}
+\DoxyCodeLine{518     \textcolor{keyword}{static} \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_character_functions_ad464ebf48f8195b54b889e697dc1d5b7}{lengthUpTo}} (CharPointerType text, \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} maxCharsToCount) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{519     \{}
+\DoxyCodeLine{520         \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegl_a8703aca610f6fee6039234f569470dbf}{len}} = 0;}
+\DoxyCodeLine{521 }
+\DoxyCodeLine{522         \textcolor{keywordflow}{while} (\mbox{\hyperlink{namespacegl_a8703aca610f6fee6039234f569470dbf}{len}} < maxCharsToCount \&\& text.getAndAdvance() != 0)}
+\DoxyCodeLine{523             ++\mbox{\hyperlink{namespacegl_a8703aca610f6fee6039234f569470dbf}{len}};}
+\DoxyCodeLine{524 }
+\DoxyCodeLine{525         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a8703aca610f6fee6039234f569470dbf}{len}};}
+\DoxyCodeLine{526     \}}
+\DoxyCodeLine{527 }
+\DoxyCodeLine{530     \textcolor{keyword}{template} <\textcolor{keyword}{typename} CharPo\textcolor{keywordtype}{int}erType>}
+\DoxyCodeLine{531     \textcolor{keyword}{static} \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_character_functions_a5685f5fdd8a4c8c0ae5871e509e844ed}{lengthUpTo}} (CharPointerType \mbox{\hyperlink{namespacegl_adad3a3824fbe72fb0b01074bb01ebe75}{start}}, \textcolor{keyword}{const} CharPointerType \mbox{\hyperlink{group__juce__core-files_ga4a3194f4f741f9bd653f28733358f62c}{end}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{532     \{}
+\DoxyCodeLine{533         \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegl_a8703aca610f6fee6039234f569470dbf}{len}} = 0;}
+\DoxyCodeLine{534 }
+\DoxyCodeLine{535         \textcolor{keywordflow}{while} (\mbox{\hyperlink{namespacegl_adad3a3824fbe72fb0b01074bb01ebe75}{start}} < \mbox{\hyperlink{group__juce__core-files_ga4a3194f4f741f9bd653f28733358f62c}{end}} \&\& \mbox{\hyperlink{namespacegl_adad3a3824fbe72fb0b01074bb01ebe75}{start}}.getAndAdvance() != 0)}
+\DoxyCodeLine{536             ++\mbox{\hyperlink{namespacegl_a8703aca610f6fee6039234f569470dbf}{len}};}
+\DoxyCodeLine{537 }
+\DoxyCodeLine{538         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a8703aca610f6fee6039234f569470dbf}{len}};}
+\DoxyCodeLine{539     \}}
+\DoxyCodeLine{540 }
+\DoxyCodeLine{542     \textcolor{keyword}{template} <\textcolor{keyword}{typename} DestCharPo\textcolor{keywordtype}{int}erType, \textcolor{keyword}{typename} SrcCharPo\textcolor{keywordtype}{int}erType>}
+\DoxyCodeLine{543     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_character_functions_aeb4fe8347d3df6ac1a09e3342517041c}{copyAll}} (DestCharPointerType\& dest, SrcCharPointerType \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{544     \{}
+\DoxyCodeLine{545         \textcolor{keywordflow}{while} (\textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} = \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}.getAndAdvance())}
+\DoxyCodeLine{546             dest.write (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}});}
+\DoxyCodeLine{547 }
+\DoxyCodeLine{548         dest.writeNull();}
+\DoxyCodeLine{549     \}}
+\DoxyCodeLine{550 }
+\DoxyCodeLine{553     \textcolor{keyword}{template} <\textcolor{keyword}{typename} DestCharPo\textcolor{keywordtype}{int}erType, \textcolor{keyword}{typename} SrcCharPo\textcolor{keywordtype}{int}erType>}
+\DoxyCodeLine{554     \textcolor{keyword}{static} \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_character_functions_af5732566217c2fbeb0830f605f90c989}{copyWithDestByteLimit}} (DestCharPointerType\& dest, SrcCharPointerType \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, \textcolor{keywordtype}{size\_t} maxBytesToWrite) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{555     \{}
+\DoxyCodeLine{556         \textcolor{keyword}{auto} startAddress = dest.getAddress();}
+\DoxyCodeLine{557         \textcolor{keyword}{auto} maxBytes = (ssize\_t) maxBytesToWrite;}
+\DoxyCodeLine{558         maxBytes -\/= (ssize\_t) \textcolor{keyword}{sizeof} (\textcolor{keyword}{typename} DestCharPointerType::CharType); \textcolor{comment}{// (allow for a terminating null)}}
+\DoxyCodeLine{559 }
+\DoxyCodeLine{560         \textcolor{keywordflow}{for} (;;)}
+\DoxyCodeLine{561         \{}
+\DoxyCodeLine{562             \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} = \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}.getAndAdvance();}
+\DoxyCodeLine{563             \textcolor{keyword}{auto} bytesNeeded = (ssize\_t) DestCharPointerType::getBytesRequiredFor (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}});}
+\DoxyCodeLine{564             maxBytes -\/= bytesNeeded;}
+\DoxyCodeLine{565 }
+\DoxyCodeLine{566             \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} == 0 || maxBytes < 0)}
+\DoxyCodeLine{567                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{568 }
+\DoxyCodeLine{569             dest.write (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}});}
+\DoxyCodeLine{570         \}}
+\DoxyCodeLine{571 }
+\DoxyCodeLine{572         dest.writeNull();}
+\DoxyCodeLine{573 }
+\DoxyCodeLine{574         \textcolor{keywordflow}{return} (\textcolor{keywordtype}{size\_t}) \mbox{\hyperlink{group__juce__core-memory_ga667897ead2d6fd7f9f682bd8f75da26a}{getAddressDifference}} (dest.getAddress(), startAddress)}
+\DoxyCodeLine{575                  + \textcolor{keyword}{sizeof} (\textcolor{keyword}{typename} DestCharPointerType::CharType);}
+\DoxyCodeLine{576     \}}
+\DoxyCodeLine{577 }
+\DoxyCodeLine{580     \textcolor{keyword}{template} <\textcolor{keyword}{typename} DestCharPo\textcolor{keywordtype}{int}erType, \textcolor{keyword}{typename} SrcCharPo\textcolor{keywordtype}{int}erType>}
+\DoxyCodeLine{581     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_character_functions_a6926024e6276580b38d81b432a2261a2}{copyWithCharLimit}} (DestCharPointerType\& dest, SrcCharPointerType \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, \textcolor{keywordtype}{int} maxChars) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{582     \{}
+\DoxyCodeLine{583         \textcolor{keywordflow}{while} (-\/-\/maxChars > 0)}
+\DoxyCodeLine{584         \{}
+\DoxyCodeLine{585             \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} = \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}.getAndAdvance();}
+\DoxyCodeLine{586 }
+\DoxyCodeLine{587             \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} == 0)}
+\DoxyCodeLine{588                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{589 }
+\DoxyCodeLine{590             dest.write (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}});}
+\DoxyCodeLine{591         \}}
+\DoxyCodeLine{592 }
+\DoxyCodeLine{593         dest.writeNull();}
+\DoxyCodeLine{594     \}}
+\DoxyCodeLine{595 }
+\DoxyCodeLine{597     \textcolor{keyword}{static} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_character_functions_a0a4508ec49af4218ff4f5979b1f6845a}{compare}} (\mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} char1, \mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} char2) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{598     \{}
+\DoxyCodeLine{599         \textcolor{keywordflow}{if} (\textcolor{keyword}{auto} diff = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>} (char1) -\/ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>} (char2))}
+\DoxyCodeLine{600             \textcolor{keywordflow}{return} diff < 0 ? -\/1 : 1;}
+\DoxyCodeLine{601 }
+\DoxyCodeLine{602         \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{603     \}}
+\DoxyCodeLine{604 }
+\DoxyCodeLine{606     \textcolor{keyword}{template} <\textcolor{keyword}{typename} CharPo\textcolor{keywordtype}{int}erType1, \textcolor{keyword}{typename} CharPo\textcolor{keywordtype}{int}erType2>}
+\DoxyCodeLine{607     \textcolor{keyword}{static} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_character_functions_a1833e4d42a9fc8e3333e57e4786641d2}{compare}} (CharPointerType1 \mbox{\hyperlink{namespacegl_a55431e247388670163eddad1dcce7a66}{s1}}, CharPointerType2 s2) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{608     \{}
+\DoxyCodeLine{609         \textcolor{keywordflow}{for} (;;)}
+\DoxyCodeLine{610         \{}
+\DoxyCodeLine{611             \textcolor{keyword}{auto} c1 = \mbox{\hyperlink{namespacegl_a55431e247388670163eddad1dcce7a66}{s1}}.getAndAdvance();}
+\DoxyCodeLine{612 }
+\DoxyCodeLine{613             \textcolor{keywordflow}{if} (\textcolor{keyword}{auto} diff = compare (c1, s2.getAndAdvance()))}
+\DoxyCodeLine{614                 \textcolor{keywordflow}{return} diff;}
+\DoxyCodeLine{615 }
+\DoxyCodeLine{616             \textcolor{keywordflow}{if} (c1 == 0)}
+\DoxyCodeLine{617                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{618         \}}
+\DoxyCodeLine{619 }
+\DoxyCodeLine{620         \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{621     \}}
+\DoxyCodeLine{622 }
+\DoxyCodeLine{624     \textcolor{keyword}{template} <\textcolor{keyword}{typename} CharPo\textcolor{keywordtype}{int}erType1, \textcolor{keyword}{typename} CharPo\textcolor{keywordtype}{int}erType2>}
+\DoxyCodeLine{625     \textcolor{keyword}{static} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_character_functions_a121f7e5a6d496a95894c5f3e2bcc6cd0}{compareUpTo}} (CharPointerType1 \mbox{\hyperlink{namespacegl_a55431e247388670163eddad1dcce7a66}{s1}}, CharPointerType2 s2, \textcolor{keywordtype}{int} maxChars) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{626     \{}
+\DoxyCodeLine{627         \textcolor{keywordflow}{while} (-\/-\/maxChars >= 0)}
+\DoxyCodeLine{628         \{}
+\DoxyCodeLine{629             \textcolor{keyword}{auto} c1 = \mbox{\hyperlink{namespacegl_a55431e247388670163eddad1dcce7a66}{s1}}.getAndAdvance();}
+\DoxyCodeLine{630 }
+\DoxyCodeLine{631             \textcolor{keywordflow}{if} (\textcolor{keyword}{auto} diff = compare (c1, s2.getAndAdvance()))}
+\DoxyCodeLine{632                 \textcolor{keywordflow}{return} diff;}
+\DoxyCodeLine{633 }
+\DoxyCodeLine{634             \textcolor{keywordflow}{if} (c1 == 0)}
+\DoxyCodeLine{635                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{636         \}}
+\DoxyCodeLine{637 }
+\DoxyCodeLine{638         \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{639     \}}
+\DoxyCodeLine{640 }
+\DoxyCodeLine{642     \textcolor{keyword}{static} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_character_functions_a347c2ef2ab32ac9b4eee84ce87876e04}{compareIgnoreCase}} (\mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} char1, \mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} char2) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{643     \{}
+\DoxyCodeLine{644         \textcolor{keywordflow}{return} char1 != char2 ? compare (toUpperCase (char1), toUpperCase (char2)) : 0;}
+\DoxyCodeLine{645     \}}
+\DoxyCodeLine{646 }
+\DoxyCodeLine{648     \textcolor{keyword}{template} <\textcolor{keyword}{typename} CharPo\textcolor{keywordtype}{int}erType1, \textcolor{keyword}{typename} CharPo\textcolor{keywordtype}{int}erType2>}
+\DoxyCodeLine{649     \textcolor{keyword}{static} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_character_functions_a58b4b783a7181c4a0ae90bb9c430d735}{compareIgnoreCase}} (CharPointerType1 \mbox{\hyperlink{namespacegl_a55431e247388670163eddad1dcce7a66}{s1}}, CharPointerType2 s2) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{650     \{}
+\DoxyCodeLine{651         \textcolor{keywordflow}{for} (;;)}
+\DoxyCodeLine{652         \{}
+\DoxyCodeLine{653             \textcolor{keyword}{auto} c1 = \mbox{\hyperlink{namespacegl_a55431e247388670163eddad1dcce7a66}{s1}}.getAndAdvance();}
+\DoxyCodeLine{654 }
+\DoxyCodeLine{655             \textcolor{keywordflow}{if} (\textcolor{keyword}{auto} diff = compareIgnoreCase (c1, s2.getAndAdvance()))}
+\DoxyCodeLine{656                 \textcolor{keywordflow}{return} diff;}
+\DoxyCodeLine{657 }
+\DoxyCodeLine{658             \textcolor{keywordflow}{if} (c1 == 0)}
+\DoxyCodeLine{659                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{660         \}}
+\DoxyCodeLine{661 }
+\DoxyCodeLine{662         \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{663     \}}
+\DoxyCodeLine{664 }
+\DoxyCodeLine{666     \textcolor{keyword}{template} <\textcolor{keyword}{typename} CharPo\textcolor{keywordtype}{int}erType1, \textcolor{keyword}{typename} CharPo\textcolor{keywordtype}{int}erType2>}
+\DoxyCodeLine{667     \textcolor{keyword}{static} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_character_functions_a88c1a470b8d453d8fd790c99406b1828}{compareIgnoreCaseUpTo}} (CharPointerType1 \mbox{\hyperlink{namespacegl_a55431e247388670163eddad1dcce7a66}{s1}}, CharPointerType2 s2, \textcolor{keywordtype}{int} maxChars) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{668     \{}
+\DoxyCodeLine{669         \textcolor{keywordflow}{while} (-\/-\/maxChars >= 0)}
+\DoxyCodeLine{670         \{}
+\DoxyCodeLine{671             \textcolor{keyword}{auto} c1 = \mbox{\hyperlink{namespacegl_a55431e247388670163eddad1dcce7a66}{s1}}.getAndAdvance();}
+\DoxyCodeLine{672 }
+\DoxyCodeLine{673             \textcolor{keywordflow}{if} (\textcolor{keyword}{auto} diff = compareIgnoreCase (c1, s2.getAndAdvance()))}
+\DoxyCodeLine{674                 \textcolor{keywordflow}{return} diff;}
+\DoxyCodeLine{675 }
+\DoxyCodeLine{676             \textcolor{keywordflow}{if} (c1 == 0)}
+\DoxyCodeLine{677                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{678         \}}
+\DoxyCodeLine{679 }
+\DoxyCodeLine{680         \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{681     \}}
+\DoxyCodeLine{682 }
+\DoxyCodeLine{686     \textcolor{keyword}{template} <\textcolor{keyword}{typename} CharPo\textcolor{keywordtype}{int}erType1, \textcolor{keyword}{typename} CharPo\textcolor{keywordtype}{int}erType2>}
+\DoxyCodeLine{687     \textcolor{keyword}{static} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_character_functions_a00a4d93de59505337b51f0597238872c}{indexOf}} (CharPointerType1 textToSearch, \textcolor{keyword}{const} CharPointerType2 substringToLookFor) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{688     \{}
+\DoxyCodeLine{689         \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}} = 0;}
+\DoxyCodeLine{690         \textcolor{keyword}{auto} substringLength = (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}) substringToLookFor.length();}
+\DoxyCodeLine{691 }
+\DoxyCodeLine{692         \textcolor{keywordflow}{for} (;;)}
+\DoxyCodeLine{693         \{}
+\DoxyCodeLine{694             \textcolor{keywordflow}{if} (textToSearch.compareUpTo (substringToLookFor, substringLength) == 0)}
+\DoxyCodeLine{695                 \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}};}
+\DoxyCodeLine{696 }
+\DoxyCodeLine{697             \textcolor{keywordflow}{if} (textToSearch.getAndAdvance() == 0)}
+\DoxyCodeLine{698                 \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{699 }
+\DoxyCodeLine{700             ++\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}};}
+\DoxyCodeLine{701         \}}
+\DoxyCodeLine{702     \}}
+\DoxyCodeLine{703 }
+\DoxyCodeLine{708     \textcolor{keyword}{template} <\textcolor{keyword}{typename} CharPo\textcolor{keywordtype}{int}erType1, \textcolor{keyword}{typename} CharPo\textcolor{keywordtype}{int}erType2>}
+\DoxyCodeLine{709     \textcolor{keyword}{static} CharPointerType1 \mbox{\hyperlink{class_character_functions_a9fbf57c0172b477fc8eb7ebac3f569a8}{find}} (CharPointerType1 textToSearch, \textcolor{keyword}{const} CharPointerType2 substringToLookFor) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{710     \{}
+\DoxyCodeLine{711         \textcolor{keyword}{auto} substringLength = (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}) substringToLookFor.length();}
+\DoxyCodeLine{712 }
+\DoxyCodeLine{713         \textcolor{keywordflow}{while} (textToSearch.compareUpTo (substringToLookFor, substringLength) != 0}
+\DoxyCodeLine{714                  \&\& ! textToSearch.isEmpty())}
+\DoxyCodeLine{715             ++textToSearch;}
+\DoxyCodeLine{716 }
+\DoxyCodeLine{717         \textcolor{keywordflow}{return} textToSearch;}
+\DoxyCodeLine{718     \}}
+\DoxyCodeLine{719 }
+\DoxyCodeLine{724     \textcolor{keyword}{template} <\textcolor{keyword}{typename} CharPo\textcolor{keywordtype}{int}erType>}
+\DoxyCodeLine{725     \textcolor{keyword}{static} CharPointerType \mbox{\hyperlink{class_character_functions_af839b24f2b8dfaa83181b027880e70c9}{find}} (CharPointerType textToSearch, \textcolor{keyword}{const} \mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} charToLookFor) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{726     \{}
+\DoxyCodeLine{727         \textcolor{keywordflow}{for} (;; ++textToSearch)}
+\DoxyCodeLine{728         \{}
+\DoxyCodeLine{729             \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} = *textToSearch;}
+\DoxyCodeLine{730 }
+\DoxyCodeLine{731             \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} == charToLookFor || \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} == 0)}
+\DoxyCodeLine{732                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{733         \}}
+\DoxyCodeLine{734 }
+\DoxyCodeLine{735         \textcolor{keywordflow}{return} textToSearch;}
+\DoxyCodeLine{736     \}}
+\DoxyCodeLine{737 }
+\DoxyCodeLine{742     \textcolor{keyword}{template} <\textcolor{keyword}{typename} CharPo\textcolor{keywordtype}{int}erType1, \textcolor{keyword}{typename} CharPo\textcolor{keywordtype}{int}erType2>}
+\DoxyCodeLine{743     \textcolor{keyword}{static} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_character_functions_a824a98ee3bef8a55a453636704a74ff8}{indexOfIgnoreCase}} (CharPointerType1 haystack, \textcolor{keyword}{const} CharPointerType2 needle) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{744     \{}
+\DoxyCodeLine{745         \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}} = 0;}
+\DoxyCodeLine{746         \textcolor{keyword}{auto} needleLength = (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}) needle.length();}
+\DoxyCodeLine{747 }
+\DoxyCodeLine{748         \textcolor{keywordflow}{for} (;;)}
+\DoxyCodeLine{749         \{}
+\DoxyCodeLine{750             \textcolor{keywordflow}{if} (haystack.compareIgnoreCaseUpTo (needle, needleLength) == 0)}
+\DoxyCodeLine{751                 \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}};}
+\DoxyCodeLine{752 }
+\DoxyCodeLine{753             \textcolor{keywordflow}{if} (haystack.getAndAdvance() == 0)}
+\DoxyCodeLine{754                 \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{755 }
+\DoxyCodeLine{756             ++\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}};}
+\DoxyCodeLine{757         \}}
+\DoxyCodeLine{758     \}}
+\DoxyCodeLine{759 }
+\DoxyCodeLine{763     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type>}
+\DoxyCodeLine{764     \textcolor{keyword}{static} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_character_functions_a6f53c649e6aae9e9f15b3a45fd7679a2}{indexOfChar}} (Type text, \textcolor{keyword}{const} \mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} charToFind) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{765     \{}
+\DoxyCodeLine{766         \textcolor{keywordtype}{int} i = 0;}
+\DoxyCodeLine{767 }
+\DoxyCodeLine{768         \textcolor{keywordflow}{while} (! text.isEmpty())}
+\DoxyCodeLine{769         \{}
+\DoxyCodeLine{770             \textcolor{keywordflow}{if} (text.getAndAdvance() == charToFind)}
+\DoxyCodeLine{771                 \textcolor{keywordflow}{return} i;}
+\DoxyCodeLine{772 }
+\DoxyCodeLine{773             ++i;}
+\DoxyCodeLine{774         \}}
+\DoxyCodeLine{775 }
+\DoxyCodeLine{776         \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{777     \}}
+\DoxyCodeLine{778 }
+\DoxyCodeLine{783     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type>}
+\DoxyCodeLine{784     \textcolor{keyword}{static} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_character_functions_a0390d13daac405225657a7237022778c}{indexOfCharIgnoreCase}} (Type text, \mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} charToFind) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{785     \{}
+\DoxyCodeLine{786         charToFind = \mbox{\hyperlink{class_character_functions_ab18ee827b663ca0e0729afa57164f34a}{CharacterFunctions::toLowerCase}} (charToFind);}
+\DoxyCodeLine{787         \textcolor{keywordtype}{int} i = 0;}
+\DoxyCodeLine{788 }
+\DoxyCodeLine{789         \textcolor{keywordflow}{while} (! text.isEmpty())}
+\DoxyCodeLine{790         \{}
+\DoxyCodeLine{791             \textcolor{keywordflow}{if} (text.toLowerCase() == charToFind)}
+\DoxyCodeLine{792                 \textcolor{keywordflow}{return} i;}
+\DoxyCodeLine{793 }
+\DoxyCodeLine{794             ++text;}
+\DoxyCodeLine{795             ++i;}
+\DoxyCodeLine{796         \}}
+\DoxyCodeLine{797 }
+\DoxyCodeLine{798         \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{799     \}}
+\DoxyCodeLine{800 }
+\DoxyCodeLine{807     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type>}
+\DoxyCodeLine{808     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_character_functions_a8af81e369043cb5b48aa34bbb1baf1fb}{incrementToEndOfWhitespace}} (Type\& text) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{809     \{}
+\DoxyCodeLine{810         \textcolor{keywordflow}{while} (text.isWhitespace())}
+\DoxyCodeLine{811             ++text;}
+\DoxyCodeLine{812     \}}
+\DoxyCodeLine{813 }
+\DoxyCodeLine{818     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type>}
+\DoxyCodeLine{819     \textcolor{keyword}{static} Type \mbox{\hyperlink{class_character_functions_ad1b0612e60e31641f0f2460d646b8e80}{findEndOfWhitespace}} (Type text) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{820     \{}
+\DoxyCodeLine{821         incrementToEndOfWhitespace (text);}
+\DoxyCodeLine{822         \textcolor{keywordflow}{return} text;}
+\DoxyCodeLine{823     \}}
+\DoxyCodeLine{824 }
+\DoxyCodeLine{828     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type, \textcolor{keyword}{typename} BreakType>}
+\DoxyCodeLine{829     \textcolor{keyword}{static} Type \mbox{\hyperlink{class_character_functions_ab13a2cfcef3af28ca4916a855967a2ac}{findEndOfToken}} (Type text, BreakType breakCharacters, Type quoteCharacters)}
+\DoxyCodeLine{830     \{}
+\DoxyCodeLine{831         \mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} currentQuoteChar = 0;}
+\DoxyCodeLine{832 }
+\DoxyCodeLine{833         \textcolor{keywordflow}{while} (! text.isEmpty())}
+\DoxyCodeLine{834         \{}
+\DoxyCodeLine{835             \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} = text.getAndAdvance();}
+\DoxyCodeLine{836 }
+\DoxyCodeLine{837             \textcolor{keywordflow}{if} (currentQuoteChar == 0 \&\& breakCharacters.indexOf (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}) >= 0)}
+\DoxyCodeLine{838             \{}
+\DoxyCodeLine{839                 -\/-\/text;}
+\DoxyCodeLine{840                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{841             \}}
+\DoxyCodeLine{842 }
+\DoxyCodeLine{843             \textcolor{keywordflow}{if} (quoteCharacters.indexOf (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}) >= 0)}
+\DoxyCodeLine{844             \{}
+\DoxyCodeLine{845                 \textcolor{keywordflow}{if} (currentQuoteChar == 0)}
+\DoxyCodeLine{846                     currentQuoteChar = \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}};}
+\DoxyCodeLine{847                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (currentQuoteChar == \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}})}
+\DoxyCodeLine{848                     currentQuoteChar = 0;}
+\DoxyCodeLine{849             \}}
+\DoxyCodeLine{850         \}}
+\DoxyCodeLine{851 }
+\DoxyCodeLine{852         \textcolor{keywordflow}{return} text;}
+\DoxyCodeLine{853     \}}
+\DoxyCodeLine{854 }
+\DoxyCodeLine{855 \textcolor{keyword}{private}:}
+\DoxyCodeLine{856     \textcolor{keyword}{static} \textcolor{keywordtype}{double} mulexp10 (\textcolor{keywordtype}{double} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a3e4f26913c422a31ce8fdce60a142d48}{exponent}}) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{857 \};}
+\DoxyCodeLine{858 }
+\DoxyCodeLine{859  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{860 }
+
+\end{DoxyCode}

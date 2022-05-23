@@ -1,0 +1,128 @@
+\hypertarget{juce___state_variable_t_p_t_filter_8h_source}{}\doxysection{juce\+\_\+\+State\+Variable\+TPTFilter.\+h}
+\label{juce___state_variable_t_p_t_filter_8h_source}\index{build/juce\_dsp/processors/juce\_StateVariableTPTFilter.h@{build/juce\_dsp/processors/juce\_StateVariableTPTFilter.h}}
+\mbox{\hyperlink{juce___state_variable_t_p_t_filter_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacedsp}{dsp}}}
+\DoxyCodeLine{30 \{}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \textcolor{keyword}{enum class} \mbox{\hyperlink{namespacedsp_a2812ed585354d3af60168fd6a9c14079}{StateVariableTPTFilterType}}}
+\DoxyCodeLine{33 \{}
+\DoxyCodeLine{34     \mbox{\hyperlink{namespacedsp_a2812ed585354d3af60168fd6a9c14079af4264a824899ff8f0fc5962ff60b9cef}{lowpass}},}
+\DoxyCodeLine{35     \mbox{\hyperlink{namespacedsp_a2812ed585354d3af60168fd6a9c14079aeaa843f2c3b43878349060f8b50c519d}{bandpass}},}
+\DoxyCodeLine{36     \mbox{\hyperlink{namespacedsp_a2812ed585354d3af60168fd6a9c14079aaf9a252c01dadf6eb482a6ce44a9c43b}{highpass}}}
+\DoxyCodeLine{37 \};}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{59 \textcolor{comment}{}\textcolor{keyword}{template} <\textcolor{keyword}{typename} SampleType>}
+\DoxyCodeLine{60 \textcolor{keyword}{class }\mbox{\hyperlink{classdsp_1_1_state_variable_t_p_t_filter}{StateVariableTPTFilter}}}
+\DoxyCodeLine{61 \{}
+\DoxyCodeLine{62 \textcolor{keyword}{public}:}
+\DoxyCodeLine{63     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{64     \textcolor{keyword}{using} \mbox{\hyperlink{namespacedsp_a2812ed585354d3af60168fd6a9c14079}{Type}} = \mbox{\hyperlink{namespacedsp_a2812ed585354d3af60168fd6a9c14079}{StateVariableTPTFilterType}};}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{68 \textcolor{comment}{}    \mbox{\hyperlink{classdsp_1_1_state_variable_t_p_t_filter_a2c6673876075ea336d79350096fdaca1}{StateVariableTPTFilter}}();}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{72 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_state_variable_t_p_t_filter_aa5329db0a9c2d66689455640ca15b21e}{setType}} (\mbox{\hyperlink{namespacedsp_a2812ed585354d3af60168fd6a9c14079}{Type}} newType);}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{78     \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_state_variable_t_p_t_filter_ad158b406ed7a2fa87fd586efb7d1f0b7}{setCutoffFrequency}} (SampleType newFrequencyHz);}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{86     \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_state_variable_t_p_t_filter_a7b2837c851e3ba66b0b4594b8238e3f3}{setResonance}} (SampleType newResonance);}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{90 \textcolor{comment}{}    \mbox{\hyperlink{namespacedsp_a2812ed585354d3af60168fd6a9c14079}{Type}} \mbox{\hyperlink{classdsp_1_1_state_variable_t_p_t_filter_a5bfbb36eecf19f1f901cdfa954e951de}{getType}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                      \{ \textcolor{keywordflow}{return} filterType; \}}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{93     SampleType \mbox{\hyperlink{classdsp_1_1_state_variable_t_p_t_filter_abc77d3de2dd72ce8a9172cedd144dbb3}{getCutoffFrequency}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept     \{ \textcolor{keywordflow}{return} cutoffFrequency; \}}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{96     SampleType \mbox{\hyperlink{classdsp_1_1_state_variable_t_p_t_filter_ae4622bf7f47980472edd56ae5e307be2}{getResonance}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept           \{ \textcolor{keywordflow}{return} resonance; \}}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{100 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_state_variable_t_p_t_filter_ad448b214a1b7f598922641cea46a7282}{prepare}} (\textcolor{keyword}{const} \mbox{\hyperlink{structdsp_1_1_process_spec}{ProcessSpec}}\& spec);}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{103     \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_state_variable_t_p_t_filter_a57d1f13f6ee768eb0606a05af3743cc7}{reset}}();}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{106     \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_state_variable_t_p_t_filter_a57d1f13f6ee768eb0606a05af3743cc7}{reset}} (SampleType newValue);}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{112     \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_state_variable_t_p_t_filter_ab0f46924f126f89339cc0b7b530dd2f4}{snapToZero}}() noexcept;}
+\DoxyCodeLine{113 }
+\DoxyCodeLine{114     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{116 \textcolor{comment}{}    template <typename ProcessContext>}
+\DoxyCodeLine{117     \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_state_variable_t_p_t_filter_a764bde02e87bc45cafbd8180cbf4e6ea}{process}} (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} ProcessContext\& context) noexcept}
+\DoxyCodeLine{118     \{}
+\DoxyCodeLine{119         \textcolor{keyword}{const} \textcolor{keyword}{auto}\& inputBlock = context.getInputBlock();}
+\DoxyCodeLine{120         \textcolor{keyword}{auto}\& outputBlock      = context.getOutputBlock();}
+\DoxyCodeLine{121         \textcolor{keyword}{const} \textcolor{keyword}{auto} numChannels = outputBlock.getNumChannels();}
+\DoxyCodeLine{122         \textcolor{keyword}{const} \textcolor{keyword}{auto} numSamples  = outputBlock.getNumSamples();}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{124         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (inputBlock.getNumChannels() <= s1.size());}
+\DoxyCodeLine{125         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (inputBlock.getNumChannels() == numChannels);}
+\DoxyCodeLine{126         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (inputBlock.getNumSamples()  == numSamples);}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{128         \textcolor{keywordflow}{if} (context.isBypassed)}
+\DoxyCodeLine{129         \{}
+\DoxyCodeLine{130             outputBlock.copyFrom (inputBlock);}
+\DoxyCodeLine{131             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{132         \}}
+\DoxyCodeLine{133 }
+\DoxyCodeLine{134         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} channel = 0; channel < numChannels; ++channel)}
+\DoxyCodeLine{135         \{}
+\DoxyCodeLine{136             \textcolor{keyword}{auto}* inputSamples  = inputBlock .getChannelPointer (channel);}
+\DoxyCodeLine{137             \textcolor{keyword}{auto}* outputSamples = outputBlock.getChannelPointer (channel);}
+\DoxyCodeLine{138 }
+\DoxyCodeLine{139             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < numSamples; ++i)}
+\DoxyCodeLine{140                 outputSamples[i] = \mbox{\hyperlink{classdsp_1_1_state_variable_t_p_t_filter_a52a7a2e317bac51c0c9dfedef491296f}{processSample}} ((\textcolor{keywordtype}{int}) channel, inputSamples[i]);}
+\DoxyCodeLine{141         \}}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{143 \textcolor{preprocessor}{       \#if JUCE\_DSP\_ENABLE\_SNAP\_TO\_ZERO}}
+\DoxyCodeLine{144         \mbox{\hyperlink{classdsp_1_1_state_variable_t_p_t_filter_ab0f46924f126f89339cc0b7b530dd2f4}{snapToZero}}();}
+\DoxyCodeLine{145 \textcolor{preprocessor}{       \#endif}}
+\DoxyCodeLine{146     \}}
+\DoxyCodeLine{147 }
+\DoxyCodeLine{148     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{150 \textcolor{comment}{}    SampleType \mbox{\hyperlink{classdsp_1_1_state_variable_t_p_t_filter_a52a7a2e317bac51c0c9dfedef491296f}{processSample}} (\textcolor{keywordtype}{int} channel, SampleType inputValue);}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{152 \textcolor{keyword}{private}:}
+\DoxyCodeLine{153     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{154     \textcolor{keywordtype}{void} update();}
+\DoxyCodeLine{155 }
+\DoxyCodeLine{156     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{157     SampleType g, h, R2;}
+\DoxyCodeLine{158     std::vector<SampleType> s1 \{ 2 \}, s2 \{ 2 \};}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160     \textcolor{keywordtype}{double} sampleRate = 44100.0;}
+\DoxyCodeLine{161     \mbox{\hyperlink{classdsp_1_1_state_variable_t_p_t_filter_ad599824914d6a48568c552ed6475aa66}{Type}} filterType = Type::lowpass;}
+\DoxyCodeLine{162     SampleType cutoffFrequency = \textcolor{keyword}{static\_cast<}SampleType\textcolor{keyword}{>} (1000.0),}
+\DoxyCodeLine{163                resonance       = \textcolor{keyword}{static\_cast<}SampleType\textcolor{keyword}{>} (1.0 / std::sqrt (2.0));}
+\DoxyCodeLine{164 \};}
+\DoxyCodeLine{165 }
+\DoxyCodeLine{166 \} \textcolor{comment}{// namespace dsp}}
+\DoxyCodeLine{167  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{168 }
+
+\end{DoxyCode}

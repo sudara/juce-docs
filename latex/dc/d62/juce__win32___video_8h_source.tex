@@ -1,0 +1,969 @@
+\hypertarget{juce__win32___video_8h_source}{}\doxysection{juce\+\_\+win32\+\_\+\+Video.\+h}
+\label{juce__win32___video_8h_source}\index{build/juce\_video/native/juce\_win32\_Video.h@{build/juce\_video/native/juce\_win32\_Video.h}}
+\mbox{\hyperlink{juce__win32___video_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{5 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{6 \textcolor{comment}{}}
+\DoxyCodeLine{7 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{8 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{9 \textcolor{comment}{}}
+\DoxyCodeLine{10 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{11 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{12 \textcolor{comment}{}}
+\DoxyCodeLine{13 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{14 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{15 \textcolor{comment}{}}
+\DoxyCodeLine{16 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{17 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{18 \textcolor{comment}{}}
+\DoxyCodeLine{19 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{20 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{21 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{24 \textcolor{comment}{*/}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespace_video_renderers}{VideoRenderers}}}
+\DoxyCodeLine{27 \{}
+\DoxyCodeLine{28     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{29     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_video_renderers_1_1_base}{Base}}}
+\DoxyCodeLine{30     \{}
+\DoxyCodeLine{31         \textcolor{keyword}{virtual} \mbox{\hyperlink{struct_video_renderers_1_1_base_a4bd122a7758a2c8e40053466a2cad11d}{\string~Base}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33         \textcolor{keyword}{virtual} HRESULT \mbox{\hyperlink{struct_video_renderers_1_1_base_a000a09cac6125c9ac387cf4b70a5aba9}{create}} (ComSmartPtr<ComTypes::IGraphBuilder>\&, ComSmartPtr<ComTypes::IBaseFilter>\&, \mbox{\hyperlink{namespacejuce_a1b3c3cf7cdbe394e401d5db42e094ac5}{HWND}}) = 0;}
+\DoxyCodeLine{34         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_renderers_1_1_base_a9ea83dc8df03c24f931708d701facc44}{setVideoWindow}} (\mbox{\hyperlink{namespacejuce_a1b3c3cf7cdbe394e401d5db42e094ac5}{HWND}}) = 0;}
+\DoxyCodeLine{35         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_renderers_1_1_base_aa06800ee581c6aabad54518f4c7de707}{setVideoPosition}} (\mbox{\hyperlink{namespacejuce_a1b3c3cf7cdbe394e401d5db42e094ac5}{HWND}}) = 0;}
+\DoxyCodeLine{36         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_renderers_1_1_base_a9a24723d830b523f12fc2e25dcb9a18f}{repaintVideo}} (\mbox{\hyperlink{namespacejuce_a1b3c3cf7cdbe394e401d5db42e094ac5}{HWND}}, HDC) = 0;}
+\DoxyCodeLine{37         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_renderers_1_1_base_ab9c9d8fdce8ae14c7c1e17cbd77fef7a}{displayModeChanged}}() = 0;}
+\DoxyCodeLine{38         \textcolor{keyword}{virtual} HRESULT \mbox{\hyperlink{struct_video_renderers_1_1_base_a9410ede0db191e879b440ed5b87246e2}{getVideoSize}} (\textcolor{keywordtype}{long}\& videoWidth, \textcolor{keywordtype}{long}\& videoHeight) = 0;}
+\DoxyCodeLine{39     \};}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{42     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_video_renderers_1_1_v_m_r7}{VMR7}}  : \textcolor{keyword}{public} \mbox{\hyperlink{struct_video_renderers_1_1_base}{Base}}}
+\DoxyCodeLine{43     \{}
+\DoxyCodeLine{44         \mbox{\hyperlink{struct_video_renderers_1_1_v_m_r7_a0a9385a890a80a458d68b69fb0f00220}{VMR7}}() \{\}}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46         HRESULT \mbox{\hyperlink{struct_video_renderers_1_1_v_m_r7_a049f5f4aac11646cc626bab2ed930715}{create}} (ComSmartPtr<ComTypes::IGraphBuilder>\& graphBuilder,}
+\DoxyCodeLine{47                         ComSmartPtr<ComTypes::IBaseFilter>\& baseFilter, \mbox{\hyperlink{namespacejuce_a1b3c3cf7cdbe394e401d5db42e094ac5}{HWND}} hwnd)\textcolor{keyword}{ override}}
+\DoxyCodeLine{48 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{49             ComSmartPtr<ComTypes::IVMRFilterConfig> filterConfig;}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51             HRESULT hr = baseFilter.CoCreateInstance (\mbox{\hyperlink{namespacejuce_1_1_com_types_ad5b6dc7dc607a461b7aced8fb0c06d80}{ComTypes::CLSID\_VideoMixingRenderer}});}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53             \textcolor{keywordflow}{if} (SUCCEEDED (hr))   hr = graphBuilder-\/>AddFilter (baseFilter, L\textcolor{stringliteral}{"{}VMR-\/7"{}});}
+\DoxyCodeLine{54             \textcolor{keywordflow}{if} (SUCCEEDED (hr))   hr = baseFilter.QueryInterface (filterConfig);}
+\DoxyCodeLine{55             \textcolor{keywordflow}{if} (SUCCEEDED (hr))   hr = filterConfig-\/>SetRenderingMode (\mbox{\hyperlink{namespacejuce_1_1_com_types_a459278d3d363b277de03d8b17aefffdaacefb2fdb681bfdee5d3fd136d4f55357}{ComTypes::VMRMode\_Windowless}});}
+\DoxyCodeLine{56             \textcolor{keywordflow}{if} (SUCCEEDED (hr))   hr = baseFilter.QueryInterface (\mbox{\hyperlink{struct_video_renderers_1_1_v_m_r7_a01925a000c386321fe603ea51ebf6873}{windowlessControl}});}
+\DoxyCodeLine{57             \textcolor{keywordflow}{if} (SUCCEEDED (hr))   hr = \mbox{\hyperlink{struct_video_renderers_1_1_v_m_r7_a01925a000c386321fe603ea51ebf6873}{windowlessControl}}-\/>SetVideoClippingWindow (hwnd);}
+\DoxyCodeLine{58             \textcolor{keywordflow}{if} (SUCCEEDED (hr))   hr = \mbox{\hyperlink{struct_video_renderers_1_1_v_m_r7_a01925a000c386321fe603ea51ebf6873}{windowlessControl}}-\/>SetAspectRatioMode (\mbox{\hyperlink{namespacejuce_1_1_com_types_ab2e0269fdaf99bcf361fba16d85303adadc26ad080f989124c1aa2dbd3a45272c}{ComTypes::VMR\_ARMODE\_LETTER\_BOX}});}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60             \textcolor{keywordflow}{return} hr;}
+\DoxyCodeLine{61         \}}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63         \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_renderers_1_1_v_m_r7_ab79cf8dbc6d61157cbb5af5600fc1c24}{setVideoWindow}} (\mbox{\hyperlink{namespacejuce_a1b3c3cf7cdbe394e401d5db42e094ac5}{HWND}} hwnd)\textcolor{keyword}{ override}}
+\DoxyCodeLine{64 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{65             \mbox{\hyperlink{struct_video_renderers_1_1_v_m_r7_a01925a000c386321fe603ea51ebf6873}{windowlessControl}}-\/>SetVideoClippingWindow (hwnd);}
+\DoxyCodeLine{66         \}}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68         \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_renderers_1_1_v_m_r7_a75a053513fdbf9f3571eafe2bc99bc48}{setVideoPosition}} (\mbox{\hyperlink{namespacejuce_a1b3c3cf7cdbe394e401d5db42e094ac5}{HWND}} hwnd)\textcolor{keyword}{ override}}
+\DoxyCodeLine{69 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{70             \textcolor{keywordtype}{long} videoWidth = 0, videoHeight = 0;}
+\DoxyCodeLine{71             \mbox{\hyperlink{struct_video_renderers_1_1_v_m_r7_a01925a000c386321fe603ea51ebf6873}{windowlessControl}}-\/>GetNativeVideoSize (\&videoWidth, \&videoHeight, \textcolor{keyword}{nullptr}, \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73             RECT \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, dest;}
+\DoxyCodeLine{74             SetRect (\&\mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, 0, 0, videoWidth, videoHeight);}
+\DoxyCodeLine{75             GetClientRect (hwnd, \&dest);}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77             \mbox{\hyperlink{struct_video_renderers_1_1_v_m_r7_a01925a000c386321fe603ea51ebf6873}{windowlessControl}}-\/>SetVideoPosition (\&\mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, \&dest);}
+\DoxyCodeLine{78         \}}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80         \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_renderers_1_1_v_m_r7_a07111ca2f5fb792885e2369029417717}{repaintVideo}} (\mbox{\hyperlink{namespacejuce_a1b3c3cf7cdbe394e401d5db42e094ac5}{HWND}} hwnd, HDC hdc)\textcolor{keyword}{ override}}
+\DoxyCodeLine{81 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{82             \mbox{\hyperlink{struct_video_renderers_1_1_v_m_r7_a01925a000c386321fe603ea51ebf6873}{windowlessControl}}-\/>RepaintVideo (hwnd, hdc);}
+\DoxyCodeLine{83         \}}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85         \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_renderers_1_1_v_m_r7_a08d777fe8144149df3450e15250cd32a}{displayModeChanged}}()\textcolor{keyword}{ override}}
+\DoxyCodeLine{86 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{87             \mbox{\hyperlink{struct_video_renderers_1_1_v_m_r7_a01925a000c386321fe603ea51ebf6873}{windowlessControl}}-\/>DisplayModeChanged();}
+\DoxyCodeLine{88         \}}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90         HRESULT \mbox{\hyperlink{struct_video_renderers_1_1_v_m_r7_aed90450602e373f4a321094e13177f08}{getVideoSize}} (\textcolor{keywordtype}{long}\& videoWidth, \textcolor{keywordtype}{long}\& videoHeight)\textcolor{keyword}{ override}}
+\DoxyCodeLine{91 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{92             \textcolor{keywordflow}{return} \mbox{\hyperlink{struct_video_renderers_1_1_v_m_r7_a01925a000c386321fe603ea51ebf6873}{windowlessControl}}-\/>GetNativeVideoSize (\&videoWidth, \&videoHeight, \textcolor{keyword}{nullptr}, \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{93         \}}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95         ComSmartPtr<ComTypes::IVMRWindowlessControl> \mbox{\hyperlink{struct_video_renderers_1_1_v_m_r7_a01925a000c386321fe603ea51ebf6873}{windowlessControl}};}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97         \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{struct_video_renderers_1_1_v_m_r7}{VMR7}})}
+\DoxyCodeLine{98     \};}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{102     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_video_renderers_1_1_e_v_r}{EVR}}  : \textcolor{keyword}{public} \mbox{\hyperlink{struct_video_renderers_1_1_base}{Base}}}
+\DoxyCodeLine{103     \{}
+\DoxyCodeLine{104         \mbox{\hyperlink{struct_video_renderers_1_1_e_v_r_a783e1c0c9f118cbfb421961cae13a0b1}{EVR}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{106         HRESULT \mbox{\hyperlink{struct_video_renderers_1_1_e_v_r_a4426492b6941fe6634195284ca01b416}{create}} (ComSmartPtr<ComTypes::IGraphBuilder>\& graphBuilder,}
+\DoxyCodeLine{107                         ComSmartPtr<ComTypes::IBaseFilter>\& baseFilter, \mbox{\hyperlink{namespacejuce_a1b3c3cf7cdbe394e401d5db42e094ac5}{HWND}} hwnd)\textcolor{keyword}{ override}}
+\DoxyCodeLine{108 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{109             ComSmartPtr<ComTypes::IMFGetService> getService;}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111             HRESULT hr = baseFilter.CoCreateInstance (\mbox{\hyperlink{namespacejuce_1_1_com_types_acc1db41214d743ffc3ff796fe074cbf0}{ComTypes::CLSID\_EnhancedVideoRenderer}});}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113             \textcolor{keywordflow}{if} (SUCCEEDED (hr))   hr = graphBuilder-\/>AddFilter (baseFilter, L\textcolor{stringliteral}{"{}EVR"{}});}
+\DoxyCodeLine{114             \textcolor{keywordflow}{if} (SUCCEEDED (hr))   hr = baseFilter.QueryInterface (getService);}
+\DoxyCodeLine{115             \mbox{\hyperlink{group__juce__core-system_ga0112339834a6548e4123e394b9ed95e2}{JUCE\_BEGIN\_IGNORE\_WARNINGS\_GCC\_LIKE}} (\textcolor{stringliteral}{"{}-\/Wlanguage-\/extension-\/token"{}})}
+\DoxyCodeLine{116             \textcolor{keywordflow}{if} (SUCCEEDED (hr))   hr = getService-\/>GetService (\mbox{\hyperlink{namespacejuce_1_1_com_types_ad0f7c1ce119b638577aae264e567f2c3}{ComTypes::MR\_VIDEO\_RENDER\_SERVICE}}, \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_ae3b9af23b20d9586ee6bd9297ad38b73}{\_\_uuidof}} (ComTypes::IMFVideoDisplayControl),}
+\DoxyCodeLine{117                                                                (\textcolor{keywordtype}{void}**) \mbox{\hyperlink{struct_video_renderers_1_1_e_v_r_af143da250826dc89c2f19b9b3e8023a9}{videoDisplayControl}}.resetAndGetPointerAddress());}
+\DoxyCodeLine{118             \mbox{\hyperlink{group__juce__core-system_ga157f2229764b17137d8814bec95df109}{JUCE\_END\_IGNORE\_WARNINGS\_GCC\_LIKE}}}
+\DoxyCodeLine{119             \textcolor{keywordflow}{if} (SUCCEEDED (hr))   hr = \mbox{\hyperlink{struct_video_renderers_1_1_e_v_r_af143da250826dc89c2f19b9b3e8023a9}{videoDisplayControl}}-\/>SetVideoWindow (hwnd);}
+\DoxyCodeLine{120             \textcolor{keywordflow}{if} (SUCCEEDED (hr))   hr = \mbox{\hyperlink{struct_video_renderers_1_1_e_v_r_af143da250826dc89c2f19b9b3e8023a9}{videoDisplayControl}}-\/>SetAspectRatioMode (\mbox{\hyperlink{namespacejuce_1_1_com_types_a06c7ea740e0e2821c847f9d6c8970275a3351bcea31b0a4d07705060e2b2e579c}{ComTypes::MFVideoARMode\_PreservePicture}});}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{122             \textcolor{keywordflow}{return} hr;}
+\DoxyCodeLine{123         \}}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{125         \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_renderers_1_1_e_v_r_ad5665a40f283154a7e39b8e3da4cf92d}{setVideoWindow}} (\mbox{\hyperlink{namespacejuce_a1b3c3cf7cdbe394e401d5db42e094ac5}{HWND}} hwnd)\textcolor{keyword}{ override}}
+\DoxyCodeLine{126 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{127             \mbox{\hyperlink{struct_video_renderers_1_1_e_v_r_af143da250826dc89c2f19b9b3e8023a9}{videoDisplayControl}}-\/>SetVideoWindow (hwnd);}
+\DoxyCodeLine{128         \}}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{130         \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_renderers_1_1_e_v_r_ab7e18e4a95e1aabbfcd1788606d87b62}{setVideoPosition}} (\mbox{\hyperlink{namespacejuce_a1b3c3cf7cdbe394e401d5db42e094ac5}{HWND}} hwnd)\textcolor{keyword}{ override}}
+\DoxyCodeLine{131 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{132             \textcolor{keyword}{const} ComTypes::MFVideoNormalizedRect \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}} \{ 0.0f, 0.0f, 1.0f, 1.0f \};}
+\DoxyCodeLine{133 }
+\DoxyCodeLine{134             RECT dest;}
+\DoxyCodeLine{135             GetClientRect (hwnd, \&dest);}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{137             \mbox{\hyperlink{struct_video_renderers_1_1_e_v_r_af143da250826dc89c2f19b9b3e8023a9}{videoDisplayControl}}-\/>SetVideoPosition (\&\mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, \&dest);}
+\DoxyCodeLine{138         \}}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140         \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_renderers_1_1_e_v_r_abe94127f7f1c8fe1a5871bcefcf33531}{repaintVideo}} (\mbox{\hyperlink{namespacejuce_a1b3c3cf7cdbe394e401d5db42e094ac5}{HWND}}, HDC)\textcolor{keyword}{ override}}
+\DoxyCodeLine{141 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{142             \mbox{\hyperlink{struct_video_renderers_1_1_e_v_r_af143da250826dc89c2f19b9b3e8023a9}{videoDisplayControl}}-\/>RepaintVideo();}
+\DoxyCodeLine{143         \}}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145         \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_renderers_1_1_e_v_r_aed17bc0e3c02adfa34afd03dedc27b6b}{displayModeChanged}}()\textcolor{keyword}{ override }\{\}}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{147         HRESULT \mbox{\hyperlink{struct_video_renderers_1_1_e_v_r_a85e9ffa4ab3092e832edb046c1e8f5e9}{getVideoSize}} (\textcolor{keywordtype}{long}\& videoWidth, \textcolor{keywordtype}{long}\& videoHeight)\textcolor{keyword}{ override}}
+\DoxyCodeLine{148 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{149             SIZE sz = \{ 0, 0 \};}
+\DoxyCodeLine{150             HRESULT hr = \mbox{\hyperlink{struct_video_renderers_1_1_e_v_r_af143da250826dc89c2f19b9b3e8023a9}{videoDisplayControl}}-\/>GetNativeVideoSize (\&sz, \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{151             videoWidth  = sz.cx;}
+\DoxyCodeLine{152             videoHeight = sz.cy;}
+\DoxyCodeLine{153             \textcolor{keywordflow}{return} hr;}
+\DoxyCodeLine{154         \}}
+\DoxyCodeLine{155 }
+\DoxyCodeLine{156         ComSmartPtr<ComTypes::IMFVideoDisplayControl> \mbox{\hyperlink{struct_video_renderers_1_1_e_v_r_af143da250826dc89c2f19b9b3e8023a9}{videoDisplayControl}};}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{158         \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{struct_video_renderers_1_1_e_v_r}{EVR}})}
+\DoxyCodeLine{159     \};}
+\DoxyCodeLine{160 \}}
+\DoxyCodeLine{161 }
+\DoxyCodeLine{162 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{163 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_video_component_1_1_pimpl}{VideoComponent::Pimpl}}  : \textcolor{keyword}{public} \mbox{\hyperlink{class_component}{Component}},}
+\DoxyCodeLine{164                                 \textcolor{keyword}{private} \mbox{\hyperlink{struct_component_peer_1_1_scale_factor_listener}{ComponentPeer::ScaleFactorListener}}}
+\DoxyCodeLine{165 \{}
+\DoxyCodeLine{166     \mbox{\hyperlink{struct_video_component_1_1_pimpl_aa84bfd6ad60b925ac1266e1202816911}{Pimpl}} (\mbox{\hyperlink{class_video_component}{VideoComponent}}\& ownerToUse, \textcolor{keywordtype}{bool})}
+\DoxyCodeLine{167         : owner (ownerToUse)}
+\DoxyCodeLine{168     \{}
+\DoxyCodeLine{169         \mbox{\hyperlink{class_component_a7320d543cba40183c894474ab78798ea}{setOpaque}} (\textcolor{keyword}{true});}
+\DoxyCodeLine{170         context.reset (\textcolor{keyword}{new} DirectShowContext (*\textcolor{keyword}{this}));}
+\DoxyCodeLine{171         componentWatcher.reset (\textcolor{keyword}{new} ComponentWatcher (*\textcolor{keyword}{this}));}
+\DoxyCodeLine{172     \}}
+\DoxyCodeLine{173 }
+\DoxyCodeLine{174     \mbox{\hyperlink{struct_video_component_1_1_pimpl_a1d8f11911d0b529ceff4a646056d6276}{\string~Pimpl}}()\textcolor{keyword}{ override}}
+\DoxyCodeLine{175 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{176         \mbox{\hyperlink{struct_video_component_1_1_pimpl_a57ed4d8dd7b190f44719e042ef101cba}{close}}();}
+\DoxyCodeLine{177         context = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{178         componentWatcher = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{179 }
+\DoxyCodeLine{180         \textcolor{keywordflow}{if} (currentPeer != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{181             currentPeer-\/>\mbox{\hyperlink{class_component_peer_a81cf3d13df6f5f8f55237ac9274f17bc}{removeScaleFactorListener}} (\textcolor{keyword}{this});}
+\DoxyCodeLine{182     \}}
+\DoxyCodeLine{183 }
+\DoxyCodeLine{184     \mbox{\hyperlink{class_result}{Result}} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a2b39fbdac40203652c174f74af9e08d3}{loadFromString}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& fileOrURLPath)}
+\DoxyCodeLine{185     \{}
+\DoxyCodeLine{186         \mbox{\hyperlink{struct_video_component_1_1_pimpl_a57ed4d8dd7b190f44719e042ef101cba}{close}}();}
+\DoxyCodeLine{187         \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}} = context-\/>loadFile (fileOrURLPath);}
+\DoxyCodeLine{188 }
+\DoxyCodeLine{189         \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}}.wasOk())}
+\DoxyCodeLine{190         \{}
+\DoxyCodeLine{191             videoLoaded = \textcolor{keyword}{true};}
+\DoxyCodeLine{192             context-\/>updateVideoPosition();}
+\DoxyCodeLine{193         \}}
+\DoxyCodeLine{194 }
+\DoxyCodeLine{195         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}};}
+\DoxyCodeLine{196     \}}
+\DoxyCodeLine{197 }
+\DoxyCodeLine{198     \mbox{\hyperlink{class_result}{Result}} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a239cbe367565ec31ca4c3b9a71c68595}{load}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& file)}
+\DoxyCodeLine{199     \{}
+\DoxyCodeLine{200         \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}} = \mbox{\hyperlink{struct_video_component_1_1_pimpl_a2b39fbdac40203652c174f74af9e08d3}{loadFromString}} (file.\mbox{\hyperlink{class_file_ab46bb1ff1b9e41ebd907c51d4d6e8743}{getFullPathName}}());}
+\DoxyCodeLine{201 }
+\DoxyCodeLine{202         \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}}.wasOk())}
+\DoxyCodeLine{203             \mbox{\hyperlink{struct_video_component_1_1_pimpl_af56d094c7a0a45f8ddd0c1e11d861f0a}{currentFile}} = file;}
+\DoxyCodeLine{204 }
+\DoxyCodeLine{205         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}};}
+\DoxyCodeLine{206     \}}
+\DoxyCodeLine{207 }
+\DoxyCodeLine{208     \mbox{\hyperlink{class_result}{Result}} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a5a8437eff8f1099b1cc693709c32869f}{load}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_u_r_l}{URL}}\& url)}
+\DoxyCodeLine{209     \{}
+\DoxyCodeLine{210         \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}} = \mbox{\hyperlink{struct_video_component_1_1_pimpl_a2b39fbdac40203652c174f74af9e08d3}{loadFromString}} (\mbox{\hyperlink{class_u_r_l_a3a1a52d72f959afee0fca0cc0d066e70}{URL::removeEscapeChars}} (url.\mbox{\hyperlink{class_u_r_l_a4f8b7e5a18bc152daaad5192c8d0b003}{toString}} (\textcolor{keyword}{true})));}
+\DoxyCodeLine{211 }
+\DoxyCodeLine{212         \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}}.wasOk())}
+\DoxyCodeLine{213             \mbox{\hyperlink{struct_video_component_1_1_pimpl_a66ef9a9d2fcfac60a19436f489d12d14}{currentURL}} = url;}
+\DoxyCodeLine{214 }
+\DoxyCodeLine{215         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}};}
+\DoxyCodeLine{216     \}}
+\DoxyCodeLine{217 }
+\DoxyCodeLine{218     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a57ed4d8dd7b190f44719e042ef101cba}{close}}()}
+\DoxyCodeLine{219     \{}
+\DoxyCodeLine{220         \mbox{\hyperlink{struct_video_component_1_1_pimpl_aab986910175fd243e55ea209ef28f4cf}{stop}}();}
+\DoxyCodeLine{221         context-\/>release();}
+\DoxyCodeLine{222 }
+\DoxyCodeLine{223         videoLoaded = \textcolor{keyword}{false};}
+\DoxyCodeLine{224         \mbox{\hyperlink{struct_video_component_1_1_pimpl_af56d094c7a0a45f8ddd0c1e11d861f0a}{currentFile}} = \mbox{\hyperlink{class_file}{File}}();}
+\DoxyCodeLine{225         \mbox{\hyperlink{struct_video_component_1_1_pimpl_a66ef9a9d2fcfac60a19436f489d12d14}{currentURL}} = \{\};}
+\DoxyCodeLine{226     \}}
+\DoxyCodeLine{227 }
+\DoxyCodeLine{228     \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a0cc8cc8e23020f74c089e34c9cd47ff9}{isOpen}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{229 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{230         \textcolor{keywordflow}{return} videoLoaded;}
+\DoxyCodeLine{231     \}}
+\DoxyCodeLine{232 }
+\DoxyCodeLine{233     \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a54aeac9c6dfc4ce067e9bc35621afa05}{isPlaying}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{234 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{235         \textcolor{keywordflow}{return} context-\/>state == DirectShowContext::runningState;}
+\DoxyCodeLine{236     \}}
+\DoxyCodeLine{237 }
+\DoxyCodeLine{238     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a715a47d99ff7ab3ef5f917b687b66c01}{play}}()}
+\DoxyCodeLine{239     \{}
+\DoxyCodeLine{240         \textcolor{keywordflow}{if} (videoLoaded)}
+\DoxyCodeLine{241             context-\/>play();}
+\DoxyCodeLine{242     \}}
+\DoxyCodeLine{243 }
+\DoxyCodeLine{244     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_component_1_1_pimpl_aab986910175fd243e55ea209ef28f4cf}{stop}}()}
+\DoxyCodeLine{245     \{}
+\DoxyCodeLine{246         \textcolor{keywordflow}{if} (videoLoaded)}
+\DoxyCodeLine{247             context-\/>pause();}
+\DoxyCodeLine{248     \}}
+\DoxyCodeLine{249 }
+\DoxyCodeLine{250     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_component_1_1_pimpl_aad13ce8cdf4ddc2c816abc2cffd72a09}{setPosition}} (\textcolor{keywordtype}{double} newPosition)}
+\DoxyCodeLine{251     \{}
+\DoxyCodeLine{252         \textcolor{keywordflow}{if} (videoLoaded)}
+\DoxyCodeLine{253             context-\/>setPosition (newPosition);}
+\DoxyCodeLine{254     \}}
+\DoxyCodeLine{255 }
+\DoxyCodeLine{256     \textcolor{keywordtype}{double} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a1b5c6aaa840823f6cb69a2ad349c4009}{getPosition}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{257 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{258         \textcolor{keywordflow}{return} videoLoaded ? context-\/>getPosition() : 0.0;}
+\DoxyCodeLine{259     \}}
+\DoxyCodeLine{260 }
+\DoxyCodeLine{261     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a26d540a1d9a8d40ae650af25c3b7fa64}{setSpeed}} (\textcolor{keywordtype}{double} newSpeed)}
+\DoxyCodeLine{262     \{}
+\DoxyCodeLine{263         \textcolor{keywordflow}{if} (videoLoaded)}
+\DoxyCodeLine{264             context-\/>setSpeed (newSpeed);}
+\DoxyCodeLine{265     \}}
+\DoxyCodeLine{266 }
+\DoxyCodeLine{267     \textcolor{keywordtype}{double} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a75b9306bb106c987fe662e52329bb3c9}{getSpeed}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{268 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{269         \textcolor{keywordflow}{return} videoLoaded ? context-\/>getSpeed() : 0.0;}
+\DoxyCodeLine{270     \}}
+\DoxyCodeLine{271 }
+\DoxyCodeLine{272     \mbox{\hyperlink{class_rectangle}{Rectangle<int>}} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a6072baa038c7c5bbb5d4fc1e0db94ded}{getNativeSize}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{273 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{274         \textcolor{keywordflow}{return} videoLoaded ? context-\/>getVideoSize()}
+\DoxyCodeLine{275                            : \mbox{\hyperlink{class_rectangle}{Rectangle<int>}}();}
+\DoxyCodeLine{276     \}}
+\DoxyCodeLine{277 }
+\DoxyCodeLine{278     \textcolor{keywordtype}{double} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a53f30af1fe6d9fba92655dc9cbbbf387}{getDuration}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{279 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{280         \textcolor{keywordflow}{return} videoLoaded ? context-\/>getDuration() : 0.0;}
+\DoxyCodeLine{281     \}}
+\DoxyCodeLine{282 }
+\DoxyCodeLine{283     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a821b3c879008a719797b62e498cf2f18}{setVolume}} (\textcolor{keywordtype}{float} newVolume)}
+\DoxyCodeLine{284     \{}
+\DoxyCodeLine{285         \textcolor{keywordflow}{if} (videoLoaded)}
+\DoxyCodeLine{286             context-\/>setVolume (newVolume);}
+\DoxyCodeLine{287     \}}
+\DoxyCodeLine{288 }
+\DoxyCodeLine{289     \textcolor{keywordtype}{float} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a2c0b3eaa8fc5e364dc5086486ac517d5}{getVolume}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{290 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{291         \textcolor{keywordflow}{return} videoLoaded ? context-\/>getVolume() : 0.0f;}
+\DoxyCodeLine{292     \}}
+\DoxyCodeLine{293 }
+\DoxyCodeLine{294     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a98f591589f82376935d348adfff14fed}{paint}} (\mbox{\hyperlink{class_graphics}{Graphics}}\& \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}})\textcolor{keyword}{ override}}
+\DoxyCodeLine{295 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{296         \textcolor{keywordflow}{if} (videoLoaded)}
+\DoxyCodeLine{297             context-\/>handleUpdateNowIfNeeded();}
+\DoxyCodeLine{298         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{299             \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}}.fillAll (\mbox{\hyperlink{namespace_colours_a72a39d8569dc2b3efade536e59de6236}{Colours::grey}});}
+\DoxyCodeLine{300     \}}
+\DoxyCodeLine{301 }
+\DoxyCodeLine{302     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a79f3197ee4cd8b59fe22d1ace01f5a5a}{updateContextPosition}}()}
+\DoxyCodeLine{303     \{}
+\DoxyCodeLine{304         context-\/>updateContextPosition();}
+\DoxyCodeLine{305 }
+\DoxyCodeLine{306         \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_component_a146a947eb5d4b2e08f8e91b2e3f706c1}{getWidth}}() > 0 \&\& \mbox{\hyperlink{class_component_a42c61c2d914e55b2395f6a84cf8e8aa2}{getHeight}}() > 0)}
+\DoxyCodeLine{307             \textcolor{keywordflow}{if} (\textcolor{keyword}{auto}* peer = \mbox{\hyperlink{class_component_ae94245880a9d7eb9ad0c9f9b3d3e74bd}{getTopLevelComponent}}()-\/>\mbox{\hyperlink{class_component_a6a137109881ef1e268ee5ec51a633269}{getPeer}}())}
+\DoxyCodeLine{308                 context-\/>updateWindowPosition ((peer-\/>getAreaCoveredBy (*this).toDouble()}
+\DoxyCodeLine{309                                                 * peer-\/>getPlatformScaleFactor()).toNearestInt());}
+\DoxyCodeLine{310     \}}
+\DoxyCodeLine{311 }
+\DoxyCodeLine{312     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_component_1_1_pimpl_aa22ed9d65d8695654f11df10d6c1c0ff}{updateContextVisibility}}()}
+\DoxyCodeLine{313     \{}
+\DoxyCodeLine{314         context-\/>showWindow (\mbox{\hyperlink{class_component_a67928458e13f5391eee62202ed7c344d}{isShowing}}());}
+\DoxyCodeLine{315     \}}
+\DoxyCodeLine{316 }
+\DoxyCodeLine{317     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_component_1_1_pimpl_aef937ed36bf0b3a42c0acf1c24fb4c6f}{recreateNativeWindowAsync}}()}
+\DoxyCodeLine{318     \{}
+\DoxyCodeLine{319         context-\/>recreateNativeWindowAsync();}
+\DoxyCodeLine{320         \mbox{\hyperlink{class_component_af3ab3eabec93dd60faf983370f3a1206}{repaint}}();}
+\DoxyCodeLine{321     \}}
+\DoxyCodeLine{322 }
+\DoxyCodeLine{323     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a2760fa9b81d7fe52ae141ff3fa0e97c5}{playbackStarted}}()}
+\DoxyCodeLine{324     \{}
+\DoxyCodeLine{325         \textcolor{keywordflow}{if} (owner.\mbox{\hyperlink{class_video_component_a50b3c539d0356679af9aa797c767fe12}{onPlaybackStarted}} != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{326             owner.\mbox{\hyperlink{class_video_component_a50b3c539d0356679af9aa797c767fe12}{onPlaybackStarted}}();}
+\DoxyCodeLine{327     \}}
+\DoxyCodeLine{328 }
+\DoxyCodeLine{329     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a6180bf8b996b1f1515669bd49484e6fa}{playbackStopped}}()}
+\DoxyCodeLine{330     \{}
+\DoxyCodeLine{331         \textcolor{keywordflow}{if} (owner.\mbox{\hyperlink{class_video_component_a79612bf6c51b83026eafcf1587307b3f}{onPlaybackStopped}} != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{332             owner.\mbox{\hyperlink{class_video_component_a79612bf6c51b83026eafcf1587307b3f}{onPlaybackStopped}}();}
+\DoxyCodeLine{333     \}}
+\DoxyCodeLine{334 }
+\DoxyCodeLine{335     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a48a0a97266b5cc11da755e123e9aea85}{errorOccurred}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& errorMessage)}
+\DoxyCodeLine{336     \{}
+\DoxyCodeLine{337         \textcolor{keywordflow}{if} (owner.\mbox{\hyperlink{class_video_component_a7f9bdd9fc7925b2cb804bc44352da62c}{onErrorOccurred}} != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{338             owner.\mbox{\hyperlink{class_video_component_a7f9bdd9fc7925b2cb804bc44352da62c}{onErrorOccurred}} (errorMessage);}
+\DoxyCodeLine{339     \}}
+\DoxyCodeLine{340 }
+\DoxyCodeLine{341     \mbox{\hyperlink{class_file}{File}} \mbox{\hyperlink{struct_video_component_1_1_pimpl_af56d094c7a0a45f8ddd0c1e11d861f0a}{currentFile}};}
+\DoxyCodeLine{342     \mbox{\hyperlink{class_u_r_l}{URL}} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a66ef9a9d2fcfac60a19436f489d12d14}{currentURL}};}
+\DoxyCodeLine{343 }
+\DoxyCodeLine{344 \textcolor{keyword}{private}:}
+\DoxyCodeLine{345     \mbox{\hyperlink{class_video_component}{VideoComponent}}\& owner;}
+\DoxyCodeLine{346     \mbox{\hyperlink{class_component_peer}{ComponentPeer}}* currentPeer = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{347     \textcolor{keywordtype}{bool} videoLoaded = \textcolor{keyword}{false};}
+\DoxyCodeLine{348 }
+\DoxyCodeLine{349     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{350     \textcolor{keywordtype}{void} nativeScaleFactorChanged (\textcolor{keywordtype}{double} \textcolor{comment}{/*newScaleFactor*/})\textcolor{keyword}{ override}}
+\DoxyCodeLine{351 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{352         \textcolor{keywordflow}{if} (videoLoaded)}
+\DoxyCodeLine{353             \mbox{\hyperlink{struct_video_component_1_1_pimpl_a79f3197ee4cd8b59fe22d1ace01f5a5a}{updateContextPosition}}();}
+\DoxyCodeLine{354     \}}
+\DoxyCodeLine{355 }
+\DoxyCodeLine{356     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{357     \textcolor{keyword}{struct }ComponentWatcher   : \textcolor{keyword}{public} \mbox{\hyperlink{class_component_movement_watcher}{ComponentMovementWatcher}}}
+\DoxyCodeLine{358     \{}
+\DoxyCodeLine{359         ComponentWatcher (\mbox{\hyperlink{struct_video_component_1_1_pimpl_aa84bfd6ad60b925ac1266e1202816911}{Pimpl}}\& \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}})  : \mbox{\hyperlink{class_component_movement_watcher}{ComponentMovementWatcher}} (\&\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}), owner (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}})}
+\DoxyCodeLine{360         \{}
+\DoxyCodeLine{361         \}}
+\DoxyCodeLine{362 }
+\DoxyCodeLine{363         \textcolor{keyword}{using} \mbox{\hyperlink{class_component_movement_watcher_a8aa7d93c182f7d8d0fd07019868da887}{ComponentMovementWatcher::componentMovedOrResized}};}
+\DoxyCodeLine{364         \textcolor{keywordtype}{void} componentMovedOrResized (\textcolor{keywordtype}{bool}, \textcolor{keywordtype}{bool})\textcolor{keyword}{ override}}
+\DoxyCodeLine{365 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{366             \textcolor{keywordflow}{if} (owner.videoLoaded)}
+\DoxyCodeLine{367                 owner.updateContextPosition();}
+\DoxyCodeLine{368         \}}
+\DoxyCodeLine{369 }
+\DoxyCodeLine{370         \textcolor{keywordtype}{void} componentPeerChanged()\textcolor{keyword}{ override}}
+\DoxyCodeLine{371 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{372             \textcolor{keywordflow}{if} (owner.currentPeer != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{373                 owner.currentPeer-\/>removeScaleFactorListener (\&owner);}
+\DoxyCodeLine{374 }
+\DoxyCodeLine{375             \textcolor{keywordflow}{if} (owner.videoLoaded)}
+\DoxyCodeLine{376                 owner.recreateNativeWindowAsync();}
+\DoxyCodeLine{377         \}}
+\DoxyCodeLine{378 }
+\DoxyCodeLine{379         \textcolor{keyword}{using} \mbox{\hyperlink{class_component_movement_watcher_ab890075a6625aff818080f601f8bec37}{ComponentMovementWatcher::componentVisibilityChanged}};}
+\DoxyCodeLine{380         \textcolor{keywordtype}{void} componentVisibilityChanged()\textcolor{keyword}{ override}}
+\DoxyCodeLine{381 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{382             \textcolor{keywordflow}{if} (owner.videoLoaded)}
+\DoxyCodeLine{383                 owner.updateContextVisibility();}
+\DoxyCodeLine{384         \}}
+\DoxyCodeLine{385 }
+\DoxyCodeLine{386         \mbox{\hyperlink{struct_video_component_1_1_pimpl_aa84bfd6ad60b925ac1266e1202816911}{Pimpl}}\& owner;}
+\DoxyCodeLine{387 }
+\DoxyCodeLine{388         \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (ComponentWatcher)}
+\DoxyCodeLine{389     \};}
+\DoxyCodeLine{390 }
+\DoxyCodeLine{391     std::unique\_ptr<ComponentWatcher> componentWatcher;}
+\DoxyCodeLine{392 }
+\DoxyCodeLine{393     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{394     \textcolor{keyword}{struct }DirectShowContext    : \textcolor{keyword}{public} \mbox{\hyperlink{class_async_updater}{AsyncUpdater}}}
+\DoxyCodeLine{395     \{}
+\DoxyCodeLine{396         DirectShowContext (\mbox{\hyperlink{struct_video_component_1_1_pimpl_aa84bfd6ad60b925ac1266e1202816911}{Pimpl}}\& \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}})  : component (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}})}
+\DoxyCodeLine{397         \{}
+\DoxyCodeLine{398             \mbox{\hyperlink{group__juce__core-maths_ga5158e6e8faa5553204f90af596fafaf5}{ignoreUnused}} (CoInitialize (\textcolor{keyword}{nullptr}));}
+\DoxyCodeLine{399         \}}
+\DoxyCodeLine{400 }
+\DoxyCodeLine{401         \string~DirectShowContext()\textcolor{keyword}{ override}}
+\DoxyCodeLine{402 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{403             release();}
+\DoxyCodeLine{404             CoUninitialize();}
+\DoxyCodeLine{405         \}}
+\DoxyCodeLine{406 }
+\DoxyCodeLine{407         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{408         \textcolor{keywordtype}{void} updateWindowPosition (\textcolor{keyword}{const} \mbox{\hyperlink{class_rectangle}{Rectangle<int>}}\& newBounds)}
+\DoxyCodeLine{409         \{}
+\DoxyCodeLine{410             nativeWindow-\/>setWindowPosition (newBounds);}
+\DoxyCodeLine{411         \}}
+\DoxyCodeLine{412 }
+\DoxyCodeLine{413         \textcolor{keywordtype}{void} showWindow (\textcolor{keywordtype}{bool} shouldBeVisible)}
+\DoxyCodeLine{414         \{}
+\DoxyCodeLine{415             nativeWindow-\/>showWindow (shouldBeVisible);}
+\DoxyCodeLine{416         \}}
+\DoxyCodeLine{417 }
+\DoxyCodeLine{418         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{419         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_component_af3ab3eabec93dd60faf983370f3a1206}{repaint}}()}
+\DoxyCodeLine{420         \{}
+\DoxyCodeLine{421             \textcolor{keywordflow}{if} (hasVideo)}
+\DoxyCodeLine{422                 videoRenderer-\/>repaintVideo (nativeWindow-\/>hwnd, nativeWindow-\/>hdc);}
+\DoxyCodeLine{423         \}}
+\DoxyCodeLine{424 }
+\DoxyCodeLine{425         \textcolor{keywordtype}{void} updateVideoPosition()}
+\DoxyCodeLine{426         \{}
+\DoxyCodeLine{427             \textcolor{keywordflow}{if} (hasVideo)}
+\DoxyCodeLine{428                 videoRenderer-\/>setVideoPosition (nativeWindow-\/>hwnd);}
+\DoxyCodeLine{429         \}}
+\DoxyCodeLine{430 }
+\DoxyCodeLine{431         \textcolor{keywordtype}{void} displayResolutionChanged()}
+\DoxyCodeLine{432         \{}
+\DoxyCodeLine{433             \textcolor{keywordflow}{if} (hasVideo)}
+\DoxyCodeLine{434                 videoRenderer-\/>displayModeChanged();}
+\DoxyCodeLine{435         \}}
+\DoxyCodeLine{436 }
+\DoxyCodeLine{437         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{438         \textcolor{keywordtype}{void} peerChanged()}
+\DoxyCodeLine{439         \{}
+\DoxyCodeLine{440             deleteNativeWindow();}
+\DoxyCodeLine{441 }
+\DoxyCodeLine{442             mediaEvent-\/>SetNotifyWindow (0, 0, 0);}
+\DoxyCodeLine{443 }
+\DoxyCodeLine{444             \textcolor{keywordflow}{if} (videoRenderer != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{445                 videoRenderer-\/>setVideoWindow (\textcolor{keyword}{nullptr});}
+\DoxyCodeLine{446 }
+\DoxyCodeLine{447             createNativeWindow();}
+\DoxyCodeLine{448 }
+\DoxyCodeLine{449             mediaEvent-\/>CancelDefaultHandling (\mbox{\hyperlink{namespacejuce_1_1_com_types_a60d7ced5732301bd6d56d6af3326d9c3ae9747b7b243b56348f9624d082ed099b}{ComTypes::EC\_STATE\_CHANGE}});}
+\DoxyCodeLine{450             mediaEvent-\/>SetNotifyWindow ((\mbox{\hyperlink{namespacejuce_1_1_com_types_af51160f30837f276b0cca1b11e32e68b}{ComTypes::OAHWND}}) hwnd, graphEventID, 0);}
+\DoxyCodeLine{451 }
+\DoxyCodeLine{452             \textcolor{keywordflow}{if} (videoRenderer != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{453                 videoRenderer-\/>setVideoWindow (hwnd);}
+\DoxyCodeLine{454         \}}
+\DoxyCodeLine{455 }
+\DoxyCodeLine{456         \textcolor{keywordtype}{void} handleAsyncUpdate()\textcolor{keyword}{ override}}
+\DoxyCodeLine{457 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{458             \textcolor{keywordflow}{if} (hwnd != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{459             \{}
+\DoxyCodeLine{460                 \textcolor{keywordflow}{if} (needToRecreateNativeWindow)}
+\DoxyCodeLine{461                 \{}
+\DoxyCodeLine{462                     peerChanged();}
+\DoxyCodeLine{463                     needToRecreateNativeWindow = \textcolor{keyword}{false};}
+\DoxyCodeLine{464                 \}}
+\DoxyCodeLine{465 }
+\DoxyCodeLine{466                 \textcolor{keywordflow}{if} (needToUpdateViewport)}
+\DoxyCodeLine{467                 \{}
+\DoxyCodeLine{468                     updateVideoPosition();}
+\DoxyCodeLine{469                     needToUpdateViewport = \textcolor{keyword}{false};}
+\DoxyCodeLine{470                 \}}
+\DoxyCodeLine{471 }
+\DoxyCodeLine{472                 \mbox{\hyperlink{class_component_af3ab3eabec93dd60faf983370f3a1206}{repaint}}();}
+\DoxyCodeLine{473             \}}
+\DoxyCodeLine{474             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{475             \{}
+\DoxyCodeLine{476                 \mbox{\hyperlink{class_async_updater_a4eece806c6ba9f591382fed54c5983b2}{triggerAsyncUpdate}}();}
+\DoxyCodeLine{477             \}}
+\DoxyCodeLine{478         \}}
+\DoxyCodeLine{479 }
+\DoxyCodeLine{480         \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_component_1_1_pimpl_aef937ed36bf0b3a42c0acf1c24fb4c6f}{recreateNativeWindowAsync}}()}
+\DoxyCodeLine{481         \{}
+\DoxyCodeLine{482             needToRecreateNativeWindow = \textcolor{keyword}{true};}
+\DoxyCodeLine{483             \mbox{\hyperlink{class_async_updater_a4eece806c6ba9f591382fed54c5983b2}{triggerAsyncUpdate}}();}
+\DoxyCodeLine{484         \}}
+\DoxyCodeLine{485 }
+\DoxyCodeLine{486         \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a79f3197ee4cd8b59fe22d1ace01f5a5a}{updateContextPosition}}()}
+\DoxyCodeLine{487         \{}
+\DoxyCodeLine{488             needToUpdateViewport = \textcolor{keyword}{true};}
+\DoxyCodeLine{489             \mbox{\hyperlink{class_async_updater_a4eece806c6ba9f591382fed54c5983b2}{triggerAsyncUpdate}}();}
+\DoxyCodeLine{490         \}}
+\DoxyCodeLine{491 }
+\DoxyCodeLine{492         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{493         \mbox{\hyperlink{class_result}{Result}} loadFile (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& fileOrURLPath)}
+\DoxyCodeLine{494         \{}
+\DoxyCodeLine{495             \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (state == uninitializedState);}
+\DoxyCodeLine{496 }
+\DoxyCodeLine{497             \textcolor{keywordflow}{if} (! createNativeWindow())}
+\DoxyCodeLine{498                 \textcolor{keywordflow}{return} \mbox{\hyperlink{class_result_a2b51de8f6f8c27c3de29f9da5cce8f75}{Result::fail}} (\textcolor{stringliteral}{"{}Can't create window"{}});}
+\DoxyCodeLine{499 }
+\DoxyCodeLine{500             HRESULT hr = graphBuilder.CoCreateInstance (\mbox{\hyperlink{namespacejuce_1_1_com_types_abe07280246828c081f759a760e7ace2b}{ComTypes::CLSID\_FilterGraph}});}
+\DoxyCodeLine{501 }
+\DoxyCodeLine{502             \textcolor{comment}{// basic playback interfaces}}
+\DoxyCodeLine{503             \textcolor{keywordflow}{if} (SUCCEEDED (hr))   hr = graphBuilder.QueryInterface (mediaControl);}
+\DoxyCodeLine{504             \textcolor{keywordflow}{if} (SUCCEEDED (hr))   hr = graphBuilder.QueryInterface (mediaPosition);}
+\DoxyCodeLine{505             \textcolor{keywordflow}{if} (SUCCEEDED (hr))   hr = graphBuilder.QueryInterface (mediaEvent);}
+\DoxyCodeLine{506             \textcolor{keywordflow}{if} (SUCCEEDED (hr))   hr = graphBuilder.QueryInterface (basicAudio);}
+\DoxyCodeLine{507 }
+\DoxyCodeLine{508             \textcolor{comment}{// video renderer interface}}
+\DoxyCodeLine{509             \textcolor{keywordflow}{if} (SUCCEEDED (hr))}
+\DoxyCodeLine{510             \{}
+\DoxyCodeLine{511                 \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_system_stats_a58744df80a9b308161e59b65deebe2d2}{SystemStats::getOperatingSystemType}}() >= \mbox{\hyperlink{class_system_stats_a7697c468b5f6c391096ab483690b68eaae9197b9bc532344d2641a414036a35f0}{SystemStats::WinVista}})}
+\DoxyCodeLine{512                 \{}
+\DoxyCodeLine{513                     videoRenderer.reset (\textcolor{keyword}{new} \mbox{\hyperlink{struct_video_renderers_1_1_e_v_r}{VideoRenderers::EVR}}());}
+\DoxyCodeLine{514                     hr = videoRenderer-\/>create (graphBuilder, baseFilter, hwnd);}
+\DoxyCodeLine{515 }
+\DoxyCodeLine{516                     \textcolor{keywordflow}{if} (FAILED (hr))}
+\DoxyCodeLine{517                         videoRenderer = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{518                 \}}
+\DoxyCodeLine{519 }
+\DoxyCodeLine{520                 \textcolor{keywordflow}{if} (videoRenderer == \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{521                 \{}
+\DoxyCodeLine{522                     videoRenderer.reset (\textcolor{keyword}{new} \mbox{\hyperlink{struct_video_renderers_1_1_v_m_r7}{VideoRenderers::VMR7}}());}
+\DoxyCodeLine{523                     hr = videoRenderer-\/>create (graphBuilder, baseFilter, hwnd);}
+\DoxyCodeLine{524                 \}}
+\DoxyCodeLine{525             \}}
+\DoxyCodeLine{526 }
+\DoxyCodeLine{527             \textcolor{comment}{// build filter graph}}
+\DoxyCodeLine{528             \textcolor{keywordflow}{if} (SUCCEEDED (hr))}
+\DoxyCodeLine{529             \{}
+\DoxyCodeLine{530                 hr = graphBuilder-\/>RenderFile (fileOrURLPath.\mbox{\hyperlink{class_string_a1861bc68125754e7a0b30f1a3e91937f}{toWideCharPointer}}(), \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{531 }
+\DoxyCodeLine{532                 \textcolor{keywordflow}{if} (FAILED (hr))}
+\DoxyCodeLine{533                 \{}
+\DoxyCodeLine{534 \textcolor{preprocessor}{                   \#if JUCE\_MODAL\_LOOPS\_PERMITTED}}
+\DoxyCodeLine{535                     \textcolor{comment}{// Annoyingly, if we don't run the msg loop between failing and deleting the window, the}}
+\DoxyCodeLine{536                     \textcolor{comment}{// whole OS message-\/dispatch system gets itself into a state, and refuses to deliver any}}
+\DoxyCodeLine{537                     \textcolor{comment}{// more messages for the whole app. (That's what happens in Win7, anyway)}}
+\DoxyCodeLine{538                     \mbox{\hyperlink{class_message_manager_a4367fa495f95a5562b58dde1ad0e965b}{MessageManager::getInstance}}()-\/>runDispatchLoopUntil (200);}
+\DoxyCodeLine{539 \textcolor{preprocessor}{                   \#endif}}
+\DoxyCodeLine{540                 \}}
+\DoxyCodeLine{541             \}}
+\DoxyCodeLine{542 }
+\DoxyCodeLine{543             \textcolor{comment}{// remove video renderer if not connected (no video)}}
+\DoxyCodeLine{544             \textcolor{keywordflow}{if} (SUCCEEDED (hr))}
+\DoxyCodeLine{545             \{}
+\DoxyCodeLine{546                 \textcolor{keywordflow}{if} (isRendererConnected())}
+\DoxyCodeLine{547                 \{}
+\DoxyCodeLine{548                     hasVideo = \textcolor{keyword}{true};}
+\DoxyCodeLine{549                 \}}
+\DoxyCodeLine{550                 \textcolor{keywordflow}{else}}
+\DoxyCodeLine{551                 \{}
+\DoxyCodeLine{552                     hasVideo = \textcolor{keyword}{false};}
+\DoxyCodeLine{553                     graphBuilder-\/>RemoveFilter (baseFilter);}
+\DoxyCodeLine{554                     videoRenderer = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{555                     baseFilter = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{556                 \}}
+\DoxyCodeLine{557             \}}
+\DoxyCodeLine{558 }
+\DoxyCodeLine{559             \textcolor{comment}{// set window to receive events}}
+\DoxyCodeLine{560             \textcolor{keywordflow}{if} (SUCCEEDED (hr))}
+\DoxyCodeLine{561             \{}
+\DoxyCodeLine{562                 mediaEvent-\/>CancelDefaultHandling (\mbox{\hyperlink{namespacejuce_1_1_com_types_a60d7ced5732301bd6d56d6af3326d9c3ae9747b7b243b56348f9624d082ed099b}{ComTypes::EC\_STATE\_CHANGE}});}
+\DoxyCodeLine{563                 hr = mediaEvent-\/>SetNotifyWindow ((\mbox{\hyperlink{namespacejuce_1_1_com_types_af51160f30837f276b0cca1b11e32e68b}{ComTypes::OAHWND}}) hwnd, graphEventID, 0);}
+\DoxyCodeLine{564             \}}
+\DoxyCodeLine{565 }
+\DoxyCodeLine{566             \textcolor{keywordflow}{if} (SUCCEEDED (hr))}
+\DoxyCodeLine{567             \{}
+\DoxyCodeLine{568                 state = stoppedState;}
+\DoxyCodeLine{569                 pause();}
+\DoxyCodeLine{570                 \textcolor{keywordflow}{return} \mbox{\hyperlink{class_result_af20c96ffa94adac90e10a8395d8c8852}{Result::ok}}();}
+\DoxyCodeLine{571             \}}
+\DoxyCodeLine{572 }
+\DoxyCodeLine{573             \textcolor{comment}{// Note that if you're trying to open a file and this method fails, you may}}
+\DoxyCodeLine{574             \textcolor{comment}{// just need to install a suitable codec. It seems that by default DirectShow}}
+\DoxyCodeLine{575             \textcolor{comment}{// doesn't support a very good range of formats.}}
+\DoxyCodeLine{576             release();}
+\DoxyCodeLine{577             \textcolor{keywordflow}{return} getErrorMessageFromResult (hr);}
+\DoxyCodeLine{578         \}}
+\DoxyCodeLine{579 }
+\DoxyCodeLine{580         \textcolor{keyword}{static} \mbox{\hyperlink{class_result}{Result}} getErrorMessageFromResult (HRESULT hr)}
+\DoxyCodeLine{581         \{}
+\DoxyCodeLine{582             \textcolor{keywordflow}{switch} (hr)}
+\DoxyCodeLine{583             \{}
+\DoxyCodeLine{584                 \textcolor{keywordflow}{case} \mbox{\hyperlink{namespacejuce_1_1_com_types_a60d7ced5732301bd6d56d6af3326d9c3a72f473317225609f25f6937ac93fcb98}{ComTypes::VFW\_E\_INVALID\_FILE\_FORMAT}}:         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_result_a2b51de8f6f8c27c3de29f9da5cce8f75}{Result::fail}} (\textcolor{stringliteral}{"{}Invalid file format"{}});}
+\DoxyCodeLine{585                 \textcolor{keywordflow}{case} \mbox{\hyperlink{namespacejuce_1_1_com_types_a60d7ced5732301bd6d56d6af3326d9c3a6eeba12ff39d388188296aabdcd435df}{ComTypes::VFW\_E\_NOT\_FOUND}}:                   \textcolor{keywordflow}{return} \mbox{\hyperlink{class_result_a2b51de8f6f8c27c3de29f9da5cce8f75}{Result::fail}} (\textcolor{stringliteral}{"{}File not found"{}});}
+\DoxyCodeLine{586                 \textcolor{keywordflow}{case} \mbox{\hyperlink{namespacejuce_1_1_com_types_a60d7ced5732301bd6d56d6af3326d9c3a399d4a35b3b2d49a5e79e5b8cfa1a118}{ComTypes::VFW\_E\_UNKNOWN\_FILE\_TYPE}}:           \textcolor{keywordflow}{return} \mbox{\hyperlink{class_result_a2b51de8f6f8c27c3de29f9da5cce8f75}{Result::fail}} (\textcolor{stringliteral}{"{}Unknown file type"{}});}
+\DoxyCodeLine{587                 \textcolor{keywordflow}{case} \mbox{\hyperlink{namespacejuce_1_1_com_types_a60d7ced5732301bd6d56d6af3326d9c3a597e821efcfc1f94bc26084b4a415448}{ComTypes::VFW\_E\_UNSUPPORTED\_STREAM}}:          \textcolor{keywordflow}{return} \mbox{\hyperlink{class_result_a2b51de8f6f8c27c3de29f9da5cce8f75}{Result::fail}} (\textcolor{stringliteral}{"{}Unsupported stream"{}});}
+\DoxyCodeLine{588                 \textcolor{keywordflow}{case} \mbox{\hyperlink{namespacejuce_1_1_com_types_a60d7ced5732301bd6d56d6af3326d9c3a9c1002d95261a49bde92a605a747c2ac}{ComTypes::VFW\_E\_CANNOT\_CONNECT}}:              \textcolor{keywordflow}{return} \mbox{\hyperlink{class_result_a2b51de8f6f8c27c3de29f9da5cce8f75}{Result::fail}} (\textcolor{stringliteral}{"{}Cannot connect"{}});}
+\DoxyCodeLine{589                 \textcolor{keywordflow}{case} \mbox{\hyperlink{namespacejuce_1_1_com_types_a60d7ced5732301bd6d56d6af3326d9c3a5859254ac3fd2d2c2a7b5f489098272a}{ComTypes::VFW\_E\_CANNOT\_LOAD\_SOURCE\_FILTER}}:   \textcolor{keywordflow}{return} \mbox{\hyperlink{class_result_a2b51de8f6f8c27c3de29f9da5cce8f75}{Result::fail}} (\textcolor{stringliteral}{"{}Cannot load source filter"{}});}
+\DoxyCodeLine{590             \}}
+\DoxyCodeLine{591 }
+\DoxyCodeLine{592             TCHAR messageBuffer[512] = \{ 0 \};}
+\DoxyCodeLine{593 }
+\DoxyCodeLine{594             FormatMessage (FORMAT\_MESSAGE\_FROM\_SYSTEM | FORMAT\_MESSAGE\_IGNORE\_INSERTS,}
+\DoxyCodeLine{595                            \textcolor{keyword}{nullptr}, (DWORD) hr, MAKELANGID (LANG\_NEUTRAL, SUBLANG\_DEFAULT),}
+\DoxyCodeLine{596                            messageBuffer, (DWORD) \mbox{\hyperlink{group__juce__core-maths_gadee9aaa20b588097567bc71e651f2f98}{numElementsInArray}} (messageBuffer) -\/ 1, \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{597 }
+\DoxyCodeLine{598             \textcolor{keywordflow}{return} \mbox{\hyperlink{class_result_a2b51de8f6f8c27c3de29f9da5cce8f75}{Result::fail}} (\mbox{\hyperlink{class_string}{String}} (messageBuffer));}
+\DoxyCodeLine{599         \}}
+\DoxyCodeLine{600 }
+\DoxyCodeLine{601         \textcolor{keywordtype}{void} release()}
+\DoxyCodeLine{602         \{}
+\DoxyCodeLine{603             \textcolor{keywordflow}{if} (mediaControl != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{604                 mediaControl-\/>Stop();}
+\DoxyCodeLine{605 }
+\DoxyCodeLine{606             \textcolor{keywordflow}{if} (mediaEvent != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{607                 mediaEvent-\/>SetNotifyWindow (0, 0, 0);}
+\DoxyCodeLine{608 }
+\DoxyCodeLine{609             \textcolor{keywordflow}{if} (videoRenderer != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{610                 videoRenderer-\/>setVideoWindow (\textcolor{keyword}{nullptr});}
+\DoxyCodeLine{611 }
+\DoxyCodeLine{612             hasVideo = \textcolor{keyword}{false};}
+\DoxyCodeLine{613             videoRenderer = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{614             baseFilter = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{615             basicAudio = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{616             mediaEvent = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{617             mediaPosition = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{618             mediaControl = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{619             graphBuilder = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{620 }
+\DoxyCodeLine{621             state = uninitializedState;}
+\DoxyCodeLine{622 }
+\DoxyCodeLine{623             \textcolor{keywordflow}{if} (nativeWindow != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{624                 deleteNativeWindow();}
+\DoxyCodeLine{625         \}}
+\DoxyCodeLine{626 }
+\DoxyCodeLine{627         \textcolor{keywordtype}{void} graphEventProc()}
+\DoxyCodeLine{628         \{}
+\DoxyCodeLine{629             LONG ec = 0;}
+\DoxyCodeLine{630             LONG\_PTR p1 = \{\}, p2 = \{\};}
+\DoxyCodeLine{631 }
+\DoxyCodeLine{632             \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (mediaEvent != \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{633 }
+\DoxyCodeLine{634             \textcolor{keywordflow}{while} (SUCCEEDED (mediaEvent-\/>GetEvent (\&ec, \&p1, \&p2, 0)))}
+\DoxyCodeLine{635             \{}
+\DoxyCodeLine{636                 mediaEvent-\/>FreeEventParams (ec, p1, p2);}
+\DoxyCodeLine{637 }
+\DoxyCodeLine{638                 \textcolor{keywordflow}{switch} (ec)}
+\DoxyCodeLine{639                 \{}
+\DoxyCodeLine{640                     \textcolor{keywordflow}{case} \mbox{\hyperlink{namespacejuce_1_1_com_types_a60d7ced5732301bd6d56d6af3326d9c3a64512e1743c47b5ea2f58b4d72e73566}{ComTypes::EC\_REPAINT}}:}
+\DoxyCodeLine{641                         component.repaint();}
+\DoxyCodeLine{642                         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{643 }
+\DoxyCodeLine{644                     \textcolor{keywordflow}{case} \mbox{\hyperlink{namespacejuce_1_1_com_types_a60d7ced5732301bd6d56d6af3326d9c3a2187da27915e102508446e176408ca7a}{ComTypes::EC\_COMPLETE}}:}
+\DoxyCodeLine{645                         component.stop();}
+\DoxyCodeLine{646                         component.setPosition (0.0);}
+\DoxyCodeLine{647                         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{648 }
+\DoxyCodeLine{649                     \textcolor{keywordflow}{case} \mbox{\hyperlink{namespacejuce_1_1_com_types_a60d7ced5732301bd6d56d6af3326d9c3a829599da08f7a62c71d3c8360baf4c97}{ComTypes::EC\_ERRORABORT}}:}
+\DoxyCodeLine{650                     \textcolor{keywordflow}{case} \mbox{\hyperlink{namespacejuce_1_1_com_types_a60d7ced5732301bd6d56d6af3326d9c3a94fe97ae392d7bf04bd3d4ba9f392106}{ComTypes::EC\_ERRORABORTEX}}:}
+\DoxyCodeLine{651                         component.errorOccurred (getErrorMessageFromResult ((HRESULT) p1).\mbox{\hyperlink{namespacejuce_1_1_d_sound_logging_a312387ee6f710cb5cc796f65335a809f}{getErrorMessage}}());}
+\DoxyCodeLine{652                         \textcolor{comment}{// intentional fallthrough}}
+\DoxyCodeLine{653                     \textcolor{keywordflow}{case} \mbox{\hyperlink{namespacejuce_1_1_com_types_a60d7ced5732301bd6d56d6af3326d9c3ae6f8c04ef3e534d67e0b6c4d5b893fca}{ComTypes::EC\_USERABORT}}:}
+\DoxyCodeLine{654                         component.close();}
+\DoxyCodeLine{655                         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{656 }
+\DoxyCodeLine{657                     \textcolor{keywordflow}{case} \mbox{\hyperlink{namespacejuce_1_1_com_types_a60d7ced5732301bd6d56d6af3326d9c3ae9747b7b243b56348f9624d082ed099b}{ComTypes::EC\_STATE\_CHANGE}}:}
+\DoxyCodeLine{658                         \textcolor{keywordflow}{switch} (p1)}
+\DoxyCodeLine{659                         \{}
+\DoxyCodeLine{660                             \textcolor{keywordflow}{case} \mbox{\hyperlink{namespacejuce_1_1_com_types_ab3abe9b6f2e7a079b9a9ec6343614e89a23853d80082905f7c0a98aa941adbfcb}{ComTypes::State\_Paused}}:  component.playbackStopped(); \textcolor{keywordflow}{break};}
+\DoxyCodeLine{661                             \textcolor{keywordflow}{case} \mbox{\hyperlink{namespacejuce_1_1_com_types_ab3abe9b6f2e7a079b9a9ec6343614e89ad81c4e683e7a7140a1fcd89810957667}{ComTypes::State\_Running}}: component.playbackStarted(); \textcolor{keywordflow}{break};}
+\DoxyCodeLine{662                             \textcolor{keywordflow}{default}: \textcolor{keywordflow}{break};}
+\DoxyCodeLine{663                         \}}
+\DoxyCodeLine{664 }
+\DoxyCodeLine{665                     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{666                         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{667                 \}}
+\DoxyCodeLine{668             \}}
+\DoxyCodeLine{669         \}}
+\DoxyCodeLine{670 }
+\DoxyCodeLine{671         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{672         \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a715a47d99ff7ab3ef5f917b687b66c01}{play}}()}
+\DoxyCodeLine{673         \{}
+\DoxyCodeLine{674             mediaControl-\/>Run();}
+\DoxyCodeLine{675             state = runningState;}
+\DoxyCodeLine{676         \}}
+\DoxyCodeLine{677 }
+\DoxyCodeLine{678         \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_component_1_1_pimpl_aab986910175fd243e55ea209ef28f4cf}{stop}}()}
+\DoxyCodeLine{679         \{}
+\DoxyCodeLine{680             mediaControl-\/>Stop();}
+\DoxyCodeLine{681             state = stoppedState;}
+\DoxyCodeLine{682         \}}
+\DoxyCodeLine{683 }
+\DoxyCodeLine{684         \textcolor{keywordtype}{void} pause()}
+\DoxyCodeLine{685         \{}
+\DoxyCodeLine{686             mediaControl-\/>Pause();}
+\DoxyCodeLine{687             state = pausedState;}
+\DoxyCodeLine{688         \}}
+\DoxyCodeLine{689 }
+\DoxyCodeLine{690         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{691         \mbox{\hyperlink{class_rectangle}{Rectangle<int>}} getVideoSize() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{692         \{}
+\DoxyCodeLine{693             \textcolor{keywordtype}{long} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}} = 0, \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}} = 0;}
+\DoxyCodeLine{694 }
+\DoxyCodeLine{695             \textcolor{keywordflow}{if} (hasVideo)}
+\DoxyCodeLine{696                 videoRenderer-\/>getVideoSize (\mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}});}
+\DoxyCodeLine{697 }
+\DoxyCodeLine{698             \textcolor{keywordflow}{return} \{ (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}) \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, (\textcolor{keywordtype}{int}) \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}} \};}
+\DoxyCodeLine{699         \}}
+\DoxyCodeLine{700 }
+\DoxyCodeLine{701         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{702         \textcolor{keywordtype}{double} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a53f30af1fe6d9fba92655dc9cbbbf387}{getDuration}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{703 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{704             \mbox{\hyperlink{namespacejuce_1_1_com_types_ab88d3de4bdd8800278843e7fc37516f1}{ComTypes::REFTIME}} duration;}
+\DoxyCodeLine{705             mediaPosition-\/>get\_Duration (\&duration);}
+\DoxyCodeLine{706             \textcolor{keywordflow}{return} duration;}
+\DoxyCodeLine{707         \}}
+\DoxyCodeLine{708 }
+\DoxyCodeLine{709         \textcolor{keywordtype}{double} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a75b9306bb106c987fe662e52329bb3c9}{getSpeed}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{710 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{711             \textcolor{keywordtype}{double} speed;}
+\DoxyCodeLine{712             mediaPosition-\/>get\_Rate (\&speed);}
+\DoxyCodeLine{713             \textcolor{keywordflow}{return} speed;}
+\DoxyCodeLine{714         \}}
+\DoxyCodeLine{715 }
+\DoxyCodeLine{716         \textcolor{keywordtype}{double} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a1b5c6aaa840823f6cb69a2ad349c4009}{getPosition}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{717 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{718             \mbox{\hyperlink{namespacejuce_1_1_com_types_ab88d3de4bdd8800278843e7fc37516f1}{ComTypes::REFTIME}} seconds;}
+\DoxyCodeLine{719             mediaPosition-\/>get\_CurrentPosition (\&seconds);}
+\DoxyCodeLine{720             \textcolor{keywordflow}{return} seconds;}
+\DoxyCodeLine{721         \}}
+\DoxyCodeLine{722 }
+\DoxyCodeLine{723         \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a26d540a1d9a8d40ae650af25c3b7fa64}{setSpeed}} (\textcolor{keywordtype}{double} newSpeed)     \{ mediaPosition-\/>put\_Rate (newSpeed); \}}
+\DoxyCodeLine{724         \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_component_1_1_pimpl_aad13ce8cdf4ddc2c816abc2cffd72a09}{setPosition}} (\textcolor{keywordtype}{double} seconds)   \{ mediaPosition-\/>put\_CurrentPosition (seconds); \}}
+\DoxyCodeLine{725         \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a821b3c879008a719797b62e498cf2f18}{setVolume}} (\textcolor{keywordtype}{float} newVolume)    \{ basicAudio-\/>put\_Volume (convertToDShowVolume (newVolume)); \}}
+\DoxyCodeLine{726 }
+\DoxyCodeLine{727         \textcolor{comment}{// in DirectShow, full volume is 0, silence is -\/10000}}
+\DoxyCodeLine{728         \textcolor{keyword}{static} \textcolor{keywordtype}{long} convertToDShowVolume (\textcolor{keywordtype}{float} vol) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{729         \{}
+\DoxyCodeLine{730             \textcolor{keywordflow}{if} (vol >= 1.0f) \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{731             \textcolor{keywordflow}{if} (vol <= 0.0f) \textcolor{keywordflow}{return} -\/10000;}
+\DoxyCodeLine{732 }
+\DoxyCodeLine{733             \textcolor{keywordflow}{return} \mbox{\hyperlink{group__juce__core-maths_gafe8eb86381d389f4ba9f9931a38e1a44}{roundToInt}} ((vol * 10000.0f) -\/ 10000.0f);}
+\DoxyCodeLine{734         \}}
+\DoxyCodeLine{735 }
+\DoxyCodeLine{736         \textcolor{keywordtype}{float} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a2c0b3eaa8fc5e364dc5086486ac517d5}{getVolume}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{737 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{738             \textcolor{keywordtype}{long} volume;}
+\DoxyCodeLine{739             basicAudio-\/>get\_Volume (\&volume);}
+\DoxyCodeLine{740             \textcolor{keywordflow}{return} (\textcolor{keywordtype}{float}) (volume + 10000) / 10000.0f;}
+\DoxyCodeLine{741         \}}
+\DoxyCodeLine{742 }
+\DoxyCodeLine{743         \textcolor{keyword}{enum} State \{ uninitializedState, runningState, pausedState, stoppedState \};}
+\DoxyCodeLine{744         State state = uninitializedState;}
+\DoxyCodeLine{745 }
+\DoxyCodeLine{746     \textcolor{keyword}{private}:}
+\DoxyCodeLine{747         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{748         \textcolor{keyword}{enum} \{ graphEventID = WM\_APP + 0x43f0 \};}
+\DoxyCodeLine{749 }
+\DoxyCodeLine{750         \mbox{\hyperlink{struct_video_component_1_1_pimpl_aa84bfd6ad60b925ac1266e1202816911}{Pimpl}}\& component;}
+\DoxyCodeLine{751         \mbox{\hyperlink{namespacejuce_a1b3c3cf7cdbe394e401d5db42e094ac5}{HWND}} hwnd = \{\};}
+\DoxyCodeLine{752         HDC hdc = \{\};}
+\DoxyCodeLine{753 }
+\DoxyCodeLine{754         ComSmartPtr<ComTypes::IGraphBuilder> graphBuilder;}
+\DoxyCodeLine{755         ComSmartPtr<ComTypes::IMediaControl> mediaControl;}
+\DoxyCodeLine{756         ComSmartPtr<ComTypes::IMediaPosition> mediaPosition;}
+\DoxyCodeLine{757         ComSmartPtr<ComTypes::IMediaEventEx> mediaEvent;}
+\DoxyCodeLine{758         ComSmartPtr<ComTypes::IBasicAudio> basicAudio;}
+\DoxyCodeLine{759         ComSmartPtr<ComTypes::IBaseFilter> baseFilter;}
+\DoxyCodeLine{760 }
+\DoxyCodeLine{761         std::unique\_ptr<VideoRenderers::Base> videoRenderer;}
+\DoxyCodeLine{762 }
+\DoxyCodeLine{763         \textcolor{keywordtype}{bool} hasVideo = \textcolor{keyword}{false}, needToUpdateViewport = \textcolor{keyword}{true}, needToRecreateNativeWindow = \textcolor{keyword}{false};}
+\DoxyCodeLine{764 }
+\DoxyCodeLine{765         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{766         \textcolor{keywordtype}{bool} createNativeWindow()}
+\DoxyCodeLine{767         \{}
+\DoxyCodeLine{768             \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (nativeWindow == \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{769 }
+\DoxyCodeLine{770             \textcolor{keywordflow}{if} (\textcolor{keyword}{auto}* topLevelPeer = component.getTopLevelComponent()-\/>getPeer())}
+\DoxyCodeLine{771             \{}
+\DoxyCodeLine{772                 nativeWindow.reset (\textcolor{keyword}{new} NativeWindow ((\mbox{\hyperlink{namespacejuce_a1b3c3cf7cdbe394e401d5db42e094ac5}{HWND}}) topLevelPeer-\/>getNativeHandle(), \textcolor{keyword}{this}));}
+\DoxyCodeLine{773 }
+\DoxyCodeLine{774                 hwnd = nativeWindow-\/>hwnd;}
+\DoxyCodeLine{775                 component.currentPeer = topLevelPeer;}
+\DoxyCodeLine{776                 component.currentPeer-\/>addScaleFactorListener (\&component);}
+\DoxyCodeLine{777 }
+\DoxyCodeLine{778                 \textcolor{keywordflow}{if} (hwnd != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{779                 \{}
+\DoxyCodeLine{780                     hdc = GetDC (hwnd);}
+\DoxyCodeLine{781                     component.updateContextPosition();}
+\DoxyCodeLine{782                     component.updateContextVisibility();}
+\DoxyCodeLine{783                     \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{784                 \}}
+\DoxyCodeLine{785 }
+\DoxyCodeLine{786                 nativeWindow = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{787             \}}
+\DoxyCodeLine{788             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{789             \{}
+\DoxyCodeLine{790                 \mbox{\hyperlink{group__juce__core-system_gadc044ce5efecbecf2f5a44cd00db67b3}{jassertfalse}};}
+\DoxyCodeLine{791             \}}
+\DoxyCodeLine{792 }
+\DoxyCodeLine{793             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{794         \}}
+\DoxyCodeLine{795 }
+\DoxyCodeLine{796         \textcolor{keywordtype}{void} deleteNativeWindow()}
+\DoxyCodeLine{797         \{}
+\DoxyCodeLine{798             \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (nativeWindow != \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{799             ReleaseDC (hwnd, hdc);}
+\DoxyCodeLine{800             hwnd = \{\};}
+\DoxyCodeLine{801             hdc = \{\};}
+\DoxyCodeLine{802             nativeWindow = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{803         \}}
+\DoxyCodeLine{804 }
+\DoxyCodeLine{805         \textcolor{keywordtype}{bool} isRendererConnected()}
+\DoxyCodeLine{806         \{}
+\DoxyCodeLine{807             ComSmartPtr<ComTypes::IEnumPins> enumPins;}
+\DoxyCodeLine{808 }
+\DoxyCodeLine{809             HRESULT hr = baseFilter-\/>EnumPins (enumPins.resetAndGetPointerAddress());}
+\DoxyCodeLine{810 }
+\DoxyCodeLine{811             \textcolor{keywordflow}{if} (SUCCEEDED (hr))}
+\DoxyCodeLine{812                 hr = enumPins-\/>Reset();}
+\DoxyCodeLine{813 }
+\DoxyCodeLine{814             ComSmartPtr<ComTypes::IPin> pin;}
+\DoxyCodeLine{815 }
+\DoxyCodeLine{816             \textcolor{keywordflow}{while} (SUCCEEDED (hr)}
+\DoxyCodeLine{817                     \&\& enumPins-\/>Next (1, pin.resetAndGetPointerAddress(), \textcolor{keyword}{nullptr}) == S\_OK)}
+\DoxyCodeLine{818             \{}
+\DoxyCodeLine{819                 ComSmartPtr<ComTypes::IPin> otherPin;}
+\DoxyCodeLine{820 }
+\DoxyCodeLine{821                 hr = pin-\/>ConnectedTo (otherPin.resetAndGetPointerAddress());}
+\DoxyCodeLine{822 }
+\DoxyCodeLine{823                 \textcolor{keywordflow}{if} (SUCCEEDED (hr))}
+\DoxyCodeLine{824                 \{}
+\DoxyCodeLine{825                     \mbox{\hyperlink{namespacejuce_1_1_com_types_ad28813b6bfb7816e22bb8b088d3eea16}{ComTypes::PIN\_DIRECTION}} direction;}
+\DoxyCodeLine{826                     hr = pin-\/>QueryDirection (\&direction);}
+\DoxyCodeLine{827 }
+\DoxyCodeLine{828                     \textcolor{keywordflow}{if} (SUCCEEDED (hr) \&\& direction == \mbox{\hyperlink{namespacejuce_1_1_com_types_ad28813b6bfb7816e22bb8b088d3eea16a7cc198183b78e75c10f2bf3c9318ce80}{ComTypes::PINDIR\_INPUT}})}
+\DoxyCodeLine{829                         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{830                 \}}
+\DoxyCodeLine{831                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (hr == \mbox{\hyperlink{namespacejuce_1_1_com_types_a60d7ced5732301bd6d56d6af3326d9c3aeee7ee58effc8c0a5b5ebf07e8e18180}{ComTypes::VFW\_E\_NOT\_CONNECTED}})}
+\DoxyCodeLine{832                 \{}
+\DoxyCodeLine{833                     hr = S\_OK;}
+\DoxyCodeLine{834                 \}}
+\DoxyCodeLine{835             \}}
+\DoxyCodeLine{836 }
+\DoxyCodeLine{837             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{838         \}}
+\DoxyCodeLine{839 }
+\DoxyCodeLine{840         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{841         \textcolor{keyword}{struct }NativeWindowClass   : \textcolor{keyword}{private} \mbox{\hyperlink{class_deleted_at_shutdown}{DeletedAtShutdown}}}
+\DoxyCodeLine{842         \{}
+\DoxyCodeLine{843             \textcolor{keywordtype}{bool} isRegistered() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept              \{ \textcolor{keywordflow}{return} atom != 0; \}}
+\DoxyCodeLine{844             LPCTSTR getWindowClassName() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept     \{ \textcolor{keywordflow}{return} (LPCTSTR) (\mbox{\hyperlink{group__juce__core-maths_gafb24e6184dde2b29ecfb687686e8fec2}{pointer\_sized\_uint}}) MAKELONG (atom, 0); \}}
+\DoxyCodeLine{845 }
+\DoxyCodeLine{846             \mbox{\hyperlink{group__juce__core-memory_gaf86c4799059ea3f12feb2c9a90abc5d1}{JUCE\_DECLARE\_SINGLETON\_SINGLETHREADED\_MINIMAL}} (NativeWindowClass)}
+\DoxyCodeLine{847 }
+\DoxyCodeLine{848         \textcolor{keyword}{private}:}
+\DoxyCodeLine{849             NativeWindowClass()}
+\DoxyCodeLine{850             \{}
+\DoxyCodeLine{851                 \mbox{\hyperlink{class_string}{String}} windowClassName (\textcolor{stringliteral}{"{}JUCE\_DIRECTSHOW\_"{}});}
+\DoxyCodeLine{852                 windowClassName << (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}) (\mbox{\hyperlink{class_time_a18ceeea45072a31c8b6b68f08e107bc0}{Time::currentTimeMillis}}() \& 0x7fffffff);}
+\DoxyCodeLine{853 }
+\DoxyCodeLine{854                 HINSTANCE moduleHandle = (HINSTANCE) Process::getCurrentModuleInstanceHandle();}
+\DoxyCodeLine{855 }
+\DoxyCodeLine{856                 TCHAR moduleFile [1024] = \{\};}
+\DoxyCodeLine{857                 GetModuleFileName (moduleHandle, moduleFile, 1024);}
+\DoxyCodeLine{858 }
+\DoxyCodeLine{859                 WNDCLASSEX wcex = \{\};}
+\DoxyCodeLine{860                 wcex.cbSize         = \textcolor{keyword}{sizeof} (wcex);}
+\DoxyCodeLine{861                 wcex.style          = CS\_OWNDC;}
+\DoxyCodeLine{862                 wcex.lpfnWndProc    = (WNDPROC) wndProc;}
+\DoxyCodeLine{863                 wcex.lpszClassName  = windowClassName.toWideCharPointer();}
+\DoxyCodeLine{864                 wcex.hInstance      = moduleHandle;}
+\DoxyCodeLine{865 }
+\DoxyCodeLine{866                 atom = RegisterClassEx (\&wcex);}
+\DoxyCodeLine{867                 \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (atom != 0);}
+\DoxyCodeLine{868             \}}
+\DoxyCodeLine{869 }
+\DoxyCodeLine{870             \string~NativeWindowClass()}
+\DoxyCodeLine{871             \{}
+\DoxyCodeLine{872                 \textcolor{keywordflow}{if} (atom != 0)}
+\DoxyCodeLine{873                     UnregisterClass (getWindowClassName(), (HINSTANCE) Process::getCurrentModuleInstanceHandle());}
+\DoxyCodeLine{874 }
+\DoxyCodeLine{875                 clearSingletonInstance();}
+\DoxyCodeLine{876             \}}
+\DoxyCodeLine{877 }
+\DoxyCodeLine{878             \textcolor{keyword}{static} LRESULT CALLBACK wndProc (\mbox{\hyperlink{namespacejuce_a1b3c3cf7cdbe394e401d5db42e094ac5}{HWND}} hwnd, UINT msg, WPARAM wParam, LPARAM lParam)}
+\DoxyCodeLine{879             \{}
+\DoxyCodeLine{880                 \textcolor{keywordflow}{if} (\textcolor{keyword}{auto}* \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} = (DirectShowContext*) GetWindowLongPtr (hwnd, GWLP\_USERDATA))}
+\DoxyCodeLine{881                 \{}
+\DoxyCodeLine{882                     \textcolor{keywordflow}{switch} (msg)}
+\DoxyCodeLine{883                     \{}
+\DoxyCodeLine{884                         \textcolor{keywordflow}{case} WM\_NCHITTEST:          \textcolor{keywordflow}{return} HTTRANSPARENT;}
+\DoxyCodeLine{885                         \textcolor{keywordflow}{case} WM\_ERASEBKGND:         \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{886                         \textcolor{keywordflow}{case} WM\_DISPLAYCHANGE:      \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}-\/>displayResolutionChanged(); \textcolor{keywordflow}{break};}
+\DoxyCodeLine{887                         \textcolor{keywordflow}{case} graphEventID:          \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}-\/>graphEventProc(); \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{888                         \textcolor{keywordflow}{default}:                    \textcolor{keywordflow}{break};}
+\DoxyCodeLine{889                     \}}
+\DoxyCodeLine{890                 \}}
+\DoxyCodeLine{891 }
+\DoxyCodeLine{892                 \textcolor{keywordflow}{return} DefWindowProc (hwnd, msg, wParam, lParam);}
+\DoxyCodeLine{893             \}}
+\DoxyCodeLine{894 }
+\DoxyCodeLine{895             ATOM atom = \{\};}
+\DoxyCodeLine{896 }
+\DoxyCodeLine{897             \mbox{\hyperlink{group__juce__core-system_ga6ab7a603bf4435c7cb286b1744366eb2}{JUCE\_DECLARE\_NON\_COPYABLE}} (NativeWindowClass)}
+\DoxyCodeLine{898         \};}
+\DoxyCodeLine{899 }
+\DoxyCodeLine{900         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{901         \textcolor{keyword}{struct }NativeWindow}
+\DoxyCodeLine{902         \{}
+\DoxyCodeLine{903             NativeWindow (\mbox{\hyperlink{namespacejuce_a1b3c3cf7cdbe394e401d5db42e094ac5}{HWND}} parentToAddTo, \textcolor{keywordtype}{void}* userData)}
+\DoxyCodeLine{904             \{}
+\DoxyCodeLine{905                 \textcolor{keyword}{auto}* wc = NativeWindowClass::getInstance();}
+\DoxyCodeLine{906 }
+\DoxyCodeLine{907                 \textcolor{keywordflow}{if} (wc-\/>isRegistered())}
+\DoxyCodeLine{908                 \{}
+\DoxyCodeLine{909                     DWORD exstyle = 0;}
+\DoxyCodeLine{910                     DWORD \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}} = WS\_CHILD;}
+\DoxyCodeLine{911 }
+\DoxyCodeLine{912                     hwnd = CreateWindowEx (exstyle, wc-\/>getWindowClassName(),}
+\DoxyCodeLine{913                                            L\textcolor{stringliteral}{"{}"{}}, \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}}, 0, 0, 0, 0, parentToAddTo, \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{914                                            (HINSTANCE) Process::getCurrentModuleInstanceHandle(), \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{915 }
+\DoxyCodeLine{916                     \textcolor{keywordflow}{if} (hwnd != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{917                     \{}
+\DoxyCodeLine{918                         hdc = GetDC (hwnd);}
+\DoxyCodeLine{919                         SetWindowLongPtr (hwnd, GWLP\_USERDATA, (LONG\_PTR) userData);}
+\DoxyCodeLine{920                     \}}
+\DoxyCodeLine{921                 \}}
+\DoxyCodeLine{922 }
+\DoxyCodeLine{923                 \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (hwnd != \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{924             \}}
+\DoxyCodeLine{925 }
+\DoxyCodeLine{926             \string~NativeWindow()}
+\DoxyCodeLine{927             \{}
+\DoxyCodeLine{928                 \textcolor{keywordflow}{if} (hwnd != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{929                 \{}
+\DoxyCodeLine{930                     SetWindowLongPtr (hwnd, GWLP\_USERDATA, (LONG\_PTR) 0);}
+\DoxyCodeLine{931                     DestroyWindow (hwnd);}
+\DoxyCodeLine{932                 \}}
+\DoxyCodeLine{933             \}}
+\DoxyCodeLine{934 }
+\DoxyCodeLine{935             \textcolor{keywordtype}{void} setWindowPosition (\mbox{\hyperlink{class_rectangle}{Rectangle<int>}} newBounds)}
+\DoxyCodeLine{936             \{}
+\DoxyCodeLine{937                 SetWindowPos (hwnd, \textcolor{keyword}{nullptr}, newBounds.\mbox{\hyperlink{class_rectangle_a4b8223fb659d6c7f95a72e8d3fbe793d}{getX}}(), newBounds.\mbox{\hyperlink{class_rectangle_a3050042669b496be5f029b1ab6fc1f52}{getY}}(),}
+\DoxyCodeLine{938                               newBounds.\mbox{\hyperlink{class_rectangle_a76c51bd8fcbdd3ac5d8f6dff3cf4a57e}{getWidth}}(), newBounds.\mbox{\hyperlink{class_rectangle_a92fff07d827126d92607d0d7c395c323}{getHeight}}(),}
+\DoxyCodeLine{939                               SWP\_NOACTIVATE | SWP\_NOZORDER | SWP\_NOOWNERZORDER);}
+\DoxyCodeLine{940             \}}
+\DoxyCodeLine{941 }
+\DoxyCodeLine{942             \textcolor{keywordtype}{void} showWindow (\textcolor{keywordtype}{bool} shouldBeVisible)}
+\DoxyCodeLine{943             \{}
+\DoxyCodeLine{944                 ShowWindow (hwnd, shouldBeVisible ? SW\_SHOWNA : SW\_HIDE);}
+\DoxyCodeLine{945             \}}
+\DoxyCodeLine{946 }
+\DoxyCodeLine{947             \mbox{\hyperlink{namespacejuce_a1b3c3cf7cdbe394e401d5db42e094ac5}{HWND}} hwnd = \{\};}
+\DoxyCodeLine{948             HDC hdc = \{\};}
+\DoxyCodeLine{949 }
+\DoxyCodeLine{950             \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (NativeWindow)}
+\DoxyCodeLine{951         \};}
+\DoxyCodeLine{952 }
+\DoxyCodeLine{953         std::unique\_ptr<NativeWindow> nativeWindow;}
+\DoxyCodeLine{954 }
+\DoxyCodeLine{955         \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (DirectShowContext)}
+\DoxyCodeLine{956     \};}
+\DoxyCodeLine{957 }
+\DoxyCodeLine{958     std::unique\_ptr<DirectShowContext> context;}
+\DoxyCodeLine{959 }
+\DoxyCodeLine{960     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{struct_video_component_1_1_pimpl_aa84bfd6ad60b925ac1266e1202816911}{Pimpl}})}
+\DoxyCodeLine{961 \};}
+\DoxyCodeLine{962 }
+\DoxyCodeLine{963 \mbox{\hyperlink{group__juce__core-memory_gaa2068ca3607c637f8ec10cf6c9c219b7}{JUCE\_IMPLEMENT\_SINGLETON}} (VideoComponent::Pimpl::DirectShowContext::NativeWindowClass)}
+
+\end{DoxyCode}

@@ -1,0 +1,143 @@
+\hypertarget{juce___weak_reference_8h_source}{}\doxysection{juce\+\_\+\+Weak\+Reference.\+h}
+\label{juce___weak_reference_8h_source}\index{build/juce\_core/memory/juce\_WeakReference.h@{build/juce\_core/memory/juce\_WeakReference.h}}
+\mbox{\hyperlink{juce___weak_reference_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{77 \textcolor{comment}{}\textcolor{keyword}{template} <\textcolor{keyword}{class} ObjectType, \textcolor{keyword}{class} ReferenceCountingType = ReferenceCountedObject>}
+\DoxyCodeLine{78 \textcolor{keyword}{class }\mbox{\hyperlink{class_weak_reference}{WeakReference}}}
+\DoxyCodeLine{79 \{}
+\DoxyCodeLine{80 \textcolor{keyword}{public}:}
+\DoxyCodeLine{82     \textcolor{keyword}{inline} \mbox{\hyperlink{class_weak_reference_a7311a4b2d696dc46533f562576ab848b}{WeakReference}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{85     \mbox{\hyperlink{class_weak_reference_ad158fa3b994aa2cbf4ffbd7209afcdee}{WeakReference}} (ObjectType* \textcolor{keywordtype}{object})  : holder (getRef (\mbox{\hyperlink{jmemsys_8h_a77e1d3f325098324c3925e8faf6ae5cf}{object}})) \{\}}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{88     \mbox{\hyperlink{class_weak_reference_a1dd877a29a839b13a046411f5c68f235}{WeakReference}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_weak_reference}{WeakReference}}\& other) noexcept         : holder (other.holder) \{\}}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{91     \mbox{\hyperlink{class_weak_reference_a7942f7ee23b8109f9fa591d25db7a810}{WeakReference}} (\mbox{\hyperlink{class_weak_reference}{WeakReference}}\&\& other) noexcept              : holder (\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (other.holder)) \{\}}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{94     \mbox{\hyperlink{class_weak_reference}{WeakReference}}\& \mbox{\hyperlink{class_weak_reference_af85cf5fb4349bc5d186e3586fbe4be67}{operator= }}(\textcolor{keyword}{const} \mbox{\hyperlink{class_weak_reference}{WeakReference}}\& other)       \{ holder = other.holder; \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{97     \mbox{\hyperlink{class_weak_reference}{WeakReference}}\& \mbox{\hyperlink{class_weak_reference_af85cf5fb4349bc5d186e3586fbe4be67}{operator= }}(ObjectType* newObject)            \{ holder = getRef (newObject); \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{100     \mbox{\hyperlink{class_weak_reference}{WeakReference}}\& \mbox{\hyperlink{class_weak_reference_af85cf5fb4349bc5d186e3586fbe4be67}{operator= }}(\mbox{\hyperlink{class_weak_reference}{WeakReference}}\&\& other) \textcolor{keyword}{noexcept}   \{ holder = \mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (other.holder); \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{103     ObjectType* \mbox{\hyperlink{class_weak_reference_a9fcb356095e78d707f7d70c4674297e8}{get}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                            \{ \textcolor{keywordflow}{return} holder != \textcolor{keyword}{nullptr} ? holder-\/>\mbox{\hyperlink{class_reference_counted_object_ptr_a7057382626ac3f78f47e2b6aceed41ce}{get}}() : \textcolor{keyword}{nullptr}; \}}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{106     \textcolor{keyword}{operator} ObjectType*() \textcolor{keyword}{const} \textcolor{keyword}{noexcept}                       \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_weak_reference_a9fcb356095e78d707f7d70c4674297e8}{get}}(); \}}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{109     ObjectType* \mbox{\hyperlink{class_weak_reference_a5430af8d0bd9e4dd2f5903470eb35a97}{operator-\/>}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                     \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_weak_reference_a9fcb356095e78d707f7d70c4674297e8}{get}}(); \}}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{118     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_weak_reference_a523f66357f106bdf39cd5b49973b3177}{wasObjectDeleted}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                      \{ \textcolor{keywordflow}{return} holder != \textcolor{keyword}{nullptr} \&\& holder-\/>\mbox{\hyperlink{class_reference_counted_object_ptr_a7057382626ac3f78f47e2b6aceed41ce}{get}}() == \textcolor{keyword}{nullptr}; \}}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_weak_reference_a446e41345121d74a68be8a45166c09d3}{operator== }}(ObjectType* \textcolor{keywordtype}{object}) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}         \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_weak_reference_a9fcb356095e78d707f7d70c4674297e8}{get}}() == \mbox{\hyperlink{jmemsys_8h_a77e1d3f325098324c3925e8faf6ae5cf}{object}}; \}}
+\DoxyCodeLine{121     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_weak_reference_af4b60878d8ee882b27ba39592a128c8e}{operator!= }}(ObjectType* \textcolor{keywordtype}{object}) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}         \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_weak_reference_a9fcb356095e78d707f7d70c4674297e8}{get}}() != \mbox{\hyperlink{jmemsys_8h_a77e1d3f325098324c3925e8faf6ae5cf}{object}}; \}}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{123     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{128 \textcolor{comment}{}    \textcolor{keyword}{class }\mbox{\hyperlink{class_weak_reference_1_1_shared_pointer}{SharedPointer}}   : \textcolor{keyword}{public} ReferenceCountingType}
+\DoxyCodeLine{129     \{}
+\DoxyCodeLine{130     \textcolor{keyword}{public}:}
+\DoxyCodeLine{131         \textcolor{keyword}{explicit} \mbox{\hyperlink{class_weak_reference_1_1_shared_pointer_ae7fbeeca009f0b39158ba5e62ab77828}{SharedPointer}} (ObjectType* \mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}}) noexcept : owner (\mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}}) \{\}}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{133         \textcolor{keyword}{inline} ObjectType* \mbox{\hyperlink{class_weak_reference_1_1_shared_pointer_a22fe97d809819a0cd304d6aa9f6f6031}{get}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept     \{ \textcolor{keywordflow}{return} owner; \}}
+\DoxyCodeLine{134         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_weak_reference_1_1_shared_pointer_a6e1786def84d6ce74d2befe690843f6a}{clearPointer}}() noexcept                \{ owner = \textcolor{keyword}{nullptr}; \}}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{136     \textcolor{keyword}{private}:}
+\DoxyCodeLine{137         ObjectType* owner;}
+\DoxyCodeLine{138 }
+\DoxyCodeLine{139         \mbox{\hyperlink{group__juce__core-system_ga6ab7a603bf4435c7cb286b1744366eb2}{JUCE\_DECLARE\_NON\_COPYABLE}} (\mbox{\hyperlink{class_weak_reference_1_1_shared_pointer}{SharedPointer}})}
+\DoxyCodeLine{140     \};}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{142     \textcolor{keyword}{using} \mbox{\hyperlink{class_reference_counted_object_ptr}{SharedRef}} = \mbox{\hyperlink{class_reference_counted_object_ptr}{ReferenceCountedObjectPtr<SharedPointer>}};}
+\DoxyCodeLine{143 }
+\DoxyCodeLine{144     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{150 \textcolor{comment}{}    \textcolor{keyword}{class }\mbox{\hyperlink{class_weak_reference_1_1_master}{Master}}}
+\DoxyCodeLine{151     \{}
+\DoxyCodeLine{152     \textcolor{keyword}{public}:}
+\DoxyCodeLine{153         \mbox{\hyperlink{class_weak_reference_1_1_master_a3ebeedd852db668baf85973ba21e6008}{Master}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{155         \mbox{\hyperlink{class_weak_reference_1_1_master_a9fc11ef197bae4a674b18e4793bed161}{\string~Master}}() noexcept}
+\DoxyCodeLine{156         \{}
+\DoxyCodeLine{157             \textcolor{comment}{// You must remember to call clear() in your source object's destructor! See the notes}}
+\DoxyCodeLine{158             \textcolor{comment}{// for the WeakReference class for an example of how to do this.}}
+\DoxyCodeLine{159             \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (sharedPointer == \textcolor{keyword}{nullptr} || sharedPointer-\/>\mbox{\hyperlink{class_reference_counted_object_ptr_a7057382626ac3f78f47e2b6aceed41ce}{get}}() == \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{160         \}}
+\DoxyCodeLine{161 }
+\DoxyCodeLine{165         \mbox{\hyperlink{class_reference_counted_object_ptr}{SharedRef}} \mbox{\hyperlink{class_weak_reference_1_1_master_a4463b14716f359f671f53a2a89b6912a}{getSharedPointer}} (ObjectType* \textcolor{keywordtype}{object})}
+\DoxyCodeLine{166         \{}
+\DoxyCodeLine{167             \textcolor{keywordflow}{if} (sharedPointer == \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{168             \{}
+\DoxyCodeLine{169                 sharedPointer = *\textcolor{keyword}{new} \mbox{\hyperlink{class_weak_reference_1_1_shared_pointer}{SharedPointer}} (\textcolor{keywordtype}{object});}
+\DoxyCodeLine{170             \}}
+\DoxyCodeLine{171             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{172             \{}
+\DoxyCodeLine{173                 \textcolor{comment}{// You're trying to create a weak reference to an object that has already been deleted!!}}
+\DoxyCodeLine{174                 \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (sharedPointer-\/>\mbox{\hyperlink{class_reference_counted_object_ptr_a7057382626ac3f78f47e2b6aceed41ce}{get}}() != \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{175             \}}
+\DoxyCodeLine{176 }
+\DoxyCodeLine{177             \textcolor{keywordflow}{return} sharedPointer;}
+\DoxyCodeLine{178         \}}
+\DoxyCodeLine{179 }
+\DoxyCodeLine{184         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_weak_reference_1_1_master_aa542fc20038febb6e3bc0ed17ab9fcaf}{clear}}() noexcept}
+\DoxyCodeLine{185         \{}
+\DoxyCodeLine{186             \textcolor{keywordflow}{if} (sharedPointer != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{187                 sharedPointer-\/>clearPointer();}
+\DoxyCodeLine{188         \}}
+\DoxyCodeLine{189 }
+\DoxyCodeLine{191         \textcolor{keywordtype}{int} \mbox{\hyperlink{class_weak_reference_1_1_master_aed6b17cff1356ac546aba47da5c19012}{getNumActiveWeakReferences}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{192         \{}
+\DoxyCodeLine{193             \textcolor{keywordflow}{return} sharedPointer == \textcolor{keyword}{nullptr} ? 0 : (sharedPointer-\/>getReferenceCount() -\/ 1);}
+\DoxyCodeLine{194         \}}
+\DoxyCodeLine{195 }
+\DoxyCodeLine{196     \textcolor{keyword}{private}:}
+\DoxyCodeLine{197         \mbox{\hyperlink{class_reference_counted_object_ptr}{SharedRef}} sharedPointer;}
+\DoxyCodeLine{198 }
+\DoxyCodeLine{199         \mbox{\hyperlink{group__juce__core-system_ga6ab7a603bf4435c7cb286b1744366eb2}{JUCE\_DECLARE\_NON\_COPYABLE}} (\mbox{\hyperlink{class_weak_reference_1_1_master}{Master}})}
+\DoxyCodeLine{200     \};}
+\DoxyCodeLine{201 }
+\DoxyCodeLine{202 \textcolor{keyword}{private}:}
+\DoxyCodeLine{203     \mbox{\hyperlink{class_weak_reference_ad4d39a0c388b7d0811e1f755cadd3fdf}{SharedRef}} holder;}
+\DoxyCodeLine{204 }
+\DoxyCodeLine{205     \textcolor{keyword}{static} \mbox{\hyperlink{class_weak_reference_ad4d39a0c388b7d0811e1f755cadd3fdf}{SharedRef}} getRef (ObjectType* o)}
+\DoxyCodeLine{206     \{}
+\DoxyCodeLine{207         \textcolor{keywordflow}{if} (o != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{208             \textcolor{keywordflow}{return} o-\/>masterReference.getSharedPointer (o);}
+\DoxyCodeLine{209 }
+\DoxyCodeLine{210         \textcolor{keywordflow}{return} \{\};}
+\DoxyCodeLine{211     \}}
+\DoxyCodeLine{212 \};}
+\DoxyCodeLine{213 }
+\DoxyCodeLine{214 }
+\DoxyCodeLine{215 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{235 \textcolor{comment}{}\textcolor{preprocessor}{\#define JUCE\_DECLARE\_WEAK\_REFERENCEABLE(Class) \(\backslash\)}}
+\DoxyCodeLine{236 \textcolor{preprocessor}{    struct WeakRefMaster  : public juce::WeakReference<Class>::Master \{ \string~WeakRefMaster() \{ this-\/>clear(); \} \}; \(\backslash\)}}
+\DoxyCodeLine{237 \textcolor{preprocessor}{    WeakRefMaster masterReference; \(\backslash\)}}
+\DoxyCodeLine{238 \textcolor{preprocessor}{    friend class juce::WeakReference<Class>; \(\backslash\)}}
+\DoxyCodeLine{239 \textcolor{preprocessor}{}}
+\DoxyCodeLine{240 }
+\DoxyCodeLine{241  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{242 }
+
+\end{DoxyCode}

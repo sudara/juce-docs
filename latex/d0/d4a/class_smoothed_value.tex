@@ -1,0 +1,162 @@
+\hypertarget{class_smoothed_value}{}\doxysection{Smoothed\+Value\texorpdfstring{$<$}{<} Float\+Type, Smoothing\+Type \texorpdfstring{$>$}{>} Class Template Reference}
+\label{class_smoothed_value}\index{SmoothedValue$<$ FloatType, SmoothingType $>$@{SmoothedValue$<$ FloatType, SmoothingType $>$}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Smoothed\+Value.\+h$>$}
+
+Inheritance diagram for Smoothed\+Value\texorpdfstring{$<$}{<} Float\+Type, Smoothing\+Type \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d0/d4a/class_smoothed_value}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_smoothed_value_a433cc947f0d22a1a559069030ee873f6}{Smoothed\+Value}} () noexcept
+\item 
+\mbox{\hyperlink{class_smoothed_value_a5d4b0080ef90517b32bbeacc13bc6f7d}{Smoothed\+Value}} (\mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{Float\+Type}} initial\+Value) noexcept
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_smoothed_value_abf70063c8a4fcedda62a37137ef8e7e6}{reset}} (double \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sample\+Rate}}, double ramp\+Length\+In\+Seconds) noexcept
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_smoothed_value_a616e5aa5ced10944a77dcf7be35d281a}{reset}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} num\+Steps) noexcept
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_smoothed_value_a7d25952842d74dc6b61aaaa1872416a3}{set\+Target\+Value}} (\mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{Float\+Type}} new\+Value) noexcept
+\item 
+\mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{Float\+Type}} \mbox{\hyperlink{class_smoothed_value_a4109115baa4d95ce759ae09a53981e79}{get\+Next\+Value}} () noexcept
+\item 
+\mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{Float\+Type}} \mbox{\hyperlink{class_smoothed_value_a424bd397956d650fc188d346b69df888}{skip}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} num\+Samples) noexcept
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_smoothed_value_a487f05ad4da1e60a72c226ca23e2abe4}{set\+Value}} (\mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{Float\+Type}} new\+Value, bool force=\mbox{\hyperlink{ordinals_8h_a65e9886d74aaee76545e83dd09011727}{false}}) noexcept
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename \mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{Float\+Type}}, typename Smoothing\+Type = Value\+Smoothing\+Types\+::\+Linear$>$\newline
+class Smoothed\+Value$<$ Float\+Type, Smoothing\+Type $>$}
+A utility class for values that need smoothing to avoid audio glitches.
+
+A \mbox{\hyperlink{struct_value_smoothing_types_1_1_linear}{Value\+Smoothing\+Types\+::\+Linear}} template parameter selects linear smoothing, which increments the \mbox{\hyperlink{class_smoothed_value}{Smoothed\+Value}} linearly towards its target value.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{class_smoothed_value}{SmoothedValue<float, ValueSmoothingTypes::Linear>}} yourSmoothedValue;}
+
+\end{DoxyCode}
+
+
+A \mbox{\hyperlink{struct_value_smoothing_types_1_1_multiplicative}{Value\+Smoothing\+Types\+::\+Multiplicative}} template parameter selects multiplicative smoothing increments towards the target value.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{class_smoothed_value}{SmoothedValue<float, ValueSmoothingTypes::Multiplicative>}} yourSmoothedValue;}
+
+\end{DoxyCode}
+
+
+Multiplicative smoothing is useful when you are dealing with exponential/logarithmic values like volume in dB or frequency in Hz. For example a 12 step ramp from 440.\+0 Hz (A4) to 880.\+0 Hz (A5) will increase the frequency with an equal temperament tuning across the octave. A 10 step smoothing from 1.\+0 (0 dB) to 3.\+16228 (10 dB) will increase the value in increments of 1 dB.
+
+Note that when you are using multiplicative smoothing you cannot ever reach a target value of zero!
+
+@tags\{Audio\} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_smoothed_value_a433cc947f0d22a1a559069030ee873f6}\label{class_smoothed_value_a433cc947f0d22a1a559069030ee873f6}} 
+\index{SmoothedValue$<$ FloatType, SmoothingType $>$@{SmoothedValue$<$ FloatType, SmoothingType $>$}!SmoothedValue@{SmoothedValue}}
+\index{SmoothedValue@{SmoothedValue}!SmoothedValue$<$ FloatType, SmoothingType $>$@{SmoothedValue$<$ FloatType, SmoothingType $>$}}
+\doxysubsubsection{\texorpdfstring{SmoothedValue()}{SmoothedValue()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename \mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{Float\+Type}} , typename Smoothing\+Type  = Value\+Smoothing\+Types\+::\+Linear$>$ \\
+\mbox{\hyperlink{class_smoothed_value}{Smoothed\+Value}}$<$ \mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{Float\+Type}}, Smoothing\+Type $>$\+::\mbox{\hyperlink{class_smoothed_value}{Smoothed\+Value}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Constructor. \mbox{\Hypertarget{class_smoothed_value_a5d4b0080ef90517b32bbeacc13bc6f7d}\label{class_smoothed_value_a5d4b0080ef90517b32bbeacc13bc6f7d}} 
+\index{SmoothedValue$<$ FloatType, SmoothingType $>$@{SmoothedValue$<$ FloatType, SmoothingType $>$}!SmoothedValue@{SmoothedValue}}
+\index{SmoothedValue@{SmoothedValue}!SmoothedValue$<$ FloatType, SmoothingType $>$@{SmoothedValue$<$ FloatType, SmoothingType $>$}}
+\doxysubsubsection{\texorpdfstring{SmoothedValue()}{SmoothedValue()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename \mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{Float\+Type}} , typename Smoothing\+Type  = Value\+Smoothing\+Types\+::\+Linear$>$ \\
+\mbox{\hyperlink{class_smoothed_value}{Smoothed\+Value}}$<$ \mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{Float\+Type}}, Smoothing\+Type $>$\+::\mbox{\hyperlink{class_smoothed_value}{Smoothed\+Value}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{Float\+Type}}}]{initial\+Value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Constructor. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_smoothed_value_a4109115baa4d95ce759ae09a53981e79}\label{class_smoothed_value_a4109115baa4d95ce759ae09a53981e79}} 
+\index{SmoothedValue$<$ FloatType, SmoothingType $>$@{SmoothedValue$<$ FloatType, SmoothingType $>$}!getNextValue@{getNextValue}}
+\index{getNextValue@{getNextValue}!SmoothedValue$<$ FloatType, SmoothingType $>$@{SmoothedValue$<$ FloatType, SmoothingType $>$}}
+\doxysubsubsection{\texorpdfstring{getNextValue()}{getNextValue()}}
+{\footnotesize\ttfamily template$<$typename \mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{Float\+Type}} , typename Smoothing\+Type  = Value\+Smoothing\+Types\+::\+Linear$>$ \\
+\mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{Float\+Type}} \mbox{\hyperlink{class_smoothed_value}{Smoothed\+Value}}$<$ \mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{Float\+Type}}, Smoothing\+Type $>$\+::get\+Next\+Value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Compute the next value. \begin{DoxyReturn}{Returns}
+Smoothed value 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_smoothed_value_abf70063c8a4fcedda62a37137ef8e7e6}\label{class_smoothed_value_abf70063c8a4fcedda62a37137ef8e7e6}} 
+\index{SmoothedValue$<$ FloatType, SmoothingType $>$@{SmoothedValue$<$ FloatType, SmoothingType $>$}!reset@{reset}}
+\index{reset@{reset}!SmoothedValue$<$ FloatType, SmoothingType $>$@{SmoothedValue$<$ FloatType, SmoothingType $>$}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename \mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{Float\+Type}} , typename Smoothing\+Type  = Value\+Smoothing\+Types\+::\+Linear$>$ \\
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_smoothed_value}{Smoothed\+Value}}$<$ \mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{Float\+Type}}, Smoothing\+Type $>$\+::reset (\begin{DoxyParamCaption}\item[{double}]{sample\+Rate,  }\item[{double}]{ramp\+Length\+In\+Seconds }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Reset to a new sample rate and ramp length. 
+\begin{DoxyParams}{Parameters}
+{\em sample\+Rate} & The sample rate \\
+\hline
+{\em ramp\+Length\+In\+Seconds} & The duration of the ramp in seconds \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_smoothed_value_a616e5aa5ced10944a77dcf7be35d281a}\label{class_smoothed_value_a616e5aa5ced10944a77dcf7be35d281a}} 
+\index{SmoothedValue$<$ FloatType, SmoothingType $>$@{SmoothedValue$<$ FloatType, SmoothingType $>$}!reset@{reset}}
+\index{reset@{reset}!SmoothedValue$<$ FloatType, SmoothingType $>$@{SmoothedValue$<$ FloatType, SmoothingType $>$}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename \mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{Float\+Type}} , typename Smoothing\+Type  = Value\+Smoothing\+Types\+::\+Linear$>$ \\
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_smoothed_value}{Smoothed\+Value}}$<$ \mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{Float\+Type}}, Smoothing\+Type $>$\+::reset (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{num\+Steps }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Set a new ramp length directly in samples. 
+\begin{DoxyParams}{Parameters}
+{\em num\+Steps} & The number of samples over which the ramp should be active \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_smoothed_value_a7d25952842d74dc6b61aaaa1872416a3}\label{class_smoothed_value_a7d25952842d74dc6b61aaaa1872416a3}} 
+\index{SmoothedValue$<$ FloatType, SmoothingType $>$@{SmoothedValue$<$ FloatType, SmoothingType $>$}!setTargetValue@{setTargetValue}}
+\index{setTargetValue@{setTargetValue}!SmoothedValue$<$ FloatType, SmoothingType $>$@{SmoothedValue$<$ FloatType, SmoothingType $>$}}
+\doxysubsubsection{\texorpdfstring{setTargetValue()}{setTargetValue()}}
+{\footnotesize\ttfamily template$<$typename \mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{Float\+Type}} , typename Smoothing\+Type  = Value\+Smoothing\+Types\+::\+Linear$>$ \\
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_smoothed_value}{Smoothed\+Value}}$<$ \mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{Float\+Type}}, Smoothing\+Type $>$\+::set\+Target\+Value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{Float\+Type}}}]{new\+Value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Set the next value to ramp towards. 
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & The new target value \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_smoothed_value_a487f05ad4da1e60a72c226ca23e2abe4}\label{class_smoothed_value_a487f05ad4da1e60a72c226ca23e2abe4}} 
+\index{SmoothedValue$<$ FloatType, SmoothingType $>$@{SmoothedValue$<$ FloatType, SmoothingType $>$}!setValue@{setValue}}
+\index{setValue@{setValue}!SmoothedValue$<$ FloatType, SmoothingType $>$@{SmoothedValue$<$ FloatType, SmoothingType $>$}}
+\doxysubsubsection{\texorpdfstring{setValue()}{setValue()}}
+{\footnotesize\ttfamily template$<$typename \mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{Float\+Type}} , typename Smoothing\+Type  = Value\+Smoothing\+Types\+::\+Linear$>$ \\
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_smoothed_value}{Smoothed\+Value}}$<$ \mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{Float\+Type}}, Smoothing\+Type $>$\+::set\+Value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{Float\+Type}}}]{new\+Value,  }\item[{bool}]{force = {\ttfamily \mbox{\hyperlink{ordinals_8h_a65e9886d74aaee76545e83dd09011727}{false}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Using the new methods\+:
+
+lsv.\+set\+Value (x, false); -\/\texorpdfstring{$>$}{>} lsv.\+set\+Target\+Value (x); lsv.\+set\+Value (x, true); -\/\texorpdfstring{$>$}{>} lsv.\+set\+Current\+And\+Target\+Value (x);
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & The new target value \\
+\hline
+{\em force} & If true, the value will be set immediately, bypassing the ramp \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_smoothed_value_a424bd397956d650fc188d346b69df888}\label{class_smoothed_value_a424bd397956d650fc188d346b69df888}} 
+\index{SmoothedValue$<$ FloatType, SmoothingType $>$@{SmoothedValue$<$ FloatType, SmoothingType $>$}!skip@{skip}}
+\index{skip@{skip}!SmoothedValue$<$ FloatType, SmoothingType $>$@{SmoothedValue$<$ FloatType, SmoothingType $>$}}
+\doxysubsubsection{\texorpdfstring{skip()}{skip()}}
+{\footnotesize\ttfamily template$<$typename \mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{Float\+Type}} , typename Smoothing\+Type  = Value\+Smoothing\+Types\+::\+Linear$>$ \\
+\mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{Float\+Type}} \mbox{\hyperlink{class_smoothed_value}{Smoothed\+Value}}$<$ \mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{Float\+Type}}, Smoothing\+Type $>$\+::skip (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{num\+Samples }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Skip the next num\+Samples samples. This is identical to calling get\+Next\+Value num\+Samples times. It returns the new current value. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_smoothed_value_a4109115baa4d95ce759ae09a53981e79}{get\+Next\+Value}} 
+\end{DoxySeeAlso}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+audio\+\_\+basics/utilities/\mbox{\hyperlink{juce___smoothed_value_8h}{juce\+\_\+\+Smoothed\+Value.\+h}}\end{DoxyCompactItemize}

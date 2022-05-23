@@ -1,0 +1,118 @@
+\hypertarget{juce___u_m_p_bytestream_input_handler_8h_source}{}\doxysection{juce\+\_\+\+UMPBytestream\+Input\+Handler.\+h}
+\label{juce___u_m_p_bytestream_input_handler_8h_source}\index{build/juce\_audio\_devices/midi\_io/ump/juce\_UMPBytestreamInputHandler.h@{build/juce\_audio\_devices/midi\_io/ump/juce\_UMPBytestreamInputHandler.h}}
+\mbox{\hyperlink{juce___u_m_p_bytestream_input_handler_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#ifndef DOXYGEN}}
+\DoxyCodeLine{28 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceuniversal__midi__packets}{universal\_midi\_packets}}}
+\DoxyCodeLine{29 \{}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{36 \textcolor{keyword}{struct }\mbox{\hyperlink{structuniversal__midi__packets_1_1_bytestream_input_handler}{BytestreamInputHandler}}}
+\DoxyCodeLine{37 \{}
+\DoxyCodeLine{38     \textcolor{keyword}{virtual} \mbox{\hyperlink{structuniversal__midi__packets_1_1_bytestream_input_handler_a44cff6559d4b8733f3e2af5556616d4f}{\string~BytestreamInputHandler}}() noexcept = default;}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40     virtual \textcolor{keywordtype}{void} \mbox{\hyperlink{structuniversal__midi__packets_1_1_bytestream_input_handler_a80b325fb83edb9117670fa7b925b4f45}{reset}}() = 0;}
+\DoxyCodeLine{41     virtual \textcolor{keywordtype}{void} \mbox{\hyperlink{structuniversal__midi__packets_1_1_bytestream_input_handler_a31e9172eb3c154f7b3d08a24e14d7808}{pushMidiData}} (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \textcolor{keywordtype}{void}* \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, \textcolor{keywordtype}{int} bytes, \textcolor{keywordtype}{double} time) = 0;}
+\DoxyCodeLine{42 \};}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{50 struct \mbox{\hyperlink{structuniversal__midi__packets_1_1_bytestream_to_bytestream_handler}{BytestreamToBytestreamHandler}} : public \mbox{\hyperlink{structuniversal__midi__packets_1_1_bytestream_input_handler}{BytestreamInputHandler}}}
+\DoxyCodeLine{51 \{}
+\DoxyCodeLine{52     \mbox{\hyperlink{structuniversal__midi__packets_1_1_bytestream_to_bytestream_handler_a8f657df8a0e12b9db7bbbd8ba8c71104}{BytestreamToBytestreamHandler}} (\mbox{\hyperlink{class_midi_input}{MidiInput}}\& i, \mbox{\hyperlink{class_midi_input_callback}{MidiInputCallback}}\& \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}})}
+\DoxyCodeLine{53         : \mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}} (i), \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}} (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}), concatenator (2048) \{\}}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{62     \textcolor{keyword}{class }\mbox{\hyperlink{classuniversal__midi__packets_1_1_bytestream_to_bytestream_handler_1_1_factory}{Factory}}}
+\DoxyCodeLine{63     \{}
+\DoxyCodeLine{64     \textcolor{keyword}{public}:}
+\DoxyCodeLine{65         \textcolor{keyword}{explicit} \mbox{\hyperlink{classuniversal__midi__packets_1_1_bytestream_to_bytestream_handler_1_1_factory_aea4f52f6f71e9d53427fdf11e47a3a01}{Factory}} (\mbox{\hyperlink{class_midi_input_callback}{MidiInputCallback}}* \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}})}
+\DoxyCodeLine{66             : \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}} (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}) \{\}}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68         std::unique\_ptr<BytestreamToBytestreamHandler> operator() (\mbox{\hyperlink{class_midi_input}{MidiInput}}\& i)\textcolor{keyword}{ const}}
+\DoxyCodeLine{69 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{70             \textcolor{keywordflow}{if} (\mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}} != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{71                 \textcolor{keywordflow}{return} std::make\_unique<BytestreamToBytestreamHandler> (i, *\mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}});}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73             \mbox{\hyperlink{group__juce__core-system_gadc044ce5efecbecf2f5a44cd00db67b3}{jassertfalse}};}
+\DoxyCodeLine{74             \textcolor{keywordflow}{return} \{\};}
+\DoxyCodeLine{75         \}}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77     \textcolor{keyword}{private}:}
+\DoxyCodeLine{78         \mbox{\hyperlink{class_midi_input_callback}{MidiInputCallback}}* \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}} = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{79     \};}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81     \textcolor{keywordtype}{void} \mbox{\hyperlink{structuniversal__midi__packets_1_1_bytestream_to_bytestream_handler_a79e895a0c0ab40b1472d6b8182853d65}{reset}}()\textcolor{keyword}{ override }\{ concatenator.reset(); \}}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83     \textcolor{keywordtype}{void} \mbox{\hyperlink{structuniversal__midi__packets_1_1_bytestream_to_bytestream_handler_a03b08a1a531d2e88d223f56915376a96}{pushMidiData}} (\textcolor{keyword}{const} \textcolor{keywordtype}{void}* \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, \textcolor{keywordtype}{int} bytes, \textcolor{keywordtype}{double} time)\textcolor{keyword}{ override}}
+\DoxyCodeLine{84 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{85         concatenator.pushMidiData (\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, bytes, time, \&\mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}}, \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}});}
+\DoxyCodeLine{86     \}}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88     \mbox{\hyperlink{class_midi_input}{MidiInput}}\& \mbox{\hyperlink{structuniversal__midi__packets_1_1_bytestream_to_bytestream_handler_a332ebbc66be1d68aae4180c42080daa8}{input}};}
+\DoxyCodeLine{89     \mbox{\hyperlink{class_midi_input_callback}{MidiInputCallback}}\& \mbox{\hyperlink{structuniversal__midi__packets_1_1_bytestream_to_bytestream_handler_a933c494d00abc8b66d7158b97ac7a14f}{callback}};}
+\DoxyCodeLine{90     \mbox{\hyperlink{class_midi_data_concatenator}{MidiDataConcatenator}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_bytestream_to_bytestream_handler_ac58965a6829413d1bc6b8c21445a62ab}{concatenator}};}
+\DoxyCodeLine{91 \};}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{99 \textcolor{keyword}{struct }\mbox{\hyperlink{structuniversal__midi__packets_1_1_bytestream_to_u_m_p_handler}{BytestreamToUMPHandler}} : \textcolor{keyword}{public} \mbox{\hyperlink{structuniversal__midi__packets_1_1_bytestream_input_handler}{BytestreamInputHandler}}}
+\DoxyCodeLine{100 \{}
+\DoxyCodeLine{101     \mbox{\hyperlink{structuniversal__midi__packets_1_1_bytestream_to_u_m_p_handler_af4965cc3fd460c23271dd2ea3c7760c0}{BytestreamToUMPHandler}} (\mbox{\hyperlink{namespaceuniversal__midi__packets_a326824bbd3be0be66cbe449db58db252}{PacketProtocol}} protocol, \mbox{\hyperlink{structuniversal__midi__packets_1_1_receiver}{Receiver}}\& \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}})}
+\DoxyCodeLine{102         : recipient (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}), dispatcher (protocol, 2048) \{\}}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{111     \textcolor{keyword}{class }\mbox{\hyperlink{classuniversal__midi__packets_1_1_bytestream_to_u_m_p_handler_1_1_factory}{Factory}}}
+\DoxyCodeLine{112     \{}
+\DoxyCodeLine{113     \textcolor{keyword}{public}:}
+\DoxyCodeLine{114         \mbox{\hyperlink{classuniversal__midi__packets_1_1_bytestream_to_u_m_p_handler_1_1_factory_ab9604e4ed049854df2f522fb330326a9}{Factory}} (\mbox{\hyperlink{namespaceuniversal__midi__packets_a326824bbd3be0be66cbe449db58db252}{PacketProtocol}} \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}}, \mbox{\hyperlink{structuniversal__midi__packets_1_1_receiver}{Receiver}}\& \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}})}
+\DoxyCodeLine{115             : protocol (\mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}}), \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}} (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}) \{\}}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117         std::unique\_ptr<BytestreamToUMPHandler> operator() (\mbox{\hyperlink{class_midi_input}{MidiInput}}\&)\textcolor{keyword}{ const}}
+\DoxyCodeLine{118 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{119             \textcolor{keywordflow}{return} std::make\_unique<BytestreamToUMPHandler> (protocol, \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}});}
+\DoxyCodeLine{120         \}}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{122     \textcolor{keyword}{private}:}
+\DoxyCodeLine{123         \mbox{\hyperlink{namespaceuniversal__midi__packets_a326824bbd3be0be66cbe449db58db252}{PacketProtocol}} protocol;}
+\DoxyCodeLine{124         \mbox{\hyperlink{structuniversal__midi__packets_1_1_receiver}{Receiver}}\& \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}};}
+\DoxyCodeLine{125     \};}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{127     \textcolor{keywordtype}{void} \mbox{\hyperlink{structuniversal__midi__packets_1_1_bytestream_to_u_m_p_handler_a68820a36e41d152e0b68874539a7f88b}{reset}}()\textcolor{keyword}{ override }\{ dispatcher.reset(); \}}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129     \textcolor{keywordtype}{void} \mbox{\hyperlink{structuniversal__midi__packets_1_1_bytestream_to_u_m_p_handler_a6c76cf4519e83d4dcdf04fba0303a056}{pushMidiData}} (\textcolor{keyword}{const} \textcolor{keywordtype}{void}* \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, \textcolor{keywordtype}{int} bytes, \textcolor{keywordtype}{double} time)\textcolor{keyword}{ override}}
+\DoxyCodeLine{130 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{131         \textcolor{keyword}{const} \textcolor{keyword}{auto}* \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}} = \textcolor{keyword}{static\_cast<}\textcolor{keyword}{const }uint8\_t*\textcolor{keyword}{>} (\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}});}
+\DoxyCodeLine{132         dispatcher.dispatch (\mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}}, \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}} + bytes, time, [\&] (\textcolor{keyword}{const} \mbox{\hyperlink{classuniversal__midi__packets_1_1_view}{View}}\& \mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}})}
+\DoxyCodeLine{133         \{}
+\DoxyCodeLine{134             recipient.packetReceived (\mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}}, time);}
+\DoxyCodeLine{135         \});}
+\DoxyCodeLine{136     \}}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{138     \mbox{\hyperlink{structuniversal__midi__packets_1_1_receiver}{Receiver}}\& \mbox{\hyperlink{structuniversal__midi__packets_1_1_bytestream_to_u_m_p_handler_aaf08d542204330fb17dffdf1bf4109ea}{recipient}};}
+\DoxyCodeLine{139     \mbox{\hyperlink{classuniversal__midi__packets_1_1_bytestream_to_u_m_p_dispatcher}{BytestreamToUMPDispatcher}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_bytestream_to_u_m_p_handler_a569f714cddc72cb2195d490bd47dca02}{dispatcher}};}
+\DoxyCodeLine{140 \};}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{142 \}}
+\DoxyCodeLine{143 }
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{146 }
+
+\end{DoxyCode}

@@ -1,0 +1,164 @@
+\hypertarget{juce___audio_format_reader_8h_source}{}\doxysection{juce\+\_\+\+Audio\+Format\+Reader.\+h}
+\label{juce___audio_format_reader_8h_source}\index{build/juce\_audio\_formats/format/juce\_AudioFormatReader.h@{build/juce\_audio\_formats/format/juce\_AudioFormatReader.h}}
+\mbox{\hyperlink{juce___audio_format_reader_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{keyword}{class }\mbox{\hyperlink{class_audio_format}{AudioFormat}};}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{44 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_audio_format_reader}{AudioFormatReader}}}
+\DoxyCodeLine{45 \{}
+\DoxyCodeLine{46 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{47     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{57 \textcolor{comment}{}    \mbox{\hyperlink{class_audio_format_reader}{AudioFormatReader}} (\mbox{\hyperlink{class_input_stream}{InputStream}}* sourceStream,}
+\DoxyCodeLine{58                        \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& formatName);}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60 \textcolor{keyword}{public}:}
+\DoxyCodeLine{62     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_audio_format_reader}{\string~AudioFormatReader}}();}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{69 \textcolor{comment}{}    \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{class_audio_format_reader_a547b9bc1cd8806ac1575ef2a71a27d6e}{getFormatName}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept    \{ \textcolor{keywordflow}{return} formatName; \}}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{90 \textcolor{comment}{}    \textcolor{keywordtype}{bool} read (\textcolor{keywordtype}{float}* \textcolor{keyword}{const}* destChannels, \textcolor{keywordtype}{int} numDestChannels,}
+\DoxyCodeLine{91                \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} startSampleInSource, \textcolor{keywordtype}{int} numSamplesToRead);}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{131     \textcolor{keywordtype}{bool} read (\textcolor{keywordtype}{int}* \textcolor{keyword}{const}* destChannels,}
+\DoxyCodeLine{132                \textcolor{keywordtype}{int} numDestChannels,}
+\DoxyCodeLine{133                \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} startSampleInSource,}
+\DoxyCodeLine{134                \textcolor{keywordtype}{int} numSamplesToRead,}
+\DoxyCodeLine{135                \textcolor{keywordtype}{bool} fillLeftoverChannelsWithCopies);}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{144     \textcolor{keywordtype}{void} read (\mbox{\hyperlink{class_audio_buffer}{AudioBuffer<float>}}* buffer,}
+\DoxyCodeLine{145                \textcolor{keywordtype}{int} startSampleInDestBuffer,}
+\DoxyCodeLine{146                \textcolor{keywordtype}{int} numSamples,}
+\DoxyCodeLine{147                \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} readerStartSample,}
+\DoxyCodeLine{148                \textcolor{keywordtype}{bool} useReaderLeftChan,}
+\DoxyCodeLine{149                \textcolor{keywordtype}{bool} useReaderRightChan);}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{167     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} readMaxLevels (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} startSample, \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} numSamples,}
+\DoxyCodeLine{168                                 \mbox{\hyperlink{class_range}{Range<float>}}* results, \textcolor{keywordtype}{int} numChannelsToRead);}
+\DoxyCodeLine{169 }
+\DoxyCodeLine{187     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} readMaxLevels (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} startSample, \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} numSamples,}
+\DoxyCodeLine{188                                 \textcolor{keywordtype}{float}\& lowestLeft,  \textcolor{keywordtype}{float}\& highestLeft,}
+\DoxyCodeLine{189                                 \textcolor{keywordtype}{float}\& lowestRight, \textcolor{keywordtype}{float}\& highestRight);}
+\DoxyCodeLine{190 }
+\DoxyCodeLine{213     \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} searchForLevel (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} startSample,}
+\DoxyCodeLine{214                           \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} numSamplesToSearch,}
+\DoxyCodeLine{215                           \textcolor{keywordtype}{double} magnitudeRangeMinimum,}
+\DoxyCodeLine{216                           \textcolor{keywordtype}{double} magnitudeRangeMaximum,}
+\DoxyCodeLine{217                           \textcolor{keywordtype}{int} minimumConsecutiveSamples);}
+\DoxyCodeLine{218 }
+\DoxyCodeLine{219 }
+\DoxyCodeLine{220     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{222 \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}} = 0;}
+\DoxyCodeLine{223 }
+\DoxyCodeLine{225     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} bitsPerSample = 0;}
+\DoxyCodeLine{226 }
+\DoxyCodeLine{228     \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} lengthInSamples = 0;}
+\DoxyCodeLine{229 }
+\DoxyCodeLine{231     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} numChannels = 0;}
+\DoxyCodeLine{232 }
+\DoxyCodeLine{234     \textcolor{keywordtype}{bool} usesFloatingPointData = \textcolor{keyword}{false};}
+\DoxyCodeLine{235 }
+\DoxyCodeLine{242     \mbox{\hyperlink{class_string_pair_array}{StringPairArray}} \mbox{\hyperlink{class_audio_format_reader_a8dfe48ed0e171928185c716811f5ecdb}{metadataValues}};}
+\DoxyCodeLine{243 }
+\DoxyCodeLine{245     \mbox{\hyperlink{class_input_stream}{InputStream}}* \mbox{\hyperlink{class_audio_format_reader_a81797ede6915ec762408d8ed23ec4d10}{input}};}
+\DoxyCodeLine{246 }
+\DoxyCodeLine{247     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{249 \textcolor{comment}{}    \textcolor{keyword}{virtual} \mbox{\hyperlink{class_audio_channel_set}{AudioChannelSet}} getChannelLayout();}
+\DoxyCodeLine{250 }
+\DoxyCodeLine{251     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{267 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_format_reader_a75d3df1c8d1b84a08fb5f1037d1754dd}{readSamples}} (\textcolor{keywordtype}{int}** destChannels,}
+\DoxyCodeLine{268                               \textcolor{keywordtype}{int} numDestChannels,}
+\DoxyCodeLine{269                               \textcolor{keywordtype}{int} startOffsetInDestBuffer,}
+\DoxyCodeLine{270                               \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} startSampleInFile,}
+\DoxyCodeLine{271                               \textcolor{keywordtype}{int} numSamples) = 0;}
+\DoxyCodeLine{272 }
+\DoxyCodeLine{273 }
+\DoxyCodeLine{274 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{275     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{277 \textcolor{comment}{}    \textcolor{keyword}{template} <\textcolor{keyword}{class} DestSampleType, \textcolor{keyword}{class} SourceSampleType, \textcolor{keyword}{class} SourceEndianness>}
+\DoxyCodeLine{278     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_audio_format_reader_1_1_read_helper}{ReadHelper}}}
+\DoxyCodeLine{279     \{}
+\DoxyCodeLine{280         \textcolor{keyword}{using} \mbox{\hyperlink{class_audio_data_1_1_pointer}{DestType}}   = \mbox{\hyperlink{class_audio_data_1_1_pointer}{AudioData::Pointer<DestSampleType,   AudioData::NativeEndian, AudioData::NonInterleaved, AudioData::NonConst>}};}
+\DoxyCodeLine{281         \textcolor{keyword}{using} \mbox{\hyperlink{class_audio_data_1_1_pointer}{SourceType}} = \mbox{\hyperlink{class_audio_data_1_1_pointer}{AudioData::Pointer<SourceSampleType, SourceEndianness, AudioData::Interleaved, AudioData::Const>}};}
+\DoxyCodeLine{282 }
+\DoxyCodeLine{283         \textcolor{keyword}{template} <\textcolor{keyword}{typename} TargetType>}
+\DoxyCodeLine{284         \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_audio_format_reader_1_1_read_helper_ab1158f4802796adedd47088948930c7d}{read}} (TargetType* \textcolor{keyword}{const}* destData, \textcolor{keywordtype}{int} destOffset, \textcolor{keywordtype}{int} numDestChannels,}
+\DoxyCodeLine{285                           \textcolor{keyword}{const} \textcolor{keywordtype}{void}* sourceData, \textcolor{keywordtype}{int} numSourceChannels, \textcolor{keywordtype}{int} numSamples) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{286         \{}
+\DoxyCodeLine{287             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < numDestChannels; ++i)}
+\DoxyCodeLine{288             \{}
+\DoxyCodeLine{289                 \textcolor{keywordflow}{if} (\textcolor{keywordtype}{void}* targetChan = destData[i])}
+\DoxyCodeLine{290                 \{}
+\DoxyCodeLine{291                     \mbox{\hyperlink{class_audio_data_1_1_pointer}{DestType}} dest (targetChan);}
+\DoxyCodeLine{292                     dest += destOffset;}
+\DoxyCodeLine{293 }
+\DoxyCodeLine{294                     \textcolor{keywordflow}{if} (i < numSourceChannels)}
+\DoxyCodeLine{295                         dest.\mbox{\hyperlink{class_audio_data_1_1_pointer_aed75d8a75052aec8fb0ca7c9cb19dfd2}{convertSamples}} (\mbox{\hyperlink{class_audio_data_1_1_pointer}{SourceType}} (\mbox{\hyperlink{group__juce__core-memory_ga8482f5e38a2a6adc3cd3f31869e4fe34}{addBytesToPointer}} (sourceData, i * SourceType::getBytesPerSample()), numSourceChannels), numSamples);}
+\DoxyCodeLine{296                     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{297                         dest.\mbox{\hyperlink{class_audio_data_1_1_pointer_a8b123e357446ef1faa6731790d421969}{clearSamples}} (numSamples);}
+\DoxyCodeLine{298                 \}}
+\DoxyCodeLine{299             \}}
+\DoxyCodeLine{300         \}}
+\DoxyCodeLine{301     \};}
+\DoxyCodeLine{302 }
+\DoxyCodeLine{306     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_format_reader_a437efb69883807f8b25d75f9eaa4da93}{clearSamplesBeyondAvailableLength}} (\textcolor{keywordtype}{int}** destChannels, \textcolor{keywordtype}{int} numDestChannels,}
+\DoxyCodeLine{307                                                    \textcolor{keywordtype}{int} startOffsetInDestBuffer, \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} startSampleInFile,}
+\DoxyCodeLine{308                                                    \textcolor{keywordtype}{int}\& numSamples, \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} fileLengthInSamples)}
+\DoxyCodeLine{309     \{}
+\DoxyCodeLine{310         \textcolor{keywordflow}{if} (destChannels == \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{311         \{}
+\DoxyCodeLine{312             \mbox{\hyperlink{group__juce__core-system_gadc044ce5efecbecf2f5a44cd00db67b3}{jassertfalse}};}
+\DoxyCodeLine{313             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{314         \}}
+\DoxyCodeLine{315 }
+\DoxyCodeLine{316         \textcolor{keyword}{const} \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} samplesAvailable = fileLengthInSamples -\/ startSampleInFile;}
+\DoxyCodeLine{317 }
+\DoxyCodeLine{318         \textcolor{keywordflow}{if} (samplesAvailable < numSamples)}
+\DoxyCodeLine{319         \{}
+\DoxyCodeLine{320             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = numDestChannels; -\/-\/i >= 0;)}
+\DoxyCodeLine{321                 \textcolor{keywordflow}{if} (destChannels[i] != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{322                     \mbox{\hyperlink{group__juce__core-memory_ga48fb9b158a3767e6573d27a8160956ea}{zeromem}} (destChannels[i] + startOffsetInDestBuffer, (\textcolor{keywordtype}{size\_t}) numSamples * \textcolor{keyword}{sizeof} (\textcolor{keywordtype}{int}));}
+\DoxyCodeLine{323 }
+\DoxyCodeLine{324             numSamples = (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}) samplesAvailable;}
+\DoxyCodeLine{325         \}}
+\DoxyCodeLine{326     \}}
+\DoxyCodeLine{327 }
+\DoxyCodeLine{328 \textcolor{keyword}{private}:}
+\DoxyCodeLine{329     \mbox{\hyperlink{class_string}{String}} formatName;}
+\DoxyCodeLine{330 }
+\DoxyCodeLine{331     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_audio_format_reader}{AudioFormatReader}})}
+\DoxyCodeLine{332 \};}
+\DoxyCodeLine{333 }
+\DoxyCodeLine{334  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{335 }
+
+\end{DoxyCode}

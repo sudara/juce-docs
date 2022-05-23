@@ -1,0 +1,141 @@
+\hypertarget{class_path_flattening_iterator}{}\doxysection{Path\+Flattening\+Iterator Class Reference}
+\label{class_path_flattening_iterator}\index{PathFlatteningIterator@{PathFlatteningIterator}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Path\+Iterator.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_path_flattening_iterator_a54f878dce32e05639dae4e3ebdc103e1}{Path\+Flattening\+Iterator}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_path}{Path}} \&path, \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_affine_transform}{Affine\+Transform}} \&transform=\mbox{\hyperlink{class_affine_transform}{Affine\+Transform}}(), float tolerance=\mbox{\hyperlink{class_path_a8e27579a740ab71d223ea7398a995fbb}{Path\+::default\+Tolerance\+For\+Measurement}})
+\item 
+\mbox{\hyperlink{class_path_flattening_iterator_a907158adef4ad38fd4899142b237106f}{$\sim$\+Path\+Flattening\+Iterator}} ()
+\item 
+bool \mbox{\hyperlink{class_path_flattening_iterator_a39a62cacf05fae6d38a0df4f250e5538}{next}} ()
+\item 
+bool \mbox{\hyperlink{class_path_flattening_iterator_a5f446bc9d137f2d04dbbfbebebce0267}{is\+Last\+In\+Subpath}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{class_path_flattening_iterator_aeb4902696a4f694a69eb7c48b274b2ff}{x1}}
+\item 
+float \mbox{\hyperlink{class_path_flattening_iterator_a6c4a3280b8b9504e38bc1cb739ab07e6}{y1}}
+\item 
+float \mbox{\hyperlink{class_path_flattening_iterator_a88aeb6be633806b5b6e2e8cc7172e1e0}{x2}}
+\item 
+float \mbox{\hyperlink{class_path_flattening_iterator_ad2ae4ff40b30bcc1c4704542d2c93003}{y2}}
+\item 
+bool \mbox{\hyperlink{class_path_flattening_iterator_ac102af0a5ac3dfd026488c1efea1b8ab}{closes\+Sub\+Path}}
+\item 
+\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{class_path_flattening_iterator_a96ac386608cfe18dde7de5a433aac417}{sub\+Path\+Index}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Flattens a \mbox{\hyperlink{class_path}{Path}} object into a series of straight-\/line sections.
+
+Use one of these to iterate through a \mbox{\hyperlink{class_path}{Path}} object, and it will convert all the curves into line sections so it\textquotesingle{}s easy to render or perform geometric operations on.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_path}{Path}}
+\end{DoxySeeAlso}
+@tags\{\mbox{\hyperlink{class_graphics}{Graphics}}\} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_path_flattening_iterator_a54f878dce32e05639dae4e3ebdc103e1}\label{class_path_flattening_iterator_a54f878dce32e05639dae4e3ebdc103e1}} 
+\index{PathFlatteningIterator@{PathFlatteningIterator}!PathFlatteningIterator@{PathFlatteningIterator}}
+\index{PathFlatteningIterator@{PathFlatteningIterator}!PathFlatteningIterator@{PathFlatteningIterator}}
+\doxysubsubsection{\texorpdfstring{PathFlatteningIterator()}{PathFlatteningIterator()}}
+{\footnotesize\ttfamily Path\+Flattening\+Iterator\+::\+Path\+Flattening\+Iterator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_path}{Path}} \&}]{path,  }\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_affine_transform}{Affine\+Transform}} \&}]{transform = {\ttfamily \mbox{\hyperlink{class_affine_transform}{Affine\+Transform}}()},  }\item[{float}]{tolerance = {\ttfamily \mbox{\hyperlink{class_path_a8e27579a740ab71d223ea7398a995fbb}{Path\+::default\+Tolerance\+For\+Measurement}}} }\end{DoxyParamCaption})}
+
+Creates a \mbox{\hyperlink{class_path_flattening_iterator}{Path\+Flattening\+Iterator}}.
+
+After creation, use the \mbox{\hyperlink{class_path_flattening_iterator_a39a62cacf05fae6d38a0df4f250e5538}{next()}} method to initialise the fields in the object with the first line\textquotesingle{}s position.
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & the path to iterate along \\
+\hline
+{\em transform} & a transform to apply to each point in the path being iterated \\
+\hline
+{\em tolerance} & the amount by which the curves are allowed to deviate from the lines into which they are being broken down -\/ a higher tolerance contains less lines, so can be generated faster, but will be less smooth. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_path_flattening_iterator_a907158adef4ad38fd4899142b237106f}\label{class_path_flattening_iterator_a907158adef4ad38fd4899142b237106f}} 
+\index{PathFlatteningIterator@{PathFlatteningIterator}!````~PathFlatteningIterator@{$\sim$PathFlatteningIterator}}
+\index{````~PathFlatteningIterator@{$\sim$PathFlatteningIterator}!PathFlatteningIterator@{PathFlatteningIterator}}
+\doxysubsubsection{\texorpdfstring{$\sim$PathFlatteningIterator()}{~PathFlatteningIterator()}}
+{\footnotesize\ttfamily Path\+Flattening\+Iterator\+::$\sim$\+Path\+Flattening\+Iterator (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Destructor. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_path_flattening_iterator_a5f446bc9d137f2d04dbbfbebebce0267}\label{class_path_flattening_iterator_a5f446bc9d137f2d04dbbfbebebce0267}} 
+\index{PathFlatteningIterator@{PathFlatteningIterator}!isLastInSubpath@{isLastInSubpath}}
+\index{isLastInSubpath@{isLastInSubpath}!PathFlatteningIterator@{PathFlatteningIterator}}
+\doxysubsubsection{\texorpdfstring{isLastInSubpath()}{isLastInSubpath()}}
+{\footnotesize\ttfamily bool Path\+Flattening\+Iterator\+::is\+Last\+In\+Subpath (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if the current segment is the last in the current sub-\/path. \mbox{\Hypertarget{class_path_flattening_iterator_a39a62cacf05fae6d38a0df4f250e5538}\label{class_path_flattening_iterator_a39a62cacf05fae6d38a0df4f250e5538}} 
+\index{PathFlatteningIterator@{PathFlatteningIterator}!next@{next}}
+\index{next@{next}!PathFlatteningIterator@{PathFlatteningIterator}}
+\doxysubsubsection{\texorpdfstring{next()}{next()}}
+{\footnotesize\ttfamily bool Path\+Flattening\+Iterator\+::next (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Fetches the next line segment from the path.
+
+This will update the member variables x1, y1, x2, y2, sub\+Path\+Index and closes\+Sub\+Path so that they describe the new line segment.
+
+\begin{DoxyReturn}{Returns}
+false when there are no more lines to fetch. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_path_flattening_iterator_ac102af0a5ac3dfd026488c1efea1b8ab}\label{class_path_flattening_iterator_ac102af0a5ac3dfd026488c1efea1b8ab}} 
+\index{PathFlatteningIterator@{PathFlatteningIterator}!closesSubPath@{closesSubPath}}
+\index{closesSubPath@{closesSubPath}!PathFlatteningIterator@{PathFlatteningIterator}}
+\doxysubsubsection{\texorpdfstring{closesSubPath}{closesSubPath}}
+{\footnotesize\ttfamily bool Path\+Flattening\+Iterator\+::closes\+Sub\+Path}
+
+Indicates whether the current line segment is closing a sub-\/path.
+
+If the current line is the one that connects the end of a sub-\/path back to the start again, this will be true. \mbox{\Hypertarget{class_path_flattening_iterator_a96ac386608cfe18dde7de5a433aac417}\label{class_path_flattening_iterator_a96ac386608cfe18dde7de5a433aac417}} 
+\index{PathFlatteningIterator@{PathFlatteningIterator}!subPathIndex@{subPathIndex}}
+\index{subPathIndex@{subPathIndex}!PathFlatteningIterator@{PathFlatteningIterator}}
+\doxysubsubsection{\texorpdfstring{subPathIndex}{subPathIndex}}
+{\footnotesize\ttfamily \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} Path\+Flattening\+Iterator\+::sub\+Path\+Index}
+
+The index of the current line within the current sub-\/path.
+
+E.\+g. you can use this to see whether the line is the first one in the subpath by seeing if it\textquotesingle{}s 0. \mbox{\Hypertarget{class_path_flattening_iterator_aeb4902696a4f694a69eb7c48b274b2ff}\label{class_path_flattening_iterator_aeb4902696a4f694a69eb7c48b274b2ff}} 
+\index{PathFlatteningIterator@{PathFlatteningIterator}!x1@{x1}}
+\index{x1@{x1}!PathFlatteningIterator@{PathFlatteningIterator}}
+\doxysubsubsection{\texorpdfstring{x1}{x1}}
+{\footnotesize\ttfamily float Path\+Flattening\+Iterator\+::x1}
+
+The x position of the start of the current line segment. \mbox{\Hypertarget{class_path_flattening_iterator_a88aeb6be633806b5b6e2e8cc7172e1e0}\label{class_path_flattening_iterator_a88aeb6be633806b5b6e2e8cc7172e1e0}} 
+\index{PathFlatteningIterator@{PathFlatteningIterator}!x2@{x2}}
+\index{x2@{x2}!PathFlatteningIterator@{PathFlatteningIterator}}
+\doxysubsubsection{\texorpdfstring{x2}{x2}}
+{\footnotesize\ttfamily float Path\+Flattening\+Iterator\+::x2}
+
+The x position of the end of the current line segment. \mbox{\Hypertarget{class_path_flattening_iterator_a6c4a3280b8b9504e38bc1cb739ab07e6}\label{class_path_flattening_iterator_a6c4a3280b8b9504e38bc1cb739ab07e6}} 
+\index{PathFlatteningIterator@{PathFlatteningIterator}!y1@{y1}}
+\index{y1@{y1}!PathFlatteningIterator@{PathFlatteningIterator}}
+\doxysubsubsection{\texorpdfstring{y1}{y1}}
+{\footnotesize\ttfamily float Path\+Flattening\+Iterator\+::y1}
+
+The y position of the start of the current line segment. \mbox{\Hypertarget{class_path_flattening_iterator_ad2ae4ff40b30bcc1c4704542d2c93003}\label{class_path_flattening_iterator_ad2ae4ff40b30bcc1c4704542d2c93003}} 
+\index{PathFlatteningIterator@{PathFlatteningIterator}!y2@{y2}}
+\index{y2@{y2}!PathFlatteningIterator@{PathFlatteningIterator}}
+\doxysubsubsection{\texorpdfstring{y2}{y2}}
+{\footnotesize\ttfamily float Path\+Flattening\+Iterator\+::y2}
+
+The y position of the end of the current line segment. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+graphics/geometry/\mbox{\hyperlink{juce___path_iterator_8h}{juce\+\_\+\+Path\+Iterator.\+h}}\item 
+build/juce\+\_\+graphics/geometry/\mbox{\hyperlink{juce___path_iterator_8cpp}{juce\+\_\+\+Path\+Iterator.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,405 @@
+\hypertarget{fobject_8h_source}{}\doxysection{fobject.\+h}
+\label{fobject_8h_source}\index{build/juce\_audio\_processors/format\_types/VST3\_SDK/base/source/fobject.h@{build/juce\_audio\_processors/format\_types/VST3\_SDK/base/source/fobject.h}}
+\mbox{\hyperlink{fobject_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{2 \textcolor{comment}{// Project     : SDK Base}}
+\DoxyCodeLine{3 \textcolor{comment}{// Version     : 1.0}}
+\DoxyCodeLine{4 \textcolor{comment}{//}}
+\DoxyCodeLine{5 \textcolor{comment}{// Category    : Helpers}}
+\DoxyCodeLine{6 \textcolor{comment}{// Filename    : base/source/fobject.h}}
+\DoxyCodeLine{7 \textcolor{comment}{// Created by  : Steinberg, 2008}}
+\DoxyCodeLine{8 \textcolor{comment}{// Description : Basic Object implementing FUnknown}}
+\DoxyCodeLine{9 \textcolor{comment}{//}}
+\DoxyCodeLine{10 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{11 \textcolor{comment}{// LICENSE}}
+\DoxyCodeLine{12 \textcolor{comment}{// (c) 2021, Steinberg Media Technologies GmbH, All Rights Reserved}}
+\DoxyCodeLine{13 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{14 \textcolor{comment}{// Redistribution and use in source and binary forms, with or without modification,}}
+\DoxyCodeLine{15 \textcolor{comment}{// are permitted provided that the following conditions are met:}}
+\DoxyCodeLine{16 \textcolor{comment}{// }}
+\DoxyCodeLine{17 \textcolor{comment}{//   * Redistributions of source code must retain the above copyright notice, }}
+\DoxyCodeLine{18 \textcolor{comment}{//     this list of conditions and the following disclaimer.}}
+\DoxyCodeLine{19 \textcolor{comment}{//   * Redistributions in binary form must reproduce the above copyright notice,}}
+\DoxyCodeLine{20 \textcolor{comment}{//     this list of conditions and the following disclaimer in the documentation }}
+\DoxyCodeLine{21 \textcolor{comment}{//     and/or other materials provided with the distribution.}}
+\DoxyCodeLine{22 \textcolor{comment}{//   * Neither the name of the Steinberg Media Technologies nor the names of its}}
+\DoxyCodeLine{23 \textcolor{comment}{//     contributors may be used to endorse or promote products derived from this }}
+\DoxyCodeLine{24 \textcolor{comment}{//     software without specific prior written permission.}}
+\DoxyCodeLine{25 \textcolor{comment}{// }}
+\DoxyCodeLine{26 \textcolor{comment}{// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "{}AS IS"{} AND}}
+\DoxyCodeLine{27 \textcolor{comment}{// ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED }}
+\DoxyCodeLine{28 \textcolor{comment}{// WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. }}
+\DoxyCodeLine{29 \textcolor{comment}{// IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, }}
+\DoxyCodeLine{30 \textcolor{comment}{// INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, }}
+\DoxyCodeLine{31 \textcolor{comment}{// BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, }}
+\DoxyCodeLine{32 \textcolor{comment}{// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF }}
+\DoxyCodeLine{33 \textcolor{comment}{// LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE }}
+\DoxyCodeLine{34 \textcolor{comment}{// OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE  OF THIS SOFTWARE, EVEN IF ADVISED}}
+\DoxyCodeLine{35 \textcolor{comment}{// OF THE POSSIBILITY OF SUCH DAMAGE.}}
+\DoxyCodeLine{36 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{41 \textcolor{comment}{}\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{42 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{funknown_8h}{pluginterfaces/base/funknown.h}}"{}}}
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{iupdatehandler_8h}{pluginterfaces/base/iupdatehandler.h}}"{}}}
+\DoxyCodeLine{46 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{fdebug_8h}{base/source/fdebug.h}}"{}} \textcolor{comment}{// use of NEW}}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespace_steinberg}{Steinberg}} \{}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52 \textcolor{keyword}{using} \mbox{\hyperlink{namespace_steinberg_a98b559d533d5d4f322dab1c943182a41}{FClassID}} = \mbox{\hyperlink{namespace_steinberg_a6ca68110b739e9a9bec4fe884cad394a}{FIDString}};}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{55 \textcolor{comment}{// Basic FObject -\/ implements FUnknown + IDependent}}
+\DoxyCodeLine{56 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{80 \textcolor{comment}{}\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{81 \textcolor{keyword}{class }\mbox{\hyperlink{class_steinberg_1_1_f_object}{FObject}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_steinberg_1_1_i_dependent}{IDependent}}}
+\DoxyCodeLine{82 \{}
+\DoxyCodeLine{83 \textcolor{keyword}{public}:}
+\DoxyCodeLine{84     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{85     \mbox{\hyperlink{class_steinberg_1_1_f_object_a38c141e4f0a41a5a11d7243b6bf5e953}{FObject}} () : \mbox{\hyperlink{class_steinberg_1_1_f_object_abb96473092c085625e53806a2acb5eec}{refCount}} (1) \{\}                                         }
+\DoxyCodeLine{86     \mbox{\hyperlink{class_steinberg_1_1_f_object_ac89109692bc284b7e0540c39a67366a8}{FObject}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_steinberg_1_1_f_object}{FObject}}\&) : \mbox{\hyperlink{class_steinberg_1_1_f_object_abb96473092c085625e53806a2acb5eec}{refCount}} (1) \{\}                                }
+\DoxyCodeLine{87     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_steinberg_1_1_f_object_a94b34739a4d9da7ceaf91e3ec5eccacb}{\string~FObject}} () \{\}                                                  }
+\DoxyCodeLine{88     \mbox{\hyperlink{class_steinberg_1_1_f_object}{FObject}}\& \mbox{\hyperlink{class_steinberg_1_1_f_object_a93edae1aba98b98095b8cbd504c92eec}{operator = }}(\textcolor{keyword}{const} \mbox{\hyperlink{class_steinberg_1_1_f_object}{FObject}}\&) \{ \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}                 }
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90     \textcolor{comment}{// OBJECT\_METHODS}}
+\DoxyCodeLine{91     \textcolor{keyword}{static} \textcolor{keyword}{inline} \mbox{\hyperlink{namespace_steinberg_a98b559d533d5d4f322dab1c943182a41}{FClassID}} \mbox{\hyperlink{class_steinberg_1_1_f_object_adee3b7dbc9d610cbdbf2c772148eef25}{getFClassID}} () \{\textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}FObject"{}};\}                }
+\DoxyCodeLine{92     \textcolor{keyword}{virtual} \mbox{\hyperlink{namespace_steinberg_a98b559d533d5d4f322dab1c943182a41}{FClassID}} \mbox{\hyperlink{class_steinberg_1_1_f_object_ad720bed79f327921945a1a0e8dfe483c}{isA}} ()\textcolor{keyword}{ const }\{\textcolor{keywordflow}{return} \mbox{\hyperlink{class_steinberg_1_1_f_object_adee3b7dbc9d610cbdbf2c772148eef25}{FObject::getFClassID}} ();\}          }
+\DoxyCodeLine{93     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_steinberg_1_1_f_object_ae0dc4e9fcc5228424c3c376ed8c2bc99}{isA}} (\mbox{\hyperlink{namespace_steinberg_a98b559d533d5d4f322dab1c943182a41}{FClassID}} \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}})\textcolor{keyword}{ const }\{\textcolor{keywordflow}{return} \mbox{\hyperlink{class_steinberg_1_1_f_object_ac2381072afce9c809b21cf6c900bee3a}{isTypeOf}} (\mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}}, \textcolor{keyword}{false});\}      }
+\DoxyCodeLine{94     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_steinberg_1_1_f_object_ac2381072afce9c809b21cf6c900bee3a}{isTypeOf}} (\mbox{\hyperlink{namespace_steinberg_a98b559d533d5d4f322dab1c943182a41}{FClassID}} \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}}, \textcolor{keywordtype}{bool} \textcolor{comment}{/*askBaseClass*/} = \textcolor{keyword}{true})\textcolor{keyword}{ const }\{\textcolor{keywordflow}{return} \mbox{\hyperlink{class_steinberg_1_1_f_object_a3a7f35514a50e9d718619b9752c95e4f}{classIDsEqual}} (\mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}}, \mbox{\hyperlink{class_steinberg_1_1_f_object_adee3b7dbc9d610cbdbf2c772148eef25}{FObject::getFClassID}} ());\}}
+\DoxyCodeLine{96     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{int32}} \mbox{\hyperlink{class_steinberg_1_1_f_object_ad0c73d4224e94cb0108fb25355875c96}{getRefCount}} () \{\textcolor{keywordflow}{return} \mbox{\hyperlink{class_steinberg_1_1_f_object_abb96473092c085625e53806a2acb5eec}{refCount}};\}                                 }
+\DoxyCodeLine{97     \mbox{\hyperlink{class_steinberg_1_1_f_unknown}{FUnknown}}* \mbox{\hyperlink{class_steinberg_1_1_f_object_ae0c71877cc0050c692b764a485f7a8a3}{unknownCast}} () \{\textcolor{keywordflow}{return} \textcolor{keyword}{this};\}                                  }
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99     \textcolor{comment}{// FUnknown}}
+\DoxyCodeLine{100     \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_f_object_aa84d396d241ebe17f94bacec33f9491b}{queryInterface}} (\textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a56b1a0450c9a583645f4e84d3806521c}{TUID}} \_iid, \textcolor{keywordtype}{void}** \mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}}) \mbox{\hyperlink{fplatform_8h_a3c5f727b2149b22fddea9edf2add04a8}{SMTG\_OVERRIDE}}; }
+\DoxyCodeLine{101     \mbox{\hyperlink{namespace_steinberg_af4518d725547bee20d4e185e8d3f1965}{uint32}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_f_object_a4527f132b11157d2531a355165f8fc00}{addRef}} () \mbox{\hyperlink{fplatform_8h_a3c5f727b2149b22fddea9edf2add04a8}{SMTG\_OVERRIDE}};                     }
+\DoxyCodeLine{102     \mbox{\hyperlink{namespace_steinberg_af4518d725547bee20d4e185e8d3f1965}{uint32}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_f_object_ac7145cd684568b59bc534750cb556f4f}{release}} () \mbox{\hyperlink{fplatform_8h_a3c5f727b2149b22fddea9edf2add04a8}{SMTG\_OVERRIDE}};                       }
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104     \textcolor{comment}{// IDependent}}
+\DoxyCodeLine{105     \textcolor{keywordtype}{void} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_f_object_ad4609d44040755afbac47966bba11dd9}{update}} (\mbox{\hyperlink{class_steinberg_1_1_f_unknown}{FUnknown}}* \textcolor{comment}{/*changedUnknown*/}, \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{int32}} \textcolor{comment}{/*message*/}) \mbox{\hyperlink{fplatform_8h_a3c5f727b2149b22fddea9edf2add04a8}{SMTG\_OVERRIDE}} \{\}}
+\DoxyCodeLine{107     \textcolor{comment}{// IDependency}}
+\DoxyCodeLine{108     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_steinberg_1_1_f_object_a076ddf90fabd21a0ded8ac7bcf6aff00}{addDependent}} (\mbox{\hyperlink{class_steinberg_1_1_i_dependent}{IDependent}}* dep);                          }
+\DoxyCodeLine{109     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_steinberg_1_1_f_object_a1eddcf61c6c1b8c539d3e483770f1efb}{removeDependent}} (\mbox{\hyperlink{class_steinberg_1_1_i_dependent}{IDependent}}* dep);                            }
+\DoxyCodeLine{110     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_steinberg_1_1_f_object_a35235a679055928dd53e34571d431ee1}{changed}} (\mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{int32}} msg = \mbox{\hyperlink{class_steinberg_1_1_i_dependent_ab253438857aa05d7c2120a81ad84fa18aa3067092b6009af185e1d138c3d201c4}{kChanged}});                            }
+\DoxyCodeLine{111     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_steinberg_1_1_f_object_a71880c15be676d0265a35fcac289937d}{deferUpdate}} (\mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{int32}} msg = \mbox{\hyperlink{class_steinberg_1_1_i_dependent_ab253438857aa05d7c2120a81ad84fa18aa3067092b6009af185e1d138c3d201c4}{kChanged}});                        }
+\DoxyCodeLine{112     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_steinberg_1_1_f_object_abb8457efff931681e8621ee636a5435a}{updateDone}} (\mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{int32}} \textcolor{comment}{/* msg */}) \{\}                         }
+\DoxyCodeLine{113     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_steinberg_1_1_f_object_a7cc5f6a3fc0912527784438d84918c44}{isEqualInstance}} (\mbox{\hyperlink{class_steinberg_1_1_f_unknown}{FUnknown}}* d) \{\textcolor{keywordflow}{return} \textcolor{keyword}{this} == d;\}}
+\DoxyCodeLine{114     }
+\DoxyCodeLine{115     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_steinberg_1_1_f_object_a3d9925cc758376aa2122e3f5a714c7d9}{setUpdateHandler}} (\mbox{\hyperlink{class_steinberg_1_1_i_update_handler}{IUpdateHandler}}* handler) \{\mbox{\hyperlink{class_steinberg_1_1_f_object_ae0c5f895cabc3db5808e95aebcd4d726}{gUpdateHandler}} = handler;\}  }
+\DoxyCodeLine{116     \textcolor{keyword}{static} \mbox{\hyperlink{class_steinberg_1_1_i_update_handler}{IUpdateHandler}}* \mbox{\hyperlink{class_steinberg_1_1_f_object_ab88dd0cd01646986979557c50c92fcd0}{getUpdateHandler}} () \{\textcolor{keywordflow}{return} \mbox{\hyperlink{class_steinberg_1_1_f_object_ae0c5f895cabc3db5808e95aebcd4d726}{gUpdateHandler}};\}                 }
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118     \textcolor{comment}{// static helper functions}}
+\DoxyCodeLine{119     \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_steinberg_1_1_f_object_a3a7f35514a50e9d718619b9752c95e4f}{classIDsEqual}} (\mbox{\hyperlink{namespace_steinberg_a98b559d533d5d4f322dab1c943182a41}{FClassID}} ci1, \mbox{\hyperlink{namespace_steinberg_a98b559d533d5d4f322dab1c943182a41}{FClassID}} ci2);         }
+\DoxyCodeLine{120     \textcolor{keyword}{static} \textcolor{keyword}{inline} \mbox{\hyperlink{class_steinberg_1_1_f_object}{FObject}}* \mbox{\hyperlink{class_steinberg_1_1_f_object_a88ec2e08e85a5fbadc637e56e0bc3b76}{unknownToObject}} (\mbox{\hyperlink{class_steinberg_1_1_f_unknown}{FUnknown}}* unknown);               }
+\DoxyCodeLine{121 }
+\DoxyCodeLine{123     \textcolor{keyword}{static} \textcolor{keyword}{const} \mbox{\hyperlink{class_steinberg_1_1_f_u_i_d}{FUID}} \mbox{\hyperlink{class_steinberg_1_1_f_object_a4287fcf7780c8cc37ecf3b53105c6ce4}{iid}};}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{125 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{126 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{127     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{int32}} \mbox{\hyperlink{class_steinberg_1_1_f_object_abb96473092c085625e53806a2acb5eec}{refCount}};                                                            }
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129     \textcolor{keyword}{static} \mbox{\hyperlink{class_steinberg_1_1_i_update_handler}{IUpdateHandler}}* \mbox{\hyperlink{class_steinberg_1_1_f_object_ae0c5f895cabc3db5808e95aebcd4d726}{gUpdateHandler}};}
+\DoxyCodeLine{130 \};}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{132 }
+\DoxyCodeLine{133 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{134 \textcolor{comment}{// conversion from FUnknown to FObject}}
+\DoxyCodeLine{135 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{136 \textcolor{keyword}{inline} \mbox{\hyperlink{class_steinberg_1_1_f_object}{FObject}}* \mbox{\hyperlink{class_steinberg_1_1_f_object_a88ec2e08e85a5fbadc637e56e0bc3b76}{FObject::unknownToObject}} (\mbox{\hyperlink{class_steinberg_1_1_f_unknown}{FUnknown}}* unknown)}
+\DoxyCodeLine{137 \{}
+\DoxyCodeLine{138     \mbox{\hyperlink{class_steinberg_1_1_f_object}{FObject}}* \textcolor{keywordtype}{object} = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{139     \textcolor{keywordflow}{if} (unknown) }
+\DoxyCodeLine{140     \{}
+\DoxyCodeLine{141         unknown-\/>\mbox{\hyperlink{class_steinberg_1_1_f_unknown_a784e44c90535adbbf7f83ca670e195db}{queryInterface}} (\mbox{\hyperlink{class_steinberg_1_1_f_object_a4287fcf7780c8cc37ecf3b53105c6ce4}{FObject::iid}}, (\textcolor{keywordtype}{void}**)\&\textcolor{keywordtype}{object});}
+\DoxyCodeLine{142         \textcolor{keywordflow}{if} (\textcolor{keywordtype}{object})}
+\DoxyCodeLine{143             \textcolor{keywordtype}{object}-\/>release (); \textcolor{comment}{// queryInterface has added ref     }}
+\DoxyCodeLine{144     \}}
+\DoxyCodeLine{145     \textcolor{keywordflow}{return} \mbox{\hyperlink{jmemsys_8h_a77e1d3f325098324c3925e8faf6ae5cf}{object}};}
+\DoxyCodeLine{146 \}}
+\DoxyCodeLine{147 }
+\DoxyCodeLine{148 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{149 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_steinberg_1_1_f_object_a3a7f35514a50e9d718619b9752c95e4f}{FObject::classIDsEqual}} (\mbox{\hyperlink{namespace_steinberg_a98b559d533d5d4f322dab1c943182a41}{FClassID}} ci1, \mbox{\hyperlink{namespace_steinberg_a98b559d533d5d4f322dab1c943182a41}{FClassID}} ci2)}
+\DoxyCodeLine{150 \{}
+\DoxyCodeLine{151     \textcolor{keywordflow}{return} (ci1 \&\& ci2) ? (strcmp (ci1, ci2) == 0) : \textcolor{keyword}{false};}
+\DoxyCodeLine{152 \}}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{156 \textcolor{comment}{}\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{157 \textcolor{keyword}{template} <\textcolor{keyword}{class} C>}
+\DoxyCodeLine{158 \textcolor{keyword}{inline} C* \mbox{\hyperlink{namespace_steinberg_a2d6b9817403c371fec28cc810cb14ea0}{FCast}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_steinberg_1_1_f_object}{FObject}}* \textcolor{keywordtype}{object})}
+\DoxyCodeLine{159 \{}
+\DoxyCodeLine{160     \textcolor{keywordflow}{if} (\textcolor{keywordtype}{object} \&\& \mbox{\hyperlink{jmemsys_8h_a77e1d3f325098324c3925e8faf6ae5cf}{object}}-\/>isTypeOf (C::getFClassID (), \textcolor{keyword}{true}))}
+\DoxyCodeLine{161         \textcolor{keywordflow}{return} (C*) \mbox{\hyperlink{jmemsys_8h_a77e1d3f325098324c3925e8faf6ae5cf}{object}};}
+\DoxyCodeLine{162     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{163 \}}
+\DoxyCodeLine{164 }
+\DoxyCodeLine{165 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{167 \textcolor{comment}{}\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{168 \textcolor{keyword}{template} <\textcolor{keyword}{class} C>}
+\DoxyCodeLine{169 \textcolor{keyword}{inline} C* \mbox{\hyperlink{namespace_steinberg_a2d6b9817403c371fec28cc810cb14ea0}{FCast}} (\mbox{\hyperlink{class_steinberg_1_1_f_unknown}{FUnknown}}* unknown)}
+\DoxyCodeLine{170 \{}
+\DoxyCodeLine{171     \mbox{\hyperlink{class_steinberg_1_1_f_object}{FObject}}* \textcolor{keywordtype}{object} = \mbox{\hyperlink{class_steinberg_1_1_f_object_a88ec2e08e85a5fbadc637e56e0bc3b76}{FObject::unknownToObject}} (unknown);}
+\DoxyCodeLine{172     \textcolor{keywordflow}{return} FCast<C> (\textcolor{keywordtype}{object});}
+\DoxyCodeLine{173 \}}
+\DoxyCodeLine{174 }
+\DoxyCodeLine{175 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{177 \textcolor{comment}{}\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{178 \textcolor{keyword}{template} <\textcolor{keyword}{class} C>}
+\DoxyCodeLine{179 \textcolor{keyword}{inline} C* \mbox{\hyperlink{namespace_steinberg_a7d8c07f07253c3b600139fd1deba49b9}{FUCast}} (\mbox{\hyperlink{class_steinberg_1_1_f_object}{FObject}}* \textcolor{keywordtype}{object})}
+\DoxyCodeLine{180 \{}
+\DoxyCodeLine{181     \textcolor{keywordflow}{return} \mbox{\hyperlink{class_steinberg_1_1_f_unknown_ptr}{FUnknownPtr<C>}} (\textcolor{keywordtype}{object} ? \mbox{\hyperlink{jmemsys_8h_a77e1d3f325098324c3925e8faf6ae5cf}{object}}-\/>unknownCast () : \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{182 \}}
+\DoxyCodeLine{183 }
+\DoxyCodeLine{184 \textcolor{keyword}{template} <\textcolor{keyword}{class} C>}
+\DoxyCodeLine{185 \textcolor{keyword}{inline} C* \mbox{\hyperlink{namespace_steinberg_a7d8c07f07253c3b600139fd1deba49b9}{FUCast}} (\mbox{\hyperlink{class_steinberg_1_1_f_unknown}{FUnknown}}* \textcolor{keywordtype}{object})}
+\DoxyCodeLine{186 \{}
+\DoxyCodeLine{187     \textcolor{keywordflow}{return} \mbox{\hyperlink{class_steinberg_1_1_f_unknown_ptr}{FUnknownPtr<C>}} (\textcolor{keywordtype}{object});}
+\DoxyCodeLine{188 \}}
+\DoxyCodeLine{189 }
+\DoxyCodeLine{190 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{210 \textcolor{comment}{}}
+\DoxyCodeLine{211 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{212 \textcolor{keyword}{template} <\textcolor{keyword}{class} I>}
+\DoxyCodeLine{213 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespace_steinberg_a694fec3dd0db8909ea3289ba1de4f494}{SafeRelease}} (I *\& \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}}) }
+\DoxyCodeLine{214 \{ }
+\DoxyCodeLine{215     \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}}) }
+\DoxyCodeLine{216     \{}
+\DoxyCodeLine{217         \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}}-\/>release (); }
+\DoxyCodeLine{218         \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}} = 0;}
+\DoxyCodeLine{219     \}}
+\DoxyCodeLine{220 \}}
+\DoxyCodeLine{221 }
+\DoxyCodeLine{222 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{223 \textcolor{keyword}{template} <\textcolor{keyword}{class} I>}
+\DoxyCodeLine{224 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespace_steinberg_a694fec3dd0db8909ea3289ba1de4f494}{SafeRelease}} (\mbox{\hyperlink{class_steinberg_1_1_i_ptr}{IPtr<I>}} \& \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}}) }
+\DoxyCodeLine{225 \{ }
+\DoxyCodeLine{226     \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}} = 0;}
+\DoxyCodeLine{227 \}}
+\DoxyCodeLine{228 }
+\DoxyCodeLine{229 }
+\DoxyCodeLine{230 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{231 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{232 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespace_steinberg_a1a7b3d6a54e6b821d843acdbb90ec7a1}{SafeDelete}} (T *\& \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}})}
+\DoxyCodeLine{233 \{}
+\DoxyCodeLine{234     \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}}) }
+\DoxyCodeLine{235     \{}
+\DoxyCodeLine{236         \textcolor{keyword}{delete} \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}};}
+\DoxyCodeLine{237         \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}} = 0;}
+\DoxyCodeLine{238     \}}
+\DoxyCodeLine{239 \}}
+\DoxyCodeLine{241 }
+\DoxyCodeLine{242 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{243 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{244 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespace_steinberg_a061c8d1b219f1b80adf65d2c1d36e899}{AssignShared}} (T*\& dest, T* newPtr)}
+\DoxyCodeLine{245 \{}
+\DoxyCodeLine{246     \textcolor{keywordflow}{if} (dest == newPtr)}
+\DoxyCodeLine{247         \textcolor{keywordflow}{return};}
+\DoxyCodeLine{248     }
+\DoxyCodeLine{249     \textcolor{keywordflow}{if} (dest) }
+\DoxyCodeLine{250         dest-\/>release (); }
+\DoxyCodeLine{251     dest = newPtr; }
+\DoxyCodeLine{252     \textcolor{keywordflow}{if} (dest) }
+\DoxyCodeLine{253         dest-\/>addRef ();}
+\DoxyCodeLine{254 \}}
+\DoxyCodeLine{255 }
+\DoxyCodeLine{256 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{257 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{258 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespace_steinberg_a52db63df2d44c7a493bf7b5ce39df1a6}{AssignSharedDependent}} (\mbox{\hyperlink{class_steinberg_1_1_i_dependent}{IDependent}}* \_this, T*\& dest, T* newPtr)}
+\DoxyCodeLine{259 \{}
+\DoxyCodeLine{260     \textcolor{keywordflow}{if} (dest == newPtr)}
+\DoxyCodeLine{261         \textcolor{keywordflow}{return};}
+\DoxyCodeLine{262 }
+\DoxyCodeLine{263     \textcolor{keywordflow}{if} (dest)}
+\DoxyCodeLine{264         dest-\/>removeDependent (\_this);}
+\DoxyCodeLine{265     \mbox{\hyperlink{namespace_steinberg_a061c8d1b219f1b80adf65d2c1d36e899}{AssignShared}} (dest, newPtr);}
+\DoxyCodeLine{266     \textcolor{keywordflow}{if} (dest)}
+\DoxyCodeLine{267         dest-\/>addDependent (\_this);}
+\DoxyCodeLine{268 \}}
+\DoxyCodeLine{269 }
+\DoxyCodeLine{270 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{271 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{272 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespace_steinberg_a52db63df2d44c7a493bf7b5ce39df1a6}{AssignSharedDependent}} (\mbox{\hyperlink{class_steinberg_1_1_i_dependent}{IDependent}}* \_this, \mbox{\hyperlink{class_steinberg_1_1_i_ptr}{IPtr<T>}}\& dest, T* newPtr)}
+\DoxyCodeLine{273 \{}
+\DoxyCodeLine{274     \textcolor{keywordflow}{if} (dest == newPtr)}
+\DoxyCodeLine{275         \textcolor{keywordflow}{return};}
+\DoxyCodeLine{276 }
+\DoxyCodeLine{277     \textcolor{keywordflow}{if} (dest)}
+\DoxyCodeLine{278         dest-\/>removeDependent (\_this);}
+\DoxyCodeLine{279     dest = newPtr;}
+\DoxyCodeLine{280     \textcolor{keywordflow}{if} (dest)}
+\DoxyCodeLine{281         dest-\/>addDependent (\_this);}
+\DoxyCodeLine{282 \}}
+\DoxyCodeLine{283     }
+\DoxyCodeLine{284 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{285 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{286 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespace_steinberg_a0869140d4f11c3f1dae20794daa85b5f}{SafeReleaseDependent}} (\mbox{\hyperlink{class_steinberg_1_1_i_dependent}{IDependent}}* \_this, T*\& dest)}
+\DoxyCodeLine{287 \{}
+\DoxyCodeLine{288     \textcolor{keywordflow}{if} (dest)}
+\DoxyCodeLine{289         dest-\/>removeDependent (\_this);}
+\DoxyCodeLine{290     \mbox{\hyperlink{namespace_steinberg_a694fec3dd0db8909ea3289ba1de4f494}{SafeRelease}} (dest);}
+\DoxyCodeLine{291 \}}
+\DoxyCodeLine{292     }
+\DoxyCodeLine{293 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{294 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{295 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespace_steinberg_a0869140d4f11c3f1dae20794daa85b5f}{SafeReleaseDependent}} (\mbox{\hyperlink{class_steinberg_1_1_i_dependent}{IDependent}}* \_this, \mbox{\hyperlink{class_steinberg_1_1_i_ptr}{IPtr<T>}}\& dest)}
+\DoxyCodeLine{296 \{}
+\DoxyCodeLine{297     \textcolor{keywordflow}{if} (dest)}
+\DoxyCodeLine{298         dest-\/>removeDependent (\_this);}
+\DoxyCodeLine{299     \mbox{\hyperlink{namespace_steinberg_a694fec3dd0db8909ea3289ba1de4f494}{SafeRelease}} (dest);}
+\DoxyCodeLine{300 \}}
+\DoxyCodeLine{301 }
+\DoxyCodeLine{302 }
+\DoxyCodeLine{303 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{305 \textcolor{comment}{}\textcolor{keyword}{namespace }Singleton \{}
+\DoxyCodeLine{307     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespace_steinberg_1_1_singleton_abc29cda94e7f75e6c7f67d829410b496}{registerInstance}} (FObject** o);}
+\DoxyCodeLine{308 }
+\DoxyCodeLine{310     \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespace_steinberg_1_1_singleton_a54b1332538329753616f6647ebb7fb30}{isTerminated}} ();}
+\DoxyCodeLine{311 }
+\DoxyCodeLine{313     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespace_steinberg_1_1_singleton_ab30df28e4cad4a1de6fdd6fb1275804a}{lockRegister}} ();}
+\DoxyCodeLine{314     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespace_steinberg_1_1_singleton_a20892706d0041c77414bd9eadebc2f54}{unlockRegister}} ();}
+\DoxyCodeLine{315 \}}
+\DoxyCodeLine{316 }
+\DoxyCodeLine{317 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{318 \} \textcolor{comment}{// namespace Steinberg}}
+\DoxyCodeLine{319 }
+\DoxyCodeLine{320 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{321 \textcolor{preprocessor}{\#define SINGLETON(ClassName)    \(\backslash\)}}
+\DoxyCodeLine{322 \textcolor{preprocessor}{    static ClassName* instance (bool create = true) \(\backslash\)}}
+\DoxyCodeLine{323 \textcolor{preprocessor}{    \{ \(\backslash\)}}
+\DoxyCodeLine{324 \textcolor{preprocessor}{        static Steinberg::FObject* inst = nullptr; \(\backslash\)}}
+\DoxyCodeLine{325 \textcolor{preprocessor}{        if (inst == nullptr \&\& create \&\& Steinberg::Singleton::isTerminated () == false) \(\backslash\)}}
+\DoxyCodeLine{326 \textcolor{preprocessor}{        \{   \(\backslash\)}}
+\DoxyCodeLine{327 \textcolor{preprocessor}{            Steinberg::Singleton::lockRegister (); \(\backslash\)}}
+\DoxyCodeLine{328 \textcolor{preprocessor}{            if (inst == nullptr) \(\backslash\)}}
+\DoxyCodeLine{329 \textcolor{preprocessor}{            \{ \(\backslash\)}}
+\DoxyCodeLine{330 \textcolor{preprocessor}{                inst = NEW ClassName; \(\backslash\)}}
+\DoxyCodeLine{331 \textcolor{preprocessor}{                Steinberg::Singleton::registerInstance (\&inst); \(\backslash\)}}
+\DoxyCodeLine{332 \textcolor{preprocessor}{            \} \(\backslash\)}}
+\DoxyCodeLine{333 \textcolor{preprocessor}{            Steinberg::Singleton::unlockRegister (); \(\backslash\)}}
+\DoxyCodeLine{334 \textcolor{preprocessor}{        \}   \(\backslash\)}}
+\DoxyCodeLine{335 \textcolor{preprocessor}{        return (ClassName*)inst; \(\backslash\)}}
+\DoxyCodeLine{336 \textcolor{preprocessor}{    \}}}
+\DoxyCodeLine{337 }
+\DoxyCodeLine{338 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{339 \textcolor{preprocessor}{\#define OBJ\_METHODS(className, baseClass)                               \(\backslash\)}}
+\DoxyCodeLine{340 \textcolor{preprocessor}{    static inline Steinberg::FClassID getFClassID () \{return (\#className);\}     \(\backslash\)}}
+\DoxyCodeLine{341 \textcolor{preprocessor}{    virtual Steinberg::FClassID isA () const SMTG\_OVERRIDE \{return className::getFClassID ();\}  \(\backslash\)}}
+\DoxyCodeLine{342 \textcolor{preprocessor}{    virtual bool isA (Steinberg::FClassID s) const SMTG\_OVERRIDE \{return isTypeOf (s, false);\}  \(\backslash\)}}
+\DoxyCodeLine{343 \textcolor{preprocessor}{    virtual bool isTypeOf (Steinberg::FClassID s, bool askBaseClass = true) const SMTG\_OVERRIDE \(\backslash\)}}
+\DoxyCodeLine{344 \textcolor{preprocessor}{    \{  return (classIDsEqual (s, \#className) ? true : (askBaseClass ? baseClass::isTypeOf (s, true) : false)); \} }}
+\DoxyCodeLine{345 }
+\DoxyCodeLine{346 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{350 \textcolor{comment}{}\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{351 \textcolor{preprocessor}{\#define REFCOUNT\_METHODS(BaseClass) \(\backslash\)}}
+\DoxyCodeLine{352 \textcolor{preprocessor}{virtual Steinberg::uint32 PLUGIN\_API addRef ()SMTG\_OVERRIDE\{ return BaseClass::addRef (); \} \(\backslash\)}}
+\DoxyCodeLine{353 \textcolor{preprocessor}{virtual Steinberg::uint32 PLUGIN\_API release ()SMTG\_OVERRIDE\{ return BaseClass::release (); \}}}
+\DoxyCodeLine{354 }
+\DoxyCodeLine{355 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{374 \textcolor{comment}{}}
+\DoxyCodeLine{375 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{377 \textcolor{comment}{}\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{378 \textcolor{preprocessor}{\#define DEFINE\_INTERFACES \(\backslash\)}}
+\DoxyCodeLine{379 \textcolor{preprocessor}{Steinberg::tresult PLUGIN\_API queryInterface (const Steinberg::TUID iid, void** obj) SMTG\_OVERRIDE \(\backslash\)}}
+\DoxyCodeLine{380 \textcolor{preprocessor}{\{}}
+\DoxyCodeLine{381 }
+\DoxyCodeLine{382 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{384 \textcolor{comment}{}\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{385 \textcolor{preprocessor}{\#define DEF\_INTERFACE(InterfaceName) \(\backslash\)}}
+\DoxyCodeLine{386 \textcolor{preprocessor}{    QUERY\_INTERFACE (iid, obj, InterfaceName::iid, InterfaceName)}}
+\DoxyCodeLine{387 }
+\DoxyCodeLine{388 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{390 \textcolor{comment}{}\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{391 \textcolor{preprocessor}{\#define END\_DEFINE\_INTERFACES(BaseClass) \(\backslash\)}}
+\DoxyCodeLine{392 \textcolor{preprocessor}{    return BaseClass::queryInterface (iid, obj); \(\backslash\)}}
+\DoxyCodeLine{393 \textcolor{preprocessor}{\}}}
+\DoxyCodeLine{395 }
+\DoxyCodeLine{396 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{409 \textcolor{comment}{}}
+\DoxyCodeLine{410 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{411 \textcolor{preprocessor}{\#define DEF\_INTERFACES\_1(InterfaceName,BaseClass) \(\backslash\)}}
+\DoxyCodeLine{412 \textcolor{preprocessor}{DEFINE\_INTERFACES \(\backslash\)}}
+\DoxyCodeLine{413 \textcolor{preprocessor}{DEF\_INTERFACE (InterfaceName) \(\backslash\)}}
+\DoxyCodeLine{414 \textcolor{preprocessor}{END\_DEFINE\_INTERFACES (BaseClass)}}
+\DoxyCodeLine{415 }
+\DoxyCodeLine{416 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{417 \textcolor{preprocessor}{\#define DEF\_INTERFACES\_2(InterfaceName1,InterfaceName2,BaseClass) \(\backslash\)}}
+\DoxyCodeLine{418 \textcolor{preprocessor}{DEFINE\_INTERFACES \(\backslash\)}}
+\DoxyCodeLine{419 \textcolor{preprocessor}{DEF\_INTERFACE (InterfaceName1) \(\backslash\)}}
+\DoxyCodeLine{420 \textcolor{preprocessor}{DEF\_INTERFACE (InterfaceName2) \(\backslash\)}}
+\DoxyCodeLine{421 \textcolor{preprocessor}{END\_DEFINE\_INTERFACES (BaseClass)}}
+\DoxyCodeLine{422 }
+\DoxyCodeLine{423 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{424 \textcolor{preprocessor}{\#define DEF\_INTERFACES\_3(InterfaceName1,InterfaceName2,InterfaceName3,BaseClass) \(\backslash\)}}
+\DoxyCodeLine{425 \textcolor{preprocessor}{DEFINE\_INTERFACES \(\backslash\)}}
+\DoxyCodeLine{426 \textcolor{preprocessor}{DEF\_INTERFACE (InterfaceName1) \(\backslash\)}}
+\DoxyCodeLine{427 \textcolor{preprocessor}{DEF\_INTERFACE (InterfaceName2) \(\backslash\)}}
+\DoxyCodeLine{428 \textcolor{preprocessor}{DEF\_INTERFACE (InterfaceName3) \(\backslash\)}}
+\DoxyCodeLine{429 \textcolor{preprocessor}{END\_DEFINE\_INTERFACES (BaseClass)}}
+\DoxyCodeLine{430 }
+\DoxyCodeLine{431 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{432 \textcolor{preprocessor}{\#define DEF\_INTERFACES\_4(InterfaceName1,InterfaceName2,InterfaceName3,InterfaceName4,BaseClass) \(\backslash\)}}
+\DoxyCodeLine{433 \textcolor{preprocessor}{    DEFINE\_INTERFACES \(\backslash\)}}
+\DoxyCodeLine{434 \textcolor{preprocessor}{    DEF\_INTERFACE (InterfaceName1) \(\backslash\)}}
+\DoxyCodeLine{435 \textcolor{preprocessor}{    DEF\_INTERFACE (InterfaceName2) \(\backslash\)}}
+\DoxyCodeLine{436 \textcolor{preprocessor}{    DEF\_INTERFACE (InterfaceName3) \(\backslash\)}}
+\DoxyCodeLine{437 \textcolor{preprocessor}{    DEF\_INTERFACE (InterfaceName4) \(\backslash\)}}
+\DoxyCodeLine{438 \textcolor{preprocessor}{    END\_DEFINE\_INTERFACES (BaseClass)}}
+\DoxyCodeLine{440 }
+\DoxyCodeLine{441 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{453 \textcolor{comment}{}}
+\DoxyCodeLine{454 \textcolor{preprocessor}{\#define FUNKNOWN\_METHODS(InterfaceName,BaseClass) \(\backslash\)}}
+\DoxyCodeLine{455 \textcolor{preprocessor}{DEF\_INTERFACES\_1(InterfaceName,BaseClass) \(\backslash\)}}
+\DoxyCodeLine{456 \textcolor{preprocessor}{REFCOUNT\_METHODS(BaseClass)}}
+\DoxyCodeLine{457 }
+\DoxyCodeLine{458 \textcolor{preprocessor}{\#define FUNKNOWN\_METHODS2(InterfaceName1,InterfaceName2,BaseClass) \(\backslash\)}}
+\DoxyCodeLine{459 \textcolor{preprocessor}{DEF\_INTERFACES\_2(InterfaceName1,InterfaceName2,BaseClass) \(\backslash\)}}
+\DoxyCodeLine{460 \textcolor{preprocessor}{REFCOUNT\_METHODS(BaseClass)}}
+\DoxyCodeLine{461 }
+\DoxyCodeLine{462 \textcolor{preprocessor}{\#define FUNKNOWN\_METHODS3(InterfaceName1,InterfaceName2,InterfaceName3,BaseClass) \(\backslash\)}}
+\DoxyCodeLine{463 \textcolor{preprocessor}{DEF\_INTERFACES\_3(InterfaceName1,InterfaceName2,InterfaceName3,BaseClass) \(\backslash\)}}
+\DoxyCodeLine{464 \textcolor{preprocessor}{REFCOUNT\_METHODS(BaseClass)}}
+\DoxyCodeLine{465 }
+\DoxyCodeLine{466 \textcolor{preprocessor}{\#define FUNKNOWN\_METHODS4(InterfaceName1,InterfaceName2,InterfaceName3,InterfaceName4,BaseClass) \(\backslash\)}}
+\DoxyCodeLine{467 \textcolor{preprocessor}{DEF\_INTERFACES\_4(InterfaceName1,InterfaceName2,InterfaceName3,InterfaceName4,BaseClass) \(\backslash\)}}
+\DoxyCodeLine{468 \textcolor{preprocessor}{REFCOUNT\_METHODS(BaseClass)}}
+\DoxyCodeLine{470 }
+\DoxyCodeLine{471 }
+\DoxyCodeLine{472 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{473 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{474 \textcolor{preprocessor}{\#if COM\_COMPATIBLE}}
+\DoxyCodeLine{475 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{487 \textcolor{comment}{}}
+\DoxyCodeLine{488 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{489 \textcolor{preprocessor}{\#define IUNKNOWN\_REFCOUNT\_METHODS(BaseClass) \(\backslash\)}}
+\DoxyCodeLine{490 \textcolor{preprocessor}{STDMETHOD\_ (ULONG, AddRef) (void) \{return BaseClass::addRef ();\} \(\backslash\)}}
+\DoxyCodeLine{491 \textcolor{preprocessor}{STDMETHOD\_ (ULONG, Release) (void) \{return BaseClass::release ();\}}}
+\DoxyCodeLine{492 }
+\DoxyCodeLine{493 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{494 \textcolor{preprocessor}{\#define COM\_QUERY\_INTERFACE(iid, obj, InterfaceName)     \(\backslash\)}}
+\DoxyCodeLine{495 \textcolor{preprocessor}{if (riid == \_\_uuidof(InterfaceName))                     \(\backslash\)}}
+\DoxyCodeLine{496 \textcolor{preprocessor}{\{                                                        \(\backslash\)}}
+\DoxyCodeLine{497 \textcolor{preprocessor}{    addRef ();                                           \(\backslash\)}}
+\DoxyCodeLine{498 \textcolor{preprocessor}{    *obj = (InterfaceName*)this;                         \(\backslash\)}}
+\DoxyCodeLine{499 \textcolor{preprocessor}{    return kResultOk;                                    \(\backslash\)}}
+\DoxyCodeLine{500 \textcolor{preprocessor}{\}}}
+\DoxyCodeLine{501 }
+\DoxyCodeLine{502 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{503 \textcolor{preprocessor}{\#define COM\_OBJECT\_QUERY\_INTERFACE(InterfaceName,BaseClass)        \(\backslash\)}}
+\DoxyCodeLine{504 \textcolor{preprocessor}{STDMETHOD (QueryInterface) (REFIID riid, void** object)            \(\backslash\)}}
+\DoxyCodeLine{505 \textcolor{preprocessor}{\{                                                                  \(\backslash\)}}
+\DoxyCodeLine{506 \textcolor{preprocessor}{    COM\_QUERY\_INTERFACE (riid, object, InterfaceName)              \(\backslash\)}}
+\DoxyCodeLine{507 \textcolor{preprocessor}{    return BaseClass::queryInterface ((FIDString)\&riid, object);   \(\backslash\)}}
+\DoxyCodeLine{508 \textcolor{preprocessor}{\}}}
+\DoxyCodeLine{509 }
+\DoxyCodeLine{510 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{511 \textcolor{preprocessor}{\#define COM\_UNKNOWN\_METHODS(InterfaceName,BaseClass) \(\backslash\)}}
+\DoxyCodeLine{512 \textcolor{preprocessor}{COM\_OBJECT\_QUERY\_INTERFACE(InterfaceName,BaseClass) \(\backslash\)}}
+\DoxyCodeLine{513 \textcolor{preprocessor}{IUNKNOWN\_REFCOUNT\_METHODS(BaseClass)}}
+\DoxyCodeLine{515 }
+\DoxyCodeLine{516 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// COM\_COMPATIBLE}}
+
+\end{DoxyCode}

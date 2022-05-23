@@ -1,0 +1,77 @@
+\hypertarget{juce___focus_outline_8h_source}{}\doxysection{juce\+\_\+\+Focus\+Outline.\+h}
+\label{juce___focus_outline_8h_source}\index{build/juce\_gui\_basics/misc/juce\_FocusOutline.h@{build/juce\_gui\_basics/misc/juce\_FocusOutline.h}}
+\mbox{\hyperlink{juce___focus_outline_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{45 \textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_focus_outline}{FocusOutline}}  : \textcolor{keyword}{private} \mbox{\hyperlink{class_component_listener}{ComponentListener}}}
+\DoxyCodeLine{46 \{}
+\DoxyCodeLine{47 \textcolor{keyword}{public}:}
+\DoxyCodeLine{48     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{54 \textcolor{comment}{}    \textcolor{keyword}{struct }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{struct_focus_outline_1_1_outline_window_properties}{OutlineWindowProperties}}}
+\DoxyCodeLine{55     \{}
+\DoxyCodeLine{56         \textcolor{keyword}{virtual} \mbox{\hyperlink{struct_focus_outline_1_1_outline_window_properties_ade0aca99d337d72cac08b01abefcb13d}{\string~OutlineWindowProperties}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{59         \textcolor{keyword}{virtual} \mbox{\hyperlink{class_rectangle}{Rectangle<int>}} \mbox{\hyperlink{struct_focus_outline_1_1_outline_window_properties_a78bac82b12b93f52ef6b62628b8faf90}{getOutlineBounds}} (\mbox{\hyperlink{class_component}{Component}}\& focusedComponent) = 0;}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{62         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_focus_outline_1_1_outline_window_properties_a2dead6a9d281858974711915e991a237}{drawOutline}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \textcolor{keywordtype}{int} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}}) = 0;}
+\DoxyCodeLine{63     \};}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{70 \textcolor{comment}{}    \mbox{\hyperlink{class_focus_outline}{FocusOutline}} (std::unique\_ptr<OutlineWindowProperties> \mbox{\hyperlink{namespacegl_a792b261e4f040a3ba0d493ce2d387469}{props}});}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{73     \mbox{\hyperlink{class_focus_outline}{\string~FocusOutline}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{76     \textcolor{keywordtype}{void} setOwner (\mbox{\hyperlink{class_component}{Component}}* componentToFollow);}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78 \textcolor{keyword}{private}:}
+\DoxyCodeLine{79     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{80     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_component_listener_a95adb1bc55096aefa74f9033be32aa47}{componentMovedOrResized}} (\mbox{\hyperlink{class_component}{Component}}\&, \textcolor{keywordtype}{bool}, \textcolor{keywordtype}{bool}) \textcolor{keyword}{override};}
+\DoxyCodeLine{81     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_component_listener_abba45bdeee6f4d74d59f2e969b178e6d}{componentBroughtToFront}} (\mbox{\hyperlink{class_component}{Component}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{82     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_component_listener_a4fc4dfeec727924401e6d201b98a64fe}{componentParentHierarchyChanged}} (\mbox{\hyperlink{class_component}{Component}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{83     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_component_listener_a0ebaa9e89310c0352f996d922a79ddfa}{componentVisibilityChanged}} (\mbox{\hyperlink{class_component}{Component}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85     \textcolor{keywordtype}{void} updateOutlineWindow();}
+\DoxyCodeLine{86     \textcolor{keywordtype}{void} updateParent();}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{89     std::unique\_ptr<OutlineWindowProperties> properties;}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91     \mbox{\hyperlink{class_weak_reference}{WeakReference<Component>}} owner;}
+\DoxyCodeLine{92     std::unique\_ptr<Component> outlineWindow;}
+\DoxyCodeLine{93     \mbox{\hyperlink{class_weak_reference}{WeakReference<Component>}} lastParentComp;}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95     \textcolor{keywordtype}{bool} reentrant = \textcolor{keyword}{false};}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{98     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_focus_outline}{FocusOutline}})}
+\DoxyCodeLine{99 \};}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{102 }
+
+\end{DoxyCode}

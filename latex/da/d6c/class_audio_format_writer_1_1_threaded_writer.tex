@@ -1,0 +1,80 @@
+\hypertarget{class_audio_format_writer_1_1_threaded_writer}{}\doxysection{Audio\+Format\+Writer\+::Threaded\+Writer Class Reference}
+\label{class_audio_format_writer_1_1_threaded_writer}\index{AudioFormatWriter::ThreadedWriter@{AudioFormatWriter::ThreadedWriter}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Audio\+Format\+Writer.\+h$>$}
+
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_audio_format_writer_1_1_threaded_writer_1_1_incoming_data_receiver}{Incoming\+Data\+Receiver}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_audio_format_writer_1_1_threaded_writer_a8efb067cf742fdac8b2bc6e21a084531}{Threaded\+Writer}} (\mbox{\hyperlink{class_audio_format_writer}{Audio\+Format\+Writer}} $\ast$writer, \mbox{\hyperlink{class_time_slice_thread}{Time\+Slice\+Thread}} \&background\+Thread, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} num\+Samples\+To\+Buffer)
+\item 
+\mbox{\hyperlink{class_audio_format_writer_1_1_threaded_writer_acb40f07ce4ffd0bdff82533d61ca79f2}{$\sim$\+Threaded\+Writer}} ()
+\item 
+bool \mbox{\hyperlink{class_audio_format_writer_1_1_threaded_writer_a75e83af285e9c0ce5d74522220821051}{write}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} float $\ast$\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} $\ast$\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} num\+Samples)
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_audio_format_writer_1_1_threaded_writer_af9af3b0ff01f3e62427c0526087f5ab3}{set\+Data\+Receiver}} (\mbox{\hyperlink{class_audio_format_writer_1_1_threaded_writer_1_1_incoming_data_receiver}{Incoming\+Data\+Receiver}} $\ast$)
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_audio_format_writer_1_1_threaded_writer_aed11ea43682211de3bc3c2f86799686f}{set\+Flush\+Interval}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} num\+Samples\+Per\+Flush) noexcept
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Provides a FIFO for an \mbox{\hyperlink{class_audio_format_writer}{Audio\+Format\+Writer}}, allowing you to push incoming data into a buffer which will be flushed to disk by a background thread. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_audio_format_writer_1_1_threaded_writer_a8efb067cf742fdac8b2bc6e21a084531}\label{class_audio_format_writer_1_1_threaded_writer_a8efb067cf742fdac8b2bc6e21a084531}} 
+\index{AudioFormatWriter::ThreadedWriter@{AudioFormatWriter::ThreadedWriter}!ThreadedWriter@{ThreadedWriter}}
+\index{ThreadedWriter@{ThreadedWriter}!AudioFormatWriter::ThreadedWriter@{AudioFormatWriter::ThreadedWriter}}
+\doxysubsubsection{\texorpdfstring{ThreadedWriter()}{ThreadedWriter()}}
+{\footnotesize\ttfamily Audio\+Format\+Writer\+::\+Threaded\+Writer\+::\+Threaded\+Writer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_audio_format_writer}{Audio\+Format\+Writer}} $\ast$}]{writer,  }\item[{\mbox{\hyperlink{class_time_slice_thread}{Time\+Slice\+Thread}} \&}]{background\+Thread,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{num\+Samples\+To\+Buffer }\end{DoxyParamCaption})}
+
+Creates a \mbox{\hyperlink{class_audio_format_writer_1_1_threaded_writer}{Threaded\+Writer}} for a given writer and a thread.
+
+The writer object which is passed in here will be owned and deleted by the \mbox{\hyperlink{class_audio_format_writer_1_1_threaded_writer}{Threaded\+Writer}} when it is no longer needed.
+
+To stop the writer and flush the buffer to disk, simply delete this object. \mbox{\Hypertarget{class_audio_format_writer_1_1_threaded_writer_acb40f07ce4ffd0bdff82533d61ca79f2}\label{class_audio_format_writer_1_1_threaded_writer_acb40f07ce4ffd0bdff82533d61ca79f2}} 
+\index{AudioFormatWriter::ThreadedWriter@{AudioFormatWriter::ThreadedWriter}!````~ThreadedWriter@{$\sim$ThreadedWriter}}
+\index{````~ThreadedWriter@{$\sim$ThreadedWriter}!AudioFormatWriter::ThreadedWriter@{AudioFormatWriter::ThreadedWriter}}
+\doxysubsubsection{\texorpdfstring{$\sim$ThreadedWriter()}{~ThreadedWriter()}}
+{\footnotesize\ttfamily Audio\+Format\+Writer\+::\+Threaded\+Writer\+::$\sim$\+Threaded\+Writer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Destructor. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_audio_format_writer_1_1_threaded_writer_af9af3b0ff01f3e62427c0526087f5ab3}\label{class_audio_format_writer_1_1_threaded_writer_af9af3b0ff01f3e62427c0526087f5ab3}} 
+\index{AudioFormatWriter::ThreadedWriter@{AudioFormatWriter::ThreadedWriter}!setDataReceiver@{setDataReceiver}}
+\index{setDataReceiver@{setDataReceiver}!AudioFormatWriter::ThreadedWriter@{AudioFormatWriter::ThreadedWriter}}
+\doxysubsubsection{\texorpdfstring{setDataReceiver()}{setDataReceiver()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Audio\+Format\+Writer\+::\+Threaded\+Writer\+::set\+Data\+Receiver (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_audio_format_writer_1_1_threaded_writer_1_1_incoming_data_receiver}{Incoming\+Data\+Receiver}} $\ast$}]{ }\end{DoxyParamCaption})}
+
+Allows you to specify a callback that this writer should update with the incoming data. The receiver will be cleared and the writer will begin adding data to it as the data arrives. Pass a null pointer to remove the current receiver.
+
+The object passed-\/in must not be deleted while this writer is still using it. \mbox{\Hypertarget{class_audio_format_writer_1_1_threaded_writer_aed11ea43682211de3bc3c2f86799686f}\label{class_audio_format_writer_1_1_threaded_writer_aed11ea43682211de3bc3c2f86799686f}} 
+\index{AudioFormatWriter::ThreadedWriter@{AudioFormatWriter::ThreadedWriter}!setFlushInterval@{setFlushInterval}}
+\index{setFlushInterval@{setFlushInterval}!AudioFormatWriter::ThreadedWriter@{AudioFormatWriter::ThreadedWriter}}
+\doxysubsubsection{\texorpdfstring{setFlushInterval()}{setFlushInterval()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Audio\+Format\+Writer\+::\+Threaded\+Writer\+::set\+Flush\+Interval (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{num\+Samples\+Per\+Flush }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Sets how many samples should be written before calling the \mbox{\hyperlink{class_audio_format_writer_ac83a728db8d8abf6cf39a3bd34390a6a}{Audio\+Format\+Writer\+::flush}} method. Set this to 0 to disable flushing (this is the default). \mbox{\Hypertarget{class_audio_format_writer_1_1_threaded_writer_a75e83af285e9c0ce5d74522220821051}\label{class_audio_format_writer_1_1_threaded_writer_a75e83af285e9c0ce5d74522220821051}} 
+\index{AudioFormatWriter::ThreadedWriter@{AudioFormatWriter::ThreadedWriter}!write@{write}}
+\index{write@{write}!AudioFormatWriter::ThreadedWriter@{AudioFormatWriter::ThreadedWriter}}
+\doxysubsubsection{\texorpdfstring{write()}{write()}}
+{\footnotesize\ttfamily bool Audio\+Format\+Writer\+::\+Threaded\+Writer\+::write (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} float $\ast$\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} $\ast$}]{data,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{num\+Samples }\end{DoxyParamCaption})}
+
+Pushes some incoming audio data into the FIFO.
+
+If there\textquotesingle{}s enough free space in the buffer, this will add the data to it,
+
+If the FIFO is too full to accept this many samples, the method will return false -\/ then you could either wait until the background thread has had time to consume some of the buffered data and try again, or you can give up and lost this block.
+
+The data must be an array containing the same number of channels as the \mbox{\hyperlink{class_audio_format_writer}{Audio\+Format\+Writer}} object is using. None of these channels can be null. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+audio\+\_\+formats/format/\mbox{\hyperlink{juce___audio_format_writer_8h}{juce\+\_\+\+Audio\+Format\+Writer.\+h}}\end{DoxyCompactItemize}

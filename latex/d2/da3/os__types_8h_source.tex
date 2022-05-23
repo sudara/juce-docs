@@ -1,0 +1,164 @@
+\hypertarget{os__types_8h_source}{}\doxysection{os\+\_\+types.\+h}
+\label{os__types_8h_source}\index{build/juce\_audio\_formats/codecs/oggvorbis/os\_types.h@{build/juce\_audio\_formats/codecs/oggvorbis/os\_types.h}}
+\mbox{\hyperlink{os__types_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/********************************************************************}}
+\DoxyCodeLine{2 \textcolor{comment}{ *                                                                  *}}
+\DoxyCodeLine{3 \textcolor{comment}{ * THIS FILE IS PART OF THE OggVorbis SOFTWARE CODEC SOURCE CODE.   *}}
+\DoxyCodeLine{4 \textcolor{comment}{ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *}}
+\DoxyCodeLine{5 \textcolor{comment}{ * GOVERNED BY A BSD-\/STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *}}
+\DoxyCodeLine{6 \textcolor{comment}{ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *}}
+\DoxyCodeLine{7 \textcolor{comment}{ *                                                                  *}}
+\DoxyCodeLine{8 \textcolor{comment}{ * THE OggVorbis SOURCE CODE IS (C) COPYRIGHT 1994-\/2002             *}}
+\DoxyCodeLine{9 \textcolor{comment}{ * by the Xiph.Org Foundation http://www.xiph.org/                  *}}
+\DoxyCodeLine{10 \textcolor{comment}{ *                                                                  *}}
+\DoxyCodeLine{11 \textcolor{comment}{ ********************************************************************}}
+\DoxyCodeLine{12 \textcolor{comment}{}}
+\DoxyCodeLine{13 \textcolor{comment}{ function: Define a consistent set of types on each platform.}}
+\DoxyCodeLine{14 \textcolor{comment}{}}
+\DoxyCodeLine{15 \textcolor{comment}{ ********************************************************************/}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#ifndef \_OS\_TYPES\_H}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#define \_OS\_TYPES\_H}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{comment}{/* make it easy on the folks that want to compile the libs with a}}
+\DoxyCodeLine{20 \textcolor{comment}{   different malloc than stdlib */}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#define \_ogg\_malloc  malloc}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#define \_ogg\_calloc  calloc}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#define \_ogg\_realloc realloc}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#define \_ogg\_free    free}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#if defined(\_WIN32)}}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#  if defined(\_\_CYGWIN\_\_)}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#    include <stdint.h>}}
+\DoxyCodeLine{30      \textcolor{keyword}{typedef} int16\_t \mbox{\hyperlink{config__types_8h_a0c3ed569a9b7ecd176140e0af4b40ed7}{ogg\_int16\_t}};}
+\DoxyCodeLine{31      \textcolor{keyword}{typedef} uint16\_t \mbox{\hyperlink{config__types_8h_af68e4dba43630165f403d491cdbce66c}{ogg\_uint16\_t}};}
+\DoxyCodeLine{32      \textcolor{keyword}{typedef} int32\_t \mbox{\hyperlink{config__types_8h_a4c7bb598f5bbfe765c03b89f317d7596}{ogg\_int32\_t}};}
+\DoxyCodeLine{33      \textcolor{keyword}{typedef} uint32\_t \mbox{\hyperlink{config__types_8h_a67ee093e22ba3e6332410383f8fa99f0}{ogg\_uint32\_t}};}
+\DoxyCodeLine{34      \textcolor{keyword}{typedef} int64\_t \mbox{\hyperlink{config__types_8h_a292432ede703993aa88db876e11b2306}{ogg\_int64\_t}};}
+\DoxyCodeLine{35      \textcolor{keyword}{typedef} uint64\_t \mbox{\hyperlink{config__types_8h_a938840d6611518501cb15b61b41e4697}{ogg\_uint64\_t}};}
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#  elif defined(\_\_MINGW32\_\_)}}
+\DoxyCodeLine{37 \textcolor{preprocessor}{\#    include <sys/types.h>}}
+\DoxyCodeLine{38      \textcolor{keyword}{typedef} \textcolor{keywordtype}{short} \mbox{\hyperlink{config__types_8h_a0c3ed569a9b7ecd176140e0af4b40ed7}{ogg\_int16\_t}};}
+\DoxyCodeLine{39      \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} \mbox{\hyperlink{config__types_8h_af68e4dba43630165f403d491cdbce66c}{ogg\_uint16\_t}};}
+\DoxyCodeLine{40      \textcolor{keyword}{typedef} \textcolor{keywordtype}{int} \mbox{\hyperlink{config__types_8h_a4c7bb598f5bbfe765c03b89f317d7596}{ogg\_int32\_t}};}
+\DoxyCodeLine{41      \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \mbox{\hyperlink{config__types_8h_a67ee093e22ba3e6332410383f8fa99f0}{ogg\_uint32\_t}};}
+\DoxyCodeLine{42      \textcolor{keyword}{typedef} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} \mbox{\hyperlink{config__types_8h_a292432ede703993aa88db876e11b2306}{ogg\_int64\_t}};}
+\DoxyCodeLine{43      \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} \mbox{\hyperlink{config__types_8h_a938840d6611518501cb15b61b41e4697}{ogg\_uint64\_t}};}
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#  elif defined(\_\_MWERKS\_\_)}}
+\DoxyCodeLine{45      \textcolor{keyword}{typedef} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} \mbox{\hyperlink{config__types_8h_a292432ede703993aa88db876e11b2306}{ogg\_int64\_t}};}
+\DoxyCodeLine{46      \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} \mbox{\hyperlink{config__types_8h_a938840d6611518501cb15b61b41e4697}{ogg\_uint64\_t}};}
+\DoxyCodeLine{47      \textcolor{keyword}{typedef} \textcolor{keywordtype}{int} \mbox{\hyperlink{config__types_8h_a4c7bb598f5bbfe765c03b89f317d7596}{ogg\_int32\_t}};}
+\DoxyCodeLine{48      \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \mbox{\hyperlink{config__types_8h_a67ee093e22ba3e6332410383f8fa99f0}{ogg\_uint32\_t}};}
+\DoxyCodeLine{49      \textcolor{keyword}{typedef} \textcolor{keywordtype}{short} \mbox{\hyperlink{config__types_8h_a0c3ed569a9b7ecd176140e0af4b40ed7}{ogg\_int16\_t}};}
+\DoxyCodeLine{50      \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} \mbox{\hyperlink{config__types_8h_af68e4dba43630165f403d491cdbce66c}{ogg\_uint16\_t}};}
+\DoxyCodeLine{51 \textcolor{preprocessor}{\#  else}}
+\DoxyCodeLine{52 \textcolor{preprocessor}{\#    if defined(\_MSC\_VER) \&\& (\_MSC\_VER >= 1800) }\textcolor{comment}{/* MSVC 2013 and newer */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{53 \textcolor{preprocessor}{\#      include <stdint.h>}}
+\DoxyCodeLine{54        \textcolor{keyword}{typedef} int16\_t \mbox{\hyperlink{config__types_8h_a0c3ed569a9b7ecd176140e0af4b40ed7}{ogg\_int16\_t}};}
+\DoxyCodeLine{55        \textcolor{keyword}{typedef} uint16\_t \mbox{\hyperlink{config__types_8h_af68e4dba43630165f403d491cdbce66c}{ogg\_uint16\_t}};}
+\DoxyCodeLine{56        \textcolor{keyword}{typedef} int32\_t \mbox{\hyperlink{config__types_8h_a4c7bb598f5bbfe765c03b89f317d7596}{ogg\_int32\_t}};}
+\DoxyCodeLine{57        \textcolor{keyword}{typedef} uint32\_t \mbox{\hyperlink{config__types_8h_a67ee093e22ba3e6332410383f8fa99f0}{ogg\_uint32\_t}};}
+\DoxyCodeLine{58        \textcolor{keyword}{typedef} int64\_t \mbox{\hyperlink{config__types_8h_a292432ede703993aa88db876e11b2306}{ogg\_int64\_t}};}
+\DoxyCodeLine{59        \textcolor{keyword}{typedef} uint64\_t \mbox{\hyperlink{config__types_8h_a938840d6611518501cb15b61b41e4697}{ogg\_uint64\_t}};}
+\DoxyCodeLine{60 \textcolor{preprocessor}{\#    else}}
+\DoxyCodeLine{61        \textcolor{comment}{/* MSVC/Borland */}}
+\DoxyCodeLine{62        \textcolor{keyword}{typedef} \_\_int64 \mbox{\hyperlink{config__types_8h_a292432ede703993aa88db876e11b2306}{ogg\_int64\_t}};}
+\DoxyCodeLine{63        \textcolor{keyword}{typedef} \_\_int32 \mbox{\hyperlink{config__types_8h_a4c7bb598f5bbfe765c03b89f317d7596}{ogg\_int32\_t}};}
+\DoxyCodeLine{64        \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \_\_int32 \mbox{\hyperlink{config__types_8h_a67ee093e22ba3e6332410383f8fa99f0}{ogg\_uint32\_t}};}
+\DoxyCodeLine{65        \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \_\_int64 \mbox{\hyperlink{config__types_8h_a938840d6611518501cb15b61b41e4697}{ogg\_uint64\_t}};}
+\DoxyCodeLine{66        \textcolor{keyword}{typedef} \_\_int16 \mbox{\hyperlink{config__types_8h_a0c3ed569a9b7ecd176140e0af4b40ed7}{ogg\_int16\_t}};}
+\DoxyCodeLine{67        \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \_\_int16 \mbox{\hyperlink{config__types_8h_af68e4dba43630165f403d491cdbce66c}{ogg\_uint16\_t}};}
+\DoxyCodeLine{68 \textcolor{preprocessor}{\#    endif}}
+\DoxyCodeLine{69 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71 \textcolor{preprocessor}{\#elif (defined(\_\_APPLE\_\_) \&\& defined(\_\_MACH\_\_)) }\textcolor{comment}{/* MacOS X Framework build */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73 \textcolor{preprocessor}{\#  include <sys/types.h>}}
+\DoxyCodeLine{74    \textcolor{keyword}{typedef} int16\_t \mbox{\hyperlink{config__types_8h_a0c3ed569a9b7ecd176140e0af4b40ed7}{ogg\_int16\_t}};}
+\DoxyCodeLine{75    \textcolor{keyword}{typedef} uint16\_t \mbox{\hyperlink{config__types_8h_af68e4dba43630165f403d491cdbce66c}{ogg\_uint16\_t}};}
+\DoxyCodeLine{76    \textcolor{keyword}{typedef} int32\_t \mbox{\hyperlink{config__types_8h_a4c7bb598f5bbfe765c03b89f317d7596}{ogg\_int32\_t}};}
+\DoxyCodeLine{77    \textcolor{keyword}{typedef} uint32\_t \mbox{\hyperlink{config__types_8h_a67ee093e22ba3e6332410383f8fa99f0}{ogg\_uint32\_t}};}
+\DoxyCodeLine{78    \textcolor{keyword}{typedef} int64\_t \mbox{\hyperlink{config__types_8h_a292432ede703993aa88db876e11b2306}{ogg\_int64\_t}};}
+\DoxyCodeLine{79    \textcolor{keyword}{typedef} uint64\_t \mbox{\hyperlink{config__types_8h_a938840d6611518501cb15b61b41e4697}{ogg\_uint64\_t}};}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81 \textcolor{preprocessor}{\#elif defined(\_\_HAIKU\_\_)}}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83   \textcolor{comment}{/* Haiku */}}
+\DoxyCodeLine{84 \textcolor{preprocessor}{\#  include <sys/types.h>}}
+\DoxyCodeLine{85    \textcolor{keyword}{typedef} \textcolor{keywordtype}{short} \mbox{\hyperlink{config__types_8h_a0c3ed569a9b7ecd176140e0af4b40ed7}{ogg\_int16\_t}};}
+\DoxyCodeLine{86    \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} \mbox{\hyperlink{config__types_8h_af68e4dba43630165f403d491cdbce66c}{ogg\_uint16\_t}};}
+\DoxyCodeLine{87    \textcolor{keyword}{typedef} \textcolor{keywordtype}{int} \mbox{\hyperlink{config__types_8h_a4c7bb598f5bbfe765c03b89f317d7596}{ogg\_int32\_t}};}
+\DoxyCodeLine{88    \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \mbox{\hyperlink{config__types_8h_a67ee093e22ba3e6332410383f8fa99f0}{ogg\_uint32\_t}};}
+\DoxyCodeLine{89    \textcolor{keyword}{typedef} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} \mbox{\hyperlink{config__types_8h_a292432ede703993aa88db876e11b2306}{ogg\_int64\_t}};}
+\DoxyCodeLine{90    \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} \mbox{\hyperlink{config__types_8h_a938840d6611518501cb15b61b41e4697}{ogg\_uint64\_t}};}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92 \textcolor{preprocessor}{\#elif defined(\_\_BEOS\_\_)}}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{94    \textcolor{comment}{/* Be */}}
+\DoxyCodeLine{95 \textcolor{preprocessor}{\#  include <inttypes.h>}}
+\DoxyCodeLine{96    \textcolor{keyword}{typedef} int16\_t \mbox{\hyperlink{config__types_8h_a0c3ed569a9b7ecd176140e0af4b40ed7}{ogg\_int16\_t}};}
+\DoxyCodeLine{97    \textcolor{keyword}{typedef} uint16\_t \mbox{\hyperlink{config__types_8h_af68e4dba43630165f403d491cdbce66c}{ogg\_uint16\_t}};}
+\DoxyCodeLine{98    \textcolor{keyword}{typedef} int32\_t \mbox{\hyperlink{config__types_8h_a4c7bb598f5bbfe765c03b89f317d7596}{ogg\_int32\_t}};}
+\DoxyCodeLine{99    \textcolor{keyword}{typedef} uint32\_t \mbox{\hyperlink{config__types_8h_a67ee093e22ba3e6332410383f8fa99f0}{ogg\_uint32\_t}};}
+\DoxyCodeLine{100    \textcolor{keyword}{typedef} int64\_t \mbox{\hyperlink{config__types_8h_a292432ede703993aa88db876e11b2306}{ogg\_int64\_t}};}
+\DoxyCodeLine{101    \textcolor{keyword}{typedef} uint64\_t \mbox{\hyperlink{config__types_8h_a938840d6611518501cb15b61b41e4697}{ogg\_uint64\_t}};}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103 \textcolor{preprocessor}{\#elif defined (\_\_EMX\_\_)}}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105    \textcolor{comment}{/* OS/2 GCC */}}
+\DoxyCodeLine{106    \textcolor{keyword}{typedef} \textcolor{keywordtype}{short} \mbox{\hyperlink{config__types_8h_a0c3ed569a9b7ecd176140e0af4b40ed7}{ogg\_int16\_t}};}
+\DoxyCodeLine{107    \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} \mbox{\hyperlink{config__types_8h_af68e4dba43630165f403d491cdbce66c}{ogg\_uint16\_t}};}
+\DoxyCodeLine{108    \textcolor{keyword}{typedef} \textcolor{keywordtype}{int} \mbox{\hyperlink{config__types_8h_a4c7bb598f5bbfe765c03b89f317d7596}{ogg\_int32\_t}};}
+\DoxyCodeLine{109    \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \mbox{\hyperlink{config__types_8h_a67ee093e22ba3e6332410383f8fa99f0}{ogg\_uint32\_t}};}
+\DoxyCodeLine{110    \textcolor{keyword}{typedef} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} \mbox{\hyperlink{config__types_8h_a292432ede703993aa88db876e11b2306}{ogg\_int64\_t}};}
+\DoxyCodeLine{111    \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} \mbox{\hyperlink{config__types_8h_a938840d6611518501cb15b61b41e4697}{ogg\_uint64\_t}};}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113 }
+\DoxyCodeLine{114 \textcolor{preprocessor}{\#elif defined (DJGPP)}}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{116    \textcolor{comment}{/* DJGPP */}}
+\DoxyCodeLine{117    \textcolor{keyword}{typedef} \textcolor{keywordtype}{short} \mbox{\hyperlink{config__types_8h_a0c3ed569a9b7ecd176140e0af4b40ed7}{ogg\_int16\_t}};}
+\DoxyCodeLine{118    \textcolor{keyword}{typedef} \textcolor{keywordtype}{int} \mbox{\hyperlink{config__types_8h_a4c7bb598f5bbfe765c03b89f317d7596}{ogg\_int32\_t}};}
+\DoxyCodeLine{119    \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \mbox{\hyperlink{config__types_8h_a67ee093e22ba3e6332410383f8fa99f0}{ogg\_uint32\_t}};}
+\DoxyCodeLine{120    \textcolor{keyword}{typedef} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} \mbox{\hyperlink{config__types_8h_a292432ede703993aa88db876e11b2306}{ogg\_int64\_t}};}
+\DoxyCodeLine{121    \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} \mbox{\hyperlink{config__types_8h_a938840d6611518501cb15b61b41e4697}{ogg\_uint64\_t}};}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{123 \textcolor{preprocessor}{\#elif defined(R5900)}}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{125    \textcolor{comment}{/* PS2 EE */}}
+\DoxyCodeLine{126    \textcolor{keyword}{typedef} \textcolor{keywordtype}{long} \mbox{\hyperlink{config__types_8h_a292432ede703993aa88db876e11b2306}{ogg\_int64\_t}};}
+\DoxyCodeLine{127    \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \mbox{\hyperlink{config__types_8h_a938840d6611518501cb15b61b41e4697}{ogg\_uint64\_t}};}
+\DoxyCodeLine{128    \textcolor{keyword}{typedef} \textcolor{keywordtype}{int} \mbox{\hyperlink{config__types_8h_a4c7bb598f5bbfe765c03b89f317d7596}{ogg\_int32\_t}};}
+\DoxyCodeLine{129    \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{config__types_8h_a67ee093e22ba3e6332410383f8fa99f0}{ogg\_uint32\_t}};}
+\DoxyCodeLine{130    \textcolor{keyword}{typedef} \textcolor{keywordtype}{short} \mbox{\hyperlink{config__types_8h_a0c3ed569a9b7ecd176140e0af4b40ed7}{ogg\_int16\_t}};}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{132 \textcolor{preprocessor}{\#elif defined(\_\_SYMBIAN32\_\_)}}
+\DoxyCodeLine{133 }
+\DoxyCodeLine{134    \textcolor{comment}{/* Symbian GCC */}}
+\DoxyCodeLine{135    \textcolor{keyword}{typedef} \textcolor{keywordtype}{signed} \textcolor{keywordtype}{short} \mbox{\hyperlink{config__types_8h_a0c3ed569a9b7ecd176140e0af4b40ed7}{ogg\_int16\_t}};}
+\DoxyCodeLine{136    \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} \mbox{\hyperlink{config__types_8h_af68e4dba43630165f403d491cdbce66c}{ogg\_uint16\_t}};}
+\DoxyCodeLine{137    \textcolor{keyword}{typedef} \textcolor{keywordtype}{signed} \textcolor{keywordtype}{int} \mbox{\hyperlink{config__types_8h_a4c7bb598f5bbfe765c03b89f317d7596}{ogg\_int32\_t}};}
+\DoxyCodeLine{138    \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \mbox{\hyperlink{config__types_8h_a67ee093e22ba3e6332410383f8fa99f0}{ogg\_uint32\_t}};}
+\DoxyCodeLine{139    \textcolor{keyword}{typedef} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} \textcolor{keywordtype}{int} \mbox{\hyperlink{config__types_8h_a292432ede703993aa88db876e11b2306}{ogg\_int64\_t}};}
+\DoxyCodeLine{140    \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} \textcolor{keywordtype}{int} \mbox{\hyperlink{config__types_8h_a938840d6611518501cb15b61b41e4697}{ogg\_uint64\_t}};}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{142 \textcolor{preprocessor}{\#elif defined(\_\_TMS320C6X\_\_)}}
+\DoxyCodeLine{143 }
+\DoxyCodeLine{144    \textcolor{comment}{/* TI C64x compiler */}}
+\DoxyCodeLine{145    \textcolor{keyword}{typedef} \textcolor{keywordtype}{signed} \textcolor{keywordtype}{short} \mbox{\hyperlink{config__types_8h_a0c3ed569a9b7ecd176140e0af4b40ed7}{ogg\_int16\_t}};}
+\DoxyCodeLine{146    \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} \mbox{\hyperlink{config__types_8h_af68e4dba43630165f403d491cdbce66c}{ogg\_uint16\_t}};}
+\DoxyCodeLine{147    \textcolor{keyword}{typedef} \textcolor{keywordtype}{signed} \textcolor{keywordtype}{int} \mbox{\hyperlink{config__types_8h_a4c7bb598f5bbfe765c03b89f317d7596}{ogg\_int32\_t}};}
+\DoxyCodeLine{148    \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \mbox{\hyperlink{config__types_8h_a67ee093e22ba3e6332410383f8fa99f0}{ogg\_uint32\_t}};}
+\DoxyCodeLine{149    \textcolor{keyword}{typedef} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} \textcolor{keywordtype}{int} \mbox{\hyperlink{config__types_8h_a292432ede703993aa88db876e11b2306}{ogg\_int64\_t}};}
+\DoxyCodeLine{150    \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} \textcolor{keywordtype}{int} \mbox{\hyperlink{config__types_8h_a938840d6611518501cb15b61b41e4697}{ogg\_uint64\_t}};}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{152 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154 \textcolor{preprocessor}{\#  include "{}\mbox{\hyperlink{config__types_8h}{config\_types.h}}"{}}}
+\DoxyCodeLine{155 }
+\DoxyCodeLine{156 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{158 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{/* \_OS\_TYPES\_H */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

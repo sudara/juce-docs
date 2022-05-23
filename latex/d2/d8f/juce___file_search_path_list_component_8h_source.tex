@@ -1,0 +1,89 @@
+\hypertarget{juce___file_search_path_list_component_8h_source}{}\doxysection{juce\+\_\+\+File\+Search\+Path\+List\+Component.\+h}
+\label{juce___file_search_path_list_component_8h_source}\index{build/juce\_gui\_basics/filebrowser/juce\_FileSearchPathListComponent.h@{build/juce\_gui\_basics/filebrowser/juce\_FileSearchPathListComponent.h}}
+\mbox{\hyperlink{juce___file_search_path_list_component_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{39 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_file_search_path_list_component}{FileSearchPathListComponent}}  : \textcolor{keyword}{public} \mbox{\hyperlink{class_component}{Component}},}
+\DoxyCodeLine{40                                                \textcolor{keyword}{public} \mbox{\hyperlink{class_settable_tooltip_client}{SettableTooltipClient}},}
+\DoxyCodeLine{41                                                \textcolor{keyword}{public} \mbox{\hyperlink{class_file_drag_and_drop_target}{FileDragAndDropTarget}},}
+\DoxyCodeLine{42                                                \textcolor{keyword}{private} \mbox{\hyperlink{class_list_box_model}{ListBoxModel}}}
+\DoxyCodeLine{43 \{}
+\DoxyCodeLine{44 \textcolor{keyword}{public}:}
+\DoxyCodeLine{45     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{47 \textcolor{comment}{}    \mbox{\hyperlink{class_file_search_path_list_component}{FileSearchPathListComponent}}();}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{51 \textcolor{comment}{}    \textcolor{keyword}{const} \mbox{\hyperlink{class_file_search_path}{FileSearchPath}}\& \mbox{\hyperlink{class_file_search_path_list_component_aa9cea078b2def232e394919b43f3010c}{getPath}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                  \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_aa24d70da9c7853cfd8a8fc343e72c20d}{path}}; \}}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{54     \textcolor{keywordtype}{void} setPath (\textcolor{keyword}{const} \mbox{\hyperlink{class_file_search_path}{FileSearchPath}}\& newPath);}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{60     \textcolor{keywordtype}{void} setDefaultBrowseTarget (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& newDefaultDirectory);}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{69     \textcolor{keyword}{enum} \mbox{\hyperlink{class_file_search_path_list_component_ad490e320611ac10c29f5c07e0c6aa30f}{ColourIds}}}
+\DoxyCodeLine{70     \{}
+\DoxyCodeLine{71         backgroundColourId      = 0x1004100, }
+\DoxyCodeLine{73     \};}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{77 \textcolor{comment}{}    \textcolor{keywordtype}{int} \mbox{\hyperlink{class_list_box_model_aa34d0f88948722ae16c8ce6a7874bcfd}{getNumRows}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{79     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_list_box_model_a255cf47783413c4f3fa71008a34cb776}{paintListBoxItem}} (\textcolor{keywordtype}{int} rowNumber, \mbox{\hyperlink{class_graphics}{Graphics}}\& \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}}, \textcolor{keywordtype}{bool} rowIsSelected) \textcolor{keyword}{override};}
+\DoxyCodeLine{81     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_list_box_model_a79d645843cd8b1abe5514f7b6a5ace92}{deleteKeyPressed}} (\textcolor{keywordtype}{int} lastRowSelected) \textcolor{keyword}{override};}
+\DoxyCodeLine{83     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_list_box_model_a45284e01bad43267a3904a9317e0fb0c}{returnKeyPressed}} (\textcolor{keywordtype}{int} lastRowSelected) \textcolor{keyword}{override};}
+\DoxyCodeLine{85     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_list_box_model_adac293364eb9813d97015498653586ca}{listBoxItemDoubleClicked}} (\textcolor{keywordtype}{int} \mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682caf1965a857bc285d26fe22023aa5ab50d}{row}}, \textcolor{keyword}{const} \mbox{\hyperlink{class_mouse_event}{MouseEvent}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{87     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_list_box_model_ac444fe9bb53c7fab3a6284d47eb0785c}{selectedRowsChanged}} (\textcolor{keywordtype}{int} lastRowSelected) \textcolor{keyword}{override};}
+\DoxyCodeLine{89     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_component_ad896183a68d71daf5816982d1fefd960}{resized}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{91     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_component_a7cf1862f4af5909ea72827898114a182}{paint}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{93     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_file_drag_and_drop_target_a44fa7f7e69dec8119c6b3a6ff9d2ddce}{isInterestedInFileDrag}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string_array}{StringArray}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{95     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_file_drag_and_drop_target_adc7848885ab2d9380f242c6445b019d4}{filesDropped}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string_array}{StringArray}}\& files, \textcolor{keywordtype}{int}, \textcolor{keywordtype}{int}) \textcolor{keyword}{override};}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97 \textcolor{keyword}{private}:}
+\DoxyCodeLine{98     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{99     \mbox{\hyperlink{class_file_search_path}{FileSearchPath}} \mbox{\hyperlink{namespacegl_aa24d70da9c7853cfd8a8fc343e72c20d}{path}};}
+\DoxyCodeLine{100     \mbox{\hyperlink{class_file}{File}} defaultBrowseTarget;}
+\DoxyCodeLine{101     std::unique\_ptr<FileChooser> chooser;}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103     \mbox{\hyperlink{class_list_box}{ListBox}} listBox;}
+\DoxyCodeLine{104     \mbox{\hyperlink{class_text_button}{TextButton}} addButton, removeButton, changeButton;}
+\DoxyCodeLine{105     \mbox{\hyperlink{class_drawable_button}{DrawableButton}} upButton, downButton;}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{107     \textcolor{keywordtype}{void} changed();}
+\DoxyCodeLine{108     \textcolor{keywordtype}{void} updateButtons();}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110     \textcolor{keywordtype}{void} addPath();}
+\DoxyCodeLine{111     \textcolor{keywordtype}{void} deleteSelected();}
+\DoxyCodeLine{112     \textcolor{keywordtype}{void} editSelected();}
+\DoxyCodeLine{113     \textcolor{keywordtype}{void} moveSelection (\textcolor{keywordtype}{int});}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_file_search_path_list_component}{FileSearchPathListComponent}})}
+\DoxyCodeLine{116 \};}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{119 }
+
+\end{DoxyCode}

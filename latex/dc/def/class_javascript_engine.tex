@@ -1,0 +1,117 @@
+\hypertarget{class_javascript_engine}{}\doxysection{Javascript\+Engine Class Reference}
+\label{class_javascript_engine}\index{JavascriptEngine@{JavascriptEngine}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Javascript.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_javascript_engine_a4982557880163aadbad5337751057269}{Javascript\+Engine}} ()
+\item 
+\mbox{\hyperlink{class_javascript_engine_af7b279a3ee909a2324804a73f16a6708}{$\sim$\+Javascript\+Engine}} ()
+\item 
+\mbox{\hyperlink{class_result}{Result}} \mbox{\hyperlink{class_javascript_engine_a0726c85d9bad8b676f9820a36135b203}{execute}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&javascript\+Code)
+\item 
+\mbox{\hyperlink{classvar}{var}} \mbox{\hyperlink{class_javascript_engine_a0cf3bac2ba4e208b69b09777f84a3f8c}{evaluate}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&javascript\+Code, \mbox{\hyperlink{class_result}{Result}} $\ast$error\+Message=nullptr)
+\item 
+\mbox{\hyperlink{classvar}{var}} \mbox{\hyperlink{class_javascript_engine_a875997c4f7e2ac48977b04d707253851}{call\+Function}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_identifier}{Identifier}} \&function, \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{structvar_1_1_native_function_args}{var\+::\+Native\+Function\+Args}} \&args, \mbox{\hyperlink{class_result}{Result}} $\ast$error\+Message=nullptr)
+\item 
+\mbox{\hyperlink{classvar}{var}} \mbox{\hyperlink{class_javascript_engine_aa60397f0665c53381cb1ff5ac9456771}{call\+Function\+Object}} (\mbox{\hyperlink{class_dynamic_object}{Dynamic\+Object}} $\ast$object\+Scope, \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{classvar}{var}} \&function\+Object, \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{structvar_1_1_native_function_args}{var\+::\+Native\+Function\+Args}} \&args, \mbox{\hyperlink{class_result}{Result}} $\ast$error\+Message=nullptr)
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_javascript_engine_a0c9f43562e6e82084d5e92a714bfa5eb}{register\+Native\+Object}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_identifier}{Identifier}} \&object\+Name, \mbox{\hyperlink{class_dynamic_object}{Dynamic\+Object}} $\ast$\mbox{\hyperlink{jmemsys_8h_a77e1d3f325098324c3925e8faf6ae5cf}{object}})
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_javascript_engine_a6768b3a2e0d881a87eea26456eb10ff1}{stop}} () noexcept
+\item 
+\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_named_value_set}{Named\+Value\+Set}} \& \mbox{\hyperlink{class_javascript_engine_a286e6cd14733fb9d622d5ad5588e7d9d}{get\+Root\+Object\+Properties}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_relative_time}{Relative\+Time}} \mbox{\hyperlink{class_javascript_engine_a4a08635cda469509d851264f9fcf2c46}{maximum\+Execution\+Time}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A simple javascript interpreter!
+
+It\textquotesingle{}s not fully standards-\/compliant, and won\textquotesingle{}t be as fast as the fancy JIT-\/compiled engines that you get in browsers, but this is an extremely compact, low-\/overhead javascript interpreter, which is integrated with the juce var and \mbox{\hyperlink{class_dynamic_object}{Dynamic\+Object}} classes. If you need a few simple bits of scripting in your app, and want to be able to easily let the JS work with native objects defined as \mbox{\hyperlink{class_dynamic_object}{Dynamic\+Object}} subclasses, then this might do the job.
+
+To use, simply create an instance of this class and call \mbox{\hyperlink{class_javascript_engine_a0726c85d9bad8b676f9820a36135b203}{execute()}} to run your code. Variables that the script sets can be retrieved with \mbox{\hyperlink{class_javascript_engine_a0cf3bac2ba4e208b69b09777f84a3f8c}{evaluate()}}, and if you need to provide native objects for the script to use, you can add them with \mbox{\hyperlink{class_javascript_engine_a0c9f43562e6e82084d5e92a714bfa5eb}{register\+Native\+Object()}}.
+
+One caveat\+: Because the values and objects that the engine works with are \mbox{\hyperlink{class_dynamic_object}{Dynamic\+Object}} and var objects, they use reference-\/counting rather than garbage-\/collection, so if your script creates complex connections between objects, you run the risk of creating cyclic dependencies and hence leaking.
+
+@tags\{Core\} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_javascript_engine_a4982557880163aadbad5337751057269}\label{class_javascript_engine_a4982557880163aadbad5337751057269}} 
+\index{JavascriptEngine@{JavascriptEngine}!JavascriptEngine@{JavascriptEngine}}
+\index{JavascriptEngine@{JavascriptEngine}!JavascriptEngine@{JavascriptEngine}}
+\doxysubsubsection{\texorpdfstring{JavascriptEngine()}{JavascriptEngine()}}
+{\footnotesize\ttfamily Javascript\+Engine\+::\+Javascript\+Engine (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Creates an instance of the engine. This creates a root namespace and defines some basic Object, \mbox{\hyperlink{class_string}{String}}, \mbox{\hyperlink{class_array}{Array}} and Math library methods. \mbox{\Hypertarget{class_javascript_engine_af7b279a3ee909a2324804a73f16a6708}\label{class_javascript_engine_af7b279a3ee909a2324804a73f16a6708}} 
+\index{JavascriptEngine@{JavascriptEngine}!````~JavascriptEngine@{$\sim$JavascriptEngine}}
+\index{````~JavascriptEngine@{$\sim$JavascriptEngine}!JavascriptEngine@{JavascriptEngine}}
+\doxysubsubsection{\texorpdfstring{$\sim$JavascriptEngine()}{~JavascriptEngine()}}
+{\footnotesize\ttfamily Javascript\+Engine\+::$\sim$\+Javascript\+Engine (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Destructor. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_javascript_engine_a875997c4f7e2ac48977b04d707253851}\label{class_javascript_engine_a875997c4f7e2ac48977b04d707253851}} 
+\index{JavascriptEngine@{JavascriptEngine}!callFunction@{callFunction}}
+\index{callFunction@{callFunction}!JavascriptEngine@{JavascriptEngine}}
+\doxysubsubsection{\texorpdfstring{callFunction()}{callFunction()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classvar}{var}} Javascript\+Engine\+::call\+Function (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_identifier}{Identifier}} \&}]{function,  }\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{structvar_1_1_native_function_args}{var\+::\+Native\+Function\+Args}} \&}]{args,  }\item[{\mbox{\hyperlink{class_result}{Result}} $\ast$}]{error\+Message = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+Calls a function in the root namespace, and returns the result. The function arguments are passed in the same format as used by native methods in the var class. \mbox{\Hypertarget{class_javascript_engine_aa60397f0665c53381cb1ff5ac9456771}\label{class_javascript_engine_aa60397f0665c53381cb1ff5ac9456771}} 
+\index{JavascriptEngine@{JavascriptEngine}!callFunctionObject@{callFunctionObject}}
+\index{callFunctionObject@{callFunctionObject}!JavascriptEngine@{JavascriptEngine}}
+\doxysubsubsection{\texorpdfstring{callFunctionObject()}{callFunctionObject()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classvar}{var}} Javascript\+Engine\+::call\+Function\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_dynamic_object}{Dynamic\+Object}} $\ast$}]{object\+Scope,  }\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{classvar}{var}} \&}]{function\+Object,  }\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{structvar_1_1_native_function_args}{var\+::\+Native\+Function\+Args}} \&}]{args,  }\item[{\mbox{\hyperlink{class_result}{Result}} $\ast$}]{error\+Message = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+Calls a function object in the namespace of a dynamic object, and returns the result. The function arguments are passed in the same format as used by native methods in the var class. \mbox{\Hypertarget{class_javascript_engine_a0cf3bac2ba4e208b69b09777f84a3f8c}\label{class_javascript_engine_a0cf3bac2ba4e208b69b09777f84a3f8c}} 
+\index{JavascriptEngine@{JavascriptEngine}!evaluate@{evaluate}}
+\index{evaluate@{evaluate}!JavascriptEngine@{JavascriptEngine}}
+\doxysubsubsection{\texorpdfstring{evaluate()}{evaluate()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classvar}{var}} Javascript\+Engine\+::evaluate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&}]{javascript\+Code,  }\item[{\mbox{\hyperlink{class_result}{Result}} $\ast$}]{error\+Message = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+Attempts to parse and run a javascript expression, and returns the result. If there\textquotesingle{}s a syntax error, or the expression can\textquotesingle{}t be evaluated, the return value will be \mbox{\hyperlink{classvar_aa8ad714f97623c9c8f0e0e7e139b09d4}{var\+::undefined()}}. The error\+Message parameter gives you a way to find out any parsing errors. You can specify a maximum time for which the program is allowed to run, and it\textquotesingle{}ll return with an error message if this time is exceeded. \mbox{\Hypertarget{class_javascript_engine_a0726c85d9bad8b676f9820a36135b203}\label{class_javascript_engine_a0726c85d9bad8b676f9820a36135b203}} 
+\index{JavascriptEngine@{JavascriptEngine}!execute@{execute}}
+\index{execute@{execute}!JavascriptEngine@{JavascriptEngine}}
+\doxysubsubsection{\texorpdfstring{execute()}{execute()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_result}{Result}} Javascript\+Engine\+::execute (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&}]{javascript\+Code }\end{DoxyParamCaption})}
+
+Attempts to parse and run a block of javascript code. If there\textquotesingle{}s a parse or execution error, the error description is returned in the result. You can specify a maximum time for which the program is allowed to run, and it\textquotesingle{}ll return with an error message if this time is exceeded. \mbox{\Hypertarget{class_javascript_engine_a286e6cd14733fb9d622d5ad5588e7d9d}\label{class_javascript_engine_a286e6cd14733fb9d622d5ad5588e7d9d}} 
+\index{JavascriptEngine@{JavascriptEngine}!getRootObjectProperties@{getRootObjectProperties}}
+\index{getRootObjectProperties@{getRootObjectProperties}!JavascriptEngine@{JavascriptEngine}}
+\doxysubsubsection{\texorpdfstring{getRootObjectProperties()}{getRootObjectProperties()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_named_value_set}{Named\+Value\+Set}} \& Javascript\+Engine\+::get\+Root\+Object\+Properties (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Provides access to the set of properties of the root namespace object. \mbox{\Hypertarget{class_javascript_engine_a0c9f43562e6e82084d5e92a714bfa5eb}\label{class_javascript_engine_a0c9f43562e6e82084d5e92a714bfa5eb}} 
+\index{JavascriptEngine@{JavascriptEngine}!registerNativeObject@{registerNativeObject}}
+\index{registerNativeObject@{registerNativeObject}!JavascriptEngine@{JavascriptEngine}}
+\doxysubsubsection{\texorpdfstring{registerNativeObject()}{registerNativeObject()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Javascript\+Engine\+::register\+Native\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_identifier}{Identifier}} \&}]{object\+Name,  }\item[{\mbox{\hyperlink{class_dynamic_object}{Dynamic\+Object}} $\ast$}]{object }\end{DoxyParamCaption})}
+
+Adds a native object to the root namespace. The object passed-\/in is reference-\/counted, and will be retained by the engine until the engine is deleted. The name must be a simple JS identifier, without any dots. \mbox{\Hypertarget{class_javascript_engine_a6768b3a2e0d881a87eea26456eb10ff1}\label{class_javascript_engine_a6768b3a2e0d881a87eea26456eb10ff1}} 
+\index{JavascriptEngine@{JavascriptEngine}!stop@{stop}}
+\index{stop@{stop}!JavascriptEngine@{JavascriptEngine}}
+\doxysubsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Javascript\+Engine\+::stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+When called from another thread, causes the interpreter to time-\/out as soon as possible 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_javascript_engine_a4a08635cda469509d851264f9fcf2c46}\label{class_javascript_engine_a4a08635cda469509d851264f9fcf2c46}} 
+\index{JavascriptEngine@{JavascriptEngine}!maximumExecutionTime@{maximumExecutionTime}}
+\index{maximumExecutionTime@{maximumExecutionTime}!JavascriptEngine@{JavascriptEngine}}
+\doxysubsubsection{\texorpdfstring{maximumExecutionTime}{maximumExecutionTime}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_relative_time}{Relative\+Time}} Javascript\+Engine\+::maximum\+Execution\+Time}
+
+This value indicates how long a call to one of the evaluate methods is permitted to run before timing-\/out and failing. The default value is a number of seconds, but you can change this to whatever value suits your application. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+core/javascript/\mbox{\hyperlink{juce___javascript_8h}{juce\+\_\+\+Javascript.\+h}}\end{DoxyCompactItemize}

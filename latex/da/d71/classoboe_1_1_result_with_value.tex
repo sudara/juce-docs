@@ -1,0 +1,142 @@
+\hypertarget{classoboe_1_1_result_with_value}{}\doxysection{oboe\+::Result\+With\+Value\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\label{classoboe_1_1_result_with_value}\index{oboe::ResultWithValue$<$ T $>$@{oboe::ResultWithValue$<$ T $>$}}
+
+
+{\ttfamily \#include $<$Result\+With\+Value.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoboe_1_1_result_with_value_aae75caa0d16a9e23a012f77fb50c5927}{Result\+With\+Value}} (\mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1}{oboe\+::\+Result}} \mbox{\hyperlink{classoboe_1_1_result_with_value_adfc76ae6db81535c2e82b856975eed41}{error}})
+\item 
+\mbox{\hyperlink{classoboe_1_1_result_with_value_a600309367db58d71f0ec16e90f7ebea5}{Result\+With\+Value}} (T \mbox{\hyperlink{classoboe_1_1_result_with_value_a45f5c99a2c9f8fbaca502276f7ebb434}{value}})
+\item 
+\mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1}{oboe\+::\+Result}} \mbox{\hyperlink{classoboe_1_1_result_with_value_adfc76ae6db81535c2e82b856975eed41}{error}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}}
+\item 
+T \mbox{\hyperlink{classoboe_1_1_result_with_value_a45f5c99a2c9f8fbaca502276f7ebb434}{value}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}}
+\item 
+\mbox{\hyperlink{classoboe_1_1_result_with_value_ae32b1953b777af7d1d0c94862ca39986}{operator bool}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}}
+\item 
+bool \mbox{\hyperlink{classoboe_1_1_result_with_value_a2dbc8b09ead8b073a78af95b4b0186e3}{operator!}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}}
+\item 
+\mbox{\hyperlink{classoboe_1_1_result_with_value_af62107817c0bc76047e6b655a78504ba}{operator Result}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classoboe_1_1_result_with_value}{Result\+With\+Value}}$<$ T $>$ \mbox{\hyperlink{classoboe_1_1_result_with_value_a623fee0e797f12e628ecd42b9eae561c}{create\+Based\+On\+Sign}} (T numeric\+Result)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+class oboe\+::\+Result\+With\+Value$<$ T $>$}
+A \mbox{\hyperlink{classoboe_1_1_result_with_value}{Result\+With\+Value}} can store both the result of an operation (either OK or an error) and a value.
+
+It has been designed for cases where the caller needs to know whether an operation succeeded and, if it did, a value which was obtained during the operation.
+
+For example, when reading from a stream the caller needs to know the result of the read operation and, if it was successful, how many frames were read. Note that \mbox{\hyperlink{classoboe_1_1_result_with_value}{Result\+With\+Value}} can be evaluated as a boolean so it\textquotesingle{}s simple to check whether the result is OK.
+
+{\ttfamily  Result\+With\+Value$<$int32\+\_\+t$>$ result\+Of\+Read = my\+Stream.\+read(\&buffer, num\+Frames, timeout\+Nanoseconds);}
+
+{\ttfamily if (result\+Of\+Read) \{ LOGD(\char`\"{}\+Frames read\+: \%d\char`\"{}, \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{result\+Of\+Read.\+value()}}); \} else \{ LOGD(\char`\"{}\+Error reading from stream\+: \%s\char`\"{}, result\+Of\+Read.\+error()); \} } 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoboe_1_1_result_with_value_aae75caa0d16a9e23a012f77fb50c5927}\label{classoboe_1_1_result_with_value_aae75caa0d16a9e23a012f77fb50c5927}} 
+\index{oboe::ResultWithValue$<$ T $>$@{oboe::ResultWithValue$<$ T $>$}!ResultWithValue@{ResultWithValue}}
+\index{ResultWithValue@{ResultWithValue}!oboe::ResultWithValue$<$ T $>$@{oboe::ResultWithValue$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{ResultWithValue()}{ResultWithValue()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classoboe_1_1_result_with_value}{oboe\+::\+Result\+With\+Value}}$<$ T $>$\+::\mbox{\hyperlink{classoboe_1_1_result_with_value}{Result\+With\+Value}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1}{oboe\+::\+Result}}}]{error }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Construct a \mbox{\hyperlink{classoboe_1_1_result_with_value}{Result\+With\+Value}} containing an error result.
+
+
+\begin{DoxyParams}{Parameters}
+{\em error} & The error \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classoboe_1_1_result_with_value_a600309367db58d71f0ec16e90f7ebea5}\label{classoboe_1_1_result_with_value_a600309367db58d71f0ec16e90f7ebea5}} 
+\index{oboe::ResultWithValue$<$ T $>$@{oboe::ResultWithValue$<$ T $>$}!ResultWithValue@{ResultWithValue}}
+\index{ResultWithValue@{ResultWithValue}!oboe::ResultWithValue$<$ T $>$@{oboe::ResultWithValue$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{ResultWithValue()}{ResultWithValue()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classoboe_1_1_result_with_value}{oboe\+::\+Result\+With\+Value}}$<$ T $>$\+::\mbox{\hyperlink{classoboe_1_1_result_with_value}{Result\+With\+Value}} (\begin{DoxyParamCaption}\item[{T}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+Construct a \mbox{\hyperlink{classoboe_1_1_result_with_value}{Result\+With\+Value}} containing an OK result and a value.
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & the value to store \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoboe_1_1_result_with_value_a623fee0e797f12e628ecd42b9eae561c}\label{classoboe_1_1_result_with_value_a623fee0e797f12e628ecd42b9eae561c}} 
+\index{oboe::ResultWithValue$<$ T $>$@{oboe::ResultWithValue$<$ T $>$}!createBasedOnSign@{createBasedOnSign}}
+\index{createBasedOnSign@{createBasedOnSign}!oboe::ResultWithValue$<$ T $>$@{oboe::ResultWithValue$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{createBasedOnSign()}{createBasedOnSign()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+static \mbox{\hyperlink{classoboe_1_1_result_with_value}{Result\+With\+Value}}$<$ T $>$ \mbox{\hyperlink{classoboe_1_1_result_with_value}{oboe\+::\+Result\+With\+Value}}$<$ T $>$\+::create\+Based\+On\+Sign (\begin{DoxyParamCaption}\item[{T}]{numeric\+Result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Create a \mbox{\hyperlink{classoboe_1_1_result_with_value}{Result\+With\+Value}} from a number. If the number is positive the \mbox{\hyperlink{classoboe_1_1_result_with_value}{Result\+With\+Value}} will have a result of \mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1ae0aa021e21dddbd6d8cecec71e9cf564}{Result\+::\+OK}} and the value will contain the number. If the number is negative the result will be obtained from the negative number (numeric error codes can be found in AAudio.\+h) and the value will be null. \mbox{\Hypertarget{classoboe_1_1_result_with_value_adfc76ae6db81535c2e82b856975eed41}\label{classoboe_1_1_result_with_value_adfc76ae6db81535c2e82b856975eed41}} 
+\index{oboe::ResultWithValue$<$ T $>$@{oboe::ResultWithValue$<$ T $>$}!error@{error}}
+\index{error@{error}!oboe::ResultWithValue$<$ T $>$@{oboe::ResultWithValue$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{error()}{error()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1}{oboe\+::\+Result}} \mbox{\hyperlink{classoboe_1_1_result_with_value}{oboe\+::\+Result\+With\+Value}}$<$ T $>$\+::error (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Get the result.
+
+\begin{DoxyReturn}{Returns}
+the result 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classoboe_1_1_result_with_value_ae32b1953b777af7d1d0c94862ca39986}\label{classoboe_1_1_result_with_value_ae32b1953b777af7d1d0c94862ca39986}} 
+\index{oboe::ResultWithValue$<$ T $>$@{oboe::ResultWithValue$<$ T $>$}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!oboe::ResultWithValue$<$ T $>$@{oboe::ResultWithValue$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator bool()}{operator bool()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classoboe_1_1_result_with_value}{oboe\+::\+Result\+With\+Value}}$<$ T $>$\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\begin{DoxyReturn}{Returns}
+true if OK 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classoboe_1_1_result_with_value_af62107817c0bc76047e6b655a78504ba}\label{classoboe_1_1_result_with_value_af62107817c0bc76047e6b655a78504ba}} 
+\index{oboe::ResultWithValue$<$ T $>$@{oboe::ResultWithValue$<$ T $>$}!operator Result@{operator Result}}
+\index{operator Result@{operator Result}!oboe::ResultWithValue$<$ T $>$@{oboe::ResultWithValue$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator Result()}{operator Result()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classoboe_1_1_result_with_value}{oboe\+::\+Result\+With\+Value}}$<$ T $>$\+::operator \mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1}{Result}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Implicitly convert to a \mbox{\hyperlink{class_result}{Result}}. This enables easy comparison with \mbox{\hyperlink{class_result}{Result}} values. Example\+:
+
+{\ttfamily  \mbox{\hyperlink{classoboe_1_1_result_with_value}{Result\+With\+Value}} result = open\+Stream(); if (result == \mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1a16ec663e33d93b065a889cd0bcf20a84}{Result\+::\+Error\+No\+Memory}})\{ // tell user they\textquotesingle{}re out of memory \} } \mbox{\Hypertarget{classoboe_1_1_result_with_value_a2dbc8b09ead8b073a78af95b4b0186e3}\label{classoboe_1_1_result_with_value_a2dbc8b09ead8b073a78af95b4b0186e3}} 
+\index{oboe::ResultWithValue$<$ T $>$@{oboe::ResultWithValue$<$ T $>$}!operator"!@{operator"!}}
+\index{operator"!@{operator"!}!oboe::ResultWithValue$<$ T $>$@{oboe::ResultWithValue$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator"!()}{operator!()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool \mbox{\hyperlink{classoboe_1_1_result_with_value}{oboe\+::\+Result\+With\+Value}}$<$ T $>$\+::operator! (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Quick way to check for an error.
+
+The caller could write something like this\+: {\ttfamily  if (!result) \{ printf(\char`\"{}\+Got error \%s\textbackslash{}n\char`\"{}, convert\+To\+Text(result.\+error())); \} }
+
+\begin{DoxyReturn}{Returns}
+true if an error occurred 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classoboe_1_1_result_with_value_a45f5c99a2c9f8fbaca502276f7ebb434}\label{classoboe_1_1_result_with_value_a45f5c99a2c9f8fbaca502276f7ebb434}} 
+\index{oboe::ResultWithValue$<$ T $>$@{oboe::ResultWithValue$<$ T $>$}!value@{value}}
+\index{value@{value}!oboe::ResultWithValue$<$ T $>$@{oboe::ResultWithValue$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{value()}{value()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T \mbox{\hyperlink{classoboe_1_1_result_with_value}{oboe\+::\+Result\+With\+Value}}$<$ T $>$\+::value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Get the value \begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+audio\+\_\+devices/native/oboe/include/oboe/\mbox{\hyperlink{_result_with_value_8h}{Result\+With\+Value.\+h}}\end{DoxyCompactItemize}

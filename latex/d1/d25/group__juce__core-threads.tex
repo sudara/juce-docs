@@ -1,0 +1,181 @@
+\hypertarget{group__juce__core-threads}{}\doxysection{threads}
+\label{group__juce__core-threads}\index{threads@{threads}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_child_process}{Child\+Process}}
+\item 
+class \mbox{\hyperlink{class_critical_section}{Critical\+Section}}
+\item 
+class \mbox{\hyperlink{class_dummy_critical_section}{Dummy\+Critical\+Section}}
+\item 
+class \mbox{\hyperlink{class_dynamic_library}{Dynamic\+Library}}
+\item 
+class \mbox{\hyperlink{class_high_resolution_timer}{High\+Resolution\+Timer}}
+\item 
+class \mbox{\hyperlink{class_inter_process_lock}{Inter\+Process\+Lock}}
+\item 
+class \mbox{\hyperlink{class_process}{Process}}
+\item 
+class \mbox{\hyperlink{class_read_write_lock}{Read\+Write\+Lock}}
+\item 
+class \mbox{\hyperlink{class_generic_scoped_lock}{Generic\+Scoped\+Lock$<$ Lock\+Type $>$}}
+\item 
+class \mbox{\hyperlink{class_generic_scoped_unlock}{Generic\+Scoped\+Unlock$<$ Lock\+Type $>$}}
+\item 
+class \mbox{\hyperlink{class_generic_scoped_try_lock}{Generic\+Scoped\+Try\+Lock$<$ Lock\+Type $>$}}
+\item 
+class \mbox{\hyperlink{class_scoped_read_lock}{Scoped\+Read\+Lock}}
+\item 
+class \mbox{\hyperlink{class_scoped_write_lock}{Scoped\+Write\+Lock}}
+\item 
+class \mbox{\hyperlink{class_spin_lock}{Spin\+Lock}}
+\item 
+class \mbox{\hyperlink{class_thread}{Thread}}
+\item 
+class \mbox{\hyperlink{class_thread_local_value}{Thread\+Local\+Value$<$ Type $>$}}
+\item 
+class \mbox{\hyperlink{class_thread_pool_job}{Thread\+Pool\+Job}}
+\item 
+class \mbox{\hyperlink{class_thread_pool}{Thread\+Pool}}
+\item 
+class \mbox{\hyperlink{class_time_slice_client}{Time\+Slice\+Client}}
+\item 
+class \mbox{\hyperlink{class_time_slice_thread}{Time\+Slice\+Thread}}
+\item 
+class \mbox{\hyperlink{class_waitable_event}{Waitable\+Event}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{group__juce__core-threads_gadd0b55041ea549cc9b1dfae71670e543}{Scoped\+Lock}} = \mbox{\hyperlink{class_critical_section_a4d398019b977a4c2151c6f1e2a06210b}{Critical\+Section\+::\+Scoped\+Lock\+Type}}
+\item 
+using \mbox{\hyperlink{group__juce__core-threads_ga1a3fa8167a53f3d021763968a03282ea}{Scoped\+Unlock}} = \mbox{\hyperlink{class_critical_section_afc7e83573aaf997f40d3c61a02823ea4}{Critical\+Section\+::\+Scoped\+Unlock\+Type}}
+\item 
+using \mbox{\hyperlink{group__juce__core-threads_ga5cd183417b285db9aacbb12c30e51d4f}{Scoped\+Try\+Lock}} = \mbox{\hyperlink{class_critical_section_aa51ba226e571a585af348e6d51a46c0d}{Critical\+Section\+::\+Scoped\+Try\+Lock\+Type}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{group__juce__core-threads_gadd0b55041ea549cc9b1dfae71670e543}\label{group__juce__core-threads_gadd0b55041ea549cc9b1dfae71670e543}} 
+\index{threads@{threads}!ScopedLock@{ScopedLock}}
+\index{ScopedLock@{ScopedLock}!threads@{threads}}
+\doxysubsubsection{\texorpdfstring{ScopedLock}{ScopedLock}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{group__juce__core-threads_gadd0b55041ea549cc9b1dfae71670e543}{Scoped\+Lock}} =  \mbox{\hyperlink{class_critical_section_a4d398019b977a4c2151c6f1e2a06210b}{Critical\+Section\+::\+Scoped\+Lock\+Type}}}
+
+Automatically locks and unlocks a \mbox{\hyperlink{class_critical_section}{Critical\+Section}} object.
+
+You can use a Scoped\+Lock as a local variable to provide RAII-\/based locking of a \mbox{\hyperlink{class_critical_section}{Critical\+Section}}.
+
+e.\+g. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{struct }MyObject}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \mbox{\hyperlink{class_critical_section}{CriticalSection}} objectLock;}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{comment}{// assuming that this example function will be called by multiple threads}}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} foo()}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        \textcolor{keyword}{const} \mbox{\hyperlink{class_generic_scoped_lock}{ScopedLock}} myScopedLock (objectLock);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// objectLock is now locked..}}
+\DoxyCodeLine{}
+\DoxyCodeLine{        ...do some thread-\/safe work here...}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// ..and objectLock gets unlocked here, as myScopedLock goes out of}}
+\DoxyCodeLine{        \textcolor{comment}{// scope at the end of the block}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{\};}
+
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_critical_section}{Critical\+Section}}, \mbox{\hyperlink{group__juce__core-threads_ga1a3fa8167a53f3d021763968a03282ea}{Scoped\+Unlock}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{group__juce__core-threads_ga5cd183417b285db9aacbb12c30e51d4f}\label{group__juce__core-threads_ga5cd183417b285db9aacbb12c30e51d4f}} 
+\index{threads@{threads}!ScopedTryLock@{ScopedTryLock}}
+\index{ScopedTryLock@{ScopedTryLock}!threads@{threads}}
+\doxysubsubsection{\texorpdfstring{ScopedTryLock}{ScopedTryLock}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{group__juce__core-threads_ga5cd183417b285db9aacbb12c30e51d4f}{Scoped\+Try\+Lock}} =  \mbox{\hyperlink{class_critical_section_aa51ba226e571a585af348e6d51a46c0d}{Critical\+Section\+::\+Scoped\+Try\+Lock\+Type}}}
+
+Automatically tries to lock and unlock a \mbox{\hyperlink{class_critical_section}{Critical\+Section}} object.
+
+Use one of these as a local variable to control access to a \mbox{\hyperlink{class_critical_section}{Critical\+Section}}.
+
+e.\+g. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{struct }MyObject}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \mbox{\hyperlink{class_critical_section}{CriticalSection}} objectLock;}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} foo()}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        \textcolor{keyword}{const} \mbox{\hyperlink{class_generic_scoped_try_lock}{ScopedTryLock}} myScopedTryLock (objectLock);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Unlike using a ScopedLock, this may fail to actually get the lock, so you}}
+\DoxyCodeLine{        \textcolor{comment}{// must call the isLocked() method before making any assumptions..}}
+\DoxyCodeLine{        \textcolor{keywordflow}{if} (myScopedTryLock.isLocked())}
+\DoxyCodeLine{        \{}
+\DoxyCodeLine{           ...safely \textcolor{keywordflow}{do} some work...}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{        \textcolor{keywordflow}{else}}
+\DoxyCodeLine{        \{}
+\DoxyCodeLine{            \textcolor{comment}{// If we get here, then our attempt at locking failed because another thread had already locked it..}}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{\};}
+
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_critical_section_a2c12101da7ebf8455de49652f377d313}{Critical\+Section\+::try\+Enter}}, \mbox{\hyperlink{group__juce__core-threads_gadd0b55041ea549cc9b1dfae71670e543}{Scoped\+Lock}}, \mbox{\hyperlink{group__juce__core-threads_ga1a3fa8167a53f3d021763968a03282ea}{Scoped\+Unlock}}, \mbox{\hyperlink{class_scoped_read_lock}{Scoped\+Read\+Lock}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{group__juce__core-threads_ga1a3fa8167a53f3d021763968a03282ea}\label{group__juce__core-threads_ga1a3fa8167a53f3d021763968a03282ea}} 
+\index{threads@{threads}!ScopedUnlock@{ScopedUnlock}}
+\index{ScopedUnlock@{ScopedUnlock}!threads@{threads}}
+\doxysubsubsection{\texorpdfstring{ScopedUnlock}{ScopedUnlock}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{group__juce__core-threads_ga1a3fa8167a53f3d021763968a03282ea}{Scoped\+Unlock}} =  \mbox{\hyperlink{class_critical_section_afc7e83573aaf997f40d3c61a02823ea4}{Critical\+Section\+::\+Scoped\+Unlock\+Type}}}
+
+Automatically unlocks and re-\/locks a \mbox{\hyperlink{class_critical_section}{Critical\+Section}} object.
+
+This is the reverse of a Scoped\+Lock object -\/ instead of locking the critical section for the lifetime of this object, it unlocks it.
+
+Make sure you don\textquotesingle{}t try to unlock critical sections that aren\textquotesingle{}t actually locked!
+
+e.\+g. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{struct }MyObject}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \mbox{\hyperlink{class_critical_section}{CriticalSection}} objectLock;}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} foo()}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        \{}
+\DoxyCodeLine{            \textcolor{keyword}{const} \mbox{\hyperlink{class_generic_scoped_lock}{ScopedLock}} myScopedLock (objectLock);}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// objectLock is now locked..}}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \{}
+\DoxyCodeLine{                \mbox{\hyperlink{class_generic_scoped_unlock}{ScopedUnlock}} myUnlocker (objectLock);}
+\DoxyCodeLine{}
+\DoxyCodeLine{                \textcolor{comment}{// ..and now unlocked..}}
+\DoxyCodeLine{            \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// ..and now locked again..}}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// ..and finally unlocked.}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{\};}
+
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_critical_section}{Critical\+Section}}, \mbox{\hyperlink{group__juce__core-threads_gadd0b55041ea549cc9b1dfae71670e543}{Scoped\+Lock}} 
+\end{DoxySeeAlso}

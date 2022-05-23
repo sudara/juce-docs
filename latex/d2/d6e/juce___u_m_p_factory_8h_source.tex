@@ -1,0 +1,536 @@
+\hypertarget{juce___u_m_p_factory_8h_source}{}\doxysection{juce\+\_\+\+UMPFactory.\+h}
+\label{juce___u_m_p_factory_8h_source}\index{build/juce\_audio\_basics/midi/ump/juce\_UMPFactory.h@{build/juce\_audio\_basics/midi/ump/juce\_UMPFactory.h}}
+\mbox{\hyperlink{juce___u_m_p_factory_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#ifndef DOXYGEN}}
+\DoxyCodeLine{28 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceuniversal__midi__packets}{universal\_midi\_packets}}}
+\DoxyCodeLine{29 \{}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{37 \textcolor{keyword}{struct }\mbox{\hyperlink{structuniversal__midi__packets_1_1_factory}{Factory}}}
+\DoxyCodeLine{38 \{}
+\DoxyCodeLine{40     \textcolor{keyword}{struct }\mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail}{Detail}}}
+\DoxyCodeLine{41     \{}
+\DoxyCodeLine{42         \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_a11fd85fb360a2f74542fda89d87b29e8}{makeSystem}}()   \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}}\{\}.\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af75abd10f07c3aae6c458ca0bb219b85}{withMessageType}} (1); \}}
+\DoxyCodeLine{43         \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_a17de8ccb8077c1d073cb7ef6806eb633}{makeV1}}()       \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}}\{\}.\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af75abd10f07c3aae6c458ca0bb219b85}{withMessageType}} (2); \}}
+\DoxyCodeLine{44         \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX2}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_aeaae989820a4704ffa4d71dd979ab40c}{makeV2}}()       \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX2}}\{\}.\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af75abd10f07c3aae6c458ca0bb219b85}{withMessageType}} (4); \}}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46         \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX2}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_a80d34798262f9a15dc411d6a12c7a7de}{makeSysEx}} (uint8\_t group,}
+\DoxyCodeLine{47                                    uint8\_t status,}
+\DoxyCodeLine{48                                    uint8\_t numBytes,}
+\DoxyCodeLine{49                                    \textcolor{keyword}{const} uint8\_t* \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}})}
+\DoxyCodeLine{50         \{}
+\DoxyCodeLine{51             \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (numBytes <= 6);}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53             std::array<uint8\_t, 8> bytes\{\{\}\};}
+\DoxyCodeLine{54             bytes[0] = (0x3 << 0x4) | group;}
+\DoxyCodeLine{55             bytes[1] = (uint8\_t) (status << 0x4) | numBytes;}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57             std::memcpy (bytes.data() + 2, \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, numBytes);}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59             std::array<uint32\_t, 2> words;}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61             \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}} = 0;}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}\& word : words)}
+\DoxyCodeLine{64                 word = \mbox{\hyperlink{group__juce__core-memory_gaf2120ca88796392bce5507cc7afceab2}{ByteOrder::bigEndianInt}} (bytes.data() + 4 * \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}++);}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66             \textcolor{keywordflow}{return} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX2}} \{ words \};}
+\DoxyCodeLine{67         \}}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69         \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX4}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_a92b102e39dd415551158a38f8ba65839}{makeSysEx8}} (uint8\_t group,}
+\DoxyCodeLine{70                                     uint8\_t status,}
+\DoxyCodeLine{71                                     uint8\_t numBytes,}
+\DoxyCodeLine{72                                     uint8\_t dataStart,}
+\DoxyCodeLine{73                                     \textcolor{keyword}{const} uint8\_t* \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}})}
+\DoxyCodeLine{74         \{}
+\DoxyCodeLine{75             \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (numBytes <= 16 -\/ dataStart);}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77             std::array<uint8\_t, 16> bytes\{\{\}\};}
+\DoxyCodeLine{78             bytes[0] = (0x5 << 0x4) | group;}
+\DoxyCodeLine{79             bytes[1] = (uint8\_t) (status << 0x4) | numBytes;}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81             std::memcpy (bytes.data() + dataStart, \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, numBytes);}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83             std::array<uint32\_t, 4> words;}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85             \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}} = 0;}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}\& word : words)}
+\DoxyCodeLine{88                 word = \mbox{\hyperlink{group__juce__core-memory_gaf2120ca88796392bce5507cc7afceab2}{ByteOrder::bigEndianInt}} (bytes.data() + 4 * \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}++);}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90             \textcolor{keywordflow}{return} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX4}} \{ words \};}
+\DoxyCodeLine{91         \}}
+\DoxyCodeLine{92     \};}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{94     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_a5905490360a240bbcce829be04be4c8e}{makeNoop}} (uint8\_t group)}
+\DoxyCodeLine{95     \{}
+\DoxyCodeLine{96         \textcolor{keywordflow}{return} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}}\{\}.\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af6e5fb58a2ae8a8a774f6c65172d5b34}{withGroup}} (group);}
+\DoxyCodeLine{97     \}}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_a3274ae5cbc18612b7609fc1bb1d974da}{makeJRClock}} (uint8\_t group, uint16\_t time)}
+\DoxyCodeLine{100     \{}
+\DoxyCodeLine{101         \textcolor{keywordflow}{return} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} \{ time \}.\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a467983da22d1a2e6ae446eb11be0d456}{withStatus}} (1).\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af6e5fb58a2ae8a8a774f6c65172d5b34}{withGroup}} (group);}
+\DoxyCodeLine{102     \}}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_a0a3705c955107a960ae40fde0c073f75}{makeJRTimestamp}} (uint8\_t group, uint16\_t time)}
+\DoxyCodeLine{105     \{}
+\DoxyCodeLine{106         \textcolor{keywordflow}{return} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} \{ time \}.\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a467983da22d1a2e6ae446eb11be0d456}{withStatus}} (2).\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af6e5fb58a2ae8a8a774f6c65172d5b34}{withGroup}} (group);}
+\DoxyCodeLine{107     \}}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_aa3fa9bed8651e01a55051d83a522c17e}{makeTimeCode}} (uint8\_t group, uint8\_t \mbox{\hyperlink{structcode}{code}})}
+\DoxyCodeLine{110     \{}
+\DoxyCodeLine{111         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_a11fd85fb360a2f74542fda89d87b29e8}{Detail::makeSystem}}().\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af6e5fb58a2ae8a8a774f6c65172d5b34}{withGroup}} (group)}
+\DoxyCodeLine{112                                    .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_aeba2e5e3ec683f5bef6166e8ad609d06}{withU8}}<1> (0xf1)}
+\DoxyCodeLine{113                                    .withU8<2> (\mbox{\hyperlink{structcode}{code}} \& 0x7f);}
+\DoxyCodeLine{114     \}}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{116     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_aa087788b8b048ac1850c54bbf5a30274}{makeSongPositionPointer}} (uint8\_t group, uint16\_t pos)}
+\DoxyCodeLine{117     \{}
+\DoxyCodeLine{118         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_a11fd85fb360a2f74542fda89d87b29e8}{Detail::makeSystem}}().\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af6e5fb58a2ae8a8a774f6c65172d5b34}{withGroup}} (group)}
+\DoxyCodeLine{119                                    .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_aeba2e5e3ec683f5bef6166e8ad609d06}{withU8}}<1> (0xf2)}
+\DoxyCodeLine{120                                    .withU8<2> (pos \& 0x7f)}
+\DoxyCodeLine{121                                    .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_aeba2e5e3ec683f5bef6166e8ad609d06}{withU8}}<3> ((pos >> 7) \& 0x7f);}
+\DoxyCodeLine{122     \}}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{124     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_a731632682cde8eab6835dc0080bb2c7c}{makeSongSelect}} (uint8\_t group, uint8\_t song)}
+\DoxyCodeLine{125     \{}
+\DoxyCodeLine{126         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_a11fd85fb360a2f74542fda89d87b29e8}{Detail::makeSystem}}().\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af6e5fb58a2ae8a8a774f6c65172d5b34}{withGroup}} (group)}
+\DoxyCodeLine{127                                    .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_aeba2e5e3ec683f5bef6166e8ad609d06}{withU8}}<1> (0xf3)}
+\DoxyCodeLine{128                                    .withU8<2> (song \& 0x7f);}
+\DoxyCodeLine{129     \}}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{131     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_aa6885c80d2b9e4e883df48a7ebd0ed79}{makeTuneRequest}} (uint8\_t group)}
+\DoxyCodeLine{132     \{}
+\DoxyCodeLine{133         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_a11fd85fb360a2f74542fda89d87b29e8}{Detail::makeSystem}}().\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af6e5fb58a2ae8a8a774f6c65172d5b34}{withGroup}} (group)}
+\DoxyCodeLine{134                                    .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_aeba2e5e3ec683f5bef6166e8ad609d06}{withU8}}<1> (0xf6);}
+\DoxyCodeLine{135     \}}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{137     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_a6a4cab4ffefc48f4b875a686b1b9399d}{makeTimingClock}} (uint8\_t group)}
+\DoxyCodeLine{138     \{}
+\DoxyCodeLine{139         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_a11fd85fb360a2f74542fda89d87b29e8}{Detail::makeSystem}}().\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af6e5fb58a2ae8a8a774f6c65172d5b34}{withGroup}} (group)}
+\DoxyCodeLine{140                                    .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_aeba2e5e3ec683f5bef6166e8ad609d06}{withU8}}<1> (0xf8);}
+\DoxyCodeLine{141     \}}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{143     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_a01051f1e386e5c829e52f3ee0e9eb921}{makeStart}} (uint8\_t group)}
+\DoxyCodeLine{144     \{}
+\DoxyCodeLine{145         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_a11fd85fb360a2f74542fda89d87b29e8}{Detail::makeSystem}}().\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af6e5fb58a2ae8a8a774f6c65172d5b34}{withGroup}} (group)}
+\DoxyCodeLine{146                                    .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_aeba2e5e3ec683f5bef6166e8ad609d06}{withU8}}<1> (0xfa);}
+\DoxyCodeLine{147     \}}
+\DoxyCodeLine{148 }
+\DoxyCodeLine{149     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_af57d124c596a354ee3ee9242dc6e7537}{makeContinue}} (uint8\_t group)}
+\DoxyCodeLine{150     \{}
+\DoxyCodeLine{151         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_a11fd85fb360a2f74542fda89d87b29e8}{Detail::makeSystem}}().\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af6e5fb58a2ae8a8a774f6c65172d5b34}{withGroup}} (group)}
+\DoxyCodeLine{152                                    .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_aeba2e5e3ec683f5bef6166e8ad609d06}{withU8}}<1> (0xfb);}
+\DoxyCodeLine{153     \}}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{155     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_a16ae8429713a82476d9fa5fa80a1e459}{makeStop}} (uint8\_t group)}
+\DoxyCodeLine{156     \{}
+\DoxyCodeLine{157         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_a11fd85fb360a2f74542fda89d87b29e8}{Detail::makeSystem}}().\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af6e5fb58a2ae8a8a774f6c65172d5b34}{withGroup}} (group)}
+\DoxyCodeLine{158                                    .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_aeba2e5e3ec683f5bef6166e8ad609d06}{withU8}}<1> (0xfc);}
+\DoxyCodeLine{159     \}}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_ad0a37014e1ddf2990045505a75304eb5}{makeActiveSensing}} (uint8\_t group)}
+\DoxyCodeLine{162     \{}
+\DoxyCodeLine{163         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_a11fd85fb360a2f74542fda89d87b29e8}{Detail::makeSystem}}().\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af6e5fb58a2ae8a8a774f6c65172d5b34}{withGroup}} (group)}
+\DoxyCodeLine{164                                    .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_aeba2e5e3ec683f5bef6166e8ad609d06}{withU8}}<1> (0xfe);}
+\DoxyCodeLine{165     \}}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{167     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_afd038f8fdf856349529a56ea19c7f6bd}{makeReset}} (uint8\_t group)}
+\DoxyCodeLine{168     \{}
+\DoxyCodeLine{169         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_a11fd85fb360a2f74542fda89d87b29e8}{Detail::makeSystem}}().\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af6e5fb58a2ae8a8a774f6c65172d5b34}{withGroup}} (group)}
+\DoxyCodeLine{170                                    .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_aeba2e5e3ec683f5bef6166e8ad609d06}{withU8}}<1> (0xff);}
+\DoxyCodeLine{171     \}}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{173     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_aa51361a25571631c08c8f8bc2ec441d5}{makeNoteOffV1}} (uint8\_t group,}
+\DoxyCodeLine{174                                    uint8\_t channel,}
+\DoxyCodeLine{175                                    uint8\_t note,}
+\DoxyCodeLine{176                                    uint8\_t velocity)}
+\DoxyCodeLine{177     \{}
+\DoxyCodeLine{178         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_a17de8ccb8077c1d073cb7ef6806eb633}{Detail::makeV1}}().\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af6e5fb58a2ae8a8a774f6c65172d5b34}{withGroup}} (group)}
+\DoxyCodeLine{179                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a467983da22d1a2e6ae446eb11be0d456}{withStatus}} (0x8)}
+\DoxyCodeLine{180                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a2e6648ab1772c7bfbf73abdcebcbfb06}{withChannel}} (channel)}
+\DoxyCodeLine{181                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_aeba2e5e3ec683f5bef6166e8ad609d06}{withU8}}<2> (note \& 0x7f)}
+\DoxyCodeLine{182                                .withU8<3> (velocity \& 0x7f);}
+\DoxyCodeLine{183     \}}
+\DoxyCodeLine{184 }
+\DoxyCodeLine{185     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_a16601d9d1a0ec73a9fa5eb9ae9c7f1d2}{makeNoteOnV1}} (uint8\_t group,}
+\DoxyCodeLine{186                                   uint8\_t channel,}
+\DoxyCodeLine{187                                   uint8\_t note,}
+\DoxyCodeLine{188                                   uint8\_t velocity)}
+\DoxyCodeLine{189     \{}
+\DoxyCodeLine{190         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_a17de8ccb8077c1d073cb7ef6806eb633}{Detail::makeV1}}().\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af6e5fb58a2ae8a8a774f6c65172d5b34}{withGroup}} (group)}
+\DoxyCodeLine{191                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a467983da22d1a2e6ae446eb11be0d456}{withStatus}} (0x9)}
+\DoxyCodeLine{192                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a2e6648ab1772c7bfbf73abdcebcbfb06}{withChannel}} (channel)}
+\DoxyCodeLine{193                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_aeba2e5e3ec683f5bef6166e8ad609d06}{withU8}}<2> (note \& 0x7f)}
+\DoxyCodeLine{194                                .withU8<3> (velocity \& 0x7f);}
+\DoxyCodeLine{195     \}}
+\DoxyCodeLine{196 }
+\DoxyCodeLine{197     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_a2ad2176cb0872ab5d83c65fb4bd8372d}{makePolyPressureV1}} (uint8\_t group,}
+\DoxyCodeLine{198                                         uint8\_t channel,}
+\DoxyCodeLine{199                                         uint8\_t note,}
+\DoxyCodeLine{200                                         uint8\_t pressure)}
+\DoxyCodeLine{201     \{}
+\DoxyCodeLine{202         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_a17de8ccb8077c1d073cb7ef6806eb633}{Detail::makeV1}}().\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af6e5fb58a2ae8a8a774f6c65172d5b34}{withGroup}} (group)}
+\DoxyCodeLine{203                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a467983da22d1a2e6ae446eb11be0d456}{withStatus}} (0xa)}
+\DoxyCodeLine{204                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a2e6648ab1772c7bfbf73abdcebcbfb06}{withChannel}} (channel)}
+\DoxyCodeLine{205                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_aeba2e5e3ec683f5bef6166e8ad609d06}{withU8}}<2> (note \& 0x7f)}
+\DoxyCodeLine{206                                .withU8<3> (pressure \& 0x7f);}
+\DoxyCodeLine{207     \}}
+\DoxyCodeLine{208 }
+\DoxyCodeLine{209     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_ab2cb78209176703f28839a60d99a3dd8}{makeControlChangeV1}} (uint8\_t group,}
+\DoxyCodeLine{210                                          uint8\_t channel,}
+\DoxyCodeLine{211                                          uint8\_t controller,}
+\DoxyCodeLine{212                                          uint8\_t \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}})}
+\DoxyCodeLine{213     \{}
+\DoxyCodeLine{214         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_a17de8ccb8077c1d073cb7ef6806eb633}{Detail::makeV1}}().\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af6e5fb58a2ae8a8a774f6c65172d5b34}{withGroup}} (group)}
+\DoxyCodeLine{215                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a467983da22d1a2e6ae446eb11be0d456}{withStatus}} (0xb)}
+\DoxyCodeLine{216                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a2e6648ab1772c7bfbf73abdcebcbfb06}{withChannel}} (channel)}
+\DoxyCodeLine{217                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_aeba2e5e3ec683f5bef6166e8ad609d06}{withU8}}<2> (controller \& 0x7f)}
+\DoxyCodeLine{218                                .withU8<3> (\mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}} \& 0x7f);}
+\DoxyCodeLine{219     \}}
+\DoxyCodeLine{220 }
+\DoxyCodeLine{221     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_a68ef0c5dce81ee87d05a72110a4a7ce7}{makeProgramChangeV1}} (uint8\_t group,}
+\DoxyCodeLine{222                                          uint8\_t channel,}
+\DoxyCodeLine{223                                          uint8\_t \mbox{\hyperlink{namespacegl_a7496b406c81bc6c8b6f19c1e727a54b7}{program}})}
+\DoxyCodeLine{224     \{}
+\DoxyCodeLine{225         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_a17de8ccb8077c1d073cb7ef6806eb633}{Detail::makeV1}}().\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af6e5fb58a2ae8a8a774f6c65172d5b34}{withGroup}} (group)}
+\DoxyCodeLine{226                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a467983da22d1a2e6ae446eb11be0d456}{withStatus}} (0xc)}
+\DoxyCodeLine{227                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a2e6648ab1772c7bfbf73abdcebcbfb06}{withChannel}} (channel)}
+\DoxyCodeLine{228                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_aeba2e5e3ec683f5bef6166e8ad609d06}{withU8}}<2> (\mbox{\hyperlink{namespacegl_a7496b406c81bc6c8b6f19c1e727a54b7}{program}} \& 0x7f);}
+\DoxyCodeLine{229     \}}
+\DoxyCodeLine{230 }
+\DoxyCodeLine{231     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_a73a5a280709c56e7ce66b191c900cf4c}{makeChannelPressureV1}} (uint8\_t group,}
+\DoxyCodeLine{232                                            uint8\_t channel,}
+\DoxyCodeLine{233                                            uint8\_t pressure)}
+\DoxyCodeLine{234     \{}
+\DoxyCodeLine{235         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_a17de8ccb8077c1d073cb7ef6806eb633}{Detail::makeV1}}().\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af6e5fb58a2ae8a8a774f6c65172d5b34}{withGroup}} (group)}
+\DoxyCodeLine{236                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a467983da22d1a2e6ae446eb11be0d456}{withStatus}} (0xd)}
+\DoxyCodeLine{237                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a2e6648ab1772c7bfbf73abdcebcbfb06}{withChannel}} (channel)}
+\DoxyCodeLine{238                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_aeba2e5e3ec683f5bef6166e8ad609d06}{withU8}}<2> (pressure \& 0x7f);}
+\DoxyCodeLine{239     \}}
+\DoxyCodeLine{240 }
+\DoxyCodeLine{241     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_a19d25664692c5c96f748d56da61df801}{makePitchBend}} (uint8\_t group,}
+\DoxyCodeLine{242                                    uint8\_t channel,}
+\DoxyCodeLine{243                                    uint16\_t pitchbend)}
+\DoxyCodeLine{244     \{}
+\DoxyCodeLine{245         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_a17de8ccb8077c1d073cb7ef6806eb633}{Detail::makeV1}}().\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af6e5fb58a2ae8a8a774f6c65172d5b34}{withGroup}} (group)}
+\DoxyCodeLine{246                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a467983da22d1a2e6ae446eb11be0d456}{withStatus}} (0xe)}
+\DoxyCodeLine{247                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a2e6648ab1772c7bfbf73abdcebcbfb06}{withChannel}} (channel)}
+\DoxyCodeLine{248                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_aeba2e5e3ec683f5bef6166e8ad609d06}{withU8}}<2> (pitchbend \& 0x7f)}
+\DoxyCodeLine{249                                .withU8<3> ((pitchbend >> 7) \& 0x7f);}
+\DoxyCodeLine{250     \}}
+\DoxyCodeLine{251 }
+\DoxyCodeLine{252     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX2}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_aa711908801a5a7d837d7e2195800f0f9}{makeSysExIn1Packet}} (uint8\_t group,}
+\DoxyCodeLine{253                                         uint8\_t numBytes,}
+\DoxyCodeLine{254                                         \textcolor{keyword}{const} uint8\_t* \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}})}
+\DoxyCodeLine{255     \{}
+\DoxyCodeLine{256         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_a80d34798262f9a15dc411d6a12c7a7de}{Detail::makeSysEx}} (group, 0x0, numBytes, \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}});}
+\DoxyCodeLine{257     \}}
+\DoxyCodeLine{258 }
+\DoxyCodeLine{259     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX2}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_a2d9a0835f7dc90b985f9e0281d034214}{makeSysExStart}} (uint8\_t group,}
+\DoxyCodeLine{260                                     uint8\_t numBytes,}
+\DoxyCodeLine{261                                     \textcolor{keyword}{const} uint8\_t* \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}})}
+\DoxyCodeLine{262     \{}
+\DoxyCodeLine{263         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_a80d34798262f9a15dc411d6a12c7a7de}{Detail::makeSysEx}} (group, 0x1, numBytes, \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}});}
+\DoxyCodeLine{264     \}}
+\DoxyCodeLine{265 }
+\DoxyCodeLine{266     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX2}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_a5b66bd940e8c9bbe5b939ada4273d1be}{makeSysExContinue}} (uint8\_t group,}
+\DoxyCodeLine{267                                        uint8\_t numBytes,}
+\DoxyCodeLine{268                                        \textcolor{keyword}{const} uint8\_t* \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}})}
+\DoxyCodeLine{269     \{}
+\DoxyCodeLine{270         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_a80d34798262f9a15dc411d6a12c7a7de}{Detail::makeSysEx}} (group, 0x2, numBytes, \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}});}
+\DoxyCodeLine{271     \}}
+\DoxyCodeLine{272 }
+\DoxyCodeLine{273     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX2}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_a4b903deada94005b5e92d1e351f3ba5b}{makeSysExEnd}} (uint8\_t group,}
+\DoxyCodeLine{274                                   uint8\_t numBytes,}
+\DoxyCodeLine{275                                   \textcolor{keyword}{const} uint8\_t* \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}})}
+\DoxyCodeLine{276     \{}
+\DoxyCodeLine{277         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_a80d34798262f9a15dc411d6a12c7a7de}{Detail::makeSysEx}} (group, 0x3, numBytes, \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}});}
+\DoxyCodeLine{278     \}}
+\DoxyCodeLine{279 }
+\DoxyCodeLine{280     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX2}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_a2e344ef28a88e5a3962dd226b73dc915}{makeRegisteredPerNoteControllerV2}} (uint8\_t group,}
+\DoxyCodeLine{281                                                        uint8\_t channel,}
+\DoxyCodeLine{282                                                        uint8\_t note,}
+\DoxyCodeLine{283                                                        uint8\_t controller,}
+\DoxyCodeLine{284                                                        uint32\_t \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}})}
+\DoxyCodeLine{285     \{}
+\DoxyCodeLine{286         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_aeaae989820a4704ffa4d71dd979ab40c}{Detail::makeV2}}().\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af6e5fb58a2ae8a8a774f6c65172d5b34}{withGroup}} (group)}
+\DoxyCodeLine{287                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a467983da22d1a2e6ae446eb11be0d456}{withStatus}} (0x0)}
+\DoxyCodeLine{288                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a2e6648ab1772c7bfbf73abdcebcbfb06}{withChannel}} (channel)}
+\DoxyCodeLine{289                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_aeba2e5e3ec683f5bef6166e8ad609d06}{withU8}}<2> (note \& 0x7f)}
+\DoxyCodeLine{290                                .withU8<3> (controller \& 0x7f)}
+\DoxyCodeLine{291                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af41eac393f30a4d1c197b12d21cd7126}{withU32}}<1> (\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}});}
+\DoxyCodeLine{292     \}}
+\DoxyCodeLine{293 }
+\DoxyCodeLine{294     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX2}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_a7044e5b3645174d29202c8f517a98bf0}{makeAssignablePerNoteControllerV2}} (uint8\_t group,}
+\DoxyCodeLine{295                                                        uint8\_t channel,}
+\DoxyCodeLine{296                                                        uint8\_t note,}
+\DoxyCodeLine{297                                                        uint8\_t controller,}
+\DoxyCodeLine{298                                                        uint32\_t \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}})}
+\DoxyCodeLine{299     \{}
+\DoxyCodeLine{300         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_aeaae989820a4704ffa4d71dd979ab40c}{Detail::makeV2}}().\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af6e5fb58a2ae8a8a774f6c65172d5b34}{withGroup}} (group)}
+\DoxyCodeLine{301                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a467983da22d1a2e6ae446eb11be0d456}{withStatus}} (0x1)}
+\DoxyCodeLine{302                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a2e6648ab1772c7bfbf73abdcebcbfb06}{withChannel}} (channel)}
+\DoxyCodeLine{303                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_aeba2e5e3ec683f5bef6166e8ad609d06}{withU8}}<2> (note \& 0x7f)}
+\DoxyCodeLine{304                                .withU8<3> (controller \& 0x7f)}
+\DoxyCodeLine{305                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af41eac393f30a4d1c197b12d21cd7126}{withU32}}<1> (\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}});}
+\DoxyCodeLine{306     \}}
+\DoxyCodeLine{307 }
+\DoxyCodeLine{308     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX2}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_a98f8fc4e99d6a1319922dfb70680b5d5}{makeRegisteredControllerV2}} (uint8\_t group,}
+\DoxyCodeLine{309                                                 uint8\_t channel,}
+\DoxyCodeLine{310                                                 uint8\_t bank,}
+\DoxyCodeLine{311                                                 uint8\_t \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}},}
+\DoxyCodeLine{312                                                 uint32\_t \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}})}
+\DoxyCodeLine{313     \{}
+\DoxyCodeLine{314         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_aeaae989820a4704ffa4d71dd979ab40c}{Detail::makeV2}}().\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af6e5fb58a2ae8a8a774f6c65172d5b34}{withGroup}} (group)}
+\DoxyCodeLine{315                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a467983da22d1a2e6ae446eb11be0d456}{withStatus}} (0x2)}
+\DoxyCodeLine{316                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a2e6648ab1772c7bfbf73abdcebcbfb06}{withChannel}} (channel)}
+\DoxyCodeLine{317                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_aeba2e5e3ec683f5bef6166e8ad609d06}{withU8}}<2> (bank \& 0x7f)}
+\DoxyCodeLine{318                                .withU8<3> (\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}} \& 0x7f)}
+\DoxyCodeLine{319                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af41eac393f30a4d1c197b12d21cd7126}{withU32}}<1> (\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}});}
+\DoxyCodeLine{320     \}}
+\DoxyCodeLine{321 }
+\DoxyCodeLine{322     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX2}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_a53b9d9746f2c427fc07f8b807934bb1d}{makeAssignableControllerV2}} (uint8\_t group,}
+\DoxyCodeLine{323                                                 uint8\_t channel,}
+\DoxyCodeLine{324                                                 uint8\_t bank,}
+\DoxyCodeLine{325                                                 uint8\_t \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}},}
+\DoxyCodeLine{326                                                 uint32\_t \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}})}
+\DoxyCodeLine{327     \{}
+\DoxyCodeLine{328         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_aeaae989820a4704ffa4d71dd979ab40c}{Detail::makeV2}}().\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af6e5fb58a2ae8a8a774f6c65172d5b34}{withGroup}} (group)}
+\DoxyCodeLine{329                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a467983da22d1a2e6ae446eb11be0d456}{withStatus}} (0x3)}
+\DoxyCodeLine{330                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a2e6648ab1772c7bfbf73abdcebcbfb06}{withChannel}} (channel)}
+\DoxyCodeLine{331                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_aeba2e5e3ec683f5bef6166e8ad609d06}{withU8}}<2> (bank \& 0x7f)}
+\DoxyCodeLine{332                                .withU8<3> (\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}} \& 0x7f)}
+\DoxyCodeLine{333                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af41eac393f30a4d1c197b12d21cd7126}{withU32}}<1> (\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}});}
+\DoxyCodeLine{334     \}}
+\DoxyCodeLine{335 }
+\DoxyCodeLine{336     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX2}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_a931bd2b2b4a629925f47db7dc8847939}{makeRelativeRegisteredControllerV2}} (uint8\_t group,}
+\DoxyCodeLine{337                                                         uint8\_t channel,}
+\DoxyCodeLine{338                                                         uint8\_t bank,}
+\DoxyCodeLine{339                                                         uint8\_t \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}},}
+\DoxyCodeLine{340                                                         uint32\_t \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}})}
+\DoxyCodeLine{341     \{}
+\DoxyCodeLine{342         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_aeaae989820a4704ffa4d71dd979ab40c}{Detail::makeV2}}().\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af6e5fb58a2ae8a8a774f6c65172d5b34}{withGroup}} (group)}
+\DoxyCodeLine{343                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a467983da22d1a2e6ae446eb11be0d456}{withStatus}} (0x4)}
+\DoxyCodeLine{344                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a2e6648ab1772c7bfbf73abdcebcbfb06}{withChannel}} (channel)}
+\DoxyCodeLine{345                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_aeba2e5e3ec683f5bef6166e8ad609d06}{withU8}}<2> (bank \& 0x7f)}
+\DoxyCodeLine{346                                .withU8<3> (\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}} \& 0x7f)}
+\DoxyCodeLine{347                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af41eac393f30a4d1c197b12d21cd7126}{withU32}}<1> (\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}});}
+\DoxyCodeLine{348     \}}
+\DoxyCodeLine{349 }
+\DoxyCodeLine{350     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX2}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_a1aa42e0a280889338bc191bc9123d86e}{makeRelativeAssignableControllerV2}} (uint8\_t group,}
+\DoxyCodeLine{351                                                         uint8\_t channel,}
+\DoxyCodeLine{352                                                         uint8\_t bank,}
+\DoxyCodeLine{353                                                         uint8\_t \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}},}
+\DoxyCodeLine{354                                                         uint32\_t \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}})}
+\DoxyCodeLine{355     \{}
+\DoxyCodeLine{356         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_aeaae989820a4704ffa4d71dd979ab40c}{Detail::makeV2}}().\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af6e5fb58a2ae8a8a774f6c65172d5b34}{withGroup}} (group)}
+\DoxyCodeLine{357                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a467983da22d1a2e6ae446eb11be0d456}{withStatus}} (0x5)}
+\DoxyCodeLine{358                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a2e6648ab1772c7bfbf73abdcebcbfb06}{withChannel}} (channel)}
+\DoxyCodeLine{359                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_aeba2e5e3ec683f5bef6166e8ad609d06}{withU8}}<2> (bank \& 0x7f)}
+\DoxyCodeLine{360                                .withU8<3> (\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}} \& 0x7f)}
+\DoxyCodeLine{361                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af41eac393f30a4d1c197b12d21cd7126}{withU32}}<1> (\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}});}
+\DoxyCodeLine{362     \}}
+\DoxyCodeLine{363 }
+\DoxyCodeLine{364     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX2}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_aeebea5ef2c5e60e9348cea29e4e1325c}{makePerNotePitchBendV2}} (uint8\_t group,}
+\DoxyCodeLine{365                                             uint8\_t channel,}
+\DoxyCodeLine{366                                             uint8\_t note,}
+\DoxyCodeLine{367                                             uint32\_t \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}})}
+\DoxyCodeLine{368     \{}
+\DoxyCodeLine{369         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_aeaae989820a4704ffa4d71dd979ab40c}{Detail::makeV2}}().\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af6e5fb58a2ae8a8a774f6c65172d5b34}{withGroup}} (group)}
+\DoxyCodeLine{370                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a467983da22d1a2e6ae446eb11be0d456}{withStatus}} (0x6)}
+\DoxyCodeLine{371                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a2e6648ab1772c7bfbf73abdcebcbfb06}{withChannel}} (channel)}
+\DoxyCodeLine{372                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_aeba2e5e3ec683f5bef6166e8ad609d06}{withU8}}<2> (note \& 0x7f)}
+\DoxyCodeLine{373                                .withU32<1> (\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}});}
+\DoxyCodeLine{374     \}}
+\DoxyCodeLine{375 }
+\DoxyCodeLine{376     \textcolor{keyword}{enum class} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_aa3b94361fdacbcdef9c1a5acf9a41e72}{NoteAttributeKind}} : uint8\_t}
+\DoxyCodeLine{377     \{}
+\DoxyCodeLine{378         \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_aa3b94361fdacbcdef9c1a5acf9a41e72a334c4a4c42fdb79d7ebc3e73b517e6f8}{none}}            = 0x00,}
+\DoxyCodeLine{379         \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_aa3b94361fdacbcdef9c1a5acf9a41e72ac2904bca62b22443d6cf5e9d89cab204}{manufacturer}}    = 0x01,}
+\DoxyCodeLine{380         \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_aa3b94361fdacbcdef9c1a5acf9a41e72a7d97481b1fe66f4b51db90da7e794d9f}{profile}}         = 0x02,}
+\DoxyCodeLine{381         \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_aa3b94361fdacbcdef9c1a5acf9a41e72a5835014055572598c88a09e662f5693d}{pitch7\_9}}        = 0x03}
+\DoxyCodeLine{382     \};}
+\DoxyCodeLine{383 }
+\DoxyCodeLine{384     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX2}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_abef20aa96743b4c69a0c66433f9a85f2}{makeNoteOffV2}} (uint8\_t group,}
+\DoxyCodeLine{385                                    uint8\_t channel,}
+\DoxyCodeLine{386                                    uint8\_t note,}
+\DoxyCodeLine{387                                    \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_aa3b94361fdacbcdef9c1a5acf9a41e72}{NoteAttributeKind}} attribute,}
+\DoxyCodeLine{388                                    uint16\_t velocity,}
+\DoxyCodeLine{389                                    uint16\_t attributeValue)}
+\DoxyCodeLine{390     \{}
+\DoxyCodeLine{391         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_aeaae989820a4704ffa4d71dd979ab40c}{Detail::makeV2}}().\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af6e5fb58a2ae8a8a774f6c65172d5b34}{withGroup}} (group)}
+\DoxyCodeLine{392                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a467983da22d1a2e6ae446eb11be0d456}{withStatus}} (0x8)}
+\DoxyCodeLine{393                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a2e6648ab1772c7bfbf73abdcebcbfb06}{withChannel}} (channel)}
+\DoxyCodeLine{394                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_aeba2e5e3ec683f5bef6166e8ad609d06}{withU8}}<2> (note \& 0x7f)}
+\DoxyCodeLine{395                                .withU8<3> ((uint8\_t) attribute)}
+\DoxyCodeLine{396                                .withU16<2> (velocity)}
+\DoxyCodeLine{397                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_acd33d52e3da9d30e28246ea72db7e2d8}{withU16}}<3> (attributeValue);}
+\DoxyCodeLine{398     \}}
+\DoxyCodeLine{399 }
+\DoxyCodeLine{400     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX2}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_ae3b3f0c36ee74bbbf80629973f2e45c9}{makeNoteOnV2}} (uint8\_t group,}
+\DoxyCodeLine{401                                   uint8\_t channel,}
+\DoxyCodeLine{402                                   uint8\_t note,}
+\DoxyCodeLine{403                                   \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_aa3b94361fdacbcdef9c1a5acf9a41e72}{NoteAttributeKind}} attribute,}
+\DoxyCodeLine{404                                   uint16\_t velocity,}
+\DoxyCodeLine{405                                   uint16\_t attributeValue)}
+\DoxyCodeLine{406     \{}
+\DoxyCodeLine{407         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_aeaae989820a4704ffa4d71dd979ab40c}{Detail::makeV2}}().\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af6e5fb58a2ae8a8a774f6c65172d5b34}{withGroup}} (group)}
+\DoxyCodeLine{408                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a467983da22d1a2e6ae446eb11be0d456}{withStatus}} (0x9)}
+\DoxyCodeLine{409                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a2e6648ab1772c7bfbf73abdcebcbfb06}{withChannel}} (channel)}
+\DoxyCodeLine{410                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_aeba2e5e3ec683f5bef6166e8ad609d06}{withU8}}<2> (note \& 0x7f)}
+\DoxyCodeLine{411                                .withU8<3> ((uint8\_t) attribute)}
+\DoxyCodeLine{412                                .withU16<2> (velocity)}
+\DoxyCodeLine{413                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_acd33d52e3da9d30e28246ea72db7e2d8}{withU16}}<3> (attributeValue);}
+\DoxyCodeLine{414     \}}
+\DoxyCodeLine{415 }
+\DoxyCodeLine{416     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX2}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_ae8345c5a38322b6c4b4a269a2ebb7c15}{makePolyPressureV2}} (uint8\_t group,}
+\DoxyCodeLine{417                                         uint8\_t channel,}
+\DoxyCodeLine{418                                         uint8\_t note,}
+\DoxyCodeLine{419                                         uint32\_t \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}})}
+\DoxyCodeLine{420     \{}
+\DoxyCodeLine{421         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_aeaae989820a4704ffa4d71dd979ab40c}{Detail::makeV2}}().\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af6e5fb58a2ae8a8a774f6c65172d5b34}{withGroup}} (group)}
+\DoxyCodeLine{422                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a467983da22d1a2e6ae446eb11be0d456}{withStatus}} (0xa)}
+\DoxyCodeLine{423                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a2e6648ab1772c7bfbf73abdcebcbfb06}{withChannel}} (channel)}
+\DoxyCodeLine{424                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_aeba2e5e3ec683f5bef6166e8ad609d06}{withU8}}<2> (note \& 0x7f)}
+\DoxyCodeLine{425                                .withU32<1> (\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}});}
+\DoxyCodeLine{426     \}}
+\DoxyCodeLine{427 }
+\DoxyCodeLine{428     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX2}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_a1dfb68e5cdd79db01d457aedffb287f6}{makeControlChangeV2}} (uint8\_t group,}
+\DoxyCodeLine{429                                          uint8\_t channel,}
+\DoxyCodeLine{430                                          uint8\_t controller,}
+\DoxyCodeLine{431                                          uint32\_t \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}})}
+\DoxyCodeLine{432     \{}
+\DoxyCodeLine{433         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_aeaae989820a4704ffa4d71dd979ab40c}{Detail::makeV2}}().\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af6e5fb58a2ae8a8a774f6c65172d5b34}{withGroup}} (group)}
+\DoxyCodeLine{434                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a467983da22d1a2e6ae446eb11be0d456}{withStatus}} (0xb)}
+\DoxyCodeLine{435                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a2e6648ab1772c7bfbf73abdcebcbfb06}{withChannel}} (channel)}
+\DoxyCodeLine{436                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_aeba2e5e3ec683f5bef6166e8ad609d06}{withU8}}<2> (controller \& 0x7f)}
+\DoxyCodeLine{437                                .withU32<1> (\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}});}
+\DoxyCodeLine{438     \}}
+\DoxyCodeLine{439 }
+\DoxyCodeLine{440     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX2}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_ad0e47473c2b8bf0a8fc27b74d2b49f77}{makeProgramChangeV2}} (uint8\_t group,}
+\DoxyCodeLine{441                                          uint8\_t channel,}
+\DoxyCodeLine{442                                          uint8\_t optionFlags,}
+\DoxyCodeLine{443                                          uint8\_t \mbox{\hyperlink{namespacegl_a7496b406c81bc6c8b6f19c1e727a54b7}{program}},}
+\DoxyCodeLine{444                                          uint8\_t bankMsb,}
+\DoxyCodeLine{445                                          uint8\_t bankLsb)}
+\DoxyCodeLine{446     \{}
+\DoxyCodeLine{447         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_aeaae989820a4704ffa4d71dd979ab40c}{Detail::makeV2}}().\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af6e5fb58a2ae8a8a774f6c65172d5b34}{withGroup}} (group)}
+\DoxyCodeLine{448                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a467983da22d1a2e6ae446eb11be0d456}{withStatus}} (0xc)}
+\DoxyCodeLine{449                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a2e6648ab1772c7bfbf73abdcebcbfb06}{withChannel}} (channel)}
+\DoxyCodeLine{450                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_aeba2e5e3ec683f5bef6166e8ad609d06}{withU8}}<3> (optionFlags)}
+\DoxyCodeLine{451                                .withU8<4> (\mbox{\hyperlink{namespacegl_a7496b406c81bc6c8b6f19c1e727a54b7}{program}})}
+\DoxyCodeLine{452                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_aeba2e5e3ec683f5bef6166e8ad609d06}{withU8}}<6> (bankMsb)}
+\DoxyCodeLine{453                                .withU8<7> (bankLsb);}
+\DoxyCodeLine{454     \}}
+\DoxyCodeLine{455 }
+\DoxyCodeLine{456     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX2}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_a5fe8059363c15eaaa07ea21e3e536083}{makeChannelPressureV2}} (uint8\_t group,}
+\DoxyCodeLine{457                                            uint8\_t channel,}
+\DoxyCodeLine{458                                            uint32\_t \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}})}
+\DoxyCodeLine{459     \{}
+\DoxyCodeLine{460         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_aeaae989820a4704ffa4d71dd979ab40c}{Detail::makeV2}}().\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af6e5fb58a2ae8a8a774f6c65172d5b34}{withGroup}} (group)}
+\DoxyCodeLine{461                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a467983da22d1a2e6ae446eb11be0d456}{withStatus}} (0xd)}
+\DoxyCodeLine{462                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a2e6648ab1772c7bfbf73abdcebcbfb06}{withChannel}} (channel)}
+\DoxyCodeLine{463                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af41eac393f30a4d1c197b12d21cd7126}{withU32}}<1> (\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}});}
+\DoxyCodeLine{464     \}}
+\DoxyCodeLine{465 }
+\DoxyCodeLine{466     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX2}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_a903f23c258161532f7708b844b77c8af}{makePitchBendV2}} (uint8\_t group,}
+\DoxyCodeLine{467                                      uint8\_t channel,}
+\DoxyCodeLine{468                                      uint32\_t \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}})}
+\DoxyCodeLine{469     \{}
+\DoxyCodeLine{470         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_aeaae989820a4704ffa4d71dd979ab40c}{Detail::makeV2}}().\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af6e5fb58a2ae8a8a774f6c65172d5b34}{withGroup}} (group)}
+\DoxyCodeLine{471                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a467983da22d1a2e6ae446eb11be0d456}{withStatus}} (0xe)}
+\DoxyCodeLine{472                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a2e6648ab1772c7bfbf73abdcebcbfb06}{withChannel}} (channel)}
+\DoxyCodeLine{473                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af41eac393f30a4d1c197b12d21cd7126}{withU32}}<1> (\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}});}
+\DoxyCodeLine{474     \}}
+\DoxyCodeLine{475 }
+\DoxyCodeLine{476     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX2}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_a128b0d7e21372d1f629b884101a05c03}{makePerNoteManagementV2}} (uint8\_t group,}
+\DoxyCodeLine{477                                              uint8\_t channel,}
+\DoxyCodeLine{478                                              uint8\_t note,}
+\DoxyCodeLine{479                                              uint8\_t optionFlags)}
+\DoxyCodeLine{480     \{}
+\DoxyCodeLine{481         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_aeaae989820a4704ffa4d71dd979ab40c}{Detail::makeV2}}().\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_af6e5fb58a2ae8a8a774f6c65172d5b34}{withGroup}} (group)}
+\DoxyCodeLine{482                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a467983da22d1a2e6ae446eb11be0d456}{withStatus}} (0xf)}
+\DoxyCodeLine{483                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a2e6648ab1772c7bfbf73abdcebcbfb06}{withChannel}} (channel)}
+\DoxyCodeLine{484                                .\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_aeba2e5e3ec683f5bef6166e8ad609d06}{withU8}}<2> (note)}
+\DoxyCodeLine{485                                .withU8<3> (optionFlags);}
+\DoxyCodeLine{486     \}}
+\DoxyCodeLine{487 }
+\DoxyCodeLine{488 }
+\DoxyCodeLine{489     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX4}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_ade670abd32ae6d637d4e601d8728be34}{makeSysEx8in1Packet}} (uint8\_t group,}
+\DoxyCodeLine{490                                          uint8\_t numBytes,}
+\DoxyCodeLine{491                                          uint8\_t streamId,}
+\DoxyCodeLine{492                                          \textcolor{keyword}{const} uint8\_t* \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}})}
+\DoxyCodeLine{493     \{}
+\DoxyCodeLine{494         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_a92b102e39dd415551158a38f8ba65839}{Detail::makeSysEx8}} (group, 0x0, numBytes, 3, \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}).\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_aeba2e5e3ec683f5bef6166e8ad609d06}{withU8}}<2> (streamId);}
+\DoxyCodeLine{495     \}}
+\DoxyCodeLine{496 }
+\DoxyCodeLine{497     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX4}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_ad1be2f5280c59d6fc8ed02f870e54198}{makeSysEx8Start}} (uint8\_t group,}
+\DoxyCodeLine{498                                      uint8\_t numBytes,}
+\DoxyCodeLine{499                                      uint8\_t streamId,}
+\DoxyCodeLine{500                                      \textcolor{keyword}{const} uint8\_t* \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}})}
+\DoxyCodeLine{501     \{}
+\DoxyCodeLine{502         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_a92b102e39dd415551158a38f8ba65839}{Detail::makeSysEx8}} (group, 0x1, numBytes, 3, \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}).\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_aeba2e5e3ec683f5bef6166e8ad609d06}{withU8}}<2> (streamId);}
+\DoxyCodeLine{503     \}}
+\DoxyCodeLine{504 }
+\DoxyCodeLine{505     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX4}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_aeb4579647e9ae0cc99b9c9fdefdfd3e8}{makeSysEx8Continue}} (uint8\_t group,}
+\DoxyCodeLine{506                                         uint8\_t numBytes,}
+\DoxyCodeLine{507                                         uint8\_t streamId,}
+\DoxyCodeLine{508                                         \textcolor{keyword}{const} uint8\_t* \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}})}
+\DoxyCodeLine{509     \{}
+\DoxyCodeLine{510         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_a92b102e39dd415551158a38f8ba65839}{Detail::makeSysEx8}} (group, 0x2, numBytes, 3, \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}).\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_aeba2e5e3ec683f5bef6166e8ad609d06}{withU8}}<2> (streamId);}
+\DoxyCodeLine{511     \}}
+\DoxyCodeLine{512 }
+\DoxyCodeLine{513     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX4}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_a78d13aedaa67d0df6f212318411f21ba}{makeSysEx8End}} (uint8\_t group,}
+\DoxyCodeLine{514                                    uint8\_t numBytes,}
+\DoxyCodeLine{515                                    uint8\_t streamId,}
+\DoxyCodeLine{516                                    \textcolor{keyword}{const} uint8\_t* \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}})}
+\DoxyCodeLine{517     \{}
+\DoxyCodeLine{518         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_a92b102e39dd415551158a38f8ba65839}{Detail::makeSysEx8}} (group, 0x3, numBytes, 3, \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}).\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_aeba2e5e3ec683f5bef6166e8ad609d06}{withU8}}<2> (streamId);}
+\DoxyCodeLine{519     \}}
+\DoxyCodeLine{520 }
+\DoxyCodeLine{521     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX4}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_aaa13b81693b692465f1adfa21392b878}{makeMixedDataSetHeader}} (uint8\_t group,}
+\DoxyCodeLine{522                                             uint8\_t dataSetId,}
+\DoxyCodeLine{523                                             \textcolor{keyword}{const} uint8\_t* \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}})}
+\DoxyCodeLine{524     \{}
+\DoxyCodeLine{525         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_a92b102e39dd415551158a38f8ba65839}{Detail::makeSysEx8}} (group, 0x8, 14, 2, \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}).\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a2e6648ab1772c7bfbf73abdcebcbfb06}{withChannel}} (dataSetId);}
+\DoxyCodeLine{526     \}}
+\DoxyCodeLine{527 }
+\DoxyCodeLine{528     \textcolor{keyword}{static} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX4}} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_a79c288627b011b8027470ef0020f9e37}{makeDataSetPayload}} (uint8\_t group,}
+\DoxyCodeLine{529                                         uint8\_t dataSetId,}
+\DoxyCodeLine{530                                         \textcolor{keyword}{const} uint8\_t* \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}})}
+\DoxyCodeLine{531     \{}
+\DoxyCodeLine{532         \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_1_1_detail_a92b102e39dd415551158a38f8ba65839}{Detail::makeSysEx8}} (group, 0x9, 14, 2, \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}).\mbox{\hyperlink{classuniversal__midi__packets_1_1_packet_a2e6648ab1772c7bfbf73abdcebcbfb06}{withChannel}} (dataSetId);}
+\DoxyCodeLine{533     \}}
+\DoxyCodeLine{534 \};}
+\DoxyCodeLine{535 }
+\DoxyCodeLine{536 \}}
+\DoxyCodeLine{537 }
+\DoxyCodeLine{538 }
+\DoxyCodeLine{539 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{540 }
+
+\end{DoxyCode}

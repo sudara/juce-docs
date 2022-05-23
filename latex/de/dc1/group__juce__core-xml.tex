@@ -1,0 +1,130 @@
+\hypertarget{group__juce__core-xml}{}\doxysection{xml}
+\label{group__juce__core-xml}\index{xml@{xml}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_xml_document}{Xml\+Document}}
+\item 
+class \mbox{\hyperlink{class_xml_element}{Xml\+Element}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group__juce__core-xml_gace692e5be62f7ab58363d91b52eb839e}{for\+Each\+Xml\+Child\+Element}}(parent\+Xml\+Element,  child\+Element\+Variable\+Name)~    for (auto$\ast$ (child\+Element\+Variable\+Name) \+: ((parent\+Xml\+Element).macro\+Based\+For\+Loop(), (parent\+Xml\+Element).get\+Child\+Iterator()))
+\item 
+\#define \mbox{\hyperlink{group__juce__core-xml_ga6cf39e14a10e2e46f753b0c79c66f2f9}{for\+Each\+Xml\+Child\+Element\+With\+Tag\+Name}}(parent\+Xml\+Element,  child\+Element\+Variable\+Name,  required\+Tag\+Name)~    for (auto$\ast$ (child\+Element\+Variable\+Name) \+: ((parent\+Xml\+Element).macro\+Based\+For\+Loop(), (parent\+Xml\+Element).get\+Child\+With\+Tag\+Name\+Iterator ((required\+Tag\+Name))))
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_xml_element}{Xml\+Element}} $>$ \mbox{\hyperlink{group__juce__core-xml_ga6fe8f419a14bfa0ef5fd85448c823fd6}{parse\+XML}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&text\+To\+Parse)
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_xml_element}{Xml\+Element}} $>$ \mbox{\hyperlink{group__juce__core-xml_ga5286ad9ba5af0be7d7d9c8a723f884d4}{parse\+XML}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_file}{File}} \&file\+To\+Parse)
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_xml_element}{Xml\+Element}} $>$ \mbox{\hyperlink{group__juce__core-xml_ga9a25da47b0802e29de7f01cfb9dccd90}{parse\+XMLIf\+Tag\+Matches}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&text\+To\+Parse, \mbox{\hyperlink{class_string_ref}{String\+Ref}} required\+Tag)
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_xml_element}{Xml\+Element}} $>$ \mbox{\hyperlink{group__juce__core-xml_ga4c9caf76da89b746022db9054601b6b0}{parse\+XMLIf\+Tag\+Matches}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_file}{File}} \&file\+To\+Parse, \mbox{\hyperlink{class_string_ref}{String\+Ref}} required\+Tag)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{group__juce__core-xml_gace692e5be62f7ab58363d91b52eb839e}\label{group__juce__core-xml_gace692e5be62f7ab58363d91b52eb839e}} 
+\index{xml@{xml}!forEachXmlChildElement@{forEachXmlChildElement}}
+\index{forEachXmlChildElement@{forEachXmlChildElement}!xml@{xml}}
+\doxysubsubsection{\texorpdfstring{forEachXmlChildElement}{forEachXmlChildElement}}
+{\footnotesize\ttfamily \#define for\+Each\+Xml\+Child\+Element(\begin{DoxyParamCaption}\item[{}]{parent\+Xml\+Element,  }\item[{}]{child\+Element\+Variable\+Name }\end{DoxyParamCaption})~    for (auto$\ast$ (child\+Element\+Variable\+Name) \+: ((parent\+Xml\+Element).macro\+Based\+For\+Loop(), (parent\+Xml\+Element).get\+Child\+Iterator()))}
+
+DEPRECATED\+: A handy macro to make it easy to iterate all the child elements in an \mbox{\hyperlink{class_xml_element}{Xml\+Element}}.
+
+New code should avoid this macro, and instead use get\+Child\+Iterator directly.
+
+The parent\+Xml\+Element should be a reference to the parent XML, and the child\+Element\+Variable\+Name will be the name of a pointer to each child element.
+
+E.\+g. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{class_xml_element}{XmlElement}}* myParentXml = createSomeKindOfXmlDocument();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{group__juce__core-xml_gace692e5be62f7ab58363d91b52eb839e}{forEachXmlChildElement}} (*myParentXml, child)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (child-\/>hasTagName (\textcolor{stringliteral}{"{}FOO"{}}))}
+\DoxyCodeLine{        doSomethingWithXmlElement (child);}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{group__juce__core-xml_ga6cf39e14a10e2e46f753b0c79c66f2f9}{for\+Each\+Xml\+Child\+Element\+With\+Tag\+Name}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{group__juce__core-xml_ga6cf39e14a10e2e46f753b0c79c66f2f9}\label{group__juce__core-xml_ga6cf39e14a10e2e46f753b0c79c66f2f9}} 
+\index{xml@{xml}!forEachXmlChildElementWithTagName@{forEachXmlChildElementWithTagName}}
+\index{forEachXmlChildElementWithTagName@{forEachXmlChildElementWithTagName}!xml@{xml}}
+\doxysubsubsection{\texorpdfstring{forEachXmlChildElementWithTagName}{forEachXmlChildElementWithTagName}}
+{\footnotesize\ttfamily \#define for\+Each\+Xml\+Child\+Element\+With\+Tag\+Name(\begin{DoxyParamCaption}\item[{}]{parent\+Xml\+Element,  }\item[{}]{child\+Element\+Variable\+Name,  }\item[{}]{required\+Tag\+Name }\end{DoxyParamCaption})~    for (auto$\ast$ (child\+Element\+Variable\+Name) \+: ((parent\+Xml\+Element).macro\+Based\+For\+Loop(), (parent\+Xml\+Element).get\+Child\+With\+Tag\+Name\+Iterator ((required\+Tag\+Name))))}
+
+DEPRECATED\+: A macro that makes it easy to iterate all the child elements of an \mbox{\hyperlink{class_xml_element}{Xml\+Element}} which have a specified tag.
+
+New code should avoid this macro, and instead use get\+Child\+With\+Tag\+Name\+Iterator directly.
+
+This does the same job as the for\+Each\+Xml\+Child\+Element macro, but only for those elements that have a particular tag name.
+
+The parent\+Xml\+Element should be a reference to the parent XML, and the child\+Element\+Variable\+Name will be the name of a pointer to each child element. The required\+Tag\+Name is the tag name to match.
+
+E.\+g. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{class_xml_element}{XmlElement}}* myParentXml = createSomeKindOfXmlDocument();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{group__juce__core-xml_ga6cf39e14a10e2e46f753b0c79c66f2f9}{forEachXmlChildElementWithTagName}} (*myParentXml, child, \textcolor{stringliteral}{"{}MYTAG"{}})}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{comment}{// the child object is now guaranteed to be a <MYTAG> element..}}
+\DoxyCodeLine{    doSomethingWithMYTAGElement (child);}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{group__juce__core-xml_gace692e5be62f7ab58363d91b52eb839e}{for\+Each\+Xml\+Child\+Element}} 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{group__juce__core-xml_ga5286ad9ba5af0be7d7d9c8a723f884d4}\label{group__juce__core-xml_ga5286ad9ba5af0be7d7d9c8a723f884d4}} 
+\index{xml@{xml}!parseXML@{parseXML}}
+\index{parseXML@{parseXML}!xml@{xml}}
+\doxysubsubsection{\texorpdfstring{parseXML()}{parseXML()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_xml_element}{Xml\+Element}} $>$ parse\+XML (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_file}{File}} \&}]{file\+To\+Parse }\end{DoxyParamCaption})}
+
+Attempts to parse some XML text, returning a new \mbox{\hyperlink{class_xml_element}{Xml\+Element}} if it was valid. If the parse fails, this will return a nullptr -\/ if you need more information about errors or more parsing options, see the \mbox{\hyperlink{class_xml_document}{Xml\+Document}} class instead. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_xml_document}{Xml\+Document}}, \mbox{\hyperlink{group__juce__core-xml_ga9a25da47b0802e29de7f01cfb9dccd90}{parse\+XMLIf\+Tag\+Matches}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{group__juce__core-xml_ga6fe8f419a14bfa0ef5fd85448c823fd6}\label{group__juce__core-xml_ga6fe8f419a14bfa0ef5fd85448c823fd6}} 
+\index{xml@{xml}!parseXML@{parseXML}}
+\index{parseXML@{parseXML}!xml@{xml}}
+\doxysubsubsection{\texorpdfstring{parseXML()}{parseXML()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_xml_element}{Xml\+Element}} $>$ parse\+XML (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&}]{text\+To\+Parse }\end{DoxyParamCaption})}
+
+Attempts to parse some XML text, returning a new \mbox{\hyperlink{class_xml_element}{Xml\+Element}} if it was valid. If the parse fails, this will return a nullptr -\/ if you need more information about errors or more parsing options, see the \mbox{\hyperlink{class_xml_document}{Xml\+Document}} class instead. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_xml_document}{Xml\+Document}}, \mbox{\hyperlink{group__juce__core-xml_ga9a25da47b0802e29de7f01cfb9dccd90}{parse\+XMLIf\+Tag\+Matches}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{group__juce__core-xml_ga4c9caf76da89b746022db9054601b6b0}\label{group__juce__core-xml_ga4c9caf76da89b746022db9054601b6b0}} 
+\index{xml@{xml}!parseXMLIfTagMatches@{parseXMLIfTagMatches}}
+\index{parseXMLIfTagMatches@{parseXMLIfTagMatches}!xml@{xml}}
+\doxysubsubsection{\texorpdfstring{parseXMLIfTagMatches()}{parseXMLIfTagMatches()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_xml_element}{Xml\+Element}} $>$ parse\+XMLIf\+Tag\+Matches (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_file}{File}} \&}]{file\+To\+Parse,  }\item[{\mbox{\hyperlink{class_string_ref}{String\+Ref}}}]{required\+Tag }\end{DoxyParamCaption})}
+
+Does an inexpensive check to see whether the top-\/level element has the given tag name, and if that\textquotesingle{}s true, does a full parse and returns the result. If the outer tag doesn\textquotesingle{}t match, or the XML has errors, this will return nullptr; \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{group__juce__core-xml_ga6fe8f419a14bfa0ef5fd85448c823fd6}{parse\+XML}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{group__juce__core-xml_ga9a25da47b0802e29de7f01cfb9dccd90}\label{group__juce__core-xml_ga9a25da47b0802e29de7f01cfb9dccd90}} 
+\index{xml@{xml}!parseXMLIfTagMatches@{parseXMLIfTagMatches}}
+\index{parseXMLIfTagMatches@{parseXMLIfTagMatches}!xml@{xml}}
+\doxysubsubsection{\texorpdfstring{parseXMLIfTagMatches()}{parseXMLIfTagMatches()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_xml_element}{Xml\+Element}} $>$ parse\+XMLIf\+Tag\+Matches (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&}]{text\+To\+Parse,  }\item[{\mbox{\hyperlink{class_string_ref}{String\+Ref}}}]{required\+Tag }\end{DoxyParamCaption})}
+
+Does an inexpensive check to see whether the top-\/level element has the given tag name, and if that\textquotesingle{}s true, does a full parse and returns the result. If the outer tag doesn\textquotesingle{}t match, or the XML has errors, this will return nullptr; \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{group__juce__core-xml_ga6fe8f419a14bfa0ef5fd85448c823fd6}{parse\+XML}} 
+\end{DoxySeeAlso}

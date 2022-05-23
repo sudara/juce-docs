@@ -1,0 +1,104 @@
+\hypertarget{juce___audio_processor_player_8h_source}{}\doxysection{juce\+\_\+\+Audio\+Processor\+Player.\+h}
+\label{juce___audio_processor_player_8h_source}\index{build/juce\_audio\_utils/players/juce\_AudioProcessorPlayer.h@{build/juce\_audio\_utils/players/juce\_AudioProcessorPlayer.h}}
+\mbox{\hyperlink{juce___audio_processor_player_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{45 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_audio_processor_player}{AudioProcessorPlayer}}    : \textcolor{keyword}{public} \mbox{\hyperlink{class_audio_i_o_device_callback}{AudioIODeviceCallback}},}
+\DoxyCodeLine{46                                           \textcolor{keyword}{public} \mbox{\hyperlink{class_midi_input_callback}{MidiInputCallback}}}
+\DoxyCodeLine{47 \{}
+\DoxyCodeLine{48 \textcolor{keyword}{public}:}
+\DoxyCodeLine{49     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{50     \mbox{\hyperlink{class_audio_processor_player}{AudioProcessorPlayer}} (\textcolor{keywordtype}{bool} doDoublePrecisionProcessing = \textcolor{keyword}{false});}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{53     \mbox{\hyperlink{class_audio_processor_player}{\string~AudioProcessorPlayer}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{61 \textcolor{comment}{}    \textcolor{keywordtype}{void} setProcessor (\mbox{\hyperlink{class_audio_processor}{AudioProcessor}}* processorToPlay);}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{64     \mbox{\hyperlink{class_audio_processor}{AudioProcessor}}* \mbox{\hyperlink{class_audio_processor_player_a26ab50022958c1890ff968411e21c469}{getCurrentProcessor}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept            \{ \textcolor{keywordflow}{return} processor; \}}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{70     \mbox{\hyperlink{class_midi_message_collector}{MidiMessageCollector}}\& \mbox{\hyperlink{class_audio_processor_player_a603befeafae5dc770d35af310a9ecb64}{getMidiMessageCollector}}() noexcept        \{ \textcolor{keywordflow}{return} messageCollector; \}}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{77     \textcolor{keywordtype}{void} setMidiOutput (\mbox{\hyperlink{class_midi_output}{MidiOutput}}* midiOutputToUse);}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{87     \textcolor{keywordtype}{void} setDoublePrecisionProcessing (\textcolor{keywordtype}{bool} doublePrecision);}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{92     \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_processor_player_aab453796aff8eba0ca2abde731746ba7}{getDoublePrecisionProcessing}}() \{ \textcolor{keywordflow}{return} isDoublePrecision; \}}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{94     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{96 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_i_o_device_callback_a9ba147cd10fe995c3016dbf35132f995}{audioDeviceIOCallback}} (\textcolor{keyword}{const} \textcolor{keywordtype}{float}**, \textcolor{keywordtype}{int}, \textcolor{keywordtype}{float}**, \textcolor{keywordtype}{int}, \textcolor{keywordtype}{int}) \textcolor{keyword}{override};}
+\DoxyCodeLine{98     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_i_o_device_callback_a1bec2ae89543a93e31461991f7404aec}{audioDeviceAboutToStart}} (\mbox{\hyperlink{class_audio_i_o_device}{AudioIODevice}}*) \textcolor{keyword}{override};}
+\DoxyCodeLine{100     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_i_o_device_callback_a7b3e3c479e4e0b3b19ea992960ef46f5}{audioDeviceStopped}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{102     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_midi_input_callback_acdf6d7e27b96a50fe06922737f0d082e}{handleIncomingMidiMessage}} (\mbox{\hyperlink{class_midi_input}{MidiInput}}*, \textcolor{keyword}{const} \mbox{\hyperlink{class_midi_message}{MidiMessage}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104 \textcolor{keyword}{private}:}
+\DoxyCodeLine{105     \textcolor{keyword}{struct }NumChannels}
+\DoxyCodeLine{106     \{}
+\DoxyCodeLine{107         NumChannels() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{108         NumChannels (\textcolor{keywordtype}{int} numIns, \textcolor{keywordtype}{int} numOuts) : ins (numIns), outs (numOuts) \{\}}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110         \textcolor{keyword}{explicit} NumChannels (\textcolor{keyword}{const} \mbox{\hyperlink{struct_audio_processor_1_1_buses_layout}{AudioProcessor::BusesLayout}}\& layout)}
+\DoxyCodeLine{111             : ins (layout.getNumChannels (\mbox{\hyperlink{ordinals_8h_a41f9c5fb8b08eb5dc3edce4dcb37fee7}{true}}, 0)), outs (layout.getNumChannels (\mbox{\hyperlink{ordinals_8h_a65e9886d74aaee76545e83dd09011727}{false}}, 0)) \{\}}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113         \mbox{\hyperlink{struct_audio_processor_1_1_buses_layout}{AudioProcessor::BusesLayout}} toLayout()\textcolor{keyword}{ const}}
+\DoxyCodeLine{114 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{115             \textcolor{keywordflow}{return} \{ \{ \mbox{\hyperlink{class_audio_channel_set_aca40b00da8c2400af055a1cc9091ace0}{AudioChannelSet::canonicalChannelSet}} (ins) \},}
+\DoxyCodeLine{116                      \{ \mbox{\hyperlink{class_audio_channel_set_aca40b00da8c2400af055a1cc9091ace0}{AudioChannelSet::canonicalChannelSet}} (outs) \} \};}
+\DoxyCodeLine{117         \}}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{119         \textcolor{keywordtype}{int} ins = 0, outs = 0;}
+\DoxyCodeLine{120     \};}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{122     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{123     NumChannels findMostSuitableLayout (\textcolor{keyword}{const} \mbox{\hyperlink{class_audio_processor}{AudioProcessor}}\&) \textcolor{keyword}{const};}
+\DoxyCodeLine{124     \textcolor{keywordtype}{void} resizeChannels();}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{127     \mbox{\hyperlink{class_audio_processor}{AudioProcessor}}* processor = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{128     \mbox{\hyperlink{class_critical_section}{CriticalSection}} lock;}
+\DoxyCodeLine{129     \textcolor{keywordtype}{double} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}} = 0;}
+\DoxyCodeLine{130     \textcolor{keywordtype}{int} blockSize = 0;}
+\DoxyCodeLine{131     \textcolor{keywordtype}{bool} isPrepared = \textcolor{keyword}{false}, isDoublePrecision = \textcolor{keyword}{false};}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{133     NumChannels deviceChannels, defaultProcessorChannels, actualProcessorChannels;}
+\DoxyCodeLine{134     std::vector<float*> channels;}
+\DoxyCodeLine{135     \mbox{\hyperlink{class_audio_buffer}{AudioBuffer<float>}} tempBuffer;}
+\DoxyCodeLine{136     \mbox{\hyperlink{class_audio_buffer}{AudioBuffer<double>}} conversionBuffer;}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{138     \mbox{\hyperlink{class_midi_buffer}{MidiBuffer}} incomingMidi;}
+\DoxyCodeLine{139     \mbox{\hyperlink{class_midi_message_collector}{MidiMessageCollector}} messageCollector;}
+\DoxyCodeLine{140     \mbox{\hyperlink{class_midi_output}{MidiOutput}}* midiOutput = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{142     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_audio_processor_player}{AudioProcessorPlayer}})}
+\DoxyCodeLine{143 \};}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{146 }
+
+\end{DoxyCode}

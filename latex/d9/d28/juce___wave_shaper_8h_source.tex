@@ -1,0 +1,80 @@
+\hypertarget{juce___wave_shaper_8h_source}{}\doxysection{juce\+\_\+\+Wave\+Shaper.\+h}
+\label{juce___wave_shaper_8h_source}\index{build/juce\_dsp/widgets/juce\_WaveShaper.h@{build/juce\_dsp/widgets/juce\_WaveShaper.h}}
+\mbox{\hyperlink{juce___wave_shaper_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacedsp}{dsp}}}
+\DoxyCodeLine{30 \{}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{37 \textcolor{keyword}{template} <\textcolor{keyword}{typename} FloatType, \textcolor{keyword}{typename} Function = FloatType (*) (FloatType)>}
+\DoxyCodeLine{38 \textcolor{keyword}{struct }\mbox{\hyperlink{structdsp_1_1_wave_shaper}{WaveShaper}}}
+\DoxyCodeLine{39 \{}
+\DoxyCodeLine{40     Function \mbox{\hyperlink{structdsp_1_1_wave_shaper_ab24e80dd88150137f5814f689c900bb6}{functionToUse}};}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{44 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{structdsp_1_1_wave_shaper_aabedf05c5600f29d4d3fe269f38e9afd}{prepare}} (\textcolor{keyword}{const} \mbox{\hyperlink{structdsp_1_1_process_spec}{ProcessSpec}}\&) \textcolor{keyword}{noexcept}   \{\}}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{48 \textcolor{comment}{}    \textcolor{keyword}{template} <\textcolor{keyword}{typename} SampleType>}
+\DoxyCodeLine{49     SampleType JUCE\_VECTOR\_CALLTYPE \mbox{\hyperlink{structdsp_1_1_wave_shaper_a9b9a7d91fde83add81727849419b1f68}{processSample}} (SampleType inputSample) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{50     \{}
+\DoxyCodeLine{51         \textcolor{keywordflow}{return} \mbox{\hyperlink{structdsp_1_1_wave_shaper_ab24e80dd88150137f5814f689c900bb6}{functionToUse}} (inputSample);}
+\DoxyCodeLine{52     \}}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{55     \textcolor{keyword}{template} <\textcolor{keyword}{typename} ProcessContext>}
+\DoxyCodeLine{56     \textcolor{keywordtype}{void} \mbox{\hyperlink{structdsp_1_1_wave_shaper_a8e7eab7117f965d081530c6c51f5b5ae}{process}} (\textcolor{keyword}{const} ProcessContext\& context) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{57     \{}
+\DoxyCodeLine{58         \textcolor{keywordflow}{if} (context.isBypassed)}
+\DoxyCodeLine{59         \{}
+\DoxyCodeLine{60             \textcolor{keywordflow}{if} (context.usesSeparateInputAndOutputBlocks())}
+\DoxyCodeLine{61                 context.getOutputBlock().copyFrom (context.getInputBlock());}
+\DoxyCodeLine{62         \}}
+\DoxyCodeLine{63         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{64         \{}
+\DoxyCodeLine{65             \mbox{\hyperlink{classdsp_1_1_audio_block_aedd34362db9b3f185c4703d127673441}{AudioBlock<FloatType>::process}} (context.getInputBlock(),}
+\DoxyCodeLine{66                                             context.getOutputBlock(),}
+\DoxyCodeLine{67                                             \mbox{\hyperlink{structdsp_1_1_wave_shaper_ab24e80dd88150137f5814f689c900bb6}{functionToUse}});}
+\DoxyCodeLine{68         \}}
+\DoxyCodeLine{69     \}}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71     \textcolor{keywordtype}{void} \mbox{\hyperlink{structdsp_1_1_wave_shaper_a41a0b132296603dc3cb10730765d9bd6}{reset}}() noexcept \{\}}
+\DoxyCodeLine{72 \};}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{75 \textcolor{preprocessor}{\#if JUCE\_CXX17\_IS\_AVAILABLE}}
+\DoxyCodeLine{76 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Functor>}
+\DoxyCodeLine{77 \textcolor{keyword}{static} WaveShaper<typename std::invoke\_result<Functor>, Functor> CreateWaveShaper (Functor functionToUse)   \{ \textcolor{keywordflow}{return} \{functionToUse\}; \}}
+\DoxyCodeLine{78 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{79 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Functor>}
+\DoxyCodeLine{80 \textcolor{keyword}{static} WaveShaper<typename std::result\_of<Functor>, Functor> CreateWaveShaper (Functor functionToUse)   \{ \textcolor{keywordflow}{return} \{functionToUse\}; \}}
+\DoxyCodeLine{81 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83 \} \textcolor{comment}{// namespace dsp}}
+\DoxyCodeLine{84  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{85 }
+
+\end{DoxyCode}

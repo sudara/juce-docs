@@ -1,0 +1,209 @@
+\hypertarget{jmemsys_8h_source}{}\doxysection{jmemsys.\+h}
+\label{jmemsys_8h_source}\index{build/juce\_graphics/image\_formats/jpglib/jmemsys.h@{build/juce\_graphics/image\_formats/jpglib/jmemsys.h}}
+\mbox{\hyperlink{jmemsys_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{ * jmemsys.h}}
+\DoxyCodeLine{3 \textcolor{comment}{ *}}
+\DoxyCodeLine{4 \textcolor{comment}{ * Copyright (C) 1992-\/1997, Thomas G. Lane.}}
+\DoxyCodeLine{5 \textcolor{comment}{ * This file is part of the Independent JPEG Group's software.}}
+\DoxyCodeLine{6 \textcolor{comment}{ * For conditions of distribution and use, see the accompanying README file.}}
+\DoxyCodeLine{7 \textcolor{comment}{ *}}
+\DoxyCodeLine{8 \textcolor{comment}{ * This include file defines the interface between the system-\/independent}}
+\DoxyCodeLine{9 \textcolor{comment}{ * and system-\/dependent portions of the JPEG memory manager.  No other}}
+\DoxyCodeLine{10 \textcolor{comment}{ * modules need include it.  (The system-\/independent portion is jmemmgr.c;}}
+\DoxyCodeLine{11 \textcolor{comment}{ * there are several different versions of the system-\/dependent portion.)}}
+\DoxyCodeLine{12 \textcolor{comment}{ *}}
+\DoxyCodeLine{13 \textcolor{comment}{ * This file works as-\/is for the system-\/dependent memory managers supplied}}
+\DoxyCodeLine{14 \textcolor{comment}{ * in the IJG distribution.  You may need to modify it if you write a}}
+\DoxyCodeLine{15 \textcolor{comment}{ * custom memory manager.  If system-\/dependent changes are needed in}}
+\DoxyCodeLine{16 \textcolor{comment}{ * this file, the best method is to \#ifdef them based on a configuration}}
+\DoxyCodeLine{17 \textcolor{comment}{ * symbol supplied in jconfig.h, as we have done with USE\_MSDOS\_MEMMGR}}
+\DoxyCodeLine{18 \textcolor{comment}{ * and USE\_MAC\_MEMMGR.}}
+\DoxyCodeLine{19 \textcolor{comment}{ */}}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#ifndef \_\_jmemsys\_h\_\_}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#define \_\_jmemsys\_h\_\_}}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{comment}{/* Short forms of external names for systems with brain-\/damaged linkers. */}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#ifdef NEED\_SHORT\_EXTERNAL\_NAMES}}
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#define jpeg\_get\_small      jGetSmall}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#define jpeg\_free\_small     jFreeSmall}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#define jpeg\_get\_large      jGetLarge}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#define jpeg\_free\_large     jFreeLarge}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#define jpeg\_mem\_available  jMemAvail}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#define jpeg\_open\_backing\_store jOpenBackStore}}
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#define jpeg\_mem\_init       jMemInit}}
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#define jpeg\_mem\_term       jMemTerm}}
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* NEED\_SHORT\_EXTERNAL\_NAMES */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38 \textcolor{comment}{/*}}
+\DoxyCodeLine{39 \textcolor{comment}{ * These two functions are used to allocate and release small chunks of}}
+\DoxyCodeLine{40 \textcolor{comment}{ * memory.  (Typically the total amount requested through jpeg\_get\_small is}}
+\DoxyCodeLine{41 \textcolor{comment}{ * no more than 20K or so; this will be requested in chunks of a few K each.)}}
+\DoxyCodeLine{42 \textcolor{comment}{ * Behavior should be the same as for the standard library functions malloc}}
+\DoxyCodeLine{43 \textcolor{comment}{ * and free; in particular, jpeg\_get\_small must return NULL on failure.}}
+\DoxyCodeLine{44 \textcolor{comment}{ * On most systems, these ARE malloc and free.  jpeg\_free\_small is passed the}}
+\DoxyCodeLine{45 \textcolor{comment}{ * size of the object being freed, just in case it's needed.}}
+\DoxyCodeLine{46 \textcolor{comment}{ * On an 80x86 machine using small-\/data memory model, these manage near heap.}}
+\DoxyCodeLine{47 \textcolor{comment}{ */}}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49 \mbox{\hyperlink{jmemsys_8h_a5ce30fec80b14fafc7f90fa5acb79d96}{EXTERN}}(\textcolor{keywordtype}{void} *) \mbox{\hyperlink{jmemnobs_8c_a80e2a6c8fc4965afccf2ec8f9a81671b}{jpeg\_get\_small}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__common__struct}{j\_common\_ptr}} cinfo, \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{jmemsys_8h_a473c898cf03a1563dc17fdafd08ddc30}{sizeofobject}}));}
+\DoxyCodeLine{50 \mbox{\hyperlink{jmemsys_8h_a5ce30fec80b14fafc7f90fa5acb79d96}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jmemnobs_8c_a6f51bfcfc824e0d29d7c4b7f95ee246b}{jpeg\_free\_small}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__common__struct}{j\_common\_ptr}} cinfo, \textcolor{keywordtype}{void} * \textcolor{keywordtype}{object},}
+\DoxyCodeLine{51                   \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{jmemsys_8h_a473c898cf03a1563dc17fdafd08ddc30}{sizeofobject}}));}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53 \textcolor{comment}{/*}}
+\DoxyCodeLine{54 \textcolor{comment}{ * These two functions are used to allocate and release large chunks of}}
+\DoxyCodeLine{55 \textcolor{comment}{ * memory (up to the total free space designated by jpeg\_mem\_available).}}
+\DoxyCodeLine{56 \textcolor{comment}{ * The interface is the same as above, except that on an 80x86 machine,}}
+\DoxyCodeLine{57 \textcolor{comment}{ * far pointers are used.  On most other machines these are identical to}}
+\DoxyCodeLine{58 \textcolor{comment}{ * the jpeg\_get/free\_small routines; but we keep them separate anyway,}}
+\DoxyCodeLine{59 \textcolor{comment}{ * in case a different allocation strategy is desirable for large chunks.}}
+\DoxyCodeLine{60 \textcolor{comment}{ */}}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62 \mbox{\hyperlink{jmemsys_8h_a5ce30fec80b14fafc7f90fa5acb79d96}{EXTERN}}(\textcolor{keywordtype}{void} \mbox{\hyperlink{zconf_8h_aef060b3456fdcc093a7210a762d5f2ed}{FAR}} *) \mbox{\hyperlink{jmemnobs_8c_a213335ba557a013c11f7bcc69cd2a095}{jpeg\_get\_large}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__common__struct}{j\_common\_ptr}} cinfo,}
+\DoxyCodeLine{63                        \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{jmemsys_8h_a473c898cf03a1563dc17fdafd08ddc30}{sizeofobject}}));}
+\DoxyCodeLine{64 \mbox{\hyperlink{jmemsys_8h_a5ce30fec80b14fafc7f90fa5acb79d96}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jmemnobs_8c_a5fc3e76daf18ec52f89262eb15b80168}{jpeg\_free\_large}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__common__struct}{j\_common\_ptr}} cinfo, \textcolor{keywordtype}{void} \mbox{\hyperlink{zconf_8h_aef060b3456fdcc093a7210a762d5f2ed}{FAR}} * \textcolor{keywordtype}{object},}
+\DoxyCodeLine{65                   \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{jmemsys_8h_a473c898cf03a1563dc17fdafd08ddc30}{sizeofobject}}));}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67 \textcolor{comment}{/*}}
+\DoxyCodeLine{68 \textcolor{comment}{ * The macro MAX\_ALLOC\_CHUNK designates the maximum number of bytes that may}}
+\DoxyCodeLine{69 \textcolor{comment}{ * be requested in a single call to jpeg\_get\_large (and jpeg\_get\_small for that}}
+\DoxyCodeLine{70 \textcolor{comment}{ * matter, but that case should never come into play).  This macro is needed}}
+\DoxyCodeLine{71 \textcolor{comment}{ * to model the 64Kb-\/segment-\/size limit of far addressing on 80x86 machines.}}
+\DoxyCodeLine{72 \textcolor{comment}{ * On those machines, we expect that jconfig.h will provide a proper value.}}
+\DoxyCodeLine{73 \textcolor{comment}{ * On machines with 32-\/bit flat address spaces, any large constant may be used.}}
+\DoxyCodeLine{74 \textcolor{comment}{ *}}
+\DoxyCodeLine{75 \textcolor{comment}{ * NB: jmemmgr.c expects that MAX\_ALLOC\_CHUNK will be representable as type}}
+\DoxyCodeLine{76 \textcolor{comment}{ * size\_t and will be a multiple of sizeof(align\_type).}}
+\DoxyCodeLine{77 \textcolor{comment}{ */}}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79 \textcolor{preprocessor}{\#ifndef MAX\_ALLOC\_CHUNK     }\textcolor{comment}{/* may be overridden in jconfig.h */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{80 \textcolor{preprocessor}{\#define MAX\_ALLOC\_CHUNK  1000000000L}}
+\DoxyCodeLine{81 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83 \textcolor{comment}{/*}}
+\DoxyCodeLine{84 \textcolor{comment}{ * This routine computes the total space still available for allocation by}}
+\DoxyCodeLine{85 \textcolor{comment}{ * jpeg\_get\_large.  If more space than this is needed, backing store will be}}
+\DoxyCodeLine{86 \textcolor{comment}{ * used.  NOTE: any memory already allocated must not be counted.}}
+\DoxyCodeLine{87 \textcolor{comment}{ *}}
+\DoxyCodeLine{88 \textcolor{comment}{ * There is a minimum space requirement, corresponding to the minimum}}
+\DoxyCodeLine{89 \textcolor{comment}{ * feasible buffer sizes; jmemmgr.c will request that much space even if}}
+\DoxyCodeLine{90 \textcolor{comment}{ * jpeg\_mem\_available returns zero.  The maximum space needed, enough to hold}}
+\DoxyCodeLine{91 \textcolor{comment}{ * all working storage in memory, is also passed in case it is useful.}}
+\DoxyCodeLine{92 \textcolor{comment}{ * Finally, the total space already allocated is passed.  If no better}}
+\DoxyCodeLine{93 \textcolor{comment}{ * method is available, cinfo-\/>mem-\/>max\_memory\_to\_use -\/ already\_allocated}}
+\DoxyCodeLine{94 \textcolor{comment}{ * is often a suitable calculation.}}
+\DoxyCodeLine{95 \textcolor{comment}{ *}}
+\DoxyCodeLine{96 \textcolor{comment}{ * It is OK for jpeg\_mem\_available to underestimate the space available}}
+\DoxyCodeLine{97 \textcolor{comment}{ * (that'll just lead to more backing-\/store access than is really necessary).}}
+\DoxyCodeLine{98 \textcolor{comment}{ * However, an overestimate will lead to failure.  Hence it's wise to subtract}}
+\DoxyCodeLine{99 \textcolor{comment}{ * a slop factor from the true available space.  5\% should be enough.}}
+\DoxyCodeLine{100 \textcolor{comment}{ *}}
+\DoxyCodeLine{101 \textcolor{comment}{ * On machines with lots of virtual memory, any large constant may be returned.}}
+\DoxyCodeLine{102 \textcolor{comment}{ * Conversely, zero may be returned to always use the minimum amount of memory.}}
+\DoxyCodeLine{103 \textcolor{comment}{ */}}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105 \mbox{\hyperlink{jmemsys_8h_a5ce30fec80b14fafc7f90fa5acb79d96}{EXTERN}}(\textcolor{keywordtype}{long}) \mbox{\hyperlink{jmemnobs_8c_a43944cdd7e64efa810c23cc90c3a86c9}{jpeg\_mem\_available}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__common__struct}{j\_common\_ptr}} cinfo,}
+\DoxyCodeLine{106                      \textcolor{keywordtype}{long} \mbox{\hyperlink{jmemsys_8h_a6b948d2a79c75828279ae218c7628576}{min\_bytes\_needed}},}
+\DoxyCodeLine{107                      \textcolor{keywordtype}{long} \mbox{\hyperlink{jmemsys_8h_a27c130987dc2e043e80499a6762399ab}{max\_bytes\_needed}},}
+\DoxyCodeLine{108                      \textcolor{keywordtype}{long} \mbox{\hyperlink{jmemsys_8h_abf337f36c1da5074de7a5b3fa344212c}{already\_allocated}}));}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111 \textcolor{comment}{/*}}
+\DoxyCodeLine{112 \textcolor{comment}{ * This structure holds whatever state is needed to access a single}}
+\DoxyCodeLine{113 \textcolor{comment}{ * backing-\/store object.  The read/write/close method pointers are called}}
+\DoxyCodeLine{114 \textcolor{comment}{ * by jmemmgr.c to manipulate the backing-\/store object; all other fields}}
+\DoxyCodeLine{115 \textcolor{comment}{ * are private to the system-\/dependent backing store routines.}}
+\DoxyCodeLine{116 \textcolor{comment}{ */}}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118 \textcolor{preprocessor}{\#define TEMP\_NAME\_LENGTH   64   }\textcolor{comment}{/* max length of a temporary file's name */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120 }
+\DoxyCodeLine{121 \textcolor{preprocessor}{\#ifdef USE\_MSDOS\_MEMMGR     }\textcolor{comment}{/* DOS-\/specific junk */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{123 \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} XMSH;    \textcolor{comment}{/* type of extended-\/memory handles */}}
+\DoxyCodeLine{124 \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} EMSH;    \textcolor{comment}{/* type of expanded-\/memory handles */}}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126 \textcolor{keyword}{typedef} \textcolor{keyword}{union }\{}
+\DoxyCodeLine{127   \textcolor{keywordtype}{short} file\_handle;        \textcolor{comment}{/* DOS file handle if it's a temp file */}}
+\DoxyCodeLine{128   XMSH xms\_handle;      \textcolor{comment}{/* handle if it's a chunk of XMS */}}
+\DoxyCodeLine{129   EMSH ems\_handle;      \textcolor{comment}{/* handle if it's a chunk of EMS */}}
+\DoxyCodeLine{130 \} handle\_union;}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{132 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* USE\_MSDOS\_MEMMGR */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{133 }
+\DoxyCodeLine{134 \textcolor{preprocessor}{\#ifdef USE\_MAC\_MEMMGR       }\textcolor{comment}{/* Mac-\/specific junk */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{135 \textcolor{preprocessor}{\#include <Files.h>}}
+\DoxyCodeLine{136 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* USE\_MAC\_MEMMGR */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{138 }
+\DoxyCodeLine{139 \textcolor{comment}{//typedef struct backing\_store\_struct * backing\_store\_ptr;}}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{141 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structbacking__store__struct}{backing\_store\_struct}} \{}
+\DoxyCodeLine{142   \textcolor{comment}{/* Methods for reading/writing/closing this backing-\/store object */}}
+\DoxyCodeLine{143   \mbox{\hyperlink{structbacking__store__struct_a73c5c146407b5b94c87bb76d07040ff4}{JMETHOD}}(\textcolor{keywordtype}{void}, read\_backing\_store, (\mbox{\hyperlink{structjpeg__common__struct}{j\_common\_ptr}} cinfo,}
+\DoxyCodeLine{144                      \textcolor{keyword}{struct} \mbox{\hyperlink{structbacking__store__struct}{backing\_store\_struct}} *\mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}},}
+\DoxyCodeLine{145                      \textcolor{keywordtype}{void} \mbox{\hyperlink{zconf_8h_aef060b3456fdcc093a7210a762d5f2ed}{FAR}} * buffer\_address,}
+\DoxyCodeLine{146                      \textcolor{keywordtype}{long} file\_offset, \textcolor{keywordtype}{long} byte\_count));}
+\DoxyCodeLine{147   \mbox{\hyperlink{structbacking__store__struct_a77b4baad491104726423ce590dfd0614}{JMETHOD}}(\textcolor{keywordtype}{void}, write\_backing\_store, (\mbox{\hyperlink{structjpeg__common__struct}{j\_common\_ptr}} cinfo,}
+\DoxyCodeLine{148                       \textcolor{keyword}{struct} \mbox{\hyperlink{structbacking__store__struct}{backing\_store\_struct}} *\mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}},}
+\DoxyCodeLine{149                       \textcolor{keywordtype}{void} \mbox{\hyperlink{zconf_8h_aef060b3456fdcc093a7210a762d5f2ed}{FAR}} * buffer\_address,}
+\DoxyCodeLine{150                       \textcolor{keywordtype}{long} file\_offset, \textcolor{keywordtype}{long} byte\_count));}
+\DoxyCodeLine{151   \mbox{\hyperlink{structbacking__store__struct_a391a23530c164ec096effb5baeac7aaa}{JMETHOD}}(\textcolor{keywordtype}{void}, close\_backing\_store, (\mbox{\hyperlink{structjpeg__common__struct}{j\_common\_ptr}} cinfo,}
+\DoxyCodeLine{152                       \textcolor{keyword}{struct} \mbox{\hyperlink{structbacking__store__struct}{backing\_store\_struct}} *\mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}));}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154   \textcolor{comment}{/* Private fields for system-\/dependent backing-\/store management */}}
+\DoxyCodeLine{155 \textcolor{preprocessor}{\#ifdef USE\_MSDOS\_MEMMGR}}
+\DoxyCodeLine{156   \textcolor{comment}{/* For the MS-\/DOS manager (jmemdos.c), we need: */}}
+\DoxyCodeLine{157   handle\_union \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8530736c0c7f7f4dc724c8246e301f83}{handle}};        \textcolor{comment}{/* reference to backing-\/store storage object */}}
+\DoxyCodeLine{158   \textcolor{keywordtype}{char} \mbox{\hyperlink{structbacking__store__struct_aee24b7268410bcf129e83a8e2a2f4d45}{temp\_name}}[\mbox{\hyperlink{jmemsys_8h_a83c496c242b727d7c2def22f79f75d1a}{TEMP\_NAME\_LENGTH}}]; \textcolor{comment}{/* name if it's a file */}}
+\DoxyCodeLine{159 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{160 \textcolor{preprocessor}{\#ifdef USE\_MAC\_MEMMGR}}
+\DoxyCodeLine{161   \textcolor{comment}{/* For the Mac manager (jmemmac.c), we need: */}}
+\DoxyCodeLine{162   \textcolor{keywordtype}{short} \mbox{\hyperlink{structbacking__store__struct_a90903f2f62f4fe65ac65599b50d0411e}{temp\_file}};     \textcolor{comment}{/* file reference number to temp file */}}
+\DoxyCodeLine{163   FSSpec tempSpec;      \textcolor{comment}{/* the FSSpec for the temp file */}}
+\DoxyCodeLine{164   \textcolor{keywordtype}{char} \mbox{\hyperlink{structbacking__store__struct_aee24b7268410bcf129e83a8e2a2f4d45}{temp\_name}}[\mbox{\hyperlink{jmemsys_8h_a83c496c242b727d7c2def22f79f75d1a}{TEMP\_NAME\_LENGTH}}]; \textcolor{comment}{/* name if it's a file */}}
+\DoxyCodeLine{165 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{166   \textcolor{comment}{/* For a typical implementation with temp files, we need: */}}
+\DoxyCodeLine{167   FILE * \mbox{\hyperlink{structbacking__store__struct_a90903f2f62f4fe65ac65599b50d0411e}{temp\_file}};        \textcolor{comment}{/* stdio reference to temp file */}}
+\DoxyCodeLine{168   \textcolor{keywordtype}{char} \mbox{\hyperlink{structbacking__store__struct_aee24b7268410bcf129e83a8e2a2f4d45}{temp\_name}}[\mbox{\hyperlink{jmemsys_8h_a83c496c242b727d7c2def22f79f75d1a}{TEMP\_NAME\_LENGTH}}]; \textcolor{comment}{/* name of temp file */}}
+\DoxyCodeLine{169 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{170 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{171 \} \mbox{\hyperlink{jmemsys_8h_af996dce224950a12afe4ce9bf82a8dfd}{backing\_store\_info}};}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{173 }
+\DoxyCodeLine{174 \textcolor{comment}{/*}}
+\DoxyCodeLine{175 \textcolor{comment}{ * Initial opening of a backing-\/store object.  This must fill in the}}
+\DoxyCodeLine{176 \textcolor{comment}{ * read/write/close pointers in the object.  The read/write routines}}
+\DoxyCodeLine{177 \textcolor{comment}{ * may take an error exit if the specified maximum file size is exceeded.}}
+\DoxyCodeLine{178 \textcolor{comment}{ * (If jpeg\_mem\_available always returns a large value, this routine can}}
+\DoxyCodeLine{179 \textcolor{comment}{ * just take an error exit.)}}
+\DoxyCodeLine{180 \textcolor{comment}{ */}}
+\DoxyCodeLine{181 }
+\DoxyCodeLine{182 \mbox{\hyperlink{jmemsys_8h_a5ce30fec80b14fafc7f90fa5acb79d96}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jmemnobs_8c_a2f59a750d3c19d9dc8af0d872bdf7b38}{jpeg\_open\_backing\_store}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__common__struct}{j\_common\_ptr}} cinfo,}
+\DoxyCodeLine{183                       \textcolor{keyword}{struct} \mbox{\hyperlink{structbacking__store__struct}{backing\_store\_struct}} *\mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}},}
+\DoxyCodeLine{184                       \textcolor{keywordtype}{long} \mbox{\hyperlink{jmemsys_8h_a3be6d837435694217d76a877efde6dc0}{total\_bytes\_needed}}));}
+\DoxyCodeLine{185 }
+\DoxyCodeLine{186 }
+\DoxyCodeLine{187 \textcolor{comment}{/*}}
+\DoxyCodeLine{188 \textcolor{comment}{ * These routines take care of any system-\/dependent initialization and}}
+\DoxyCodeLine{189 \textcolor{comment}{ * cleanup required.  jpeg\_mem\_init will be called before anything is}}
+\DoxyCodeLine{190 \textcolor{comment}{ * allocated (and, therefore, nothing in cinfo is of use except the error}}
+\DoxyCodeLine{191 \textcolor{comment}{ * manager pointer).  It should return a suitable default value for}}
+\DoxyCodeLine{192 \textcolor{comment}{ * max\_memory\_to\_use; this may subsequently be overridden by the surrounding}}
+\DoxyCodeLine{193 \textcolor{comment}{ * application.  (Note that max\_memory\_to\_use is only important if}}
+\DoxyCodeLine{194 \textcolor{comment}{ * jpeg\_mem\_available chooses to consult it ... no one else will.)}}
+\DoxyCodeLine{195 \textcolor{comment}{ * jpeg\_mem\_term may assume that all requested memory has been freed and that}}
+\DoxyCodeLine{196 \textcolor{comment}{ * all opened backing-\/store objects have been closed.}}
+\DoxyCodeLine{197 \textcolor{comment}{ */}}
+\DoxyCodeLine{198 }
+\DoxyCodeLine{199 \mbox{\hyperlink{jmemsys_8h_a5ce30fec80b14fafc7f90fa5acb79d96}{EXTERN}}(\textcolor{keywordtype}{long}) \mbox{\hyperlink{jmemnobs_8c_adb28e0bbf356ba3fbf342575fa96e160}{jpeg\_mem\_init}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__common__struct}{j\_common\_ptr}} cinfo));}
+\DoxyCodeLine{200 \mbox{\hyperlink{jmemsys_8h_a5ce30fec80b14fafc7f90fa5acb79d96}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jmemnobs_8c_abd72fadf17fd796e184e8c70781403ba}{jpeg\_mem\_term}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__common__struct}{j\_common\_ptr}} cinfo));}
+\DoxyCodeLine{201 }
+\DoxyCodeLine{202 }
+\DoxyCodeLine{203 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

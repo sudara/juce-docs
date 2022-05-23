@@ -1,0 +1,101 @@
+\hypertarget{juce___u_m_p_utils_8h_source}{}\doxysection{juce\+\_\+\+UMPUtils.\+h}
+\label{juce___u_m_p_utils_8h_source}\index{build/juce\_audio\_basics/midi/ump/juce\_UMPUtils.h@{build/juce\_audio\_basics/midi/ump/juce\_UMPUtils.h}}
+\mbox{\hyperlink{juce___u_m_p_utils_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#ifndef DOXYGEN}}
+\DoxyCodeLine{28 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceuniversal__midi__packets}{universal\_midi\_packets}}}
+\DoxyCodeLine{29 \{}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{36 \textcolor{keyword}{struct }\mbox{\hyperlink{structuniversal__midi__packets_1_1_utils}{Utils}}}
+\DoxyCodeLine{37 \{}
+\DoxyCodeLine{39     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} uint32\_t \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_a8293705cacedcccd19735f7a7abcfb78}{bytesToWord}} (uint8\_t \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, uint8\_t \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}, uint8\_t \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}, uint8\_t d)}
+\DoxyCodeLine{40     \{}
+\DoxyCodeLine{41         \textcolor{keywordflow}{return} uint32\_t (\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} << 0x18 | \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} << 0x10 | \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} << 0x08 | d << 0x00);}
+\DoxyCodeLine{42     \}}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{50     \textcolor{keyword}{static} uint32\_t \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_ab8be369da2c35963dda3db2221d660f4}{getNumWordsForMessageType}} (uint32\_t);}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{55     \textcolor{keyword}{template} <\textcolor{keywordtype}{size\_t} Index>}
+\DoxyCodeLine{56     \textcolor{keyword}{struct }\mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_1_1_u4}{U4}}}
+\DoxyCodeLine{57     \{}
+\DoxyCodeLine{58         \textcolor{keyword}{static} \textcolor{keyword}{constexpr} uint32\_t \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_1_1_u4_a859ece41aba5ec234dba1b2d0c081d9d}{shift}} = (uint32\_t) 0x1c -\/ Index * 4;}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60         \textcolor{keyword}{static} \textcolor{keyword}{constexpr} uint32\_t \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_1_1_u4_a01341d86610dd5748ae4bea602d542fc}{set}} (uint32\_t word, uint8\_t \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}})}
+\DoxyCodeLine{61         \{}
+\DoxyCodeLine{62             \textcolor{keywordflow}{return} (word \& \string~((uint32\_t) 0xf << \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_1_1_u4_a859ece41aba5ec234dba1b2d0c081d9d}{shift}})) | (uint32\_t) ((\mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}} \& 0xf) << \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_1_1_u4_a859ece41aba5ec234dba1b2d0c081d9d}{shift}});}
+\DoxyCodeLine{63         \}}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65         \textcolor{keyword}{static} \textcolor{keyword}{constexpr} uint8\_t \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_1_1_u4_aa92728a2946787af3096604da735becd}{get}} (uint32\_t word)}
+\DoxyCodeLine{66         \{}
+\DoxyCodeLine{67             \textcolor{keywordflow}{return} (uint8\_t) ((word >> \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_1_1_u4_a859ece41aba5ec234dba1b2d0c081d9d}{shift}}) \& 0xf);}
+\DoxyCodeLine{68         \}}
+\DoxyCodeLine{69     \};}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{74     \textcolor{keyword}{template} <\textcolor{keywordtype}{size\_t} Index>}
+\DoxyCodeLine{75     \textcolor{keyword}{struct }\mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_1_1_u8}{U8}}}
+\DoxyCodeLine{76     \{}
+\DoxyCodeLine{77         \textcolor{keyword}{static} \textcolor{keyword}{constexpr} uint32\_t \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_1_1_u8_a4fc376fd30c4a5fad67c2518685af353}{shift}} = (uint32\_t) 0x18 -\/ Index * 8;}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79         \textcolor{keyword}{static} \textcolor{keyword}{constexpr} uint32\_t \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_1_1_u8_ad2626096a88252bf266ee3c35d59c176}{set}} (uint32\_t word, uint8\_t \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}})}
+\DoxyCodeLine{80         \{}
+\DoxyCodeLine{81             \textcolor{keywordflow}{return} (word \& \string~((uint32\_t) 0xff << \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_1_1_u8_a4fc376fd30c4a5fad67c2518685af353}{shift}})) | (uint32\_t) (\mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}} << \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_1_1_u8_a4fc376fd30c4a5fad67c2518685af353}{shift}});}
+\DoxyCodeLine{82         \}}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84         \textcolor{keyword}{static} \textcolor{keyword}{constexpr} uint8\_t \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_1_1_u8_af8034236324cfecfaf1a93fd8714d7a5}{get}} (uint32\_t word)}
+\DoxyCodeLine{85         \{}
+\DoxyCodeLine{86             \textcolor{keywordflow}{return} (uint8\_t) ((word >> \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_1_1_u8_a4fc376fd30c4a5fad67c2518685af353}{shift}}) \& 0xff);}
+\DoxyCodeLine{87         \}}
+\DoxyCodeLine{88     \};}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{93     \textcolor{keyword}{template} <\textcolor{keywordtype}{size\_t} Index>}
+\DoxyCodeLine{94     \textcolor{keyword}{struct }\mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_1_1_u16}{U16}}}
+\DoxyCodeLine{95     \{}
+\DoxyCodeLine{96         \textcolor{keyword}{static} \textcolor{keyword}{constexpr} uint32\_t \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_1_1_u16_aa4a5fe29d78fd91f7cdca3c5579d6166}{shift}} = (uint32\_t) 0x10 -\/ Index * 16;}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98         \textcolor{keyword}{static} \textcolor{keyword}{constexpr} uint32\_t \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_1_1_u16_a6965930954c655f85f7e78f401685603}{set}} (uint32\_t word, uint16\_t \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}})}
+\DoxyCodeLine{99         \{}
+\DoxyCodeLine{100             \textcolor{keywordflow}{return} (word \& \string~((uint32\_t) 0xffff << \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_1_1_u16_aa4a5fe29d78fd91f7cdca3c5579d6166}{shift}})) | (uint32\_t) (\mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}} << \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_1_1_u16_aa4a5fe29d78fd91f7cdca3c5579d6166}{shift}});}
+\DoxyCodeLine{101         \}}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103         \textcolor{keyword}{static} \textcolor{keyword}{constexpr} uint16\_t \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_1_1_u16_aacb889f1a0f3d2124b38d3e9e76d493c}{get}} (uint32\_t word)}
+\DoxyCodeLine{104         \{}
+\DoxyCodeLine{105             \textcolor{keywordflow}{return} (uint16\_t) ((word >> \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_1_1_u16_aa4a5fe29d78fd91f7cdca3c5579d6166}{shift}}) \& 0xffff);}
+\DoxyCodeLine{106         \}}
+\DoxyCodeLine{107     \};}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} uint8\_t \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_aa8f83c90a4548bcb1f078f0fad117fbc}{getMessageType}} (uint32\_t \mbox{\hyperlink{namespacegl_a4a17fbf5c7c6ae1f233cf4944a70237d}{w}}) \textcolor{keyword}{noexcept} \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_1_1_u4_aa92728a2946787af3096604da735becd}{U4<0>::get}} (\mbox{\hyperlink{namespacegl_a4a17fbf5c7c6ae1f233cf4944a70237d}{w}}); \}}
+\DoxyCodeLine{110     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} uint8\_t \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_af8301cd14206b11fde7a047b2aa612ff}{getGroup}}       (uint32\_t \mbox{\hyperlink{namespacegl_a4a17fbf5c7c6ae1f233cf4944a70237d}{w}}) \textcolor{keyword}{noexcept} \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_1_1_u4_aa92728a2946787af3096604da735becd}{U4<1>::get}} (\mbox{\hyperlink{namespacegl_a4a17fbf5c7c6ae1f233cf4944a70237d}{w}}); \}}
+\DoxyCodeLine{111     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} uint8\_t \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_acd7746fa8dec805d039ed7c5f2f84ab7}{getStatus}}      (uint32\_t \mbox{\hyperlink{namespacegl_a4a17fbf5c7c6ae1f233cf4944a70237d}{w}}) \textcolor{keyword}{noexcept} \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_1_1_u4_aa92728a2946787af3096604da735becd}{U4<2>::get}} (\mbox{\hyperlink{namespacegl_a4a17fbf5c7c6ae1f233cf4944a70237d}{w}}); \}}
+\DoxyCodeLine{112     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} uint8\_t \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_a8e6b9f27194a47126a96b36650ffa12f}{getChannel}}     (uint32\_t \mbox{\hyperlink{namespacegl_a4a17fbf5c7c6ae1f233cf4944a70237d}{w}}) \textcolor{keyword}{noexcept} \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_1_1_u4_aa92728a2946787af3096604da735becd}{U4<3>::get}} (\mbox{\hyperlink{namespacegl_a4a17fbf5c7c6ae1f233cf4944a70237d}{w}}); \}}
+\DoxyCodeLine{113 \};}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115 \}}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{119 }
+
+\end{DoxyCode}

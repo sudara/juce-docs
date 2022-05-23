@@ -1,0 +1,79 @@
+\hypertarget{structjuce_1_1_parameter_group_item}{}\doxysection{juce\+::Parameter\+Group\+Item Struct Reference}
+\label{structjuce_1_1_parameter_group_item}\index{juce::ParameterGroupItem@{juce::ParameterGroupItem}}
+Inheritance diagram for juce\+::Parameter\+Group\+Item\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d2/d3e/structjuce_1_1_parameter_group_item}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structjuce_1_1_parameter_group_item_ad953c5596ff11d5e394cff93d5cfcbf5}{Parameter\+Group\+Item}} (\mbox{\hyperlink{class_audio_processor_editor}{Audio\+Processor\+Editor}} \&editor, \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_audio_processor_parameter_group}{Audio\+Processor\+Parameter\+Group}} \&group)
+\item 
+bool \mbox{\hyperlink{structjuce_1_1_parameter_group_item_a4b1c234457555f56d9135e55a8826435}{might\+Contain\+Sub\+Items}} () override
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_component}{Component}} $>$ \mbox{\hyperlink{structjuce_1_1_parameter_group_item_a22e6fad9c9435de3d89453b1d02c525e}{create\+Item\+Component}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{structjuce_1_1_parameter_group_item_a2761afcede6bf5bcd16c7de7660282bf}{name}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structjuce_1_1_parameter_group_item_ad953c5596ff11d5e394cff93d5cfcbf5}\label{structjuce_1_1_parameter_group_item_ad953c5596ff11d5e394cff93d5cfcbf5}} 
+\index{juce::ParameterGroupItem@{juce::ParameterGroupItem}!ParameterGroupItem@{ParameterGroupItem}}
+\index{ParameterGroupItem@{ParameterGroupItem}!juce::ParameterGroupItem@{juce::ParameterGroupItem}}
+\doxysubsubsection{\texorpdfstring{ParameterGroupItem()}{ParameterGroupItem()}}
+{\footnotesize\ttfamily juce\+::\+Parameter\+Group\+Item\+::\+Parameter\+Group\+Item (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_audio_processor_editor}{Audio\+Processor\+Editor}} \&}]{editor,  }\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_audio_processor_parameter_group}{Audio\+Processor\+Parameter\+Group}} \&}]{group }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structjuce_1_1_parameter_group_item_a22e6fad9c9435de3d89453b1d02c525e}\label{structjuce_1_1_parameter_group_item_a22e6fad9c9435de3d89453b1d02c525e}} 
+\index{juce::ParameterGroupItem@{juce::ParameterGroupItem}!createItemComponent@{createItemComponent}}
+\index{createItemComponent@{createItemComponent}!juce::ParameterGroupItem@{juce::ParameterGroupItem}}
+\doxysubsubsection{\texorpdfstring{createItemComponent()}{createItemComponent()}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_component}{Component}} $>$ juce\+::\+Parameter\+Group\+Item\+::create\+Item\+Component (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Creates a component that will be used to represent this item.
+
+You don\textquotesingle{}t have to implement this method -\/ if it returns nullptr then no component will be used for the item, and you can just draw it using the \mbox{\hyperlink{class_tree_view_item_a31587d447a9622b647ac9d8d6b9e63be}{paint\+Item()}} callback. But if you do return a component, it will be positioned in the \mbox{\hyperlink{class_tree_view}{Tree\+View}} so that it can be used to represent this item.
+
+The component returned will be managed by the \mbox{\hyperlink{class_tree_view}{Tree\+View}} and will be deleted later when it goes off the screen or is no longer needed. Its position and size will be completely managed by the tree, so don\textquotesingle{}t attempt to move it around.
+
+Something you may want to do with your component is to give it a pointer to the \mbox{\hyperlink{class_tree_view}{Tree\+View}} that created it. This is perfectly safe, and there\textquotesingle{}s no danger of it becoming a dangling pointer because the \mbox{\hyperlink{class_tree_view}{Tree\+View}} will always delete the component before it is itself deleted.
+
+As long as you stick to these rules you can return whatever kind of component you like. It\textquotesingle{}s most useful if you\textquotesingle{}re doing things like drag-\/and-\/drop of items, or want to use a \mbox{\hyperlink{class_label}{Label}} component to edit item names, etc. 
+
+Reimplemented from \mbox{\hyperlink{class_tree_view_item_a7234dd675142d729485b3e66b33fc832}{Tree\+View\+Item}}.
+
+\mbox{\Hypertarget{structjuce_1_1_parameter_group_item_a4b1c234457555f56d9135e55a8826435}\label{structjuce_1_1_parameter_group_item_a4b1c234457555f56d9135e55a8826435}} 
+\index{juce::ParameterGroupItem@{juce::ParameterGroupItem}!mightContainSubItems@{mightContainSubItems}}
+\index{mightContainSubItems@{mightContainSubItems}!juce::ParameterGroupItem@{juce::ParameterGroupItem}}
+\doxysubsubsection{\texorpdfstring{mightContainSubItems()}{mightContainSubItems()}}
+{\footnotesize\ttfamily bool juce\+::\+Parameter\+Group\+Item\+::might\+Contain\+Sub\+Items (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Tells the tree whether this item can potentially be opened.
+
+If your item could contain sub-\/items, this should return true; if it returns false then the tree will not try to open the item. This determines whether or not the item will be drawn with a \textquotesingle{}plus\textquotesingle{} button next to it. 
+
+Implements \mbox{\hyperlink{class_tree_view_item_a1d4dc3f8e9971147e2649a128bd0344d}{Tree\+View\+Item}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{structjuce_1_1_parameter_group_item_a2761afcede6bf5bcd16c7de7660282bf}\label{structjuce_1_1_parameter_group_item_a2761afcede6bf5bcd16c7de7660282bf}} 
+\index{juce::ParameterGroupItem@{juce::ParameterGroupItem}!name@{name}}
+\index{name@{name}!juce::ParameterGroupItem@{juce::ParameterGroupItem}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_string}{String}} juce\+::\+Parameter\+Group\+Item\+::name}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+audio\+\_\+processors/processors/\mbox{\hyperlink{juce___generic_audio_processor_editor_8cpp}{juce\+\_\+\+Generic\+Audio\+Processor\+Editor.\+cpp}}\end{DoxyCompactItemize}

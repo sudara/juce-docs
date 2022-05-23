@@ -1,0 +1,103 @@
+\hypertarget{_c_a_reference_counted_8h_source}{}\doxysection{CAReference\+Counted.\+h}
+\label{_c_a_reference_counted_8h_source}\index{build/juce\_audio\_plugin\_client/AU/CoreAudioUtilityClasses/CAReferenceCounted.h@{build/juce\_audio\_plugin\_client/AU/CoreAudioUtilityClasses/CAReferenceCounted.h}}
+\mbox{\hyperlink{_c_a_reference_counted_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{     File: CAReferenceCounted.h}}
+\DoxyCodeLine{3 \textcolor{comment}{ Abstract: Part of CoreAudio Utility Classes}}
+\DoxyCodeLine{4 \textcolor{comment}{  Version: 1.1}}
+\DoxyCodeLine{5 \textcolor{comment}{}}
+\DoxyCodeLine{6 \textcolor{comment}{ Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple}}
+\DoxyCodeLine{7 \textcolor{comment}{ Inc. ("{}Apple"{}) in consideration of your agreement to the following}}
+\DoxyCodeLine{8 \textcolor{comment}{ terms, and your use, installation, modification or redistribution of}}
+\DoxyCodeLine{9 \textcolor{comment}{ this Apple software constitutes acceptance of these terms.  If you do}}
+\DoxyCodeLine{10 \textcolor{comment}{ not agree with these terms, please do not use, install, modify or}}
+\DoxyCodeLine{11 \textcolor{comment}{ redistribute this Apple software.}}
+\DoxyCodeLine{12 \textcolor{comment}{}}
+\DoxyCodeLine{13 \textcolor{comment}{ In consideration of your agreement to abide by the following terms, and}}
+\DoxyCodeLine{14 \textcolor{comment}{ subject to these terms, Apple grants you a personal, non-\/exclusive}}
+\DoxyCodeLine{15 \textcolor{comment}{ license, under Apple's copyrights in this original Apple software (the}}
+\DoxyCodeLine{16 \textcolor{comment}{ "{}Apple Software"{}), to use, reproduce, modify and redistribute the Apple}}
+\DoxyCodeLine{17 \textcolor{comment}{ Software, with or without modifications, in source and/or binary forms;}}
+\DoxyCodeLine{18 \textcolor{comment}{ provided that if you redistribute the Apple Software in its entirety and}}
+\DoxyCodeLine{19 \textcolor{comment}{ without modifications, you must retain this notice and the following}}
+\DoxyCodeLine{20 \textcolor{comment}{ text and disclaimers in all such redistributions of the Apple Software.}}
+\DoxyCodeLine{21 \textcolor{comment}{ Neither the name, trademarks, service marks or logos of Apple Inc. may}}
+\DoxyCodeLine{22 \textcolor{comment}{ be used to endorse or promote products derived from the Apple Software}}
+\DoxyCodeLine{23 \textcolor{comment}{ without specific prior written permission from Apple.  Except as}}
+\DoxyCodeLine{24 \textcolor{comment}{ expressly stated in this notice, no other rights or licenses, express or}}
+\DoxyCodeLine{25 \textcolor{comment}{ implied, are granted by Apple herein, including but not limited to any}}
+\DoxyCodeLine{26 \textcolor{comment}{ patent rights that may be infringed by your derivative works or by other}}
+\DoxyCodeLine{27 \textcolor{comment}{ works in which the Apple Software may be incorporated.}}
+\DoxyCodeLine{28 \textcolor{comment}{}}
+\DoxyCodeLine{29 \textcolor{comment}{ The Apple Software is provided by Apple on an "{}AS IS"{} basis.  APPLE}}
+\DoxyCodeLine{30 \textcolor{comment}{ MAKES NO WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION}}
+\DoxyCodeLine{31 \textcolor{comment}{ THE IMPLIED WARRANTIES OF NON-\/INFRINGEMENT, MERCHANTABILITY AND FITNESS}}
+\DoxyCodeLine{32 \textcolor{comment}{ FOR A PARTICULAR PURPOSE, REGARDING THE APPLE SOFTWARE OR ITS USE AND}}
+\DoxyCodeLine{33 \textcolor{comment}{ OPERATION ALONE OR IN COMBINATION WITH YOUR PRODUCTS.}}
+\DoxyCodeLine{34 \textcolor{comment}{}}
+\DoxyCodeLine{35 \textcolor{comment}{ IN NO EVENT SHALL APPLE BE LIABLE FOR ANY SPECIAL, INDIRECT, INCIDENTAL}}
+\DoxyCodeLine{36 \textcolor{comment}{ OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF}}
+\DoxyCodeLine{37 \textcolor{comment}{ SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS}}
+\DoxyCodeLine{38 \textcolor{comment}{ INTERRUPTION) ARISING IN ANY WAY OUT OF THE USE, REPRODUCTION,}}
+\DoxyCodeLine{39 \textcolor{comment}{ MODIFICATION AND/OR DISTRIBUTION OF THE APPLE SOFTWARE, HOWEVER CAUSED}}
+\DoxyCodeLine{40 \textcolor{comment}{ AND WHETHER UNDER THEORY OF CONTRACT, TORT (INCLUDING NEGLIGENCE),}}
+\DoxyCodeLine{41 \textcolor{comment}{ STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE}}
+\DoxyCodeLine{42 \textcolor{comment}{ POSSIBILITY OF SUCH DAMAGE.}}
+\DoxyCodeLine{43 \textcolor{comment}{}}
+\DoxyCodeLine{44 \textcolor{comment}{ Copyright (C) 2014 Apple Inc. All Rights Reserved.}}
+\DoxyCodeLine{45 \textcolor{comment}{}}
+\DoxyCodeLine{46 \textcolor{comment}{*/}}
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#ifndef \_\_CAReferenceCounted\_h\_\_}}
+\DoxyCodeLine{48 \textcolor{preprocessor}{\#define \_\_CAReferenceCounted\_h\_\_}}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_c_a_atomic_8h}{CAAtomic.h}}"{}}}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52 \textcolor{comment}{// base class for reference-\/counted objects}}
+\DoxyCodeLine{53 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_a_reference_counted}{CAReferenceCounted}} \{}
+\DoxyCodeLine{54 \textcolor{keyword}{public}:}
+\DoxyCodeLine{55     \mbox{\hyperlink{class_c_a_reference_counted_aa16ec425bba54027502b1fa8d8d4fe92}{CAReferenceCounted}}() : mRefCount(1) \{\}}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57     \textcolor{keywordtype}{void}    \mbox{\hyperlink{class_c_a_reference_counted_a00cb92a7b8a03314bee713c8e488cd5a}{retain}}() \{ \mbox{\hyperlink{_c_a_atomic_8h_a3a5194a20549651c6b82353af4f3de07}{CAAtomicIncrement32}}(\&mRefCount); \}}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59     \textcolor{keywordtype}{void}    \mbox{\hyperlink{class_c_a_reference_counted_a3158a1306cf1a1b6b1d2625074f12887}{release}}()}
+\DoxyCodeLine{60             \{}
+\DoxyCodeLine{61                 SInt32 rc = \mbox{\hyperlink{_c_a_atomic_8h_a94bf3063e7aad2b621ac08f27a05adbd}{CAAtomicDecrement32}}(\&mRefCount);}
+\DoxyCodeLine{62                 \textcolor{keywordflow}{if} (rc == 0) \{}
+\DoxyCodeLine{63                     \mbox{\hyperlink{class_c_a_reference_counted_a4b09d58d31b8f0099d7016678d5d8a4e}{releaseObject}}();}
+\DoxyCodeLine{64                 \}}
+\DoxyCodeLine{65             \}}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68     \textcolor{keyword}{class }\mbox{\hyperlink{class_c_a_reference_counted_1_1_retainer}{Retainer}} \{}
+\DoxyCodeLine{69     \textcolor{keyword}{public}:}
+\DoxyCodeLine{70         \mbox{\hyperlink{class_c_a_reference_counted_1_1_retainer_a380af787ae89101ea551d6a5e77ebe4a}{Retainer}}(\mbox{\hyperlink{class_c_a_reference_counted}{CAReferenceCounted}} *\mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}}) : mObject(\mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}}) \{ mObject-\/>\mbox{\hyperlink{class_c_a_reference_counted_a00cb92a7b8a03314bee713c8e488cd5a}{retain}}(); \}}
+\DoxyCodeLine{71         \mbox{\hyperlink{class_c_a_reference_counted_1_1_retainer_af39609b820b0ef79b306f2ca66457d9f}{\string~Retainer}}() \{ mObject-\/>\mbox{\hyperlink{class_c_a_reference_counted_a3158a1306cf1a1b6b1d2625074f12887}{release}}(); \}}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73     \textcolor{keyword}{private}:}
+\DoxyCodeLine{74         \mbox{\hyperlink{class_c_a_reference_counted}{CAReferenceCounted}} *  mObject;}
+\DoxyCodeLine{75     \};}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{78     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_c_a_reference_counted_af3484a14dd5f6e510e19137b9517e81c}{\string~CAReferenceCounted}}() \{ \}}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_a_reference_counted_a4b09d58d31b8f0099d7016678d5d8a4e}{releaseObject}} ()}
+\DoxyCodeLine{81             \{}
+\DoxyCodeLine{82                 \textcolor{keyword}{delete} \textcolor{keyword}{this};}
+\DoxyCodeLine{83             \}}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85 \textcolor{preprocessor}{\#if DEBUG}}
+\DoxyCodeLine{86 \textcolor{keyword}{public}:}
+\DoxyCodeLine{87 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{88     SInt32  \mbox{\hyperlink{class_c_a_reference_counted_afc4052e969ea5347341a676224b2c872}{GetReferenceCount}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} mRefCount; \}}
+\DoxyCodeLine{89 \textcolor{keyword}{private}:}
+\DoxyCodeLine{90     SInt32      mRefCount;}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92     \mbox{\hyperlink{class_c_a_reference_counted_aa16ec425bba54027502b1fa8d8d4fe92}{CAReferenceCounted}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_c_a_reference_counted}{CAReferenceCounted}} \&\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}});}
+\DoxyCodeLine{93     \mbox{\hyperlink{class_c_a_reference_counted}{CAReferenceCounted}} \&operator=(\textcolor{keyword}{const} \mbox{\hyperlink{class_c_a_reference_counted}{CAReferenceCounted}} \&\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}});}
+\DoxyCodeLine{94 \};}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// \_\_CAReferenceCounted\_h\_\_}}
+
+\end{DoxyCode}

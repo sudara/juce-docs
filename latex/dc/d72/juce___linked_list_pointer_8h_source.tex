@@ -1,0 +1,273 @@
+\hypertarget{juce___linked_list_pointer_8h_source}{}\doxysection{juce\+\_\+\+Linked\+List\+Pointer.\+h}
+\label{juce___linked_list_pointer_8h_source}\index{build/juce\_core/containers/juce\_LinkedListPointer.h@{build/juce\_core/containers/juce\_LinkedListPointer.h}}
+\mbox{\hyperlink{juce___linked_list_pointer_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{56 \textcolor{comment}{}\textcolor{keyword}{template} <\textcolor{keyword}{class} ObjectType>}
+\DoxyCodeLine{57 \textcolor{keyword}{class }\mbox{\hyperlink{class_linked_list_pointer}{LinkedListPointer}}}
+\DoxyCodeLine{58 \{}
+\DoxyCodeLine{59 \textcolor{keyword}{public}:}
+\DoxyCodeLine{60     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{62 \textcolor{comment}{}    \mbox{\hyperlink{class_linked_list_pointer_a044598f5b6b8ac53a221fb934fa41724}{LinkedListPointer}}() noexcept}
+\DoxyCodeLine{63         : item (\textcolor{keywordtype}{nullptr})}
+\DoxyCodeLine{64     \{}
+\DoxyCodeLine{65     \}}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{68     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_linked_list_pointer_ac971f23361914ad4adef583e766e9d7f}{LinkedListPointer}} (ObjectType* \textcolor{keyword}{const} headItem) noexcept}
+\DoxyCodeLine{69         : item (headItem)}
+\DoxyCodeLine{70     \{}
+\DoxyCodeLine{71     \}}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{74     \mbox{\hyperlink{class_linked_list_pointer}{LinkedListPointer}}\& \mbox{\hyperlink{class_linked_list_pointer_ade34464c70ec05356de6647fb71aa91a}{operator= }}(ObjectType* \textcolor{keyword}{const} newItem) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{75     \{}
+\DoxyCodeLine{76         item = newItem;}
+\DoxyCodeLine{77         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{78     \}}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80     \mbox{\hyperlink{class_linked_list_pointer_a0e6a6fd8444c8d3abefe4a4ddb22e82f}{LinkedListPointer}} (\mbox{\hyperlink{class_linked_list_pointer}{LinkedListPointer}}\&\& other) noexcept}
+\DoxyCodeLine{81         : item (other.item)}
+\DoxyCodeLine{82     \{}
+\DoxyCodeLine{83         other.item = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{84     \}}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86     \mbox{\hyperlink{class_linked_list_pointer}{LinkedListPointer}}\& \mbox{\hyperlink{class_linked_list_pointer_ade34464c70ec05356de6647fb71aa91a}{operator= }}(\mbox{\hyperlink{class_linked_list_pointer}{LinkedListPointer}}\&\& other) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{87     \{}
+\DoxyCodeLine{88         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (\textcolor{keyword}{this} != \&other); \textcolor{comment}{// hopefully the compiler should make this situation impossible!}}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90         item = other.item;}
+\DoxyCodeLine{91         other.item = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{92         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{93     \}}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{97 \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keyword}{operator} ObjectType*() \textcolor{keyword}{const} \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{98     \{}
+\DoxyCodeLine{99         \textcolor{keywordflow}{return} item;}
+\DoxyCodeLine{100     \}}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{103     \textcolor{keyword}{inline} ObjectType* \mbox{\hyperlink{class_linked_list_pointer_a9bc4fc1304366afd2f84832535325d4c}{get}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{104     \{}
+\DoxyCodeLine{105         \textcolor{keywordflow}{return} item;}
+\DoxyCodeLine{106     \}}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{115     \mbox{\hyperlink{class_linked_list_pointer}{LinkedListPointer}}\& \mbox{\hyperlink{class_linked_list_pointer_ae01fc4aecc6baf2a830778de779d7508}{getLast}}() noexcept}
+\DoxyCodeLine{116     \{}
+\DoxyCodeLine{117         \textcolor{keyword}{auto}* l = \textcolor{keyword}{this};}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{119         \textcolor{keywordflow}{while} (l-\/>item != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{120             l = \&(l-\/>item-\/>nextListItem);}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{122         \textcolor{keywordflow}{return} *l;}
+\DoxyCodeLine{123     \}}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{129     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_linked_list_pointer_a167753863d2e10d5ae5e98fbd7b1cfa4}{size}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{130     \{}
+\DoxyCodeLine{131         \textcolor{keywordtype}{int} total = 0;}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{133         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}* i = item; i != \textcolor{keyword}{nullptr}; i = i-\/>nextListItem)}
+\DoxyCodeLine{134             ++total;}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{136         \textcolor{keywordflow}{return} total;}
+\DoxyCodeLine{137     \}}
+\DoxyCodeLine{138 }
+\DoxyCodeLine{143     \mbox{\hyperlink{class_linked_list_pointer}{LinkedListPointer}}\& \mbox{\hyperlink{class_linked_list_pointer_a13dd6d331f873d4b24248de984938fd5}{operator[] }}(\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{144     \{}
+\DoxyCodeLine{145         \textcolor{keyword}{auto}* l = \textcolor{keyword}{this};}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{147         \textcolor{keywordflow}{while} (-\/-\/\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}} >= 0 \&\& l-\/>item != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{148             l = \&(l-\/>item-\/>nextListItem);}
+\DoxyCodeLine{149 }
+\DoxyCodeLine{150         \textcolor{keywordflow}{return} *l;}
+\DoxyCodeLine{151     \}}
+\DoxyCodeLine{152 }
+\DoxyCodeLine{157     \textcolor{keyword}{const} \mbox{\hyperlink{class_linked_list_pointer}{LinkedListPointer}}\& \mbox{\hyperlink{class_linked_list_pointer_a13dd6d331f873d4b24248de984938fd5}{operator[] }}(\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{158     \{}
+\DoxyCodeLine{159         \textcolor{keyword}{auto}* l = \textcolor{keyword}{this};}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161         \textcolor{keywordflow}{while} (-\/-\/\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}} >= 0 \&\& l-\/>item != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{162             l = \&(l-\/>item-\/>nextListItem);}
+\DoxyCodeLine{163 }
+\DoxyCodeLine{164         \textcolor{keywordflow}{return} *l;}
+\DoxyCodeLine{165     \}}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{168     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_linked_list_pointer_a3cc7650c325a2661c02eb5b08219ff92}{contains}} (\textcolor{keyword}{const} ObjectType* \textcolor{keyword}{const} itemToLookFor) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{169     \{}
+\DoxyCodeLine{170         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}* i = item; i != \textcolor{keyword}{nullptr}; i = i-\/>nextListItem)}
+\DoxyCodeLine{171             \textcolor{keywordflow}{if} (itemToLookFor == i)}
+\DoxyCodeLine{172                 \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{173 }
+\DoxyCodeLine{174         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{175     \}}
+\DoxyCodeLine{176 }
+\DoxyCodeLine{177     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{181 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_linked_list_pointer_aec30ea7b65a22847a91011e7a413a7f5}{insertNext}} (ObjectType* \textcolor{keyword}{const} newItem)}
+\DoxyCodeLine{182     \{}
+\DoxyCodeLine{183         \mbox{\hyperlink{group__juce__core-system_ga2b5e72f0aed7e03859e4964392e57a43}{JUCE\_BEGIN\_IGNORE\_WARNINGS\_MSVC}} (6011)}
+\DoxyCodeLine{184         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (newItem != \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{185         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (newItem-\/>nextListItem == \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{186         newItem-\/>nextListItem = item;}
+\DoxyCodeLine{187         item = newItem;}
+\DoxyCodeLine{188         \mbox{\hyperlink{group__juce__core-system_gab840349e4194162156441dce088062ec}{JUCE\_END\_IGNORE\_WARNINGS\_MSVC}}}
+\DoxyCodeLine{189     \}}
+\DoxyCodeLine{190 }
+\DoxyCodeLine{195     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_linked_list_pointer_ace9638977f9007c5de6d705dd0698d72}{insertAtIndex}} (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}, ObjectType* newItem)}
+\DoxyCodeLine{196     \{}
+\DoxyCodeLine{197         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (newItem != \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{198         \textcolor{keyword}{auto}* l = \textcolor{keyword}{this};}
+\DoxyCodeLine{199 }
+\DoxyCodeLine{200         \textcolor{keywordflow}{while} (\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}} != 0 \&\& l-\/>item != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{201         \{}
+\DoxyCodeLine{202             l = \&(l-\/>item-\/>nextListItem);}
+\DoxyCodeLine{203             -\/-\/\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}};}
+\DoxyCodeLine{204         \}}
+\DoxyCodeLine{205 }
+\DoxyCodeLine{206         l-\/>insertNext (newItem);}
+\DoxyCodeLine{207     \}}
+\DoxyCodeLine{208 }
+\DoxyCodeLine{212     ObjectType* \mbox{\hyperlink{class_linked_list_pointer_af77a6ed6bf518fd73d560a0bd378b2ed}{replaceNext}} (ObjectType* \textcolor{keyword}{const} newItem) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{213     \{}
+\DoxyCodeLine{214         \mbox{\hyperlink{group__juce__core-system_ga2b5e72f0aed7e03859e4964392e57a43}{JUCE\_BEGIN\_IGNORE\_WARNINGS\_MSVC}} (6011 28182)}
+\DoxyCodeLine{215         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (newItem != \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{216         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (newItem-\/>nextListItem == \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{217 }
+\DoxyCodeLine{218         \textcolor{keyword}{auto} oldItem = item;}
+\DoxyCodeLine{219         item = newItem;}
+\DoxyCodeLine{220         item-\/>nextListItem = oldItem-\/>nextListItem.item;}
+\DoxyCodeLine{221         oldItem-\/>nextListItem.item = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{222         \textcolor{keywordflow}{return} oldItem;}
+\DoxyCodeLine{223         \mbox{\hyperlink{group__juce__core-system_gab840349e4194162156441dce088062ec}{JUCE\_END\_IGNORE\_WARNINGS\_MSVC}}}
+\DoxyCodeLine{224     \}}
+\DoxyCodeLine{225 }
+\DoxyCodeLine{232     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_linked_list_pointer_a7d3e9a4e9bfed23ecb63a534cf84772d}{append}} (ObjectType* \textcolor{keyword}{const} newItem)}
+\DoxyCodeLine{233     \{}
+\DoxyCodeLine{234         \mbox{\hyperlink{class_linked_list_pointer_ae01fc4aecc6baf2a830778de779d7508}{getLast}}().item = newItem;}
+\DoxyCodeLine{235     \}}
+\DoxyCodeLine{236 }
+\DoxyCodeLine{241     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_linked_list_pointer_a471a609ef0b2d61ccfdada1aaf5eb73f}{addCopyOfList}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_linked_list_pointer}{LinkedListPointer}}\& other)}
+\DoxyCodeLine{242     \{}
+\DoxyCodeLine{243         \textcolor{keyword}{auto}* insertPoint = \textcolor{keyword}{this};}
+\DoxyCodeLine{244 }
+\DoxyCodeLine{245         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}* i = other.item; i != \textcolor{keyword}{nullptr}; i = i-\/>nextListItem)}
+\DoxyCodeLine{246         \{}
+\DoxyCodeLine{247             insertPoint-\/>insertNext (\textcolor{keyword}{new} ObjectType (*i));}
+\DoxyCodeLine{248             insertPoint = \&(insertPoint-\/>item-\/>nextListItem);}
+\DoxyCodeLine{249         \}}
+\DoxyCodeLine{250     \}}
+\DoxyCodeLine{251 }
+\DoxyCodeLine{256     ObjectType* \mbox{\hyperlink{class_linked_list_pointer_a93bebf533f99f58f4b090a453fd2c81d}{removeNext}}() noexcept}
+\DoxyCodeLine{257     \{}
+\DoxyCodeLine{258         \textcolor{keyword}{auto} oldItem = item;}
+\DoxyCodeLine{259 }
+\DoxyCodeLine{260         \textcolor{keywordflow}{if} (oldItem != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{261         \{}
+\DoxyCodeLine{262             item = oldItem-\/>nextListItem;}
+\DoxyCodeLine{263             oldItem-\/>nextListItem.item = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{264         \}}
+\DoxyCodeLine{265 }
+\DoxyCodeLine{266         \textcolor{keywordflow}{return} oldItem;}
+\DoxyCodeLine{267     \}}
+\DoxyCodeLine{268 }
+\DoxyCodeLine{272     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_linked_list_pointer_a45793c4207bcab206c31e281a7593d9d}{remove}} (ObjectType* \textcolor{keyword}{const} itemToRemove)}
+\DoxyCodeLine{273     \{}
+\DoxyCodeLine{274         \textcolor{keywordflow}{if} (\textcolor{keyword}{auto}* l = \mbox{\hyperlink{class_linked_list_pointer_a5429de39deabf1513487656375a25c1e}{findPointerTo}} (itemToRemove))}
+\DoxyCodeLine{275             l-\/>removeNext();}
+\DoxyCodeLine{276     \}}
+\DoxyCodeLine{277 }
+\DoxyCodeLine{281     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_linked_list_pointer_a2762ae9b67186e39883a9b1bd0a1d4af}{deleteAll}}()}
+\DoxyCodeLine{282     \{}
+\DoxyCodeLine{283         \textcolor{keywordflow}{while} (item != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{284         \{}
+\DoxyCodeLine{285             \textcolor{keyword}{auto} oldItem = item;}
+\DoxyCodeLine{286             item = oldItem-\/>nextListItem;}
+\DoxyCodeLine{287             \textcolor{keyword}{delete} oldItem;}
+\DoxyCodeLine{288         \}}
+\DoxyCodeLine{289     \}}
+\DoxyCodeLine{290 }
+\DoxyCodeLine{295     \mbox{\hyperlink{class_linked_list_pointer}{LinkedListPointer}}* \mbox{\hyperlink{class_linked_list_pointer_a5429de39deabf1513487656375a25c1e}{findPointerTo}} (ObjectType* \textcolor{keyword}{const} itemToLookFor) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{296     \{}
+\DoxyCodeLine{297         \textcolor{keyword}{auto}* l = \textcolor{keyword}{this};}
+\DoxyCodeLine{298 }
+\DoxyCodeLine{299         \textcolor{keywordflow}{while} (l-\/>item != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{300         \{}
+\DoxyCodeLine{301             \textcolor{keywordflow}{if} (l-\/>item == itemToLookFor)}
+\DoxyCodeLine{302                 \textcolor{keywordflow}{return} l;}
+\DoxyCodeLine{303 }
+\DoxyCodeLine{304             l = \&(l-\/>item-\/>nextListItem);}
+\DoxyCodeLine{305         \}}
+\DoxyCodeLine{306 }
+\DoxyCodeLine{307         \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{308     \}}
+\DoxyCodeLine{309 }
+\DoxyCodeLine{314     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_linked_list_pointer_a2474d1f6e6156e9d5ffdcd3bb873b7c9}{copyToArray}} (ObjectType** destArray) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{315     \{}
+\DoxyCodeLine{316         \mbox{\hyperlink{group__juce__core-system_ga2b5e72f0aed7e03859e4964392e57a43}{JUCE\_BEGIN\_IGNORE\_WARNINGS\_MSVC}} (6011)}
+\DoxyCodeLine{317         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (destArray != \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{318 }
+\DoxyCodeLine{319         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}* i = item; i != \textcolor{keyword}{nullptr}; i = i-\/>nextListItem)}
+\DoxyCodeLine{320             *destArray++ = i;}
+\DoxyCodeLine{321 }
+\DoxyCodeLine{322         \mbox{\hyperlink{group__juce__core-system_gab840349e4194162156441dce088062ec}{JUCE\_END\_IGNORE\_WARNINGS\_MSVC}}}
+\DoxyCodeLine{323     \}}
+\DoxyCodeLine{324 }
+\DoxyCodeLine{326     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_linked_list_pointer_a32fe51ed00c010d04a24f36a6b39ce16}{swapWith}} (\mbox{\hyperlink{class_linked_list_pointer}{LinkedListPointer}}\& other) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{327     \{}
+\DoxyCodeLine{328         std::swap (item, other.item);}
+\DoxyCodeLine{329     \}}
+\DoxyCodeLine{330 }
+\DoxyCodeLine{331     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{339 \textcolor{comment}{}    \textcolor{keyword}{class }\mbox{\hyperlink{class_linked_list_pointer_1_1_appender}{Appender}}}
+\DoxyCodeLine{340     \{}
+\DoxyCodeLine{341     \textcolor{keyword}{public}:}
+\DoxyCodeLine{344         \mbox{\hyperlink{class_linked_list_pointer_1_1_appender_a752b6c9da32ac7a17eb2a50c62cf9233}{Appender}} (\mbox{\hyperlink{class_linked_list_pointer}{LinkedListPointer}}\& endOfListPointer) noexcept}
+\DoxyCodeLine{345             : endOfList (\&endOfListPointer)}
+\DoxyCodeLine{346         \{}
+\DoxyCodeLine{347             \textcolor{comment}{// This can only be used to add to the end of a list.}}
+\DoxyCodeLine{348             \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (endOfListPointer.item == \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{349         \}}
+\DoxyCodeLine{350 }
+\DoxyCodeLine{352         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_linked_list_pointer_1_1_appender_a9cdd44669fe1fb53b54e0dfc30833c2b}{append}} (ObjectType* \textcolor{keyword}{const} newItem) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{353         \{}
+\DoxyCodeLine{354             *endOfList = newItem;}
+\DoxyCodeLine{355             endOfList = \&(newItem-\/>nextListItem);}
+\DoxyCodeLine{356         \}}
+\DoxyCodeLine{357 }
+\DoxyCodeLine{358     \textcolor{keyword}{private}:}
+\DoxyCodeLine{359         \mbox{\hyperlink{class_linked_list_pointer}{LinkedListPointer}}* endOfList;}
+\DoxyCodeLine{360 }
+\DoxyCodeLine{361         \mbox{\hyperlink{group__juce__core-system_ga6ab7a603bf4435c7cb286b1744366eb2}{JUCE\_DECLARE\_NON\_COPYABLE}} (\mbox{\hyperlink{class_linked_list_pointer_1_1_appender}{Appender}})}
+\DoxyCodeLine{362     \};}
+\DoxyCodeLine{363 }
+\DoxyCodeLine{364 \textcolor{keyword}{private}:}
+\DoxyCodeLine{365     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{366     ObjectType* item;}
+\DoxyCodeLine{367 }
+\DoxyCodeLine{368     \mbox{\hyperlink{group__juce__core-system_ga6ab7a603bf4435c7cb286b1744366eb2}{JUCE\_DECLARE\_NON\_COPYABLE}} (\mbox{\hyperlink{class_linked_list_pointer}{LinkedListPointer}})}
+\DoxyCodeLine{369 \};}
+\DoxyCodeLine{370 }
+\DoxyCodeLine{371  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{372 }
+
+\end{DoxyCode}

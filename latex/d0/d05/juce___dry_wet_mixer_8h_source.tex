@@ -1,0 +1,94 @@
+\hypertarget{juce___dry_wet_mixer_8h_source}{}\doxysection{juce\+\_\+\+Dry\+Wet\+Mixer.\+h}
+\label{juce___dry_wet_mixer_8h_source}\index{build/juce\_dsp/processors/juce\_DryWetMixer.h@{build/juce\_dsp/processors/juce\_DryWetMixer.h}}
+\mbox{\hyperlink{juce___dry_wet_mixer_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacedsp}{dsp}}}
+\DoxyCodeLine{30 \{}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \textcolor{keyword}{enum class} \mbox{\hyperlink{namespacedsp_a88d33c6b783d9a78aee07335dbf9a968}{DryWetMixingRule}}}
+\DoxyCodeLine{33 \{}
+\DoxyCodeLine{34     \mbox{\hyperlink{namespacedsp_a88d33c6b783d9a78aee07335dbf9a968a9a932b3cb396238423eb2f33ec17d6aa}{linear}},          \textcolor{comment}{// dry volume is equal to 1 -\/ wet volume}}
+\DoxyCodeLine{35     \mbox{\hyperlink{namespacedsp_a88d33c6b783d9a78aee07335dbf9a968ab336df698d12ac8e54570ba6ea2679f0}{balanced}},        \textcolor{comment}{// both dry and wet are 1 when mix is 0.5, with dry decreasing to 0}}
+\DoxyCodeLine{36                      \textcolor{comment}{// above this value and wet decreasing to 0 below it}}
+\DoxyCodeLine{37     \mbox{\hyperlink{namespacedsp_a88d33c6b783d9a78aee07335dbf9a968a64940aceac8d111f728de01af14a3c21}{sin3dB}},          \textcolor{comment}{// alternate dry/wet mixing rule using the 3 dB sine panning rule}}
+\DoxyCodeLine{38     \mbox{\hyperlink{namespacedsp_a88d33c6b783d9a78aee07335dbf9a968aac01fdf017bc266b8e83af4a1bfdc936}{sin4p5dB}},        \textcolor{comment}{// alternate dry/wet mixing rule using the 4.5 dB sine panning rule}}
+\DoxyCodeLine{39     \mbox{\hyperlink{namespacedsp_a88d33c6b783d9a78aee07335dbf9a968a90f000db258530bde660845d9d6f9ead}{sin6dB}},          \textcolor{comment}{// alternate dry/wet mixing rule using the 6 dB sine panning rule}}
+\DoxyCodeLine{40     \mbox{\hyperlink{namespacedsp_a88d33c6b783d9a78aee07335dbf9a968a5b26d1750438364ace067d859b36ff68}{squareRoot3dB}},   \textcolor{comment}{// alternate dry/wet mixing rule using the regular 3 dB panning rule}}
+\DoxyCodeLine{41     \mbox{\hyperlink{namespacedsp_a88d33c6b783d9a78aee07335dbf9a968a0f9a9215d4bf9fd51e11a65462846222}{squareRoot4p5dB}}  \textcolor{comment}{// alternate dry/wet mixing rule using the regular 4.5 dB panning rule}}
+\DoxyCodeLine{42 \};}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{53 \textcolor{keyword}{template} <\textcolor{keyword}{typename} SampleType>}
+\DoxyCodeLine{54 \textcolor{keyword}{class }\mbox{\hyperlink{classdsp_1_1_dry_wet_mixer}{DryWetMixer}}}
+\DoxyCodeLine{55 \{}
+\DoxyCodeLine{56 \textcolor{keyword}{public}:}
+\DoxyCodeLine{57     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{58     \textcolor{keyword}{using} \mbox{\hyperlink{namespacedsp_a88d33c6b783d9a78aee07335dbf9a968}{MixingRule}} = \mbox{\hyperlink{namespacedsp_a88d33c6b783d9a78aee07335dbf9a968}{DryWetMixingRule}};}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{62 \textcolor{comment}{}    \mbox{\hyperlink{classdsp_1_1_dry_wet_mixer_acf696b998b700df32d07208a8b301fc8}{DryWetMixer}}();}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{65     \textcolor{keyword}{explicit} \mbox{\hyperlink{classdsp_1_1_dry_wet_mixer_a4a61aa7afdd45ed419159b5fa8b13d49}{DryWetMixer}} (\textcolor{keywordtype}{int} maximumWetLatencyInSamples);}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{69 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_dry_wet_mixer_af4a4cf4c18dd6c9c68035dc754fdefb0}{setMixingRule}} (\mbox{\hyperlink{namespacedsp_a88d33c6b783d9a78aee07335dbf9a968}{MixingRule}} newRule);}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{74     \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_dry_wet_mixer_a0ca651e558c2988cd807574addbb3a6f}{setWetMixProportion}} (SampleType newWetMixProportion);}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{80     \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_dry_wet_mixer_abbaba025e845b6783e58c94a2d4962e2}{setWetLatency}} (SampleType wetLatencyInSamples);}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{84 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_dry_wet_mixer_a0278eb5f74beb8db0e9fa741ce6d5b74}{prepare}} (\textcolor{keyword}{const} \mbox{\hyperlink{structdsp_1_1_process_spec}{ProcessSpec}}\& spec);}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{87     \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_dry_wet_mixer_af7126c11db1f99aed3ffe5e60f6a74d6}{reset}}();}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{91 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_dry_wet_mixer_a8791a6ce9f95c20e4ad9cb871007a549}{pushDrySamples}} (\textcolor{keyword}{const} \mbox{\hyperlink{classdsp_1_1_audio_block}{AudioBlock<const SampleType>}} drySamples);}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{102     \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_dry_wet_mixer_a1a9b2b08554529707c18466990cbe373}{mixWetSamples}} (\mbox{\hyperlink{classdsp_1_1_audio_block}{AudioBlock<SampleType>}} wetSamples);}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104 \textcolor{keyword}{private}:}
+\DoxyCodeLine{105     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{106     \textcolor{keywordtype}{void} update();}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{108     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{109     \mbox{\hyperlink{class_smoothed_value}{SmoothedValue<SampleType, ValueSmoothingTypes::Linear>}} dryVolume, wetVolume;}
+\DoxyCodeLine{110     \mbox{\hyperlink{classdsp_1_1_delay_line}{DelayLine<SampleType, DelayLineInterpolationTypes::Thiran>}} dryDelayLine;}
+\DoxyCodeLine{111     \mbox{\hyperlink{class_audio_buffer}{AudioBuffer<SampleType>}} bufferDry;}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113     \mbox{\hyperlink{class_single_threaded_abstract_fifo}{SingleThreadedAbstractFifo}} fifo;}
+\DoxyCodeLine{114     SampleType mix = 1.0;}
+\DoxyCodeLine{115     \mbox{\hyperlink{namespacedsp_a88d33c6b783d9a78aee07335dbf9a968}{MixingRule}} currentMixingRule = \mbox{\hyperlink{namespacedsp_a88d33c6b783d9a78aee07335dbf9a968a9a932b3cb396238423eb2f33ec17d6aa}{MixingRule::linear}};}
+\DoxyCodeLine{116     \textcolor{keywordtype}{double} sampleRate = 44100.0;}
+\DoxyCodeLine{117     \textcolor{keywordtype}{int} maximumWetLatencyInSamples = 0;}
+\DoxyCodeLine{118 \};}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120 \} \textcolor{comment}{// namespace dsp}}
+\DoxyCodeLine{121  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{122 }
+
+\end{DoxyCode}

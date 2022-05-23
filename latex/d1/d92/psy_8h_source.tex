@@ -1,0 +1,159 @@
+\hypertarget{psy_8h_source}{}\doxysection{psy.\+h}
+\label{psy_8h_source}\index{build/juce\_audio\_formats/codecs/oggvorbis/libvorbis-\/1.3.7/lib/psy.h@{build/juce\_audio\_formats/codecs/oggvorbis/libvorbis-\/1.3.7/lib/psy.h}}
+\mbox{\hyperlink{psy_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/********************************************************************}}
+\DoxyCodeLine{2 \textcolor{comment}{ *                                                                  *}}
+\DoxyCodeLine{3 \textcolor{comment}{ * THIS FILE IS PART OF THE OggVorbis SOFTWARE CODEC SOURCE CODE.   *}}
+\DoxyCodeLine{4 \textcolor{comment}{ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *}}
+\DoxyCodeLine{5 \textcolor{comment}{ * GOVERNED BY A BSD-\/STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *}}
+\DoxyCodeLine{6 \textcolor{comment}{ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *}}
+\DoxyCodeLine{7 \textcolor{comment}{ *                                                                  *}}
+\DoxyCodeLine{8 \textcolor{comment}{ * THE OggVorbis SOURCE CODE IS (C) COPYRIGHT 1994-\/2009             *}}
+\DoxyCodeLine{9 \textcolor{comment}{ * by the Xiph.Org Foundation https://xiph.org/                     *}}
+\DoxyCodeLine{10 \textcolor{comment}{ *                                                                  *}}
+\DoxyCodeLine{11 \textcolor{comment}{ ********************************************************************}}
+\DoxyCodeLine{12 \textcolor{comment}{}}
+\DoxyCodeLine{13 \textcolor{comment}{ function: random psychoacoustics (not including preecho)}}
+\DoxyCodeLine{14 \textcolor{comment}{}}
+\DoxyCodeLine{15 \textcolor{comment}{ ********************************************************************/}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#ifndef \_V\_PSY\_H\_}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#define \_V\_PSY\_H\_}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{smallft_8h}{smallft.h}}"{}}}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{backends_8h}{backends.h}}"{}}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{envelope_8h}{envelope.h}}"{}}}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#ifndef EHMER\_MAX}}
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#define EHMER\_MAX 56}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{comment}{/* psychoacoustic setup ********************************************/}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#define P\_BANDS 17      }\textcolor{comment}{/* 62Hz to 16kHz */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#define P\_LEVELS 8      }\textcolor{comment}{/* 30dB to 100dB */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#define P\_LEVEL\_0 30.    }\textcolor{comment}{/* 30 dB */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#define P\_NOISECURVES 3}}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#define NOISE\_COMPAND\_LEVELS 40}}
+\DoxyCodeLine{35 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structvorbis__info__psy}{vorbis\_info\_psy}}\{}
+\DoxyCodeLine{36   \textcolor{keywordtype}{int}   \mbox{\hyperlink{structvorbis__info__psy_a884dea13b7446c8f28f40d5ae3faa144}{blockflag}};}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38   \textcolor{keywordtype}{float} \mbox{\hyperlink{structvorbis__info__psy_a299a4a5373e48f994fee99cc701299e7}{ath\_adjatt}};}
+\DoxyCodeLine{39   \textcolor{keywordtype}{float} \mbox{\hyperlink{structvorbis__info__psy_a59d8b44072c5de4de4a7a79b30cf0595}{ath\_maxatt}};}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41   \textcolor{keywordtype}{float} \mbox{\hyperlink{structvorbis__info__psy_a254bb09eb0de3cf794063ad1102b7a8c}{tone\_masteratt}}[\mbox{\hyperlink{psy_8h_a179ea3e4fa2cdb1ef235e922ea51405a}{P\_NOISECURVES}}];}
+\DoxyCodeLine{42   \textcolor{keywordtype}{float} \mbox{\hyperlink{structvorbis__info__psy_acc3f82d8c41c63e6e35d2cb451d72069}{tone\_centerboost}};}
+\DoxyCodeLine{43   \textcolor{keywordtype}{float} \mbox{\hyperlink{structvorbis__info__psy_ac10d4f96b564c11d017a2403f23914d9}{tone\_decay}};}
+\DoxyCodeLine{44   \textcolor{keywordtype}{float} \mbox{\hyperlink{structvorbis__info__psy_adea96fad862c5291d520454d6a029876}{tone\_abs\_limit}};}
+\DoxyCodeLine{45   \textcolor{keywordtype}{float} \mbox{\hyperlink{structvorbis__info__psy_ab8ef339e8d8ae469c1ae7ba706534a91}{toneatt}}[\mbox{\hyperlink{psy_8h_ae6af2ec0a0f6e0813ae814e9a07c728a}{P\_BANDS}}];}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47   \textcolor{keywordtype}{int} \mbox{\hyperlink{structvorbis__info__psy_ac7d88922bbd445f3688f1b58a835afb3}{noisemaskp}};}
+\DoxyCodeLine{48   \textcolor{keywordtype}{float} \mbox{\hyperlink{structvorbis__info__psy_ad102882d97e34592a277c60ac6636056}{noisemaxsupp}};}
+\DoxyCodeLine{49   \textcolor{keywordtype}{float} \mbox{\hyperlink{structvorbis__info__psy_a6cfe41252db68bd2f1bb408119673b3a}{noisewindowlo}};}
+\DoxyCodeLine{50   \textcolor{keywordtype}{float} \mbox{\hyperlink{structvorbis__info__psy_a8337b6979fcf921b4f975f3a88cf0394}{noisewindowhi}};}
+\DoxyCodeLine{51   \textcolor{keywordtype}{int}   \mbox{\hyperlink{structvorbis__info__psy_a2db09fd0e801f1b6f2c99850391fd940}{noisewindowlomin}};}
+\DoxyCodeLine{52   \textcolor{keywordtype}{int}   \mbox{\hyperlink{structvorbis__info__psy_ae3d1c2bece355a1dc347ea0f04e51a38}{noisewindowhimin}};}
+\DoxyCodeLine{53   \textcolor{keywordtype}{int}   \mbox{\hyperlink{structvorbis__info__psy_a6cb2aeec6204b044c4b4279c22e22d56}{noisewindowfixed}};}
+\DoxyCodeLine{54   \textcolor{keywordtype}{float} \mbox{\hyperlink{structvorbis__info__psy_aa9386a43b2fed4d8d322beeb86ca716c}{noiseoff}}[\mbox{\hyperlink{psy_8h_a179ea3e4fa2cdb1ef235e922ea51405a}{P\_NOISECURVES}}][\mbox{\hyperlink{psy_8h_ae6af2ec0a0f6e0813ae814e9a07c728a}{P\_BANDS}}];}
+\DoxyCodeLine{55   \textcolor{keywordtype}{float} \mbox{\hyperlink{structvorbis__info__psy_a30e0f5a53a3803feabbe826578c8a5e7}{noisecompand}}[\mbox{\hyperlink{psy_8h_a370d177dee7c7401b0c46ed37310d54b}{NOISE\_COMPAND\_LEVELS}}];}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57   \textcolor{keywordtype}{float} \mbox{\hyperlink{structvorbis__info__psy_a8aeb497662b106e241bd3232016aba66}{max\_curve\_dB}};}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59   \textcolor{keywordtype}{int} \mbox{\hyperlink{structvorbis__info__psy_ae6765718469a8efa31817f451996951f}{normal\_p}};}
+\DoxyCodeLine{60   \textcolor{keywordtype}{int} \mbox{\hyperlink{structvorbis__info__psy_a04680a3cb4a277fa8534e23d62e8939b}{normal\_start}};}
+\DoxyCodeLine{61   \textcolor{keywordtype}{int} \mbox{\hyperlink{structvorbis__info__psy_a96b80a288323a1ce2fc2e9f65d48c5b1}{normal\_partition}};}
+\DoxyCodeLine{62   \textcolor{keywordtype}{double} \mbox{\hyperlink{structvorbis__info__psy_ac733f35b4ca08d41b3de512e903e3ae0}{normal\_thresh}};}
+\DoxyCodeLine{63 \} \mbox{\hyperlink{psy_8h_a4305d063c0f209924d4c712654eaa483}{vorbis\_info\_psy}};}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65 \textcolor{keyword}{typedef} \textcolor{keyword}{struct}\{}
+\DoxyCodeLine{66   \textcolor{keywordtype}{int}   \mbox{\hyperlink{structvorbis__info__psy__global_a88e8cf9fc8dd0de7562379558c4a1910}{eighth\_octave\_lines}};}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68   \textcolor{comment}{/* for block long/short tuning; encode only */}}
+\DoxyCodeLine{69   \textcolor{keywordtype}{float} preecho\_thresh[\mbox{\hyperlink{envelope_8h_a9309f3ce540b562a832e378b7f58d807}{VE\_BANDS}}];}
+\DoxyCodeLine{70   \textcolor{keywordtype}{float} postecho\_thresh[\mbox{\hyperlink{envelope_8h_a9309f3ce540b562a832e378b7f58d807}{VE\_BANDS}}];}
+\DoxyCodeLine{71   \textcolor{keywordtype}{float} \mbox{\hyperlink{structvorbis__info__psy__global_a18a1fc853e4c5a7fe425de4404a15637}{stretch\_penalty}};}
+\DoxyCodeLine{72   \textcolor{keywordtype}{float} \mbox{\hyperlink{structvorbis__info__psy__global_a4b33ed2b895f683a5ed47ea81f65d7cf}{preecho\_minenergy}};}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74   \textcolor{keywordtype}{float} \mbox{\hyperlink{structvorbis__info__psy__global_ad928858e7853b161d92c034fdf654265}{ampmax\_att\_per\_sec}};}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76   \textcolor{comment}{/* channel coupling config */}}
+\DoxyCodeLine{77   \textcolor{keywordtype}{int}   coupling\_pkHz[\mbox{\hyperlink{codec__internal_8h_a9293c5a15a78abadbe212d944080e04b}{PACKETBLOBS}}];}
+\DoxyCodeLine{78   \textcolor{keywordtype}{int}   coupling\_pointlimit[2][\mbox{\hyperlink{codec__internal_8h_a9293c5a15a78abadbe212d944080e04b}{PACKETBLOBS}}];}
+\DoxyCodeLine{79   \textcolor{keywordtype}{int}   coupling\_prepointamp[\mbox{\hyperlink{codec__internal_8h_a9293c5a15a78abadbe212d944080e04b}{PACKETBLOBS}}];}
+\DoxyCodeLine{80   \textcolor{keywordtype}{int}   coupling\_postpointamp[\mbox{\hyperlink{codec__internal_8h_a9293c5a15a78abadbe212d944080e04b}{PACKETBLOBS}}];}
+\DoxyCodeLine{81   \textcolor{keywordtype}{int}   sliding\_lowpass[2][\mbox{\hyperlink{codec__internal_8h_a9293c5a15a78abadbe212d944080e04b}{PACKETBLOBS}}];}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83 \} \mbox{\hyperlink{structvorbis__info__psy__global}{vorbis\_info\_psy\_global}};}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\{}
+\DoxyCodeLine{86   \textcolor{keywordtype}{float} \mbox{\hyperlink{structvorbis__look__psy__global_a973febd6d21b9ea9b20c601adfff77e0}{ampmax}};}
+\DoxyCodeLine{87   \textcolor{keywordtype}{int}   \mbox{\hyperlink{structvorbis__look__psy__global_ac86c7cc0a9c62a5271dd309e3607c9c0}{channels}};}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89   \mbox{\hyperlink{structvorbis__info__psy__global}{vorbis\_info\_psy\_global}} *\mbox{\hyperlink{structvorbis__look__psy__global_a03368bba0e885407073c7cadb7ebd45e}{gi}};}
+\DoxyCodeLine{90   \textcolor{keywordtype}{int}   coupling\_pointlimit[2][\mbox{\hyperlink{psy_8h_a179ea3e4fa2cdb1ef235e922ea51405a}{P\_NOISECURVES}}];}
+\DoxyCodeLine{91 \} \mbox{\hyperlink{structvorbis__look__psy__global}{vorbis\_look\_psy\_global}};}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93 }
+\DoxyCodeLine{94 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\{}
+\DoxyCodeLine{95   \textcolor{keywordtype}{int} \mbox{\hyperlink{structvorbis__look__psy_a32e7f5f9a3c335d9376c9b3ffb3dd929}{n}};}
+\DoxyCodeLine{96   \textcolor{keyword}{struct }\mbox{\hyperlink{structvorbis__info__psy}{vorbis\_info\_psy}} *\mbox{\hyperlink{structvorbis__look__psy_a7e8428a907f20c860e64ec33d45309d8}{vi}};}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98   \textcolor{keywordtype}{float} ***\mbox{\hyperlink{structvorbis__look__psy_af99844cac8795514329522d9855d0494}{tonecurves}};}
+\DoxyCodeLine{99   \textcolor{keywordtype}{float} **\mbox{\hyperlink{structvorbis__look__psy_a856b96ea21a9902f3564f0baa81de0d4}{noiseoffset}};}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101   \textcolor{keywordtype}{float} *\mbox{\hyperlink{structvorbis__look__psy_a3446b16512508584e3d81cfbb07ab390}{ath}};}
+\DoxyCodeLine{102   \textcolor{keywordtype}{long}  *\mbox{\hyperlink{structvorbis__look__psy_a3bd4830be6d4d265ab06dbbc26926648}{octave}};             \textcolor{comment}{/* in n.ocshift format */}}
+\DoxyCodeLine{103   \textcolor{keywordtype}{long}  *\mbox{\hyperlink{structvorbis__look__psy_ab26f48178c7d4493eb8a814553441844}{bark}};}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105   \textcolor{keywordtype}{long}  \mbox{\hyperlink{structvorbis__look__psy_aa989a7d275eaa49f05d406a9760c9fcc}{firstoc}};}
+\DoxyCodeLine{106   \textcolor{keywordtype}{long}  \mbox{\hyperlink{structvorbis__look__psy_a97ab9b72727138cef93f0b930bc47568}{shiftoc}};}
+\DoxyCodeLine{107   \textcolor{keywordtype}{int}   \mbox{\hyperlink{structvorbis__look__psy_afc52eca23e371be299e975dbedb16340}{eighth\_octave\_lines}}; \textcolor{comment}{/* power of two, please */}}
+\DoxyCodeLine{108   \textcolor{keywordtype}{int}   \mbox{\hyperlink{structvorbis__look__psy_adf9a21c963c42ef1ccc000ab4127af09}{total\_octave\_lines}};}
+\DoxyCodeLine{109   \textcolor{keywordtype}{long}  \mbox{\hyperlink{structvorbis__look__psy_ab670c918ba2eea41e7dfed9d3ac33294}{rate}}; \textcolor{comment}{/* cache it */}}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111   \textcolor{keywordtype}{float} \mbox{\hyperlink{structvorbis__look__psy_aacbda1e90ed61475b1d1c6d81adc0cbb}{m\_val}}; \textcolor{comment}{/* Masking compensation value */}}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113 \} \mbox{\hyperlink{structvorbis__look__psy}{vorbis\_look\_psy}};}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115 \textcolor{keyword}{extern} \textcolor{keywordtype}{void}   \mbox{\hyperlink{psy_8h_a807a71364ce536fec54115f82cfac4b9}{\_vp\_psy\_init}}(\mbox{\hyperlink{structvorbis__look__psy}{vorbis\_look\_psy}} *\mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}},\mbox{\hyperlink{structvorbis__info__psy}{vorbis\_info\_psy}} *vi,}
+\DoxyCodeLine{116                            \mbox{\hyperlink{structvorbis__info__psy__global}{vorbis\_info\_psy\_global}} *gi,\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}},\textcolor{keywordtype}{long} \mbox{\hyperlink{namespacegl_a56ad46db01833cbc116c53b445f5668b}{rate}});}
+\DoxyCodeLine{117 \textcolor{keyword}{extern} \textcolor{keywordtype}{void}   \mbox{\hyperlink{psy_8h_affcd0e9240a0429b7507c9dff1cefc71}{\_vp\_psy\_clear}}(\mbox{\hyperlink{structvorbis__look__psy}{vorbis\_look\_psy}} *\mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}});}
+\DoxyCodeLine{118 \textcolor{keyword}{extern} \textcolor{keywordtype}{void}  *\mbox{\hyperlink{psy_8h_ab82d28e1a39c508b7bb18070fb9fc5b2}{\_vi\_psy\_dup}}(\textcolor{keywordtype}{void} *\mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}});}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120 \textcolor{keyword}{extern} \textcolor{keywordtype}{void}   \mbox{\hyperlink{psy_8h_a2be9a7ae18da45f4dd41f742a600cd3c}{\_vi\_psy\_free}}(\mbox{\hyperlink{structvorbis__info__psy}{vorbis\_info\_psy}} *i);}
+\DoxyCodeLine{121 \textcolor{keyword}{extern} \mbox{\hyperlink{structvorbis__info__psy}{vorbis\_info\_psy}} *\mbox{\hyperlink{psy_8h_ade402a5c3f419384ded50439a9442d9c}{\_vi\_psy\_copy}}(\mbox{\hyperlink{structvorbis__info__psy}{vorbis\_info\_psy}} *i);}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{123 \textcolor{keyword}{extern} \textcolor{keywordtype}{void} \mbox{\hyperlink{psy_8h_ac1810545af983f3d7bdcc2279689f533}{\_vp\_noisemask}}(\mbox{\hyperlink{structvorbis__look__psy}{vorbis\_look\_psy}} *\mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}},}
+\DoxyCodeLine{124                           \textcolor{keywordtype}{float} *logmdct,}
+\DoxyCodeLine{125                           \textcolor{keywordtype}{float} *logmask);}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{127 \textcolor{keyword}{extern} \textcolor{keywordtype}{void} \mbox{\hyperlink{psy_8h_aa3b3c37a437296674cca2436dcba809d}{\_vp\_tonemask}}(\mbox{\hyperlink{structvorbis__look__psy}{vorbis\_look\_psy}} *\mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}},}
+\DoxyCodeLine{128                          \textcolor{keywordtype}{float} *logfft,}
+\DoxyCodeLine{129                          \textcolor{keywordtype}{float} *logmask,}
+\DoxyCodeLine{130                          \textcolor{keywordtype}{float} global\_specmax,}
+\DoxyCodeLine{131                          \textcolor{keywordtype}{float} local\_specmax);}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{133 \textcolor{keyword}{extern} \textcolor{keywordtype}{void} \mbox{\hyperlink{psy_8h_a6a8f6ff5c487cd19e73aa3adf702dcd1}{\_vp\_offset\_and\_mix}}(\mbox{\hyperlink{structvorbis__look__psy}{vorbis\_look\_psy}} *\mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}},}
+\DoxyCodeLine{134                                \textcolor{keywordtype}{float} *noise,}
+\DoxyCodeLine{135                                \textcolor{keywordtype}{float} *tone,}
+\DoxyCodeLine{136                                \textcolor{keywordtype}{int} offset\_select,}
+\DoxyCodeLine{137                                \textcolor{keywordtype}{float} *logmask,}
+\DoxyCodeLine{138                                \textcolor{keywordtype}{float} *mdct,}
+\DoxyCodeLine{139                                \textcolor{keywordtype}{float} *logmdct);}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{141 \textcolor{keyword}{extern} \textcolor{keywordtype}{float} \mbox{\hyperlink{psy_8h_acf2486bf30b03e505305f05fd3107bb1}{\_vp\_ampmax\_decay}}(\textcolor{keywordtype}{float} amp,\mbox{\hyperlink{structvorbis__dsp__state}{vorbis\_dsp\_state}} *vd);}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{143 \textcolor{keyword}{extern} \textcolor{keywordtype}{void} \mbox{\hyperlink{psy_8h_a61c85571375521578807e2deff2232de}{\_vp\_couple\_quantize\_normalize}}(\textcolor{keywordtype}{int} blobno,}
+\DoxyCodeLine{144                                           \mbox{\hyperlink{structvorbis__info__psy__global}{vorbis\_info\_psy\_global}} *\mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}},}
+\DoxyCodeLine{145                                           \mbox{\hyperlink{structvorbis__look__psy}{vorbis\_look\_psy}} *\mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}},}
+\DoxyCodeLine{146                                           \mbox{\hyperlink{structvorbis__info__mapping0}{vorbis\_info\_mapping0}} *vi,}
+\DoxyCodeLine{147                                           \textcolor{keywordtype}{float} **mdct,}
+\DoxyCodeLine{148                                           \textcolor{keywordtype}{int}   **iwork,}
+\DoxyCodeLine{149                                           \textcolor{keywordtype}{int}    *nonzero,}
+\DoxyCodeLine{150                                           \textcolor{keywordtype}{int}     sliding\_lowpass,}
+\DoxyCodeLine{151                                           \textcolor{keywordtype}{int}     ch);}
+\DoxyCodeLine{152 }
+\DoxyCodeLine{153 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

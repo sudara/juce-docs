@@ -1,0 +1,176 @@
+\hypertarget{class_thread_with_progress_window}{}\doxysection{Thread\+With\+Progress\+Window Class Reference}
+\label{class_thread_with_progress_window}\index{ThreadWithProgressWindow@{ThreadWithProgressWindow}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Thread\+With\+Progress\+Window.\+h$>$}
+
+Inheritance diagram for Thread\+With\+Progress\+Window\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d2/d93/class_thread_with_progress_window}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_thread_with_progress_window_ac4fae9b0c2d110ca03e010d34133ea75}{Thread\+With\+Progress\+Window}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&window\+Title, bool has\+Progress\+Bar, bool has\+Cancel\+Button, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} time\+Out\+Ms\+When\+Cancelling=10000, \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&cancel\+Button\+Text=\mbox{\hyperlink{class_string}{String}}(), \mbox{\hyperlink{class_component}{Component}} $\ast$component\+To\+Centre\+Around=nullptr)
+\item 
+\mbox{\hyperlink{class_thread_with_progress_window_a7fd224fde4af82af4a12f935dd20c4e1}{$\sim$\+Thread\+With\+Progress\+Window}} () override
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_thread_with_progress_window_adb0f85d0de1be635284b3606b02d1708}{launch\+Thread}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} priority=5)
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_thread_with_progress_window_a607960c4dca64ea8e6193cc5e94d8c76}{set\+Progress}} (double new\+Progress)
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_thread_with_progress_window_a3f85676fc78cb05eecaf93f5d47eeaa5}{set\+Status\+Message}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&new\+Status\+Message)
+\item 
+\mbox{\hyperlink{class_alert_window}{Alert\+Window}} $\ast$ \mbox{\hyperlink{class_thread_with_progress_window_afa46bdafdd20821db7d84b5c4a129892}{get\+Alert\+Window}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+virtual \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_thread_with_progress_window_a498cef830af19752272e4491157fb3a2}{thread\+Complete}} (bool user\+Pressed\+Cancel)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+A thread that automatically pops up a modal dialog box with a progress bar and cancel button while it\textquotesingle{}s busy running.
+
+These are handy for performing some sort of task while giving the user feedback about how long there is to go, etc.
+
+E.\+g. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{class }MyTask  : \textcolor{keyword}{public} \mbox{\hyperlink{class_thread_with_progress_window}{ThreadWithProgressWindow}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{    MyTask()    : \mbox{\hyperlink{class_thread_with_progress_window}{ThreadWithProgressWindow}} (\textcolor{stringliteral}{"{}busy..."{}}, \mbox{\hyperlink{ordinals_8h_a41f9c5fb8b08eb5dc3edce4dcb37fee7}{true}}, \mbox{\hyperlink{ordinals_8h_a41f9c5fb8b08eb5dc3edce4dcb37fee7}{true}})}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_thread_aae90dfabab3e1776cf01a26e7ee3a620}{run}}()}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < thingsToDo; ++i)}
+\DoxyCodeLine{        \{}
+\DoxyCodeLine{            \textcolor{comment}{// must check this as often as possible, because this is}}
+\DoxyCodeLine{            \textcolor{comment}{// how we know if the user's pressed 'cancel'}}
+\DoxyCodeLine{            \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_thread_ab89b68d53514e0b3978460aab3202fd7}{threadShouldExit}}())}
+\DoxyCodeLine{                \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// this will update the progress bar on the dialog box}}
+\DoxyCodeLine{            \mbox{\hyperlink{class_thread_with_progress_window_a607960c4dca64ea8e6193cc5e94d8c76}{setProgress}} (i / (\textcolor{keywordtype}{double}) thingsToDo);}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{//   ... do the business here...}}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void} doTheTask()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    MyTask \mbox{\hyperlink{namespacegl_a0927a7b4232e61481fa501d12209467e}{m}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a0927a7b4232e61481fa501d12209467e}{m}}.runThread())}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        \textcolor{comment}{// thread finished normally..}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{    \textcolor{keywordflow}{else}}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        \textcolor{comment}{// user pressed the cancel button..}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_thread}{Thread}}, \mbox{\hyperlink{class_alert_window}{Alert\+Window}}
+\end{DoxySeeAlso}
+@tags\{GUI\} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_thread_with_progress_window_ac4fae9b0c2d110ca03e010d34133ea75}\label{class_thread_with_progress_window_ac4fae9b0c2d110ca03e010d34133ea75}} 
+\index{ThreadWithProgressWindow@{ThreadWithProgressWindow}!ThreadWithProgressWindow@{ThreadWithProgressWindow}}
+\index{ThreadWithProgressWindow@{ThreadWithProgressWindow}!ThreadWithProgressWindow@{ThreadWithProgressWindow}}
+\doxysubsubsection{\texorpdfstring{ThreadWithProgressWindow()}{ThreadWithProgressWindow()}}
+{\footnotesize\ttfamily Thread\+With\+Progress\+Window\+::\+Thread\+With\+Progress\+Window (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&}]{window\+Title,  }\item[{bool}]{has\+Progress\+Bar,  }\item[{bool}]{has\+Cancel\+Button,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{time\+Out\+Ms\+When\+Cancelling = {\ttfamily 10000},  }\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&}]{cancel\+Button\+Text = {\ttfamily \mbox{\hyperlink{class_string}{String}}()},  }\item[{\mbox{\hyperlink{class_component}{Component}} $\ast$}]{component\+To\+Centre\+Around = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+Creates the thread.
+
+Initially, the dialog box won\textquotesingle{}t be visible, it\textquotesingle{}ll only appear when the run\+Thread() method is called.
+
+
+\begin{DoxyParams}{Parameters}
+{\em window\+Title} & the title to go at the top of the dialog box \\
+\hline
+{\em has\+Progress\+Bar} & whether the dialog box should have a progress bar (see \mbox{\hyperlink{class_thread_with_progress_window_a607960c4dca64ea8e6193cc5e94d8c76}{set\+Progress()}} ) \\
+\hline
+{\em has\+Cancel\+Button} & whether the dialog box should have a cancel button \\
+\hline
+{\em time\+Out\+Ms\+When\+Cancelling} & when \textquotesingle{}cancel\textquotesingle{} is pressed, this is how long to wait for the thread to stop before killing it forcibly (see \mbox{\hyperlink{class_thread_a18583d51411d6a34c59b63f0adff4697}{Thread\+::stop\+Thread()}} ) \\
+\hline
+{\em cancel\+Button\+Text} & the text that should be shown in the cancel button (if it has one). Leave this empty for the default \char`\"{}\+Cancel\char`\"{} \\
+\hline
+{\em component\+To\+Centre\+Around} & if this is non-\/null, the window will be positioned so that it\textquotesingle{}s centred around this component. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_thread_with_progress_window_a7fd224fde4af82af4a12f935dd20c4e1}\label{class_thread_with_progress_window_a7fd224fde4af82af4a12f935dd20c4e1}} 
+\index{ThreadWithProgressWindow@{ThreadWithProgressWindow}!````~ThreadWithProgressWindow@{$\sim$ThreadWithProgressWindow}}
+\index{````~ThreadWithProgressWindow@{$\sim$ThreadWithProgressWindow}!ThreadWithProgressWindow@{ThreadWithProgressWindow}}
+\doxysubsubsection{\texorpdfstring{$\sim$ThreadWithProgressWindow()}{~ThreadWithProgressWindow()}}
+{\footnotesize\ttfamily Thread\+With\+Progress\+Window\+::$\sim$\+Thread\+With\+Progress\+Window (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+Destructor. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_thread_with_progress_window_afa46bdafdd20821db7d84b5c4a129892}\label{class_thread_with_progress_window_afa46bdafdd20821db7d84b5c4a129892}} 
+\index{ThreadWithProgressWindow@{ThreadWithProgressWindow}!getAlertWindow@{getAlertWindow}}
+\index{getAlertWindow@{getAlertWindow}!ThreadWithProgressWindow@{ThreadWithProgressWindow}}
+\doxysubsubsection{\texorpdfstring{getAlertWindow()}{getAlertWindow()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_alert_window}{Alert\+Window}} $\ast$ Thread\+With\+Progress\+Window\+::get\+Alert\+Window (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Returns the \mbox{\hyperlink{class_alert_window}{Alert\+Window}} that is being used. \mbox{\Hypertarget{class_thread_with_progress_window_adb0f85d0de1be635284b3606b02d1708}\label{class_thread_with_progress_window_adb0f85d0de1be635284b3606b02d1708}} 
+\index{ThreadWithProgressWindow@{ThreadWithProgressWindow}!launchThread@{launchThread}}
+\index{launchThread@{launchThread}!ThreadWithProgressWindow@{ThreadWithProgressWindow}}
+\doxysubsubsection{\texorpdfstring{launchThread()}{launchThread()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Thread\+With\+Progress\+Window\+::launch\+Thread (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{priority = {\ttfamily 5} }\end{DoxyParamCaption})}
+
+Starts the thread and returns.
+
+This will start the thread and make the dialog box appear in a modal state. When the thread finishes normally, or the cancel button is pressed, the window will be hidden and the \mbox{\hyperlink{class_thread_with_progress_window_a498cef830af19752272e4491157fb3a2}{thread\+Complete()}} method will be called.
+
+
+\begin{DoxyParams}{Parameters}
+{\em priority} & the priority to use when starting the thread -\/ see \mbox{\hyperlink{class_thread_a5502205d727c00752f95af27a063d983}{Thread\+::start\+Thread()}} for values \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_thread_with_progress_window_a607960c4dca64ea8e6193cc5e94d8c76}\label{class_thread_with_progress_window_a607960c4dca64ea8e6193cc5e94d8c76}} 
+\index{ThreadWithProgressWindow@{ThreadWithProgressWindow}!setProgress@{setProgress}}
+\index{setProgress@{setProgress}!ThreadWithProgressWindow@{ThreadWithProgressWindow}}
+\doxysubsubsection{\texorpdfstring{setProgress()}{setProgress()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Thread\+With\+Progress\+Window\+::set\+Progress (\begin{DoxyParamCaption}\item[{double}]{new\+Progress }\end{DoxyParamCaption})}
+
+The thread should call this periodically to update the position of the progress bar.
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Progress} & the progress, from 0.\+0 to 1.\+0 \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_thread_with_progress_window_a3f85676fc78cb05eecaf93f5d47eeaa5}{set\+Status\+Message}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_thread_with_progress_window_a3f85676fc78cb05eecaf93f5d47eeaa5}\label{class_thread_with_progress_window_a3f85676fc78cb05eecaf93f5d47eeaa5}} 
+\index{ThreadWithProgressWindow@{ThreadWithProgressWindow}!setStatusMessage@{setStatusMessage}}
+\index{setStatusMessage@{setStatusMessage}!ThreadWithProgressWindow@{ThreadWithProgressWindow}}
+\doxysubsubsection{\texorpdfstring{setStatusMessage()}{setStatusMessage()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Thread\+With\+Progress\+Window\+::set\+Status\+Message (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&}]{new\+Status\+Message }\end{DoxyParamCaption})}
+
+The thread can call this to change the message that\textquotesingle{}s displayed in the dialog box. \mbox{\Hypertarget{class_thread_with_progress_window_a498cef830af19752272e4491157fb3a2}\label{class_thread_with_progress_window_a498cef830af19752272e4491157fb3a2}} 
+\index{ThreadWithProgressWindow@{ThreadWithProgressWindow}!threadComplete@{threadComplete}}
+\index{threadComplete@{threadComplete}!ThreadWithProgressWindow@{ThreadWithProgressWindow}}
+\doxysubsubsection{\texorpdfstring{threadComplete()}{threadComplete()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Thread\+With\+Progress\+Window\+::thread\+Complete (\begin{DoxyParamCaption}\item[{bool}]{user\+Pressed\+Cancel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+This method is called (on the message thread) when the operation has finished. You may choose to use this callback to delete the \mbox{\hyperlink{class_thread_with_progress_window}{Thread\+With\+Progress\+Window}} object. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+gui\+\_\+basics/windows/\mbox{\hyperlink{juce___thread_with_progress_window_8h}{juce\+\_\+\+Thread\+With\+Progress\+Window.\+h}}\item 
+build/juce\+\_\+gui\+\_\+basics/windows/\mbox{\hyperlink{juce___thread_with_progress_window_8cpp}{juce\+\_\+\+Thread\+With\+Progress\+Window.\+cpp}}\end{DoxyCompactItemize}

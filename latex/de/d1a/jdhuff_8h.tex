@@ -1,0 +1,267 @@
+\hypertarget{jdhuff_8h}{}\doxysection{build/juce\+\_\+graphics/image\+\_\+formats/jpglib/jdhuff.h File Reference}
+\label{jdhuff_8h}\index{build/juce\_graphics/image\_formats/jpglib/jdhuff.h@{build/juce\_graphics/image\_formats/jpglib/jdhuff.h}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structd__derived__tbl}{d\+\_\+derived\+\_\+tbl}}
+\item 
+struct \mbox{\hyperlink{structbitread__perm__state}{bitread\+\_\+perm\+\_\+state}}
+\item 
+struct \mbox{\hyperlink{structbitread__working__state}{bitread\+\_\+working\+\_\+state}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{jdhuff_8h_a51937b71b3fbef28d57cc49f69ec8e7d}{HUFF\+\_\+\+LOOKAHEAD}}~8 /$\ast$ \# of bits of lookahead $\ast$/
+\item 
+\#define \mbox{\hyperlink{jdhuff_8h_af1bdc52b149ed3624eae0843033e7ee8}{BIT\+\_\+\+BUF\+\_\+\+SIZE}}~32 /$\ast$ size of buffer in bits $\ast$/
+\item 
+\#define \mbox{\hyperlink{jdhuff_8h_a980b37b80ff5f9f5f61f355e94971f2d}{BITREAD\+\_\+\+STATE\+\_\+\+VARS}}
+\item 
+\#define \mbox{\hyperlink{jdhuff_8h_aac92a9696088b68207ea708322b692ca}{BITREAD\+\_\+\+LOAD\+\_\+\+STATE}}(cinfop,  permstate)
+\item 
+\#define \mbox{\hyperlink{jdhuff_8h_afe3920d8725ec70f0c4cc68395266b1e}{BITREAD\+\_\+\+SAVE\+\_\+\+STATE}}(cinfop,  permstate)
+\item 
+\#define \mbox{\hyperlink{jdhuff_8h_af6bdea3084471f67f52a9c3bd330fe5a}{CHECK\+\_\+\+BIT\+\_\+\+BUFFER}}(state,  \mbox{\hyperlink{jdhuff_8h_a981cd410ab62049170e73d82fb2947fe}{nbits}},  action)
+\item 
+\#define \mbox{\hyperlink{jdhuff_8h_a2a9341c1fe1afae135e1a50c4c1a6416}{GET\+\_\+\+BITS}}(\mbox{\hyperlink{jdhuff_8h_a981cd410ab62049170e73d82fb2947fe}{nbits}})~ (((\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}) (\mbox{\hyperlink{jdhuff_8h_a9bcfab076ba6e1ababeab060af4e3462}{get\+\_\+buffer}} $>$$>$ (\mbox{\hyperlink{jdhuff_8h_a69e541fa3fec92d0b3d2d8a6c5f04886}{bits\+\_\+left}} -\/= (\mbox{\hyperlink{jdhuff_8h_a981cd410ab62049170e73d82fb2947fe}{nbits}})))) \& ((1$<$$<$(\mbox{\hyperlink{jdhuff_8h_a981cd410ab62049170e73d82fb2947fe}{nbits}}))-\/1))
+\item 
+\#define \mbox{\hyperlink{jdhuff_8h_af206f5a6e7f0e147e85e4e772e2276cb}{PEEK\+\_\+\+BITS}}(\mbox{\hyperlink{jdhuff_8h_a981cd410ab62049170e73d82fb2947fe}{nbits}})~ (((\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}) (\mbox{\hyperlink{jdhuff_8h_a9bcfab076ba6e1ababeab060af4e3462}{get\+\_\+buffer}} $>$$>$ (\mbox{\hyperlink{jdhuff_8h_a69e541fa3fec92d0b3d2d8a6c5f04886}{bits\+\_\+left}} -\/  (\mbox{\hyperlink{jdhuff_8h_a981cd410ab62049170e73d82fb2947fe}{nbits}})))) \& ((1$<$$<$(\mbox{\hyperlink{jdhuff_8h_a981cd410ab62049170e73d82fb2947fe}{nbits}}))-\/1))
+\item 
+\#define \mbox{\hyperlink{jdhuff_8h_a4d2644ad3912b6b94de83233b191d96e}{DROP\+\_\+\+BITS}}(\mbox{\hyperlink{jdhuff_8h_a981cd410ab62049170e73d82fb2947fe}{nbits}})~ (\mbox{\hyperlink{jdhuff_8h_a69e541fa3fec92d0b3d2d8a6c5f04886}{bits\+\_\+left}} -\/= (\mbox{\hyperlink{jdhuff_8h_a981cd410ab62049170e73d82fb2947fe}{nbits}}))
+\item 
+\#define \mbox{\hyperlink{jdhuff_8h_aaeab72644a8012bb53c7b2426bbe2cf9}{HUFF\+\_\+\+DECODE}}(result,  state,  \mbox{\hyperlink{jdhuff_8h_af74dba4716a8b51205604367fb049bdc}{htbl}},  failaction,  slowlabel)
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef \mbox{\hyperlink{jmorecfg_8h_a0cb58e7e6f0bad369840a52e54a56ae0}{INT32}} \mbox{\hyperlink{jdhuff_8h_ab2d47e546a8ed21c68e22f54535574a8}{bit\+\_\+buf\+\_\+type}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{jdhuff_8h_a0a473a27ae612feb8373c0097a4327f5}{EXTERN}} (\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}}) \mbox{\hyperlink{jdhuff_8c_acf14a3a5408a3bc212c5f14cee4f3efb}{jpeg\+\_\+make\+\_\+d\+\_\+derived\+\_\+tbl}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{jpeglib_8h_a00c7d78af44bd26a901c791ccfc1e178}{j\+\_\+decompress\+\_\+ptr}} cinfo
+\item 
+\mbox{\hyperlink{jdhuff_8h_a931bd06ed347a65a931b1de5f5b80ae1}{EXTERN}} (\mbox{\hyperlink{jconfig_8h_a7670a4e8a07d9ebb00411948b0bbf86d}{boolean}}) \mbox{\hyperlink{jdhuff_8c_a38f0238772793a274f36e913077338ad}{jpeg\+\_\+fill\+\_\+bit\+\_\+buffer}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structbitread__working__state}{bitread\+\_\+working\+\_\+state}} $\ast$state
+\item 
+\mbox{\hyperlink{jdhuff_8h_a93a39561814f1e34c80b5fc5352051ae}{EXTERN}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}) \mbox{\hyperlink{jdhuff_8c_a286dc7e86d9d930aec2cfeda955e5139}{jpeg\+\_\+huff\+\_\+decode}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structbitread__working__state}{bitread\+\_\+working\+\_\+state}} $\ast$state
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{jconfig_8h_a7670a4e8a07d9ebb00411948b0bbf86d}{boolean}} \mbox{\hyperlink{jdhuff_8h_a3b9fc61fd5e263607c9367d1113b842d}{is\+DC}}
+\item 
+\mbox{\hyperlink{jconfig_8h_a7670a4e8a07d9ebb00411948b0bbf86d}{boolean}} \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{jdhuff_8h_ac15aa4f86b719988961b67992d37851a}{tblno}}
+\item 
+\mbox{\hyperlink{jconfig_8h_a7670a4e8a07d9ebb00411948b0bbf86d}{boolean}} \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{structd__derived__tbl}{d\+\_\+derived\+\_\+tbl}} $\ast$$\ast$ \mbox{\hyperlink{jdhuff_8h_a1c37b580fbf7abb6d73c7a0e97bb8f85}{pdtbl}}
+\item 
+\mbox{\hyperlink{jdhuff_8h_ab2d47e546a8ed21c68e22f54535574a8}{bit\+\_\+buf\+\_\+type}} \mbox{\hyperlink{jdhuff_8h_a9bcfab076ba6e1ababeab060af4e3462}{get\+\_\+buffer}}
+\item 
+\mbox{\hyperlink{jdhuff_8h_ab2d47e546a8ed21c68e22f54535574a8}{bit\+\_\+buf\+\_\+type}} \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{jdhuff_8h_a69e541fa3fec92d0b3d2d8a6c5f04886}{bits\+\_\+left}}
+\item 
+\mbox{\hyperlink{jdhuff_8h_ab2d47e546a8ed21c68e22f54535574a8}{bit\+\_\+buf\+\_\+type}} \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{jdhuff_8h_a981cd410ab62049170e73d82fb2947fe}{nbits}}
+\item 
+\mbox{\hyperlink{jdhuff_8h_ab2d47e546a8ed21c68e22f54535574a8}{bit\+\_\+buf\+\_\+type}} \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{structd__derived__tbl}{d\+\_\+derived\+\_\+tbl}} $\ast$ \mbox{\hyperlink{jdhuff_8h_af74dba4716a8b51205604367fb049bdc}{htbl}}
+\item 
+\mbox{\hyperlink{jdhuff_8h_ab2d47e546a8ed21c68e22f54535574a8}{bit\+\_\+buf\+\_\+type}} \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{structd__derived__tbl}{d\+\_\+derived\+\_\+tbl}} \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{jdhuff_8h_a12219352a13247e13a957e62ed04c61b}{min\+\_\+bits}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{jdhuff_8h_af1bdc52b149ed3624eae0843033e7ee8}\label{jdhuff_8h_af1bdc52b149ed3624eae0843033e7ee8}} 
+\index{jdhuff.h@{jdhuff.h}!BIT\_BUF\_SIZE@{BIT\_BUF\_SIZE}}
+\index{BIT\_BUF\_SIZE@{BIT\_BUF\_SIZE}!jdhuff.h@{jdhuff.h}}
+\doxysubsubsection{\texorpdfstring{BIT\_BUF\_SIZE}{BIT\_BUF\_SIZE}}
+{\footnotesize\ttfamily \#define BIT\+\_\+\+BUF\+\_\+\+SIZE~32 /$\ast$ size of buffer in bits $\ast$/}
+
+\mbox{\Hypertarget{jdhuff_8h_aac92a9696088b68207ea708322b692ca}\label{jdhuff_8h_aac92a9696088b68207ea708322b692ca}} 
+\index{jdhuff.h@{jdhuff.h}!BITREAD\_LOAD\_STATE@{BITREAD\_LOAD\_STATE}}
+\index{BITREAD\_LOAD\_STATE@{BITREAD\_LOAD\_STATE}!jdhuff.h@{jdhuff.h}}
+\doxysubsubsection{\texorpdfstring{BITREAD\_LOAD\_STATE}{BITREAD\_LOAD\_STATE}}
+{\footnotesize\ttfamily \#define BITREAD\+\_\+\+LOAD\+\_\+\+STATE(\begin{DoxyParamCaption}\item[{}]{cinfop,  }\item[{}]{permstate }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    br\_state.cinfo = cinfop; \(\backslash\)}
+\DoxyCodeLine{    br\_state.next\_input\_byte = cinfop-\/>src-\/>next\_input\_byte; \(\backslash\)}
+\DoxyCodeLine{    br\_state.bytes\_in\_buffer = cinfop-\/>src-\/>bytes\_in\_buffer; \(\backslash\)}
+\DoxyCodeLine{    get\_buffer = permstate.get\_buffer; \(\backslash\)}
+\DoxyCodeLine{    bits\_left = permstate.bits\_left;}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{jdhuff_8h_afe3920d8725ec70f0c4cc68395266b1e}\label{jdhuff_8h_afe3920d8725ec70f0c4cc68395266b1e}} 
+\index{jdhuff.h@{jdhuff.h}!BITREAD\_SAVE\_STATE@{BITREAD\_SAVE\_STATE}}
+\index{BITREAD\_SAVE\_STATE@{BITREAD\_SAVE\_STATE}!jdhuff.h@{jdhuff.h}}
+\doxysubsubsection{\texorpdfstring{BITREAD\_SAVE\_STATE}{BITREAD\_SAVE\_STATE}}
+{\footnotesize\ttfamily \#define BITREAD\+\_\+\+SAVE\+\_\+\+STATE(\begin{DoxyParamCaption}\item[{}]{cinfop,  }\item[{}]{permstate }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    cinfop-\/>src-\/>next\_input\_byte = br\_state.next\_input\_byte; \(\backslash\)}
+\DoxyCodeLine{    cinfop-\/>src-\/>bytes\_in\_buffer = br\_state.bytes\_in\_buffer; \(\backslash\)}
+\DoxyCodeLine{    permstate.get\_buffer = \mbox{\hyperlink{jdhuff_8h_a9bcfab076ba6e1ababeab060af4e3462}{get\_buffer}}; \(\backslash\)}
+\DoxyCodeLine{    permstate.bits\_left = \mbox{\hyperlink{jdhuff_8h_a69e541fa3fec92d0b3d2d8a6c5f04886}{bits\_left}}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{jdhuff_8h_a980b37b80ff5f9f5f61f355e94971f2d}\label{jdhuff_8h_a980b37b80ff5f9f5f61f355e94971f2d}} 
+\index{jdhuff.h@{jdhuff.h}!BITREAD\_STATE\_VARS@{BITREAD\_STATE\_VARS}}
+\index{BITREAD\_STATE\_VARS@{BITREAD\_STATE\_VARS}!jdhuff.h@{jdhuff.h}}
+\doxysubsubsection{\texorpdfstring{BITREAD\_STATE\_VARS}{BITREAD\_STATE\_VARS}}
+{\footnotesize\ttfamily \#define BITREAD\+\_\+\+STATE\+\_\+\+VARS}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \mbox{\hyperlink{jdhuff_8h_ab2d47e546a8ed21c68e22f54535574a8}{bit\_buf\_type}} \mbox{\hyperlink{jdhuff_8h_a9bcfab076ba6e1ababeab060af4e3462}{get\_buffer}};  \(\backslash\)}
+\DoxyCodeLine{    int \mbox{\hyperlink{jdhuff_8h_a69e541fa3fec92d0b3d2d8a6c5f04886}{bits\_left}};  \(\backslash\)}
+\DoxyCodeLine{    bitread\_working\_state br\_state}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{jdhuff_8h_af6bdea3084471f67f52a9c3bd330fe5a}\label{jdhuff_8h_af6bdea3084471f67f52a9c3bd330fe5a}} 
+\index{jdhuff.h@{jdhuff.h}!CHECK\_BIT\_BUFFER@{CHECK\_BIT\_BUFFER}}
+\index{CHECK\_BIT\_BUFFER@{CHECK\_BIT\_BUFFER}!jdhuff.h@{jdhuff.h}}
+\doxysubsubsection{\texorpdfstring{CHECK\_BIT\_BUFFER}{CHECK\_BIT\_BUFFER}}
+{\footnotesize\ttfamily \#define CHECK\+\_\+\+BIT\+\_\+\+BUFFER(\begin{DoxyParamCaption}\item[{}]{state,  }\item[{}]{\mbox{\hyperlink{jdhuff_8h_a981cd410ab62049170e73d82fb2947fe}{nbits}},  }\item[{}]{action }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \{ \textcolor{keywordflow}{if} (\mbox{\hyperlink{jdhuff_8h_a69e541fa3fec92d0b3d2d8a6c5f04886}{bits\_left}} < (\mbox{\hyperlink{jdhuff_8h_a981cd410ab62049170e73d82fb2947fe}{nbits}})) \{  \(\backslash\)}
+\DoxyCodeLine{        if (! \mbox{\hyperlink{jdhuff_8c_a38f0238772793a274f36e913077338ad}{jpeg\_fill\_bit\_buffer}}(\&(state),\mbox{\hyperlink{jdhuff_8h_a9bcfab076ba6e1ababeab060af4e3462}{get\_buffer}},\mbox{\hyperlink{jdhuff_8h_a69e541fa3fec92d0b3d2d8a6c5f04886}{bits\_left}},\mbox{\hyperlink{jdhuff_8h_a981cd410ab62049170e73d82fb2947fe}{nbits}}))  \(\backslash\)}
+\DoxyCodeLine{          \{ action; \}  \(\backslash\)}
+\DoxyCodeLine{        get\_buffer = (state).\mbox{\hyperlink{jdhuff_8h_a9bcfab076ba6e1ababeab060af4e3462}{get\_buffer}}; \mbox{\hyperlink{jdhuff_8h_a69e541fa3fec92d0b3d2d8a6c5f04886}{bits\_left}} = (state).\mbox{\hyperlink{jdhuff_8h_a69e541fa3fec92d0b3d2d8a6c5f04886}{bits\_left}}; \} \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{jdhuff_8h_a4d2644ad3912b6b94de83233b191d96e}\label{jdhuff_8h_a4d2644ad3912b6b94de83233b191d96e}} 
+\index{jdhuff.h@{jdhuff.h}!DROP\_BITS@{DROP\_BITS}}
+\index{DROP\_BITS@{DROP\_BITS}!jdhuff.h@{jdhuff.h}}
+\doxysubsubsection{\texorpdfstring{DROP\_BITS}{DROP\_BITS}}
+{\footnotesize\ttfamily \#define DROP\+\_\+\+BITS(\begin{DoxyParamCaption}\item[{}]{\mbox{\hyperlink{jdhuff_8h_a981cd410ab62049170e73d82fb2947fe}{nbits}} }\end{DoxyParamCaption})~ (\mbox{\hyperlink{jdhuff_8h_a69e541fa3fec92d0b3d2d8a6c5f04886}{bits\+\_\+left}} -\/= (\mbox{\hyperlink{jdhuff_8h_a981cd410ab62049170e73d82fb2947fe}{nbits}}))}
+
+\mbox{\Hypertarget{jdhuff_8h_a2a9341c1fe1afae135e1a50c4c1a6416}\label{jdhuff_8h_a2a9341c1fe1afae135e1a50c4c1a6416}} 
+\index{jdhuff.h@{jdhuff.h}!GET\_BITS@{GET\_BITS}}
+\index{GET\_BITS@{GET\_BITS}!jdhuff.h@{jdhuff.h}}
+\doxysubsubsection{\texorpdfstring{GET\_BITS}{GET\_BITS}}
+{\footnotesize\ttfamily \#define GET\+\_\+\+BITS(\begin{DoxyParamCaption}\item[{}]{\mbox{\hyperlink{jdhuff_8h_a981cd410ab62049170e73d82fb2947fe}{nbits}} }\end{DoxyParamCaption})~ (((\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}) (\mbox{\hyperlink{jdhuff_8h_a9bcfab076ba6e1ababeab060af4e3462}{get\+\_\+buffer}} $>$$>$ (\mbox{\hyperlink{jdhuff_8h_a69e541fa3fec92d0b3d2d8a6c5f04886}{bits\+\_\+left}} -\/= (\mbox{\hyperlink{jdhuff_8h_a981cd410ab62049170e73d82fb2947fe}{nbits}})))) \& ((1$<$$<$(\mbox{\hyperlink{jdhuff_8h_a981cd410ab62049170e73d82fb2947fe}{nbits}}))-\/1))}
+
+\mbox{\Hypertarget{jdhuff_8h_aaeab72644a8012bb53c7b2426bbe2cf9}\label{jdhuff_8h_aaeab72644a8012bb53c7b2426bbe2cf9}} 
+\index{jdhuff.h@{jdhuff.h}!HUFF\_DECODE@{HUFF\_DECODE}}
+\index{HUFF\_DECODE@{HUFF\_DECODE}!jdhuff.h@{jdhuff.h}}
+\doxysubsubsection{\texorpdfstring{HUFF\_DECODE}{HUFF\_DECODE}}
+{\footnotesize\ttfamily \#define HUFF\+\_\+\+DECODE(\begin{DoxyParamCaption}\item[{}]{result,  }\item[{}]{state,  }\item[{}]{\mbox{\hyperlink{jdhuff_8h_af74dba4716a8b51205604367fb049bdc}{htbl}},  }\item[{}]{failaction,  }\item[{}]{slowlabel }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{ \textcolor{keywordtype}{int} nb, look; \(\backslash\)}
+\DoxyCodeLine{  if (\mbox{\hyperlink{jdhuff_8h_a69e541fa3fec92d0b3d2d8a6c5f04886}{bits\_left}} < \mbox{\hyperlink{jdhuff_8h_a51937b71b3fbef28d57cc49f69ec8e7d}{HUFF\_LOOKAHEAD}}) \{ \(\backslash\)}
+\DoxyCodeLine{    if (! \mbox{\hyperlink{jdhuff_8c_a38f0238772793a274f36e913077338ad}{jpeg\_fill\_bit\_buffer}}(\&state,\mbox{\hyperlink{jdhuff_8h_a9bcfab076ba6e1ababeab060af4e3462}{get\_buffer}},\mbox{\hyperlink{jdhuff_8h_a69e541fa3fec92d0b3d2d8a6c5f04886}{bits\_left}}, 0)) \{failaction;\} \(\backslash\)}
+\DoxyCodeLine{    get\_buffer = state.get\_buffer; \mbox{\hyperlink{jdhuff_8h_a69e541fa3fec92d0b3d2d8a6c5f04886}{bits\_left}} = state.bits\_left; \(\backslash\)}
+\DoxyCodeLine{    if (\mbox{\hyperlink{jdhuff_8h_a69e541fa3fec92d0b3d2d8a6c5f04886}{bits\_left}} < \mbox{\hyperlink{jdhuff_8h_a51937b71b3fbef28d57cc49f69ec8e7d}{HUFF\_LOOKAHEAD}}) \{ \(\backslash\)}
+\DoxyCodeLine{      nb = 1; \textcolor{keywordflow}{goto} slowlabel; \(\backslash\)}
+\DoxyCodeLine{    \} \(\backslash\)}
+\DoxyCodeLine{  \} \(\backslash\)}
+\DoxyCodeLine{  look = \mbox{\hyperlink{jdhuff_8h_af206f5a6e7f0e147e85e4e772e2276cb}{PEEK\_BITS}}(\mbox{\hyperlink{jdhuff_8h_a51937b71b3fbef28d57cc49f69ec8e7d}{HUFF\_LOOKAHEAD}}); \(\backslash\)}
+\DoxyCodeLine{  if ((nb = \mbox{\hyperlink{jdhuff_8h_af74dba4716a8b51205604367fb049bdc}{htbl}}-\/>\mbox{\hyperlink{structd__derived__tbl_a69e9228ebe44420f896c147bcb8b2f4b}{look\_nbits}}[look]) != 0) \{ \(\backslash\)}
+\DoxyCodeLine{    DROP\_BITS(nb); \(\backslash\)}
+\DoxyCodeLine{    result = \mbox{\hyperlink{jdhuff_8h_af74dba4716a8b51205604367fb049bdc}{htbl}}-\/>\mbox{\hyperlink{structd__derived__tbl_a526051256461864bc8395d1f6d1a82fd}{look\_sym}}[look]; \(\backslash\)}
+\DoxyCodeLine{  \} \textcolor{keywordflow}{else} \{ \(\backslash\)}
+\DoxyCodeLine{    nb = \mbox{\hyperlink{jdhuff_8h_a51937b71b3fbef28d57cc49f69ec8e7d}{HUFF\_LOOKAHEAD}}+1; \(\backslash\)}
+\DoxyCodeLine{slowlabel: \(\backslash\)}
+\DoxyCodeLine{    if ((\mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}=\mbox{\hyperlink{jdhuff_8c_a286dc7e86d9d930aec2cfeda955e5139}{jpeg\_huff\_decode}}(\&state,\mbox{\hyperlink{jdhuff_8h_a9bcfab076ba6e1ababeab060af4e3462}{get\_buffer}},\mbox{\hyperlink{jdhuff_8h_a69e541fa3fec92d0b3d2d8a6c5f04886}{bits\_left}},\mbox{\hyperlink{jdhuff_8h_af74dba4716a8b51205604367fb049bdc}{htbl}},nb)) < 0) \(\backslash\)}
+\DoxyCodeLine{    \{ failaction; \} \(\backslash\)}
+\DoxyCodeLine{    get\_buffer = state.get\_buffer; \mbox{\hyperlink{jdhuff_8h_a69e541fa3fec92d0b3d2d8a6c5f04886}{bits\_left}} = state.bits\_left; \(\backslash\)}
+\DoxyCodeLine{  \} \(\backslash\)}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{jdhuff_8h_a51937b71b3fbef28d57cc49f69ec8e7d}\label{jdhuff_8h_a51937b71b3fbef28d57cc49f69ec8e7d}} 
+\index{jdhuff.h@{jdhuff.h}!HUFF\_LOOKAHEAD@{HUFF\_LOOKAHEAD}}
+\index{HUFF\_LOOKAHEAD@{HUFF\_LOOKAHEAD}!jdhuff.h@{jdhuff.h}}
+\doxysubsubsection{\texorpdfstring{HUFF\_LOOKAHEAD}{HUFF\_LOOKAHEAD}}
+{\footnotesize\ttfamily \#define HUFF\+\_\+\+LOOKAHEAD~8 /$\ast$ \# of bits of lookahead $\ast$/}
+
+\mbox{\Hypertarget{jdhuff_8h_af206f5a6e7f0e147e85e4e772e2276cb}\label{jdhuff_8h_af206f5a6e7f0e147e85e4e772e2276cb}} 
+\index{jdhuff.h@{jdhuff.h}!PEEK\_BITS@{PEEK\_BITS}}
+\index{PEEK\_BITS@{PEEK\_BITS}!jdhuff.h@{jdhuff.h}}
+\doxysubsubsection{\texorpdfstring{PEEK\_BITS}{PEEK\_BITS}}
+{\footnotesize\ttfamily \#define PEEK\+\_\+\+BITS(\begin{DoxyParamCaption}\item[{}]{\mbox{\hyperlink{jdhuff_8h_a981cd410ab62049170e73d82fb2947fe}{nbits}} }\end{DoxyParamCaption})~ (((\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}) (\mbox{\hyperlink{jdhuff_8h_a9bcfab076ba6e1ababeab060af4e3462}{get\+\_\+buffer}} $>$$>$ (\mbox{\hyperlink{jdhuff_8h_a69e541fa3fec92d0b3d2d8a6c5f04886}{bits\+\_\+left}} -\/  (\mbox{\hyperlink{jdhuff_8h_a981cd410ab62049170e73d82fb2947fe}{nbits}})))) \& ((1$<$$<$(\mbox{\hyperlink{jdhuff_8h_a981cd410ab62049170e73d82fb2947fe}{nbits}}))-\/1))}
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{jdhuff_8h_ab2d47e546a8ed21c68e22f54535574a8}\label{jdhuff_8h_ab2d47e546a8ed21c68e22f54535574a8}} 
+\index{jdhuff.h@{jdhuff.h}!bit\_buf\_type@{bit\_buf\_type}}
+\index{bit\_buf\_type@{bit\_buf\_type}!jdhuff.h@{jdhuff.h}}
+\doxysubsubsection{\texorpdfstring{bit\_buf\_type}{bit\_buf\_type}}
+{\footnotesize\ttfamily typedef \mbox{\hyperlink{jmorecfg_8h_a0cb58e7e6f0bad369840a52e54a56ae0}{INT32}} \mbox{\hyperlink{jdhuff_8h_ab2d47e546a8ed21c68e22f54535574a8}{bit\+\_\+buf\+\_\+type}}}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{jdhuff_8h_a931bd06ed347a65a931b1de5f5b80ae1}\label{jdhuff_8h_a931bd06ed347a65a931b1de5f5b80ae1}} 
+\index{jdhuff.h@{jdhuff.h}!EXTERN@{EXTERN}}
+\index{EXTERN@{EXTERN}!jdhuff.h@{jdhuff.h}}
+\doxysubsubsection{\texorpdfstring{EXTERN()}{EXTERN()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily EXTERN (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{jconfig_8h_a7670a4e8a07d9ebb00411948b0bbf86d}{boolean}}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{jdhuff_8h_a93a39561814f1e34c80b5fc5352051ae}\label{jdhuff_8h_a93a39561814f1e34c80b5fc5352051ae}} 
+\index{jdhuff.h@{jdhuff.h}!EXTERN@{EXTERN}}
+\index{EXTERN@{EXTERN}!jdhuff.h@{jdhuff.h}}
+\doxysubsubsection{\texorpdfstring{EXTERN()}{EXTERN()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily EXTERN (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{jdhuff_8h_a0a473a27ae612feb8373c0097a4327f5}\label{jdhuff_8h_a0a473a27ae612feb8373c0097a4327f5}} 
+\index{jdhuff.h@{jdhuff.h}!EXTERN@{EXTERN}}
+\index{EXTERN@{EXTERN}!jdhuff.h@{jdhuff.h}}
+\doxysubsubsection{\texorpdfstring{EXTERN()}{EXTERN()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily EXTERN (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}}}]{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{jdhuff_8h_a69e541fa3fec92d0b3d2d8a6c5f04886}\label{jdhuff_8h_a69e541fa3fec92d0b3d2d8a6c5f04886}} 
+\index{jdhuff.h@{jdhuff.h}!bits\_left@{bits\_left}}
+\index{bits\_left@{bits\_left}!jdhuff.h@{jdhuff.h}}
+\doxysubsubsection{\texorpdfstring{bits\_left}{bits\_left}}
+{\footnotesize\ttfamily \mbox{\hyperlink{jdhuff_8h_ab2d47e546a8ed21c68e22f54535574a8}{bit\+\_\+buf\+\_\+type}} \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} bits\+\_\+left}
+
+\mbox{\Hypertarget{jdhuff_8h_a9bcfab076ba6e1ababeab060af4e3462}\label{jdhuff_8h_a9bcfab076ba6e1ababeab060af4e3462}} 
+\index{jdhuff.h@{jdhuff.h}!get\_buffer@{get\_buffer}}
+\index{get\_buffer@{get\_buffer}!jdhuff.h@{jdhuff.h}}
+\doxysubsubsection{\texorpdfstring{get\_buffer}{get\_buffer}}
+{\footnotesize\ttfamily \mbox{\hyperlink{jdhuff_8h_ab2d47e546a8ed21c68e22f54535574a8}{bit\+\_\+buf\+\_\+type}} get\+\_\+buffer}
+
+\mbox{\Hypertarget{jdhuff_8h_af74dba4716a8b51205604367fb049bdc}\label{jdhuff_8h_af74dba4716a8b51205604367fb049bdc}} 
+\index{jdhuff.h@{jdhuff.h}!htbl@{htbl}}
+\index{htbl@{htbl}!jdhuff.h@{jdhuff.h}}
+\doxysubsubsection{\texorpdfstring{htbl}{htbl}}
+{\footnotesize\ttfamily \mbox{\hyperlink{jdhuff_8h_ab2d47e546a8ed21c68e22f54535574a8}{bit\+\_\+buf\+\_\+type}} \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{structd__derived__tbl}{d\+\_\+derived\+\_\+tbl}}$\ast$ htbl}
+
+\mbox{\Hypertarget{jdhuff_8h_a3b9fc61fd5e263607c9367d1113b842d}\label{jdhuff_8h_a3b9fc61fd5e263607c9367d1113b842d}} 
+\index{jdhuff.h@{jdhuff.h}!isDC@{isDC}}
+\index{isDC@{isDC}!jdhuff.h@{jdhuff.h}}
+\doxysubsubsection{\texorpdfstring{isDC}{isDC}}
+{\footnotesize\ttfamily \mbox{\hyperlink{jconfig_8h_a7670a4e8a07d9ebb00411948b0bbf86d}{boolean}} is\+DC}
+
+\mbox{\Hypertarget{jdhuff_8h_a12219352a13247e13a957e62ed04c61b}\label{jdhuff_8h_a12219352a13247e13a957e62ed04c61b}} 
+\index{jdhuff.h@{jdhuff.h}!min\_bits@{min\_bits}}
+\index{min\_bits@{min\_bits}!jdhuff.h@{jdhuff.h}}
+\doxysubsubsection{\texorpdfstring{min\_bits}{min\_bits}}
+{\footnotesize\ttfamily \mbox{\hyperlink{jdhuff_8h_ab2d47e546a8ed21c68e22f54535574a8}{bit\+\_\+buf\+\_\+type}} \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{structd__derived__tbl}{d\+\_\+derived\+\_\+tbl}} \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} min\+\_\+bits}
+
+\mbox{\Hypertarget{jdhuff_8h_a981cd410ab62049170e73d82fb2947fe}\label{jdhuff_8h_a981cd410ab62049170e73d82fb2947fe}} 
+\index{jdhuff.h@{jdhuff.h}!nbits@{nbits}}
+\index{nbits@{nbits}!jdhuff.h@{jdhuff.h}}
+\doxysubsubsection{\texorpdfstring{nbits}{nbits}}
+{\footnotesize\ttfamily \mbox{\hyperlink{jdhuff_8h_ab2d47e546a8ed21c68e22f54535574a8}{bit\+\_\+buf\+\_\+type}} \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} nbits}
+
+\mbox{\Hypertarget{jdhuff_8h_a1c37b580fbf7abb6d73c7a0e97bb8f85}\label{jdhuff_8h_a1c37b580fbf7abb6d73c7a0e97bb8f85}} 
+\index{jdhuff.h@{jdhuff.h}!pdtbl@{pdtbl}}
+\index{pdtbl@{pdtbl}!jdhuff.h@{jdhuff.h}}
+\doxysubsubsection{\texorpdfstring{pdtbl}{pdtbl}}
+{\footnotesize\ttfamily \mbox{\hyperlink{jconfig_8h_a7670a4e8a07d9ebb00411948b0bbf86d}{boolean}} \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{structd__derived__tbl}{d\+\_\+derived\+\_\+tbl}}$\ast$$\ast$ pdtbl}
+
+\mbox{\Hypertarget{jdhuff_8h_ac15aa4f86b719988961b67992d37851a}\label{jdhuff_8h_ac15aa4f86b719988961b67992d37851a}} 
+\index{jdhuff.h@{jdhuff.h}!tblno@{tblno}}
+\index{tblno@{tblno}!jdhuff.h@{jdhuff.h}}
+\doxysubsubsection{\texorpdfstring{tblno}{tblno}}
+{\footnotesize\ttfamily \mbox{\hyperlink{jconfig_8h_a7670a4e8a07d9ebb00411948b0bbf86d}{boolean}} \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} tblno}
+

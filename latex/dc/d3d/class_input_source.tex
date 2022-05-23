@@ -1,0 +1,103 @@
+\hypertarget{class_input_source}{}\doxysection{Input\+Source Class Reference}
+\label{class_input_source}\index{InputSource@{InputSource}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Input\+Source.\+h$>$}
+
+Inheritance diagram for Input\+Source\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{dc/d3d/class_input_source}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_input_source_a3b19bea9a06f88384111d6c27386e04a}{Input\+Source}} ()=default
+\item 
+virtual \mbox{\hyperlink{class_input_source_a02eec90ae2d3419c82e7fc7f09204e1f}{$\sim$\+Input\+Source}} ()=default
+\item 
+virtual \mbox{\hyperlink{class_input_stream}{Input\+Stream}} $\ast$ \mbox{\hyperlink{class_input_source_afd099507820a7040542efe21950d71bf}{create\+Input\+Stream}} ()=0
+\item 
+virtual \mbox{\hyperlink{class_input_stream}{Input\+Stream}} $\ast$ \mbox{\hyperlink{class_input_source_a86e1e201ea6c5b87077edfefb15d189f}{create\+Input\+Stream\+For}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&related\+Item\+Path)=0
+\item 
+virtual \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} \mbox{\hyperlink{class_input_source_a1fe754d44724da8eaef055c496ca4140}{hash\+Code}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} =0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A lightweight object that can create a stream to read some kind of resource.
+
+This may be used to refer to a file, or some other kind of source, allowing a caller to create an input stream that can read from it when required.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_file_input_source}{File\+Input\+Source}}
+\end{DoxySeeAlso}
+@tags\{Core\} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_input_source_a3b19bea9a06f88384111d6c27386e04a}\label{class_input_source_a3b19bea9a06f88384111d6c27386e04a}} 
+\index{InputSource@{InputSource}!InputSource@{InputSource}}
+\index{InputSource@{InputSource}!InputSource@{InputSource}}
+\doxysubsubsection{\texorpdfstring{InputSource()}{InputSource()}}
+{\footnotesize\ttfamily Input\+Source\+::\+Input\+Source (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\mbox{\Hypertarget{class_input_source_a02eec90ae2d3419c82e7fc7f09204e1f}\label{class_input_source_a02eec90ae2d3419c82e7fc7f09204e1f}} 
+\index{InputSource@{InputSource}!````~InputSource@{$\sim$InputSource}}
+\index{````~InputSource@{$\sim$InputSource}!InputSource@{InputSource}}
+\doxysubsubsection{\texorpdfstring{$\sim$InputSource()}{~InputSource()}}
+{\footnotesize\ttfamily virtual Input\+Source\+::$\sim$\+Input\+Source (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+Destructor. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_input_source_afd099507820a7040542efe21950d71bf}\label{class_input_source_afd099507820a7040542efe21950d71bf}} 
+\index{InputSource@{InputSource}!createInputStream@{createInputStream}}
+\index{createInputStream@{createInputStream}!InputSource@{InputSource}}
+\doxysubsubsection{\texorpdfstring{createInputStream()}{createInputStream()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{class_input_stream}{Input\+Stream}} $\ast$ Input\+Source\+::create\+Input\+Stream (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Returns a new \mbox{\hyperlink{class_input_stream}{Input\+Stream}} to read this item.
+
+\begin{DoxyReturn}{Returns}
+an inputstream that the caller will delete, or nullptr if the filename isn\textquotesingle{}t found. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_file_input_source_ad54fa68c6b294347205f57621bbecf77}{File\+Input\+Source}}, and \mbox{\hyperlink{class_u_r_l_input_source_ab272ee9ed38e4083939917f24f8db297}{URLInput\+Source}}.
+
+\mbox{\Hypertarget{class_input_source_a86e1e201ea6c5b87077edfefb15d189f}\label{class_input_source_a86e1e201ea6c5b87077edfefb15d189f}} 
+\index{InputSource@{InputSource}!createInputStreamFor@{createInputStreamFor}}
+\index{createInputStreamFor@{createInputStreamFor}!InputSource@{InputSource}}
+\doxysubsubsection{\texorpdfstring{createInputStreamFor()}{createInputStreamFor()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{class_input_stream}{Input\+Stream}} $\ast$ Input\+Source\+::create\+Input\+Stream\+For (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&}]{related\+Item\+Path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Returns a new \mbox{\hyperlink{class_input_stream}{Input\+Stream}} to read an item, relative.
+
+
+\begin{DoxyParams}{Parameters}
+{\em related\+Item\+Path} & the relative pathname of the resource that is required \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+an inputstream that the caller will delete, or nullptr if the item isn\textquotesingle{}t found. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_file_input_source_a9aba3506d0b610f682ebf301b62a39b7}{File\+Input\+Source}}, and \mbox{\hyperlink{class_u_r_l_input_source_a1425130eeacf34b2e84679fd4fff64c3}{URLInput\+Source}}.
+
+\mbox{\Hypertarget{class_input_source_a1fe754d44724da8eaef055c496ca4140}\label{class_input_source_a1fe754d44724da8eaef055c496ca4140}} 
+\index{InputSource@{InputSource}!hashCode@{hashCode}}
+\index{hashCode@{hashCode}!InputSource@{InputSource}}
+\doxysubsubsection{\texorpdfstring{hashCode()}{hashCode()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} Input\+Source\+::hash\+Code (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Returns a hash code that uniquely represents this item. 
+
+Implemented in \mbox{\hyperlink{class_file_input_source_a95b676eefdd0f1b2978d9c31a6af5d10}{File\+Input\+Source}}, and \mbox{\hyperlink{class_u_r_l_input_source_a289bcfa8603911b61cd057ea0dd63646}{URLInput\+Source}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+core/streams/\mbox{\hyperlink{juce___input_source_8h}{juce\+\_\+\+Input\+Source.\+h}}\end{DoxyCompactItemize}

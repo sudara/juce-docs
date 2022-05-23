@@ -1,0 +1,111 @@
+\hypertarget{class_steinberg_1_1_vst_1_1_i_midi_learn}{}\doxysection{Steinberg\+::Vst\+::IMidi\+Learn Class Reference}
+\label{class_steinberg_1_1_vst_1_1_i_midi_learn}\index{Steinberg::Vst::IMidiLearn@{Steinberg::Vst::IMidiLearn}}
+
+
+{\ttfamily \#include $<$ivstmidilearn.\+h$>$}
+
+Inheritance diagram for Steinberg\+::Vst\+::IMidi\+Learn\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{df/d72/class_steinberg_1_1_vst_1_1_i_midi_learn}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\+\_\+\+API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_midi_learn_a03bb8d38c19b391f4c28a3e58c556c06}{on\+Live\+MIDIController\+Input}} (\mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{int32}} bus\+Index, \mbox{\hyperlink{namespace_steinberg_a091b21d361005029928d1a49e59f1fd9}{int16}} channel, \mbox{\hyperlink{namespace_steinberg_1_1_vst_a7cdcbf3982dea195392fe7949ba70d26}{Ctrl\+Number}} midi\+CC)=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_steinberg_1_1_f_u_i_d}{FUID}} \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_midi_learn_a3f57ac5fc0ad074d99a1526f08ede2ae}{iid}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+MIDI Learn interface\+: \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_midi_learn}{Vst\+::\+IMidi\+Learn}}
+
+
+\begin{DoxyItemize}
+\item \mbox{[}plug imp\mbox{]}
+\item \mbox{[}extends \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_edit_controller}{IEdit\+Controller}}\mbox{]}
+\item \mbox{[}released\+: 3.\+6.\+12\mbox{]}
+\item \mbox{[}optional\mbox{]}
+\end{DoxyItemize}
+
+If this interface is implemented by the edit controller, the host will call this method whenever there is live MIDI-\/\+CC input for the plug-\/in. This way, the plug-\/in can change its MIDI-\/\+CC parameter mapping and inform the host via the \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_component_handler_a65e162e3686dbcd5f2739b6481f69186}{IComponent\+Handler\+::restart\+Component}} with the k\+Midi\+CCAssignment\+Changed flag. Use this if you want to implement custom MIDI-\/\+Learn functionality in your plug-\/in.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\textcolor{comment}{// in MyController class declaration}}
+\DoxyCodeLine{\textcolor{keyword}{class }MyController : \textcolor{keyword}{public} Vst::EditController, \textcolor{keyword}{public} Vst::IMidiLearn}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{comment}{// ...}}
+\DoxyCodeLine{    \textcolor{comment}{//-\/-\/-\/ IMidiLearn -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{    \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_midi_learn_a03bb8d38c19b391f4c28a3e58c556c06}{onLiveMIDIControllerInput}} (\mbox{\hyperlink{juce__box2d_8cpp_a6a5a8e94340b94579afb83ab477a983c}{int32}} busIndex, \mbox{\hyperlink{juce__box2d_8cpp_a1336d6dad274f1bead955274a953c13d}{int16}} channel,}
+\DoxyCodeLine{                                                  \mbox{\hyperlink{namespace_steinberg_1_1_vst_a7cdcbf3982dea195392fe7949ba70d26}{CtrlNumber}} midiCC) \mbox{\hyperlink{fplatform_8h_a3c5f727b2149b22fddea9edf2add04a8}{SMTG\_OVERRIDE}};}
+\DoxyCodeLine{    \textcolor{comment}{// ...}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \mbox{\hyperlink{fobject_8h_a5a6e2365f969f95aee286638cf6164c7}{OBJ\_METHODS}} (MyController, Vst::EditController)}
+\DoxyCodeLine{    \mbox{\hyperlink{fobject_8h_a3c0ce0ce836f44d269b414624e3e0971}{DEFINE\_INTERFACES}}}
+\DoxyCodeLine{        \textcolor{comment}{// ...}}
+\DoxyCodeLine{        \mbox{\hyperlink{fobject_8h_a53e7d200032b573e38e925748fdb89e3}{DEF\_INTERFACE}} (Vst::IMidiLearn)}
+\DoxyCodeLine{    \mbox{\hyperlink{fobject_8h_a7991876302dbc825f493930c856dbd83}{END\_DEFINE\_INTERFACES}} (Vst::EditController)}
+\DoxyCodeLine{    \textcolor{comment}{//...}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\textcolor{comment}{// in mycontroller.cpp}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}pluginterfaces/vst/ivstmidilearn.h}}
+\DoxyCodeLine{\textcolor{preprocessor}{}}
+\DoxyCodeLine{\textcolor{preprocessor}{namespace Steinberg \{}}
+\DoxyCodeLine{\textcolor{preprocessor}{    namespace Vst \{}}
+\DoxyCodeLine{\textcolor{preprocessor}{        DEF\_CLASS\_IID (IMidiLearn)}}
+\DoxyCodeLine{\textcolor{preprocessor}{    \}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\}}}
+\DoxyCodeLine{\textcolor{preprocessor}{}}
+\DoxyCodeLine{\textcolor{preprocessor}{}\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{tresult PLUGIN\_API MyController::onLiveMIDIControllerInput (int32 busIndex, }
+\DoxyCodeLine{                            int16 channel, CtrlNumber midiCC)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{comment}{// if we are not in doMIDILearn (triggered by a UI button for example) }}
+\DoxyCodeLine{    \textcolor{comment}{// or wrong channel then return}}
+\DoxyCodeLine{    if (!doMIDILearn || busIndex != 0 || channel != 0 || midiLearnParamID == InvalidParamID)}
+\DoxyCodeLine{        return kResultFalse;}
+\DoxyCodeLine{}
+\DoxyCodeLine{    // adapt our internal MIDICC -\/> parameterID \mbox{\hyperlink{namespacegl_a17a6af3b52c7a2574508ffacd8c66014}{mapping}}}
+\DoxyCodeLine{    midiCCMapping[midiCC] = midiLearnParamID;}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{comment}{// new mapping then inform the host that our MIDI assignment has changed}}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (\textcolor{keyword}{auto} componentHandler = getComponentHandler ())}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        componentHandler-\/>restartComponent (\mbox{\hyperlink{namespace_steinberg_1_1_vst_a7efda02ae38d57d5cff658320ebf6149a7002c4145ebefbdaad8e3806a3e14919}{kMidiCCAssignmentChanged}});}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} \mbox{\hyperlink{namespace_steinberg_aad984331dc0e96a8c373da4eedc8867fabe8a193950563af44d7042627097968b}{kResultTrue}};}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_steinberg_1_1_vst_1_1_i_midi_learn_a03bb8d38c19b391f4c28a3e58c556c06}\label{class_steinberg_1_1_vst_1_1_i_midi_learn_a03bb8d38c19b391f4c28a3e58c556c06}} 
+\index{Steinberg::Vst::IMidiLearn@{Steinberg::Vst::IMidiLearn}!onLiveMIDIControllerInput@{onLiveMIDIControllerInput}}
+\index{onLiveMIDIControllerInput@{onLiveMIDIControllerInput}!Steinberg::Vst::IMidiLearn@{Steinberg::Vst::IMidiLearn}}
+\doxysubsubsection{\texorpdfstring{onLiveMIDIControllerInput()}{onLiveMIDIControllerInput()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\+\_\+\+API Steinberg\+::\+Vst\+::\+IMidi\+Learn\+::on\+Live\+MIDIController\+Input (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{int32}}}]{bus\+Index,  }\item[{\mbox{\hyperlink{namespace_steinberg_a091b21d361005029928d1a49e59f1fd9}{int16}}}]{channel,  }\item[{\mbox{\hyperlink{namespace_steinberg_1_1_vst_a7cdcbf3982dea195392fe7949ba70d26}{Ctrl\+Number}}}]{midi\+CC }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Called on live input MIDI-\/\+CC change associated to a given bus index and MIDI channel 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_steinberg_1_1_vst_1_1_i_midi_learn_a3f57ac5fc0ad074d99a1526f08ede2ae}\label{class_steinberg_1_1_vst_1_1_i_midi_learn_a3f57ac5fc0ad074d99a1526f08ede2ae}} 
+\index{Steinberg::Vst::IMidiLearn@{Steinberg::Vst::IMidiLearn}!iid@{iid}}
+\index{iid@{iid}!Steinberg::Vst::IMidiLearn@{Steinberg::Vst::IMidiLearn}}
+\doxysubsubsection{\texorpdfstring{iid}{iid}}
+{\footnotesize\ttfamily \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_steinberg_1_1_f_u_i_d}{FUID}} Steinberg\+::\+Vst\+::\+IMidi\+Learn\+::iid\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+audio\+\_\+processors/format\+\_\+types/\+VST3\+\_\+\+SDK/pluginterfaces/vst/\mbox{\hyperlink{ivstmidilearn_8h}{ivstmidilearn.\+h}}\end{DoxyCompactItemize}

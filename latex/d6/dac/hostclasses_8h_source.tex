@@ -1,0 +1,114 @@
+\hypertarget{hostclasses_8h_source}{}\doxysection{hostclasses.\+h}
+\label{hostclasses_8h_source}\index{build/juce\_audio\_processors/format\_types/VST3\_SDK/public.sdk/source/vst/hosting/hostclasses.h@{build/juce\_audio\_processors/format\_types/VST3\_SDK/public.sdk/source/vst/hosting/hostclasses.h}}
+\mbox{\hyperlink{hostclasses_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{2 \textcolor{comment}{// Project     : VST SDK}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 \textcolor{comment}{// Category    : Helpers}}
+\DoxyCodeLine{5 \textcolor{comment}{// Filename    : public.sdk/source/vst/hosting/hostclasses.h}}
+\DoxyCodeLine{6 \textcolor{comment}{// Created by  : Steinberg, 03/05/2008.}}
+\DoxyCodeLine{7 \textcolor{comment}{// Description : VST 3 hostclasses, example implementations for IHostApplication, IAttributeList and IMessage}}
+\DoxyCodeLine{8 \textcolor{comment}{//}}
+\DoxyCodeLine{9 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{10 \textcolor{comment}{// LICENSE}}
+\DoxyCodeLine{11 \textcolor{comment}{// (c) 2021, Steinberg Media Technologies GmbH, All Rights Reserved}}
+\DoxyCodeLine{12 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{13 \textcolor{comment}{// Redistribution and use in source and binary forms, with or without modification,}}
+\DoxyCodeLine{14 \textcolor{comment}{// are permitted provided that the following conditions are met:}}
+\DoxyCodeLine{15 \textcolor{comment}{// }}
+\DoxyCodeLine{16 \textcolor{comment}{//   * Redistributions of source code must retain the above copyright notice, }}
+\DoxyCodeLine{17 \textcolor{comment}{//     this list of conditions and the following disclaimer.}}
+\DoxyCodeLine{18 \textcolor{comment}{//   * Redistributions in binary form must reproduce the above copyright notice,}}
+\DoxyCodeLine{19 \textcolor{comment}{//     this list of conditions and the following disclaimer in the documentation }}
+\DoxyCodeLine{20 \textcolor{comment}{//     and/or other materials provided with the distribution.}}
+\DoxyCodeLine{21 \textcolor{comment}{//   * Neither the name of the Steinberg Media Technologies nor the names of its}}
+\DoxyCodeLine{22 \textcolor{comment}{//     contributors may be used to endorse or promote products derived from this }}
+\DoxyCodeLine{23 \textcolor{comment}{//     software without specific prior written permission.}}
+\DoxyCodeLine{24 \textcolor{comment}{// }}
+\DoxyCodeLine{25 \textcolor{comment}{// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "{}AS IS"{} AND}}
+\DoxyCodeLine{26 \textcolor{comment}{// ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED }}
+\DoxyCodeLine{27 \textcolor{comment}{// WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. }}
+\DoxyCodeLine{28 \textcolor{comment}{// IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, }}
+\DoxyCodeLine{29 \textcolor{comment}{// INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, }}
+\DoxyCodeLine{30 \textcolor{comment}{// BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, }}
+\DoxyCodeLine{31 \textcolor{comment}{// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF }}
+\DoxyCodeLine{32 \textcolor{comment}{// LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE }}
+\DoxyCodeLine{33 \textcolor{comment}{// OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE  OF THIS SOFTWARE, EVEN IF ADVISED}}
+\DoxyCodeLine{34 \textcolor{comment}{// OF THE POSSIBILITY OF SUCH DAMAGE.}}
+\DoxyCodeLine{35 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{pluginterfacesupport_8h}{public.sdk/source/vst/hosting/pluginterfacesupport.h}}"{}}}
+\DoxyCodeLine{40 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{fstring_8h}{base/source/fstring.h}}"{}}}
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{ivsthostapplication_8h}{pluginterfaces/vst/ivsthostapplication.h}}"{}}}
+\DoxyCodeLine{42 \textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespace_steinberg}{Steinberg}} \{}
+\DoxyCodeLine{45 \textcolor{keyword}{namespace }Vst \{}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{51 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_host_application}{HostApplication}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_host_application}{IHostApplication}}}
+\DoxyCodeLine{52 \{}
+\DoxyCodeLine{53 \textcolor{keyword}{public}:}
+\DoxyCodeLine{54     \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_host_application_a79f6a87136099961661b10dd04364ae1}{HostApplication}} ();}
+\DoxyCodeLine{55     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_host_application_a03d5b250cab69569ef69b480be2b26ad}{\string~HostApplication}} () \{ \mbox{\hyperlink{funknown_8h_ac31390eb834d3acfda3d871db3f9f959}{FUNKNOWN\_DTOR}} \}}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57     \textcolor{comment}{//-\/-\/-\/ IHostApplication -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{58     \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_host_application_ab9f8231e8517e3a2c09230601fa49157}{getName}} (\mbox{\hyperlink{namespace_steinberg_1_1_vst_a3304fa8513f23d66819bee647e6cb29c}{String128}} \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}) \mbox{\hyperlink{fplatform_8h_a3c5f727b2149b22fddea9edf2add04a8}{SMTG\_OVERRIDE}};}
+\DoxyCodeLine{59     \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_host_application_a6db570d580e5e699d721b992dee4e5c6}{createInstance}} (\mbox{\hyperlink{namespace_steinberg_a56b1a0450c9a583645f4e84d3806521c}{TUID}} cid, \mbox{\hyperlink{namespace_steinberg_a56b1a0450c9a583645f4e84d3806521c}{TUID}} \_iid, \textcolor{keywordtype}{void}** \mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}}) \mbox{\hyperlink{fplatform_8h_a3c5f727b2149b22fddea9edf2add04a8}{SMTG\_OVERRIDE}};}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61     \mbox{\hyperlink{funknown_8h_acb6e5cc5e226c37c1fca4f5192fb80a2}{DECLARE\_FUNKNOWN\_METHODS}}}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63     \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_plug_interface_support}{PlugInterfaceSupport}}* \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_host_application_a7eb9c6e0a337ece59831b1f979394cc4}{getPlugInterfaceSupport}} ()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_host_application_a2a333534b4adc49736e82339842d321a}{mPlugInterfaceSupport}}; \}}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{66     \mbox{\hyperlink{class_steinberg_1_1_i_ptr}{IPtr<PlugInterfaceSupport>}} \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_host_application_a2a333534b4adc49736e82339842d321a}{mPlugInterfaceSupport}};}
+\DoxyCodeLine{67 \};}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69 \textcolor{keyword}{class }\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_host_attribute}{HostAttribute}};}
+\DoxyCodeLine{70 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{74 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_host_attribute_list}{HostAttributeList}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_attribute_list}{IAttributeList}}}
+\DoxyCodeLine{75 \{}
+\DoxyCodeLine{76 \textcolor{keyword}{public}:}
+\DoxyCodeLine{77     \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_host_attribute_list_a3df18330dd6c338ff07692726d79bb4e}{HostAttributeList}} ();}
+\DoxyCodeLine{78     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_host_attribute_list_a44d88cf7d908766d0900763870136476}{\string~HostAttributeList}} ();}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80     \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_host_attribute_list_aaa76f0677fd8b658e4d2e7bbc5a60cc9}{setInt}} (\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_attribute_list_a4adeff8e50d8abc86aeea352e2abf529}{AttrID}} aid, \mbox{\hyperlink{namespace_steinberg_a8e6d63a581d885f3e9a3e1642b0f75b3}{int64}} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}) \mbox{\hyperlink{fplatform_8h_a3c5f727b2149b22fddea9edf2add04a8}{SMTG\_OVERRIDE}};}
+\DoxyCodeLine{81     \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_host_attribute_list_ae2d3f0a685f83cb856bcd13e9dfc9644}{getInt}} (\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_attribute_list_a4adeff8e50d8abc86aeea352e2abf529}{AttrID}} aid, \mbox{\hyperlink{namespace_steinberg_a8e6d63a581d885f3e9a3e1642b0f75b3}{int64}}\& \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}) \mbox{\hyperlink{fplatform_8h_a3c5f727b2149b22fddea9edf2add04a8}{SMTG\_OVERRIDE}};}
+\DoxyCodeLine{82     \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_host_attribute_list_a522b201d34cb155997dc0a76543c28c2}{setFloat}} (\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_attribute_list_a4adeff8e50d8abc86aeea352e2abf529}{AttrID}} aid, \textcolor{keywordtype}{double} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}) \mbox{\hyperlink{fplatform_8h_a3c5f727b2149b22fddea9edf2add04a8}{SMTG\_OVERRIDE}};}
+\DoxyCodeLine{83     \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_host_attribute_list_a64046a90f35aa942551f0a4c6cb2306b}{getFloat}} (\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_attribute_list_a4adeff8e50d8abc86aeea352e2abf529}{AttrID}} aid, \textcolor{keywordtype}{double}\& \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}) \mbox{\hyperlink{fplatform_8h_a3c5f727b2149b22fddea9edf2add04a8}{SMTG\_OVERRIDE}};}
+\DoxyCodeLine{84     \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_host_attribute_list_a10e71fbafeab4627890780755ed0e756}{setString}} (\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_attribute_list_a4adeff8e50d8abc86aeea352e2abf529}{AttrID}} aid, \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_1_1_vst_a3598b6ccf094d9d65342935206000b3a}{TChar}}* \textcolor{keywordtype}{string}) \mbox{\hyperlink{fplatform_8h_a3c5f727b2149b22fddea9edf2add04a8}{SMTG\_OVERRIDE}};}
+\DoxyCodeLine{85     \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_host_attribute_list_a09fed0fd0c0fb7b0467d6e05f1ce3ae6}{getString}} (\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_attribute_list_a4adeff8e50d8abc86aeea352e2abf529}{AttrID}} aid, \mbox{\hyperlink{namespace_steinberg_1_1_vst_a3598b6ccf094d9d65342935206000b3a}{TChar}}* \textcolor{keywordtype}{string}, \mbox{\hyperlink{namespace_steinberg_af4518d725547bee20d4e185e8d3f1965}{uint32}} sizeInBytes) \mbox{\hyperlink{fplatform_8h_a3c5f727b2149b22fddea9edf2add04a8}{SMTG\_OVERRIDE}};}
+\DoxyCodeLine{86     \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_host_attribute_list_af1729daeed41fa76794a171acca5013d}{setBinary}} (\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_attribute_list_a4adeff8e50d8abc86aeea352e2abf529}{AttrID}} aid, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, \mbox{\hyperlink{namespace_steinberg_af4518d725547bee20d4e185e8d3f1965}{uint32}} sizeInBytes) \mbox{\hyperlink{fplatform_8h_a3c5f727b2149b22fddea9edf2add04a8}{SMTG\_OVERRIDE}};}
+\DoxyCodeLine{87     \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_host_attribute_list_af60352a876f5d4375316de057e87bb15}{getBinary}} (\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_attribute_list_a4adeff8e50d8abc86aeea352e2abf529}{AttrID}} aid, \textcolor{keyword}{const} \textcolor{keywordtype}{void}*\& \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, \mbox{\hyperlink{namespace_steinberg_af4518d725547bee20d4e185e8d3f1965}{uint32}}\& sizeInBytes) \mbox{\hyperlink{fplatform_8h_a3c5f727b2149b22fddea9edf2add04a8}{SMTG\_OVERRIDE}};}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89     \mbox{\hyperlink{funknown_8h_acb6e5cc5e226c37c1fca4f5192fb80a2}{DECLARE\_FUNKNOWN\_METHODS}}}
+\DoxyCodeLine{90 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{91     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_host_attribute_list_ab52788e3910b013d4b926368369347a9}{removeAttrID}} (\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_attribute_list_a4adeff8e50d8abc86aeea352e2abf529}{AttrID}} aid);}
+\DoxyCodeLine{92     std::map<String, HostAttribute*> \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_host_attribute_list_a5c5464b837995e398f9761f3a77b7790}{list}};}
+\DoxyCodeLine{93 \};}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{99 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_host_message}{HostMessage}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_message}{IMessage}}}
+\DoxyCodeLine{100 \{}
+\DoxyCodeLine{101 \textcolor{keyword}{public}:}
+\DoxyCodeLine{102     \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_host_message_a8df97bf6d70827523e31d83cff7123df}{HostMessage}} ();}
+\DoxyCodeLine{103     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_host_message_a15046377b8eb0d04d9852a0b424c6feb}{\string~HostMessage}} ();}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105     \textcolor{keyword}{const} \textcolor{keywordtype}{char}* PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_host_message_a9fa33916689991a58f53c1510b95a151}{getMessageID}} () \mbox{\hyperlink{fplatform_8h_a3c5f727b2149b22fddea9edf2add04a8}{SMTG\_OVERRIDE}};}
+\DoxyCodeLine{106     \textcolor{keywordtype}{void} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_host_message_a015e04fc38864d6518a4bef75f03554f}{setMessageID}} (\textcolor{keyword}{const} \textcolor{keywordtype}{char}* messageID) \mbox{\hyperlink{fplatform_8h_a3c5f727b2149b22fddea9edf2add04a8}{SMTG\_OVERRIDE}};}
+\DoxyCodeLine{107     \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_attribute_list}{IAttributeList}}* PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_host_message_ab7513327bde82f84a74f62fd6b0096e1}{getAttributes}} () \mbox{\hyperlink{fplatform_8h_a3c5f727b2149b22fddea9edf2add04a8}{SMTG\_OVERRIDE}};}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109     \mbox{\hyperlink{funknown_8h_acb6e5cc5e226c37c1fca4f5192fb80a2}{DECLARE\_FUNKNOWN\_METHODS}}}
+\DoxyCodeLine{110 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{111     \textcolor{keywordtype}{char}* \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_host_message_aa781066cf4f35c28440830569834eab4}{messageId}};}
+\DoxyCodeLine{112     \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_host_attribute_list}{HostAttributeList}}* \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_host_message_a637f75491fa93a86521e6a6971a3bdec}{attributeList}};}
+\DoxyCodeLine{113 \};}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{116 \} \textcolor{comment}{// namespace Vst}}
+\DoxyCodeLine{117 \} \textcolor{comment}{// namespace Steinberg}}
+
+\end{DoxyCode}

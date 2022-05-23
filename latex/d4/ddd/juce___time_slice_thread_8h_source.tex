@@ -1,0 +1,87 @@
+\hypertarget{juce___time_slice_thread_8h_source}{}\doxysection{juce\+\_\+\+Time\+Slice\+Thread.\+h}
+\label{juce___time_slice_thread_8h_source}\index{build/juce\_core/threads/juce\_TimeSliceThread.h@{build/juce\_core/threads/juce\_TimeSliceThread.h}}
+\mbox{\hyperlink{juce___time_slice_thread_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{keyword}{class }\mbox{\hyperlink{class_time_slice_thread}{TimeSliceThread}};}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{44 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_time_slice_client}{TimeSliceClient}}}
+\DoxyCodeLine{45 \{}
+\DoxyCodeLine{46 \textcolor{keyword}{public}:}
+\DoxyCodeLine{48     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_time_slice_client_aedd0f68e061de085ae7014629aee9d16}{\string~TimeSliceClient}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{65     \textcolor{keyword}{virtual} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_time_slice_client_a272b0868c9bd0b5c281cf09dbaa69a9c}{useTimeSlice}}() = 0;}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68 \textcolor{keyword}{private}:}
+\DoxyCodeLine{69     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{class_time_slice_thread}{TimeSliceThread}};}
+\DoxyCodeLine{70     \mbox{\hyperlink{class_time}{Time}} nextCallTime;}
+\DoxyCodeLine{71 \};}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{83 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_time_slice_thread}{TimeSliceThread}}   : \textcolor{keyword}{public} \mbox{\hyperlink{class_thread}{Thread}}}
+\DoxyCodeLine{84 \{}
+\DoxyCodeLine{85 \textcolor{keyword}{public}:}
+\DoxyCodeLine{86     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{93 \textcolor{comment}{}    \textcolor{keyword}{explicit} \mbox{\hyperlink{class_time_slice_thread}{TimeSliceThread}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& threadName);}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{102     \mbox{\hyperlink{class_time_slice_thread}{\string~TimeSliceThread}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{109 \textcolor{comment}{}    \textcolor{keywordtype}{void} addTimeSliceClient (\mbox{\hyperlink{class_time_slice_client}{TimeSliceClient}}* clientToAdd, \textcolor{keywordtype}{int} millisecondsBeforeStarting = 0);}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{115     \textcolor{keywordtype}{void} moveToFrontOfQueue (\mbox{\hyperlink{class_time_slice_client}{TimeSliceClient}}* clientToMove);}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{121     \textcolor{keywordtype}{void} removeTimeSliceClient (\mbox{\hyperlink{class_time_slice_client}{TimeSliceClient}}* clientToRemove);}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{127     \textcolor{keywordtype}{void} removeAllClients();}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{130     \textcolor{keywordtype}{int} getNumClients() \textcolor{keyword}{const};}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{133     \mbox{\hyperlink{class_time_slice_client}{TimeSliceClient}}* getClient (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{136 \textcolor{preprocessor}{   \#ifndef DOXYGEN}}
+\DoxyCodeLine{137     \textcolor{keywordtype}{void} run() \textcolor{keyword}{override};}
+\DoxyCodeLine{138 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{141 \textcolor{keyword}{private}:}
+\DoxyCodeLine{142     \mbox{\hyperlink{class_critical_section}{CriticalSection}} callbackLock, listLock;}
+\DoxyCodeLine{143     \mbox{\hyperlink{class_array}{Array<TimeSliceClient*>}} clients;}
+\DoxyCodeLine{144     \mbox{\hyperlink{class_time_slice_client}{TimeSliceClient}}* clientBeingCalled = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{146     \mbox{\hyperlink{class_time_slice_client}{TimeSliceClient}}* getNextClient (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{147 }
+\DoxyCodeLine{148     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_time_slice_thread}{TimeSliceThread}})}
+\DoxyCodeLine{149 \};}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{151  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{152 }
+
+\end{DoxyCode}

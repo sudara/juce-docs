@@ -1,0 +1,841 @@
+\hypertarget{juce__win32___camera_device_8h_source}{}\doxysection{juce\+\_\+win32\+\_\+\+Camera\+Device.\+h}
+\label{juce__win32___camera_device_8h_source}\index{build/juce\_video/native/juce\_win32\_CameraDevice.h@{build/juce\_video/native/juce\_win32\_CameraDevice.h}}
+\mbox{\hyperlink{juce__win32___camera_device_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{5 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{6 \textcolor{comment}{}}
+\DoxyCodeLine{7 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{8 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{9 \textcolor{comment}{}}
+\DoxyCodeLine{10 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{11 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{12 \textcolor{comment}{}}
+\DoxyCodeLine{13 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{14 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{15 \textcolor{comment}{}}
+\DoxyCodeLine{16 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{17 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{18 \textcolor{comment}{}}
+\DoxyCodeLine{19 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{20 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{21 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{24 \textcolor{comment}{*/}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_camera_device_1_1_pimpl}{CameraDevice::Pimpl}}  : \textcolor{keyword}{public} \mbox{\hyperlink{class_change_broadcaster}{ChangeBroadcaster}}}
+\DoxyCodeLine{27 \{}
+\DoxyCodeLine{28     \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ae0e29b29cfbcc638ee189a7176a06c11}{Pimpl}} (CameraDevice\& ownerToUse, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\&, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}},}
+\DoxyCodeLine{29            \textcolor{keywordtype}{int} minWidth, \textcolor{keywordtype}{int} minHeight, \textcolor{keywordtype}{int} maxWidth, \textcolor{keywordtype}{int} maxHeight,}
+\DoxyCodeLine{30            \textcolor{keywordtype}{bool} \textcolor{comment}{/*highQuality*/})}
+\DoxyCodeLine{31        : owner (ownerToUse)}
+\DoxyCodeLine{32     \{}
+\DoxyCodeLine{33         HRESULT hr = \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a7aef7d9f598eaba2c57aa3d901b1b65a}{captureGraphBuilder}}.CoCreateInstance (\mbox{\hyperlink{namespacejuce_1_1_com_types_af534d5299f46848fa6328cffe2365876}{ComTypes::CLSID\_CaptureGraphBuilder2}});}
+\DoxyCodeLine{34         \textcolor{keywordflow}{if} (FAILED (hr))}
+\DoxyCodeLine{35             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a652405d1ee6e11b9c1f5af5b48207469}{filter}} = \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a808ca2365bc9589e51124e572fb82004}{enumerateCameras}} (\textcolor{keyword}{nullptr}, \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}});}
+\DoxyCodeLine{38         \textcolor{keywordflow}{if} (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_a652405d1ee6e11b9c1f5af5b48207469}{filter}} == \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{39             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41         hr = \mbox{\hyperlink{struct_camera_device_1_1_pimpl_afe0260487b54bbe598f64ef7795eea57}{graphBuilder}}.CoCreateInstance (\mbox{\hyperlink{namespacejuce_1_1_com_types_abe07280246828c081f759a760e7ace2b}{ComTypes::CLSID\_FilterGraph}});}
+\DoxyCodeLine{42         \textcolor{keywordflow}{if} (FAILED (hr))}
+\DoxyCodeLine{43             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45         hr = \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a7aef7d9f598eaba2c57aa3d901b1b65a}{captureGraphBuilder}}-\/>SetFiltergraph (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_afe0260487b54bbe598f64ef7795eea57}{graphBuilder}});}
+\DoxyCodeLine{46         \textcolor{keywordflow}{if} (FAILED (hr))}
+\DoxyCodeLine{47             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ac322f2492f398adc996c514dc16f0aac}{mediaControl}} = \mbox{\hyperlink{struct_camera_device_1_1_pimpl_afe0260487b54bbe598f64ef7795eea57}{graphBuilder}}.getInterface<ComTypes::IMediaControl>();}
+\DoxyCodeLine{50         \textcolor{keywordflow}{if} (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_ac322f2492f398adc996c514dc16f0aac}{mediaControl}} == \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{51             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53         \{}
+\DoxyCodeLine{54             ComSmartPtr<ComTypes::IAMStreamConfig> streamConfig;}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56             \mbox{\hyperlink{group__juce__core-system_ga0112339834a6548e4123e394b9ed95e2}{JUCE\_BEGIN\_IGNORE\_WARNINGS\_GCC\_LIKE}} (\textcolor{stringliteral}{"{}-\/Wlanguage-\/extension-\/token"{}})}
+\DoxyCodeLine{57             hr = \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a7aef7d9f598eaba2c57aa3d901b1b65a}{captureGraphBuilder}}-\/>FindInterface (\&\mbox{\hyperlink{namespacejuce_1_1_com_types_a6ad14b321b4515bddf85e9827a0d6939}{ComTypes::PIN\_CATEGORY\_CAPTURE}}, \textcolor{keyword}{nullptr}, \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a652405d1ee6e11b9c1f5af5b48207469}{filter}},}
+\DoxyCodeLine{58                                                      \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_ae3b9af23b20d9586ee6bd9297ad38b73}{\_\_uuidof}} (ComTypes::IAMStreamConfig), (\textcolor{keywordtype}{void}**) streamConfig.resetAndGetPointerAddress());}
+\DoxyCodeLine{59             \mbox{\hyperlink{group__juce__core-system_ga157f2229764b17137d8814bec95df109}{JUCE\_END\_IGNORE\_WARNINGS\_GCC\_LIKE}}}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61             \textcolor{keywordflow}{if} (streamConfig != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{62             \{}
+\DoxyCodeLine{63                 getVideoSizes (streamConfig);}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65                 \textcolor{keywordflow}{if} (! selectVideoSize (streamConfig, minWidth, minHeight, maxWidth, maxHeight))}
+\DoxyCodeLine{66                     \textcolor{keywordflow}{return};}
+\DoxyCodeLine{67             \}}
+\DoxyCodeLine{68         \}}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70         hr = \mbox{\hyperlink{struct_camera_device_1_1_pimpl_afe0260487b54bbe598f64ef7795eea57}{graphBuilder}}-\/>AddFilter (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_a652405d1ee6e11b9c1f5af5b48207469}{filter}}, \_T(\textcolor{stringliteral}{"{}Video Capture"{}}));}
+\DoxyCodeLine{71         \textcolor{keywordflow}{if} (FAILED (hr))}
+\DoxyCodeLine{72             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74         hr = \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a2596b020890455584aa9d36cb06e38a1}{smartTee}}.CoCreateInstance (\mbox{\hyperlink{namespacejuce_1_1_com_types_a900222368fd6176e8d11759bbd7b136f}{ComTypes::CLSID\_SmartTee}});}
+\DoxyCodeLine{75         \textcolor{keywordflow}{if} (FAILED (hr))}
+\DoxyCodeLine{76             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78         hr = \mbox{\hyperlink{struct_camera_device_1_1_pimpl_afe0260487b54bbe598f64ef7795eea57}{graphBuilder}}-\/>AddFilter (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_a2596b020890455584aa9d36cb06e38a1}{smartTee}}, \_T(\textcolor{stringliteral}{"{}Smart Tee"{}}));}
+\DoxyCodeLine{79         \textcolor{keywordflow}{if} (FAILED (hr))}
+\DoxyCodeLine{80             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82         \textcolor{keywordflow}{if} (! connectFilters (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_a652405d1ee6e11b9c1f5af5b48207469}{filter}}, \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a2596b020890455584aa9d36cb06e38a1}{smartTee}}))}
+\DoxyCodeLine{83             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85         ComSmartPtr<ComTypes::IBaseFilter> sampleGrabberBase;}
+\DoxyCodeLine{86         hr = sampleGrabberBase.CoCreateInstance (\mbox{\hyperlink{namespacejuce_1_1_com_types_acfe50acc76b0a4492cc49e931d9896a4}{ComTypes::CLSID\_SampleGrabber}});}
+\DoxyCodeLine{87         \textcolor{keywordflow}{if} (FAILED (hr))}
+\DoxyCodeLine{88             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90         \mbox{\hyperlink{group__juce__core-system_ga0112339834a6548e4123e394b9ed95e2}{JUCE\_BEGIN\_IGNORE\_WARNINGS\_GCC\_LIKE}} (\textcolor{stringliteral}{"{}-\/Wlanguage-\/extension-\/token"{}})}
+\DoxyCodeLine{91         hr = sampleGrabberBase.QueryInterface (\mbox{\hyperlink{juce__win32___com_smart_ptr_8h_ae3b9af23b20d9586ee6bd9297ad38b73}{\_\_uuidof}} (ComTypes::ISampleGrabber), \mbox{\hyperlink{struct_camera_device_1_1_pimpl_aeef5af95311484167110b209d47ffebf}{sampleGrabber}});}
+\DoxyCodeLine{92         \mbox{\hyperlink{group__juce__core-system_ga157f2229764b17137d8814bec95df109}{JUCE\_END\_IGNORE\_WARNINGS\_GCC\_LIKE}}}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{94         \textcolor{keywordflow}{if} (FAILED (hr))}
+\DoxyCodeLine{95             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97         \{}
+\DoxyCodeLine{98             ComTypes::AM\_MEDIA\_TYPE mt = \{\};}
+\DoxyCodeLine{99             mt.majortype = \mbox{\hyperlink{namespacejuce_1_1_com_types_ab81bd5fddf71e576f73751bb608d7871}{ComTypes::MEDIATYPE\_Video}};}
+\DoxyCodeLine{100             mt.subtype = \mbox{\hyperlink{namespacejuce_1_1_com_types_a871a6af604083967d4213b797ff5dd25}{ComTypes::MEDIASUBTYPE\_RGB24}};}
+\DoxyCodeLine{101             mt.formattype = \mbox{\hyperlink{namespacejuce_1_1_com_types_a764b9924846ac29e8d6dd1f32d317c79}{ComTypes::FORMAT\_VideoInfo}};}
+\DoxyCodeLine{102             \mbox{\hyperlink{struct_camera_device_1_1_pimpl_aeef5af95311484167110b209d47ffebf}{sampleGrabber}}-\/>SetMediaType (\&mt);}
+\DoxyCodeLine{103         \}}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ab998421a4bf8f54bcaa196b6fccba46d}{callback}} = \textcolor{keyword}{new} GrabberCallback (*\textcolor{keyword}{this});}
+\DoxyCodeLine{106         hr = \mbox{\hyperlink{struct_camera_device_1_1_pimpl_aeef5af95311484167110b209d47ffebf}{sampleGrabber}}-\/>SetCallback (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_ab998421a4bf8f54bcaa196b6fccba46d}{callback}}, 1);}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{108         hr = \mbox{\hyperlink{struct_camera_device_1_1_pimpl_afe0260487b54bbe598f64ef7795eea57}{graphBuilder}}-\/>AddFilter (sampleGrabberBase, \_T(\textcolor{stringliteral}{"{}Sample Grabber"{}}));}
+\DoxyCodeLine{109         \textcolor{keywordflow}{if} (FAILED (hr))}
+\DoxyCodeLine{110             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112         ComSmartPtr<ComTypes::IPin> grabberInputPin;}
+\DoxyCodeLine{113         \textcolor{keywordflow}{if} (! (getPin (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_a2596b020890455584aa9d36cb06e38a1}{smartTee}}, \mbox{\hyperlink{namespacejuce_1_1_com_types_ad28813b6bfb7816e22bb8b088d3eea16af2d47d2f3589003986eaf37902d29ae9}{ComTypes::PINDIR\_OUTPUT}}, \mbox{\hyperlink{struct_camera_device_1_1_pimpl_adb5df9200d735e6979a9dfe7465200dc}{smartTeeCaptureOutputPin}}, \textcolor{stringliteral}{"{}capture"{}})}
+\DoxyCodeLine{114                 \&\& getPin (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_a2596b020890455584aa9d36cb06e38a1}{smartTee}}, \mbox{\hyperlink{namespacejuce_1_1_com_types_ad28813b6bfb7816e22bb8b088d3eea16af2d47d2f3589003986eaf37902d29ae9}{ComTypes::PINDIR\_OUTPUT}}, \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ae6c7f252d30b3e57e57dddf4e1c8a94a}{smartTeePreviewOutputPin}}, \textcolor{stringliteral}{"{}preview"{}})}
+\DoxyCodeLine{115                 \&\& getPin (sampleGrabberBase, \mbox{\hyperlink{namespacejuce_1_1_com_types_ad28813b6bfb7816e22bb8b088d3eea16a7cc198183b78e75c10f2bf3c9318ce80}{ComTypes::PINDIR\_INPUT}}, grabberInputPin)))}
+\DoxyCodeLine{116             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118         hr = \mbox{\hyperlink{struct_camera_device_1_1_pimpl_afe0260487b54bbe598f64ef7795eea57}{graphBuilder}}-\/>Connect (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_ae6c7f252d30b3e57e57dddf4e1c8a94a}{smartTeePreviewOutputPin}}, grabberInputPin);}
+\DoxyCodeLine{119         \textcolor{keywordflow}{if} (FAILED (hr))}
+\DoxyCodeLine{120             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{122         ComTypes::AM\_MEDIA\_TYPE mt = \{\};}
+\DoxyCodeLine{123         hr = \mbox{\hyperlink{struct_camera_device_1_1_pimpl_aeef5af95311484167110b209d47ffebf}{sampleGrabber}}-\/>GetConnectedMediaType (\&mt);}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{125         \textcolor{keywordflow}{if} (\textcolor{keyword}{auto}* pVih = unalignedPointerCast<ComTypes::VIDEOINFOHEADER*> (mt.pbFormat))}
+\DoxyCodeLine{126         \{}
+\DoxyCodeLine{127             \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a6941a8c76ca6b528123053a8dede2ba2}{width}} = pVih-\/>bmiHeader.biWidth;}
+\DoxyCodeLine{128             \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a2747ecebff013026e24ea04c2a88b449}{height}} = pVih-\/>bmiHeader.biHeight;}
+\DoxyCodeLine{129         \}}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{131         ComSmartPtr<ComTypes::IBaseFilter> nullFilter;}
+\DoxyCodeLine{132         hr = nullFilter.CoCreateInstance (\mbox{\hyperlink{namespacejuce_1_1_com_types_a6b5d5996057a5184ce54baf72617079f}{ComTypes::CLSID\_NullRenderer}});}
+\DoxyCodeLine{133         hr = \mbox{\hyperlink{struct_camera_device_1_1_pimpl_afe0260487b54bbe598f64ef7795eea57}{graphBuilder}}-\/>AddFilter (nullFilter, \_T(\textcolor{stringliteral}{"{}Null Renderer"{}}));}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135         \textcolor{keywordflow}{if} (connectFilters (sampleGrabberBase, nullFilter)}
+\DoxyCodeLine{136               \&\& addGraphToRot())}
+\DoxyCodeLine{137         \{}
+\DoxyCodeLine{138             \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a780c0a34426c2423051998b51fc20667}{activeImage}} = \mbox{\hyperlink{class_image}{Image}} (\mbox{\hyperlink{class_image_ab47b5746d2df286ae6f8da6af5463c01a03a8b8bb3246ef72c98b01e711d61425}{Image::RGB}}, \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a6941a8c76ca6b528123053a8dede2ba2}{width}}, \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a2747ecebff013026e24ea04c2a88b449}{height}}, \textcolor{keyword}{true});}
+\DoxyCodeLine{139             \mbox{\hyperlink{struct_camera_device_1_1_pimpl_afd9d5389e5d5fd631116f6c0ee48857a}{loadingImage}} = \mbox{\hyperlink{class_image}{Image}} (\mbox{\hyperlink{class_image_ab47b5746d2df286ae6f8da6af5463c01a03a8b8bb3246ef72c98b01e711d61425}{Image::RGB}}, \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a6941a8c76ca6b528123053a8dede2ba2}{width}}, \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a2747ecebff013026e24ea04c2a88b449}{height}}, \textcolor{keyword}{true});}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{141             \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a8c8bf128df4786b10c8e1d29d0a061bc}{openedSuccessfully}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{142         \}}
+\DoxyCodeLine{143     \}}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145     \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a9fceb830bb1b774c96430237e9df6c0d}{\string~Pimpl}}()}
+\DoxyCodeLine{146     \{}
+\DoxyCodeLine{147         \textcolor{keywordflow}{if} (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_ac322f2492f398adc996c514dc16f0aac}{mediaControl}} != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{148             \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ac322f2492f398adc996c514dc16f0aac}{mediaControl}}-\/>Stop();}
+\DoxyCodeLine{149 }
+\DoxyCodeLine{150         removeGraphFromRot();}
+\DoxyCodeLine{151         disconnectAnyViewers();}
+\DoxyCodeLine{152 }
+\DoxyCodeLine{153         \textcolor{keywordflow}{if} (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_aeef5af95311484167110b209d47ffebf}{sampleGrabber}} != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{154         \{}
+\DoxyCodeLine{155             \mbox{\hyperlink{struct_camera_device_1_1_pimpl_aeef5af95311484167110b209d47ffebf}{sampleGrabber}}-\/>SetCallback (\textcolor{keyword}{nullptr}, 0);}
+\DoxyCodeLine{156             \mbox{\hyperlink{struct_camera_device_1_1_pimpl_aeef5af95311484167110b209d47ffebf}{sampleGrabber}} = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{157         \}}
+\DoxyCodeLine{158 }
+\DoxyCodeLine{159         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ab998421a4bf8f54bcaa196b6fccba46d}{callback}} = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{160         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_afe0260487b54bbe598f64ef7795eea57}{graphBuilder}} = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{161         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ac322f2492f398adc996c514dc16f0aac}{mediaControl}} = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{162         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a652405d1ee6e11b9c1f5af5b48207469}{filter}} = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{163         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a7aef7d9f598eaba2c57aa3d901b1b65a}{captureGraphBuilder}} = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{164         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a2596b020890455584aa9d36cb06e38a1}{smartTee}} = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{165         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ae6c7f252d30b3e57e57dddf4e1c8a94a}{smartTeePreviewOutputPin}} = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{166         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_adb5df9200d735e6979a9dfe7465200dc}{smartTeeCaptureOutputPin}} = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{167         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ac7d6e653aa3286efe1d08ec02892b733}{asfWriter}} = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{168     \}}
+\DoxyCodeLine{169 }
+\DoxyCodeLine{170     \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a79d3488e0970fce52d753c9c0c81aa34}{openedOk}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept       \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a8c8bf128df4786b10c8e1d29d0a061bc}{openedSuccessfully}}; \}}
+\DoxyCodeLine{171 }
+\DoxyCodeLine{172     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a5167029331352275c3f62be288392d93}{takeStillPicture}} (\mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\textcolor{keywordtype}{void} (\textcolor{keyword}{const} \mbox{\hyperlink{class_image}{Image}}\&)> pictureTakenCallbackToUse)}
+\DoxyCodeLine{173     \{}
+\DoxyCodeLine{174         \{}
+\DoxyCodeLine{175             \textcolor{keyword}{const} \mbox{\hyperlink{class_generic_scoped_lock}{ScopedLock}} sl (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_afdc88d49fbbcab24cb85c80b556a0a4e}{pictureTakenCallbackLock}});}
+\DoxyCodeLine{176 }
+\DoxyCodeLine{177             \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (pictureTakenCallbackToUse != \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{178 }
+\DoxyCodeLine{179             \textcolor{keywordflow}{if} (pictureTakenCallbackToUse == \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{180                 \textcolor{keywordflow}{return};}
+\DoxyCodeLine{181 }
+\DoxyCodeLine{182             pictureTakenCallback = \mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (pictureTakenCallbackToUse);}
+\DoxyCodeLine{183         \}}
+\DoxyCodeLine{184 }
+\DoxyCodeLine{185         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_adb5faafa036e298124ff50faf3452c2a}{addUser}}();}
+\DoxyCodeLine{186     \}}
+\DoxyCodeLine{187 }
+\DoxyCodeLine{188     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a332ef17da124d7f71cc5fa27737f5b70}{startRecordingToFile}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& file, \textcolor{keywordtype}{int} \mbox{\hyperlink{jpeglib_8h_acac7df77df55f2a1bfd8d8d18340b773}{quality}})}
+\DoxyCodeLine{189     \{}
+\DoxyCodeLine{190         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_adb5faafa036e298124ff50faf3452c2a}{addUser}}();}
+\DoxyCodeLine{191         isRecording = \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a7c85e053d3004b9b896ca5cae186381b}{createFileCaptureFilter}} (file, \mbox{\hyperlink{jpeglib_8h_acac7df77df55f2a1bfd8d8d18340b773}{quality}});}
+\DoxyCodeLine{192     \}}
+\DoxyCodeLine{193 }
+\DoxyCodeLine{194     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ac33ca230910ae42b3171bd149ef0f84e}{stopRecording}}()}
+\DoxyCodeLine{195     \{}
+\DoxyCodeLine{196         \textcolor{keywordflow}{if} (isRecording)}
+\DoxyCodeLine{197         \{}
+\DoxyCodeLine{198             \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a49e1ec651c95209587a2bb1944faf975}{removeFileCaptureFilter}}();}
+\DoxyCodeLine{199             \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a3296736e427862afc2fefe55d158afca}{removeUser}}();}
+\DoxyCodeLine{200             isRecording = \textcolor{keyword}{false};}
+\DoxyCodeLine{201         \}}
+\DoxyCodeLine{202     \}}
+\DoxyCodeLine{203 }
+\DoxyCodeLine{204     \mbox{\hyperlink{class_time}{Time}} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a140af780d9abb52ff7f4408c47a69beb}{getTimeOfFirstRecordedFrame}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{205 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{206         \textcolor{keywordflow}{return} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_adce991ec21c1e3933f831be375c706b3}{firstRecordedTime}};}
+\DoxyCodeLine{207     \}}
+\DoxyCodeLine{208 }
+\DoxyCodeLine{209     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a631a4ade218dfddc56d588c5b03fd1ca}{addListener}} (CameraDevice::Listener* listenerToAdd)}
+\DoxyCodeLine{210     \{}
+\DoxyCodeLine{211         \textcolor{keyword}{const} \mbox{\hyperlink{class_generic_scoped_lock}{ScopedLock}} sl (listenerLock);}
+\DoxyCodeLine{212 }
+\DoxyCodeLine{213         \textcolor{keywordflow}{if} (listeners.size() == 0)}
+\DoxyCodeLine{214             \mbox{\hyperlink{struct_camera_device_1_1_pimpl_adb5faafa036e298124ff50faf3452c2a}{addUser}}();}
+\DoxyCodeLine{215 }
+\DoxyCodeLine{216         listeners.add (listenerToAdd);}
+\DoxyCodeLine{217     \}}
+\DoxyCodeLine{218 }
+\DoxyCodeLine{219     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a39c0df63795c33e8e22f16451349a36f}{removeListener}} (CameraDevice::Listener* listenerToRemove)}
+\DoxyCodeLine{220     \{}
+\DoxyCodeLine{221         \textcolor{keyword}{const} \mbox{\hyperlink{class_generic_scoped_lock}{ScopedLock}} sl (listenerLock);}
+\DoxyCodeLine{222         listeners.remove (listenerToRemove);}
+\DoxyCodeLine{223 }
+\DoxyCodeLine{224         \textcolor{keywordflow}{if} (listeners.size() == 0)}
+\DoxyCodeLine{225             \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a3296736e427862afc2fefe55d158afca}{removeUser}}();}
+\DoxyCodeLine{226     \}}
+\DoxyCodeLine{227 }
+\DoxyCodeLine{228     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_aa75b76306cb6e0a49de5442e057fac4a}{callListeners}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_image}{Image}}\& \mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca78805a221a988e79ef3f42d7c5bfd418}{image}})}
+\DoxyCodeLine{229     \{}
+\DoxyCodeLine{230         \textcolor{keyword}{const} \mbox{\hyperlink{class_generic_scoped_lock}{ScopedLock}} sl (listenerLock);}
+\DoxyCodeLine{231         listeners.call ([=] (Listener\& l) \{ l.imageReceived (\mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca78805a221a988e79ef3f42d7c5bfd418}{image}}); \});}
+\DoxyCodeLine{232     \}}
+\DoxyCodeLine{233 }
+\DoxyCodeLine{234     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ac09c96e91e3dc8cf6e8ba42071aae68f}{notifyPictureTakenIfNeeded}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_image}{Image}}\& \mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca78805a221a988e79ef3f42d7c5bfd418}{image}})}
+\DoxyCodeLine{235     \{}
+\DoxyCodeLine{236         \{}
+\DoxyCodeLine{237             \textcolor{keyword}{const} \mbox{\hyperlink{class_generic_scoped_lock}{ScopedLock}} sl (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_afdc88d49fbbcab24cb85c80b556a0a4e}{pictureTakenCallbackLock}});}
+\DoxyCodeLine{238 }
+\DoxyCodeLine{239             \textcolor{keywordflow}{if} (pictureTakenCallback == \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{240                 \textcolor{keywordflow}{return};}
+\DoxyCodeLine{241         \}}
+\DoxyCodeLine{242 }
+\DoxyCodeLine{243         \mbox{\hyperlink{class_message_manager_acfe6da5271c2ab76fdb0414b235ed095}{MessageManager::callAsync}} ([weakRef = \mbox{\hyperlink{class_weak_reference}{WeakReference<Pimpl>}} \{ \textcolor{keyword}{this} \}, \mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca78805a221a988e79ef3f42d7c5bfd418}{image}}]() \textcolor{keyword}{mutable}}
+\DoxyCodeLine{244                                    \{}
+\DoxyCodeLine{245                                        \textcolor{keywordflow}{if} (weakRef == \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{246                                            \textcolor{keywordflow}{return};}
+\DoxyCodeLine{247 }
+\DoxyCodeLine{248                                        \textcolor{keywordflow}{if} (weakRef-\/>pictureTakenCallback != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{249                                            weakRef-\/>pictureTakenCallback (\mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca78805a221a988e79ef3f42d7c5bfd418}{image}});}
+\DoxyCodeLine{250 }
+\DoxyCodeLine{251                                        weakRef-\/>pictureTakenCallback = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{252                                    \});}
+\DoxyCodeLine{253     \}}
+\DoxyCodeLine{254 }
+\DoxyCodeLine{255     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_adb5faafa036e298124ff50faf3452c2a}{addUser}}()}
+\DoxyCodeLine{256     \{}
+\DoxyCodeLine{257         \textcolor{keywordflow}{if} (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_a8c8bf128df4786b10c8e1d29d0a061bc}{openedSuccessfully}} \&\& \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a3299ea2f0281004fb470911014140f93}{activeUsers}}++ == 0)}
+\DoxyCodeLine{258             \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ac322f2492f398adc996c514dc16f0aac}{mediaControl}}-\/>Run();}
+\DoxyCodeLine{259     \}}
+\DoxyCodeLine{260 }
+\DoxyCodeLine{261     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a3296736e427862afc2fefe55d158afca}{removeUser}}()}
+\DoxyCodeLine{262     \{}
+\DoxyCodeLine{263         \textcolor{keywordflow}{if} (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_a8c8bf128df4786b10c8e1d29d0a061bc}{openedSuccessfully}} \&\& -\/-\/\mbox{\hyperlink{struct_camera_device_1_1_pimpl_a3299ea2f0281004fb470911014140f93}{activeUsers}} == 0)}
+\DoxyCodeLine{264             \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ac322f2492f398adc996c514dc16f0aac}{mediaControl}}-\/>Stop();}
+\DoxyCodeLine{265     \}}
+\DoxyCodeLine{266 }
+\DoxyCodeLine{267     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a54b83d20c3aac79669e4272ba59f152a}{handleFrame}} (\textcolor{keywordtype}{double} \textcolor{comment}{/*time*/}, BYTE* buffer, \textcolor{keywordtype}{long} \textcolor{comment}{/*bufferSize*/})}
+\DoxyCodeLine{268     \{}
+\DoxyCodeLine{269         \textcolor{keywordflow}{if} (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_a62287452ba964971524b8aaa6cd4acdd}{recordNextFrameTime}})}
+\DoxyCodeLine{270         \{}
+\DoxyCodeLine{271             \textcolor{keyword}{const} \textcolor{keywordtype}{double} defaultCameraLatency = 0.1;}
+\DoxyCodeLine{272 }
+\DoxyCodeLine{273             \mbox{\hyperlink{struct_camera_device_1_1_pimpl_adce991ec21c1e3933f831be375c706b3}{firstRecordedTime}} = \mbox{\hyperlink{class_time_a9acf1454101b83bc3c77b435778d698e}{Time::getCurrentTime}}() -\/ \mbox{\hyperlink{class_relative_time}{RelativeTime}} (defaultCameraLatency);}
+\DoxyCodeLine{274             \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a62287452ba964971524b8aaa6cd4acdd}{recordNextFrameTime}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{275 }
+\DoxyCodeLine{276             ComSmartPtr<ComTypes::IPin> pin;}
+\DoxyCodeLine{277             \textcolor{keywordflow}{if} (getPin (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_a652405d1ee6e11b9c1f5af5b48207469}{filter}}, \mbox{\hyperlink{namespacejuce_1_1_com_types_ad28813b6bfb7816e22bb8b088d3eea16af2d47d2f3589003986eaf37902d29ae9}{ComTypes::PINDIR\_OUTPUT}}, pin))}
+\DoxyCodeLine{278             \{}
+\DoxyCodeLine{279                 \textcolor{keywordflow}{if} (\textcolor{keyword}{auto} pushSource = pin.getInterface<ComTypes::IAMPushSource>())}
+\DoxyCodeLine{280                 \{}
+\DoxyCodeLine{281                     \mbox{\hyperlink{namespacejuce_aa61c33896ddf86654e387058c589eff7}{ComTypes::REFERENCE\_TIME}} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a9c5bf07170b5d91cfb44d4bfd0517128}{latency}} = 0;}
+\DoxyCodeLine{282                     pushSource-\/>GetLatency (\&\mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a9c5bf07170b5d91cfb44d4bfd0517128}{latency}});}
+\DoxyCodeLine{283 }
+\DoxyCodeLine{284                     \mbox{\hyperlink{struct_camera_device_1_1_pimpl_adce991ec21c1e3933f831be375c706b3}{firstRecordedTime}} = \mbox{\hyperlink{struct_camera_device_1_1_pimpl_adce991ec21c1e3933f831be375c706b3}{firstRecordedTime}} -\/ \mbox{\hyperlink{class_relative_time}{RelativeTime}} ((\textcolor{keywordtype}{double}) \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a9c5bf07170b5d91cfb44d4bfd0517128}{latency}});}
+\DoxyCodeLine{285                 \}}
+\DoxyCodeLine{286             \}}
+\DoxyCodeLine{287         \}}
+\DoxyCodeLine{288 }
+\DoxyCodeLine{289         \{}
+\DoxyCodeLine{290             \textcolor{keyword}{const} \textcolor{keywordtype}{int} lineStride = \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a6941a8c76ca6b528123053a8dede2ba2}{width}} * 3;}
+\DoxyCodeLine{291             \textcolor{keyword}{const} \mbox{\hyperlink{class_generic_scoped_lock}{ScopedLock}} sl (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_ae8db60cdb7e31bc64fd075766c6de0b0}{imageSwapLock}});}
+\DoxyCodeLine{292 }
+\DoxyCodeLine{293             \{}
+\DoxyCodeLine{294                 \mbox{\hyperlink{struct_camera_device_1_1_pimpl_afd9d5389e5d5fd631116f6c0ee48857a}{loadingImage}}.\mbox{\hyperlink{class_image_ad995cd253234063d22b604984e83489d}{duplicateIfShared}}();}
+\DoxyCodeLine{295                 \textcolor{keyword}{const} \mbox{\hyperlink{class_image_1_1_bitmap_data}{Image::BitmapData}} destData (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_afd9d5389e5d5fd631116f6c0ee48857a}{loadingImage}}, 0, 0, \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a6941a8c76ca6b528123053a8dede2ba2}{width}}, \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a2747ecebff013026e24ea04c2a88b449}{height}}, \mbox{\hyperlink{class_image_1_1_bitmap_data_aef68f9fb2440dd6a56a3c0b8c8b6fc13a5cf46bf61ad8fd0449364d4e0a0eeac7}{Image::BitmapData::writeOnly}});}
+\DoxyCodeLine{296 }
+\DoxyCodeLine{297                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a2747ecebff013026e24ea04c2a88b449}{height}}; ++i)}
+\DoxyCodeLine{298                     memcpy (destData.\mbox{\hyperlink{class_image_1_1_bitmap_data_aab18bd6eb4265beca0989907147d0cfd}{getLinePointer}} ((\mbox{\hyperlink{struct_camera_device_1_1_pimpl_a2747ecebff013026e24ea04c2a88b449}{height}} -\/ 1) -\/ i),}
+\DoxyCodeLine{299                             buffer + lineStride * i,}
+\DoxyCodeLine{300                             (\textcolor{keywordtype}{size\_t}) lineStride);}
+\DoxyCodeLine{301             \}}
+\DoxyCodeLine{302 }
+\DoxyCodeLine{303             \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a24690ef57a8095fcdb1795708161e89c}{imageNeedsFlipping}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{304         \}}
+\DoxyCodeLine{305 }
+\DoxyCodeLine{306         \textcolor{keywordflow}{if} (listeners.size() > 0)}
+\DoxyCodeLine{307             callListeners (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_afd9d5389e5d5fd631116f6c0ee48857a}{loadingImage}});}
+\DoxyCodeLine{308 }
+\DoxyCodeLine{309         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ac09c96e91e3dc8cf6e8ba42071aae68f}{notifyPictureTakenIfNeeded}} (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_afd9d5389e5d5fd631116f6c0ee48857a}{loadingImage}});}
+\DoxyCodeLine{310 }
+\DoxyCodeLine{311         \mbox{\hyperlink{class_change_broadcaster_a10f01d1c0a7fde85355321985a682cbd}{sendChangeMessage}}();}
+\DoxyCodeLine{312     \}}
+\DoxyCodeLine{313 }
+\DoxyCodeLine{314     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ad8c6aec718729323d427a784e5e52f06}{drawCurrentImage}} (\mbox{\hyperlink{class_graphics}{Graphics}}\& \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}}, \mbox{\hyperlink{class_rectangle}{Rectangle<int>}} area)}
+\DoxyCodeLine{315     \{}
+\DoxyCodeLine{316         \textcolor{keywordflow}{if} (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_a24690ef57a8095fcdb1795708161e89c}{imageNeedsFlipping}})}
+\DoxyCodeLine{317         \{}
+\DoxyCodeLine{318             \textcolor{keyword}{const} \mbox{\hyperlink{class_generic_scoped_lock}{ScopedLock}} sl (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_ae8db60cdb7e31bc64fd075766c6de0b0}{imageSwapLock}});}
+\DoxyCodeLine{319             std::swap (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_afd9d5389e5d5fd631116f6c0ee48857a}{loadingImage}}, \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a780c0a34426c2423051998b51fc20667}{activeImage}});}
+\DoxyCodeLine{320             \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a24690ef57a8095fcdb1795708161e89c}{imageNeedsFlipping}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{321         \}}
+\DoxyCodeLine{322 }
+\DoxyCodeLine{323         \mbox{\hyperlink{class_rectangle}{Rectangle<int>}} centred (\mbox{\hyperlink{class_rectangle_placement}{RectanglePlacement}} (\mbox{\hyperlink{class_rectangle_placement_afd5464553fd6bb41d697f3fc1d7427edadf52ee04f4f43cfcc6049d49833dd946}{RectanglePlacement::centred}})}
+\DoxyCodeLine{324                                     .appliedTo (\mbox{\hyperlink{class_rectangle}{Rectangle<int>}} (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_a6941a8c76ca6b528123053a8dede2ba2}{width}}, \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a2747ecebff013026e24ea04c2a88b449}{height}}), area));}
+\DoxyCodeLine{325 }
+\DoxyCodeLine{326         \mbox{\hyperlink{class_rectangle_list}{RectangleList<int>}} borders (area);}
+\DoxyCodeLine{327         borders.\mbox{\hyperlink{class_rectangle_list_a7aa4739b7a963367f615462097e5e744}{subtract}} (centred);}
+\DoxyCodeLine{328         \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}}.setColour (\mbox{\hyperlink{namespace_colours_ab5f46ac613c2b717ac885b7cf995ffc6}{Colours::black}});}
+\DoxyCodeLine{329         \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}}.fillRectList (borders);}
+\DoxyCodeLine{330 }
+\DoxyCodeLine{331         \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}}.drawImage (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_a780c0a34426c2423051998b51fc20667}{activeImage}}, centred.\mbox{\hyperlink{class_rectangle_a4b8223fb659d6c7f95a72e8d3fbe793d}{getX}}(), centred.\mbox{\hyperlink{class_rectangle_a3050042669b496be5f029b1ab6fc1f52}{getY}}(),}
+\DoxyCodeLine{332                      centred.\mbox{\hyperlink{class_rectangle_a76c51bd8fcbdd3ac5d8f6dff3cf4a57e}{getWidth}}(), centred.\mbox{\hyperlink{class_rectangle_a92fff07d827126d92607d0d7c395c323}{getHeight}}(), 0, 0, \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a6941a8c76ca6b528123053a8dede2ba2}{width}}, \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a2747ecebff013026e24ea04c2a88b449}{height}});}
+\DoxyCodeLine{333     \}}
+\DoxyCodeLine{334 }
+\DoxyCodeLine{335     \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a7c85e053d3004b9b896ca5cae186381b}{createFileCaptureFilter}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& file, \textcolor{keywordtype}{int} \mbox{\hyperlink{jpeglib_8h_acac7df77df55f2a1bfd8d8d18340b773}{quality}})}
+\DoxyCodeLine{336     \{}
+\DoxyCodeLine{337         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a49e1ec651c95209587a2bb1944faf975}{removeFileCaptureFilter}}();}
+\DoxyCodeLine{338         file.\mbox{\hyperlink{class_file_adc64f67a869db306afd65a67758e5a3e}{deleteFile}}();}
+\DoxyCodeLine{339         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ac322f2492f398adc996c514dc16f0aac}{mediaControl}}-\/>Stop();}
+\DoxyCodeLine{340         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_adce991ec21c1e3933f831be375c706b3}{firstRecordedTime}} = \mbox{\hyperlink{class_time}{Time}}();}
+\DoxyCodeLine{341         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a62287452ba964971524b8aaa6cd4acdd}{recordNextFrameTime}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{342         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ae0df5e836ec3d988f5cd9a9f5066523f}{previewMaxFPS}} = 60;}
+\DoxyCodeLine{343 }
+\DoxyCodeLine{344         HRESULT hr = \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ac7d6e653aa3286efe1d08ec02892b733}{asfWriter}}.CoCreateInstance (\mbox{\hyperlink{namespacejuce_1_1_com_types_aaae680f89a3d4c73f6fb0e32a649dfe4}{ComTypes::CLSID\_WMAsfWriter}});}
+\DoxyCodeLine{345 }
+\DoxyCodeLine{346         \textcolor{keywordflow}{if} (SUCCEEDED (hr))}
+\DoxyCodeLine{347         \{}
+\DoxyCodeLine{348             \textcolor{keywordflow}{if} (\textcolor{keyword}{auto} fileSink = \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ac7d6e653aa3286efe1d08ec02892b733}{asfWriter}}.getInterface<ComTypes::IFileSinkFilter>())}
+\DoxyCodeLine{349             \{}
+\DoxyCodeLine{350                 hr = fileSink-\/>SetFileName (file.\mbox{\hyperlink{class_file_ab46bb1ff1b9e41ebd907c51d4d6e8743}{getFullPathName}}().\mbox{\hyperlink{class_string_a1861bc68125754e7a0b30f1a3e91937f}{toWideCharPointer}}(), \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{351 }
+\DoxyCodeLine{352                 \textcolor{keywordflow}{if} (SUCCEEDED (hr))}
+\DoxyCodeLine{353                 \{}
+\DoxyCodeLine{354                     hr = \mbox{\hyperlink{struct_camera_device_1_1_pimpl_afe0260487b54bbe598f64ef7795eea57}{graphBuilder}}-\/>AddFilter (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_ac7d6e653aa3286efe1d08ec02892b733}{asfWriter}}, \_T(\textcolor{stringliteral}{"{}AsfWriter"{}}));}
+\DoxyCodeLine{355 }
+\DoxyCodeLine{356                     \textcolor{keywordflow}{if} (SUCCEEDED (hr))}
+\DoxyCodeLine{357                     \{}
+\DoxyCodeLine{358                         \textcolor{keywordflow}{if} (\textcolor{keyword}{auto} asfConfig = \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ac7d6e653aa3286efe1d08ec02892b733}{asfWriter}}.getInterface<ComTypes::IConfigAsfWriter>())}
+\DoxyCodeLine{359                         \{}
+\DoxyCodeLine{360                             asfConfig-\/>SetIndexMode (\textcolor{keyword}{true});}
+\DoxyCodeLine{361                             ComSmartPtr<IWMProfileManager> profileManager;}
+\DoxyCodeLine{362 }
+\DoxyCodeLine{363                             \textcolor{keyword}{using} Fn = HRESULT (*) (IWMProfileManager**);}
+\DoxyCodeLine{364 }
+\DoxyCodeLine{365                             \textcolor{comment}{// This function is available on Windows 2000 and up, but we load it at runtime anyway}}
+\DoxyCodeLine{366                             \textcolor{comment}{// because some versions of MinGW ship with libraries that don't include this symbol.}}
+\DoxyCodeLine{367                             \textcolor{keywordflow}{if} (\textcolor{keyword}{auto}* fn = \textcolor{keyword}{reinterpret\_cast<}Fn\textcolor{keyword}{>} (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_a08bc293af3a6b4c571465185fbb339fd}{wmvcoreLibrary}}.\mbox{\hyperlink{class_dynamic_library_abd1a071cf7da091958e52c6baf1b2442}{getFunction}} (\textcolor{stringliteral}{"{}WMCreateProfileManager"{}})))}
+\DoxyCodeLine{368                                 hr = fn (profileManager.resetAndGetPointerAddress());}
+\DoxyCodeLine{369                             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{370                                 \mbox{\hyperlink{group__juce__core-system_gadc044ce5efecbecf2f5a44cd00db67b3}{jassertfalse}};}
+\DoxyCodeLine{371 }
+\DoxyCodeLine{372                             \textcolor{comment}{// This gibberish is the DirectShow profile for a video-\/only wmv file.}}
+\DoxyCodeLine{373                             \mbox{\hyperlink{class_string}{String}} prof (\textcolor{stringliteral}{"{}<profile version=\(\backslash\)"{}589824\(\backslash\)"{} storageformat=\(\backslash\)"{}1\(\backslash\)"{} name=\(\backslash\)"{}Quality\(\backslash\)"{} description=\(\backslash\)"{}Quality type for output.\(\backslash\)"{}>"{}}}
+\DoxyCodeLine{374                                            \textcolor{stringliteral}{"{}<streamconfig majortype=\(\backslash\)"{}\{73646976-\/0000-\/0010-\/8000-\/00AA00389B71\}\(\backslash\)"{} streamnumber=\(\backslash\)"{}1\(\backslash\)"{} "{}}}
+\DoxyCodeLine{375                                                          \textcolor{stringliteral}{"{}streamname=\(\backslash\)"{}Video Stream\(\backslash\)"{} inputname=\(\backslash\)"{}Video409\(\backslash\)"{} bitrate=\(\backslash\)"{}894960\(\backslash\)"{} "{}}}
+\DoxyCodeLine{376                                                          \textcolor{stringliteral}{"{}bufferwindow=\(\backslash\)"{}0\(\backslash\)"{} reliabletransport=\(\backslash\)"{}1\(\backslash\)"{} decodercomplexity=\(\backslash\)"{}AU\(\backslash\)"{} rfc1766langid=\(\backslash\)"{}en-\/us\(\backslash\)"{}>"{}}}
+\DoxyCodeLine{377                                              \textcolor{stringliteral}{"{}<videomediaprops maxkeyframespacing=\(\backslash\)"{}50000000\(\backslash\)"{} quality=\(\backslash\)"{}90\(\backslash\)"{}/>"{}}}
+\DoxyCodeLine{378                                              \textcolor{stringliteral}{"{}<wmmediatype subtype=\(\backslash\)"{}\{33564D57-\/0000-\/0010-\/8000-\/00AA00389B71\}\(\backslash\)"{} bfixedsizesamples=\(\backslash\)"{}0\(\backslash\)"{} "{}}}
+\DoxyCodeLine{379                                                           \textcolor{stringliteral}{"{}btemporalcompression=\(\backslash\)"{}1\(\backslash\)"{} lsamplesize=\(\backslash\)"{}0\(\backslash\)"{}>"{}}}
+\DoxyCodeLine{380                                              \textcolor{stringliteral}{"{}<videoinfoheader dwbitrate=\(\backslash\)"{}894960\(\backslash\)"{} dwbiterrorrate=\(\backslash\)"{}0\(\backslash\)"{} avgtimeperframe=\(\backslash\)"{}\$AVGTIMEPERFRAME\(\backslash\)"{}>"{}}}
+\DoxyCodeLine{381                                                  \textcolor{stringliteral}{"{}<rcsource left=\(\backslash\)"{}0\(\backslash\)"{} top=\(\backslash\)"{}0\(\backslash\)"{} right=\(\backslash\)"{}\$WIDTH\(\backslash\)"{} bottom=\(\backslash\)"{}\$HEIGHT\(\backslash\)"{}/>"{}}}
+\DoxyCodeLine{382                                                  \textcolor{stringliteral}{"{}<rctarget left=\(\backslash\)"{}0\(\backslash\)"{} top=\(\backslash\)"{}0\(\backslash\)"{} right=\(\backslash\)"{}\$WIDTH\(\backslash\)"{} bottom=\(\backslash\)"{}\$HEIGHT\(\backslash\)"{}/>"{}}}
+\DoxyCodeLine{383                                                  \textcolor{stringliteral}{"{}<bitmapinfoheader biwidth=\(\backslash\)"{}\$WIDTH\(\backslash\)"{} biheight=\(\backslash\)"{}\$HEIGHT\(\backslash\)"{} biplanes=\(\backslash\)"{}1\(\backslash\)"{} bibitcount=\(\backslash\)"{}24\(\backslash\)"{} "{}}}
+\DoxyCodeLine{384                                                                    \textcolor{stringliteral}{"{}bicompression=\(\backslash\)"{}WMV3\(\backslash\)"{} bisizeimage=\(\backslash\)"{}0\(\backslash\)"{} bixpelspermeter=\(\backslash\)"{}0\(\backslash\)"{} biypelspermeter=\(\backslash\)"{}0\(\backslash\)"{} "{}}}
+\DoxyCodeLine{385                                                                    \textcolor{stringliteral}{"{}biclrused=\(\backslash\)"{}0\(\backslash\)"{} biclrimportant=\(\backslash\)"{}0\(\backslash\)"{}/>"{}}}
+\DoxyCodeLine{386                                                \textcolor{stringliteral}{"{}</videoinfoheader>"{}}}
+\DoxyCodeLine{387                                              \textcolor{stringliteral}{"{}</wmmediatype>"{}}}
+\DoxyCodeLine{388                                            \textcolor{stringliteral}{"{}</streamconfig>"{}}}
+\DoxyCodeLine{389                                          \textcolor{stringliteral}{"{}</profile>"{}});}
+\DoxyCodeLine{390 }
+\DoxyCodeLine{391                             \textcolor{keyword}{const} \textcolor{keywordtype}{int} fps[] = \{ 10, 15, 30 \};}
+\DoxyCodeLine{392                             \textcolor{keywordtype}{int} maxFramesPerSecond = fps[\mbox{\hyperlink{group__juce__core-maths_gacf7cd562ab136d15d3bf5c3be047cf96}{jlimit}} (0, \mbox{\hyperlink{group__juce__core-maths_gadee9aaa20b588097567bc71e651f2f98}{numElementsInArray}} (fps) -\/ 1, \mbox{\hyperlink{jpeglib_8h_acac7df77df55f2a1bfd8d8d18340b773}{quality}} \& 0xff)];}
+\DoxyCodeLine{393 }
+\DoxyCodeLine{394                             \textcolor{keywordflow}{if} (((uint32\_t) \mbox{\hyperlink{jpeglib_8h_acac7df77df55f2a1bfd8d8d18340b773}{quality}} \& 0xff000000) != 0) \textcolor{comment}{// (internal hacky way to pass explicit frame rates for testing)}}
+\DoxyCodeLine{395                                 maxFramesPerSecond = (\mbox{\hyperlink{jpeglib_8h_acac7df77df55f2a1bfd8d8d18340b773}{quality}} >> 24) \& 0xff;}
+\DoxyCodeLine{396 }
+\DoxyCodeLine{397                             prof = prof.\mbox{\hyperlink{class_string_abbd337cd9c4e82ee357ae2e8bf48b16c}{replace}} (\textcolor{stringliteral}{"{}\$WIDTH"{}}, \mbox{\hyperlink{class_string}{String}} (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_a6941a8c76ca6b528123053a8dede2ba2}{width}}))}
+\DoxyCodeLine{398                                        .replace (\textcolor{stringliteral}{"{}\$HEIGHT"{}}, \mbox{\hyperlink{class_string}{String}} (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_a2747ecebff013026e24ea04c2a88b449}{height}}))}
+\DoxyCodeLine{399                                        .replace (\textcolor{stringliteral}{"{}\$AVGTIMEPERFRAME"{}}, \mbox{\hyperlink{class_string}{String}} (10000000 / maxFramesPerSecond));}
+\DoxyCodeLine{400 }
+\DoxyCodeLine{401                             ComSmartPtr<IWMProfile> currentProfile;}
+\DoxyCodeLine{402                             hr = profileManager-\/>LoadProfileByData (prof.\mbox{\hyperlink{class_string_a1861bc68125754e7a0b30f1a3e91937f}{toWideCharPointer}}(), currentProfile.resetAndGetPointerAddress());}
+\DoxyCodeLine{403                             hr = asfConfig-\/>ConfigureFilterUsingProfile (currentProfile);}
+\DoxyCodeLine{404 }
+\DoxyCodeLine{405                             \textcolor{keywordflow}{if} (SUCCEEDED (hr))}
+\DoxyCodeLine{406                             \{}
+\DoxyCodeLine{407                                 ComSmartPtr<ComTypes::IPin> asfWriterInputPin;}
+\DoxyCodeLine{408 }
+\DoxyCodeLine{409                                 \textcolor{keywordflow}{if} (getPin (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_ac7d6e653aa3286efe1d08ec02892b733}{asfWriter}}, \mbox{\hyperlink{namespacejuce_1_1_com_types_ad28813b6bfb7816e22bb8b088d3eea16a7cc198183b78e75c10f2bf3c9318ce80}{ComTypes::PINDIR\_INPUT}}, asfWriterInputPin, \textcolor{stringliteral}{"{}Video Input 01"{}}))}
+\DoxyCodeLine{410                                 \{}
+\DoxyCodeLine{411                                     hr = \mbox{\hyperlink{struct_camera_device_1_1_pimpl_afe0260487b54bbe598f64ef7795eea57}{graphBuilder}}-\/>Connect (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_adb5df9200d735e6979a9dfe7465200dc}{smartTeeCaptureOutputPin}}, asfWriterInputPin);}
+\DoxyCodeLine{412 }
+\DoxyCodeLine{413                                     \textcolor{keywordflow}{if} (SUCCEEDED (hr) \&\& \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a8c8bf128df4786b10c8e1d29d0a061bc}{openedSuccessfully}} \&\& \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a3299ea2f0281004fb470911014140f93}{activeUsers}} > 0}
+\DoxyCodeLine{414                                         \&\& SUCCEEDED (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_ac322f2492f398adc996c514dc16f0aac}{mediaControl}}-\/>Run()))}
+\DoxyCodeLine{415                                     \{}
+\DoxyCodeLine{416                                         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ae0df5e836ec3d988f5cd9a9f5066523f}{previewMaxFPS}} = (\mbox{\hyperlink{jpeglib_8h_acac7df77df55f2a1bfd8d8d18340b773}{quality}} < 2) ? 15 : 25; \textcolor{comment}{// throttle back the preview comps to try to leave the cpu free for encoding}}
+\DoxyCodeLine{417 }
+\DoxyCodeLine{418                                         \textcolor{keywordflow}{if} ((\mbox{\hyperlink{jpeglib_8h_acac7df77df55f2a1bfd8d8d18340b773}{quality}} \& 0x00ff0000) != 0)  \textcolor{comment}{// (internal hacky way to pass explicit frame rates for testing)}}
+\DoxyCodeLine{419                                             \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ae0df5e836ec3d988f5cd9a9f5066523f}{previewMaxFPS}} = (\mbox{\hyperlink{jpeglib_8h_acac7df77df55f2a1bfd8d8d18340b773}{quality}} >> 16) \& 0xff;}
+\DoxyCodeLine{420 }
+\DoxyCodeLine{421                                         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{422                                     \}}
+\DoxyCodeLine{423                                 \}}
+\DoxyCodeLine{424                             \}}
+\DoxyCodeLine{425                         \}}
+\DoxyCodeLine{426                     \}}
+\DoxyCodeLine{427                 \}}
+\DoxyCodeLine{428             \}}
+\DoxyCodeLine{429         \}}
+\DoxyCodeLine{430 }
+\DoxyCodeLine{431         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a49e1ec651c95209587a2bb1944faf975}{removeFileCaptureFilter}}();}
+\DoxyCodeLine{432 }
+\DoxyCodeLine{433         \textcolor{keywordflow}{if} (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_a8c8bf128df4786b10c8e1d29d0a061bc}{openedSuccessfully}} \&\& \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a3299ea2f0281004fb470911014140f93}{activeUsers}} > 0)}
+\DoxyCodeLine{434             \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ac322f2492f398adc996c514dc16f0aac}{mediaControl}}-\/>Run();}
+\DoxyCodeLine{435 }
+\DoxyCodeLine{436         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{437     \}}
+\DoxyCodeLine{438 }
+\DoxyCodeLine{439     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a49e1ec651c95209587a2bb1944faf975}{removeFileCaptureFilter}}()}
+\DoxyCodeLine{440     \{}
+\DoxyCodeLine{441         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ac322f2492f398adc996c514dc16f0aac}{mediaControl}}-\/>Stop();}
+\DoxyCodeLine{442 }
+\DoxyCodeLine{443         \textcolor{keywordflow}{if} (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_ac7d6e653aa3286efe1d08ec02892b733}{asfWriter}} != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{444         \{}
+\DoxyCodeLine{445             \mbox{\hyperlink{struct_camera_device_1_1_pimpl_afe0260487b54bbe598f64ef7795eea57}{graphBuilder}}-\/>RemoveFilter (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_ac7d6e653aa3286efe1d08ec02892b733}{asfWriter}});}
+\DoxyCodeLine{446             \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ac7d6e653aa3286efe1d08ec02892b733}{asfWriter}} = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{447         \}}
+\DoxyCodeLine{448 }
+\DoxyCodeLine{449         \textcolor{keywordflow}{if} (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_a8c8bf128df4786b10c8e1d29d0a061bc}{openedSuccessfully}} \&\& \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a3299ea2f0281004fb470911014140f93}{activeUsers}} > 0)}
+\DoxyCodeLine{450             \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ac322f2492f398adc996c514dc16f0aac}{mediaControl}}-\/>Run();}
+\DoxyCodeLine{451 }
+\DoxyCodeLine{452         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ae0df5e836ec3d988f5cd9a9f5066523f}{previewMaxFPS}} = 60;}
+\DoxyCodeLine{453     \}}
+\DoxyCodeLine{454 }
+\DoxyCodeLine{455     \textcolor{keyword}{static} ComSmartPtr<ComTypes::IBaseFilter> \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a808ca2365bc9589e51124e572fb82004}{enumerateCameras}} (\mbox{\hyperlink{class_string_array}{StringArray}}* \mbox{\hyperlink{namespacegl_a01ff293243531c5cdb39f353e2408553}{names}}, \textcolor{keyword}{const} \textcolor{keywordtype}{int} deviceIndexToOpen)}
+\DoxyCodeLine{456     \{}
+\DoxyCodeLine{457         \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}} = 0;}
+\DoxyCodeLine{458         ComSmartPtr<ComTypes::ICreateDevEnum> pDevEnum;}
+\DoxyCodeLine{459 }
+\DoxyCodeLine{460         \textcolor{keyword}{struct }Deleter}
+\DoxyCodeLine{461         \{}
+\DoxyCodeLine{462             \textcolor{keywordtype}{void} operator() (IUnknown* \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}}) \textcolor{keyword}{const} \textcolor{keyword}{noexcept} \{ \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}}-\/>Release(); \}}
+\DoxyCodeLine{463         \};}
+\DoxyCodeLine{464 }
+\DoxyCodeLine{465         \textcolor{keyword}{using} \mbox{\hyperlink{namespacejuce_1_1detail_a039825bdb8c20394430c984d665b5550}{ContextPtr}} = std::unique\_ptr<IBindCtx, Deleter>;}
+\DoxyCodeLine{466 }
+\DoxyCodeLine{467         \textcolor{keywordflow}{if} (SUCCEEDED (pDevEnum.CoCreateInstance (\mbox{\hyperlink{namespacejuce_1_1_com_types_ab61a1c1fddc91f48b36a6e4dd4cd96ae}{ComTypes::CLSID\_SystemDeviceEnum}})))}
+\DoxyCodeLine{468         \{}
+\DoxyCodeLine{469             ComSmartPtr<IEnumMoniker> enumerator;}
+\DoxyCodeLine{470             HRESULT hr = pDevEnum-\/>CreateClassEnumerator (\mbox{\hyperlink{namespacejuce_1_1_com_types_aacb6c42d091e315ec9e367f3bd5bf574}{ComTypes::CLSID\_VideoInputDeviceCategory}}, enumerator.resetAndGetPointerAddress(), 0);}
+\DoxyCodeLine{471 }
+\DoxyCodeLine{472             \textcolor{keywordflow}{if} (SUCCEEDED (hr) \&\& enumerator != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{473             \{}
+\DoxyCodeLine{474                 ComSmartPtr<IMoniker> moniker;}
+\DoxyCodeLine{475                 ULONG fetched;}
+\DoxyCodeLine{476 }
+\DoxyCodeLine{477                 \textcolor{keywordflow}{while} (enumerator-\/>Next (1, moniker.resetAndGetPointerAddress(), \&fetched) == S\_OK)}
+\DoxyCodeLine{478                 \{}
+\DoxyCodeLine{479                     \textcolor{keyword}{auto} context = []}
+\DoxyCodeLine{480                     \{}
+\DoxyCodeLine{481                         IBindCtx* \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}} = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{482                         \mbox{\hyperlink{group__juce__core-maths_ga5158e6e8faa5553204f90af596fafaf5}{ignoreUnused}} (CreateBindCtx (0, \&\mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}}));}
+\DoxyCodeLine{483                         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacejuce_1_1detail_a039825bdb8c20394430c984d665b5550}{ContextPtr}} (\mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}});}
+\DoxyCodeLine{484                     \}();}
+\DoxyCodeLine{485 }
+\DoxyCodeLine{486                     ComSmartPtr<ComTypes::IBaseFilter> captureFilter;}
+\DoxyCodeLine{487                     \mbox{\hyperlink{group__juce__core-system_ga0112339834a6548e4123e394b9ed95e2}{JUCE\_BEGIN\_IGNORE\_WARNINGS\_GCC\_LIKE}} (\textcolor{stringliteral}{"{}-\/Wlanguage-\/extension-\/token"{}})}
+\DoxyCodeLine{488                     hr = moniker-\/>BindToObject (context.get(), \textcolor{keyword}{nullptr}, \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_ae3b9af23b20d9586ee6bd9297ad38b73}{\_\_uuidof}} (ComTypes::IBaseFilter), (\textcolor{keywordtype}{void}**) captureFilter.resetAndGetPointerAddress());}
+\DoxyCodeLine{489                     \mbox{\hyperlink{group__juce__core-system_ga157f2229764b17137d8814bec95df109}{JUCE\_END\_IGNORE\_WARNINGS\_GCC\_LIKE}}}
+\DoxyCodeLine{490 }
+\DoxyCodeLine{491                     \textcolor{keywordflow}{if} (SUCCEEDED (hr))}
+\DoxyCodeLine{492                     \{}
+\DoxyCodeLine{493                         ComSmartPtr<IPropertyBag> propertyBag;}
+\DoxyCodeLine{494                         hr = moniker-\/>BindToStorage (context.get(), \textcolor{keyword}{nullptr}, IID\_IPropertyBag, (\textcolor{keywordtype}{void}**) propertyBag.resetAndGetPointerAddress());}
+\DoxyCodeLine{495 }
+\DoxyCodeLine{496                         \textcolor{keywordflow}{if} (SUCCEEDED (hr))}
+\DoxyCodeLine{497                         \{}
+\DoxyCodeLine{498                             VARIANT \mbox{\hyperlink{classvar}{var}};}
+\DoxyCodeLine{499                             \mbox{\hyperlink{classvar}{var}}.vt = VT\_BSTR;}
+\DoxyCodeLine{500 }
+\DoxyCodeLine{501                             hr = propertyBag-\/>Read (\_T(\textcolor{stringliteral}{"{}FriendlyName"{}}), \&\mbox{\hyperlink{classvar}{var}}, \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{502                             propertyBag = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{503 }
+\DoxyCodeLine{504                             \textcolor{keywordflow}{if} (SUCCEEDED (hr))}
+\DoxyCodeLine{505                             \{}
+\DoxyCodeLine{506                                 \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a01ff293243531c5cdb39f353e2408553}{names}} != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{507                                     \mbox{\hyperlink{namespacegl_a01ff293243531c5cdb39f353e2408553}{names}}-\/>add (\mbox{\hyperlink{classvar}{var}}.bstrVal);}
+\DoxyCodeLine{508 }
+\DoxyCodeLine{509                                 \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}} == deviceIndexToOpen)}
+\DoxyCodeLine{510                                     \textcolor{keywordflow}{return} captureFilter;}
+\DoxyCodeLine{511 }
+\DoxyCodeLine{512                                 ++\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}};}
+\DoxyCodeLine{513                             \}}
+\DoxyCodeLine{514                         \}}
+\DoxyCodeLine{515                     \}}
+\DoxyCodeLine{516                 \}}
+\DoxyCodeLine{517             \}}
+\DoxyCodeLine{518         \}}
+\DoxyCodeLine{519 }
+\DoxyCodeLine{520         \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{521     \}}
+\DoxyCodeLine{522 }
+\DoxyCodeLine{523     \textcolor{keyword}{static} \mbox{\hyperlink{class_string_array}{StringArray}} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ac9188d9367c011ba618a1fade6f01401}{getAvailableDevices}}()}
+\DoxyCodeLine{524     \{}
+\DoxyCodeLine{525         \mbox{\hyperlink{class_string_array}{StringArray}} devs;}
+\DoxyCodeLine{526         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a808ca2365bc9589e51124e572fb82004}{enumerateCameras}} (\&devs, -\/1);}
+\DoxyCodeLine{527         \textcolor{keywordflow}{return} devs;}
+\DoxyCodeLine{528     \}}
+\DoxyCodeLine{529 }
+\DoxyCodeLine{530     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_camera_device_1_1_pimpl_1_1_grabber_callback}{GrabberCallback}}   : \textcolor{keyword}{public} ComBaseClassHelperBase<ComTypes::ISampleGrabberCB>}
+\DoxyCodeLine{531     \{}
+\DoxyCodeLine{532         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_1_1_grabber_callback_a7fabd26f0d44a9d0b17930c4e97dac56}{GrabberCallback}} (\mbox{\hyperlink{struct_camera_device_1_1_pimpl}{Pimpl}}\& \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}})}
+\DoxyCodeLine{533             : ComBaseClassHelperBase (0), \mbox{\hyperlink{struct_camera_device_1_1_pimpl_1_1_grabber_callback_ab8416e9d880f0629b93d672ca1413673}{owner}} (\mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}}) \{\}}
+\DoxyCodeLine{534 }
+\DoxyCodeLine{535         \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_adf7ea5b8ae4dd1bb0ef1193c5c758eba}{JUCE\_COMRESULT}} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_1_1_grabber_callback_afac5a51f23f1061f2df7d4a0b5bca2b7}{QueryInterface}} (REFIID refId, \textcolor{keywordtype}{void}** \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}})}
+\DoxyCodeLine{536         \{}
+\DoxyCodeLine{537             \mbox{\hyperlink{group__juce__core-system_ga0112339834a6548e4123e394b9ed95e2}{JUCE\_BEGIN\_IGNORE\_WARNINGS\_GCC\_LIKE}} (\textcolor{stringliteral}{"{}-\/Wlanguage-\/extension-\/token"{}})}
+\DoxyCodeLine{538             \textcolor{keywordflow}{if} (refId == \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_ae3b9af23b20d9586ee6bd9297ad38b73}{\_\_uuidof}} (ComTypes::ISampleGrabberCB))}
+\DoxyCodeLine{539                 \textcolor{keywordflow}{return} castToType<ComTypes::ISampleGrabberCB> (\mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}});}
+\DoxyCodeLine{540             \mbox{\hyperlink{group__juce__core-system_ga157f2229764b17137d8814bec95df109}{JUCE\_END\_IGNORE\_WARNINGS\_GCC\_LIKE}}}
+\DoxyCodeLine{541 }
+\DoxyCodeLine{542             \textcolor{keywordflow}{return} ComBaseClassHelperBase<ComTypes::ISampleGrabberCB>::QueryInterface (refId, \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}});}
+\DoxyCodeLine{543         \}}
+\DoxyCodeLine{544 }
+\DoxyCodeLine{545         \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_adf7ea5b8ae4dd1bb0ef1193c5c758eba}{JUCE\_COMRESULT}} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_1_1_grabber_callback_afc8d7ed62dd8d5157382c0a103f57fdf}{SampleCB}} (\textcolor{keywordtype}{double}, ComTypes::IMediaSample*)  \{ \textcolor{keywordflow}{return} E\_FAIL; \}}
+\DoxyCodeLine{546 }
+\DoxyCodeLine{547         \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_adf7ea5b8ae4dd1bb0ef1193c5c758eba}{JUCE\_COMRESULT}} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_1_1_grabber_callback_a4521d5cf9fdc35ce98e6c2bd2dc4d213}{BufferCB}} (\textcolor{keywordtype}{double} time, BYTE* buffer, \textcolor{keywordtype}{long} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8556d19b129aa550f5b2819ed0320e83}{bufferSize}})}
+\DoxyCodeLine{548         \{}
+\DoxyCodeLine{549             \mbox{\hyperlink{struct_camera_device_1_1_pimpl_1_1_grabber_callback_ab8416e9d880f0629b93d672ca1413673}{owner}}.\mbox{\hyperlink{struct_camera_device_1_1_pimpl_a54b83d20c3aac79669e4272ba59f152a}{handleFrame}} (time, buffer, \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8556d19b129aa550f5b2819ed0320e83}{bufferSize}});}
+\DoxyCodeLine{550             \textcolor{keywordflow}{return} S\_OK;}
+\DoxyCodeLine{551         \}}
+\DoxyCodeLine{552 }
+\DoxyCodeLine{553         \mbox{\hyperlink{struct_camera_device_1_1_pimpl}{Pimpl}}\& \mbox{\hyperlink{struct_camera_device_1_1_pimpl_1_1_grabber_callback_ab8416e9d880f0629b93d672ca1413673}{owner}};}
+\DoxyCodeLine{554 }
+\DoxyCodeLine{555         \mbox{\hyperlink{group__juce__core-system_ga6ab7a603bf4435c7cb286b1744366eb2}{JUCE\_DECLARE\_NON\_COPYABLE}} (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_1_1_grabber_callback}{GrabberCallback}})}
+\DoxyCodeLine{556     \};}
+\DoxyCodeLine{557 }
+\DoxyCodeLine{558     \mbox{\hyperlink{class_dynamic_library}{DynamicLibrary}} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a08bc293af3a6b4c571465185fbb339fd}{wmvcoreLibrary}} \{ \textcolor{stringliteral}{"{}wmvcore"{}} \};}
+\DoxyCodeLine{559     CameraDevice\& owner;}
+\DoxyCodeLine{560 }
+\DoxyCodeLine{561     ComSmartPtr<GrabberCallback> \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ab998421a4bf8f54bcaa196b6fccba46d}{callback}};}
+\DoxyCodeLine{562 }
+\DoxyCodeLine{563     \mbox{\hyperlink{class_critical_section}{CriticalSection}} listenerLock;}
+\DoxyCodeLine{564     \mbox{\hyperlink{class_listener_list}{ListenerList<Listener>}} listeners;}
+\DoxyCodeLine{565 }
+\DoxyCodeLine{566     \mbox{\hyperlink{class_critical_section}{CriticalSection}} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_afdc88d49fbbcab24cb85c80b556a0a4e}{pictureTakenCallbackLock}};}
+\DoxyCodeLine{567     \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_image}{Image}}\&)> pictureTakenCallback;}
+\DoxyCodeLine{568 }
+\DoxyCodeLine{569     \textcolor{keywordtype}{bool} isRecording = \textcolor{keyword}{false}, \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a8c8bf128df4786b10c8e1d29d0a061bc}{openedSuccessfully}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{570     \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a6941a8c76ca6b528123053a8dede2ba2}{width}} = 0, \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a2747ecebff013026e24ea04c2a88b449}{height}} = 0;}
+\DoxyCodeLine{571     \mbox{\hyperlink{class_time}{Time}} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_adce991ec21c1e3933f831be375c706b3}{firstRecordedTime}};}
+\DoxyCodeLine{572 }
+\DoxyCodeLine{573     \mbox{\hyperlink{class_array}{Array<ViewerComponent*>}} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ae803b88501bd663ea4c1598254fa97f4}{viewerComps}};}
+\DoxyCodeLine{574 }
+\DoxyCodeLine{575     ComSmartPtr<ComTypes::ICaptureGraphBuilder2> \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a7aef7d9f598eaba2c57aa3d901b1b65a}{captureGraphBuilder}};}
+\DoxyCodeLine{576     ComSmartPtr<ComTypes::IBaseFilter> \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a652405d1ee6e11b9c1f5af5b48207469}{filter}}, \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a2596b020890455584aa9d36cb06e38a1}{smartTee}}, \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ac7d6e653aa3286efe1d08ec02892b733}{asfWriter}};}
+\DoxyCodeLine{577     ComSmartPtr<ComTypes::IGraphBuilder> \mbox{\hyperlink{struct_camera_device_1_1_pimpl_afe0260487b54bbe598f64ef7795eea57}{graphBuilder}};}
+\DoxyCodeLine{578     ComSmartPtr<ComTypes::ISampleGrabber> \mbox{\hyperlink{struct_camera_device_1_1_pimpl_aeef5af95311484167110b209d47ffebf}{sampleGrabber}};}
+\DoxyCodeLine{579     ComSmartPtr<ComTypes::IMediaControl> \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ac322f2492f398adc996c514dc16f0aac}{mediaControl}};}
+\DoxyCodeLine{580     ComSmartPtr<ComTypes::IPin> \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ae6c7f252d30b3e57e57dddf4e1c8a94a}{smartTeePreviewOutputPin}}, \mbox{\hyperlink{struct_camera_device_1_1_pimpl_adb5df9200d735e6979a9dfe7465200dc}{smartTeeCaptureOutputPin}};}
+\DoxyCodeLine{581     \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a3299ea2f0281004fb470911014140f93}{activeUsers}} = 0;}
+\DoxyCodeLine{582     \mbox{\hyperlink{class_array}{Array<int>}} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a69e3239c91afb345173c1b323b5ef182}{widths}}, \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a6f97bfc8fec55139bf52202f6fc20c59}{heights}};}
+\DoxyCodeLine{583     DWORD \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a460895a19c58c44ba37af811fd0115e2}{graphRegistrationID}};}
+\DoxyCodeLine{584 }
+\DoxyCodeLine{585     \mbox{\hyperlink{class_critical_section}{CriticalSection}} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ae8db60cdb7e31bc64fd075766c6de0b0}{imageSwapLock}};}
+\DoxyCodeLine{586     \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a24690ef57a8095fcdb1795708161e89c}{imageNeedsFlipping}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{587     \mbox{\hyperlink{class_image}{Image}} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_afd9d5389e5d5fd631116f6c0ee48857a}{loadingImage}}, \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a780c0a34426c2423051998b51fc20667}{activeImage}};}
+\DoxyCodeLine{588 }
+\DoxyCodeLine{589     \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a62287452ba964971524b8aaa6cd4acdd}{recordNextFrameTime}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{590     \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ae0df5e836ec3d988f5cd9a9f5066523f}{previewMaxFPS}} = 60;}
+\DoxyCodeLine{591 }
+\DoxyCodeLine{592     \mbox{\hyperlink{group__juce__core-memory_ga557fa9dbf924a150e27f0cf0dad368b0}{JUCE\_DECLARE\_WEAK\_REFERENCEABLE}} (\mbox{\hyperlink{struct_camera_device_1_1_pimpl}{Pimpl}})}
+\DoxyCodeLine{593 }
+\DoxyCodeLine{594 \textcolor{keyword}{private}:}
+\DoxyCodeLine{595     \textcolor{keywordtype}{void} getVideoSizes (ComTypes::IAMStreamConfig* \textcolor{keyword}{const} streamConfig)}
+\DoxyCodeLine{596     \{}
+\DoxyCodeLine{597         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a69e3239c91afb345173c1b323b5ef182}{widths}}.clear();}
+\DoxyCodeLine{598         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a6f97bfc8fec55139bf52202f6fc20c59}{heights}}.clear();}
+\DoxyCodeLine{599 }
+\DoxyCodeLine{600         \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_ad51b1b50b16ae6a9961a1632cb21be63}{count}} = 0, \mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}} = 0;}
+\DoxyCodeLine{601         streamConfig-\/>GetNumberOfCapabilities (\&\mbox{\hyperlink{namespacegl_ad51b1b50b16ae6a9961a1632cb21be63}{count}}, \&\mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}});}
+\DoxyCodeLine{602 }
+\DoxyCodeLine{603         \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}} == (\textcolor{keywordtype}{int}) \textcolor{keyword}{sizeof} (ComTypes::VIDEO\_STREAM\_CONFIG\_CAPS))}
+\DoxyCodeLine{604         \{}
+\DoxyCodeLine{605             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < \mbox{\hyperlink{namespacegl_ad51b1b50b16ae6a9961a1632cb21be63}{count}}; ++i)}
+\DoxyCodeLine{606             \{}
+\DoxyCodeLine{607                 ComTypes::VIDEO\_STREAM\_CONFIG\_CAPS scc;}
+\DoxyCodeLine{608                 ComTypes::AM\_MEDIA\_TYPE* \mbox{\hyperlink{deflate_8c_a2e56afa64412e0b968cb288a6d1278ba}{config}};}
+\DoxyCodeLine{609 }
+\DoxyCodeLine{610                 HRESULT hr = streamConfig-\/>GetStreamCaps (i, \&\mbox{\hyperlink{structconfig__s}{config}}, (BYTE*) \&scc);}
+\DoxyCodeLine{611 }
+\DoxyCodeLine{612                 \textcolor{keywordflow}{if} (SUCCEEDED (hr))}
+\DoxyCodeLine{613                 \{}
+\DoxyCodeLine{614                     \textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a4a17fbf5c7c6ae1f233cf4944a70237d}{w}} = scc.InputSize.cx;}
+\DoxyCodeLine{615                     \textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_ae0306c9e6aca74fac45e19b5f64f7ba7}{h}} = scc.InputSize.cy;}
+\DoxyCodeLine{616 }
+\DoxyCodeLine{617                     \textcolor{keywordtype}{bool} duplicate = \textcolor{keyword}{false};}
+\DoxyCodeLine{618 }
+\DoxyCodeLine{619                     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}} = \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a69e3239c91afb345173c1b323b5ef182}{widths}}.size(); -\/-\/\mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}} >= 0;)}
+\DoxyCodeLine{620                     \{}
+\DoxyCodeLine{621                         \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a4a17fbf5c7c6ae1f233cf4944a70237d}{w}} == \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a69e3239c91afb345173c1b323b5ef182}{widths}}.getUnchecked (\mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}}) \&\& \mbox{\hyperlink{namespacegl_ae0306c9e6aca74fac45e19b5f64f7ba7}{h}} == \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a6f97bfc8fec55139bf52202f6fc20c59}{heights}}.getUnchecked (\mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}}))}
+\DoxyCodeLine{622                         \{}
+\DoxyCodeLine{623                             duplicate = \textcolor{keyword}{true};}
+\DoxyCodeLine{624                             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{625                         \}}
+\DoxyCodeLine{626                     \}}
+\DoxyCodeLine{627 }
+\DoxyCodeLine{628                     \textcolor{keywordflow}{if} (! duplicate)}
+\DoxyCodeLine{629                     \{}
+\DoxyCodeLine{630                         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a69e3239c91afb345173c1b323b5ef182}{widths}}.add (\mbox{\hyperlink{namespacegl_a4a17fbf5c7c6ae1f233cf4944a70237d}{w}});}
+\DoxyCodeLine{631                         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a6f97bfc8fec55139bf52202f6fc20c59}{heights}}.add (\mbox{\hyperlink{namespacegl_ae0306c9e6aca74fac45e19b5f64f7ba7}{h}});}
+\DoxyCodeLine{632                     \}}
+\DoxyCodeLine{633 }
+\DoxyCodeLine{634                     deleteMediaType (\mbox{\hyperlink{structconfig__s}{config}});}
+\DoxyCodeLine{635                 \}}
+\DoxyCodeLine{636             \}}
+\DoxyCodeLine{637         \}}
+\DoxyCodeLine{638     \}}
+\DoxyCodeLine{639 }
+\DoxyCodeLine{640     \textcolor{keywordtype}{bool} selectVideoSize (ComTypes::IAMStreamConfig* \textcolor{keyword}{const} streamConfig,}
+\DoxyCodeLine{641                           \textcolor{keyword}{const} \textcolor{keywordtype}{int} minWidth, \textcolor{keyword}{const} \textcolor{keywordtype}{int} minHeight,}
+\DoxyCodeLine{642                           \textcolor{keyword}{const} \textcolor{keywordtype}{int} maxWidth, \textcolor{keyword}{const} \textcolor{keywordtype}{int} maxHeight)}
+\DoxyCodeLine{643     \{}
+\DoxyCodeLine{644         \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_ad51b1b50b16ae6a9961a1632cb21be63}{count}} = 0, \mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}} = 0, bestArea = 0, bestIndex = -\/1;}
+\DoxyCodeLine{645         streamConfig-\/>GetNumberOfCapabilities (\&\mbox{\hyperlink{namespacegl_ad51b1b50b16ae6a9961a1632cb21be63}{count}}, \&\mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}});}
+\DoxyCodeLine{646 }
+\DoxyCodeLine{647         \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}} == (\textcolor{keywordtype}{int}) \textcolor{keyword}{sizeof} (ComTypes::VIDEO\_STREAM\_CONFIG\_CAPS))}
+\DoxyCodeLine{648         \{}
+\DoxyCodeLine{649             ComTypes::AM\_MEDIA\_TYPE* \mbox{\hyperlink{deflate_8c_a2e56afa64412e0b968cb288a6d1278ba}{config}};}
+\DoxyCodeLine{650             ComTypes::VIDEO\_STREAM\_CONFIG\_CAPS scc;}
+\DoxyCodeLine{651 }
+\DoxyCodeLine{652             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < \mbox{\hyperlink{namespacegl_ad51b1b50b16ae6a9961a1632cb21be63}{count}}; ++i)}
+\DoxyCodeLine{653             \{}
+\DoxyCodeLine{654                 HRESULT hr = streamConfig-\/>GetStreamCaps (i, \&\mbox{\hyperlink{structconfig__s}{config}}, (BYTE*) \&scc);}
+\DoxyCodeLine{655 }
+\DoxyCodeLine{656                 \textcolor{keywordflow}{if} (SUCCEEDED (hr))}
+\DoxyCodeLine{657                 \{}
+\DoxyCodeLine{658                     \textcolor{keywordflow}{if} (scc.InputSize.cx >= minWidth}
+\DoxyCodeLine{659                          \&\& scc.InputSize.cy >= minHeight}
+\DoxyCodeLine{660                          \&\& scc.InputSize.cx <= maxWidth}
+\DoxyCodeLine{661                          \&\& scc.InputSize.cy <= maxHeight)}
+\DoxyCodeLine{662                     \{}
+\DoxyCodeLine{663                         \textcolor{keywordtype}{int} area = scc.InputSize.cx * scc.InputSize.cy;}
+\DoxyCodeLine{664                         \textcolor{keywordflow}{if} (area > bestArea)}
+\DoxyCodeLine{665                         \{}
+\DoxyCodeLine{666                             bestIndex = i;}
+\DoxyCodeLine{667                             bestArea = area;}
+\DoxyCodeLine{668                         \}}
+\DoxyCodeLine{669                     \}}
+\DoxyCodeLine{670 }
+\DoxyCodeLine{671                     deleteMediaType (\mbox{\hyperlink{structconfig__s}{config}});}
+\DoxyCodeLine{672                 \}}
+\DoxyCodeLine{673             \}}
+\DoxyCodeLine{674 }
+\DoxyCodeLine{675             \textcolor{keywordflow}{if} (bestIndex >= 0)}
+\DoxyCodeLine{676             \{}
+\DoxyCodeLine{677                 HRESULT hr = streamConfig-\/>GetStreamCaps (bestIndex, \&\mbox{\hyperlink{structconfig__s}{config}}, (BYTE*) \&scc);}
+\DoxyCodeLine{678 }
+\DoxyCodeLine{679                 hr = streamConfig-\/>SetFormat (\mbox{\hyperlink{structconfig__s}{config}});}
+\DoxyCodeLine{680                 deleteMediaType (\mbox{\hyperlink{structconfig__s}{config}});}
+\DoxyCodeLine{681                 \textcolor{keywordflow}{return} SUCCEEDED (hr);}
+\DoxyCodeLine{682             \}}
+\DoxyCodeLine{683         \}}
+\DoxyCodeLine{684 }
+\DoxyCodeLine{685         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{686     \}}
+\DoxyCodeLine{687 }
+\DoxyCodeLine{688     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} getPin (ComTypes::IBaseFilter* \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a652405d1ee6e11b9c1f5af5b48207469}{filter}}, \textcolor{keyword}{const} \mbox{\hyperlink{namespacejuce_1_1_com_types_ad28813b6bfb7816e22bb8b088d3eea16}{ComTypes::PIN\_DIRECTION}} wantedDirection,}
+\DoxyCodeLine{689                         ComSmartPtr<ComTypes::IPin>\& \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* pinName = \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{690     \{}
+\DoxyCodeLine{691         ComSmartPtr<ComTypes::IEnumPins> enumerator;}
+\DoxyCodeLine{692         ComSmartPtr<ComTypes::IPin> pin;}
+\DoxyCodeLine{693 }
+\DoxyCodeLine{694         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a652405d1ee6e11b9c1f5af5b48207469}{filter}}-\/>EnumPins (enumerator.resetAndGetPointerAddress());}
+\DoxyCodeLine{695 }
+\DoxyCodeLine{696         \textcolor{keywordflow}{while} (enumerator-\/>Next (1, pin.resetAndGetPointerAddress(), \textcolor{keyword}{nullptr}) == S\_OK)}
+\DoxyCodeLine{697         \{}
+\DoxyCodeLine{698             \mbox{\hyperlink{namespacejuce_1_1_com_types_ad28813b6bfb7816e22bb8b088d3eea16}{ComTypes::PIN\_DIRECTION}} dir;}
+\DoxyCodeLine{699             pin-\/>QueryDirection (\&dir);}
+\DoxyCodeLine{700 }
+\DoxyCodeLine{701             \textcolor{keywordflow}{if} (wantedDirection == dir)}
+\DoxyCodeLine{702             \{}
+\DoxyCodeLine{703                 ComTypes::PIN\_INFO \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}} = \{\};}
+\DoxyCodeLine{704                 pin-\/>QueryPinInfo (\&\mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}});}
+\DoxyCodeLine{705 }
+\DoxyCodeLine{706                 \textcolor{keywordflow}{if} (pinName == \textcolor{keyword}{nullptr} || \mbox{\hyperlink{class_string}{String}} (pinName).equalsIgnoreCase (\mbox{\hyperlink{class_string}{String}} (\mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}.achName)))}
+\DoxyCodeLine{707                 \{}
+\DoxyCodeLine{708                     \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = pin;}
+\DoxyCodeLine{709                     \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{710                 \}}
+\DoxyCodeLine{711             \}}
+\DoxyCodeLine{712         \}}
+\DoxyCodeLine{713 }
+\DoxyCodeLine{714         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{715     \}}
+\DoxyCodeLine{716 }
+\DoxyCodeLine{717     \textcolor{keywordtype}{bool} connectFilters (ComTypes::IBaseFilter* \textcolor{keyword}{const} \mbox{\hyperlink{namespacegl_a3e2e85c116e60c63a828fa79480b2859}{first}}, ComTypes::IBaseFilter* \textcolor{keyword}{const} second)\textcolor{keyword}{ const}}
+\DoxyCodeLine{718 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{719         ComSmartPtr<ComTypes::IPin> \mbox{\hyperlink{namespacegl_a72039bf7996167e32bca54980c5595e4}{in}}, out;}
+\DoxyCodeLine{720 }
+\DoxyCodeLine{721         \textcolor{keywordflow}{return} getPin (\mbox{\hyperlink{namespacegl_a3e2e85c116e60c63a828fa79480b2859}{first}}, \mbox{\hyperlink{namespacejuce_1_1_com_types_ad28813b6bfb7816e22bb8b088d3eea16af2d47d2f3589003986eaf37902d29ae9}{ComTypes::PINDIR\_OUTPUT}}, out)}
+\DoxyCodeLine{722                 \&\& getPin (second, \mbox{\hyperlink{namespacejuce_1_1_com_types_ad28813b6bfb7816e22bb8b088d3eea16a7cc198183b78e75c10f2bf3c9318ce80}{ComTypes::PINDIR\_INPUT}}, \mbox{\hyperlink{namespacegl_a72039bf7996167e32bca54980c5595e4}{in}})}
+\DoxyCodeLine{723                 \&\& SUCCEEDED (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_afe0260487b54bbe598f64ef7795eea57}{graphBuilder}}-\/>Connect (out, \mbox{\hyperlink{namespacegl_a72039bf7996167e32bca54980c5595e4}{in}}));}
+\DoxyCodeLine{724     \}}
+\DoxyCodeLine{725 }
+\DoxyCodeLine{726     \textcolor{keywordtype}{bool} addGraphToRot()}
+\DoxyCodeLine{727     \{}
+\DoxyCodeLine{728         ComSmartPtr<IRunningObjectTable> rot;}
+\DoxyCodeLine{729         \textcolor{keywordflow}{if} (FAILED (GetRunningObjectTable (0, rot.resetAndGetPointerAddress())))}
+\DoxyCodeLine{730             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{731 }
+\DoxyCodeLine{732         ComSmartPtr<IMoniker> moniker;}
+\DoxyCodeLine{733         WCHAR \mbox{\hyperlink{namespacegl_af1bd5433d4e42cb8df763d053866e0a6}{buffer}}[128]\{\};}
+\DoxyCodeLine{734         HRESULT hr = CreateItemMoniker (\_T(\textcolor{stringliteral}{"{}!"{}}), buffer, moniker.resetAndGetPointerAddress());}
+\DoxyCodeLine{735         \textcolor{keywordflow}{if} (FAILED (hr))}
+\DoxyCodeLine{736             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{737 }
+\DoxyCodeLine{738         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a460895a19c58c44ba37af811fd0115e2}{graphRegistrationID}} = 0;}
+\DoxyCodeLine{739         \textcolor{keywordflow}{return} SUCCEEDED (rot-\/>Register (0, \mbox{\hyperlink{struct_camera_device_1_1_pimpl_afe0260487b54bbe598f64ef7795eea57}{graphBuilder}}, moniker, \&\mbox{\hyperlink{struct_camera_device_1_1_pimpl_a460895a19c58c44ba37af811fd0115e2}{graphRegistrationID}}));}
+\DoxyCodeLine{740     \}}
+\DoxyCodeLine{741 }
+\DoxyCodeLine{742     \textcolor{keywordtype}{void} removeGraphFromRot()}
+\DoxyCodeLine{743     \{}
+\DoxyCodeLine{744         ComSmartPtr<IRunningObjectTable> rot;}
+\DoxyCodeLine{745 }
+\DoxyCodeLine{746         \textcolor{keywordflow}{if} (SUCCEEDED (GetRunningObjectTable (0, rot.resetAndGetPointerAddress())))}
+\DoxyCodeLine{747             rot-\/>Revoke (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_a460895a19c58c44ba37af811fd0115e2}{graphRegistrationID}});}
+\DoxyCodeLine{748     \}}
+\DoxyCodeLine{749 }
+\DoxyCodeLine{750     \textcolor{keywordtype}{void} disconnectAnyViewers();}
+\DoxyCodeLine{751 }
+\DoxyCodeLine{752     \textcolor{keyword}{static} \textcolor{keywordtype}{void} deleteMediaType (ComTypes::AM\_MEDIA\_TYPE* \textcolor{keyword}{const} pmt)}
+\DoxyCodeLine{753     \{}
+\DoxyCodeLine{754         \textcolor{keywordflow}{if} (pmt-\/>cbFormat != 0)}
+\DoxyCodeLine{755             CoTaskMemFree ((PVOID) pmt-\/>pbFormat);}
+\DoxyCodeLine{756 }
+\DoxyCodeLine{757         \textcolor{keywordflow}{if} (pmt-\/>pUnk != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{758             pmt-\/>pUnk-\/>Release();}
+\DoxyCodeLine{759 }
+\DoxyCodeLine{760         CoTaskMemFree (pmt);}
+\DoxyCodeLine{761     \}}
+\DoxyCodeLine{762 }
+\DoxyCodeLine{763     \mbox{\hyperlink{group__juce__core-system_ga6ab7a603bf4435c7cb286b1744366eb2}{JUCE\_DECLARE\_NON\_COPYABLE}} (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_a5693c517fa4eedd5b9ccf84308cdcd19}{Pimpl}})}
+\DoxyCodeLine{764 \};}
+\DoxyCodeLine{765 }
+\DoxyCodeLine{766 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{767 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_camera_device_1_1_viewer_component}{CameraDevice::ViewerComponent}}  : \textcolor{keyword}{public} \mbox{\hyperlink{class_component}{Component}},}
+\DoxyCodeLine{768                                         \textcolor{keyword}{public} \mbox{\hyperlink{class_change_listener}{ChangeListener}}}
+\DoxyCodeLine{769 \{}
+\DoxyCodeLine{770     \mbox{\hyperlink{struct_camera_device_1_1_viewer_component_a8f4f4a6304719b0f91b633ec05c8c3f3}{ViewerComponent}} (CameraDevice\& d)}
+\DoxyCodeLine{771        : owner (d.pimpl.\mbox{\hyperlink{namespacedsp_ab70e205bff92b09aa297e479676b5bc8}{get}}()), maxFPS (15), lastRepaintTime (0)}
+\DoxyCodeLine{772     \{}
+\DoxyCodeLine{773         \mbox{\hyperlink{class_component_a7320d543cba40183c894474ab78798ea}{setOpaque}} (\textcolor{keyword}{true});}
+\DoxyCodeLine{774         owner-\/>addChangeListener (\textcolor{keyword}{this});}
+\DoxyCodeLine{775         owner-\/>addUser();}
+\DoxyCodeLine{776         owner-\/>viewerComps.add (\textcolor{keyword}{this});}
+\DoxyCodeLine{777         \mbox{\hyperlink{class_component_af7e0443344448fcbbefc2b3dd985e43f}{setSize}} (owner-\/>width, owner-\/>height);}
+\DoxyCodeLine{778     \}}
+\DoxyCodeLine{779 }
+\DoxyCodeLine{780     \mbox{\hyperlink{struct_camera_device_1_1_viewer_component_a7d65ccd204b0fb667a4d11c842da2f2f}{\string~ViewerComponent}}()\textcolor{keyword}{ override}}
+\DoxyCodeLine{781 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{782         \textcolor{keywordflow}{if} (owner != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{783         \{}
+\DoxyCodeLine{784             owner-\/>viewerComps.removeFirstMatchingValue (\textcolor{keyword}{this});}
+\DoxyCodeLine{785             owner-\/>removeUser();}
+\DoxyCodeLine{786             owner-\/>removeChangeListener (\textcolor{keyword}{this});}
+\DoxyCodeLine{787         \}}
+\DoxyCodeLine{788     \}}
+\DoxyCodeLine{789 }
+\DoxyCodeLine{790     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_camera_device_1_1_viewer_component_ae7693d7eb19420218cfa30270a9d6bdf}{ownerDeleted}}()}
+\DoxyCodeLine{791     \{}
+\DoxyCodeLine{792         owner = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{793     \}}
+\DoxyCodeLine{794 }
+\DoxyCodeLine{795     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_camera_device_1_1_viewer_component_aea33ad65c472dc7e31f3962cac1f5a10}{paint}} (\mbox{\hyperlink{class_graphics}{Graphics}}\& \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}})\textcolor{keyword}{ override}}
+\DoxyCodeLine{796 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{797         \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}}.setColour (\mbox{\hyperlink{namespace_colours_ab5f46ac613c2b717ac885b7cf995ffc6}{Colours::black}});}
+\DoxyCodeLine{798         \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}}.setImageResamplingQuality (\mbox{\hyperlink{class_graphics_a5da218e649d1b5ac3d67443ae77caf87a4eb9cfa2e544befd2d50708e3316b28e}{Graphics::lowResamplingQuality}});}
+\DoxyCodeLine{799 }
+\DoxyCodeLine{800         \textcolor{keywordflow}{if} (owner != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{801             owner-\/>drawCurrentImage (\mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}}, \mbox{\hyperlink{class_component_a0bb195a619802a5e8d4ed2218394816f}{getLocalBounds}}());}
+\DoxyCodeLine{802         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{803             \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}}.fillAll();}
+\DoxyCodeLine{804     \}}
+\DoxyCodeLine{805 }
+\DoxyCodeLine{806     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_camera_device_1_1_viewer_component_a0f5532e8fe95a5cd6c96b6dc554e3861}{changeListenerCallback}} (\mbox{\hyperlink{class_change_broadcaster}{ChangeBroadcaster}}*)\textcolor{keyword}{ override}}
+\DoxyCodeLine{807 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{808         \textcolor{keyword}{const} \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} now = \mbox{\hyperlink{class_time_a18ceeea45072a31c8b6b68f08e107bc0}{Time::currentTimeMillis}}();}
+\DoxyCodeLine{809 }
+\DoxyCodeLine{810         \textcolor{keywordflow}{if} (now >= lastRepaintTime + (1000 / maxFPS))}
+\DoxyCodeLine{811         \{}
+\DoxyCodeLine{812             lastRepaintTime = now;}
+\DoxyCodeLine{813             \mbox{\hyperlink{class_component_af3ab3eabec93dd60faf983370f3a1206}{repaint}}();}
+\DoxyCodeLine{814 }
+\DoxyCodeLine{815             \textcolor{keywordflow}{if} (owner != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{816                 maxFPS = owner-\/>previewMaxFPS;}
+\DoxyCodeLine{817         \}}
+\DoxyCodeLine{818     \}}
+\DoxyCodeLine{819 }
+\DoxyCodeLine{820 \textcolor{keyword}{private}:}
+\DoxyCodeLine{821     \mbox{\hyperlink{struct_camera_device_1_1_pimpl}{Pimpl}}* owner;}
+\DoxyCodeLine{822     \textcolor{keywordtype}{int} maxFPS;}
+\DoxyCodeLine{823     \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} lastRepaintTime;}
+\DoxyCodeLine{824 \};}
+\DoxyCodeLine{825 }
+\DoxyCodeLine{826 \textcolor{keywordtype}{void} CameraDevice::Pimpl::disconnectAnyViewers()}
+\DoxyCodeLine{827 \{}
+\DoxyCodeLine{828     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ae803b88501bd663ea4c1598254fa97f4}{viewerComps}}.size(); -\/-\/i >= 0;)}
+\DoxyCodeLine{829         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ae803b88501bd663ea4c1598254fa97f4}{viewerComps}}.getUnchecked(i)-\/>ownerDeleted();}
+\DoxyCodeLine{830 \}}
+\DoxyCodeLine{831 }
+\DoxyCodeLine{832 \mbox{\hyperlink{class_string}{String}} CameraDevice::getFileExtension()}
+\DoxyCodeLine{833 \{}
+\DoxyCodeLine{834     \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}.wmv"{}};}
+\DoxyCodeLine{835 \}}
+
+\end{DoxyCode}

@@ -1,0 +1,144 @@
+\hypertarget{juce___polynomial_8h_source}{}\doxysection{juce\+\_\+\+Polynomial.\+h}
+\label{juce___polynomial_8h_source}\index{build/juce\_dsp/maths/juce\_Polynomial.h@{build/juce\_dsp/maths/juce\_Polynomial.h}}
+\mbox{\hyperlink{juce___polynomial_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacedsp}{dsp}}}
+\DoxyCodeLine{30 \{}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{37 \textcolor{keyword}{template} <\textcolor{keyword}{typename} FloatingType>}
+\DoxyCodeLine{38 \textcolor{keyword}{class }\mbox{\hyperlink{classdsp_1_1_polynomial}{Polynomial}}}
+\DoxyCodeLine{39 \{}
+\DoxyCodeLine{40 \textcolor{keyword}{public}:}
+\DoxyCodeLine{41     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{43 \textcolor{comment}{}    \mbox{\hyperlink{classdsp_1_1_polynomial_a01c07cf505f7affbbc0932481fbc7fc1}{Polynomial}}()}
+\DoxyCodeLine{44     \{}
+\DoxyCodeLine{45         coeffs.add (0);}
+\DoxyCodeLine{46     \}}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{56     \mbox{\hyperlink{classdsp_1_1_polynomial_a0ab3e7d6978662bb7ac95279b3c1c09a}{Polynomial}} (\textcolor{keyword}{const} FloatingType* coefficients, \textcolor{keywordtype}{int} numCoefficients)}
+\DoxyCodeLine{57         : coeffs (coefficients, numCoefficients)}
+\DoxyCodeLine{58     \{}
+\DoxyCodeLine{59         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (! coeffs.isEmpty());}
+\DoxyCodeLine{60     \}}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{63     \mbox{\hyperlink{classdsp_1_1_polynomial_a0272135a46099a6e68fd68e4135ae289}{Polynomial}} (\textcolor{keyword}{const} \mbox{\hyperlink{classdsp_1_1_polynomial}{Polynomial}}\&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{66     \mbox{\hyperlink{classdsp_1_1_polynomial_a10c43af9454e248b8593a010af23a46e}{Polynomial}} (\mbox{\hyperlink{classdsp_1_1_polynomial}{Polynomial}}\&\&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{69     \mbox{\hyperlink{classdsp_1_1_polynomial}{Polynomial}}\& \mbox{\hyperlink{classdsp_1_1_polynomial_a60229ef4caa92a8af1f50855208ca056}{operator= }}(\textcolor{keyword}{const} \mbox{\hyperlink{classdsp_1_1_polynomial}{Polynomial}}\&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{72     \mbox{\hyperlink{classdsp_1_1_polynomial}{Polynomial}}\& \mbox{\hyperlink{classdsp_1_1_polynomial_a60229ef4caa92a8af1f50855208ca056}{operator= }}(\mbox{\hyperlink{classdsp_1_1_polynomial}{Polynomial}}\&\&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{78     \textcolor{keyword}{template} <\textcolor{keyword}{typename}... Values>}
+\DoxyCodeLine{79     \mbox{\hyperlink{classdsp_1_1_polynomial_a401fd7fa6e06649e4a2463f9181930e8}{Polynomial}} (Values... items)  : coeffs (items...)}
+\DoxyCodeLine{80     \{}
+\DoxyCodeLine{81         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (! coeffs.isEmpty());}
+\DoxyCodeLine{82     \}}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{86 \textcolor{comment}{}    FloatingType \mbox{\hyperlink{classdsp_1_1_polynomial_a04cada3b99dd3539c16606fadf0aa0af}{operator[] }}(\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}              \{ \textcolor{keywordflow}{return} coeffs.getUnchecked (\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}); \}}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{89     FloatingType\& \mbox{\hyperlink{classdsp_1_1_polynomial_a04cada3b99dd3539c16606fadf0aa0af}{operator[] }}(\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) \textcolor{keyword}{noexcept}                   \{ \textcolor{keywordflow}{return} coeffs.getReference (\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}); \}}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{92     FloatingType \mbox{\hyperlink{classdsp_1_1_polynomial_a7f622c09e8be703120099ca2e85415b4}{operator() }}(FloatingType \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{93     \{}
+\DoxyCodeLine{94         \textcolor{comment}{// Horner's method}}
+\DoxyCodeLine{95         FloatingType \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}} (0);}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = coeffs.size(); -\/-\/i >= 0;)}
+\DoxyCodeLine{98             \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}} = (\mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}} * \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}}) + coeffs.getUnchecked(i);}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}};}
+\DoxyCodeLine{101     \}}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{104     \textcolor{keywordtype}{int} \mbox{\hyperlink{classdsp_1_1_polynomial_aa77e70e9438c55b1d59f5ff8ba701da1}{getOrder}}() noexcept}
+\DoxyCodeLine{105     \{}
+\DoxyCodeLine{106         \textcolor{keywordflow}{return} coeffs.size() -\/ 1;}
+\DoxyCodeLine{107     \}}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{111 \textcolor{comment}{}    \mbox{\hyperlink{classdsp_1_1_polynomial}{Polynomial<FloatingType>}} \mbox{\hyperlink{classdsp_1_1_polynomial_a61d33e953a27025c67d50f109697f2d6}{withGain}} (\textcolor{keywordtype}{double} gain)\textcolor{keyword}{ const}}
+\DoxyCodeLine{112 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{113         \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = *\textcolor{keyword}{this};}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}\& \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} : \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}.coeffs)}
+\DoxyCodeLine{116             \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} *= gain;}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}};}
+\DoxyCodeLine{119     \}}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{122     \mbox{\hyperlink{classdsp_1_1_polynomial}{Polynomial<FloatingType>}} \mbox{\hyperlink{classdsp_1_1_polynomial_ac94b38690d9ce647c75e1b859085af01}{getSumWith}} (\textcolor{keyword}{const} \mbox{\hyperlink{classdsp_1_1_polynomial}{Polynomial<FloatingType>}}\& other)\textcolor{keyword}{ const}}
+\DoxyCodeLine{123 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{124         \textcolor{keywordflow}{if} (coeffs.size() < other.coeffs.size())}
+\DoxyCodeLine{125             \textcolor{keywordflow}{return} other.\mbox{\hyperlink{classdsp_1_1_polynomial_ac94b38690d9ce647c75e1b859085af01}{getSumWith}} (*\textcolor{keyword}{this});}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{127         \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = *\textcolor{keyword}{this};}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < other.coeffs.size(); ++i)}
+\DoxyCodeLine{130             \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}[i] += other[i];}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{132         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}};}
+\DoxyCodeLine{133     \}}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{136     \mbox{\hyperlink{classdsp_1_1_polynomial}{Polynomial<FloatingType>}} \mbox{\hyperlink{classdsp_1_1_polynomial_af523b46ec5c5e50ed69bb5f676229700}{getProductWith}} (\textcolor{keyword}{const} \mbox{\hyperlink{classdsp_1_1_polynomial}{Polynomial<FloatingType>}}\& other)\textcolor{keyword}{ const}}
+\DoxyCodeLine{137 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{138         \mbox{\hyperlink{classdsp_1_1_polynomial}{Polynomial<FloatingType>}} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}};}
+\DoxyCodeLine{139         \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}.coeffs.clearQuick();}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{141         \textcolor{keyword}{auto} N1 = coeffs.size();}
+\DoxyCodeLine{142         \textcolor{keyword}{auto} N2 = other.coeffs.size();}
+\DoxyCodeLine{143         \textcolor{keyword}{auto} Nmax = \mbox{\hyperlink{group__juce__core-maths_gadfd716f36f80987d66ebc2fce819c1fe}{jmax}} (N1, N2);}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145         \textcolor{keyword}{auto} N = N1 + N2 -\/ 1;}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{147         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < N; ++i)}
+\DoxyCodeLine{148         \{}
+\DoxyCodeLine{149             FloatingType \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}} (0);}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{151             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}} = 0; \mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}} < Nmax; ++\mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}})}
+\DoxyCodeLine{152                 \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}} >= 0 \&\& j < N1 \&\& i -\/ j >= 0 \&\& i -\/ \mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}} < N2)}
+\DoxyCodeLine{153                     \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}} = \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}} + (*this)[\mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}}] * other[i -\/ \mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}}];}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{155             \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}.coeffs.add (\mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}});}
+\DoxyCodeLine{156         \}}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{158         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}};}
+\DoxyCodeLine{159     \}}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161 \textcolor{keyword}{private}:}
+\DoxyCodeLine{162     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{163     \mbox{\hyperlink{class_array}{Array<FloatingType>}} coeffs;}
+\DoxyCodeLine{164 }
+\DoxyCodeLine{165     \mbox{\hyperlink{group__juce__core-memory_gab3639a79598b35f2116f4572af0d93f1}{JUCE\_LEAK\_DETECTOR}} (\mbox{\hyperlink{classdsp_1_1_polynomial}{Polynomial}})}
+\DoxyCodeLine{166 \};}
+\DoxyCodeLine{167 }
+\DoxyCodeLine{168 \} \textcolor{comment}{// namespace dsp}}
+\DoxyCodeLine{169  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{170 }
+
+\end{DoxyCode}

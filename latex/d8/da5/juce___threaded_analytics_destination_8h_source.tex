@@ -1,0 +1,91 @@
+\hypertarget{juce___threaded_analytics_destination_8h_source}{}\doxysection{juce\+\_\+\+Threaded\+Analytics\+Destination.\+h}
+\label{juce___threaded_analytics_destination_8h_source}\index{build/juce\_analytics/destinations/juce\_ThreadedAnalyticsDestination.h@{build/juce\_analytics/destinations/juce\_ThreadedAnalyticsDestination.h}}
+\mbox{\hyperlink{juce___threaded_analytics_destination_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{53 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_threaded_analytics_destination}{ThreadedAnalyticsDestination}}   : \textcolor{keyword}{public} \mbox{\hyperlink{struct_analytics_destination}{AnalyticsDestination}}}
+\DoxyCodeLine{54 \{}
+\DoxyCodeLine{55 \textcolor{keyword}{public}:}
+\DoxyCodeLine{56     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{63 \textcolor{comment}{}    \mbox{\hyperlink{class_threaded_analytics_destination}{ThreadedAnalyticsDestination}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& threadName = \textcolor{stringliteral}{"{}Analytics thread"{}});}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{66     \mbox{\hyperlink{class_threaded_analytics_destination}{\string~ThreadedAnalyticsDestination}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{75 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_threaded_analytics_destination_afd72d3a1b982b1fe5c2bdbef147a5aae}{getMaximumBatchSize}}() = 0;}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{89     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_threaded_analytics_destination_a72822517bc35699a4f474a35979e1430}{logBatchedEvents}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_array}{Array<AnalyticsEvent>}}\& events) = 0;}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{108     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_threaded_analytics_destination_accb9697247b2816d09954d5ed16ed3a7}{stopLoggingEvents}}() = 0;}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{120 \textcolor{comment}{}    \textcolor{keywordtype}{void} setBatchPeriod (\textcolor{keywordtype}{int} newSubmissionPeriodMilliseconds);}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{130     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_analytics_destination_a915afe9dfa5adb575454363e5367a4bd}{logEvent}} (\textcolor{keyword}{const} \mbox{\hyperlink{struct_analytics_destination_1_1_analytics_event}{AnalyticsEvent}}\& \mbox{\hyperlink{namespacegl_a5db3d429ae1833f173b8c4ef6a9b3b82}{event}}) \textcolor{keyword}{override} \textcolor{keyword}{final};}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{132 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{133     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{140 \textcolor{comment}{}    \textcolor{keywordtype}{void} startAnalyticsThread (\textcolor{keywordtype}{int} initialBatchPeriodMilliseconds);}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{142     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{158 \textcolor{comment}{}    \textcolor{keywordtype}{void} stopAnalyticsThread (\textcolor{keywordtype}{int} timeoutMilliseconds);}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160 \textcolor{keyword}{private}:}
+\DoxyCodeLine{161     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{177 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} saveUnloggedEvents (\textcolor{keyword}{const} std::deque<AnalyticsEvent>\& eventsToSave) = 0;}
+\DoxyCodeLine{178 }
+\DoxyCodeLine{193     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} restoreUnloggedEvents (std::deque<AnalyticsEvent>\& restoredEventQueue) = 0;}
+\DoxyCodeLine{194 }
+\DoxyCodeLine{195     \textcolor{keyword}{struct }EventDispatcher   : \textcolor{keyword}{public} \mbox{\hyperlink{class_thread}{Thread}}}
+\DoxyCodeLine{196     \{}
+\DoxyCodeLine{197         EventDispatcher (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& threadName, \mbox{\hyperlink{class_threaded_analytics_destination}{ThreadedAnalyticsDestination}}\&);}
+\DoxyCodeLine{198 }
+\DoxyCodeLine{199         \textcolor{keywordtype}{void} run() \textcolor{keyword}{override};}
+\DoxyCodeLine{200         \textcolor{keywordtype}{void} addToQueue (\textcolor{keyword}{const} \mbox{\hyperlink{struct_analytics_destination_1_1_analytics_event}{AnalyticsEvent}}\&);}
+\DoxyCodeLine{201 }
+\DoxyCodeLine{202         \mbox{\hyperlink{class_threaded_analytics_destination}{ThreadedAnalyticsDestination}}\& parent;}
+\DoxyCodeLine{203 }
+\DoxyCodeLine{204         std::deque<AnalyticsEvent> eventQueue;}
+\DoxyCodeLine{205         \mbox{\hyperlink{class_critical_section}{CriticalSection}} queueAccess;}
+\DoxyCodeLine{206 }
+\DoxyCodeLine{207         \mbox{\hyperlink{struct_atomic}{Atomic<int>}} batchPeriodMilliseconds \{ 1000 \};}
+\DoxyCodeLine{208 }
+\DoxyCodeLine{209         \mbox{\hyperlink{class_array}{Array<AnalyticsEvent>}} eventsToSend;}
+\DoxyCodeLine{210     \};}
+\DoxyCodeLine{211 }
+\DoxyCodeLine{212     \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}} destinationName;}
+\DoxyCodeLine{213     EventDispatcher dispatcher;}
+\DoxyCodeLine{214 }
+\DoxyCodeLine{215     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_threaded_analytics_destination}{ThreadedAnalyticsDestination}})}
+\DoxyCodeLine{216 \};}
+\DoxyCodeLine{217 }
+\DoxyCodeLine{218  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{219 }
+
+\end{DoxyCode}

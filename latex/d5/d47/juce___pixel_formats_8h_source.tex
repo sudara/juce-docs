@@ -1,0 +1,592 @@
+\hypertarget{juce___pixel_formats_8h_source}{}\doxysection{juce\+\_\+\+Pixel\+Formats.\+h}
+\label{juce___pixel_formats_8h_source}\index{build/juce\_graphics/colour/juce\_PixelFormats.h@{build/juce\_graphics/colour/juce\_PixelFormats.h}}
+\mbox{\hyperlink{juce___pixel_formats_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#if JUCE\_MSVC}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{ \#pragma pack (push, 1)}}
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35 \textcolor{keyword}{class }\mbox{\hyperlink{class_pixel_r_g_b}{PixelRGB}};}
+\DoxyCodeLine{36 \textcolor{keyword}{class }\mbox{\hyperlink{class_pixel_alpha}{PixelAlpha}};}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38 \textcolor{keyword}{inline} \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} \mbox{\hyperlink{group__juce__graphics-colour_gabebe763f0ddf41420146d43d918a20fc}{maskPixelComponents}} (\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{39 \{}
+\DoxyCodeLine{40     \textcolor{keywordflow}{return} (\mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}} >> 8) \& 0x00ff00ff;}
+\DoxyCodeLine{41 \}}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43 \textcolor{keyword}{inline} \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} \mbox{\hyperlink{group__juce__graphics-colour_gae982b6f45d5bce9d1dde9376bef9ea78}{clampPixelComponents}} (\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{44 \{}
+\DoxyCodeLine{45     \textcolor{keywordflow}{return} (\mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}} | (0x01000100 -\/ \mbox{\hyperlink{group__juce__graphics-colour_gabebe763f0ddf41420146d43d918a20fc}{maskPixelComponents}} (\mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}))) \& 0x00ff00ff;}
+\DoxyCodeLine{46 \}}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{59 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_pixel_a_r_g_b}{PixelARGB}}}
+\DoxyCodeLine{60 \{}
+\DoxyCodeLine{61 \textcolor{keyword}{public}:}
+\DoxyCodeLine{63     \mbox{\hyperlink{class_pixel_a_r_g_b_a8f18b1839a1ea8366036458e7a1ee839}{PixelARGB}}() noexcept = default;}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65     \mbox{\hyperlink{class_pixel_a_r_g_b}{PixelARGB}} (\mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}}, \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}}, \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}) noexcept}
+\DoxyCodeLine{66     \{}
+\DoxyCodeLine{67         \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.b = \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}};}
+\DoxyCodeLine{68         \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.g = \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}};}
+\DoxyCodeLine{69         \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.r = \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}};}
+\DoxyCodeLine{70         \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.a = \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}};}
+\DoxyCodeLine{71     \}}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{75 \textcolor{comment}{}    \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} \mbox{\hyperlink{class_pixel_a_r_g_b_aeccc464b04bebbeb8fa721340433c035}{getNativeARGB}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept   \{ \textcolor{keywordflow}{return} \textcolor{keyword}{internal}; \}}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{79     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} \mbox{\hyperlink{class_pixel_a_r_g_b_a4ab57cb14ec71b5113226cfdc477a5cf}{getInARGBMaskOrder}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{80     \{}
+\DoxyCodeLine{81 \textcolor{preprocessor}{       \#if JUCE\_ANDROID}}
+\DoxyCodeLine{82         \textcolor{keywordflow}{return} (\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}}) ((\mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.a << 24) | (\mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.r << 16) | (\mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.g << 8) | (\mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.b << 0));}
+\DoxyCodeLine{83 \textcolor{preprocessor}{       \#else}}
+\DoxyCodeLine{84         \textcolor{keywordflow}{return} getNativeARGB();}
+\DoxyCodeLine{85 \textcolor{preprocessor}{       \#endif}}
+\DoxyCodeLine{86     \}}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{90     \textcolor{keyword}{inline} \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} \mbox{\hyperlink{class_pixel_a_r_g_b_a1f31ac28866d97bf44632b876140f88b}{getInARGBMemoryOrder}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{91     \{}
+\DoxyCodeLine{92 \textcolor{preprocessor}{       \#if JUCE\_BIG\_ENDIAN}}
+\DoxyCodeLine{93         \textcolor{keywordflow}{return} getInARGBMaskOrder();}
+\DoxyCodeLine{94 \textcolor{preprocessor}{       \#else}}
+\DoxyCodeLine{95         \textcolor{keywordflow}{return} (\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}}) ((\mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.b << 24) | (\mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.g << 16) | (\mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.r << 8) | \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.a);}
+\DoxyCodeLine{96 \textcolor{preprocessor}{       \#endif}}
+\DoxyCodeLine{97     \}}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{101     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} \mbox{\hyperlink{class_pixel_a_r_g_b_a4af6a97626701a864011185574456fec}{getEvenBytes}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept \{ \textcolor{keywordflow}{return} 0x00ff00ff \& \textcolor{keyword}{internal}; \}}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{105     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} \mbox{\hyperlink{class_pixel_a_r_g_b_ab069bd7777789034829231e19d8e4372}{getOddBytes}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept  \{ \textcolor{keywordflow}{return} 0x00ff00ff \& (\textcolor{keyword}{internal} >> 8); \}}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{107     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{108     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} \mbox{\hyperlink{class_pixel_a_r_g_b_a578d8073cc8fc06b02bf5376c0fb3769}{getAlpha}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept      \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.a; \}}
+\DoxyCodeLine{109     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} \mbox{\hyperlink{class_pixel_a_r_g_b_afbe911418e1dd168d01d287376ea89fc}{getRed}}()   \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept      \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.r; \}}
+\DoxyCodeLine{110     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} \mbox{\hyperlink{class_pixel_a_r_g_b_aba1cdf360beb38ab4ee87d686e356171}{getGreen}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept      \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.g; \}}
+\DoxyCodeLine{111     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} \mbox{\hyperlink{class_pixel_a_r_g_b_a7dbf874cf5e5e876c87ed25c65014e59}{getBlue}}()  \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept      \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.b; \}}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{118 \textcolor{comment}{}    \textcolor{keyword}{template} <\textcolor{keyword}{class} Pixel>}
+\DoxyCodeLine{119     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_pixel_a_r_g_b_a5c72335f6ca8533026d8b484f7a995b2}{set}} (\textcolor{keyword}{const} Pixel\& \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{120     \{}
+\DoxyCodeLine{121         \textcolor{keyword}{internal} = \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}.getNativeARGB();}
+\DoxyCodeLine{122     \}}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{124     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{126 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_pixel_a_r_g_b_a4969bb2bec245ea0fbcee204e4d5ff1b}{setARGB}} (\mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}}, \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}}, \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{127     \{}
+\DoxyCodeLine{128         \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.b = \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}};}
+\DoxyCodeLine{129         \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.g = \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}};}
+\DoxyCodeLine{130         \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.r = \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}};}
+\DoxyCodeLine{131         \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.a = \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}};}
+\DoxyCodeLine{132     \}}
+\DoxyCodeLine{133 }
+\DoxyCodeLine{134     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{140 \textcolor{comment}{}    \textcolor{keyword}{template} <\textcolor{keyword}{class} Pixel>}
+\DoxyCodeLine{141     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_pixel_a_r_g_b_a2bd4f6bc1869f0f6b60468746e4beece}{blend}} (\textcolor{keyword}{const} Pixel\& \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{142     \{}
+\DoxyCodeLine{143         \textcolor{keyword}{auto} rb = \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}.getEvenBytes();}
+\DoxyCodeLine{144         \textcolor{keyword}{auto} ag = \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}.getOddBytes();}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{146         \textcolor{keyword}{const} \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a63bc6ce06ecbc516b6e22d01f9f4dd09}{alpha}} = 0x100 -\/ (ag >> 16);}
+\DoxyCodeLine{147 }
+\DoxyCodeLine{148         rb += \mbox{\hyperlink{group__juce__graphics-colour_gabebe763f0ddf41420146d43d918a20fc}{maskPixelComponents}} (getEvenBytes() * \mbox{\hyperlink{namespacegl_a63bc6ce06ecbc516b6e22d01f9f4dd09}{alpha}});}
+\DoxyCodeLine{149         ag += \mbox{\hyperlink{group__juce__graphics-colour_gabebe763f0ddf41420146d43d918a20fc}{maskPixelComponents}} (getOddBytes() * \mbox{\hyperlink{namespacegl_a63bc6ce06ecbc516b6e22d01f9f4dd09}{alpha}});}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{151         \textcolor{keyword}{internal} = \mbox{\hyperlink{group__juce__graphics-colour_gae982b6f45d5bce9d1dde9376bef9ea78}{clampPixelComponents}} (rb) | (\mbox{\hyperlink{group__juce__graphics-colour_gae982b6f45d5bce9d1dde9376bef9ea78}{clampPixelComponents}} (ag) << 8);}
+\DoxyCodeLine{152     \}}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{159     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} blend (\mbox{\hyperlink{class_pixel_r_g_b}{PixelRGB}} \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161 }
+\DoxyCodeLine{167     \textcolor{keyword}{template} <\textcolor{keyword}{class} Pixel>}
+\DoxyCodeLine{168     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_pixel_a_r_g_b_a84ded96012732f73dfcbf8fd763239dd}{blend}} (\textcolor{keyword}{const} Pixel\& \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} extraAlpha) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{169     \{}
+\DoxyCodeLine{170         \textcolor{keyword}{auto} rb = \mbox{\hyperlink{group__juce__graphics-colour_gabebe763f0ddf41420146d43d918a20fc}{maskPixelComponents}} (extraAlpha * \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}.getEvenBytes());}
+\DoxyCodeLine{171         \textcolor{keyword}{auto} ag = \mbox{\hyperlink{group__juce__graphics-colour_gabebe763f0ddf41420146d43d918a20fc}{maskPixelComponents}} (extraAlpha * \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}.getOddBytes());}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{173         \textcolor{keyword}{const} \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a63bc6ce06ecbc516b6e22d01f9f4dd09}{alpha}} = 0x100 -\/ (ag >> 16);}
+\DoxyCodeLine{174 }
+\DoxyCodeLine{175         rb += \mbox{\hyperlink{group__juce__graphics-colour_gabebe763f0ddf41420146d43d918a20fc}{maskPixelComponents}} (getEvenBytes() * \mbox{\hyperlink{namespacegl_a63bc6ce06ecbc516b6e22d01f9f4dd09}{alpha}});}
+\DoxyCodeLine{176         ag += \mbox{\hyperlink{group__juce__graphics-colour_gabebe763f0ddf41420146d43d918a20fc}{maskPixelComponents}} (getOddBytes() * \mbox{\hyperlink{namespacegl_a63bc6ce06ecbc516b6e22d01f9f4dd09}{alpha}});}
+\DoxyCodeLine{177 }
+\DoxyCodeLine{178         \textcolor{keyword}{internal} = \mbox{\hyperlink{group__juce__graphics-colour_gae982b6f45d5bce9d1dde9376bef9ea78}{clampPixelComponents}} (rb) | (\mbox{\hyperlink{group__juce__graphics-colour_gae982b6f45d5bce9d1dde9376bef9ea78}{clampPixelComponents}} (ag) << 8);}
+\DoxyCodeLine{179     \}}
+\DoxyCodeLine{180 }
+\DoxyCodeLine{184     \textcolor{keyword}{template} <\textcolor{keyword}{class} Pixel>}
+\DoxyCodeLine{185     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_pixel_a_r_g_b_a8bc382137d6d2a33426aef9b8a236fba}{tween}} (\textcolor{keyword}{const} Pixel\& \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} amount) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{186     \{}
+\DoxyCodeLine{187         \textcolor{keyword}{auto} dEvenBytes = getEvenBytes();}
+\DoxyCodeLine{188         dEvenBytes += (((\mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}.getEvenBytes() -\/ dEvenBytes) * amount) >> 8);}
+\DoxyCodeLine{189         dEvenBytes \&= 0x00ff00ff;}
+\DoxyCodeLine{190 }
+\DoxyCodeLine{191         \textcolor{keyword}{auto} dOddBytes = getOddBytes();}
+\DoxyCodeLine{192         dOddBytes += (((\mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}.getOddBytes() -\/ dOddBytes) * amount) >> 8);}
+\DoxyCodeLine{193         dOddBytes \&= 0x00ff00ff;}
+\DoxyCodeLine{194         dOddBytes <<= 8;}
+\DoxyCodeLine{195 }
+\DoxyCodeLine{196         dOddBytes |= dEvenBytes;}
+\DoxyCodeLine{197         \textcolor{keyword}{internal} = dOddBytes;}
+\DoxyCodeLine{198     \}}
+\DoxyCodeLine{199 }
+\DoxyCodeLine{200     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{202 \textcolor{comment}{}    \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_pixel_a_r_g_b_a766d9ce927e6798c62379cd2002c43b9}{setAlpha}} (\mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} newAlpha) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{203     \{}
+\DoxyCodeLine{204         \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.a = newAlpha;}
+\DoxyCodeLine{205     \}}
+\DoxyCodeLine{206 }
+\DoxyCodeLine{208     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_pixel_a_r_g_b_aa7ee03257f712ffdfb80cc1d90a863ef}{multiplyAlpha}} (\textcolor{keywordtype}{int} multiplier) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{209     \{}
+\DoxyCodeLine{210         \textcolor{comment}{// increment alpha by 1, so that if multiplier == 255 (full alpha),}}
+\DoxyCodeLine{211         \textcolor{comment}{// this function will not change the values.}}
+\DoxyCodeLine{212         ++multiplier;}
+\DoxyCodeLine{213 }
+\DoxyCodeLine{214         \textcolor{keyword}{internal} = ((((\mbox{\hyperlink{namespace_steinberg_af4518d725547bee20d4e185e8d3f1965}{uint32}}) multiplier) * getOddBytes()) \& 0xff00ff00)}
+\DoxyCodeLine{215                 | (((((\mbox{\hyperlink{namespace_steinberg_af4518d725547bee20d4e185e8d3f1965}{uint32}}) multiplier) * getEvenBytes()) >> 8) \& 0x00ff00ff);}
+\DoxyCodeLine{216     \}}
+\DoxyCodeLine{217 }
+\DoxyCodeLine{218     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_pixel_a_r_g_b_a11595ad87cb8ae8315771839b2b354fa}{multiplyAlpha}} (\textcolor{keywordtype}{float} multiplier) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{219     \{}
+\DoxyCodeLine{220         multiplyAlpha ((\textcolor{keywordtype}{int}) (multiplier * 255.0f));}
+\DoxyCodeLine{221     \}}
+\DoxyCodeLine{222 }
+\DoxyCodeLine{223 }
+\DoxyCodeLine{224     \textcolor{keyword}{inline} \mbox{\hyperlink{class_pixel_a_r_g_b}{PixelARGB}} \mbox{\hyperlink{class_pixel_a_r_g_b_ad776536ef8434b6b1ab252a87727ea72}{getUnpremultiplied}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{225     \{}
+\DoxyCodeLine{226         \mbox{\hyperlink{class_pixel_a_r_g_b}{PixelARGB}} \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}} (\textcolor{keyword}{internal});}
+\DoxyCodeLine{227         \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}}.unpremultiply();}
+\DoxyCodeLine{228         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}};}
+\DoxyCodeLine{229     \}}
+\DoxyCodeLine{230 }
+\DoxyCodeLine{232     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_pixel_a_r_g_b_a825c18e92a2159d93687b4b161ade875}{premultiply}}() noexcept}
+\DoxyCodeLine{233     \{}
+\DoxyCodeLine{234         \textcolor{keyword}{const} \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a63bc6ce06ecbc516b6e22d01f9f4dd09}{alpha}} = \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.a;}
+\DoxyCodeLine{235 }
+\DoxyCodeLine{236         \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a63bc6ce06ecbc516b6e22d01f9f4dd09}{alpha}} < 0xff)}
+\DoxyCodeLine{237         \{}
+\DoxyCodeLine{238             \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a63bc6ce06ecbc516b6e22d01f9f4dd09}{alpha}} == 0)}
+\DoxyCodeLine{239             \{}
+\DoxyCodeLine{240                 \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.b = 0;}
+\DoxyCodeLine{241                 \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.g = 0;}
+\DoxyCodeLine{242                 \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.r = 0;}
+\DoxyCodeLine{243             \}}
+\DoxyCodeLine{244             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{245             \{}
+\DoxyCodeLine{246                 \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.b = (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}}) ((\mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.b * \mbox{\hyperlink{namespacegl_a63bc6ce06ecbc516b6e22d01f9f4dd09}{alpha}} + 0x7f) >> 8);}
+\DoxyCodeLine{247                 \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.g = (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}}) ((\mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.g * \mbox{\hyperlink{namespacegl_a63bc6ce06ecbc516b6e22d01f9f4dd09}{alpha}} + 0x7f) >> 8);}
+\DoxyCodeLine{248                 \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.r = (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}}) ((\mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.r * \mbox{\hyperlink{namespacegl_a63bc6ce06ecbc516b6e22d01f9f4dd09}{alpha}} + 0x7f) >> 8);}
+\DoxyCodeLine{249             \}}
+\DoxyCodeLine{250         \}}
+\DoxyCodeLine{251     \}}
+\DoxyCodeLine{252 }
+\DoxyCodeLine{254     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_pixel_a_r_g_b_a6270aec4f8b98a22f3487be2b8db4dc2}{unpremultiply}}() noexcept}
+\DoxyCodeLine{255     \{}
+\DoxyCodeLine{256         \textcolor{keyword}{const} \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a63bc6ce06ecbc516b6e22d01f9f4dd09}{alpha}} = \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.a;}
+\DoxyCodeLine{257 }
+\DoxyCodeLine{258         \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a63bc6ce06ecbc516b6e22d01f9f4dd09}{alpha}} < 0xff)}
+\DoxyCodeLine{259         \{}
+\DoxyCodeLine{260             \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a63bc6ce06ecbc516b6e22d01f9f4dd09}{alpha}} == 0)}
+\DoxyCodeLine{261             \{}
+\DoxyCodeLine{262                 \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.b = 0;}
+\DoxyCodeLine{263                 \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.g = 0;}
+\DoxyCodeLine{264                 \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.r = 0;}
+\DoxyCodeLine{265             \}}
+\DoxyCodeLine{266             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{267             \{}
+\DoxyCodeLine{268                 \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.b = (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}}) \mbox{\hyperlink{group__juce__core-maths_gae8394cdf11279b266f4aa741758c1669}{jmin}} ((\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}}) 0xffu, (\mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.b * 0xffu) / \mbox{\hyperlink{namespacegl_a63bc6ce06ecbc516b6e22d01f9f4dd09}{alpha}});}
+\DoxyCodeLine{269                 \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.g = (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}}) \mbox{\hyperlink{group__juce__core-maths_gae8394cdf11279b266f4aa741758c1669}{jmin}} ((\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}}) 0xffu, (\mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.g * 0xffu) / \mbox{\hyperlink{namespacegl_a63bc6ce06ecbc516b6e22d01f9f4dd09}{alpha}});}
+\DoxyCodeLine{270                 \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.r = (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}}) \mbox{\hyperlink{group__juce__core-maths_gae8394cdf11279b266f4aa741758c1669}{jmin}} ((\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}}) 0xffu, (\mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.r * 0xffu) / \mbox{\hyperlink{namespacegl_a63bc6ce06ecbc516b6e22d01f9f4dd09}{alpha}});}
+\DoxyCodeLine{271             \}}
+\DoxyCodeLine{272         \}}
+\DoxyCodeLine{273     \}}
+\DoxyCodeLine{274 }
+\DoxyCodeLine{275     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_pixel_a_r_g_b_a4ee58dea3b504fcae39680bbd3b54106}{desaturate}}() noexcept}
+\DoxyCodeLine{276     \{}
+\DoxyCodeLine{277         \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.a < 0xff \&\& \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.a > 0)}
+\DoxyCodeLine{278         \{}
+\DoxyCodeLine{279             \textcolor{keyword}{const} \textcolor{keyword}{auto} newUnpremultipliedLevel = (0xff * ((\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}) \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.r + (\textcolor{keywordtype}{int}) \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.g + (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}) \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.b) / (3 * \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.a));}
+\DoxyCodeLine{280 }
+\DoxyCodeLine{281             \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.r = \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.g = \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.b}
+\DoxyCodeLine{282                 = (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}}) ((newUnpremultipliedLevel * \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.a + 0x7f) >> 8);}
+\DoxyCodeLine{283         \}}
+\DoxyCodeLine{284         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{285         \{}
+\DoxyCodeLine{286             \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.r = \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.g = \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.b}
+\DoxyCodeLine{287                 = (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}}) (((\textcolor{keywordtype}{int}) \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.r + (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}) \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.g + (\textcolor{keywordtype}{int}) \mbox{\hyperlink{namespacegl_a07f71d6449ada9dff35af288c00948e1}{components}}.b) / 3);}
+\DoxyCodeLine{288         \}}
+\DoxyCodeLine{289     \}}
+\DoxyCodeLine{290 }
+\DoxyCodeLine{291     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{293 \textcolor{comment}{}\textcolor{preprocessor}{  \#if JUCE\_ANDROID}}
+\DoxyCodeLine{294 \textcolor{preprocessor}{   \#if JUCE\_BIG\_ENDIAN}}
+\DoxyCodeLine{295     \textcolor{keyword}{enum} \{ indexA = 0, indexR = 3, indexG = 2, indexB = 1 \};}
+\DoxyCodeLine{296 \textcolor{preprocessor}{   \#else}}
+\DoxyCodeLine{297     \textcolor{keyword}{enum} \{ indexA = 3, indexR = 0, indexG = 1, indexB = 2 \};}
+\DoxyCodeLine{298 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{299 \textcolor{preprocessor}{  \#else}}
+\DoxyCodeLine{300 \textcolor{preprocessor}{   \#if JUCE\_BIG\_ENDIAN}}
+\DoxyCodeLine{301     \textcolor{keyword}{enum} \{ indexA = 0, indexR = 1, indexG = 2, indexB = 3 \};}
+\DoxyCodeLine{302 \textcolor{preprocessor}{   \#else}}
+\DoxyCodeLine{303     \textcolor{keyword}{enum} \{ indexA = 3, indexR = 2, indexG = 1, indexB = 0 \};}
+\DoxyCodeLine{304 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{305 \textcolor{preprocessor}{  \#endif}}
+\DoxyCodeLine{306 }
+\DoxyCodeLine{307 \textcolor{keyword}{private}:}
+\DoxyCodeLine{308     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{309     \mbox{\hyperlink{class_pixel_a_r_g_b}{PixelARGB}} (\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} internalValue) noexcept}
+\DoxyCodeLine{310         : \textcolor{keyword}{internal} (internalValue)}
+\DoxyCodeLine{311     \{}
+\DoxyCodeLine{312     \}}
+\DoxyCodeLine{313 }
+\DoxyCodeLine{314     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{315     \textcolor{keyword}{struct }Components}
+\DoxyCodeLine{316     \{}
+\DoxyCodeLine{317 \textcolor{preprocessor}{      \#if JUCE\_ANDROID}}
+\DoxyCodeLine{318 \textcolor{preprocessor}{       \#if JUCE\_BIG\_ENDIAN}}
+\DoxyCodeLine{319         \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}, \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}}, \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}};}
+\DoxyCodeLine{320 \textcolor{preprocessor}{       \#else}}
+\DoxyCodeLine{321         \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}}, \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}}, \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}, \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}};}
+\DoxyCodeLine{322 \textcolor{preprocessor}{       \#endif}}
+\DoxyCodeLine{323 \textcolor{preprocessor}{      \#else}}
+\DoxyCodeLine{324 \textcolor{preprocessor}{       \#if JUCE\_BIG\_ENDIAN}}
+\DoxyCodeLine{325         \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}}, \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}}, \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}};}
+\DoxyCodeLine{326 \textcolor{preprocessor}{       \#else}}
+\DoxyCodeLine{327         \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}, \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}}, \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}}, \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}};}
+\DoxyCodeLine{328 \textcolor{preprocessor}{       \#endif}}
+\DoxyCodeLine{329 \textcolor{preprocessor}{      \#endif}}
+\DoxyCodeLine{330     \} \mbox{\hyperlink{group__juce__graphics-colour_ga206675be9d52637553a25d937be34f3e}{JUCE\_PACKED}};}
+\DoxyCodeLine{331 }
+\DoxyCodeLine{332     \textcolor{keyword}{union}}
+\DoxyCodeLine{333     \{}
+\DoxyCodeLine{334         \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} \textcolor{keyword}{internal};}
+\DoxyCodeLine{335         Components \mbox{\hyperlink{class_pixel_a_r_g_b_a6c24be1323d796c9835c7554dbb58e66}{components}};}
+\DoxyCodeLine{336     \};}
+\DoxyCodeLine{337 \}}
+\DoxyCodeLine{338 \textcolor{preprocessor}{\#ifndef DOXYGEN}}
+\DoxyCodeLine{339  \mbox{\hyperlink{group__juce__graphics-colour_ga206675be9d52637553a25d937be34f3e}{JUCE\_PACKED}}}
+\DoxyCodeLine{340 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{341 ;}
+\DoxyCodeLine{342 }
+\DoxyCodeLine{343 }
+\DoxyCodeLine{344 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{354 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_pixel_r_g_b}{PixelRGB}}}
+\DoxyCodeLine{355 \{}
+\DoxyCodeLine{356 \textcolor{keyword}{public}:}
+\DoxyCodeLine{358     \mbox{\hyperlink{class_pixel_r_g_b_a717ef6dc881e4f1cf1a8adde0c03707f}{PixelRGB}}() noexcept = default;}
+\DoxyCodeLine{359 }
+\DoxyCodeLine{360     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{365 \textcolor{comment}{}    \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} getNativeARGB() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{366     \{}
+\DoxyCodeLine{367 \textcolor{preprocessor}{       \#if JUCE\_ANDROID}}
+\DoxyCodeLine{368         \textcolor{keywordflow}{return} (\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}}) ((0xffu << 24) | \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}} | ((\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}}) \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}} << 8) | ((\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}}) \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} << 16));}
+\DoxyCodeLine{369 \textcolor{preprocessor}{       \#else}}
+\DoxyCodeLine{370         \textcolor{keywordflow}{return} (\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}}) ((0xffu << 24) | \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} | ((\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}}) \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}} << 8) | ((\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}}) \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}} << 16));}
+\DoxyCodeLine{371 \textcolor{preprocessor}{       \#endif}}
+\DoxyCodeLine{372     \}}
+\DoxyCodeLine{373 }
+\DoxyCodeLine{376     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} \mbox{\hyperlink{class_pixel_r_g_b_ac48c9b4c90c3dc5224aaadc7d581e27a}{getInARGBMaskOrder}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{377     \{}
+\DoxyCodeLine{378 \textcolor{preprocessor}{       \#if JUCE\_ANDROID}}
+\DoxyCodeLine{379         \textcolor{keywordflow}{return} (\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}}) ((0xffu << 24) | \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} | ((\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}}) \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}} << 8) | ((\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}}) \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}} << 16));}
+\DoxyCodeLine{380 \textcolor{preprocessor}{       \#else}}
+\DoxyCodeLine{381         \textcolor{keywordflow}{return} getNativeARGB();}
+\DoxyCodeLine{382 \textcolor{preprocessor}{       \#endif}}
+\DoxyCodeLine{383     \}}
+\DoxyCodeLine{384 }
+\DoxyCodeLine{387     \textcolor{keyword}{inline} \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} \mbox{\hyperlink{class_pixel_r_g_b_a37fba955091e639d7f1401cdb841d8ff}{getInARGBMemoryOrder}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{388     \{}
+\DoxyCodeLine{389 \textcolor{preprocessor}{       \#if JUCE\_BIG\_ENDIAN}}
+\DoxyCodeLine{390         \textcolor{keywordflow}{return} getInARGBMaskOrder();}
+\DoxyCodeLine{391 \textcolor{preprocessor}{       \#else}}
+\DoxyCodeLine{392         \textcolor{keywordflow}{return} (\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}}) ((\mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} << 24) | (\mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}} << 16) | (\mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}} << 8) | 0xff);}
+\DoxyCodeLine{393 \textcolor{preprocessor}{       \#endif}}
+\DoxyCodeLine{394     \}}
+\DoxyCodeLine{395 }
+\DoxyCodeLine{401     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} \mbox{\hyperlink{class_pixel_r_g_b_a6b144f6a657e7ff62abd6f59b742a787}{getEvenBytes}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{402     \{}
+\DoxyCodeLine{403 \textcolor{preprocessor}{       \#if JUCE\_ANDROID}}
+\DoxyCodeLine{404         \textcolor{keywordflow}{return} (\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}}) (\mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}} | (\mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} << 16));}
+\DoxyCodeLine{405 \textcolor{preprocessor}{       \#else}}
+\DoxyCodeLine{406         \textcolor{keywordflow}{return} (\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}}) (\mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} | (\mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}} << 16));}
+\DoxyCodeLine{407 \textcolor{preprocessor}{       \#endif}}
+\DoxyCodeLine{408     \}}
+\DoxyCodeLine{409 }
+\DoxyCodeLine{415     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} \mbox{\hyperlink{class_pixel_r_g_b_ad30feb7effcf69fd9acc0be0ecd7e357}{getOddBytes}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept       \{ \textcolor{keywordflow}{return} (\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}}) 0xff0000 | \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}}; \}}
+\DoxyCodeLine{416 }
+\DoxyCodeLine{417     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{418     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} \mbox{\hyperlink{class_pixel_r_g_b_a932cebd81f75f0ff9f13c7b8e0339b82}{getAlpha}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept    \{ \textcolor{keywordflow}{return} 0xff; \}}
+\DoxyCodeLine{419     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} \mbox{\hyperlink{class_pixel_r_g_b_a19df8a6d101bb795b7ed25057c964711}{getRed}}()   \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept    \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}}; \}}
+\DoxyCodeLine{420     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} \mbox{\hyperlink{class_pixel_r_g_b_a44b8873d8fd580206df89bac652a21c2}{getGreen}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept    \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}}; \}}
+\DoxyCodeLine{421     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} \mbox{\hyperlink{class_pixel_r_g_b_a415a25dcd36ef2c0d569b39d603487ac}{getBlue}}()  \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept    \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}; \}}
+\DoxyCodeLine{422 }
+\DoxyCodeLine{423     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{430 \textcolor{comment}{}    \textcolor{keyword}{template} <\textcolor{keyword}{class} Pixel>}
+\DoxyCodeLine{431     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_pixel_r_g_b_a1179e367308d07f57857c7c4707d7c3f}{set}} (\textcolor{keyword}{const} Pixel\& \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{432     \{}
+\DoxyCodeLine{433         \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} = \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}.getBlue();}
+\DoxyCodeLine{434         \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}} = \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}.getGreen();}
+\DoxyCodeLine{435         \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}} = \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}.getRed();}
+\DoxyCodeLine{436     \}}
+\DoxyCodeLine{437 }
+\DoxyCodeLine{439     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_pixel_r_g_b_afa5a85339ceb24e0db6fa4e26af9497a}{setARGB}} (\mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}}, \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} \mbox{\hyperlink{png_8h_a785e03b9f52b7b9ca5116a272adc908f}{red}}, \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} \mbox{\hyperlink{namespace_colours_a3195dd8726f3950a627a6cb7fc5258f9}{green}}, \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} \mbox{\hyperlink{namespace_colours_a712056f9defb3e4e19f670d2175290c8}{blue}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{440     \{}
+\DoxyCodeLine{441         \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}} = \mbox{\hyperlink{png_8h_a785e03b9f52b7b9ca5116a272adc908f}{red}};}
+\DoxyCodeLine{442         \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}} = \mbox{\hyperlink{namespace_colours_a3195dd8726f3950a627a6cb7fc5258f9}{green}};}
+\DoxyCodeLine{443         \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} = \mbox{\hyperlink{namespace_colours_a712056f9defb3e4e19f670d2175290c8}{blue}};}
+\DoxyCodeLine{444     \}}
+\DoxyCodeLine{445 }
+\DoxyCodeLine{446     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{452 \textcolor{comment}{}    \textcolor{keyword}{template} <\textcolor{keyword}{class} Pixel>}
+\DoxyCodeLine{453     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_pixel_r_g_b_a51ac813b207fd2e900672d76ba02d546}{blend}} (\textcolor{keyword}{const} Pixel\& \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{454     \{}
+\DoxyCodeLine{455         \textcolor{keyword}{const} \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a63bc6ce06ecbc516b6e22d01f9f4dd09}{alpha}} = (\mbox{\hyperlink{namespace_steinberg_af4518d725547bee20d4e185e8d3f1965}{uint32}}) (0x100 -\/ \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}.getAlpha());}
+\DoxyCodeLine{456 }
+\DoxyCodeLine{457         \textcolor{comment}{// getEvenBytes returns 0x00rr00bb on non-\/android}}
+\DoxyCodeLine{458         \textcolor{keyword}{const} \textcolor{keyword}{auto} rb = \mbox{\hyperlink{group__juce__graphics-colour_gae982b6f45d5bce9d1dde9376bef9ea78}{clampPixelComponents}} (\mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}.getEvenBytes() + \mbox{\hyperlink{group__juce__graphics-colour_gabebe763f0ddf41420146d43d918a20fc}{maskPixelComponents}} (getEvenBytes() * \mbox{\hyperlink{namespacegl_a63bc6ce06ecbc516b6e22d01f9f4dd09}{alpha}}));}
+\DoxyCodeLine{459         \textcolor{comment}{// getOddBytes returns 0x00aa00gg on non-\/android}}
+\DoxyCodeLine{460         \textcolor{keyword}{const} \textcolor{keyword}{auto} ag = \mbox{\hyperlink{group__juce__graphics-colour_gae982b6f45d5bce9d1dde9376bef9ea78}{clampPixelComponents}} (\mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}.getOddBytes() + ((\mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}} * \mbox{\hyperlink{namespacegl_a63bc6ce06ecbc516b6e22d01f9f4dd09}{alpha}}) >> 8));}
+\DoxyCodeLine{461 }
+\DoxyCodeLine{462         \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}} = (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}}) (ag \& 0xff);}
+\DoxyCodeLine{463 }
+\DoxyCodeLine{464 \textcolor{preprocessor}{       \#if JUCE\_ANDROID}}
+\DoxyCodeLine{465         \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} = (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}}) (rb >> 16);}
+\DoxyCodeLine{466         \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}} = (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}}) (rb \& 0xff);}
+\DoxyCodeLine{467 \textcolor{preprocessor}{       \#else}}
+\DoxyCodeLine{468         \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}} = (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}}) (rb >> 16);}
+\DoxyCodeLine{469         \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} = (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}}) (rb \& 0xff);}
+\DoxyCodeLine{470 \textcolor{preprocessor}{       \#endif}}
+\DoxyCodeLine{471     \}}
+\DoxyCodeLine{472 }
+\DoxyCodeLine{473     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_pixel_r_g_b_a0d8c2e7cfe0cad504c424a9cb3bc551f}{blend}} (\mbox{\hyperlink{class_pixel_r_g_b}{PixelRGB}} \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{474     \{}
+\DoxyCodeLine{475         set (\mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}});}
+\DoxyCodeLine{476     \}}
+\DoxyCodeLine{477 }
+\DoxyCodeLine{483     \textcolor{keyword}{template} <\textcolor{keyword}{class} Pixel>}
+\DoxyCodeLine{484     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_pixel_r_g_b_a5e78165deed6b6da89391ec6b8a9f272}{blend}} (\textcolor{keyword}{const} Pixel\& \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} extraAlpha) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{485     \{}
+\DoxyCodeLine{486         \textcolor{keyword}{auto} ag = \mbox{\hyperlink{group__juce__graphics-colour_gabebe763f0ddf41420146d43d918a20fc}{maskPixelComponents}} (extraAlpha * \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}.getOddBytes());}
+\DoxyCodeLine{487         \textcolor{keyword}{auto} rb = \mbox{\hyperlink{group__juce__graphics-colour_gabebe763f0ddf41420146d43d918a20fc}{maskPixelComponents}} (extraAlpha * \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}.getEvenBytes());}
+\DoxyCodeLine{488 }
+\DoxyCodeLine{489         \textcolor{keyword}{const} \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a63bc6ce06ecbc516b6e22d01f9f4dd09}{alpha}} = 0x100 -\/ (ag >> 16);}
+\DoxyCodeLine{490 }
+\DoxyCodeLine{491         ag = \mbox{\hyperlink{group__juce__graphics-colour_gae982b6f45d5bce9d1dde9376bef9ea78}{clampPixelComponents}} (ag + (\mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}} * \mbox{\hyperlink{namespacegl_a63bc6ce06ecbc516b6e22d01f9f4dd09}{alpha}} >> 8));}
+\DoxyCodeLine{492         rb = \mbox{\hyperlink{group__juce__graphics-colour_gae982b6f45d5bce9d1dde9376bef9ea78}{clampPixelComponents}} (rb + \mbox{\hyperlink{group__juce__graphics-colour_gabebe763f0ddf41420146d43d918a20fc}{maskPixelComponents}} (getEvenBytes() * \mbox{\hyperlink{namespacegl_a63bc6ce06ecbc516b6e22d01f9f4dd09}{alpha}}));}
+\DoxyCodeLine{493 }
+\DoxyCodeLine{494         \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}} = (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}}) (ag \& 0xff);}
+\DoxyCodeLine{495 }
+\DoxyCodeLine{496 \textcolor{preprocessor}{       \#if JUCE\_ANDROID}}
+\DoxyCodeLine{497         \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} = (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}}) (rb >> 16);}
+\DoxyCodeLine{498         \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}} = (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}}) (rb \& 0xff);}
+\DoxyCodeLine{499 \textcolor{preprocessor}{       \#else}}
+\DoxyCodeLine{500         \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}} = (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}}) (rb >> 16);}
+\DoxyCodeLine{501         \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} = (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}}) (rb \& 0xff);}
+\DoxyCodeLine{502 \textcolor{preprocessor}{       \#endif}}
+\DoxyCodeLine{503     \}}
+\DoxyCodeLine{504 }
+\DoxyCodeLine{508     \textcolor{keyword}{template} <\textcolor{keyword}{class} Pixel>}
+\DoxyCodeLine{509     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_pixel_r_g_b_aae11e0d637e0d29392429e73803daffc}{tween}} (\textcolor{keyword}{const} Pixel\& \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} amount) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{510     \{}
+\DoxyCodeLine{511         \textcolor{keyword}{auto} dEvenBytes = getEvenBytes();}
+\DoxyCodeLine{512         dEvenBytes += (((\mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}.getEvenBytes() -\/ dEvenBytes) * amount) >> 8);}
+\DoxyCodeLine{513 }
+\DoxyCodeLine{514         \textcolor{keyword}{auto} dOddBytes = getOddBytes();}
+\DoxyCodeLine{515         dOddBytes += (((\mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}.getOddBytes() -\/ dOddBytes) * amount) >> 8);}
+\DoxyCodeLine{516 }
+\DoxyCodeLine{517         \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}} = (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}}) (dOddBytes \& 0xff);  \textcolor{comment}{// dOddBytes =  0x00aa00gg}}
+\DoxyCodeLine{518 }
+\DoxyCodeLine{519 \textcolor{preprocessor}{       \#if JUCE\_ANDROID}}
+\DoxyCodeLine{520         \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}} = (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}}) (dEvenBytes \& 0xff); \textcolor{comment}{// dEvenBytes = 0x00bb00rr}}
+\DoxyCodeLine{521         \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} = (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}}) (dEvenBytes >> 16);}
+\DoxyCodeLine{522 \textcolor{preprocessor}{       \#else}}
+\DoxyCodeLine{523         \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} = (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}}) (dEvenBytes \& 0xff); \textcolor{comment}{// dEvenBytes = 0x00rr00bb}}
+\DoxyCodeLine{524         \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}} = (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}}) (dEvenBytes >> 16);}
+\DoxyCodeLine{525 \textcolor{preprocessor}{       \#endif}}
+\DoxyCodeLine{526     \}}
+\DoxyCodeLine{527 }
+\DoxyCodeLine{528     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{530 \textcolor{comment}{}    \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_pixel_r_g_b_a2c16a8d7ef5238e8c8b4b5ee1e3687ea}{setAlpha}} (\mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}}) \textcolor{keyword}{noexcept} \{\}}
+\DoxyCodeLine{531 }
+\DoxyCodeLine{533     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_pixel_r_g_b_a3ae04d64a7112d6159da2efec4889582}{multiplyAlpha}} (\textcolor{keywordtype}{int}) \textcolor{keyword}{noexcept} \{\}}
+\DoxyCodeLine{534 }
+\DoxyCodeLine{536     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_pixel_r_g_b_a12973ec4edb0adbd721e0a7d653362e2}{multiplyAlpha}} (\textcolor{keywordtype}{float}) \textcolor{keyword}{noexcept} \{\}}
+\DoxyCodeLine{537 }
+\DoxyCodeLine{539     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_pixel_r_g_b_a8e2419282f881f6823d7899f747c122c}{premultiply}}() noexcept \{\}}
+\DoxyCodeLine{540 }
+\DoxyCodeLine{542     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_pixel_r_g_b_a43bd818ac8d55e02b8b3e14cc865a1b7}{unpremultiply}}() noexcept \{\}}
+\DoxyCodeLine{543 }
+\DoxyCodeLine{544     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_pixel_r_g_b_ac2918e55bfa1c745ad3e169b9b342a34}{desaturate}}() noexcept}
+\DoxyCodeLine{545     \{}
+\DoxyCodeLine{546         \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}} = \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}} = \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} = (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}}) (((\textcolor{keywordtype}{int}) \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}} + (\textcolor{keywordtype}{int}) \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}} + (\textcolor{keywordtype}{int}) \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}) / 3);}
+\DoxyCodeLine{547     \}}
+\DoxyCodeLine{548 }
+\DoxyCodeLine{549     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{551 \textcolor{comment}{}\textcolor{preprocessor}{   \#if JUCE\_MAC}}
+\DoxyCodeLine{552     \textcolor{keyword}{enum} \{ indexR = 0, indexG = 1, indexB = 2 \};}
+\DoxyCodeLine{553 \textcolor{preprocessor}{   \#else}}
+\DoxyCodeLine{554     \textcolor{keyword}{enum} \{ indexR = 2, indexG = 1, indexB = 0 \};}
+\DoxyCodeLine{555 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{556 }
+\DoxyCodeLine{557 \textcolor{keyword}{private}:}
+\DoxyCodeLine{558     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{559     \mbox{\hyperlink{class_pixel_r_g_b}{PixelRGB}} (\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} \textcolor{keyword}{internal}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{560     \{}
+\DoxyCodeLine{561 \textcolor{preprocessor}{      \#if JUCE\_ANDROID}}
+\DoxyCodeLine{562         \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} = (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}}) (\textcolor{keyword}{internal} >> 16);}
+\DoxyCodeLine{563         \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}} = (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}}) (\textcolor{keyword}{internal} >> 8);}
+\DoxyCodeLine{564         \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}} = (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}}) (\textcolor{keyword}{internal});}
+\DoxyCodeLine{565 \textcolor{preprocessor}{      \#else}}
+\DoxyCodeLine{566         \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}} = (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}}) (\textcolor{keyword}{internal} >> 16);}
+\DoxyCodeLine{567         \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}} = (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}}) (\textcolor{keyword}{internal} >> 8);}
+\DoxyCodeLine{568         \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} = (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}}) (\textcolor{keyword}{internal});}
+\DoxyCodeLine{569 \textcolor{preprocessor}{      \#endif}}
+\DoxyCodeLine{570     \}}
+\DoxyCodeLine{571 }
+\DoxyCodeLine{572     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{573 \textcolor{preprocessor}{   \#if JUCE\_MAC}}
+\DoxyCodeLine{574     \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}}, \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}}, \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}};}
+\DoxyCodeLine{575 \textcolor{preprocessor}{   \#else}}
+\DoxyCodeLine{576     \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}, \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}}, \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}};}
+\DoxyCodeLine{577 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{578 }
+\DoxyCodeLine{579 \}}
+\DoxyCodeLine{580 \textcolor{preprocessor}{\#ifndef DOXYGEN}}
+\DoxyCodeLine{581  \mbox{\hyperlink{group__juce__graphics-colour_ga206675be9d52637553a25d937be34f3e}{JUCE\_PACKED}}}
+\DoxyCodeLine{582 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{583 ;}
+\DoxyCodeLine{584 }
+\DoxyCodeLine{585 \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_pixel_a_r_g_b_a2bd4f6bc1869f0f6b60468746e4beece}{PixelARGB::blend}} (\mbox{\hyperlink{class_pixel_r_g_b}{PixelRGB}} \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{586 \{}
+\DoxyCodeLine{587     set (\mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}});}
+\DoxyCodeLine{588 \}}
+\DoxyCodeLine{589 }
+\DoxyCodeLine{590 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{600 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_pixel_alpha}{PixelAlpha}}}
+\DoxyCodeLine{601 \{}
+\DoxyCodeLine{602 \textcolor{keyword}{public}:}
+\DoxyCodeLine{604     \mbox{\hyperlink{class_pixel_alpha_a36d2df232bacd783660e22d3fdb44f14}{PixelAlpha}}() noexcept = default;}
+\DoxyCodeLine{605 }
+\DoxyCodeLine{606     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{611 \textcolor{comment}{}    \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} getNativeARGB() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept      \{ \textcolor{keywordflow}{return} (\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}}) ((\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} << 24) | (\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} << 16) | (\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} << 8) | \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}); \}}
+\DoxyCodeLine{612 }
+\DoxyCodeLine{615     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} \mbox{\hyperlink{class_pixel_alpha_ac83c1528cc922e8a4a2884e0409eaa87}{getInARGBMaskOrder}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept \{ \textcolor{keywordflow}{return} getNativeARGB(); \}}
+\DoxyCodeLine{616 }
+\DoxyCodeLine{619     \textcolor{keyword}{inline} \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} \mbox{\hyperlink{class_pixel_alpha_a86e524943b142407678977e4b52fc6b1}{getInARGBMemoryOrder}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept     \{ \textcolor{keywordflow}{return} getNativeARGB(); \}}
+\DoxyCodeLine{620 }
+\DoxyCodeLine{626     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} \mbox{\hyperlink{class_pixel_alpha_a069c94645ad1c3922b5b7520e2d5599c}{getEvenBytes}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept      \{ \textcolor{keywordflow}{return} (\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}}) ((\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} << 16) | \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}); \}}
+\DoxyCodeLine{627 }
+\DoxyCodeLine{633     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} \mbox{\hyperlink{class_pixel_alpha_a769b88b69cd1fbddcca263b03bd8b97a}{getOddBytes}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept       \{ \textcolor{keywordflow}{return} (\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}}) ((\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} << 16) | \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}); \}}
+\DoxyCodeLine{634 }
+\DoxyCodeLine{635     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{636     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} \mbox{\hyperlink{class_pixel_alpha_af52357a6af759e4c14f2241ee65658db}{getAlpha}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept    \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}; \}}
+\DoxyCodeLine{637     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} \mbox{\hyperlink{class_pixel_alpha_abe09f7dca64ace709f4549d4d7f52a6b}{getRed}}()   \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept    \{ \textcolor{keywordflow}{return} 0; \}}
+\DoxyCodeLine{638     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} \mbox{\hyperlink{class_pixel_alpha_a20e33bf48279362d6b97cea62fb8e686}{getGreen}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept    \{ \textcolor{keywordflow}{return} 0; \}}
+\DoxyCodeLine{639     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} \mbox{\hyperlink{class_pixel_alpha_a0b34ddebf90051d609abbb19955e7d8f}{getBlue}}()  \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept    \{ \textcolor{keywordflow}{return} 0; \}}
+\DoxyCodeLine{640 }
+\DoxyCodeLine{641     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{646 \textcolor{comment}{}    \textcolor{keyword}{template} <\textcolor{keyword}{class} Pixel>}
+\DoxyCodeLine{647     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_pixel_alpha_ae7576d9af15ae35b0f39c8b89a9368a4}{set}} (\textcolor{keyword}{const} Pixel\& \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{648     \{}
+\DoxyCodeLine{649         \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} = \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}.getAlpha();}
+\DoxyCodeLine{650     \}}
+\DoxyCodeLine{651 }
+\DoxyCodeLine{653     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_pixel_alpha_a5f2089c0ec6a45ed83572d3494caef0f}{setARGB}} (\mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} a\_, \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}}, \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}}, \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{654     \{}
+\DoxyCodeLine{655         \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} = a\_;}
+\DoxyCodeLine{656     \}}
+\DoxyCodeLine{657 }
+\DoxyCodeLine{658     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{664 \textcolor{comment}{}    \textcolor{keyword}{template} <\textcolor{keyword}{class} Pixel>}
+\DoxyCodeLine{665     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_pixel_alpha_a6e5ce1211bea45d35d14ef55c0471901}{blend}} (\textcolor{keyword}{const} Pixel\& \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{666     \{}
+\DoxyCodeLine{667         \textcolor{keyword}{const} \textcolor{keyword}{auto} srcA = \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}.getAlpha();}
+\DoxyCodeLine{668         \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} = (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}}) ((\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} * (0x100 -\/ srcA) >> 8) + srcA);}
+\DoxyCodeLine{669     \}}
+\DoxyCodeLine{670 }
+\DoxyCodeLine{676     \textcolor{keyword}{template} <\textcolor{keyword}{class} Pixel>}
+\DoxyCodeLine{677     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_pixel_alpha_a68dd6a81bb823df97c9770d423a295b5}{blend}} (\textcolor{keyword}{const} Pixel\& \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} extraAlpha) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{678     \{}
+\DoxyCodeLine{679         ++extraAlpha;}
+\DoxyCodeLine{680         \textcolor{keyword}{const} \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_ab2da28a504a756db3eae1a5c032dc2e6}{srcAlpha}} = (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}) ((extraAlpha * \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}.getAlpha()) >> 8);}
+\DoxyCodeLine{681         \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} = (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}}) ((\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} * (0x100 -\/ \mbox{\hyperlink{namespacegl_ab2da28a504a756db3eae1a5c032dc2e6}{srcAlpha}}) >> 8) + \mbox{\hyperlink{namespacegl_ab2da28a504a756db3eae1a5c032dc2e6}{srcAlpha}});}
+\DoxyCodeLine{682     \}}
+\DoxyCodeLine{683 }
+\DoxyCodeLine{687     \textcolor{keyword}{template} <\textcolor{keyword}{class} Pixel>}
+\DoxyCodeLine{688     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_pixel_alpha_a92ff3a8add8e9f7c442083567a3098d7}{tween}} (\textcolor{keyword}{const} Pixel\& \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} amount) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{689     \{}
+\DoxyCodeLine{690         \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} += ((\mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}.getAlpha() -\/ \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}) * amount) >> 8;}
+\DoxyCodeLine{691     \}}
+\DoxyCodeLine{692 }
+\DoxyCodeLine{693     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{695 \textcolor{comment}{}    \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_pixel_alpha_adadffb0a0f83225fba24dbf55601edb6}{setAlpha}} (\mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} newAlpha) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{696     \{}
+\DoxyCodeLine{697         \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} = newAlpha;}
+\DoxyCodeLine{698     \}}
+\DoxyCodeLine{699 }
+\DoxyCodeLine{701     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_pixel_alpha_a1e5cac4a57706aee687dbe57c65db42e}{multiplyAlpha}} (\textcolor{keywordtype}{int} multiplier) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{702     \{}
+\DoxyCodeLine{703         ++multiplier;}
+\DoxyCodeLine{704         \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} = (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}}) ((\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} * multiplier) >> 8);}
+\DoxyCodeLine{705     \}}
+\DoxyCodeLine{706 }
+\DoxyCodeLine{707     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_pixel_alpha_a82f6324230984ba5cfaea91eedec04f8}{multiplyAlpha}} (\textcolor{keywordtype}{float} multiplier) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{708     \{}
+\DoxyCodeLine{709         \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} = (\mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{uint8}}) (\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} * multiplier);}
+\DoxyCodeLine{710     \}}
+\DoxyCodeLine{711 }
+\DoxyCodeLine{713     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_pixel_alpha_afc74783ac4f996a4f41df985c107ed52}{premultiply}}() noexcept \{\}}
+\DoxyCodeLine{714 }
+\DoxyCodeLine{716     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_pixel_alpha_a739f660b3d4b93d86bf99e791aea1999}{unpremultiply}}() noexcept \{\}}
+\DoxyCodeLine{717 }
+\DoxyCodeLine{718     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_pixel_alpha_adfb09bc7b34321939d9ad6b07b76c220}{desaturate}}() noexcept \{\}}
+\DoxyCodeLine{719 }
+\DoxyCodeLine{720     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{722 \textcolor{comment}{}    \textcolor{keyword}{enum} \{ indexA = 0 \};}
+\DoxyCodeLine{723 }
+\DoxyCodeLine{724 \textcolor{keyword}{private}:}
+\DoxyCodeLine{725     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{726     \mbox{\hyperlink{class_pixel_alpha}{PixelAlpha}} (\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} \textcolor{keyword}{internal}) noexcept}
+\DoxyCodeLine{727         : \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} ((\mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}}) (\textcolor{keyword}{internal} >> 24)) \{ \}}
+\DoxyCodeLine{728 }
+\DoxyCodeLine{729     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{730     \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}};}
+\DoxyCodeLine{731 \}}
+\DoxyCodeLine{732 \textcolor{preprocessor}{\#ifndef DOXYGEN}}
+\DoxyCodeLine{733  \mbox{\hyperlink{group__juce__graphics-colour_ga206675be9d52637553a25d937be34f3e}{JUCE\_PACKED}}}
+\DoxyCodeLine{734 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{735 ;}
+\DoxyCodeLine{736 }
+\DoxyCodeLine{737 \textcolor{preprocessor}{\#if JUCE\_MSVC}}
+\DoxyCodeLine{738 \textcolor{preprocessor}{ \#pragma pack (pop)}}
+\DoxyCodeLine{739 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{740 }
+\DoxyCodeLine{741  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{742 }
+
+\end{DoxyCode}

@@ -1,0 +1,111 @@
+\hypertarget{juce__win32___u_i_a_helpers_8h_source}{}\doxysection{juce\+\_\+win32\+\_\+\+UIAHelpers.\+h}
+\label{juce__win32___u_i_a_helpers_8h_source}\index{build/juce\_gui\_basics/native/accessibility/juce\_win32\_UIAHelpers.h@{build/juce\_gui\_basics/native/accessibility/juce\_win32\_UIAHelpers.h}}
+\mbox{\hyperlink{juce__win32___u_i_a_helpers_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{5 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{6 \textcolor{comment}{}}
+\DoxyCodeLine{7 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{8 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{9 \textcolor{comment}{}}
+\DoxyCodeLine{10 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{11 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{12 \textcolor{comment}{}}
+\DoxyCodeLine{13 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{14 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{15 \textcolor{comment}{}}
+\DoxyCodeLine{16 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{17 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{18 \textcolor{comment}{}}
+\DoxyCodeLine{19 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{20 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{21 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{24 \textcolor{comment}{*/}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacejuce}{juce}}}
+\DoxyCodeLine{27 \{}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29 \textcolor{keyword}{namespace }VariantHelpers}
+\DoxyCodeLine{30 \{}
+\DoxyCodeLine{31     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacejuce_1_1_variant_helpers_ab93072d117b3e8da66c9a44ee915f7f6}{clear}} (VARIANT* variant)}
+\DoxyCodeLine{32     \{}
+\DoxyCodeLine{33         variant-\/>vt = VT\_EMPTY;}
+\DoxyCodeLine{34     \}}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacejuce_1_1_variant_helpers_a2dd420afa67c917469b0e2c657707d9e}{setInt}} (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}, VARIANT* variant)}
+\DoxyCodeLine{37     \{}
+\DoxyCodeLine{38         variant-\/>vt   = VT\_I4;}
+\DoxyCodeLine{39         variant-\/>lVal = \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}};}
+\DoxyCodeLine{40     \}}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacejuce_1_1_variant_helpers_a14f94352a993b0e941946d7f78fec64f}{setBool}} (\textcolor{keywordtype}{bool} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}, VARIANT* variant)}
+\DoxyCodeLine{43     \{}
+\DoxyCodeLine{44         variant-\/>vt      = VT\_BOOL;}
+\DoxyCodeLine{45         variant-\/>boolVal = \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}} ? -\/1 : 0;}
+\DoxyCodeLine{46     \}}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacejuce_1_1_variant_helpers_ad3feaf8d17b324b3dc129daea446d4f4}{setString}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}, VARIANT* variant)}
+\DoxyCodeLine{49     \{}
+\DoxyCodeLine{50         variant-\/>vt      = VT\_BSTR;}
+\DoxyCodeLine{51         variant-\/>bstrVal = SysAllocString ((\textcolor{keyword}{const} OLECHAR*) \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}.toWideCharPointer());}
+\DoxyCodeLine{52     \}}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacejuce_1_1_variant_helpers_a121f3e6f118517fe048911b1353c7e4d}{setDouble}} (\textcolor{keywordtype}{double} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}, VARIANT* variant)}
+\DoxyCodeLine{55     \{}
+\DoxyCodeLine{56         variant-\/>vt     = VT\_R8;}
+\DoxyCodeLine{57         variant-\/>dblVal = \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}};}
+\DoxyCodeLine{58     \}}
+\DoxyCodeLine{59 \}}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61 \textcolor{keyword}{inline} \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_adf7ea5b8ae4dd1bb0ef1193c5c758eba}{JUCE\_COMRESULT}} \mbox{\hyperlink{namespacejuce_af2f65a1c631a0fb627c131560f5b3d4d}{addHandlersToArray}} (\textcolor{keyword}{const} std::vector<const AccessibilityHandler*>\& handlers, SAFEARRAY** pRetVal)}
+\DoxyCodeLine{62 \{}
+\DoxyCodeLine{63     \textcolor{keyword}{auto} numHandlers = handlers.size();}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65     *pRetVal = SafeArrayCreateVector (VT\_UNKNOWN, 0, (ULONG) numHandlers);}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67     \textcolor{keywordflow}{if} (pRetVal != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{68     \{}
+\DoxyCodeLine{69         \textcolor{keywordflow}{for} (LONG i = 0; i < (LONG) numHandlers; ++i)}
+\DoxyCodeLine{70         \{}
+\DoxyCodeLine{71             \textcolor{keyword}{auto}* handler = handlers[(size\_t) i];}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73             \textcolor{keywordflow}{if} (handler == \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{74                 \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76             \mbox{\hyperlink{classjuce_1_1_com_smart_ptr}{ComSmartPtr<IRawElementProviderSimple>}} provider;}
+\DoxyCodeLine{77             \mbox{\hyperlink{group__juce__core-system_ga0112339834a6548e4123e394b9ed95e2}{JUCE\_BEGIN\_IGNORE\_WARNINGS\_GCC\_LIKE}} (\textcolor{stringliteral}{"{}-\/Wlanguage-\/extension-\/token"{}})}
+\DoxyCodeLine{78             handler-\/>getNativeImplementation()-\/>QueryInterface (IID\_PPV\_ARGS (provider.\mbox{\hyperlink{classjuce_1_1_com_smart_ptr_a719b6e40223f6be85c0ca699feefe66d}{resetAndGetPointerAddress}}()));}
+\DoxyCodeLine{79             \mbox{\hyperlink{group__juce__core-system_ga157f2229764b17137d8814bec95df109}{JUCE\_END\_IGNORE\_WARNINGS\_GCC\_LIKE}}}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81             \textcolor{keyword}{auto} hr = SafeArrayPutElement (*pRetVal, \&i, provider);}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83             \textcolor{keywordflow}{if} (FAILED (hr))}
+\DoxyCodeLine{84                 \textcolor{keywordflow}{return} E\_FAIL;}
+\DoxyCodeLine{85         \}}
+\DoxyCodeLine{86     \}}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88     \textcolor{keywordflow}{return} S\_OK;}
+\DoxyCodeLine{89 \}}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Value, \textcolor{keyword}{typename} Object, \textcolor{keyword}{typename} Callback>}
+\DoxyCodeLine{92 \textcolor{keyword}{inline} \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_adf7ea5b8ae4dd1bb0ef1193c5c758eba}{JUCE\_COMRESULT}} \mbox{\hyperlink{namespacejuce_a8bed7e9b52b4c0208d41ac6d2052d05e}{withCheckedComArgs}} (\mbox{\hyperlink{class_value}{Value}}* pRetVal, Object\& \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8530736c0c7f7f4dc724c8246e301f83}{handle}}, Callback\&\& \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}})}
+\DoxyCodeLine{93 \{}
+\DoxyCodeLine{94     \textcolor{keywordflow}{if} (pRetVal == \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{95         \textcolor{keywordflow}{return} E\_INVALIDARG;}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97     *pRetVal = \mbox{\hyperlink{class_value}{Value}}\{\};}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99     \textcolor{keywordflow}{if} (! \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8530736c0c7f7f4dc724c8246e301f83}{handle}}.isElementValid())}
+\DoxyCodeLine{100         \textcolor{keywordflow}{return} (HRESULT) UIA\_E\_ELEMENTNOTAVAILABLE;}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{102     \textcolor{keywordflow}{return} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}}();}
+\DoxyCodeLine{103 \}}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105 \} \textcolor{comment}{// namespace juce}}
+
+\end{DoxyCode}

@@ -1,0 +1,58 @@
+\hypertarget{jchuff_8h_source}{}\doxysection{jchuff.\+h}
+\label{jchuff_8h_source}\index{build/juce\_graphics/image\_formats/jpglib/jchuff.h@{build/juce\_graphics/image\_formats/jpglib/jchuff.h}}
+\mbox{\hyperlink{jchuff_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{ * jchuff.h}}
+\DoxyCodeLine{3 \textcolor{comment}{ *}}
+\DoxyCodeLine{4 \textcolor{comment}{ * Copyright (C) 1991-\/1997, Thomas G. Lane.}}
+\DoxyCodeLine{5 \textcolor{comment}{ * This file is part of the Independent JPEG Group's software.}}
+\DoxyCodeLine{6 \textcolor{comment}{ * For conditions of distribution and use, see the accompanying README file.}}
+\DoxyCodeLine{7 \textcolor{comment}{ *}}
+\DoxyCodeLine{8 \textcolor{comment}{ * This file contains declarations for Huffman entropy encoding routines}}
+\DoxyCodeLine{9 \textcolor{comment}{ * that are shared between the sequential encoder (jchuff.c) and the}}
+\DoxyCodeLine{10 \textcolor{comment}{ * progressive encoder (jcphuff.c).  No other modules need to see these.}}
+\DoxyCodeLine{11 \textcolor{comment}{ */}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{comment}{/* The legal range of a DCT coefficient is}}
+\DoxyCodeLine{14 \textcolor{comment}{ *  -\/1024 .. +1023  for 8-\/bit data;}}
+\DoxyCodeLine{15 \textcolor{comment}{ * -\/16384 .. +16383 for 12-\/bit data.}}
+\DoxyCodeLine{16 \textcolor{comment}{ * Hence the magnitude should always fit in 10 or 14 bits respectively.}}
+\DoxyCodeLine{17 \textcolor{comment}{ */}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#ifndef \_jchuff\_h\_}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#define \_jchuff\_h\_}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#if BITS\_IN\_JSAMPLE == 8}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#define MAX\_COEF\_BITS 10}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#define MAX\_COEF\_BITS 14}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{comment}{/* Derived data constructed for each Huffman table */}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\{}
+\DoxyCodeLine{31   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} ehufco[256]; \textcolor{comment}{/* code for each symbol */}}
+\DoxyCodeLine{32   \textcolor{keywordtype}{char} ehufsi[256];     \textcolor{comment}{/* length of code for each symbol */}}
+\DoxyCodeLine{33   \textcolor{comment}{/* If no code has been allocated for a symbol S, ehufsi[S] contains 0 */}}
+\DoxyCodeLine{34 \} \mbox{\hyperlink{structc__derived__tbl}{c\_derived\_tbl}};}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 \textcolor{comment}{/* Short forms of external names for systems with brain-\/damaged linkers. */}}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38 \textcolor{preprocessor}{\#ifdef NEED\_SHORT\_EXTERNAL\_NAMES}}
+\DoxyCodeLine{39 \textcolor{preprocessor}{\#define jpeg\_make\_c\_derived\_tbl jMkCDerived}}
+\DoxyCodeLine{40 \textcolor{preprocessor}{\#define jpeg\_gen\_optimal\_table  jGenOptTbl}}
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* NEED\_SHORT\_EXTERNAL\_NAMES */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43 \textcolor{comment}{/* Expand a Huffman table definition into the derived format */}}
+\DoxyCodeLine{44 \mbox{\hyperlink{jchuff_8h_a06fca0011d5ce16d59ed8b23e9a943bf}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jchuff_8c_a6ba6c9dfe4c088663cdde4f09eaf11e8}{jpeg\_make\_c\_derived\_tbl}}}
+\DoxyCodeLine{45     \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo, \textcolor{keywordtype}{boolean} \mbox{\hyperlink{jchuff_8h_a3b9fc61fd5e263607c9367d1113b842d}{isDC}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{jchuff_8h_ac15aa4f86b719988961b67992d37851a}{tblno}},}
+\DoxyCodeLine{46          \mbox{\hyperlink{structc__derived__tbl}{c\_derived\_tbl}} ** \mbox{\hyperlink{jchuff_8h_a34e4e29bfd9e8289233e0b855d4677cf}{pdtbl}}));}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48 \textcolor{comment}{/* Generate an optimal table definition given the specified counts */}}
+\DoxyCodeLine{49 \mbox{\hyperlink{jchuff_8h_a06fca0011d5ce16d59ed8b23e9a943bf}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jchuff_8c_a3f40436fc5d3ec20e1124b84e3256b93}{jpeg\_gen\_optimal\_table}}}
+\DoxyCodeLine{50     \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__compress__struct}{j\_compress\_ptr}} cinfo, \mbox{\hyperlink{struct_j_h_u_f_f___t_b_l}{JHUFF\_TBL}} * \mbox{\hyperlink{jchuff_8h_aec5b02d91c74ef2d75160a1f1e3891f2}{htbl}}, \textcolor{keywordtype}{long} \mbox{\hyperlink{jchuff_8h_a4d6507be80120e3919afbfdc34cebb3c}{freq}}[]));}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,79 @@
+\hypertarget{class_scaled_image}{}\doxysection{Scaled\+Image Class Reference}
+\label{class_scaled_image}\index{ScaledImage@{ScaledImage}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Scaled\+Image.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_scaled_image_a22c984024759542ea855ea3e750b3ca6}{Scaled\+Image}} ()=default
+\item 
+\mbox{\hyperlink{class_scaled_image_a465df234735b1d44ac7980e1a2f6b4b7}{Scaled\+Image}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_image}{Image}} \&image\+In)
+\item 
+\mbox{\hyperlink{class_scaled_image_ae8f9cd29dd2a8eee631fb09937a30faf}{Scaled\+Image}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_image}{Image}} \&image\+In, double scale\+In)
+\item 
+\mbox{\hyperlink{class_image}{Image}} \mbox{\hyperlink{class_scaled_image_a9abf607e60b70da8964acd694f2f8530}{get\+Image}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}}
+\item 
+double \mbox{\hyperlink{class_scaled_image_a3ad905371b1710c42113389a96437553}{get\+Scale}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}}
+\item 
+\mbox{\hyperlink{class_rectangle}{Rectangle}}$<$ double $>$ \mbox{\hyperlink{class_scaled_image_a1b6d4119570e1b0812acd3aadf0c23ec}{get\+Scaled\+Bounds}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+An image that will be resampled before it is drawn.
+
+A plain \mbox{\hyperlink{class_image}{Image}} only stores plain pixels, but does not store any information about how these pixels correspond to points. This means that if the image\textquotesingle{}s dimensions are interpreted as points, then the image will be blurry when drawn on high resolution displays. If the image\textquotesingle{}s dimensions are instead interpreted as corresponding to exact pixel positions, then the logical size of the image will change depending on the scale factor of the screen used to draw it.
+
+The \mbox{\hyperlink{class_scaled_image}{Scaled\+Image}} class is designed to store an image alongside a scale factor that informs a renderer how to convert between the image\textquotesingle{}s pixels and points. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_scaled_image_a22c984024759542ea855ea3e750b3ca6}\label{class_scaled_image_a22c984024759542ea855ea3e750b3ca6}} 
+\index{ScaledImage@{ScaledImage}!ScaledImage@{ScaledImage}}
+\index{ScaledImage@{ScaledImage}!ScaledImage@{ScaledImage}}
+\doxysubsubsection{\texorpdfstring{ScaledImage()}{ScaledImage()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily Scaled\+Image\+::\+Scaled\+Image (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+Creates a \mbox{\hyperlink{class_scaled_image}{Scaled\+Image}} with an invalid image and unity scale. \mbox{\Hypertarget{class_scaled_image_a465df234735b1d44ac7980e1a2f6b4b7}\label{class_scaled_image_a465df234735b1d44ac7980e1a2f6b4b7}} 
+\index{ScaledImage@{ScaledImage}!ScaledImage@{ScaledImage}}
+\index{ScaledImage@{ScaledImage}!ScaledImage@{ScaledImage}}
+\doxysubsubsection{\texorpdfstring{ScaledImage()}{ScaledImage()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily Scaled\+Image\+::\+Scaled\+Image (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_image}{Image}} \&}]{image\+In }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+Creates a \mbox{\hyperlink{class_scaled_image}{Scaled\+Image}} from an \mbox{\hyperlink{class_image}{Image}}, where the dimensions of the image in pixels are exactly equal to its dimensions in points. \mbox{\Hypertarget{class_scaled_image_ae8f9cd29dd2a8eee631fb09937a30faf}\label{class_scaled_image_ae8f9cd29dd2a8eee631fb09937a30faf}} 
+\index{ScaledImage@{ScaledImage}!ScaledImage@{ScaledImage}}
+\index{ScaledImage@{ScaledImage}!ScaledImage@{ScaledImage}}
+\doxysubsubsection{\texorpdfstring{ScaledImage()}{ScaledImage()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily Scaled\+Image\+::\+Scaled\+Image (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_image}{Image}} \&}]{image\+In,  }\item[{double}]{scale\+In }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Creates a \mbox{\hyperlink{class_scaled_image}{Scaled\+Image}} from an \mbox{\hyperlink{class_image}{Image}}, using a custom scale factor.
+
+A scale of 1.\+0 means that the image\textquotesingle{}s dimensions in pixels is equal to its dimensions in points.
+
+A scale of 2.\+0 means that the image contains 2 pixels per point in each direction. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_scaled_image_a9abf607e60b70da8964acd694f2f8530}\label{class_scaled_image_a9abf607e60b70da8964acd694f2f8530}} 
+\index{ScaledImage@{ScaledImage}!getImage@{getImage}}
+\index{getImage@{getImage}!ScaledImage@{ScaledImage}}
+\doxysubsubsection{\texorpdfstring{getImage()}{getImage()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_image}{Image}} Scaled\+Image\+::get\+Image (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns the image at its original dimensions. \mbox{\Hypertarget{class_scaled_image_a3ad905371b1710c42113389a96437553}\label{class_scaled_image_a3ad905371b1710c42113389a96437553}} 
+\index{ScaledImage@{ScaledImage}!getScale@{getScale}}
+\index{getScale@{getScale}!ScaledImage@{ScaledImage}}
+\doxysubsubsection{\texorpdfstring{getScale()}{getScale()}}
+{\footnotesize\ttfamily double Scaled\+Image\+::get\+Scale (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns the image\textquotesingle{}s scale. \mbox{\Hypertarget{class_scaled_image_a1b6d4119570e1b0812acd3aadf0c23ec}\label{class_scaled_image_a1b6d4119570e1b0812acd3aadf0c23ec}} 
+\index{ScaledImage@{ScaledImage}!getScaledBounds@{getScaledBounds}}
+\index{getScaledBounds@{getScaledBounds}!ScaledImage@{ScaledImage}}
+\doxysubsubsection{\texorpdfstring{getScaledBounds()}{getScaledBounds()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_rectangle}{Rectangle}}$<$ double $>$ Scaled\+Image\+::get\+Scaled\+Bounds (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns the bounds of this image expressed in points. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+graphics/images/\mbox{\hyperlink{juce___scaled_image_8h}{juce\+\_\+\+Scaled\+Image.\+h}}\end{DoxyCompactItemize}

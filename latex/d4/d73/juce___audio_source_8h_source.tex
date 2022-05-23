@@ -1,0 +1,84 @@
+\hypertarget{juce___audio_source_8h_source}{}\doxysection{juce\+\_\+\+Audio\+Source.\+h}
+\label{juce___audio_source_8h_source}\index{build/juce\_audio\_basics/sources/juce\_AudioSource.h@{build/juce\_audio\_basics/sources/juce\_AudioSource.h}}
+\mbox{\hyperlink{juce___audio_source_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{33 \textcolor{comment}{}\textcolor{keyword}{struct }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{struct_audio_source_channel_info}{AudioSourceChannelInfo}}}
+\DoxyCodeLine{34 \{}
+\DoxyCodeLine{36     \mbox{\hyperlink{struct_audio_source_channel_info_a8dcbde27fb2cba0a8abfc3e6e8a771c8}{AudioSourceChannelInfo}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{39     \mbox{\hyperlink{struct_audio_source_channel_info_a6a2258f06ed541e387474e3eaea2d067}{AudioSourceChannelInfo}} (\mbox{\hyperlink{class_audio_buffer}{AudioBuffer<float>}}* bufferToUse,}
+\DoxyCodeLine{40                             \textcolor{keywordtype}{int} startSampleOffset, \textcolor{keywordtype}{int} numSamplesToUse) noexcept}
+\DoxyCodeLine{41         : buffer (bufferToUse),}
+\DoxyCodeLine{42           startSample (startSampleOffset),}
+\DoxyCodeLine{43           numSamples (numSamplesToUse)}
+\DoxyCodeLine{44     \{}
+\DoxyCodeLine{45     \}}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{51     \textcolor{keyword}{explicit} \mbox{\hyperlink{struct_audio_source_channel_info_a88cb148b25fba21ebfd3ebf0f49439ec}{AudioSourceChannelInfo}} (\mbox{\hyperlink{class_audio_buffer}{AudioBuffer<float>}}\& bufferToUse) noexcept}
+\DoxyCodeLine{52         : buffer (\&bufferToUse),}
+\DoxyCodeLine{53           startSample (0),}
+\DoxyCodeLine{54           numSamples (bufferToUse.getNumSamples())}
+\DoxyCodeLine{55     \{}
+\DoxyCodeLine{56     \}}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{74     \mbox{\hyperlink{class_audio_buffer}{AudioBuffer<float>}}* \mbox{\hyperlink{struct_audio_source_channel_info_a2e5c55518a161daf6d36502e1db9f148}{buffer}};}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{78     \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_audio_source_channel_info_a42e88ccc05d4893015e2415785390259}{startSample}};}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{82     \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_audio_source_channel_info_a6669c809cf3b47afa94af63d4fa48101}{numSamples}};}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{85     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_audio_source_channel_info_a6246ca9f1f6ef86dab31fc0eeaacb7a3}{clearActiveBufferRegion}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{86 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{87         \textcolor{keywordflow}{if} (buffer != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{88             buffer-\/>clear (startSample, numSamples);}
+\DoxyCodeLine{89     \}}
+\DoxyCodeLine{90 \};}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{110 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_audio_source}{AudioSource}}}
+\DoxyCodeLine{111 \{}
+\DoxyCodeLine{112 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{113     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{115 \textcolor{comment}{}    \mbox{\hyperlink{class_audio_source_a233efec1dab609e4cd0e53bc12ad0240}{AudioSource}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117 \textcolor{keyword}{public}:}
+\DoxyCodeLine{119     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_audio_source_a86cddd324bf8401416fc38eedc01c0a8}{\string~AudioSource}}()      = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{121     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{148 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_source_a653279dbd167f70e318fd280681dbddf}{prepareToPlay}} (\textcolor{keywordtype}{int} samplesPerBlockExpected,}
+\DoxyCodeLine{149                                 \textcolor{keywordtype}{double} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}}) = 0;}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{163     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_source_a7823bf0f1c43333eed41664c7994f290}{releaseResources}}() = 0;}
+\DoxyCodeLine{164 }
+\DoxyCodeLine{177     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_source_a36fc2484ead8fb8dc03be57d09dd5735}{getNextAudioBlock}} (\textcolor{keyword}{const} \mbox{\hyperlink{struct_audio_source_channel_info}{AudioSourceChannelInfo}}\& bufferToFill) = 0;}
+\DoxyCodeLine{178 \};}
+\DoxyCodeLine{179 }
+\DoxyCodeLine{180  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{181 }
+
+\end{DoxyCode}

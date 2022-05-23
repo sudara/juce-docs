@@ -1,0 +1,198 @@
+\hypertarget{juce___affine_transform_8h_source}{}\doxysection{juce\+\_\+\+Affine\+Transform.\+h}
+\label{juce___affine_transform_8h_source}\index{build/juce\_graphics/geometry/juce\_AffineTransform.h@{build/juce\_graphics/geometry/juce\_AffineTransform.h}}
+\mbox{\hyperlink{juce___affine_transform_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{43 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_affine_transform}{AffineTransform}}  final}
+\DoxyCodeLine{44 \{}
+\DoxyCodeLine{45 \textcolor{keyword}{public}:}
+\DoxyCodeLine{46     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{48 \textcolor{comment}{}    \mbox{\hyperlink{class_affine_transform_a51ad3548029fd42b9c76e6a9c2dcdadf}{AffineTransform}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{51     \mbox{\hyperlink{class_affine_transform_a344caf55d2a49094b9008f45c450de09}{AffineTransform}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_affine_transform}{AffineTransform}}\&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{61     \mbox{\hyperlink{class_affine_transform}{AffineTransform}} (\textcolor{keywordtype}{float} mat00, \textcolor{keywordtype}{float} mat01, \textcolor{keywordtype}{float} mat02,}
+\DoxyCodeLine{62                      \textcolor{keywordtype}{float} mat10, \textcolor{keywordtype}{float} mat11, \textcolor{keywordtype}{float} mat12) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{65     \mbox{\hyperlink{class_affine_transform}{AffineTransform}}\& operator= (\textcolor{keyword}{const} \mbox{\hyperlink{class_affine_transform}{AffineTransform}}\&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{68     \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_audio_channel_layout_8cpp_ad569fbf0e2ce80e9b92caaf1cbb3c257}{operator== }}(\textcolor{keyword}{const} \mbox{\hyperlink{class_affine_transform}{AffineTransform}}\& other) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{71     \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_audio_channel_layout_8cpp_aa4ad43821a0285a3d7a5c840173f03ac}{operator!= }}(\textcolor{keyword}{const} \mbox{\hyperlink{class_affine_transform}{AffineTransform}}\& other) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{75 \textcolor{comment}{}    \textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType>}
+\DoxyCodeLine{76     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_affine_transform_ade9df23412c79acaf89f5dbdf7da6add}{transformPoint}} (ValueType\& \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, ValueType\& \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}}) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{77     \{}
+\DoxyCodeLine{78         \textcolor{keyword}{auto} oldX = \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}};}
+\DoxyCodeLine{79         \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}} = \textcolor{keyword}{static\_cast<}ValueType\textcolor{keyword}{>} (mat00 * oldX + mat01 * \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}} + mat02);}
+\DoxyCodeLine{80         \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}} = \textcolor{keyword}{static\_cast<}ValueType\textcolor{keyword}{>} (mat10 * oldX + mat11 * \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}} + mat12);}
+\DoxyCodeLine{81     \}}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{88     \textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType>}
+\DoxyCodeLine{89     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_affine_transform_a991a8c5f94062033d7a5e75dff84ff72}{transformPoints}} (ValueType\& \mbox{\hyperlink{namespacegl_a0cdc45daf9e0c16b723274598e07ade4}{x1}}, ValueType\& \mbox{\hyperlink{namespacegl_a3412c80a61c260e478b8085d4ed7a245}{y1}},}
+\DoxyCodeLine{90                           ValueType\& \mbox{\hyperlink{namespacegl_a95978d40e4513069cd0bd5b5c77d2023}{x2}}, ValueType\& \mbox{\hyperlink{namespacegl_aecde589503dc680cf0bc0572eea34a19}{y2}}) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{91     \{}
+\DoxyCodeLine{92         \textcolor{keyword}{auto} oldX1 = \mbox{\hyperlink{namespacegl_a0cdc45daf9e0c16b723274598e07ade4}{x1}}, oldX2 = \mbox{\hyperlink{namespacegl_a95978d40e4513069cd0bd5b5c77d2023}{x2}};}
+\DoxyCodeLine{93         \mbox{\hyperlink{namespacegl_a0cdc45daf9e0c16b723274598e07ade4}{x1}} = \textcolor{keyword}{static\_cast<}ValueType\textcolor{keyword}{>} (mat00 * oldX1 + mat01 * \mbox{\hyperlink{namespacegl_a3412c80a61c260e478b8085d4ed7a245}{y1}} + mat02);}
+\DoxyCodeLine{94         \mbox{\hyperlink{namespacegl_a3412c80a61c260e478b8085d4ed7a245}{y1}} = \textcolor{keyword}{static\_cast<}ValueType\textcolor{keyword}{>} (mat10 * oldX1 + mat11 * \mbox{\hyperlink{namespacegl_a3412c80a61c260e478b8085d4ed7a245}{y1}} + mat12);}
+\DoxyCodeLine{95         \mbox{\hyperlink{namespacegl_a95978d40e4513069cd0bd5b5c77d2023}{x2}} = \textcolor{keyword}{static\_cast<}ValueType\textcolor{keyword}{>} (mat00 * oldX2 + mat01 * \mbox{\hyperlink{namespacegl_aecde589503dc680cf0bc0572eea34a19}{y2}} + mat02);}
+\DoxyCodeLine{96         \mbox{\hyperlink{namespacegl_aecde589503dc680cf0bc0572eea34a19}{y2}} = \textcolor{keyword}{static\_cast<}ValueType\textcolor{keyword}{>} (mat10 * oldX2 + mat11 * \mbox{\hyperlink{namespacegl_aecde589503dc680cf0bc0572eea34a19}{y2}} + mat12);}
+\DoxyCodeLine{97     \}}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{104     \textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType>}
+\DoxyCodeLine{105     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_affine_transform_aa4083c3ff6cab1119de654554cade3b0}{transformPoints}} (ValueType\& \mbox{\hyperlink{namespacegl_a0cdc45daf9e0c16b723274598e07ade4}{x1}}, ValueType\& \mbox{\hyperlink{namespacegl_a3412c80a61c260e478b8085d4ed7a245}{y1}},}
+\DoxyCodeLine{106                           ValueType\& \mbox{\hyperlink{namespacegl_a95978d40e4513069cd0bd5b5c77d2023}{x2}}, ValueType\& \mbox{\hyperlink{namespacegl_aecde589503dc680cf0bc0572eea34a19}{y2}},}
+\DoxyCodeLine{107                           ValueType\& x3, ValueType\& y3) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{108     \{}
+\DoxyCodeLine{109         \textcolor{keyword}{auto} oldX1 = \mbox{\hyperlink{namespacegl_a0cdc45daf9e0c16b723274598e07ade4}{x1}}, oldX2 = \mbox{\hyperlink{namespacegl_a95978d40e4513069cd0bd5b5c77d2023}{x2}}, oldX3 = x3;}
+\DoxyCodeLine{110         \mbox{\hyperlink{namespacegl_a0cdc45daf9e0c16b723274598e07ade4}{x1}} = \textcolor{keyword}{static\_cast<}ValueType\textcolor{keyword}{>} (mat00 * oldX1 + mat01 * \mbox{\hyperlink{namespacegl_a3412c80a61c260e478b8085d4ed7a245}{y1}} + mat02);}
+\DoxyCodeLine{111         \mbox{\hyperlink{namespacegl_a3412c80a61c260e478b8085d4ed7a245}{y1}} = \textcolor{keyword}{static\_cast<}ValueType\textcolor{keyword}{>} (mat10 * oldX1 + mat11 * \mbox{\hyperlink{namespacegl_a3412c80a61c260e478b8085d4ed7a245}{y1}} + mat12);}
+\DoxyCodeLine{112         \mbox{\hyperlink{namespacegl_a95978d40e4513069cd0bd5b5c77d2023}{x2}} = \textcolor{keyword}{static\_cast<}ValueType\textcolor{keyword}{>} (mat00 * oldX2 + mat01 * \mbox{\hyperlink{namespacegl_aecde589503dc680cf0bc0572eea34a19}{y2}} + mat02);}
+\DoxyCodeLine{113         \mbox{\hyperlink{namespacegl_aecde589503dc680cf0bc0572eea34a19}{y2}} = \textcolor{keyword}{static\_cast<}ValueType\textcolor{keyword}{>} (mat10 * oldX2 + mat11 * \mbox{\hyperlink{namespacegl_aecde589503dc680cf0bc0572eea34a19}{y2}} + mat12);}
+\DoxyCodeLine{114         x3 = \textcolor{keyword}{static\_cast<}ValueType\textcolor{keyword}{>} (mat00 * oldX3 + mat01 * y3 + mat02);}
+\DoxyCodeLine{115         y3 = \textcolor{keyword}{static\_cast<}ValueType\textcolor{keyword}{>} (mat10 * oldX3 + mat11 * y3 + mat12);}
+\DoxyCodeLine{116     \}}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{120 \textcolor{comment}{}    \mbox{\hyperlink{class_affine_transform}{AffineTransform}} translated (\textcolor{keywordtype}{float} deltaX,}
+\DoxyCodeLine{121                                 \textcolor{keywordtype}{float} deltaY) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{124     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Po\textcolor{keywordtype}{int}Type>}
+\DoxyCodeLine{125     \mbox{\hyperlink{class_affine_transform}{AffineTransform}} \mbox{\hyperlink{class_affine_transform_a8ee639be7f28764e6b0e0c96c6402497}{translated}} (PointType delta) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{126     \{}
+\DoxyCodeLine{127         \textcolor{keywordflow}{return} translated ((\textcolor{keywordtype}{float}) delta.x, (\textcolor{keywordtype}{float}) delta.y);}
+\DoxyCodeLine{128     \}}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{131     \textcolor{keyword}{static} \mbox{\hyperlink{class_affine_transform}{AffineTransform}} translation (\textcolor{keywordtype}{float} deltaX,}
+\DoxyCodeLine{132                                         \textcolor{keywordtype}{float} deltaY) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{133 }
+\DoxyCodeLine{135     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Po\textcolor{keywordtype}{int}Type>}
+\DoxyCodeLine{136     \textcolor{keyword}{static} \mbox{\hyperlink{class_affine_transform}{AffineTransform}} \mbox{\hyperlink{class_affine_transform_a8d0852d6dba218323f747eb208ecf2cb}{translation}} (PointType delta) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{137     \{}
+\DoxyCodeLine{138         \textcolor{keywordflow}{return} translation ((\textcolor{keywordtype}{float}) delta.x, (\textcolor{keywordtype}{float}) delta.y);}
+\DoxyCodeLine{139     \}}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{142     \mbox{\hyperlink{class_affine_transform}{AffineTransform}} withAbsoluteTranslation (\textcolor{keywordtype}{float} translationX,}
+\DoxyCodeLine{143                                              \textcolor{keywordtype}{float} translationY) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{150     \mbox{\hyperlink{class_affine_transform}{AffineTransform}} rotated (\textcolor{keywordtype}{float} angleInRadians) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{157     \mbox{\hyperlink{class_affine_transform}{AffineTransform}} rotated (\textcolor{keywordtype}{float} angleInRadians,}
+\DoxyCodeLine{158                              \textcolor{keywordtype}{float} pivotX,}
+\DoxyCodeLine{159                              \textcolor{keywordtype}{float} pivotY) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{162     \textcolor{keyword}{static} \mbox{\hyperlink{class_affine_transform}{AffineTransform}} rotation (\textcolor{keywordtype}{float} angleInRadians) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{163 }
+\DoxyCodeLine{165     \textcolor{keyword}{static} \mbox{\hyperlink{class_affine_transform}{AffineTransform}} rotation (\textcolor{keywordtype}{float} angleInRadians,}
+\DoxyCodeLine{166                                      \textcolor{keywordtype}{float} pivotX,}
+\DoxyCodeLine{167                                      \textcolor{keywordtype}{float} pivotY) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{168 }
+\DoxyCodeLine{172     \mbox{\hyperlink{class_affine_transform}{AffineTransform}} scaled (\textcolor{keywordtype}{float} factorX,}
+\DoxyCodeLine{173                             \textcolor{keywordtype}{float} factorY) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{174 }
+\DoxyCodeLine{178     \mbox{\hyperlink{class_affine_transform}{AffineTransform}} scaled (\textcolor{keywordtype}{float} factor) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{179 }
+\DoxyCodeLine{183     \mbox{\hyperlink{class_affine_transform}{AffineTransform}} scaled (\textcolor{keywordtype}{float} factorX, \textcolor{keywordtype}{float} factorY,}
+\DoxyCodeLine{184                             \textcolor{keywordtype}{float} pivotX, \textcolor{keywordtype}{float} pivotY) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{185 }
+\DoxyCodeLine{187     \textcolor{keyword}{static} \mbox{\hyperlink{class_affine_transform}{AffineTransform}} \mbox{\hyperlink{namespacegl_a4f27436ebaceab481939dc1f71b047dc}{scale}} (\textcolor{keywordtype}{float} factorX,}
+\DoxyCodeLine{188                                   \textcolor{keywordtype}{float} factorY) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{189 }
+\DoxyCodeLine{191     \textcolor{keyword}{static} \mbox{\hyperlink{class_affine_transform}{AffineTransform}} \mbox{\hyperlink{namespacegl_a4f27436ebaceab481939dc1f71b047dc}{scale}} (\textcolor{keywordtype}{float} factor) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{192 }
+\DoxyCodeLine{194     \textcolor{keyword}{static} \mbox{\hyperlink{class_affine_transform}{AffineTransform}} \mbox{\hyperlink{namespacegl_a4f27436ebaceab481939dc1f71b047dc}{scale}} (\textcolor{keywordtype}{float} factorX, \textcolor{keywordtype}{float} factorY,}
+\DoxyCodeLine{195                                   \textcolor{keywordtype}{float} pivotX, \textcolor{keywordtype}{float} pivotY) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{196 }
+\DoxyCodeLine{200     \mbox{\hyperlink{class_affine_transform}{AffineTransform}} sheared (\textcolor{keywordtype}{float} shearX, \textcolor{keywordtype}{float} shearY) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{201 }
+\DoxyCodeLine{203     \textcolor{keyword}{static} \mbox{\hyperlink{class_affine_transform}{AffineTransform}} shear (\textcolor{keywordtype}{float} shearX, \textcolor{keywordtype}{float} shearY) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{204 }
+\DoxyCodeLine{208     \textcolor{keyword}{static} \mbox{\hyperlink{class_affine_transform}{AffineTransform}} verticalFlip (\textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}}) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{209 }
+\DoxyCodeLine{215     \mbox{\hyperlink{class_affine_transform}{AffineTransform}} inverted() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{216 }
+\DoxyCodeLine{223     static \mbox{\hyperlink{class_affine_transform}{AffineTransform}} fromTargetPoints (\textcolor{keywordtype}{float} x00, \textcolor{keywordtype}{float} y00,}
+\DoxyCodeLine{224                                              \textcolor{keywordtype}{float} x10, \textcolor{keywordtype}{float} y10,}
+\DoxyCodeLine{225                                              \textcolor{keywordtype}{float} x01, \textcolor{keywordtype}{float} y01) noexcept;}
+\DoxyCodeLine{226 }
+\DoxyCodeLine{228     static \mbox{\hyperlink{class_affine_transform}{AffineTransform}} fromTargetPoints (\textcolor{keywordtype}{float} sourceX1, \textcolor{keywordtype}{float} sourceY1, \textcolor{keywordtype}{float} targetX1, \textcolor{keywordtype}{float} targetY1,}
+\DoxyCodeLine{229                                              \textcolor{keywordtype}{float} sourceX2, \textcolor{keywordtype}{float} sourceY2, \textcolor{keywordtype}{float} targetX2, \textcolor{keywordtype}{float} targetY2,}
+\DoxyCodeLine{230                                              \textcolor{keywordtype}{float} sourceX3, \textcolor{keywordtype}{float} sourceY3, \textcolor{keywordtype}{float} targetX3, \textcolor{keywordtype}{float} targetY3) noexcept;}
+\DoxyCodeLine{231 }
+\DoxyCodeLine{233     template <typename PointType>}
+\DoxyCodeLine{234     static \mbox{\hyperlink{class_affine_transform}{AffineTransform}} fromTargetPoints (PointType source1, PointType \mbox{\hyperlink{namespacegl_aa62aeea4dce61cbc5fbf26e25a3670c9}{target1}},}
+\DoxyCodeLine{235                                              PointType source2, PointType \mbox{\hyperlink{namespacegl_a7a3ad7a9f8de3b0a027e41388cd5a217}{target2}},}
+\DoxyCodeLine{236                                              PointType source3, PointType \mbox{\hyperlink{namespacegl_aec49232db1bec5810efabe0c8c8c8c98}{target3}}) noexcept}
+\DoxyCodeLine{237     \{}
+\DoxyCodeLine{238         \textcolor{keywordflow}{return} fromTargetPoints (source1.x, source1.y, \mbox{\hyperlink{namespacegl_aa62aeea4dce61cbc5fbf26e25a3670c9}{target1}}.x, \mbox{\hyperlink{namespacegl_aa62aeea4dce61cbc5fbf26e25a3670c9}{target1}}.y,}
+\DoxyCodeLine{239                                  source2.x, source2.y, \mbox{\hyperlink{namespacegl_a7a3ad7a9f8de3b0a027e41388cd5a217}{target2}}.x, \mbox{\hyperlink{namespacegl_a7a3ad7a9f8de3b0a027e41388cd5a217}{target2}}.y,}
+\DoxyCodeLine{240                                  source3.x, source3.y, \mbox{\hyperlink{namespacegl_aec49232db1bec5810efabe0c8c8c8c98}{target3}}.x, \mbox{\hyperlink{namespacegl_aec49232db1bec5810efabe0c8c8c8c98}{target3}}.y);}
+\DoxyCodeLine{241     \}}
+\DoxyCodeLine{242 }
+\DoxyCodeLine{243     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{245 \textcolor{comment}{}    \mbox{\hyperlink{class_affine_transform}{AffineTransform}} followedBy (\textcolor{keyword}{const} \mbox{\hyperlink{class_affine_transform}{AffineTransform}}\& other) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{246 }
+\DoxyCodeLine{248     \textcolor{keywordtype}{bool} isIdentity() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{249 }
+\DoxyCodeLine{251     \textcolor{keywordtype}{bool} isSingularity() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{252 }
+\DoxyCodeLine{255     \textcolor{keywordtype}{bool} isOnlyTranslation() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{256 }
+\DoxyCodeLine{260     \textcolor{keywordtype}{float} getTranslationX() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                  \{ \textcolor{keywordflow}{return} mat02; \}}
+\DoxyCodeLine{261 }
+\DoxyCodeLine{265     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_affine_transform_af249bc3a5c385cdc193723cc709bc23d}{getTranslationY}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                  \{ \textcolor{keywordflow}{return} mat12; \}}
+\DoxyCodeLine{266 }
+\DoxyCodeLine{268     \textcolor{keywordtype}{float} getDeterminant() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{269 }
+\DoxyCodeLine{270     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{271    \textcolor{preprocessor}{\#ifndef DOXYGEN}}
+\DoxyCodeLine{285     [[deprecated (\textcolor{stringliteral}{"{}This method produces incorrect values for transforms containing rotations. "{}}}
+\DoxyCodeLine{286                  \textcolor{stringliteral}{"{}See the method docs for a code example on how to calculate the correct scale factor."{}})]]}
+\DoxyCodeLine{287     \textcolor{keywordtype}{float} getScaleFactor() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{288 }
+\DoxyCodeLine{289     [[deprecated ("{}If you need an identity \mbox{\hyperlink{namespacegl_afb5567981d8120d47c7dccb93e2c4db2}{transform}}, just use \mbox{\hyperlink{class_affine_transform}{AffineTransform}}() or \{\}.\textcolor{stringliteral}{"{})]]}}
+\DoxyCodeLine{290 \textcolor{stringliteral}{    static const AffineTransform identity;}}
+\DoxyCodeLine{291 \textcolor{stringliteral}{   \#endif}}
+\DoxyCodeLine{292 \textcolor{stringliteral}{}}
+\DoxyCodeLine{293 \textcolor{stringliteral}{    //==============================================================================}}
+\DoxyCodeLine{294 \textcolor{stringliteral}{    /* The transform matrix is:}}
+\DoxyCodeLine{295 \textcolor{stringliteral}{}}
+\DoxyCodeLine{296 \textcolor{stringliteral}{        (mat00 mat01 mat02)}}
+\DoxyCodeLine{297 \textcolor{stringliteral}{        (mat10 mat11 mat12)}}
+\DoxyCodeLine{298 \textcolor{stringliteral}{        (  0     0     1  )}}
+\DoxyCodeLine{299 \textcolor{stringliteral}{    */}}
+\DoxyCodeLine{300 \textcolor{stringliteral}{    float mat00 \{ 1.0f \}, mat01 \{ 0.0f \}, mat02 \{ 0.0f \};}}
+\DoxyCodeLine{301 \textcolor{stringliteral}{    float mat10 \{ 0.0f \}, mat11 \{ 1.0f \}, mat12 \{ 0.0f \};}}
+\DoxyCodeLine{302 \textcolor{stringliteral}{\};}}
+\DoxyCodeLine{303 \textcolor{stringliteral}{}}
+\DoxyCodeLine{304 \textcolor{stringliteral}{ // namespace juce}}
+\DoxyCodeLine{305 \textcolor{stringliteral}{}}
+
+\end{DoxyCode}

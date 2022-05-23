@@ -1,0 +1,113 @@
+\hypertarget{fixed_8h_source}{}\doxysection{fixed.\+h}
+\label{fixed_8h_source}\index{build/juce\_audio\_formats/codecs/flac/libFLAC/include/private/fixed.h@{build/juce\_audio\_formats/codecs/flac/libFLAC/include/private/fixed.h}}
+\mbox{\hyperlink{fixed_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/* libFLAC -\/ Free Lossless Audio Codec library}}
+\DoxyCodeLine{2 \textcolor{comment}{ * Copyright (C) 2000-\/2009  Josh Coalson}}
+\DoxyCodeLine{3 \textcolor{comment}{ * Copyright (C) 2011-\/2014  Xiph.Org Foundation}}
+\DoxyCodeLine{4 \textcolor{comment}{ *}}
+\DoxyCodeLine{5 \textcolor{comment}{ * Redistribution and use in source and binary forms, with or without}}
+\DoxyCodeLine{6 \textcolor{comment}{ * modification, are permitted provided that the following conditions}}
+\DoxyCodeLine{7 \textcolor{comment}{ * are met:}}
+\DoxyCodeLine{8 \textcolor{comment}{ *}}
+\DoxyCodeLine{9 \textcolor{comment}{ * -\/ Redistributions of source code must retain the above copyright}}
+\DoxyCodeLine{10 \textcolor{comment}{ * notice, this list of conditions and the following disclaimer.}}
+\DoxyCodeLine{11 \textcolor{comment}{ *}}
+\DoxyCodeLine{12 \textcolor{comment}{ * -\/ Redistributions in binary form must reproduce the above copyright}}
+\DoxyCodeLine{13 \textcolor{comment}{ * notice, this list of conditions and the following disclaimer in the}}
+\DoxyCodeLine{14 \textcolor{comment}{ * documentation and/or other materials provided with the distribution.}}
+\DoxyCodeLine{15 \textcolor{comment}{ *}}
+\DoxyCodeLine{16 \textcolor{comment}{ * -\/ Neither the name of the Xiph.org Foundation nor the names of its}}
+\DoxyCodeLine{17 \textcolor{comment}{ * contributors may be used to endorse or promote products derived from}}
+\DoxyCodeLine{18 \textcolor{comment}{ * this software without specific prior written permission.}}
+\DoxyCodeLine{19 \textcolor{comment}{ *}}
+\DoxyCodeLine{20 \textcolor{comment}{ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS}}
+\DoxyCodeLine{21 \textcolor{comment}{ * ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT}}
+\DoxyCodeLine{22 \textcolor{comment}{ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR}}
+\DoxyCodeLine{23 \textcolor{comment}{ * A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE FOUNDATION OR}}
+\DoxyCodeLine{24 \textcolor{comment}{ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,}}
+\DoxyCodeLine{25 \textcolor{comment}{ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,}}
+\DoxyCodeLine{26 \textcolor{comment}{ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR}}
+\DoxyCodeLine{27 \textcolor{comment}{ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF}}
+\DoxyCodeLine{28 \textcolor{comment}{ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING}}
+\DoxyCodeLine{29 \textcolor{comment}{ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS}}
+\DoxyCodeLine{30 \textcolor{comment}{ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.}}
+\DoxyCodeLine{31 \textcolor{comment}{ */}}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#ifndef FLAC\_\_PRIVATE\_\_FIXED\_H}}
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#define FLAC\_\_PRIVATE\_\_FIXED\_H}}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#ifdef HAVE\_CONFIG\_H}}
+\DoxyCodeLine{37 \textcolor{preprocessor}{\#include <config.h>}}
+\DoxyCodeLine{38 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{cpu_8h}{cpu.h}}"{}}}
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{float_8h}{float.h}}"{}}}
+\DoxyCodeLine{42 \textcolor{preprocessor}{\#include "{}../../../format.h"{}}}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44 \textcolor{comment}{/*}}
+\DoxyCodeLine{45 \textcolor{comment}{ *  FLAC\_\_fixed\_compute\_best\_predictor()}}
+\DoxyCodeLine{46 \textcolor{comment}{ *  -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{47 \textcolor{comment}{ *  Compute the best fixed predictor and the expected bits-\/per-\/sample}}
+\DoxyCodeLine{48 \textcolor{comment}{ *  of the residual signal for each order.  The \_wide() version uses}}
+\DoxyCodeLine{49 \textcolor{comment}{ *  64-\/bit integers which is statistically necessary when bits-\/per-\/}}
+\DoxyCodeLine{50 \textcolor{comment}{ *  sample + log2(blocksize) > 30}}
+\DoxyCodeLine{51 \textcolor{comment}{ *}}
+\DoxyCodeLine{52 \textcolor{comment}{ *  IN data[0,data\_len-\/1]}}
+\DoxyCodeLine{53 \textcolor{comment}{ *  IN data\_len}}
+\DoxyCodeLine{54 \textcolor{comment}{ *  OUT residual\_bits\_per\_sample[0,FLAC\_\_MAX\_FIXED\_ORDER]}}
+\DoxyCodeLine{55 \textcolor{comment}{ */}}
+\DoxyCodeLine{56 \textcolor{preprocessor}{\#ifndef FLAC\_\_INTEGER\_ONLY\_LIBRARY}}
+\DoxyCodeLine{57 \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{fixed_8h_ab36d9c4e86565776c7ede063fac119e0}{FLAC\_\_fixed\_compute\_best\_predictor}}(\textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}[], \textcolor{keywordtype}{unsigned} data\_len, \mbox{\hyperlink{float_8h_aa081c47b0e3ecaf406a6cf718768a69c}{FLAC\_\_float}} residual\_bits\_per\_sample[\mbox{\hyperlink{group__flac__format_gabd0d5d6fe71b337244712b244ae7cb0f}{FLAC\_\_MAX\_FIXED\_ORDER}}+1]);}
+\DoxyCodeLine{58 \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{fixed_8h_ac1e7d54aa1083f2e12804459a4e98836}{FLAC\_\_fixed\_compute\_best\_predictor\_wide}}(\textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}[], \textcolor{keywordtype}{unsigned} data\_len, \mbox{\hyperlink{float_8h_aa081c47b0e3ecaf406a6cf718768a69c}{FLAC\_\_float}} residual\_bits\_per\_sample[\mbox{\hyperlink{group__flac__format_gabd0d5d6fe71b337244712b244ae7cb0f}{FLAC\_\_MAX\_FIXED\_ORDER}}+1]);}
+\DoxyCodeLine{59 \textcolor{preprocessor}{\# ifndef FLAC\_\_NO\_ASM}}
+\DoxyCodeLine{60 \textcolor{preprocessor}{\#  if (defined FLAC\_\_CPU\_IA32 || defined FLAC\_\_CPU\_X86\_64) \&\& defined FLAC\_\_HAS\_X86INTRIN}}
+\DoxyCodeLine{61 \textcolor{preprocessor}{\#   ifdef FLAC\_\_SSE2\_SUPPORTED}}
+\DoxyCodeLine{62 \textcolor{keywordtype}{unsigned} FLAC\_\_fixed\_compute\_best\_predictor\_intrin\_sse2(\textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}[], \textcolor{keywordtype}{unsigned} data\_len, \mbox{\hyperlink{float_8h_aa081c47b0e3ecaf406a6cf718768a69c}{FLAC\_\_float}} residual\_bits\_per\_sample[\mbox{\hyperlink{group__flac__format_gabd0d5d6fe71b337244712b244ae7cb0f}{FLAC\_\_MAX\_FIXED\_ORDER}} + 1]);}
+\DoxyCodeLine{63 \textcolor{keywordtype}{unsigned} FLAC\_\_fixed\_compute\_best\_predictor\_wide\_intrin\_sse2(\textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}[], \textcolor{keywordtype}{unsigned} data\_len, \mbox{\hyperlink{float_8h_aa081c47b0e3ecaf406a6cf718768a69c}{FLAC\_\_float}} residual\_bits\_per\_sample[\mbox{\hyperlink{group__flac__format_gabd0d5d6fe71b337244712b244ae7cb0f}{FLAC\_\_MAX\_FIXED\_ORDER}} + 1]);}
+\DoxyCodeLine{64 \textcolor{preprocessor}{\#   endif}}
+\DoxyCodeLine{65 \textcolor{preprocessor}{\#   ifdef FLAC\_\_SSSE3\_SUPPORTED}}
+\DoxyCodeLine{66 \textcolor{keywordtype}{unsigned} FLAC\_\_fixed\_compute\_best\_predictor\_intrin\_ssse3(\textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}[], \textcolor{keywordtype}{unsigned} data\_len, \mbox{\hyperlink{float_8h_aa081c47b0e3ecaf406a6cf718768a69c}{FLAC\_\_float}} residual\_bits\_per\_sample[\mbox{\hyperlink{group__flac__format_gabd0d5d6fe71b337244712b244ae7cb0f}{FLAC\_\_MAX\_FIXED\_ORDER}}+1]);}
+\DoxyCodeLine{67 \textcolor{keywordtype}{unsigned} FLAC\_\_fixed\_compute\_best\_predictor\_wide\_intrin\_ssse3(\textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}[], \textcolor{keywordtype}{unsigned} data\_len, \mbox{\hyperlink{float_8h_aa081c47b0e3ecaf406a6cf718768a69c}{FLAC\_\_float}} residual\_bits\_per\_sample[\mbox{\hyperlink{group__flac__format_gabd0d5d6fe71b337244712b244ae7cb0f}{FLAC\_\_MAX\_FIXED\_ORDER}} + 1]);}
+\DoxyCodeLine{68 \textcolor{preprocessor}{\#   endif}}
+\DoxyCodeLine{69 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{70 \textcolor{preprocessor}{\#  if defined FLAC\_\_CPU\_IA32 \&\& defined FLAC\_\_HAS\_NASM}}
+\DoxyCodeLine{71 \textcolor{keywordtype}{unsigned} FLAC\_\_fixed\_compute\_best\_predictor\_asm\_ia32\_mmx\_cmov(\textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}[], \textcolor{keywordtype}{unsigned} data\_len, \mbox{\hyperlink{float_8h_aa081c47b0e3ecaf406a6cf718768a69c}{FLAC\_\_float}} residual\_bits\_per\_sample[\mbox{\hyperlink{group__flac__format_gabd0d5d6fe71b337244712b244ae7cb0f}{FLAC\_\_MAX\_FIXED\_ORDER}}+1]);}
+\DoxyCodeLine{72 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{73 \textcolor{preprocessor}{\# endif}}
+\DoxyCodeLine{74 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{75 \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{fixed_8h_ab36d9c4e86565776c7ede063fac119e0}{FLAC\_\_fixed\_compute\_best\_predictor}}(\textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}[], \textcolor{keywordtype}{unsigned} data\_len, FLAC\_\_fixedpoint residual\_bits\_per\_sample[\mbox{\hyperlink{group__flac__format_gabd0d5d6fe71b337244712b244ae7cb0f}{FLAC\_\_MAX\_FIXED\_ORDER}}+1]);}
+\DoxyCodeLine{76 \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{fixed_8h_ac1e7d54aa1083f2e12804459a4e98836}{FLAC\_\_fixed\_compute\_best\_predictor\_wide}}(\textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}[], \textcolor{keywordtype}{unsigned} data\_len, FLAC\_\_fixedpoint residual\_bits\_per\_sample[\mbox{\hyperlink{group__flac__format_gabd0d5d6fe71b337244712b244ae7cb0f}{FLAC\_\_MAX\_FIXED\_ORDER}}+1]);}
+\DoxyCodeLine{77 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79 \textcolor{comment}{/*}}
+\DoxyCodeLine{80 \textcolor{comment}{ *  FLAC\_\_fixed\_compute\_residual()}}
+\DoxyCodeLine{81 \textcolor{comment}{ *  -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{82 \textcolor{comment}{ *  Compute the residual signal obtained from sutracting the predicted}}
+\DoxyCodeLine{83 \textcolor{comment}{ *  signal from the original.}}
+\DoxyCodeLine{84 \textcolor{comment}{ *}}
+\DoxyCodeLine{85 \textcolor{comment}{ *  IN data[-\/order,data\_len-\/1]        original signal (NOTE THE INDICES!)}}
+\DoxyCodeLine{86 \textcolor{comment}{ *  IN data\_len                       length of original signal}}
+\DoxyCodeLine{87 \textcolor{comment}{ *  IN order <= FLAC\_\_MAX\_FIXED\_ORDER fixed-\/predictor order}}
+\DoxyCodeLine{88 \textcolor{comment}{ *  OUT residual[0,data\_len-\/1]        residual signal}}
+\DoxyCodeLine{89 \textcolor{comment}{ */}}
+\DoxyCodeLine{90 \textcolor{keywordtype}{void} \mbox{\hyperlink{fixed_8h_a838221da9e3804dc14dfb0c87b6ac455}{FLAC\_\_fixed\_compute\_residual}}(\textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}[], \textcolor{keywordtype}{unsigned} data\_len, \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}}, \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} residual[]);}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92 \textcolor{comment}{/*}}
+\DoxyCodeLine{93 \textcolor{comment}{ *  FLAC\_\_fixed\_restore\_signal()}}
+\DoxyCodeLine{94 \textcolor{comment}{ *  -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{95 \textcolor{comment}{ *  Restore the original signal by summing the residual and the}}
+\DoxyCodeLine{96 \textcolor{comment}{ *  predictor.}}
+\DoxyCodeLine{97 \textcolor{comment}{ *}}
+\DoxyCodeLine{98 \textcolor{comment}{ *  IN residual[0,data\_len-\/1]         residual signal}}
+\DoxyCodeLine{99 \textcolor{comment}{ *  IN data\_len                       length of original signal}}
+\DoxyCodeLine{100 \textcolor{comment}{ *  IN order <= FLAC\_\_MAX\_FIXED\_ORDER fixed-\/predictor order}}
+\DoxyCodeLine{101 \textcolor{comment}{ *  *** IMPORTANT: the caller must pass in the historical samples:}}
+\DoxyCodeLine{102 \textcolor{comment}{ *  IN  data[-\/order,-\/1]               previously-\/reconstructed historical samples}}
+\DoxyCodeLine{103 \textcolor{comment}{ *  OUT data[0,data\_len-\/1]            original signal}}
+\DoxyCodeLine{104 \textcolor{comment}{ */}}
+\DoxyCodeLine{105 \textcolor{keywordtype}{void} \mbox{\hyperlink{fixed_8h_a97f1c6d48aa5561a586a7c19f87387ea}{FLAC\_\_fixed\_restore\_signal}}(\textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} residual[], \textcolor{keywordtype}{unsigned} data\_len, \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}}, \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}[]);}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{107 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

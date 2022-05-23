@@ -1,0 +1,159 @@
+\hypertarget{b2_revolute_joint_8h_source}{}\doxysection{b2\+Revolute\+Joint.\+h}
+\label{b2_revolute_joint_8h_source}\index{build/juce\_box2d/box2d/Dynamics/Joints/b2RevoluteJoint.h@{build/juce\_box2d/box2d/Dynamics/Joints/b2RevoluteJoint.h}}
+\mbox{\hyperlink{b2_revolute_joint_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{* Copyright (c) 2006-\/2011 Erin Catto http://www.box2d.org}}
+\DoxyCodeLine{3 \textcolor{comment}{*}}
+\DoxyCodeLine{4 \textcolor{comment}{* This software is provided 'as-\/is', without any express or implied}}
+\DoxyCodeLine{5 \textcolor{comment}{* warranty.  In no event will the authors be held liable for any damages}}
+\DoxyCodeLine{6 \textcolor{comment}{* arising from the use of this software.}}
+\DoxyCodeLine{7 \textcolor{comment}{* Permission is granted to anyone to use this software for any purpose,}}
+\DoxyCodeLine{8 \textcolor{comment}{* including commercial applications, and to alter it and redistribute it}}
+\DoxyCodeLine{9 \textcolor{comment}{* freely, subject to the following restrictions:}}
+\DoxyCodeLine{10 \textcolor{comment}{* 1. The origin of this software must not be misrepresented; you must not}}
+\DoxyCodeLine{11 \textcolor{comment}{* claim that you wrote the original software. If you use this software}}
+\DoxyCodeLine{12 \textcolor{comment}{* in a product, an acknowledgment in the product documentation would be}}
+\DoxyCodeLine{13 \textcolor{comment}{* appreciated but is not required.}}
+\DoxyCodeLine{14 \textcolor{comment}{* 2. Altered source versions must be plainly marked as such, and must not be}}
+\DoxyCodeLine{15 \textcolor{comment}{* misrepresented as being the original software.}}
+\DoxyCodeLine{16 \textcolor{comment}{* 3. This notice may not be removed or altered from any source distribution.}}
+\DoxyCodeLine{17 \textcolor{comment}{*/}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#ifndef B2\_REVOLUTE\_JOINT\_H}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#define B2\_REVOLUTE\_JOINT\_H}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{b2_joint_8h}{b2Joint.h}}"{}}}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{35 \textcolor{keyword}{struct }\mbox{\hyperlink{structb2_revolute_joint_def}{b2RevoluteJointDef}} : \textcolor{keyword}{public} \mbox{\hyperlink{structb2_joint_def}{b2JointDef}}}
+\DoxyCodeLine{36 \{}
+\DoxyCodeLine{37     \mbox{\hyperlink{structb2_revolute_joint_def_a20296c13c3102d03eb8787e463ff63d1}{b2RevoluteJointDef}}()}
+\DoxyCodeLine{38     \{}
+\DoxyCodeLine{39         \mbox{\hyperlink{structb2_joint_def_a470f2879b24adb05facbd49f338856fb}{type}} = \mbox{\hyperlink{b2_joint_8h_a0bb202d8a286c888a11985b07b2272aba506c32e1b03b26af5f1a9ef2b885b145}{e\_revoluteJoint}};}
+\DoxyCodeLine{40         \mbox{\hyperlink{structb2_revolute_joint_def_a76337d07aa63232a7b20d50decc862ae}{localAnchorA}}.\mbox{\hyperlink{structb2_vec2_a4d61640a645e470a50b451307d8e94c3}{Set}}(0.0f, 0.0f);}
+\DoxyCodeLine{41         \mbox{\hyperlink{structb2_revolute_joint_def_a3f33bc1d9f6c22043a5ff2f1d89f04e0}{localAnchorB}}.\mbox{\hyperlink{structb2_vec2_a4d61640a645e470a50b451307d8e94c3}{Set}}(0.0f, 0.0f);}
+\DoxyCodeLine{42         \mbox{\hyperlink{structb2_revolute_joint_def_a1858d897d5fea04c5e606a1ff73f64f8}{referenceAngle}} = 0.0f;}
+\DoxyCodeLine{43         \mbox{\hyperlink{structb2_revolute_joint_def_a24d0b2638a01405c77bd1c0de3e53de8}{lowerAngle}} = 0.0f;}
+\DoxyCodeLine{44         \mbox{\hyperlink{structb2_revolute_joint_def_a692cfe333ad12afd5753a6ec54e39a66}{upperAngle}} = 0.0f;}
+\DoxyCodeLine{45         \mbox{\hyperlink{structb2_revolute_joint_def_a9fc1b67fe6d1bc31f88cc2cfd681fe30}{maxMotorTorque}} = 0.0f;}
+\DoxyCodeLine{46         \mbox{\hyperlink{structb2_revolute_joint_def_aced7cf768f4dcc3561576a39c7b92ec4}{motorSpeed}} = 0.0f;}
+\DoxyCodeLine{47         \mbox{\hyperlink{structb2_revolute_joint_def_a2eaefc5fc5caf879cfd59ebcd852b756}{enableLimit}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{48         \mbox{\hyperlink{structb2_revolute_joint_def_aa94d9e66be9f03818d0cfbd9c70b2996}{enableMotor}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{49     \}}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{53     \textcolor{keywordtype}{void} \mbox{\hyperlink{structb2_revolute_joint_def_a6401b2a663533415d032a525e4fa2806}{Initialize}}(\mbox{\hyperlink{classb2_body}{b2Body}}* \mbox{\hyperlink{structb2_joint_def_a8cd54c93da396be75a9788f2c6897f05}{bodyA}}, \mbox{\hyperlink{classb2_body}{b2Body}}* \mbox{\hyperlink{structb2_joint_def_aa4f4dee2fbcd12187b19506b60e68e3d}{bodyB}}, \textcolor{keyword}{const} \mbox{\hyperlink{structb2_vec2}{b2Vec2}}\& anchor);}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{56     \mbox{\hyperlink{structb2_vec2}{b2Vec2}} \mbox{\hyperlink{structb2_revolute_joint_def_a76337d07aa63232a7b20d50decc862ae}{localAnchorA}};}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{59     \mbox{\hyperlink{structb2_vec2}{b2Vec2}} \mbox{\hyperlink{structb2_revolute_joint_def_a3f33bc1d9f6c22043a5ff2f1d89f04e0}{localAnchorB}};}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{62     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{structb2_revolute_joint_def_a1858d897d5fea04c5e606a1ff73f64f8}{referenceAngle}};}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{65     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structb2_revolute_joint_def_a2eaefc5fc5caf879cfd59ebcd852b756}{enableLimit}};}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{68     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{structb2_revolute_joint_def_a24d0b2638a01405c77bd1c0de3e53de8}{lowerAngle}};}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{71     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{structb2_revolute_joint_def_a692cfe333ad12afd5753a6ec54e39a66}{upperAngle}};}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{74     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structb2_revolute_joint_def_aa94d9e66be9f03818d0cfbd9c70b2996}{enableMotor}};}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{77     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{structb2_revolute_joint_def_aced7cf768f4dcc3561576a39c7b92ec4}{motorSpeed}};}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{81     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{structb2_revolute_joint_def_a9fc1b67fe6d1bc31f88cc2cfd681fe30}{maxMotorTorque}};}
+\DoxyCodeLine{82 \};}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{90 \textcolor{keyword}{class }\mbox{\hyperlink{classb2_revolute_joint}{b2RevoluteJoint}} : \textcolor{keyword}{public} \mbox{\hyperlink{classb2_joint}{b2Joint}}}
+\DoxyCodeLine{91 \{}
+\DoxyCodeLine{92 \textcolor{keyword}{public}:}
+\DoxyCodeLine{93     \mbox{\hyperlink{structb2_vec2}{b2Vec2}} \mbox{\hyperlink{classb2_revolute_joint_a5c2f2baf0544e6c62b2ab3f0c9200b10}{GetAnchorA}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{94     \mbox{\hyperlink{structb2_vec2}{b2Vec2}} \mbox{\hyperlink{classb2_revolute_joint_ada46548d2167b4f9a63c0eddb7fae669}{GetAnchorB}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{97     \textcolor{keyword}{const} \mbox{\hyperlink{structb2_vec2}{b2Vec2}}\& \mbox{\hyperlink{classb2_revolute_joint_a57cd09f25994444d34733d6d0b92dab2}{GetLocalAnchorA}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classb2_revolute_joint_ad4ce801fa7bdd408b41310793e6b37f8}{m\_localAnchorA}}; \}}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{100     \textcolor{keyword}{const} \mbox{\hyperlink{structb2_vec2}{b2Vec2}}\& \mbox{\hyperlink{classb2_revolute_joint_a29897e82bb7528858ab20ff50d7c36aa}{GetLocalAnchorB}}()\textcolor{keyword}{ const  }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classb2_revolute_joint_ae206b6bcc7b6527d7d18f239d20a7ae9}{m\_localAnchorB}}; \}}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{103     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_revolute_joint_ae84b9659fe94f41f54f43d3f64ee0741}{GetReferenceAngle}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classb2_revolute_joint_a7648b770a9165ee9cd97edcf2df6ed9e}{m\_referenceAngle}}; \}}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{106     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_revolute_joint_a2a83b2276c71bf287771004838f2b507}{GetJointAngle}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{109     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_revolute_joint_a631b7bd2c72b61f03b6efc605308092f}{GetJointSpeed}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{112     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classb2_revolute_joint_a84ff9c4f82b3e7d27a4390164f81f3ab}{IsLimitEnabled}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{113 }
+\DoxyCodeLine{115     \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_revolute_joint_a56bdfdd04e906e52d0258f6a481b9093}{EnableLimit}}(\textcolor{keywordtype}{bool} flag);}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{118     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_revolute_joint_a1e34ad0cc3289d90bff8140c5d6261d2}{GetLowerLimit}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{121     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_revolute_joint_a5c30cf83116841607d4d819985732efb}{GetUpperLimit}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{124     \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_revolute_joint_a32f9393d8a6b993fd523f0f643c28107}{SetLimits}}(\mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} lower, \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} upper);}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{127     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classb2_revolute_joint_a37d5744e89991ebe01b974c4d15a21b5}{IsMotorEnabled}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{130     \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_revolute_joint_a80ed5a07d9a0e07d010808a73ffae6ff}{EnableMotor}}(\textcolor{keywordtype}{bool} flag);}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{133     \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_revolute_joint_a56f60bb1ea69048c8a455da49d62bf65}{SetMotorSpeed}}(\mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} speed);}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{136     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_revolute_joint_abb1fa43d5779a1164ddfedf6130d7ff2}{GetMotorSpeed}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{139     \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_revolute_joint_a41779d7ec05be33e6368ef00123a3581}{SetMaxMotorTorque}}(\mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} torque);}
+\DoxyCodeLine{140     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_revolute_joint_a878308eb3e299e15ac9dc88d48671d51}{GetMaxMotorTorque}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classb2_revolute_joint_a06ab30be0a455599bd3b5b6a11d6a43a}{m\_maxMotorTorque}}; \}}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{144     \mbox{\hyperlink{structb2_vec2}{b2Vec2}} \mbox{\hyperlink{classb2_revolute_joint_a75d097d273af5f15994cfa5109039ac6}{GetReactionForce}}(\mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} inv\_dt) \textcolor{keyword}{const};}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{148     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_revolute_joint_af068e495214c92316d02130ba0a568b7}{GetReactionTorque}}(\mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} inv\_dt) \textcolor{keyword}{const};}
+\DoxyCodeLine{149 }
+\DoxyCodeLine{152     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_revolute_joint_a5abafb4d0c1df642f73a5d9faf615e26}{GetMotorTorque}}(\mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} inv\_dt) \textcolor{keyword}{const};}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{155     \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_revolute_joint_aa9d88f5476c77a5c4a6ef5b2ad0d3e6f}{Dump}}();}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{157 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{158 }
+\DoxyCodeLine{159     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{classb2_joint}{b2Joint}};}
+\DoxyCodeLine{160     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{classb2_gear_joint}{b2GearJoint}};}
+\DoxyCodeLine{161 }
+\DoxyCodeLine{162     \mbox{\hyperlink{classb2_revolute_joint_a2571c1438e909fb3518de6f88bb29e01}{b2RevoluteJoint}}(\textcolor{keyword}{const} \mbox{\hyperlink{structb2_revolute_joint_def}{b2RevoluteJointDef}}* def);}
+\DoxyCodeLine{163 }
+\DoxyCodeLine{164     \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_revolute_joint_af8f5a4b3fac025f0a0e5474b81667dfb}{InitVelocityConstraints}}(\textcolor{keyword}{const} \mbox{\hyperlink{structb2_solver_data}{b2SolverData}}\& \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}});}
+\DoxyCodeLine{165     \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_revolute_joint_a9971ccf2570c9bf8c2e816aa5c0db05a}{SolveVelocityConstraints}}(\textcolor{keyword}{const} \mbox{\hyperlink{structb2_solver_data}{b2SolverData}}\& \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}});}
+\DoxyCodeLine{166     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classb2_revolute_joint_ad07e86dedb1f42c7d78129a65c0184fc}{SolvePositionConstraints}}(\textcolor{keyword}{const} \mbox{\hyperlink{structb2_solver_data}{b2SolverData}}\& \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}});}
+\DoxyCodeLine{167 }
+\DoxyCodeLine{168     \textcolor{comment}{// Solver shared}}
+\DoxyCodeLine{169     \mbox{\hyperlink{structb2_vec2}{b2Vec2}} \mbox{\hyperlink{classb2_revolute_joint_ad4ce801fa7bdd408b41310793e6b37f8}{m\_localAnchorA}};}
+\DoxyCodeLine{170     \mbox{\hyperlink{structb2_vec2}{b2Vec2}} \mbox{\hyperlink{classb2_revolute_joint_ae206b6bcc7b6527d7d18f239d20a7ae9}{m\_localAnchorB}};}
+\DoxyCodeLine{171     \mbox{\hyperlink{structb2_vec3}{b2Vec3}} \mbox{\hyperlink{classb2_revolute_joint_a00d576701b8e2ee886e9a59811b4df65}{m\_impulse}};}
+\DoxyCodeLine{172     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_revolute_joint_a9275ac791803aa38c225d06b05ecfc26}{m\_motorImpulse}};}
+\DoxyCodeLine{173 }
+\DoxyCodeLine{174     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classb2_revolute_joint_a8fcdcbfc9fd51e8b5dc98ed8ea652e13}{m\_enableMotor}};}
+\DoxyCodeLine{175     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_revolute_joint_a06ab30be0a455599bd3b5b6a11d6a43a}{m\_maxMotorTorque}};}
+\DoxyCodeLine{176     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_revolute_joint_a7b6f51d7aa4b0132b12ec1091fdebfca}{m\_motorSpeed}};}
+\DoxyCodeLine{177 }
+\DoxyCodeLine{178     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classb2_revolute_joint_adb179e134ac49c612201caa20340e090}{m\_enableLimit}};}
+\DoxyCodeLine{179     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_revolute_joint_a7648b770a9165ee9cd97edcf2df6ed9e}{m\_referenceAngle}};}
+\DoxyCodeLine{180     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_revolute_joint_a7c57732200aae93368481970731630b1}{m\_lowerAngle}};}
+\DoxyCodeLine{181     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_revolute_joint_adf7a2ab69e1e7a72697a2c9d92877c52}{m\_upperAngle}};}
+\DoxyCodeLine{182 }
+\DoxyCodeLine{183     \textcolor{comment}{// Solver temp}}
+\DoxyCodeLine{184     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} \mbox{\hyperlink{classb2_revolute_joint_a26d579c959ef4d37d07cf0f7a8c3d6a0}{m\_indexA}};}
+\DoxyCodeLine{185     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} \mbox{\hyperlink{classb2_revolute_joint_ad923769c56020325559f5c51ab3dc043}{m\_indexB}};}
+\DoxyCodeLine{186     \mbox{\hyperlink{structb2_vec2}{b2Vec2}} \mbox{\hyperlink{classb2_revolute_joint_a6e33bbf932ce95efe072326199fa30f3}{m\_rA}};}
+\DoxyCodeLine{187     \mbox{\hyperlink{structb2_vec2}{b2Vec2}} \mbox{\hyperlink{classb2_revolute_joint_afd72e453f92aa3214701a201c8f9dfe9}{m\_rB}};}
+\DoxyCodeLine{188     \mbox{\hyperlink{structb2_vec2}{b2Vec2}} \mbox{\hyperlink{classb2_revolute_joint_a70e2a385d097053453b4099094eb1154}{m\_localCenterA}};}
+\DoxyCodeLine{189     \mbox{\hyperlink{structb2_vec2}{b2Vec2}} \mbox{\hyperlink{classb2_revolute_joint_a322ec1f7c33a358db73b53ec58e3356b}{m\_localCenterB}};}
+\DoxyCodeLine{190     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_revolute_joint_a28cd428903a7c62914d3473a40857fd2}{m\_invMassA}};}
+\DoxyCodeLine{191     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_revolute_joint_a4fd153ad1fcb65084455f9884fa8b9d7}{m\_invMassB}};}
+\DoxyCodeLine{192     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_revolute_joint_a948a49144e282f7db22b1f20379c6099}{m\_invIA}};}
+\DoxyCodeLine{193     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_revolute_joint_a7c224fc59adebaa00590217ab8a2c685}{m\_invIB}};}
+\DoxyCodeLine{194     \mbox{\hyperlink{structb2_mat33}{b2Mat33}} \mbox{\hyperlink{classb2_revolute_joint_a284ae761074305d5032a2b666efb0650}{m\_mass}};            \textcolor{comment}{// effective mass for point-\/to-\/point constraint.}}
+\DoxyCodeLine{195     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_revolute_joint_aced7e455dd33ccb17a1d4ff9bb80c442}{m\_motorMass}};  \textcolor{comment}{// effective mass for motor/limit angular constraint.}}
+\DoxyCodeLine{196     \mbox{\hyperlink{b2_joint_8h_ae7784edce074221afeb010d638404443}{b2LimitState}} \mbox{\hyperlink{classb2_revolute_joint_abe77594f4773d21dabd8912d6630dc6a}{m\_limitState}};}
+\DoxyCodeLine{197 \};}
+\DoxyCodeLine{198 }
+\DoxyCodeLine{199 \textcolor{keyword}{inline} \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_revolute_joint_abb1fa43d5779a1164ddfedf6130d7ff2}{b2RevoluteJoint::GetMotorSpeed}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{200 \textcolor{keyword}{}\{}
+\DoxyCodeLine{201     \textcolor{keywordflow}{return} \mbox{\hyperlink{classb2_revolute_joint_a7b6f51d7aa4b0132b12ec1091fdebfca}{m\_motorSpeed}};}
+\DoxyCodeLine{202 \}}
+\DoxyCodeLine{203 }
+\DoxyCodeLine{204 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

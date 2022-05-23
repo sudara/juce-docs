@@ -1,0 +1,51 @@
+\hypertarget{_source_i16_caller_8h_source}{}\doxysection{Source\+I16\+Caller.\+h}
+\label{_source_i16_caller_8h_source}\index{build/juce\_audio\_devices/native/oboe/src/common/SourceI16Caller.h@{build/juce\_audio\_devices/native/oboe/src/common/SourceI16Caller.h}}
+\mbox{\hyperlink{_source_i16_caller_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{ * Copyright 2019 The Android Open Source Project}}
+\DoxyCodeLine{3 \textcolor{comment}{ *}}
+\DoxyCodeLine{4 \textcolor{comment}{ * Licensed under the Apache License, Version 2.0 (the "{}License"{});}}
+\DoxyCodeLine{5 \textcolor{comment}{ * you may not use this file except in compliance with the License.}}
+\DoxyCodeLine{6 \textcolor{comment}{ * You may obtain a copy of the License at}}
+\DoxyCodeLine{7 \textcolor{comment}{ *}}
+\DoxyCodeLine{8 \textcolor{comment}{ *      http://www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{9 \textcolor{comment}{ *}}
+\DoxyCodeLine{10 \textcolor{comment}{ * Unless required by applicable law or agreed to in writing, software}}
+\DoxyCodeLine{11 \textcolor{comment}{ * distributed under the License is distributed on an "{}AS IS"{} BASIS,}}
+\DoxyCodeLine{12 \textcolor{comment}{ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.}}
+\DoxyCodeLine{13 \textcolor{comment}{ * See the License for the specific language governing permissions and}}
+\DoxyCodeLine{14 \textcolor{comment}{ * limitations under the License.}}
+\DoxyCodeLine{15 \textcolor{comment}{ */}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#ifndef OBOE\_SOURCE\_I16\_CALLER\_H}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#define OBOE\_SOURCE\_I16\_CALLER\_H}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#include <unistd.h>}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#include <sys/types.h>}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_flow_graph_node_8h}{flowgraph/FlowGraphNode.h}}"{}}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_audio_source_caller_8h}{AudioSourceCaller.h}}"{}}}
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_fixed_block_reader_8h}{FixedBlockReader.h}}"{}}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceoboe}{oboe}} \{}
+\DoxyCodeLine{31 \textcolor{keyword}{class }\mbox{\hyperlink{classoboe_1_1_source_i16_caller}{SourceI16Caller}} : \textcolor{keyword}{public} \mbox{\hyperlink{classoboe_1_1_audio_source_caller}{AudioSourceCaller}} \{}
+\DoxyCodeLine{32 \textcolor{keyword}{public}:}
+\DoxyCodeLine{33     \mbox{\hyperlink{classoboe_1_1_source_i16_caller_ac178557d092d80cb65c7cbfa332c1eea}{SourceI16Caller}}(int32\_t channelCount, int32\_t framesPerCallback)}
+\DoxyCodeLine{34     : \mbox{\hyperlink{classoboe_1_1_audio_source_caller}{AudioSourceCaller}}(channelCount, framesPerCallback, sizeof(int16\_t)) \{}
+\DoxyCodeLine{35         mConversionBuffer = std::make\_unique<int16\_t[]>(channelCount * \mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}}.getFramesPerBuffer());}
+\DoxyCodeLine{36     \}}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38     int32\_t \mbox{\hyperlink{classoboe_1_1_source_i16_caller_ae4dfd895d3acd76eb9f272b977f22eda}{onProcess}}(int32\_t numFrames) \textcolor{keyword}{override};}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40     \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{classoboe_1_1_source_i16_caller_a26e3ca6701fc5ac99d3f4dfe5dfda601}{getName}}()\textcolor{keyword}{ override }\{}
+\DoxyCodeLine{41         \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}SourceI16Caller"{}};}
+\DoxyCodeLine{42     \}}
+\DoxyCodeLine{43 \textcolor{keyword}{private}:}
+\DoxyCodeLine{44     std::unique\_ptr<int16\_t[]>  mConversionBuffer;}
+\DoxyCodeLine{45 \};}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47 \}}
+\DoxyCodeLine{48 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//OBOE\_SOURCE\_I16\_CALLER\_H}}
+
+\end{DoxyCode}

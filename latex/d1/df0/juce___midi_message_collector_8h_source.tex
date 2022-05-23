@@ -1,0 +1,69 @@
+\hypertarget{juce___midi_message_collector_8h_source}{}\doxysection{juce\+\_\+\+Midi\+Message\+Collector.\+h}
+\label{juce___midi_message_collector_8h_source}\index{build/juce\_audio\_devices/midi\_io/juce\_MidiMessageCollector.h@{build/juce\_audio\_devices/midi\_io/juce\_MidiMessageCollector.h}}
+\mbox{\hyperlink{juce___midi_message_collector_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{39 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_midi_message_collector}{MidiMessageCollector}}    : \textcolor{keyword}{public} \mbox{\hyperlink{class_midi_keyboard_state_1_1_listener}{MidiKeyboardState::Listener}},}
+\DoxyCodeLine{40                                           \textcolor{keyword}{public} \mbox{\hyperlink{class_midi_input_callback}{MidiInputCallback}}}
+\DoxyCodeLine{41 \{}
+\DoxyCodeLine{42 \textcolor{keyword}{public}:}
+\DoxyCodeLine{43     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{45 \textcolor{comment}{}    \mbox{\hyperlink{class_midi_message_collector}{MidiMessageCollector}}();}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{48     \mbox{\hyperlink{class_midi_message_collector}{\string~MidiMessageCollector}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{56 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_midi_keyboard_state_a32ba944d0ca8e29347abb96f24e56bf1}{reset}} (\textcolor{keywordtype}{double} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}});}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{66     \textcolor{keywordtype}{void} addMessageToQueue (\textcolor{keyword}{const} \mbox{\hyperlink{class_midi_message}{MidiMessage}}\& \mbox{\hyperlink{namespacegl_a1243e1c99f08a099c7a70cc1a258034a}{message}});}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{82     \textcolor{keywordtype}{void} removeNextBlockOfMessages (\mbox{\hyperlink{class_midi_buffer}{MidiBuffer}}\& destBuffer, \textcolor{keywordtype}{int} numSamples);}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{90     \textcolor{keywordtype}{void} ensureStorageAllocated (\textcolor{keywordtype}{size\_t} bytes);}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{95 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_midi_keyboard_state_1_1_listener_a854381a64354389e0cb2c15ec1fb4b01}{handleNoteOn}} (\mbox{\hyperlink{class_midi_keyboard_state}{MidiKeyboardState}}*, \textcolor{keywordtype}{int} midiChannel, \textcolor{keywordtype}{int} midiNoteNumber, \textcolor{keywordtype}{float} velocity) \textcolor{keyword}{override};}
+\DoxyCodeLine{97     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_midi_keyboard_state_1_1_listener_aedc74bd79578cb19edba66d38e9a93cf}{handleNoteOff}} (\mbox{\hyperlink{class_midi_keyboard_state}{MidiKeyboardState}}*, \textcolor{keywordtype}{int} midiChannel, \textcolor{keywordtype}{int} midiNoteNumber, \textcolor{keywordtype}{float} velocity) \textcolor{keyword}{override};}
+\DoxyCodeLine{99     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_midi_input_callback_acdf6d7e27b96a50fe06922737f0d082e}{handleIncomingMidiMessage}} (\mbox{\hyperlink{class_midi_input}{MidiInput}}*, \textcolor{keyword}{const} \mbox{\hyperlink{class_midi_message}{MidiMessage}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101 \textcolor{keyword}{private}:}
+\DoxyCodeLine{102     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{103     \textcolor{keywordtype}{double} lastCallbackTime = 0;}
+\DoxyCodeLine{104     \mbox{\hyperlink{class_critical_section}{CriticalSection}} midiCallbackLock;}
+\DoxyCodeLine{105     \mbox{\hyperlink{class_midi_buffer}{MidiBuffer}} incomingMessages;}
+\DoxyCodeLine{106     \textcolor{keywordtype}{double} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}} = 44100.0;}
+\DoxyCodeLine{107 \textcolor{preprocessor}{   \#if JUCE\_DEBUG}}
+\DoxyCodeLine{108     \textcolor{keywordtype}{bool} hasCalledReset = \textcolor{keyword}{false};}
+\DoxyCodeLine{109 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_midi_message_collector}{MidiMessageCollector}})}
+\DoxyCodeLine{112 \};}
+\DoxyCodeLine{113 }
+\DoxyCodeLine{114  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{115 }
+
+\end{DoxyCode}

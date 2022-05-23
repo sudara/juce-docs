@@ -1,0 +1,311 @@
+\hypertarget{_c_a_atomic_8h_source}{}\doxysection{CAAtomic.\+h}
+\label{_c_a_atomic_8h_source}\index{build/juce\_audio\_plugin\_client/AU/CoreAudioUtilityClasses/CAAtomic.h@{build/juce\_audio\_plugin\_client/AU/CoreAudioUtilityClasses/CAAtomic.h}}
+\mbox{\hyperlink{_c_a_atomic_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{     File: CAAtomic.h}}
+\DoxyCodeLine{3 \textcolor{comment}{ Abstract: Part of CoreAudio Utility Classes}}
+\DoxyCodeLine{4 \textcolor{comment}{  Version: 1.1}}
+\DoxyCodeLine{5 \textcolor{comment}{}}
+\DoxyCodeLine{6 \textcolor{comment}{ Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple}}
+\DoxyCodeLine{7 \textcolor{comment}{ Inc. ("{}Apple"{}) in consideration of your agreement to the following}}
+\DoxyCodeLine{8 \textcolor{comment}{ terms, and your use, installation, modification or redistribution of}}
+\DoxyCodeLine{9 \textcolor{comment}{ this Apple software constitutes acceptance of these terms.  If you do}}
+\DoxyCodeLine{10 \textcolor{comment}{ not agree with these terms, please do not use, install, modify or}}
+\DoxyCodeLine{11 \textcolor{comment}{ redistribute this Apple software.}}
+\DoxyCodeLine{12 \textcolor{comment}{}}
+\DoxyCodeLine{13 \textcolor{comment}{ In consideration of your agreement to abide by the following terms, and}}
+\DoxyCodeLine{14 \textcolor{comment}{ subject to these terms, Apple grants you a personal, non-\/exclusive}}
+\DoxyCodeLine{15 \textcolor{comment}{ license, under Apple's copyrights in this original Apple software (the}}
+\DoxyCodeLine{16 \textcolor{comment}{ "{}Apple Software"{}), to use, reproduce, modify and redistribute the Apple}}
+\DoxyCodeLine{17 \textcolor{comment}{ Software, with or without modifications, in source and/or binary forms;}}
+\DoxyCodeLine{18 \textcolor{comment}{ provided that if you redistribute the Apple Software in its entirety and}}
+\DoxyCodeLine{19 \textcolor{comment}{ without modifications, you must retain this notice and the following}}
+\DoxyCodeLine{20 \textcolor{comment}{ text and disclaimers in all such redistributions of the Apple Software.}}
+\DoxyCodeLine{21 \textcolor{comment}{ Neither the name, trademarks, service marks or logos of Apple Inc. may}}
+\DoxyCodeLine{22 \textcolor{comment}{ be used to endorse or promote products derived from the Apple Software}}
+\DoxyCodeLine{23 \textcolor{comment}{ without specific prior written permission from Apple.  Except as}}
+\DoxyCodeLine{24 \textcolor{comment}{ expressly stated in this notice, no other rights or licenses, express or}}
+\DoxyCodeLine{25 \textcolor{comment}{ implied, are granted by Apple herein, including but not limited to any}}
+\DoxyCodeLine{26 \textcolor{comment}{ patent rights that may be infringed by your derivative works or by other}}
+\DoxyCodeLine{27 \textcolor{comment}{ works in which the Apple Software may be incorporated.}}
+\DoxyCodeLine{28 \textcolor{comment}{}}
+\DoxyCodeLine{29 \textcolor{comment}{ The Apple Software is provided by Apple on an "{}AS IS"{} basis.  APPLE}}
+\DoxyCodeLine{30 \textcolor{comment}{ MAKES NO WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION}}
+\DoxyCodeLine{31 \textcolor{comment}{ THE IMPLIED WARRANTIES OF NON-\/INFRINGEMENT, MERCHANTABILITY AND FITNESS}}
+\DoxyCodeLine{32 \textcolor{comment}{ FOR A PARTICULAR PURPOSE, REGARDING THE APPLE SOFTWARE OR ITS USE AND}}
+\DoxyCodeLine{33 \textcolor{comment}{ OPERATION ALONE OR IN COMBINATION WITH YOUR PRODUCTS.}}
+\DoxyCodeLine{34 \textcolor{comment}{}}
+\DoxyCodeLine{35 \textcolor{comment}{ IN NO EVENT SHALL APPLE BE LIABLE FOR ANY SPECIAL, INDIRECT, INCIDENTAL}}
+\DoxyCodeLine{36 \textcolor{comment}{ OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF}}
+\DoxyCodeLine{37 \textcolor{comment}{ SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS}}
+\DoxyCodeLine{38 \textcolor{comment}{ INTERRUPTION) ARISING IN ANY WAY OUT OF THE USE, REPRODUCTION,}}
+\DoxyCodeLine{39 \textcolor{comment}{ MODIFICATION AND/OR DISTRIBUTION OF THE APPLE SOFTWARE, HOWEVER CAUSED}}
+\DoxyCodeLine{40 \textcolor{comment}{ AND WHETHER UNDER THEORY OF CONTRACT, TORT (INCLUDING NEGLIGENCE),}}
+\DoxyCodeLine{41 \textcolor{comment}{ STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE}}
+\DoxyCodeLine{42 \textcolor{comment}{ POSSIBILITY OF SUCH DAMAGE.}}
+\DoxyCodeLine{43 \textcolor{comment}{}}
+\DoxyCodeLine{44 \textcolor{comment}{ Copyright (C) 2014 Apple Inc. All Rights Reserved.}}
+\DoxyCodeLine{45 \textcolor{comment}{}}
+\DoxyCodeLine{46 \textcolor{comment}{*/}}
+\DoxyCodeLine{47 \textcolor{comment}{/*}}
+\DoxyCodeLine{48 \textcolor{comment}{    This file implements all Atomic operations using Interlocked functions specified in}}
+\DoxyCodeLine{49 \textcolor{comment}{    Winbase.h}}
+\DoxyCodeLine{50 \textcolor{comment}{NOTE: According to Microsoft documentation, all Interlocked functions generates a}}
+\DoxyCodeLine{51 \textcolor{comment}{full barrier.}}
+\DoxyCodeLine{52 \textcolor{comment}{    On Windows:}}
+\DoxyCodeLine{53 \textcolor{comment}{    As the Interlocked functions returns the Old value, Extra checks and operations}}
+\DoxyCodeLine{54 \textcolor{comment}{    are made after the atomic operation to return value consistent with OSX counterparts.}}
+\DoxyCodeLine{55 \textcolor{comment}{*/}}
+\DoxyCodeLine{56 \textcolor{preprocessor}{\#ifndef \_\_CAAtomic\_h\_\_}}
+\DoxyCodeLine{57 \textcolor{preprocessor}{\#define \_\_CAAtomic\_h\_\_}}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59 \textcolor{preprocessor}{\#if TARGET\_OS\_WIN32}}
+\DoxyCodeLine{60 \textcolor{preprocessor}{    \#include <windows.h>}}
+\DoxyCodeLine{61 \textcolor{preprocessor}{    \#include <intrin.h>}}
+\DoxyCodeLine{62 \textcolor{preprocessor}{    \#pragma intrinsic(\_InterlockedOr)}}
+\DoxyCodeLine{63 \textcolor{preprocessor}{    \#pragma intrinsic(\_InterlockedAnd)}}
+\DoxyCodeLine{64 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{65 \textcolor{preprocessor}{    \#include <CoreFoundation/CFBase.h>}}
+\DoxyCodeLine{66 \textcolor{preprocessor}{    \#include <libkern/OSAtomic.h>}}
+\DoxyCodeLine{67 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{_c_a_atomic_8h_a9e845894fd5e70b0387b27587b0faa3d}{CAMemoryBarrier}}()}
+\DoxyCodeLine{70 \{}
+\DoxyCodeLine{71 \textcolor{preprocessor}{\#if TARGET\_OS\_WIN32}}
+\DoxyCodeLine{72     MemoryBarrier();}
+\DoxyCodeLine{73 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{74     OSMemoryBarrier();}
+\DoxyCodeLine{75 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{76 \}}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78 \textcolor{keyword}{inline} SInt32 \mbox{\hyperlink{_c_a_atomic_8h_ac196dfbe6c4093c7d4024b5759bd5712}{CAAtomicAdd32Barrier}}(SInt32 theAmt, \textcolor{keyword}{volatile} SInt32* theValue)}
+\DoxyCodeLine{79 \{}
+\DoxyCodeLine{80 \textcolor{preprocessor}{\#if TARGET\_OS\_WIN32}}
+\DoxyCodeLine{81     \textcolor{keywordtype}{long} lRetVal = InterlockedExchangeAdd((\textcolor{keyword}{volatile} \textcolor{keywordtype}{long}*)theValue, theAmt);}
+\DoxyCodeLine{82     \textcolor{comment}{// InterlockedExchangeAdd returns the original value which differs from OSX version.}}
+\DoxyCodeLine{83     \textcolor{comment}{// At this point the addition would have occured and hence returning the new value}}
+\DoxyCodeLine{84     \textcolor{comment}{// to keep it sync with OSX.}}
+\DoxyCodeLine{85     \textcolor{keywordflow}{return} lRetVal + theAmt;}
+\DoxyCodeLine{86 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{87     \textcolor{keywordflow}{return} OSAtomicAdd32Barrier(theAmt, (\textcolor{keyword}{volatile} int32\_t *)theValue);}
+\DoxyCodeLine{88 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{89 \}}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91 \textcolor{keyword}{inline} SInt32 \mbox{\hyperlink{_c_a_atomic_8h_aa3dddbcf16cf32b64a03f0d3bdfbc94d}{CAAtomicOr32Barrier}}(UInt32 theMask, \textcolor{keyword}{volatile} UInt32* theValue)}
+\DoxyCodeLine{92 \{}
+\DoxyCodeLine{93 \textcolor{preprocessor}{\#if TARGET\_OS\_WIN32}}
+\DoxyCodeLine{94     \textcolor{comment}{// InterlockedAnd macro is not defined in x86 platform, and hence using the intrinsic}}
+\DoxyCodeLine{95     \textcolor{comment}{// function instead.}}
+\DoxyCodeLine{96     \textcolor{keywordtype}{long} \mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}} = \_InterlockedOr((\textcolor{keyword}{volatile} \textcolor{keywordtype}{long}*)theValue, theMask);}
+\DoxyCodeLine{97     \textcolor{comment}{// \_InterlockedOr returns the original value which differs from OSX version.}}
+\DoxyCodeLine{98     \textcolor{comment}{// Returning the new value similar to OSX}}
+\DoxyCodeLine{99     \textcolor{keywordflow}{return} (SInt32)(\mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}} | theMask);}
+\DoxyCodeLine{100 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{101     \textcolor{keywordflow}{return} OSAtomicOr32Barrier(theMask, (\textcolor{keyword}{volatile} uint32\_t *)theValue);}
+\DoxyCodeLine{102 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{103 \}}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105 \textcolor{keyword}{inline} SInt32 \mbox{\hyperlink{_c_a_atomic_8h_a9482ced2046a37544379efa78cb057b0}{CAAtomicAnd32Barrier}}(UInt32 theMask, \textcolor{keyword}{volatile} UInt32* theValue)}
+\DoxyCodeLine{106 \{}
+\DoxyCodeLine{107 \textcolor{preprocessor}{\#if TARGET\_OS\_WIN32}}
+\DoxyCodeLine{108 \textcolor{comment}{// InterlockedAnd macro is not defined in x86 platform, and hence using the intrinsic}}
+\DoxyCodeLine{109 \textcolor{comment}{// function instead.}}
+\DoxyCodeLine{110     \textcolor{keywordtype}{long} \mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}} = \_InterlockedAnd((\textcolor{keyword}{volatile} \textcolor{keywordtype}{long}*)theValue, theMask);}
+\DoxyCodeLine{111     \textcolor{comment}{// \_InterlockedAnd returns the original value which differs from OSX version.}}
+\DoxyCodeLine{112     \textcolor{comment}{// Returning the new value similar to OSX}}
+\DoxyCodeLine{113     \textcolor{keywordflow}{return} (SInt32)(\mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}} \& theMask);}
+\DoxyCodeLine{114 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{115     \textcolor{keywordflow}{return} OSAtomicAnd32Barrier(theMask, (\textcolor{keyword}{volatile} uint32\_t *)theValue);}
+\DoxyCodeLine{116 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{117 \}}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{119 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_atomic_8h_ad758a4df9a61e953cf58befe86e712a2}{CAAtomicCompareAndSwap32Barrier}}(SInt32 oldValue, SInt32 newValue, \textcolor{keyword}{volatile} SInt32 *theValue)}
+\DoxyCodeLine{120 \{}
+\DoxyCodeLine{121 \textcolor{preprocessor}{\#if TARGET\_OS\_WIN32}}
+\DoxyCodeLine{122     \textcolor{comment}{// InterlockedCompareExchange returns the old value. But we need to return bool value.}}
+\DoxyCodeLine{123     \textcolor{keywordtype}{long} lRetVal = InterlockedCompareExchange((\textcolor{keyword}{volatile} \textcolor{keywordtype}{long}*)theValue, newValue, oldValue);}
+\DoxyCodeLine{124 \textcolor{comment}{// Hence we check if the new value is set and if it is we return true else false.}}
+\DoxyCodeLine{125 \textcolor{comment}{// If theValue is equal to oldValue then the swap happens. Otherwise swap doesn't happen.}}
+\DoxyCodeLine{126     \textcolor{keywordflow}{return} (oldValue == lRetVal);}
+\DoxyCodeLine{127 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{128     \textcolor{keywordflow}{return} OSAtomicCompareAndSwap32Barrier(oldValue, newValue, (\textcolor{keyword}{volatile} int32\_t *)theValue);}
+\DoxyCodeLine{129 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{130 \}}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{132 }
+\DoxyCodeLine{133 \textcolor{keyword}{inline} SInt32 \mbox{\hyperlink{_c_a_atomic_8h_a3a5194a20549651c6b82353af4f3de07}{CAAtomicIncrement32}}(\textcolor{keyword}{volatile} SInt32* theValue)}
+\DoxyCodeLine{134 \{}
+\DoxyCodeLine{135 \textcolor{preprocessor}{\#if TARGET\_OS\_WIN32}}
+\DoxyCodeLine{136     \textcolor{keywordflow}{return} (SInt32)InterlockedIncrement((\textcolor{keyword}{volatile} \textcolor{keywordtype}{long}*)theValue);}
+\DoxyCodeLine{137 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{138     \textcolor{keywordflow}{return} OSAtomicIncrement32((\textcolor{keyword}{volatile} int32\_t *)theValue);}
+\DoxyCodeLine{139 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{140 \}}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{142 \textcolor{keyword}{inline} SInt32 \mbox{\hyperlink{_c_a_atomic_8h_a94bf3063e7aad2b621ac08f27a05adbd}{CAAtomicDecrement32}}(\textcolor{keyword}{volatile} SInt32* theValue)}
+\DoxyCodeLine{143 \{}
+\DoxyCodeLine{144 \textcolor{preprocessor}{\#if TARGET\_OS\_WIN32}}
+\DoxyCodeLine{145     \textcolor{keywordflow}{return} (SInt32)InterlockedDecrement((\textcolor{keyword}{volatile} \textcolor{keywordtype}{long}*)theValue);}
+\DoxyCodeLine{146 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{147     \textcolor{keywordflow}{return} OSAtomicDecrement32((\textcolor{keyword}{volatile} int32\_t *)theValue);}
+\DoxyCodeLine{148 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{149 \}}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{151 \textcolor{keyword}{inline} SInt32 \mbox{\hyperlink{_c_a_atomic_8h_a98b348c5480474b180d36d48bd468987}{CAAtomicIncrement32Barrier}}(\textcolor{keyword}{volatile} SInt32* theValue)}
+\DoxyCodeLine{152 \{}
+\DoxyCodeLine{153 \textcolor{preprocessor}{\#if TARGET\_OS\_WIN32}}
+\DoxyCodeLine{154     \textcolor{keywordflow}{return} \mbox{\hyperlink{_c_a_atomic_8h_a3a5194a20549651c6b82353af4f3de07}{CAAtomicIncrement32}}(theValue);}
+\DoxyCodeLine{155 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{156     \textcolor{keywordflow}{return} OSAtomicIncrement32Barrier((\textcolor{keyword}{volatile} int32\_t *)theValue);}
+\DoxyCodeLine{157 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{158 \}}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160 \textcolor{keyword}{inline} SInt32 \mbox{\hyperlink{_c_a_atomic_8h_ab4a5acba7ff1f408e5ec2d155be20ba2}{CAAtomicDecrement32Barrier}}(\textcolor{keyword}{volatile} SInt32* theValue)}
+\DoxyCodeLine{161 \{}
+\DoxyCodeLine{162 \textcolor{preprocessor}{\#if TARGET\_OS\_WIN32}}
+\DoxyCodeLine{163     \textcolor{keywordflow}{return} \mbox{\hyperlink{_c_a_atomic_8h_a94bf3063e7aad2b621ac08f27a05adbd}{CAAtomicDecrement32}}(theValue);}
+\DoxyCodeLine{164 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{165     \textcolor{keywordflow}{return} OSAtomicDecrement32Barrier((\textcolor{keyword}{volatile} int32\_t *)theValue);}
+\DoxyCodeLine{166 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{167 \}}
+\DoxyCodeLine{168 }
+\DoxyCodeLine{169 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_atomic_8h_a37d0c4f9dc34254ec8f2353c67d3191b}{CAAtomicTestAndClearBarrier}}(\textcolor{keywordtype}{int} bitToClear, \textcolor{keywordtype}{void}* theAddress)}
+\DoxyCodeLine{170 \{}
+\DoxyCodeLine{171 \textcolor{preprocessor}{\#if TARGET\_OS\_WIN32}}
+\DoxyCodeLine{172     BOOL bOldVal = InterlockedBitTestAndReset((\textcolor{keywordtype}{long}*)theAddress, bitToClear);}
+\DoxyCodeLine{173     \textcolor{keywordflow}{return} (bOldVal ? \textcolor{keyword}{true} : \textcolor{keyword}{false});}
+\DoxyCodeLine{174 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{175     \textcolor{keywordflow}{return} OSAtomicTestAndClearBarrier(bitToClear, (\textcolor{keyword}{volatile} \textcolor{keywordtype}{void} *)theAddress);}
+\DoxyCodeLine{176 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{177 \}}
+\DoxyCodeLine{178 }
+\DoxyCodeLine{179 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_atomic_8h_a8ed37ffe15ebc008eddb45193322c2b2}{CAAtomicTestAndClear}}(\textcolor{keywordtype}{int} bitToClear, \textcolor{keywordtype}{void}* theAddress)}
+\DoxyCodeLine{180 \{}
+\DoxyCodeLine{181 \textcolor{preprocessor}{\#if TARGET\_OS\_WIN32}}
+\DoxyCodeLine{182     BOOL bOldVal = \mbox{\hyperlink{_c_a_atomic_8h_a37d0c4f9dc34254ec8f2353c67d3191b}{CAAtomicTestAndClearBarrier}}(bitToClear, (\textcolor{keywordtype}{long}*)theAddress);}
+\DoxyCodeLine{183     \textcolor{keywordflow}{return} (bOldVal ? \textcolor{keyword}{true} : \textcolor{keyword}{false});}
+\DoxyCodeLine{184 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{185     \textcolor{keywordflow}{return} OSAtomicTestAndClear(bitToClear, (\textcolor{keyword}{volatile} \textcolor{keywordtype}{void} *)theAddress);}
+\DoxyCodeLine{186 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{187 \}}
+\DoxyCodeLine{188 }
+\DoxyCodeLine{189 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_atomic_8h_add8610eebecaf86fff494367298a8fd3}{CAAtomicTestAndSetBarrier}}(\textcolor{keywordtype}{int} bitToSet, \textcolor{keywordtype}{void}* theAddress)}
+\DoxyCodeLine{190 \{}
+\DoxyCodeLine{191 \textcolor{preprocessor}{\#if TARGET\_OS\_WIN32}}
+\DoxyCodeLine{192     BOOL bOldVal = InterlockedBitTestAndSet((\textcolor{keywordtype}{long}*)theAddress, bitToSet);}
+\DoxyCodeLine{193     \textcolor{keywordflow}{return} (bOldVal ? \textcolor{keyword}{true} : \textcolor{keyword}{false});}
+\DoxyCodeLine{194 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{195     \textcolor{keywordflow}{return} OSAtomicTestAndSetBarrier(bitToSet, (\textcolor{keyword}{volatile} \textcolor{keywordtype}{void} *)theAddress);}
+\DoxyCodeLine{196 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{197 \}}
+\DoxyCodeLine{198 }
+\DoxyCodeLine{199 \textcolor{comment}{// int32\_t flavors -\/-\/ for C++ only since we can't overload in C}}
+\DoxyCodeLine{200 \textcolor{comment}{// CFBase.h defines SInt32 as signed int which is similar to int32\_t. If CFBase.h is included, then}}
+\DoxyCodeLine{201 \textcolor{comment}{// this will generate redefinition error. But on Mac, CFBase.h, still includes MacTypes.h where}}
+\DoxyCodeLine{202 \textcolor{comment}{// SInt32 is defined as signed long so this would work there.}}
+\DoxyCodeLine{203 \textcolor{comment}{// So in order to fix the redefinition errors, we define these functions only if MacTypes.h is included.}}
+\DoxyCodeLine{204 \textcolor{preprocessor}{\#if defined(\_\_cplusplus) \&\& defined(\_\_MACTYPES\_\_) \&\& !\_\_LP64\_\_}}
+\DoxyCodeLine{205 \textcolor{keyword}{inline} int32\_t \mbox{\hyperlink{_c_a_atomic_8h_ac196dfbe6c4093c7d4024b5759bd5712}{CAAtomicAdd32Barrier}}(int32\_t theAmt, \textcolor{keyword}{volatile} int32\_t* theValue)}
+\DoxyCodeLine{206 \{}
+\DoxyCodeLine{207     \textcolor{keywordflow}{return} \mbox{\hyperlink{_c_a_atomic_8h_ac196dfbe6c4093c7d4024b5759bd5712}{CAAtomicAdd32Barrier}}(theAmt, (\textcolor{keyword}{volatile} SInt32 *)theValue);}
+\DoxyCodeLine{208 \}}
+\DoxyCodeLine{209 }
+\DoxyCodeLine{210 \textcolor{keyword}{inline} int32\_t \mbox{\hyperlink{_c_a_atomic_8h_aa3dddbcf16cf32b64a03f0d3bdfbc94d}{CAAtomicOr32Barrier}}(uint32\_t theMask, \textcolor{keyword}{volatile} uint32\_t* theValue)}
+\DoxyCodeLine{211 \{}
+\DoxyCodeLine{212     \textcolor{keywordflow}{return} \mbox{\hyperlink{_c_a_atomic_8h_aa3dddbcf16cf32b64a03f0d3bdfbc94d}{CAAtomicOr32Barrier}}(theMask, (\textcolor{keyword}{volatile} UInt32 *)theValue);}
+\DoxyCodeLine{213 \}}
+\DoxyCodeLine{214 }
+\DoxyCodeLine{215 \textcolor{keyword}{inline} int32\_t \mbox{\hyperlink{_c_a_atomic_8h_a9482ced2046a37544379efa78cb057b0}{CAAtomicAnd32Barrier}}(uint32\_t theMask, \textcolor{keyword}{volatile} uint32\_t* theValue)}
+\DoxyCodeLine{216 \{}
+\DoxyCodeLine{217     \textcolor{keywordflow}{return} \mbox{\hyperlink{_c_a_atomic_8h_a9482ced2046a37544379efa78cb057b0}{CAAtomicAnd32Barrier}}(theMask, (\textcolor{keyword}{volatile} UInt32 *)theValue);}
+\DoxyCodeLine{218 \}}
+\DoxyCodeLine{219 }
+\DoxyCodeLine{220 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_atomic_8h_ad758a4df9a61e953cf58befe86e712a2}{CAAtomicCompareAndSwap32Barrier}}(int32\_t oldValue, int32\_t newValue, \textcolor{keyword}{volatile} int32\_t *theValue)}
+\DoxyCodeLine{221 \{}
+\DoxyCodeLine{222     \textcolor{keywordflow}{return} \mbox{\hyperlink{_c_a_atomic_8h_ad758a4df9a61e953cf58befe86e712a2}{CAAtomicCompareAndSwap32Barrier}}(oldValue, newValue, (\textcolor{keyword}{volatile} SInt32 *)theValue);}
+\DoxyCodeLine{223 \}}
+\DoxyCodeLine{224 }
+\DoxyCodeLine{225 \textcolor{keyword}{inline} int32\_t \mbox{\hyperlink{_c_a_atomic_8h_a3a5194a20549651c6b82353af4f3de07}{CAAtomicIncrement32}}(\textcolor{keyword}{volatile} int32\_t* theValue)}
+\DoxyCodeLine{226 \{}
+\DoxyCodeLine{227     \textcolor{keywordflow}{return} \mbox{\hyperlink{_c_a_atomic_8h_a3a5194a20549651c6b82353af4f3de07}{CAAtomicIncrement32}}((\textcolor{keyword}{volatile} SInt32 *)theValue);}
+\DoxyCodeLine{228 \}}
+\DoxyCodeLine{229 }
+\DoxyCodeLine{230 \textcolor{keyword}{inline} int32\_t \mbox{\hyperlink{_c_a_atomic_8h_a94bf3063e7aad2b621ac08f27a05adbd}{CAAtomicDecrement32}}(\textcolor{keyword}{volatile} int32\_t* theValue)}
+\DoxyCodeLine{231 \{}
+\DoxyCodeLine{232     \textcolor{keywordflow}{return} \mbox{\hyperlink{_c_a_atomic_8h_a94bf3063e7aad2b621ac08f27a05adbd}{CAAtomicDecrement32}}((\textcolor{keyword}{volatile} SInt32 *)theValue);}
+\DoxyCodeLine{233 \}}
+\DoxyCodeLine{234 }
+\DoxyCodeLine{235 \textcolor{keyword}{inline} int32\_t \mbox{\hyperlink{_c_a_atomic_8h_a98b348c5480474b180d36d48bd468987}{CAAtomicIncrement32Barrier}}(\textcolor{keyword}{volatile} int32\_t* theValue)}
+\DoxyCodeLine{236 \{}
+\DoxyCodeLine{237     \textcolor{keywordflow}{return} \mbox{\hyperlink{_c_a_atomic_8h_a98b348c5480474b180d36d48bd468987}{CAAtomicIncrement32Barrier}}((\textcolor{keyword}{volatile} SInt32 *)theValue);}
+\DoxyCodeLine{238 \}}
+\DoxyCodeLine{239 }
+\DoxyCodeLine{240 \textcolor{keyword}{inline} int32\_t \mbox{\hyperlink{_c_a_atomic_8h_ab4a5acba7ff1f408e5ec2d155be20ba2}{CAAtomicDecrement32Barrier}}(\textcolor{keyword}{volatile} int32\_t* theValue)}
+\DoxyCodeLine{241 \{}
+\DoxyCodeLine{242     \textcolor{keywordflow}{return} \mbox{\hyperlink{_c_a_atomic_8h_ab4a5acba7ff1f408e5ec2d155be20ba2}{CAAtomicDecrement32Barrier}}((\textcolor{keyword}{volatile} SInt32 *)theValue);}
+\DoxyCodeLine{243 \}}
+\DoxyCodeLine{244 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// \_\_cplusplus \&\& !\_\_LP64\_\_}}
+\DoxyCodeLine{245 }
+\DoxyCodeLine{246 \textcolor{preprocessor}{\#if \_\_LP64\_\_}}
+\DoxyCodeLine{247 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} CAAtomicCompareAndSwap64Barrier( int64\_t \_\_oldValue, int64\_t \_\_newValue, \textcolor{keyword}{volatile} int64\_t *\_\_theValue )}
+\DoxyCodeLine{248 \{}
+\DoxyCodeLine{249     \textcolor{keywordflow}{return} OSAtomicCompareAndSwap64Barrier(\_\_oldValue, \_\_newValue, \_\_theValue);}
+\DoxyCodeLine{250 \}}
+\DoxyCodeLine{251 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{252 }
+\DoxyCodeLine{253 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_atomic_8h_a21bae61b2895e12ea31f1bc90489de8f}{CAAtomicCompareAndSwapPtrBarrier}}(\textcolor{keywordtype}{void} *\_\_oldValue, \textcolor{keywordtype}{void} *\_\_newValue, \textcolor{keyword}{volatile} \textcolor{keywordtype}{void} ** \_\_theValue)}
+\DoxyCodeLine{254 \{}
+\DoxyCodeLine{255 \textcolor{preprocessor}{\#if \_\_LP64\_\_}}
+\DoxyCodeLine{256     \textcolor{keywordflow}{return} CAAtomicCompareAndSwap64Barrier((int64\_t)\_\_oldValue, (int64\_t)\_\_newValue, (int64\_t *)\_\_theValue);}
+\DoxyCodeLine{257 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{258     \textcolor{keywordflow}{return} \mbox{\hyperlink{_c_a_atomic_8h_ad758a4df9a61e953cf58befe86e712a2}{CAAtomicCompareAndSwap32Barrier}}((int32\_t)\_\_oldValue, (int32\_t)\_\_newValue, (int32\_t *)\_\_theValue);}
+\DoxyCodeLine{259 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{260 \}}
+\DoxyCodeLine{261 }
+\DoxyCodeLine{262 \textcolor{comment}{/* Spinlocks.  These use memory barriers as required to synchronize access to shared}}
+\DoxyCodeLine{263 \textcolor{comment}{ * memory protected by the lock.  The lock operation spins, but employs various strategies}}
+\DoxyCodeLine{264 \textcolor{comment}{ * to back off if the lock is held, making it immune to most priority-\/inversion livelocks.}}
+\DoxyCodeLine{265 \textcolor{comment}{ * The try operation immediately returns false if the lock was held, true if it took the}}
+\DoxyCodeLine{266 \textcolor{comment}{ * lock.  The convention is that unlocked is zero, locked is nonzero.}}
+\DoxyCodeLine{267 \textcolor{comment}{ */}}
+\DoxyCodeLine{268 \textcolor{preprocessor}{\#define CA\_SPINLOCK\_INIT    0}}
+\DoxyCodeLine{269 }
+\DoxyCodeLine{270 \textcolor{keyword}{typedef} int32\_t \mbox{\hyperlink{_c_a_atomic_8h_a6d30089ee8c2a4bebf1e7349ba323619}{CASpinLock}};}
+\DoxyCodeLine{271 }
+\DoxyCodeLine{272 \textcolor{keywordtype}{bool}    \mbox{\hyperlink{_c_a_atomic_8h_a51e5ed80532f06d6a7857dc3c64799cf}{CASpinLockTry}}( \textcolor{keyword}{volatile} \mbox{\hyperlink{_c_a_atomic_8h_a6d30089ee8c2a4bebf1e7349ba323619}{CASpinLock}} *\_\_lock );}
+\DoxyCodeLine{273 \textcolor{keywordtype}{void}    \mbox{\hyperlink{_c_a_atomic_8h_a1702a65eb872a4ce76bf677dc48add28}{CASpinLockLock}}( \textcolor{keyword}{volatile} \mbox{\hyperlink{_c_a_atomic_8h_a6d30089ee8c2a4bebf1e7349ba323619}{CASpinLock}} *\_\_lock );}
+\DoxyCodeLine{274 \textcolor{keywordtype}{void}    \mbox{\hyperlink{_c_a_atomic_8h_a547241c0f5549276530bac235f52a024}{CASpinLockUnlock}}( \textcolor{keyword}{volatile} \mbox{\hyperlink{_c_a_atomic_8h_a6d30089ee8c2a4bebf1e7349ba323619}{CASpinLock}} *\_\_lock );}
+\DoxyCodeLine{275 }
+\DoxyCodeLine{276 \textcolor{keyword}{inline} \textcolor{keywordtype}{void}    \mbox{\hyperlink{_c_a_atomic_8h_a1702a65eb872a4ce76bf677dc48add28}{CASpinLockLock}}( \textcolor{keyword}{volatile} \mbox{\hyperlink{_c_a_atomic_8h_a6d30089ee8c2a4bebf1e7349ba323619}{CASpinLock}} *\_\_lock )}
+\DoxyCodeLine{277 \{}
+\DoxyCodeLine{278 \textcolor{preprocessor}{\#if TARGET\_OS\_MAC}}
+\DoxyCodeLine{279     OSSpinLockLock(\_\_lock);}
+\DoxyCodeLine{280 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{281     \textcolor{keywordflow}{while} (\mbox{\hyperlink{_c_a_atomic_8h_add8610eebecaf86fff494367298a8fd3}{CAAtomicTestAndSetBarrier}}(0, (\textcolor{keywordtype}{void}*)\_\_lock))}
+\DoxyCodeLine{282         usleep(1000); \textcolor{comment}{// ???}}
+\DoxyCodeLine{283 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{284 \}}
+\DoxyCodeLine{285 }
+\DoxyCodeLine{286 \textcolor{keyword}{inline} \textcolor{keywordtype}{void}    \mbox{\hyperlink{_c_a_atomic_8h_a547241c0f5549276530bac235f52a024}{CASpinLockUnlock}}( \textcolor{keyword}{volatile} \mbox{\hyperlink{_c_a_atomic_8h_a6d30089ee8c2a4bebf1e7349ba323619}{CASpinLock}} *\_\_lock )}
+\DoxyCodeLine{287 \{}
+\DoxyCodeLine{288 \textcolor{preprocessor}{\#if TARGET\_OS\_MAC}}
+\DoxyCodeLine{289     OSSpinLockUnlock(\_\_lock);}
+\DoxyCodeLine{290 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{291     \mbox{\hyperlink{_c_a_atomic_8h_a37d0c4f9dc34254ec8f2353c67d3191b}{CAAtomicTestAndClearBarrier}}(0, (\textcolor{keywordtype}{void}*)\_\_lock);}
+\DoxyCodeLine{292 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{293 \}}
+\DoxyCodeLine{294 }
+\DoxyCodeLine{295 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool}    \mbox{\hyperlink{_c_a_atomic_8h_a51e5ed80532f06d6a7857dc3c64799cf}{CASpinLockTry}}( \textcolor{keyword}{volatile} \mbox{\hyperlink{_c_a_atomic_8h_a6d30089ee8c2a4bebf1e7349ba323619}{CASpinLock}} *\_\_lock )}
+\DoxyCodeLine{296 \{}
+\DoxyCodeLine{297 \textcolor{preprocessor}{\#if TARGET\_OS\_MAC}}
+\DoxyCodeLine{298     \textcolor{keywordflow}{return} OSSpinLockTry(\_\_lock);}
+\DoxyCodeLine{299 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{300     \textcolor{keywordflow}{return} (\mbox{\hyperlink{_c_a_atomic_8h_add8610eebecaf86fff494367298a8fd3}{CAAtomicTestAndSetBarrier}}(0, (\textcolor{keywordtype}{void}*)\_\_lock) == 0);}
+\DoxyCodeLine{301 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{302 \}}
+\DoxyCodeLine{303 }
+\DoxyCodeLine{304 }
+\DoxyCodeLine{305 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// \_\_CAAtomic\_h\_\_}}
+
+\end{DoxyCode}

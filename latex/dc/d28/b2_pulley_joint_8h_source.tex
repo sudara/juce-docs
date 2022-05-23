@@ -1,0 +1,125 @@
+\hypertarget{b2_pulley_joint_8h_source}{}\doxysection{b2\+Pulley\+Joint.\+h}
+\label{b2_pulley_joint_8h_source}\index{build/juce\_box2d/box2d/Dynamics/Joints/b2PulleyJoint.h@{build/juce\_box2d/box2d/Dynamics/Joints/b2PulleyJoint.h}}
+\mbox{\hyperlink{b2_pulley_joint_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{* Copyright (c) 2006-\/2011 Erin Catto http://www.box2d.org}}
+\DoxyCodeLine{3 \textcolor{comment}{*}}
+\DoxyCodeLine{4 \textcolor{comment}{* This software is provided 'as-\/is', without any express or implied}}
+\DoxyCodeLine{5 \textcolor{comment}{* warranty.  In no event will the authors be held liable for any damages}}
+\DoxyCodeLine{6 \textcolor{comment}{* arising from the use of this software.}}
+\DoxyCodeLine{7 \textcolor{comment}{* Permission is granted to anyone to use this software for any purpose,}}
+\DoxyCodeLine{8 \textcolor{comment}{* including commercial applications, and to alter it and redistribute it}}
+\DoxyCodeLine{9 \textcolor{comment}{* freely, subject to the following restrictions:}}
+\DoxyCodeLine{10 \textcolor{comment}{* 1. The origin of this software must not be misrepresented; you must not}}
+\DoxyCodeLine{11 \textcolor{comment}{* claim that you wrote the original software. If you use this software}}
+\DoxyCodeLine{12 \textcolor{comment}{* in a product, an acknowledgment in the product documentation would be}}
+\DoxyCodeLine{13 \textcolor{comment}{* appreciated but is not required.}}
+\DoxyCodeLine{14 \textcolor{comment}{* 2. Altered source versions must be plainly marked as such, and must not be}}
+\DoxyCodeLine{15 \textcolor{comment}{* misrepresented as being the original software.}}
+\DoxyCodeLine{16 \textcolor{comment}{* 3. This notice may not be removed or altered from any source distribution.}}
+\DoxyCodeLine{17 \textcolor{comment}{*/}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#ifndef B2\_PULLEY\_JOINT\_H}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#define B2\_PULLEY\_JOINT\_H}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{b2_joint_8h}{b2Joint.h}}"{}}}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{keyword}{const} \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{b2_pulley_joint_8h_aba070b75f7a267ec754c1e43d76169c3}{b2\_minPulleyLength}} = 2.0f;}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{28 \textcolor{keyword}{struct }\mbox{\hyperlink{structb2_pulley_joint_def}{b2PulleyJointDef}} : \textcolor{keyword}{public} \mbox{\hyperlink{structb2_joint_def}{b2JointDef}}}
+\DoxyCodeLine{29 \{}
+\DoxyCodeLine{30     \mbox{\hyperlink{structb2_pulley_joint_def_ab006bb8b7ea6bea6e0fd8cbaaacb33b0}{b2PulleyJointDef}}()}
+\DoxyCodeLine{31     \{}
+\DoxyCodeLine{32         \mbox{\hyperlink{structb2_joint_def_a470f2879b24adb05facbd49f338856fb}{type}} = \mbox{\hyperlink{b2_joint_8h_a0bb202d8a286c888a11985b07b2272abacd059f23d4360fb5c4c8c4b630d197ac}{e\_pulleyJoint}};}
+\DoxyCodeLine{33         \mbox{\hyperlink{structb2_pulley_joint_def_aae77c020ce4629ab9e03560e28aa853d}{groundAnchorA}}.\mbox{\hyperlink{structb2_vec2_a4d61640a645e470a50b451307d8e94c3}{Set}}(-\/1.0f, 1.0f);}
+\DoxyCodeLine{34         \mbox{\hyperlink{structb2_pulley_joint_def_aa412b9f3bffd1fb69ace14f9b3e03b82}{groundAnchorB}}.\mbox{\hyperlink{structb2_vec2_a4d61640a645e470a50b451307d8e94c3}{Set}}(1.0f, 1.0f);}
+\DoxyCodeLine{35         \mbox{\hyperlink{structb2_pulley_joint_def_ad7677a4ad02a6e7cb8699fc5012eac3e}{localAnchorA}}.\mbox{\hyperlink{structb2_vec2_a4d61640a645e470a50b451307d8e94c3}{Set}}(-\/1.0f, 0.0f);}
+\DoxyCodeLine{36         \mbox{\hyperlink{structb2_pulley_joint_def_aed3f9c9f5f4145ceb32e7e164de73144}{localAnchorB}}.\mbox{\hyperlink{structb2_vec2_a4d61640a645e470a50b451307d8e94c3}{Set}}(1.0f, 0.0f);}
+\DoxyCodeLine{37         \mbox{\hyperlink{structb2_pulley_joint_def_a51d945882c1d7a78af2b0e9ffb31a33b}{lengthA}} = 0.0f;}
+\DoxyCodeLine{38         \mbox{\hyperlink{structb2_pulley_joint_def_a5857d5b5b9880b6c8201ce3ee8c3eef0}{lengthB}} = 0.0f;}
+\DoxyCodeLine{39         \mbox{\hyperlink{structb2_pulley_joint_def_af35074246aeacbf239c11682642b31f5}{ratio}} = 1.0f;}
+\DoxyCodeLine{40         \mbox{\hyperlink{structb2_joint_def_aef099a1f89b64e230173b6016848ea9b}{collideConnected}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{41     \}}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{44     \textcolor{keywordtype}{void} \mbox{\hyperlink{structb2_pulley_joint_def_abef614a93562b82aa3b5f8cac17d1ce8}{Initialize}}(\mbox{\hyperlink{classb2_body}{b2Body}}* \mbox{\hyperlink{structb2_joint_def_a8cd54c93da396be75a9788f2c6897f05}{bodyA}}, \mbox{\hyperlink{classb2_body}{b2Body}}* \mbox{\hyperlink{structb2_joint_def_aa4f4dee2fbcd12187b19506b60e68e3d}{bodyB}},}
+\DoxyCodeLine{45                     \textcolor{keyword}{const} \mbox{\hyperlink{structb2_vec2}{b2Vec2}}\& \mbox{\hyperlink{structb2_pulley_joint_def_aae77c020ce4629ab9e03560e28aa853d}{groundAnchorA}}, \textcolor{keyword}{const} \mbox{\hyperlink{structb2_vec2}{b2Vec2}}\& \mbox{\hyperlink{structb2_pulley_joint_def_aa412b9f3bffd1fb69ace14f9b3e03b82}{groundAnchorB}},}
+\DoxyCodeLine{46                     \textcolor{keyword}{const} \mbox{\hyperlink{structb2_vec2}{b2Vec2}}\& anchorA, \textcolor{keyword}{const} \mbox{\hyperlink{structb2_vec2}{b2Vec2}}\& anchorB,}
+\DoxyCodeLine{47                     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{structb2_pulley_joint_def_af35074246aeacbf239c11682642b31f5}{ratio}});}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{50     \mbox{\hyperlink{structb2_vec2}{b2Vec2}} \mbox{\hyperlink{structb2_pulley_joint_def_aae77c020ce4629ab9e03560e28aa853d}{groundAnchorA}};}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{53     \mbox{\hyperlink{structb2_vec2}{b2Vec2}} \mbox{\hyperlink{structb2_pulley_joint_def_aa412b9f3bffd1fb69ace14f9b3e03b82}{groundAnchorB}};}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{56     \mbox{\hyperlink{structb2_vec2}{b2Vec2}} \mbox{\hyperlink{structb2_pulley_joint_def_ad7677a4ad02a6e7cb8699fc5012eac3e}{localAnchorA}};}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{59     \mbox{\hyperlink{structb2_vec2}{b2Vec2}} \mbox{\hyperlink{structb2_pulley_joint_def_aed3f9c9f5f4145ceb32e7e164de73144}{localAnchorB}};}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{62     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{structb2_pulley_joint_def_a51d945882c1d7a78af2b0e9ffb31a33b}{lengthA}};}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{65     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{structb2_pulley_joint_def_a5857d5b5b9880b6c8201ce3ee8c3eef0}{lengthB}};}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{68     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{structb2_pulley_joint_def_af35074246aeacbf239c11682642b31f5}{ratio}};}
+\DoxyCodeLine{69 \};}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{79 \textcolor{keyword}{class }\mbox{\hyperlink{classb2_pulley_joint}{b2PulleyJoint}} : \textcolor{keyword}{public} \mbox{\hyperlink{classb2_joint}{b2Joint}}}
+\DoxyCodeLine{80 \{}
+\DoxyCodeLine{81 \textcolor{keyword}{public}:}
+\DoxyCodeLine{82     \mbox{\hyperlink{structb2_vec2}{b2Vec2}} \mbox{\hyperlink{classb2_pulley_joint_a345a3c79dc93e30a387b97e01864e20b}{GetAnchorA}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{83     \mbox{\hyperlink{structb2_vec2}{b2Vec2}} \mbox{\hyperlink{classb2_pulley_joint_a593539f4419009c3a6e0e3718e2b1a70}{GetAnchorB}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85     \mbox{\hyperlink{structb2_vec2}{b2Vec2}} \mbox{\hyperlink{classb2_pulley_joint_a6d8fbc90079bff055acd1ecd7d9fddbc}{GetReactionForce}}(\mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} inv\_dt) \textcolor{keyword}{const};}
+\DoxyCodeLine{86     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_pulley_joint_a838b4e51ce58ddab869d0983f8cecfa8}{GetReactionTorque}}(\mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} inv\_dt) \textcolor{keyword}{const};}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{89     \mbox{\hyperlink{structb2_vec2}{b2Vec2}} \mbox{\hyperlink{classb2_pulley_joint_a082db0a3ab20f682b9c7d5f41f0cc79e}{GetGroundAnchorA}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{92     \mbox{\hyperlink{structb2_vec2}{b2Vec2}} \mbox{\hyperlink{classb2_pulley_joint_afb105270ab46c3fc3f862cab6e127971}{GetGroundAnchorB}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{95     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_pulley_joint_ac92d5def8d6d14777b255cbeea6b9c30}{GetLengthA}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{98     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_pulley_joint_a8558201dc81ba177f040ec7e12d78c8d}{GetLengthB}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{101     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_pulley_joint_a130e85a48bfe54588d15766b94e3b2b2}{GetRatio}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{104     \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_pulley_joint_ad12d0e03b5d07b2f8af1005c95c67aa2}{Dump}}();}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{106 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{108     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{classb2_joint}{b2Joint}};}
+\DoxyCodeLine{109     \mbox{\hyperlink{classb2_pulley_joint_aca1b8dc6fb05c134ccbc0423674c1867}{b2PulleyJoint}}(\textcolor{keyword}{const} \mbox{\hyperlink{structb2_pulley_joint_def}{b2PulleyJointDef}}* \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}});}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111     \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_pulley_joint_a1b339ba58e82261beeb55f9ab04cfa7e}{InitVelocityConstraints}}(\textcolor{keyword}{const} \mbox{\hyperlink{structb2_solver_data}{b2SolverData}}\& \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}});}
+\DoxyCodeLine{112     \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_pulley_joint_a517858e93e24f3daa51be4873b22c2c3}{SolveVelocityConstraints}}(\textcolor{keyword}{const} \mbox{\hyperlink{structb2_solver_data}{b2SolverData}}\& \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}});}
+\DoxyCodeLine{113     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classb2_pulley_joint_a8fcdd728e02b7c89372bf11b7732d976}{SolvePositionConstraints}}(\textcolor{keyword}{const} \mbox{\hyperlink{structb2_solver_data}{b2SolverData}}\& \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}});}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115     \mbox{\hyperlink{structb2_vec2}{b2Vec2}} \mbox{\hyperlink{classb2_pulley_joint_a13456d1c62a4e96e8247988152be4166}{m\_groundAnchorA}};}
+\DoxyCodeLine{116     \mbox{\hyperlink{structb2_vec2}{b2Vec2}} \mbox{\hyperlink{classb2_pulley_joint_a9cc8195bf4e2d53606db0b49d9fc1cbc}{m\_groundAnchorB}};}
+\DoxyCodeLine{117     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_pulley_joint_a26f2565f804692553e6b96e58621dbc9}{m\_lengthA}};}
+\DoxyCodeLine{118     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_pulley_joint_aa44e84a3eed2ded26fca07281e247bbd}{m\_lengthB}};}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120     \textcolor{comment}{// Solver shared}}
+\DoxyCodeLine{121     \mbox{\hyperlink{structb2_vec2}{b2Vec2}} \mbox{\hyperlink{classb2_pulley_joint_a58cb3464ba25236e316b35d66e92366f}{m\_localAnchorA}};}
+\DoxyCodeLine{122     \mbox{\hyperlink{structb2_vec2}{b2Vec2}} \mbox{\hyperlink{classb2_pulley_joint_af643cf90fb22709fe410164d8a46ea50}{m\_localAnchorB}};}
+\DoxyCodeLine{123     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_pulley_joint_a0e73d1d31126331267a1661beb146bc7}{m\_constant}};}
+\DoxyCodeLine{124     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_pulley_joint_aa44594b9b4826c565da387bed5f02470}{m\_ratio}};}
+\DoxyCodeLine{125     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_pulley_joint_a1e5b5fff8b1564688b38d139c5f7c65a}{m\_impulse}};}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{127     \textcolor{comment}{// Solver temp}}
+\DoxyCodeLine{128     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} \mbox{\hyperlink{classb2_pulley_joint_a4edd6c6555627008808966e32174cd22}{m\_indexA}};}
+\DoxyCodeLine{129     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} \mbox{\hyperlink{classb2_pulley_joint_aa97c10f48332f306f9036863d62aabbd}{m\_indexB}};}
+\DoxyCodeLine{130     \mbox{\hyperlink{structb2_vec2}{b2Vec2}} \mbox{\hyperlink{classb2_pulley_joint_a8b49167603509d296aa8d04e46b13658}{m\_uA}};}
+\DoxyCodeLine{131     \mbox{\hyperlink{structb2_vec2}{b2Vec2}} \mbox{\hyperlink{classb2_pulley_joint_a1354dfebc4658560b9d7e4b447b1dd5e}{m\_uB}};}
+\DoxyCodeLine{132     \mbox{\hyperlink{structb2_vec2}{b2Vec2}} \mbox{\hyperlink{classb2_pulley_joint_a4ebd669d4856b0c6d1d6f76d7a9eae2d}{m\_rA}};}
+\DoxyCodeLine{133     \mbox{\hyperlink{structb2_vec2}{b2Vec2}} \mbox{\hyperlink{classb2_pulley_joint_a6be5e9ad2eeaee5cf25e1df61d923a58}{m\_rB}};}
+\DoxyCodeLine{134     \mbox{\hyperlink{structb2_vec2}{b2Vec2}} \mbox{\hyperlink{classb2_pulley_joint_a82741929b0aa083f520a3d7f9ef675bb}{m\_localCenterA}};}
+\DoxyCodeLine{135     \mbox{\hyperlink{structb2_vec2}{b2Vec2}} \mbox{\hyperlink{classb2_pulley_joint_abd382cd6772fa3be1958c4845369f6c3}{m\_localCenterB}};}
+\DoxyCodeLine{136     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_pulley_joint_a7c37029c6b7117a07bb8be552b44ee3f}{m\_invMassA}};}
+\DoxyCodeLine{137     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_pulley_joint_ad4e470cbc2e9f596c93e144630657534}{m\_invMassB}};}
+\DoxyCodeLine{138     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_pulley_joint_a701fbc685109f5b397b968be2407b123}{m\_invIA}};}
+\DoxyCodeLine{139     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_pulley_joint_a19278e2f7dcec7275aff55b1d760b398}{m\_invIB}};}
+\DoxyCodeLine{140     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_pulley_joint_a60efdc42d9fd8f4c50f96eb68ff3f191}{m\_mass}};}
+\DoxyCodeLine{141 \};}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{143 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

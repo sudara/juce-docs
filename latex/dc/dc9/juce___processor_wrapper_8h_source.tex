@@ -1,0 +1,70 @@
+\hypertarget{juce___processor_wrapper_8h_source}{}\doxysection{juce\+\_\+\+Processor\+Wrapper.\+h}
+\label{juce___processor_wrapper_8h_source}\index{build/juce\_dsp/processors/juce\_ProcessorWrapper.h@{build/juce\_dsp/processors/juce\_ProcessorWrapper.h}}
+\mbox{\hyperlink{juce___processor_wrapper_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacedsp}{dsp}}}
+\DoxyCodeLine{30 \{}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{41 \textcolor{keyword}{struct }\mbox{\hyperlink{structdsp_1_1_processor_base}{ProcessorBase}}}
+\DoxyCodeLine{42 \{}
+\DoxyCodeLine{43     \mbox{\hyperlink{structdsp_1_1_processor_base_aa1a04bedc3c6389e2118d940e0d7eaaa}{ProcessorBase}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{44     \textcolor{keyword}{virtual} \mbox{\hyperlink{structdsp_1_1_processor_base_a1ab2784775a727cb637e4a4b74514e26}{\string~ProcessorBase}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{structdsp_1_1_processor_base_ac7c1eac1c7cb1e6cafa746ec8f1bf7c9}{prepare}} (\textcolor{keyword}{const} \mbox{\hyperlink{structdsp_1_1_process_spec}{ProcessSpec}}\&)  = 0;}
+\DoxyCodeLine{47     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{structdsp_1_1_processor_base_abf8edab1a15d1e7d38fc473f645ba681}{process}} (\textcolor{keyword}{const} \mbox{\hyperlink{structdsp_1_1_process_context_replacing}{ProcessContextReplacing<float>}}\&) = 0;}
+\DoxyCodeLine{48     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{structdsp_1_1_processor_base_a5cd1696045ef2b6060242d6d72d5c3ec}{reset}}() = 0;}
+\DoxyCodeLine{49 \};}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{60 \textcolor{comment}{}\textcolor{keyword}{template} <\textcolor{keyword}{typename} ProcessorType>}
+\DoxyCodeLine{61 \textcolor{keyword}{struct }\mbox{\hyperlink{structdsp_1_1_processor_wrapper}{ProcessorWrapper}}  : \textcolor{keyword}{public} \mbox{\hyperlink{structdsp_1_1_processor_base}{ProcessorBase}}}
+\DoxyCodeLine{62 \{}
+\DoxyCodeLine{63     \textcolor{keywordtype}{void} \mbox{\hyperlink{structdsp_1_1_processor_wrapper_ad91c7dbc203b67262c0e3150e3c24ecd}{prepare}} (\textcolor{keyword}{const} \mbox{\hyperlink{structdsp_1_1_process_spec}{ProcessSpec}}\& spec)\textcolor{keyword}{ override}}
+\DoxyCodeLine{64 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{65         \mbox{\hyperlink{structdsp_1_1_processor_wrapper_aff7894dc51aa6a49f01545d9d32fe3f5}{processor}}.prepare (spec);}
+\DoxyCodeLine{66     \}}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68     \textcolor{keywordtype}{void} \mbox{\hyperlink{structdsp_1_1_processor_wrapper_a70086afdda109c843e74e6fed09e29bf}{process}} (\textcolor{keyword}{const} \mbox{\hyperlink{structdsp_1_1_process_context_replacing}{ProcessContextReplacing<float>}}\& context)\textcolor{keyword}{ override}}
+\DoxyCodeLine{69 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{70         \mbox{\hyperlink{structdsp_1_1_processor_wrapper_aff7894dc51aa6a49f01545d9d32fe3f5}{processor}}.process (context);}
+\DoxyCodeLine{71     \}}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73     \textcolor{keywordtype}{void} \mbox{\hyperlink{structdsp_1_1_processor_wrapper_af42d452bd6e8b53b4dac65cbc5478447}{reset}}()\textcolor{keyword}{ override}}
+\DoxyCodeLine{74 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{75         \mbox{\hyperlink{structdsp_1_1_processor_wrapper_aff7894dc51aa6a49f01545d9d32fe3f5}{processor}}.reset();}
+\DoxyCodeLine{76     \}}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78     ProcessorType \mbox{\hyperlink{structdsp_1_1_processor_wrapper_aff7894dc51aa6a49f01545d9d32fe3f5}{processor}};}
+\DoxyCodeLine{79 \};}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81 \} \textcolor{comment}{// namespace dsp}}
+\DoxyCodeLine{82  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{83 }
+
+\end{DoxyCode}

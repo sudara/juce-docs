@@ -1,0 +1,335 @@
+\hypertarget{_component_base_8h_source}{}\doxysection{Component\+Base.\+h}
+\label{_component_base_8h_source}\index{build/juce\_audio\_plugin\_client/AU/CoreAudioUtilityClasses/ComponentBase.h@{build/juce\_audio\_plugin\_client/AU/CoreAudioUtilityClasses/ComponentBase.h}}
+\mbox{\hyperlink{_component_base_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{     File: ComponentBase.h}}
+\DoxyCodeLine{3 \textcolor{comment}{ Abstract: Part of CoreAudio Utility Classes}}
+\DoxyCodeLine{4 \textcolor{comment}{  Version: 1.1}}
+\DoxyCodeLine{5 \textcolor{comment}{}}
+\DoxyCodeLine{6 \textcolor{comment}{ Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple}}
+\DoxyCodeLine{7 \textcolor{comment}{ Inc. ("{}Apple"{}) in consideration of your agreement to the following}}
+\DoxyCodeLine{8 \textcolor{comment}{ terms, and your use, installation, modification or redistribution of}}
+\DoxyCodeLine{9 \textcolor{comment}{ this Apple software constitutes acceptance of these terms.  If you do}}
+\DoxyCodeLine{10 \textcolor{comment}{ not agree with these terms, please do not use, install, modify or}}
+\DoxyCodeLine{11 \textcolor{comment}{ redistribute this Apple software.}}
+\DoxyCodeLine{12 \textcolor{comment}{}}
+\DoxyCodeLine{13 \textcolor{comment}{ In consideration of your agreement to abide by the following terms, and}}
+\DoxyCodeLine{14 \textcolor{comment}{ subject to these terms, Apple grants you a personal, non-\/exclusive}}
+\DoxyCodeLine{15 \textcolor{comment}{ license, under Apple's copyrights in this original Apple software (the}}
+\DoxyCodeLine{16 \textcolor{comment}{ "{}Apple Software"{}), to use, reproduce, modify and redistribute the Apple}}
+\DoxyCodeLine{17 \textcolor{comment}{ Software, with or without modifications, in source and/or binary forms;}}
+\DoxyCodeLine{18 \textcolor{comment}{ provided that if you redistribute the Apple Software in its entirety and}}
+\DoxyCodeLine{19 \textcolor{comment}{ without modifications, you must retain this notice and the following}}
+\DoxyCodeLine{20 \textcolor{comment}{ text and disclaimers in all such redistributions of the Apple Software.}}
+\DoxyCodeLine{21 \textcolor{comment}{ Neither the name, trademarks, service marks or logos of Apple Inc. may}}
+\DoxyCodeLine{22 \textcolor{comment}{ be used to endorse or promote products derived from the Apple Software}}
+\DoxyCodeLine{23 \textcolor{comment}{ without specific prior written permission from Apple.  Except as}}
+\DoxyCodeLine{24 \textcolor{comment}{ expressly stated in this notice, no other rights or licenses, express or}}
+\DoxyCodeLine{25 \textcolor{comment}{ implied, are granted by Apple herein, including but not limited to any}}
+\DoxyCodeLine{26 \textcolor{comment}{ patent rights that may be infringed by your derivative works or by other}}
+\DoxyCodeLine{27 \textcolor{comment}{ works in which the Apple Software may be incorporated.}}
+\DoxyCodeLine{28 \textcolor{comment}{}}
+\DoxyCodeLine{29 \textcolor{comment}{ The Apple Software is provided by Apple on an "{}AS IS"{} basis.  APPLE}}
+\DoxyCodeLine{30 \textcolor{comment}{ MAKES NO WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION}}
+\DoxyCodeLine{31 \textcolor{comment}{ THE IMPLIED WARRANTIES OF NON-\/INFRINGEMENT, MERCHANTABILITY AND FITNESS}}
+\DoxyCodeLine{32 \textcolor{comment}{ FOR A PARTICULAR PURPOSE, REGARDING THE APPLE SOFTWARE OR ITS USE AND}}
+\DoxyCodeLine{33 \textcolor{comment}{ OPERATION ALONE OR IN COMBINATION WITH YOUR PRODUCTS.}}
+\DoxyCodeLine{34 \textcolor{comment}{}}
+\DoxyCodeLine{35 \textcolor{comment}{ IN NO EVENT SHALL APPLE BE LIABLE FOR ANY SPECIAL, INDIRECT, INCIDENTAL}}
+\DoxyCodeLine{36 \textcolor{comment}{ OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF}}
+\DoxyCodeLine{37 \textcolor{comment}{ SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS}}
+\DoxyCodeLine{38 \textcolor{comment}{ INTERRUPTION) ARISING IN ANY WAY OUT OF THE USE, REPRODUCTION,}}
+\DoxyCodeLine{39 \textcolor{comment}{ MODIFICATION AND/OR DISTRIBUTION OF THE APPLE SOFTWARE, HOWEVER CAUSED}}
+\DoxyCodeLine{40 \textcolor{comment}{ AND WHETHER UNDER THEORY OF CONTRACT, TORT (INCLUDING NEGLIGENCE),}}
+\DoxyCodeLine{41 \textcolor{comment}{ STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE}}
+\DoxyCodeLine{42 \textcolor{comment}{ POSSIBILITY OF SUCH DAMAGE.}}
+\DoxyCodeLine{43 \textcolor{comment}{}}
+\DoxyCodeLine{44 \textcolor{comment}{ Copyright (C) 2014 Apple Inc. All Rights Reserved.}}
+\DoxyCodeLine{45 \textcolor{comment}{}}
+\DoxyCodeLine{46 \textcolor{comment}{*/}}
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#ifndef \_\_ComponentBase\_h\_\_}}
+\DoxyCodeLine{48 \textcolor{preprocessor}{\#define \_\_ComponentBase\_h\_\_}}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50 \textcolor{preprocessor}{\#include <new>}}
+\DoxyCodeLine{51 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_c_a_debug_macros_8h}{CADebugMacros.h}}"{}}}
+\DoxyCodeLine{52 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_c_a_x_exception_8h}{CAXException.h}}"{}}}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54 \textcolor{preprocessor}{\#if !defined(\_\_COREAUDIO\_USE\_FLAT\_INCLUDES\_\_)}}
+\DoxyCodeLine{55 \textcolor{preprocessor}{    \#include <CoreAudio/CoreAudioTypes.h>}}
+\DoxyCodeLine{56 \textcolor{preprocessor}{    \#include <AudioUnit/AudioUnit.h>}}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58 \textcolor{preprocessor}{    \#if !CA\_USE\_AUDIO\_PLUGIN\_ONLY}}
+\DoxyCodeLine{59 \textcolor{preprocessor}{        \#include <CoreServices/../Frameworks/CarbonCore.framework/Headers/Components.h>}}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61 \textcolor{preprocessor}{        \#if (MAC\_OS\_X\_VERSION\_MAX\_ALLOWED <= MAC\_OS\_X\_VERSION\_10\_5)}}
+\DoxyCodeLine{62 \textcolor{preprocessor}{            \#define AudioComponentInstance          ComponentInstance}}
+\DoxyCodeLine{63 \textcolor{preprocessor}{            \#define AudioComponentDescription       ComponentDescription}}
+\DoxyCodeLine{64 \textcolor{preprocessor}{            \#define AudioComponent                  Component}}
+\DoxyCodeLine{65 \textcolor{preprocessor}{        \#endif}}
+\DoxyCodeLine{66         Handle \mbox{\hyperlink{_component_base_8h_ab903001116443045daeb2778874f5db8}{CMgr\_GetComponentInstanceStorage}}(ComponentInstance aComponentInstance);}
+\DoxyCodeLine{67         \textcolor{keywordtype}{void} \mbox{\hyperlink{_component_base_8h_a151f0a6a3ba2553f3ce5fa5bbdf19188}{CMgr\_SetComponentInstanceStorage}}(ComponentInstance aComponentInstance, Handle theStorage);}
+\DoxyCodeLine{68 \textcolor{preprocessor}{    \#endif}}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70 \textcolor{preprocessor}{    \#if MAC\_OS\_X\_VERSION\_MAX\_ALLOWED <= MAC\_OS\_X\_VERSION\_10\_4}}
+\DoxyCodeLine{71         \textcolor{keyword}{typedef} Float32 \mbox{\hyperlink{_component_base_8h_ad37b0f5817e3f72543294a0e2edb9c26}{AudioUnitParameterValue}};}
+\DoxyCodeLine{72 \textcolor{preprocessor}{    \#endif}}
+\DoxyCodeLine{73 \textcolor{preprocessor}{    \#if COREAUDIOTYPES\_VERSION < 1051}}
+\DoxyCodeLine{74         \textcolor{keyword}{typedef} Float32 \mbox{\hyperlink{_component_base_8h_aa226e106996913ddb8c8fe133692f495}{AudioUnitSampleType}};}
+\DoxyCodeLine{75 \textcolor{preprocessor}{    \#endif}}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77 \textcolor{preprocessor}{    \#if !TARGET\_OS\_WIN32}}
+\DoxyCodeLine{78 \textcolor{preprocessor}{        \#include <pthread.h>}}
+\DoxyCodeLine{79 \textcolor{preprocessor}{    \#endif}}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81 \textcolor{preprocessor}{    \#if TARGET\_OS\_WIN32}}
+\DoxyCodeLine{82 \textcolor{preprocessor}{        \#include "{}CAGuard.h"{}}}
+\DoxyCodeLine{83 \textcolor{preprocessor}{    \#endif}}
+\DoxyCodeLine{84 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{85 \textcolor{preprocessor}{    \#include "{}CoreAudioTypes.h"{}}}
+\DoxyCodeLine{86 \textcolor{preprocessor}{    \#if !CA\_USE\_AUDIO\_PLUGIN\_ONLY}}
+\DoxyCodeLine{87 \textcolor{preprocessor}{        \#include "{}ComponentManagerDependenciesWin.h"{}}}
+\DoxyCodeLine{88 \textcolor{preprocessor}{    \#endif}}
+\DoxyCodeLine{89 \textcolor{preprocessor}{    \#include "{}AudioUnit.h"{}}}
+\DoxyCodeLine{90 \textcolor{preprocessor}{    \#include "{}CAGuard.h"{}}}
+\DoxyCodeLine{91 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93 \textcolor{preprocessor}{\#ifndef COMPONENT\_THROW}}
+\DoxyCodeLine{94 \textcolor{preprocessor}{    \#if VERBOSE\_COMPONENT\_THROW}}
+\DoxyCodeLine{95 \textcolor{preprocessor}{        \#define COMPONENT\_THROW(throw\_err) \(\backslash\)}}
+\DoxyCodeLine{96 \textcolor{preprocessor}{            do \{ DebugMessage(\#throw\_err); throw static\_cast<OSStatus>(throw\_err); \} while (0)}}
+\DoxyCodeLine{97 \textcolor{preprocessor}{    \#else}}
+\DoxyCodeLine{98 \textcolor{preprocessor}{        \#define COMPONENT\_THROW(throw\_err) \(\backslash\)}}
+\DoxyCodeLine{99 \textcolor{preprocessor}{            throw static\_cast<OSStatus>(throw\_err)}}
+\DoxyCodeLine{100 \textcolor{preprocessor}{    \#endif}}
+\DoxyCodeLine{101 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103 \textcolor{preprocessor}{\#define COMPONENT\_CATCH \(\backslash\)}}
+\DoxyCodeLine{104 \textcolor{preprocessor}{    catch (const CAXException \&ex) \{ result = ex.mError; \} \(\backslash\)}}
+\DoxyCodeLine{105 \textcolor{preprocessor}{    catch (std::bad\_alloc \&) \{ result = kAudio\_MemFullError; \} \(\backslash\)}}
+\DoxyCodeLine{106 \textcolor{preprocessor}{    catch (OSStatus catch\_err) \{ result = catch\_err; \} \(\backslash\)}}
+\DoxyCodeLine{107 \textcolor{preprocessor}{    catch (OSErr catch\_err) \{ result = catch\_err; \} \(\backslash\)}}
+\DoxyCodeLine{108 \textcolor{preprocessor}{    catch (...) \{ result = -\/1; \}}}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{111 \textcolor{keyword}{class }\mbox{\hyperlink{class_component_base}{ComponentBase}} \{}
+\DoxyCodeLine{112 \textcolor{keyword}{public}:}
+\DoxyCodeLine{113     \textcolor{comment}{// classic MacErrors}}
+\DoxyCodeLine{114     \textcolor{keyword}{enum} \{ \mbox{\hyperlink{class_component_base_a19f94469b599d3744f81fe3153a6a7feaf4e286767e1bd8839389a71e374716de}{noErr}} = 0\};}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{117                 \mbox{\hyperlink{class_component_base_af425d24126195cbd658edb40a2ba397e}{ComponentBase}}(\mbox{\hyperlink{group__juce__audio__processors-utilities_ga8d76a4b29adb5f5b39318dd91162b8f4}{AudioComponentInstance}} inInstance);}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{120     \textcolor{keyword}{virtual}     \mbox{\hyperlink{class_component_base_a7effff3d13c28c065b38694f49d4ef22}{\string~ComponentBase}}();}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{123     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void}            \mbox{\hyperlink{class_component_base_ac51ed9645ff75f91a715106e6db09bb9}{PostConstructor}}();}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{126     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void}            \mbox{\hyperlink{class_component_base_a92644a2401c01fecd45e6e09ae77c58a}{PreDestructor}}();}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{128 \textcolor{preprocessor}{\#if !CA\_USE\_AUDIO\_PLUGIN\_ONLY}}
+\DoxyCodeLine{130     \textcolor{keyword}{virtual} OSStatus        \mbox{\hyperlink{class_component_base_af3422972c9dda6f8376ba6dba9cc82c2}{Version}}();}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{133     \textcolor{keyword}{static} OSStatus     \mbox{\hyperlink{class_component_base_aeee0698e7253797200f3471edbfd568f}{ComponentEntryDispatch}}(ComponentParameters *\mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}}, \mbox{\hyperlink{class_component_base}{ComponentBase}} *This);}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{136     \textcolor{keyword}{static} SInt16       \mbox{\hyperlink{class_component_base_a984b5cbfc06c054c0c30741f85cc0e6d}{GetSelectorForCanDo}}(ComponentParameters *\mbox{\hyperlink{namespacegl_a23c4f2997e7d61ec0804d763f22ee44c}{params}});}
+\DoxyCodeLine{137 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{138 }
+\DoxyCodeLine{140     \mbox{\hyperlink{group__juce__audio__processors-utilities_ga8d76a4b29adb5f5b39318dd91162b8f4}{AudioComponentInstance}}        \mbox{\hyperlink{class_component_base_aaa67c67748150aed19f3426d8615785e}{GetComponentInstance}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_component_base_a9dcad534003a5bdc42b6f39054c19c3e}{mComponentInstance}}; \}}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{143     \mbox{\hyperlink{_component_base_8h_ad1e4bbe11c56c767e7406d2774abbcfd}{AudioComponentDescription}}  \mbox{\hyperlink{class_component_base_aaf612a81834257e95622d7cfd9239748}{GetComponentDescription}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145     \textcolor{comment}{// This global variable is so that new instances know how they were instantiated: via the Component Manager,}}
+\DoxyCodeLine{146     \textcolor{comment}{// or as AudioComponents. It's ugly, but preferable to altering the constructor of every class in the hierarchy.}}
+\DoxyCodeLine{147     \textcolor{comment}{// It's safe because construction is protected by ComponentInitLocker.}}
+\DoxyCodeLine{148     \textcolor{keyword}{enum} \mbox{\hyperlink{class_component_base_a87bf8af64a9b287be04d37879ea1ea96}{EInstanceType}} \{ \mbox{\hyperlink{class_component_base_a87bf8af64a9b287be04d37879ea1ea96aa41328ccbc1d694af075d9b21539380c}{kComponentMgrInstance}}, \mbox{\hyperlink{class_component_base_a87bf8af64a9b287be04d37879ea1ea96a4c2509fa5f4d4b2ee2c13a9652914fca}{kAudioComponentInstance}} \};}
+\DoxyCodeLine{149     \textcolor{keyword}{static} \mbox{\hyperlink{class_component_base_a87bf8af64a9b287be04d37879ea1ea96}{EInstanceType}} \mbox{\hyperlink{class_component_base_a38b05f641def8293e5a8cfb4727ff494}{sNewInstanceType}};}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{152     \textcolor{keywordtype}{bool}            \mbox{\hyperlink{class_component_base_a7898b46a099cea29886f3f6b24f51354}{IsPluginObject}} ()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_component_base_aa2b916b05f54df77918ba6c61816ec43}{mInstanceType}} == \mbox{\hyperlink{class_component_base_a87bf8af64a9b287be04d37879ea1ea96a4c2509fa5f4d4b2ee2c13a9652914fca}{kAudioComponentInstance}}; \}}
+\DoxyCodeLine{154     \textcolor{keywordtype}{bool}            \mbox{\hyperlink{class_component_base_a40a0dc350426e42355578a5c226f2203}{IsCMgrObject}} ()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_component_base_aa2b916b05f54df77918ba6c61816ec43}{mInstanceType}} == \mbox{\hyperlink{class_component_base_a87bf8af64a9b287be04d37879ea1ea96aa41328ccbc1d694af075d9b21539380c}{kComponentMgrInstance}}; \}}
+\DoxyCodeLine{155 }
+\DoxyCodeLine{157     \textcolor{keyword}{static} OSStatus \mbox{\hyperlink{class_component_base_a528859a254e34cb2925522f5dc33cda7}{AP\_Open}}(\textcolor{keywordtype}{void} *\textcolor{keyword}{self}, \mbox{\hyperlink{group__juce__audio__processors-utilities_ga55e0e3a99e12b3f8e10f9125dc891709}{AudioUnit}} compInstance);}
+\DoxyCodeLine{158 }
+\DoxyCodeLine{160     \textcolor{keyword}{static} OSStatus \mbox{\hyperlink{class_component_base_a99f5808d02092846e64f0fd89bf57fbb}{AP\_Close}}(\textcolor{keywordtype}{void} *\textcolor{keyword}{self});}
+\DoxyCodeLine{161 }
+\DoxyCodeLine{162 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{164     \mbox{\hyperlink{group__juce__audio__processors-utilities_ga8d76a4b29adb5f5b39318dd91162b8f4}{AudioComponentInstance}}        \mbox{\hyperlink{class_component_base_a9dcad534003a5bdc42b6f39054c19c3e}{mComponentInstance}};}
+\DoxyCodeLine{165     \mbox{\hyperlink{class_component_base_a87bf8af64a9b287be04d37879ea1ea96}{EInstanceType}}              \mbox{\hyperlink{class_component_base_aa2b916b05f54df77918ba6c61816ec43}{mInstanceType}};}
+\DoxyCodeLine{166 \};}
+\DoxyCodeLine{167 }
+\DoxyCodeLine{168 \textcolor{keyword}{class }\mbox{\hyperlink{class_component_init_locker}{ComponentInitLocker}}}
+\DoxyCodeLine{169 \{}
+\DoxyCodeLine{170 \textcolor{preprocessor}{\#if TARGET\_OS\_MAC}}
+\DoxyCodeLine{171 \textcolor{keyword}{public}:}
+\DoxyCodeLine{172     \mbox{\hyperlink{class_component_init_locker}{ComponentInitLocker}}()}
+\DoxyCodeLine{173     \{}
+\DoxyCodeLine{174         pthread\_once(\&sOnce, InitComponentInitLocker);}
+\DoxyCodeLine{175         pthread\_mutex\_lock(\&sComponentOpenMutex);}
+\DoxyCodeLine{176         mPreviousNewInstanceType = \mbox{\hyperlink{class_component_base_a38b05f641def8293e5a8cfb4727ff494}{ComponentBase::sNewInstanceType}};}
+\DoxyCodeLine{177     \}}
+\DoxyCodeLine{178     \mbox{\hyperlink{class_component_init_locker}{\string~ComponentInitLocker}}()}
+\DoxyCodeLine{179     \{}
+\DoxyCodeLine{180         \mbox{\hyperlink{class_component_base_a38b05f641def8293e5a8cfb4727ff494}{ComponentBase::sNewInstanceType}} = mPreviousNewInstanceType;}
+\DoxyCodeLine{181         pthread\_mutex\_unlock(\&sComponentOpenMutex);}
+\DoxyCodeLine{182     \}}
+\DoxyCodeLine{183 }
+\DoxyCodeLine{184     \textcolor{comment}{// There are situations (11844772) where we need to be able to release the lock early.}}
+\DoxyCodeLine{185     \textcolor{keyword}{class }Unlocker \{}
+\DoxyCodeLine{186     \textcolor{keyword}{public}:}
+\DoxyCodeLine{187         Unlocker()}
+\DoxyCodeLine{188         \{}
+\DoxyCodeLine{189             pthread\_mutex\_unlock(\&sComponentOpenMutex);}
+\DoxyCodeLine{190         \}}
+\DoxyCodeLine{191         \string~Unlocker()}
+\DoxyCodeLine{192         \{}
+\DoxyCodeLine{193             pthread\_mutex\_lock(\&sComponentOpenMutex);}
+\DoxyCodeLine{194         \}}
+\DoxyCodeLine{195     \};}
+\DoxyCodeLine{196 }
+\DoxyCodeLine{197 \textcolor{keyword}{private}:}
+\DoxyCodeLine{198     \textcolor{keyword}{static} pthread\_mutex\_t sComponentOpenMutex;}
+\DoxyCodeLine{199     \textcolor{keyword}{static} pthread\_once\_t sOnce;}
+\DoxyCodeLine{200     \textcolor{keyword}{static} \textcolor{keywordtype}{void} InitComponentInitLocker();}
+\DoxyCodeLine{201 }
+\DoxyCodeLine{202 \textcolor{preprocessor}{\#elif TARGET\_OS\_WIN32}}
+\DoxyCodeLine{203 \textcolor{keyword}{public}:}
+\DoxyCodeLine{204     \textcolor{keywordtype}{bool} sNeedsUnlocking;}
+\DoxyCodeLine{205     \mbox{\hyperlink{class_component_init_locker}{ComponentInitLocker}}() \{ sNeedsUnlocking = sComponentOpenGuard.Lock(); \}}
+\DoxyCodeLine{206     \mbox{\hyperlink{class_component_init_locker}{\string~ComponentInitLocker}}() \{ \textcolor{keywordflow}{if}(sNeedsUnlocking) \{ sComponentOpenGuard.Unlock(); \} \}}
+\DoxyCodeLine{207 \textcolor{keyword}{private}:}
+\DoxyCodeLine{208     \textcolor{keyword}{static} CAGuard  sComponentOpenGuard;}
+\DoxyCodeLine{209 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{210 }
+\DoxyCodeLine{211 \textcolor{keyword}{private}:}
+\DoxyCodeLine{212     \mbox{\hyperlink{class_component_base_a87bf8af64a9b287be04d37879ea1ea96}{ComponentBase::EInstanceType}}    mPreviousNewInstanceType;}
+\DoxyCodeLine{213 \};}
+\DoxyCodeLine{214 }
+\DoxyCodeLine{216 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_audio_component_plug_in_instance}{AudioComponentPlugInInstance}} \{}
+\DoxyCodeLine{217     AudioComponentPlugInInterface       \mbox{\hyperlink{struct_audio_component_plug_in_instance_a959133d89a16ad957ea275093c46f8bb}{mPlugInInterface}};}
+\DoxyCodeLine{218     \textcolor{keywordtype}{void} *                              (*mConstruct)(\textcolor{keywordtype}{void} *\mbox{\hyperlink{namespacegl_a3a5cfcada98dcfb74023a94251b8345b}{memory}}, \mbox{\hyperlink{group__juce__audio__processors-utilities_ga8d76a4b29adb5f5b39318dd91162b8f4}{AudioComponentInstance}} ci);}
+\DoxyCodeLine{219     \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}}                                (*\mbox{\hyperlink{struct_audio_component_plug_in_instance_a7f39a4e7b744330f44c354074334e2b0}{mDestruct}})(\textcolor{keywordtype}{void} *\mbox{\hyperlink{namespacegl_a3a5cfcada98dcfb74023a94251b8345b}{memory}});}
+\DoxyCodeLine{220     \textcolor{keywordtype}{void} *                              \mbox{\hyperlink{struct_audio_component_plug_in_instance_ada3d86544a9eda63491fd41848256bde}{mPad}}[2];                \textcolor{comment}{// pad to a 16-\/byte boundary (in either 32 or 64 bit mode)}}
+\DoxyCodeLine{221     UInt32                              \mbox{\hyperlink{struct_audio_component_plug_in_instance_a185d588670711bdbba207200d8cbe9e1}{mInstanceStorage}};       \textcolor{comment}{// the ACI implementation object is constructed into this memory}}
+\DoxyCodeLine{222                                                                 \textcolor{comment}{// this member is just a placeholder. it is aligned to a 16byte boundary}}
+\DoxyCodeLine{223 \};}
+\DoxyCodeLine{224 }
+\DoxyCodeLine{226 \textcolor{keyword}{template} <\textcolor{keyword}{class} APMethodLookup, \textcolor{keyword}{class} Implementor>}
+\DoxyCodeLine{227 \textcolor{keyword}{class }\mbox{\hyperlink{class_a_p_factory}{APFactory}} \{}
+\DoxyCodeLine{228 \textcolor{keyword}{public}:}
+\DoxyCodeLine{229     \textcolor{keyword}{static} \textcolor{keywordtype}{void} *\mbox{\hyperlink{class_a_p_factory_a9d9721ee3d45d695265f96c5162644fa}{Construct}}(\textcolor{keywordtype}{void} *\mbox{\hyperlink{namespacegl_a3a5cfcada98dcfb74023a94251b8345b}{memory}}, \mbox{\hyperlink{group__juce__audio__processors-utilities_ga8d76a4b29adb5f5b39318dd91162b8f4}{AudioComponentInstance}} compInstance)}
+\DoxyCodeLine{230     \{}
+\DoxyCodeLine{231         \textcolor{keywordflow}{return} \textcolor{keyword}{new}(\mbox{\hyperlink{namespacegl_a3a5cfcada98dcfb74023a94251b8345b}{memory}}) Implementor(compInstance);}
+\DoxyCodeLine{232     \}}
+\DoxyCodeLine{233 }
+\DoxyCodeLine{234     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_a_p_factory_ab98f0136ba114fbdc035d8324225ac16}{Destruct}}(\textcolor{keywordtype}{void} *\mbox{\hyperlink{namespacegl_a3a5cfcada98dcfb74023a94251b8345b}{memory}})}
+\DoxyCodeLine{235     \{}
+\DoxyCodeLine{236         ((Implementor *)\mbox{\hyperlink{namespacegl_a3a5cfcada98dcfb74023a94251b8345b}{memory}})-\/>\string~Implementor();}
+\DoxyCodeLine{237     \}}
+\DoxyCodeLine{238 }
+\DoxyCodeLine{239     \textcolor{comment}{// This is the AudioComponentFactoryFunction. It returns an AudioComponentPlugInInstance.}}
+\DoxyCodeLine{240     \textcolor{comment}{// The actual implementation object is not created until Open().}}
+\DoxyCodeLine{241     \textcolor{keyword}{static} AudioComponentPlugInInterface *\mbox{\hyperlink{class_a_p_factory_a8d7576dcd0d1a1fca11eedfdc7be8ff6}{Factory}}(\textcolor{keyword}{const} \mbox{\hyperlink{_component_base_8h_ad1e4bbe11c56c767e7406d2774abbcfd}{AudioComponentDescription}} * \textcolor{comment}{/* inDesc */})}
+\DoxyCodeLine{242     \{}
+\DoxyCodeLine{243         \mbox{\hyperlink{struct_audio_component_plug_in_instance}{AudioComponentPlugInInstance}} *acpi =}
+\DoxyCodeLine{244                 (\mbox{\hyperlink{struct_audio_component_plug_in_instance}{AudioComponentPlugInInstance}} *)malloc( offsetof(\mbox{\hyperlink{struct_audio_component_plug_in_instance}{AudioComponentPlugInInstance}}, mInstanceStorage) + \textcolor{keyword}{sizeof}(Implementor) );}
+\DoxyCodeLine{245         acpi-\/>\mbox{\hyperlink{struct_audio_component_plug_in_instance_a959133d89a16ad957ea275093c46f8bb}{mPlugInInterface}}.Open = \mbox{\hyperlink{class_component_base_a528859a254e34cb2925522f5dc33cda7}{ComponentBase::AP\_Open}};}
+\DoxyCodeLine{246         acpi-\/>\mbox{\hyperlink{struct_audio_component_plug_in_instance_a959133d89a16ad957ea275093c46f8bb}{mPlugInInterface}}.Close = \mbox{\hyperlink{class_component_base_a99f5808d02092846e64f0fd89bf57fbb}{ComponentBase::AP\_Close}};}
+\DoxyCodeLine{247         acpi-\/>\mbox{\hyperlink{struct_audio_component_plug_in_instance_a959133d89a16ad957ea275093c46f8bb}{mPlugInInterface}}.Lookup = APMethodLookup::Lookup;}
+\DoxyCodeLine{248         acpi-\/>\mbox{\hyperlink{struct_audio_component_plug_in_instance_a959133d89a16ad957ea275093c46f8bb}{mPlugInInterface}}.reserved = NULL;}
+\DoxyCodeLine{249         acpi-\/>\mbox{\hyperlink{struct_audio_component_plug_in_instance_a27a7db69079b7206d632da13e7f54fc6}{mConstruct}} = \mbox{\hyperlink{class_a_p_factory_a9d9721ee3d45d695265f96c5162644fa}{Construct}};}
+\DoxyCodeLine{250         acpi-\/>\mbox{\hyperlink{struct_audio_component_plug_in_instance_a7f39a4e7b744330f44c354074334e2b0}{mDestruct}} = \mbox{\hyperlink{class_a_p_factory_ab98f0136ba114fbdc035d8324225ac16}{Destruct}};}
+\DoxyCodeLine{251         acpi-\/>\mbox{\hyperlink{struct_audio_component_plug_in_instance_ada3d86544a9eda63491fd41848256bde}{mPad}}[0] = NULL;}
+\DoxyCodeLine{252         acpi-\/>\mbox{\hyperlink{struct_audio_component_plug_in_instance_ada3d86544a9eda63491fd41848256bde}{mPad}}[1] = NULL;}
+\DoxyCodeLine{253         \textcolor{keywordflow}{return} (AudioComponentPlugInInterface*)acpi;}
+\DoxyCodeLine{254     \}}
+\DoxyCodeLine{255 }
+\DoxyCodeLine{256     \textcolor{comment}{// This is for runtime registration (not for plug-\/ins loaded from bundles).}}
+\DoxyCodeLine{257     \textcolor{keyword}{static} \mbox{\hyperlink{_component_base_8h_a5ac8b8900fbc118d3f5bf7d599b63cbf}{AudioComponent}} \mbox{\hyperlink{class_a_p_factory_aba1b7df87f693654fd90e9731dd33172}{Register}}(UInt32 \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}}, UInt32 subtype, UInt32 manuf, CFStringRef \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}, UInt32 vers, UInt32 \mbox{\hyperlink{namespacejuce_a848bbbcf606d6a8175b2c2712055d209}{flags}}=0)}
+\DoxyCodeLine{258     \{}
+\DoxyCodeLine{259         \mbox{\hyperlink{_component_base_8h_ad1e4bbe11c56c767e7406d2774abbcfd}{AudioComponentDescription}} desc = \{ \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}}, subtype, manuf, \mbox{\hyperlink{namespacejuce_a848bbbcf606d6a8175b2c2712055d209}{flags}}, 0 \};}
+\DoxyCodeLine{260         \textcolor{keywordflow}{return} AudioComponentRegister(\&desc, \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}, vers, \mbox{\hyperlink{class_a_p_factory_a8d7576dcd0d1a1fca11eedfdc7be8ff6}{Factory}});}
+\DoxyCodeLine{261     \}}
+\DoxyCodeLine{262 \};}
+\DoxyCodeLine{263 }
+\DoxyCodeLine{264 \textcolor{preprocessor}{\#if !CA\_USE\_AUDIO\_PLUGIN\_ONLY}}
+\DoxyCodeLine{268 \textcolor{keyword}{template} <\textcolor{keyword}{class} Class>}
+\DoxyCodeLine{269 \textcolor{keyword}{class }\mbox{\hyperlink{class_component_entry_point}{ComponentEntryPoint}} \{}
+\DoxyCodeLine{270 \textcolor{keyword}{public}:}
+\DoxyCodeLine{272     \textcolor{keyword}{static} OSStatus \mbox{\hyperlink{class_component_entry_point_a07cdfbbf89f7cea753e70c135403d445}{Dispatch}}(ComponentParameters *\mbox{\hyperlink{namespacegl_a23c4f2997e7d61ec0804d763f22ee44c}{params}}, Class *\mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}})}
+\DoxyCodeLine{273     \{}
+\DoxyCodeLine{274         OSStatus \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = noErr;}
+\DoxyCodeLine{275 }
+\DoxyCodeLine{276         \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{277             \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a23c4f2997e7d61ec0804d763f22ee44c}{params}}-\/>what == kComponentOpenSelect) \{}
+\DoxyCodeLine{278                 \textcolor{comment}{// solve a host of initialization thread safety issues.}}
+\DoxyCodeLine{279                 \mbox{\hyperlink{class_component_init_locker}{ComponentInitLocker}} lock;}
+\DoxyCodeLine{280 }
+\DoxyCodeLine{281                 \mbox{\hyperlink{class_component_base_a38b05f641def8293e5a8cfb4727ff494}{ComponentBase::sNewInstanceType}} = \mbox{\hyperlink{class_component_base_a87bf8af64a9b287be04d37879ea1ea96aa41328ccbc1d694af075d9b21539380c}{ComponentBase::kComponentMgrInstance}};}
+\DoxyCodeLine{282                 ComponentInstance ci = (ComponentInstance)(\mbox{\hyperlink{namespacegl_a23c4f2997e7d61ec0804d763f22ee44c}{params}}-\/>params[0]);}
+\DoxyCodeLine{283                 Class *This = \textcolor{keyword}{new} Class((\mbox{\hyperlink{group__juce__audio__processors-utilities_ga8d76a4b29adb5f5b39318dd91162b8f4}{AudioComponentInstance}})ci);}
+\DoxyCodeLine{284                 This-\/>PostConstructor();    \textcolor{comment}{// allows base class to do additional initialization}}
+\DoxyCodeLine{285                                             \textcolor{comment}{// once the derived class is fully constructed}}
+\DoxyCodeLine{286 }
+\DoxyCodeLine{287                 \mbox{\hyperlink{_component_base_8h_a151f0a6a3ba2553f3ce5fa5bbdf19188}{CMgr\_SetComponentInstanceStorage}}(ci, (Handle)This);}
+\DoxyCodeLine{288             \} \textcolor{keywordflow}{else}}
+\DoxyCodeLine{289                 \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = Class::ComponentEntryDispatch(\mbox{\hyperlink{namespacegl_a23c4f2997e7d61ec0804d763f22ee44c}{params}}, \mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}});}
+\DoxyCodeLine{290         \}}
+\DoxyCodeLine{291         \mbox{\hyperlink{_component_base_8h_a0f7252a505a8e5935047dc04ca4e42e1}{COMPONENT\_CATCH}}}
+\DoxyCodeLine{292 }
+\DoxyCodeLine{293         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}};}
+\DoxyCodeLine{294     \}}
+\DoxyCodeLine{295 }
+\DoxyCodeLine{297     \textcolor{keyword}{static} \mbox{\hyperlink{class_component}{Component}} \mbox{\hyperlink{class_component_entry_point_aa8376ed67c79ec8dbbffba940f49f2c0}{Register}}(OSType compType, OSType subType, OSType manufacturer)}
+\DoxyCodeLine{298     \{}
+\DoxyCodeLine{299         ComponentDescription    description = \{compType, subType, manufacturer, 0, 0\};}
+\DoxyCodeLine{300         \mbox{\hyperlink{class_component}{Component}}  component = RegisterComponent(\&description, (ComponentRoutineUPP) \mbox{\hyperlink{class_component_entry_point_a07cdfbbf89f7cea753e70c135403d445}{Dispatch}}, registerComponentGlobal, NULL, NULL, NULL);}
+\DoxyCodeLine{301         \textcolor{keywordflow}{if} (component != NULL) \{}
+\DoxyCodeLine{302             SetDefaultComponent(component, defaultComponentAnyFlagsAnyManufacturerAnySubType);}
+\DoxyCodeLine{303         \}}
+\DoxyCodeLine{304         \textcolor{keywordflow}{return} component;}
+\DoxyCodeLine{305     \}}
+\DoxyCodeLine{306 \};}
+\DoxyCodeLine{307 }
+\DoxyCodeLine{308 \textcolor{comment}{// NOTE: Component Mgr is deprecated in ML.}}
+\DoxyCodeLine{309 \textcolor{comment}{// this macro should not be used with new audio components}}
+\DoxyCodeLine{310 \textcolor{comment}{// it is only for backwards compatibility with Lion and SL.}}
+\DoxyCodeLine{311 \textcolor{comment}{// this macro registers both a plugin and a component mgr version.}}
+\DoxyCodeLine{312 \textcolor{preprocessor}{\#define AUDIOCOMPONENT\_ENTRY(FactoryType, Class) \(\backslash\)}}
+\DoxyCodeLine{313 \textcolor{preprocessor}{    extern "{}C"{}} OSStatus Class\#\#Entry(ComponentParameters *params, Class *obj); \(\backslash\)}
+\DoxyCodeLine{314     extern "{}C"{} OSStatus Class\#\#Entry(ComponentParameters *params, Class *obj) \{ \(\backslash\)}
+\DoxyCodeLine{315         return ComponentEntryPoint<Class>::Dispatch(params, obj); \(\backslash\)}
+\DoxyCodeLine{316     \} \(\backslash\)}
+\DoxyCodeLine{317     extern "{}C"{} void * Class\#\#Factory(const AudioComponentDescription *inDesc); \(\backslash\)}
+\DoxyCodeLine{318     extern "{}C"{} void * Class\#\#Factory(const AudioComponentDescription *inDesc) \{ \(\backslash\)}
+\DoxyCodeLine{319         return FactoryType<Class>::Factory(inDesc); \(\backslash\)}
+\DoxyCodeLine{320     \}}
+\DoxyCodeLine{321     \textcolor{comment}{// the only component we still support are the carbon based view components}}
+\DoxyCodeLine{322     \textcolor{comment}{// you should be using this macro now to exclusively register those types}}
+\DoxyCodeLine{323 \textcolor{preprocessor}{\#define VIEW\_COMPONENT\_ENTRY(Class) \(\backslash\)}}
+\DoxyCodeLine{324 \textcolor{preprocessor}{    extern "{}C"{}} OSStatus Class\#\#Entry(ComponentParameters *params, Class *obj); \(\backslash\)}
+\DoxyCodeLine{325     extern "{}C"{} OSStatus Class\#\#Entry(ComponentParameters *params, Class *obj) \{ \(\backslash\)}
+\DoxyCodeLine{326         return ComponentEntryPoint<Class>::Dispatch(params, obj); \(\backslash\)}
+\DoxyCodeLine{327     \}}
+\DoxyCodeLine{328 }
+\DoxyCodeLine{330 \textcolor{keyword}{template} <\textcolor{keyword}{class} Class, OSType Type, OSType Subtype, OSType Manufacturer>}
+\DoxyCodeLine{331 \textcolor{keyword}{class }\mbox{\hyperlink{class_component_registrar}{ComponentRegistrar}} \{}
+\DoxyCodeLine{332 \textcolor{keyword}{public}:}
+\DoxyCodeLine{334     \mbox{\hyperlink{class_component_registrar_a70da720740d46bcb2d6305c4e188d9f7}{ComponentRegistrar}}() \{ \mbox{\hyperlink{class_component_entry_point_aa8376ed67c79ec8dbbffba940f49f2c0}{ComponentEntryPoint<Class>::Register}}(Type, Subtype, Manufacturer); \}}
+\DoxyCodeLine{335 \};}
+\DoxyCodeLine{336 }
+\DoxyCodeLine{337 \textcolor{preprocessor}{\#define COMPONENT\_REGISTER(Class,Type,Subtype,Manufacturer) \(\backslash\)}}
+\DoxyCodeLine{338 \textcolor{preprocessor}{    static ComponentRegistrar<Class, Type, Subtype, Manufacturer>   gRegistrar\#\#Class}}
+\DoxyCodeLine{339 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{340 \textcolor{preprocessor}{\#define COMPONENT\_ENTRY(Class)}}
+\DoxyCodeLine{341 \textcolor{preprocessor}{\#define COMPONENT\_REGISTER(Class)}}
+\DoxyCodeLine{342 \textcolor{comment}{// this macro is used to generate the Entry Point for a given Audio Plugin}}
+\DoxyCodeLine{343 \textcolor{comment}{// you should be using this macro now with audio components}}
+\DoxyCodeLine{344 \textcolor{preprocessor}{\#define AUDIOCOMPONENT\_ENTRY(FactoryType, Class) \(\backslash\)}}
+\DoxyCodeLine{345 \textcolor{preprocessor}{    extern "{}C"{}} void * Class\#\#Factory(const AudioComponentDescription *inDesc); \(\backslash\)}
+\DoxyCodeLine{346     extern "{}C"{} void * Class\#\#Factory(const AudioComponentDescription *inDesc) \{ \(\backslash\)}
+\DoxyCodeLine{347         return FactoryType<Class>::Factory(inDesc); \(\backslash\)}
+\DoxyCodeLine{348     \}}
+\DoxyCodeLine{349 }
+\DoxyCodeLine{350 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// !CA\_USE\_AUDIO\_PLUGIN\_ONLY}}
+\DoxyCodeLine{351 }
+\DoxyCodeLine{352 }
+\DoxyCodeLine{353 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// \_\_ComponentBase\_h\_\_}}
+
+\end{DoxyCode}

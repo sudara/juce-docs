@@ -1,0 +1,122 @@
+\hypertarget{setup__44_8h_source}{}\doxysection{setup\+\_\+44.\+h}
+\label{setup__44_8h_source}\index{build/juce\_audio\_formats/codecs/oggvorbis/libvorbis-\/1.3.7/lib/modes/setup\_44.h@{build/juce\_audio\_formats/codecs/oggvorbis/libvorbis-\/1.3.7/lib/modes/setup\_44.h}}
+\mbox{\hyperlink{setup__44_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/********************************************************************}}
+\DoxyCodeLine{2 \textcolor{comment}{ *                                                                  *}}
+\DoxyCodeLine{3 \textcolor{comment}{ * THIS FILE IS PART OF THE OggVorbis SOFTWARE CODEC SOURCE CODE.   *}}
+\DoxyCodeLine{4 \textcolor{comment}{ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *}}
+\DoxyCodeLine{5 \textcolor{comment}{ * GOVERNED BY A BSD-\/STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *}}
+\DoxyCodeLine{6 \textcolor{comment}{ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *}}
+\DoxyCodeLine{7 \textcolor{comment}{ *                                                                  *}}
+\DoxyCodeLine{8 \textcolor{comment}{ * THE OggVorbis SOURCE CODE IS (C) COPYRIGHT 1994-\/2009             *}}
+\DoxyCodeLine{9 \textcolor{comment}{ * by the Xiph.Org Foundation https://xiph.org/                     *}}
+\DoxyCodeLine{10 \textcolor{comment}{ *                                                                  *}}
+\DoxyCodeLine{11 \textcolor{comment}{ ********************************************************************}}
+\DoxyCodeLine{12 \textcolor{comment}{}}
+\DoxyCodeLine{13 \textcolor{comment}{ function: toplevel settings for 44.1/48kHz}}
+\DoxyCodeLine{14 \textcolor{comment}{}}
+\DoxyCodeLine{15 \textcolor{comment}{ ********************************************************************/}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{floor__all_8h}{floor\_all.h}}"{}}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{residue__44_8h}{residue\_44.h}}"{}}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{psych__44_8h}{psych\_44.h}}"{}}}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21 \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{double} rate\_mapping\_44\_stereo[12]=\{}
+\DoxyCodeLine{22   22500.,32000.,40000.,48000.,56000.,64000.,}
+\DoxyCodeLine{23   80000.,96000.,112000.,128000.,160000.,250001.}
+\DoxyCodeLine{24 \};}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{double} quality\_mapping\_44[12]=\{}
+\DoxyCodeLine{27   -\/.1,.0,.1,.2,.3,.4,.5,.6,.7,.8,.9,1.0}
+\DoxyCodeLine{28 \};}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{int} blocksize\_short\_44[11]=\{}
+\DoxyCodeLine{31   512,256,256,256,256,256,256,256,256,256,256}
+\DoxyCodeLine{32 \};}
+\DoxyCodeLine{33 \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{int} blocksize\_long\_44[11]=\{}
+\DoxyCodeLine{34   4096,2048,2048,2048,2048,2048,2048,2048,2048,2048,2048}
+\DoxyCodeLine{35 \};}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37 \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{double} \_psy\_compand\_short\_mapping[12]=\{}
+\DoxyCodeLine{38   0.5, 1., 1., 1.3, 1.6, 2., 2., 2., 2., 2., 2., 2.}
+\DoxyCodeLine{39 \};}
+\DoxyCodeLine{40 \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{double} \_psy\_compand\_long\_mapping[12]=\{}
+\DoxyCodeLine{41   3.5, 4., 4., 4.3, 4.6, 5., 5., 5., 5., 5., 5., 5.}
+\DoxyCodeLine{42 \};}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44 \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{double} \_global\_mapping\_44[12]=\{}
+\DoxyCodeLine{45   \textcolor{comment}{/* 1., 1., 1.5, 2., 2., 2.5, 2.7, 3.0, 3.5, 4., 4. */}}
+\DoxyCodeLine{46  0., 1., 1., 1.5, 2., 2., 2.5, 2.7, 3.0, 3.7, 4., 4.}
+\DoxyCodeLine{47 \};}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49 \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{int} \_floor\_mapping\_44a[11]=\{}
+\DoxyCodeLine{50   1,0,0,2,2,4,5,5,5,5,5}
+\DoxyCodeLine{51 \};}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53 \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{int} \_floor\_mapping\_44b[11]=\{}
+\DoxyCodeLine{54   8,7,7,7,7,7,7,7,7,7,7}
+\DoxyCodeLine{55 \};}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57 \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{int} \_floor\_mapping\_44c[11]=\{}
+\DoxyCodeLine{58   10,10,10,10,10,10,10,10,10,10,10}
+\DoxyCodeLine{59 \};}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61 \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{int} *\_floor\_mapping\_44[]=\{}
+\DoxyCodeLine{62   \_floor\_mapping\_44a,}
+\DoxyCodeLine{63   \_floor\_mapping\_44b,}
+\DoxyCodeLine{64   \_floor\_mapping\_44c,}
+\DoxyCodeLine{65 \};}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67 \textcolor{keyword}{static} \textcolor{keyword}{const} \mbox{\hyperlink{structve__setup__data__template}{ve\_setup\_data\_template}} ve\_setup\_44\_stereo=\{}
+\DoxyCodeLine{68   11,}
+\DoxyCodeLine{69   rate\_mapping\_44\_stereo,}
+\DoxyCodeLine{70   quality\_mapping\_44,}
+\DoxyCodeLine{71   2,}
+\DoxyCodeLine{72   40000,}
+\DoxyCodeLine{73   50000,}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75   blocksize\_short\_44,}
+\DoxyCodeLine{76   blocksize\_long\_44,}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78   \_psy\_tone\_masteratt\_44,}
+\DoxyCodeLine{79   \_psy\_tone\_0dB,}
+\DoxyCodeLine{80   \_psy\_tone\_suppress,}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82   \_vp\_tonemask\_adj\_otherblock,}
+\DoxyCodeLine{83   \_vp\_tonemask\_adj\_longblock,}
+\DoxyCodeLine{84   \_vp\_tonemask\_adj\_otherblock,}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86   \_psy\_noiseguards\_44,}
+\DoxyCodeLine{87   \_psy\_noisebias\_impulse,}
+\DoxyCodeLine{88   \_psy\_noisebias\_padding,}
+\DoxyCodeLine{89   \_psy\_noisebias\_trans,}
+\DoxyCodeLine{90   \_psy\_noisebias\_long,}
+\DoxyCodeLine{91   \_psy\_noise\_suppress,}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93   \_psy\_compand\_44,}
+\DoxyCodeLine{94   \_psy\_compand\_short\_mapping,}
+\DoxyCodeLine{95   \_psy\_compand\_long\_mapping,}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97   \{\_noise\_start\_short\_44,\_noise\_start\_long\_44\},}
+\DoxyCodeLine{98   \{\_noise\_part\_short\_44,\_noise\_part\_long\_44\},}
+\DoxyCodeLine{99   \_noise\_thresh\_44,}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101   \_psy\_ath\_floater,}
+\DoxyCodeLine{102   \_psy\_ath\_abs,}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104   \_psy\_lowpass\_44,}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{106   \_psy\_global\_44,}
+\DoxyCodeLine{107   \_global\_mapping\_44,}
+\DoxyCodeLine{108   \_psy\_stereo\_modes\_44,}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110   \_floor\_books,}
+\DoxyCodeLine{111   \_floor,}
+\DoxyCodeLine{112   2,}
+\DoxyCodeLine{113   \_floor\_mapping\_44,}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115   \_mapres\_template\_44\_stereo}
+\DoxyCodeLine{116 \};}
+
+\end{DoxyCode}

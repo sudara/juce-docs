@@ -1,0 +1,262 @@
+\hypertarget{juce___unit_test_8h_source}{}\doxysection{juce\+\_\+\+Unit\+Test.\+h}
+\label{juce___unit_test_8h_source}\index{build/juce\_core/unit\_tests/juce\_UnitTest.h@{build/juce\_core/unit\_tests/juce\_UnitTest.h}}
+\mbox{\hyperlink{juce___unit_test_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{keyword}{class }\mbox{\hyperlink{class_unit_test_runner}{UnitTestRunner}};}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{70 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_unit_test}{UnitTest}}}
+\DoxyCodeLine{71 \{}
+\DoxyCodeLine{72 \textcolor{keyword}{public}:}
+\DoxyCodeLine{73     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{75 \textcolor{comment}{}    \textcolor{keyword}{explicit} \mbox{\hyperlink{class_unit_test}{UnitTest}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& category = \mbox{\hyperlink{class_string}{String}}());}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{78     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_unit_test}{\string~UnitTest}}();}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{81     \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{class_unit_test_a4da9d062d60fc548b86877bd723b75f9}{getName}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept       \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}; \}}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{84     \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{class_unit_test_a3c66a8f2be48b20959d6d0bb986769aa}{getCategory}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept   \{ \textcolor{keywordflow}{return} category; \}}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{90     \textcolor{keywordtype}{void} performTest (\mbox{\hyperlink{class_unit_test_runner}{UnitTestRunner}}* runner);}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{93     \textcolor{keyword}{static} \mbox{\hyperlink{class_array}{Array<UnitTest*>}}\& getAllTests();}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{96     \textcolor{keyword}{static} \mbox{\hyperlink{class_array}{Array<UnitTest*>}} getTestsInCategory (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& category);}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{99     \textcolor{keyword}{static} \mbox{\hyperlink{class_string_array}{StringArray}} getAllCategories();}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{105 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} initialise();}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{110     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} shutdown();}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{117     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_unit_test_a1a95d7f09eb80442a8099663dfb92628}{runTest}}() = 0;}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{119     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{124 \textcolor{comment}{}    \textcolor{keywordtype}{void} beginTest (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& testName);}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{145 \textcolor{comment}{}    \textcolor{keywordtype}{void} expect (\textcolor{keywordtype}{bool} testResult, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& failureMessage = \mbox{\hyperlink{class_string}{String}}());}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{147     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{151 \textcolor{comment}{}    \textcolor{keyword}{template} <\textcolor{keyword}{class} ValueType>}
+\DoxyCodeLine{152     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_unit_test_a580cd21eec8cae621eceb531eec711d3}{expectEquals}} (ValueType actual, ValueType expected, \mbox{\hyperlink{class_string}{String}} failureMessage = \mbox{\hyperlink{class_string}{String}}())}
+\DoxyCodeLine{153     \{}
+\DoxyCodeLine{154         \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = actual == expected;}
+\DoxyCodeLine{155         expectResultAndPrint (actual, expected, \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}, \textcolor{stringliteral}{"{}"{}}, failureMessage);}
+\DoxyCodeLine{156     \}}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{161     \textcolor{keyword}{template} <\textcolor{keyword}{class} ValueType>}
+\DoxyCodeLine{162     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_unit_test_a88277b29ca7179e4da719098c43d08c9}{expectNotEquals}} (ValueType \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}, ValueType valueToCompareTo, \mbox{\hyperlink{class_string}{String}} failureMessage = \mbox{\hyperlink{class_string}{String}}())}
+\DoxyCodeLine{163     \{}
+\DoxyCodeLine{164         \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}} != valueToCompareTo;}
+\DoxyCodeLine{165         expectResultAndPrint (\mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}, valueToCompareTo, \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}, \textcolor{stringliteral}{"{}unequal to"{}}, failureMessage);}
+\DoxyCodeLine{166     \}}
+\DoxyCodeLine{167 }
+\DoxyCodeLine{171     \textcolor{keyword}{template} <\textcolor{keyword}{class} ValueType>}
+\DoxyCodeLine{172     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_unit_test_aef466ffd07c2677e636e2c0292605f62}{expectGreaterThan}} (ValueType \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}, ValueType valueToCompareTo, \mbox{\hyperlink{class_string}{String}} failureMessage = \mbox{\hyperlink{class_string}{String}}())}
+\DoxyCodeLine{173     \{}
+\DoxyCodeLine{174         \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}} > valueToCompareTo;}
+\DoxyCodeLine{175         expectResultAndPrint (\mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}, valueToCompareTo, \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}, \textcolor{stringliteral}{"{}greater than"{}}, failureMessage);}
+\DoxyCodeLine{176     \}}
+\DoxyCodeLine{177 }
+\DoxyCodeLine{181     \textcolor{keyword}{template} <\textcolor{keyword}{class} ValueType>}
+\DoxyCodeLine{182     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_unit_test_ac1fd4a33b1ca2db3a32a05d739087879}{expectLessThan}} (ValueType \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}, ValueType valueToCompareTo, \mbox{\hyperlink{class_string}{String}} failureMessage = \mbox{\hyperlink{class_string}{String}}())}
+\DoxyCodeLine{183     \{}
+\DoxyCodeLine{184         \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}} < valueToCompareTo;}
+\DoxyCodeLine{185         expectResultAndPrint (\mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}, valueToCompareTo, \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}, \textcolor{stringliteral}{"{}less than"{}}, failureMessage);}
+\DoxyCodeLine{186     \}}
+\DoxyCodeLine{187 }
+\DoxyCodeLine{191     \textcolor{keyword}{template} <\textcolor{keyword}{class} ValueType>}
+\DoxyCodeLine{192     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_unit_test_a0744ec69e299f5ff9ab5e881446eaf94}{expectGreaterOrEqual}} (ValueType \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}, ValueType valueToCompareTo, \mbox{\hyperlink{class_string}{String}} failureMessage = \mbox{\hyperlink{class_string}{String}}())}
+\DoxyCodeLine{193     \{}
+\DoxyCodeLine{194         \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}} >= valueToCompareTo;}
+\DoxyCodeLine{195         expectResultAndPrint (\mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}, valueToCompareTo, \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}, \textcolor{stringliteral}{"{}greater or equal to"{}}, failureMessage);}
+\DoxyCodeLine{196     \}}
+\DoxyCodeLine{197 }
+\DoxyCodeLine{201     \textcolor{keyword}{template} <\textcolor{keyword}{class} ValueType>}
+\DoxyCodeLine{202     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_unit_test_a8a149547bc7180b943d1f8379e1d834d}{expectLessOrEqual}} (ValueType \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}, ValueType valueToCompareTo, \mbox{\hyperlink{class_string}{String}} failureMessage = \mbox{\hyperlink{class_string}{String}}())}
+\DoxyCodeLine{203     \{}
+\DoxyCodeLine{204         \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}} <= valueToCompareTo;}
+\DoxyCodeLine{205         expectResultAndPrint (\mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}, valueToCompareTo, \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}, \textcolor{stringliteral}{"{}less or equal to"{}}, failureMessage);}
+\DoxyCodeLine{206     \}}
+\DoxyCodeLine{207 }
+\DoxyCodeLine{212     \textcolor{keyword}{template} <\textcolor{keyword}{class} ValueType>}
+\DoxyCodeLine{213     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_unit_test_a53c512c74a94c08ab8d465848bbba2a2}{expectWithinAbsoluteError}} (ValueType actual, ValueType expected, ValueType maxAbsoluteError, \mbox{\hyperlink{class_string}{String}} failureMessage = \mbox{\hyperlink{class_string}{String}}())}
+\DoxyCodeLine{214     \{}
+\DoxyCodeLine{215         \textcolor{keyword}{const} ValueType diff = std::abs (actual -\/ expected);}
+\DoxyCodeLine{216         \textcolor{keyword}{const} \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = diff <= maxAbsoluteError;}
+\DoxyCodeLine{217 }
+\DoxyCodeLine{218         expectResultAndPrint (actual, expected, \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}, \textcolor{stringliteral}{"{} within "{}} + \mbox{\hyperlink{class_string}{String}} (maxAbsoluteError) + \textcolor{stringliteral}{"{} of"{}} , failureMessage);}
+\DoxyCodeLine{219     \}}
+\DoxyCodeLine{220 }
+\DoxyCodeLine{221     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{223 \textcolor{comment}{}\textcolor{preprocessor}{    \#define expectDoesNotThrow(expr)         \(\backslash\)}}
+\DoxyCodeLine{224 \textcolor{preprocessor}{        try                                  \(\backslash\)}}
+\DoxyCodeLine{225 \textcolor{preprocessor}{        \{                                    \(\backslash\)}}
+\DoxyCodeLine{226 \textcolor{preprocessor}{            (expr);                          \(\backslash\)}}
+\DoxyCodeLine{227 \textcolor{preprocessor}{            expect (true);                   \(\backslash\)}}
+\DoxyCodeLine{228 \textcolor{preprocessor}{        \}                                    \(\backslash\)}}
+\DoxyCodeLine{229 \textcolor{preprocessor}{        catch (...)                          \(\backslash\)}}
+\DoxyCodeLine{230 \textcolor{preprocessor}{        \{                                    \(\backslash\)}}
+\DoxyCodeLine{231 \textcolor{preprocessor}{            expect (false, "{}Expected: does not throw an exception, Actual: throws."{}}); \(\backslash\)}
+\DoxyCodeLine{232         \}}
+\DoxyCodeLine{233 }
+\DoxyCodeLine{235 \textcolor{preprocessor}{    \#define expectThrows(expr)               \(\backslash\)}}
+\DoxyCodeLine{236 \textcolor{preprocessor}{        try                                  \(\backslash\)}}
+\DoxyCodeLine{237 \textcolor{preprocessor}{        \{                                    \(\backslash\)}}
+\DoxyCodeLine{238 \textcolor{preprocessor}{            (expr);                          \(\backslash\)}}
+\DoxyCodeLine{239 \textcolor{preprocessor}{            expect (false, "{}Expected: throws an exception, Actual: does not throw."{}}); \(\backslash\)}
+\DoxyCodeLine{240         \}                                    \(\backslash\)}
+\DoxyCodeLine{241         catch (...)                          \(\backslash\)}
+\DoxyCodeLine{242         \{                                    \(\backslash\)}
+\DoxyCodeLine{243             expect (true);                   \(\backslash\)}
+\DoxyCodeLine{244         \}}
+\DoxyCodeLine{245 }
+\DoxyCodeLine{247 \textcolor{preprocessor}{    \#define expectThrowsType(expr, type)     \(\backslash\)}}
+\DoxyCodeLine{248 \textcolor{preprocessor}{        try                                  \(\backslash\)}}
+\DoxyCodeLine{249 \textcolor{preprocessor}{        \{                                    \(\backslash\)}}
+\DoxyCodeLine{250 \textcolor{preprocessor}{            (expr);                          \(\backslash\)}}
+\DoxyCodeLine{251 \textcolor{preprocessor}{            expect (false, "{}Expected: throws an exception of type "{}} \#type "{}, Actual: does not throw."{}); \(\backslash\)}
+\DoxyCodeLine{252         \}                                    \(\backslash\)}
+\DoxyCodeLine{253         catch (type\&)                        \(\backslash\)}
+\DoxyCodeLine{254         \{                                    \(\backslash\)}
+\DoxyCodeLine{255             expect (true);                   \(\backslash\)}
+\DoxyCodeLine{256         \}                                    \(\backslash\)}
+\DoxyCodeLine{257         catch (...)                          \(\backslash\)}
+\DoxyCodeLine{258         \{                                    \(\backslash\)}
+\DoxyCodeLine{259             expect (false, "{}Expected: throws an exception of type "{} \#type "{}, Actual: throws another type."{}); \(\backslash\)}
+\DoxyCodeLine{260         \}}
+\DoxyCodeLine{261 }
+\DoxyCodeLine{262     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{266 \textcolor{comment}{}    \textcolor{keywordtype}{void} logMessage (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{namespacegl_a1243e1c99f08a099c7a70cc1a258034a}{message}});}
+\DoxyCodeLine{267 }
+\DoxyCodeLine{282     \mbox{\hyperlink{class_random}{Random}} getRandom() \textcolor{keyword}{const};}
+\DoxyCodeLine{283 }
+\DoxyCodeLine{284 \textcolor{keyword}{private}:}
+\DoxyCodeLine{285     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{286     \textcolor{keyword}{template} <\textcolor{keyword}{class} ValueType>}
+\DoxyCodeLine{287     \textcolor{keywordtype}{void} expectResultAndPrint (ValueType \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}, ValueType valueToCompareTo, \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}},}
+\DoxyCodeLine{288                                \mbox{\hyperlink{class_string}{String}} compDescription, \mbox{\hyperlink{class_string}{String}} failureMessage)}
+\DoxyCodeLine{289     \{}
+\DoxyCodeLine{290         \textcolor{keywordflow}{if} (! \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}})}
+\DoxyCodeLine{291         \{}
+\DoxyCodeLine{292             \textcolor{keywordflow}{if} (failureMessage.\mbox{\hyperlink{class_string_a46001a29fcbd7c867f0f3a42598a1495}{isNotEmpty}}())}
+\DoxyCodeLine{293                 failureMessage << \textcolor{stringliteral}{"{} -\/-\/ "{}};}
+\DoxyCodeLine{294 }
+\DoxyCodeLine{295             failureMessage << \textcolor{stringliteral}{"{}Expected value"{}} << (compDescription.\mbox{\hyperlink{class_string_ab31a36bda8c789ba3c0ed37bb16c978c}{isEmpty}}() ? \textcolor{stringliteral}{"{}"{}} : \textcolor{stringliteral}{"{} "{}})}
+\DoxyCodeLine{296                            << compDescription << \textcolor{stringliteral}{"{}: "{}} << valueToCompareTo}
+\DoxyCodeLine{297                            << \textcolor{stringliteral}{"{}, Actual value: "{}} << \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}};}
+\DoxyCodeLine{298         \}}
+\DoxyCodeLine{299 }
+\DoxyCodeLine{300         expect (\mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}, failureMessage);}
+\DoxyCodeLine{301     \}}
+\DoxyCodeLine{302 }
+\DoxyCodeLine{303     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{304     \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}, category;}
+\DoxyCodeLine{305     \mbox{\hyperlink{class_unit_test_runner}{UnitTestRunner}}* runner = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{306 }
+\DoxyCodeLine{307     \mbox{\hyperlink{group__juce__core-system_ga6ab7a603bf4435c7cb286b1744366eb2}{JUCE\_DECLARE\_NON\_COPYABLE}} (\mbox{\hyperlink{class_unit_test}{UnitTest}})}
+\DoxyCodeLine{308 \};}
+\DoxyCodeLine{309 }
+\DoxyCodeLine{310 }
+\DoxyCodeLine{311 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{325 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_unit_test_runner}{UnitTestRunner}}}
+\DoxyCodeLine{326 \{}
+\DoxyCodeLine{327 \textcolor{keyword}{public}:}
+\DoxyCodeLine{328     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{330 \textcolor{comment}{}    \mbox{\hyperlink{class_unit_test_runner}{UnitTestRunner}}();}
+\DoxyCodeLine{331 }
+\DoxyCodeLine{333     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_unit_test_runner}{\string~UnitTestRunner}}();}
+\DoxyCodeLine{334 }
+\DoxyCodeLine{343     \textcolor{keywordtype}{void} runTests (\textcolor{keyword}{const} \mbox{\hyperlink{class_array}{Array<UnitTest*>}}\& tests, \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} randomSeed = 0);}
+\DoxyCodeLine{344 }
+\DoxyCodeLine{351     \textcolor{keywordtype}{void} runAllTests (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} randomSeed = 0);}
+\DoxyCodeLine{352 }
+\DoxyCodeLine{359     \textcolor{keywordtype}{void} runTestsInCategory (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& category, \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} randomSeed = 0);}
+\DoxyCodeLine{360 }
+\DoxyCodeLine{364     \textcolor{keywordtype}{void} setAssertOnFailure (\textcolor{keywordtype}{bool} shouldAssert) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{365 }
+\DoxyCodeLine{369     \textcolor{keywordtype}{void} setPassesAreLogged (\textcolor{keywordtype}{bool} shouldDisplayPasses) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{370 }
+\DoxyCodeLine{371     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{378 \textcolor{comment}{}    \textcolor{keyword}{struct }\mbox{\hyperlink{struct_unit_test_runner_1_1_test_result}{TestResult}}}
+\DoxyCodeLine{379     \{}
+\DoxyCodeLine{380         \mbox{\hyperlink{struct_unit_test_runner_1_1_test_result_aaad0f9f6803c45862497dca142e67820}{TestResult}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{381 }
+\DoxyCodeLine{382         \textcolor{keyword}{explicit} \mbox{\hyperlink{struct_unit_test_runner_1_1_test_result_a73df716cb98c472c70858f0f94913851}{TestResult}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& subCategory)}
+\DoxyCodeLine{383              : unitTestName (\mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}),}
+\DoxyCodeLine{384                subcategoryName (subCategory)}
+\DoxyCodeLine{385         \{}
+\DoxyCodeLine{386         \}}
+\DoxyCodeLine{387 }
+\DoxyCodeLine{389         \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{struct_unit_test_runner_1_1_test_result_a5bbfc3f70ca29c0b836dfc9325a328df}{unitTestName}};}
+\DoxyCodeLine{391         \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{struct_unit_test_runner_1_1_test_result_af0a632786980a63693a86bb9942959c0}{subcategoryName}};}
+\DoxyCodeLine{392 }
+\DoxyCodeLine{394         \textcolor{keywordtype}{int} passes = 0;}
+\DoxyCodeLine{396         \textcolor{keywordtype}{int} failures = 0;}
+\DoxyCodeLine{397 }
+\DoxyCodeLine{399         \mbox{\hyperlink{class_string_array}{StringArray}} \mbox{\hyperlink{struct_unit_test_runner_1_1_test_result_ae94f7a271e7f4a5725939036156595bb}{messages}};}
+\DoxyCodeLine{400 }
+\DoxyCodeLine{402         \mbox{\hyperlink{class_time}{Time}} startTime = \mbox{\hyperlink{class_time_a9acf1454101b83bc3c77b435778d698e}{Time::getCurrentTime}}();}
+\DoxyCodeLine{404         \mbox{\hyperlink{class_time}{Time}} \mbox{\hyperlink{struct_unit_test_runner_1_1_test_result_ad755398b0350bc2d834b502c37bb4b30}{endTime}};}
+\DoxyCodeLine{405     \};}
+\DoxyCodeLine{406 }
+\DoxyCodeLine{410     \textcolor{keywordtype}{int} getNumResults() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{411 }
+\DoxyCodeLine{415     \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{struct_unit_test_runner_1_1_test_result}{TestResult}}* getResult (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{416 }
+\DoxyCodeLine{417 protected:}
+\DoxyCodeLine{421     virtual \textcolor{keywordtype}{void} resultsUpdated();}
+\DoxyCodeLine{422 }
+\DoxyCodeLine{427     virtual \textcolor{keywordtype}{void} logMessage (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{namespacegl_a1243e1c99f08a099c7a70cc1a258034a}{message}});}
+\DoxyCodeLine{428 }
+\DoxyCodeLine{432     virtual \textcolor{keywordtype}{bool} shouldAbortTests();}
+\DoxyCodeLine{433 }
+\DoxyCodeLine{434 private:}
+\DoxyCodeLine{435     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{436     friend class \mbox{\hyperlink{class_unit_test}{UnitTest}};}
+\DoxyCodeLine{437 }
+\DoxyCodeLine{438     \mbox{\hyperlink{class_unit_test}{UnitTest}}* currentTest = \textcolor{keywordtype}{nullptr};}
+\DoxyCodeLine{439     \mbox{\hyperlink{class_string}{String}} currentSubCategory;}
+\DoxyCodeLine{440     \mbox{\hyperlink{class_owned_array}{OwnedArray}}<\mbox{\hyperlink{struct_unit_test_runner_1_1_test_result}{TestResult}}, \mbox{\hyperlink{class_critical_section}{CriticalSection}}> results;}
+\DoxyCodeLine{441     \textcolor{keywordtype}{bool} assertOnFailure = \mbox{\hyperlink{ordinals_8h_a41f9c5fb8b08eb5dc3edce4dcb37fee7}{true}}, logPasses = \mbox{\hyperlink{ordinals_8h_a65e9886d74aaee76545e83dd09011727}{false}};}
+\DoxyCodeLine{442     \mbox{\hyperlink{class_random}{Random}} randomForTest;}
+\DoxyCodeLine{443 }
+\DoxyCodeLine{444     \textcolor{keywordtype}{void} beginNewTest (\mbox{\hyperlink{class_unit_test}{UnitTest}}* test, \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}}\& subCategory);}
+\DoxyCodeLine{445     \textcolor{keywordtype}{void} endTest();}
+\DoxyCodeLine{446 }
+\DoxyCodeLine{447     \textcolor{keywordtype}{void} addPass();}
+\DoxyCodeLine{448     \textcolor{keywordtype}{void} addFail (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}}\& failureMessage);}
+\DoxyCodeLine{449 }
+\DoxyCodeLine{450     \mbox{\hyperlink{group__juce__core-system_ga6ab7a603bf4435c7cb286b1744366eb2}{JUCE\_DECLARE\_NON\_COPYABLE}} (\mbox{\hyperlink{class_unit_test_runner}{UnitTestRunner}})}
+\DoxyCodeLine{451 \};}
+\DoxyCodeLine{452 }
+\DoxyCodeLine{453  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{454 }
+
+\end{DoxyCode}

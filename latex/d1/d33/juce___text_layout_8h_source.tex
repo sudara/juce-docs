@@ -1,0 +1,213 @@
+\hypertarget{juce___text_layout_8h_source}{}\doxysection{juce\+\_\+\+Text\+Layout.\+h}
+\label{juce___text_layout_8h_source}\index{build/juce\_graphics/fonts/juce\_TextLayout.h@{build/juce\_graphics/fonts/juce\_TextLayout.h}}
+\mbox{\hyperlink{juce___text_layout_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{41 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_text_layout}{TextLayout}}  final}
+\DoxyCodeLine{42 \{}
+\DoxyCodeLine{43 \textcolor{keyword}{private}:}
+\DoxyCodeLine{44     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Iterator>}
+\DoxyCodeLine{45     \textcolor{keyword}{class }DereferencingIterator}
+\DoxyCodeLine{46     \{}
+\DoxyCodeLine{47     \textcolor{keyword}{public}:}
+\DoxyCodeLine{48         \textcolor{keyword}{using} value\_type = \textcolor{keyword}{typename} std::remove\_reference<decltype(**std::declval<Iterator>())>::\mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}};}
+\DoxyCodeLine{49         \textcolor{keyword}{using} difference\_type = \textcolor{keyword}{typename} std::iterator\_traits<Iterator>::difference\_type;}
+\DoxyCodeLine{50         \textcolor{keyword}{using} \mbox{\hyperlink{namespacegl_aaed9478f30f9e6b0b29bc31827876c3a}{pointer}} = value\_type*;}
+\DoxyCodeLine{51         \textcolor{keyword}{using} \mbox{\hyperlink{namespacegl_ae1e0d48aae46a2915967f5f947f40ef6}{reference}} = value\_type\&;}
+\DoxyCodeLine{52         \textcolor{keyword}{using} iterator\_category = \textcolor{keyword}{typename} std::iterator\_traits<Iterator>::iterator\_category;}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54         \textcolor{keyword}{explicit} DereferencingIterator (Iterator \mbox{\hyperlink{namespacegl_a72039bf7996167e32bca54980c5595e4}{in}}) : \mbox{\hyperlink{class_text_layout_a58539f01af12859a0414099405b4e873}{iterator}} (\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (\mbox{\hyperlink{namespacegl_a72039bf7996167e32bca54980c5595e4}{in}})) \{\}}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56         DereferencingIterator\& \mbox{\hyperlink{group__juce__core-text_ga185659df4f125d6be8ff07328768e2c3}{operator+= }}(difference\_type \mbox{\hyperlink{namespacegl_a183930cfb90912db497a30515e33eb70}{distance}})}
+\DoxyCodeLine{57         \{}
+\DoxyCodeLine{58             \mbox{\hyperlink{class_text_layout_a58539f01af12859a0414099405b4e873}{iterator}} += \mbox{\hyperlink{namespacegl_a183930cfb90912db497a30515e33eb70}{distance}};}
+\DoxyCodeLine{59             \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{60         \}}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62         \textcolor{keyword}{friend} DereferencingIterator \mbox{\hyperlink{namespace_steinberg_ada25fd2a2681fec14af4507826ffdfe8}{operator+ }}(DereferencingIterator i, difference\_type d) \{ \textcolor{keywordflow}{return} i += d; \}}
+\DoxyCodeLine{63         \textcolor{keyword}{friend} DereferencingIterator \mbox{\hyperlink{namespace_steinberg_ada25fd2a2681fec14af4507826ffdfe8}{operator+ }}(difference\_type d, DereferencingIterator i) \{ \textcolor{keywordflow}{return} i += d; \}}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65         DereferencingIterator\& operator-\/= (difference\_type \mbox{\hyperlink{namespacegl_a183930cfb90912db497a30515e33eb70}{distance}})}
+\DoxyCodeLine{66         \{}
+\DoxyCodeLine{67             \mbox{\hyperlink{class_text_layout_a58539f01af12859a0414099405b4e873}{iterator}} -\/= \mbox{\hyperlink{namespacegl_a183930cfb90912db497a30515e33eb70}{distance}};}
+\DoxyCodeLine{68             \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{69         \}}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71         \textcolor{keyword}{friend} DereferencingIterator \mbox{\hyperlink{b2_math_8h_a42a4d381fdfdde9aa5a3078b13f6b76b}{operator-\/ }}(DereferencingIterator i, difference\_type d) \{ \textcolor{keywordflow}{return} i -\/= d; \}}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73         \textcolor{keyword}{friend} difference\_type \mbox{\hyperlink{b2_math_8h_a42a4d381fdfdde9aa5a3078b13f6b76b}{operator-\/ }}(DereferencingIterator \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, DereferencingIterator \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}})   \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}.iterator -\/ \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}.iterator; \}}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75         \mbox{\hyperlink{namespacegl_ae1e0d48aae46a2915967f5f947f40ef6}{reference}} operator[] (difference\_type d)\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} *\mbox{\hyperlink{class_text_layout_a58539f01af12859a0414099405b4e873}{iterator}}[d]; \}}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77         \textcolor{keyword}{friend} \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_stream_basic_description_8cpp_a878a42c3e8d99e69b741cd76d9a0f8db}{operator<  }}(DereferencingIterator \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, DereferencingIterator \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}.iterator <  \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}.iterator; \}}
+\DoxyCodeLine{78         \textcolor{keyword}{friend} \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespace_steinberg_afc04c8ac4717595b641a119f8e1f4c08}{operator<= }}(DereferencingIterator \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, DereferencingIterator \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}.iterator <= \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}.iterator; \}}
+\DoxyCodeLine{79         \textcolor{keyword}{friend} \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespace_steinberg_ac98deb5a1f36329c44edeee647d46431}{operator>  }}(DereferencingIterator \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, DereferencingIterator \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}.iterator >  \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}.iterator; \}}
+\DoxyCodeLine{80         \textcolor{keyword}{friend} \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespace_steinberg_a98082cddf36f42dae42928aab7b7d704}{operator>= }}(DereferencingIterator \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, DereferencingIterator \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}.iterator >= \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}.iterator; \}}
+\DoxyCodeLine{81         \textcolor{keyword}{friend} \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_audio_channel_layout_8cpp_ad569fbf0e2ce80e9b92caaf1cbb3c257}{operator== }}(DereferencingIterator \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, DereferencingIterator \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}.iterator == \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}.iterator; \}}
+\DoxyCodeLine{82         \textcolor{keyword}{friend} \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_audio_channel_layout_8cpp_aa4ad43821a0285a3d7a5c840173f03ac}{operator!= }}(DereferencingIterator \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, DereferencingIterator \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}.iterator != \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}.iterator; \}}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84         DereferencingIterator\& operator++()           \{ ++\mbox{\hyperlink{class_text_layout_a58539f01af12859a0414099405b4e873}{iterator}}; \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{85         DereferencingIterator\& operator-\/-\/()           \{ -\/-\/\mbox{\hyperlink{class_text_layout_a58539f01af12859a0414099405b4e873}{iterator}}; \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{86         DereferencingIterator  operator++ (\textcolor{keywordtype}{int})\textcolor{keyword}{ const }\{ DereferencingIterator \mbox{\hyperlink{namespace_standard_application_command_i_ds_a994fb4dfda21935c7dfd723144b38778a3584c202667823072c928fd699725466}{copy}} (*\textcolor{keyword}{this}); ++(*this); \textcolor{keywordflow}{return} \mbox{\hyperlink{namespace_standard_application_command_i_ds_a994fb4dfda21935c7dfd723144b38778a3584c202667823072c928fd699725466}{copy}}; \}}
+\DoxyCodeLine{87         DereferencingIterator  operator-\/-\/ (\textcolor{keywordtype}{int})\textcolor{keyword}{ const }\{ DereferencingIterator \mbox{\hyperlink{namespace_standard_application_command_i_ds_a994fb4dfda21935c7dfd723144b38778a3584c202667823072c928fd699725466}{copy}} (*\textcolor{keyword}{this}); -\/-\/(*this); \textcolor{keywordflow}{return} \mbox{\hyperlink{namespace_standard_application_command_i_ds_a994fb4dfda21935c7dfd723144b38778a3584c202667823072c928fd699725466}{copy}}; \}}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89         \mbox{\hyperlink{namespacegl_ae1e0d48aae46a2915967f5f947f40ef6}{reference}} \mbox{\hyperlink{b2_math_8h_a8a3ec3a803ef689abd6674c943eb358b}{operator* }}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} **\mbox{\hyperlink{class_text_layout_a58539f01af12859a0414099405b4e873}{iterator}}; \}}
+\DoxyCodeLine{90         \mbox{\hyperlink{namespacegl_aaed9478f30f9e6b0b29bc31827876c3a}{pointer}}   operator-\/>()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return}  *\mbox{\hyperlink{class_text_layout_a58539f01af12859a0414099405b4e873}{iterator}}; \}}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92     \textcolor{keyword}{private}:}
+\DoxyCodeLine{93         Iterator \mbox{\hyperlink{class_text_layout_a58539f01af12859a0414099405b4e873}{iterator}};}
+\DoxyCodeLine{94     \};}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{96 \textcolor{keyword}{public}:}
+\DoxyCodeLine{101     \mbox{\hyperlink{class_text_layout}{TextLayout}}();}
+\DoxyCodeLine{102     \mbox{\hyperlink{class_text_layout}{TextLayout}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_text_layout}{TextLayout}}\&);}
+\DoxyCodeLine{103     \mbox{\hyperlink{class_text_layout}{TextLayout}}\& operator= (\textcolor{keyword}{const} \mbox{\hyperlink{class_text_layout}{TextLayout}}\&);}
+\DoxyCodeLine{104     \mbox{\hyperlink{class_text_layout}{TextLayout}} (\mbox{\hyperlink{class_text_layout}{TextLayout}}\&\&) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{105     \mbox{\hyperlink{class_text_layout}{TextLayout}}\& operator= (\mbox{\hyperlink{class_text_layout}{TextLayout}}\&\&) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{108     \mbox{\hyperlink{class_text_layout}{\string~TextLayout}}();}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{114 \textcolor{comment}{}    \textcolor{keywordtype}{void} createLayout (\textcolor{keyword}{const} \mbox{\hyperlink{class_attributed_string}{AttributedString}}\&, \textcolor{keywordtype}{float} maxWidth);}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{119     \textcolor{keywordtype}{void} createLayout (\textcolor{keyword}{const} \mbox{\hyperlink{class_attributed_string}{AttributedString}}\&, \textcolor{keywordtype}{float} maxWidth, \textcolor{keywordtype}{float} maxHeight);}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{127     \textcolor{keywordtype}{void} createLayoutWithBalancedLineLengths (\textcolor{keyword}{const} \mbox{\hyperlink{class_attributed_string}{AttributedString}}\&, \textcolor{keywordtype}{float} maxWidth);}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{135     \textcolor{keywordtype}{void} createLayoutWithBalancedLineLengths (\textcolor{keyword}{const} \mbox{\hyperlink{class_attributed_string}{AttributedString}}\&, \textcolor{keywordtype}{float} maxWidth, \textcolor{keywordtype}{float} maxHeight);}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{141     \textcolor{keywordtype}{void} draw (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \mbox{\hyperlink{class_rectangle}{Rectangle<float>}} area) \textcolor{keyword}{const};}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{143     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{145 \textcolor{comment}{}    \textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_text_layout_1_1_glyph}{Glyph}}}
+\DoxyCodeLine{146     \{}
+\DoxyCodeLine{147     \textcolor{keyword}{public}:}
+\DoxyCodeLine{148         \mbox{\hyperlink{class_text_layout_1_1_glyph}{Glyph}} (\textcolor{keywordtype}{int} glyphCode, \mbox{\hyperlink{class_point}{Point<float>}} anchor, \textcolor{keywordtype}{float} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{149 }
+\DoxyCodeLine{151         \textcolor{keywordtype}{int} \mbox{\hyperlink{class_text_layout_1_1_glyph_abb803cc04147b2094e02b773f6aaeb92}{glyphCode}};}
+\DoxyCodeLine{152 }
+\DoxyCodeLine{156         \mbox{\hyperlink{class_point}{Point<float>}} \mbox{\hyperlink{class_text_layout_1_1_glyph_a5ed7fd244c70a76748ced04c222cfb87}{anchor}};}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{158         \textcolor{keywordtype}{float} \mbox{\hyperlink{class_text_layout_1_1_glyph_a3c24f2ea2314f119c3d9e38882c83bf0}{width}};}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160     \textcolor{keyword}{private}:}
+\DoxyCodeLine{161         \mbox{\hyperlink{group__juce__core-memory_gab3639a79598b35f2116f4572af0d93f1}{JUCE\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_text_layout_1_1_glyph}{Glyph}})}
+\DoxyCodeLine{162     \};}
+\DoxyCodeLine{163 }
+\DoxyCodeLine{164     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{166 \textcolor{comment}{}    \textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_text_layout_1_1_run}{Run}}}
+\DoxyCodeLine{167     \{}
+\DoxyCodeLine{168     \textcolor{keyword}{public}:}
+\DoxyCodeLine{169         \mbox{\hyperlink{class_text_layout_1_1_run_aaa88495ce476f6a96b4254144d5de6a0}{Run}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{170         \mbox{\hyperlink{class_text_layout_1_1_run}{Run}} (\mbox{\hyperlink{class_range}{Range<int>}} stringRange, \textcolor{keywordtype}{int} numGlyphsToPreallocate);}
+\DoxyCodeLine{171 }
+\DoxyCodeLine{173         \mbox{\hyperlink{class_range}{Range<float>}} getRunBoundsX() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{174 }
+\DoxyCodeLine{175         \mbox{\hyperlink{class_font}{Font}} font;                      }
+\DoxyCodeLine{176         \mbox{\hyperlink{class_colour}{Colour}} colour \{ 0xff000000 \};   }
+\DoxyCodeLine{177         \mbox{\hyperlink{class_array}{Array<Glyph>}} \mbox{\hyperlink{class_text_layout_1_1_run_ade86d06f39c2bec790e049a053b8de2b}{glyphs}};            }
+\DoxyCodeLine{178         \mbox{\hyperlink{class_range}{Range<int>}} \mbox{\hyperlink{class_text_layout_1_1_run_a5e78255b382519784f9950efeae14f57}{stringRange}};         }
+\DoxyCodeLine{180     \textcolor{keyword}{private}:}
+\DoxyCodeLine{181         \mbox{\hyperlink{group__juce__core-memory_gab3639a79598b35f2116f4572af0d93f1}{JUCE\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_text_layout_1_1_run}{Run}})}
+\DoxyCodeLine{182     \};}
+\DoxyCodeLine{183 }
+\DoxyCodeLine{184     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{186 \textcolor{comment}{}    \textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_text_layout_1_1_line}{Line}}}
+\DoxyCodeLine{187     \{}
+\DoxyCodeLine{188     \textcolor{keyword}{public}:}
+\DoxyCodeLine{189         \mbox{\hyperlink{class_text_layout_1_1_line_aa26cf0e1e87223465f318f2de457e6a2}{Line}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{190         \mbox{\hyperlink{class_text_layout_1_1_line}{Line}} (\mbox{\hyperlink{class_range}{Range<int>}} stringRange, \mbox{\hyperlink{class_point}{Point<float>}} lineOrigin,}
+\DoxyCodeLine{191               \textcolor{keywordtype}{float} ascent, \textcolor{keywordtype}{float} descent, \textcolor{keywordtype}{float} leading, \textcolor{keywordtype}{int} numRunsToPreallocate);}
+\DoxyCodeLine{192 }
+\DoxyCodeLine{193         \mbox{\hyperlink{class_text_layout_1_1_line}{Line}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_text_layout_1_1_line}{Line}}\&);}
+\DoxyCodeLine{194         \mbox{\hyperlink{class_text_layout_1_1_line}{Line}}\& operator= (\textcolor{keyword}{const} \mbox{\hyperlink{class_text_layout_1_1_line}{Line}}\&);}
+\DoxyCodeLine{195 }
+\DoxyCodeLine{196         \mbox{\hyperlink{class_text_layout_1_1_line_ae2f51f6f146cec3ac1971e485fe442f8}{Line}} (\mbox{\hyperlink{class_text_layout_1_1_line}{Line}}\&\&) noexcept = default;}
+\DoxyCodeLine{197         \mbox{\hyperlink{class_text_layout_1_1_line}{Line}}\& operator= (\mbox{\hyperlink{class_text_layout_1_1_line}{Line}}\&\&) noexcept = default;}
+\DoxyCodeLine{198 }
+\DoxyCodeLine{199         \string~\mbox{\hyperlink{class_text_layout_1_1_line}{Line}}() noexcept = default;}
+\DoxyCodeLine{200 }
+\DoxyCodeLine{202         \mbox{\hyperlink{class_range}{Range}}<\textcolor{keywordtype}{float}> getLineBoundsX() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{203 }
+\DoxyCodeLine{205         \mbox{\hyperlink{class_range}{Range}}<\textcolor{keywordtype}{float}> getLineBoundsY() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{206 }
+\DoxyCodeLine{208         \mbox{\hyperlink{class_rectangle}{Rectangle}}<\textcolor{keywordtype}{float}> getLineBounds() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{209 }
+\DoxyCodeLine{210         \textcolor{keywordtype}{void} swap (\mbox{\hyperlink{class_text_layout_1_1_line}{Line}}\& other) noexcept;}
+\DoxyCodeLine{211 }
+\DoxyCodeLine{212         \mbox{\hyperlink{class_owned_array}{OwnedArray}}<\mbox{\hyperlink{class_text_layout_1_1_run}{Run}}> runs;           }
+\DoxyCodeLine{213         \mbox{\hyperlink{class_range}{Range}}<\textcolor{keywordtype}{int}> stringRange;         }
+\DoxyCodeLine{215         \mbox{\hyperlink{class_point}{Point}}<\textcolor{keywordtype}{float}> lineOrigin;        }
+\DoxyCodeLine{216         \textcolor{keywordtype}{float} ascent = 0.0\mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}}, descent = 0.0\mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}}, leading = 0.0\mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}};}
+\DoxyCodeLine{217 }
+\DoxyCodeLine{218     private:}
+\DoxyCodeLine{219         \mbox{\hyperlink{group__juce__core-memory_gab3639a79598b35f2116f4572af0d93f1}{JUCE\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_text_layout_1_1_line}{Line}})}
+\DoxyCodeLine{220     \};}
+\DoxyCodeLine{221 }
+\DoxyCodeLine{222     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{224 \textcolor{comment}{}    \textcolor{keywordtype}{float} getWidth() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept     \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}; \}}
+\DoxyCodeLine{225 }
+\DoxyCodeLine{227     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_text_layout_af4364d09c1a3518cd35761df3d9ebebe}{getHeight}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept    \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}}; \}}
+\DoxyCodeLine{228 }
+\DoxyCodeLine{230     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_text_layout_a87cf3ad96a71fcfb49a349bc54a5f0ec}{getNumLines}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept    \{ \textcolor{keywordflow}{return} lines.size(); \}}
+\DoxyCodeLine{231 }
+\DoxyCodeLine{233     \mbox{\hyperlink{class_line}{Line}}\& getLine (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{234 }
+\DoxyCodeLine{237     \textcolor{keywordtype}{void} addLine (std::unique\_ptr<Line>);}
+\DoxyCodeLine{238 }
+\DoxyCodeLine{240     \textcolor{keywordtype}{void} ensureStorageAllocated (\textcolor{keywordtype}{int} numLinesNeeded);}
+\DoxyCodeLine{241 }
+\DoxyCodeLine{242     \textcolor{keyword}{using}       \mbox{\hyperlink{class_text_layout_a58539f01af12859a0414099405b4e873}{iterator}} = DereferencingIterator<      Line* const*>;}
+\DoxyCodeLine{243     \textcolor{keyword}{using} \mbox{\hyperlink{class_text_layout_ab64acba39ceb55cc6e292e7209cd4faa}{const\_iterator}} = DereferencingIterator<const Line* const*>;}
+\DoxyCodeLine{244 }
+\DoxyCodeLine{246           \mbox{\hyperlink{class_text_layout_a58539f01af12859a0414099405b4e873}{iterator}}  \mbox{\hyperlink{class_text_layout_aed9c0c66ed0f0dce21020dedb3eff636}{begin}}()       \{ \textcolor{keywordflow}{return}       \mbox{\hyperlink{class_text_layout_a58539f01af12859a0414099405b4e873}{iterator}} (lines.begin()); \}}
+\DoxyCodeLine{247     \mbox{\hyperlink{class_text_layout_ab64acba39ceb55cc6e292e7209cd4faa}{const\_iterator}}  \mbox{\hyperlink{class_text_layout_a245c99cfd274221e6723d1e5e149ca51}{begin}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_text_layout_ab64acba39ceb55cc6e292e7209cd4faa}{const\_iterator}} (lines.begin()); \}}
+\DoxyCodeLine{248     \mbox{\hyperlink{class_text_layout_ab64acba39ceb55cc6e292e7209cd4faa}{const\_iterator}} \mbox{\hyperlink{class_text_layout_a48374b5cfd026b827072dd20fdb0e3d6}{cbegin}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_text_layout_ab64acba39ceb55cc6e292e7209cd4faa}{const\_iterator}} (lines.begin()); \}}
+\DoxyCodeLine{249 }
+\DoxyCodeLine{251           \mbox{\hyperlink{class_text_layout_a58539f01af12859a0414099405b4e873}{iterator}}  \mbox{\hyperlink{class_text_layout_a275b5e5c5f694f643d87d76d91534440}{end}}()       \{ \textcolor{keywordflow}{return}       \mbox{\hyperlink{class_text_layout_a58539f01af12859a0414099405b4e873}{iterator}} (lines.end()); \}}
+\DoxyCodeLine{252     \mbox{\hyperlink{class_text_layout_ab64acba39ceb55cc6e292e7209cd4faa}{const\_iterator}}  \mbox{\hyperlink{class_text_layout_a5f66157dcc12c2df6b44f0d942518157}{end}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_text_layout_ab64acba39ceb55cc6e292e7209cd4faa}{const\_iterator}} (lines.end()); \}}
+\DoxyCodeLine{253     \mbox{\hyperlink{class_text_layout_ab64acba39ceb55cc6e292e7209cd4faa}{const\_iterator}} \mbox{\hyperlink{class_text_layout_a2477c113ea57abbfe03bdf6a94854c1c}{cend}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_text_layout_ab64acba39ceb55cc6e292e7209cd4faa}{const\_iterator}} (lines.end()); \}}
+\DoxyCodeLine{254 }
+\DoxyCodeLine{258     \textcolor{keywordtype}{void} recalculateSize();}
+\DoxyCodeLine{259 }
+\DoxyCodeLine{260 \textcolor{keyword}{private}:}
+\DoxyCodeLine{261     \mbox{\hyperlink{class_owned_array}{OwnedArray<Line>}} lines;}
+\DoxyCodeLine{262     \textcolor{keywordtype}{float} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}};}
+\DoxyCodeLine{263     \mbox{\hyperlink{class_justification}{Justification}} justification;}
+\DoxyCodeLine{264 }
+\DoxyCodeLine{265     \textcolor{keywordtype}{void} createStandardLayout (\textcolor{keyword}{const} \mbox{\hyperlink{class_attributed_string}{AttributedString}}\&);}
+\DoxyCodeLine{266     \textcolor{keywordtype}{bool} createNativeLayout (\textcolor{keyword}{const} \mbox{\hyperlink{class_attributed_string}{AttributedString}}\&);}
+\DoxyCodeLine{267 }
+\DoxyCodeLine{268     \mbox{\hyperlink{group__juce__core-memory_gab3639a79598b35f2116f4572af0d93f1}{JUCE\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_text_layout}{TextLayout}})}
+\DoxyCodeLine{269 \};}
+\DoxyCodeLine{270 }
+\DoxyCodeLine{271  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{272 }
+
+\end{DoxyCode}

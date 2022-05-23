@@ -1,0 +1,140 @@
+\hypertarget{class_midi_buffer_iterator}{}\doxysection{Midi\+Buffer\+Iterator Class Reference}
+\label{class_midi_buffer_iterator}\index{MidiBufferIterator@{MidiBufferIterator}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Midi\+Buffer.\+h$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{class_midi_buffer_iterator_adfa167a8101d15fd74fba52bf407e13d}{difference\+\_\+type}} = std\+::iterator\+\_\+traits$<$ Ptr $>$\+::\mbox{\hyperlink{class_midi_buffer_iterator_adfa167a8101d15fd74fba52bf407e13d}{difference\+\_\+type}}
+\item 
+using \mbox{\hyperlink{class_midi_buffer_iterator_a93687373a7dcdedb88c8c9f33e762974}{value\+\_\+type}} = \mbox{\hyperlink{struct_midi_message_metadata}{Midi\+Message\+Metadata}}
+\item 
+using \mbox{\hyperlink{class_midi_buffer_iterator_a9133c21bade24b0052041bf96028bd09}{reference}} = \mbox{\hyperlink{struct_midi_message_metadata}{Midi\+Message\+Metadata}}
+\item 
+using \mbox{\hyperlink{class_midi_buffer_iterator_a3db7b8fe6241ede296561b8dc896ebde}{pointer}} = \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}}
+\item 
+using \mbox{\hyperlink{class_midi_buffer_iterator_a0d910cd4e7b1946be70f63e4753a9cf0}{iterator\+\_\+category}} = std\+::input\+\_\+iterator\+\_\+tag
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_midi_buffer_iterator_ae1f18be6d57b9fa7114e49b479fb7427}{Midi\+Buffer\+Iterator}} ()=default
+\item 
+\mbox{\hyperlink{class_midi_buffer_iterator_a2b395e43b584b805eba9b2714f1720a8}{Midi\+Buffer\+Iterator}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} $\ast$data\+In) noexcept
+\item 
+\mbox{\hyperlink{class_midi_buffer_iterator}{Midi\+Buffer\+Iterator}} \& \mbox{\hyperlink{class_midi_buffer_iterator_a1ab7b971372d63d83b5e4e624fda797a}{operator++}} () noexcept
+\item 
+\mbox{\hyperlink{class_midi_buffer_iterator}{Midi\+Buffer\+Iterator}} \mbox{\hyperlink{class_midi_buffer_iterator_a71f5e7aec8cd236bed6d260d454ae705}{operator++}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}) noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_buffer_iterator_a5c4551bca0ce6418164ab3fbe9583297}{operator==}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_midi_buffer_iterator}{Midi\+Buffer\+Iterator}} \&other) \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_buffer_iterator_a4cd7967bd2e4265c4e3742612b37062c}{operator!=}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_midi_buffer_iterator}{Midi\+Buffer\+Iterator}} \&other) \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{class_midi_buffer_iterator_a9133c21bade24b0052041bf96028bd09}{reference}} \mbox{\hyperlink{class_midi_buffer_iterator_aa32e0ccc29a4c8bd1b5b25c642c91905}{operator$\ast$}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+An iterator to move over contiguous raw MIDI data, which Allows iterating over a \mbox{\hyperlink{class_midi_buffer}{Midi\+Buffer}} using C++11 range-\/for syntax.
+
+In the following example, we log all three-\/byte messages in a midi buffer. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} processBlock (\mbox{\hyperlink{class_audio_buffer}{AudioBuffer<float>}}\&, \mbox{\hyperlink{class_midi_buffer}{MidiBuffer}}\& midiBuffer)\textcolor{keyword}{ override}}
+\DoxyCodeLine{\textcolor{keyword}{}\{}
+\DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \mbox{\hyperlink{struct_midi_message_metadata}{MidiMessageMetadata}} metadata : midiBuffer)}
+\DoxyCodeLine{        \textcolor{keywordflow}{if} (metadata.numBytes == 3)}
+\DoxyCodeLine{            \mbox{\hyperlink{class_logger_a36591e78bde79728c19f35712de65e65}{Logger::writeToLog}} (metadata.getMessage().getDescription());}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+@tags\{Audio\} 
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{class_midi_buffer_iterator_adfa167a8101d15fd74fba52bf407e13d}\label{class_midi_buffer_iterator_adfa167a8101d15fd74fba52bf407e13d}} 
+\index{MidiBufferIterator@{MidiBufferIterator}!difference\_type@{difference\_type}}
+\index{difference\_type@{difference\_type}!MidiBufferIterator@{MidiBufferIterator}}
+\doxysubsubsection{\texorpdfstring{difference\_type}{difference\_type}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{class_midi_buffer_iterator_adfa167a8101d15fd74fba52bf407e13d}{Midi\+Buffer\+Iterator\+::difference\+\_\+type}} =  std\+::iterator\+\_\+traits$<$Ptr$>$\+::\mbox{\hyperlink{class_midi_buffer_iterator_adfa167a8101d15fd74fba52bf407e13d}{difference\+\_\+type}}}
+
+\mbox{\Hypertarget{class_midi_buffer_iterator_a0d910cd4e7b1946be70f63e4753a9cf0}\label{class_midi_buffer_iterator_a0d910cd4e7b1946be70f63e4753a9cf0}} 
+\index{MidiBufferIterator@{MidiBufferIterator}!iterator\_category@{iterator\_category}}
+\index{iterator\_category@{iterator\_category}!MidiBufferIterator@{MidiBufferIterator}}
+\doxysubsubsection{\texorpdfstring{iterator\_category}{iterator\_category}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{class_midi_buffer_iterator_a0d910cd4e7b1946be70f63e4753a9cf0}{Midi\+Buffer\+Iterator\+::iterator\+\_\+category}} =  std\+::input\+\_\+iterator\+\_\+tag}
+
+\mbox{\Hypertarget{class_midi_buffer_iterator_a3db7b8fe6241ede296561b8dc896ebde}\label{class_midi_buffer_iterator_a3db7b8fe6241ede296561b8dc896ebde}} 
+\index{MidiBufferIterator@{MidiBufferIterator}!pointer@{pointer}}
+\index{pointer@{pointer}!MidiBufferIterator@{MidiBufferIterator}}
+\doxysubsubsection{\texorpdfstring{pointer}{pointer}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{class_midi_buffer_iterator_a3db7b8fe6241ede296561b8dc896ebde}{Midi\+Buffer\+Iterator\+::pointer}} =  \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}}}
+
+\mbox{\Hypertarget{class_midi_buffer_iterator_a9133c21bade24b0052041bf96028bd09}\label{class_midi_buffer_iterator_a9133c21bade24b0052041bf96028bd09}} 
+\index{MidiBufferIterator@{MidiBufferIterator}!reference@{reference}}
+\index{reference@{reference}!MidiBufferIterator@{MidiBufferIterator}}
+\doxysubsubsection{\texorpdfstring{reference}{reference}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{class_midi_buffer_iterator_a9133c21bade24b0052041bf96028bd09}{Midi\+Buffer\+Iterator\+::reference}} =  \mbox{\hyperlink{struct_midi_message_metadata}{Midi\+Message\+Metadata}}}
+
+\mbox{\Hypertarget{class_midi_buffer_iterator_a93687373a7dcdedb88c8c9f33e762974}\label{class_midi_buffer_iterator_a93687373a7dcdedb88c8c9f33e762974}} 
+\index{MidiBufferIterator@{MidiBufferIterator}!value\_type@{value\_type}}
+\index{value\_type@{value\_type}!MidiBufferIterator@{MidiBufferIterator}}
+\doxysubsubsection{\texorpdfstring{value\_type}{value\_type}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{class_midi_buffer_iterator_a93687373a7dcdedb88c8c9f33e762974}{Midi\+Buffer\+Iterator\+::value\+\_\+type}} =  \mbox{\hyperlink{struct_midi_message_metadata}{Midi\+Message\+Metadata}}}
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_midi_buffer_iterator_ae1f18be6d57b9fa7114e49b479fb7427}\label{class_midi_buffer_iterator_ae1f18be6d57b9fa7114e49b479fb7427}} 
+\index{MidiBufferIterator@{MidiBufferIterator}!MidiBufferIterator@{MidiBufferIterator}}
+\index{MidiBufferIterator@{MidiBufferIterator}!MidiBufferIterator@{MidiBufferIterator}}
+\doxysubsubsection{\texorpdfstring{MidiBufferIterator()}{MidiBufferIterator()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Midi\+Buffer\+Iterator\+::\+Midi\+Buffer\+Iterator (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\mbox{\Hypertarget{class_midi_buffer_iterator_a2b395e43b584b805eba9b2714f1720a8}\label{class_midi_buffer_iterator_a2b395e43b584b805eba9b2714f1720a8}} 
+\index{MidiBufferIterator@{MidiBufferIterator}!MidiBufferIterator@{MidiBufferIterator}}
+\index{MidiBufferIterator@{MidiBufferIterator}!MidiBufferIterator@{MidiBufferIterator}}
+\doxysubsubsection{\texorpdfstring{MidiBufferIterator()}{MidiBufferIterator()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Midi\+Buffer\+Iterator\+::\+Midi\+Buffer\+Iterator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} $\ast$}]{data\+In }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}, {\ttfamily [noexcept]}}
+
+Constructs an iterator pointing at the message starting at the byte {\ttfamily data\+In}. {\ttfamily data\+In} must point to the start of a valid MIDI message. If it does not, calling other member functions on the iterator will result in undefined behaviour. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_midi_buffer_iterator_a4cd7967bd2e4265c4e3742612b37062c}\label{class_midi_buffer_iterator_a4cd7967bd2e4265c4e3742612b37062c}} 
+\index{MidiBufferIterator@{MidiBufferIterator}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!MidiBufferIterator@{MidiBufferIterator}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily bool Midi\+Buffer\+Iterator\+::operator!= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_midi_buffer_iterator}{Midi\+Buffer\+Iterator}} \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Return false if this iterator points to the same message as another iterator instance, otherwise returns true. \mbox{\Hypertarget{class_midi_buffer_iterator_aa32e0ccc29a4c8bd1b5b25c642c91905}\label{class_midi_buffer_iterator_aa32e0ccc29a4c8bd1b5b25c642c91905}} 
+\index{MidiBufferIterator@{MidiBufferIterator}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!MidiBufferIterator@{MidiBufferIterator}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$()}{operator*()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_buffer_iterator_a9133c21bade24b0052041bf96028bd09}{Midi\+Buffer\+Iterator\+::reference}} Midi\+Buffer\+Iterator\+::operator$\ast$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Return an instance of \mbox{\hyperlink{struct_midi_message_metadata}{Midi\+Message\+Metadata}} which describes the message to which the iterator is currently pointing. \mbox{\Hypertarget{class_midi_buffer_iterator_a1ab7b971372d63d83b5e4e624fda797a}\label{class_midi_buffer_iterator_a1ab7b971372d63d83b5e4e624fda797a}} 
+\index{MidiBufferIterator@{MidiBufferIterator}!operator++@{operator++}}
+\index{operator++@{operator++}!MidiBufferIterator@{MidiBufferIterator}}
+\doxysubsubsection{\texorpdfstring{operator++()}{operator++()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_buffer_iterator}{Midi\+Buffer\+Iterator}} \& Midi\+Buffer\+Iterator\+::operator++ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Make this iterator point to the next message in the buffer. \mbox{\Hypertarget{class_midi_buffer_iterator_a71f5e7aec8cd236bed6d260d454ae705}\label{class_midi_buffer_iterator_a71f5e7aec8cd236bed6d260d454ae705}} 
+\index{MidiBufferIterator@{MidiBufferIterator}!operator++@{operator++}}
+\index{operator++@{operator++}!MidiBufferIterator@{MidiBufferIterator}}
+\doxysubsubsection{\texorpdfstring{operator++()}{operator++()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_buffer_iterator}{Midi\+Buffer\+Iterator}} Midi\+Buffer\+Iterator\+::operator++ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Create a copy of this object, make this iterator point to the next message in the buffer, then return the copy. \mbox{\Hypertarget{class_midi_buffer_iterator_a5c4551bca0ce6418164ab3fbe9583297}\label{class_midi_buffer_iterator_a5c4551bca0ce6418164ab3fbe9583297}} 
+\index{MidiBufferIterator@{MidiBufferIterator}!operator==@{operator==}}
+\index{operator==@{operator==}!MidiBufferIterator@{MidiBufferIterator}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool Midi\+Buffer\+Iterator\+::operator== (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_midi_buffer_iterator}{Midi\+Buffer\+Iterator}} \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Return true if this iterator points to the same message as another iterator instance, otherwise return false. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+audio\+\_\+basics/midi/\mbox{\hyperlink{juce___midi_buffer_8h}{juce\+\_\+\+Midi\+Buffer.\+h}}\item 
+build/juce\+\_\+audio\+\_\+basics/midi/\mbox{\hyperlink{juce___midi_buffer_8cpp}{juce\+\_\+\+Midi\+Buffer.\+cpp}}\end{DoxyCompactItemize}

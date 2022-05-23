@@ -1,0 +1,166 @@
+\hypertarget{juce___known_plugin_list_8h_source}{}\doxysection{juce\+\_\+\+Known\+Plugin\+List.\+h}
+\label{juce___known_plugin_list_8h_source}\index{build/juce\_audio\_processors/scanning/juce\_KnownPluginList.h@{build/juce\_audio\_processors/scanning/juce\_KnownPluginList.h}}
+\mbox{\hyperlink{juce___known_plugin_list_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{41 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_known_plugin_list}{KnownPluginList}}   : \textcolor{keyword}{public} \mbox{\hyperlink{class_change_broadcaster}{ChangeBroadcaster}}}
+\DoxyCodeLine{42 \{}
+\DoxyCodeLine{43 \textcolor{keyword}{public}:}
+\DoxyCodeLine{44     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{46 \textcolor{comment}{}    \mbox{\hyperlink{class_known_plugin_list}{KnownPluginList}}();}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{49     \mbox{\hyperlink{class_known_plugin_list}{\string~KnownPluginList}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{53 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacedsp_1_1detail_a953fbe1bf6236c0f3a95d12aad7ffffb}{clear}}();}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{56     \textcolor{keywordtype}{bool} addType (\textcolor{keyword}{const} \mbox{\hyperlink{class_plugin_description}{PluginDescription}}\& \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}});}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{59     \textcolor{keywordtype}{void} removeType (\textcolor{keyword}{const} \mbox{\hyperlink{class_plugin_description}{PluginDescription}}\& \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}});}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{62     \textcolor{keywordtype}{int} getNumTypes() \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{65     \mbox{\hyperlink{class_array}{Array<PluginDescription>}} getTypes() \textcolor{keyword}{const};}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{68     \mbox{\hyperlink{class_array}{Array<PluginDescription>}} getTypesForFormat (\mbox{\hyperlink{class_audio_plugin_format}{AudioPluginFormat}}\&) \textcolor{keyword}{const};}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{71     std::unique\_ptr<PluginDescription> getTypeForFile (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& fileOrIdentifier) \textcolor{keyword}{const};}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{78     std::unique\_ptr<PluginDescription> getTypeForIdentifierString (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& identifierString) \textcolor{keyword}{const};}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{92     \textcolor{keywordtype}{bool} scanAndAddFile (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& possiblePluginFileOrIdentifier,}
+\DoxyCodeLine{93                          \textcolor{keywordtype}{bool} dontRescanIfAlreadyInList,}
+\DoxyCodeLine{94                          \mbox{\hyperlink{class_owned_array}{OwnedArray<PluginDescription>}}\& typesFound,}
+\DoxyCodeLine{95                          \mbox{\hyperlink{class_audio_plugin_format}{AudioPluginFormat}}\& formatToUse);}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{98     \textcolor{keywordtype}{void} scanFinished();}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{103     \textcolor{keywordtype}{bool} isListingUpToDate (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& possiblePluginFileOrIdentifier,}
+\DoxyCodeLine{104                             \mbox{\hyperlink{class_audio_plugin_format}{AudioPluginFormat}}\& formatToUse) \textcolor{keyword}{const};}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{109     \textcolor{keywordtype}{void} scanAndAddDragAndDroppedFiles (\mbox{\hyperlink{class_audio_plugin_format_manager}{AudioPluginFormatManager}}\& formatManager,}
+\DoxyCodeLine{110                                         \textcolor{keyword}{const} \mbox{\hyperlink{class_string_array}{StringArray}}\& filenames,}
+\DoxyCodeLine{111                                         \mbox{\hyperlink{class_owned_array}{OwnedArray<PluginDescription>}}\& typesFound);}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{115 \textcolor{comment}{}    \textcolor{keyword}{const} \mbox{\hyperlink{class_string_array}{StringArray}}\& getBlacklistedFiles() \textcolor{keyword}{const};}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{118     \textcolor{keywordtype}{void} addToBlacklist (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& pluginID);}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{121     \textcolor{keywordtype}{void} removeFromBlacklist (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& pluginID);}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{124     \textcolor{keywordtype}{void} clearBlacklistedFiles();}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{129 \textcolor{comment}{}    \textcolor{keyword}{enum} \mbox{\hyperlink{class_known_plugin_list_a6beabfccc86796527f663f30f3514098}{SortMethod}}}
+\DoxyCodeLine{130     \{}
+\DoxyCodeLine{131         defaultOrder = 0,}
+\DoxyCodeLine{132         \mbox{\hyperlink{class_known_plugin_list_a6beabfccc86796527f663f30f3514098a13fa4bc46bb8b6c70670f13fa2a8ad4e}{sortAlphabetically}},}
+\DoxyCodeLine{133         \mbox{\hyperlink{class_known_plugin_list_a6beabfccc86796527f663f30f3514098a2a27fc73f320a500d812f660663eee11}{sortByCategory}},}
+\DoxyCodeLine{134         \mbox{\hyperlink{class_known_plugin_list_a6beabfccc86796527f663f30f3514098acf0c4ac83301f91cb2eb1ac54fb32222}{sortByManufacturer}},}
+\DoxyCodeLine{135         \mbox{\hyperlink{class_known_plugin_list_a6beabfccc86796527f663f30f3514098a72b3147bbc8e818e0ece96b463c07bcc}{sortByFormat}},}
+\DoxyCodeLine{136         \mbox{\hyperlink{class_known_plugin_list_a6beabfccc86796527f663f30f3514098a7da9f1486befa583139ced7d449a6b9d}{sortByFileSystemLocation}},}
+\DoxyCodeLine{137         sortByInfoUpdateTime}
+\DoxyCodeLine{138     \};}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{148 \textcolor{comment}{}    \textcolor{keyword}{static} \textcolor{keywordtype}{void} addToMenu (\mbox{\hyperlink{class_popup_menu}{PopupMenu}}\& menu, \textcolor{keyword}{const} \mbox{\hyperlink{class_array}{Array<PluginDescription>}}\& types,}
+\DoxyCodeLine{149                            SortMethod sortMethod, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& currentlyTickedPluginID = \{\});}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{155     \textcolor{keyword}{static} \textcolor{keywordtype}{int} getIndexChosenByMenu (\textcolor{keyword}{const} \mbox{\hyperlink{class_array}{Array<PluginDescription>}}\& types, \textcolor{keywordtype}{int} menuResultCode);}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{157     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{159 \textcolor{comment}{}    \textcolor{keywordtype}{void} sort (SortMethod method, \textcolor{keywordtype}{bool} forwards);}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{163 \textcolor{comment}{}    std::unique\_ptr<XmlElement> createXml() \textcolor{keyword}{const};}
+\DoxyCodeLine{164 }
+\DoxyCodeLine{166     \textcolor{keywordtype}{void} recreateFromXml (\textcolor{keyword}{const} \mbox{\hyperlink{class_xml_element}{XmlElement}}\& xml);}
+\DoxyCodeLine{167 }
+\DoxyCodeLine{168     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{172 \textcolor{comment}{}    \textcolor{keyword}{struct }\mbox{\hyperlink{struct_known_plugin_list_1_1_plugin_tree}{PluginTree}}}
+\DoxyCodeLine{173     \{}
+\DoxyCodeLine{174         \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{struct_known_plugin_list_1_1_plugin_tree_ac9560e7c8295f7967b7a4f1b62a30d1b}{folder}}; }
+\DoxyCodeLine{175         \mbox{\hyperlink{class_owned_array}{OwnedArray<PluginTree>}} \mbox{\hyperlink{struct_known_plugin_list_1_1_plugin_tree_a46a202981e3ec6943e51ddbe2866a8d0}{subFolders}};}
+\DoxyCodeLine{176         \mbox{\hyperlink{class_array}{Array<PluginDescription>}} \mbox{\hyperlink{struct_known_plugin_list_1_1_plugin_tree_a38e4386aee24bad7bc0aab73eecb7b08}{plugins}};}
+\DoxyCodeLine{177     \};}
+\DoxyCodeLine{178 }
+\DoxyCodeLine{180     \textcolor{keyword}{static} std::unique\_ptr<PluginTree> createTree (\textcolor{keyword}{const} \mbox{\hyperlink{class_array}{Array<PluginDescription>}}\& types, \mbox{\hyperlink{class_known_plugin_list_a6beabfccc86796527f663f30f3514098}{SortMethod}} sortMethod);}
+\DoxyCodeLine{181 }
+\DoxyCodeLine{182     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{184 \textcolor{comment}{}    \textcolor{keyword}{class }\mbox{\hyperlink{class_known_plugin_list_1_1_custom_scanner}{CustomScanner}}}
+\DoxyCodeLine{185     \{}
+\DoxyCodeLine{186     \textcolor{keyword}{public}:}
+\DoxyCodeLine{187         \mbox{\hyperlink{class_known_plugin_list_1_1_custom_scanner}{CustomScanner}}();}
+\DoxyCodeLine{188         \textcolor{keyword}{virtual} \mbox{\hyperlink{class_known_plugin_list_1_1_custom_scanner}{\string~CustomScanner}}();}
+\DoxyCodeLine{189 }
+\DoxyCodeLine{193         \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_known_plugin_list_1_1_custom_scanner_a3af43036c1db3c52075e5cb268f34631}{findPluginTypesFor}} (\mbox{\hyperlink{class_audio_plugin_format}{AudioPluginFormat}}\& \mbox{\hyperlink{namespacegl_a597b77c61fc6d444d2bfc6bf69dee277}{format}},}
+\DoxyCodeLine{194                                          \mbox{\hyperlink{class_owned_array}{OwnedArray<PluginDescription>}}\& \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}},}
+\DoxyCodeLine{195                                          \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& fileOrIdentifier) = 0;}
+\DoxyCodeLine{196 }
+\DoxyCodeLine{198         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} scanFinished();}
+\DoxyCodeLine{199 }
+\DoxyCodeLine{204         \textcolor{keywordtype}{bool} shouldExit() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{205     \};}
+\DoxyCodeLine{206 }
+\DoxyCodeLine{210     \textcolor{keywordtype}{void} setCustomScanner (\mbox{\hyperlink{namespacestd}{std}}::unique\_ptr<\mbox{\hyperlink{class_known_plugin_list_1_1_custom_scanner}{CustomScanner}}> newScanner);}
+\DoxyCodeLine{211 }
+\DoxyCodeLine{212     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{213    \textcolor{preprocessor}{\#ifndef DOXYGEN}}
+\DoxyCodeLine{214     \textcolor{comment}{// These methods have been deprecated! When getting the list of plugin types you should instead use}}
+\DoxyCodeLine{215     \textcolor{comment}{// the getTypes() method which returns a copy of the internal PluginDescription array and can be accessed}}
+\DoxyCodeLine{216     \textcolor{comment}{// in a thread-\/safe way.}}
+\DoxyCodeLine{217     [[deprecated]] \mbox{\hyperlink{class_plugin_description}{PluginDescription}}* \mbox{\hyperlink{class_known_plugin_list_acae1f5ede510d4830d1e7b52f10c96cb}{getType}} (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}})  \textcolor{keyword}{noexcept}            \{ \textcolor{keywordflow}{return} \&types.getReference (\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}); \}}
+\DoxyCodeLine{218     [[deprecated]] \textcolor{keyword}{const} \mbox{\hyperlink{class_plugin_description}{PluginDescription}}* \mbox{\hyperlink{class_known_plugin_list_a6b47a5a7b398dc1579d3ad16388ed47f}{getType}} (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) \textcolor{keyword}{const} \textcolor{keyword}{noexcept} \{ \textcolor{keywordflow}{return} \&types.getReference (\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}); \}}
+\DoxyCodeLine{219     [[deprecated]] \mbox{\hyperlink{class_plugin_description}{PluginDescription}}** \mbox{\hyperlink{class_known_plugin_list_a157c5ca6aa277aeb9c370d5b581da6cc}{begin}}() noexcept                        \{ \mbox{\hyperlink{group__juce__core-system_gadc044ce5efecbecf2f5a44cd00db67b3}{jassertfalse}}; \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr}; \}}
+\DoxyCodeLine{220     [[deprecated]] \mbox{\hyperlink{class_plugin_description}{PluginDescription}}* \textcolor{keyword}{const}* \mbox{\hyperlink{class_known_plugin_list_a82626dd9bde4ff9f9cf262f95bcd7acf}{begin}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept            \{ \mbox{\hyperlink{group__juce__core-system_gadc044ce5efecbecf2f5a44cd00db67b3}{jassertfalse}}; \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr}; \}}
+\DoxyCodeLine{221     [[deprecated]] \mbox{\hyperlink{class_plugin_description}{PluginDescription}}** \mbox{\hyperlink{class_known_plugin_list_acc927883c153391500355c1f9c6d6703}{end}}() noexcept                          \{ \mbox{\hyperlink{group__juce__core-system_gadc044ce5efecbecf2f5a44cd00db67b3}{jassertfalse}}; \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr}; \}}
+\DoxyCodeLine{222     [[deprecated]] \mbox{\hyperlink{class_plugin_description}{PluginDescription}}* \textcolor{keyword}{const}* \mbox{\hyperlink{class_known_plugin_list_acd9f9856dc1242f69ea4f42fb40af041}{end}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept              \{ \mbox{\hyperlink{group__juce__core-system_gadc044ce5efecbecf2f5a44cd00db67b3}{jassertfalse}}; \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr}; \}}
+\DoxyCodeLine{223 }
+\DoxyCodeLine{224     \textcolor{comment}{// These methods have been deprecated in favour of their static counterparts. You should call getTypes()}}
+\DoxyCodeLine{225     \textcolor{comment}{// to store the plug-\/in list at a point in time and use it when calling these methods.}}
+\DoxyCodeLine{226     [[deprecated]] \textcolor{keywordtype}{void} addToMenu (\mbox{\hyperlink{class_popup_menu}{PopupMenu}}\& menu, SortMethod sortMethod, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& currentlyTickedPluginID = \{\}) \textcolor{keyword}{const};}
+\DoxyCodeLine{227     [[deprecated]] \textcolor{keywordtype}{int} getIndexChosenByMenu (\textcolor{keywordtype}{int} menuResultCode) \textcolor{keyword}{const};}
+\DoxyCodeLine{228     [[deprecated]] std::unique\_ptr<PluginTree> createTree (\textcolor{keyword}{const} SortMethod sortMethod) \textcolor{keyword}{const};}
+\DoxyCodeLine{229 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{230 }
+\DoxyCodeLine{231 \textcolor{keyword}{private}:}
+\DoxyCodeLine{232     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{233     \mbox{\hyperlink{class_array}{Array<PluginDescription>}} \mbox{\hyperlink{namespacegl_a7938d717f9b4bfe954cb42cdae2ed3c0}{types}};}
+\DoxyCodeLine{234     \mbox{\hyperlink{class_string_array}{StringArray}} blacklist;}
+\DoxyCodeLine{235     std::unique\_ptr<CustomScanner> scanner;}
+\DoxyCodeLine{236     \mbox{\hyperlink{class_critical_section}{CriticalSection}} scanLock, typesArrayLock;}
+\DoxyCodeLine{237 }
+\DoxyCodeLine{238     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_known_plugin_list}{KnownPluginList}})}
+\DoxyCodeLine{239 \};}
+\DoxyCodeLine{240 }
+\DoxyCodeLine{241  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{242 }
+
+\end{DoxyCode}

@@ -1,0 +1,169 @@
+\hypertarget{juce___web_browser_component_8h_source}{}\doxysection{juce\+\_\+\+Web\+Browser\+Component.\+h}
+\label{juce___web_browser_component_8h_source}\index{build/juce\_gui\_extra/misc/juce\_WebBrowserComponent.h@{build/juce\_gui\_extra/misc/juce\_WebBrowserComponent.h}}
+\mbox{\hyperlink{juce___web_browser_component_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#if JUCE\_WEB\_BROWSER || DOXYGEN}}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{46 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  WebBrowserComponent  : \textcolor{keyword}{public} \mbox{\hyperlink{class_component}{Component}}}
+\DoxyCodeLine{47 \{}
+\DoxyCodeLine{48 \textcolor{keyword}{public}:}
+\DoxyCodeLine{49     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{60 \textcolor{comment}{}    \textcolor{keyword}{explicit} WebBrowserComponent (\textcolor{keywordtype}{bool} unloadPageWhenBrowserIsHidden = \textcolor{keyword}{true});}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{63     \string~WebBrowserComponent() \textcolor{keyword}{override};}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{75 \textcolor{comment}{}    \textcolor{keywordtype}{void} goToURL (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& url,}
+\DoxyCodeLine{76                   \textcolor{keyword}{const} \mbox{\hyperlink{class_string_array}{StringArray}}* headers = \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{77                   \textcolor{keyword}{const} \mbox{\hyperlink{class_memory_block}{MemoryBlock}}* postData = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{80     \textcolor{keywordtype}{void} stop();}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{83     \textcolor{keywordtype}{void} goBack();}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{86     \textcolor{keywordtype}{void} goForward();}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{89     \textcolor{keywordtype}{void} refresh();}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{92     \textcolor{keyword}{static} \textcolor{keywordtype}{void} clearCookies();}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{94     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{102 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} pageAboutToLoad (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& newURL)             \{ \mbox{\hyperlink{group__juce__core-maths_ga5158e6e8faa5553204f90af596fafaf5}{ignoreUnused}} (newURL); \textcolor{keywordflow}{return} \textcolor{keyword}{true}; \}}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{105     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} pageFinishedLoading (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& url)            \{ \mbox{\hyperlink{group__juce__core-maths_ga5158e6e8faa5553204f90af596fafaf5}{ignoreUnused}} (url); \}}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{117     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} pageLoadHadNetworkError (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& errorInfo)  \{ \mbox{\hyperlink{group__juce__core-maths_ga5158e6e8faa5553204f90af596fafaf5}{ignoreUnused}} (errorInfo); \textcolor{keywordflow}{return} \textcolor{keyword}{true}; \}}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{122     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} windowCloseRequest()                               \{\}}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{128     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} newWindowAttemptingToLoad (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& newURL)   \{ \mbox{\hyperlink{group__juce__core-maths_ga5158e6e8faa5553204f90af596fafaf5}{ignoreUnused}} (newURL); \}}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{130     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{132 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_component_a7cf1862f4af5909ea72827898114a182}{paint}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{134     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_component_ad896183a68d71daf5816982d1fefd960}{resized}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{136     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_component_a83f298a05d7f26a6e50e45dd37eb6313}{parentHierarchyChanged}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{138     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_component_a3859d7aacb18fd51b2fc3e0c51680d1c}{visibilityChanged}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{140     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_component_a408d41f1499a2ebdd4bbc8d4004c7727}{focusGained}} (FocusChangeType) \textcolor{keyword}{override};}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{143     \textcolor{keyword}{class }Pimpl;}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{146     \textcolor{keyword}{friend} \textcolor{keyword}{class }WindowsWebView2WebBrowserComponent;}
+\DoxyCodeLine{147 }
+\DoxyCodeLine{149     \textcolor{keyword}{struct }ConstructWithoutPimpl}
+\DoxyCodeLine{150     \{}
+\DoxyCodeLine{151         \textcolor{keyword}{explicit} ConstructWithoutPimpl (\textcolor{keywordtype}{bool} unloadOnHide) : unloadWhenHidden (unloadOnHide) \{\}}
+\DoxyCodeLine{152         \textcolor{keyword}{const} \textcolor{keywordtype}{bool} unloadWhenHidden;}
+\DoxyCodeLine{153     \};}
+\DoxyCodeLine{154     \textcolor{keyword}{explicit} WebBrowserComponent (ConstructWithoutPimpl);}
+\DoxyCodeLine{155 }
+\DoxyCodeLine{156 \textcolor{keyword}{private}:}
+\DoxyCodeLine{157     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{158     std::unique\_ptr<Pimpl> browser;}
+\DoxyCodeLine{159     \textcolor{keywordtype}{bool} blankPageShown = \textcolor{keyword}{false}, unloadPageWhenHidden;}
+\DoxyCodeLine{160     \mbox{\hyperlink{class_string}{String}} lastURL;}
+\DoxyCodeLine{161     \mbox{\hyperlink{class_string_array}{StringArray}} lastHeaders;}
+\DoxyCodeLine{162     \mbox{\hyperlink{class_memory_block}{MemoryBlock}} lastPostData;}
+\DoxyCodeLine{163 }
+\DoxyCodeLine{164     \textcolor{keywordtype}{void} reloadLastURL();}
+\DoxyCodeLine{165     \textcolor{keywordtype}{void} checkWindowAssociation();}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{167     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (WebBrowserComponent)}
+\DoxyCodeLine{168 \};}
+\DoxyCodeLine{169 }
+\DoxyCodeLine{170 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{179 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  WebView2Preferences}
+\DoxyCodeLine{180 \{}
+\DoxyCodeLine{181 \textcolor{keyword}{public}:}
+\DoxyCodeLine{182     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{186 \textcolor{comment}{}    \mbox{\hyperlink{group__juce__core-system_ga73895ce668ec3b0d108f741e8500d28c}{JUCE\_NODISCARD}} WebView2Preferences withDLLLocation (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& \mbox{\hyperlink{namespacegl_ac2dc845e3770e22a4aeb21e55cf2816e}{location}})\textcolor{keyword}{ const   }\{ \textcolor{keywordflow}{return} with (\&WebView2Preferences::dllLocation, \mbox{\hyperlink{namespacegl_ac2dc845e3770e22a4aeb21e55cf2816e}{location}}); \}}
+\DoxyCodeLine{187 }
+\DoxyCodeLine{189     WebView2Preferences withUserDataFolder (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& folder)\textcolor{keyword}{ const  }\{ \textcolor{keywordflow}{return} with (\&WebView2Preferences::userDataFolder, folder); \}}
+\DoxyCodeLine{190 }
+\DoxyCodeLine{194     \mbox{\hyperlink{group__juce__core-system_ga73895ce668ec3b0d108f741e8500d28c}{JUCE\_NODISCARD}} WebView2Preferences withStatusBarDisabled()\textcolor{keyword}{ const                  }\{ \textcolor{keywordflow}{return} with (\&WebView2Preferences::disableStatusBar, \textcolor{keyword}{true}); \}}
+\DoxyCodeLine{195 }
+\DoxyCodeLine{199     \mbox{\hyperlink{group__juce__core-system_ga73895ce668ec3b0d108f741e8500d28c}{JUCE\_NODISCARD}} WebView2Preferences withBuiltInErrorPageDisabled()\textcolor{keyword}{ const           }\{ \textcolor{keywordflow}{return} with (\&WebView2Preferences::disableBuiltInErrorPage, \textcolor{keyword}{true}); \}}
+\DoxyCodeLine{200 }
+\DoxyCodeLine{206     \mbox{\hyperlink{group__juce__core-system_ga73895ce668ec3b0d108f741e8500d28c}{JUCE\_NODISCARD}} WebView2Preferences withBackgroundColour (\textcolor{keyword}{const} \mbox{\hyperlink{class_colour}{Colour}}\& colour)\textcolor{keyword}{ const}}
+\DoxyCodeLine{207 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{208         \textcolor{comment}{// the background colour must be either fully opaque or transparent!}}
+\DoxyCodeLine{209         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (colour.\mbox{\hyperlink{class_colour_a0ea77f44712e52ad17b313b305650ec0}{isOpaque}}() || colour.\mbox{\hyperlink{class_colour_a30c68aad96d0a126d68b410089ae9993}{isTransparent}}());}
+\DoxyCodeLine{210 }
+\DoxyCodeLine{211         \textcolor{keywordflow}{return} with (\&WebView2Preferences::backgroundColour, colour);}
+\DoxyCodeLine{212     \}}
+\DoxyCodeLine{213 }
+\DoxyCodeLine{214     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{215     \mbox{\hyperlink{class_file}{File}} getDLLLocation()\textcolor{keyword}{ const                          }\{ \textcolor{keywordflow}{return} dllLocation; \}}
+\DoxyCodeLine{216     \mbox{\hyperlink{class_file}{File}} getUserDataFolder()\textcolor{keyword}{ const                       }\{ \textcolor{keywordflow}{return} userDataFolder; \}}
+\DoxyCodeLine{217     \textcolor{keywordtype}{bool} getIsStatusBarDisabled() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept         \{ \textcolor{keywordflow}{return} disableStatusBar; \}}
+\DoxyCodeLine{218     \textcolor{keywordtype}{bool} getIsBuiltInErrorPageDisabled() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept  \{ \textcolor{keywordflow}{return} disableBuiltInErrorPage; \}}
+\DoxyCodeLine{219     \mbox{\hyperlink{class_colour}{Colour}} getBackgroundColour()\textcolor{keyword}{ const                   }\{ \textcolor{keywordflow}{return} backgroundColour; \}}
+\DoxyCodeLine{220 }
+\DoxyCodeLine{221 \textcolor{keyword}{private}:}
+\DoxyCodeLine{222     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{223     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Member, \textcolor{keyword}{typename} Item>}
+\DoxyCodeLine{224     WebView2Preferences with (Member\&\& member, Item\&\& item)\textcolor{keyword}{ const}}
+\DoxyCodeLine{225 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{226         \textcolor{keyword}{auto} options = *\textcolor{keyword}{this};}
+\DoxyCodeLine{227         options.*member = std::forward<Item> (item);}
+\DoxyCodeLine{228 }
+\DoxyCodeLine{229         \textcolor{keywordflow}{return} options;}
+\DoxyCodeLine{230     \}}
+\DoxyCodeLine{231 }
+\DoxyCodeLine{232     \mbox{\hyperlink{class_file}{File}} dllLocation, userDataFolder;}
+\DoxyCodeLine{233     \textcolor{keywordtype}{bool} disableStatusBar = \textcolor{keyword}{false}, disableBuiltInErrorPage = \textcolor{keyword}{false};}
+\DoxyCodeLine{234     \mbox{\hyperlink{class_colour}{Colour}} backgroundColour = \mbox{\hyperlink{namespace_colours_a62eff4c03f8f8e0805bc5d4e47cf24ec}{Colours::white}};}
+\DoxyCodeLine{235 \};}
+\DoxyCodeLine{236 }
+\DoxyCodeLine{254 \textcolor{keyword}{class }WindowsWebView2WebBrowserComponent  : \textcolor{keyword}{public} WebBrowserComponent}
+\DoxyCodeLine{255 \{}
+\DoxyCodeLine{256 \textcolor{keyword}{public}:}
+\DoxyCodeLine{257     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{271 \textcolor{comment}{}    WindowsWebView2WebBrowserComponent (\textcolor{keywordtype}{bool} unloadPageWhenBrowserIsHidden = \textcolor{keyword}{true},}
+\DoxyCodeLine{272                                         \textcolor{keyword}{const} WebView2Preferences\& preferences = \{\});}
+\DoxyCodeLine{273 }
+\DoxyCodeLine{274     \textcolor{comment}{// This constructor has been deprecated. Use the new constructor that takes a}}
+\DoxyCodeLine{275     \textcolor{comment}{// WebView2Preferences instead.}}
+\DoxyCodeLine{276     \textcolor{keyword}{explicit} WindowsWebView2WebBrowserComponent (\textcolor{keywordtype}{bool} unloadPageWhenBrowserIsHidden = \textcolor{keyword}{true},}
+\DoxyCodeLine{277                                                  \textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& dllLocation = \{\},}
+\DoxyCodeLine{278                                                  \textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& userDataFolder = \{\})}
+\DoxyCodeLine{279                                   : WindowsWebView2WebBrowserComponent (unloadPageWhenBrowserIsHidden,}
+\DoxyCodeLine{280                                                                         WebView2Preferences().withDLLLocation (dllLocation)}
+\DoxyCodeLine{281                                                                                              .withUserDataFolder (userDataFolder))}
+\DoxyCodeLine{282     \{}
+\DoxyCodeLine{283     \}}
+\DoxyCodeLine{284 \};}
+\DoxyCodeLine{285 }
+\DoxyCodeLine{286 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{287 }
+\DoxyCodeLine{288  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{289 }
+
+\end{DoxyCode}

@@ -1,0 +1,404 @@
+\hypertarget{juce___file_8h_source}{}\doxysection{juce\+\_\+\+File.\+h}
+\label{juce___file_8h_source}\index{build/juce\_core/files/juce\_File.h@{build/juce\_core/files/juce\_File.h}}
+\mbox{\hyperlink{juce___file_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#if ! defined (DOXYGEN) \&\& (JUCE\_MAC || JUCE\_IOS)}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{ \#if \_\_LP64\_\_}}
+\DoxyCodeLine{29   \textcolor{keyword}{using} OSType = \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}};}
+\DoxyCodeLine{30 \textcolor{preprocessor}{ \#else}}
+\DoxyCodeLine{31   \textcolor{keyword}{using} OSType = \textcolor{keywordtype}{unsigned} long;}
+\DoxyCodeLine{32 \textcolor{preprocessor}{ \#endif}}
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{49 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_file}{File}} final}
+\DoxyCodeLine{50 \{}
+\DoxyCodeLine{51 \textcolor{keyword}{public}:}
+\DoxyCodeLine{52     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{60 \textcolor{comment}{}    \mbox{\hyperlink{class_file_a38506545c1402119b5fef7bcf6289fa9}{File}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{72     \mbox{\hyperlink{class_file}{File}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& absolutePath);}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{75     \mbox{\hyperlink{class_file}{File}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\&);}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{78     \mbox{\hyperlink{class_file_af8bd941b390c225d2f50c74c8a234528}{\string~File}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{90     \mbox{\hyperlink{class_file}{File}}\& operator= (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& newAbsolutePath);}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{93     \mbox{\hyperlink{class_file}{File}}\& operator= (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& otherFile);}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{96     \mbox{\hyperlink{class_file}{File}} (\mbox{\hyperlink{class_file}{File}}\&\&) noexcept;}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{99     \mbox{\hyperlink{class_file}{File}}\& operator= (\mbox{\hyperlink{class_file}{File}}\&\&) noexcept;}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{107 \textcolor{comment}{}    \textcolor{keywordtype}{bool} exists() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{115     \textcolor{keywordtype}{bool} existsAsFile() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{123     \textcolor{keywordtype}{bool} isDirectory() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{131     \textcolor{keywordtype}{bool} isRoot() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{137     \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} getSize() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{138 }
+\DoxyCodeLine{144     static \mbox{\hyperlink{class_string}{String}} descriptionOfSizeInBytes (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} bytes);}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{146     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{158 \textcolor{comment}{}    \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}}\& getFullPathName() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept          \{ \textcolor{keywordflow}{return} fullPath; \}}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{173     \mbox{\hyperlink{class_string}{String}} getFileName() \textcolor{keyword}{const};}
+\DoxyCodeLine{174 }
+\DoxyCodeLine{190     \mbox{\hyperlink{class_string}{String}} getRelativePathFrom (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& directoryToBeRelativeTo) \textcolor{keyword}{const};}
+\DoxyCodeLine{191 }
+\DoxyCodeLine{192     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{201 \textcolor{comment}{}    \mbox{\hyperlink{class_string}{String}} getFileExtension() \textcolor{keyword}{const};}
+\DoxyCodeLine{202 }
+\DoxyCodeLine{214     \textcolor{keywordtype}{bool} hasFileExtension (\mbox{\hyperlink{class_string_ref}{StringRef}} extensionToTest) \textcolor{keyword}{const};}
+\DoxyCodeLine{215 }
+\DoxyCodeLine{226     \mbox{\hyperlink{class_file}{File}} withFileExtension (\mbox{\hyperlink{class_string_ref}{StringRef}} newExtension) \textcolor{keyword}{const};}
+\DoxyCodeLine{227 }
+\DoxyCodeLine{234     \mbox{\hyperlink{class_string}{String}} getFileNameWithoutExtension() \textcolor{keyword}{const};}
+\DoxyCodeLine{235 }
+\DoxyCodeLine{236     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{242 \textcolor{comment}{}    \textcolor{keywordtype}{int} hashCode() \textcolor{keyword}{const};}
+\DoxyCodeLine{243 }
+\DoxyCodeLine{249     \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} hashCode64() \textcolor{keyword}{const};}
+\DoxyCodeLine{250 }
+\DoxyCodeLine{251     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{266 \textcolor{comment}{}    \mbox{\hyperlink{class_file}{File}} getChildFile (\mbox{\hyperlink{class_string_ref}{StringRef}} relativeOrAbsolutePath) \textcolor{keyword}{const};}
+\DoxyCodeLine{267 }
+\DoxyCodeLine{274     \mbox{\hyperlink{class_file}{File}} getSiblingFile (\mbox{\hyperlink{class_string_ref}{StringRef}} siblingFileName) \textcolor{keyword}{const};}
+\DoxyCodeLine{275 }
+\DoxyCodeLine{276     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{284 \textcolor{comment}{}    \mbox{\hyperlink{class_file}{File}} getParentDirectory() \textcolor{keyword}{const};}
+\DoxyCodeLine{285 }
+\DoxyCodeLine{295     \textcolor{keywordtype}{bool} isAChildOf (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& potentialParentDirectory) \textcolor{keyword}{const};}
+\DoxyCodeLine{296 }
+\DoxyCodeLine{297     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{315 \textcolor{comment}{}    \mbox{\hyperlink{class_file}{File}} getNonexistentChildFile (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& prefix,}
+\DoxyCodeLine{316                                   \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& suffix,}
+\DoxyCodeLine{317                                   \textcolor{keywordtype}{bool} putNumbersInBrackets = \textcolor{keyword}{true}) \textcolor{keyword}{const};}
+\DoxyCodeLine{318 }
+\DoxyCodeLine{328     \mbox{\hyperlink{class_file}{File}} getNonexistentSibling (\textcolor{keywordtype}{bool} putNumbersInBrackets = \textcolor{keyword}{true}) \textcolor{keyword}{const};}
+\DoxyCodeLine{329 }
+\DoxyCodeLine{330     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{332 \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_audio_channel_layout_8cpp_ad569fbf0e2ce80e9b92caaf1cbb3c257}{operator== }}(\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\&) \textcolor{keyword}{const};}
+\DoxyCodeLine{334     \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_audio_channel_layout_8cpp_aa4ad43821a0285a3d7a5c840173f03ac}{operator!= }}(\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\&) \textcolor{keyword}{const};}
+\DoxyCodeLine{336     \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_stream_basic_description_8cpp_a878a42c3e8d99e69b741cd76d9a0f8db}{operator< }}(\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\&) \textcolor{keyword}{const};}
+\DoxyCodeLine{338     \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespace_steinberg_ac98deb5a1f36329c44edeee647d46431}{operator> }}(\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\&) \textcolor{keyword}{const};}
+\DoxyCodeLine{339 }
+\DoxyCodeLine{340     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{348 \textcolor{comment}{}    \textcolor{keywordtype}{bool} hasWriteAccess() \textcolor{keyword}{const};}
+\DoxyCodeLine{349 }
+\DoxyCodeLine{359     \textcolor{keywordtype}{bool} setReadOnly (\textcolor{keywordtype}{bool} shouldBeReadOnly,}
+\DoxyCodeLine{360                       \textcolor{keywordtype}{bool} applyRecursively = \textcolor{keyword}{false}) \textcolor{keyword}{const};}
+\DoxyCodeLine{361 }
+\DoxyCodeLine{367     \textcolor{keywordtype}{bool} setExecutePermission (\textcolor{keywordtype}{bool} shouldBeExecutable) \textcolor{keyword}{const};}
+\DoxyCodeLine{368 }
+\DoxyCodeLine{372     \textcolor{keywordtype}{bool} isHidden() \textcolor{keyword}{const};}
+\DoxyCodeLine{373 }
+\DoxyCodeLine{380     \mbox{\hyperlink{group__juce__core-maths_gaba41bf2b6f6da5945ee08fb99931aede}{uint64}} getFileIdentifier() \textcolor{keyword}{const};}
+\DoxyCodeLine{381 }
+\DoxyCodeLine{382     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{388 \textcolor{comment}{}    \mbox{\hyperlink{class_time}{Time}} getLastModificationTime() \textcolor{keyword}{const};}
+\DoxyCodeLine{389 }
+\DoxyCodeLine{395     \mbox{\hyperlink{class_time}{Time}} getLastAccessTime() \textcolor{keyword}{const};}
+\DoxyCodeLine{396 }
+\DoxyCodeLine{402     \mbox{\hyperlink{class_time}{Time}} getCreationTime() \textcolor{keyword}{const};}
+\DoxyCodeLine{403 }
+\DoxyCodeLine{410     \textcolor{keywordtype}{bool} setLastModificationTime (\mbox{\hyperlink{class_time}{Time}} newTime) \textcolor{keyword}{const};}
+\DoxyCodeLine{411 }
+\DoxyCodeLine{418     \textcolor{keywordtype}{bool} setLastAccessTime (\mbox{\hyperlink{class_time}{Time}} newTime) \textcolor{keyword}{const};}
+\DoxyCodeLine{419 }
+\DoxyCodeLine{426     \textcolor{keywordtype}{bool} setCreationTime (\mbox{\hyperlink{class_time}{Time}} newTime) \textcolor{keyword}{const};}
+\DoxyCodeLine{427 }
+\DoxyCodeLine{434     \mbox{\hyperlink{class_string}{String}} getVersion() \textcolor{keyword}{const};}
+\DoxyCodeLine{435 }
+\DoxyCodeLine{436     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{451 \textcolor{comment}{}    \mbox{\hyperlink{class_result}{Result}} create() \textcolor{keyword}{const};}
+\DoxyCodeLine{452 }
+\DoxyCodeLine{462     \mbox{\hyperlink{class_result}{Result}} createDirectory() \textcolor{keyword}{const};}
+\DoxyCodeLine{463 }
+\DoxyCodeLine{476     \textcolor{keywordtype}{bool} deleteFile() \textcolor{keyword}{const};}
+\DoxyCodeLine{477 }
+\DoxyCodeLine{490     \textcolor{keywordtype}{bool} deleteRecursively (\textcolor{keywordtype}{bool} followSymlinks = \textcolor{keyword}{false}) \textcolor{keyword}{const};}
+\DoxyCodeLine{491 }
+\DoxyCodeLine{498     \textcolor{keywordtype}{bool} moveToTrash() \textcolor{keyword}{const};}
+\DoxyCodeLine{499 }
+\DoxyCodeLine{514     \textcolor{keywordtype}{bool} moveFileTo (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& targetLocation) \textcolor{keyword}{const};}
+\DoxyCodeLine{515 }
+\DoxyCodeLine{524     \textcolor{keywordtype}{bool} copyFileTo (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& targetLocation) \textcolor{keyword}{const};}
+\DoxyCodeLine{525 }
+\DoxyCodeLine{536     \textcolor{keywordtype}{bool} replaceFileIn (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& targetLocation) \textcolor{keyword}{const};}
+\DoxyCodeLine{537 }
+\DoxyCodeLine{551     \textcolor{keywordtype}{bool} copyDirectoryTo (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& newDirectory) \textcolor{keyword}{const};}
+\DoxyCodeLine{552 }
+\DoxyCodeLine{553     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{556 \textcolor{comment}{}    \textcolor{keyword}{enum} \mbox{\hyperlink{class_file_a2e3d1ed8a9022434f3ddb7d34b24198c}{TypesOfFileToFind}}}
+\DoxyCodeLine{557     \{}
+\DoxyCodeLine{558         findDirectories             = 1,    }
+\DoxyCodeLine{559         findFiles                   = 2,    }
+\DoxyCodeLine{560         findFilesAndDirectories     = 3,    }
+\DoxyCodeLine{561         ignoreHiddenFiles           = 4     }
+\DoxyCodeLine{562     \};}
+\DoxyCodeLine{563 }
+\DoxyCodeLine{564     \textcolor{keyword}{enum class} \mbox{\hyperlink{class_file_a0a1de7b7cf65e7502cac315b3d180aec}{FollowSymlinks}}}
+\DoxyCodeLine{565     \{}
+\DoxyCodeLine{567         no,}
+\DoxyCodeLine{568 }
+\DoxyCodeLine{572         noCycles,}
+\DoxyCodeLine{573 }
+\DoxyCodeLine{578         yes}
+\DoxyCodeLine{579     \};}
+\DoxyCodeLine{580 }
+\DoxyCodeLine{598     \mbox{\hyperlink{class_array}{Array<File>}} findChildFiles (\textcolor{keywordtype}{int} whatToLookFor,}
+\DoxyCodeLine{599                                 \textcolor{keywordtype}{bool} searchRecursively,}
+\DoxyCodeLine{600                                 \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& wildCardPattern = \textcolor{stringliteral}{"{}*"{}},}
+\DoxyCodeLine{601                                 FollowSymlinks followSymlinks = FollowSymlinks::yes) \textcolor{keyword}{const};}
+\DoxyCodeLine{602 }
+\DoxyCodeLine{608     \textcolor{keywordtype}{int} findChildFiles (\mbox{\hyperlink{class_array}{Array<File>}}\& results, \textcolor{keywordtype}{int} whatToLookFor,}
+\DoxyCodeLine{609                         \textcolor{keywordtype}{bool} searchRecursively, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& wildCardPattern = \textcolor{stringliteral}{"{}*"{}},}
+\DoxyCodeLine{610                         FollowSymlinks followSymlinks = FollowSymlinks::yes) \textcolor{keyword}{const};}
+\DoxyCodeLine{611 }
+\DoxyCodeLine{629     \textcolor{keywordtype}{int} getNumberOfChildFiles (\textcolor{keywordtype}{int} whatToLookFor,}
+\DoxyCodeLine{630                                \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& wildCardPattern = \textcolor{stringliteral}{"{}*"{}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{631 }
+\DoxyCodeLine{635     \textcolor{keywordtype}{bool} containsSubDirectories() \textcolor{keyword}{const};}
+\DoxyCodeLine{636 }
+\DoxyCodeLine{637     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{655 \textcolor{comment}{}    std::unique\_ptr<FileInputStream> createInputStream() \textcolor{keyword}{const};}
+\DoxyCodeLine{656 }
+\DoxyCodeLine{688     std::unique\_ptr<FileOutputStream> createOutputStream (\textcolor{keywordtype}{size\_t} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8556d19b129aa550f5b2819ed0320e83}{bufferSize}} = 0x8000) \textcolor{keyword}{const};}
+\DoxyCodeLine{689 }
+\DoxyCodeLine{690     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{701 \textcolor{comment}{}    \textcolor{keywordtype}{bool} loadFileAsData (\mbox{\hyperlink{class_memory_block}{MemoryBlock}}\& \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{702 }
+\DoxyCodeLine{710     \mbox{\hyperlink{class_string}{String}} loadFileAsString() \textcolor{keyword}{const};}
+\DoxyCodeLine{711 }
+\DoxyCodeLine{715     \textcolor{keywordtype}{void} readLines (\mbox{\hyperlink{class_string_array}{StringArray}}\& destLines) \textcolor{keyword}{const};}
+\DoxyCodeLine{716 }
+\DoxyCodeLine{717     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{724 \textcolor{comment}{}    \textcolor{keywordtype}{bool} appendData (\textcolor{keyword}{const} \textcolor{keywordtype}{void}* dataToAppend,}
+\DoxyCodeLine{725                      \textcolor{keywordtype}{size\_t} numberOfBytes) \textcolor{keyword}{const};}
+\DoxyCodeLine{726 }
+\DoxyCodeLine{741     \textcolor{keywordtype}{bool} replaceWithData (\textcolor{keyword}{const} \textcolor{keywordtype}{void}* dataToWrite,}
+\DoxyCodeLine{742                           \textcolor{keywordtype}{size\_t} numberOfBytes) \textcolor{keyword}{const};}
+\DoxyCodeLine{743 }
+\DoxyCodeLine{757     \textcolor{keywordtype}{bool} appendText (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& textToAppend,}
+\DoxyCodeLine{758                      \textcolor{keywordtype}{bool} asUnicode = \textcolor{keyword}{false},}
+\DoxyCodeLine{759                      \textcolor{keywordtype}{bool} writeUnicodeHeaderBytes = \textcolor{keyword}{false},}
+\DoxyCodeLine{760                      \textcolor{keyword}{const} \textcolor{keywordtype}{char}* lineEndings = \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n"{}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{761 }
+\DoxyCodeLine{778     \textcolor{keywordtype}{bool} replaceWithText (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& textToWrite,}
+\DoxyCodeLine{779                           \textcolor{keywordtype}{bool} asUnicode = \textcolor{keyword}{false},}
+\DoxyCodeLine{780                           \textcolor{keywordtype}{bool} writeUnicodeHeaderBytes = \textcolor{keyword}{false},}
+\DoxyCodeLine{781                           \textcolor{keyword}{const} \textcolor{keywordtype}{char}* lineEndings = \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n"{}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{782 }
+\DoxyCodeLine{786     \textcolor{keywordtype}{bool} hasIdenticalContentTo (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& other) \textcolor{keyword}{const};}
+\DoxyCodeLine{787 }
+\DoxyCodeLine{788     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{795 \textcolor{comment}{}    \textcolor{keyword}{static} \textcolor{keywordtype}{void} findFileSystemRoots (\mbox{\hyperlink{class_array}{Array<File>}}\& results);}
+\DoxyCodeLine{796 }
+\DoxyCodeLine{800     \mbox{\hyperlink{class_string}{String}} getVolumeLabel() \textcolor{keyword}{const};}
+\DoxyCodeLine{801 }
+\DoxyCodeLine{805     \textcolor{keywordtype}{int} getVolumeSerialNumber() \textcolor{keyword}{const};}
+\DoxyCodeLine{806 }
+\DoxyCodeLine{812     \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} getBytesFreeOnVolume() \textcolor{keyword}{const};}
+\DoxyCodeLine{813 }
+\DoxyCodeLine{819     \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} getVolumeTotalSize() \textcolor{keyword}{const};}
+\DoxyCodeLine{820 }
+\DoxyCodeLine{822     \textcolor{keywordtype}{bool} isOnCDRomDrive() \textcolor{keyword}{const};}
+\DoxyCodeLine{823 }
+\DoxyCodeLine{829     \textcolor{keywordtype}{bool} isOnHardDisk() \textcolor{keyword}{const};}
+\DoxyCodeLine{830 }
+\DoxyCodeLine{835     \textcolor{keywordtype}{bool} isOnRemovableDrive() \textcolor{keyword}{const};}
+\DoxyCodeLine{836 }
+\DoxyCodeLine{837     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{849 \textcolor{comment}{}    \textcolor{keywordtype}{bool} startAsProcess (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& parameters = \mbox{\hyperlink{class_string}{String}}()) \textcolor{keyword}{const};}
+\DoxyCodeLine{850 }
+\DoxyCodeLine{854     \textcolor{keywordtype}{void} revealToUser() \textcolor{keyword}{const};}
+\DoxyCodeLine{855 }
+\DoxyCodeLine{856     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{859 \textcolor{comment}{}    \textcolor{keyword}{enum} \mbox{\hyperlink{class_file_a3e19cafabb03c5838160263a6e76313d}{SpecialLocationType}}}
+\DoxyCodeLine{860     \{}
+\DoxyCodeLine{862         \mbox{\hyperlink{class_file_a3e19cafabb03c5838160263a6e76313da8620eabc38cfbd921a52d10157463c5e}{userHomeDirectory}},}
+\DoxyCodeLine{863 }
+\DoxyCodeLine{868         \mbox{\hyperlink{class_file_a3e19cafabb03c5838160263a6e76313da72c8fbf94445ccce6b01470265c8f397}{userDocumentsDirectory}},}
+\DoxyCodeLine{869 }
+\DoxyCodeLine{871         \mbox{\hyperlink{class_file_a3e19cafabb03c5838160263a6e76313da4776bc5e304bf2857ed5ede0fbbc4060}{userDesktopDirectory}},}
+\DoxyCodeLine{872 }
+\DoxyCodeLine{874         \mbox{\hyperlink{class_file_a3e19cafabb03c5838160263a6e76313dad0662607d7763c1940693b9f80673567}{userMusicDirectory}},}
+\DoxyCodeLine{875 }
+\DoxyCodeLine{877         \mbox{\hyperlink{class_file_a3e19cafabb03c5838160263a6e76313dadcb6e6c19c350d8020615417b0505da8}{userMoviesDirectory}},}
+\DoxyCodeLine{878 }
+\DoxyCodeLine{880         \mbox{\hyperlink{class_file_a3e19cafabb03c5838160263a6e76313daa8e7ec352e54ab4efcae250eba502313}{userPicturesDirectory}},}
+\DoxyCodeLine{881 }
+\DoxyCodeLine{888         \mbox{\hyperlink{class_file_a3e19cafabb03c5838160263a6e76313da0c9f89d8dc9f9f32c9eb42428385351d}{userApplicationDataDirectory}},}
+\DoxyCodeLine{889 }
+\DoxyCodeLine{900         \mbox{\hyperlink{class_file_a3e19cafabb03c5838160263a6e76313da18566f0ca926c8f6db1e178ba5f403c0}{commonApplicationDataDirectory}},}
+\DoxyCodeLine{901 }
+\DoxyCodeLine{907         \mbox{\hyperlink{class_file_a3e19cafabb03c5838160263a6e76313dada45b7958b5fc77f30e313f8dab12b23}{commonDocumentsDirectory}},}
+\DoxyCodeLine{908 }
+\DoxyCodeLine{912         \mbox{\hyperlink{class_file_a3e19cafabb03c5838160263a6e76313da08818a8233a97db2e3c54a917adf4954}{tempDirectory}},}
+\DoxyCodeLine{913 }
+\DoxyCodeLine{925         \mbox{\hyperlink{class_file_a3e19cafabb03c5838160263a6e76313dab960741272c75e94482f295a516aae62}{currentExecutableFile}},}
+\DoxyCodeLine{926 }
+\DoxyCodeLine{935         \mbox{\hyperlink{class_file_a3e19cafabb03c5838160263a6e76313da8292b316ce9eb8ebc0d0980b788a877c}{currentApplicationFile}},}
+\DoxyCodeLine{936 }
+\DoxyCodeLine{942         \mbox{\hyperlink{class_file_a3e19cafabb03c5838160263a6e76313dafdae061dc559a8e9ac3a9623d2cd8081}{invokedExecutableFile}},}
+\DoxyCodeLine{943 }
+\DoxyCodeLine{945         \mbox{\hyperlink{class_file_a3e19cafabb03c5838160263a6e76313dafab1d75c642d3f8eb23564f1cfb408a3}{hostApplicationPath}},}
+\DoxyCodeLine{946 }
+\DoxyCodeLine{947 \textcolor{preprocessor}{       \#if JUCE\_WINDOWS || DOXYGEN}}
+\DoxyCodeLine{949         windowsSystemDirectory,}
+\DoxyCodeLine{950 \textcolor{preprocessor}{       \#endif}}
+\DoxyCodeLine{951 }
+\DoxyCodeLine{956         \mbox{\hyperlink{class_file_a3e19cafabb03c5838160263a6e76313dad4f66736251eab2cdaa21dd5a709ed21}{globalApplicationsDirectory}},}
+\DoxyCodeLine{957 }
+\DoxyCodeLine{958 \textcolor{preprocessor}{       \#if JUCE\_WINDOWS || DOXYGEN}}
+\DoxyCodeLine{966         globalApplicationsDirectoryX86,}
+\DoxyCodeLine{967 }
+\DoxyCodeLine{969         windowsLocalAppData}
+\DoxyCodeLine{970 \textcolor{preprocessor}{       \#endif}}
+\DoxyCodeLine{971     \};}
+\DoxyCodeLine{972 }
+\DoxyCodeLine{978     \textcolor{keyword}{static} \mbox{\hyperlink{class_file}{File}} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} getSpecialLocation (\textcolor{keyword}{const} SpecialLocationType \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}});}
+\DoxyCodeLine{979 }
+\DoxyCodeLine{980     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{985 \textcolor{comment}{}    \textcolor{keyword}{static} \mbox{\hyperlink{class_file}{File}} createTempFile (\mbox{\hyperlink{class_string_ref}{StringRef}} fileNameEnding);}
+\DoxyCodeLine{986 }
+\DoxyCodeLine{987     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{991 \textcolor{comment}{}    \textcolor{keyword}{static} \mbox{\hyperlink{class_file}{File}} getCurrentWorkingDirectory();}
+\DoxyCodeLine{992 }
+\DoxyCodeLine{1000     \textcolor{keywordtype}{bool} setAsCurrentWorkingDirectory() \textcolor{keyword}{const};}
+\DoxyCodeLine{1001 }
+\DoxyCodeLine{1002     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1006 \textcolor{comment}{}    \textcolor{keyword}{static} \mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} getSeparatorChar();}
+\DoxyCodeLine{1007 }
+\DoxyCodeLine{1011     \textcolor{keyword}{static} \mbox{\hyperlink{class_string_ref}{StringRef}} getSeparatorString();}
+\DoxyCodeLine{1012 }
+\DoxyCodeLine{1013     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1025 \textcolor{comment}{}    \textcolor{keyword}{static} \mbox{\hyperlink{class_string}{String}} createLegalFileName (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& fileNameToFix);}
+\DoxyCodeLine{1026 }
+\DoxyCodeLine{1034     \textcolor{keyword}{static} \mbox{\hyperlink{class_string}{String}} createLegalPathName (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& pathNameToFix);}
+\DoxyCodeLine{1035 }
+\DoxyCodeLine{1037     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} areFileNamesCaseSensitive();}
+\DoxyCodeLine{1038 }
+\DoxyCodeLine{1040     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} isAbsolutePath (\mbox{\hyperlink{class_string_ref}{StringRef}} \mbox{\hyperlink{namespacegl_aa24d70da9c7853cfd8a8fc343e72c20d}{path}});}
+\DoxyCodeLine{1041 }
+\DoxyCodeLine{1047     \textcolor{keyword}{static} \mbox{\hyperlink{class_file}{File}} createFileWithoutCheckingPath (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& absolutePath) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{1048 }
+\DoxyCodeLine{1050     \textcolor{keyword}{static} \mbox{\hyperlink{class_string}{String}} addTrailingSeparator (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{namespacegl_aa24d70da9c7853cfd8a8fc343e72c20d}{path}});}
+\DoxyCodeLine{1051 }
+\DoxyCodeLine{1052     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1054 \textcolor{comment}{}    \textcolor{keywordtype}{bool} createSymbolicLink (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& linkFileToCreate, \textcolor{keywordtype}{bool} overwriteExisting) \textcolor{keyword}{const};}
+\DoxyCodeLine{1055 }
+\DoxyCodeLine{1057     \textcolor{keywordtype}{bool} isSymbolicLink() \textcolor{keyword}{const};}
+\DoxyCodeLine{1058 }
+\DoxyCodeLine{1062     \mbox{\hyperlink{class_file}{File}} getLinkedTarget() \textcolor{keyword}{const};}
+\DoxyCodeLine{1063 }
+\DoxyCodeLine{1069     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} createSymbolicLink (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& linkFileToCreate,}
+\DoxyCodeLine{1070                                     \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& nativePathOfTarget,}
+\DoxyCodeLine{1071                                     \textcolor{keywordtype}{bool} overwriteExisting);}
+\DoxyCodeLine{1072 }
+\DoxyCodeLine{1075     \mbox{\hyperlink{class_string}{String}} getNativeLinkedTarget() \textcolor{keyword}{const};}
+\DoxyCodeLine{1076 }
+\DoxyCodeLine{1077 \textcolor{preprocessor}{   \#if JUCE\_WINDOWS || DOXYGEN}}
+\DoxyCodeLine{1079     \textcolor{keywordtype}{bool} createShortcut (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& description, \textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& linkFileToCreate) \textcolor{keyword}{const};}
+\DoxyCodeLine{1080 }
+\DoxyCodeLine{1082     \textcolor{keywordtype}{bool} isShortcut() \textcolor{keyword}{const};}
+\DoxyCodeLine{1083 \textcolor{preprocessor}{   \#else}}
+\DoxyCodeLine{1084 }
+\DoxyCodeLine{1085 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{1086 }
+\DoxyCodeLine{1087     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1088 \textcolor{preprocessor}{   \#if JUCE\_MAC || JUCE\_IOS || DOXYGEN}}
+\DoxyCodeLine{1090     OSType getMacOSType() \textcolor{keyword}{const};}
+\DoxyCodeLine{1091 }
+\DoxyCodeLine{1093     \textcolor{keywordtype}{bool} isBundle() \textcolor{keyword}{const};}
+\DoxyCodeLine{1094 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{1095 }
+\DoxyCodeLine{1096 \textcolor{preprocessor}{   \#if JUCE\_MAC || DOXYGEN}}
+\DoxyCodeLine{1098     \textcolor{keywordtype}{void} addToDock() \textcolor{keyword}{const};}
+\DoxyCodeLine{1099 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{1100 }
+\DoxyCodeLine{1101 \textcolor{preprocessor}{   \#if JUCE\_MAC || JUCE\_IOS}}
+\DoxyCodeLine{1109     \textcolor{keyword}{static} \mbox{\hyperlink{class_file}{File}} getContainerForSecurityApplicationGroupIdentifier (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& appGroup);}
+\DoxyCodeLine{1110 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{1111 }
+\DoxyCodeLine{1112     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1114 \textcolor{comment}{}    \textcolor{keyword}{struct }\mbox{\hyperlink{struct_file_1_1_natural_file_comparator}{NaturalFileComparator}}}
+\DoxyCodeLine{1115     \{}
+\DoxyCodeLine{1116         \mbox{\hyperlink{struct_file_1_1_natural_file_comparator_adf4f4af4bc21c7efbc6d20d89b233f0e}{NaturalFileComparator}} (\textcolor{keywordtype}{bool} shouldPutFoldersFirst) noexcept : foldersFirst (shouldPutFoldersFirst) \{\}}
+\DoxyCodeLine{1117 }
+\DoxyCodeLine{1118         \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_file_1_1_natural_file_comparator_a126fe61d19c9cd93de01ebafa7687112}{compareElements}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& firstFile, \textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& secondFile)\textcolor{keyword}{ const}}
+\DoxyCodeLine{1119 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{1120             \textcolor{keywordflow}{if} (foldersFirst \&\& (firstFile.\mbox{\hyperlink{class_file_ac7db97d8e1c60f9b443def08e7d1758f}{isDirectory}}() != secondFile.\mbox{\hyperlink{class_file_ac7db97d8e1c60f9b443def08e7d1758f}{isDirectory}}()))}
+\DoxyCodeLine{1121                 \textcolor{keywordflow}{return} firstFile.\mbox{\hyperlink{class_file_ac7db97d8e1c60f9b443def08e7d1758f}{isDirectory}}() ? -\/1 : 1;}
+\DoxyCodeLine{1122 }
+\DoxyCodeLine{1123 \textcolor{preprocessor}{           \#if NAMES\_ARE\_CASE\_SENSITIVE}}
+\DoxyCodeLine{1124             \textcolor{keywordflow}{return} firstFile.\mbox{\hyperlink{class_file_ab46bb1ff1b9e41ebd907c51d4d6e8743}{getFullPathName}}().\mbox{\hyperlink{class_string_a966277f2dcc30f9f2507f0a7b5721a9b}{compareNatural}} (secondFile.\mbox{\hyperlink{class_file_ab46bb1ff1b9e41ebd907c51d4d6e8743}{getFullPathName}}(), \textcolor{keyword}{true});}
+\DoxyCodeLine{1125 \textcolor{preprocessor}{           \#else}}
+\DoxyCodeLine{1126             \textcolor{keywordflow}{return} firstFile.\mbox{\hyperlink{class_file_ab46bb1ff1b9e41ebd907c51d4d6e8743}{getFullPathName}}().\mbox{\hyperlink{class_string_a966277f2dcc30f9f2507f0a7b5721a9b}{compareNatural}} (secondFile.\mbox{\hyperlink{class_file_ab46bb1ff1b9e41ebd907c51d4d6e8743}{getFullPathName}}(), \textcolor{keyword}{false});}
+\DoxyCodeLine{1127 \textcolor{preprocessor}{           \#endif}}
+\DoxyCodeLine{1128         \}}
+\DoxyCodeLine{1129 }
+\DoxyCodeLine{1130         \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_file_1_1_natural_file_comparator_a531f83d3078a594f5ebc87a7fe7ad28a}{foldersFirst}};}
+\DoxyCodeLine{1131     \};}
+\DoxyCodeLine{1132 }
+\DoxyCodeLine{1133 \textcolor{preprocessor}{   \#if JUCE\_ALLOW\_STATIC\_NULL\_VARIABLES \&\& ! defined (DOXYGEN)}}
+\DoxyCodeLine{1134     \textcolor{comment}{/* These static objects are deprecated because it's too easy to accidentally use them indirectly}}
+\DoxyCodeLine{1135 \textcolor{comment}{       during a static constructor, which leads to very obscure order-\/of-\/initialisation bugs.}}
+\DoxyCodeLine{1136 \textcolor{comment}{       Use File::getSeparatorChar() and File::getSeparatorString(), and instead of File::nonexistent,}}
+\DoxyCodeLine{1137 \textcolor{comment}{       just use File() or \{\}.}}
+\DoxyCodeLine{1138 \textcolor{comment}{    */}}
+\DoxyCodeLine{1139     [[deprecated]] \textcolor{keyword}{static} \textcolor{keyword}{const} \mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} separator;}
+\DoxyCodeLine{1140     [[deprecated]] \textcolor{keyword}{static} \textcolor{keyword}{const} \mbox{\hyperlink{class_string_ref}{StringRef}} separatorString;}
+\DoxyCodeLine{1141     [[deprecated]] \textcolor{keyword}{static} \textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}} nonexistent;}
+\DoxyCodeLine{1142 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{1143 }
+\DoxyCodeLine{1144 \textcolor{keyword}{private}:}
+\DoxyCodeLine{1145     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1146     \mbox{\hyperlink{class_string}{String}} fullPath;}
+\DoxyCodeLine{1147 }
+\DoxyCodeLine{1148     \textcolor{keyword}{static} \mbox{\hyperlink{class_string}{String}} parseAbsolutePath (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\&);}
+\DoxyCodeLine{1149     \mbox{\hyperlink{class_string}{String}} getPathUpToLastSlash() \textcolor{keyword}{const};}
+\DoxyCodeLine{1150 }
+\DoxyCodeLine{1151     \mbox{\hyperlink{class_result}{Result}} createDirectoryInternal (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\&) \textcolor{keyword}{const};}
+\DoxyCodeLine{1152     \textcolor{keywordtype}{bool} copyInternal (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\&) \textcolor{keyword}{const};}
+\DoxyCodeLine{1153     \textcolor{keywordtype}{bool} moveInternal (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\&) \textcolor{keyword}{const};}
+\DoxyCodeLine{1154     \textcolor{keywordtype}{bool} replaceInternal (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\&) \textcolor{keyword}{const};}
+\DoxyCodeLine{1155     \textcolor{keywordtype}{bool} setFileTimesInternal (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} \mbox{\hyperlink{namespacegl_a0927a7b4232e61481fa501d12209467e}{m}}, \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{1156     \textcolor{keywordtype}{void} getFileTimesInternal (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}\& \mbox{\hyperlink{namespacegl_a0927a7b4232e61481fa501d12209467e}{m}}, \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}\& \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}\& \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{1157     \textcolor{keywordtype}{bool} setFileReadOnlyInternal (\textcolor{keywordtype}{bool}) \textcolor{keyword}{const};}
+\DoxyCodeLine{1158     \textcolor{keywordtype}{bool} setFileExecutableInternal (\textcolor{keywordtype}{bool}) \textcolor{keyword}{const};}
+\DoxyCodeLine{1159 \};}
+\DoxyCodeLine{1160 }
+\DoxyCodeLine{1161  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{1162 }
+
+\end{DoxyCode}

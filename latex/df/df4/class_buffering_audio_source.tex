@@ -1,0 +1,167 @@
+\hypertarget{class_buffering_audio_source}{}\doxysection{Buffering\+Audio\+Source Class Reference}
+\label{class_buffering_audio_source}\index{BufferingAudioSource@{BufferingAudioSource}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Buffering\+Audio\+Source.\+h$>$}
+
+Inheritance diagram for Buffering\+Audio\+Source\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{df/df4/class_buffering_audio_source}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_buffering_audio_source_a325821cdc46ccbfcbad4c0c4e224e9f6}{Buffering\+Audio\+Source}} (\mbox{\hyperlink{class_positionable_audio_source}{Positionable\+Audio\+Source}} $\ast$source, \mbox{\hyperlink{class_time_slice_thread}{Time\+Slice\+Thread}} \&background\+Thread, bool delete\+Source\+When\+Deleted, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} number\+Of\+Samples\+To\+Buffer, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} number\+Of\+Channels=2, bool prefill\+Buffer\+On\+Prepare\+To\+Play=\mbox{\hyperlink{ordinals_8h_a41f9c5fb8b08eb5dc3edce4dcb37fee7}{true}})
+\item 
+\mbox{\hyperlink{class_buffering_audio_source_a3faf7e7e7ae778125a26b1dc8bc0964c}{$\sim$\+Buffering\+Audio\+Source}} () override
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_buffering_audio_source_aa7fccfe307c0c3f8c4c1af52b97cb6c1}{prepare\+To\+Play}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} samples\+Per\+Block\+Expected, double sample\+Rate) override
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_buffering_audio_source_a62ec9a6127f4728ecb84464f807b648b}{release\+Resources}} () override
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_buffering_audio_source_a53ed823e042d3b78ff7f11985d88042c}{get\+Next\+Audio\+Block}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{struct_audio_source_channel_info}{Audio\+Source\+Channel\+Info}} \&) override
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_buffering_audio_source_aaa1d23f64abd488771fea3e6cab68ce2}{set\+Next\+Read\+Position}} (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} new\+Position) override
+\item 
+\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} \mbox{\hyperlink{class_buffering_audio_source_aa0d8d7021519e011877656c1725accea}{get\+Next\+Read\+Position}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} override
+\item 
+\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} \mbox{\hyperlink{class_buffering_audio_source_aa9c0838f1c7c8cd5a9f93f72681b3bd8}{get\+Total\+Length}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} override
+\item 
+bool \mbox{\hyperlink{class_buffering_audio_source_ad5db3f567c5b68306f23fb3fed5367c0}{is\+Looping}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} override
+\item 
+bool \mbox{\hyperlink{class_buffering_audio_source_a5b6591413bbb172929fe3514eea14238}{wait\+For\+Next\+Audio\+Block\+Ready}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{struct_audio_source_channel_info}{Audio\+Source\+Channel\+Info}} \&\mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}, \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} timeout)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+An \mbox{\hyperlink{class_audio_source}{Audio\+Source}} which takes another source as input, and buffers it using a thread.
+
+Create this as a wrapper around another thread, and it will read-\/ahead with a background thread to smooth out playback. You can either create one of these directly, or use it indirectly using an \mbox{\hyperlink{class_audio_transport_source}{Audio\+Transport\+Source}}.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_positionable_audio_source}{Positionable\+Audio\+Source}}, \mbox{\hyperlink{class_audio_transport_source}{Audio\+Transport\+Source}}
+\end{DoxySeeAlso}
+@tags\{Audio\} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_buffering_audio_source_a325821cdc46ccbfcbad4c0c4e224e9f6}\label{class_buffering_audio_source_a325821cdc46ccbfcbad4c0c4e224e9f6}} 
+\index{BufferingAudioSource@{BufferingAudioSource}!BufferingAudioSource@{BufferingAudioSource}}
+\index{BufferingAudioSource@{BufferingAudioSource}!BufferingAudioSource@{BufferingAudioSource}}
+\doxysubsubsection{\texorpdfstring{BufferingAudioSource()}{BufferingAudioSource()}}
+{\footnotesize\ttfamily Buffering\+Audio\+Source\+::\+Buffering\+Audio\+Source (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_positionable_audio_source}{Positionable\+Audio\+Source}} $\ast$}]{source,  }\item[{\mbox{\hyperlink{class_time_slice_thread}{Time\+Slice\+Thread}} \&}]{background\+Thread,  }\item[{bool}]{delete\+Source\+When\+Deleted,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{number\+Of\+Samples\+To\+Buffer,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{number\+Of\+Channels = {\ttfamily 2},  }\item[{bool}]{prefill\+Buffer\+On\+Prepare\+To\+Play = {\ttfamily \mbox{\hyperlink{ordinals_8h_a41f9c5fb8b08eb5dc3edce4dcb37fee7}{true}}} }\end{DoxyParamCaption})}
+
+Creates a \mbox{\hyperlink{class_buffering_audio_source}{Buffering\+Audio\+Source}}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & the input source to read from \\
+\hline
+{\em background\+Thread} & a background thread that will be used for the background read-\/ahead. This object must not be deleted until after any Buffering\+Audio\+Sources that are using it have been deleted! \\
+\hline
+{\em delete\+Source\+When\+Deleted} & if true, then the input source object will be deleted when this object is deleted \\
+\hline
+{\em number\+Of\+Samples\+To\+Buffer} & the size of buffer to use for reading ahead \\
+\hline
+{\em number\+Of\+Channels} & the number of channels that will be played \\
+\hline
+{\em prefill\+Buffer\+On\+Prepare\+To\+Play} & if true, then calling prepare\+To\+Play on this object will block until the buffer has been filled \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_buffering_audio_source_a3faf7e7e7ae778125a26b1dc8bc0964c}\label{class_buffering_audio_source_a3faf7e7e7ae778125a26b1dc8bc0964c}} 
+\index{BufferingAudioSource@{BufferingAudioSource}!````~BufferingAudioSource@{$\sim$BufferingAudioSource}}
+\index{````~BufferingAudioSource@{$\sim$BufferingAudioSource}!BufferingAudioSource@{BufferingAudioSource}}
+\doxysubsubsection{\texorpdfstring{$\sim$BufferingAudioSource()}{~BufferingAudioSource()}}
+{\footnotesize\ttfamily Buffering\+Audio\+Source\+::$\sim$\+Buffering\+Audio\+Source (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+Destructor.
+
+The input source may be deleted depending on whether the delete\+Source\+When\+Deleted flag was set in the constructor. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_buffering_audio_source_a53ed823e042d3b78ff7f11985d88042c}\label{class_buffering_audio_source_a53ed823e042d3b78ff7f11985d88042c}} 
+\index{BufferingAudioSource@{BufferingAudioSource}!getNextAudioBlock@{getNextAudioBlock}}
+\index{getNextAudioBlock@{getNextAudioBlock}!BufferingAudioSource@{BufferingAudioSource}}
+\doxysubsubsection{\texorpdfstring{getNextAudioBlock()}{getNextAudioBlock()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Buffering\+Audio\+Source\+::get\+Next\+Audio\+Block (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{struct_audio_source_channel_info}{Audio\+Source\+Channel\+Info}} \&}]{info }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Implementation of the \mbox{\hyperlink{class_audio_source}{Audio\+Source}} method. 
+
+Implements \mbox{\hyperlink{class_audio_source_a36fc2484ead8fb8dc03be57d09dd5735}{Audio\+Source}}.
+
+\mbox{\Hypertarget{class_buffering_audio_source_aa0d8d7021519e011877656c1725accea}\label{class_buffering_audio_source_aa0d8d7021519e011877656c1725accea}} 
+\index{BufferingAudioSource@{BufferingAudioSource}!getNextReadPosition@{getNextReadPosition}}
+\index{getNextReadPosition@{getNextReadPosition}!BufferingAudioSource@{BufferingAudioSource}}
+\doxysubsubsection{\texorpdfstring{getNextReadPosition()}{getNextReadPosition()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} Buffering\+Audio\+Source\+::get\+Next\+Read\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Implements the \mbox{\hyperlink{class_positionable_audio_source}{Positionable\+Audio\+Source}} method. 
+
+Implements \mbox{\hyperlink{class_positionable_audio_source_a93fffbfa30a0470c246f6dd2ae8597c6}{Positionable\+Audio\+Source}}.
+
+\mbox{\Hypertarget{class_buffering_audio_source_aa9c0838f1c7c8cd5a9f93f72681b3bd8}\label{class_buffering_audio_source_aa9c0838f1c7c8cd5a9f93f72681b3bd8}} 
+\index{BufferingAudioSource@{BufferingAudioSource}!getTotalLength@{getTotalLength}}
+\index{getTotalLength@{getTotalLength}!BufferingAudioSource@{BufferingAudioSource}}
+\doxysubsubsection{\texorpdfstring{getTotalLength()}{getTotalLength()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} Buffering\+Audio\+Source\+::get\+Total\+Length (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Implements the \mbox{\hyperlink{class_positionable_audio_source}{Positionable\+Audio\+Source}} method. 
+
+Implements \mbox{\hyperlink{class_positionable_audio_source_aa32269d1013b829bb7585e65ce80f08c}{Positionable\+Audio\+Source}}.
+
+\mbox{\Hypertarget{class_buffering_audio_source_ad5db3f567c5b68306f23fb3fed5367c0}\label{class_buffering_audio_source_ad5db3f567c5b68306f23fb3fed5367c0}} 
+\index{BufferingAudioSource@{BufferingAudioSource}!isLooping@{isLooping}}
+\index{isLooping@{isLooping}!BufferingAudioSource@{BufferingAudioSource}}
+\doxysubsubsection{\texorpdfstring{isLooping()}{isLooping()}}
+{\footnotesize\ttfamily bool Buffering\+Audio\+Source\+::is\+Looping (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Implements the \mbox{\hyperlink{class_positionable_audio_source}{Positionable\+Audio\+Source}} method. 
+
+Implements \mbox{\hyperlink{class_positionable_audio_source_a4e59a6b4cfcfb6e8afeea42c25379849}{Positionable\+Audio\+Source}}.
+
+\mbox{\Hypertarget{class_buffering_audio_source_aa7fccfe307c0c3f8c4c1af52b97cb6c1}\label{class_buffering_audio_source_aa7fccfe307c0c3f8c4c1af52b97cb6c1}} 
+\index{BufferingAudioSource@{BufferingAudioSource}!prepareToPlay@{prepareToPlay}}
+\index{prepareToPlay@{prepareToPlay}!BufferingAudioSource@{BufferingAudioSource}}
+\doxysubsubsection{\texorpdfstring{prepareToPlay()}{prepareToPlay()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Buffering\+Audio\+Source\+::prepare\+To\+Play (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{samples\+Per\+Block\+Expected,  }\item[{double}]{sample\+Rate }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Implementation of the \mbox{\hyperlink{class_audio_source}{Audio\+Source}} method. 
+
+Implements \mbox{\hyperlink{class_audio_source_a653279dbd167f70e318fd280681dbddf}{Audio\+Source}}.
+
+\mbox{\Hypertarget{class_buffering_audio_source_a62ec9a6127f4728ecb84464f807b648b}\label{class_buffering_audio_source_a62ec9a6127f4728ecb84464f807b648b}} 
+\index{BufferingAudioSource@{BufferingAudioSource}!releaseResources@{releaseResources}}
+\index{releaseResources@{releaseResources}!BufferingAudioSource@{BufferingAudioSource}}
+\doxysubsubsection{\texorpdfstring{releaseResources()}{releaseResources()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Buffering\+Audio\+Source\+::release\+Resources (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Implementation of the \mbox{\hyperlink{class_audio_source}{Audio\+Source}} method. 
+
+Implements \mbox{\hyperlink{class_audio_source_a7823bf0f1c43333eed41664c7994f290}{Audio\+Source}}.
+
+\mbox{\Hypertarget{class_buffering_audio_source_aaa1d23f64abd488771fea3e6cab68ce2}\label{class_buffering_audio_source_aaa1d23f64abd488771fea3e6cab68ce2}} 
+\index{BufferingAudioSource@{BufferingAudioSource}!setNextReadPosition@{setNextReadPosition}}
+\index{setNextReadPosition@{setNextReadPosition}!BufferingAudioSource@{BufferingAudioSource}}
+\doxysubsubsection{\texorpdfstring{setNextReadPosition()}{setNextReadPosition()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Buffering\+Audio\+Source\+::set\+Next\+Read\+Position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}}]{new\+Position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Implements the \mbox{\hyperlink{class_positionable_audio_source}{Positionable\+Audio\+Source}} method. 
+
+Implements \mbox{\hyperlink{class_positionable_audio_source_a1d8360d66e08d9491eb1b27c37a330ed}{Positionable\+Audio\+Source}}.
+
+\mbox{\Hypertarget{class_buffering_audio_source_a5b6591413bbb172929fe3514eea14238}\label{class_buffering_audio_source_a5b6591413bbb172929fe3514eea14238}} 
+\index{BufferingAudioSource@{BufferingAudioSource}!waitForNextAudioBlockReady@{waitForNextAudioBlockReady}}
+\index{waitForNextAudioBlockReady@{waitForNextAudioBlockReady}!BufferingAudioSource@{BufferingAudioSource}}
+\doxysubsubsection{\texorpdfstring{waitForNextAudioBlockReady()}{waitForNextAudioBlockReady()}}
+{\footnotesize\ttfamily bool Buffering\+Audio\+Source\+::wait\+For\+Next\+Audio\+Block\+Ready (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{struct_audio_source_channel_info}{Audio\+Source\+Channel\+Info}} \&}]{info,  }\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}}}]{timeout }\end{DoxyParamCaption})}
+
+A useful function to block until the next the buffer info can be filled.
+
+This is useful for offline rendering. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+audio\+\_\+basics/sources/\mbox{\hyperlink{juce___buffering_audio_source_8h}{juce\+\_\+\+Buffering\+Audio\+Source.\+h}}\item 
+build/juce\+\_\+audio\+\_\+basics/sources/\mbox{\hyperlink{juce___buffering_audio_source_8cpp}{juce\+\_\+\+Buffering\+Audio\+Source.\+cpp}}\end{DoxyCompactItemize}

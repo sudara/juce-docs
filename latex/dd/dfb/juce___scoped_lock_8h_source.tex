@@ -1,0 +1,91 @@
+\hypertarget{juce___scoped_lock_8h_source}{}\doxysection{juce\+\_\+\+Scoped\+Lock.\+h}
+\label{juce___scoped_lock_8h_source}\index{build/juce\_core/threads/juce\_ScopedLock.h@{build/juce\_core/threads/juce\_ScopedLock.h}}
+\mbox{\hyperlink{juce___scoped_lock_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{54 \textcolor{comment}{}\textcolor{keyword}{template} <\textcolor{keyword}{class} LockType>}
+\DoxyCodeLine{55 \textcolor{keyword}{class }\mbox{\hyperlink{class_generic_scoped_lock}{GenericScopedLock}}}
+\DoxyCodeLine{56 \{}
+\DoxyCodeLine{57 \textcolor{keyword}{public}:}
+\DoxyCodeLine{58     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{68 \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keyword}{explicit} \mbox{\hyperlink{class_generic_scoped_lock_acb13a2d16339b721c40951ce85005eeb}{GenericScopedLock}} (\textcolor{keyword}{const} LockType\& lock) noexcept : lock\_ (lock)     \{ lock.enter(); \}}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{75     \textcolor{keyword}{inline} \mbox{\hyperlink{class_generic_scoped_lock_a02234589cd2f1c0ff057d4d64beb12e1}{\string~GenericScopedLock}}() noexcept                                                 \{ lock\_.exit(); \}}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77 \textcolor{keyword}{private}:}
+\DoxyCodeLine{78     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{79     \textcolor{keyword}{const} LockType\& lock\_;}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81     \mbox{\hyperlink{group__juce__core-system_ga6ab7a603bf4435c7cb286b1744366eb2}{JUCE\_DECLARE\_NON\_COPYABLE}} (\mbox{\hyperlink{class_generic_scoped_lock}{GenericScopedLock}})}
+\DoxyCodeLine{82 \};}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{125 \textcolor{comment}{}\textcolor{keyword}{template} <\textcolor{keyword}{class} LockType>}
+\DoxyCodeLine{126 \textcolor{keyword}{class }\mbox{\hyperlink{class_generic_scoped_unlock}{GenericScopedUnlock}}}
+\DoxyCodeLine{127 \{}
+\DoxyCodeLine{128 \textcolor{keyword}{public}:}
+\DoxyCodeLine{129     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{140 \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keyword}{explicit} \mbox{\hyperlink{class_generic_scoped_unlock_ab2dc89287c459355d6a04fb5d58d9ce3}{GenericScopedUnlock}} (\textcolor{keyword}{const} LockType\& lock) noexcept : lock\_ (lock)   \{ lock.exit(); \}}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{149     \textcolor{keyword}{inline} \mbox{\hyperlink{class_generic_scoped_unlock_ab979a8270fadb8bd835ef693cb5ad474}{\string~GenericScopedUnlock}}() noexcept                                               \{ lock\_.enter(); \}}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{151 }
+\DoxyCodeLine{152 \textcolor{keyword}{private}:}
+\DoxyCodeLine{153     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{154     \textcolor{keyword}{const} LockType\& lock\_;}
+\DoxyCodeLine{155 }
+\DoxyCodeLine{156     \mbox{\hyperlink{group__juce__core-system_ga6ab7a603bf4435c7cb286b1744366eb2}{JUCE\_DECLARE\_NON\_COPYABLE}} (\mbox{\hyperlink{class_generic_scoped_unlock}{GenericScopedUnlock}})}
+\DoxyCodeLine{157 \};}
+\DoxyCodeLine{158 }
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{197 \textcolor{comment}{}\textcolor{keyword}{template} <\textcolor{keyword}{class} LockType>}
+\DoxyCodeLine{198 \textcolor{keyword}{class }\mbox{\hyperlink{class_generic_scoped_try_lock}{GenericScopedTryLock}}}
+\DoxyCodeLine{199 \{}
+\DoxyCodeLine{200 \textcolor{keyword}{public}:}
+\DoxyCodeLine{201     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{218 \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keyword}{explicit} \mbox{\hyperlink{class_generic_scoped_try_lock_ad95709ae51fff0d9b7746ca726caa089}{GenericScopedTryLock}} (\textcolor{keyword}{const} LockType\& lock, \textcolor{keywordtype}{bool} acquireLockOnInitialisation = \textcolor{keyword}{true}) noexcept}
+\DoxyCodeLine{219         : lock\_ (lock), lockWasSuccessful (acquireLockOnInitialisation \&\& lock.tryEnter()) \{\}}
+\DoxyCodeLine{220 }
+\DoxyCodeLine{229     \textcolor{keyword}{inline} \mbox{\hyperlink{class_generic_scoped_try_lock_aa552ec1121d42230080f6dbc614ead99}{\string~GenericScopedTryLock}}() noexcept         \{ \textcolor{keywordflow}{if} (lockWasSuccessful) lock\_.exit(); \}}
+\DoxyCodeLine{230 }
+\DoxyCodeLine{232     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_generic_scoped_try_lock_a0504fe1e14b9a246e5e6018132578b94}{isLocked}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                  \{ \textcolor{keywordflow}{return} lockWasSuccessful; \}}
+\DoxyCodeLine{233 }
+\DoxyCodeLine{235     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_generic_scoped_try_lock_ae53a276403f3ab95fe1381f97b36da08}{retryLock}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                 \{ lockWasSuccessful = lock\_.tryEnter(); \textcolor{keywordflow}{return} lockWasSuccessful; \}}
+\DoxyCodeLine{236 }
+\DoxyCodeLine{237 \textcolor{keyword}{private}:}
+\DoxyCodeLine{238     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{239     \textcolor{keyword}{const} LockType\& lock\_;}
+\DoxyCodeLine{240     \textcolor{keyword}{mutable} \textcolor{keywordtype}{bool} lockWasSuccessful;}
+\DoxyCodeLine{241 }
+\DoxyCodeLine{242     \mbox{\hyperlink{group__juce__core-system_ga6ab7a603bf4435c7cb286b1744366eb2}{JUCE\_DECLARE\_NON\_COPYABLE}} (\mbox{\hyperlink{class_generic_scoped_try_lock}{GenericScopedTryLock}})}
+\DoxyCodeLine{243 \};}
+\DoxyCodeLine{244 }
+\DoxyCodeLine{245  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{246 }
+
+\end{DoxyCode}

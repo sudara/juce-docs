@@ -1,0 +1,609 @@
+\hypertarget{juce__mac___camera_device_8h_source}{}\doxysection{juce\+\_\+mac\+\_\+\+Camera\+Device.\+h}
+\label{juce__mac___camera_device_8h_source}\index{build/juce\_video/native/juce\_mac\_CameraDevice.h@{build/juce\_video/native/juce\_mac\_CameraDevice.h}}
+\mbox{\hyperlink{juce__mac___camera_device_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{5 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{6 \textcolor{comment}{}}
+\DoxyCodeLine{7 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{8 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{9 \textcolor{comment}{}}
+\DoxyCodeLine{10 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{11 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{12 \textcolor{comment}{}}
+\DoxyCodeLine{13 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{14 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{15 \textcolor{comment}{}}
+\DoxyCodeLine{16 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{17 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{18 \textcolor{comment}{}}
+\DoxyCodeLine{19 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{20 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{21 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{24 \textcolor{comment}{*/}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#if defined (MAC\_OS\_X\_VERSION\_10\_15) \&\& MAC\_OS\_X\_VERSION\_MAX\_ALLOWED >= MAC\_OS\_X\_VERSION\_10\_15}}
+\DoxyCodeLine{27 \textcolor{preprocessor}{ \#define JUCE\_USE\_NEW\_CAMERA\_API 1}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_camera_device_1_1_pimpl}{CameraDevice::Pimpl}}}
+\DoxyCodeLine{31 \{}
+\DoxyCodeLine{32     \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a85ee969f0ea1980e773aca3243657d1e}{Pimpl}} (CameraDevice\& ownerToUse, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& deviceNameToUse, \textcolor{keywordtype}{int} \textcolor{comment}{/*index*/},}
+\DoxyCodeLine{33            \textcolor{keywordtype}{int} \textcolor{comment}{/*minWidth*/}, \textcolor{keywordtype}{int} \textcolor{comment}{/*minHeight*/},}
+\DoxyCodeLine{34            \textcolor{keywordtype}{int} \textcolor{comment}{/*maxWidth*/}, \textcolor{keywordtype}{int} \textcolor{comment}{/*maxHeight*/},}
+\DoxyCodeLine{35            \textcolor{keywordtype}{bool} useHighQuality)}
+\DoxyCodeLine{36         : owner (ownerToUse),}
+\DoxyCodeLine{37           deviceName (deviceNameToUse)}
+\DoxyCodeLine{38     \{}
+\DoxyCodeLine{39         imageOutput = []() -\/> std::unique\_ptr<ImageOutputBase>}
+\DoxyCodeLine{40         \{}
+\DoxyCodeLine{41 \textcolor{preprocessor}{           \#if JUCE\_USE\_NEW\_CAMERA\_API}}
+\DoxyCodeLine{42             \textcolor{keywordflow}{if} (@available (macOS 10.15, *))}
+\DoxyCodeLine{43                 \textcolor{keywordflow}{return} std::make\_unique<PostCatalinaPhotoOutput>();}
+\DoxyCodeLine{44 \textcolor{preprocessor}{           \#endif}}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46            \textcolor{keywordflow}{return} std::make\_unique<PreCatalinaStillImageOutput>();}
+\DoxyCodeLine{47         \}();}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49         session = [[AVCaptureSession alloc] init];}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51         session.sessionPreset = useHighQuality ? AVCaptureSessionPresetHigh}
+\DoxyCodeLine{52                                                : AVCaptureSessionPresetMedium;}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54         refreshConnections();}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56         \textcolor{keyword}{static} DelegateClass cls;}
+\DoxyCodeLine{57         callbackDelegate = (id<AVCaptureFileOutputRecordingDelegate>) [cls.createInstance() init];}
+\DoxyCodeLine{58         DelegateClass::setOwner (callbackDelegate, \textcolor{keyword}{this});}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60         \mbox{\hyperlink{group__juce__core-system_ga0112339834a6548e4123e394b9ed95e2}{JUCE\_BEGIN\_IGNORE\_WARNINGS\_GCC\_LIKE}} (\textcolor{stringliteral}{"{}-\/Wundeclared-\/selector"{}})}
+\DoxyCodeLine{61         [[NSNotificationCenter defaultCenter] addObserver: callbackDelegate}
+\DoxyCodeLine{62                                                  selector: \textcolor{keyword}{@selector} (captureSessionRuntimeError:)}
+\DoxyCodeLine{63                                                      \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}: AVCaptureSessionRuntimeErrorNotification}
+\DoxyCodeLine{64                                                    \textcolor{keywordtype}{object}: session];}
+\DoxyCodeLine{65         \mbox{\hyperlink{group__juce__core-system_ga157f2229764b17137d8814bec95df109}{JUCE\_END\_IGNORE\_WARNINGS\_GCC\_LIKE}}}
+\DoxyCodeLine{66     \}}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68     \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a9fceb830bb1b774c96430237e9df6c0d}{\string~Pimpl}}()}
+\DoxyCodeLine{69     \{}
+\DoxyCodeLine{70         [[NSNotificationCenter defaultCenter] removeObserver: callbackDelegate];}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72         [session stopRunning];}
+\DoxyCodeLine{73         removeInput();}
+\DoxyCodeLine{74         removeImageCapture();}
+\DoxyCodeLine{75         removeMovieCapture();}
+\DoxyCodeLine{76         [session release];}
+\DoxyCodeLine{77         [callbackDelegate release];}
+\DoxyCodeLine{78     \}}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{81     \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a79d3488e0970fce52d753c9c0c81aa34}{openedOk}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept       \{ \textcolor{keywordflow}{return} openingError.\mbox{\hyperlink{class_string_ab31a36bda8c789ba3c0ed37bb16c978c}{isEmpty}}(); \}}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_acfe211473bc9adf0817c0754ce201140}{startSession}}()}
+\DoxyCodeLine{84     \{}
+\DoxyCodeLine{85         \textcolor{keywordflow}{if} (! [session isRunning])}
+\DoxyCodeLine{86             [session startRunning];}
+\DoxyCodeLine{87     \}}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a5167029331352275c3f62be288392d93}{takeStillPicture}} (\mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\textcolor{keywordtype}{void} (\textcolor{keyword}{const} \mbox{\hyperlink{class_image}{Image}}\&)> pictureTakenCallbackToUse)}
+\DoxyCodeLine{90     \{}
+\DoxyCodeLine{91         \textcolor{keywordflow}{if} (pictureTakenCallbackToUse == \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{92         \{}
+\DoxyCodeLine{93             \mbox{\hyperlink{group__juce__core-system_gadc044ce5efecbecf2f5a44cd00db67b3}{jassertfalse}};}
+\DoxyCodeLine{94             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{95         \}}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97         pictureTakenCallback = \mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (pictureTakenCallbackToUse);}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99         triggerImageCapture();}
+\DoxyCodeLine{100     \}}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{102     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_afb3d92c684c0bc97a6e2eca8cbb3fa05}{startRecordingToFile}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& file, \textcolor{keywordtype}{int} \textcolor{comment}{/*quality*/})}
+\DoxyCodeLine{103     \{}
+\DoxyCodeLine{104         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ac33ca230910ae42b3171bd149ef0f84e}{stopRecording}}();}
+\DoxyCodeLine{105         refreshIfNeeded();}
+\DoxyCodeLine{106         firstPresentationTime = \mbox{\hyperlink{class_time_a9acf1454101b83bc3c77b435778d698e}{Time::getCurrentTime}}();}
+\DoxyCodeLine{107         file.\mbox{\hyperlink{class_file_adc64f67a869db306afd65a67758e5a3e}{deleteFile}}();}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_acfe211473bc9adf0817c0754ce201140}{startSession}}();}
+\DoxyCodeLine{110         isRecording = \textcolor{keyword}{true};}
+\DoxyCodeLine{111         [fileOutput startRecordingToOutputFileURL: \mbox{\hyperlink{namespacejuce_a2b866db1760192d8951943ae845be95a}{createNSURLFromFile}} (file)}
+\DoxyCodeLine{112                                 recordingDelegate: callbackDelegate];}
+\DoxyCodeLine{113     \}}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ac33ca230910ae42b3171bd149ef0f84e}{stopRecording}}()}
+\DoxyCodeLine{116     \{}
+\DoxyCodeLine{117         \textcolor{keywordflow}{if} (isRecording)}
+\DoxyCodeLine{118         \{}
+\DoxyCodeLine{119             [fileOutput \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ac33ca230910ae42b3171bd149ef0f84e}{stopRecording}}];}
+\DoxyCodeLine{120             isRecording = \textcolor{keyword}{false};}
+\DoxyCodeLine{121         \}}
+\DoxyCodeLine{122     \}}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{124     \mbox{\hyperlink{class_time}{Time}} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a140af780d9abb52ff7f4408c47a69beb}{getTimeOfFirstRecordedFrame}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{125 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{126         \textcolor{keywordflow}{return} firstPresentationTime;}
+\DoxyCodeLine{127     \}}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a631a4ade218dfddc56d588c5b03fd1ca}{addListener}} (CameraDevice::Listener* listenerToAdd)}
+\DoxyCodeLine{130     \{}
+\DoxyCodeLine{131         \textcolor{keyword}{const} \mbox{\hyperlink{class_generic_scoped_lock}{ScopedLock}} sl (listenerLock);}
+\DoxyCodeLine{132         listeners.add (listenerToAdd);}
+\DoxyCodeLine{133 }
+\DoxyCodeLine{134         \textcolor{keywordflow}{if} (listeners.size() == 1)}
+\DoxyCodeLine{135             triggerImageCapture();}
+\DoxyCodeLine{136     \}}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{138     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a39c0df63795c33e8e22f16451349a36f}{removeListener}} (CameraDevice::Listener* listenerToRemove)}
+\DoxyCodeLine{139     \{}
+\DoxyCodeLine{140         \textcolor{keyword}{const} \mbox{\hyperlink{class_generic_scoped_lock}{ScopedLock}} sl (listenerLock);}
+\DoxyCodeLine{141         listeners.remove (listenerToRemove);}
+\DoxyCodeLine{142     \}}
+\DoxyCodeLine{143 }
+\DoxyCodeLine{144     \textcolor{keyword}{static} NSArray* \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a5579df03e754099809b4faa20887bf00}{getCaptureDevices}}()}
+\DoxyCodeLine{145     \{}
+\DoxyCodeLine{146 \textcolor{preprocessor}{       \#if JUCE\_USE\_NEW\_CAMERA\_API}}
+\DoxyCodeLine{147         \textcolor{keywordflow}{if} (@available (macOS 10.15, *))}
+\DoxyCodeLine{148         \{}
+\DoxyCodeLine{149             \textcolor{keyword}{auto}* discovery = [AVCaptureDeviceDiscoverySession discoverySessionWithDeviceTypes: @[AVCaptureDeviceTypeBuiltInWideAngleCamera,}
+\DoxyCodeLine{150                                                                                                 AVCaptureDeviceTypeExternalUnknown]}
+\DoxyCodeLine{151                                                                                      mediaType: AVMediaTypeVideo}
+\DoxyCodeLine{152                                                                                       position: AVCaptureDevicePositionUnspecified];}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154             \textcolor{keywordflow}{return} [discovery devices];}
+\DoxyCodeLine{155         \}}
+\DoxyCodeLine{156 \textcolor{preprocessor}{       \#endif}}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{158         \mbox{\hyperlink{group__juce__core-system_ga0112339834a6548e4123e394b9ed95e2}{JUCE\_BEGIN\_IGNORE\_WARNINGS\_GCC\_LIKE}} (\textcolor{stringliteral}{"{}-\/Wdeprecated-\/declarations"{}})}
+\DoxyCodeLine{159         \textcolor{keywordflow}{return} [AVCaptureDevice devicesWithMediaType: AVMediaTypeVideo];}
+\DoxyCodeLine{160         \mbox{\hyperlink{group__juce__core-system_ga157f2229764b17137d8814bec95df109}{JUCE\_END\_IGNORE\_WARNINGS\_GCC\_LIKE}}}
+\DoxyCodeLine{161     \}}
+\DoxyCodeLine{162 }
+\DoxyCodeLine{163     \textcolor{keyword}{static} \mbox{\hyperlink{class_string_array}{StringArray}} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_ac9188d9367c011ba618a1fade6f01401}{getAvailableDevices}}()}
+\DoxyCodeLine{164     \{}
+\DoxyCodeLine{165         \mbox{\hyperlink{class_string_array}{StringArray}} results;}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{167         \textcolor{keywordflow}{for} (AVCaptureDevice* device : \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a5579df03e754099809b4faa20887bf00}{getCaptureDevices}}())}
+\DoxyCodeLine{168             results.\mbox{\hyperlink{class_string_array_a18cb8087b39a81c462e9c67b03453901}{add}} (\mbox{\hyperlink{namespacejuce_a42e5f26f6fd7b644c5f6f44728b0c03b}{nsStringToJuce}} ([device localizedName]));}
+\DoxyCodeLine{169 }
+\DoxyCodeLine{170         \textcolor{keywordflow}{return} results;}
+\DoxyCodeLine{171     \}}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{173     AVCaptureSession* \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a5a3676ff7e9f67093c9f3a112f620dd6}{getCaptureSession}}()}
+\DoxyCodeLine{174     \{}
+\DoxyCodeLine{175         \textcolor{keywordflow}{return} session;}
+\DoxyCodeLine{176     \}}
+\DoxyCodeLine{177 }
+\DoxyCodeLine{178     NSView* \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a5b29027578e5d8383bc37efa77310ffd}{createVideoCapturePreview}}()}
+\DoxyCodeLine{179     \{}
+\DoxyCodeLine{180         \textcolor{comment}{// The video preview must be created before the capture session is}}
+\DoxyCodeLine{181         \textcolor{comment}{// started. Make sure you haven't called `addListener`,}}
+\DoxyCodeLine{182         \textcolor{comment}{// `startRecordingToFile`, or `takeStillPicture` before calling this}}
+\DoxyCodeLine{183         \textcolor{comment}{// function.}}
+\DoxyCodeLine{184         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (! [session isRunning]);}
+\DoxyCodeLine{185         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_acfe211473bc9adf0817c0754ce201140}{startSession}}();}
+\DoxyCodeLine{186 }
+\DoxyCodeLine{187         \mbox{\hyperlink{group__juce__core-memory_gad73fadcd76040b11a626d5bdf833ad49}{JUCE\_AUTORELEASEPOOL}}}
+\DoxyCodeLine{188         \{}
+\DoxyCodeLine{189             NSView* view = [[NSView alloc] init];}
+\DoxyCodeLine{190             [view setLayer: [AVCaptureVideoPreviewLayer layerWithSession: \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a5a3676ff7e9f67093c9f3a112f620dd6}{getCaptureSession}}()]];}
+\DoxyCodeLine{191             \textcolor{keywordflow}{return} view;}
+\DoxyCodeLine{192         \}}
+\DoxyCodeLine{193     \}}
+\DoxyCodeLine{194 }
+\DoxyCodeLine{195 \textcolor{keyword}{private}:}
+\DoxyCodeLine{196     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{197     \textcolor{keyword}{struct }DelegateClass  : \textcolor{keyword}{public} ObjCClass<NSObject>}
+\DoxyCodeLine{198     \{}
+\DoxyCodeLine{199         DelegateClass()  : ObjCClass<NSObject> (\textcolor{stringliteral}{"{}JUCECameraDelegate\_"{}})}
+\DoxyCodeLine{200         \{}
+\DoxyCodeLine{201             addIvar<Pimpl*> (\textcolor{stringliteral}{"{}owner"{}});}
+\DoxyCodeLine{202             addProtocol (\textcolor{keyword}{@protocol} (AVCaptureFileOutputRecordingDelegate));}
+\DoxyCodeLine{203 }
+\DoxyCodeLine{204             addMethod (\textcolor{keyword}{@selector} (captureOutput:didStartRecordingToOutputFileAtURL:  fromConnections:),       didStartRecordingToOutputFileAtURL);}
+\DoxyCodeLine{205             addMethod (\textcolor{keyword}{@selector} (captureOutput:didPauseRecordingToOutputFileAtURL:  fromConnections:),       didPauseRecordingToOutputFileAtURL);}
+\DoxyCodeLine{206             addMethod (\textcolor{keyword}{@selector} (captureOutput:didResumeRecordingToOutputFileAtURL: fromConnections:),       didResumeRecordingToOutputFileAtURL);}
+\DoxyCodeLine{207             addMethod (\textcolor{keyword}{@selector} (captureOutput:willFinishRecordingToOutputFileAtURL:fromConnections:\mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_af44443f87d7b66dff07b3d884445dca1}{error}}:), willFinishRecordingToOutputFileAtURL);}
+\DoxyCodeLine{208 }
+\DoxyCodeLine{209             \mbox{\hyperlink{group__juce__core-system_ga0112339834a6548e4123e394b9ed95e2}{JUCE\_BEGIN\_IGNORE\_WARNINGS\_GCC\_LIKE}} (\textcolor{stringliteral}{"{}-\/Wundeclared-\/selector"{}})}
+\DoxyCodeLine{210             addMethod (@selector (captureSessionRuntimeError:), sessionRuntimeError);}
+\DoxyCodeLine{211             \mbox{\hyperlink{group__juce__core-system_ga157f2229764b17137d8814bec95df109}{JUCE\_END\_IGNORE\_WARNINGS\_GCC\_LIKE}}}
+\DoxyCodeLine{212 }
+\DoxyCodeLine{213             registerClass();}
+\DoxyCodeLine{214         \}}
+\DoxyCodeLine{215 }
+\DoxyCodeLine{216         static \textcolor{keywordtype}{void} setOwner (\textcolor{keywordtype}{id} self, \mbox{\hyperlink{struct_camera_device_1_1_pimpl}{Pimpl}}* owner)   \{ object\_setInstanceVariable (\textcolor{keyword}{self}, \textcolor{stringliteral}{"{}owner"{}}, owner); \}}
+\DoxyCodeLine{217         \textcolor{keyword}{static} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a5693c517fa4eedd5b9ccf84308cdcd19}{Pimpl}}\& getOwner (\textcolor{keywordtype}{id} \textcolor{keyword}{self})               \{ \textcolor{keywordflow}{return} *getIvar<Pimpl*> (\textcolor{keyword}{self}, \textcolor{stringliteral}{"{}owner"{}}); \}}
+\DoxyCodeLine{218 }
+\DoxyCodeLine{219     \textcolor{keyword}{private}:}
+\DoxyCodeLine{220         \textcolor{keyword}{static} \textcolor{keywordtype}{void} didStartRecordingToOutputFileAtURL (\textcolor{keywordtype}{id}, \textcolor{keywordtype}{SEL}, AVCaptureFileOutput*, NSURL*, NSArray*) \{\}}
+\DoxyCodeLine{221         \textcolor{keyword}{static} \textcolor{keywordtype}{void} didPauseRecordingToOutputFileAtURL (\textcolor{keywordtype}{id}, \textcolor{keywordtype}{SEL}, AVCaptureFileOutput*, NSURL*, NSArray*) \{\}}
+\DoxyCodeLine{222         \textcolor{keyword}{static} \textcolor{keywordtype}{void} didResumeRecordingToOutputFileAtURL (\textcolor{keywordtype}{id}, \textcolor{keywordtype}{SEL}, AVCaptureFileOutput*, NSURL*, NSArray*) \{\}}
+\DoxyCodeLine{223         \textcolor{keyword}{static} \textcolor{keywordtype}{void} willFinishRecordingToOutputFileAtURL (\textcolor{keywordtype}{id}, \textcolor{keywordtype}{SEL}, AVCaptureFileOutput*, NSURL*, NSArray*, NSError*) \{\}}
+\DoxyCodeLine{224 }
+\DoxyCodeLine{225         \textcolor{keyword}{static} \textcolor{keywordtype}{void} sessionRuntimeError (\textcolor{keywordtype}{id} \textcolor{keyword}{self}, \textcolor{keywordtype}{SEL}, NSNotification* notification)}
+\DoxyCodeLine{226         \{}
+\DoxyCodeLine{227             JUCE\_CAMERA\_LOG (\mbox{\hyperlink{namespacejuce_a42e5f26f6fd7b644c5f6f44728b0c03b}{nsStringToJuce}} ([notification description]));}
+\DoxyCodeLine{228 }
+\DoxyCodeLine{229             NSError* \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_af44443f87d7b66dff07b3d884445dca1}{error}} = notification.userInfo[AVCaptureSessionErrorKey];}
+\DoxyCodeLine{230             \textcolor{keyword}{auto} errorString = \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_af44443f87d7b66dff07b3d884445dca1}{error}} != nil ? \mbox{\hyperlink{namespacejuce_a42e5f26f6fd7b644c5f6f44728b0c03b}{nsStringToJuce}} (\mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_af44443f87d7b66dff07b3d884445dca1}{error}}.localizedDescription) : \mbox{\hyperlink{class_string}{String}}();}
+\DoxyCodeLine{231             getOwner (\textcolor{keyword}{self}).cameraSessionRuntimeError (errorString);}
+\DoxyCodeLine{232         \}}
+\DoxyCodeLine{233     \};}
+\DoxyCodeLine{234 }
+\DoxyCodeLine{235     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{236     \textcolor{keyword}{struct }ImageOutputBase}
+\DoxyCodeLine{237     \{}
+\DoxyCodeLine{238         \textcolor{keyword}{virtual} \string~ImageOutputBase() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{239 }
+\DoxyCodeLine{240         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} addImageCapture (AVCaptureSession*) = 0;}
+\DoxyCodeLine{241         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} removeImageCapture (AVCaptureSession*) = 0;}
+\DoxyCodeLine{242         \textcolor{keyword}{virtual} NSArray<AVCaptureConnection*>* getConnections() \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{243         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} triggerImageCapture (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_a5693c517fa4eedd5b9ccf84308cdcd19}{Pimpl}}\& \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}}) = 0;}
+\DoxyCodeLine{244     \};}
+\DoxyCodeLine{245 }
+\DoxyCodeLine{246 \textcolor{preprocessor}{   \#if JUCE\_USE\_NEW\_CAMERA\_API}}
+\DoxyCodeLine{247     \mbox{\hyperlink{group__juce__core-system_ga0112339834a6548e4123e394b9ed95e2}{JUCE\_BEGIN\_IGNORE\_WARNINGS\_GCC\_LIKE}} (\textcolor{stringliteral}{"{}-\/Wunguarded-\/availability"{}}, \textcolor{stringliteral}{"{}-\/Wunguarded-\/availability-\/new"{}})}
+\DoxyCodeLine{248     class PostCatalinaPhotoOutput  : public ImageOutputBase}
+\DoxyCodeLine{249     \{}
+\DoxyCodeLine{250     \textcolor{keyword}{public}:}
+\DoxyCodeLine{251         PostCatalinaPhotoOutput()}
+\DoxyCodeLine{252         \{}
+\DoxyCodeLine{253             \textcolor{keyword}{static} PhotoOutputDelegateClass \mbox{\hyperlink{structjuce_1_1_obj_c_class_aa83acbdf7d37321ed140d295a6a5e5bc}{cls}};}
+\DoxyCodeLine{254             delegate.reset ([cls.createInstance() init]);}
+\DoxyCodeLine{255         \}}
+\DoxyCodeLine{256 }
+\DoxyCodeLine{257         \textcolor{keywordtype}{void} addImageCapture (AVCaptureSession* \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}})\textcolor{keyword}{ override}}
+\DoxyCodeLine{258 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{259             \textcolor{keywordflow}{if} (imageOutput != nil)}
+\DoxyCodeLine{260                 \textcolor{keywordflow}{return};}
+\DoxyCodeLine{261 }
+\DoxyCodeLine{262             imageOutput = [[AVCapturePhotoOutput alloc] init];}
+\DoxyCodeLine{263             [\mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}} addOutput: imageOutput];}
+\DoxyCodeLine{264         \}}
+\DoxyCodeLine{265 }
+\DoxyCodeLine{266         \textcolor{keywordtype}{void} removeImageCapture (AVCaptureSession* \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}})\textcolor{keyword}{ override}}
+\DoxyCodeLine{267 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{268             \textcolor{keywordflow}{if} (imageOutput == nil)}
+\DoxyCodeLine{269                 \textcolor{keywordflow}{return};}
+\DoxyCodeLine{270 }
+\DoxyCodeLine{271             [\mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}} removeOutput: imageOutput];}
+\DoxyCodeLine{272             [imageOutput release];}
+\DoxyCodeLine{273             imageOutput = nil;}
+\DoxyCodeLine{274         \}}
+\DoxyCodeLine{275 }
+\DoxyCodeLine{276         NSArray<AVCaptureConnection*>* getConnections()\textcolor{keyword}{ const override}}
+\DoxyCodeLine{277 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{278             \textcolor{keywordflow}{if} (imageOutput != nil)}
+\DoxyCodeLine{279                 \textcolor{keywordflow}{return} imageOutput.connections;}
+\DoxyCodeLine{280 }
+\DoxyCodeLine{281             \textcolor{keywordflow}{return} nil;}
+\DoxyCodeLine{282         \}}
+\DoxyCodeLine{283 }
+\DoxyCodeLine{284         \textcolor{keywordtype}{void} triggerImageCapture (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_a5693c517fa4eedd5b9ccf84308cdcd19}{Pimpl}}\& \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}})\textcolor{keyword}{ override}}
+\DoxyCodeLine{285 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{286             \textcolor{keywordflow}{if} (imageOutput == nil)}
+\DoxyCodeLine{287                 \textcolor{keywordflow}{return};}
+\DoxyCodeLine{288 }
+\DoxyCodeLine{289             PhotoOutputDelegateClass::setOwner (delegate.get(), \&\mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}});}
+\DoxyCodeLine{290 }
+\DoxyCodeLine{291             [imageOutput capturePhotoWithSettings: [AVCapturePhotoSettings photoSettings]}
+\DoxyCodeLine{292                                          delegate: id<AVCapturePhotoCaptureDelegate> (delegate.get())];}
+\DoxyCodeLine{293         \}}
+\DoxyCodeLine{294 }
+\DoxyCodeLine{295     \textcolor{keyword}{private}:}
+\DoxyCodeLine{296         \textcolor{keyword}{class }PhotoOutputDelegateClass : \textcolor{keyword}{public} \mbox{\hyperlink{structjuce_1_1_obj_c_class_a28cf8c5e159f3b4d63ec52c85cc2c6c1}{ObjCClass}}<NSObject>}
+\DoxyCodeLine{297         \{}
+\DoxyCodeLine{298         \textcolor{keyword}{public}:}
+\DoxyCodeLine{299             PhotoOutputDelegateClass() : ObjCClass<NSObject> (\textcolor{stringliteral}{"{}PhotoOutputDelegateClass\_"{}})}
+\DoxyCodeLine{300             \{}
+\DoxyCodeLine{301                 addMethod (\textcolor{keyword}{@selector} (captureOutput:didFinishProcessingPhoto:\mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_af44443f87d7b66dff07b3d884445dca1}{error}}:), didFinishProcessingPhoto);}
+\DoxyCodeLine{302                 addIvar<Pimpl*> (\textcolor{stringliteral}{"{}owner"{}});}
+\DoxyCodeLine{303                 registerClass();}
+\DoxyCodeLine{304             \}}
+\DoxyCodeLine{305 }
+\DoxyCodeLine{306             \textcolor{keyword}{static} \textcolor{keywordtype}{void} didFinishProcessingPhoto (\textcolor{keywordtype}{id} \textcolor{keyword}{self}, \textcolor{keywordtype}{SEL}, AVCapturePhotoOutput*, AVCapturePhoto* photo, NSError* \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_af44443f87d7b66dff07b3d884445dca1}{error}})}
+\DoxyCodeLine{307             \{}
+\DoxyCodeLine{308                 \textcolor{keywordflow}{if} (\mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_af44443f87d7b66dff07b3d884445dca1}{error}} != nil)}
+\DoxyCodeLine{309                 \{}
+\DoxyCodeLine{310                     \mbox{\hyperlink{class_string}{String}} errorString = \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_af44443f87d7b66dff07b3d884445dca1}{error}} != nil ? \mbox{\hyperlink{namespacejuce_a42e5f26f6fd7b644c5f6f44728b0c03b}{nsStringToJuce}} (\mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_af44443f87d7b66dff07b3d884445dca1}{error}}.localizedDescription) : \mbox{\hyperlink{class_string}{String}}();}
+\DoxyCodeLine{311                     \mbox{\hyperlink{group__juce__core-maths_ga5158e6e8faa5553204f90af596fafaf5}{ignoreUnused}} (errorString);}
+\DoxyCodeLine{312 }
+\DoxyCodeLine{313                     JUCE\_CAMERA\_LOG (\textcolor{stringliteral}{"{}Still picture capture failed, error: "{}} + errorString);}
+\DoxyCodeLine{314                     \mbox{\hyperlink{group__juce__core-system_gadc044ce5efecbecf2f5a44cd00db67b3}{jassertfalse}};}
+\DoxyCodeLine{315 }
+\DoxyCodeLine{316                     \textcolor{keywordflow}{return};}
+\DoxyCodeLine{317                 \}}
+\DoxyCodeLine{318 }
+\DoxyCodeLine{319                 \textcolor{keyword}{auto}* imageData = [photo fileDataRepresentation];}
+\DoxyCodeLine{320                 \textcolor{keyword}{auto} \mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca78805a221a988e79ef3f42d7c5bfd418}{image}} = \mbox{\hyperlink{class_image_file_format_aa5cf7b6f03682432ae93df3c3defc2b7}{ImageFileFormat::loadFrom}} (imageData.bytes, (\textcolor{keywordtype}{size\_t}) imageData.length);}
+\DoxyCodeLine{321 }
+\DoxyCodeLine{322                 getOwner (\textcolor{keyword}{self}).imageCaptureFinished (\mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca78805a221a988e79ef3f42d7c5bfd418}{image}});}
+\DoxyCodeLine{323             \}}
+\DoxyCodeLine{324 }
+\DoxyCodeLine{325             \textcolor{keyword}{static} \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a5693c517fa4eedd5b9ccf84308cdcd19}{Pimpl}}\& getOwner (\textcolor{keywordtype}{id} \textcolor{keyword}{self}) \{ \textcolor{keywordflow}{return} *getIvar<Pimpl*> (\textcolor{keyword}{self}, \textcolor{stringliteral}{"{}owner"{}}); \}}
+\DoxyCodeLine{326             \textcolor{keyword}{static} \textcolor{keywordtype}{void} setOwner (\textcolor{keywordtype}{id} \textcolor{keyword}{self}, \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a5693c517fa4eedd5b9ccf84308cdcd19}{Pimpl}}* \mbox{\hyperlink{namespacegl_ad0bd70fc9115453f6f5f5ac53accea65}{t}}) \{ object\_setInstanceVariable (\textcolor{keyword}{self}, \textcolor{stringliteral}{"{}owner"{}}, \mbox{\hyperlink{namespacegl_ad0bd70fc9115453f6f5f5ac53accea65}{t}}); \}}
+\DoxyCodeLine{327         \};}
+\DoxyCodeLine{328 }
+\DoxyCodeLine{329         AVCapturePhotoOutput* imageOutput = nil;}
+\DoxyCodeLine{330         std::unique\_ptr<NSObject, NSObjectDeleter> delegate;}
+\DoxyCodeLine{331     \};}
+\DoxyCodeLine{332     \mbox{\hyperlink{group__juce__core-system_ga157f2229764b17137d8814bec95df109}{JUCE\_END\_IGNORE\_WARNINGS\_GCC\_LIKE}}}
+\DoxyCodeLine{333 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{334 }
+\DoxyCodeLine{335     \mbox{\hyperlink{group__juce__core-system_ga0112339834a6548e4123e394b9ed95e2}{JUCE\_BEGIN\_IGNORE\_WARNINGS\_GCC\_LIKE}} (\textcolor{stringliteral}{"{}-\/Wdeprecated-\/declarations"{}})}
+\DoxyCodeLine{336     class PreCatalinaStillImageOutput  : public ImageOutputBase}
+\DoxyCodeLine{337     \{}
+\DoxyCodeLine{338     \textcolor{keyword}{public}:}
+\DoxyCodeLine{339         \textcolor{keywordtype}{void} addImageCapture (AVCaptureSession* \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}})\textcolor{keyword}{ override}}
+\DoxyCodeLine{340 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{341             \textcolor{keywordflow}{if} (imageOutput != nil)}
+\DoxyCodeLine{342                 \textcolor{keywordflow}{return};}
+\DoxyCodeLine{343 }
+\DoxyCodeLine{344             \textcolor{keyword}{const} \textcolor{keyword}{auto} codecType = []}
+\DoxyCodeLine{345             \{}
+\DoxyCodeLine{346 \textcolor{preprocessor}{               \#if defined (MAC\_OS\_X\_VERSION\_10\_13) \&\& MAC\_OS\_X\_VERSION\_MAX\_ALLOWED >= MAC\_OS\_X\_VERSION\_10\_13}}
+\DoxyCodeLine{347                 \textcolor{keywordflow}{if} (@available (macOS 10.13, *))}
+\DoxyCodeLine{348                    \textcolor{keywordflow}{return} AVVideoCodecTypeJPEG;}
+\DoxyCodeLine{349 \textcolor{preprocessor}{               \#endif}}
+\DoxyCodeLine{350 }
+\DoxyCodeLine{351                 \textcolor{keywordflow}{return} AVVideoCodecJPEG;}
+\DoxyCodeLine{352             \}();}
+\DoxyCodeLine{353 }
+\DoxyCodeLine{354             imageOutput = [[AVCaptureStillImageOutput alloc] init];}
+\DoxyCodeLine{355             \textcolor{keyword}{auto} imageSettings = [[NSDictionary alloc] initWithObjectsAndKeys: codecType, AVVideoCodecKey, nil];}
+\DoxyCodeLine{356             [imageOutput setOutputSettings: imageSettings];}
+\DoxyCodeLine{357             [imageSettings release];}
+\DoxyCodeLine{358             [\mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}} addOutput: imageOutput];}
+\DoxyCodeLine{359         \}}
+\DoxyCodeLine{360 }
+\DoxyCodeLine{361         \textcolor{keywordtype}{void} removeImageCapture (AVCaptureSession* \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}})\textcolor{keyword}{ override}}
+\DoxyCodeLine{362 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{363             \textcolor{keywordflow}{if} (imageOutput == nil)}
+\DoxyCodeLine{364                 \textcolor{keywordflow}{return};}
+\DoxyCodeLine{365 }
+\DoxyCodeLine{366             [\mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}} removeOutput: imageOutput];}
+\DoxyCodeLine{367             [imageOutput release];}
+\DoxyCodeLine{368             imageOutput = nil;}
+\DoxyCodeLine{369         \}}
+\DoxyCodeLine{370 }
+\DoxyCodeLine{371         NSArray<AVCaptureConnection*>* getConnections()\textcolor{keyword}{ const override}}
+\DoxyCodeLine{372 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{373             \textcolor{keywordflow}{if} (imageOutput != nil)}
+\DoxyCodeLine{374                 \textcolor{keywordflow}{return} imageOutput.connections;}
+\DoxyCodeLine{375 }
+\DoxyCodeLine{376             \textcolor{keywordflow}{return} nil;}
+\DoxyCodeLine{377         \}}
+\DoxyCodeLine{378 }
+\DoxyCodeLine{379         \textcolor{keywordtype}{void} triggerImageCapture (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_a5693c517fa4eedd5b9ccf84308cdcd19}{Pimpl}}\& \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}})\textcolor{keyword}{ override}}
+\DoxyCodeLine{380 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{381             \textcolor{keywordflow}{if} (\textcolor{keyword}{auto}* videoConnection = \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}}.getVideoConnection())}
+\DoxyCodeLine{382             \{}
+\DoxyCodeLine{383                 [imageOutput captureStillImageAsynchronouslyFromConnection: videoConnection}
+\DoxyCodeLine{384                                                          completionHandler: \string^(CMSampleBufferRef sampleBuffer, NSError* \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_af44443f87d7b66dff07b3d884445dca1}{error}})}
+\DoxyCodeLine{385                 \{}
+\DoxyCodeLine{386                     \textcolor{keywordflow}{if} (\mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_af44443f87d7b66dff07b3d884445dca1}{error}} != nil)}
+\DoxyCodeLine{387                     \{}
+\DoxyCodeLine{388                         JUCE\_CAMERA\_LOG (\textcolor{stringliteral}{"{}Still picture capture failed, error: "{}} + \mbox{\hyperlink{namespacejuce_a42e5f26f6fd7b644c5f6f44728b0c03b}{nsStringToJuce}} (\mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_af44443f87d7b66dff07b3d884445dca1}{error}}.localizedDescription));}
+\DoxyCodeLine{389                         \mbox{\hyperlink{group__juce__core-system_gadc044ce5efecbecf2f5a44cd00db67b3}{jassertfalse}};}
+\DoxyCodeLine{390                         \textcolor{keywordflow}{return};}
+\DoxyCodeLine{391                     \}}
+\DoxyCodeLine{392 }
+\DoxyCodeLine{393                     \textcolor{keyword}{auto}* imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation: sampleBuffer];}
+\DoxyCodeLine{394                     \textcolor{keyword}{auto} \mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca78805a221a988e79ef3f42d7c5bfd418}{image}} = \mbox{\hyperlink{class_image_file_format_aa5cf7b6f03682432ae93df3c3defc2b7}{ImageFileFormat::loadFrom}} (imageData.bytes, (\textcolor{keywordtype}{size\_t}) imageData.length);}
+\DoxyCodeLine{395                     \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}}.imageCaptureFinished (\mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca78805a221a988e79ef3f42d7c5bfd418}{image}});}
+\DoxyCodeLine{396                 \}];}
+\DoxyCodeLine{397             \}}
+\DoxyCodeLine{398         \}}
+\DoxyCodeLine{399 }
+\DoxyCodeLine{400     \textcolor{keyword}{private}:}
+\DoxyCodeLine{401         AVCaptureStillImageOutput* imageOutput = nil;}
+\DoxyCodeLine{402     \};}
+\DoxyCodeLine{403     \mbox{\hyperlink{group__juce__core-system_ga157f2229764b17137d8814bec95df109}{JUCE\_END\_IGNORE\_WARNINGS\_GCC\_LIKE}}}
+\DoxyCodeLine{404 }
+\DoxyCodeLine{405     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{406     \textcolor{keywordtype}{void} addImageCapture()}
+\DoxyCodeLine{407     \{}
+\DoxyCodeLine{408         imageOutput-\/>addImageCapture (session);}
+\DoxyCodeLine{409     \}}
+\DoxyCodeLine{410 }
+\DoxyCodeLine{411     \textcolor{keywordtype}{void} addMovieCapture()}
+\DoxyCodeLine{412     \{}
+\DoxyCodeLine{413         \textcolor{keywordflow}{if} (fileOutput == nil)}
+\DoxyCodeLine{414         \{}
+\DoxyCodeLine{415             fileOutput = [[AVCaptureMovieFileOutput alloc] init];}
+\DoxyCodeLine{416             [session addOutput: fileOutput];}
+\DoxyCodeLine{417         \}}
+\DoxyCodeLine{418     \}}
+\DoxyCodeLine{419 }
+\DoxyCodeLine{420     \textcolor{keywordtype}{void} removeImageCapture()}
+\DoxyCodeLine{421     \{}
+\DoxyCodeLine{422         imageOutput-\/>removeImageCapture (session);}
+\DoxyCodeLine{423     \}}
+\DoxyCodeLine{424 }
+\DoxyCodeLine{425     \textcolor{keywordtype}{void} removeMovieCapture()}
+\DoxyCodeLine{426     \{}
+\DoxyCodeLine{427         \textcolor{keywordflow}{if} (fileOutput != nil)}
+\DoxyCodeLine{428         \{}
+\DoxyCodeLine{429             [session removeOutput: fileOutput];}
+\DoxyCodeLine{430             [fileOutput release];}
+\DoxyCodeLine{431             fileOutput = nil;}
+\DoxyCodeLine{432         \}}
+\DoxyCodeLine{433     \}}
+\DoxyCodeLine{434 }
+\DoxyCodeLine{435     \textcolor{keywordtype}{void} removeCurrentSessionVideoInputs()}
+\DoxyCodeLine{436     \{}
+\DoxyCodeLine{437         \textcolor{keywordflow}{if} (session != nil)}
+\DoxyCodeLine{438         \{}
+\DoxyCodeLine{439             NSArray<AVCaptureDeviceInput*>* inputs = session.inputs;}
+\DoxyCodeLine{440 }
+\DoxyCodeLine{441             \textcolor{keywordflow}{for} (AVCaptureDeviceInput* \mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}} : inputs)}
+\DoxyCodeLine{442                 \textcolor{keywordflow}{if} ([\mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}}.device hasMediaType: AVMediaTypeVideo])}
+\DoxyCodeLine{443                     [session removeInput:\mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}}];}
+\DoxyCodeLine{444         \}}
+\DoxyCodeLine{445     \}}
+\DoxyCodeLine{446 }
+\DoxyCodeLine{447     \textcolor{keywordtype}{void} addInput()}
+\DoxyCodeLine{448     \{}
+\DoxyCodeLine{449         \textcolor{keywordflow}{if} (currentInput == nil)}
+\DoxyCodeLine{450         \{}
+\DoxyCodeLine{451             \textcolor{keywordflow}{for} (AVCaptureDevice* device : \mbox{\hyperlink{struct_camera_device_1_1_pimpl_a5579df03e754099809b4faa20887bf00}{getCaptureDevices}}())}
+\DoxyCodeLine{452             \{}
+\DoxyCodeLine{453                 \textcolor{keywordflow}{if} (deviceName == \mbox{\hyperlink{namespacejuce_a42e5f26f6fd7b644c5f6f44728b0c03b}{nsStringToJuce}} ([device localizedName]))}
+\DoxyCodeLine{454                 \{}
+\DoxyCodeLine{455                     removeCurrentSessionVideoInputs();}
+\DoxyCodeLine{456 }
+\DoxyCodeLine{457                     NSError* err = nil;}
+\DoxyCodeLine{458                     AVCaptureDeviceInput* inputDevice = [[AVCaptureDeviceInput alloc] initWithDevice: device}
+\DoxyCodeLine{459                                                                                                \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_af44443f87d7b66dff07b3d884445dca1}{error}}: \&err];}
+\DoxyCodeLine{460 }
+\DoxyCodeLine{461                     \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (err == nil);}
+\DoxyCodeLine{462 }
+\DoxyCodeLine{463                     \textcolor{keywordflow}{if} ([session canAddInput: inputDevice])}
+\DoxyCodeLine{464                     \{}
+\DoxyCodeLine{465                         [session addInput: inputDevice];}
+\DoxyCodeLine{466                         currentInput = inputDevice;}
+\DoxyCodeLine{467                     \}}
+\DoxyCodeLine{468                     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{469                     \{}
+\DoxyCodeLine{470                         \mbox{\hyperlink{group__juce__core-system_gadc044ce5efecbecf2f5a44cd00db67b3}{jassertfalse}};}
+\DoxyCodeLine{471                         [inputDevice release];}
+\DoxyCodeLine{472                     \}}
+\DoxyCodeLine{473 }
+\DoxyCodeLine{474                     \textcolor{keywordflow}{return};}
+\DoxyCodeLine{475                 \}}
+\DoxyCodeLine{476             \}}
+\DoxyCodeLine{477         \}}
+\DoxyCodeLine{478     \}}
+\DoxyCodeLine{479 }
+\DoxyCodeLine{480     \textcolor{keywordtype}{void} removeInput()}
+\DoxyCodeLine{481     \{}
+\DoxyCodeLine{482         \textcolor{keywordflow}{if} (currentInput != nil)}
+\DoxyCodeLine{483         \{}
+\DoxyCodeLine{484             [session removeInput: currentInput];}
+\DoxyCodeLine{485             [currentInput release];}
+\DoxyCodeLine{486             currentInput = nil;}
+\DoxyCodeLine{487         \}}
+\DoxyCodeLine{488     \}}
+\DoxyCodeLine{489 }
+\DoxyCodeLine{490     \textcolor{keywordtype}{void} refreshConnections()}
+\DoxyCodeLine{491     \{}
+\DoxyCodeLine{492         [session beginConfiguration];}
+\DoxyCodeLine{493         removeInput();}
+\DoxyCodeLine{494         removeImageCapture();}
+\DoxyCodeLine{495         removeMovieCapture();}
+\DoxyCodeLine{496         addInput();}
+\DoxyCodeLine{497         addImageCapture();}
+\DoxyCodeLine{498         addMovieCapture();}
+\DoxyCodeLine{499         [session commitConfiguration];}
+\DoxyCodeLine{500     \}}
+\DoxyCodeLine{501 }
+\DoxyCodeLine{502     \textcolor{keywordtype}{void} refreshIfNeeded()}
+\DoxyCodeLine{503     \{}
+\DoxyCodeLine{504         \textcolor{keywordflow}{if} (getVideoConnection() == \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{505             refreshConnections();}
+\DoxyCodeLine{506     \}}
+\DoxyCodeLine{507 }
+\DoxyCodeLine{508     AVCaptureConnection* getVideoConnection()\textcolor{keyword}{ const}}
+\DoxyCodeLine{509 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{510         \textcolor{keyword}{auto}* connections = imageOutput-\/>getConnections();}
+\DoxyCodeLine{511 }
+\DoxyCodeLine{512         \textcolor{keywordflow}{if} (connections != nil)}
+\DoxyCodeLine{513             \textcolor{keywordflow}{for} (AVCaptureConnection* connection \mbox{\hyperlink{namespacegl_a72039bf7996167e32bca54980c5595e4}{in}} connections)}
+\DoxyCodeLine{514                 \textcolor{keywordflow}{if} ([connection isActive] \&\& [connection isEnabled])}
+\DoxyCodeLine{515                     \textcolor{keywordflow}{for} (AVCaptureInputPort* \mbox{\hyperlink{namespacejuce_a6d327326870c2c2f1ca1d681842b923f}{port}} \mbox{\hyperlink{namespacegl_a72039bf7996167e32bca54980c5595e4}{in}} [connection inputPorts])}
+\DoxyCodeLine{516                         \textcolor{keywordflow}{if} ([[\mbox{\hyperlink{namespacejuce_a6d327326870c2c2f1ca1d681842b923f}{port}} mediaType] isEqual: AVMediaTypeVideo])}
+\DoxyCodeLine{517                             \textcolor{keywordflow}{return} connection;}
+\DoxyCodeLine{518 }
+\DoxyCodeLine{519         \textcolor{keywordflow}{return} nil;}
+\DoxyCodeLine{520     \}}
+\DoxyCodeLine{521 }
+\DoxyCodeLine{522     \textcolor{keywordtype}{void} imageCaptureFinished (\textcolor{keyword}{const} \mbox{\hyperlink{class_image}{Image}}\& \mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca78805a221a988e79ef3f42d7c5bfd418}{image}})}
+\DoxyCodeLine{523     \{}
+\DoxyCodeLine{524         handleImageCapture (\mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca78805a221a988e79ef3f42d7c5bfd418}{image}});}
+\DoxyCodeLine{525 }
+\DoxyCodeLine{526         \mbox{\hyperlink{class_message_manager_acfe6da5271c2ab76fdb0414b235ed095}{MessageManager::callAsync}} ([weakRef = \mbox{\hyperlink{class_weak_reference}{WeakReference<Pimpl>}} \{ \textcolor{keyword}{this} \}, \mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca78805a221a988e79ef3f42d7c5bfd418}{image}}]() \textcolor{keyword}{mutable}}
+\DoxyCodeLine{527         \{}
+\DoxyCodeLine{528             \textcolor{keywordflow}{if} (weakRef != \textcolor{keyword}{nullptr} \&\& weakRef-\/>pictureTakenCallback != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{529                 weakRef-\/>pictureTakenCallback (\mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca78805a221a988e79ef3f42d7c5bfd418}{image}});}
+\DoxyCodeLine{530         \});}
+\DoxyCodeLine{531     \}}
+\DoxyCodeLine{532 }
+\DoxyCodeLine{533     \textcolor{keywordtype}{void} handleImageCapture (\textcolor{keyword}{const} \mbox{\hyperlink{class_image}{Image}}\& \mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca78805a221a988e79ef3f42d7c5bfd418}{image}})}
+\DoxyCodeLine{534     \{}
+\DoxyCodeLine{535         \textcolor{keyword}{const} \mbox{\hyperlink{class_generic_scoped_lock}{ScopedLock}} sl (listenerLock);}
+\DoxyCodeLine{536         listeners.call ([=] (Listener\& l) \{ l.imageReceived (\mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca78805a221a988e79ef3f42d7c5bfd418}{image}}); \});}
+\DoxyCodeLine{537 }
+\DoxyCodeLine{538         \textcolor{keywordflow}{if} (! listeners.isEmpty())}
+\DoxyCodeLine{539             triggerImageCapture();}
+\DoxyCodeLine{540     \}}
+\DoxyCodeLine{541 }
+\DoxyCodeLine{542     \textcolor{keywordtype}{void} triggerImageCapture()}
+\DoxyCodeLine{543     \{}
+\DoxyCodeLine{544         refreshIfNeeded();}
+\DoxyCodeLine{545 }
+\DoxyCodeLine{546         \mbox{\hyperlink{struct_camera_device_1_1_pimpl_acfe211473bc9adf0817c0754ce201140}{startSession}}();}
+\DoxyCodeLine{547 }
+\DoxyCodeLine{548         \textcolor{keywordflow}{if} (\textcolor{keyword}{auto}* videoConnection = getVideoConnection())}
+\DoxyCodeLine{549             imageOutput-\/>triggerImageCapture (*\textcolor{keyword}{this});}
+\DoxyCodeLine{550     \}}
+\DoxyCodeLine{551 }
+\DoxyCodeLine{552     \textcolor{keywordtype}{void} cameraSessionRuntimeError (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_af44443f87d7b66dff07b3d884445dca1}{error}})}
+\DoxyCodeLine{553     \{}
+\DoxyCodeLine{554         JUCE\_CAMERA\_LOG (\textcolor{stringliteral}{"{}cameraSessionRuntimeError(), error = "{}} + \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_af44443f87d7b66dff07b3d884445dca1}{error}});}
+\DoxyCodeLine{555 }
+\DoxyCodeLine{556         \textcolor{keywordflow}{if} (owner.onErrorOccurred != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{557             owner.onErrorOccurred (\mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_af44443f87d7b66dff07b3d884445dca1}{error}});}
+\DoxyCodeLine{558     \}}
+\DoxyCodeLine{559 }
+\DoxyCodeLine{560     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{561     CameraDevice\& owner;}
+\DoxyCodeLine{562     \mbox{\hyperlink{class_string}{String}} deviceName;}
+\DoxyCodeLine{563 }
+\DoxyCodeLine{564     AVCaptureSession* session = nil;}
+\DoxyCodeLine{565     AVCaptureMovieFileOutput* fileOutput = nil;}
+\DoxyCodeLine{566     std::unique\_ptr<ImageOutputBase> imageOutput;}
+\DoxyCodeLine{567     AVCaptureDeviceInput* currentInput = nil;}
+\DoxyCodeLine{568 }
+\DoxyCodeLine{569     id<AVCaptureFileOutputRecordingDelegate> callbackDelegate = nil;}
+\DoxyCodeLine{570     \mbox{\hyperlink{class_string}{String}} openingError;}
+\DoxyCodeLine{571     \mbox{\hyperlink{class_time}{Time}} firstPresentationTime;}
+\DoxyCodeLine{572     \textcolor{keywordtype}{bool} isRecording = \textcolor{keyword}{false};}
+\DoxyCodeLine{573 }
+\DoxyCodeLine{574     \mbox{\hyperlink{class_critical_section}{CriticalSection}} listenerLock;}
+\DoxyCodeLine{575     \mbox{\hyperlink{class_listener_list}{ListenerList<Listener>}} listeners;}
+\DoxyCodeLine{576 }
+\DoxyCodeLine{577     \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_image}{Image}}\&)> pictureTakenCallback = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{578 }
+\DoxyCodeLine{579     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{580     \mbox{\hyperlink{group__juce__core-memory_ga557fa9dbf924a150e27f0cf0dad368b0}{JUCE\_DECLARE\_WEAK\_REFERENCEABLE}} (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_a5693c517fa4eedd5b9ccf84308cdcd19}{Pimpl}})}
+\DoxyCodeLine{581     \mbox{\hyperlink{group__juce__core-system_ga6ab7a603bf4435c7cb286b1744366eb2}{JUCE\_DECLARE\_NON\_COPYABLE}}       (\mbox{\hyperlink{struct_camera_device_1_1_pimpl_a5693c517fa4eedd5b9ccf84308cdcd19}{Pimpl}})}
+\DoxyCodeLine{582 \};}
+\DoxyCodeLine{583 }
+\DoxyCodeLine{584 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{585 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_camera_device_1_1_viewer_component}{CameraDevice::ViewerComponent}}  : \textcolor{keyword}{public} NSViewComponent}
+\DoxyCodeLine{586 \{}
+\DoxyCodeLine{587     \mbox{\hyperlink{struct_camera_device_1_1_viewer_component_aa2953d6c88d135bab35a703fcf7276f9}{ViewerComponent}} (CameraDevice\& device)}
+\DoxyCodeLine{588     \{}
+\DoxyCodeLine{589         setView (device.pimpl-\/>createVideoCapturePreview());}
+\DoxyCodeLine{590     \}}
+\DoxyCodeLine{591 }
+\DoxyCodeLine{592     \mbox{\hyperlink{struct_camera_device_1_1_viewer_component_a492175cde343cc5927267795c2aaf55e}{\string~ViewerComponent}}()}
+\DoxyCodeLine{593     \{}
+\DoxyCodeLine{594         setView (nil);}
+\DoxyCodeLine{595     \}}
+\DoxyCodeLine{596 }
+\DoxyCodeLine{597     \mbox{\hyperlink{group__juce__core-system_ga6ab7a603bf4435c7cb286b1744366eb2}{JUCE\_DECLARE\_NON\_COPYABLE}} (\mbox{\hyperlink{struct_camera_device_1_1_viewer_component}{ViewerComponent}})}
+\DoxyCodeLine{598 \};}
+\DoxyCodeLine{599 }
+\DoxyCodeLine{600 \mbox{\hyperlink{class_string}{String}} CameraDevice::getFileExtension()}
+\DoxyCodeLine{601 \{}
+\DoxyCodeLine{602     \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}.mov"{}};}
+\DoxyCodeLine{603 \}}
+
+\end{DoxyCode}

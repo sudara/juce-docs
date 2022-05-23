@@ -1,0 +1,1797 @@
+\hypertarget{class_midi_message}{}\doxysection{Midi\+Message Class Reference}
+\label{class_midi_message}\index{MidiMessage@{MidiMessage}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Midi\+Message.\+h$>$}
+
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_midi_message_1_1_variable_length_value}{Variable\+Length\+Value}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_midi_message_a0e86db4d1186af858ad9f80d6abe96ab}{Smpte\+Timecode\+Type}} \{ \mbox{\hyperlink{class_midi_message_a0e86db4d1186af858ad9f80d6abe96abade7bcfdca717ecd009d2a10c41e77485}{fps24}} = 0
+, \mbox{\hyperlink{class_midi_message_a0e86db4d1186af858ad9f80d6abe96abab4a72d4e94a2431828188c3dd05df35a}{fps25}} = 1
+, \mbox{\hyperlink{class_midi_message_a0e86db4d1186af858ad9f80d6abe96aba16b56e3f81f4265ffc0d553e763f6a4f}{fps30drop}} = 2
+, \mbox{\hyperlink{class_midi_message_a0e86db4d1186af858ad9f80d6abe96aba91e489a4210c9f5cbe2a47c4d3e26194}{fps30}} = 3
+ \}
+\item 
+enum \mbox{\hyperlink{class_midi_message_aa95b060274257522d1af40794ad1631d}{Midi\+Machine\+Control\+Command}} \{ \newline
+\mbox{\hyperlink{class_midi_message_aa95b060274257522d1af40794ad1631da155f2d18fc89378f6cc9c4982db67bac}{mmc\+\_\+stop}} = 1
+, \mbox{\hyperlink{class_midi_message_aa95b060274257522d1af40794ad1631da852c994c93716c792fd33ef2882174bc}{mmc\+\_\+play}} = 2
+, \mbox{\hyperlink{class_midi_message_aa95b060274257522d1af40794ad1631da07a0c0e0cc4d8a4e03b420bcdeb5e555}{mmc\+\_\+deferredplay}} = 3
+, \mbox{\hyperlink{class_midi_message_aa95b060274257522d1af40794ad1631da2d6a145a51bd9090e99040cd90241318}{mmc\+\_\+fastforward}} = 4
+, \newline
+\mbox{\hyperlink{class_midi_message_aa95b060274257522d1af40794ad1631da8ab7de3ea5e060435d0d420630cdd40b}{mmc\+\_\+rewind}} = 5
+, \mbox{\hyperlink{class_midi_message_aa95b060274257522d1af40794ad1631da4f684774d0aa585b94f9e8aa447ce1a1}{mmc\+\_\+record\+Start}} = 6
+, \mbox{\hyperlink{class_midi_message_aa95b060274257522d1af40794ad1631da2dde82123f4aba81c023d5a07e6732cf}{mmc\+\_\+record\+Stop}} = 7
+, \mbox{\hyperlink{class_midi_message_aa95b060274257522d1af40794ad1631daea66d5cf7abc74b30cf5d529057ff301}{mmc\+\_\+pause}} = 9
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_midi_message_ab5b6fe39b57b4c39e4400b4d8e9bbbc9}{Midi\+Message}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} byte1, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} byte2, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} byte3, double time\+Stamp=0) noexcept
+\item 
+\mbox{\hyperlink{class_midi_message_a1e4f3637ec1968b34b0aa0e87dd30d03}{Midi\+Message}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} byte1, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} byte2, double time\+Stamp=0) noexcept
+\item 
+\mbox{\hyperlink{class_midi_message_ac37614dc438a8adfaf335daa0c67e1db}{Midi\+Message}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} byte1, double time\+Stamp=0) noexcept
+\item 
+{\footnotesize template$<$typename... Data$>$ }\\\mbox{\hyperlink{class_midi_message_a7fcf7010a96716f17903bcf19d8de5cc}{Midi\+Message}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} byte1, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} byte2, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} byte3, Data... other\+Bytes)
+\item 
+\mbox{\hyperlink{class_midi_message_a6adcb5182a0e1446f5b9d77c9e08c7b3}{Midi\+Message}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} $\ast$\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} num\+Bytes, double time\+Stamp=0)
+\item 
+\mbox{\hyperlink{class_midi_message_a5dccdd2d580003120f5cfe4aafd28ed9}{Midi\+Message}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} $\ast$\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} max\+Bytes\+To\+Use, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \&num\+Bytes\+Used, \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} last\+Status\+Byte, double time\+Stamp=0, bool sysex\+Has\+Embedded\+Length=\mbox{\hyperlink{ordinals_8h_a41f9c5fb8b08eb5dc3edce4dcb37fee7}{true}})
+\item 
+\mbox{\hyperlink{class_midi_message_ad6e2e3e43fa78ef012bf87b5d7392e8a}{Midi\+Message}} () noexcept
+\item 
+\mbox{\hyperlink{class_midi_message_a2d3e85112bf8b37d91b3aab0911cf5b6}{Midi\+Message}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \&)
+\item 
+\mbox{\hyperlink{class_midi_message_ab0701cc3ca5c035b10c1f5f894e5276a}{Midi\+Message}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \&, double new\+Time\+Stamp)
+\item 
+\mbox{\hyperlink{class_midi_message_a914e3d004a3b62dfcdcf1c3f7e71b81c}{$\sim$\+Midi\+Message}} () noexcept
+\item 
+\mbox{\hyperlink{class_midi_message}{Midi\+Message}} \& \mbox{\hyperlink{class_midi_message_ac619d6f5f66c3b1f82a81a026413cf98}{operator=}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \&other)
+\item 
+\mbox{\hyperlink{class_midi_message_a024fc6e9466031a4ce14ce291059a9ee}{Midi\+Message}} (\mbox{\hyperlink{class_midi_message}{Midi\+Message}} \&\&) noexcept
+\item 
+\mbox{\hyperlink{class_midi_message}{Midi\+Message}} \& \mbox{\hyperlink{class_midi_message_a2c2dbe683153d725c70122e8aa6b277b}{operator=}} (\mbox{\hyperlink{class_midi_message}{Midi\+Message}} \&\&) noexcept
+\item 
+\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} $\ast$ \mbox{\hyperlink{class_midi_message_acb371198496cdac48c2fe2a96c884913}{get\+Raw\+Data}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{class_midi_message_a5768889fe63a63c58755d9d2f05afbd0}{get\+Raw\+Data\+Size}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{class_midi_message_a868d95a096fad999de5ba11f9a2f6340}{get\+Description}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}}
+\item 
+double \mbox{\hyperlink{class_midi_message_a9a942c96a776e80e3c512058b29011a8}{get\+Time\+Stamp}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_midi_message_ad5f9ceed74dd22e846ed0650d81f11a7}{set\+Time\+Stamp}} (double new\+Timestamp) noexcept
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_midi_message_a49112e5cf324feff8c69e2a2d8963695}{add\+To\+Time\+Stamp}} (double delta) noexcept
+\item 
+\mbox{\hyperlink{class_midi_message}{Midi\+Message}} \mbox{\hyperlink{class_midi_message_a941cf093e7f8989c2f7c3ec7ed8434bb}{with\+Time\+Stamp}} (double new\+Timestamp) \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}}
+\item 
+\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{class_midi_message_a7d681b7417c52d29cb73c108ca2a83b7}{get\+Channel}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_aaf63f62d38b5174c967164395bf05252}{is\+For\+Channel}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} channel\+Number) \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_midi_message_ac35c11dba441d652e70720525cb2dc7f}{set\+Channel}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} new\+Channel\+Number) noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_a8412d9b5f9d717d104537b96263dbdf5}{is\+Sys\+Ex}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} $\ast$ \mbox{\hyperlink{class_midi_message_a2f5b2634786bf5b47cd89b792b5af8a1}{get\+Sys\+Ex\+Data}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{class_midi_message_afb6ff5014531a80589756228fe637aaa}{get\+Sys\+Ex\+Data\+Size}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_a590da92c0536e23f9d3c90c99278d789}{is\+Note\+On}} (bool return\+True\+For\+Velocity0=\mbox{\hyperlink{ordinals_8h_a65e9886d74aaee76545e83dd09011727}{false}}) \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_af66814dee34738882ba39d8796b77be0}{is\+Note\+Off}} (bool return\+True\+For\+Note\+On\+Velocity0=\mbox{\hyperlink{ordinals_8h_a41f9c5fb8b08eb5dc3edce4dcb37fee7}{true}}) \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_a0d1c1c5927eb898dbacb832f768299bc}{is\+Note\+On\+Or\+Off}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{class_midi_message_a6a5f965e98254fb026c5a20b64edcbc1}{get\+Note\+Number}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_midi_message_a47583c88bed0ca4b30b0f86bc2afb48c}{set\+Note\+Number}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} new\+Note\+Number) noexcept
+\item 
+\mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} \mbox{\hyperlink{class_midi_message_ad5483775a661b2176687303bc9c8aac6}{get\+Velocity}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+float \mbox{\hyperlink{class_midi_message_a07210a8a79ef89e079be89ad6e1b98ae}{get\+Float\+Velocity}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_midi_message_afab2cc0f59531d4aba57a0f10e9dafc4}{set\+Velocity}} (float new\+Velocity) noexcept
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_midi_message_a12058e7e2cb2d287241824caf6c729c7}{multiply\+Velocity}} (float scale\+Factor) noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_a2a0b1143c544e7a107c1d86e1ac7d4c3}{is\+Sustain\+Pedal\+On}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_abb4e431332e797a548092c16c37f5ccf}{is\+Sustain\+Pedal\+Off}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_a3ddae770f33da071772f3570a9dbd119}{is\+Sostenuto\+Pedal\+On}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_aa5508f9280afa255ab17b5cfc7577a5c}{is\+Sostenuto\+Pedal\+Off}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_a37edc67c1113f68a3e9cb063ab7e2781}{is\+Soft\+Pedal\+On}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_a3fa95632707d7540c705151421de13fe}{is\+Soft\+Pedal\+Off}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_a89035047ec5cc9b77d8d484d4a8c9a8d}{is\+Program\+Change}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{class_midi_message_a9c200619411c253b661acee5660e4b76}{get\+Program\+Change\+Number}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_aaa504ef83e8d0c5fd8f652bf0712c4e1}{is\+Pitch\+Wheel}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{class_midi_message_aaa9675ccbce68b47067b512370e2ac20}{get\+Pitch\+Wheel\+Value}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_a08acde3017ba958b404f1b5e191c88e6}{is\+Aftertouch}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{class_midi_message_a623eb143fab4c07d18106c8e4e40316f}{get\+After\+Touch\+Value}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_a49037c7f75318d83ab284708c682c843}{is\+Channel\+Pressure}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{class_midi_message_aa9dc36194c26bb72f35d8522f60b3ac1}{get\+Channel\+Pressure\+Value}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_ac059a2234b67e28464a519632a1b31db}{is\+Controller}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{class_midi_message_a772acb26aa7f2cdc1992210b6d2d496a}{get\+Controller\+Number}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{class_midi_message_aa301aa18dace968d5ebb2f809fd52522}{get\+Controller\+Value}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_af5f1b96eff37b0ca1fccfb67960e829b}{is\+Controller\+Of\+Type}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} controller\+Type) \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_a861beff07f9593a7711e773bcd81ba3c}{is\+All\+Notes\+Off}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_af87b936f883b459c1e9cb87c0bfec783}{is\+All\+Sound\+Off}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_a6313eee002685de08c684bb79be34fd6}{is\+Reset\+All\+Controllers}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_ac1ec120f33d7cb7fc186f254493cf553}{is\+Meta\+Event}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{class_midi_message_ae46c134b2808500122c73347cc07014f}{get\+Meta\+Event\+Type}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} $\ast$ \mbox{\hyperlink{class_midi_message_a6298077548e1b79c54ce2a2f28b71ec4}{get\+Meta\+Event\+Data}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{class_midi_message_a3e0156ec465f66b3333ecfbcdfe340f6}{get\+Meta\+Event\+Length}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_acecc7e99f8287e851d6d944a4babc08e}{is\+Track\+Meta\+Event}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_a17ea4a5fc3cb8e1b83a002797e1350e6}{is\+End\+Of\+Track\+Meta\+Event}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_aeb18602ea05f67cad490f8866e07c172}{is\+Track\+Name\+Event}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_afb44a1c54810b707eb0f6e108d3060f1}{is\+Text\+Meta\+Event}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{class_midi_message_a204d2d2bf997be762510d2f43ab79c36}{get\+Text\+From\+Text\+Meta\+Event}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}}
+\item 
+bool \mbox{\hyperlink{class_midi_message_aa9654c52ea08da9d76a31c93006348f8}{is\+Tempo\+Meta\+Event}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+double \mbox{\hyperlink{class_midi_message_abd90df7704a306f5186aa86f14978ae9}{get\+Tempo\+Meta\+Event\+Tick\+Length}} (short time\+Format) \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+double \mbox{\hyperlink{class_midi_message_ab4228aa759969257eae0dc29d76bd70c}{get\+Tempo\+Seconds\+Per\+Quarter\+Note}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_a0253a501abf4ee4d2a66dcc6e8ce433c}{is\+Time\+Signature\+Meta\+Event}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_midi_message_a35ab9435cfda308abd22f6d72a5fece1}{get\+Time\+Signature\+Info}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \&numerator, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \&denominator) \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_ae686c5d86fa7d04df268f56bbf853f23}{is\+Key\+Signature\+Meta\+Event}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{class_midi_message_a13348f90ec60de09d242265d4652711c}{get\+Key\+Signature\+Number\+Of\+Sharps\+Or\+Flats}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_a9388bf7192568805515545ec31fa605b}{is\+Key\+Signature\+Major\+Key}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_a15aa1d11ffbdfbe78b2a11bf6375f4f9}{is\+Midi\+Channel\+Meta\+Event}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{class_midi_message_a04730ebdec68d3db7501e8e2c68111e3}{get\+Midi\+Channel\+Meta\+Event\+Channel}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_abfb16fe1f29aa68b21cbe3933c048606}{is\+Active\+Sense}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_aea49271c04e05ebad35131635935f469}{is\+Midi\+Start}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_a8c5254f2b5450aaf1937395a7f162636}{is\+Midi\+Continue}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_a54444e9d53fb321909cf0b5c9d1b5515}{is\+Midi\+Stop}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_a0529f082f989c25373050f04e0df2b1f}{is\+Midi\+Clock}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_ae4ed73e5046837c640064c937c538a00}{is\+Song\+Position\+Pointer}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{class_midi_message_a75823853d0f796d2671efa4a1b9876f1}{get\+Song\+Position\+Pointer\+Midi\+Beat}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_a948318bbf7471f8e4ab857c43004b34c}{is\+Quarter\+Frame}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{class_midi_message_a9eb49c9f42a98dfd8dd9c2eb55e33afd}{get\+Quarter\+Frame\+Sequence\+Number}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{class_midi_message_acd7704a0c68987326fdd4127f77a9976}{get\+Quarter\+Frame\+Value}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_a79564ccd8e9e0a46591eb2daedea8cdb}{is\+Full\+Frame}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_midi_message_a47d3e7c684912a0c9993f227ef675198}{get\+Full\+Frame\+Parameters}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \&hours, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \&minutes, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \&seconds, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \&frames, \mbox{\hyperlink{class_midi_message_a0e86db4d1186af858ad9f80d6abe96ab}{Smpte\+Timecode\+Type}} \&timecode\+Type) \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_af6fcf72f3bbbf104c63da61defa42bc9}{is\+Midi\+Machine\+Control\+Message}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{class_midi_message_aa95b060274257522d1af40794ad1631d}{Midi\+Machine\+Control\+Command}} \mbox{\hyperlink{class_midi_message_a5710fca6493291b3582c65d25196dfa8}{get\+Midi\+Machine\+Control\+Command}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_message_aa9ce1a0076fb2e6c229a84bd6e2665d9}{is\+Midi\+Machine\+Control\+Goto}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \&hours, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \&minutes, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \&seconds, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \&frames) \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \mbox{\hyperlink{class_midi_message_a9f189916aaff2533e115f6dc942aafc7}{note\+On}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} channel, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} note\+Number, float velocity) noexcept
+\item 
+static \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \mbox{\hyperlink{class_midi_message_a41f02fa1d8e01271f983909314847b66}{note\+On}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} channel, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} note\+Number, \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} velocity) noexcept
+\item 
+static \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \mbox{\hyperlink{class_midi_message_a8990f215f1befaad55c8c0e832f43175}{note\+Off}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} channel, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} note\+Number, float velocity) noexcept
+\item 
+static \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \mbox{\hyperlink{class_midi_message_a70303f05d34cbf886c51677443eb0ca7}{note\+Off}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} channel, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} note\+Number, \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} velocity) noexcept
+\item 
+static \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \mbox{\hyperlink{class_midi_message_aa942aa1d680f444462f9b919e5a0c830}{note\+Off}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} channel, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} note\+Number) noexcept
+\item 
+static \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \mbox{\hyperlink{class_midi_message_a703ef4b9b6308b1f8aa72d20f9b95dbc}{program\+Change}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} channel, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} program\+Number) noexcept
+\item 
+static \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \mbox{\hyperlink{class_midi_message_a5e26e83ef29f13d6f7729ca5feb026d1}{pitch\+Wheel}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} channel, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} position) noexcept
+\item 
+static \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \mbox{\hyperlink{class_midi_message_a70b5fbedc4efb0c4e46d8f03e52672a9}{aftertouch\+Change}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} channel, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} note\+Number, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} aftertouch\+Amount) noexcept
+\item 
+static \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \mbox{\hyperlink{class_midi_message_a4512f9ab1048b288b1b93680d6f24d13}{channel\+Pressure\+Change}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} channel, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} pressure) noexcept
+\item 
+static \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \mbox{\hyperlink{class_midi_message_a3ec4f4757e99ca98667da599b97e93ac}{controller\+Event}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} channel, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} controller\+Type, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} value) noexcept
+\item 
+static \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \mbox{\hyperlink{class_midi_message_a9564e36421339111f9b3409a347f24e1}{all\+Notes\+Off}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} channel) noexcept
+\item 
+static \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \mbox{\hyperlink{class_midi_message_a4f76bdb60f1143b307447cfeeb90ceb4}{all\+Sound\+Off}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} channel) noexcept
+\item 
+static \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \mbox{\hyperlink{class_midi_message_a72e2ab2aea452f0e8702c6f8fa0a7799}{all\+Controllers\+Off}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} channel) noexcept
+\item 
+static \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \mbox{\hyperlink{class_midi_message_a08cf985b119eb4af07dc0b1430717b77}{end\+Of\+Track}} () noexcept
+\item 
+static \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \mbox{\hyperlink{class_midi_message_aa2a55bc710dd1bdd028525614ddd1bad}{text\+Meta\+Event}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} type, \mbox{\hyperlink{class_string_ref}{String\+Ref}} text)
+\item 
+static \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \mbox{\hyperlink{class_midi_message_a4a604960a97eac59158edd9206ccb4d4}{tempo\+Meta\+Event}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} microseconds\+Per\+Quarter\+Note) noexcept
+\item 
+static \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \mbox{\hyperlink{class_midi_message_a5e0e4e89f08690d84dc513fa9e92e414}{time\+Signature\+Meta\+Event}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} numerator, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} denominator)
+\item 
+static \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \mbox{\hyperlink{class_midi_message_a4fc6c35cb02265b8ba88615e03f3a73e}{key\+Signature\+Meta\+Event}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} number\+Of\+Sharps\+Or\+Flats, bool is\+Minor\+Key)
+\item 
+static \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \mbox{\hyperlink{class_midi_message_a8e27f389ebb56af650ed870ddc817063}{midi\+Channel\+Meta\+Event}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} channel) noexcept
+\item 
+static \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \mbox{\hyperlink{class_midi_message_a1c913bf2cbdc315c02068a32853d9185}{midi\+Start}} () noexcept
+\item 
+static \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \mbox{\hyperlink{class_midi_message_a14d70a3733f884b30f78d767b3ff6106}{midi\+Continue}} () noexcept
+\item 
+static \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \mbox{\hyperlink{class_midi_message_ab4a18c8c4eab63f21be52d7afb8a23e2}{midi\+Stop}} () noexcept
+\item 
+static \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \mbox{\hyperlink{class_midi_message_a5013ace96c3f8b32ac5f731ab5e0eb66}{midi\+Clock}} () noexcept
+\item 
+static \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \mbox{\hyperlink{class_midi_message_a58c65c8cf6542504109e43f872661d70}{song\+Position\+Pointer}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} position\+In\+Midi\+Beats) noexcept
+\item 
+static \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \mbox{\hyperlink{class_midi_message_ae3bde183bd6663fee315b07b3866fa46}{quarter\+Frame}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} sequence\+Number, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} value) noexcept
+\item 
+static \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \mbox{\hyperlink{class_midi_message_aa6cce35a1e4b8c154422fb7254f8f513}{full\+Frame}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} hours, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} minutes, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} seconds, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} frames, \mbox{\hyperlink{class_midi_message_a0e86db4d1186af858ad9f80d6abe96ab}{Smpte\+Timecode\+Type}} timecode\+Type)
+\item 
+static \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \mbox{\hyperlink{class_midi_message_ab1178b785df4da47999da2af3a1f9e67}{midi\+Machine\+Control\+Command}} (\mbox{\hyperlink{class_midi_message_aa95b060274257522d1af40794ad1631d}{Midi\+Machine\+Control\+Command}} \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_gga485dc2a0e5ed7da3d9f826367b36ee55a6440030ae8284cee96c1c88b356c45a7}{command}})
+\item 
+static \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \mbox{\hyperlink{class_midi_message_aa56f55a5b3c42b0d1524681f238a3e82}{midi\+Machine\+Control\+Goto}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} hours, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} minutes, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} seconds, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} frames)
+\item 
+static \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \mbox{\hyperlink{class_midi_message_ae84a62a89e25a756f430a00bd416b258}{master\+Volume}} (float volume)
+\item 
+static \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \mbox{\hyperlink{class_midi_message_ad9cf216c12b52a87cfe490b51779416b}{create\+Sys\+Ex\+Message}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} $\ast$sysex\+Data, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} data\+Size)
+\item 
+static \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{class_midi_message_a6bf3c3208674c514365dc3dc25a21061}{read\+Variable\+Length\+Val}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} $\ast$\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \&num\+Bytes\+Used) noexcept
+\item 
+static \mbox{\hyperlink{struct_midi_message_1_1_variable_length_value}{Variable\+Length\+Value}} \mbox{\hyperlink{class_midi_message_ab2e392601e4a28f3b38eaca5ccd63d0e}{read\+Variable\+Length\+Value}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} $\ast$\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} max\+Bytes\+To\+Use) noexcept
+\item 
+static \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{class_midi_message_a5e312ea62140d65cb63af27e9469e183}{get\+Message\+Length\+From\+First\+Byte}} (\mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} first\+Byte) noexcept
+\item 
+static \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{class_midi_message_ac782d50b7ca289a7d45fc9c0dd96f454}{get\+Midi\+Note\+Name}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} note\+Number, bool use\+Sharps, bool include\+Octave\+Number, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} octave\+Num\+For\+MiddleC)
+\item 
+static double \mbox{\hyperlink{class_midi_message_aa2dd8b7517cc03915a22279264b1dfd5}{get\+Midi\+Note\+In\+Hertz}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} note\+Number, double frequency\+OfA=440.\+0) noexcept
+\item 
+static bool \mbox{\hyperlink{class_midi_message_a6c3dd076ca4d0b4507bee507881a8a1f}{is\+Midi\+Note\+Black}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} note\+Number) noexcept
+\item 
+static \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} char $\ast$ \mbox{\hyperlink{class_midi_message_ab995932c1950a401e28dee62f4fb7433}{get\+GMInstrument\+Name}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} midi\+Instrument\+Number)
+\item 
+static \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} char $\ast$ \mbox{\hyperlink{class_midi_message_a0ab113958ade72226065d25522084202}{get\+GMInstrument\+Bank\+Name}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} midi\+Bank\+Number)
+\item 
+static \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} char $\ast$ \mbox{\hyperlink{class_midi_message_ac452c7d3b94ff57b52427745196a8868}{get\+Rhythm\+Instrument\+Name}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} midi\+Note\+Number)
+\item 
+static \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} char $\ast$ \mbox{\hyperlink{class_midi_message_a32db03448d2d94b9294fd134a651a843}{get\+Controller\+Name}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} controller\+Number)
+\item 
+static \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} \mbox{\hyperlink{class_midi_message_a0fcfb6db586913057a7fabffe35141b4}{float\+Value\+To\+Midi\+Byte}} (float value\+Between0and1) noexcept
+\item 
+static \mbox{\hyperlink{juce__box2d_8cpp_acc2cb9a2f3246f6f4775ef16196fd983}{uint16}} \mbox{\hyperlink{class_midi_message_a2f8000c139618314a8394adab5f09447}{pitchbend\+To\+Pitchwheel\+Pos}} (float pitchbend\+In\+Semitones, float pitchbend\+Range\+In\+Semitones) noexcept
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Encapsulates a MIDI message.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_sequence}{Midi\+Message\+Sequence}}, \mbox{\hyperlink{class_midi_output}{Midi\+Output}}, \mbox{\hyperlink{class_midi_input}{Midi\+Input}}
+\end{DoxySeeAlso}
+@tags\{Audio\} 
+
+\doxysubsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{class_midi_message_aa95b060274257522d1af40794ad1631d}\label{class_midi_message_aa95b060274257522d1af40794ad1631d}} 
+\index{MidiMessage@{MidiMessage}!MidiMachineControlCommand@{MidiMachineControlCommand}}
+\index{MidiMachineControlCommand@{MidiMachineControlCommand}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{MidiMachineControlCommand}{MidiMachineControlCommand}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{class_midi_message_aa95b060274257522d1af40794ad1631d}{Midi\+Message\+::\+Midi\+Machine\+Control\+Command}}}
+
+Types of MMC command.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_af6fcf72f3bbbf104c63da61defa42bc9}{is\+Midi\+Machine\+Control\+Message}}, \mbox{\hyperlink{class_midi_message_a5710fca6493291b3582c65d25196dfa8}{get\+Midi\+Machine\+Control\+Command}}, \mbox{\hyperlink{class_midi_message_ab1178b785df4da47999da2af3a1f9e67}{midi\+Machine\+Control\+Command}} 
+\end{DoxySeeAlso}
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{mmc\_stop@{mmc\_stop}!MidiMessage@{MidiMessage}}\index{MidiMessage@{MidiMessage}!mmc\_stop@{mmc\_stop}}}\mbox{\Hypertarget{class_midi_message_aa95b060274257522d1af40794ad1631da155f2d18fc89378f6cc9c4982db67bac}\label{class_midi_message_aa95b060274257522d1af40794ad1631da155f2d18fc89378f6cc9c4982db67bac}} 
+mmc\+\_\+stop&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{mmc\_play@{mmc\_play}!MidiMessage@{MidiMessage}}\index{MidiMessage@{MidiMessage}!mmc\_play@{mmc\_play}}}\mbox{\Hypertarget{class_midi_message_aa95b060274257522d1af40794ad1631da852c994c93716c792fd33ef2882174bc}\label{class_midi_message_aa95b060274257522d1af40794ad1631da852c994c93716c792fd33ef2882174bc}} 
+mmc\+\_\+play&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{mmc\_deferredplay@{mmc\_deferredplay}!MidiMessage@{MidiMessage}}\index{MidiMessage@{MidiMessage}!mmc\_deferredplay@{mmc\_deferredplay}}}\mbox{\Hypertarget{class_midi_message_aa95b060274257522d1af40794ad1631da07a0c0e0cc4d8a4e03b420bcdeb5e555}\label{class_midi_message_aa95b060274257522d1af40794ad1631da07a0c0e0cc4d8a4e03b420bcdeb5e555}} 
+mmc\+\_\+deferredplay&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{mmc\_fastforward@{mmc\_fastforward}!MidiMessage@{MidiMessage}}\index{MidiMessage@{MidiMessage}!mmc\_fastforward@{mmc\_fastforward}}}\mbox{\Hypertarget{class_midi_message_aa95b060274257522d1af40794ad1631da2d6a145a51bd9090e99040cd90241318}\label{class_midi_message_aa95b060274257522d1af40794ad1631da2d6a145a51bd9090e99040cd90241318}} 
+mmc\+\_\+fastforward&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{mmc\_rewind@{mmc\_rewind}!MidiMessage@{MidiMessage}}\index{MidiMessage@{MidiMessage}!mmc\_rewind@{mmc\_rewind}}}\mbox{\Hypertarget{class_midi_message_aa95b060274257522d1af40794ad1631da8ab7de3ea5e060435d0d420630cdd40b}\label{class_midi_message_aa95b060274257522d1af40794ad1631da8ab7de3ea5e060435d0d420630cdd40b}} 
+mmc\+\_\+rewind&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{mmc\_recordStart@{mmc\_recordStart}!MidiMessage@{MidiMessage}}\index{MidiMessage@{MidiMessage}!mmc\_recordStart@{mmc\_recordStart}}}\mbox{\Hypertarget{class_midi_message_aa95b060274257522d1af40794ad1631da4f684774d0aa585b94f9e8aa447ce1a1}\label{class_midi_message_aa95b060274257522d1af40794ad1631da4f684774d0aa585b94f9e8aa447ce1a1}} 
+mmc\+\_\+record\+Start&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{mmc\_recordStop@{mmc\_recordStop}!MidiMessage@{MidiMessage}}\index{MidiMessage@{MidiMessage}!mmc\_recordStop@{mmc\_recordStop}}}\mbox{\Hypertarget{class_midi_message_aa95b060274257522d1af40794ad1631da2dde82123f4aba81c023d5a07e6732cf}\label{class_midi_message_aa95b060274257522d1af40794ad1631da2dde82123f4aba81c023d5a07e6732cf}} 
+mmc\+\_\+record\+Stop&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{mmc\_pause@{mmc\_pause}!MidiMessage@{MidiMessage}}\index{MidiMessage@{MidiMessage}!mmc\_pause@{mmc\_pause}}}\mbox{\Hypertarget{class_midi_message_aa95b060274257522d1af40794ad1631daea66d5cf7abc74b30cf5d529057ff301}\label{class_midi_message_aa95b060274257522d1af40794ad1631daea66d5cf7abc74b30cf5d529057ff301}} 
+mmc\+\_\+pause&\\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{class_midi_message_a0e86db4d1186af858ad9f80d6abe96ab}\label{class_midi_message_a0e86db4d1186af858ad9f80d6abe96ab}} 
+\index{MidiMessage@{MidiMessage}!SmpteTimecodeType@{SmpteTimecodeType}}
+\index{SmpteTimecodeType@{SmpteTimecodeType}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{SmpteTimecodeType}{SmpteTimecodeType}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{class_midi_message_a0e86db4d1186af858ad9f80d6abe96ab}{Midi\+Message\+::\+Smpte\+Timecode\+Type}}}
+
+SMPTE timecode types. Used by the \mbox{\hyperlink{class_midi_message_a47d3e7c684912a0c9993f227ef675198}{get\+Full\+Frame\+Parameters()}} and \mbox{\hyperlink{class_midi_message_aa6cce35a1e4b8c154422fb7254f8f513}{full\+Frame()}} methods. \begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{fps24@{fps24}!MidiMessage@{MidiMessage}}\index{MidiMessage@{MidiMessage}!fps24@{fps24}}}\mbox{\Hypertarget{class_midi_message_a0e86db4d1186af858ad9f80d6abe96abade7bcfdca717ecd009d2a10c41e77485}\label{class_midi_message_a0e86db4d1186af858ad9f80d6abe96abade7bcfdca717ecd009d2a10c41e77485}} 
+fps24&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{fps25@{fps25}!MidiMessage@{MidiMessage}}\index{MidiMessage@{MidiMessage}!fps25@{fps25}}}\mbox{\Hypertarget{class_midi_message_a0e86db4d1186af858ad9f80d6abe96abab4a72d4e94a2431828188c3dd05df35a}\label{class_midi_message_a0e86db4d1186af858ad9f80d6abe96abab4a72d4e94a2431828188c3dd05df35a}} 
+fps25&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{fps30drop@{fps30drop}!MidiMessage@{MidiMessage}}\index{MidiMessage@{MidiMessage}!fps30drop@{fps30drop}}}\mbox{\Hypertarget{class_midi_message_a0e86db4d1186af858ad9f80d6abe96aba16b56e3f81f4265ffc0d553e763f6a4f}\label{class_midi_message_a0e86db4d1186af858ad9f80d6abe96aba16b56e3f81f4265ffc0d553e763f6a4f}} 
+fps30drop&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{fps30@{fps30}!MidiMessage@{MidiMessage}}\index{MidiMessage@{MidiMessage}!fps30@{fps30}}}\mbox{\Hypertarget{class_midi_message_a0e86db4d1186af858ad9f80d6abe96aba91e489a4210c9f5cbe2a47c4d3e26194}\label{class_midi_message_a0e86db4d1186af858ad9f80d6abe96aba91e489a4210c9f5cbe2a47c4d3e26194}} 
+fps30&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_midi_message_ab5b6fe39b57b4c39e4400b4d8e9bbbc9}\label{class_midi_message_ab5b6fe39b57b4c39e4400b4d8e9bbbc9}} 
+\index{MidiMessage@{MidiMessage}!MidiMessage@{MidiMessage}}
+\index{MidiMessage@{MidiMessage}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{MidiMessage()}{MidiMessage()}\hspace{0.1cm}{\footnotesize\ttfamily [1/10]}}
+{\footnotesize\ttfamily Midi\+Message\+::\+Midi\+Message (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{byte1,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{byte2,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{byte3,  }\item[{double}]{time\+Stamp = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Creates a 3-\/byte short midi message.
+
+
+\begin{DoxyParams}{Parameters}
+{\em byte1} & message byte 1 \\
+\hline
+{\em byte2} & message byte 2 \\
+\hline
+{\em byte3} & message byte 3 \\
+\hline
+{\em time\+Stamp} & the time to give the midi message -\/ this value doesn\textquotesingle{}t use any particular units, so will be application-\/specific \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_midi_message_a1e4f3637ec1968b34b0aa0e87dd30d03}\label{class_midi_message_a1e4f3637ec1968b34b0aa0e87dd30d03}} 
+\index{MidiMessage@{MidiMessage}!MidiMessage@{MidiMessage}}
+\index{MidiMessage@{MidiMessage}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{MidiMessage()}{MidiMessage()}\hspace{0.1cm}{\footnotesize\ttfamily [2/10]}}
+{\footnotesize\ttfamily Midi\+Message\+::\+Midi\+Message (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{byte1,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{byte2,  }\item[{double}]{time\+Stamp = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Creates a 2-\/byte short midi message.
+
+
+\begin{DoxyParams}{Parameters}
+{\em byte1} & message byte 1 \\
+\hline
+{\em byte2} & message byte 2 \\
+\hline
+{\em time\+Stamp} & the time to give the midi message -\/ this value doesn\textquotesingle{}t use any particular units, so will be application-\/specific \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_midi_message_ac37614dc438a8adfaf335daa0c67e1db}\label{class_midi_message_ac37614dc438a8adfaf335daa0c67e1db}} 
+\index{MidiMessage@{MidiMessage}!MidiMessage@{MidiMessage}}
+\index{MidiMessage@{MidiMessage}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{MidiMessage()}{MidiMessage()}\hspace{0.1cm}{\footnotesize\ttfamily [3/10]}}
+{\footnotesize\ttfamily Midi\+Message\+::\+Midi\+Message (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{byte1,  }\item[{double}]{time\+Stamp = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Creates a 1-\/byte short midi message.
+
+
+\begin{DoxyParams}{Parameters}
+{\em byte1} & message byte 1 \\
+\hline
+{\em time\+Stamp} & the time to give the midi message -\/ this value doesn\textquotesingle{}t use any particular units, so will be application-\/specific \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_midi_message_a7fcf7010a96716f17903bcf19d8de5cc}\label{class_midi_message_a7fcf7010a96716f17903bcf19d8de5cc}} 
+\index{MidiMessage@{MidiMessage}!MidiMessage@{MidiMessage}}
+\index{MidiMessage@{MidiMessage}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{MidiMessage()}{MidiMessage()}\hspace{0.1cm}{\footnotesize\ttfamily [4/10]}}
+{\footnotesize\ttfamily template$<$typename... Data$>$ \\
+Midi\+Message\+::\+Midi\+Message (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{byte1,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{byte2,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{byte3,  }\item[{Data...}]{other\+Bytes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Creates a midi message from a list of bytes. \mbox{\Hypertarget{class_midi_message_a6adcb5182a0e1446f5b9d77c9e08c7b3}\label{class_midi_message_a6adcb5182a0e1446f5b9d77c9e08c7b3}} 
+\index{MidiMessage@{MidiMessage}!MidiMessage@{MidiMessage}}
+\index{MidiMessage@{MidiMessage}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{MidiMessage()}{MidiMessage()}\hspace{0.1cm}{\footnotesize\ttfamily [5/10]}}
+{\footnotesize\ttfamily Midi\+Message\+::\+Midi\+Message (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} $\ast$}]{data,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{num\+Bytes,  }\item[{double}]{time\+Stamp = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+Creates a midi message from a block of data. \mbox{\Hypertarget{class_midi_message_a5dccdd2d580003120f5cfe4aafd28ed9}\label{class_midi_message_a5dccdd2d580003120f5cfe4aafd28ed9}} 
+\index{MidiMessage@{MidiMessage}!MidiMessage@{MidiMessage}}
+\index{MidiMessage@{MidiMessage}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{MidiMessage()}{MidiMessage()}\hspace{0.1cm}{\footnotesize\ttfamily [6/10]}}
+{\footnotesize\ttfamily Midi\+Message\+::\+Midi\+Message (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} $\ast$}]{data,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{max\+Bytes\+To\+Use,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \&}]{num\+Bytes\+Used,  }\item[{\mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}}}]{last\+Status\+Byte,  }\item[{double}]{time\+Stamp = {\ttfamily 0},  }\item[{bool}]{sysex\+Has\+Embedded\+Length = {\ttfamily \mbox{\hyperlink{ordinals_8h_a41f9c5fb8b08eb5dc3edce4dcb37fee7}{true}}} }\end{DoxyParamCaption})}
+
+Reads the next midi message from some data.
+
+This will read as many bytes from a data stream as it needs to make a complete message, and will return the number of bytes it used. This lets you read a sequence of midi messages from a file or stream.
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & the data to read from \\
+\hline
+{\em max\+Bytes\+To\+Use} & the maximum number of bytes it\textquotesingle{}s allowed to read \\
+\hline
+{\em num\+Bytes\+Used} & returns the number of bytes that were actually needed \\
+\hline
+{\em last\+Status\+Byte} & in a sequence of midi messages, the initial byte can be dropped from a message if it\textquotesingle{}s the same as the first byte of the previous message, so this lets you supply the byte to use if the first byte of the message has in fact been dropped. \\
+\hline
+{\em time\+Stamp} & the time to give the midi message -\/ this value doesn\textquotesingle{}t use any particular units, so will be application-\/specific \\
+\hline
+{\em sysex\+Has\+Embedded\+Length} & when reading sysexes, this flag indicates whether to expect the data to begin with a variable-\/length field indicating its size \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_midi_message_ad6e2e3e43fa78ef012bf87b5d7392e8a}\label{class_midi_message_ad6e2e3e43fa78ef012bf87b5d7392e8a}} 
+\index{MidiMessage@{MidiMessage}!MidiMessage@{MidiMessage}}
+\index{MidiMessage@{MidiMessage}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{MidiMessage()}{MidiMessage()}\hspace{0.1cm}{\footnotesize\ttfamily [7/10]}}
+{\footnotesize\ttfamily Midi\+Message\+::\+Midi\+Message (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Creates an empty sysex message.
+
+Since the \mbox{\hyperlink{class_midi_message}{Midi\+Message}} has to contain a valid message, this default constructor just initialises it with an empty sysex message. \mbox{\Hypertarget{class_midi_message_a2d3e85112bf8b37d91b3aab0911cf5b6}\label{class_midi_message_a2d3e85112bf8b37d91b3aab0911cf5b6}} 
+\index{MidiMessage@{MidiMessage}!MidiMessage@{MidiMessage}}
+\index{MidiMessage@{MidiMessage}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{MidiMessage()}{MidiMessage()}\hspace{0.1cm}{\footnotesize\ttfamily [8/10]}}
+{\footnotesize\ttfamily Midi\+Message\+::\+Midi\+Message (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \&}]{other }\end{DoxyParamCaption})}
+
+Creates a copy of another midi message. \mbox{\Hypertarget{class_midi_message_ab0701cc3ca5c035b10c1f5f894e5276a}\label{class_midi_message_ab0701cc3ca5c035b10c1f5f894e5276a}} 
+\index{MidiMessage@{MidiMessage}!MidiMessage@{MidiMessage}}
+\index{MidiMessage@{MidiMessage}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{MidiMessage()}{MidiMessage()}\hspace{0.1cm}{\footnotesize\ttfamily [9/10]}}
+{\footnotesize\ttfamily Midi\+Message\+::\+Midi\+Message (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \&}]{other,  }\item[{double}]{new\+Time\+Stamp }\end{DoxyParamCaption})}
+
+Creates a copy of another midi message, with a different timestamp. \mbox{\Hypertarget{class_midi_message_a914e3d004a3b62dfcdcf1c3f7e71b81c}\label{class_midi_message_a914e3d004a3b62dfcdcf1c3f7e71b81c}} 
+\index{MidiMessage@{MidiMessage}!````~MidiMessage@{$\sim$MidiMessage}}
+\index{````~MidiMessage@{$\sim$MidiMessage}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{$\sim$MidiMessage()}{~MidiMessage()}}
+{\footnotesize\ttfamily Midi\+Message\+::$\sim$\+Midi\+Message (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Destructor. \mbox{\Hypertarget{class_midi_message_a024fc6e9466031a4ce14ce291059a9ee}\label{class_midi_message_a024fc6e9466031a4ce14ce291059a9ee}} 
+\index{MidiMessage@{MidiMessage}!MidiMessage@{MidiMessage}}
+\index{MidiMessage@{MidiMessage}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{MidiMessage()}{MidiMessage()}\hspace{0.1cm}{\footnotesize\ttfamily [10/10]}}
+{\footnotesize\ttfamily Midi\+Message\+::\+Midi\+Message (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_midi_message}{Midi\+Message}} \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Move constructor 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_midi_message_a49112e5cf324feff8c69e2a2d8963695}\label{class_midi_message_a49112e5cf324feff8c69e2a2d8963695}} 
+\index{MidiMessage@{MidiMessage}!addToTimeStamp@{addToTimeStamp}}
+\index{addToTimeStamp@{addToTimeStamp}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{addToTimeStamp()}{addToTimeStamp()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Midi\+Message\+::add\+To\+Time\+Stamp (\begin{DoxyParamCaption}\item[{double}]{delta }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Adds a value to the message\textquotesingle{}s timestamp. The units for the timestamp will be application-\/specific. \mbox{\Hypertarget{class_midi_message_a70b5fbedc4efb0c4e46d8f03e52672a9}\label{class_midi_message_a70b5fbedc4efb0c4e46d8f03e52672a9}} 
+\index{MidiMessage@{MidiMessage}!aftertouchChange@{aftertouchChange}}
+\index{aftertouchChange@{aftertouchChange}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{aftertouchChange()}{aftertouchChange()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_message}{Midi\+Message}} Midi\+Message\+::aftertouch\+Change (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{channel,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{note\+Number,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{aftertouch\+Amount }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [noexcept]}}
+
+Creates an aftertouch message.
+
+
+\begin{DoxyParams}{Parameters}
+{\em channel} & the midi channel, in the range 1 to 16 \\
+\hline
+{\em note\+Number} & the key number, 0 to 127 \\
+\hline
+{\em aftertouch\+Amount} & the amount of aftertouch, 0 to 127 \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a08acde3017ba958b404f1b5e191c88e6}{is\+Aftertouch}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a72e2ab2aea452f0e8702c6f8fa0a7799}\label{class_midi_message_a72e2ab2aea452f0e8702c6f8fa0a7799}} 
+\index{MidiMessage@{MidiMessage}!allControllersOff@{allControllersOff}}
+\index{allControllersOff@{allControllersOff}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{allControllersOff()}{allControllersOff()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_message}{Midi\+Message}} Midi\+Message\+::all\+Controllers\+Off (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{channel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [noexcept]}}
+
+Creates an all-\/controllers-\/off message. 
+\begin{DoxyParams}{Parameters}
+{\em channel} & the midi channel, in the range 1 to 16 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_midi_message_a9564e36421339111f9b3409a347f24e1}\label{class_midi_message_a9564e36421339111f9b3409a347f24e1}} 
+\index{MidiMessage@{MidiMessage}!allNotesOff@{allNotesOff}}
+\index{allNotesOff@{allNotesOff}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{allNotesOff()}{allNotesOff()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_message}{Midi\+Message}} Midi\+Message\+::all\+Notes\+Off (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{channel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [noexcept]}}
+
+Creates an all-\/notes-\/off message. 
+\begin{DoxyParams}{Parameters}
+{\em channel} & the midi channel, in the range 1 to 16 \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a861beff07f9593a7711e773bcd81ba3c}{is\+All\+Notes\+Off}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a4f76bdb60f1143b307447cfeeb90ceb4}\label{class_midi_message_a4f76bdb60f1143b307447cfeeb90ceb4}} 
+\index{MidiMessage@{MidiMessage}!allSoundOff@{allSoundOff}}
+\index{allSoundOff@{allSoundOff}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{allSoundOff()}{allSoundOff()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_message}{Midi\+Message}} Midi\+Message\+::all\+Sound\+Off (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{channel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [noexcept]}}
+
+Creates an all-\/sound-\/off message. 
+\begin{DoxyParams}{Parameters}
+{\em channel} & the midi channel, in the range 1 to 16 \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_af87b936f883b459c1e9cb87c0bfec783}{is\+All\+Sound\+Off}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a4512f9ab1048b288b1b93680d6f24d13}\label{class_midi_message_a4512f9ab1048b288b1b93680d6f24d13}} 
+\index{MidiMessage@{MidiMessage}!channelPressureChange@{channelPressureChange}}
+\index{channelPressureChange@{channelPressureChange}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{channelPressureChange()}{channelPressureChange()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_message}{Midi\+Message}} Midi\+Message\+::channel\+Pressure\+Change (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{channel,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{pressure }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [noexcept]}}
+
+Creates a channel-\/pressure change event.
+
+
+\begin{DoxyParams}{Parameters}
+{\em channel} & the midi channel\+: 1 to 16 \\
+\hline
+{\em pressure} & the pressure, 0 to 127 \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a49037c7f75318d83ab284708c682c843}{is\+Channel\+Pressure}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a3ec4f4757e99ca98667da599b97e93ac}\label{class_midi_message_a3ec4f4757e99ca98667da599b97e93ac}} 
+\index{MidiMessage@{MidiMessage}!controllerEvent@{controllerEvent}}
+\index{controllerEvent@{controllerEvent}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{controllerEvent()}{controllerEvent()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_message}{Midi\+Message}} Midi\+Message\+::controller\+Event (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{channel,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{controller\+Type,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [noexcept]}}
+
+Creates a controller message. 
+\begin{DoxyParams}{Parameters}
+{\em channel} & the midi channel, in the range 1 to 16 \\
+\hline
+{\em controller\+Type} & the type of controller \\
+\hline
+{\em value} & the controller value \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_ac059a2234b67e28464a519632a1b31db}{is\+Controller}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_ad9cf216c12b52a87cfe490b51779416b}\label{class_midi_message_ad9cf216c12b52a87cfe490b51779416b}} 
+\index{MidiMessage@{MidiMessage}!createSysExMessage@{createSysExMessage}}
+\index{createSysExMessage@{createSysExMessage}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{createSysExMessage()}{createSysExMessage()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_message}{Midi\+Message}} Midi\+Message\+::create\+Sys\+Ex\+Message (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} $\ast$}]{sysex\+Data,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{data\+Size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Creates a system-\/exclusive message. The data passed in is wrapped with header and tail bytes of 0xf0 and 0xf7. \mbox{\Hypertarget{class_midi_message_a08cf985b119eb4af07dc0b1430717b77}\label{class_midi_message_a08cf985b119eb4af07dc0b1430717b77}} 
+\index{MidiMessage@{MidiMessage}!endOfTrack@{endOfTrack}}
+\index{endOfTrack@{endOfTrack}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{endOfTrack()}{endOfTrack()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_message}{Midi\+Message}} Midi\+Message\+::end\+Of\+Track (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [noexcept]}}
+
+Creates an end-\/of-\/track meta-\/event. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a17ea4a5fc3cb8e1b83a002797e1350e6}{is\+End\+Of\+Track\+Meta\+Event}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a0fcfb6db586913057a7fabffe35141b4}\label{class_midi_message_a0fcfb6db586913057a7fabffe35141b4}} 
+\index{MidiMessage@{MidiMessage}!floatValueToMidiByte@{floatValueToMidiByte}}
+\index{floatValueToMidiByte@{floatValueToMidiByte}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{floatValueToMidiByte()}{floatValueToMidiByte()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} Midi\+Message\+::float\+Value\+To\+Midi\+Byte (\begin{DoxyParamCaption}\item[{float}]{value\+Between0and1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [noexcept]}}
+
+Converts a floating-\/point value between 0 and 1 to a MIDI 7-\/bit value between 0 and 127. \mbox{\Hypertarget{class_midi_message_aa6cce35a1e4b8c154422fb7254f8f513}\label{class_midi_message_aa6cce35a1e4b8c154422fb7254f8f513}} 
+\index{MidiMessage@{MidiMessage}!fullFrame@{fullFrame}}
+\index{fullFrame@{fullFrame}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{fullFrame()}{fullFrame()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_message}{Midi\+Message}} Midi\+Message\+::full\+Frame (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{hours,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{minutes,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{seconds,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{frames,  }\item[{\mbox{\hyperlink{class_midi_message_a0e86db4d1186af858ad9f80d6abe96ab}{Midi\+Message\+::\+Smpte\+Timecode\+Type}}}]{timecode\+Type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Creates a full-\/frame MTC message. \mbox{\Hypertarget{class_midi_message_a623eb143fab4c07d18106c8e4e40316f}\label{class_midi_message_a623eb143fab4c07d18106c8e4e40316f}} 
+\index{MidiMessage@{MidiMessage}!getAfterTouchValue@{getAfterTouchValue}}
+\index{getAfterTouchValue@{getAfterTouchValue}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getAfterTouchValue()}{getAfterTouchValue()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} Midi\+Message\+::get\+After\+Touch\+Value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns the amount of aftertouch from an aftertouch messages.
+
+The value returned is in the range 0 to 127, and will be nonsense for messages other than aftertouch messages.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a08acde3017ba958b404f1b5e191c88e6}{is\+Aftertouch}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a7d681b7417c52d29cb73c108ca2a83b7}\label{class_midi_message_a7d681b7417c52d29cb73c108ca2a83b7}} 
+\index{MidiMessage@{MidiMessage}!getChannel@{getChannel}}
+\index{getChannel@{getChannel}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getChannel()}{getChannel()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} Midi\+Message\+::get\+Channel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns the midi channel associated with the message.
+
+\begin{DoxyReturn}{Returns}
+a value 1 to 16 if the message has a channel, or 0 if it hasn\textquotesingle{}t (e.\+g. if it\textquotesingle{}s a sysex) 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_aaf63f62d38b5174c967164395bf05252}{is\+For\+Channel}}, \mbox{\hyperlink{class_midi_message_ac35c11dba441d652e70720525cb2dc7f}{set\+Channel}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_aa9dc36194c26bb72f35d8522f60b3ac1}\label{class_midi_message_aa9dc36194c26bb72f35d8522f60b3ac1}} 
+\index{MidiMessage@{MidiMessage}!getChannelPressureValue@{getChannelPressureValue}}
+\index{getChannelPressureValue@{getChannelPressureValue}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getChannelPressureValue()}{getChannelPressureValue()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} Midi\+Message\+::get\+Channel\+Pressure\+Value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns the pressure from a channel pressure change message.
+
+\begin{DoxyReturn}{Returns}
+the pressure, in the range 0 to 127 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a49037c7f75318d83ab284708c682c843}{is\+Channel\+Pressure}}, \mbox{\hyperlink{class_midi_message_a4512f9ab1048b288b1b93680d6f24d13}{channel\+Pressure\+Change}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a32db03448d2d94b9294fd134a651a843}\label{class_midi_message_a32db03448d2d94b9294fd134a651a843}} 
+\index{MidiMessage@{MidiMessage}!getControllerName@{getControllerName}}
+\index{getControllerName@{getControllerName}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getControllerName()}{getControllerName()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} char $\ast$ Midi\+Message\+::get\+Controller\+Name (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{controller\+Number }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Returns the name of a controller type number, or nullptr if unknown for this controller number. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a772acb26aa7f2cdc1992210b6d2d496a}{get\+Controller\+Number}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a772acb26aa7f2cdc1992210b6d2d496a}\label{class_midi_message_a772acb26aa7f2cdc1992210b6d2d496a}} 
+\index{MidiMessage@{MidiMessage}!getControllerNumber@{getControllerNumber}}
+\index{getControllerNumber@{getControllerNumber}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getControllerNumber()}{getControllerNumber()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} Midi\+Message\+::get\+Controller\+Number (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns the controller number of a controller message.
+
+The name of the controller can be looked up using the \mbox{\hyperlink{class_midi_message_a32db03448d2d94b9294fd134a651a843}{get\+Controller\+Name()}} method. Note that the value returned is invalid for messages that aren\textquotesingle{}t controller changes.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_ac059a2234b67e28464a519632a1b31db}{is\+Controller}}, \mbox{\hyperlink{class_midi_message_a32db03448d2d94b9294fd134a651a843}{get\+Controller\+Name}}, \mbox{\hyperlink{class_midi_message_aa301aa18dace968d5ebb2f809fd52522}{get\+Controller\+Value}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_aa301aa18dace968d5ebb2f809fd52522}\label{class_midi_message_aa301aa18dace968d5ebb2f809fd52522}} 
+\index{MidiMessage@{MidiMessage}!getControllerValue@{getControllerValue}}
+\index{getControllerValue@{getControllerValue}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getControllerValue()}{getControllerValue()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} Midi\+Message\+::get\+Controller\+Value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns the controller value from a controller message.
+
+A value 0 to 127 is returned to indicate the new controller position. Note that the value returned is invalid for messages that aren\textquotesingle{}t controller changes.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_ac059a2234b67e28464a519632a1b31db}{is\+Controller}}, \mbox{\hyperlink{class_midi_message_a772acb26aa7f2cdc1992210b6d2d496a}{get\+Controller\+Number}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a868d95a096fad999de5ba11f9a2f6340}\label{class_midi_message_a868d95a096fad999de5ba11f9a2f6340}} 
+\index{MidiMessage@{MidiMessage}!getDescription@{getDescription}}
+\index{getDescription@{getDescription}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getDescription()}{getDescription()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_string}{String}} Midi\+Message\+::get\+Description (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Returns a human-\/readable description of the midi message as a string, for example \char`\"{}\+Note On C\#3 Velocity 120 Channel 1\char`\"{}. \mbox{\Hypertarget{class_midi_message_a07210a8a79ef89e079be89ad6e1b98ae}\label{class_midi_message_a07210a8a79ef89e079be89ad6e1b98ae}} 
+\index{MidiMessage@{MidiMessage}!getFloatVelocity@{getFloatVelocity}}
+\index{getFloatVelocity@{getFloatVelocity}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getFloatVelocity()}{getFloatVelocity()}}
+{\footnotesize\ttfamily float Midi\+Message\+::get\+Float\+Velocity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns the velocity of a note-\/on or note-\/off message.
+
+The value returned will be in the range 0 to 1.\+0 If the message isn\textquotesingle{}t a note-\/on or off event, it will return 0.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_ad5483775a661b2176687303bc9c8aac6}{get\+Velocity}}, \mbox{\hyperlink{class_midi_message_afab2cc0f59531d4aba57a0f10e9dafc4}{set\+Velocity}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a47d3e7c684912a0c9993f227ef675198}\label{class_midi_message_a47d3e7c684912a0c9993f227ef675198}} 
+\index{MidiMessage@{MidiMessage}!getFullFrameParameters@{getFullFrameParameters}}
+\index{getFullFrameParameters@{getFullFrameParameters}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getFullFrameParameters()}{getFullFrameParameters()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Midi\+Message\+::get\+Full\+Frame\+Parameters (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \&}]{hours,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \&}]{minutes,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \&}]{seconds,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \&}]{frames,  }\item[{\mbox{\hyperlink{class_midi_message_a0e86db4d1186af858ad9f80d6abe96ab}{Midi\+Message\+::\+Smpte\+Timecode\+Type}} \&}]{timecode\+Type }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Extracts the timecode information from a full-\/frame midi timecode message.
+
+You should only call this on messages where you\textquotesingle{}ve used \mbox{\hyperlink{class_midi_message_a79564ccd8e9e0a46591eb2daedea8cdb}{is\+Full\+Frame()}} to check that they\textquotesingle{}re the right kind. \mbox{\Hypertarget{class_midi_message_a0ab113958ade72226065d25522084202}\label{class_midi_message_a0ab113958ade72226065d25522084202}} 
+\index{MidiMessage@{MidiMessage}!getGMInstrumentBankName@{getGMInstrumentBankName}}
+\index{getGMInstrumentBankName@{getGMInstrumentBankName}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getGMInstrumentBankName()}{getGMInstrumentBankName()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} char $\ast$ Midi\+Message\+::get\+GMInstrument\+Bank\+Name (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{midi\+Bank\+Number }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Returns the name of a bank of GM instruments, or nullptr if unknown for this bank number. 
+\begin{DoxyParams}{Parameters}
+{\em midi\+Bank\+Number} & the bank, 0 to 15 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_midi_message_ab995932c1950a401e28dee62f4fb7433}\label{class_midi_message_ab995932c1950a401e28dee62f4fb7433}} 
+\index{MidiMessage@{MidiMessage}!getGMInstrumentName@{getGMInstrumentName}}
+\index{getGMInstrumentName@{getGMInstrumentName}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getGMInstrumentName()}{getGMInstrumentName()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} char $\ast$ Midi\+Message\+::get\+GMInstrument\+Name (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{midi\+Instrument\+Number }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Returns the standard name of a GM instrument, or nullptr if unknown for this index.
+
+
+\begin{DoxyParams}{Parameters}
+{\em midi\+Instrument\+Number} & the program number 0 to 127 \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a9c200619411c253b661acee5660e4b76}{get\+Program\+Change\+Number}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a13348f90ec60de09d242265d4652711c}\label{class_midi_message_a13348f90ec60de09d242265d4652711c}} 
+\index{MidiMessage@{MidiMessage}!getKeySignatureNumberOfSharpsOrFlats@{getKeySignatureNumberOfSharpsOrFlats}}
+\index{getKeySignatureNumberOfSharpsOrFlats@{getKeySignatureNumberOfSharpsOrFlats}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getKeySignatureNumberOfSharpsOrFlats()}{getKeySignatureNumberOfSharpsOrFlats()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} Midi\+Message\+::get\+Key\+Signature\+Number\+Of\+Sharps\+Or\+Flats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns the key from a key-\/signature meta-\/event. This method must only be called if \mbox{\hyperlink{class_midi_message_ae686c5d86fa7d04df268f56bbf853f23}{is\+Key\+Signature\+Meta\+Event()}} is true. A positive number here indicates the number of sharps in the key signature, and a negative number indicates a number of flats. So e.\+g. 3 = F\# + C\# + G\#, -\/2 = Bb + Eb \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_ae686c5d86fa7d04df268f56bbf853f23}{is\+Key\+Signature\+Meta\+Event}}, \mbox{\hyperlink{class_midi_message_a9388bf7192568805515545ec31fa605b}{is\+Key\+Signature\+Major\+Key}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a5e312ea62140d65cb63af27e9469e183}\label{class_midi_message_a5e312ea62140d65cb63af27e9469e183}} 
+\index{MidiMessage@{MidiMessage}!getMessageLengthFromFirstByte@{getMessageLengthFromFirstByte}}
+\index{getMessageLengthFromFirstByte@{getMessageLengthFromFirstByte}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getMessageLengthFromFirstByte()}{getMessageLengthFromFirstByte()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} Midi\+Message\+::get\+Message\+Length\+From\+First\+Byte (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}}}]{first\+Byte }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [noexcept]}}
+
+Based on the first byte of a short midi message, this uses a lookup table to return the message length (either 1, 2, or 3 bytes).
+
+The value passed in must be 0x80 or higher. \mbox{\Hypertarget{class_midi_message_a6298077548e1b79c54ce2a2f28b71ec4}\label{class_midi_message_a6298077548e1b79c54ce2a2f28b71ec4}} 
+\index{MidiMessage@{MidiMessage}!getMetaEventData@{getMetaEventData}}
+\index{getMetaEventData@{getMetaEventData}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getMetaEventData()}{getMetaEventData()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} $\ast$ Midi\+Message\+::get\+Meta\+Event\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns a pointer to the data in a meta-\/event. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_ac1ec120f33d7cb7fc186f254493cf553}{is\+Meta\+Event}}, \mbox{\hyperlink{class_midi_message_a3e0156ec465f66b3333ecfbcdfe340f6}{get\+Meta\+Event\+Length}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a3e0156ec465f66b3333ecfbcdfe340f6}\label{class_midi_message_a3e0156ec465f66b3333ecfbcdfe340f6}} 
+\index{MidiMessage@{MidiMessage}!getMetaEventLength@{getMetaEventLength}}
+\index{getMetaEventLength@{getMetaEventLength}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getMetaEventLength()}{getMetaEventLength()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} Midi\+Message\+::get\+Meta\+Event\+Length (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns the length of the data for a meta-\/event. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_ac1ec120f33d7cb7fc186f254493cf553}{is\+Meta\+Event}}, \mbox{\hyperlink{class_midi_message_a6298077548e1b79c54ce2a2f28b71ec4}{get\+Meta\+Event\+Data}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_ae46c134b2808500122c73347cc07014f}\label{class_midi_message_ae46c134b2808500122c73347cc07014f}} 
+\index{MidiMessage@{MidiMessage}!getMetaEventType@{getMetaEventType}}
+\index{getMetaEventType@{getMetaEventType}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getMetaEventType()}{getMetaEventType()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} Midi\+Message\+::get\+Meta\+Event\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns a meta-\/event\textquotesingle{}s type number.
+
+If the message isn\textquotesingle{}t a meta-\/event, this will return -\/1.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_ac1ec120f33d7cb7fc186f254493cf553}{is\+Meta\+Event}}, \mbox{\hyperlink{class_midi_message_acecc7e99f8287e851d6d944a4babc08e}{is\+Track\+Meta\+Event}}, \mbox{\hyperlink{class_midi_message_a17ea4a5fc3cb8e1b83a002797e1350e6}{is\+End\+Of\+Track\+Meta\+Event}}, \mbox{\hyperlink{class_midi_message_afb44a1c54810b707eb0f6e108d3060f1}{is\+Text\+Meta\+Event}}, \mbox{\hyperlink{class_midi_message_aeb18602ea05f67cad490f8866e07c172}{is\+Track\+Name\+Event}}, \mbox{\hyperlink{class_midi_message_aa9654c52ea08da9d76a31c93006348f8}{is\+Tempo\+Meta\+Event}}, \mbox{\hyperlink{class_midi_message_a0253a501abf4ee4d2a66dcc6e8ce433c}{is\+Time\+Signature\+Meta\+Event}}, \mbox{\hyperlink{class_midi_message_ae686c5d86fa7d04df268f56bbf853f23}{is\+Key\+Signature\+Meta\+Event}}, \mbox{\hyperlink{class_midi_message_a15aa1d11ffbdfbe78b2a11bf6375f4f9}{is\+Midi\+Channel\+Meta\+Event}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a04730ebdec68d3db7501e8e2c68111e3}\label{class_midi_message_a04730ebdec68d3db7501e8e2c68111e3}} 
+\index{MidiMessage@{MidiMessage}!getMidiChannelMetaEventChannel@{getMidiChannelMetaEventChannel}}
+\index{getMidiChannelMetaEventChannel@{getMidiChannelMetaEventChannel}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getMidiChannelMetaEventChannel()}{getMidiChannelMetaEventChannel()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} Midi\+Message\+::get\+Midi\+Channel\+Meta\+Event\+Channel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns the channel number from a channel meta-\/event.
+
+\begin{DoxyReturn}{Returns}
+the channel, in the range 1 to 16. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a15aa1d11ffbdfbe78b2a11bf6375f4f9}{is\+Midi\+Channel\+Meta\+Event}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a5710fca6493291b3582c65d25196dfa8}\label{class_midi_message_a5710fca6493291b3582c65d25196dfa8}} 
+\index{MidiMessage@{MidiMessage}!getMidiMachineControlCommand@{getMidiMachineControlCommand}}
+\index{getMidiMachineControlCommand@{getMidiMachineControlCommand}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getMidiMachineControlCommand()}{getMidiMachineControlCommand()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_message_aa95b060274257522d1af40794ad1631d}{Midi\+Message\+::\+Midi\+Machine\+Control\+Command}} Midi\+Message\+::get\+Midi\+Machine\+Control\+Command (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+For an MMC message, this returns its type.
+
+Make sure it\textquotesingle{}s actually an MMC message with \mbox{\hyperlink{class_midi_message_af6fcf72f3bbbf104c63da61defa42bc9}{is\+Midi\+Machine\+Control\+Message()}} before calling this method. \mbox{\Hypertarget{class_midi_message_aa2dd8b7517cc03915a22279264b1dfd5}\label{class_midi_message_aa2dd8b7517cc03915a22279264b1dfd5}} 
+\index{MidiMessage@{MidiMessage}!getMidiNoteInHertz@{getMidiNoteInHertz}}
+\index{getMidiNoteInHertz@{getMidiNoteInHertz}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getMidiNoteInHertz()}{getMidiNoteInHertz()}}
+{\footnotesize\ttfamily double Midi\+Message\+::get\+Midi\+Note\+In\+Hertz (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{note\+Number,  }\item[{double}]{frequency\+OfA = {\ttfamily 440.0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [noexcept]}}
+
+Returns the frequency of a midi note number.
+
+The frequency\+OfA parameter is an optional frequency for \textquotesingle{}A\textquotesingle{}, normally 440-\/444Hz for concert pitch. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_ac782d50b7ca289a7d45fc9c0dd96f454}{get\+Midi\+Note\+Name}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_ac782d50b7ca289a7d45fc9c0dd96f454}\label{class_midi_message_ac782d50b7ca289a7d45fc9c0dd96f454}} 
+\index{MidiMessage@{MidiMessage}!getMidiNoteName@{getMidiNoteName}}
+\index{getMidiNoteName@{getMidiNoteName}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getMidiNoteName()}{getMidiNoteName()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_string}{String}} Midi\+Message\+::get\+Midi\+Note\+Name (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{note\+Number,  }\item[{bool}]{use\+Sharps,  }\item[{bool}]{include\+Octave\+Number,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{octave\+Num\+For\+MiddleC }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Returns the name of a midi note number.
+
+E.\+g \char`\"{}\+C\char`\"{}, \char`\"{}\+D\#\char`\"{}, etc.
+
+
+\begin{DoxyParams}{Parameters}
+{\em note\+Number} & the midi note number, 0 to 127 \\
+\hline
+{\em use\+Sharps} & if true, sharpened notes are used, e.\+g. \char`\"{}\+C\#\char`\"{}, otherwise they\textquotesingle{}ll be flattened, e.\+g. \char`\"{}\+Db\char`\"{} \\
+\hline
+{\em include\+Octave\+Number} & if true, the octave number will be appended to the string, e.\+g. \char`\"{}\+C\#4\char`\"{} \\
+\hline
+{\em octave\+Num\+For\+MiddleC} & if an octave number is being appended, this indicates the number that will be used for middle C\textquotesingle{}s octave\\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_aa2dd8b7517cc03915a22279264b1dfd5}{get\+Midi\+Note\+In\+Hertz}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a6a5f965e98254fb026c5a20b64edcbc1}\label{class_midi_message_a6a5f965e98254fb026c5a20b64edcbc1}} 
+\index{MidiMessage@{MidiMessage}!getNoteNumber@{getNoteNumber}}
+\index{getNoteNumber@{getNoteNumber}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getNoteNumber()}{getNoteNumber()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} Midi\+Message\+::get\+Note\+Number (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns the midi note number for note-\/on and note-\/off messages. If the message isn\textquotesingle{}t a note-\/on or off, the value returned is undefined. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_af66814dee34738882ba39d8796b77be0}{is\+Note\+Off}}, \mbox{\hyperlink{class_midi_message_ac782d50b7ca289a7d45fc9c0dd96f454}{get\+Midi\+Note\+Name}}, \mbox{\hyperlink{class_midi_message_aa2dd8b7517cc03915a22279264b1dfd5}{get\+Midi\+Note\+In\+Hertz}}, \mbox{\hyperlink{class_midi_message_a47583c88bed0ca4b30b0f86bc2afb48c}{set\+Note\+Number}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_aaa9675ccbce68b47067b512370e2ac20}\label{class_midi_message_aaa9675ccbce68b47067b512370e2ac20}} 
+\index{MidiMessage@{MidiMessage}!getPitchWheelValue@{getPitchWheelValue}}
+\index{getPitchWheelValue@{getPitchWheelValue}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getPitchWheelValue()}{getPitchWheelValue()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} Midi\+Message\+::get\+Pitch\+Wheel\+Value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns the pitch wheel position from a pitch-\/wheel move message.
+
+The value returned is a 14-\/bit number from 0 to 0x3fff, indicating the wheel position. If called for messages which aren\textquotesingle{}t pitch wheel events, the number returned will be nonsense.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_aaa504ef83e8d0c5fd8f652bf0712c4e1}{is\+Pitch\+Wheel}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a9c200619411c253b661acee5660e4b76}\label{class_midi_message_a9c200619411c253b661acee5660e4b76}} 
+\index{MidiMessage@{MidiMessage}!getProgramChangeNumber@{getProgramChangeNumber}}
+\index{getProgramChangeNumber@{getProgramChangeNumber}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getProgramChangeNumber()}{getProgramChangeNumber()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} Midi\+Message\+::get\+Program\+Change\+Number (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns the new program number of a program change message. If the message isn\textquotesingle{}t a program change, the value returned is undefined. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a89035047ec5cc9b77d8d484d4a8c9a8d}{is\+Program\+Change}}, \mbox{\hyperlink{class_midi_message_ab995932c1950a401e28dee62f4fb7433}{get\+GMInstrument\+Name}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a9eb49c9f42a98dfd8dd9c2eb55e33afd}\label{class_midi_message_a9eb49c9f42a98dfd8dd9c2eb55e33afd}} 
+\index{MidiMessage@{MidiMessage}!getQuarterFrameSequenceNumber@{getQuarterFrameSequenceNumber}}
+\index{getQuarterFrameSequenceNumber@{getQuarterFrameSequenceNumber}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getQuarterFrameSequenceNumber()}{getQuarterFrameSequenceNumber()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} Midi\+Message\+::get\+Quarter\+Frame\+Sequence\+Number (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns the sequence number of a quarter-\/frame midi timecode message. This will be a value between 0 and 7. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a948318bbf7471f8e4ab857c43004b34c}{is\+Quarter\+Frame}}, \mbox{\hyperlink{class_midi_message_acd7704a0c68987326fdd4127f77a9976}{get\+Quarter\+Frame\+Value}}, \mbox{\hyperlink{class_midi_message_ae3bde183bd6663fee315b07b3866fa46}{quarter\+Frame}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_acd7704a0c68987326fdd4127f77a9976}\label{class_midi_message_acd7704a0c68987326fdd4127f77a9976}} 
+\index{MidiMessage@{MidiMessage}!getQuarterFrameValue@{getQuarterFrameValue}}
+\index{getQuarterFrameValue@{getQuarterFrameValue}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getQuarterFrameValue()}{getQuarterFrameValue()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} Midi\+Message\+::get\+Quarter\+Frame\+Value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns the value from a quarter-\/frame message. This will be the lower nybble of the message\textquotesingle{}s data-\/byte, a value between 0 and 15 \mbox{\Hypertarget{class_midi_message_acb371198496cdac48c2fe2a96c884913}\label{class_midi_message_acb371198496cdac48c2fe2a96c884913}} 
+\index{MidiMessage@{MidiMessage}!getRawData@{getRawData}}
+\index{getRawData@{getRawData}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getRawData()}{getRawData()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} $\ast$ Midi\+Message\+::get\+Raw\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Returns a pointer to the raw midi data. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a5768889fe63a63c58755d9d2f05afbd0}{get\+Raw\+Data\+Size}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a5768889fe63a63c58755d9d2f05afbd0}\label{class_midi_message_a5768889fe63a63c58755d9d2f05afbd0}} 
+\index{MidiMessage@{MidiMessage}!getRawDataSize@{getRawDataSize}}
+\index{getRawDataSize@{getRawDataSize}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getRawDataSize()}{getRawDataSize()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} Midi\+Message\+::get\+Raw\+Data\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Returns the number of bytes of data in the message. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_acb371198496cdac48c2fe2a96c884913}{get\+Raw\+Data}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_ac452c7d3b94ff57b52427745196a8868}\label{class_midi_message_ac452c7d3b94ff57b52427745196a8868}} 
+\index{MidiMessage@{MidiMessage}!getRhythmInstrumentName@{getRhythmInstrumentName}}
+\index{getRhythmInstrumentName@{getRhythmInstrumentName}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getRhythmInstrumentName()}{getRhythmInstrumentName()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} char $\ast$ Midi\+Message\+::get\+Rhythm\+Instrument\+Name (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{midi\+Note\+Number }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Returns the standard name of a channel 10 percussion sound, or nullptr if unknown for this note number. 
+\begin{DoxyParams}{Parameters}
+{\em midi\+Note\+Number} & the key number, 35 to 81 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_midi_message_a75823853d0f796d2671efa4a1b9876f1}\label{class_midi_message_a75823853d0f796d2671efa4a1b9876f1}} 
+\index{MidiMessage@{MidiMessage}!getSongPositionPointerMidiBeat@{getSongPositionPointerMidiBeat}}
+\index{getSongPositionPointerMidiBeat@{getSongPositionPointerMidiBeat}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getSongPositionPointerMidiBeat()}{getSongPositionPointerMidiBeat()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} Midi\+Message\+::get\+Song\+Position\+Pointer\+Midi\+Beat (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns the midi beat-\/number of a song-\/position-\/pointer message. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_ae4ed73e5046837c640064c937c538a00}{is\+Song\+Position\+Pointer}}, \mbox{\hyperlink{class_midi_message_a58c65c8cf6542504109e43f872661d70}{song\+Position\+Pointer}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a2f5b2634786bf5b47cd89b792b5af8a1}\label{class_midi_message_a2f5b2634786bf5b47cd89b792b5af8a1}} 
+\index{MidiMessage@{MidiMessage}!getSysExData@{getSysExData}}
+\index{getSysExData@{getSysExData}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getSysExData()}{getSysExData()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} $\ast$ Midi\+Message\+::get\+Sys\+Ex\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns a pointer to the sysex data inside the message. If this event isn\textquotesingle{}t a sysex event, it\textquotesingle{}ll return 0. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_afb6ff5014531a80589756228fe637aaa}{get\+Sys\+Ex\+Data\+Size}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_afb6ff5014531a80589756228fe637aaa}\label{class_midi_message_afb6ff5014531a80589756228fe637aaa}} 
+\index{MidiMessage@{MidiMessage}!getSysExDataSize@{getSysExDataSize}}
+\index{getSysExDataSize@{getSysExDataSize}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getSysExDataSize()}{getSysExDataSize()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} Midi\+Message\+::get\+Sys\+Ex\+Data\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns the size of the sysex data. This value excludes the 0xf0 header byte and the 0xf7 at the end. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a2f5b2634786bf5b47cd89b792b5af8a1}{get\+Sys\+Ex\+Data}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_abd90df7704a306f5186aa86f14978ae9}\label{class_midi_message_abd90df7704a306f5186aa86f14978ae9}} 
+\index{MidiMessage@{MidiMessage}!getTempoMetaEventTickLength@{getTempoMetaEventTickLength}}
+\index{getTempoMetaEventTickLength@{getTempoMetaEventTickLength}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getTempoMetaEventTickLength()}{getTempoMetaEventTickLength()}}
+{\footnotesize\ttfamily double Midi\+Message\+::get\+Tempo\+Meta\+Event\+Tick\+Length (\begin{DoxyParamCaption}\item[{short}]{time\+Format }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns the tick length from a tempo meta-\/event.
+
+
+\begin{DoxyParams}{Parameters}
+{\em time\+Format} & the 16-\/bit time format value from the midi file\textquotesingle{}s header. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the tick length (in seconds). 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_aa9654c52ea08da9d76a31c93006348f8}{is\+Tempo\+Meta\+Event}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_ab4228aa759969257eae0dc29d76bd70c}\label{class_midi_message_ab4228aa759969257eae0dc29d76bd70c}} 
+\index{MidiMessage@{MidiMessage}!getTempoSecondsPerQuarterNote@{getTempoSecondsPerQuarterNote}}
+\index{getTempoSecondsPerQuarterNote@{getTempoSecondsPerQuarterNote}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getTempoSecondsPerQuarterNote()}{getTempoSecondsPerQuarterNote()}}
+{\footnotesize\ttfamily double Midi\+Message\+::get\+Tempo\+Seconds\+Per\+Quarter\+Note (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Calculates the seconds-\/per-\/quarter-\/note from a tempo meta-\/event. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_aa9654c52ea08da9d76a31c93006348f8}{is\+Tempo\+Meta\+Event}}, \mbox{\hyperlink{class_midi_message_abd90df7704a306f5186aa86f14978ae9}{get\+Tempo\+Meta\+Event\+Tick\+Length}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a204d2d2bf997be762510d2f43ab79c36}\label{class_midi_message_a204d2d2bf997be762510d2f43ab79c36}} 
+\index{MidiMessage@{MidiMessage}!getTextFromTextMetaEvent@{getTextFromTextMetaEvent}}
+\index{getTextFromTextMetaEvent@{getTextFromTextMetaEvent}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getTextFromTextMetaEvent()}{getTextFromTextMetaEvent()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_string}{String}} Midi\+Message\+::get\+Text\+From\+Text\+Meta\+Event (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Returns the text from a text meta-\/event. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_afb44a1c54810b707eb0f6e108d3060f1}{is\+Text\+Meta\+Event}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a35ab9435cfda308abd22f6d72a5fece1}\label{class_midi_message_a35ab9435cfda308abd22f6d72a5fece1}} 
+\index{MidiMessage@{MidiMessage}!getTimeSignatureInfo@{getTimeSignatureInfo}}
+\index{getTimeSignatureInfo@{getTimeSignatureInfo}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getTimeSignatureInfo()}{getTimeSignatureInfo()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Midi\+Message\+::get\+Time\+Signature\+Info (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \&}]{numerator,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \&}]{denominator }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns the time-\/signature values from a time-\/signature meta-\/event. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a0253a501abf4ee4d2a66dcc6e8ce433c}{is\+Time\+Signature\+Meta\+Event}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a9a942c96a776e80e3c512058b29011a8}\label{class_midi_message_a9a942c96a776e80e3c512058b29011a8}} 
+\index{MidiMessage@{MidiMessage}!getTimeStamp@{getTimeStamp}}
+\index{getTimeStamp@{getTimeStamp}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getTimeStamp()}{getTimeStamp()}}
+{\footnotesize\ttfamily double Midi\+Message\+::get\+Time\+Stamp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Returns the timestamp associated with this message.
+
+The exact meaning of this time and its units will vary, as messages are used in a variety of different contexts.
+
+If you\textquotesingle{}re getting the message from a midi file, this could be a time in seconds, or a number of ticks -\/ see \mbox{\hyperlink{class_midi_file_af66c3497ec6109a9c7c1cf1f474c8b95}{Midi\+File\+::convert\+Timestamp\+Ticks\+To\+Seconds()}}.
+
+If the message is being used in a \mbox{\hyperlink{class_midi_buffer}{Midi\+Buffer}}, it might indicate the number of audio samples from the start of the buffer.
+
+If the message was created by a \mbox{\hyperlink{class_midi_input}{Midi\+Input}}, see \mbox{\hyperlink{class_midi_input_callback_acdf6d7e27b96a50fe06922737f0d082e}{Midi\+Input\+Callback\+::handle\+Incoming\+Midi\+Message()}} for details of the way that it initialises this value.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_ad5f9ceed74dd22e846ed0650d81f11a7}{set\+Time\+Stamp}}, \mbox{\hyperlink{class_midi_message_a49112e5cf324feff8c69e2a2d8963695}{add\+To\+Time\+Stamp}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_ad5483775a661b2176687303bc9c8aac6}\label{class_midi_message_ad5483775a661b2176687303bc9c8aac6}} 
+\index{MidiMessage@{MidiMessage}!getVelocity@{getVelocity}}
+\index{getVelocity@{getVelocity}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{getVelocity()}{getVelocity()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} Midi\+Message\+::get\+Velocity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns the velocity of a note-\/on or note-\/off message.
+
+The value returned will be in the range 0 to 127. If the message isn\textquotesingle{}t a note-\/on or off event, it will return 0.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a07210a8a79ef89e079be89ad6e1b98ae}{get\+Float\+Velocity}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_abfb16fe1f29aa68b21cbe3933c048606}\label{class_midi_message_abfb16fe1f29aa68b21cbe3933c048606}} 
+\index{MidiMessage@{MidiMessage}!isActiveSense@{isActiveSense}}
+\index{isActiveSense@{isActiveSense}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isActiveSense()}{isActiveSense()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Active\+Sense (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if this is an active-\/sense message. \mbox{\Hypertarget{class_midi_message_a08acde3017ba958b404f1b5e191c88e6}\label{class_midi_message_a08acde3017ba958b404f1b5e191c88e6}} 
+\index{MidiMessage@{MidiMessage}!isAftertouch@{isAftertouch}}
+\index{isAftertouch@{isAftertouch}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isAftertouch()}{isAftertouch()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Aftertouch (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if the message is an aftertouch event.
+
+For aftertouch events, use the \mbox{\hyperlink{class_midi_message_a6a5f965e98254fb026c5a20b64edcbc1}{get\+Note\+Number()}} method to find out the key that it applies to, and \mbox{\hyperlink{class_midi_message_a623eb143fab4c07d18106c8e4e40316f}{get\+After\+Touch\+Value()}} to find out the amount. Use \mbox{\hyperlink{class_midi_message_a7d681b7417c52d29cb73c108ca2a83b7}{get\+Channel()}} to find out the channel.
+
+\begin{DoxySeeAlso}{See also}
+get\+Aftertouch\+Value, \mbox{\hyperlink{class_midi_message_a6a5f965e98254fb026c5a20b64edcbc1}{get\+Note\+Number}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a861beff07f9593a7711e773bcd81ba3c}\label{class_midi_message_a861beff07f9593a7711e773bcd81ba3c}} 
+\index{MidiMessage@{MidiMessage}!isAllNotesOff@{isAllNotesOff}}
+\index{isAllNotesOff@{isAllNotesOff}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isAllNotesOff()}{isAllNotesOff()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+All\+Notes\+Off (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Checks whether this message is an all-\/notes-\/off message. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a9564e36421339111f9b3409a347f24e1}{all\+Notes\+Off}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_af87b936f883b459c1e9cb87c0bfec783}\label{class_midi_message_af87b936f883b459c1e9cb87c0bfec783}} 
+\index{MidiMessage@{MidiMessage}!isAllSoundOff@{isAllSoundOff}}
+\index{isAllSoundOff@{isAllSoundOff}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isAllSoundOff()}{isAllSoundOff()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+All\+Sound\+Off (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Checks whether this message is an all-\/sound-\/off message. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a4f76bdb60f1143b307447cfeeb90ceb4}{all\+Sound\+Off}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a49037c7f75318d83ab284708c682c843}\label{class_midi_message_a49037c7f75318d83ab284708c682c843}} 
+\index{MidiMessage@{MidiMessage}!isChannelPressure@{isChannelPressure}}
+\index{isChannelPressure@{isChannelPressure}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isChannelPressure()}{isChannelPressure()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Channel\+Pressure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if the message is a channel-\/pressure change event.
+
+This is like aftertouch, but common to the whole channel rather than a specific note. Use \mbox{\hyperlink{class_midi_message_aa9dc36194c26bb72f35d8522f60b3ac1}{get\+Channel\+Pressure\+Value()}} to find out the pressure, and \mbox{\hyperlink{class_midi_message_a7d681b7417c52d29cb73c108ca2a83b7}{get\+Channel()}} to find out the channel.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a4512f9ab1048b288b1b93680d6f24d13}{channel\+Pressure\+Change}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_ac059a2234b67e28464a519632a1b31db}\label{class_midi_message_ac059a2234b67e28464a519632a1b31db}} 
+\index{MidiMessage@{MidiMessage}!isController@{isController}}
+\index{isController@{isController}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isController()}{isController()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Controller (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if this is a midi controller message.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a772acb26aa7f2cdc1992210b6d2d496a}{get\+Controller\+Number}}, \mbox{\hyperlink{class_midi_message_aa301aa18dace968d5ebb2f809fd52522}{get\+Controller\+Value}}, \mbox{\hyperlink{class_midi_message_a3ec4f4757e99ca98667da599b97e93ac}{controller\+Event}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_af5f1b96eff37b0ca1fccfb67960e829b}\label{class_midi_message_af5f1b96eff37b0ca1fccfb67960e829b}} 
+\index{MidiMessage@{MidiMessage}!isControllerOfType@{isControllerOfType}}
+\index{isControllerOfType@{isControllerOfType}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isControllerOfType()}{isControllerOfType()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Controller\+Of\+Type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{controller\+Type }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if this message is a controller message and if it has the specified controller type. \mbox{\Hypertarget{class_midi_message_a17ea4a5fc3cb8e1b83a002797e1350e6}\label{class_midi_message_a17ea4a5fc3cb8e1b83a002797e1350e6}} 
+\index{MidiMessage@{MidiMessage}!isEndOfTrackMetaEvent@{isEndOfTrackMetaEvent}}
+\index{isEndOfTrackMetaEvent@{isEndOfTrackMetaEvent}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isEndOfTrackMetaEvent()}{isEndOfTrackMetaEvent()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+End\+Of\+Track\+Meta\+Event (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if this is an \textquotesingle{}end-\/of-\/track\textquotesingle{} meta-\/event. \mbox{\Hypertarget{class_midi_message_aaf63f62d38b5174c967164395bf05252}\label{class_midi_message_aaf63f62d38b5174c967164395bf05252}} 
+\index{MidiMessage@{MidiMessage}!isForChannel@{isForChannel}}
+\index{isForChannel@{isForChannel}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isForChannel()}{isForChannel()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+For\+Channel (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{channel\+Number }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if the message applies to the given midi channel.
+
+
+\begin{DoxyParams}{Parameters}
+{\em channel\+Number} & the channel number to look for, in the range 1 to 16 \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a7d681b7417c52d29cb73c108ca2a83b7}{get\+Channel}}, \mbox{\hyperlink{class_midi_message_ac35c11dba441d652e70720525cb2dc7f}{set\+Channel}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a79564ccd8e9e0a46591eb2daedea8cdb}\label{class_midi_message_a79564ccd8e9e0a46591eb2daedea8cdb}} 
+\index{MidiMessage@{MidiMessage}!isFullFrame@{isFullFrame}}
+\index{isFullFrame@{isFullFrame}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isFullFrame()}{isFullFrame()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Full\+Frame (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if this is a full-\/frame midi timecode message. \mbox{\Hypertarget{class_midi_message_a9388bf7192568805515545ec31fa605b}\label{class_midi_message_a9388bf7192568805515545ec31fa605b}} 
+\index{MidiMessage@{MidiMessage}!isKeySignatureMajorKey@{isKeySignatureMajorKey}}
+\index{isKeySignatureMajorKey@{isKeySignatureMajorKey}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isKeySignatureMajorKey()}{isKeySignatureMajorKey()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Key\+Signature\+Major\+Key (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if this key-\/signature event is major, or false if it\textquotesingle{}s minor. This method must only be called if \mbox{\hyperlink{class_midi_message_ae686c5d86fa7d04df268f56bbf853f23}{is\+Key\+Signature\+Meta\+Event()}} is true. \mbox{\Hypertarget{class_midi_message_ae686c5d86fa7d04df268f56bbf853f23}\label{class_midi_message_ae686c5d86fa7d04df268f56bbf853f23}} 
+\index{MidiMessage@{MidiMessage}!isKeySignatureMetaEvent@{isKeySignatureMetaEvent}}
+\index{isKeySignatureMetaEvent@{isKeySignatureMetaEvent}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isKeySignatureMetaEvent()}{isKeySignatureMetaEvent()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Key\+Signature\+Meta\+Event (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if this is a \textquotesingle{}key-\/signature\textquotesingle{} meta-\/event. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a13348f90ec60de09d242265d4652711c}{get\+Key\+Signature\+Number\+Of\+Sharps\+Or\+Flats}}, \mbox{\hyperlink{class_midi_message_a9388bf7192568805515545ec31fa605b}{is\+Key\+Signature\+Major\+Key}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_ac1ec120f33d7cb7fc186f254493cf553}\label{class_midi_message_ac1ec120f33d7cb7fc186f254493cf553}} 
+\index{MidiMessage@{MidiMessage}!isMetaEvent@{isMetaEvent}}
+\index{isMetaEvent@{isMetaEvent}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isMetaEvent()}{isMetaEvent()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Meta\+Event (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if this event is a meta-\/event.
+
+Meta-\/events are things like tempo changes, track names, etc.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_ae46c134b2808500122c73347cc07014f}{get\+Meta\+Event\+Type}}, \mbox{\hyperlink{class_midi_message_acecc7e99f8287e851d6d944a4babc08e}{is\+Track\+Meta\+Event}}, \mbox{\hyperlink{class_midi_message_a17ea4a5fc3cb8e1b83a002797e1350e6}{is\+End\+Of\+Track\+Meta\+Event}}, \mbox{\hyperlink{class_midi_message_afb44a1c54810b707eb0f6e108d3060f1}{is\+Text\+Meta\+Event}}, \mbox{\hyperlink{class_midi_message_aeb18602ea05f67cad490f8866e07c172}{is\+Track\+Name\+Event}}, \mbox{\hyperlink{class_midi_message_aa9654c52ea08da9d76a31c93006348f8}{is\+Tempo\+Meta\+Event}}, \mbox{\hyperlink{class_midi_message_a0253a501abf4ee4d2a66dcc6e8ce433c}{is\+Time\+Signature\+Meta\+Event}}, \mbox{\hyperlink{class_midi_message_ae686c5d86fa7d04df268f56bbf853f23}{is\+Key\+Signature\+Meta\+Event}}, \mbox{\hyperlink{class_midi_message_a15aa1d11ffbdfbe78b2a11bf6375f4f9}{is\+Midi\+Channel\+Meta\+Event}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a15aa1d11ffbdfbe78b2a11bf6375f4f9}\label{class_midi_message_a15aa1d11ffbdfbe78b2a11bf6375f4f9}} 
+\index{MidiMessage@{MidiMessage}!isMidiChannelMetaEvent@{isMidiChannelMetaEvent}}
+\index{isMidiChannelMetaEvent@{isMidiChannelMetaEvent}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isMidiChannelMetaEvent()}{isMidiChannelMetaEvent()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Midi\+Channel\+Meta\+Event (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if this is a \textquotesingle{}channel\textquotesingle{} meta-\/event.
+
+A channel meta-\/event specifies the midi channel that should be used for subsequent meta-\/events.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a04730ebdec68d3db7501e8e2c68111e3}{get\+Midi\+Channel\+Meta\+Event\+Channel}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a0529f082f989c25373050f04e0df2b1f}\label{class_midi_message_a0529f082f989c25373050f04e0df2b1f}} 
+\index{MidiMessage@{MidiMessage}!isMidiClock@{isMidiClock}}
+\index{isMidiClock@{isMidiClock}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isMidiClock()}{isMidiClock()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Midi\+Clock (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if this is a midi clock event. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a5013ace96c3f8b32ac5f731ab5e0eb66}{midi\+Clock}}, \mbox{\hyperlink{class_midi_message_a58c65c8cf6542504109e43f872661d70}{song\+Position\+Pointer}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a8c5254f2b5450aaf1937395a7f162636}\label{class_midi_message_a8c5254f2b5450aaf1937395a7f162636}} 
+\index{MidiMessage@{MidiMessage}!isMidiContinue@{isMidiContinue}}
+\index{isMidiContinue@{isMidiContinue}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isMidiContinue()}{isMidiContinue()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Midi\+Continue (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if this is a midi continue event. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a14d70a3733f884b30f78d767b3ff6106}{midi\+Continue}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_aa9ce1a0076fb2e6c229a84bd6e2665d9}\label{class_midi_message_aa9ce1a0076fb2e6c229a84bd6e2665d9}} 
+\index{MidiMessage@{MidiMessage}!isMidiMachineControlGoto@{isMidiMachineControlGoto}}
+\index{isMidiMachineControlGoto@{isMidiMachineControlGoto}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isMidiMachineControlGoto()}{isMidiMachineControlGoto()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Midi\+Machine\+Control\+Goto (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \&}]{hours,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \&}]{minutes,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \&}]{seconds,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \&}]{frames }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Checks whether this is an MMC \char`\"{}goto\char`\"{} message. If it is, the parameters passed-\/in are set to the time that the message contains. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_aa56f55a5b3c42b0d1524681f238a3e82}{midi\+Machine\+Control\+Goto}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_af6fcf72f3bbbf104c63da61defa42bc9}\label{class_midi_message_af6fcf72f3bbbf104c63da61defa42bc9}} 
+\index{MidiMessage@{MidiMessage}!isMidiMachineControlMessage@{isMidiMachineControlMessage}}
+\index{isMidiMachineControlMessage@{isMidiMachineControlMessage}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isMidiMachineControlMessage()}{isMidiMachineControlMessage()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Midi\+Machine\+Control\+Message (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Checks whether this is an MMC message. If it is, you can use the \mbox{\hyperlink{class_midi_message_a5710fca6493291b3582c65d25196dfa8}{get\+Midi\+Machine\+Control\+Command()}} to find out its type. \mbox{\Hypertarget{class_midi_message_a6c3dd076ca4d0b4507bee507881a8a1f}\label{class_midi_message_a6c3dd076ca4d0b4507bee507881a8a1f}} 
+\index{MidiMessage@{MidiMessage}!isMidiNoteBlack@{isMidiNoteBlack}}
+\index{isMidiNoteBlack@{isMidiNoteBlack}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isMidiNoteBlack()}{isMidiNoteBlack()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Midi\+Note\+Black (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{note\+Number }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [noexcept]}}
+
+Returns true if the given midi note number is a black key. \mbox{\Hypertarget{class_midi_message_aea49271c04e05ebad35131635935f469}\label{class_midi_message_aea49271c04e05ebad35131635935f469}} 
+\index{MidiMessage@{MidiMessage}!isMidiStart@{isMidiStart}}
+\index{isMidiStart@{isMidiStart}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isMidiStart()}{isMidiStart()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Midi\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if this is a midi start event. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a1c913bf2cbdc315c02068a32853d9185}{midi\+Start}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a54444e9d53fb321909cf0b5c9d1b5515}\label{class_midi_message_a54444e9d53fb321909cf0b5c9d1b5515}} 
+\index{MidiMessage@{MidiMessage}!isMidiStop@{isMidiStop}}
+\index{isMidiStop@{isMidiStop}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isMidiStop()}{isMidiStop()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Midi\+Stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if this is a midi stop event. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_ab4a18c8c4eab63f21be52d7afb8a23e2}{midi\+Stop}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_af66814dee34738882ba39d8796b77be0}\label{class_midi_message_af66814dee34738882ba39d8796b77be0}} 
+\index{MidiMessage@{MidiMessage}!isNoteOff@{isNoteOff}}
+\index{isNoteOff@{isNoteOff}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isNoteOff()}{isNoteOff()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Note\+Off (\begin{DoxyParamCaption}\item[{bool}]{return\+True\+For\+Note\+On\+Velocity0 = {\ttfamily \mbox{\hyperlink{ordinals_8h_a41f9c5fb8b08eb5dc3edce4dcb37fee7}{true}}} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if this message is a \textquotesingle{}key-\/up\textquotesingle{} event.
+
+If return\+True\+For\+Note\+On\+Velocity0 is true, then his will also return true for a note-\/on event with a velocity of 0.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a590da92c0536e23f9d3c90c99278d789}{is\+Note\+On}}, \mbox{\hyperlink{class_midi_message_a6a5f965e98254fb026c5a20b64edcbc1}{get\+Note\+Number}}, \mbox{\hyperlink{class_midi_message_ad5483775a661b2176687303bc9c8aac6}{get\+Velocity}}, \mbox{\hyperlink{class_midi_message_a8990f215f1befaad55c8c0e832f43175}{note\+Off}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a590da92c0536e23f9d3c90c99278d789}\label{class_midi_message_a590da92c0536e23f9d3c90c99278d789}} 
+\index{MidiMessage@{MidiMessage}!isNoteOn@{isNoteOn}}
+\index{isNoteOn@{isNoteOn}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isNoteOn()}{isNoteOn()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Note\+On (\begin{DoxyParamCaption}\item[{bool}]{return\+True\+For\+Velocity0 = {\ttfamily \mbox{\hyperlink{ordinals_8h_a65e9886d74aaee76545e83dd09011727}{false}}} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if this message is a \textquotesingle{}key-\/down\textquotesingle{} event.
+
+
+\begin{DoxyParams}{Parameters}
+{\em return\+True\+For\+Velocity0} & if true, then if this event is a note-\/on with velocity 0, it will still be considered to be a note-\/on and the method will return true. If return\+True\+For\+Velocity0 is false, then if this is a note-\/on event with velocity 0, it\textquotesingle{}ll be regarded as a note-\/off, and the method will return false\\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_af66814dee34738882ba39d8796b77be0}{is\+Note\+Off}}, \mbox{\hyperlink{class_midi_message_a6a5f965e98254fb026c5a20b64edcbc1}{get\+Note\+Number}}, \mbox{\hyperlink{class_midi_message_ad5483775a661b2176687303bc9c8aac6}{get\+Velocity}}, \mbox{\hyperlink{class_midi_message_a9f189916aaff2533e115f6dc942aafc7}{note\+On}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a0d1c1c5927eb898dbacb832f768299bc}\label{class_midi_message_a0d1c1c5927eb898dbacb832f768299bc}} 
+\index{MidiMessage@{MidiMessage}!isNoteOnOrOff@{isNoteOnOrOff}}
+\index{isNoteOnOrOff@{isNoteOnOrOff}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isNoteOnOrOff()}{isNoteOnOrOff()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Note\+On\+Or\+Off (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if this message is a \textquotesingle{}key-\/down\textquotesingle{} or \textquotesingle{}key-\/up\textquotesingle{} event.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a590da92c0536e23f9d3c90c99278d789}{is\+Note\+On}}, \mbox{\hyperlink{class_midi_message_af66814dee34738882ba39d8796b77be0}{is\+Note\+Off}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_aaa504ef83e8d0c5fd8f652bf0712c4e1}\label{class_midi_message_aaa504ef83e8d0c5fd8f652bf0712c4e1}} 
+\index{MidiMessage@{MidiMessage}!isPitchWheel@{isPitchWheel}}
+\index{isPitchWheel@{isPitchWheel}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isPitchWheel()}{isPitchWheel()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Pitch\+Wheel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if the message is a pitch-\/wheel move. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_aaa9675ccbce68b47067b512370e2ac20}{get\+Pitch\+Wheel\+Value}}, \mbox{\hyperlink{class_midi_message_a5e26e83ef29f13d6f7729ca5feb026d1}{pitch\+Wheel}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a89035047ec5cc9b77d8d484d4a8c9a8d}\label{class_midi_message_a89035047ec5cc9b77d8d484d4a8c9a8d}} 
+\index{MidiMessage@{MidiMessage}!isProgramChange@{isProgramChange}}
+\index{isProgramChange@{isProgramChange}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isProgramChange()}{isProgramChange()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Program\+Change (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if the message is a program (patch) change message. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a9c200619411c253b661acee5660e4b76}{get\+Program\+Change\+Number}}, \mbox{\hyperlink{class_midi_message_ab995932c1950a401e28dee62f4fb7433}{get\+GMInstrument\+Name}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a948318bbf7471f8e4ab857c43004b34c}\label{class_midi_message_a948318bbf7471f8e4ab857c43004b34c}} 
+\index{MidiMessage@{MidiMessage}!isQuarterFrame@{isQuarterFrame}}
+\index{isQuarterFrame@{isQuarterFrame}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isQuarterFrame()}{isQuarterFrame()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Quarter\+Frame (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if this is a quarter-\/frame midi timecode message. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_ae3bde183bd6663fee315b07b3866fa46}{quarter\+Frame}}, \mbox{\hyperlink{class_midi_message_a9eb49c9f42a98dfd8dd9c2eb55e33afd}{get\+Quarter\+Frame\+Sequence\+Number}}, \mbox{\hyperlink{class_midi_message_acd7704a0c68987326fdd4127f77a9976}{get\+Quarter\+Frame\+Value}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a6313eee002685de08c684bb79be34fd6}\label{class_midi_message_a6313eee002685de08c684bb79be34fd6}} 
+\index{MidiMessage@{MidiMessage}!isResetAllControllers@{isResetAllControllers}}
+\index{isResetAllControllers@{isResetAllControllers}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isResetAllControllers()}{isResetAllControllers()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Reset\+All\+Controllers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Checks whether this message is a reset all controllers message. \begin{DoxySeeAlso}{See also}
+all\+Controller\+Off 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a3fa95632707d7540c705151421de13fe}\label{class_midi_message_a3fa95632707d7540c705151421de13fe}} 
+\index{MidiMessage@{MidiMessage}!isSoftPedalOff@{isSoftPedalOff}}
+\index{isSoftPedalOff@{isSoftPedalOff}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isSoftPedalOff()}{isSoftPedalOff()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Soft\+Pedal\+Off (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if this message is a \textquotesingle{}soft pedal up\textquotesingle{} controller message. \mbox{\Hypertarget{class_midi_message_a37edc67c1113f68a3e9cb063ab7e2781}\label{class_midi_message_a37edc67c1113f68a3e9cb063ab7e2781}} 
+\index{MidiMessage@{MidiMessage}!isSoftPedalOn@{isSoftPedalOn}}
+\index{isSoftPedalOn@{isSoftPedalOn}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isSoftPedalOn()}{isSoftPedalOn()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Soft\+Pedal\+On (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if this message is a \textquotesingle{}soft pedal down\textquotesingle{} controller message. \mbox{\Hypertarget{class_midi_message_ae4ed73e5046837c640064c937c538a00}\label{class_midi_message_ae4ed73e5046837c640064c937c538a00}} 
+\index{MidiMessage@{MidiMessage}!isSongPositionPointer@{isSongPositionPointer}}
+\index{isSongPositionPointer@{isSongPositionPointer}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isSongPositionPointer()}{isSongPositionPointer()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Song\+Position\+Pointer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if this is a song-\/position-\/pointer message. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a75823853d0f796d2671efa4a1b9876f1}{get\+Song\+Position\+Pointer\+Midi\+Beat}}, \mbox{\hyperlink{class_midi_message_a58c65c8cf6542504109e43f872661d70}{song\+Position\+Pointer}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_aa5508f9280afa255ab17b5cfc7577a5c}\label{class_midi_message_aa5508f9280afa255ab17b5cfc7577a5c}} 
+\index{MidiMessage@{MidiMessage}!isSostenutoPedalOff@{isSostenutoPedalOff}}
+\index{isSostenutoPedalOff@{isSostenutoPedalOff}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isSostenutoPedalOff()}{isSostenutoPedalOff()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Sostenuto\+Pedal\+Off (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if this message is a \textquotesingle{}sostenuto pedal up\textquotesingle{} controller message. \mbox{\Hypertarget{class_midi_message_a3ddae770f33da071772f3570a9dbd119}\label{class_midi_message_a3ddae770f33da071772f3570a9dbd119}} 
+\index{MidiMessage@{MidiMessage}!isSostenutoPedalOn@{isSostenutoPedalOn}}
+\index{isSostenutoPedalOn@{isSostenutoPedalOn}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isSostenutoPedalOn()}{isSostenutoPedalOn()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Sostenuto\+Pedal\+On (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if this message is a \textquotesingle{}sostenuto pedal down\textquotesingle{} controller message. \mbox{\Hypertarget{class_midi_message_abb4e431332e797a548092c16c37f5ccf}\label{class_midi_message_abb4e431332e797a548092c16c37f5ccf}} 
+\index{MidiMessage@{MidiMessage}!isSustainPedalOff@{isSustainPedalOff}}
+\index{isSustainPedalOff@{isSustainPedalOff}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isSustainPedalOff()}{isSustainPedalOff()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Sustain\+Pedal\+Off (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if this message is a \textquotesingle{}sustain pedal up\textquotesingle{} controller message. \mbox{\Hypertarget{class_midi_message_a2a0b1143c544e7a107c1d86e1ac7d4c3}\label{class_midi_message_a2a0b1143c544e7a107c1d86e1ac7d4c3}} 
+\index{MidiMessage@{MidiMessage}!isSustainPedalOn@{isSustainPedalOn}}
+\index{isSustainPedalOn@{isSustainPedalOn}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isSustainPedalOn()}{isSustainPedalOn()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Sustain\+Pedal\+On (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if this message is a \textquotesingle{}sustain pedal down\textquotesingle{} controller message. \mbox{\Hypertarget{class_midi_message_a8412d9b5f9d717d104537b96263dbdf5}\label{class_midi_message_a8412d9b5f9d717d104537b96263dbdf5}} 
+\index{MidiMessage@{MidiMessage}!isSysEx@{isSysEx}}
+\index{isSysEx@{isSysEx}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isSysEx()}{isSysEx()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Sys\+Ex (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if this is a system-\/exclusive message. \mbox{\Hypertarget{class_midi_message_aa9654c52ea08da9d76a31c93006348f8}\label{class_midi_message_aa9654c52ea08da9d76a31c93006348f8}} 
+\index{MidiMessage@{MidiMessage}!isTempoMetaEvent@{isTempoMetaEvent}}
+\index{isTempoMetaEvent@{isTempoMetaEvent}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isTempoMetaEvent()}{isTempoMetaEvent()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Tempo\+Meta\+Event (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if this is a \textquotesingle{}tempo\textquotesingle{} meta-\/event. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_abd90df7704a306f5186aa86f14978ae9}{get\+Tempo\+Meta\+Event\+Tick\+Length}}, \mbox{\hyperlink{class_midi_message_ab4228aa759969257eae0dc29d76bd70c}{get\+Tempo\+Seconds\+Per\+Quarter\+Note}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_afb44a1c54810b707eb0f6e108d3060f1}\label{class_midi_message_afb44a1c54810b707eb0f6e108d3060f1}} 
+\index{MidiMessage@{MidiMessage}!isTextMetaEvent@{isTextMetaEvent}}
+\index{isTextMetaEvent@{isTextMetaEvent}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isTextMetaEvent()}{isTextMetaEvent()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Text\+Meta\+Event (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if this is a \textquotesingle{}text\textquotesingle{} meta-\/event. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a204d2d2bf997be762510d2f43ab79c36}{get\+Text\+From\+Text\+Meta\+Event}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a0253a501abf4ee4d2a66dcc6e8ce433c}\label{class_midi_message_a0253a501abf4ee4d2a66dcc6e8ce433c}} 
+\index{MidiMessage@{MidiMessage}!isTimeSignatureMetaEvent@{isTimeSignatureMetaEvent}}
+\index{isTimeSignatureMetaEvent@{isTimeSignatureMetaEvent}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isTimeSignatureMetaEvent()}{isTimeSignatureMetaEvent()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Time\+Signature\+Meta\+Event (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if this is a \textquotesingle{}time-\/signature\textquotesingle{} meta-\/event. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a35ab9435cfda308abd22f6d72a5fece1}{get\+Time\+Signature\+Info}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_acecc7e99f8287e851d6d944a4babc08e}\label{class_midi_message_acecc7e99f8287e851d6d944a4babc08e}} 
+\index{MidiMessage@{MidiMessage}!isTrackMetaEvent@{isTrackMetaEvent}}
+\index{isTrackMetaEvent@{isTrackMetaEvent}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isTrackMetaEvent()}{isTrackMetaEvent()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Track\+Meta\+Event (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if this is a \textquotesingle{}track\textquotesingle{} meta-\/event. \mbox{\Hypertarget{class_midi_message_aeb18602ea05f67cad490f8866e07c172}\label{class_midi_message_aeb18602ea05f67cad490f8866e07c172}} 
+\index{MidiMessage@{MidiMessage}!isTrackNameEvent@{isTrackNameEvent}}
+\index{isTrackNameEvent@{isTrackNameEvent}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{isTrackNameEvent()}{isTrackNameEvent()}}
+{\footnotesize\ttfamily bool Midi\+Message\+::is\+Track\+Name\+Event (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns true if this is an \textquotesingle{}track name\textquotesingle{} meta-\/event. You can use the \mbox{\hyperlink{class_midi_message_a204d2d2bf997be762510d2f43ab79c36}{get\+Text\+From\+Text\+Meta\+Event()}} method to get the track\textquotesingle{}s name. \mbox{\Hypertarget{class_midi_message_a4fc6c35cb02265b8ba88615e03f3a73e}\label{class_midi_message_a4fc6c35cb02265b8ba88615e03f3a73e}} 
+\index{MidiMessage@{MidiMessage}!keySignatureMetaEvent@{keySignatureMetaEvent}}
+\index{keySignatureMetaEvent@{keySignatureMetaEvent}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{keySignatureMetaEvent()}{keySignatureMetaEvent()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_message}{Midi\+Message}} Midi\+Message\+::key\+Signature\+Meta\+Event (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{number\+Of\+Sharps\+Or\+Flats,  }\item[{bool}]{is\+Minor\+Key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Creates a key-\/signature meta-\/event. 
+\begin{DoxyParams}{Parameters}
+{\em number\+Of\+Sharps\+Or\+Flats} & if positive, this indicates the number of sharps in the key; if negative, the number of flats \\
+\hline
+{\em is\+Minor\+Key} & if true, the key is minor; if false, it is major \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_ae686c5d86fa7d04df268f56bbf853f23}{is\+Key\+Signature\+Meta\+Event}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_ae84a62a89e25a756f430a00bd416b258}\label{class_midi_message_ae84a62a89e25a756f430a00bd416b258}} 
+\index{MidiMessage@{MidiMessage}!masterVolume@{masterVolume}}
+\index{masterVolume@{masterVolume}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{masterVolume()}{masterVolume()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_message}{Midi\+Message}} Midi\+Message\+::master\+Volume (\begin{DoxyParamCaption}\item[{float}]{volume }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Creates a master-\/volume change message. 
+\begin{DoxyParams}{Parameters}
+{\em volume} & the volume, 0 to 1.\+0 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_midi_message_a8e27f389ebb56af650ed870ddc817063}\label{class_midi_message_a8e27f389ebb56af650ed870ddc817063}} 
+\index{MidiMessage@{MidiMessage}!midiChannelMetaEvent@{midiChannelMetaEvent}}
+\index{midiChannelMetaEvent@{midiChannelMetaEvent}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{midiChannelMetaEvent()}{midiChannelMetaEvent()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_message}{Midi\+Message}} Midi\+Message\+::midi\+Channel\+Meta\+Event (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{channel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [noexcept]}}
+
+Creates a midi channel meta-\/event.
+
+
+\begin{DoxyParams}{Parameters}
+{\em channel} & the midi channel, in the range 1 to 16 \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a15aa1d11ffbdfbe78b2a11bf6375f4f9}{is\+Midi\+Channel\+Meta\+Event}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a5013ace96c3f8b32ac5f731ab5e0eb66}\label{class_midi_message_a5013ace96c3f8b32ac5f731ab5e0eb66}} 
+\index{MidiMessage@{MidiMessage}!midiClock@{midiClock}}
+\index{midiClock@{midiClock}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{midiClock()}{midiClock()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_message}{Midi\+Message}} Midi\+Message\+::midi\+Clock (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [noexcept]}}
+
+Creates a midi clock event. \mbox{\Hypertarget{class_midi_message_a14d70a3733f884b30f78d767b3ff6106}\label{class_midi_message_a14d70a3733f884b30f78d767b3ff6106}} 
+\index{MidiMessage@{MidiMessage}!midiContinue@{midiContinue}}
+\index{midiContinue@{midiContinue}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{midiContinue()}{midiContinue()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_message}{Midi\+Message}} Midi\+Message\+::midi\+Continue (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [noexcept]}}
+
+Creates a midi continue event. \mbox{\Hypertarget{class_midi_message_ab1178b785df4da47999da2af3a1f9e67}\label{class_midi_message_ab1178b785df4da47999da2af3a1f9e67}} 
+\index{MidiMessage@{MidiMessage}!midiMachineControlCommand@{midiMachineControlCommand}}
+\index{midiMachineControlCommand@{midiMachineControlCommand}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{midiMachineControlCommand()}{midiMachineControlCommand()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_message}{Midi\+Message}} Midi\+Message\+::midi\+Machine\+Control\+Command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_midi_message_aa95b060274257522d1af40794ad1631d}{Midi\+Message\+::\+Midi\+Machine\+Control\+Command}}}]{command }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Creates an MMC message. \mbox{\Hypertarget{class_midi_message_aa56f55a5b3c42b0d1524681f238a3e82}\label{class_midi_message_aa56f55a5b3c42b0d1524681f238a3e82}} 
+\index{MidiMessage@{MidiMessage}!midiMachineControlGoto@{midiMachineControlGoto}}
+\index{midiMachineControlGoto@{midiMachineControlGoto}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{midiMachineControlGoto()}{midiMachineControlGoto()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_message}{Midi\+Message}} Midi\+Message\+::midi\+Machine\+Control\+Goto (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{hours,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{minutes,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{seconds,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{frames }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Creates an MMC \char`\"{}goto\char`\"{} message. This messages tells the device to go to a specific frame. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_aa9ce1a0076fb2e6c229a84bd6e2665d9}{is\+Midi\+Machine\+Control\+Goto}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a1c913bf2cbdc315c02068a32853d9185}\label{class_midi_message_a1c913bf2cbdc315c02068a32853d9185}} 
+\index{MidiMessage@{MidiMessage}!midiStart@{midiStart}}
+\index{midiStart@{midiStart}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{midiStart()}{midiStart()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_message}{Midi\+Message}} Midi\+Message\+::midi\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [noexcept]}}
+
+Creates a midi start event. \mbox{\Hypertarget{class_midi_message_ab4a18c8c4eab63f21be52d7afb8a23e2}\label{class_midi_message_ab4a18c8c4eab63f21be52d7afb8a23e2}} 
+\index{MidiMessage@{MidiMessage}!midiStop@{midiStop}}
+\index{midiStop@{midiStop}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{midiStop()}{midiStop()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_message}{Midi\+Message}} Midi\+Message\+::midi\+Stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [noexcept]}}
+
+Creates a midi stop event. \mbox{\Hypertarget{class_midi_message_a12058e7e2cb2d287241824caf6c729c7}\label{class_midi_message_a12058e7e2cb2d287241824caf6c729c7}} 
+\index{MidiMessage@{MidiMessage}!multiplyVelocity@{multiplyVelocity}}
+\index{multiplyVelocity@{multiplyVelocity}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{multiplyVelocity()}{multiplyVelocity()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Midi\+Message\+::multiply\+Velocity (\begin{DoxyParamCaption}\item[{float}]{scale\+Factor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Multiplies the velocity of a note-\/on or note-\/off message by a given amount.
+
+If the message isn\textquotesingle{}t a note on or off, this will do nothing.
+
+
+\begin{DoxyParams}{Parameters}
+{\em scale\+Factor} & the value by which to multiply the velocity \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_afab2cc0f59531d4aba57a0f10e9dafc4}{set\+Velocity}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_aa942aa1d680f444462f9b919e5a0c830}\label{class_midi_message_aa942aa1d680f444462f9b919e5a0c830}} 
+\index{MidiMessage@{MidiMessage}!noteOff@{noteOff}}
+\index{noteOff@{noteOff}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{noteOff()}{noteOff()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_message}{Midi\+Message}} Midi\+Message\+::note\+Off (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{channel,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{note\+Number }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [noexcept]}}
+
+Creates a key-\/up message.
+
+
+\begin{DoxyParams}{Parameters}
+{\em channel} & the midi channel, in the range 1 to 16 \\
+\hline
+{\em note\+Number} & the key number, 0 to 127 \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_af66814dee34738882ba39d8796b77be0}{is\+Note\+Off}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a8990f215f1befaad55c8c0e832f43175}\label{class_midi_message_a8990f215f1befaad55c8c0e832f43175}} 
+\index{MidiMessage@{MidiMessage}!noteOff@{noteOff}}
+\index{noteOff@{noteOff}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{noteOff()}{noteOff()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_message}{Midi\+Message}} Midi\+Message\+::note\+Off (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{channel,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{note\+Number,  }\item[{float}]{velocity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [noexcept]}}
+
+Creates a key-\/up message.
+
+
+\begin{DoxyParams}{Parameters}
+{\em channel} & the midi channel, in the range 1 to 16 \\
+\hline
+{\em note\+Number} & the key number, 0 to 127 \\
+\hline
+{\em velocity} & in the range 0 to 1.\+0 \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_af66814dee34738882ba39d8796b77be0}{is\+Note\+Off}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a70303f05d34cbf886c51677443eb0ca7}\label{class_midi_message_a70303f05d34cbf886c51677443eb0ca7}} 
+\index{MidiMessage@{MidiMessage}!noteOff@{noteOff}}
+\index{noteOff@{noteOff}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{noteOff()}{noteOff()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_message}{Midi\+Message}} Midi\+Message\+::note\+Off (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{channel,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{note\+Number,  }\item[{\mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}}}]{velocity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [noexcept]}}
+
+Creates a key-\/up message.
+
+
+\begin{DoxyParams}{Parameters}
+{\em channel} & the midi channel, in the range 1 to 16 \\
+\hline
+{\em note\+Number} & the key number, 0 to 127 \\
+\hline
+{\em velocity} & in the range 0 to 127 \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_af66814dee34738882ba39d8796b77be0}{is\+Note\+Off}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a9f189916aaff2533e115f6dc942aafc7}\label{class_midi_message_a9f189916aaff2533e115f6dc942aafc7}} 
+\index{MidiMessage@{MidiMessage}!noteOn@{noteOn}}
+\index{noteOn@{noteOn}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{noteOn()}{noteOn()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_message}{Midi\+Message}} Midi\+Message\+::note\+On (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{channel,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{note\+Number,  }\item[{float}]{velocity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [noexcept]}}
+
+Creates a key-\/down message (using a floating-\/point velocity).
+
+
+\begin{DoxyParams}{Parameters}
+{\em channel} & the midi channel, in the range 1 to 16 \\
+\hline
+{\em note\+Number} & the key number, 0 to 127 \\
+\hline
+{\em velocity} & in the range 0 to 1.\+0 \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a590da92c0536e23f9d3c90c99278d789}{is\+Note\+On}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a41f02fa1d8e01271f983909314847b66}\label{class_midi_message_a41f02fa1d8e01271f983909314847b66}} 
+\index{MidiMessage@{MidiMessage}!noteOn@{noteOn}}
+\index{noteOn@{noteOn}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{noteOn()}{noteOn()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_message}{Midi\+Message}} Midi\+Message\+::note\+On (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{channel,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{note\+Number,  }\item[{\mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}}}]{velocity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [noexcept]}}
+
+Creates a key-\/down message (using an integer velocity).
+
+
+\begin{DoxyParams}{Parameters}
+{\em channel} & the midi channel, in the range 1 to 16 \\
+\hline
+{\em note\+Number} & the key number, 0 to 127 \\
+\hline
+{\em velocity} & in the range 0 to 127 \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a590da92c0536e23f9d3c90c99278d789}{is\+Note\+On}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_ac619d6f5f66c3b1f82a81a026413cf98}\label{class_midi_message_ac619d6f5f66c3b1f82a81a026413cf98}} 
+\index{MidiMessage@{MidiMessage}!operator=@{operator=}}
+\index{operator=@{operator=}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \& Midi\+Message\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \&}]{other }\end{DoxyParamCaption})}
+
+Copies this message from another one. \mbox{\Hypertarget{class_midi_message_a2c2dbe683153d725c70122e8aa6b277b}\label{class_midi_message_a2c2dbe683153d725c70122e8aa6b277b}} 
+\index{MidiMessage@{MidiMessage}!operator=@{operator=}}
+\index{operator=@{operator=}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_message}{Midi\+Message}} \& Midi\+Message\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_midi_message}{Midi\+Message}} \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Move assignment operator \mbox{\Hypertarget{class_midi_message_a2f8000c139618314a8394adab5f09447}\label{class_midi_message_a2f8000c139618314a8394adab5f09447}} 
+\index{MidiMessage@{MidiMessage}!pitchbendToPitchwheelPos@{pitchbendToPitchwheelPos}}
+\index{pitchbendToPitchwheelPos@{pitchbendToPitchwheelPos}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{pitchbendToPitchwheelPos()}{pitchbendToPitchwheelPos()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{juce__box2d_8cpp_acc2cb9a2f3246f6f4775ef16196fd983}{uint16}} Midi\+Message\+::pitchbend\+To\+Pitchwheel\+Pos (\begin{DoxyParamCaption}\item[{float}]{pitchbend\+In\+Semitones,  }\item[{float}]{pitchbend\+Range\+In\+Semitones }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [noexcept]}}
+
+Converts a pitchbend value in semitones to a MIDI 14-\/bit pitchwheel position value. \mbox{\Hypertarget{class_midi_message_a5e26e83ef29f13d6f7729ca5feb026d1}\label{class_midi_message_a5e26e83ef29f13d6f7729ca5feb026d1}} 
+\index{MidiMessage@{MidiMessage}!pitchWheel@{pitchWheel}}
+\index{pitchWheel@{pitchWheel}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{pitchWheel()}{pitchWheel()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_message}{Midi\+Message}} Midi\+Message\+::pitch\+Wheel (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{channel,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [noexcept]}}
+
+Creates a pitch-\/wheel move message.
+
+
+\begin{DoxyParams}{Parameters}
+{\em channel} & the midi channel, in the range 1 to 16 \\
+\hline
+{\em position} & the wheel position, in the range 0 to 16383 \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_aaa504ef83e8d0c5fd8f652bf0712c4e1}{is\+Pitch\+Wheel}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a703ef4b9b6308b1f8aa72d20f9b95dbc}\label{class_midi_message_a703ef4b9b6308b1f8aa72d20f9b95dbc}} 
+\index{MidiMessage@{MidiMessage}!programChange@{programChange}}
+\index{programChange@{programChange}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{programChange()}{programChange()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_message}{Midi\+Message}} Midi\+Message\+::program\+Change (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{channel,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{program\+Number }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [noexcept]}}
+
+Creates a program-\/change message.
+
+
+\begin{DoxyParams}{Parameters}
+{\em channel} & the midi channel, in the range 1 to 16 \\
+\hline
+{\em program\+Number} & the midi program number, 0 to 127 \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a89035047ec5cc9b77d8d484d4a8c9a8d}{is\+Program\+Change}}, \mbox{\hyperlink{class_midi_message_ab995932c1950a401e28dee62f4fb7433}{get\+GMInstrument\+Name}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_ae3bde183bd6663fee315b07b3866fa46}\label{class_midi_message_ae3bde183bd6663fee315b07b3866fa46}} 
+\index{MidiMessage@{MidiMessage}!quarterFrame@{quarterFrame}}
+\index{quarterFrame@{quarterFrame}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{quarterFrame()}{quarterFrame()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_message}{Midi\+Message}} Midi\+Message\+::quarter\+Frame (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{sequence\+Number,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [noexcept]}}
+
+Creates a quarter-\/frame MTC message.
+
+
+\begin{DoxyParams}{Parameters}
+{\em sequence\+Number} & a value 0 to 7 for the upper nybble of the message\textquotesingle{}s data byte \\
+\hline
+{\em value} & a value 0 to 15 for the lower nybble of the message\textquotesingle{}s data byte \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_midi_message_a6bf3c3208674c514365dc3dc25a21061}\label{class_midi_message_a6bf3c3208674c514365dc3dc25a21061}} 
+\index{MidiMessage@{MidiMessage}!readVariableLengthVal@{readVariableLengthVal}}
+\index{readVariableLengthVal@{readVariableLengthVal}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{readVariableLengthVal()}{readVariableLengthVal()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} Midi\+Message\+::read\+Variable\+Length\+Val (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} $\ast$}]{data,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \&}]{num\+Bytes\+Used }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [noexcept]}}
+
+Reads a midi variable-\/length integer.
+
+The {\ttfamily data} argument indicates the data to read the number from, and {\ttfamily num\+Bytes\+Used} is used as an out-\/parameter to indicate the number of bytes that were read. \mbox{\Hypertarget{class_midi_message_ab2e392601e4a28f3b38eaca5ccd63d0e}\label{class_midi_message_ab2e392601e4a28f3b38eaca5ccd63d0e}} 
+\index{MidiMessage@{MidiMessage}!readVariableLengthValue@{readVariableLengthValue}}
+\index{readVariableLengthValue@{readVariableLengthValue}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{readVariableLengthValue()}{readVariableLengthValue()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_midi_message_1_1_variable_length_value}{Midi\+Message\+::\+Variable\+Length\+Value}} Midi\+Message\+::read\+Variable\+Length\+Value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} $\ast$}]{data,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{max\+Bytes\+To\+Use }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [noexcept]}}
+
+Reads a midi variable-\/length integer, with protection against buffer overflow.
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & the data to read the number from \\
+\hline
+{\em max\+Bytes\+To\+Use} & the number of bytes in the region following {\ttfamily data} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a struct containing the parsed value, and the number of bytes that were read. If parsing fails, both the {\ttfamily value} and {\ttfamily bytes\+Used} fields will be set to 0 and {\ttfamily is\+Valid()} will return false 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_midi_message_ac35c11dba441d652e70720525cb2dc7f}\label{class_midi_message_ac35c11dba441d652e70720525cb2dc7f}} 
+\index{MidiMessage@{MidiMessage}!setChannel@{setChannel}}
+\index{setChannel@{setChannel}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{setChannel()}{setChannel()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Midi\+Message\+::set\+Channel (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{new\+Channel\+Number }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Changes the message\textquotesingle{}s midi channel. This won\textquotesingle{}t do anything for non-\/channel messages like sysexes. 
+\begin{DoxyParams}{Parameters}
+{\em new\+Channel\+Number} & the channel number to change it to, in the range 1 to 16 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_midi_message_a47583c88bed0ca4b30b0f86bc2afb48c}\label{class_midi_message_a47583c88bed0ca4b30b0f86bc2afb48c}} 
+\index{MidiMessage@{MidiMessage}!setNoteNumber@{setNoteNumber}}
+\index{setNoteNumber@{setNoteNumber}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{setNoteNumber()}{setNoteNumber()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Midi\+Message\+::set\+Note\+Number (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{new\+Note\+Number }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Changes the midi note number of a note-\/on or note-\/off message. If the message isn\textquotesingle{}t a note on or off, this will do nothing. \mbox{\Hypertarget{class_midi_message_ad5f9ceed74dd22e846ed0650d81f11a7}\label{class_midi_message_ad5f9ceed74dd22e846ed0650d81f11a7}} 
+\index{MidiMessage@{MidiMessage}!setTimeStamp@{setTimeStamp}}
+\index{setTimeStamp@{setTimeStamp}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{setTimeStamp()}{setTimeStamp()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Midi\+Message\+::set\+Time\+Stamp (\begin{DoxyParamCaption}\item[{double}]{new\+Timestamp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Changes the message\textquotesingle{}s associated timestamp. The units for the timestamp will be application-\/specific -\/ see the notes for \mbox{\hyperlink{class_midi_message_a9a942c96a776e80e3c512058b29011a8}{get\+Time\+Stamp()}}. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a49112e5cf324feff8c69e2a2d8963695}{add\+To\+Time\+Stamp}}, \mbox{\hyperlink{class_midi_message_a9a942c96a776e80e3c512058b29011a8}{get\+Time\+Stamp}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_afab2cc0f59531d4aba57a0f10e9dafc4}\label{class_midi_message_afab2cc0f59531d4aba57a0f10e9dafc4}} 
+\index{MidiMessage@{MidiMessage}!setVelocity@{setVelocity}}
+\index{setVelocity@{setVelocity}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{setVelocity()}{setVelocity()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Midi\+Message\+::set\+Velocity (\begin{DoxyParamCaption}\item[{float}]{new\+Velocity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Changes the velocity of a note-\/on or note-\/off message.
+
+If the message isn\textquotesingle{}t a note on or off, this will do nothing.
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Velocity} & the new velocity, in the range 0 to 1.\+0 \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a07210a8a79ef89e079be89ad6e1b98ae}{get\+Float\+Velocity}}, \mbox{\hyperlink{class_midi_message_a12058e7e2cb2d287241824caf6c729c7}{multiply\+Velocity}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a58c65c8cf6542504109e43f872661d70}\label{class_midi_message_a58c65c8cf6542504109e43f872661d70}} 
+\index{MidiMessage@{MidiMessage}!songPositionPointer@{songPositionPointer}}
+\index{songPositionPointer@{songPositionPointer}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{songPositionPointer()}{songPositionPointer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_message}{Midi\+Message}} Midi\+Message\+::song\+Position\+Pointer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{position\+In\+Midi\+Beats }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [noexcept]}}
+
+Creates a song-\/position-\/pointer message.
+
+The position is a number of midi beats from the start of the song, where 1 midi beat is 6 midi clocks, and there are 24 midi clocks in a quarter-\/note. So there are 4 midi beats in a quarter-\/note.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_ae4ed73e5046837c640064c937c538a00}{is\+Song\+Position\+Pointer}}, \mbox{\hyperlink{class_midi_message_a75823853d0f796d2671efa4a1b9876f1}{get\+Song\+Position\+Pointer\+Midi\+Beat}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a4a604960a97eac59158edd9206ccb4d4}\label{class_midi_message_a4a604960a97eac59158edd9206ccb4d4}} 
+\index{MidiMessage@{MidiMessage}!tempoMetaEvent@{tempoMetaEvent}}
+\index{tempoMetaEvent@{tempoMetaEvent}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{tempoMetaEvent()}{tempoMetaEvent()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_message}{Midi\+Message}} Midi\+Message\+::tempo\+Meta\+Event (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{microseconds\+Per\+Quarter\+Note }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [noexcept]}}
+
+Creates a tempo meta-\/event. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_aa9654c52ea08da9d76a31c93006348f8}{is\+Tempo\+Meta\+Event}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_aa2a55bc710dd1bdd028525614ddd1bad}\label{class_midi_message_aa2a55bc710dd1bdd028525614ddd1bad}} 
+\index{MidiMessage@{MidiMessage}!textMetaEvent@{textMetaEvent}}
+\index{textMetaEvent@{textMetaEvent}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{textMetaEvent()}{textMetaEvent()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_message}{Midi\+Message}} Midi\+Message\+::text\+Meta\+Event (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{type,  }\item[{\mbox{\hyperlink{class_string_ref}{String\+Ref}}}]{text }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Creates a text meta-\/event. \mbox{\Hypertarget{class_midi_message_a5e0e4e89f08690d84dc513fa9e92e414}\label{class_midi_message_a5e0e4e89f08690d84dc513fa9e92e414}} 
+\index{MidiMessage@{MidiMessage}!timeSignatureMetaEvent@{timeSignatureMetaEvent}}
+\index{timeSignatureMetaEvent@{timeSignatureMetaEvent}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{timeSignatureMetaEvent()}{timeSignatureMetaEvent()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_message}{Midi\+Message}} Midi\+Message\+::time\+Signature\+Meta\+Event (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{numerator,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{denominator }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Creates a time-\/signature meta-\/event. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message_a0253a501abf4ee4d2a66dcc6e8ce433c}{is\+Time\+Signature\+Meta\+Event}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_midi_message_a941cf093e7f8989c2f7c3ec7ed8434bb}\label{class_midi_message_a941cf093e7f8989c2f7c3ec7ed8434bb}} 
+\index{MidiMessage@{MidiMessage}!withTimeStamp@{withTimeStamp}}
+\index{withTimeStamp@{withTimeStamp}!MidiMessage@{MidiMessage}}
+\doxysubsubsection{\texorpdfstring{withTimeStamp()}{withTimeStamp()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_message}{Midi\+Message}} Midi\+Message\+::with\+Time\+Stamp (\begin{DoxyParamCaption}\item[{double}]{new\+Timestamp }\end{DoxyParamCaption}) const}
+
+Return a copy of this message with a new timestamp. The units for the timestamp will be application-\/specific -\/ see the notes for \mbox{\hyperlink{class_midi_message_a9a942c96a776e80e3c512058b29011a8}{get\+Time\+Stamp()}}. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+audio\+\_\+basics/midi/\mbox{\hyperlink{juce___midi_message_8h}{juce\+\_\+\+Midi\+Message.\+h}}\item 
+build/juce\+\_\+audio\+\_\+basics/midi/\mbox{\hyperlink{juce___midi_message_8cpp}{juce\+\_\+\+Midi\+Message.\+cpp}}\end{DoxyCompactItemize}

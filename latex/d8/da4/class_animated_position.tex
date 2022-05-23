@@ -1,0 +1,156 @@
+\hypertarget{class_animated_position}{}\doxysection{Animated\+Position\texorpdfstring{$<$}{<} Behaviour \texorpdfstring{$>$}{>} Class Template Reference}
+\label{class_animated_position}\index{AnimatedPosition$<$ Behaviour $>$@{AnimatedPosition$<$ Behaviour $>$}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Animated\+Position.\+h$>$}
+
+Inheritance diagram for Animated\+Position\texorpdfstring{$<$}{<} Behaviour \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d8/da4/class_animated_position}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_animated_position_1_1_listener}{Listener}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_animated_position_a364daf059e5e4ac2bce94ea8a236c02c}{Animated\+Position}} ()
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_animated_position_ab8837ee82f8f478d01c3eb815edb96a2}{set\+Limits}} (\mbox{\hyperlink{class_range}{Range}}$<$ double $>$ new\+Range) noexcept
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_animated_position_a3378dd6b200539ef684f5d8031a4f69a}{begin\+Drag}} ()
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_animated_position_aecd11c12c444387d46ef54931c5cbd86}{drag}} (double delta\+From\+Start\+Of\+Drag)
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_animated_position_a31520fda363c37afac010416dab7707f}{end\+Drag}} ()
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_animated_position_aa58f2a396a133f7325322b5eeb9b1d3b}{nudge}} (double delta\+From\+Current\+Position)
+\item 
+double \mbox{\hyperlink{class_animated_position_a6586cfc0cf0ec99e73d6287b0f2700f5}{get\+Position}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_animated_position_a18201fedfc570cb04582ff65b9ddbf3d}{set\+Position}} (double new\+Position)
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_animated_position_a26cb4a90ef54041d01dfe07be46c0e88}{add\+Listener}} (\mbox{\hyperlink{class_animated_position_1_1_listener}{Listener}} $\ast$listener)
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_animated_position_aea1ba3edaac6d6f86739f64ca03f4597}{remove\+Listener}} (\mbox{\hyperlink{class_animated_position_1_1_listener}{Listener}} $\ast$listener)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Behaviour \mbox{\hyperlink{class_animated_position_a8dee430f7730c4f6ff98b7f53d2f1d7b}{behaviour}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Behaviour$>$\newline
+class Animated\+Position$<$ Behaviour $>$}
+Models a 1-\/dimensional position that can be dragged around by the user, and which will then continue moving with a customisable physics behaviour when released.
+
+This is useful for things like scrollable views or objects that can be dragged and thrown around with the mouse/touch, and by writing your own behaviour class, you can customise the trajectory that it follows when released.
+
+The class uses its own \mbox{\hyperlink{class_timer}{Timer}} to continuously change its value when a drag ends, and \mbox{\hyperlink{class_animated_position_1_1_listener}{Listener}} objects can be registered to receive callbacks whenever the value changes.
+
+The value is stored as a double, and can be used to represent whatever units you need.
+
+The template parameter Behaviour must be a class that implements various methods to return the physics of the value\textquotesingle{}s movement -\/ you can use the classes provided for this in the \mbox{\hyperlink{namespace_animated_position_behaviours}{Animated\+Position\+Behaviours}} namespace, or write your own custom behaviour.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{struct_animated_position_behaviours_1_1_continuous_with_momentum}{Animated\+Position\+Behaviours\+::\+Continuous\+With\+Momentum}}, \mbox{\hyperlink{struct_animated_position_behaviours_1_1_snap_to_page_boundaries}{Animated\+Position\+Behaviours\+::\+Snap\+To\+Page\+Boundaries}}
+\end{DoxySeeAlso}
+@tags\{GUI\} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_animated_position_a364daf059e5e4ac2bce94ea8a236c02c}\label{class_animated_position_a364daf059e5e4ac2bce94ea8a236c02c}} 
+\index{AnimatedPosition$<$ Behaviour $>$@{AnimatedPosition$<$ Behaviour $>$}!AnimatedPosition@{AnimatedPosition}}
+\index{AnimatedPosition@{AnimatedPosition}!AnimatedPosition$<$ Behaviour $>$@{AnimatedPosition$<$ Behaviour $>$}}
+\doxysubsubsection{\texorpdfstring{AnimatedPosition()}{AnimatedPosition()}}
+{\footnotesize\ttfamily template$<$typename Behaviour $>$ \\
+\mbox{\hyperlink{class_animated_position}{Animated\+Position}}$<$ Behaviour $>$\+::\mbox{\hyperlink{class_animated_position}{Animated\+Position}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_animated_position_a26cb4a90ef54041d01dfe07be46c0e88}\label{class_animated_position_a26cb4a90ef54041d01dfe07be46c0e88}} 
+\index{AnimatedPosition$<$ Behaviour $>$@{AnimatedPosition$<$ Behaviour $>$}!addListener@{addListener}}
+\index{addListener@{addListener}!AnimatedPosition$<$ Behaviour $>$@{AnimatedPosition$<$ Behaviour $>$}}
+\doxysubsubsection{\texorpdfstring{addListener()}{addListener()}}
+{\footnotesize\ttfamily template$<$typename Behaviour $>$ \\
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_animated_position}{Animated\+Position}}$<$ Behaviour $>$\+::add\+Listener (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_animated_position_1_1_listener}{Listener}} $\ast$}]{listener }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Adds a listener to be called when the value changes. \mbox{\Hypertarget{class_animated_position_a3378dd6b200539ef684f5d8031a4f69a}\label{class_animated_position_a3378dd6b200539ef684f5d8031a4f69a}} 
+\index{AnimatedPosition$<$ Behaviour $>$@{AnimatedPosition$<$ Behaviour $>$}!beginDrag@{beginDrag}}
+\index{beginDrag@{beginDrag}!AnimatedPosition$<$ Behaviour $>$@{AnimatedPosition$<$ Behaviour $>$}}
+\doxysubsubsection{\texorpdfstring{beginDrag()}{beginDrag()}}
+{\footnotesize\ttfamily template$<$typename Behaviour $>$ \\
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_animated_position}{Animated\+Position}}$<$ Behaviour $>$\+::begin\+Drag (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Called to indicate that the object is now being controlled by a mouse-\/drag or similar operation.
+
+After calling this method, you should make calls to the \mbox{\hyperlink{class_animated_position_aecd11c12c444387d46ef54931c5cbd86}{drag()}} method each time the mouse drags the position around, and always be sure to finish with a call to \mbox{\hyperlink{class_animated_position_a31520fda363c37afac010416dab7707f}{end\+Drag()}} when the mouse is released, which allows the position to continue moving freely according to the specified behaviour. \mbox{\Hypertarget{class_animated_position_aecd11c12c444387d46ef54931c5cbd86}\label{class_animated_position_aecd11c12c444387d46ef54931c5cbd86}} 
+\index{AnimatedPosition$<$ Behaviour $>$@{AnimatedPosition$<$ Behaviour $>$}!drag@{drag}}
+\index{drag@{drag}!AnimatedPosition$<$ Behaviour $>$@{AnimatedPosition$<$ Behaviour $>$}}
+\doxysubsubsection{\texorpdfstring{drag()}{drag()}}
+{\footnotesize\ttfamily template$<$typename Behaviour $>$ \\
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_animated_position}{Animated\+Position}}$<$ Behaviour $>$\+::drag (\begin{DoxyParamCaption}\item[{double}]{delta\+From\+Start\+Of\+Drag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Called during a mouse-\/drag operation, to indicate that the mouse has moved. The delta is the difference between the position when \mbox{\hyperlink{class_animated_position_a3378dd6b200539ef684f5d8031a4f69a}{begin\+Drag()}} was called and the new position that\textquotesingle{}s required. \mbox{\Hypertarget{class_animated_position_a31520fda363c37afac010416dab7707f}\label{class_animated_position_a31520fda363c37afac010416dab7707f}} 
+\index{AnimatedPosition$<$ Behaviour $>$@{AnimatedPosition$<$ Behaviour $>$}!endDrag@{endDrag}}
+\index{endDrag@{endDrag}!AnimatedPosition$<$ Behaviour $>$@{AnimatedPosition$<$ Behaviour $>$}}
+\doxysubsubsection{\texorpdfstring{endDrag()}{endDrag()}}
+{\footnotesize\ttfamily template$<$typename Behaviour $>$ \\
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_animated_position}{Animated\+Position}}$<$ Behaviour $>$\+::end\+Drag (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Called after \mbox{\hyperlink{class_animated_position_a3378dd6b200539ef684f5d8031a4f69a}{begin\+Drag()}} and \mbox{\hyperlink{class_animated_position_aecd11c12c444387d46ef54931c5cbd86}{drag()}} to indicate that the drag operation has now finished. \mbox{\Hypertarget{class_animated_position_a6586cfc0cf0ec99e73d6287b0f2700f5}\label{class_animated_position_a6586cfc0cf0ec99e73d6287b0f2700f5}} 
+\index{AnimatedPosition$<$ Behaviour $>$@{AnimatedPosition$<$ Behaviour $>$}!getPosition@{getPosition}}
+\index{getPosition@{getPosition}!AnimatedPosition$<$ Behaviour $>$@{AnimatedPosition$<$ Behaviour $>$}}
+\doxysubsubsection{\texorpdfstring{getPosition()}{getPosition()}}
+{\footnotesize\ttfamily template$<$typename Behaviour $>$ \\
+double \mbox{\hyperlink{class_animated_position}{Animated\+Position}}$<$ Behaviour $>$\+::get\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Returns the current position. \mbox{\Hypertarget{class_animated_position_aa58f2a396a133f7325322b5eeb9b1d3b}\label{class_animated_position_aa58f2a396a133f7325322b5eeb9b1d3b}} 
+\index{AnimatedPosition$<$ Behaviour $>$@{AnimatedPosition$<$ Behaviour $>$}!nudge@{nudge}}
+\index{nudge@{nudge}!AnimatedPosition$<$ Behaviour $>$@{AnimatedPosition$<$ Behaviour $>$}}
+\doxysubsubsection{\texorpdfstring{nudge()}{nudge()}}
+{\footnotesize\ttfamily template$<$typename Behaviour $>$ \\
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_animated_position}{Animated\+Position}}$<$ Behaviour $>$\+::nudge (\begin{DoxyParamCaption}\item[{double}]{delta\+From\+Current\+Position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Called outside of a drag operation to cause a nudge in the specified direction. This is intended for use by e.\+g. mouse-\/wheel events. \mbox{\Hypertarget{class_animated_position_aea1ba3edaac6d6f86739f64ca03f4597}\label{class_animated_position_aea1ba3edaac6d6f86739f64ca03f4597}} 
+\index{AnimatedPosition$<$ Behaviour $>$@{AnimatedPosition$<$ Behaviour $>$}!removeListener@{removeListener}}
+\index{removeListener@{removeListener}!AnimatedPosition$<$ Behaviour $>$@{AnimatedPosition$<$ Behaviour $>$}}
+\doxysubsubsection{\texorpdfstring{removeListener()}{removeListener()}}
+{\footnotesize\ttfamily template$<$typename Behaviour $>$ \\
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_animated_position}{Animated\+Position}}$<$ Behaviour $>$\+::remove\+Listener (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_animated_position_1_1_listener}{Listener}} $\ast$}]{listener }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Removes a previously-\/registered listener. \mbox{\Hypertarget{class_animated_position_ab8837ee82f8f478d01c3eb815edb96a2}\label{class_animated_position_ab8837ee82f8f478d01c3eb815edb96a2}} 
+\index{AnimatedPosition$<$ Behaviour $>$@{AnimatedPosition$<$ Behaviour $>$}!setLimits@{setLimits}}
+\index{setLimits@{setLimits}!AnimatedPosition$<$ Behaviour $>$@{AnimatedPosition$<$ Behaviour $>$}}
+\doxysubsubsection{\texorpdfstring{setLimits()}{setLimits()}}
+{\footnotesize\ttfamily template$<$typename Behaviour $>$ \\
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_animated_position}{Animated\+Position}}$<$ Behaviour $>$\+::set\+Limits (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_range}{Range}}$<$ double $>$}]{new\+Range }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Sets a range within which the value will be constrained. \mbox{\Hypertarget{class_animated_position_a18201fedfc570cb04582ff65b9ddbf3d}\label{class_animated_position_a18201fedfc570cb04582ff65b9ddbf3d}} 
+\index{AnimatedPosition$<$ Behaviour $>$@{AnimatedPosition$<$ Behaviour $>$}!setPosition@{setPosition}}
+\index{setPosition@{setPosition}!AnimatedPosition$<$ Behaviour $>$@{AnimatedPosition$<$ Behaviour $>$}}
+\doxysubsubsection{\texorpdfstring{setPosition()}{setPosition()}}
+{\footnotesize\ttfamily template$<$typename Behaviour $>$ \\
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_animated_position}{Animated\+Position}}$<$ Behaviour $>$\+::set\+Position (\begin{DoxyParamCaption}\item[{double}]{new\+Position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Explicitly sets the position and stops any further movement. This will cause a synchronous call to any listeners if the position actually changes. 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_animated_position_a8dee430f7730c4f6ff98b7f53d2f1d7b}\label{class_animated_position_a8dee430f7730c4f6ff98b7f53d2f1d7b}} 
+\index{AnimatedPosition$<$ Behaviour $>$@{AnimatedPosition$<$ Behaviour $>$}!behaviour@{behaviour}}
+\index{behaviour@{behaviour}!AnimatedPosition$<$ Behaviour $>$@{AnimatedPosition$<$ Behaviour $>$}}
+\doxysubsubsection{\texorpdfstring{behaviour}{behaviour}}
+{\footnotesize\ttfamily template$<$typename Behaviour $>$ \\
+Behaviour \mbox{\hyperlink{class_animated_position}{Animated\+Position}}$<$ Behaviour $>$\+::behaviour}
+
+The behaviour object. This is public to let you tweak any parameters that it provides. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+gui\+\_\+basics/layout/\mbox{\hyperlink{juce___animated_position_8h}{juce\+\_\+\+Animated\+Position.\+h}}\end{DoxyCompactItemize}

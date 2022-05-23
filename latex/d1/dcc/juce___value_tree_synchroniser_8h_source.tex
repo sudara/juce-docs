@@ -1,0 +1,63 @@
+\hypertarget{juce___value_tree_synchroniser_8h_source}{}\doxysection{juce\+\_\+\+Value\+Tree\+Synchroniser.\+h}
+\label{juce___value_tree_synchroniser_8h_source}\index{build/juce\_data\_structures/values/juce\_ValueTreeSynchroniser.h@{build/juce\_data\_structures/values/juce\_ValueTreeSynchroniser.h}}
+\mbox{\hyperlink{juce___value_tree_synchroniser_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{46 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_value_tree_synchroniser}{ValueTreeSynchroniser}}  : \textcolor{keyword}{private} \mbox{\hyperlink{class_value_tree_1_1_listener}{ValueTree::Listener}}}
+\DoxyCodeLine{47 \{}
+\DoxyCodeLine{48 \textcolor{keyword}{public}:}
+\DoxyCodeLine{55     \mbox{\hyperlink{class_value_tree_synchroniser}{ValueTreeSynchroniser}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_value_tree}{ValueTree}}\& \mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682cac0af77cf8294ff93a5cdb2963ca9f038}{tree}});}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{58     \mbox{\hyperlink{class_value_tree_synchroniser}{\string~ValueTreeSynchroniser}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{65     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_value_tree_synchroniser_acd2f064583c5bf45d65c5ff1369f0a5b}{stateChanged}} (\textcolor{keyword}{const} \textcolor{keywordtype}{void}* encodedChange, \textcolor{keywordtype}{size\_t} encodedChangeSize) = 0;}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{72     \textcolor{keywordtype}{void} sendFullSyncCallback();}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{80     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} applyChange (\mbox{\hyperlink{class_value_tree}{ValueTree}}\& \mbox{\hyperlink{namespacegl_a61228f5aa014ae6a6f7d537c7b0943b7}{target}},}
+\DoxyCodeLine{81                              \textcolor{keyword}{const} \textcolor{keywordtype}{void}* encodedChangeData, \textcolor{keywordtype}{size\_t} encodedChangeDataSize,}
+\DoxyCodeLine{82                              \mbox{\hyperlink{class_undo_manager}{UndoManager}}* undoManager);}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{85     \textcolor{keyword}{const} \mbox{\hyperlink{class_value_tree}{ValueTree}}\& \mbox{\hyperlink{class_value_tree_synchroniser_abfcecba558c6bcce8cde644ba331e226}{getRoot}}() noexcept       \{ \textcolor{keywordflow}{return} valueTree; \}}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87 \textcolor{keyword}{private}:}
+\DoxyCodeLine{88     \mbox{\hyperlink{class_value_tree}{ValueTree}} valueTree;}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_value_tree_1_1_listener_acb50ea91d11a3f46564b117ccdfcf6ac}{valueTreePropertyChanged}} (\mbox{\hyperlink{class_value_tree}{ValueTree}}\&, \textcolor{keyword}{const} \mbox{\hyperlink{class_identifier}{Identifier}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{91     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_value_tree_1_1_listener_ad68ed8d6c8a0aa041f3365bb2a70e51c}{valueTreeChildAdded}} (\mbox{\hyperlink{class_value_tree}{ValueTree}}\&, \mbox{\hyperlink{class_value_tree}{ValueTree}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{92     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_value_tree_1_1_listener_a3b7f107200e15912e6b7067d8fc0a5fd}{valueTreeChildRemoved}} (\mbox{\hyperlink{class_value_tree}{ValueTree}}\&, \mbox{\hyperlink{class_value_tree}{ValueTree}}\&, \textcolor{keywordtype}{int}) \textcolor{keyword}{override};}
+\DoxyCodeLine{93     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_value_tree_1_1_listener_a7384aaa854afff67c4068ef440d67308}{valueTreeChildOrderChanged}} (\mbox{\hyperlink{class_value_tree}{ValueTree}}\&, \textcolor{keywordtype}{int}, \textcolor{keywordtype}{int}) \textcolor{keyword}{override};}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_value_tree_synchroniser}{ValueTreeSynchroniser}})}
+\DoxyCodeLine{96 \};}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{99 }
+
+\end{DoxyCode}

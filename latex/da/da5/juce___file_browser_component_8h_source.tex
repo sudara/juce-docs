@@ -1,0 +1,190 @@
+\hypertarget{juce___file_browser_component_8h_source}{}\doxysection{juce\+\_\+\+File\+Browser\+Component.\+h}
+\label{juce___file_browser_component_8h_source}\index{build/juce\_gui\_basics/filebrowser/juce\_FileBrowserComponent.h@{build/juce\_gui\_basics/filebrowser/juce\_FileBrowserComponent.h}}
+\mbox{\hyperlink{juce___file_browser_component_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{42 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_file_browser_component}{FileBrowserComponent}}  : \textcolor{keyword}{public} \mbox{\hyperlink{class_component}{Component}},}
+\DoxyCodeLine{43                                         \textcolor{keyword}{private} \mbox{\hyperlink{class_file_browser_listener}{FileBrowserListener}},}
+\DoxyCodeLine{44                                         \textcolor{keyword}{private} \mbox{\hyperlink{class_file_filter}{FileFilter}},}
+\DoxyCodeLine{45                                         \textcolor{keyword}{private} \mbox{\hyperlink{class_timer}{Timer}}}
+\DoxyCodeLine{46 \{}
+\DoxyCodeLine{47 \textcolor{keyword}{public}:}
+\DoxyCodeLine{48     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{53 \textcolor{comment}{}    \textcolor{keyword}{enum} \mbox{\hyperlink{class_file_browser_component_a32888a950cc0e51c8e1350f53bea43d6}{FileChooserFlags}}}
+\DoxyCodeLine{54     \{}
+\DoxyCodeLine{55         openMode                        = 1,    }
+\DoxyCodeLine{57         saveMode                        = 2,    }
+\DoxyCodeLine{59         canSelectFiles                  = 4,    }
+\DoxyCodeLine{61         canSelectDirectories            = 8,    }
+\DoxyCodeLine{63         canSelectMultipleItems          = 16,   }
+\DoxyCodeLine{64         useTreeView                     = 32,   }
+\DoxyCodeLine{65         filenameBoxIsReadOnly           = 64,   }
+\DoxyCodeLine{66         warnAboutOverwriting            = 128,  }
+\DoxyCodeLine{67         doNotClearFileNameOnRootChange  = 256   }
+\DoxyCodeLine{68     \};}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{85 \textcolor{comment}{}    \mbox{\hyperlink{class_file_browser_component}{FileBrowserComponent}} (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacejuce_a848bbbcf606d6a8175b2c2712055d209}{flags}},}
+\DoxyCodeLine{86                           \textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& initialFileOrDirectory,}
+\DoxyCodeLine{87                           \textcolor{keyword}{const} \mbox{\hyperlink{class_file_filter}{FileFilter}}* fileFilter,}
+\DoxyCodeLine{88                           \mbox{\hyperlink{class_file_preview_component}{FilePreviewComponent}}* previewComp);}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{91     \mbox{\hyperlink{class_file_browser_component}{\string~FileBrowserComponent}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{98 \textcolor{comment}{}    \textcolor{keywordtype}{int} getNumSelectedFiles() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{105     \mbox{\hyperlink{class_file}{File}} getSelectedFile (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{108     \textcolor{keywordtype}{void} deselectAllFiles();}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{117     \textcolor{keywordtype}{bool} currentFileIsValid() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{125     \mbox{\hyperlink{class_file}{File}} getHighlightedFile() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{127     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{129 \textcolor{comment}{}    \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_file}{File}}\& getRoot() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{132     \textcolor{keywordtype}{void} setRoot (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_file}{File}}\& newRootDirectory);}
+\DoxyCodeLine{133 }
+\DoxyCodeLine{135     \textcolor{keywordtype}{void} setFileName (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}}\& newName);}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{138     \textcolor{keywordtype}{void} goUp();}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{141     \textcolor{keywordtype}{void} refresh();}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{144     \textcolor{keywordtype}{void} setFileFilter (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_file_filter}{FileFilter}}* newFileFilter);}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{151     virtual \mbox{\hyperlink{class_string}{String}} getActionVerb() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{152 }
+\DoxyCodeLine{154     \textcolor{keywordtype}{bool} isSaveMode() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{155 }
+\DoxyCodeLine{160     \textcolor{keywordtype}{void} setFilenameBoxLabel (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}});}
+\DoxyCodeLine{161 }
+\DoxyCodeLine{162     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{166 \textcolor{comment}{}    \textcolor{keywordtype}{void} addListener (\mbox{\hyperlink{class_file_browser_listener}{FileBrowserListener}}* listener);}
+\DoxyCodeLine{167 }
+\DoxyCodeLine{171     \textcolor{keywordtype}{void} removeListener (\mbox{\hyperlink{class_file_browser_listener}{FileBrowserListener}}* listener);}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{178     static \textcolor{keywordtype}{void} getDefaultRoots (\mbox{\hyperlink{class_string_array}{StringArray}}\& rootNames, \mbox{\hyperlink{class_string_array}{StringArray}}\& rootPaths);}
+\DoxyCodeLine{179 }
+\DoxyCodeLine{180     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{184 \textcolor{comment}{}    struct \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{struct_file_browser_component_1_1_look_and_feel_methods}{LookAndFeelMethods}}}
+\DoxyCodeLine{185     \{}
+\DoxyCodeLine{186         \textcolor{keyword}{virtual} \mbox{\hyperlink{struct_file_browser_component_1_1_look_and_feel_methods_a9c86c7f7328f9494af252429d18dada1}{\string~LookAndFeelMethods}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{187 }
+\DoxyCodeLine{188         \textcolor{comment}{// These return a pointer to an internally cached drawable -\/ make sure you don't keep}}
+\DoxyCodeLine{189         \textcolor{comment}{// a copy of this pointer anywhere, as it may become invalid in the future.}}
+\DoxyCodeLine{190         \textcolor{keyword}{virtual} \textcolor{keyword}{const} \mbox{\hyperlink{class_drawable}{Drawable}}* \mbox{\hyperlink{struct_file_browser_component_1_1_look_and_feel_methods_aee793246efbc9492527a24704d8b98b3}{getDefaultFolderImage}}() = 0;}
+\DoxyCodeLine{191         \textcolor{keyword}{virtual} \textcolor{keyword}{const} \mbox{\hyperlink{class_drawable}{Drawable}}* \mbox{\hyperlink{struct_file_browser_component_1_1_look_and_feel_methods_abcad8c998b1cb990948a17fc8c810dc2}{getDefaultDocumentFileImage}}() = 0;}
+\DoxyCodeLine{192 }
+\DoxyCodeLine{193         \textcolor{keyword}{virtual} \mbox{\hyperlink{class_attributed_string}{AttributedString}} \mbox{\hyperlink{struct_file_browser_component_1_1_look_and_feel_methods_af5d72bc0fb76a5ccae4fe2430dbc99e4}{createFileChooserHeaderText}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& title,}
+\DoxyCodeLine{194                                                               \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& instructions) = 0;}
+\DoxyCodeLine{195 }
+\DoxyCodeLine{196         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_file_browser_component_1_1_look_and_feel_methods_ab44187dec465f6a85f3872ce2c2677e3}{drawFileBrowserRow}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \textcolor{keywordtype}{int} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}},}
+\DoxyCodeLine{197                                          \textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& file,}
+\DoxyCodeLine{198                                          \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& filename,}
+\DoxyCodeLine{199                                          \mbox{\hyperlink{class_image}{Image}}* optionalIcon,}
+\DoxyCodeLine{200                                          \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& fileSizeDescription,}
+\DoxyCodeLine{201                                          \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& fileTimeDescription,}
+\DoxyCodeLine{202                                          \textcolor{keywordtype}{bool} isDirectory,}
+\DoxyCodeLine{203                                          \textcolor{keywordtype}{bool} isItemSelected,}
+\DoxyCodeLine{204                                          \textcolor{keywordtype}{int} itemIndex,}
+\DoxyCodeLine{205                                          \mbox{\hyperlink{class_directory_contents_display_component}{DirectoryContentsDisplayComponent}}\&) = 0;}
+\DoxyCodeLine{206 }
+\DoxyCodeLine{207         \textcolor{keyword}{virtual} \mbox{\hyperlink{class_button}{Button}}* \mbox{\hyperlink{struct_file_browser_component_1_1_look_and_feel_methods_a9750f09c523a25ab6f3dd81f9eeeb6d9}{createFileBrowserGoUpButton}}() = 0;}
+\DoxyCodeLine{208 }
+\DoxyCodeLine{209         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_file_browser_component_1_1_look_and_feel_methods_a4a95e3d406af1c06a040db56701daa7e}{layoutFileBrowserComponent}} (\mbox{\hyperlink{class_file_browser_component}{FileBrowserComponent}}\& browserComp,}
+\DoxyCodeLine{210                                                  \mbox{\hyperlink{class_directory_contents_display_component}{DirectoryContentsDisplayComponent}}* fileListComponent,}
+\DoxyCodeLine{211                                                  \mbox{\hyperlink{class_file_preview_component}{FilePreviewComponent}}* previewComp,}
+\DoxyCodeLine{212                                                  \mbox{\hyperlink{class_combo_box}{ComboBox}}* currentPathBox,}
+\DoxyCodeLine{213                                                  \mbox{\hyperlink{class_text_editor}{TextEditor}}* filenameBox,}
+\DoxyCodeLine{214                                                  \mbox{\hyperlink{class_button}{Button}}* goUpButton) = 0;}
+\DoxyCodeLine{215     \};}
+\DoxyCodeLine{216 }
+\DoxyCodeLine{224     \textcolor{keyword}{enum} \mbox{\hyperlink{class_file_browser_component_a97c8e2837fcbc106996be4a651181090}{ColourIds}}}
+\DoxyCodeLine{225     \{}
+\DoxyCodeLine{226         currentPathBoxBackgroundColourId    = 0x1000640, }
+\DoxyCodeLine{227         currentPathBoxTextColourId          = 0x1000641, }
+\DoxyCodeLine{228         currentPathBoxArrowColourId         = 0x1000642, }
+\DoxyCodeLine{229         filenameBoxBackgroundColourId       = 0x1000643, }
+\DoxyCodeLine{230         filenameBoxTextColourId             = 0x1000644  }
+\DoxyCodeLine{231     \};}
+\DoxyCodeLine{232 }
+\DoxyCodeLine{233     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{235 \textcolor{comment}{}    \textcolor{keywordtype}{void} resized() \textcolor{keyword}{override};}
+\DoxyCodeLine{237     \textcolor{keywordtype}{void} lookAndFeelChanged() \textcolor{keyword}{override};}
+\DoxyCodeLine{239     \textcolor{keywordtype}{bool} keyPressed (\textcolor{keyword}{const} \mbox{\hyperlink{class_key_press}{KeyPress}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{241     \textcolor{keywordtype}{void} selectionChanged() \textcolor{keyword}{override};}
+\DoxyCodeLine{243     \textcolor{keywordtype}{void} fileClicked (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\&, \textcolor{keyword}{const} \mbox{\hyperlink{class_mouse_event}{MouseEvent}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{245     \textcolor{keywordtype}{void} fileDoubleClicked (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{247     \textcolor{keywordtype}{void} browserRootChanged (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{249     \textcolor{keywordtype}{bool} isFileSuitable (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\&) \textcolor{keyword}{const override};}
+\DoxyCodeLine{251     \textcolor{keywordtype}{bool} isDirectorySuitable (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\&) \textcolor{keyword}{const override};}
+\DoxyCodeLine{253     \mbox{\hyperlink{class_file_preview_component}{FilePreviewComponent}}* getPreviewComponent() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{255     \mbox{\hyperlink{class_directory_contents_display_component}{DirectoryContentsDisplayComponent}}* getDisplayComponent() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{256 }
+\DoxyCodeLine{257 protected:}
+\DoxyCodeLine{263     virtual \textcolor{keywordtype}{void} getRoots (\mbox{\hyperlink{class_string_array}{StringArray}}\& rootNames, \mbox{\hyperlink{class_string_array}{StringArray}}\& rootPaths);}
+\DoxyCodeLine{264 }
+\DoxyCodeLine{266     \textcolor{keywordtype}{void} resetRecentPaths();}
+\DoxyCodeLine{267 }
+\DoxyCodeLine{268 private:}
+\DoxyCodeLine{269     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{270     \mbox{\hyperlink{namespacestd}{std}}::unique\_ptr<\mbox{\hyperlink{class_directory_contents_list}{DirectoryContentsList}}> fileList;}
+\DoxyCodeLine{271     \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_file_filter}{FileFilter}}* fileFilter;}
+\DoxyCodeLine{272 }
+\DoxyCodeLine{273     \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacejuce_a848bbbcf606d6a8175b2c2712055d209}{flags}};}
+\DoxyCodeLine{274     \mbox{\hyperlink{class_file}{File}} currentRoot;}
+\DoxyCodeLine{275     \mbox{\hyperlink{class_array}{Array}}<\mbox{\hyperlink{class_file}{File}}> chosenFiles;}
+\DoxyCodeLine{276     \mbox{\hyperlink{class_listener_list}{ListenerList}}<\mbox{\hyperlink{class_file_browser_listener}{FileBrowserListener}}> listeners;}
+\DoxyCodeLine{277 }
+\DoxyCodeLine{278     \mbox{\hyperlink{namespacestd}{std}}::unique\_ptr<\mbox{\hyperlink{class_directory_contents_display_component}{DirectoryContentsDisplayComponent}}> fileListComponent;}
+\DoxyCodeLine{279     \mbox{\hyperlink{class_file_preview_component}{FilePreviewComponent}}* previewComp;}
+\DoxyCodeLine{280     \mbox{\hyperlink{class_combo_box}{ComboBox}} currentPathBox;}
+\DoxyCodeLine{281     \mbox{\hyperlink{class_text_editor}{TextEditor}} filenameBox;}
+\DoxyCodeLine{282     \mbox{\hyperlink{class_label}{Label}} fileLabel;}
+\DoxyCodeLine{283     \mbox{\hyperlink{namespacestd}{std}}::unique\_ptr<\mbox{\hyperlink{class_button}{Button}}> goUpButton;}
+\DoxyCodeLine{284     \mbox{\hyperlink{class_time_slice_thread}{TimeSliceThread}} thread;}
+\DoxyCodeLine{285     \textcolor{keywordtype}{bool} wasProcessActive;}
+\DoxyCodeLine{286 }
+\DoxyCodeLine{287     \mbox{\hyperlink{namespacestd}{std}}::unique\_ptr<\mbox{\hyperlink{class_accessibility_handler}{AccessibilityHandler}}> createAccessibilityHandler() override;}
+\DoxyCodeLine{288     \textcolor{keywordtype}{void} timerCallback() override;}
+\DoxyCodeLine{289     \textcolor{keywordtype}{void} sendListenerChangeMessage();}
+\DoxyCodeLine{290     \textcolor{keywordtype}{bool} isFileOrDirSuitable (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_file}{File}}\&) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{291     \textcolor{keywordtype}{void} updateSelectedPath();}
+\DoxyCodeLine{292     \textcolor{keywordtype}{void} changeFilename();}
+\DoxyCodeLine{293 }
+\DoxyCodeLine{294     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_file_browser_component}{FileBrowserComponent}})}
+\DoxyCodeLine{295 \};}
+\DoxyCodeLine{296 }
+\DoxyCodeLine{297  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{298 }
+
+\end{DoxyCode}

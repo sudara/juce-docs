@@ -1,0 +1,69 @@
+\hypertarget{class_midi_keyboard_state_1_1_listener}{}\doxysection{Midi\+Keyboard\+State\+::Listener Class Reference}
+\label{class_midi_keyboard_state_1_1_listener}\index{MidiKeyboardState::Listener@{MidiKeyboardState::Listener}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Midi\+Keyboard\+State.\+h$>$}
+
+Inheritance diagram for Midi\+Keyboard\+State\+::Listener\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d1/d82/class_midi_keyboard_state_1_1_listener}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_midi_keyboard_state_1_1_listener_a87db938272e0badd5343f44c5f7dd4c9}{$\sim$\+Listener}} ()=default
+\item 
+virtual \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_midi_keyboard_state_1_1_listener_a854381a64354389e0cb2c15ec1fb4b01}{handle\+Note\+On}} (\mbox{\hyperlink{class_midi_keyboard_state}{Midi\+Keyboard\+State}} $\ast$source, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} midi\+Channel, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} midi\+Note\+Number, float velocity)=0
+\item 
+virtual \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_midi_keyboard_state_1_1_listener_aedc74bd79578cb19edba66d38e9a93cf}{handle\+Note\+Off}} (\mbox{\hyperlink{class_midi_keyboard_state}{Midi\+Keyboard\+State}} $\ast$source, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} midi\+Channel, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} midi\+Note\+Number, float velocity)=0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Receives events from a \mbox{\hyperlink{class_midi_keyboard_state}{Midi\+Keyboard\+State}} object. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_midi_keyboard_state_1_1_listener_a87db938272e0badd5343f44c5f7dd4c9}\label{class_midi_keyboard_state_1_1_listener_a87db938272e0badd5343f44c5f7dd4c9}} 
+\index{MidiKeyboardState::Listener@{MidiKeyboardState::Listener}!````~Listener@{$\sim$Listener}}
+\index{````~Listener@{$\sim$Listener}!MidiKeyboardState::Listener@{MidiKeyboardState::Listener}}
+\doxysubsubsection{\texorpdfstring{$\sim$Listener()}{~Listener()}}
+{\footnotesize\ttfamily virtual Midi\+Keyboard\+State\+::\+Listener\+::$\sim$\+Listener (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_midi_keyboard_state_1_1_listener_aedc74bd79578cb19edba66d38e9a93cf}\label{class_midi_keyboard_state_1_1_listener_aedc74bd79578cb19edba66d38e9a93cf}} 
+\index{MidiKeyboardState::Listener@{MidiKeyboardState::Listener}!handleNoteOff@{handleNoteOff}}
+\index{handleNoteOff@{handleNoteOff}!MidiKeyboardState::Listener@{MidiKeyboardState::Listener}}
+\doxysubsubsection{\texorpdfstring{handleNoteOff()}{handleNoteOff()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Midi\+Keyboard\+State\+::\+Listener\+::handle\+Note\+Off (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_midi_keyboard_state}{Midi\+Keyboard\+State}} $\ast$}]{source,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{midi\+Channel,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{midi\+Note\+Number,  }\item[{float}]{velocity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Called when one of the \mbox{\hyperlink{class_midi_keyboard_state}{Midi\+Keyboard\+State}}\textquotesingle{}s keys is released.
+
+This will be called synchronously when the state is either processing a buffer in its \mbox{\hyperlink{class_midi_keyboard_state_aa7afad38f581c129c407a4d7d069bbbb}{Midi\+Keyboard\+State\+::process\+Next\+Midi\+Buffer()}} method, or when a note is being played with its \mbox{\hyperlink{class_midi_keyboard_state_aca0173180551f533327c1f8e4daa332e}{Midi\+Keyboard\+State\+::note\+Off()}} method.
+
+Note that this callback could happen from an audio callback thread, so be careful not to block, and avoid any UI activity in the callback. 
+
+Implemented in \mbox{\hyperlink{class_midi_message_collector_a07e1a9bbeb9131dbe8d55431bb166ee8}{Midi\+Message\+Collector}}.
+
+\mbox{\Hypertarget{class_midi_keyboard_state_1_1_listener_a854381a64354389e0cb2c15ec1fb4b01}\label{class_midi_keyboard_state_1_1_listener_a854381a64354389e0cb2c15ec1fb4b01}} 
+\index{MidiKeyboardState::Listener@{MidiKeyboardState::Listener}!handleNoteOn@{handleNoteOn}}
+\index{handleNoteOn@{handleNoteOn}!MidiKeyboardState::Listener@{MidiKeyboardState::Listener}}
+\doxysubsubsection{\texorpdfstring{handleNoteOn()}{handleNoteOn()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Midi\+Keyboard\+State\+::\+Listener\+::handle\+Note\+On (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_midi_keyboard_state}{Midi\+Keyboard\+State}} $\ast$}]{source,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{midi\+Channel,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{midi\+Note\+Number,  }\item[{float}]{velocity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Called when one of the \mbox{\hyperlink{class_midi_keyboard_state}{Midi\+Keyboard\+State}}\textquotesingle{}s keys is pressed.
+
+This will be called synchronously when the state is either processing a buffer in its \mbox{\hyperlink{class_midi_keyboard_state_aa7afad38f581c129c407a4d7d069bbbb}{Midi\+Keyboard\+State\+::process\+Next\+Midi\+Buffer()}} method, or when a note is being played with its \mbox{\hyperlink{class_midi_keyboard_state_a60e0e629d485466360bded04ad35025a}{Midi\+Keyboard\+State\+::note\+On()}} method.
+
+Note that this callback could happen from an audio callback thread, so be careful not to block, and avoid any UI activity in the callback. 
+
+Implemented in \mbox{\hyperlink{class_midi_message_collector_a0e6368630ea8c456c79f86d8aebcaeb6}{Midi\+Message\+Collector}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+audio\+\_\+basics/midi/\mbox{\hyperlink{juce___midi_keyboard_state_8h}{juce\+\_\+\+Midi\+Keyboard\+State.\+h}}\end{DoxyCompactItemize}

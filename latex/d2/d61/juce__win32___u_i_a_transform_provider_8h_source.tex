@@ -1,0 +1,128 @@
+\hypertarget{juce__win32___u_i_a_transform_provider_8h_source}{}\doxysection{juce\+\_\+win32\+\_\+\+UIATransform\+Provider.\+h}
+\label{juce__win32___u_i_a_transform_provider_8h_source}\index{build/juce\_gui\_basics/native/accessibility/juce\_win32\_UIATransformProvider.h@{build/juce\_gui\_basics/native/accessibility/juce\_win32\_UIATransformProvider.h}}
+\mbox{\hyperlink{juce__win32___u_i_a_transform_provider_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{5 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{6 \textcolor{comment}{}}
+\DoxyCodeLine{7 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{8 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{9 \textcolor{comment}{}}
+\DoxyCodeLine{10 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{11 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{12 \textcolor{comment}{}}
+\DoxyCodeLine{13 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{14 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{15 \textcolor{comment}{}}
+\DoxyCodeLine{16 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{17 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{18 \textcolor{comment}{}}
+\DoxyCodeLine{19 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{20 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{21 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{24 \textcolor{comment}{*/}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacejuce}{juce}}}
+\DoxyCodeLine{27 \{}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{30 \textcolor{keyword}{class }\mbox{\hyperlink{classjuce_1_1_u_i_a_transform_provider}{UIATransformProvider}}  : \textcolor{keyword}{public} \mbox{\hyperlink{classjuce_1_1_u_i_a_provider_base}{UIAProviderBase}},}
+\DoxyCodeLine{31                               \textcolor{keyword}{public} \mbox{\hyperlink{classjuce_1_1_com_base_class_helper}{ComBaseClassHelper}}<ComTypes::ITransformProvider>}
+\DoxyCodeLine{32 \{}
+\DoxyCodeLine{33 \textcolor{keyword}{public}:}
+\DoxyCodeLine{34     \textcolor{keyword}{using} \mbox{\hyperlink{classjuce_1_1_u_i_a_provider_base_ae6ed5c67016c257a80661f180ed7eb7a}{UIAProviderBase::UIAProviderBase}};}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{37     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_adf7ea5b8ae4dd1bb0ef1193c5c758eba}{JUCE\_COMRESULT}} \mbox{\hyperlink{classjuce_1_1_u_i_a_transform_provider_abd08fcedc17a44b303210fbefb5aa30f}{Move}} (\textcolor{keywordtype}{double} \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, \textcolor{keywordtype}{double} \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}})\textcolor{keyword}{ override}}
+\DoxyCodeLine{38 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{39         \textcolor{keywordflow}{if} (! \mbox{\hyperlink{classjuce_1_1_u_i_a_provider_base_aee4ce572d15493baa9d12a66b283dd49}{isElementValid}}())}
+\DoxyCodeLine{40             \textcolor{keywordflow}{return} (HRESULT) UIA\_E\_ELEMENTNOTAVAILABLE;}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42         \textcolor{keywordflow}{if} (\textcolor{keyword}{auto}* peer = getPeer())}
+\DoxyCodeLine{43         \{}
+\DoxyCodeLine{44             RECT rect;}
+\DoxyCodeLine{45             GetWindowRect ((\mbox{\hyperlink{namespacejuce_a1b3c3cf7cdbe394e401d5db42e094ac5}{HWND}}) peer-\/>getNativeHandle(), \&rect);}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47             rect.left = \mbox{\hyperlink{group__juce__core-maths_gafe8eb86381d389f4ba9f9931a38e1a44}{roundToInt}} (\mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}});}
+\DoxyCodeLine{48             rect.top  = \mbox{\hyperlink{group__juce__core-maths_gafe8eb86381d389f4ba9f9931a38e1a44}{roundToInt}} (\mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}});}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50             \textcolor{keyword}{auto} bounds = \mbox{\hyperlink{class_rectangle_a07aef484eb8be1f93df7e2c4dbfe4409}{Rectangle<int>::leftTopRightBottom}} (rect.left, rect.top, rect.right, rect.bottom);}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52             peer-\/>setBounds (\mbox{\hyperlink{class_desktop_aedeca95ef32376027263bd39c693eeda}{Desktop::getInstance}}().getDisplays().physicalToLogical (bounds),}
+\DoxyCodeLine{53                              peer-\/>isFullScreen());}
+\DoxyCodeLine{54         \}}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56         \textcolor{keywordflow}{return} S\_OK;}
+\DoxyCodeLine{57     \}}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_adf7ea5b8ae4dd1bb0ef1193c5c758eba}{JUCE\_COMRESULT}} \mbox{\hyperlink{classjuce_1_1_u_i_a_transform_provider_a6efec58f98530500f296296f5cb8296d}{Resize}} (\textcolor{keywordtype}{double} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{double} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}})\textcolor{keyword}{ override}}
+\DoxyCodeLine{60 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{61         \textcolor{keywordflow}{if} (! \mbox{\hyperlink{classjuce_1_1_u_i_a_provider_base_aee4ce572d15493baa9d12a66b283dd49}{isElementValid}}())}
+\DoxyCodeLine{62             \textcolor{keywordflow}{return} (HRESULT) UIA\_E\_ELEMENTNOTAVAILABLE;}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64         \textcolor{keywordflow}{if} (\textcolor{keyword}{auto}* peer = getPeer())}
+\DoxyCodeLine{65         \{}
+\DoxyCodeLine{66             \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a4f27436ebaceab481939dc1f71b047dc}{scale}} = peer-\/>getPlatformScaleFactor();}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68             peer-\/>getComponent().setSize (\mbox{\hyperlink{group__juce__core-maths_gafe8eb86381d389f4ba9f9931a38e1a44}{roundToInt}} (\mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}  / \mbox{\hyperlink{namespacegl_a4f27436ebaceab481939dc1f71b047dc}{scale}}),}
+\DoxyCodeLine{69                                           \mbox{\hyperlink{group__juce__core-maths_gafe8eb86381d389f4ba9f9931a38e1a44}{roundToInt}} (\mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}} / \mbox{\hyperlink{namespacegl_a4f27436ebaceab481939dc1f71b047dc}{scale}}));}
+\DoxyCodeLine{70         \}}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72         \textcolor{keywordflow}{return} S\_OK;}
+\DoxyCodeLine{73     \}}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_adf7ea5b8ae4dd1bb0ef1193c5c758eba}{JUCE\_COMRESULT}} \mbox{\hyperlink{classjuce_1_1_u_i_a_transform_provider_a28f9b0d4e240fcd3b5ea3282eef4c862}{Rotate}} (\textcolor{keywordtype}{double})\textcolor{keyword}{ override}}
+\DoxyCodeLine{76 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{77         \textcolor{keywordflow}{if} (! \mbox{\hyperlink{classjuce_1_1_u_i_a_provider_base_aee4ce572d15493baa9d12a66b283dd49}{isElementValid}}())}
+\DoxyCodeLine{78             \textcolor{keywordflow}{return} (HRESULT) UIA\_E\_ELEMENTNOTAVAILABLE;}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80         \textcolor{keywordflow}{return} (HRESULT) UIA\_E\_NOTSUPPORTED;}
+\DoxyCodeLine{81     \}}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_adf7ea5b8ae4dd1bb0ef1193c5c758eba}{JUCE\_COMRESULT}} \mbox{\hyperlink{classjuce_1_1_u_i_a_transform_provider_aff343c6933cfba223df628416afcdc2d}{get\_CanMove}} (BOOL* pRetVal)\textcolor{keyword}{ override}}
+\DoxyCodeLine{84 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{85         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacejuce_a8bed7e9b52b4c0208d41ac6d2052d05e}{withCheckedComArgs}} (pRetVal, *\textcolor{keyword}{this}, [\&]}
+\DoxyCodeLine{86         \{}
+\DoxyCodeLine{87             *pRetVal = \textcolor{keyword}{true};}
+\DoxyCodeLine{88             \textcolor{keywordflow}{return} S\_OK;}
+\DoxyCodeLine{89         \});}
+\DoxyCodeLine{90     \}}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_adf7ea5b8ae4dd1bb0ef1193c5c758eba}{JUCE\_COMRESULT}} \mbox{\hyperlink{classjuce_1_1_u_i_a_transform_provider_ad6d6d24201998d5c2e76af72c80208c0}{get\_CanResize}} (BOOL* pRetVal)\textcolor{keyword}{ override}}
+\DoxyCodeLine{93 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{94         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacejuce_a8bed7e9b52b4c0208d41ac6d2052d05e}{withCheckedComArgs}} (pRetVal, *\textcolor{keyword}{this}, [\&]}
+\DoxyCodeLine{95         \{}
+\DoxyCodeLine{96             \textcolor{keywordflow}{if} (\textcolor{keyword}{auto}* peer = getPeer())}
+\DoxyCodeLine{97                 *pRetVal = ((peer-\/>getStyleFlags() \& \mbox{\hyperlink{class_component_peer_a94a21f91c61f8211774d6f43243a6ddca3b12da2010eca8a92f6c97fad9a21a6b}{ComponentPeer::windowIsResizable}}) != 0);}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99             \textcolor{keywordflow}{return} S\_OK;}
+\DoxyCodeLine{100         \});}
+\DoxyCodeLine{101     \}}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_adf7ea5b8ae4dd1bb0ef1193c5c758eba}{JUCE\_COMRESULT}} \mbox{\hyperlink{classjuce_1_1_u_i_a_transform_provider_a20c7c95d3842541cae447077dd73291f}{get\_CanRotate}} (BOOL* pRetVal)\textcolor{keyword}{ override}}
+\DoxyCodeLine{104 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{105         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacejuce_a8bed7e9b52b4c0208d41ac6d2052d05e}{withCheckedComArgs}} (pRetVal, *\textcolor{keyword}{this}, [\&]}
+\DoxyCodeLine{106         \{}
+\DoxyCodeLine{107             *pRetVal = \textcolor{keyword}{false};}
+\DoxyCodeLine{108             \textcolor{keywordflow}{return} S\_OK;}
+\DoxyCodeLine{109         \});}
+\DoxyCodeLine{110     \}}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112 \textcolor{keyword}{private}:}
+\DoxyCodeLine{113     \mbox{\hyperlink{class_component_peer}{ComponentPeer}}* getPeer()\textcolor{keyword}{ const}}
+\DoxyCodeLine{114 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{115         \textcolor{keywordflow}{return} \mbox{\hyperlink{classjuce_1_1_u_i_a_provider_base_a9a977d439e4162efbfd008d4221eda9d}{getHandler}}().\mbox{\hyperlink{class_accessibility_handler_acb0f1a9ba27ae6d444307259ec1dfc62}{getComponent}}().\mbox{\hyperlink{class_component_a6a137109881ef1e268ee5ec51a633269}{getPeer}}();}
+\DoxyCodeLine{116     \}}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{119     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (UIATransformProvider)}
+\DoxyCodeLine{120 \};}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{122 \} \textcolor{comment}{// namespace juce}}
+
+\end{DoxyCode}

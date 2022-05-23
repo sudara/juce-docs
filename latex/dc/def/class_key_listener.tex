@@ -1,0 +1,99 @@
+\hypertarget{class_key_listener}{}\doxysection{Key\+Listener Class Reference}
+\label{class_key_listener}\index{KeyListener@{KeyListener}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Key\+Listener.\+h$>$}
+
+Inheritance diagram for Key\+Listener\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{dc/def/class_key_listener}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_key_listener_a16c15e64e7d206bb4d1492f56dd7577d}{$\sim$\+Key\+Listener}} ()=default
+\item 
+virtual bool \mbox{\hyperlink{class_key_listener_ae69d788cbada2ae5069a9e725db0baf7}{key\+Pressed}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_key_press}{Key\+Press}} \&key, \mbox{\hyperlink{class_component}{Component}} $\ast$originating\+Component)=0
+\item 
+virtual bool \mbox{\hyperlink{class_key_listener_a72c1311128d6508eb2891227a4d52dec}{key\+State\+Changed}} (bool is\+Key\+Down, \mbox{\hyperlink{class_component}{Component}} $\ast$originating\+Component)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Receives callbacks when keys are pressed.
+
+You can add a key listener to a component to be informed when that component gets key events. See the Component\+::add\+Listener method for more details.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_key_press}{Key\+Press}}, \mbox{\hyperlink{class_component_a4ec1b609c39c54434f746cefffa6ce3f}{Component\+::add\+Key\+Listener}}, \mbox{\hyperlink{class_key_press_mapping_set}{Key\+Press\+Mapping\+Set}}
+\end{DoxySeeAlso}
+@tags\{GUI\} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_key_listener_a16c15e64e7d206bb4d1492f56dd7577d}\label{class_key_listener_a16c15e64e7d206bb4d1492f56dd7577d}} 
+\index{KeyListener@{KeyListener}!````~KeyListener@{$\sim$KeyListener}}
+\index{````~KeyListener@{$\sim$KeyListener}!KeyListener@{KeyListener}}
+\doxysubsubsection{\texorpdfstring{$\sim$KeyListener()}{~KeyListener()}}
+{\footnotesize\ttfamily virtual Key\+Listener\+::$\sim$\+Key\+Listener (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+Destructor. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_key_listener_ae69d788cbada2ae5069a9e725db0baf7}\label{class_key_listener_ae69d788cbada2ae5069a9e725db0baf7}} 
+\index{KeyListener@{KeyListener}!keyPressed@{keyPressed}}
+\index{keyPressed@{keyPressed}!KeyListener@{KeyListener}}
+\doxysubsubsection{\texorpdfstring{keyPressed()}{keyPressed()}}
+{\footnotesize\ttfamily virtual bool Key\+Listener\+::key\+Pressed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_key_press}{Key\+Press}} \&}]{key,  }\item[{\mbox{\hyperlink{class_component}{Component}} $\ast$}]{originating\+Component }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Called to indicate that a key has been pressed.
+
+If your implementation returns true, then the key event is considered to have been consumed, and will not be passed on to any other components. If it returns false, then the key will be passed to other components that might want to use it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & the keystroke, including modifier keys \\
+\hline
+{\em originating\+Component} & the component that received the key event \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_key_listener_a72c1311128d6508eb2891227a4d52dec}{key\+State\+Changed}}, \mbox{\hyperlink{class_component_ab063a5c631854864da09106abec78a86}{Component\+::key\+Pressed}} 
+\end{DoxySeeAlso}
+
+
+Implemented in \mbox{\hyperlink{structjuce_1_1_button_1_1_callback_helper_a1232b0c2dfee3820661f978f53ef6f58}{juce\+::\+Button\+::\+Callback\+Helper}}, and \mbox{\hyperlink{class_key_press_mapping_set_ab92a471a8cfc20ad036750cd3c19d5c5}{Key\+Press\+Mapping\+Set}}.
+
+\mbox{\Hypertarget{class_key_listener_a72c1311128d6508eb2891227a4d52dec}\label{class_key_listener_a72c1311128d6508eb2891227a4d52dec}} 
+\index{KeyListener@{KeyListener}!keyStateChanged@{keyStateChanged}}
+\index{keyStateChanged@{keyStateChanged}!KeyListener@{KeyListener}}
+\doxysubsubsection{\texorpdfstring{keyStateChanged()}{keyStateChanged()}}
+{\footnotesize\ttfamily bool Key\+Listener\+::key\+State\+Changed (\begin{DoxyParamCaption}\item[{bool}]{is\+Key\+Down,  }\item[{\mbox{\hyperlink{class_component}{Component}} $\ast$}]{originating\+Component }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Called when any key is pressed or released.
+
+When this is called, classes that might be interested in the state of one or more keys can use \mbox{\hyperlink{class_key_press_a22dc8e2e91023e57ef9e102aef0c6961}{Key\+Press\+::is\+Key\+Currently\+Down()}} to check whether their key has changed.
+
+If your implementation returns true, then the key event is considered to have been consumed, and will not be passed on to any other components. If it returns false, then the key will be passed to other components that might want to use it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em originating\+Component} & the component that received the key event \\
+\hline
+{\em is\+Key\+Down} & true if a key is being pressed, false if one is being released \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_key_press}{Key\+Press}}, \mbox{\hyperlink{class_component_aeff4d2fdbae4d5974e43b62ab3c304f9}{Component\+::key\+State\+Changed}} 
+\end{DoxySeeAlso}
+
+
+Reimplemented in \mbox{\hyperlink{class_key_press_mapping_set_a0329856dd3e6ec50d64114f197045491}{Key\+Press\+Mapping\+Set}}, and \mbox{\hyperlink{structjuce_1_1_button_1_1_callback_helper_ae8643e956fbd15238c99f082fef52c4c}{juce\+::\+Button\+::\+Callback\+Helper}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+gui\+\_\+basics/keyboard/\mbox{\hyperlink{juce___key_listener_8h}{juce\+\_\+\+Key\+Listener.\+h}}\item 
+build/juce\+\_\+gui\+\_\+basics/keyboard/\mbox{\hyperlink{juce___key_listener_8cpp}{juce\+\_\+\+Key\+Listener.\+cpp}}\end{DoxyCompactItemize}

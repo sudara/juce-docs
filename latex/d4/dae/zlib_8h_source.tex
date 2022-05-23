@@ -1,0 +1,1364 @@
+\hypertarget{zlib_8h_source}{}\doxysection{zlib.\+h}
+\label{zlib_8h_source}\index{build/juce\_core/zip/zlib/zlib.h@{build/juce\_core/zip/zlib/zlib.h}}
+\mbox{\hyperlink{zlib_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/* zlib.h -\/-\/ interface of the 'zlib' general purpose compression library}}
+\DoxyCodeLine{2 \textcolor{comment}{  version 1.2.3, July 18th, 2005}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{  Copyright (C) 1995-\/2005 Jean-\/loup Gailly and Mark Adler}}
+\DoxyCodeLine{5 \textcolor{comment}{}}
+\DoxyCodeLine{6 \textcolor{comment}{  This software is provided 'as-\/is', without any express or implied}}
+\DoxyCodeLine{7 \textcolor{comment}{  warranty.  In no event will the authors be held liable for any damages}}
+\DoxyCodeLine{8 \textcolor{comment}{  arising from the use of this software.}}
+\DoxyCodeLine{9 \textcolor{comment}{}}
+\DoxyCodeLine{10 \textcolor{comment}{  Permission is granted to anyone to use this software for any purpose,}}
+\DoxyCodeLine{11 \textcolor{comment}{  including commercial applications, and to alter it and redistribute it}}
+\DoxyCodeLine{12 \textcolor{comment}{  freely, subject to the following restrictions:}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{  1. The origin of this software must not be misrepresented; you must not}}
+\DoxyCodeLine{15 \textcolor{comment}{     claim that you wrote the original software. If you use this software}}
+\DoxyCodeLine{16 \textcolor{comment}{     in a product, an acknowledgment in the product documentation would be}}
+\DoxyCodeLine{17 \textcolor{comment}{     appreciated but is not required.}}
+\DoxyCodeLine{18 \textcolor{comment}{  2. Altered source versions must be plainly marked as such, and must not be}}
+\DoxyCodeLine{19 \textcolor{comment}{     misrepresented as being the original software.}}
+\DoxyCodeLine{20 \textcolor{comment}{  3. This notice may not be removed or altered from any source distribution.}}
+\DoxyCodeLine{21 \textcolor{comment}{}}
+\DoxyCodeLine{22 \textcolor{comment}{  Jean-\/loup Gailly        Mark Adler}}
+\DoxyCodeLine{23 \textcolor{comment}{  jloup@gzip.org          madler@alumni.caltech.edu}}
+\DoxyCodeLine{24 \textcolor{comment}{}}
+\DoxyCodeLine{25 \textcolor{comment}{}}
+\DoxyCodeLine{26 \textcolor{comment}{  The data format used by the zlib library is described by RFCs (Request for}}
+\DoxyCodeLine{27 \textcolor{comment}{  Comments) 1950 to 1952 in the files http://www.ietf.org/rfc/rfc1950.txt}}
+\DoxyCodeLine{28 \textcolor{comment}{  (zlib format), rfc1951.txt (deflate format) and rfc1952.txt (gzip format).}}
+\DoxyCodeLine{29 \textcolor{comment}{*/}}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#ifndef ZLIB\_H}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#define ZLIB\_H}}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{zconf_8h}{zconf.h}}"{}}}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{37 \textcolor{comment}{//extern "{}C"{} \{}}
+\DoxyCodeLine{38 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40 \textcolor{preprocessor}{\#define ZLIB\_VERSION "{}1.2.3"{}}}
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#define ZLIB\_VERNUM 0x1230}}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44 \textcolor{comment}{/*}}
+\DoxyCodeLine{45 \textcolor{comment}{     The 'zlib' compression library provides in-\/memory compression and}}
+\DoxyCodeLine{46 \textcolor{comment}{  decompression functions, including integrity checks of the uncompressed}}
+\DoxyCodeLine{47 \textcolor{comment}{  data.  This version of the library supports only one compression method}}
+\DoxyCodeLine{48 \textcolor{comment}{  (deflation) but other algorithms will be added later and will have the same}}
+\DoxyCodeLine{49 \textcolor{comment}{  stream interface.}}
+\DoxyCodeLine{50 \textcolor{comment}{}}
+\DoxyCodeLine{51 \textcolor{comment}{     Compression can be done in a single step if the buffers are large}}
+\DoxyCodeLine{52 \textcolor{comment}{  enough (for example if an input file is mmap'ed), or can be done by}}
+\DoxyCodeLine{53 \textcolor{comment}{  repeated calls of the compression function.  In the latter case, the}}
+\DoxyCodeLine{54 \textcolor{comment}{  application must provide more input and/or consume the output}}
+\DoxyCodeLine{55 \textcolor{comment}{  (providing more output space) before each call.}}
+\DoxyCodeLine{56 \textcolor{comment}{}}
+\DoxyCodeLine{57 \textcolor{comment}{     The compressed data format used by default by the in-\/memory functions is}}
+\DoxyCodeLine{58 \textcolor{comment}{  the zlib format, which is a zlib wrapper documented in RFC 1950, wrapped}}
+\DoxyCodeLine{59 \textcolor{comment}{  around a deflate stream, which is itself documented in RFC 1951.}}
+\DoxyCodeLine{60 \textcolor{comment}{}}
+\DoxyCodeLine{61 \textcolor{comment}{     The library also supports reading and writing files in gzip (.gz) format}}
+\DoxyCodeLine{62 \textcolor{comment}{  with an interface similar to that of stdio using the functions that start}}
+\DoxyCodeLine{63 \textcolor{comment}{  with "{}gz"{}.  The gzip format is different from the zlib format.  gzip is a}}
+\DoxyCodeLine{64 \textcolor{comment}{  gzip wrapper, documented in RFC 1952, wrapped around a deflate stream.}}
+\DoxyCodeLine{65 \textcolor{comment}{}}
+\DoxyCodeLine{66 \textcolor{comment}{     This library can optionally read and write gzip streams in memory as well.}}
+\DoxyCodeLine{67 \textcolor{comment}{}}
+\DoxyCodeLine{68 \textcolor{comment}{     The zlib format was designed to be compact and fast for use in memory}}
+\DoxyCodeLine{69 \textcolor{comment}{  and on communications channels.  The gzip format was designed for single-\/}}
+\DoxyCodeLine{70 \textcolor{comment}{  file compression on file systems, has a larger header than zlib to maintain}}
+\DoxyCodeLine{71 \textcolor{comment}{  directory information, and uses a different, slower check method than zlib.}}
+\DoxyCodeLine{72 \textcolor{comment}{}}
+\DoxyCodeLine{73 \textcolor{comment}{     The library does not install any signal handler. The decoder checks}}
+\DoxyCodeLine{74 \textcolor{comment}{  the consistency of the compressed data, so the library should never}}
+\DoxyCodeLine{75 \textcolor{comment}{  crash even in case of corrupted input.}}
+\DoxyCodeLine{76 \textcolor{comment}{*/}}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78 \textcolor{keyword}{typedef} \mbox{\hyperlink{zconf_8h_a2349424c4b622675bb12e2ca93c57c72}{voidpf}} (*\mbox{\hyperlink{zconf_8h_a4719a257e0920f8212b267186ea81083}{alloc\_func}}) \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zconf_8h_a04c731495379021454c8e61439dc88ec}{voidpf}} opaque, \mbox{\hyperlink{zconf_8h_a87d141052bcd5ec8a80812a565c70369}{uInt}} items, \mbox{\hyperlink{zconf_8h_a87d141052bcd5ec8a80812a565c70369}{uInt}} \mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}}));}
+\DoxyCodeLine{79 \textcolor{keyword}{typedef} \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}}   (*\mbox{\hyperlink{zconf_8h_ac18e786dc1c81785889a0f4edc113102}{free\_func}})  \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zconf_8h_a04c731495379021454c8e61439dc88ec}{voidpf}} opaque, \mbox{\hyperlink{zconf_8h_a04c731495379021454c8e61439dc88ec}{voidpf}} \mbox{\hyperlink{namespacegl_a806bc647401f0b1530e579b97b65de84}{address}}));}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81 \textcolor{keyword}{struct }\mbox{\hyperlink{structinternal__state}{internal\_state}};}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structz__stream__s}{z\_stream\_s}} \{}
+\DoxyCodeLine{84     \mbox{\hyperlink{zconf_8h_aeb722a888064be47e12d05f692e0f407}{Bytef}}    *\mbox{\hyperlink{structz__stream__s_a21d2c026f0f2fcd67f33011231f8ed00}{next\_in}};  \textcolor{comment}{/* next input byte */}}
+\DoxyCodeLine{85     \mbox{\hyperlink{zconf_8h_a87d141052bcd5ec8a80812a565c70369}{uInt}}     \mbox{\hyperlink{structz__stream__s_a0cf177f50dbb49692f27480cbcfde794}{avail\_in}};  \textcolor{comment}{/* number of bytes available at next\_in */}}
+\DoxyCodeLine{86     \mbox{\hyperlink{zconf_8h_acd2a5701a3aecf6700d2c66c606ecb40}{uLong}}    \mbox{\hyperlink{structz__stream__s_aa8f408b9632737dc21519fa1ed34b08d}{total\_in}};  \textcolor{comment}{/* total nb of input bytes read so far */}}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88     \mbox{\hyperlink{zconf_8h_aeb722a888064be47e12d05f692e0f407}{Bytef}}    *\mbox{\hyperlink{structz__stream__s_aed4a02cfe93e975314fed50b04427bf3}{next\_out}}; \textcolor{comment}{/* next output byte should be put there */}}
+\DoxyCodeLine{89     \mbox{\hyperlink{zconf_8h_a87d141052bcd5ec8a80812a565c70369}{uInt}}     \mbox{\hyperlink{structz__stream__s_a45ad2364307af9d944fd39d4eca3ca3c}{avail\_out}}; \textcolor{comment}{/* remaining free space at next\_out */}}
+\DoxyCodeLine{90     \mbox{\hyperlink{zconf_8h_acd2a5701a3aecf6700d2c66c606ecb40}{uLong}}    \mbox{\hyperlink{structz__stream__s_abae26f1f236cf920250b9d37fdf009c1}{total\_out}}; \textcolor{comment}{/* total nb of bytes output so far */}}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92     \textcolor{keywordtype}{char}     *\mbox{\hyperlink{structz__stream__s_a9b2f745fc780e3b33e2935f8c650a326}{msg}};      \textcolor{comment}{/* last error message, NULL if no error */}}
+\DoxyCodeLine{93     \textcolor{keyword}{struct }\mbox{\hyperlink{structinternal__state}{internal\_state}} \mbox{\hyperlink{zconf_8h_aef060b3456fdcc093a7210a762d5f2ed}{FAR}} *\mbox{\hyperlink{structz__stream__s_ac4a114217a1868dc6fbe7d1f5bda126b}{state}}; \textcolor{comment}{/* not visible by applications */}}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95     \mbox{\hyperlink{zconf_8h_a4719a257e0920f8212b267186ea81083}{alloc\_func}} \mbox{\hyperlink{structz__stream__s_a23a2299c384f808e76e9908f21216b0f}{zalloc}};  \textcolor{comment}{/* used to allocate the internal state */}}
+\DoxyCodeLine{96     \mbox{\hyperlink{zconf_8h_ac18e786dc1c81785889a0f4edc113102}{free\_func}}  \mbox{\hyperlink{structz__stream__s_a89eb750ade7f4f0b56bfdadf13344982}{zfree}};   \textcolor{comment}{/* used to free the internal state */}}
+\DoxyCodeLine{97     \mbox{\hyperlink{zconf_8h_a04c731495379021454c8e61439dc88ec}{voidpf}}     \mbox{\hyperlink{structz__stream__s_ab72467f908d2ce65d5b42ee6556ef8bb}{opaque}};  \textcolor{comment}{/* private data object passed to zalloc and zfree */}}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99     \textcolor{keywordtype}{int}     \mbox{\hyperlink{structz__stream__s_a9d8f63877d7639a8bca60f9fc3704fc4}{data\_type}};  \textcolor{comment}{/* best guess about the data type: binary or text */}}
+\DoxyCodeLine{100     \mbox{\hyperlink{zconf_8h_acd2a5701a3aecf6700d2c66c606ecb40}{uLong}}   \mbox{\hyperlink{structz__stream__s_ade2217fe31e671be1257731883201223}{adler}};      \textcolor{comment}{/* adler32 value of the uncompressed data */}}
+\DoxyCodeLine{101     \mbox{\hyperlink{zconf_8h_acd2a5701a3aecf6700d2c66c606ecb40}{uLong}}   \mbox{\hyperlink{structz__stream__s_add73791dd19b49c9c68f3f3d328c37db}{reserved}};   \textcolor{comment}{/* reserved for future use */}}
+\DoxyCodeLine{102 \} \mbox{\hyperlink{zlib_8h_aa4751fbf6d882976fb300ea9815f5010}{z\_stream}};}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104 \textcolor{keyword}{typedef} \mbox{\hyperlink{structz__stream__s}{z\_stream}} \mbox{\hyperlink{zconf_8h_aef060b3456fdcc093a7210a762d5f2ed}{FAR}} *\mbox{\hyperlink{zlib_8h_a6ede25c84d3c9f8632305866acffb1d6}{z\_streamp}};}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{106 \textcolor{comment}{/*}}
+\DoxyCodeLine{107 \textcolor{comment}{     gzip header information passed to and from zlib routines.  See RFC 1952}}
+\DoxyCodeLine{108 \textcolor{comment}{  for more details on the meanings of these fields.}}
+\DoxyCodeLine{109 \textcolor{comment}{*/}}
+\DoxyCodeLine{110 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structgz__header__s}{gz\_header\_s}} \{}
+\DoxyCodeLine{111     \textcolor{keywordtype}{int}     \mbox{\hyperlink{structgz__header__s_af94c3fadfed835a501bc1babc4b894f9}{text}};       \textcolor{comment}{/* true if compressed data believed to be text */}}
+\DoxyCodeLine{112     \mbox{\hyperlink{zconf_8h_acd2a5701a3aecf6700d2c66c606ecb40}{uLong}}   \mbox{\hyperlink{structgz__header__s_a5f00bb6f9689c1abf7a54dad449ce9d3}{time}};       \textcolor{comment}{/* modification time */}}
+\DoxyCodeLine{113     \textcolor{keywordtype}{int}     \mbox{\hyperlink{structgz__header__s_a40e35dc1a967c6537c6012cf5416210a}{xflags}};     \textcolor{comment}{/* extra flags (not used when writing a gzip file) */}}
+\DoxyCodeLine{114     \textcolor{keywordtype}{int}     \mbox{\hyperlink{structgz__header__s_a2708d3180d30b0563e3c2c965865cd4f}{os}};         \textcolor{comment}{/* operating system */}}
+\DoxyCodeLine{115     \mbox{\hyperlink{zconf_8h_aeb722a888064be47e12d05f692e0f407}{Bytef}}   *\mbox{\hyperlink{structgz__header__s_a397959afc459da7e296c676a3d4c1915}{extra}};     \textcolor{comment}{/* pointer to extra field or Z\_NULL if none */}}
+\DoxyCodeLine{116     \mbox{\hyperlink{zconf_8h_a87d141052bcd5ec8a80812a565c70369}{uInt}}    \mbox{\hyperlink{structgz__header__s_a271798915d64ae1f0d25a3a814ca0aa3}{extra\_len}};  \textcolor{comment}{/* extra field length (valid if extra != Z\_NULL) */}}
+\DoxyCodeLine{117     \mbox{\hyperlink{zconf_8h_a87d141052bcd5ec8a80812a565c70369}{uInt}}    \mbox{\hyperlink{structgz__header__s_ada4b174bf7ec0442b1091011c7342ca1}{extra\_max}};  \textcolor{comment}{/* space at extra (only when reading header) */}}
+\DoxyCodeLine{118     \mbox{\hyperlink{zconf_8h_aeb722a888064be47e12d05f692e0f407}{Bytef}}   *\mbox{\hyperlink{structgz__header__s_a60ae5eee2882d1c25b3bb328972f0149}{name}};      \textcolor{comment}{/* pointer to zero-\/terminated file name or Z\_NULL */}}
+\DoxyCodeLine{119     \mbox{\hyperlink{zconf_8h_a87d141052bcd5ec8a80812a565c70369}{uInt}}    \mbox{\hyperlink{structgz__header__s_af503d267de15a461b81dcbbfb0d628e5}{name\_max}};   \textcolor{comment}{/* space at name (only when reading header) */}}
+\DoxyCodeLine{120     \mbox{\hyperlink{zconf_8h_aeb722a888064be47e12d05f692e0f407}{Bytef}}   *\mbox{\hyperlink{structgz__header__s_a1d4fd0807e838ce4bfde54aa021e18e9}{comment}};   \textcolor{comment}{/* pointer to zero-\/terminated comment or Z\_NULL */}}
+\DoxyCodeLine{121     \mbox{\hyperlink{zconf_8h_a87d141052bcd5ec8a80812a565c70369}{uInt}}    \mbox{\hyperlink{structgz__header__s_aa0529f45e5c08b3009cfc2a61a86aea0}{comm\_max}};   \textcolor{comment}{/* space at comment (only when reading header) */}}
+\DoxyCodeLine{122     \textcolor{keywordtype}{int}     \mbox{\hyperlink{structgz__header__s_a29fa8de3acff8d8c7bad61dc924d8564}{hcrc}};       \textcolor{comment}{/* true if there was or will be a header crc */}}
+\DoxyCodeLine{123     \textcolor{keywordtype}{int}     \mbox{\hyperlink{structgz__header__s_ab8fd11f59b76a7d031e24bede8679d9d}{done}};       \textcolor{comment}{/* true when done reading gzip header (not used}}
+\DoxyCodeLine{124 \textcolor{comment}{                           when writing a gzip file) */}}
+\DoxyCodeLine{125 \} \mbox{\hyperlink{zlib_8h_aae85b4a4f7931ee1f67f54c459007421}{gz\_header}};}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{127 \textcolor{keyword}{typedef} \mbox{\hyperlink{structgz__header__s}{gz\_header}} \mbox{\hyperlink{zconf_8h_aef060b3456fdcc093a7210a762d5f2ed}{FAR}} *\mbox{\hyperlink{zlib_8h_a40e9dcc294796d99b25e98fb06477fc8}{gz\_headerp}};}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129 \textcolor{comment}{/*}}
+\DoxyCodeLine{130 \textcolor{comment}{   The application must update next\_in and avail\_in when avail\_in has}}
+\DoxyCodeLine{131 \textcolor{comment}{   dropped to zero. It must update next\_out and avail\_out when avail\_out}}
+\DoxyCodeLine{132 \textcolor{comment}{   has dropped to zero. The application must initialize zalloc, zfree and}}
+\DoxyCodeLine{133 \textcolor{comment}{   opaque before calling the init function. All other fields are set by the}}
+\DoxyCodeLine{134 \textcolor{comment}{   compression library and must not be updated by the application.}}
+\DoxyCodeLine{135 \textcolor{comment}{}}
+\DoxyCodeLine{136 \textcolor{comment}{   The opaque value provided by the application will be passed as the first}}
+\DoxyCodeLine{137 \textcolor{comment}{   parameter for calls of zalloc and zfree. This can be useful for custom}}
+\DoxyCodeLine{138 \textcolor{comment}{   memory management. The compression library attaches no meaning to the}}
+\DoxyCodeLine{139 \textcolor{comment}{   opaque value.}}
+\DoxyCodeLine{140 \textcolor{comment}{}}
+\DoxyCodeLine{141 \textcolor{comment}{   zalloc must return Z\_NULL if there is not enough memory for the object.}}
+\DoxyCodeLine{142 \textcolor{comment}{   If zlib is used in a multi-\/threaded application, zalloc and zfree must be}}
+\DoxyCodeLine{143 \textcolor{comment}{   thread safe.}}
+\DoxyCodeLine{144 \textcolor{comment}{}}
+\DoxyCodeLine{145 \textcolor{comment}{   On 16-\/bit systems, the functions zalloc and zfree must be able to allocate}}
+\DoxyCodeLine{146 \textcolor{comment}{   exactly 65536 bytes, but will not be required to allocate more than this}}
+\DoxyCodeLine{147 \textcolor{comment}{   if the symbol MAXSEG\_64K is defined (see zconf.h). WARNING: On MSDOS,}}
+\DoxyCodeLine{148 \textcolor{comment}{   pointers returned by zalloc for objects of exactly 65536 bytes *must*}}
+\DoxyCodeLine{149 \textcolor{comment}{   have their offset normalized to zero. The default allocation function}}
+\DoxyCodeLine{150 \textcolor{comment}{   provided by this library ensures this (see zutil.c). To reduce memory}}
+\DoxyCodeLine{151 \textcolor{comment}{   requirements and avoid any allocation of 64K objects, at the expense of}}
+\DoxyCodeLine{152 \textcolor{comment}{   compression ratio, compile the library with -\/DMAX\_WBITS=14 (see zconf.h).}}
+\DoxyCodeLine{153 \textcolor{comment}{}}
+\DoxyCodeLine{154 \textcolor{comment}{   The fields total\_in and total\_out can be used for statistics or}}
+\DoxyCodeLine{155 \textcolor{comment}{   progress reports. After compression, total\_in holds the total size of}}
+\DoxyCodeLine{156 \textcolor{comment}{   the uncompressed data and may be saved for use in the decompressor}}
+\DoxyCodeLine{157 \textcolor{comment}{   (particularly if the decompressor wants to decompress everything in}}
+\DoxyCodeLine{158 \textcolor{comment}{   a single step).}}
+\DoxyCodeLine{159 \textcolor{comment}{*/}}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161                         \textcolor{comment}{/* constants */}}
+\DoxyCodeLine{162 }
+\DoxyCodeLine{163 \textcolor{preprocessor}{\#define Z\_NO\_FLUSH      0}}
+\DoxyCodeLine{164 \textcolor{preprocessor}{\#define Z\_PARTIAL\_FLUSH 1 }\textcolor{comment}{/* will be removed, use Z\_SYNC\_FLUSH instead */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{165 \textcolor{preprocessor}{\#define Z\_SYNC\_FLUSH    2}}
+\DoxyCodeLine{166 \textcolor{preprocessor}{\#define Z\_FULL\_FLUSH    3}}
+\DoxyCodeLine{167 \textcolor{preprocessor}{\#define Z\_FINISH        4}}
+\DoxyCodeLine{168 \textcolor{preprocessor}{\#define Z\_BLOCK         5}}
+\DoxyCodeLine{169 \textcolor{comment}{/* Allowed flush values; see deflate() and inflate() below for details */}}
+\DoxyCodeLine{170 }
+\DoxyCodeLine{171 \textcolor{preprocessor}{\#define Z\_OK            0}}
+\DoxyCodeLine{172 \textcolor{preprocessor}{\#define Z\_STREAM\_END    1}}
+\DoxyCodeLine{173 \textcolor{preprocessor}{\#define Z\_NEED\_DICT     2}}
+\DoxyCodeLine{174 \textcolor{preprocessor}{\#define Z\_ERRNO        (-\/1)}}
+\DoxyCodeLine{175 \textcolor{preprocessor}{\#define Z\_STREAM\_ERROR (-\/2)}}
+\DoxyCodeLine{176 \textcolor{preprocessor}{\#define Z\_DATA\_ERROR   (-\/3)}}
+\DoxyCodeLine{177 \textcolor{preprocessor}{\#define Z\_MEM\_ERROR    (-\/4)}}
+\DoxyCodeLine{178 \textcolor{preprocessor}{\#define Z\_BUF\_ERROR    (-\/5)}}
+\DoxyCodeLine{179 \textcolor{preprocessor}{\#define Z\_VERSION\_ERROR (-\/6)}}
+\DoxyCodeLine{180 \textcolor{comment}{/* Return codes for the compression/decompression functions. Negative}}
+\DoxyCodeLine{181 \textcolor{comment}{ * values are errors, positive values are used for special but normal events.}}
+\DoxyCodeLine{182 \textcolor{comment}{ */}}
+\DoxyCodeLine{183 }
+\DoxyCodeLine{184 \textcolor{preprocessor}{\#define Z\_NO\_COMPRESSION         0}}
+\DoxyCodeLine{185 \textcolor{preprocessor}{\#define Z\_BEST\_SPEED             1}}
+\DoxyCodeLine{186 \textcolor{preprocessor}{\#define Z\_BEST\_COMPRESSION       9}}
+\DoxyCodeLine{187 \textcolor{preprocessor}{\#define Z\_DEFAULT\_COMPRESSION  (-\/1)}}
+\DoxyCodeLine{188 \textcolor{comment}{/* compression levels */}}
+\DoxyCodeLine{189 }
+\DoxyCodeLine{190 \textcolor{preprocessor}{\#define Z\_FILTERED            1}}
+\DoxyCodeLine{191 \textcolor{preprocessor}{\#define Z\_HUFFMAN\_ONLY        2}}
+\DoxyCodeLine{192 \textcolor{preprocessor}{\#define Z\_RLE                 3}}
+\DoxyCodeLine{193 \textcolor{preprocessor}{\#define Z\_FIXED               4}}
+\DoxyCodeLine{194 \textcolor{preprocessor}{\#define Z\_DEFAULT\_STRATEGY    0}}
+\DoxyCodeLine{195 \textcolor{comment}{/* compression strategy; see deflateInit2() below for details */}}
+\DoxyCodeLine{196 }
+\DoxyCodeLine{197 \textcolor{preprocessor}{\#define Z\_BINARY   0}}
+\DoxyCodeLine{198 \textcolor{preprocessor}{\#define Z\_TEXT     1}}
+\DoxyCodeLine{199 \textcolor{preprocessor}{\#define Z\_ASCII    Z\_TEXT   }\textcolor{comment}{/* for compatibility with 1.2.2 and earlier */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{200 \textcolor{preprocessor}{\#define Z\_UNKNOWN  2}}
+\DoxyCodeLine{201 \textcolor{comment}{/* Possible values of the data\_type field (though see inflate()) */}}
+\DoxyCodeLine{202 }
+\DoxyCodeLine{203 \textcolor{preprocessor}{\#define Z\_DEFLATED   8}}
+\DoxyCodeLine{204 \textcolor{comment}{/* The deflate compression method (the only one supported in this version) */}}
+\DoxyCodeLine{205 }
+\DoxyCodeLine{206 \textcolor{preprocessor}{\#define Z\_NULL  0  }\textcolor{comment}{/* for initializing zalloc, zfree, opaque */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{207 }
+\DoxyCodeLine{208 \textcolor{preprocessor}{\#define zlib\_version zlibVersion()}}
+\DoxyCodeLine{209 \textcolor{comment}{/* for compatibility with versions < 1.0.2 */}}
+\DoxyCodeLine{210 }
+\DoxyCodeLine{211                         \textcolor{comment}{/* basic functions */}}
+\DoxyCodeLine{212 }
+\DoxyCodeLine{213 \textcolor{comment}{//ZEXTERN const char * ZEXPORT zlibVersion OF((void));}}
+\DoxyCodeLine{214 \textcolor{comment}{/* The application can compare zlibVersion and ZLIB\_VERSION for consistency.}}
+\DoxyCodeLine{215 \textcolor{comment}{   If the first character differs, the library code actually used is}}
+\DoxyCodeLine{216 \textcolor{comment}{   not compatible with the zlib.h header file used by the application.}}
+\DoxyCodeLine{217 \textcolor{comment}{   This check is automatically made by deflateInit and inflateInit.}}
+\DoxyCodeLine{218 \textcolor{comment}{ */}}
+\DoxyCodeLine{219 }
+\DoxyCodeLine{220 \textcolor{comment}{/*}}
+\DoxyCodeLine{221 \textcolor{comment}{ZEXTERN int ZEXPORT deflateInit OF((z\_streamp strm, int level));}}
+\DoxyCodeLine{222 \textcolor{comment}{}}
+\DoxyCodeLine{223 \textcolor{comment}{     Initializes the internal stream state for compression. The fields}}
+\DoxyCodeLine{224 \textcolor{comment}{   zalloc, zfree and opaque must be initialized before by the caller.}}
+\DoxyCodeLine{225 \textcolor{comment}{   If zalloc and zfree are set to Z\_NULL, deflateInit updates them to}}
+\DoxyCodeLine{226 \textcolor{comment}{   use default allocation functions.}}
+\DoxyCodeLine{227 \textcolor{comment}{}}
+\DoxyCodeLine{228 \textcolor{comment}{     The compression level must be Z\_DEFAULT\_COMPRESSION, or between 0 and 9:}}
+\DoxyCodeLine{229 \textcolor{comment}{   1 gives best speed, 9 gives best compression, 0 gives no compression at}}
+\DoxyCodeLine{230 \textcolor{comment}{   all (the input data is simply copied a block at a time).}}
+\DoxyCodeLine{231 \textcolor{comment}{   Z\_DEFAULT\_COMPRESSION requests a default compromise between speed and}}
+\DoxyCodeLine{232 \textcolor{comment}{   compression (currently equivalent to level 6).}}
+\DoxyCodeLine{233 \textcolor{comment}{}}
+\DoxyCodeLine{234 \textcolor{comment}{     deflateInit returns Z\_OK if success, Z\_MEM\_ERROR if there was not}}
+\DoxyCodeLine{235 \textcolor{comment}{   enough memory, Z\_STREAM\_ERROR if level is not a valid compression level,}}
+\DoxyCodeLine{236 \textcolor{comment}{   Z\_VERSION\_ERROR if the zlib library version (zlib\_version) is incompatible}}
+\DoxyCodeLine{237 \textcolor{comment}{   with the version assumed by the caller (ZLIB\_VERSION).}}
+\DoxyCodeLine{238 \textcolor{comment}{   msg is set to null if there is no error message.  deflateInit does not}}
+\DoxyCodeLine{239 \textcolor{comment}{   perform any compression: this will be done by deflate().}}
+\DoxyCodeLine{240 \textcolor{comment}{*/}}
+\DoxyCodeLine{241 }
+\DoxyCodeLine{242 }
+\DoxyCodeLine{243 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} \mbox{\hyperlink{deflate_8c_aedba3a94d6e827d61b660443ae5b9f09}{deflate}} \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_a6ede25c84d3c9f8632305866acffb1d6}{z\_streamp}} strm, \textcolor{keywordtype}{int} flush));}
+\DoxyCodeLine{244 \textcolor{comment}{/*}}
+\DoxyCodeLine{245 \textcolor{comment}{    deflate compresses as much data as possible, and stops when the input}}
+\DoxyCodeLine{246 \textcolor{comment}{  buffer becomes empty or the output buffer becomes full. It may introduce some}}
+\DoxyCodeLine{247 \textcolor{comment}{  output latency (reading input without producing any output) except when}}
+\DoxyCodeLine{248 \textcolor{comment}{  forced to flush.}}
+\DoxyCodeLine{249 \textcolor{comment}{}}
+\DoxyCodeLine{250 \textcolor{comment}{    The detailed semantics are as follows. deflate performs one or both of the}}
+\DoxyCodeLine{251 \textcolor{comment}{  following actions:}}
+\DoxyCodeLine{252 \textcolor{comment}{}}
+\DoxyCodeLine{253 \textcolor{comment}{  -\/ Compress more input starting at next\_in and update next\_in and avail\_in}}
+\DoxyCodeLine{254 \textcolor{comment}{    accordingly. If not all input can be processed (because there is not}}
+\DoxyCodeLine{255 \textcolor{comment}{    enough room in the output buffer), next\_in and avail\_in are updated and}}
+\DoxyCodeLine{256 \textcolor{comment}{    processing will resume at this point for the next call of deflate().}}
+\DoxyCodeLine{257 \textcolor{comment}{}}
+\DoxyCodeLine{258 \textcolor{comment}{  -\/ Provide more output starting at next\_out and update next\_out and avail\_out}}
+\DoxyCodeLine{259 \textcolor{comment}{    accordingly. This action is forced if the parameter flush is non zero.}}
+\DoxyCodeLine{260 \textcolor{comment}{    Forcing flush frequently degrades the compression ratio, so this parameter}}
+\DoxyCodeLine{261 \textcolor{comment}{    should be set only when necessary (in interactive applications).}}
+\DoxyCodeLine{262 \textcolor{comment}{    Some output may be provided even if flush is not set.}}
+\DoxyCodeLine{263 \textcolor{comment}{}}
+\DoxyCodeLine{264 \textcolor{comment}{  Before the call of deflate(), the application should ensure that at least}}
+\DoxyCodeLine{265 \textcolor{comment}{  one of the actions is possible, by providing more input and/or consuming}}
+\DoxyCodeLine{266 \textcolor{comment}{  more output, and updating avail\_in or avail\_out accordingly; avail\_out}}
+\DoxyCodeLine{267 \textcolor{comment}{  should never be zero before the call. The application can consume the}}
+\DoxyCodeLine{268 \textcolor{comment}{  compressed output when it wants, for example when the output buffer is full}}
+\DoxyCodeLine{269 \textcolor{comment}{  (avail\_out == 0), or after each call of deflate(). If deflate returns Z\_OK}}
+\DoxyCodeLine{270 \textcolor{comment}{  and with zero avail\_out, it must be called again after making room in the}}
+\DoxyCodeLine{271 \textcolor{comment}{  output buffer because there might be more output pending.}}
+\DoxyCodeLine{272 \textcolor{comment}{}}
+\DoxyCodeLine{273 \textcolor{comment}{    Normally the parameter flush is set to Z\_NO\_FLUSH, which allows deflate to}}
+\DoxyCodeLine{274 \textcolor{comment}{  decide how much data to accumualte before producing output, in order to}}
+\DoxyCodeLine{275 \textcolor{comment}{  maximize compression.}}
+\DoxyCodeLine{276 \textcolor{comment}{}}
+\DoxyCodeLine{277 \textcolor{comment}{    If the parameter flush is set to Z\_SYNC\_FLUSH, all pending output is}}
+\DoxyCodeLine{278 \textcolor{comment}{  flushed to the output buffer and the output is aligned on a byte boundary, so}}
+\DoxyCodeLine{279 \textcolor{comment}{  that the decompressor can get all input data available so far. (In particular}}
+\DoxyCodeLine{280 \textcolor{comment}{  avail\_in is zero after the call if enough output space has been provided}}
+\DoxyCodeLine{281 \textcolor{comment}{  before the call.)  Flushing may degrade compression for some compression}}
+\DoxyCodeLine{282 \textcolor{comment}{  algorithms and so it should be used only when necessary.}}
+\DoxyCodeLine{283 \textcolor{comment}{}}
+\DoxyCodeLine{284 \textcolor{comment}{    If flush is set to Z\_FULL\_FLUSH, all output is flushed as with}}
+\DoxyCodeLine{285 \textcolor{comment}{  Z\_SYNC\_FLUSH, and the compression state is reset so that decompression can}}
+\DoxyCodeLine{286 \textcolor{comment}{  restart from this point if previous compressed data has been damaged or if}}
+\DoxyCodeLine{287 \textcolor{comment}{  random access is desired. Using Z\_FULL\_FLUSH too often can seriously degrade}}
+\DoxyCodeLine{288 \textcolor{comment}{  compression.}}
+\DoxyCodeLine{289 \textcolor{comment}{}}
+\DoxyCodeLine{290 \textcolor{comment}{    If deflate returns with avail\_out == 0, this function must be called again}}
+\DoxyCodeLine{291 \textcolor{comment}{  with the same value of the flush parameter and more output space (updated}}
+\DoxyCodeLine{292 \textcolor{comment}{  avail\_out), until the flush is complete (deflate returns with non-\/zero}}
+\DoxyCodeLine{293 \textcolor{comment}{  avail\_out). In the case of a Z\_FULL\_FLUSH or Z\_SYNC\_FLUSH, make sure that}}
+\DoxyCodeLine{294 \textcolor{comment}{  avail\_out is greater than six to avoid repeated flush markers due to}}
+\DoxyCodeLine{295 \textcolor{comment}{  avail\_out == 0 on return.}}
+\DoxyCodeLine{296 \textcolor{comment}{}}
+\DoxyCodeLine{297 \textcolor{comment}{    If the parameter flush is set to Z\_FINISH, pending input is processed,}}
+\DoxyCodeLine{298 \textcolor{comment}{  pending output is flushed and deflate returns with Z\_STREAM\_END if there}}
+\DoxyCodeLine{299 \textcolor{comment}{  was enough output space; if deflate returns with Z\_OK, this function must be}}
+\DoxyCodeLine{300 \textcolor{comment}{  called again with Z\_FINISH and more output space (updated avail\_out) but no}}
+\DoxyCodeLine{301 \textcolor{comment}{  more input data, until it returns with Z\_STREAM\_END or an error. After}}
+\DoxyCodeLine{302 \textcolor{comment}{  deflate has returned Z\_STREAM\_END, the only possible operations on the}}
+\DoxyCodeLine{303 \textcolor{comment}{  stream are deflateReset or deflateEnd.}}
+\DoxyCodeLine{304 \textcolor{comment}{}}
+\DoxyCodeLine{305 \textcolor{comment}{    Z\_FINISH can be used immediately after deflateInit if all the compression}}
+\DoxyCodeLine{306 \textcolor{comment}{  is to be done in a single step. In this case, avail\_out must be at least}}
+\DoxyCodeLine{307 \textcolor{comment}{  the value returned by deflateBound (see below). If deflate does not return}}
+\DoxyCodeLine{308 \textcolor{comment}{  Z\_STREAM\_END, then it must be called again as described above.}}
+\DoxyCodeLine{309 \textcolor{comment}{}}
+\DoxyCodeLine{310 \textcolor{comment}{    deflate() sets strm-\/>adler to the adler32 checksum of all input read}}
+\DoxyCodeLine{311 \textcolor{comment}{  so far (that is, total\_in bytes).}}
+\DoxyCodeLine{312 \textcolor{comment}{}}
+\DoxyCodeLine{313 \textcolor{comment}{    deflate() may update strm-\/>data\_type if it can make a good guess about}}
+\DoxyCodeLine{314 \textcolor{comment}{  the input data type (Z\_BINARY or Z\_TEXT). In doubt, the data is considered}}
+\DoxyCodeLine{315 \textcolor{comment}{  binary. This field is only for information purposes and does not affect}}
+\DoxyCodeLine{316 \textcolor{comment}{  the compression algorithm in any manner.}}
+\DoxyCodeLine{317 \textcolor{comment}{}}
+\DoxyCodeLine{318 \textcolor{comment}{    deflate() returns Z\_OK if some progress has been made (more input}}
+\DoxyCodeLine{319 \textcolor{comment}{  processed or more output produced), Z\_STREAM\_END if all input has been}}
+\DoxyCodeLine{320 \textcolor{comment}{  consumed and all output has been produced (only when flush is set to}}
+\DoxyCodeLine{321 \textcolor{comment}{  Z\_FINISH), Z\_STREAM\_ERROR if the stream state was inconsistent (for example}}
+\DoxyCodeLine{322 \textcolor{comment}{  if next\_in or next\_out was NULL), Z\_BUF\_ERROR if no progress is possible}}
+\DoxyCodeLine{323 \textcolor{comment}{  (for example avail\_in or avail\_out was zero). Note that Z\_BUF\_ERROR is not}}
+\DoxyCodeLine{324 \textcolor{comment}{  fatal, and deflate() can be called again with more input and more output}}
+\DoxyCodeLine{325 \textcolor{comment}{  space to continue compressing.}}
+\DoxyCodeLine{326 \textcolor{comment}{*/}}
+\DoxyCodeLine{327 }
+\DoxyCodeLine{328 }
+\DoxyCodeLine{329 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} \mbox{\hyperlink{deflate_8c_ada68769789b1d84de7e708d6e848a075}{deflateEnd}} \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_a6ede25c84d3c9f8632305866acffb1d6}{z\_streamp}} strm));}
+\DoxyCodeLine{330 \textcolor{comment}{/*}}
+\DoxyCodeLine{331 \textcolor{comment}{     All dynamically allocated data structures for this stream are freed.}}
+\DoxyCodeLine{332 \textcolor{comment}{   This function discards any unprocessed input and does not flush any}}
+\DoxyCodeLine{333 \textcolor{comment}{   pending output.}}
+\DoxyCodeLine{334 \textcolor{comment}{}}
+\DoxyCodeLine{335 \textcolor{comment}{     deflateEnd returns Z\_OK if success, Z\_STREAM\_ERROR if the}}
+\DoxyCodeLine{336 \textcolor{comment}{   stream state was inconsistent, Z\_DATA\_ERROR if the stream was freed}}
+\DoxyCodeLine{337 \textcolor{comment}{   prematurely (some input or output was discarded). In the error case,}}
+\DoxyCodeLine{338 \textcolor{comment}{   msg may be set but then points to a static string (which must not be}}
+\DoxyCodeLine{339 \textcolor{comment}{   deallocated).}}
+\DoxyCodeLine{340 \textcolor{comment}{*/}}
+\DoxyCodeLine{341 }
+\DoxyCodeLine{342 }
+\DoxyCodeLine{343 \textcolor{comment}{/*}}
+\DoxyCodeLine{344 \textcolor{comment}{ZEXTERN int ZEXPORT inflateInit OF((z\_streamp strm));}}
+\DoxyCodeLine{345 \textcolor{comment}{}}
+\DoxyCodeLine{346 \textcolor{comment}{     Initializes the internal stream state for decompression. The fields}}
+\DoxyCodeLine{347 \textcolor{comment}{   next\_in, avail\_in, zalloc, zfree and opaque must be initialized before by}}
+\DoxyCodeLine{348 \textcolor{comment}{   the caller. If next\_in is not Z\_NULL and avail\_in is large enough (the exact}}
+\DoxyCodeLine{349 \textcolor{comment}{   value depends on the compression method), inflateInit determines the}}
+\DoxyCodeLine{350 \textcolor{comment}{   compression method from the zlib header and allocates all data structures}}
+\DoxyCodeLine{351 \textcolor{comment}{   accordingly; otherwise the allocation will be deferred to the first call of}}
+\DoxyCodeLine{352 \textcolor{comment}{   inflate.  If zalloc and zfree are set to Z\_NULL, inflateInit updates them to}}
+\DoxyCodeLine{353 \textcolor{comment}{   use default allocation functions.}}
+\DoxyCodeLine{354 \textcolor{comment}{}}
+\DoxyCodeLine{355 \textcolor{comment}{     inflateInit returns Z\_OK if success, Z\_MEM\_ERROR if there was not enough}}
+\DoxyCodeLine{356 \textcolor{comment}{   memory, Z\_VERSION\_ERROR if the zlib library version is incompatible with the}}
+\DoxyCodeLine{357 \textcolor{comment}{   version assumed by the caller.  msg is set to null if there is no error}}
+\DoxyCodeLine{358 \textcolor{comment}{   message. inflateInit does not perform any decompression apart from reading}}
+\DoxyCodeLine{359 \textcolor{comment}{   the zlib header if present: this will be done by inflate().  (So next\_in and}}
+\DoxyCodeLine{360 \textcolor{comment}{   avail\_in may be modified, but next\_out and avail\_out are unchanged.)}}
+\DoxyCodeLine{361 \textcolor{comment}{*/}}
+\DoxyCodeLine{362 }
+\DoxyCodeLine{363 }
+\DoxyCodeLine{364 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} \mbox{\hyperlink{inflate_8c_a9a49cf8b6ce882dea33505b0ac84ecef}{inflate}} \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_a6ede25c84d3c9f8632305866acffb1d6}{z\_streamp}} strm, \textcolor{keywordtype}{int} flush));}
+\DoxyCodeLine{365 \textcolor{comment}{/*}}
+\DoxyCodeLine{366 \textcolor{comment}{    inflate decompresses as much data as possible, and stops when the input}}
+\DoxyCodeLine{367 \textcolor{comment}{  buffer becomes empty or the output buffer becomes full. It may introduce}}
+\DoxyCodeLine{368 \textcolor{comment}{  some output latency (reading input without producing any output) except when}}
+\DoxyCodeLine{369 \textcolor{comment}{  forced to flush.}}
+\DoxyCodeLine{370 \textcolor{comment}{}}
+\DoxyCodeLine{371 \textcolor{comment}{  The detailed semantics are as follows. inflate performs one or both of the}}
+\DoxyCodeLine{372 \textcolor{comment}{  following actions:}}
+\DoxyCodeLine{373 \textcolor{comment}{}}
+\DoxyCodeLine{374 \textcolor{comment}{  -\/ Decompress more input starting at next\_in and update next\_in and avail\_in}}
+\DoxyCodeLine{375 \textcolor{comment}{    accordingly. If not all input can be processed (because there is not}}
+\DoxyCodeLine{376 \textcolor{comment}{    enough room in the output buffer), next\_in is updated and processing}}
+\DoxyCodeLine{377 \textcolor{comment}{    will resume at this point for the next call of inflate().}}
+\DoxyCodeLine{378 \textcolor{comment}{}}
+\DoxyCodeLine{379 \textcolor{comment}{  -\/ Provide more output starting at next\_out and update next\_out and avail\_out}}
+\DoxyCodeLine{380 \textcolor{comment}{    accordingly.  inflate() provides as much output as possible, until there}}
+\DoxyCodeLine{381 \textcolor{comment}{    is no more input data or no more space in the output buffer (see below}}
+\DoxyCodeLine{382 \textcolor{comment}{    about the flush parameter).}}
+\DoxyCodeLine{383 \textcolor{comment}{}}
+\DoxyCodeLine{384 \textcolor{comment}{  Before the call of inflate(), the application should ensure that at least}}
+\DoxyCodeLine{385 \textcolor{comment}{  one of the actions is possible, by providing more input and/or consuming}}
+\DoxyCodeLine{386 \textcolor{comment}{  more output, and updating the next\_* and avail\_* values accordingly.}}
+\DoxyCodeLine{387 \textcolor{comment}{  The application can consume the uncompressed output when it wants, for}}
+\DoxyCodeLine{388 \textcolor{comment}{  example when the output buffer is full (avail\_out == 0), or after each}}
+\DoxyCodeLine{389 \textcolor{comment}{  call of inflate(). If inflate returns Z\_OK and with zero avail\_out, it}}
+\DoxyCodeLine{390 \textcolor{comment}{  must be called again after making room in the output buffer because there}}
+\DoxyCodeLine{391 \textcolor{comment}{  might be more output pending.}}
+\DoxyCodeLine{392 \textcolor{comment}{}}
+\DoxyCodeLine{393 \textcolor{comment}{    The flush parameter of inflate() can be Z\_NO\_FLUSH, Z\_SYNC\_FLUSH,}}
+\DoxyCodeLine{394 \textcolor{comment}{  Z\_FINISH, or Z\_BLOCK. Z\_SYNC\_FLUSH requests that inflate() flush as much}}
+\DoxyCodeLine{395 \textcolor{comment}{  output as possible to the output buffer. Z\_BLOCK requests that inflate() stop}}
+\DoxyCodeLine{396 \textcolor{comment}{  if and when it gets to the next deflate block boundary. When decoding the}}
+\DoxyCodeLine{397 \textcolor{comment}{  zlib or gzip format, this will cause inflate() to return immediately after}}
+\DoxyCodeLine{398 \textcolor{comment}{  the header and before the first block. When doing a raw inflate, inflate()}}
+\DoxyCodeLine{399 \textcolor{comment}{  will go ahead and process the first block, and will return when it gets to}}
+\DoxyCodeLine{400 \textcolor{comment}{  the end of that block, or when it runs out of data.}}
+\DoxyCodeLine{401 \textcolor{comment}{}}
+\DoxyCodeLine{402 \textcolor{comment}{    The Z\_BLOCK option assists in appending to or combining deflate streams.}}
+\DoxyCodeLine{403 \textcolor{comment}{  Also to assist in this, on return inflate() will set strm-\/>data\_type to the}}
+\DoxyCodeLine{404 \textcolor{comment}{  number of unused bits in the last byte taken from strm-\/>next\_in, plus 64}}
+\DoxyCodeLine{405 \textcolor{comment}{  if inflate() is currently decoding the last block in the deflate stream,}}
+\DoxyCodeLine{406 \textcolor{comment}{  plus 128 if inflate() returned immediately after decoding an end-\/of-\/block}}
+\DoxyCodeLine{407 \textcolor{comment}{  code or decoding the complete header up to just before the first byte of the}}
+\DoxyCodeLine{408 \textcolor{comment}{  deflate stream. The end-\/of-\/block will not be indicated until all of the}}
+\DoxyCodeLine{409 \textcolor{comment}{  uncompressed data from that block has been written to strm-\/>next\_out.  The}}
+\DoxyCodeLine{410 \textcolor{comment}{  number of unused bits may in general be greater than seven, except when}}
+\DoxyCodeLine{411 \textcolor{comment}{  bit 7 of data\_type is set, in which case the number of unused bits will be}}
+\DoxyCodeLine{412 \textcolor{comment}{  less than eight.}}
+\DoxyCodeLine{413 \textcolor{comment}{}}
+\DoxyCodeLine{414 \textcolor{comment}{    inflate() should normally be called until it returns Z\_STREAM\_END or an}}
+\DoxyCodeLine{415 \textcolor{comment}{  error. However if all decompression is to be performed in a single step}}
+\DoxyCodeLine{416 \textcolor{comment}{  (a single call of inflate), the parameter flush should be set to}}
+\DoxyCodeLine{417 \textcolor{comment}{  Z\_FINISH. In this case all pending input is processed and all pending}}
+\DoxyCodeLine{418 \textcolor{comment}{  output is flushed; avail\_out must be large enough to hold all the}}
+\DoxyCodeLine{419 \textcolor{comment}{  uncompressed data. (The size of the uncompressed data may have been saved}}
+\DoxyCodeLine{420 \textcolor{comment}{  by the compressor for this purpose.) The next operation on this stream must}}
+\DoxyCodeLine{421 \textcolor{comment}{  be inflateEnd to deallocate the decompression state. The use of Z\_FINISH}}
+\DoxyCodeLine{422 \textcolor{comment}{  is never required, but can be used to inform inflate that a faster approach}}
+\DoxyCodeLine{423 \textcolor{comment}{  may be used for the single inflate() call.}}
+\DoxyCodeLine{424 \textcolor{comment}{}}
+\DoxyCodeLine{425 \textcolor{comment}{     In this implementation, inflate() always flushes as much output as}}
+\DoxyCodeLine{426 \textcolor{comment}{  possible to the output buffer, and always uses the faster approach on the}}
+\DoxyCodeLine{427 \textcolor{comment}{  first call. So the only effect of the flush parameter in this implementation}}
+\DoxyCodeLine{428 \textcolor{comment}{  is on the return value of inflate(), as noted below, or when it returns early}}
+\DoxyCodeLine{429 \textcolor{comment}{  because Z\_BLOCK is used.}}
+\DoxyCodeLine{430 \textcolor{comment}{}}
+\DoxyCodeLine{431 \textcolor{comment}{     If a preset dictionary is needed after this call (see inflateSetDictionary}}
+\DoxyCodeLine{432 \textcolor{comment}{  below), inflate sets strm-\/>adler to the adler32 checksum of the dictionary}}
+\DoxyCodeLine{433 \textcolor{comment}{  chosen by the compressor and returns Z\_NEED\_DICT; otherwise it sets}}
+\DoxyCodeLine{434 \textcolor{comment}{  strm-\/>adler to the adler32 checksum of all output produced so far (that is,}}
+\DoxyCodeLine{435 \textcolor{comment}{  total\_out bytes) and returns Z\_OK, Z\_STREAM\_END or an error code as described}}
+\DoxyCodeLine{436 \textcolor{comment}{  below. At the end of the stream, inflate() checks that its computed adler32}}
+\DoxyCodeLine{437 \textcolor{comment}{  checksum is equal to that saved by the compressor and returns Z\_STREAM\_END}}
+\DoxyCodeLine{438 \textcolor{comment}{  only if the checksum is correct.}}
+\DoxyCodeLine{439 \textcolor{comment}{}}
+\DoxyCodeLine{440 \textcolor{comment}{    inflate() will decompress and check either zlib-\/wrapped or gzip-\/wrapped}}
+\DoxyCodeLine{441 \textcolor{comment}{  deflate data.  The header type is detected automatically.  Any information}}
+\DoxyCodeLine{442 \textcolor{comment}{  contained in the gzip header is not retained, so applications that need that}}
+\DoxyCodeLine{443 \textcolor{comment}{  information should instead use raw inflate, see inflateInit2() below, or}}
+\DoxyCodeLine{444 \textcolor{comment}{  inflateBack() and perform their own processing of the gzip header and}}
+\DoxyCodeLine{445 \textcolor{comment}{  trailer.}}
+\DoxyCodeLine{446 \textcolor{comment}{}}
+\DoxyCodeLine{447 \textcolor{comment}{    inflate() returns Z\_OK if some progress has been made (more input processed}}
+\DoxyCodeLine{448 \textcolor{comment}{  or more output produced), Z\_STREAM\_END if the end of the compressed data has}}
+\DoxyCodeLine{449 \textcolor{comment}{  been reached and all uncompressed output has been produced, Z\_NEED\_DICT if a}}
+\DoxyCodeLine{450 \textcolor{comment}{  preset dictionary is needed at this point, Z\_DATA\_ERROR if the input data was}}
+\DoxyCodeLine{451 \textcolor{comment}{  corrupted (input stream not conforming to the zlib format or incorrect check}}
+\DoxyCodeLine{452 \textcolor{comment}{  value), Z\_STREAM\_ERROR if the stream structure was inconsistent (for example}}
+\DoxyCodeLine{453 \textcolor{comment}{  if next\_in or next\_out was NULL), Z\_MEM\_ERROR if there was not enough memory,}}
+\DoxyCodeLine{454 \textcolor{comment}{  Z\_BUF\_ERROR if no progress is possible or if there was not enough room in the}}
+\DoxyCodeLine{455 \textcolor{comment}{  output buffer when Z\_FINISH is used. Note that Z\_BUF\_ERROR is not fatal, and}}
+\DoxyCodeLine{456 \textcolor{comment}{  inflate() can be called again with more input and more output space to}}
+\DoxyCodeLine{457 \textcolor{comment}{  continue decompressing. If Z\_DATA\_ERROR is returned, the application may then}}
+\DoxyCodeLine{458 \textcolor{comment}{  call inflateSync() to look for a good compression block if a partial recovery}}
+\DoxyCodeLine{459 \textcolor{comment}{  of the data is desired.}}
+\DoxyCodeLine{460 \textcolor{comment}{*/}}
+\DoxyCodeLine{461 }
+\DoxyCodeLine{462 }
+\DoxyCodeLine{463 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} \mbox{\hyperlink{inflate_8c_aed3136bc8afc3ef309b731b4ad724534}{inflateEnd}} \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_a6ede25c84d3c9f8632305866acffb1d6}{z\_streamp}} strm));}
+\DoxyCodeLine{464 \textcolor{comment}{/*}}
+\DoxyCodeLine{465 \textcolor{comment}{     All dynamically allocated data structures for this stream are freed.}}
+\DoxyCodeLine{466 \textcolor{comment}{   This function discards any unprocessed input and does not flush any}}
+\DoxyCodeLine{467 \textcolor{comment}{   pending output.}}
+\DoxyCodeLine{468 \textcolor{comment}{}}
+\DoxyCodeLine{469 \textcolor{comment}{     inflateEnd returns Z\_OK if success, Z\_STREAM\_ERROR if the stream state}}
+\DoxyCodeLine{470 \textcolor{comment}{   was inconsistent. In the error case, msg may be set but then points to a}}
+\DoxyCodeLine{471 \textcolor{comment}{   static string (which must not be deallocated).}}
+\DoxyCodeLine{472 \textcolor{comment}{*/}}
+\DoxyCodeLine{473 }
+\DoxyCodeLine{474                         \textcolor{comment}{/* Advanced functions */}}
+\DoxyCodeLine{475 }
+\DoxyCodeLine{476 \textcolor{comment}{/*}}
+\DoxyCodeLine{477 \textcolor{comment}{    The following functions are needed only in some special applications.}}
+\DoxyCodeLine{478 \textcolor{comment}{*/}}
+\DoxyCodeLine{479 }
+\DoxyCodeLine{480 \textcolor{comment}{/*}}
+\DoxyCodeLine{481 \textcolor{comment}{ZEXTERN int ZEXPORT deflateInit2 OF((z\_streamp strm,}}
+\DoxyCodeLine{482 \textcolor{comment}{                                     int  level,}}
+\DoxyCodeLine{483 \textcolor{comment}{                                     int  method,}}
+\DoxyCodeLine{484 \textcolor{comment}{                                     int  windowBits,}}
+\DoxyCodeLine{485 \textcolor{comment}{                                     int  memLevel,}}
+\DoxyCodeLine{486 \textcolor{comment}{                                     int  strategy));}}
+\DoxyCodeLine{487 \textcolor{comment}{}}
+\DoxyCodeLine{488 \textcolor{comment}{     This is another version of deflateInit with more compression options. The}}
+\DoxyCodeLine{489 \textcolor{comment}{   fields next\_in, zalloc, zfree and opaque must be initialized before by}}
+\DoxyCodeLine{490 \textcolor{comment}{   the caller.}}
+\DoxyCodeLine{491 \textcolor{comment}{}}
+\DoxyCodeLine{492 \textcolor{comment}{     The method parameter is the compression method. It must be Z\_DEFLATED in}}
+\DoxyCodeLine{493 \textcolor{comment}{   this version of the library.}}
+\DoxyCodeLine{494 \textcolor{comment}{}}
+\DoxyCodeLine{495 \textcolor{comment}{     The windowBits parameter is the base two logarithm of the window size}}
+\DoxyCodeLine{496 \textcolor{comment}{   (the size of the history buffer). It should be in the range 8..15 for this}}
+\DoxyCodeLine{497 \textcolor{comment}{   version of the library. Larger values of this parameter result in better}}
+\DoxyCodeLine{498 \textcolor{comment}{   compression at the expense of memory usage. The default value is 15 if}}
+\DoxyCodeLine{499 \textcolor{comment}{   deflateInit is used instead.}}
+\DoxyCodeLine{500 \textcolor{comment}{}}
+\DoxyCodeLine{501 \textcolor{comment}{     windowBits can also be -\/8..-\/15 for raw deflate. In this case, -\/windowBits}}
+\DoxyCodeLine{502 \textcolor{comment}{   determines the window size. deflate() will then generate raw deflate data}}
+\DoxyCodeLine{503 \textcolor{comment}{   with no zlib header or trailer, and will not compute an adler32 check value.}}
+\DoxyCodeLine{504 \textcolor{comment}{}}
+\DoxyCodeLine{505 \textcolor{comment}{     windowBits can also be greater than 15 for optional gzip encoding. Add}}
+\DoxyCodeLine{506 \textcolor{comment}{   16 to windowBits to write a simple gzip header and trailer around the}}
+\DoxyCodeLine{507 \textcolor{comment}{   compressed data instead of a zlib wrapper. The gzip header will have no}}
+\DoxyCodeLine{508 \textcolor{comment}{   file name, no extra data, no comment, no modification time (set to zero),}}
+\DoxyCodeLine{509 \textcolor{comment}{   no header crc, and the operating system will be set to 255 (unknown).  If a}}
+\DoxyCodeLine{510 \textcolor{comment}{   gzip stream is being written, strm-\/>adler is a crc32 instead of an adler32.}}
+\DoxyCodeLine{511 \textcolor{comment}{}}
+\DoxyCodeLine{512 \textcolor{comment}{     The memLevel parameter specifies how much memory should be allocated}}
+\DoxyCodeLine{513 \textcolor{comment}{   for the internal compression state. memLevel=1 uses minimum memory but}}
+\DoxyCodeLine{514 \textcolor{comment}{   is slow and reduces compression ratio; memLevel=9 uses maximum memory}}
+\DoxyCodeLine{515 \textcolor{comment}{   for optimal speed. The default value is 8. See zconf.h for total memory}}
+\DoxyCodeLine{516 \textcolor{comment}{   usage as a function of windowBits and memLevel.}}
+\DoxyCodeLine{517 \textcolor{comment}{}}
+\DoxyCodeLine{518 \textcolor{comment}{     The strategy parameter is used to tune the compression algorithm. Use the}}
+\DoxyCodeLine{519 \textcolor{comment}{   value Z\_DEFAULT\_STRATEGY for normal data, Z\_FILTERED for data produced by a}}
+\DoxyCodeLine{520 \textcolor{comment}{   filter (or predictor), Z\_HUFFMAN\_ONLY to force Huffman encoding only (no}}
+\DoxyCodeLine{521 \textcolor{comment}{   string match), or Z\_RLE to limit match distances to one (run-\/length}}
+\DoxyCodeLine{522 \textcolor{comment}{   encoding). Filtered data consists mostly of small values with a somewhat}}
+\DoxyCodeLine{523 \textcolor{comment}{   random distribution. In this case, the compression algorithm is tuned to}}
+\DoxyCodeLine{524 \textcolor{comment}{   compress them better. The effect of Z\_FILTERED is to force more Huffman}}
+\DoxyCodeLine{525 \textcolor{comment}{   coding and less string matching; it is somewhat intermediate between}}
+\DoxyCodeLine{526 \textcolor{comment}{   Z\_DEFAULT and Z\_HUFFMAN\_ONLY. Z\_RLE is designed to be almost as fast as}}
+\DoxyCodeLine{527 \textcolor{comment}{   Z\_HUFFMAN\_ONLY, but give better compression for PNG image data. The strategy}}
+\DoxyCodeLine{528 \textcolor{comment}{   parameter only affects the compression ratio but not the correctness of the}}
+\DoxyCodeLine{529 \textcolor{comment}{   compressed output even if it is not set appropriately.  Z\_FIXED prevents the}}
+\DoxyCodeLine{530 \textcolor{comment}{   use of dynamic Huffman codes, allowing for a simpler decoder for special}}
+\DoxyCodeLine{531 \textcolor{comment}{   applications.}}
+\DoxyCodeLine{532 \textcolor{comment}{}}
+\DoxyCodeLine{533 \textcolor{comment}{      deflateInit2 returns Z\_OK if success, Z\_MEM\_ERROR if there was not enough}}
+\DoxyCodeLine{534 \textcolor{comment}{   memory, Z\_STREAM\_ERROR if a parameter is invalid (such as an invalid}}
+\DoxyCodeLine{535 \textcolor{comment}{   method). msg is set to null if there is no error message.  deflateInit2 does}}
+\DoxyCodeLine{536 \textcolor{comment}{   not perform any compression: this will be done by deflate().}}
+\DoxyCodeLine{537 \textcolor{comment}{*/}}
+\DoxyCodeLine{538 }
+\DoxyCodeLine{539 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} \mbox{\hyperlink{deflate_8c_a4e2855f986abd56d4515e9bb09986a5b}{deflateSetDictionary}} \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_a6ede25c84d3c9f8632305866acffb1d6}{z\_streamp}} strm,}
+\DoxyCodeLine{540                                              \textcolor{keyword}{const} \mbox{\hyperlink{zconf_8h_aeb722a888064be47e12d05f692e0f407}{Bytef}} *dictionary,}
+\DoxyCodeLine{541                                              \mbox{\hyperlink{zconf_8h_a87d141052bcd5ec8a80812a565c70369}{uInt}}  dictLength));}
+\DoxyCodeLine{542 \textcolor{comment}{/*}}
+\DoxyCodeLine{543 \textcolor{comment}{     Initializes the compression dictionary from the given byte sequence}}
+\DoxyCodeLine{544 \textcolor{comment}{   without producing any compressed output. This function must be called}}
+\DoxyCodeLine{545 \textcolor{comment}{   immediately after deflateInit, deflateInit2 or deflateReset, before any}}
+\DoxyCodeLine{546 \textcolor{comment}{   call of deflate. The compressor and decompressor must use exactly the same}}
+\DoxyCodeLine{547 \textcolor{comment}{   dictionary (see inflateSetDictionary).}}
+\DoxyCodeLine{548 \textcolor{comment}{}}
+\DoxyCodeLine{549 \textcolor{comment}{     The dictionary should consist of strings (byte sequences) that are likely}}
+\DoxyCodeLine{550 \textcolor{comment}{   to be encountered later in the data to be compressed, with the most commonly}}
+\DoxyCodeLine{551 \textcolor{comment}{   used strings preferably put towards the end of the dictionary. Using a}}
+\DoxyCodeLine{552 \textcolor{comment}{   dictionary is most useful when the data to be compressed is short and can be}}
+\DoxyCodeLine{553 \textcolor{comment}{   predicted with good accuracy; the data can then be compressed better than}}
+\DoxyCodeLine{554 \textcolor{comment}{   with the default empty dictionary.}}
+\DoxyCodeLine{555 \textcolor{comment}{}}
+\DoxyCodeLine{556 \textcolor{comment}{     Depending on the size of the compression data structures selected by}}
+\DoxyCodeLine{557 \textcolor{comment}{   deflateInit or deflateInit2, a part of the dictionary may in effect be}}
+\DoxyCodeLine{558 \textcolor{comment}{   discarded, for example if the dictionary is larger than the window size in}}
+\DoxyCodeLine{559 \textcolor{comment}{   deflate or deflate2. Thus the strings most likely to be useful should be}}
+\DoxyCodeLine{560 \textcolor{comment}{   put at the end of the dictionary, not at the front. In addition, the}}
+\DoxyCodeLine{561 \textcolor{comment}{   current implementation of deflate will use at most the window size minus}}
+\DoxyCodeLine{562 \textcolor{comment}{   262 bytes of the provided dictionary.}}
+\DoxyCodeLine{563 \textcolor{comment}{}}
+\DoxyCodeLine{564 \textcolor{comment}{     Upon return of this function, strm-\/>adler is set to the adler32 value}}
+\DoxyCodeLine{565 \textcolor{comment}{   of the dictionary; the decompressor may later use this value to determine}}
+\DoxyCodeLine{566 \textcolor{comment}{   which dictionary has been used by the compressor. (The adler32 value}}
+\DoxyCodeLine{567 \textcolor{comment}{   applies to the whole dictionary even if only a subset of the dictionary is}}
+\DoxyCodeLine{568 \textcolor{comment}{   actually used by the compressor.) If a raw deflate was requested, then the}}
+\DoxyCodeLine{569 \textcolor{comment}{   adler32 value is not computed and strm-\/>adler is not set.}}
+\DoxyCodeLine{570 \textcolor{comment}{}}
+\DoxyCodeLine{571 \textcolor{comment}{     deflateSetDictionary returns Z\_OK if success, or Z\_STREAM\_ERROR if a}}
+\DoxyCodeLine{572 \textcolor{comment}{   parameter is invalid (such as NULL dictionary) or the stream state is}}
+\DoxyCodeLine{573 \textcolor{comment}{   inconsistent (for example if deflate has already been called for this stream}}
+\DoxyCodeLine{574 \textcolor{comment}{   or if the compression method is bsort). deflateSetDictionary does not}}
+\DoxyCodeLine{575 \textcolor{comment}{   perform any compression: this will be done by deflate().}}
+\DoxyCodeLine{576 \textcolor{comment}{*/}}
+\DoxyCodeLine{577 }
+\DoxyCodeLine{578 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} \mbox{\hyperlink{deflate_8c_a496430688ab9f4179689c883a6776b02}{deflateCopy}} \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_a6ede25c84d3c9f8632305866acffb1d6}{z\_streamp}} dest,}
+\DoxyCodeLine{579                                     \mbox{\hyperlink{zlib_8h_a6ede25c84d3c9f8632305866acffb1d6}{z\_streamp}} \mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}}));}
+\DoxyCodeLine{580 \textcolor{comment}{/*}}
+\DoxyCodeLine{581 \textcolor{comment}{     Sets the destination stream as a complete copy of the source stream.}}
+\DoxyCodeLine{582 \textcolor{comment}{}}
+\DoxyCodeLine{583 \textcolor{comment}{     This function can be useful when several compression strategies will be}}
+\DoxyCodeLine{584 \textcolor{comment}{   tried, for example when there are several ways of pre-\/processing the input}}
+\DoxyCodeLine{585 \textcolor{comment}{   data with a filter. The streams that will be discarded should then be freed}}
+\DoxyCodeLine{586 \textcolor{comment}{   by calling deflateEnd.  Note that deflateCopy duplicates the internal}}
+\DoxyCodeLine{587 \textcolor{comment}{   compression state which can be quite large, so this strategy is slow and}}
+\DoxyCodeLine{588 \textcolor{comment}{   can consume lots of memory.}}
+\DoxyCodeLine{589 \textcolor{comment}{}}
+\DoxyCodeLine{590 \textcolor{comment}{     deflateCopy returns Z\_OK if success, Z\_MEM\_ERROR if there was not}}
+\DoxyCodeLine{591 \textcolor{comment}{   enough memory, Z\_STREAM\_ERROR if the source stream state was inconsistent}}
+\DoxyCodeLine{592 \textcolor{comment}{   (such as zalloc being NULL). msg is left unchanged in both source and}}
+\DoxyCodeLine{593 \textcolor{comment}{   destination.}}
+\DoxyCodeLine{594 \textcolor{comment}{*/}}
+\DoxyCodeLine{595 }
+\DoxyCodeLine{596 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} \mbox{\hyperlink{deflate_8c_a4f17a4d330d76066b4b26c27f7cde5dc}{deflateReset}} \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_a6ede25c84d3c9f8632305866acffb1d6}{z\_streamp}} strm));}
+\DoxyCodeLine{597 \textcolor{comment}{/*}}
+\DoxyCodeLine{598 \textcolor{comment}{     This function is equivalent to deflateEnd followed by deflateInit,}}
+\DoxyCodeLine{599 \textcolor{comment}{   but does not free and reallocate all the internal compression state.}}
+\DoxyCodeLine{600 \textcolor{comment}{   The stream will keep the same compression level and any other attributes}}
+\DoxyCodeLine{601 \textcolor{comment}{   that may have been set by deflateInit2.}}
+\DoxyCodeLine{602 \textcolor{comment}{}}
+\DoxyCodeLine{603 \textcolor{comment}{      deflateReset returns Z\_OK if success, or Z\_STREAM\_ERROR if the source}}
+\DoxyCodeLine{604 \textcolor{comment}{   stream state was inconsistent (such as zalloc or state being NULL).}}
+\DoxyCodeLine{605 \textcolor{comment}{*/}}
+\DoxyCodeLine{606 }
+\DoxyCodeLine{607 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} \mbox{\hyperlink{deflate_8c_a6be3d26b7e317aa4db6c7870b1911d4d}{deflateParams}} \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_a6ede25c84d3c9f8632305866acffb1d6}{z\_streamp}} strm,}
+\DoxyCodeLine{608                                       \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a3037cfec75442657d7a3f8830cb97c34}{level}},}
+\DoxyCodeLine{609                                       \textcolor{keywordtype}{int} strategy));}
+\DoxyCodeLine{610 \textcolor{comment}{/*}}
+\DoxyCodeLine{611 \textcolor{comment}{     Dynamically update the compression level and compression strategy.  The}}
+\DoxyCodeLine{612 \textcolor{comment}{   interpretation of level and strategy is as in deflateInit2.  This can be}}
+\DoxyCodeLine{613 \textcolor{comment}{   used to switch between compression and straight copy of the input data, or}}
+\DoxyCodeLine{614 \textcolor{comment}{   to switch to a different kind of input data requiring a different}}
+\DoxyCodeLine{615 \textcolor{comment}{   strategy. If the compression level is changed, the input available so far}}
+\DoxyCodeLine{616 \textcolor{comment}{   is compressed with the old level (and may be flushed); the new level will}}
+\DoxyCodeLine{617 \textcolor{comment}{   take effect only at the next call of deflate().}}
+\DoxyCodeLine{618 \textcolor{comment}{}}
+\DoxyCodeLine{619 \textcolor{comment}{     Before the call of deflateParams, the stream state must be set as for}}
+\DoxyCodeLine{620 \textcolor{comment}{   a call of deflate(), since the currently available input may have to}}
+\DoxyCodeLine{621 \textcolor{comment}{   be compressed and flushed. In particular, strm-\/>avail\_out must be non-\/zero.}}
+\DoxyCodeLine{622 \textcolor{comment}{}}
+\DoxyCodeLine{623 \textcolor{comment}{     deflateParams returns Z\_OK if success, Z\_STREAM\_ERROR if the source}}
+\DoxyCodeLine{624 \textcolor{comment}{   stream state was inconsistent or if a parameter was invalid, Z\_BUF\_ERROR}}
+\DoxyCodeLine{625 \textcolor{comment}{   if strm-\/>avail\_out was zero.}}
+\DoxyCodeLine{626 \textcolor{comment}{*/}}
+\DoxyCodeLine{627 }
+\DoxyCodeLine{628 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} \mbox{\hyperlink{deflate_8c_aa2f2f8ee11441c80c35f035ad7efbb8e}{deflateTune}} \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_a6ede25c84d3c9f8632305866acffb1d6}{z\_streamp}} strm,}
+\DoxyCodeLine{629                                     \textcolor{keywordtype}{int} good\_length,}
+\DoxyCodeLine{630                                     \textcolor{keywordtype}{int} max\_lazy,}
+\DoxyCodeLine{631                                     \textcolor{keywordtype}{int} nice\_length,}
+\DoxyCodeLine{632                                     \textcolor{keywordtype}{int} max\_chain));}
+\DoxyCodeLine{633 \textcolor{comment}{/*}}
+\DoxyCodeLine{634 \textcolor{comment}{     Fine tune deflate's internal compression parameters.  This should only be}}
+\DoxyCodeLine{635 \textcolor{comment}{   used by someone who understands the algorithm used by zlib's deflate for}}
+\DoxyCodeLine{636 \textcolor{comment}{   searching for the best matching string, and even then only by the most}}
+\DoxyCodeLine{637 \textcolor{comment}{   fanatic optimizer trying to squeeze out the last compressed bit for their}}
+\DoxyCodeLine{638 \textcolor{comment}{   specific input data.  Read the deflate.c source code for the meaning of the}}
+\DoxyCodeLine{639 \textcolor{comment}{   max\_lazy, good\_length, nice\_length, and max\_chain parameters.}}
+\DoxyCodeLine{640 \textcolor{comment}{}}
+\DoxyCodeLine{641 \textcolor{comment}{     deflateTune() can be called after deflateInit() or deflateInit2(), and}}
+\DoxyCodeLine{642 \textcolor{comment}{   returns Z\_OK on success, or Z\_STREAM\_ERROR for an invalid deflate stream.}}
+\DoxyCodeLine{643 \textcolor{comment}{ */}}
+\DoxyCodeLine{644 }
+\DoxyCodeLine{645 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \mbox{\hyperlink{zconf_8h_acd2a5701a3aecf6700d2c66c606ecb40}{uLong}} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} \mbox{\hyperlink{deflate_8c_a746d0203373d0033ab69055f72a370e8}{deflateBound}} \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_a6ede25c84d3c9f8632305866acffb1d6}{z\_streamp}} strm,}
+\DoxyCodeLine{646                                        \mbox{\hyperlink{zconf_8h_acd2a5701a3aecf6700d2c66c606ecb40}{uLong}} sourceLen));}
+\DoxyCodeLine{647 \textcolor{comment}{/*}}
+\DoxyCodeLine{648 \textcolor{comment}{     deflateBound() returns an upper bound on the compressed size after}}
+\DoxyCodeLine{649 \textcolor{comment}{   deflation of sourceLen bytes.  It must be called after deflateInit()}}
+\DoxyCodeLine{650 \textcolor{comment}{   or deflateInit2().  This would be used to allocate an output buffer}}
+\DoxyCodeLine{651 \textcolor{comment}{   for deflation in a single pass, and so would be called before deflate().}}
+\DoxyCodeLine{652 \textcolor{comment}{*/}}
+\DoxyCodeLine{653 }
+\DoxyCodeLine{654 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} \mbox{\hyperlink{deflate_8c_aa8ca15b272bfde8fd23ab658d789aa87}{deflatePrime}} \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_a6ede25c84d3c9f8632305866acffb1d6}{z\_streamp}} strm,}
+\DoxyCodeLine{655                                      \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a2d763e4e2dee4f85a5f19f853667d728}{bits}},}
+\DoxyCodeLine{656                                      \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}));}
+\DoxyCodeLine{657 \textcolor{comment}{/*}}
+\DoxyCodeLine{658 \textcolor{comment}{     deflatePrime() inserts bits in the deflate output stream.  The intent}}
+\DoxyCodeLine{659 \textcolor{comment}{  is that this function is used to start off the deflate output with the}}
+\DoxyCodeLine{660 \textcolor{comment}{  bits leftover from a previous deflate stream when appending to it.  As such,}}
+\DoxyCodeLine{661 \textcolor{comment}{  this function can only be used for raw deflate, and must be used before the}}
+\DoxyCodeLine{662 \textcolor{comment}{  first deflate() call after a deflateInit2() or deflateReset().  bits must be}}
+\DoxyCodeLine{663 \textcolor{comment}{  less than or equal to 16, and that many of the least significant bits of}}
+\DoxyCodeLine{664 \textcolor{comment}{  value will be inserted in the output.}}
+\DoxyCodeLine{665 \textcolor{comment}{}}
+\DoxyCodeLine{666 \textcolor{comment}{      deflatePrime returns Z\_OK if success, or Z\_STREAM\_ERROR if the source}}
+\DoxyCodeLine{667 \textcolor{comment}{   stream state was inconsistent.}}
+\DoxyCodeLine{668 \textcolor{comment}{*/}}
+\DoxyCodeLine{669 }
+\DoxyCodeLine{670 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} \mbox{\hyperlink{deflate_8c_a0bb9d562cacbe698297de30cdeeb2153}{deflateSetHeader}} \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_a6ede25c84d3c9f8632305866acffb1d6}{z\_streamp}} strm,}
+\DoxyCodeLine{671                                          \mbox{\hyperlink{zlib_8h_a40e9dcc294796d99b25e98fb06477fc8}{gz\_headerp}} \mbox{\hyperlink{structhead}{head}}));}
+\DoxyCodeLine{672 \textcolor{comment}{/*}}
+\DoxyCodeLine{673 \textcolor{comment}{      deflateSetHeader() provides gzip header information for when a gzip}}
+\DoxyCodeLine{674 \textcolor{comment}{   stream is requested by deflateInit2().  deflateSetHeader() may be called}}
+\DoxyCodeLine{675 \textcolor{comment}{   after deflateInit2() or deflateReset() and before the first call of}}
+\DoxyCodeLine{676 \textcolor{comment}{   deflate().  The text, time, os, extra field, name, and comment information}}
+\DoxyCodeLine{677 \textcolor{comment}{   in the provided gz\_header structure are written to the gzip header (xflag is}}
+\DoxyCodeLine{678 \textcolor{comment}{   ignored -\/-\/ the extra flags are set according to the compression level).  The}}
+\DoxyCodeLine{679 \textcolor{comment}{   caller must assure that, if not Z\_NULL, name and comment are terminated with}}
+\DoxyCodeLine{680 \textcolor{comment}{   a zero byte, and that if extra is not Z\_NULL, that extra\_len bytes are}}
+\DoxyCodeLine{681 \textcolor{comment}{   available there.  If hcrc is true, a gzip header crc is included.  Note that}}
+\DoxyCodeLine{682 \textcolor{comment}{   the current versions of the command-\/line version of gzip (up through version}}
+\DoxyCodeLine{683 \textcolor{comment}{   1.3.x) do not support header crc's, and will report that it is a "{}multi-\/part}}
+\DoxyCodeLine{684 \textcolor{comment}{   gzip file"{} and give up.}}
+\DoxyCodeLine{685 \textcolor{comment}{}}
+\DoxyCodeLine{686 \textcolor{comment}{      If deflateSetHeader is not used, the default gzip header has text false,}}
+\DoxyCodeLine{687 \textcolor{comment}{   the time set to zero, and os set to 255, with no extra, name, or comment}}
+\DoxyCodeLine{688 \textcolor{comment}{   fields.  The gzip header is returned to the default state by deflateReset().}}
+\DoxyCodeLine{689 \textcolor{comment}{}}
+\DoxyCodeLine{690 \textcolor{comment}{      deflateSetHeader returns Z\_OK if success, or Z\_STREAM\_ERROR if the source}}
+\DoxyCodeLine{691 \textcolor{comment}{   stream state was inconsistent.}}
+\DoxyCodeLine{692 \textcolor{comment}{*/}}
+\DoxyCodeLine{693 }
+\DoxyCodeLine{694 \textcolor{comment}{/*}}
+\DoxyCodeLine{695 \textcolor{comment}{ZEXTERN int ZEXPORT inflateInit2 OF((z\_streamp strm,}}
+\DoxyCodeLine{696 \textcolor{comment}{                                     int  windowBits));}}
+\DoxyCodeLine{697 \textcolor{comment}{}}
+\DoxyCodeLine{698 \textcolor{comment}{     This is another version of inflateInit with an extra parameter. The}}
+\DoxyCodeLine{699 \textcolor{comment}{   fields next\_in, avail\_in, zalloc, zfree and opaque must be initialized}}
+\DoxyCodeLine{700 \textcolor{comment}{   before by the caller.}}
+\DoxyCodeLine{701 \textcolor{comment}{}}
+\DoxyCodeLine{702 \textcolor{comment}{     The windowBits parameter is the base two logarithm of the maximum window}}
+\DoxyCodeLine{703 \textcolor{comment}{   size (the size of the history buffer).  It should be in the range 8..15 for}}
+\DoxyCodeLine{704 \textcolor{comment}{   this version of the library. The default value is 15 if inflateInit is used}}
+\DoxyCodeLine{705 \textcolor{comment}{   instead. windowBits must be greater than or equal to the windowBits value}}
+\DoxyCodeLine{706 \textcolor{comment}{   provided to deflateInit2() while compressing, or it must be equal to 15 if}}
+\DoxyCodeLine{707 \textcolor{comment}{   deflateInit2() was not used. If a compressed stream with a larger window}}
+\DoxyCodeLine{708 \textcolor{comment}{   size is given as input, inflate() will return with the error code}}
+\DoxyCodeLine{709 \textcolor{comment}{   Z\_DATA\_ERROR instead of trying to allocate a larger window.}}
+\DoxyCodeLine{710 \textcolor{comment}{}}
+\DoxyCodeLine{711 \textcolor{comment}{     windowBits can also be -\/8..-\/15 for raw inflate. In this case, -\/windowBits}}
+\DoxyCodeLine{712 \textcolor{comment}{   determines the window size. inflate() will then process raw deflate data,}}
+\DoxyCodeLine{713 \textcolor{comment}{   not looking for a zlib or gzip header, not generating a check value, and not}}
+\DoxyCodeLine{714 \textcolor{comment}{   looking for any check values for comparison at the end of the stream. This}}
+\DoxyCodeLine{715 \textcolor{comment}{   is for use with other formats that use the deflate compressed data format}}
+\DoxyCodeLine{716 \textcolor{comment}{   such as zip.  Those formats provide their own check values. If a custom}}
+\DoxyCodeLine{717 \textcolor{comment}{   format is developed using the raw deflate format for compressed data, it is}}
+\DoxyCodeLine{718 \textcolor{comment}{   recommended that a check value such as an adler32 or a crc32 be applied to}}
+\DoxyCodeLine{719 \textcolor{comment}{   the uncompressed data as is done in the zlib, gzip, and zip formats.  For}}
+\DoxyCodeLine{720 \textcolor{comment}{   most applications, the zlib format should be used as is. Note that comments}}
+\DoxyCodeLine{721 \textcolor{comment}{   above on the use in deflateInit2() applies to the magnitude of windowBits.}}
+\DoxyCodeLine{722 \textcolor{comment}{}}
+\DoxyCodeLine{723 \textcolor{comment}{     windowBits can also be greater than 15 for optional gzip decoding. Add}}
+\DoxyCodeLine{724 \textcolor{comment}{   32 to windowBits to enable zlib and gzip decoding with automatic header}}
+\DoxyCodeLine{725 \textcolor{comment}{   detection, or add 16 to decode only the gzip format (the zlib format will}}
+\DoxyCodeLine{726 \textcolor{comment}{   return a Z\_DATA\_ERROR).  If a gzip stream is being decoded, strm-\/>adler is}}
+\DoxyCodeLine{727 \textcolor{comment}{   a crc32 instead of an adler32.}}
+\DoxyCodeLine{728 \textcolor{comment}{}}
+\DoxyCodeLine{729 \textcolor{comment}{     inflateInit2 returns Z\_OK if success, Z\_MEM\_ERROR if there was not enough}}
+\DoxyCodeLine{730 \textcolor{comment}{   memory, Z\_STREAM\_ERROR if a parameter is invalid (such as a null strm). msg}}
+\DoxyCodeLine{731 \textcolor{comment}{   is set to null if there is no error message.  inflateInit2 does not perform}}
+\DoxyCodeLine{732 \textcolor{comment}{   any decompression apart from reading the zlib header if present: this will}}
+\DoxyCodeLine{733 \textcolor{comment}{   be done by inflate(). (So next\_in and avail\_in may be modified, but next\_out}}
+\DoxyCodeLine{734 \textcolor{comment}{   and avail\_out are unchanged.)}}
+\DoxyCodeLine{735 \textcolor{comment}{*/}}
+\DoxyCodeLine{736 }
+\DoxyCodeLine{737 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} \mbox{\hyperlink{inflate_8c_a0e7de2db7d65e00a99bea217653b152e}{inflateSetDictionary}} \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_a6ede25c84d3c9f8632305866acffb1d6}{z\_streamp}} strm,}
+\DoxyCodeLine{738                                              \textcolor{keyword}{const} \mbox{\hyperlink{zconf_8h_aeb722a888064be47e12d05f692e0f407}{Bytef}} *dictionary,}
+\DoxyCodeLine{739                                              \mbox{\hyperlink{zconf_8h_a87d141052bcd5ec8a80812a565c70369}{uInt}}  dictLength));}
+\DoxyCodeLine{740 \textcolor{comment}{/*}}
+\DoxyCodeLine{741 \textcolor{comment}{     Initializes the decompression dictionary from the given uncompressed byte}}
+\DoxyCodeLine{742 \textcolor{comment}{   sequence. This function must be called immediately after a call of inflate,}}
+\DoxyCodeLine{743 \textcolor{comment}{   if that call returned Z\_NEED\_DICT. The dictionary chosen by the compressor}}
+\DoxyCodeLine{744 \textcolor{comment}{   can be determined from the adler32 value returned by that call of inflate.}}
+\DoxyCodeLine{745 \textcolor{comment}{   The compressor and decompressor must use exactly the same dictionary (see}}
+\DoxyCodeLine{746 \textcolor{comment}{   deflateSetDictionary).  For raw inflate, this function can be called}}
+\DoxyCodeLine{747 \textcolor{comment}{   immediately after inflateInit2() or inflateReset() and before any call of}}
+\DoxyCodeLine{748 \textcolor{comment}{   inflate() to set the dictionary.  The application must insure that the}}
+\DoxyCodeLine{749 \textcolor{comment}{   dictionary that was used for compression is provided.}}
+\DoxyCodeLine{750 \textcolor{comment}{}}
+\DoxyCodeLine{751 \textcolor{comment}{     inflateSetDictionary returns Z\_OK if success, Z\_STREAM\_ERROR if a}}
+\DoxyCodeLine{752 \textcolor{comment}{   parameter is invalid (such as NULL dictionary) or the stream state is}}
+\DoxyCodeLine{753 \textcolor{comment}{   inconsistent, Z\_DATA\_ERROR if the given dictionary doesn't match the}}
+\DoxyCodeLine{754 \textcolor{comment}{   expected one (incorrect adler32 value). inflateSetDictionary does not}}
+\DoxyCodeLine{755 \textcolor{comment}{   perform any decompression: this will be done by subsequent calls of}}
+\DoxyCodeLine{756 \textcolor{comment}{   inflate().}}
+\DoxyCodeLine{757 \textcolor{comment}{*/}}
+\DoxyCodeLine{758 }
+\DoxyCodeLine{759 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} \mbox{\hyperlink{inflate_8c_a91828dbb3f427115719a892872b414a4}{inflateSync}} \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_a6ede25c84d3c9f8632305866acffb1d6}{z\_streamp}} strm));}
+\DoxyCodeLine{760 \textcolor{comment}{/*}}
+\DoxyCodeLine{761 \textcolor{comment}{    Skips invalid compressed data until a full flush point (see above the}}
+\DoxyCodeLine{762 \textcolor{comment}{  description of deflate with Z\_FULL\_FLUSH) can be found, or until all}}
+\DoxyCodeLine{763 \textcolor{comment}{  available input is skipped. No output is provided.}}
+\DoxyCodeLine{764 \textcolor{comment}{}}
+\DoxyCodeLine{765 \textcolor{comment}{    inflateSync returns Z\_OK if a full flush point has been found, Z\_BUF\_ERROR}}
+\DoxyCodeLine{766 \textcolor{comment}{  if no more input was provided, Z\_DATA\_ERROR if no flush point has been found,}}
+\DoxyCodeLine{767 \textcolor{comment}{  or Z\_STREAM\_ERROR if the stream structure was inconsistent. In the success}}
+\DoxyCodeLine{768 \textcolor{comment}{  case, the application may save the current current value of total\_in which}}
+\DoxyCodeLine{769 \textcolor{comment}{  indicates where valid compressed data was found. In the error case, the}}
+\DoxyCodeLine{770 \textcolor{comment}{  application may repeatedly call inflateSync, providing more input each time,}}
+\DoxyCodeLine{771 \textcolor{comment}{  until success or end of the input data.}}
+\DoxyCodeLine{772 \textcolor{comment}{*/}}
+\DoxyCodeLine{773 }
+\DoxyCodeLine{774 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} \mbox{\hyperlink{inflate_8c_aed5ce4086853dcd68479b936c516ac09}{inflateCopy}} \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_a6ede25c84d3c9f8632305866acffb1d6}{z\_streamp}} dest,}
+\DoxyCodeLine{775                                     \mbox{\hyperlink{zlib_8h_a6ede25c84d3c9f8632305866acffb1d6}{z\_streamp}} \mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}}));}
+\DoxyCodeLine{776 \textcolor{comment}{/*}}
+\DoxyCodeLine{777 \textcolor{comment}{     Sets the destination stream as a complete copy of the source stream.}}
+\DoxyCodeLine{778 \textcolor{comment}{}}
+\DoxyCodeLine{779 \textcolor{comment}{     This function can be useful when randomly accessing a large stream.  The}}
+\DoxyCodeLine{780 \textcolor{comment}{   first pass through the stream can periodically record the inflate state,}}
+\DoxyCodeLine{781 \textcolor{comment}{   allowing restarting inflate at those points when randomly accessing the}}
+\DoxyCodeLine{782 \textcolor{comment}{   stream.}}
+\DoxyCodeLine{783 \textcolor{comment}{}}
+\DoxyCodeLine{784 \textcolor{comment}{     inflateCopy returns Z\_OK if success, Z\_MEM\_ERROR if there was not}}
+\DoxyCodeLine{785 \textcolor{comment}{   enough memory, Z\_STREAM\_ERROR if the source stream state was inconsistent}}
+\DoxyCodeLine{786 \textcolor{comment}{   (such as zalloc being NULL). msg is left unchanged in both source and}}
+\DoxyCodeLine{787 \textcolor{comment}{   destination.}}
+\DoxyCodeLine{788 \textcolor{comment}{*/}}
+\DoxyCodeLine{789 }
+\DoxyCodeLine{790 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} \mbox{\hyperlink{inflate_8c_adb02c2100f9179f4075b220395b1553c}{inflateReset}} \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_a6ede25c84d3c9f8632305866acffb1d6}{z\_streamp}} strm));}
+\DoxyCodeLine{791 \textcolor{comment}{/*}}
+\DoxyCodeLine{792 \textcolor{comment}{     This function is equivalent to inflateEnd followed by inflateInit,}}
+\DoxyCodeLine{793 \textcolor{comment}{   but does not free and reallocate all the internal decompression state.}}
+\DoxyCodeLine{794 \textcolor{comment}{   The stream will keep attributes that may have been set by inflateInit2.}}
+\DoxyCodeLine{795 \textcolor{comment}{}}
+\DoxyCodeLine{796 \textcolor{comment}{      inflateReset returns Z\_OK if success, or Z\_STREAM\_ERROR if the source}}
+\DoxyCodeLine{797 \textcolor{comment}{   stream state was inconsistent (such as zalloc or state being NULL).}}
+\DoxyCodeLine{798 \textcolor{comment}{*/}}
+\DoxyCodeLine{799 }
+\DoxyCodeLine{800 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} \mbox{\hyperlink{inflate_8c_a67fe72a5001252fee87757fa6a215d61}{inflatePrime}} \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_a6ede25c84d3c9f8632305866acffb1d6}{z\_streamp}} strm,}
+\DoxyCodeLine{801                                      \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a2d763e4e2dee4f85a5f19f853667d728}{bits}},}
+\DoxyCodeLine{802                                      \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}));}
+\DoxyCodeLine{803 \textcolor{comment}{/*}}
+\DoxyCodeLine{804 \textcolor{comment}{     This function inserts bits in the inflate input stream.  The intent is}}
+\DoxyCodeLine{805 \textcolor{comment}{  that this function is used to start inflating at a bit position in the}}
+\DoxyCodeLine{806 \textcolor{comment}{  middle of a byte.  The provided bits will be used before any bytes are used}}
+\DoxyCodeLine{807 \textcolor{comment}{  from next\_in.  This function should only be used with raw inflate, and}}
+\DoxyCodeLine{808 \textcolor{comment}{  should be used before the first inflate() call after inflateInit2() or}}
+\DoxyCodeLine{809 \textcolor{comment}{  inflateReset().  bits must be less than or equal to 16, and that many of the}}
+\DoxyCodeLine{810 \textcolor{comment}{  least significant bits of value will be inserted in the input.}}
+\DoxyCodeLine{811 \textcolor{comment}{}}
+\DoxyCodeLine{812 \textcolor{comment}{      inflatePrime returns Z\_OK if success, or Z\_STREAM\_ERROR if the source}}
+\DoxyCodeLine{813 \textcolor{comment}{   stream state was inconsistent.}}
+\DoxyCodeLine{814 \textcolor{comment}{*/}}
+\DoxyCodeLine{815 }
+\DoxyCodeLine{816 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} \mbox{\hyperlink{inflate_8c_a7a24a91914357dc95ee94bb30fe2ba57}{inflateGetHeader}} \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_a6ede25c84d3c9f8632305866acffb1d6}{z\_streamp}} strm,}
+\DoxyCodeLine{817                                          \mbox{\hyperlink{zlib_8h_a40e9dcc294796d99b25e98fb06477fc8}{gz\_headerp}} \mbox{\hyperlink{structhead}{head}}));}
+\DoxyCodeLine{818 \textcolor{comment}{/*}}
+\DoxyCodeLine{819 \textcolor{comment}{      inflateGetHeader() requests that gzip header information be stored in the}}
+\DoxyCodeLine{820 \textcolor{comment}{   provided gz\_header structure.  inflateGetHeader() may be called after}}
+\DoxyCodeLine{821 \textcolor{comment}{   inflateInit2() or inflateReset(), and before the first call of inflate().}}
+\DoxyCodeLine{822 \textcolor{comment}{   As inflate() processes the gzip stream, head-\/>done is zero until the header}}
+\DoxyCodeLine{823 \textcolor{comment}{   is completed, at which time head-\/>done is set to one.  If a zlib stream is}}
+\DoxyCodeLine{824 \textcolor{comment}{   being decoded, then head-\/>done is set to -\/1 to indicate that there will be}}
+\DoxyCodeLine{825 \textcolor{comment}{   no gzip header information forthcoming.  Note that Z\_BLOCK can be used to}}
+\DoxyCodeLine{826 \textcolor{comment}{   force inflate() to return immediately after header processing is complete}}
+\DoxyCodeLine{827 \textcolor{comment}{   and before any actual data is decompressed.}}
+\DoxyCodeLine{828 \textcolor{comment}{}}
+\DoxyCodeLine{829 \textcolor{comment}{      The text, time, xflags, and os fields are filled in with the gzip header}}
+\DoxyCodeLine{830 \textcolor{comment}{   contents.  hcrc is set to true if there is a header CRC.  (The header CRC}}
+\DoxyCodeLine{831 \textcolor{comment}{   was valid if done is set to one.)  If extra is not Z\_NULL, then extra\_max}}
+\DoxyCodeLine{832 \textcolor{comment}{   contains the maximum number of bytes to write to extra.  Once done is true,}}
+\DoxyCodeLine{833 \textcolor{comment}{   extra\_len contains the actual extra field length, and extra contains the}}
+\DoxyCodeLine{834 \textcolor{comment}{   extra field, or that field truncated if extra\_max is less than extra\_len.}}
+\DoxyCodeLine{835 \textcolor{comment}{   If name is not Z\_NULL, then up to name\_max characters are written there,}}
+\DoxyCodeLine{836 \textcolor{comment}{   terminated with a zero unless the length is greater than name\_max.  If}}
+\DoxyCodeLine{837 \textcolor{comment}{   comment is not Z\_NULL, then up to comm\_max characters are written there,}}
+\DoxyCodeLine{838 \textcolor{comment}{   terminated with a zero unless the length is greater than comm\_max.  When}}
+\DoxyCodeLine{839 \textcolor{comment}{   any of extra, name, or comment are not Z\_NULL and the respective field is}}
+\DoxyCodeLine{840 \textcolor{comment}{   not present in the header, then that field is set to Z\_NULL to signal its}}
+\DoxyCodeLine{841 \textcolor{comment}{   absence.  This allows the use of deflateSetHeader() with the returned}}
+\DoxyCodeLine{842 \textcolor{comment}{   structure to duplicate the header.  However if those fields are set to}}
+\DoxyCodeLine{843 \textcolor{comment}{   allocated memory, then the application will need to save those pointers}}
+\DoxyCodeLine{844 \textcolor{comment}{   elsewhere so that they can be eventually freed.}}
+\DoxyCodeLine{845 \textcolor{comment}{}}
+\DoxyCodeLine{846 \textcolor{comment}{      If inflateGetHeader is not used, then the header information is simply}}
+\DoxyCodeLine{847 \textcolor{comment}{   discarded.  The header is always checked for validity, including the header}}
+\DoxyCodeLine{848 \textcolor{comment}{   CRC if present.  inflateReset() will reset the process to discard the header}}
+\DoxyCodeLine{849 \textcolor{comment}{   information.  The application would need to call inflateGetHeader() again to}}
+\DoxyCodeLine{850 \textcolor{comment}{   retrieve the header from the next gzip stream.}}
+\DoxyCodeLine{851 \textcolor{comment}{}}
+\DoxyCodeLine{852 \textcolor{comment}{      inflateGetHeader returns Z\_OK if success, or Z\_STREAM\_ERROR if the source}}
+\DoxyCodeLine{853 \textcolor{comment}{   stream state was inconsistent.}}
+\DoxyCodeLine{854 \textcolor{comment}{*/}}
+\DoxyCodeLine{855 }
+\DoxyCodeLine{856 \textcolor{comment}{/*}}
+\DoxyCodeLine{857 \textcolor{comment}{ZEXTERN int ZEXPORT inflateBackInit OF((z\_streamp strm, int windowBits,}}
+\DoxyCodeLine{858 \textcolor{comment}{                                        unsigned char FAR *window));}}
+\DoxyCodeLine{859 \textcolor{comment}{}}
+\DoxyCodeLine{860 \textcolor{comment}{     Initialize the internal stream state for decompression using inflateBack()}}
+\DoxyCodeLine{861 \textcolor{comment}{   calls.  The fields zalloc, zfree and opaque in strm must be initialized}}
+\DoxyCodeLine{862 \textcolor{comment}{   before the call.  If zalloc and zfree are Z\_NULL, then the default library-\/}}
+\DoxyCodeLine{863 \textcolor{comment}{   derived memory allocation routines are used.  windowBits is the base two}}
+\DoxyCodeLine{864 \textcolor{comment}{   logarithm of the window size, in the range 8..15.  window is a caller}}
+\DoxyCodeLine{865 \textcolor{comment}{   supplied buffer of that size.  Except for special applications where it is}}
+\DoxyCodeLine{866 \textcolor{comment}{   assured that deflate was used with small window sizes, windowBits must be 15}}
+\DoxyCodeLine{867 \textcolor{comment}{   and a 32K byte window must be supplied to be able to decompress general}}
+\DoxyCodeLine{868 \textcolor{comment}{   deflate streams.}}
+\DoxyCodeLine{869 \textcolor{comment}{}}
+\DoxyCodeLine{870 \textcolor{comment}{     See inflateBack() for the usage of these routines.}}
+\DoxyCodeLine{871 \textcolor{comment}{}}
+\DoxyCodeLine{872 \textcolor{comment}{     inflateBackInit will return Z\_OK on success, Z\_STREAM\_ERROR if any of}}
+\DoxyCodeLine{873 \textcolor{comment}{   the paramaters are invalid, Z\_MEM\_ERROR if the internal state could not}}
+\DoxyCodeLine{874 \textcolor{comment}{   be allocated, or Z\_VERSION\_ERROR if the version of the library does not}}
+\DoxyCodeLine{875 \textcolor{comment}{   match the version of the header file.}}
+\DoxyCodeLine{876 \textcolor{comment}{*/}}
+\DoxyCodeLine{877 }
+\DoxyCodeLine{878 \textcolor{keyword}{typedef} unsigned (*\mbox{\hyperlink{zconf_8h_afd7951252f6a2431a4299b5b4b3186fe}{in\_func}}) \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\textcolor{keywordtype}{void} \mbox{\hyperlink{zconf_8h_aef060b3456fdcc093a7210a762d5f2ed}{FAR}} *, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} \mbox{\hyperlink{zconf_8h_aef060b3456fdcc093a7210a762d5f2ed}{FAR}} * \mbox{\hyperlink{zconf_8h_aef060b3456fdcc093a7210a762d5f2ed}{FAR}} *));}
+\DoxyCodeLine{879 \textcolor{keyword}{typedef} \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} (*\mbox{\hyperlink{zconf_8h_a20bf84aaee69bceea95e21eeac387678}{out\_func}}) \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\textcolor{keywordtype}{void} \mbox{\hyperlink{zconf_8h_aef060b3456fdcc093a7210a762d5f2ed}{FAR}} *, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} \mbox{\hyperlink{zconf_8h_aef060b3456fdcc093a7210a762d5f2ed}{FAR}} *, \textcolor{keywordtype}{unsigned}));}
+\DoxyCodeLine{880 }
+\DoxyCodeLine{881 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} \mbox{\hyperlink{infback_8c_a6568b72b098ada9bd162fc0365943f5c}{inflateBack}} \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_a6ede25c84d3c9f8632305866acffb1d6}{z\_streamp}} strm,}
+\DoxyCodeLine{882                                     \mbox{\hyperlink{zconf_8h_afd7951252f6a2431a4299b5b4b3186fe}{in\_func}} \mbox{\hyperlink{namespacegl_a72039bf7996167e32bca54980c5595e4}{in}}, \textcolor{keywordtype}{void} \mbox{\hyperlink{zconf_8h_aef060b3456fdcc093a7210a762d5f2ed}{FAR}} *in\_desc,}
+\DoxyCodeLine{883                                     \mbox{\hyperlink{zconf_8h_a20bf84aaee69bceea95e21eeac387678}{out\_func}} out, \textcolor{keywordtype}{void} \mbox{\hyperlink{zconf_8h_aef060b3456fdcc093a7210a762d5f2ed}{FAR}} *out\_desc));}
+\DoxyCodeLine{884 \textcolor{comment}{/*}}
+\DoxyCodeLine{885 \textcolor{comment}{     inflateBack() does a raw inflate with a single call using a call-\/back}}
+\DoxyCodeLine{886 \textcolor{comment}{   interface for input and output.  This is more efficient than inflate() for}}
+\DoxyCodeLine{887 \textcolor{comment}{   file i/o applications in that it avoids copying between the output and the}}
+\DoxyCodeLine{888 \textcolor{comment}{   sliding window by simply making the window itself the output buffer.  This}}
+\DoxyCodeLine{889 \textcolor{comment}{   function trusts the application to not change the output buffer passed by}}
+\DoxyCodeLine{890 \textcolor{comment}{   the output function, at least until inflateBack() returns.}}
+\DoxyCodeLine{891 \textcolor{comment}{}}
+\DoxyCodeLine{892 \textcolor{comment}{     inflateBackInit() must be called first to allocate the internal state}}
+\DoxyCodeLine{893 \textcolor{comment}{   and to initialize the state with the user-\/provided window buffer.}}
+\DoxyCodeLine{894 \textcolor{comment}{   inflateBack() may then be used multiple times to inflate a complete, raw}}
+\DoxyCodeLine{895 \textcolor{comment}{   deflate stream with each call.  inflateBackEnd() is then called to free}}
+\DoxyCodeLine{896 \textcolor{comment}{   the allocated state.}}
+\DoxyCodeLine{897 \textcolor{comment}{}}
+\DoxyCodeLine{898 \textcolor{comment}{     A raw deflate stream is one with no zlib or gzip header or trailer.}}
+\DoxyCodeLine{899 \textcolor{comment}{   This routine would normally be used in a utility that reads zip or gzip}}
+\DoxyCodeLine{900 \textcolor{comment}{   files and writes out uncompressed files.  The utility would decode the}}
+\DoxyCodeLine{901 \textcolor{comment}{   header and process the trailer on its own, hence this routine expects}}
+\DoxyCodeLine{902 \textcolor{comment}{   only the raw deflate stream to decompress.  This is different from the}}
+\DoxyCodeLine{903 \textcolor{comment}{   normal behavior of inflate(), which expects either a zlib or gzip header and}}
+\DoxyCodeLine{904 \textcolor{comment}{   trailer around the deflate stream.}}
+\DoxyCodeLine{905 \textcolor{comment}{}}
+\DoxyCodeLine{906 \textcolor{comment}{     inflateBack() uses two subroutines supplied by the caller that are then}}
+\DoxyCodeLine{907 \textcolor{comment}{   called by inflateBack() for input and output.  inflateBack() calls those}}
+\DoxyCodeLine{908 \textcolor{comment}{   routines until it reads a complete deflate stream and writes out all of the}}
+\DoxyCodeLine{909 \textcolor{comment}{   uncompressed data, or until it encounters an error.  The function's}}
+\DoxyCodeLine{910 \textcolor{comment}{   parameters and return types are defined above in the in\_func and out\_func}}
+\DoxyCodeLine{911 \textcolor{comment}{   typedefs.  inflateBack() will call in(in\_desc, \&buf) which should return the}}
+\DoxyCodeLine{912 \textcolor{comment}{   number of bytes of provided input, and a pointer to that input in buf.  If}}
+\DoxyCodeLine{913 \textcolor{comment}{   there is no input available, in() must return zero-\/-\/buf is ignored in that}}
+\DoxyCodeLine{914 \textcolor{comment}{   case-\/-\/and inflateBack() will return a buffer error.  inflateBack() will call}}
+\DoxyCodeLine{915 \textcolor{comment}{   out(out\_desc, buf, len) to write the uncompressed data buf[0..len-\/1].  out()}}
+\DoxyCodeLine{916 \textcolor{comment}{   should return zero on success, or non-\/zero on failure.  If out() returns}}
+\DoxyCodeLine{917 \textcolor{comment}{   non-\/zero, inflateBack() will return with an error.  Neither in() nor out()}}
+\DoxyCodeLine{918 \textcolor{comment}{   are permitted to change the contents of the window provided to}}
+\DoxyCodeLine{919 \textcolor{comment}{   inflateBackInit(), which is also the buffer that out() uses to write from.}}
+\DoxyCodeLine{920 \textcolor{comment}{   The length written by out() will be at most the window size.  Any non-\/zero}}
+\DoxyCodeLine{921 \textcolor{comment}{   amount of input may be provided by in().}}
+\DoxyCodeLine{922 \textcolor{comment}{}}
+\DoxyCodeLine{923 \textcolor{comment}{     For convenience, inflateBack() can be provided input on the first call by}}
+\DoxyCodeLine{924 \textcolor{comment}{   setting strm-\/>next\_in and strm-\/>avail\_in.  If that input is exhausted, then}}
+\DoxyCodeLine{925 \textcolor{comment}{   in() will be called.  Therefore strm-\/>next\_in must be initialized before}}
+\DoxyCodeLine{926 \textcolor{comment}{   calling inflateBack().  If strm-\/>next\_in is Z\_NULL, then in() will be called}}
+\DoxyCodeLine{927 \textcolor{comment}{   immediately for input.  If strm-\/>next\_in is not Z\_NULL, then strm-\/>avail\_in}}
+\DoxyCodeLine{928 \textcolor{comment}{   must also be initialized, and then if strm-\/>avail\_in is not zero, input will}}
+\DoxyCodeLine{929 \textcolor{comment}{   initially be taken from strm-\/>next\_in[0 .. strm-\/>avail\_in -\/ 1].}}
+\DoxyCodeLine{930 \textcolor{comment}{}}
+\DoxyCodeLine{931 \textcolor{comment}{     The in\_desc and out\_desc parameters of inflateBack() is passed as the}}
+\DoxyCodeLine{932 \textcolor{comment}{   first parameter of in() and out() respectively when they are called.  These}}
+\DoxyCodeLine{933 \textcolor{comment}{   descriptors can be optionally used to pass any information that the caller-\/}}
+\DoxyCodeLine{934 \textcolor{comment}{   supplied in() and out() functions need to do their job.}}
+\DoxyCodeLine{935 \textcolor{comment}{}}
+\DoxyCodeLine{936 \textcolor{comment}{     On return, inflateBack() will set strm-\/>next\_in and strm-\/>avail\_in to}}
+\DoxyCodeLine{937 \textcolor{comment}{   pass back any unused input that was provided by the last in() call.  The}}
+\DoxyCodeLine{938 \textcolor{comment}{   return values of inflateBack() can be Z\_STREAM\_END on success, Z\_BUF\_ERROR}}
+\DoxyCodeLine{939 \textcolor{comment}{   if in() or out() returned an error, Z\_DATA\_ERROR if there was a format}}
+\DoxyCodeLine{940 \textcolor{comment}{   error in the deflate stream (in which case strm-\/>msg is set to indicate the}}
+\DoxyCodeLine{941 \textcolor{comment}{   nature of the error), or Z\_STREAM\_ERROR if the stream was not properly}}
+\DoxyCodeLine{942 \textcolor{comment}{   initialized.  In the case of Z\_BUF\_ERROR, an input or output error can be}}
+\DoxyCodeLine{943 \textcolor{comment}{   distinguished using strm-\/>next\_in which will be Z\_NULL only if in() returned}}
+\DoxyCodeLine{944 \textcolor{comment}{   an error.  If strm-\/>next is not Z\_NULL, then the Z\_BUF\_ERROR was due to}}
+\DoxyCodeLine{945 \textcolor{comment}{   out() returning non-\/zero.  (in() will always be called before out(), so}}
+\DoxyCodeLine{946 \textcolor{comment}{   strm-\/>next\_in is assured to be defined if out() returns non-\/zero.)  Note}}
+\DoxyCodeLine{947 \textcolor{comment}{   that inflateBack() cannot return Z\_OK.}}
+\DoxyCodeLine{948 \textcolor{comment}{*/}}
+\DoxyCodeLine{949 }
+\DoxyCodeLine{950 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} \mbox{\hyperlink{infback_8c_a6fe1a0debff7933ce382bfd5348f2b2b}{inflateBackEnd}} \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_a6ede25c84d3c9f8632305866acffb1d6}{z\_streamp}} strm));}
+\DoxyCodeLine{951 \textcolor{comment}{/*}}
+\DoxyCodeLine{952 \textcolor{comment}{     All memory allocated by inflateBackInit() is freed.}}
+\DoxyCodeLine{953 \textcolor{comment}{}}
+\DoxyCodeLine{954 \textcolor{comment}{     inflateBackEnd() returns Z\_OK on success, or Z\_STREAM\_ERROR if the stream}}
+\DoxyCodeLine{955 \textcolor{comment}{   state was inconsistent.}}
+\DoxyCodeLine{956 \textcolor{comment}{*/}}
+\DoxyCodeLine{957 }
+\DoxyCodeLine{958 \textcolor{comment}{//ZEXTERN uLong ZEXPORT zlibCompileFlags OF((void));}}
+\DoxyCodeLine{959 \textcolor{comment}{/* Return flags indicating compile-\/time options.}}
+\DoxyCodeLine{960 \textcolor{comment}{}}
+\DoxyCodeLine{961 \textcolor{comment}{    Type sizes, two bits each, 00 = 16 bits, 01 = 32, 10 = 64, 11 = other:}}
+\DoxyCodeLine{962 \textcolor{comment}{     1.0: size of uInt}}
+\DoxyCodeLine{963 \textcolor{comment}{     3.2: size of uLong}}
+\DoxyCodeLine{964 \textcolor{comment}{     5.4: size of voidpf (pointer)}}
+\DoxyCodeLine{965 \textcolor{comment}{     7.6: size of z\_off\_t}}
+\DoxyCodeLine{966 \textcolor{comment}{}}
+\DoxyCodeLine{967 \textcolor{comment}{    Compiler, assembler, and debug options:}}
+\DoxyCodeLine{968 \textcolor{comment}{     8: DEBUG}}
+\DoxyCodeLine{969 \textcolor{comment}{     9: ASMV or ASMINF -\/-\/ use ASM code}}
+\DoxyCodeLine{970 \textcolor{comment}{     10: ZLIB\_WINAPI -\/-\/ exported functions use the WINAPI calling convention}}
+\DoxyCodeLine{971 \textcolor{comment}{     11: 0 (reserved)}}
+\DoxyCodeLine{972 \textcolor{comment}{}}
+\DoxyCodeLine{973 \textcolor{comment}{    One-\/time table building (smaller code, but not thread-\/safe if true):}}
+\DoxyCodeLine{974 \textcolor{comment}{     12: BUILDFIXED -\/-\/ build static block decoding tables when needed}}
+\DoxyCodeLine{975 \textcolor{comment}{     13: DYNAMIC\_CRC\_TABLE -\/-\/ build CRC calculation tables when needed}}
+\DoxyCodeLine{976 \textcolor{comment}{     14,15: 0 (reserved)}}
+\DoxyCodeLine{977 \textcolor{comment}{}}
+\DoxyCodeLine{978 \textcolor{comment}{    Library content (indicates missing functionality):}}
+\DoxyCodeLine{979 \textcolor{comment}{     16: NO\_GZCOMPRESS -\/-\/ gz* functions cannot compress (to avoid linking}}
+\DoxyCodeLine{980 \textcolor{comment}{                          deflate code when not needed)}}
+\DoxyCodeLine{981 \textcolor{comment}{     17: NO\_GZIP -\/-\/ deflate can't write gzip streams, and inflate can't detect}}
+\DoxyCodeLine{982 \textcolor{comment}{                    and decode gzip streams (to avoid linking crc code)}}
+\DoxyCodeLine{983 \textcolor{comment}{     18-\/19: 0 (reserved)}}
+\DoxyCodeLine{984 \textcolor{comment}{}}
+\DoxyCodeLine{985 \textcolor{comment}{    Operation variations (changes in library functionality):}}
+\DoxyCodeLine{986 \textcolor{comment}{     20: PKZIP\_BUG\_WORKAROUND -\/-\/ slightly more permissive inflate}}
+\DoxyCodeLine{987 \textcolor{comment}{     21: FASTEST -\/-\/ deflate algorithm with only one, lowest compression level}}
+\DoxyCodeLine{988 \textcolor{comment}{     22,23: 0 (reserved)}}
+\DoxyCodeLine{989 \textcolor{comment}{}}
+\DoxyCodeLine{990 \textcolor{comment}{    The sprintf variant used by gzprintf (zero is best):}}
+\DoxyCodeLine{991 \textcolor{comment}{     24: 0 = vs*, 1 = s* -\/-\/ 1 means limited to 20 arguments after the format}}
+\DoxyCodeLine{992 \textcolor{comment}{     25: 0 = *nprintf, 1 = *printf -\/-\/ 1 means gzprintf() not secure!}}
+\DoxyCodeLine{993 \textcolor{comment}{     26: 0 = returns value, 1 = void -\/-\/ 1 means inferred string length returned}}
+\DoxyCodeLine{994 \textcolor{comment}{}}
+\DoxyCodeLine{995 \textcolor{comment}{    Remainder:}}
+\DoxyCodeLine{996 \textcolor{comment}{     27-\/31: 0 (reserved)}}
+\DoxyCodeLine{997 \textcolor{comment}{ */}}
+\DoxyCodeLine{998 }
+\DoxyCodeLine{999 }
+\DoxyCodeLine{1000                         \textcolor{comment}{/* utility functions */}}
+\DoxyCodeLine{1001 }
+\DoxyCodeLine{1002 \textcolor{comment}{/*}}
+\DoxyCodeLine{1003 \textcolor{comment}{     The following utility functions are implemented on top of the}}
+\DoxyCodeLine{1004 \textcolor{comment}{   basic stream-\/oriented functions. To simplify the interface, some}}
+\DoxyCodeLine{1005 \textcolor{comment}{   default options are assumed (compression level and memory usage,}}
+\DoxyCodeLine{1006 \textcolor{comment}{   standard memory allocation functions). The source code of these}}
+\DoxyCodeLine{1007 \textcolor{comment}{   utility functions can easily be modified if you need special options.}}
+\DoxyCodeLine{1008 \textcolor{comment}{*/}}
+\DoxyCodeLine{1009 }
+\DoxyCodeLine{1010 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} \mbox{\hyperlink{compress_8c_aef315743418d760a360e1be293d27cd1}{compress}} \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zconf_8h_aeb722a888064be47e12d05f692e0f407}{Bytef}} *dest,   \mbox{\hyperlink{zconf_8h_a0426a5a0ed418ec4ae15af8281c64254}{uLongf}} *destLen,}
+\DoxyCodeLine{1011                                  \textcolor{keyword}{const} \mbox{\hyperlink{zconf_8h_aeb722a888064be47e12d05f692e0f407}{Bytef}} *\mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}}, \mbox{\hyperlink{zconf_8h_acd2a5701a3aecf6700d2c66c606ecb40}{uLong}} sourceLen));}
+\DoxyCodeLine{1012 \textcolor{comment}{/*}}
+\DoxyCodeLine{1013 \textcolor{comment}{     Compresses the source buffer into the destination buffer.  sourceLen is}}
+\DoxyCodeLine{1014 \textcolor{comment}{   the byte length of the source buffer. Upon entry, destLen is the total}}
+\DoxyCodeLine{1015 \textcolor{comment}{   size of the destination buffer, which must be at least the value returned}}
+\DoxyCodeLine{1016 \textcolor{comment}{   by compressBound(sourceLen). Upon exit, destLen is the actual size of the}}
+\DoxyCodeLine{1017 \textcolor{comment}{   compressed buffer.}}
+\DoxyCodeLine{1018 \textcolor{comment}{     This function can be used to compress a whole file at once if the}}
+\DoxyCodeLine{1019 \textcolor{comment}{   input file is mmap'ed.}}
+\DoxyCodeLine{1020 \textcolor{comment}{     compress returns Z\_OK if success, Z\_MEM\_ERROR if there was not}}
+\DoxyCodeLine{1021 \textcolor{comment}{   enough memory, Z\_BUF\_ERROR if there was not enough room in the output}}
+\DoxyCodeLine{1022 \textcolor{comment}{   buffer.}}
+\DoxyCodeLine{1023 \textcolor{comment}{*/}}
+\DoxyCodeLine{1024 }
+\DoxyCodeLine{1025 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} \mbox{\hyperlink{compress_8c_aede7e438c033a969a1a40ba6b44f91f9}{compress2}} \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zconf_8h_aeb722a888064be47e12d05f692e0f407}{Bytef}} *dest,   \mbox{\hyperlink{zconf_8h_a0426a5a0ed418ec4ae15af8281c64254}{uLongf}} *destLen,}
+\DoxyCodeLine{1026                                   \textcolor{keyword}{const} \mbox{\hyperlink{zconf_8h_aeb722a888064be47e12d05f692e0f407}{Bytef}} *\mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}}, \mbox{\hyperlink{zconf_8h_acd2a5701a3aecf6700d2c66c606ecb40}{uLong}} sourceLen,}
+\DoxyCodeLine{1027                                   \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a3037cfec75442657d7a3f8830cb97c34}{level}}));}
+\DoxyCodeLine{1028 \textcolor{comment}{/*}}
+\DoxyCodeLine{1029 \textcolor{comment}{     Compresses the source buffer into the destination buffer. The level}}
+\DoxyCodeLine{1030 \textcolor{comment}{   parameter has the same meaning as in deflateInit.  sourceLen is the byte}}
+\DoxyCodeLine{1031 \textcolor{comment}{   length of the source buffer. Upon entry, destLen is the total size of the}}
+\DoxyCodeLine{1032 \textcolor{comment}{   destination buffer, which must be at least the value returned by}}
+\DoxyCodeLine{1033 \textcolor{comment}{   compressBound(sourceLen). Upon exit, destLen is the actual size of the}}
+\DoxyCodeLine{1034 \textcolor{comment}{   compressed buffer.}}
+\DoxyCodeLine{1035 \textcolor{comment}{}}
+\DoxyCodeLine{1036 \textcolor{comment}{     compress2 returns Z\_OK if success, Z\_MEM\_ERROR if there was not enough}}
+\DoxyCodeLine{1037 \textcolor{comment}{   memory, Z\_BUF\_ERROR if there was not enough room in the output buffer,}}
+\DoxyCodeLine{1038 \textcolor{comment}{   Z\_STREAM\_ERROR if the level parameter is invalid.}}
+\DoxyCodeLine{1039 \textcolor{comment}{*/}}
+\DoxyCodeLine{1040 }
+\DoxyCodeLine{1041 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \mbox{\hyperlink{zconf_8h_acd2a5701a3aecf6700d2c66c606ecb40}{uLong}} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} \mbox{\hyperlink{compress_8c_a6bfd92b4426ff6008c841c2cc6f8fed3}{compressBound}} \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zconf_8h_acd2a5701a3aecf6700d2c66c606ecb40}{uLong}} sourceLen));}
+\DoxyCodeLine{1042 \textcolor{comment}{/*}}
+\DoxyCodeLine{1043 \textcolor{comment}{     compressBound() returns an upper bound on the compressed size after}}
+\DoxyCodeLine{1044 \textcolor{comment}{   compress() or compress2() on sourceLen bytes.  It would be used before}}
+\DoxyCodeLine{1045 \textcolor{comment}{   a compress() or compress2() call to allocate the destination buffer.}}
+\DoxyCodeLine{1046 \textcolor{comment}{*/}}
+\DoxyCodeLine{1047 }
+\DoxyCodeLine{1048 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} \mbox{\hyperlink{uncompr_8c_a8f3c7b8209b3ef38a1d2b9d03f0eb978}{uncompress}} \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zconf_8h_aeb722a888064be47e12d05f692e0f407}{Bytef}} *dest,   \mbox{\hyperlink{zconf_8h_a0426a5a0ed418ec4ae15af8281c64254}{uLongf}} *destLen,}
+\DoxyCodeLine{1049                                    \textcolor{keyword}{const} \mbox{\hyperlink{zconf_8h_aeb722a888064be47e12d05f692e0f407}{Bytef}} *\mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}}, \mbox{\hyperlink{zconf_8h_acd2a5701a3aecf6700d2c66c606ecb40}{uLong}} sourceLen));}
+\DoxyCodeLine{1050 \textcolor{comment}{/*}}
+\DoxyCodeLine{1051 \textcolor{comment}{     Decompresses the source buffer into the destination buffer.  sourceLen is}}
+\DoxyCodeLine{1052 \textcolor{comment}{   the byte length of the source buffer. Upon entry, destLen is the total}}
+\DoxyCodeLine{1053 \textcolor{comment}{   size of the destination buffer, which must be large enough to hold the}}
+\DoxyCodeLine{1054 \textcolor{comment}{   entire uncompressed data. (The size of the uncompressed data must have}}
+\DoxyCodeLine{1055 \textcolor{comment}{   been saved previously by the compressor and transmitted to the decompressor}}
+\DoxyCodeLine{1056 \textcolor{comment}{   by some mechanism outside the scope of this compression library.)}}
+\DoxyCodeLine{1057 \textcolor{comment}{   Upon exit, destLen is the actual size of the compressed buffer.}}
+\DoxyCodeLine{1058 \textcolor{comment}{     This function can be used to decompress a whole file at once if the}}
+\DoxyCodeLine{1059 \textcolor{comment}{   input file is mmap'ed.}}
+\DoxyCodeLine{1060 \textcolor{comment}{}}
+\DoxyCodeLine{1061 \textcolor{comment}{     uncompress returns Z\_OK if success, Z\_MEM\_ERROR if there was not}}
+\DoxyCodeLine{1062 \textcolor{comment}{   enough memory, Z\_BUF\_ERROR if there was not enough room in the output}}
+\DoxyCodeLine{1063 \textcolor{comment}{   buffer, or Z\_DATA\_ERROR if the input data was corrupted or incomplete.}}
+\DoxyCodeLine{1064 \textcolor{comment}{*/}}
+\DoxyCodeLine{1065 }
+\DoxyCodeLine{1066 }
+\DoxyCodeLine{1067 \textcolor{keyword}{typedef} \mbox{\hyperlink{zconf_8h_aa3397ff439b5e076528b04bc9b8b086a}{voidp}} \mbox{\hyperlink{zlib_8h_acd0143ddd532551631ecc7093fd7adfc}{gzFile}};}
+\DoxyCodeLine{1068 }
+\DoxyCodeLine{1069 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \mbox{\hyperlink{zlib_8h_acd0143ddd532551631ecc7093fd7adfc}{gzFile}} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} gzopen  \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{namespacegl_aa24d70da9c7853cfd8a8fc343e72c20d}{path}}, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{png_8h_a3eabae3e1e65723a7ec3445646cb7795}{mode}}));}
+\DoxyCodeLine{1070 \textcolor{comment}{/*}}
+\DoxyCodeLine{1071 \textcolor{comment}{     Opens a gzip (.gz) file for reading or writing. The mode parameter}}
+\DoxyCodeLine{1072 \textcolor{comment}{   is as in fopen ("{}rb"{} or "{}wb"{}) but can also include a compression level}}
+\DoxyCodeLine{1073 \textcolor{comment}{   ("{}wb9"{}) or a strategy: 'f' for filtered data as in "{}wb6f"{}, 'h' for}}
+\DoxyCodeLine{1074 \textcolor{comment}{   Huffman only compression as in "{}wb1h"{}, or 'R' for run-\/length encoding}}
+\DoxyCodeLine{1075 \textcolor{comment}{   as in "{}wb1R"{}. (See the description of deflateInit2 for more information}}
+\DoxyCodeLine{1076 \textcolor{comment}{   about the strategy parameter.)}}
+\DoxyCodeLine{1077 \textcolor{comment}{}}
+\DoxyCodeLine{1078 \textcolor{comment}{     gzopen can be used to read a file which is not in gzip format; in this}}
+\DoxyCodeLine{1079 \textcolor{comment}{   case gzread will directly read from the file without decompression.}}
+\DoxyCodeLine{1080 \textcolor{comment}{}}
+\DoxyCodeLine{1081 \textcolor{comment}{     gzopen returns NULL if the file could not be opened or if there was}}
+\DoxyCodeLine{1082 \textcolor{comment}{   insufficient memory to allocate the (de)compression state; errno}}
+\DoxyCodeLine{1083 \textcolor{comment}{   can be checked to distinguish the two cases (if errno is zero, the}}
+\DoxyCodeLine{1084 \textcolor{comment}{   zlib error is Z\_MEM\_ERROR).  */}}
+\DoxyCodeLine{1085 }
+\DoxyCodeLine{1086 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \mbox{\hyperlink{zlib_8h_acd0143ddd532551631ecc7093fd7adfc}{gzFile}} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} gzdopen  \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a1af1643b175375d13a594f4a555199bf}{fd}}, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{png_8h_a3eabae3e1e65723a7ec3445646cb7795}{mode}}));}
+\DoxyCodeLine{1087 \textcolor{comment}{/*}}
+\DoxyCodeLine{1088 \textcolor{comment}{     gzdopen() associates a gzFile with the file descriptor fd.  File}}
+\DoxyCodeLine{1089 \textcolor{comment}{   descriptors are obtained from calls like open, dup, creat, pipe or}}
+\DoxyCodeLine{1090 \textcolor{comment}{   fileno (in the file has been previously opened with fopen).}}
+\DoxyCodeLine{1091 \textcolor{comment}{   The mode parameter is as in gzopen.}}
+\DoxyCodeLine{1092 \textcolor{comment}{     The next call of gzclose on the returned gzFile will also close the}}
+\DoxyCodeLine{1093 \textcolor{comment}{   file descriptor fd, just like fclose(fdopen(fd), mode) closes the file}}
+\DoxyCodeLine{1094 \textcolor{comment}{   descriptor fd. If you want to keep fd open, use gzdopen(dup(fd), mode).}}
+\DoxyCodeLine{1095 \textcolor{comment}{     gzdopen returns NULL if there was insufficient memory to allocate}}
+\DoxyCodeLine{1096 \textcolor{comment}{   the (de)compression state.}}
+\DoxyCodeLine{1097 \textcolor{comment}{*/}}
+\DoxyCodeLine{1098 }
+\DoxyCodeLine{1099 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} gzsetparams \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_acd0143ddd532551631ecc7093fd7adfc}{gzFile}} file, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a3037cfec75442657d7a3f8830cb97c34}{level}}, \textcolor{keywordtype}{int} strategy));}
+\DoxyCodeLine{1100 \textcolor{comment}{/*}}
+\DoxyCodeLine{1101 \textcolor{comment}{     Dynamically update the compression level or strategy. See the description}}
+\DoxyCodeLine{1102 \textcolor{comment}{   of deflateInit2 for the meaning of these parameters.}}
+\DoxyCodeLine{1103 \textcolor{comment}{     gzsetparams returns Z\_OK if success, or Z\_STREAM\_ERROR if the file was not}}
+\DoxyCodeLine{1104 \textcolor{comment}{   opened for writing.}}
+\DoxyCodeLine{1105 \textcolor{comment}{*/}}
+\DoxyCodeLine{1106 }
+\DoxyCodeLine{1107 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}}    gzread  \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_acd0143ddd532551631ecc7093fd7adfc}{gzFile}} file, \mbox{\hyperlink{zconf_8h_aa3397ff439b5e076528b04bc9b8b086a}{voidp}} \mbox{\hyperlink{namespacegl_ab998012e627da2312fc60f51c0c2f313}{buf}}, \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespacegl_a8703aca610f6fee6039234f569470dbf}{len}}));}
+\DoxyCodeLine{1108 \textcolor{comment}{/*}}
+\DoxyCodeLine{1109 \textcolor{comment}{     Reads the given number of uncompressed bytes from the compressed file.}}
+\DoxyCodeLine{1110 \textcolor{comment}{   If the input file was not in gzip format, gzread copies the given number}}
+\DoxyCodeLine{1111 \textcolor{comment}{   of bytes into the buffer.}}
+\DoxyCodeLine{1112 \textcolor{comment}{     gzread returns the number of uncompressed bytes actually read (0 for}}
+\DoxyCodeLine{1113 \textcolor{comment}{   end of file, -\/1 for error). */}}
+\DoxyCodeLine{1114 }
+\DoxyCodeLine{1115 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}}    gzwrite \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_acd0143ddd532551631ecc7093fd7adfc}{gzFile}} file,}
+\DoxyCodeLine{1116                                    \mbox{\hyperlink{zconf_8h_a7db54413d7060e4b57868c2b23c0ec1c}{voidpc}} \mbox{\hyperlink{namespacegl_ab998012e627da2312fc60f51c0c2f313}{buf}}, \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespacegl_a8703aca610f6fee6039234f569470dbf}{len}}));}
+\DoxyCodeLine{1117 \textcolor{comment}{/*}}
+\DoxyCodeLine{1118 \textcolor{comment}{     Writes the given number of uncompressed bytes into the compressed file.}}
+\DoxyCodeLine{1119 \textcolor{comment}{   gzwrite returns the number of uncompressed bytes actually written}}
+\DoxyCodeLine{1120 \textcolor{comment}{   (0 in case of error).}}
+\DoxyCodeLine{1121 \textcolor{comment}{*/}}
+\DoxyCodeLine{1122 }
+\DoxyCodeLine{1123 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_af38d1853df635eee27f1a02f96457b22}{ZEXPORTVA}}   gzprintf \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_acd0143ddd532551631ecc7093fd7adfc}{gzFile}} file, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{namespacegl_a597b77c61fc6d444d2bfc6bf69dee277}{format}}, ...));}
+\DoxyCodeLine{1124 \textcolor{comment}{/*}}
+\DoxyCodeLine{1125 \textcolor{comment}{     Converts, formats, and writes the args to the compressed file under}}
+\DoxyCodeLine{1126 \textcolor{comment}{   control of the format string, as in fprintf. gzprintf returns the number of}}
+\DoxyCodeLine{1127 \textcolor{comment}{   uncompressed bytes actually written (0 in case of error).  The number of}}
+\DoxyCodeLine{1128 \textcolor{comment}{   uncompressed bytes written is limited to 4095. The caller should assure that}}
+\DoxyCodeLine{1129 \textcolor{comment}{   this limit is not exceeded. If it is exceeded, then gzprintf() will return}}
+\DoxyCodeLine{1130 \textcolor{comment}{   return an error (0) with nothing written. In this case, there may also be a}}
+\DoxyCodeLine{1131 \textcolor{comment}{   buffer overflow with unpredictable consequences, which is possible only if}}
+\DoxyCodeLine{1132 \textcolor{comment}{   zlib was compiled with the insecure functions sprintf() or vsprintf()}}
+\DoxyCodeLine{1133 \textcolor{comment}{   because the secure snprintf() or vsnprintf() functions were not available.}}
+\DoxyCodeLine{1134 \textcolor{comment}{*/}}
+\DoxyCodeLine{1135 }
+\DoxyCodeLine{1136 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} gzputs \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_acd0143ddd532551631ecc7093fd7adfc}{gzFile}} file, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}}));}
+\DoxyCodeLine{1137 \textcolor{comment}{/*}}
+\DoxyCodeLine{1138 \textcolor{comment}{      Writes the given null-\/terminated string to the compressed file, excluding}}
+\DoxyCodeLine{1139 \textcolor{comment}{   the terminating null character.}}
+\DoxyCodeLine{1140 \textcolor{comment}{      gzputs returns the number of characters written, or -\/1 in case of error.}}
+\DoxyCodeLine{1141 \textcolor{comment}{*/}}
+\DoxyCodeLine{1142 }
+\DoxyCodeLine{1143 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{char} * \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} gzgets \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_acd0143ddd532551631ecc7093fd7adfc}{gzFile}} file, \textcolor{keywordtype}{char} *\mbox{\hyperlink{namespacegl_ab998012e627da2312fc60f51c0c2f313}{buf}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a8703aca610f6fee6039234f569470dbf}{len}}));}
+\DoxyCodeLine{1144 \textcolor{comment}{/*}}
+\DoxyCodeLine{1145 \textcolor{comment}{      Reads bytes from the compressed file until len-\/1 characters are read, or}}
+\DoxyCodeLine{1146 \textcolor{comment}{   a newline character is read and transferred to buf, or an end-\/of-\/file}}
+\DoxyCodeLine{1147 \textcolor{comment}{   condition is encountered.  The string is then terminated with a null}}
+\DoxyCodeLine{1148 \textcolor{comment}{   character.}}
+\DoxyCodeLine{1149 \textcolor{comment}{      gzgets returns buf, or Z\_NULL in case of error.}}
+\DoxyCodeLine{1150 \textcolor{comment}{*/}}
+\DoxyCodeLine{1151 }
+\DoxyCodeLine{1152 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}}    gzputc \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_acd0143ddd532551631ecc7093fd7adfc}{gzFile}} file, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}));}
+\DoxyCodeLine{1153 \textcolor{comment}{/*}}
+\DoxyCodeLine{1154 \textcolor{comment}{      Writes c, converted to an unsigned char, into the compressed file.}}
+\DoxyCodeLine{1155 \textcolor{comment}{   gzputc returns the value that was written, or -\/1 in case of error.}}
+\DoxyCodeLine{1156 \textcolor{comment}{*/}}
+\DoxyCodeLine{1157 }
+\DoxyCodeLine{1158 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}}    gzgetc \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_acd0143ddd532551631ecc7093fd7adfc}{gzFile}} file));}
+\DoxyCodeLine{1159 \textcolor{comment}{/*}}
+\DoxyCodeLine{1160 \textcolor{comment}{      Reads one byte from the compressed file. gzgetc returns this byte}}
+\DoxyCodeLine{1161 \textcolor{comment}{   or -\/1 in case of end of file or error.}}
+\DoxyCodeLine{1162 \textcolor{comment}{*/}}
+\DoxyCodeLine{1163 }
+\DoxyCodeLine{1164 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}}    gzungetc \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}, \mbox{\hyperlink{zlib_8h_acd0143ddd532551631ecc7093fd7adfc}{gzFile}} file));}
+\DoxyCodeLine{1165 \textcolor{comment}{/*}}
+\DoxyCodeLine{1166 \textcolor{comment}{      Push one character back onto the stream to be read again later.}}
+\DoxyCodeLine{1167 \textcolor{comment}{   Only one character of push-\/back is allowed.  gzungetc() returns the}}
+\DoxyCodeLine{1168 \textcolor{comment}{   character pushed, or -\/1 on failure.  gzungetc() will fail if a}}
+\DoxyCodeLine{1169 \textcolor{comment}{   character has been pushed but not read yet, or if c is -\/1. The pushed}}
+\DoxyCodeLine{1170 \textcolor{comment}{   character will be discarded if the stream is repositioned with gzseek()}}
+\DoxyCodeLine{1171 \textcolor{comment}{   or gzrewind().}}
+\DoxyCodeLine{1172 \textcolor{comment}{*/}}
+\DoxyCodeLine{1173 }
+\DoxyCodeLine{1174 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}}    gzflush \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_acd0143ddd532551631ecc7093fd7adfc}{gzFile}} file, \textcolor{keywordtype}{int} flush));}
+\DoxyCodeLine{1175 \textcolor{comment}{/*}}
+\DoxyCodeLine{1176 \textcolor{comment}{     Flushes all pending output into the compressed file. The parameter}}
+\DoxyCodeLine{1177 \textcolor{comment}{   flush is as in the deflate() function. The return value is the zlib}}
+\DoxyCodeLine{1178 \textcolor{comment}{   error number (see function gzerror below). gzflush returns Z\_OK if}}
+\DoxyCodeLine{1179 \textcolor{comment}{   the flush parameter is Z\_FINISH and all output could be flushed.}}
+\DoxyCodeLine{1180 \textcolor{comment}{     gzflush should be called only when strictly necessary because it can}}
+\DoxyCodeLine{1181 \textcolor{comment}{   degrade compression.}}
+\DoxyCodeLine{1182 \textcolor{comment}{*/}}
+\DoxyCodeLine{1183 }
+\DoxyCodeLine{1184 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \mbox{\hyperlink{zconf_8h_a8cf4661a88ec12823d7cbdd3fa629eb0}{z\_off\_t}} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}}    gzseek \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_acd0143ddd532551631ecc7093fd7adfc}{gzFile}} file,}
+\DoxyCodeLine{1185                                       \mbox{\hyperlink{zconf_8h_a8cf4661a88ec12823d7cbdd3fa629eb0}{z\_off\_t}} \mbox{\hyperlink{namespacegl_aa4212fe83465b750077176bdbad74288}{offset}}, \textcolor{keywordtype}{int} whence));}
+\DoxyCodeLine{1186 \textcolor{comment}{/*}}
+\DoxyCodeLine{1187 \textcolor{comment}{      Sets the starting position for the next gzread or gzwrite on the}}
+\DoxyCodeLine{1188 \textcolor{comment}{   given compressed file. The offset represents a number of bytes in the}}
+\DoxyCodeLine{1189 \textcolor{comment}{   uncompressed data stream. The whence parameter is defined as in lseek(2);}}
+\DoxyCodeLine{1190 \textcolor{comment}{   the value SEEK\_END is not supported.}}
+\DoxyCodeLine{1191 \textcolor{comment}{     If the file is opened for reading, this function is emulated but can be}}
+\DoxyCodeLine{1192 \textcolor{comment}{   extremely slow. If the file is opened for writing, only forward seeks are}}
+\DoxyCodeLine{1193 \textcolor{comment}{   supported; gzseek then compresses a sequence of zeroes up to the new}}
+\DoxyCodeLine{1194 \textcolor{comment}{   starting position.}}
+\DoxyCodeLine{1195 \textcolor{comment}{}}
+\DoxyCodeLine{1196 \textcolor{comment}{      gzseek returns the resulting offset location as measured in bytes from}}
+\DoxyCodeLine{1197 \textcolor{comment}{   the beginning of the uncompressed stream, or -\/1 in case of error, in}}
+\DoxyCodeLine{1198 \textcolor{comment}{   particular if the file is opened for writing and the new starting position}}
+\DoxyCodeLine{1199 \textcolor{comment}{   would be before the current position.}}
+\DoxyCodeLine{1200 \textcolor{comment}{*/}}
+\DoxyCodeLine{1201 }
+\DoxyCodeLine{1202 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}}    gzrewind \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_acd0143ddd532551631ecc7093fd7adfc}{gzFile}} file));}
+\DoxyCodeLine{1203 \textcolor{comment}{/*}}
+\DoxyCodeLine{1204 \textcolor{comment}{     Rewinds the given file. This function is supported only for reading.}}
+\DoxyCodeLine{1205 \textcolor{comment}{}}
+\DoxyCodeLine{1206 \textcolor{comment}{   gzrewind(file) is equivalent to (int)gzseek(file, 0L, SEEK\_SET)}}
+\DoxyCodeLine{1207 \textcolor{comment}{*/}}
+\DoxyCodeLine{1208 }
+\DoxyCodeLine{1209 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \mbox{\hyperlink{zconf_8h_a8cf4661a88ec12823d7cbdd3fa629eb0}{z\_off\_t}} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}}    gztell \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_acd0143ddd532551631ecc7093fd7adfc}{gzFile}} file));}
+\DoxyCodeLine{1210 \textcolor{comment}{/*}}
+\DoxyCodeLine{1211 \textcolor{comment}{     Returns the starting position for the next gzread or gzwrite on the}}
+\DoxyCodeLine{1212 \textcolor{comment}{   given compressed file. This position represents a number of bytes in the}}
+\DoxyCodeLine{1213 \textcolor{comment}{   uncompressed data stream.}}
+\DoxyCodeLine{1214 \textcolor{comment}{}}
+\DoxyCodeLine{1215 \textcolor{comment}{   gztell(file) is equivalent to gzseek(file, 0L, SEEK\_CUR)}}
+\DoxyCodeLine{1216 \textcolor{comment}{*/}}
+\DoxyCodeLine{1217 }
+\DoxyCodeLine{1218 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} gzeof \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_acd0143ddd532551631ecc7093fd7adfc}{gzFile}} file));}
+\DoxyCodeLine{1219 \textcolor{comment}{/*}}
+\DoxyCodeLine{1220 \textcolor{comment}{     Returns 1 when EOF has previously been detected reading the given}}
+\DoxyCodeLine{1221 \textcolor{comment}{   input stream, otherwise zero.}}
+\DoxyCodeLine{1222 \textcolor{comment}{*/}}
+\DoxyCodeLine{1223 }
+\DoxyCodeLine{1224 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} gzdirect \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_acd0143ddd532551631ecc7093fd7adfc}{gzFile}} file));}
+\DoxyCodeLine{1225 \textcolor{comment}{/*}}
+\DoxyCodeLine{1226 \textcolor{comment}{     Returns 1 if file is being read directly without decompression, otherwise}}
+\DoxyCodeLine{1227 \textcolor{comment}{   zero.}}
+\DoxyCodeLine{1228 \textcolor{comment}{*/}}
+\DoxyCodeLine{1229 }
+\DoxyCodeLine{1230 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}}    gzclose \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_acd0143ddd532551631ecc7093fd7adfc}{gzFile}} file));}
+\DoxyCodeLine{1231 \textcolor{comment}{/*}}
+\DoxyCodeLine{1232 \textcolor{comment}{     Flushes all pending output if necessary, closes the compressed file}}
+\DoxyCodeLine{1233 \textcolor{comment}{   and deallocates all the (de)compression state. The return value is the zlib}}
+\DoxyCodeLine{1234 \textcolor{comment}{   error number (see function gzerror below).}}
+\DoxyCodeLine{1235 \textcolor{comment}{*/}}
+\DoxyCodeLine{1236 }
+\DoxyCodeLine{1237 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keyword}{const} \textcolor{keywordtype}{char} * \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} gzerror \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_acd0143ddd532551631ecc7093fd7adfc}{gzFile}} file, \textcolor{keywordtype}{int} *errnum));}
+\DoxyCodeLine{1238 \textcolor{comment}{/*}}
+\DoxyCodeLine{1239 \textcolor{comment}{     Returns the error message for the last error which occurred on the}}
+\DoxyCodeLine{1240 \textcolor{comment}{   given compressed file. errnum is set to zlib error number. If an}}
+\DoxyCodeLine{1241 \textcolor{comment}{   error occurred in the file system and not in the compression library,}}
+\DoxyCodeLine{1242 \textcolor{comment}{   errnum is set to Z\_ERRNO and the application may consult errno}}
+\DoxyCodeLine{1243 \textcolor{comment}{   to get the exact error code.}}
+\DoxyCodeLine{1244 \textcolor{comment}{*/}}
+\DoxyCodeLine{1245 }
+\DoxyCodeLine{1246 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{void} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} gzclearerr \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_acd0143ddd532551631ecc7093fd7adfc}{gzFile}} file));}
+\DoxyCodeLine{1247 \textcolor{comment}{/*}}
+\DoxyCodeLine{1248 \textcolor{comment}{     Clears the error and end-\/of-\/file flags for file. This is analogous to the}}
+\DoxyCodeLine{1249 \textcolor{comment}{   clearerr() function in stdio. This is useful for continuing to read a gzip}}
+\DoxyCodeLine{1250 \textcolor{comment}{   file that is being written concurrently.}}
+\DoxyCodeLine{1251 \textcolor{comment}{*/}}
+\DoxyCodeLine{1252 }
+\DoxyCodeLine{1253                         \textcolor{comment}{/* checksum functions */}}
+\DoxyCodeLine{1254 }
+\DoxyCodeLine{1255 \textcolor{comment}{/*}}
+\DoxyCodeLine{1256 \textcolor{comment}{     These functions are not related to compression but are exported}}
+\DoxyCodeLine{1257 \textcolor{comment}{   anyway because they might be useful in applications using the}}
+\DoxyCodeLine{1258 \textcolor{comment}{   compression library.}}
+\DoxyCodeLine{1259 \textcolor{comment}{*/}}
+\DoxyCodeLine{1260 }
+\DoxyCodeLine{1261 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \mbox{\hyperlink{zconf_8h_acd2a5701a3aecf6700d2c66c606ecb40}{uLong}} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} \mbox{\hyperlink{adler32_8c_a86607743a4b76949b24cf5cc2f01a40d}{adler32}} \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zconf_8h_acd2a5701a3aecf6700d2c66c606ecb40}{uLong}} \mbox{\hyperlink{png_8c_abe64cf46aaf48e85ea1d9a4faa51555d}{adler}}, \textcolor{keyword}{const} \mbox{\hyperlink{zconf_8h_aeb722a888064be47e12d05f692e0f407}{Bytef}} *\mbox{\hyperlink{namespacegl_ab998012e627da2312fc60f51c0c2f313}{buf}}, \mbox{\hyperlink{zconf_8h_a87d141052bcd5ec8a80812a565c70369}{uInt}} \mbox{\hyperlink{namespacegl_a8703aca610f6fee6039234f569470dbf}{len}}));}
+\DoxyCodeLine{1262 \textcolor{comment}{/*}}
+\DoxyCodeLine{1263 \textcolor{comment}{     Update a running Adler-\/32 checksum with the bytes buf[0..len-\/1] and}}
+\DoxyCodeLine{1264 \textcolor{comment}{   return the updated checksum. If buf is NULL, this function returns}}
+\DoxyCodeLine{1265 \textcolor{comment}{   the required initial value for the checksum.}}
+\DoxyCodeLine{1266 \textcolor{comment}{   An Adler-\/32 checksum is almost as reliable as a CRC32 but can be computed}}
+\DoxyCodeLine{1267 \textcolor{comment}{   much faster. Usage example:}}
+\DoxyCodeLine{1268 \textcolor{comment}{}}
+\DoxyCodeLine{1269 \textcolor{comment}{     uLong adler = adler32(0L, Z\_NULL, 0);}}
+\DoxyCodeLine{1270 \textcolor{comment}{}}
+\DoxyCodeLine{1271 \textcolor{comment}{     while (read\_buffer(buffer, length) != EOF) \{}}
+\DoxyCodeLine{1272 \textcolor{comment}{       adler = adler32(adler, buffer, length);}}
+\DoxyCodeLine{1273 \textcolor{comment}{     \}}}
+\DoxyCodeLine{1274 \textcolor{comment}{     if (adler != original\_adler) error();}}
+\DoxyCodeLine{1275 \textcolor{comment}{*/}}
+\DoxyCodeLine{1276 }
+\DoxyCodeLine{1277 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \mbox{\hyperlink{zconf_8h_acd2a5701a3aecf6700d2c66c606ecb40}{uLong}} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} \mbox{\hyperlink{adler32_8c_af4a8b45f615e831c56b08da530870e59}{adler32\_combine}} \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zconf_8h_acd2a5701a3aecf6700d2c66c606ecb40}{uLong}} adler1, \mbox{\hyperlink{zconf_8h_acd2a5701a3aecf6700d2c66c606ecb40}{uLong}} adler2,}
+\DoxyCodeLine{1278                                           \mbox{\hyperlink{zconf_8h_a8cf4661a88ec12823d7cbdd3fa629eb0}{z\_off\_t}} len2));}
+\DoxyCodeLine{1279 \textcolor{comment}{/*}}
+\DoxyCodeLine{1280 \textcolor{comment}{     Combine two Adler-\/32 checksums into one.  For two sequences of bytes, seq1}}
+\DoxyCodeLine{1281 \textcolor{comment}{   and seq2 with lengths len1 and len2, Adler-\/32 checksums were calculated for}}
+\DoxyCodeLine{1282 \textcolor{comment}{   each, adler1 and adler2.  adler32\_combine() returns the Adler-\/32 checksum of}}
+\DoxyCodeLine{1283 \textcolor{comment}{   seq1 and seq2 concatenated, requiring only adler1, adler2, and len2.}}
+\DoxyCodeLine{1284 \textcolor{comment}{*/}}
+\DoxyCodeLine{1285 }
+\DoxyCodeLine{1286 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \mbox{\hyperlink{zconf_8h_acd2a5701a3aecf6700d2c66c606ecb40}{uLong}} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} \mbox{\hyperlink{crc32_8c_a5d6fb454f076e5762905a247702c9be3}{crc32}}   \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zconf_8h_acd2a5701a3aecf6700d2c66c606ecb40}{uLong}} \mbox{\hyperlink{png_8c_abe3a3dd2f471e670e252fcc0835d57c0}{crc}}, \textcolor{keyword}{const} \mbox{\hyperlink{zconf_8h_aeb722a888064be47e12d05f692e0f407}{Bytef}} *\mbox{\hyperlink{namespacegl_ab998012e627da2312fc60f51c0c2f313}{buf}}, \mbox{\hyperlink{zconf_8h_a87d141052bcd5ec8a80812a565c70369}{uInt}} \mbox{\hyperlink{namespacegl_a8703aca610f6fee6039234f569470dbf}{len}}));}
+\DoxyCodeLine{1287 \textcolor{comment}{/*}}
+\DoxyCodeLine{1288 \textcolor{comment}{     Update a running CRC-\/32 with the bytes buf[0..len-\/1] and return the}}
+\DoxyCodeLine{1289 \textcolor{comment}{   updated CRC-\/32. If buf is NULL, this function returns the required initial}}
+\DoxyCodeLine{1290 \textcolor{comment}{   value for the for the crc. Pre-\/ and post-\/conditioning (one's complement) is}}
+\DoxyCodeLine{1291 \textcolor{comment}{   performed within this function so it shouldn't be done by the application.}}
+\DoxyCodeLine{1292 \textcolor{comment}{   Usage example:}}
+\DoxyCodeLine{1293 \textcolor{comment}{}}
+\DoxyCodeLine{1294 \textcolor{comment}{     uLong crc = crc32(0L, Z\_NULL, 0);}}
+\DoxyCodeLine{1295 \textcolor{comment}{}}
+\DoxyCodeLine{1296 \textcolor{comment}{     while (read\_buffer(buffer, length) != EOF) \{}}
+\DoxyCodeLine{1297 \textcolor{comment}{       crc = crc32(crc, buffer, length);}}
+\DoxyCodeLine{1298 \textcolor{comment}{     \}}}
+\DoxyCodeLine{1299 \textcolor{comment}{     if (crc != original\_crc) error();}}
+\DoxyCodeLine{1300 \textcolor{comment}{*/}}
+\DoxyCodeLine{1301 }
+\DoxyCodeLine{1302 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \mbox{\hyperlink{zconf_8h_acd2a5701a3aecf6700d2c66c606ecb40}{uLong}} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} \mbox{\hyperlink{crc32_8c_aa7a1dc42a5d07c76263f4130f23d4515}{crc32\_combine}} \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zconf_8h_acd2a5701a3aecf6700d2c66c606ecb40}{uLong}} crc1, \mbox{\hyperlink{zconf_8h_acd2a5701a3aecf6700d2c66c606ecb40}{uLong}} crc2, \mbox{\hyperlink{zconf_8h_a8cf4661a88ec12823d7cbdd3fa629eb0}{z\_off\_t}} len2));}
+\DoxyCodeLine{1303 }
+\DoxyCodeLine{1304 \textcolor{comment}{/*}}
+\DoxyCodeLine{1305 \textcolor{comment}{     Combine two CRC-\/32 check values into one.  For two sequences of bytes,}}
+\DoxyCodeLine{1306 \textcolor{comment}{   seq1 and seq2 with lengths len1 and len2, CRC-\/32 check values were}}
+\DoxyCodeLine{1307 \textcolor{comment}{   calculated for each, crc1 and crc2.  crc32\_combine() returns the CRC-\/32}}
+\DoxyCodeLine{1308 \textcolor{comment}{   check value of seq1 and seq2 concatenated, requiring only crc1, crc2, and}}
+\DoxyCodeLine{1309 \textcolor{comment}{   len2.}}
+\DoxyCodeLine{1310 \textcolor{comment}{*/}}
+\DoxyCodeLine{1311 }
+\DoxyCodeLine{1312 }
+\DoxyCodeLine{1313                         \textcolor{comment}{/* various hacks, don't look :) */}}
+\DoxyCodeLine{1314 }
+\DoxyCodeLine{1315 \textcolor{comment}{/* deflateInit and inflateInit are macros to allow checking the zlib version}}
+\DoxyCodeLine{1316 \textcolor{comment}{ * and the compiler's view of z\_stream:}}
+\DoxyCodeLine{1317 \textcolor{comment}{ */}}
+\DoxyCodeLine{1318 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} \mbox{\hyperlink{deflate_8c_a0e6601591faa9573f27340153b0f3296}{deflateInit\_}} \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_a6ede25c84d3c9f8632305866acffb1d6}{z\_streamp}} strm, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a3037cfec75442657d7a3f8830cb97c34}{level}},}
+\DoxyCodeLine{1319                                      \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{jpeglib_8h_aad880fc4455c253781e8968f2239d56f}{version}}, \textcolor{keywordtype}{int} stream\_size));}
+\DoxyCodeLine{1320 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} \mbox{\hyperlink{inflate_8c_aed01e9084fe1ed4d8808bbcf525dfe63}{inflateInit\_}} \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_a6ede25c84d3c9f8632305866acffb1d6}{z\_streamp}} strm,}
+\DoxyCodeLine{1321                                      \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{jpeglib_8h_aad880fc4455c253781e8968f2239d56f}{version}}, \textcolor{keywordtype}{int} stream\_size));}
+\DoxyCodeLine{1322 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} \mbox{\hyperlink{deflate_8c_ae501d2862c68d17b909d6f1c9264815c}{deflateInit2\_}} \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_a6ede25c84d3c9f8632305866acffb1d6}{z\_streamp}} strm, \textcolor{keywordtype}{int}  \mbox{\hyperlink{namespacegl_a3037cfec75442657d7a3f8830cb97c34}{level}}, \textcolor{keywordtype}{int}  method,}
+\DoxyCodeLine{1323                                       \textcolor{keywordtype}{int} windowBits, \textcolor{keywordtype}{int} memLevel,}
+\DoxyCodeLine{1324                                       \textcolor{keywordtype}{int} strategy, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{jpeglib_8h_aad880fc4455c253781e8968f2239d56f}{version}},}
+\DoxyCodeLine{1325                                       \textcolor{keywordtype}{int} stream\_size));}
+\DoxyCodeLine{1326 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} \mbox{\hyperlink{inflate_8c_aa87e80daa481d931b2d4d414769d432a}{inflateInit2\_}} \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_a6ede25c84d3c9f8632305866acffb1d6}{z\_streamp}} strm, \textcolor{keywordtype}{int}  windowBits,}
+\DoxyCodeLine{1327                                       \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{jpeglib_8h_aad880fc4455c253781e8968f2239d56f}{version}}, \textcolor{keywordtype}{int} stream\_size));}
+\DoxyCodeLine{1328 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int} \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} \mbox{\hyperlink{infback_8c_a00558519755e3bab13ee6f8378973913}{inflateBackInit\_}} \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_a6ede25c84d3c9f8632305866acffb1d6}{z\_streamp}} strm, \textcolor{keywordtype}{int} windowBits,}
+\DoxyCodeLine{1329                                          \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} \mbox{\hyperlink{zconf_8h_aef060b3456fdcc093a7210a762d5f2ed}{FAR}} *window,}
+\DoxyCodeLine{1330                                          \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{jpeglib_8h_aad880fc4455c253781e8968f2239d56f}{version}},}
+\DoxyCodeLine{1331                                          \textcolor{keywordtype}{int} stream\_size));}
+\DoxyCodeLine{1332 \textcolor{preprocessor}{\#define deflateInit(strm, level) \(\backslash\)}}
+\DoxyCodeLine{1333 \textcolor{preprocessor}{        deflateInit\_((strm), (level),       ZLIB\_VERSION, sizeof(z\_stream))}}
+\DoxyCodeLine{1334 \textcolor{preprocessor}{\#define inflateInit(strm) \(\backslash\)}}
+\DoxyCodeLine{1335 \textcolor{preprocessor}{        inflateInit\_((strm),                ZLIB\_VERSION, sizeof(z\_stream))}}
+\DoxyCodeLine{1336 \textcolor{preprocessor}{\#define deflateInit2(strm, level, method, windowBits, memLevel, strategy) \(\backslash\)}}
+\DoxyCodeLine{1337 \textcolor{preprocessor}{        deflateInit2\_((strm),(level),(method),(windowBits),(memLevel),\(\backslash\)}}
+\DoxyCodeLine{1338 \textcolor{preprocessor}{                      (strategy),           ZLIB\_VERSION, sizeof(z\_stream))}}
+\DoxyCodeLine{1339 \textcolor{preprocessor}{\#define inflateInit2(strm, windowBits) \(\backslash\)}}
+\DoxyCodeLine{1340 \textcolor{preprocessor}{        inflateInit2\_((strm), (windowBits), ZLIB\_VERSION, sizeof(z\_stream))}}
+\DoxyCodeLine{1341 \textcolor{preprocessor}{\#define inflateBackInit(strm, windowBits, window) \(\backslash\)}}
+\DoxyCodeLine{1342 \textcolor{preprocessor}{        inflateBackInit\_((strm), (windowBits), (window), \(\backslash\)}}
+\DoxyCodeLine{1343 \textcolor{preprocessor}{        ZLIB\_VERSION, sizeof(z\_stream))}}
+\DoxyCodeLine{1344 }
+\DoxyCodeLine{1345 }
+\DoxyCodeLine{1346 \textcolor{preprocessor}{\#if !defined(ZUTIL\_H) \&\& !defined(NO\_DUMMY\_DECL)}}
+\DoxyCodeLine{1347     \textcolor{keyword}{struct }\mbox{\hyperlink{structinternal__state}{internal\_state}} \{\textcolor{keywordtype}{int} \mbox{\hyperlink{structinternal__state_ab000a3e3c901dd063859521988ad7e52}{dummy}};\}; \textcolor{comment}{/* hack for buggy compilers */}}
+\DoxyCodeLine{1348 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{1349 }
+\DoxyCodeLine{1350 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keyword}{const} \textcolor{keywordtype}{char}   * \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} \mbox{\hyperlink{zutil_8c_ae18915a3028cbb78f6d7fffc813974b1}{zError}}           \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\textcolor{keywordtype}{int}));}
+\DoxyCodeLine{1351 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keywordtype}{int}            \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} \mbox{\hyperlink{inflate_8c_a4499ff5c57a6da7b10a834e82c3e5ab8}{inflateSyncPoint}} \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\mbox{\hyperlink{zlib_8h_a6ede25c84d3c9f8632305866acffb1d6}{z\_streamp}} \mbox{\hyperlink{namespacegl_a7b675e84eeb86e538d7e1ac597237df0}{z}}));}
+\DoxyCodeLine{1352 \mbox{\hyperlink{zconf_8h_a49b7f5eccfcc99e53178581632bc9589}{ZEXTERN}} \textcolor{keyword}{const} \mbox{\hyperlink{zconf_8h_a0426a5a0ed418ec4ae15af8281c64254}{uLongf}} * \mbox{\hyperlink{zconf_8h_a181415878f03b95a7094309d824a14b6}{ZEXPORT}} \mbox{\hyperlink{crc32_8c_ac8247ae44e9cf6caac64460324071053}{get\_crc\_table}}    \mbox{\hyperlink{zlib_8h_a8614d49a5dd53697f4689073c0dbecbb}{OF}}((\textcolor{keywordtype}{void}));}
+\DoxyCodeLine{1353 }
+\DoxyCodeLine{1354 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{1355 \textcolor{comment}{//\}}}
+\DoxyCodeLine{1356 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{1357 }
+\DoxyCodeLine{1358 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* ZLIB\_H */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

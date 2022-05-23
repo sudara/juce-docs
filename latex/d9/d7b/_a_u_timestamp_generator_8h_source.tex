@@ -1,0 +1,169 @@
+\hypertarget{_a_u_timestamp_generator_8h_source}{}\doxysection{AUTimestamp\+Generator.\+h}
+\label{_a_u_timestamp_generator_8h_source}\index{build/juce\_audio\_plugin\_client/AU/CoreAudioUtilityClasses/AUTimestampGenerator.h@{build/juce\_audio\_plugin\_client/AU/CoreAudioUtilityClasses/AUTimestampGenerator.h}}
+\mbox{\hyperlink{_a_u_timestamp_generator_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{     File: AUTimestampGenerator.h}}
+\DoxyCodeLine{3 \textcolor{comment}{ Abstract: Part of CoreAudio Utility Classes}}
+\DoxyCodeLine{4 \textcolor{comment}{  Version: 1.1}}
+\DoxyCodeLine{5 \textcolor{comment}{}}
+\DoxyCodeLine{6 \textcolor{comment}{ Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple}}
+\DoxyCodeLine{7 \textcolor{comment}{ Inc. ("{}Apple"{}) in consideration of your agreement to the following}}
+\DoxyCodeLine{8 \textcolor{comment}{ terms, and your use, installation, modification or redistribution of}}
+\DoxyCodeLine{9 \textcolor{comment}{ this Apple software constitutes acceptance of these terms.  If you do}}
+\DoxyCodeLine{10 \textcolor{comment}{ not agree with these terms, please do not use, install, modify or}}
+\DoxyCodeLine{11 \textcolor{comment}{ redistribute this Apple software.}}
+\DoxyCodeLine{12 \textcolor{comment}{}}
+\DoxyCodeLine{13 \textcolor{comment}{ In consideration of your agreement to abide by the following terms, and}}
+\DoxyCodeLine{14 \textcolor{comment}{ subject to these terms, Apple grants you a personal, non-\/exclusive}}
+\DoxyCodeLine{15 \textcolor{comment}{ license, under Apple's copyrights in this original Apple software (the}}
+\DoxyCodeLine{16 \textcolor{comment}{ "{}Apple Software"{}), to use, reproduce, modify and redistribute the Apple}}
+\DoxyCodeLine{17 \textcolor{comment}{ Software, with or without modifications, in source and/or binary forms;}}
+\DoxyCodeLine{18 \textcolor{comment}{ provided that if you redistribute the Apple Software in its entirety and}}
+\DoxyCodeLine{19 \textcolor{comment}{ without modifications, you must retain this notice and the following}}
+\DoxyCodeLine{20 \textcolor{comment}{ text and disclaimers in all such redistributions of the Apple Software.}}
+\DoxyCodeLine{21 \textcolor{comment}{ Neither the name, trademarks, service marks or logos of Apple Inc. may}}
+\DoxyCodeLine{22 \textcolor{comment}{ be used to endorse or promote products derived from the Apple Software}}
+\DoxyCodeLine{23 \textcolor{comment}{ without specific prior written permission from Apple.  Except as}}
+\DoxyCodeLine{24 \textcolor{comment}{ expressly stated in this notice, no other rights or licenses, express or}}
+\DoxyCodeLine{25 \textcolor{comment}{ implied, are granted by Apple herein, including but not limited to any}}
+\DoxyCodeLine{26 \textcolor{comment}{ patent rights that may be infringed by your derivative works or by other}}
+\DoxyCodeLine{27 \textcolor{comment}{ works in which the Apple Software may be incorporated.}}
+\DoxyCodeLine{28 \textcolor{comment}{}}
+\DoxyCodeLine{29 \textcolor{comment}{ The Apple Software is provided by Apple on an "{}AS IS"{} basis.  APPLE}}
+\DoxyCodeLine{30 \textcolor{comment}{ MAKES NO WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION}}
+\DoxyCodeLine{31 \textcolor{comment}{ THE IMPLIED WARRANTIES OF NON-\/INFRINGEMENT, MERCHANTABILITY AND FITNESS}}
+\DoxyCodeLine{32 \textcolor{comment}{ FOR A PARTICULAR PURPOSE, REGARDING THE APPLE SOFTWARE OR ITS USE AND}}
+\DoxyCodeLine{33 \textcolor{comment}{ OPERATION ALONE OR IN COMBINATION WITH YOUR PRODUCTS.}}
+\DoxyCodeLine{34 \textcolor{comment}{}}
+\DoxyCodeLine{35 \textcolor{comment}{ IN NO EVENT SHALL APPLE BE LIABLE FOR ANY SPECIAL, INDIRECT, INCIDENTAL}}
+\DoxyCodeLine{36 \textcolor{comment}{ OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF}}
+\DoxyCodeLine{37 \textcolor{comment}{ SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS}}
+\DoxyCodeLine{38 \textcolor{comment}{ INTERRUPTION) ARISING IN ANY WAY OUT OF THE USE, REPRODUCTION,}}
+\DoxyCodeLine{39 \textcolor{comment}{ MODIFICATION AND/OR DISTRIBUTION OF THE APPLE SOFTWARE, HOWEVER CAUSED}}
+\DoxyCodeLine{40 \textcolor{comment}{ AND WHETHER UNDER THEORY OF CONTRACT, TORT (INCLUDING NEGLIGENCE),}}
+\DoxyCodeLine{41 \textcolor{comment}{ STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE}}
+\DoxyCodeLine{42 \textcolor{comment}{ POSSIBILITY OF SUCH DAMAGE.}}
+\DoxyCodeLine{43 \textcolor{comment}{}}
+\DoxyCodeLine{44 \textcolor{comment}{ Copyright (C) 2014 Apple Inc. All Rights Reserved.}}
+\DoxyCodeLine{45 \textcolor{comment}{}}
+\DoxyCodeLine{46 \textcolor{comment}{*/}}
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#ifndef \_\_AUTimestampGenerator\_h\_\_}}
+\DoxyCodeLine{48 \textcolor{preprocessor}{\#define \_\_AUTimestampGenerator\_h\_\_}}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50 \textcolor{preprocessor}{\#include <math.h>}}
+\DoxyCodeLine{51 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_c_a_host_time_base_8h}{CAHostTimeBase.h}}"{}}}
+\DoxyCodeLine{52 \textcolor{preprocessor}{\#include <stdio.h>}}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54 \textcolor{preprocessor}{\#define TSGFMT "{}0x\%10qx"{}}}
+\DoxyCodeLine{55 \textcolor{comment}{//\#define TSGFMT "{}\%10qd"{}}}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57 \textcolor{comment}{// This class generates a continuously increasing series of timestamps based}}
+\DoxyCodeLine{58 \textcolor{comment}{// on a series of potentially discontinuous timestamps (as can be delivered from}}
+\DoxyCodeLine{59 \textcolor{comment}{// CoreAudio in the event of an overload or major engine change).}}
+\DoxyCodeLine{60 \textcolor{comment}{// N.B.: "{}output"{} = downstream (source) timestamp}}
+\DoxyCodeLine{61 \textcolor{comment}{//       "{}input"{}  = upstream (derived) timestamp}}
+\DoxyCodeLine{62 \textcolor{keyword}{class }\mbox{\hyperlink{class_a_u_timestamp_generator}{AUTimestampGenerator}} \{}
+\DoxyCodeLine{63 \textcolor{keyword}{public}:}
+\DoxyCodeLine{64     \mbox{\hyperlink{class_a_u_timestamp_generator_ac13b5913767ba1657522b4319ecbe8cd}{AUTimestampGenerator}}(\textcolor{keywordtype}{bool} hostTimeDiscontinuityCorrection = \textcolor{keyword}{false})}
+\DoxyCodeLine{65     \{}
+\DoxyCodeLine{66         mState.\mbox{\hyperlink{struct_a_u_timestamp_generator_1_1_state_a8ae3f352fcce0f5718ea1697ed13e179}{mStartInputAtZero}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{67         mState.\mbox{\hyperlink{struct_a_u_timestamp_generator_1_1_state_a04c5da794b8c9abbeb10733e9663d436}{mBypassed}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{68         mState.\mbox{\hyperlink{struct_a_u_timestamp_generator_1_1_state_a692f0c6b4767e5476c803884e167d923}{mHostTimeDiscontinuityCorrection}} = hostTimeDiscontinuityCorrection;}
+\DoxyCodeLine{69 \textcolor{preprocessor}{\#if DEBUG}}
+\DoxyCodeLine{70         mVerbosity = 0;}
+\DoxyCodeLine{71         snprintf(mDebugName, \textcolor{keyword}{sizeof}(mDebugName), \textcolor{stringliteral}{"{}tsg @ \%p"{}}, \textcolor{keyword}{this});}
+\DoxyCodeLine{72 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{73         \textcolor{comment}{// CAHostTimeBase should be used instead of the calls in <CoreAudio/HostTime.h>}}
+\DoxyCodeLine{74         \textcolor{comment}{// we make this call here to ensure that this is initialized, otherwise the first time}}
+\DoxyCodeLine{75         \textcolor{comment}{// you do actually call CAHostTimeBase to do work, can be on the render thread, and lead to unwanted VM faults}}
+\DoxyCodeLine{76         \mbox{\hyperlink{class_c_a_host_time_base_af4b74ca3076ee95c9b6faabba752ba85}{CAHostTimeBase::GetFrequency}}();}
+\DoxyCodeLine{77         \mbox{\hyperlink{class_a_u_timestamp_generator_afe91729dce0a7e89e5ae3021f12aa9b0}{Reset}}();}
+\DoxyCodeLine{78     \}}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80     \textcolor{keywordtype}{void}    \mbox{\hyperlink{class_a_u_timestamp_generator_acfd8f5c4fc72b2d774c7c5e68bdf2ca7}{SetStartInputAtZero}}(\textcolor{keywordtype}{bool} \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}) \{ mState.\mbox{\hyperlink{struct_a_u_timestamp_generator_1_1_state_a8ae3f352fcce0f5718ea1697ed13e179}{mStartInputAtZero}} = \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}; \}}
+\DoxyCodeLine{81     \textcolor{keywordtype}{bool}    \mbox{\hyperlink{class_a_u_timestamp_generator_afa3495da19375e251d547c3c907179f7}{GetStartInputAtZero}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} mState.\mbox{\hyperlink{struct_a_u_timestamp_generator_1_1_state_a8ae3f352fcce0f5718ea1697ed13e179}{mStartInputAtZero}}; \}}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83     \textcolor{comment}{// bypassing is intended for a narrow special case. the upstream sample time will always be the same as the downstream time.}}
+\DoxyCodeLine{84     \textcolor{keywordtype}{void}    \mbox{\hyperlink{class_a_u_timestamp_generator_a2e429a984b45f3b25ef398607e6d782e}{SetBypassed}}(\textcolor{keywordtype}{bool} \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}) \{ mState.\mbox{\hyperlink{struct_a_u_timestamp_generator_1_1_state_a04c5da794b8c9abbeb10733e9663d436}{mBypassed}} = \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}; \}}
+\DoxyCodeLine{85     \textcolor{keywordtype}{bool}    \mbox{\hyperlink{class_a_u_timestamp_generator_a70d4e8d9c4af11682d0dacd8ccb5d4ae}{GetBypassed}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} mState.\mbox{\hyperlink{struct_a_u_timestamp_generator_1_1_state_a04c5da794b8c9abbeb10733e9663d436}{mBypassed}}; \}}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87     \textcolor{comment}{// Call this to reset the timeline.}}
+\DoxyCodeLine{88     \textcolor{keywordtype}{void}    \mbox{\hyperlink{class_a_u_timestamp_generator_afe91729dce0a7e89e5ae3021f12aa9b0}{Reset}}()}
+\DoxyCodeLine{89     \{}
+\DoxyCodeLine{90         mState.\mbox{\hyperlink{struct_a_u_timestamp_generator_1_1_state_a68d8ccf1f26c2a3b5420ac78b18c469a}{mCurrentInputTime}}.mSampleTime = 0.;}
+\DoxyCodeLine{91         mState.\mbox{\hyperlink{struct_a_u_timestamp_generator_1_1_state_a96f0e926f8fd1d14a0ce02ba233a8e53}{mNextInputSampleTime}} = 0.;}
+\DoxyCodeLine{92         mState.\mbox{\hyperlink{struct_a_u_timestamp_generator_1_1_state_a8f9967c8fd325760572db998184dc7d3}{mCurrentOutputTime}}.mSampleTime = 0.;}
+\DoxyCodeLine{93         mState.\mbox{\hyperlink{struct_a_u_timestamp_generator_1_1_state_ad3f630cd91808a79a8fa7b7dee0aa007}{mNextOutputSampleTime}} = 0.;}
+\DoxyCodeLine{94         mState.\mbox{\hyperlink{struct_a_u_timestamp_generator_1_1_state_aab8869eb5ece016fb090b150488f89cc}{mLastOutputTime}}.mFlags = 0;}
+\DoxyCodeLine{95         mState.\mbox{\hyperlink{struct_a_u_timestamp_generator_1_1_state_a31e06710a8aed4c0341e42d2c0783a0e}{mRateScalarAdj}} = 1.;}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97         mFirstTime = \textcolor{keyword}{true};}
+\DoxyCodeLine{98 \textcolor{preprocessor}{\#if DEBUG}}
+\DoxyCodeLine{99         \textcolor{keywordflow}{if} (mVerbosity)}
+\DoxyCodeLine{100             printf(\textcolor{stringliteral}{"{}\%-\/20.20s: Reset\(\backslash\)n"{}}, mDebugName);}
+\DoxyCodeLine{101 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{102     \}}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104     \textcolor{comment}{// Call this once per render cycle with the downstream timestamp.}}
+\DoxyCodeLine{105     \textcolor{comment}{// expectedDeltaFrames is the expected difference between the current and NEXT}}
+\DoxyCodeLine{106     \textcolor{comment}{//  downstream timestamps.}}
+\DoxyCodeLine{107     \textcolor{comment}{// sampleRate is the OUTPUT sample rate.}}
+\DoxyCodeLine{108     \textcolor{keywordtype}{void}    \mbox{\hyperlink{class_a_u_timestamp_generator_a17fdf2205429f7d9d0dd281090593920}{AddOutputTime}}(\textcolor{keyword}{const} AudioTimeStamp \&inTimeStamp, Float64 expectedDeltaFrames, \textcolor{keywordtype}{double} outputSampleRate, \textcolor{keywordtype}{double} rateScalarAdj=1.0);}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110     \textcolor{comment}{// Call this once per render cycle to obtain the upstream timestamp.}}
+\DoxyCodeLine{111     \textcolor{comment}{// framesToAdvance is the number of frames the input timeline is to be}}
+\DoxyCodeLine{112     \textcolor{comment}{//  advanced during this render cycle.}}
+\DoxyCodeLine{113     \textcolor{comment}{// sampleRate is the INPUT sample rate.}}
+\DoxyCodeLine{114     \textcolor{keyword}{const} AudioTimeStamp \&  \mbox{\hyperlink{class_a_u_timestamp_generator_a5cfaf84198166adce0b9b09e4ec258e9}{GenerateInputTime}}(Float64 framesToAdvance, \textcolor{keywordtype}{double} inputSampleRate, \textcolor{keywordtype}{bool} advanceHostTime = \textcolor{keyword}{false});}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{116     \textcolor{comment}{// this can be called to override the setting of the next input sample time in GenerateInputTime}}
+\DoxyCodeLine{117     \textcolor{keywordtype}{void}                    \mbox{\hyperlink{class_a_u_timestamp_generator_aa8ee16e7876862561bb04a0e28b93bc5}{Advance}}(Float64 framesToAdvance)}
+\DoxyCodeLine{118     \{}
+\DoxyCodeLine{119 \textcolor{preprocessor}{\#if DEBUG}}
+\DoxyCodeLine{120         \textcolor{keywordflow}{if} (mVerbosity > 1)}
+\DoxyCodeLine{121             printf(\textcolor{stringliteral}{"{}\%-\/20.20s:   ADVANCE         in = "{}} \mbox{\hyperlink{_a_u_timestamp_generator_8h_abc79c6eb1b7861ad61199d5787f286f9}{TSGFMT}} \textcolor{stringliteral}{"{}                    advance = "{}} \mbox{\hyperlink{_a_u_timestamp_generator_8h_abc79c6eb1b7861ad61199d5787f286f9}{TSGFMT}} \textcolor{stringliteral}{"{}\(\backslash\)n"{}}, mDebugName, (SInt64)mState.\mbox{\hyperlink{struct_a_u_timestamp_generator_1_1_state_a68d8ccf1f26c2a3b5420ac78b18c469a}{mCurrentInputTime}}.mSampleTime, (SInt64)framesToAdvance);}
+\DoxyCodeLine{122 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{123         mState.\mbox{\hyperlink{struct_a_u_timestamp_generator_1_1_state_a96f0e926f8fd1d14a0ce02ba233a8e53}{mNextInputSampleTime}} = mState.\mbox{\hyperlink{struct_a_u_timestamp_generator_1_1_state_a68d8ccf1f26c2a3b5420ac78b18c469a}{mCurrentInputTime}}.mSampleTime + framesToAdvance;}
+\DoxyCodeLine{124     \}}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_a_u_timestamp_generator_1_1_state}{State}} \{}
+\DoxyCodeLine{127         AudioTimeStamp      \mbox{\hyperlink{struct_a_u_timestamp_generator_1_1_state_a68d8ccf1f26c2a3b5420ac78b18c469a}{mCurrentInputTime}};}
+\DoxyCodeLine{128         Float64             \mbox{\hyperlink{struct_a_u_timestamp_generator_1_1_state_a96f0e926f8fd1d14a0ce02ba233a8e53}{mNextInputSampleTime}};}
+\DoxyCodeLine{129         Float64             \mbox{\hyperlink{struct_a_u_timestamp_generator_1_1_state_ad3f630cd91808a79a8fa7b7dee0aa007}{mNextOutputSampleTime}};}
+\DoxyCodeLine{130         Float64             \mbox{\hyperlink{struct_a_u_timestamp_generator_1_1_state_a18af0063054cdf4ea2f0be31a6538d5b}{mInputSampleTimeForOutputPull}};}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{132         AudioTimeStamp      \mbox{\hyperlink{struct_a_u_timestamp_generator_1_1_state_aab8869eb5ece016fb090b150488f89cc}{mLastOutputTime}};}
+\DoxyCodeLine{133         AudioTimeStamp      \mbox{\hyperlink{struct_a_u_timestamp_generator_1_1_state_a8f9967c8fd325760572db998184dc7d3}{mCurrentOutputTime}};}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135         \textcolor{keywordtype}{bool}                \mbox{\hyperlink{struct_a_u_timestamp_generator_1_1_state_a8ae3f352fcce0f5718ea1697ed13e179}{mStartInputAtZero}};  \textcolor{comment}{// if true, input timeline starts at 0, else it starts}}
+\DoxyCodeLine{136                                                 \textcolor{comment}{// synced with the output timeline}}
+\DoxyCodeLine{137         \textcolor{keywordtype}{bool}                \mbox{\hyperlink{struct_a_u_timestamp_generator_1_1_state_a4a960ea84e49cc57cd172414fc49c6c6}{mDiscontinuous}};}
+\DoxyCodeLine{138         \textcolor{keywordtype}{bool}                \mbox{\hyperlink{struct_a_u_timestamp_generator_1_1_state_a04c5da794b8c9abbeb10733e9663d436}{mBypassed}};}
+\DoxyCodeLine{139         Float64             \mbox{\hyperlink{struct_a_u_timestamp_generator_1_1_state_a423499fb6214fd65e11d0baec56cf970}{mDiscontinuityDeltaSamples}};}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{141         \textcolor{keywordtype}{double}              \mbox{\hyperlink{struct_a_u_timestamp_generator_1_1_state_a31e06710a8aed4c0341e42d2c0783a0e}{mRateScalarAdj}};}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{143         \textcolor{keywordtype}{bool}                \mbox{\hyperlink{struct_a_u_timestamp_generator_1_1_state_a692f0c6b4767e5476c803884e167d923}{mHostTimeDiscontinuityCorrection}}; \textcolor{comment}{// If true, propagate timestamp discontinuities using host time.}}
+\DoxyCodeLine{144     \};}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{146     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_a_u_timestamp_generator_afd27536b8be7cfb2a536b793979d00c2}{GetState}}(\mbox{\hyperlink{struct_a_u_timestamp_generator_1_1_state}{State}}\& outState)\textcolor{keyword}{ const }\{ outState = mState; \}}
+\DoxyCodeLine{147     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_a_u_timestamp_generator_a12b8dd38a8d3c12bc530522799f6b907}{SetState}}(\mbox{\hyperlink{struct_a_u_timestamp_generator_1_1_state}{State}} \textcolor{keyword}{const}\& inState) \{ mState = inState; mFirstTime = \textcolor{keyword}{false}; \}}
+\DoxyCodeLine{148 }
+\DoxyCodeLine{149 \textcolor{keyword}{private}:}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{151     \textcolor{keyword}{struct }State        mState;}
+\DoxyCodeLine{152 }
+\DoxyCodeLine{153     \textcolor{keywordtype}{bool}                mFirstTime;}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{155 \textcolor{preprocessor}{\#if DEBUG}}
+\DoxyCodeLine{156 \textcolor{keyword}{public}:}
+\DoxyCodeLine{157     \textcolor{keywordtype}{int}                 mVerbosity;}
+\DoxyCodeLine{158     \textcolor{keywordtype}{char}                mDebugName[64];}
+\DoxyCodeLine{159 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{160 \};}
+\DoxyCodeLine{161 }
+\DoxyCodeLine{162 }
+\DoxyCodeLine{163 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// \_\_AUTimestampGenerator\_h\_\_}}
+
+\end{DoxyCode}

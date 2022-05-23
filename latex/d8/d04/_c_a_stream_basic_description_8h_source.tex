@@ -1,0 +1,430 @@
+\hypertarget{_c_a_stream_basic_description_8h_source}{}\doxysection{CAStream\+Basic\+Description.\+h}
+\label{_c_a_stream_basic_description_8h_source}\index{build/juce\_audio\_plugin\_client/AU/CoreAudioUtilityClasses/CAStreamBasicDescription.h@{build/juce\_audio\_plugin\_client/AU/CoreAudioUtilityClasses/CAStreamBasicDescription.h}}
+\mbox{\hyperlink{_c_a_stream_basic_description_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{     File: CAStreamBasicDescription.h}}
+\DoxyCodeLine{3 \textcolor{comment}{ Abstract: Part of CoreAudio Utility Classes}}
+\DoxyCodeLine{4 \textcolor{comment}{  Version: 1.1}}
+\DoxyCodeLine{5 \textcolor{comment}{}}
+\DoxyCodeLine{6 \textcolor{comment}{ Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple}}
+\DoxyCodeLine{7 \textcolor{comment}{ Inc. ("{}Apple"{}) in consideration of your agreement to the following}}
+\DoxyCodeLine{8 \textcolor{comment}{ terms, and your use, installation, modification or redistribution of}}
+\DoxyCodeLine{9 \textcolor{comment}{ this Apple software constitutes acceptance of these terms.  If you do}}
+\DoxyCodeLine{10 \textcolor{comment}{ not agree with these terms, please do not use, install, modify or}}
+\DoxyCodeLine{11 \textcolor{comment}{ redistribute this Apple software.}}
+\DoxyCodeLine{12 \textcolor{comment}{}}
+\DoxyCodeLine{13 \textcolor{comment}{ In consideration of your agreement to abide by the following terms, and}}
+\DoxyCodeLine{14 \textcolor{comment}{ subject to these terms, Apple grants you a personal, non-\/exclusive}}
+\DoxyCodeLine{15 \textcolor{comment}{ license, under Apple's copyrights in this original Apple software (the}}
+\DoxyCodeLine{16 \textcolor{comment}{ "{}Apple Software"{}), to use, reproduce, modify and redistribute the Apple}}
+\DoxyCodeLine{17 \textcolor{comment}{ Software, with or without modifications, in source and/or binary forms;}}
+\DoxyCodeLine{18 \textcolor{comment}{ provided that if you redistribute the Apple Software in its entirety and}}
+\DoxyCodeLine{19 \textcolor{comment}{ without modifications, you must retain this notice and the following}}
+\DoxyCodeLine{20 \textcolor{comment}{ text and disclaimers in all such redistributions of the Apple Software.}}
+\DoxyCodeLine{21 \textcolor{comment}{ Neither the name, trademarks, service marks or logos of Apple Inc. may}}
+\DoxyCodeLine{22 \textcolor{comment}{ be used to endorse or promote products derived from the Apple Software}}
+\DoxyCodeLine{23 \textcolor{comment}{ without specific prior written permission from Apple.  Except as}}
+\DoxyCodeLine{24 \textcolor{comment}{ expressly stated in this notice, no other rights or licenses, express or}}
+\DoxyCodeLine{25 \textcolor{comment}{ implied, are granted by Apple herein, including but not limited to any}}
+\DoxyCodeLine{26 \textcolor{comment}{ patent rights that may be infringed by your derivative works or by other}}
+\DoxyCodeLine{27 \textcolor{comment}{ works in which the Apple Software may be incorporated.}}
+\DoxyCodeLine{28 \textcolor{comment}{}}
+\DoxyCodeLine{29 \textcolor{comment}{ The Apple Software is provided by Apple on an "{}AS IS"{} basis.  APPLE}}
+\DoxyCodeLine{30 \textcolor{comment}{ MAKES NO WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION}}
+\DoxyCodeLine{31 \textcolor{comment}{ THE IMPLIED WARRANTIES OF NON-\/INFRINGEMENT, MERCHANTABILITY AND FITNESS}}
+\DoxyCodeLine{32 \textcolor{comment}{ FOR A PARTICULAR PURPOSE, REGARDING THE APPLE SOFTWARE OR ITS USE AND}}
+\DoxyCodeLine{33 \textcolor{comment}{ OPERATION ALONE OR IN COMBINATION WITH YOUR PRODUCTS.}}
+\DoxyCodeLine{34 \textcolor{comment}{}}
+\DoxyCodeLine{35 \textcolor{comment}{ IN NO EVENT SHALL APPLE BE LIABLE FOR ANY SPECIAL, INDIRECT, INCIDENTAL}}
+\DoxyCodeLine{36 \textcolor{comment}{ OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF}}
+\DoxyCodeLine{37 \textcolor{comment}{ SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS}}
+\DoxyCodeLine{38 \textcolor{comment}{ INTERRUPTION) ARISING IN ANY WAY OUT OF THE USE, REPRODUCTION,}}
+\DoxyCodeLine{39 \textcolor{comment}{ MODIFICATION AND/OR DISTRIBUTION OF THE APPLE SOFTWARE, HOWEVER CAUSED}}
+\DoxyCodeLine{40 \textcolor{comment}{ AND WHETHER UNDER THEORY OF CONTRACT, TORT (INCLUDING NEGLIGENCE),}}
+\DoxyCodeLine{41 \textcolor{comment}{ STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE}}
+\DoxyCodeLine{42 \textcolor{comment}{ POSSIBILITY OF SUCH DAMAGE.}}
+\DoxyCodeLine{43 \textcolor{comment}{}}
+\DoxyCodeLine{44 \textcolor{comment}{ Copyright (C) 2014 Apple Inc. All Rights Reserved.}}
+\DoxyCodeLine{45 \textcolor{comment}{}}
+\DoxyCodeLine{46 \textcolor{comment}{*/}}
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#ifndef \_\_CAStreamBasicDescription\_h\_\_}}
+\DoxyCodeLine{48 \textcolor{preprocessor}{\#define \_\_CAStreamBasicDescription\_h\_\_}}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50 \textcolor{preprocessor}{\#if !defined(\_\_COREAUDIO\_USE\_FLAT\_INCLUDES\_\_)}}
+\DoxyCodeLine{51 \textcolor{preprocessor}{    \#include <CoreAudio/CoreAudioTypes.h>}}
+\DoxyCodeLine{52 \textcolor{preprocessor}{    \#include <CoreFoundation/CoreFoundation.h>}}
+\DoxyCodeLine{53 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{54 \textcolor{preprocessor}{    \#include "{}CoreAudioTypes.h"{}}}
+\DoxyCodeLine{55 \textcolor{preprocessor}{    \#include "{}CoreFoundation.h"{}}}
+\DoxyCodeLine{56 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_c_a_debug_macros_8h}{CADebugMacros.h}}"{}}}
+\DoxyCodeLine{59 \textcolor{preprocessor}{\#include <string.h>} \textcolor{comment}{// for memset, memcpy}}
+\DoxyCodeLine{60 \textcolor{preprocessor}{\#include <stdio.h>}  \textcolor{comment}{// for FILE *}}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62 \textcolor{preprocessor}{\#pragma mark    This file needs to compile on more earlier versions of the OS, so please keep that in mind when editing it}}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64 \textcolor{keyword}{extern} \textcolor{keywordtype}{char} *\mbox{\hyperlink{_c_a_stream_basic_description_8h_a9205cc9a5e0df46fe5ee13e9ecc84d6d}{CAStringForOSType}} (OSType \mbox{\hyperlink{namespacegl_ad0bd70fc9115453f6f5f5ac53accea65}{t}}, \textcolor{keywordtype}{char} *writeLocation, \textcolor{keywordtype}{size\_t} bufsize);}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66 \textcolor{comment}{// define Leopard specific symbols for backward compatibility if applicable}}
+\DoxyCodeLine{67 \textcolor{preprocessor}{\#if COREAUDIOTYPES\_VERSION < 1050}}
+\DoxyCodeLine{68 \textcolor{keyword}{typedef} Float32 \mbox{\hyperlink{_c_a_stream_basic_description_8h_aef3794e850f2509f0d37ed16ea60b27c}{AudioSampleType}};}
+\DoxyCodeLine{69 \textcolor{keyword}{enum} \{ \mbox{\hyperlink{_c_a_stream_basic_description_8h_a1f9aebf1de3ebbf4283a4dcf73308562a72fe8cfc30e3d6da7856fcc01ab50b30}{kAudioFormatFlagsCanonical}} = kAudioFormatFlagIsFloat | kAudioFormatFlagsNativeEndian | kAudioFormatFlagIsPacked \};}
+\DoxyCodeLine{70 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{71 \textcolor{preprocessor}{\#if COREAUDIOTYPES\_VERSION < 1051}}
+\DoxyCodeLine{72 \textcolor{keyword}{typedef} Float32 \mbox{\hyperlink{_c_a_stream_basic_description_8h_aa226e106996913ddb8c8fe133692f495}{AudioUnitSampleType}};}
+\DoxyCodeLine{73 \textcolor{keyword}{enum} \{}
+\DoxyCodeLine{74     \mbox{\hyperlink{_c_a_stream_basic_description_8h_a77867ab4129f63159b37bca3b652a798ab24e82ff12077b40bc4112c8bc3f97da}{kLinearPCMFormatFlagsSampleFractionShift}}    = 7,}
+\DoxyCodeLine{75     \mbox{\hyperlink{_c_a_stream_basic_description_8h_a77867ab4129f63159b37bca3b652a798ac6a14b724b3b08d95edb20a275de85af}{kLinearPCMFormatFlagsSampleFractionMask}}     = (0x3F << \mbox{\hyperlink{_c_a_stream_basic_description_8h_a77867ab4129f63159b37bca3b652a798ab24e82ff12077b40bc4112c8bc3f97da}{kLinearPCMFormatFlagsSampleFractionShift}}),}
+\DoxyCodeLine{76 \};}
+\DoxyCodeLine{77 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79 \textcolor{comment}{//  define the IsMixable format flag for all versions of the system}}
+\DoxyCodeLine{80 \textcolor{preprocessor}{\#if (MAC\_OS\_X\_VERSION\_MAX\_ALLOWED >= MAC\_OS\_X\_VERSION\_10\_3)}}
+\DoxyCodeLine{81     \textcolor{keyword}{enum} \{ \mbox{\hyperlink{_c_a_stream_basic_description_8h_a16685eea158879e41b101ca3634de462acbfc2d39d39dadb78001ab1aedfc2fe4}{kIsNonMixableFlag}} = kAudioFormatFlagIsNonMixable \};}
+\DoxyCodeLine{82 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{83     \textcolor{keyword}{enum} \{ \mbox{\hyperlink{_c_a_stream_basic_description_8h_a16685eea158879e41b101ca3634de462acbfc2d39d39dadb78001ab1aedfc2fe4}{kIsNonMixableFlag}} = (1L << 6) \};}
+\DoxyCodeLine{84 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86 \textcolor{comment}{//=============================================================================}}
+\DoxyCodeLine{87 \textcolor{comment}{//  CAStreamBasicDescription}}
+\DoxyCodeLine{88 \textcolor{comment}{//}}
+\DoxyCodeLine{89 \textcolor{comment}{//  This is a wrapper class for the AudioStreamBasicDescription struct.}}
+\DoxyCodeLine{90 \textcolor{comment}{//  It adds a number of convenience routines, but otherwise adds nothing}}
+\DoxyCodeLine{91 \textcolor{comment}{//  to the footprint of the original struct.}}
+\DoxyCodeLine{92 \textcolor{comment}{//=============================================================================}}
+\DoxyCodeLine{93 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_a_stream_basic_description}{CAStreamBasicDescription}} :}
+\DoxyCodeLine{94     \textcolor{keyword}{public} AudioStreamBasicDescription}
+\DoxyCodeLine{95 \{}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97 \textcolor{comment}{//  Constants}}
+\DoxyCodeLine{98 \textcolor{keyword}{public}:}
+\DoxyCodeLine{99     \textcolor{keyword}{static} \textcolor{keyword}{const} AudioStreamBasicDescription    \mbox{\hyperlink{class_c_a_stream_basic_description_acf1b610a609b871871412fdf0bb9a6bf}{sEmpty}};}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101     \textcolor{keyword}{enum} \mbox{\hyperlink{class_c_a_stream_basic_description_aabcdf253bd2ce62db3f0d05d71966478}{CommonPCMFormat}} \{}
+\DoxyCodeLine{102         \mbox{\hyperlink{class_c_a_stream_basic_description_aabcdf253bd2ce62db3f0d05d71966478ad5545a9c5b0157c7e7f2d7918c1f7532}{kPCMFormatOther}}      = 0,}
+\DoxyCodeLine{103         \mbox{\hyperlink{class_c_a_stream_basic_description_aabcdf253bd2ce62db3f0d05d71966478ae90400845638ee9feb0cd894fa741c35}{kPCMFormatFloat32}}  = 1,}
+\DoxyCodeLine{104         \mbox{\hyperlink{class_c_a_stream_basic_description_aabcdf253bd2ce62db3f0d05d71966478a2975acda2860f46b2662dc71e1691dd0}{kPCMFormatInt16}}      = 2,}
+\DoxyCodeLine{105         \mbox{\hyperlink{class_c_a_stream_basic_description_aabcdf253bd2ce62db3f0d05d71966478a16972be69e55f62d6c4fcef28fac969b}{kPCMFormatFixed824}}    = 3,}
+\DoxyCodeLine{106         \mbox{\hyperlink{class_c_a_stream_basic_description_aabcdf253bd2ce62db3f0d05d71966478a886c4025a1875213da83976bf74ef3b3}{kPCMFormatFloat64}}  = 4}
+\DoxyCodeLine{107     \};}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109 \textcolor{comment}{//  Construction/Destruction}}
+\DoxyCodeLine{110 \textcolor{keyword}{public}:}
+\DoxyCodeLine{111     \mbox{\hyperlink{class_c_a_stream_basic_description_a209c60790bd3100147950b618b33353f}{CAStreamBasicDescription}}();}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113     \mbox{\hyperlink{class_c_a_stream_basic_description_a209c60790bd3100147950b618b33353f}{CAStreamBasicDescription}}(\textcolor{keyword}{const} AudioStreamBasicDescription \&desc);}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115     \mbox{\hyperlink{class_c_a_stream_basic_description_a209c60790bd3100147950b618b33353f}{CAStreamBasicDescription}}(       \textcolor{keywordtype}{double} inSampleRate,        UInt32 inFormatID,}
+\DoxyCodeLine{116                                     UInt32 inBytesPerPacket,    UInt32 inFramesPerPacket,}
+\DoxyCodeLine{117                                     UInt32 inBytesPerFrame,     UInt32 inChannelsPerFrame,}
+\DoxyCodeLine{118                                     UInt32 inBitsPerChannel,    UInt32 inFormatFlags);}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120     \mbox{\hyperlink{class_c_a_stream_basic_description_aa51207d0fb81f7b23d874970c4b6c484}{CAStreamBasicDescription}}(   \textcolor{keywordtype}{double} inSampleRate, UInt32 inNumChannels, \mbox{\hyperlink{class_c_a_stream_basic_description_aabcdf253bd2ce62db3f0d05d71966478}{CommonPCMFormat}} pcmf, \textcolor{keywordtype}{bool} inIsInterleaved) \{}
+\DoxyCodeLine{121         \textcolor{keywordtype}{unsigned} wordsize;}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{123         mSampleRate = inSampleRate;}
+\DoxyCodeLine{124         mFormatID = kAudioFormatLinearPCM;}
+\DoxyCodeLine{125         mFormatFlags = kAudioFormatFlagsNativeEndian | kAudioFormatFlagIsPacked;}
+\DoxyCodeLine{126         mFramesPerPacket = 1;}
+\DoxyCodeLine{127         mChannelsPerFrame = inNumChannels;}
+\DoxyCodeLine{128         mBytesPerFrame = mBytesPerPacket = 0;}
+\DoxyCodeLine{129         mReserved = 0;}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{131         \textcolor{keywordflow}{switch} (pcmf) \{}
+\DoxyCodeLine{132         \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{133             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{134         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_c_a_stream_basic_description_aabcdf253bd2ce62db3f0d05d71966478ae90400845638ee9feb0cd894fa741c35}{kPCMFormatFloat32}}:}
+\DoxyCodeLine{135             wordsize = 4;}
+\DoxyCodeLine{136             mFormatFlags |= kAudioFormatFlagIsFloat;}
+\DoxyCodeLine{137             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{138         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_c_a_stream_basic_description_aabcdf253bd2ce62db3f0d05d71966478a886c4025a1875213da83976bf74ef3b3}{kPCMFormatFloat64}}:}
+\DoxyCodeLine{139             wordsize = 8;}
+\DoxyCodeLine{140             mFormatFlags |= kAudioFormatFlagIsFloat;}
+\DoxyCodeLine{141             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{142         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_c_a_stream_basic_description_aabcdf253bd2ce62db3f0d05d71966478a2975acda2860f46b2662dc71e1691dd0}{kPCMFormatInt16}}:}
+\DoxyCodeLine{143             wordsize = 2;}
+\DoxyCodeLine{144             mFormatFlags |= kAudioFormatFlagIsSignedInteger;}
+\DoxyCodeLine{145             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{146         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_c_a_stream_basic_description_aabcdf253bd2ce62db3f0d05d71966478a16972be69e55f62d6c4fcef28fac969b}{kPCMFormatFixed824}}:}
+\DoxyCodeLine{147             wordsize = 4;}
+\DoxyCodeLine{148             mFormatFlags |= kAudioFormatFlagIsSignedInteger | (24 << \mbox{\hyperlink{_c_a_stream_basic_description_8h_a77867ab4129f63159b37bca3b652a798ab24e82ff12077b40bc4112c8bc3f97da}{kLinearPCMFormatFlagsSampleFractionShift}});}
+\DoxyCodeLine{149             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{150         \}}
+\DoxyCodeLine{151         mBitsPerChannel = wordsize * 8;}
+\DoxyCodeLine{152         \textcolor{keywordflow}{if} (inIsInterleaved)}
+\DoxyCodeLine{153             mBytesPerFrame = mBytesPerPacket = wordsize * inNumChannels;}
+\DoxyCodeLine{154         \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{155             mFormatFlags |= kAudioFormatFlagIsNonInterleaved;}
+\DoxyCodeLine{156             mBytesPerFrame = mBytesPerPacket = wordsize;}
+\DoxyCodeLine{157         \}}
+\DoxyCodeLine{158     \}}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160 \textcolor{comment}{//  Assignment}}
+\DoxyCodeLine{161     \mbox{\hyperlink{class_c_a_stream_basic_description}{CAStreamBasicDescription}}\&   \mbox{\hyperlink{class_c_a_stream_basic_description_a75e8c792681c792de627a0cbaa135056}{operator=}}(\textcolor{keyword}{const} AudioStreamBasicDescription\& \mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}}) \{ \mbox{\hyperlink{class_c_a_stream_basic_description_a78a662b08d5107efcd93391e9eae86b3}{SetFrom}}(\mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}}); \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{162 }
+\DoxyCodeLine{163     \textcolor{keywordtype}{void}    \mbox{\hyperlink{class_c_a_stream_basic_description_a78a662b08d5107efcd93391e9eae86b3}{SetFrom}}(\textcolor{keyword}{const} AudioStreamBasicDescription \&desc)}
+\DoxyCodeLine{164     \{}
+\DoxyCodeLine{165         memcpy(\textcolor{keyword}{this}, \&desc, \textcolor{keyword}{sizeof}(AudioStreamBasicDescription));}
+\DoxyCodeLine{166     \}}
+\DoxyCodeLine{167 }
+\DoxyCodeLine{168     \textcolor{keywordtype}{bool}        \mbox{\hyperlink{class_c_a_stream_basic_description_aaa14e56970f8ffd9e6d014dd93bae6e8}{FromText}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *inTextDesc) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_c_a_stream_basic_description_aaa14e56970f8ffd9e6d014dd93bae6e8}{FromText}}(inTextDesc, *\textcolor{keyword}{this}); \}}
+\DoxyCodeLine{169     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_a_stream_basic_description_aaa14e56970f8ffd9e6d014dd93bae6e8}{FromText}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *inTextDesc, AudioStreamBasicDescription \&outDesc);}
+\DoxyCodeLine{170                     \textcolor{comment}{// return true if parsing was successful}}
+\DoxyCodeLine{171 }
+\DoxyCodeLine{172     \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{class_c_a_stream_basic_description_a765b0eb5bc9a80c665e5db4a99533d94}{sTextParsingUsageString}};}
+\DoxyCodeLine{173 }
+\DoxyCodeLine{174     \textcolor{comment}{// \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_}}
+\DoxyCodeLine{175     \textcolor{comment}{//}}
+\DoxyCodeLine{176     \textcolor{comment}{// interrogation}}
+\DoxyCodeLine{177 }
+\DoxyCodeLine{178     \textcolor{keywordtype}{bool}    \mbox{\hyperlink{class_c_a_stream_basic_description_a100fc78e85438a521f9cefb984106747}{IsPCM}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} mFormatID == kAudioFormatLinearPCM; \}}
+\DoxyCodeLine{179 }
+\DoxyCodeLine{180     \textcolor{keywordtype}{bool}    \mbox{\hyperlink{class_c_a_stream_basic_description_a03b63fe1eea43fd9cf2ccb4b2161cf7d}{PackednessIsSignificant}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{181 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{182         \mbox{\hyperlink{_c_a_debug_macros_8h_a4822c0ddcab68067c84dfb57fdac3253}{Assert}}(\mbox{\hyperlink{class_c_a_stream_basic_description_a100fc78e85438a521f9cefb984106747}{IsPCM}}(), \textcolor{stringliteral}{"{}PackednessIsSignificant only applies for PCM"{}});}
+\DoxyCodeLine{183         \textcolor{keywordflow}{return} (\mbox{\hyperlink{class_c_a_stream_basic_description_a0e07f9655d9d65f0b0cd9d16401c2cf6}{SampleWordSize}}() << 3) != mBitsPerChannel;}
+\DoxyCodeLine{184     \}}
+\DoxyCodeLine{185 }
+\DoxyCodeLine{186     \textcolor{keywordtype}{bool}    \mbox{\hyperlink{class_c_a_stream_basic_description_a9aa7745afad23940aa3ca8e52b0c0db2}{AlignmentIsSignificant}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{187 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{188         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_c_a_stream_basic_description_a03b63fe1eea43fd9cf2ccb4b2161cf7d}{PackednessIsSignificant}}() || (mBitsPerChannel \& 7) != 0;}
+\DoxyCodeLine{189     \}}
+\DoxyCodeLine{190 }
+\DoxyCodeLine{191     \textcolor{keywordtype}{bool}    \mbox{\hyperlink{class_c_a_stream_basic_description_a672ff001cd533f0d49bacb15a7c4b251}{IsInterleaved}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{192 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{193         \textcolor{keywordflow}{return} !(mFormatFlags \& kAudioFormatFlagIsNonInterleaved);}
+\DoxyCodeLine{194     \}}
+\DoxyCodeLine{195 }
+\DoxyCodeLine{196     \textcolor{keywordtype}{bool}    \mbox{\hyperlink{class_c_a_stream_basic_description_aa817905e40545e2f6ea12411a5233a76}{IsSignedInteger}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{197 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{198         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_c_a_stream_basic_description_a100fc78e85438a521f9cefb984106747}{IsPCM}}() \&\& (mFormatFlags \& kAudioFormatFlagIsSignedInteger);}
+\DoxyCodeLine{199     \}}
+\DoxyCodeLine{200 }
+\DoxyCodeLine{201     \textcolor{keywordtype}{bool}    \mbox{\hyperlink{class_c_a_stream_basic_description_a4cfa49524f1970396c6b6cfa340c46e3}{IsFloat}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{202 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{203         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_c_a_stream_basic_description_a100fc78e85438a521f9cefb984106747}{IsPCM}}() \&\& (mFormatFlags \& kAudioFormatFlagIsFloat);}
+\DoxyCodeLine{204     \}}
+\DoxyCodeLine{205 }
+\DoxyCodeLine{206     \textcolor{keywordtype}{bool}    \mbox{\hyperlink{class_c_a_stream_basic_description_a7f1ef2c64e0b987172bbdc7e6427ae6c}{IsNativeEndian}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{207 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{208         \textcolor{keywordflow}{return} (mFormatFlags \& kAudioFormatFlagIsBigEndian) == kAudioFormatFlagsNativeEndian;}
+\DoxyCodeLine{209     \}}
+\DoxyCodeLine{210 }
+\DoxyCodeLine{211     \textcolor{comment}{// for sanity with interleaved/deinterleaved possibilities, never access mChannelsPerFrame, use these:}}
+\DoxyCodeLine{212     UInt32  \mbox{\hyperlink{class_c_a_stream_basic_description_a6d2494cf632a43bd0e7d82cc06f97862}{NumberInterleavedChannels}}()\textcolor{keyword}{ const  }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_c_a_stream_basic_description_a672ff001cd533f0d49bacb15a7c4b251}{IsInterleaved}}() ? mChannelsPerFrame : 1; \}}
+\DoxyCodeLine{213     UInt32  \mbox{\hyperlink{class_c_a_stream_basic_description_a76c838c70529063a6ba90923613a91b3}{NumberChannelStreams}}()\textcolor{keyword}{ const        }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_c_a_stream_basic_description_a672ff001cd533f0d49bacb15a7c4b251}{IsInterleaved}}() ? 1 : mChannelsPerFrame; \}}
+\DoxyCodeLine{214     UInt32  \mbox{\hyperlink{class_c_a_stream_basic_description_ad99ff358b70f86852a4ecec632059bb6}{NumberChannels}}()\textcolor{keyword}{ const                }\{ \textcolor{keywordflow}{return} mChannelsPerFrame; \}}
+\DoxyCodeLine{215     UInt32  \mbox{\hyperlink{class_c_a_stream_basic_description_a0e07f9655d9d65f0b0cd9d16401c2cf6}{SampleWordSize}}()\textcolor{keyword}{ const                }\{}
+\DoxyCodeLine{216             \textcolor{keywordflow}{return} (mBytesPerFrame > 0 \&\& \mbox{\hyperlink{class_c_a_stream_basic_description_a6d2494cf632a43bd0e7d82cc06f97862}{NumberInterleavedChannels}}()) ? mBytesPerFrame / \mbox{\hyperlink{class_c_a_stream_basic_description_a6d2494cf632a43bd0e7d82cc06f97862}{NumberInterleavedChannels}}() :  0;}
+\DoxyCodeLine{217     \}}
+\DoxyCodeLine{218 }
+\DoxyCodeLine{219     UInt32  \mbox{\hyperlink{class_c_a_stream_basic_description_ae48864a9671f988218e1f5c8badacb6d}{FramesToBytes}}(UInt32 nframes)\textcolor{keyword}{ const    }\{ \textcolor{keywordflow}{return} nframes * mBytesPerFrame; \}}
+\DoxyCodeLine{220     UInt32  \mbox{\hyperlink{class_c_a_stream_basic_description_a2e7af2eea6b24ce99ac72f0ff1270975}{BytesToFrames}}(UInt32 nbytes)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{221         \mbox{\hyperlink{_c_a_debug_macros_8h_a4822c0ddcab68067c84dfb57fdac3253}{Assert}}(mBytesPerFrame > 0, \textcolor{stringliteral}{"{}bytesPerFrame must be > 0 in BytesToFrames"{}});}
+\DoxyCodeLine{222         \textcolor{keywordflow}{return} nbytes / mBytesPerFrame;}
+\DoxyCodeLine{223     \}}
+\DoxyCodeLine{224 }
+\DoxyCodeLine{225     \textcolor{keywordtype}{bool}    \mbox{\hyperlink{class_c_a_stream_basic_description_aec1b2f6f159f379c524376bd9b9e7dd6}{SameChannelsAndInterleaving}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_c_a_stream_basic_description}{CAStreamBasicDescription}} \&\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}})\textcolor{keyword}{ const}}
+\DoxyCodeLine{226 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{227         \textcolor{keywordflow}{return} this-\/>\mbox{\hyperlink{class_c_a_stream_basic_description_ad99ff358b70f86852a4ecec632059bb6}{NumberChannels}}() == a.\mbox{\hyperlink{class_c_a_stream_basic_description_ad99ff358b70f86852a4ecec632059bb6}{NumberChannels}}() \&\& this-\/>\mbox{\hyperlink{class_c_a_stream_basic_description_a672ff001cd533f0d49bacb15a7c4b251}{IsInterleaved}}() == a.\mbox{\hyperlink{class_c_a_stream_basic_description_a672ff001cd533f0d49bacb15a7c4b251}{IsInterleaved}}();}
+\DoxyCodeLine{228     \}}
+\DoxyCodeLine{229 }
+\DoxyCodeLine{230     \textcolor{keywordtype}{bool}    \mbox{\hyperlink{class_c_a_stream_basic_description_a6988d35a06055e9db01a9f906b4ecbfe}{IdentifyCommonPCMFormat}}(\mbox{\hyperlink{class_c_a_stream_basic_description_aabcdf253bd2ce62db3f0d05d71966478}{CommonPCMFormat}} \&outFormat, \textcolor{keywordtype}{bool} *outIsInterleaved=NULL)\textcolor{keyword}{ const}}
+\DoxyCodeLine{231 \textcolor{keyword}{    }\{   \textcolor{comment}{// return true if it's a valid PCM format.}}
+\DoxyCodeLine{232 }
+\DoxyCodeLine{233         outFormat = \mbox{\hyperlink{class_c_a_stream_basic_description_aabcdf253bd2ce62db3f0d05d71966478ad5545a9c5b0157c7e7f2d7918c1f7532}{kPCMFormatOther}};}
+\DoxyCodeLine{234         \textcolor{comment}{// trap out patently invalid formats.}}
+\DoxyCodeLine{235         \textcolor{keywordflow}{if} (mFormatID != kAudioFormatLinearPCM || mFramesPerPacket != 1 || mBytesPerFrame != mBytesPerPacket || mBitsPerChannel/8 > mBytesPerFrame || mChannelsPerFrame == 0)}
+\DoxyCodeLine{236             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{237         \textcolor{keywordtype}{bool} interleaved = (mFormatFlags \& kAudioFormatFlagIsNonInterleaved) == 0;}
+\DoxyCodeLine{238         \textcolor{keywordflow}{if} (outIsInterleaved != NULL) *outIsInterleaved = interleaved;}
+\DoxyCodeLine{239         \textcolor{keywordtype}{unsigned} wordsize = mBytesPerFrame;}
+\DoxyCodeLine{240         \textcolor{keywordflow}{if} (interleaved) \{}
+\DoxyCodeLine{241             \textcolor{keywordflow}{if} (wordsize \% mChannelsPerFrame != 0) \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{242             wordsize /= mChannelsPerFrame;}
+\DoxyCodeLine{243         \}}
+\DoxyCodeLine{244 }
+\DoxyCodeLine{245         \textcolor{keywordflow}{if} ((mFormatFlags \& kAudioFormatFlagIsBigEndian) == kAudioFormatFlagsNativeEndian}
+\DoxyCodeLine{246         \&\& wordsize * 8 == mBitsPerChannel) \{}
+\DoxyCodeLine{247             \textcolor{comment}{// packed and native endian, good}}
+\DoxyCodeLine{248             \textcolor{keywordflow}{if} (mFormatFlags \& kLinearPCMFormatFlagIsFloat) \{}
+\DoxyCodeLine{249                 \textcolor{comment}{// float: reject nonsense bits}}
+\DoxyCodeLine{250                 \textcolor{keywordflow}{if} (mFormatFlags \& (kLinearPCMFormatFlagIsSignedInteger | \mbox{\hyperlink{_c_a_stream_basic_description_8h_a77867ab4129f63159b37bca3b652a798ac6a14b724b3b08d95edb20a275de85af}{kLinearPCMFormatFlagsSampleFractionMask}}))}
+\DoxyCodeLine{251                     \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{252                 \textcolor{keywordflow}{if} (wordsize == 4)}
+\DoxyCodeLine{253                     outFormat = \mbox{\hyperlink{class_c_a_stream_basic_description_aabcdf253bd2ce62db3f0d05d71966478ae90400845638ee9feb0cd894fa741c35}{kPCMFormatFloat32}};}
+\DoxyCodeLine{254                 \textcolor{keywordflow}{if} (wordsize == 8)}
+\DoxyCodeLine{255                     outFormat = \mbox{\hyperlink{class_c_a_stream_basic_description_aabcdf253bd2ce62db3f0d05d71966478a886c4025a1875213da83976bf74ef3b3}{kPCMFormatFloat64}};}
+\DoxyCodeLine{256             \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (mFormatFlags \& kLinearPCMFormatFlagIsSignedInteger) \{}
+\DoxyCodeLine{257                 \textcolor{comment}{// signed int}}
+\DoxyCodeLine{258                 \textcolor{keywordtype}{unsigned} fracbits = (mFormatFlags \& \mbox{\hyperlink{_c_a_stream_basic_description_8h_a77867ab4129f63159b37bca3b652a798ac6a14b724b3b08d95edb20a275de85af}{kLinearPCMFormatFlagsSampleFractionMask}}) >> \mbox{\hyperlink{_c_a_stream_basic_description_8h_a77867ab4129f63159b37bca3b652a798ab24e82ff12077b40bc4112c8bc3f97da}{kLinearPCMFormatFlagsSampleFractionShift}};}
+\DoxyCodeLine{259                 \textcolor{keywordflow}{if} (wordsize == 4 \&\& fracbits == 24)}
+\DoxyCodeLine{260                     outFormat = \mbox{\hyperlink{class_c_a_stream_basic_description_aabcdf253bd2ce62db3f0d05d71966478a16972be69e55f62d6c4fcef28fac969b}{kPCMFormatFixed824}};}
+\DoxyCodeLine{261                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (wordsize == 2 \&\& fracbits == 0)}
+\DoxyCodeLine{262                     outFormat = \mbox{\hyperlink{class_c_a_stream_basic_description_aabcdf253bd2ce62db3f0d05d71966478a2975acda2860f46b2662dc71e1691dd0}{kPCMFormatInt16}};}
+\DoxyCodeLine{263             \}}
+\DoxyCodeLine{264         \}}
+\DoxyCodeLine{265         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{266     \}}
+\DoxyCodeLine{267 }
+\DoxyCodeLine{268     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_a_stream_basic_description_a994d8e67a93a20f5b1fe9b8ac938fba6}{IsCommonFloat32}}(\textcolor{keywordtype}{bool} *outIsInterleaved=NULL)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{269         \mbox{\hyperlink{class_c_a_stream_basic_description_aabcdf253bd2ce62db3f0d05d71966478}{CommonPCMFormat}} fmt;}
+\DoxyCodeLine{270         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_c_a_stream_basic_description_a6988d35a06055e9db01a9f906b4ecbfe}{IdentifyCommonPCMFormat}}(fmt, outIsInterleaved) \&\& fmt == \mbox{\hyperlink{class_c_a_stream_basic_description_aabcdf253bd2ce62db3f0d05d71966478ae90400845638ee9feb0cd894fa741c35}{kPCMFormatFloat32}};}
+\DoxyCodeLine{271     \}}
+\DoxyCodeLine{272     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_a_stream_basic_description_a755a8aab1c0c3f3bd1590d303ad83d94}{IsCommonFloat64}}(\textcolor{keywordtype}{bool} *outIsInterleaved=NULL)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{273         \mbox{\hyperlink{class_c_a_stream_basic_description_aabcdf253bd2ce62db3f0d05d71966478}{CommonPCMFormat}} fmt;}
+\DoxyCodeLine{274         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_c_a_stream_basic_description_a6988d35a06055e9db01a9f906b4ecbfe}{IdentifyCommonPCMFormat}}(fmt, outIsInterleaved) \&\& fmt == \mbox{\hyperlink{class_c_a_stream_basic_description_aabcdf253bd2ce62db3f0d05d71966478a886c4025a1875213da83976bf74ef3b3}{kPCMFormatFloat64}};}
+\DoxyCodeLine{275     \}}
+\DoxyCodeLine{276     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_a_stream_basic_description_a2f53c05944cfc4122d9e3b95150e161d}{IsCommonFixed824}}(\textcolor{keywordtype}{bool} *outIsInterleaved=NULL)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{277         \mbox{\hyperlink{class_c_a_stream_basic_description_aabcdf253bd2ce62db3f0d05d71966478}{CommonPCMFormat}} fmt;}
+\DoxyCodeLine{278         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_c_a_stream_basic_description_a6988d35a06055e9db01a9f906b4ecbfe}{IdentifyCommonPCMFormat}}(fmt, outIsInterleaved) \&\& fmt == \mbox{\hyperlink{class_c_a_stream_basic_description_aabcdf253bd2ce62db3f0d05d71966478a16972be69e55f62d6c4fcef28fac969b}{kPCMFormatFixed824}};}
+\DoxyCodeLine{279     \}}
+\DoxyCodeLine{280     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_a_stream_basic_description_a8c3ed946ad7bab4001f3bcb15ff52806}{IsCommonInt16}}(\textcolor{keywordtype}{bool} *outIsInterleaved=NULL)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{281         \mbox{\hyperlink{class_c_a_stream_basic_description_aabcdf253bd2ce62db3f0d05d71966478}{CommonPCMFormat}} fmt;}
+\DoxyCodeLine{282         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_c_a_stream_basic_description_a6988d35a06055e9db01a9f906b4ecbfe}{IdentifyCommonPCMFormat}}(fmt, outIsInterleaved) \&\& fmt == \mbox{\hyperlink{class_c_a_stream_basic_description_aabcdf253bd2ce62db3f0d05d71966478a2975acda2860f46b2662dc71e1691dd0}{kPCMFormatInt16}};}
+\DoxyCodeLine{283     \}}
+\DoxyCodeLine{284 }
+\DoxyCodeLine{285     \textcolor{comment}{// \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_}}
+\DoxyCodeLine{286     \textcolor{comment}{//}}
+\DoxyCodeLine{287     \textcolor{comment}{//  manipulation}}
+\DoxyCodeLine{288 }
+\DoxyCodeLine{289     \textcolor{keywordtype}{void}    \mbox{\hyperlink{class_c_a_stream_basic_description_ac633aa610ac762235444d51db59a569e}{SetCanonical}}(UInt32 nChannels, \textcolor{keywordtype}{bool} interleaved)}
+\DoxyCodeLine{290                 \textcolor{comment}{// note: leaves sample rate untouched}}
+\DoxyCodeLine{291     \{}
+\DoxyCodeLine{292         mFormatID = kAudioFormatLinearPCM;}
+\DoxyCodeLine{293         UInt32 sampleSize = \mbox{\hyperlink{_c_a_debug_macros_8h_ac62388a56aed341b5ae0c2f43eb71759}{SizeOf32}}(\mbox{\hyperlink{_c_a_stream_basic_description_8h_aef3794e850f2509f0d37ed16ea60b27c}{AudioSampleType}});}
+\DoxyCodeLine{294         mFormatFlags = \mbox{\hyperlink{_c_a_stream_basic_description_8h_a1f9aebf1de3ebbf4283a4dcf73308562a72fe8cfc30e3d6da7856fcc01ab50b30}{kAudioFormatFlagsCanonical}};}
+\DoxyCodeLine{295         mBitsPerChannel = 8 * sampleSize;}
+\DoxyCodeLine{296         mChannelsPerFrame = nChannels;}
+\DoxyCodeLine{297         mFramesPerPacket = 1;}
+\DoxyCodeLine{298         \textcolor{keywordflow}{if} (interleaved)}
+\DoxyCodeLine{299             mBytesPerPacket = mBytesPerFrame = nChannels * sampleSize;}
+\DoxyCodeLine{300         \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{301             mBytesPerPacket = mBytesPerFrame = sampleSize;}
+\DoxyCodeLine{302             mFormatFlags |= kAudioFormatFlagIsNonInterleaved;}
+\DoxyCodeLine{303         \}}
+\DoxyCodeLine{304     \}}
+\DoxyCodeLine{305 }
+\DoxyCodeLine{306     \textcolor{keywordtype}{bool}    \mbox{\hyperlink{class_c_a_stream_basic_description_ab7da1f08db42566bfb2dc958c82d60a8}{IsCanonical}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{307 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{308         \textcolor{keywordflow}{if} (mFormatID != kAudioFormatLinearPCM) \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{309         UInt32 reqFormatFlags;}
+\DoxyCodeLine{310         UInt32 flagsMask = (kLinearPCMFormatFlagIsFloat | kLinearPCMFormatFlagIsBigEndian | kLinearPCMFormatFlagIsSignedInteger | kLinearPCMFormatFlagIsPacked | \mbox{\hyperlink{_c_a_stream_basic_description_8h_a77867ab4129f63159b37bca3b652a798ac6a14b724b3b08d95edb20a275de85af}{kLinearPCMFormatFlagsSampleFractionMask}});}
+\DoxyCodeLine{311         \textcolor{keywordtype}{bool} interleaved = (mFormatFlags \& kAudioFormatFlagIsNonInterleaved) == 0;}
+\DoxyCodeLine{312         \textcolor{keywordtype}{unsigned} sampleSize = \mbox{\hyperlink{_c_a_debug_macros_8h_ac62388a56aed341b5ae0c2f43eb71759}{SizeOf32}}(\mbox{\hyperlink{_c_a_stream_basic_description_8h_aef3794e850f2509f0d37ed16ea60b27c}{AudioSampleType}});}
+\DoxyCodeLine{313         reqFormatFlags = \mbox{\hyperlink{_c_a_stream_basic_description_8h_a1f9aebf1de3ebbf4283a4dcf73308562a72fe8cfc30e3d6da7856fcc01ab50b30}{kAudioFormatFlagsCanonical}};}
+\DoxyCodeLine{314         UInt32 reqFrameSize = interleaved ? (mChannelsPerFrame * sampleSize) : sampleSize;}
+\DoxyCodeLine{315 }
+\DoxyCodeLine{316         \textcolor{keywordflow}{return} ((mFormatFlags \& flagsMask) == reqFormatFlags}
+\DoxyCodeLine{317             \&\& mBitsPerChannel == 8 * sampleSize}
+\DoxyCodeLine{318             \&\& mFramesPerPacket == 1}
+\DoxyCodeLine{319             \&\& mBytesPerFrame == reqFrameSize}
+\DoxyCodeLine{320             \&\& mBytesPerPacket == reqFrameSize);}
+\DoxyCodeLine{321     \}}
+\DoxyCodeLine{322 }
+\DoxyCodeLine{323     \textcolor{keywordtype}{void}    \mbox{\hyperlink{class_c_a_stream_basic_description_a55187bd31444a9dd2e750d9d9d8857d9}{SetAUCanonical}}(UInt32 nChannels, \textcolor{keywordtype}{bool} interleaved)}
+\DoxyCodeLine{324     \{}
+\DoxyCodeLine{325         mFormatID = kAudioFormatLinearPCM;}
+\DoxyCodeLine{326 \textcolor{preprocessor}{\#if CA\_PREFER\_FIXED\_POINT}}
+\DoxyCodeLine{327         mFormatFlags = \mbox{\hyperlink{_c_a_stream_basic_description_8h_a1f9aebf1de3ebbf4283a4dcf73308562a72fe8cfc30e3d6da7856fcc01ab50b30}{kAudioFormatFlagsCanonical}} | (kAudioUnitSampleFractionBits << \mbox{\hyperlink{_c_a_stream_basic_description_8h_a77867ab4129f63159b37bca3b652a798ab24e82ff12077b40bc4112c8bc3f97da}{kLinearPCMFormatFlagsSampleFractionShift}});}
+\DoxyCodeLine{328 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{329         mFormatFlags = \mbox{\hyperlink{_c_a_stream_basic_description_8h_a1f9aebf1de3ebbf4283a4dcf73308562a72fe8cfc30e3d6da7856fcc01ab50b30}{kAudioFormatFlagsCanonical}};}
+\DoxyCodeLine{330 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{331         mChannelsPerFrame = nChannels;}
+\DoxyCodeLine{332         mFramesPerPacket = 1;}
+\DoxyCodeLine{333         mBitsPerChannel = 8 * \mbox{\hyperlink{_c_a_debug_macros_8h_ac62388a56aed341b5ae0c2f43eb71759}{SizeOf32}}(\mbox{\hyperlink{_c_a_stream_basic_description_8h_aa226e106996913ddb8c8fe133692f495}{AudioUnitSampleType}});}
+\DoxyCodeLine{334         \textcolor{keywordflow}{if} (interleaved)}
+\DoxyCodeLine{335             mBytesPerPacket = mBytesPerFrame = nChannels * \mbox{\hyperlink{_c_a_debug_macros_8h_ac62388a56aed341b5ae0c2f43eb71759}{SizeOf32}}(\mbox{\hyperlink{_c_a_stream_basic_description_8h_aa226e106996913ddb8c8fe133692f495}{AudioUnitSampleType}});}
+\DoxyCodeLine{336         \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{337             mBytesPerPacket = mBytesPerFrame = \mbox{\hyperlink{_c_a_debug_macros_8h_ac62388a56aed341b5ae0c2f43eb71759}{SizeOf32}}(\mbox{\hyperlink{_c_a_stream_basic_description_8h_aa226e106996913ddb8c8fe133692f495}{AudioUnitSampleType}});}
+\DoxyCodeLine{338             mFormatFlags |= kAudioFormatFlagIsNonInterleaved;}
+\DoxyCodeLine{339         \}}
+\DoxyCodeLine{340     \}}
+\DoxyCodeLine{341 }
+\DoxyCodeLine{342     \textcolor{keywordtype}{void}    \mbox{\hyperlink{class_c_a_stream_basic_description_ad23594a30eeb949107d567e5cf99c8ed}{ChangeNumberChannels}}(UInt32 nChannels, \textcolor{keywordtype}{bool} interleaved)}
+\DoxyCodeLine{343                 \textcolor{comment}{// alter an existing format}}
+\DoxyCodeLine{344     \{}
+\DoxyCodeLine{345         \mbox{\hyperlink{_c_a_debug_macros_8h_a4822c0ddcab68067c84dfb57fdac3253}{Assert}}(\mbox{\hyperlink{class_c_a_stream_basic_description_a100fc78e85438a521f9cefb984106747}{IsPCM}}(), \textcolor{stringliteral}{"{}ChangeNumberChannels only works for PCM formats"{}});}
+\DoxyCodeLine{346         UInt32 wordSize = \mbox{\hyperlink{class_c_a_stream_basic_description_a0e07f9655d9d65f0b0cd9d16401c2cf6}{SampleWordSize}}();   \textcolor{comment}{// get this before changing ANYTHING}}
+\DoxyCodeLine{347         \textcolor{keywordflow}{if} (wordSize == 0)}
+\DoxyCodeLine{348             wordSize = (mBitsPerChannel + 7) / 8;}
+\DoxyCodeLine{349         mChannelsPerFrame = nChannels;}
+\DoxyCodeLine{350         mFramesPerPacket = 1;}
+\DoxyCodeLine{351         \textcolor{keywordflow}{if} (interleaved) \{}
+\DoxyCodeLine{352             mBytesPerPacket = mBytesPerFrame = nChannels * wordSize;}
+\DoxyCodeLine{353             mFormatFlags \&= \string~static\_cast<UInt32>(kAudioFormatFlagIsNonInterleaved);}
+\DoxyCodeLine{354         \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{355             mBytesPerPacket = mBytesPerFrame = wordSize;}
+\DoxyCodeLine{356             mFormatFlags |= kAudioFormatFlagIsNonInterleaved;}
+\DoxyCodeLine{357         \}}
+\DoxyCodeLine{358     \}}
+\DoxyCodeLine{359 }
+\DoxyCodeLine{360     \textcolor{comment}{// \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_}}
+\DoxyCodeLine{361     \textcolor{comment}{//}}
+\DoxyCodeLine{362     \textcolor{comment}{//  other}}
+\DoxyCodeLine{363 }
+\DoxyCodeLine{364     \textcolor{keywordtype}{bool}            \mbox{\hyperlink{class_c_a_stream_basic_description_ad2fb22da9cd5c33de8166509fa4fc1dc}{IsEqual}}(\textcolor{keyword}{const} AudioStreamBasicDescription \&other, \textcolor{keywordtype}{bool} interpretingWildcards=\textcolor{keyword}{true}) \textcolor{keyword}{const};}
+\DoxyCodeLine{365     \textcolor{keyword}{static} \textcolor{keywordtype}{bool}     \mbox{\hyperlink{class_c_a_stream_basic_description_ab97fd94d431d171716d8327b6715c3cd}{FlagIndependentEquivalence}}(\textcolor{keyword}{const} AudioStreamBasicDescription \&\mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, \textcolor{keyword}{const} AudioStreamBasicDescription \&\mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}});}
+\DoxyCodeLine{366     \textcolor{keyword}{static} \textcolor{keywordtype}{bool}     \mbox{\hyperlink{class_c_a_stream_basic_description_a912e97914b61ecb1fd79965279dd6614}{IsFunctionallyEquivalent}}(\textcolor{keyword}{const} AudioStreamBasicDescription \&\mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, \textcolor{keyword}{const} AudioStreamBasicDescription \&\mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}});}
+\DoxyCodeLine{367 }
+\DoxyCodeLine{368     \textcolor{keywordtype}{void}    \mbox{\hyperlink{class_c_a_stream_basic_description_a8d9af5bb0b2362cd72b3f09aa39ee64a}{Print}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{369         \mbox{\hyperlink{class_c_a_stream_basic_description_a8d9af5bb0b2362cd72b3f09aa39ee64a}{Print}} (stdout);}
+\DoxyCodeLine{370     \}}
+\DoxyCodeLine{371 }
+\DoxyCodeLine{372     \textcolor{keywordtype}{void}    \mbox{\hyperlink{class_c_a_stream_basic_description_a5b4e07dfb41ff1671135766da0a2b290}{Print}}(FILE* file)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{373         \mbox{\hyperlink{class_c_a_stream_basic_description_a66879fd2308fdb1b26b078696dca4fc9}{PrintFormat}} (file, \textcolor{stringliteral}{"{}"{}}, \textcolor{stringliteral}{"{}AudioStreamBasicDescription:"{}});}
+\DoxyCodeLine{374     \}}
+\DoxyCodeLine{375 }
+\DoxyCodeLine{376     \textcolor{keywordtype}{void}    \mbox{\hyperlink{class_c_a_stream_basic_description_a66879fd2308fdb1b26b078696dca4fc9}{PrintFormat}}(FILE *\mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}}, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *indent, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}})\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{377         \textcolor{keywordtype}{char} \mbox{\hyperlink{namespacegl_ab998012e627da2312fc60f51c0c2f313}{buf}}[256];}
+\DoxyCodeLine{378         fprintf(\mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}}, \textcolor{stringliteral}{"{}\%s\%s \%s\(\backslash\)n"{}}, indent, \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}, \mbox{\hyperlink{class_c_a_stream_basic_description_a8a6e6267bf0f54ebe80bf88f9ad41ac2}{AsString}}(\mbox{\hyperlink{namespacegl_ab998012e627da2312fc60f51c0c2f313}{buf}}, \textcolor{keyword}{sizeof}(\mbox{\hyperlink{namespacegl_ab998012e627da2312fc60f51c0c2f313}{buf}})));}
+\DoxyCodeLine{379     \}}
+\DoxyCodeLine{380 }
+\DoxyCodeLine{381     \textcolor{keywordtype}{void}    \mbox{\hyperlink{class_c_a_stream_basic_description_a5d395c2e432111f929de92c0248d37a4}{PrintFormat2}}(FILE *\mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}}, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *indent, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}})\textcolor{keyword}{ const }\{ \textcolor{comment}{// no trailing newline}}
+\DoxyCodeLine{382         \textcolor{keywordtype}{char} \mbox{\hyperlink{namespacegl_ab998012e627da2312fc60f51c0c2f313}{buf}}[256];}
+\DoxyCodeLine{383         fprintf(\mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}}, \textcolor{stringliteral}{"{}\%s\%s \%s"{}}, indent, \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}, \mbox{\hyperlink{class_c_a_stream_basic_description_a8a6e6267bf0f54ebe80bf88f9ad41ac2}{AsString}}(\mbox{\hyperlink{namespacegl_ab998012e627da2312fc60f51c0c2f313}{buf}}, \textcolor{keyword}{sizeof}(\mbox{\hyperlink{namespacegl_ab998012e627da2312fc60f51c0c2f313}{buf}})));}
+\DoxyCodeLine{384     \}}
+\DoxyCodeLine{385 }
+\DoxyCodeLine{386     \textcolor{keywordtype}{char} *  \mbox{\hyperlink{class_c_a_stream_basic_description_a8a6e6267bf0f54ebe80bf88f9ad41ac2}{AsString}}(\textcolor{keywordtype}{char} *\mbox{\hyperlink{namespacegl_ab998012e627da2312fc60f51c0c2f313}{buf}}, \textcolor{keywordtype}{size\_t} bufsize, \textcolor{keywordtype}{bool} brief=\textcolor{keyword}{false}) \textcolor{keyword}{const};}
+\DoxyCodeLine{387 }
+\DoxyCodeLine{388     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_a_stream_basic_description_a008dbb7091c36e00f0cfd7c64baaac2b}{Print}} (\textcolor{keyword}{const} AudioStreamBasicDescription \&inDesc)}
+\DoxyCodeLine{389     \{}
+\DoxyCodeLine{390         \mbox{\hyperlink{class_c_a_stream_basic_description}{CAStreamBasicDescription}} desc(inDesc);}
+\DoxyCodeLine{391         desc.\mbox{\hyperlink{class_c_a_stream_basic_description_a8d9af5bb0b2362cd72b3f09aa39ee64a}{Print}} ();}
+\DoxyCodeLine{392     \}}
+\DoxyCodeLine{393 }
+\DoxyCodeLine{394     OSStatus            \mbox{\hyperlink{class_c_a_stream_basic_description_a910ee88c781ef8e0e7bce888ed1ec396}{Save}}(CFPropertyListRef *outData) \textcolor{keyword}{const};}
+\DoxyCodeLine{395 }
+\DoxyCodeLine{396     OSStatus            \mbox{\hyperlink{class_c_a_stream_basic_description_a8984469000417d7ff3a314e4b9bd9637}{Restore}}(CFPropertyListRef \&inData);}
+\DoxyCodeLine{397 }
+\DoxyCodeLine{398 \textcolor{comment}{//  Operations}}
+\DoxyCodeLine{399     \textcolor{keyword}{static} \textcolor{keywordtype}{bool}         \mbox{\hyperlink{class_c_a_stream_basic_description_a244df3cb37254de1e5208ec98f0a6029}{IsMixable}}(\textcolor{keyword}{const} AudioStreamBasicDescription\& inDescription) \{ \textcolor{keywordflow}{return} (inDescription.mFormatID == kAudioFormatLinearPCM) \&\& ((inDescription.mFormatFlags \& \mbox{\hyperlink{_c_a_stream_basic_description_8h_a16685eea158879e41b101ca3634de462acbfc2d39d39dadb78001ab1aedfc2fe4}{kIsNonMixableFlag}}) == 0); \}}
+\DoxyCodeLine{400     \textcolor{keyword}{static} \textcolor{keywordtype}{void}         \mbox{\hyperlink{class_c_a_stream_basic_description_a783de129516d3019ea7f514b1824174c}{NormalizeLinearPCMFormat}}(AudioStreamBasicDescription\& ioDescription);}
+\DoxyCodeLine{401     \textcolor{keyword}{static} \textcolor{keywordtype}{void}         \mbox{\hyperlink{class_c_a_stream_basic_description_a783de129516d3019ea7f514b1824174c}{NormalizeLinearPCMFormat}}(\textcolor{keywordtype}{bool} inNativeEndian, AudioStreamBasicDescription\& ioDescription);}
+\DoxyCodeLine{402     \textcolor{keyword}{static} \textcolor{keywordtype}{void}         \mbox{\hyperlink{class_c_a_stream_basic_description_ac9c723fcaeab6472b0141bbd2488767f}{ResetFormat}}(AudioStreamBasicDescription\& ioDescription);}
+\DoxyCodeLine{403     \textcolor{keyword}{static} \textcolor{keywordtype}{void}         \mbox{\hyperlink{class_c_a_stream_basic_description_a40339549e45e47a35276746e3a34250c}{FillOutFormat}}(AudioStreamBasicDescription\& ioDescription, \textcolor{keyword}{const} AudioStreamBasicDescription\& inTemplateDescription);}
+\DoxyCodeLine{404     \textcolor{keyword}{static} \textcolor{keywordtype}{void}         \mbox{\hyperlink{class_c_a_stream_basic_description_a95be306f35ce1588b058bdfae29913f2}{GetSimpleName}}(\textcolor{keyword}{const} AudioStreamBasicDescription\& inDescription, \textcolor{keywordtype}{char}* outName, UInt32 inMaxNameLength, \textcolor{keywordtype}{bool} inAbbreviate, \textcolor{keywordtype}{bool} inIncludeSampleRate = \textcolor{keyword}{false});}
+\DoxyCodeLine{405     \textcolor{keyword}{static} \textcolor{keywordtype}{void}         \mbox{\hyperlink{class_c_a_stream_basic_description_a468a1904490ff3a7729e9d427e1d7a34}{ModifyFormatFlagsForMatching}}(\textcolor{keyword}{const} AudioStreamBasicDescription\& \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, \textcolor{keyword}{const} AudioStreamBasicDescription\& \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}}, UInt32\& xFlags, UInt32\& yFlags, \textcolor{keywordtype}{bool} converterOnly);}
+\DoxyCodeLine{406 }
+\DoxyCodeLine{407 \textcolor{preprocessor}{\#if CoreAudio\_Debug}}
+\DoxyCodeLine{408     \textcolor{keyword}{static} \textcolor{keywordtype}{void}         PrintToLog(\textcolor{keyword}{const} AudioStreamBasicDescription\& inDesc);}
+\DoxyCodeLine{409 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{410 \};}
+\DoxyCodeLine{411 }
+\DoxyCodeLine{412 \textcolor{keywordtype}{bool}        \mbox{\hyperlink{_c_a_stream_basic_description_8h_a878a42c3e8d99e69b741cd76d9a0f8db}{operator<}}(\textcolor{keyword}{const} AudioStreamBasicDescription\& \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, \textcolor{keyword}{const} AudioStreamBasicDescription\& \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}});}
+\DoxyCodeLine{413 \textcolor{keywordtype}{bool}        \mbox{\hyperlink{_c_a_stream_basic_description_8h_ad43ad5696a3770f73e95e754a26c63ed}{operator==}}(\textcolor{keyword}{const} AudioStreamBasicDescription\& \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, \textcolor{keyword}{const} AudioStreamBasicDescription\& \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}});}
+\DoxyCodeLine{414 \textcolor{preprocessor}{\#if TARGET\_OS\_MAC || (TARGET\_OS\_WIN32 \&\& (\_MSC\_VER > 600))}}
+\DoxyCodeLine{415 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_audio_channel_layout_8cpp_aa4ad43821a0285a3d7a5c840173f03ac}{operator!=}}(\textcolor{keyword}{const} AudioStreamBasicDescription\& \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, \textcolor{keyword}{const} AudioStreamBasicDescription\& \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}}) \{ \textcolor{keywordflow}{return} !(\mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}} == \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}}); \}}
+\DoxyCodeLine{416 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespace_steinberg_afc04c8ac4717595b641a119f8e1f4c08}{operator<=}}(\textcolor{keyword}{const} AudioStreamBasicDescription\& \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, \textcolor{keyword}{const} AudioStreamBasicDescription\& \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}}) \{ \textcolor{keywordflow}{return} (\mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}} < \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}}) || (\mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}} == \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}}); \}}
+\DoxyCodeLine{417 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespace_steinberg_a98082cddf36f42dae42928aab7b7d704}{operator>=}}(\textcolor{keyword}{const} AudioStreamBasicDescription\& \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, \textcolor{keyword}{const} AudioStreamBasicDescription\& \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}}) \{ \textcolor{keywordflow}{return} !(\mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}} < \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}}); \}}
+\DoxyCodeLine{418 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespace_steinberg_ac98deb5a1f36329c44edeee647d46431}{operator>}}(\textcolor{keyword}{const} AudioStreamBasicDescription\& \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, \textcolor{keyword}{const} AudioStreamBasicDescription\& \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}}) \{ \textcolor{keywordflow}{return} !((\mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}} < \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}}) || (\mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}} == \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}})); \}}
+\DoxyCodeLine{419 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{420 }
+\DoxyCodeLine{421 \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_stream_basic_description_8h_a3018636284e3ffb09f5f307c84e26c27}{SanityCheck}}(\textcolor{keyword}{const} AudioStreamBasicDescription\& \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}});}
+\DoxyCodeLine{422 }
+\DoxyCodeLine{423 }
+\DoxyCodeLine{424 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// \_\_CAStreamBasicDescription\_h\_\_}}
+
+\end{DoxyCode}

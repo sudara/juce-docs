@@ -1,0 +1,210 @@
+\hypertarget{juce___m_p_e_instrument_8h_source}{}\doxysection{juce\+\_\+\+MPEInstrument.\+h}
+\label{juce___m_p_e_instrument_8h_source}\index{build/juce\_audio\_basics/mpe/juce\_MPEInstrument.h@{build/juce\_audio\_basics/mpe/juce\_MPEInstrument.h}}
+\mbox{\hyperlink{juce___m_p_e_instrument_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{54 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_m_p_e_instrument}{MPEInstrument}}}
+\DoxyCodeLine{55 \{}
+\DoxyCodeLine{56 \textcolor{keyword}{public}:}
+\DoxyCodeLine{64     \mbox{\hyperlink{class_m_p_e_instrument}{MPEInstrument}}() \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{67     \mbox{\hyperlink{class_m_p_e_instrument}{MPEInstrument}} (\mbox{\hyperlink{class_m_p_e_zone_layout}{MPEZoneLayout}} layout);}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{70     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_m_p_e_instrument_ab35850fd7bac2d679928c556e290b126}{\string~MPEInstrument}}();}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{79 \textcolor{comment}{}    \mbox{\hyperlink{class_m_p_e_zone_layout}{MPEZoneLayout}} getZoneLayout() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{87     \textcolor{keywordtype}{void} setZoneLayout (\mbox{\hyperlink{class_m_p_e_zone_layout}{MPEZoneLayout}} newLayout);}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{95     \textcolor{keywordtype}{bool} isMemberChannel (\textcolor{keywordtype}{int} midiChannel) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{102     \textcolor{keywordtype}{bool} isMasterChannel (\textcolor{keywordtype}{int} midiChannel) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{110     \textcolor{keywordtype}{bool} isUsingChannel (\textcolor{keywordtype}{int} midiChannel) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{120 \textcolor{comment}{}    enum \mbox{\hyperlink{class_m_p_e_instrument_a6253ed9c5e70322645b02865c70dc0b6}{TrackingMode}}}
+\DoxyCodeLine{121     \{}
+\DoxyCodeLine{122         \mbox{\hyperlink{class_m_p_e_instrument_a6253ed9c5e70322645b02865c70dc0b6a88bee5e48b4e40245b2743809737fd2e}{lastNotePlayedOnChannel}}, }
+\DoxyCodeLine{123         \mbox{\hyperlink{class_m_p_e_instrument_a6253ed9c5e70322645b02865c70dc0b6a47f69f12a40825822a72ff0e4e8f5c4b}{lowestNoteOnChannel}},     }
+\DoxyCodeLine{124         \mbox{\hyperlink{class_m_p_e_instrument_a6253ed9c5e70322645b02865c70dc0b6ad52768b05c36483f44c933044a35d4dd}{highestNoteOnChannel}},    }
+\DoxyCodeLine{125         allNotesOnChannel        }
+\DoxyCodeLine{126     \};}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{129     \textcolor{keywordtype}{void} setPressureTrackingMode (TrackingMode modeToUse);}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{132     \textcolor{keywordtype}{void} setPitchbendTrackingMode (TrackingMode modeToUse);}
+\DoxyCodeLine{133 }
+\DoxyCodeLine{135     \textcolor{keywordtype}{void} setTimbreTrackingMode (TrackingMode modeToUse);}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{137     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{144 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} processNextMidiEvent (\textcolor{keyword}{const} \mbox{\hyperlink{class_midi_message}{MidiMessage}}\& \mbox{\hyperlink{namespacegl_a1243e1c99f08a099c7a70cc1a258034a}{message}});}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{146     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{153 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} noteOn (\textcolor{keywordtype}{int} midiChannel, \textcolor{keywordtype}{int} midiNoteNumber, \mbox{\hyperlink{class_m_p_e_value}{MPEValue}} midiNoteOnVelocity);}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{161     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} noteOff (\textcolor{keywordtype}{int} midiChannel, \textcolor{keywordtype}{int} midiNoteNumber, \mbox{\hyperlink{class_m_p_e_value}{MPEValue}} midiNoteOffVelocity);}
+\DoxyCodeLine{162 }
+\DoxyCodeLine{171     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} pitchbend (\textcolor{keywordtype}{int} midiChannel, \mbox{\hyperlink{class_m_p_e_value}{MPEValue}} pitchbend);}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{179     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} pressure (\textcolor{keywordtype}{int} midiChannel, \mbox{\hyperlink{class_m_p_e_value}{MPEValue}} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}});}
+\DoxyCodeLine{180 }
+\DoxyCodeLine{188     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} timbre (\textcolor{keywordtype}{int} midiChannel, \mbox{\hyperlink{class_m_p_e_value}{MPEValue}} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}});}
+\DoxyCodeLine{189 }
+\DoxyCodeLine{195     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} polyAftertouch (\textcolor{keywordtype}{int} midiChannel, \textcolor{keywordtype}{int} midiNoteNumber, \mbox{\hyperlink{class_m_p_e_value}{MPEValue}} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}});}
+\DoxyCodeLine{196 }
+\DoxyCodeLine{202     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} sustainPedal (\textcolor{keywordtype}{int} midiChannel, \textcolor{keywordtype}{bool} isDown);}
+\DoxyCodeLine{203 }
+\DoxyCodeLine{209     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} sostenutoPedal (\textcolor{keywordtype}{int} midiChannel, \textcolor{keywordtype}{bool} isDown);}
+\DoxyCodeLine{210 }
+\DoxyCodeLine{215     \textcolor{keywordtype}{void} releaseAllNotes();}
+\DoxyCodeLine{216 }
+\DoxyCodeLine{217     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{219 \textcolor{comment}{}    \textcolor{keywordtype}{int} getNumPlayingNotes() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{220 }
+\DoxyCodeLine{226     \mbox{\hyperlink{struct_m_p_e_note}{MPENote}} getNote (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{227 }
+\DoxyCodeLine{232     \mbox{\hyperlink{struct_m_p_e_note}{MPENote}} getNote (\textcolor{keywordtype}{int} midiChannel, \textcolor{keywordtype}{int} midiNoteNumber) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{233 }
+\DoxyCodeLine{235     \mbox{\hyperlink{struct_m_p_e_note}{MPENote}} getNoteWithID (\mbox{\hyperlink{juce__box2d_8cpp_acc2cb9a2f3246f6f4775ef16196fd983}{uint16}} noteID) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{236 }
+\DoxyCodeLine{242     \mbox{\hyperlink{struct_m_p_e_note}{MPENote}} getMostRecentNote (\textcolor{keywordtype}{int} midiChannel) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{243 }
+\DoxyCodeLine{249     \mbox{\hyperlink{struct_m_p_e_note}{MPENote}} getMostRecentNoteOtherThan (\mbox{\hyperlink{struct_m_p_e_note}{MPENote}} otherThanThisNote) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{250 }
+\DoxyCodeLine{251     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{260 \textcolor{comment}{}    class \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_m_p_e_instrument_1_1_listener}{Listener}}}
+\DoxyCodeLine{261     \{}
+\DoxyCodeLine{262     \textcolor{keyword}{public}:}
+\DoxyCodeLine{264         \textcolor{keyword}{virtual} \mbox{\hyperlink{class_m_p_e_instrument_1_1_listener_a24b96764da523054c5525c29c00c418e}{\string~Listener}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{265 }
+\DoxyCodeLine{269         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_m_p_e_instrument_1_1_listener_a53f2141bc1178783d5f89536f6dc3481}{noteAdded}} (\mbox{\hyperlink{struct_m_p_e_note}{MPENote}} newNote)                 \{ \mbox{\hyperlink{group__juce__core-maths_ga5158e6e8faa5553204f90af596fafaf5}{ignoreUnused}} (newNote); \}}
+\DoxyCodeLine{270 }
+\DoxyCodeLine{274         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_m_p_e_instrument_1_1_listener_a9d687e2e40b593a93a4e210afd691ac7}{notePressureChanged}} (\mbox{\hyperlink{struct_m_p_e_note}{MPENote}} changedNote)   \{ \mbox{\hyperlink{group__juce__core-maths_ga5158e6e8faa5553204f90af596fafaf5}{ignoreUnused}} (changedNote); \}}
+\DoxyCodeLine{275 }
+\DoxyCodeLine{283         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_m_p_e_instrument_1_1_listener_a17e7d4e3793bb4d82164369c1c1227ce}{notePitchbendChanged}} (\mbox{\hyperlink{struct_m_p_e_note}{MPENote}} changedNote)  \{ \mbox{\hyperlink{group__juce__core-maths_ga5158e6e8faa5553204f90af596fafaf5}{ignoreUnused}} (changedNote); \}}
+\DoxyCodeLine{284 }
+\DoxyCodeLine{288         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_m_p_e_instrument_1_1_listener_ace32bde57684274f5a78d33f9636a444}{noteTimbreChanged}} (\mbox{\hyperlink{struct_m_p_e_note}{MPENote}} changedNote)     \{ \mbox{\hyperlink{group__juce__core-maths_ga5158e6e8faa5553204f90af596fafaf5}{ignoreUnused}} (changedNote); \}}
+\DoxyCodeLine{289 }
+\DoxyCodeLine{297         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_m_p_e_instrument_1_1_listener_adc0f11b66f86070af16e68c7e14eaa1c}{noteKeyStateChanged}} (\mbox{\hyperlink{struct_m_p_e_note}{MPENote}} changedNote)   \{ \mbox{\hyperlink{group__juce__core-maths_ga5158e6e8faa5553204f90af596fafaf5}{ignoreUnused}} (changedNote); \}}
+\DoxyCodeLine{298 }
+\DoxyCodeLine{304         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_m_p_e_instrument_1_1_listener_a1493b1fefb70c80d98fbdfa7aae6c2fa}{noteReleased}} (\mbox{\hyperlink{struct_m_p_e_note}{MPENote}} finishedNote)         \{ \mbox{\hyperlink{group__juce__core-maths_ga5158e6e8faa5553204f90af596fafaf5}{ignoreUnused}} (finishedNote); \}}
+\DoxyCodeLine{305 }
+\DoxyCodeLine{309         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_m_p_e_instrument_1_1_listener_a0306746f2a06a4f023d816290399a4f1}{zoneLayoutChanged}}()                         \{\}}
+\DoxyCodeLine{310     \};}
+\DoxyCodeLine{311 }
+\DoxyCodeLine{312     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{314 \textcolor{comment}{}    \textcolor{keywordtype}{void} addListener (Listener* listenerToAdd);}
+\DoxyCodeLine{315 }
+\DoxyCodeLine{317     \textcolor{keywordtype}{void} removeListener (Listener* listenerToRemove);}
+\DoxyCodeLine{318 }
+\DoxyCodeLine{319     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{341 \textcolor{comment}{}    \textcolor{keywordtype}{void} enableLegacyMode (\textcolor{keywordtype}{int} pitchbendRange = 2,}
+\DoxyCodeLine{342                            \mbox{\hyperlink{class_range}{Range<int>}} channelRange = \mbox{\hyperlink{class_range}{Range<int>}} (1, 17));}
+\DoxyCodeLine{343 }
+\DoxyCodeLine{345     \textcolor{keywordtype}{bool} isLegacyModeEnabled() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{346 }
+\DoxyCodeLine{348     \mbox{\hyperlink{class_range}{Range}}<\textcolor{keywordtype}{int}> getLegacyModeChannelRange() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{349 }
+\DoxyCodeLine{351     \textcolor{keywordtype}{void} setLegacyModeChannelRange (\mbox{\hyperlink{class_range}{Range}}<\textcolor{keywordtype}{int}> channelRange);}
+\DoxyCodeLine{352 }
+\DoxyCodeLine{354     \textcolor{keywordtype}{int} getLegacyModePitchbendRange() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{355 }
+\DoxyCodeLine{357     \textcolor{keywordtype}{void} setLegacyModePitchbendRange (\textcolor{keywordtype}{int} pitchbendRange);}
+\DoxyCodeLine{358 }
+\DoxyCodeLine{359 protected:}
+\DoxyCodeLine{360     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{361     \mbox{\hyperlink{class_critical_section}{CriticalSection}} lock;}
+\DoxyCodeLine{362 }
+\DoxyCodeLine{363 private:}
+\DoxyCodeLine{364     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{365     \mbox{\hyperlink{class_array}{Array}}<\mbox{\hyperlink{struct_m_p_e_note}{MPENote}}> notes;}
+\DoxyCodeLine{366     \mbox{\hyperlink{class_m_p_e_zone_layout}{MPEZoneLayout}} zoneLayout;}
+\DoxyCodeLine{367     \mbox{\hyperlink{class_listener_list}{ListenerList}}<\mbox{\hyperlink{class_m_p_e_instrument_1_1_listener}{Listener}}> listeners;}
+\DoxyCodeLine{368 }
+\DoxyCodeLine{369     \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} lastPressureLowerBitReceivedOnChannel[16];}
+\DoxyCodeLine{370     \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} lastTimbreLowerBitReceivedOnChannel[16];}
+\DoxyCodeLine{371     \textcolor{keywordtype}{bool} isMemberChannelSustained[16];}
+\DoxyCodeLine{372 }
+\DoxyCodeLine{373     struct LegacyMode}
+\DoxyCodeLine{374     \{}
+\DoxyCodeLine{375         \textcolor{keywordtype}{bool} isEnabled = \textcolor{keyword}{false};}
+\DoxyCodeLine{376         \mbox{\hyperlink{class_range}{Range<int>}} channelRange;}
+\DoxyCodeLine{377         \textcolor{keywordtype}{int} pitchbendRange = 2;}
+\DoxyCodeLine{378     \};}
+\DoxyCodeLine{379 }
+\DoxyCodeLine{380     \textcolor{keyword}{struct }MPEDimension}
+\DoxyCodeLine{381     \{}
+\DoxyCodeLine{382         TrackingMode trackingMode = lastNotePlayedOnChannel;}
+\DoxyCodeLine{383         \mbox{\hyperlink{class_m_p_e_value}{MPEValue}} lastValueReceivedOnChannel[16];}
+\DoxyCodeLine{384         \mbox{\hyperlink{class_m_p_e_value}{MPEValue}} \mbox{\hyperlink{struct_m_p_e_note}{MPENote}}::* \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}};}
+\DoxyCodeLine{385         \mbox{\hyperlink{class_m_p_e_value}{MPEValue}}\& getValue (\mbox{\hyperlink{struct_m_p_e_note}{MPENote}}\& note) \textcolor{keyword}{noexcept}   \{ \textcolor{keywordflow}{return} note.*(\mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}); \}}
+\DoxyCodeLine{386     \};}
+\DoxyCodeLine{387 }
+\DoxyCodeLine{388     LegacyMode legacyMode;}
+\DoxyCodeLine{389     MPEDimension pitchbendDimension, pressureDimension, timbreDimension;}
+\DoxyCodeLine{390 }
+\DoxyCodeLine{391     \textcolor{keywordtype}{void} resetLastReceivedValues();}
+\DoxyCodeLine{392 }
+\DoxyCodeLine{393     \textcolor{keywordtype}{void} updateDimension (\textcolor{keywordtype}{int} midiChannel, MPEDimension\&, \mbox{\hyperlink{class_m_p_e_value}{MPEValue}});}
+\DoxyCodeLine{394     \textcolor{keywordtype}{void} updateDimensionMaster (\textcolor{keywordtype}{bool}, MPEDimension\&, \mbox{\hyperlink{class_m_p_e_value}{MPEValue}});}
+\DoxyCodeLine{395     \textcolor{keywordtype}{void} updateDimensionForNote (\mbox{\hyperlink{struct_m_p_e_note}{MPENote}}\&, MPEDimension\&, \mbox{\hyperlink{class_m_p_e_value}{MPEValue}});}
+\DoxyCodeLine{396     \textcolor{keywordtype}{void} callListenersDimensionChanged (\textcolor{keyword}{const} \mbox{\hyperlink{struct_m_p_e_note}{MPENote}}\&, \textcolor{keyword}{const} MPEDimension\&);}
+\DoxyCodeLine{397     \mbox{\hyperlink{class_m_p_e_value}{MPEValue}} getInitialValueForNewNote (\textcolor{keywordtype}{int} midiChannel, MPEDimension\&) \textcolor{keyword}{const};}
+\DoxyCodeLine{398 }
+\DoxyCodeLine{399     \textcolor{keywordtype}{void} processMidiNoteOnMessage (\textcolor{keyword}{const} \mbox{\hyperlink{class_midi_message}{MidiMessage}}\&);}
+\DoxyCodeLine{400     \textcolor{keywordtype}{void} processMidiNoteOffMessage (\textcolor{keyword}{const} \mbox{\hyperlink{class_midi_message}{MidiMessage}}\&);}
+\DoxyCodeLine{401     \textcolor{keywordtype}{void} processMidiPitchWheelMessage (\textcolor{keyword}{const} \mbox{\hyperlink{class_midi_message}{MidiMessage}}\&);}
+\DoxyCodeLine{402     \textcolor{keywordtype}{void} processMidiChannelPressureMessage (\textcolor{keyword}{const} \mbox{\hyperlink{class_midi_message}{MidiMessage}}\&);}
+\DoxyCodeLine{403     \textcolor{keywordtype}{void} processMidiControllerMessage (\textcolor{keyword}{const} \mbox{\hyperlink{class_midi_message}{MidiMessage}}\&);}
+\DoxyCodeLine{404     \textcolor{keywordtype}{void} processMidiResetAllControllersMessage (\textcolor{keyword}{const} \mbox{\hyperlink{class_midi_message}{MidiMessage}}\&);}
+\DoxyCodeLine{405     \textcolor{keywordtype}{void} processMidiAfterTouchMessage (\textcolor{keyword}{const} \mbox{\hyperlink{class_midi_message}{MidiMessage}}\&);}
+\DoxyCodeLine{406     \textcolor{keywordtype}{void} handlePressureMSB (\textcolor{keywordtype}{int} midiChannel, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{407     \textcolor{keywordtype}{void} handlePressureLSB (\textcolor{keywordtype}{int} midiChannel, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{408     \textcolor{keywordtype}{void} handleTimbreMSB (\textcolor{keywordtype}{int} midiChannel, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{409     \textcolor{keywordtype}{void} handleTimbreLSB (\textcolor{keywordtype}{int} midiChannel, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{410     \textcolor{keywordtype}{void} handleSustainOrSostenuto (\textcolor{keywordtype}{int} midiChannel, \textcolor{keywordtype}{bool} isDown, \textcolor{keywordtype}{bool} isSostenuto);}
+\DoxyCodeLine{411 }
+\DoxyCodeLine{412     \textcolor{keyword}{const} \mbox{\hyperlink{struct_m_p_e_note}{MPENote}}* getNotePtr (\textcolor{keywordtype}{int} midiChannel, \textcolor{keywordtype}{int} midiNoteNumber) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{413     \mbox{\hyperlink{struct_m_p_e_note}{MPENote}}* getNotePtr (\textcolor{keywordtype}{int} midiChannel, \textcolor{keywordtype}{int} midiNoteNumber) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{414     \textcolor{keyword}{const} \mbox{\hyperlink{struct_m_p_e_note}{MPENote}}* getNotePtr (\textcolor{keywordtype}{int} midiChannel, TrackingMode) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{415     \mbox{\hyperlink{struct_m_p_e_note}{MPENote}}* getNotePtr (\textcolor{keywordtype}{int} midiChannel, TrackingMode) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{416     \textcolor{keyword}{const} \mbox{\hyperlink{struct_m_p_e_note}{MPENote}}* getLastNotePlayedPtr (\textcolor{keywordtype}{int} midiChannel) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{417     \mbox{\hyperlink{struct_m_p_e_note}{MPENote}}* getLastNotePlayedPtr (\textcolor{keywordtype}{int} midiChannel) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{418     \textcolor{keyword}{const} \mbox{\hyperlink{struct_m_p_e_note}{MPENote}}* getHighestNotePtr (\textcolor{keywordtype}{int} midiChannel) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{419     \mbox{\hyperlink{struct_m_p_e_note}{MPENote}}* getHighestNotePtr (\textcolor{keywordtype}{int} midiChannel) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{420     \textcolor{keyword}{const} \mbox{\hyperlink{struct_m_p_e_note}{MPENote}}* getLowestNotePtr (\textcolor{keywordtype}{int} midiChannel) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{421     \mbox{\hyperlink{struct_m_p_e_note}{MPENote}}* getLowestNotePtr (\textcolor{keywordtype}{int} midiChannel) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{422     \textcolor{keywordtype}{void} updateNoteTotalPitchbend (\mbox{\hyperlink{struct_m_p_e_note}{MPENote}}\&);}
+\DoxyCodeLine{423 }
+\DoxyCodeLine{424     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_m_p_e_instrument}{MPEInstrument}})}
+\DoxyCodeLine{425 \};}
+\DoxyCodeLine{426 }
+\DoxyCodeLine{427  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{428 }
+
+\end{DoxyCode}

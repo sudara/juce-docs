@@ -1,0 +1,192 @@
+\hypertarget{jchuff_8c}{}\doxysection{build/juce\+\_\+graphics/image\+\_\+formats/jpglib/jchuff.c File Reference}
+\label{jchuff_8c}\index{build/juce\_graphics/image\_formats/jpglib/jchuff.c@{build/juce\_graphics/image\_formats/jpglib/jchuff.c}}
+{\ttfamily \#include \char`\"{}jinclude.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}jpeglib.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}jchuff.\+h\char`\"{}}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structsavable__state}{savable\+\_\+state}}
+\item 
+struct \mbox{\hyperlink{structhuff__entropy__encoder}{huff\+\_\+entropy\+\_\+encoder}}
+\item 
+struct \mbox{\hyperlink{structworking__state}{working\+\_\+state}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{jchuff_8c_ad5c3cdfae3019b8223973041a2a1304b}{JPEG\+\_\+\+INTERNALS}}
+\item 
+\#define \mbox{\hyperlink{jchuff_8c_a0aa59fa38553f2f947f0880637cf0865}{ASSIGN\+\_\+\+STATE}}(dest,  src)~((dest) = (src))
+\item 
+\#define \mbox{\hyperlink{jchuff_8c_abb7d8d00694e31aa9fb8b6a222acd34b}{emit\+\_\+byte}}(state,  \mbox{\hyperlink{jpeglib_8h_aa0ccb5ee6d882ee3605ff47745c6467b}{val}},  action)
+\item 
+\#define \mbox{\hyperlink{jchuff_8c_a82509103366dba59196d5c326a495766}{MAX\+\_\+\+CLEN}}~32  /$\ast$ assumed maximum initial \mbox{\hyperlink{structcode}{code}} \mbox{\hyperlink{png_8c_a209c8e470817686b5ca6730db67f8d67}{length}} $\ast$/
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef \mbox{\hyperlink{structhuff__entropy__encoder}{huff\+\_\+entropy\+\_\+encoder}} $\ast$ \mbox{\hyperlink{jchuff_8c_affce96a1cce448f0bd2b830395f68cca}{huff\+\_\+entropy\+\_\+ptr}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{jchuff_8c_a1a64d09a8eaa504dd788c52dfb3cf6d6}{METHODDEF}} (\mbox{\hyperlink{jconfig_8h_a7670a4e8a07d9ebb00411948b0bbf86d}{boolean}})
+\item 
+\mbox{\hyperlink{jchuff_8c_a6ba6c9dfe4c088663cdde4f09eaf11e8}{jpeg\+\_\+make\+\_\+c\+\_\+derived\+\_\+tbl}} (\mbox{\hyperlink{jpeglib_8h_add2a072c54e3a51550f4975f7ddb91e7}{j\+\_\+compress\+\_\+ptr}} cinfo, \mbox{\hyperlink{jconfig_8h_a7670a4e8a07d9ebb00411948b0bbf86d}{boolean}} \mbox{\hyperlink{jdhuff_8h_a3b9fc61fd5e263607c9367d1113b842d}{is\+DC}}, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{jdhuff_8h_ac15aa4f86b719988961b67992d37851a}{tblno}}, \mbox{\hyperlink{structc__derived__tbl}{c\+\_\+derived\+\_\+tbl}} $\ast$$\ast$\mbox{\hyperlink{jdhuff_8h_a1c37b580fbf7abb6d73c7a0e97bb8f85}{pdtbl}})
+\item 
+\mbox{\hyperlink{jchuff_8c_aa2805132a531cf972869eb39d5a4f724}{dump\+\_\+buffer}} (\mbox{\hyperlink{structworking__state}{working\+\_\+state}} $\ast$state)
+\item 
+INLINE \mbox{\hyperlink{jchuff_8c_a812e1cbcd3af76239a0e8ebb0923a9d8}{emit\+\_\+bits}} (\mbox{\hyperlink{structworking__state}{working\+\_\+state}} $\ast$state, unsigned \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{structcode}{code}}, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} size)
+\item 
+\mbox{\hyperlink{jchuff_8c_a2f510ca46c87b004c651d6ecf65da254}{flush\+\_\+bits}} (\mbox{\hyperlink{structworking__state}{working\+\_\+state}} $\ast$state)
+\item 
+\mbox{\hyperlink{jchuff_8c_ace50da25851d39478557d1cc19365f21}{encode\+\_\+one\+\_\+block}} (\mbox{\hyperlink{structworking__state}{working\+\_\+state}} $\ast$state, \mbox{\hyperlink{jpeglib_8h_a7cffaee4be349c90c1d541f480aa62e3}{JCOEFPTR}} block, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} last\+\_\+dc\+\_\+val, \mbox{\hyperlink{structc__derived__tbl}{c\+\_\+derived\+\_\+tbl}} $\ast$dctbl, \mbox{\hyperlink{structc__derived__tbl}{c\+\_\+derived\+\_\+tbl}} $\ast$actbl)
+\item 
+\mbox{\hyperlink{jchuff_8c_af7d99c3ac2571bac5e1f2549b189459c}{emit\+\_\+restart}} (\mbox{\hyperlink{structworking__state}{working\+\_\+state}} $\ast$state, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} restart\+\_\+num)
+\item 
+\mbox{\hyperlink{jchuff_8c_a5f17abbb322e422572e38aba28612a65}{encode\+\_\+mcu\+\_\+huff}} (\mbox{\hyperlink{jpeglib_8h_add2a072c54e3a51550f4975f7ddb91e7}{j\+\_\+compress\+\_\+ptr}} cinfo, \mbox{\hyperlink{jpeglib_8h_a04dea0959d9bd9e8ddad83597161453b}{JBLOCKROW}} $\ast$MCU\+\_\+data)
+\item 
+\mbox{\hyperlink{jchuff_8c_ab0f7f271927d5e929992cc4b3af7b131}{finish\+\_\+pass\+\_\+huff}} (\mbox{\hyperlink{jpeglib_8h_add2a072c54e3a51550f4975f7ddb91e7}{j\+\_\+compress\+\_\+ptr}} cinfo)
+\item 
+\mbox{\hyperlink{jchuff_8c_a047d325de5ab123028c4489c07c4db64}{htest\+\_\+one\+\_\+block}} (\mbox{\hyperlink{jpeglib_8h_add2a072c54e3a51550f4975f7ddb91e7}{j\+\_\+compress\+\_\+ptr}} cinfo, \mbox{\hyperlink{jpeglib_8h_a7cffaee4be349c90c1d541f480aa62e3}{JCOEFPTR}} block, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} last\+\_\+dc\+\_\+val, long dc\+\_\+counts\mbox{[}$\,$\mbox{]}, long ac\+\_\+counts\mbox{[}$\,$\mbox{]})
+\item 
+\mbox{\hyperlink{jchuff_8c_a2d8ec90784ce5332ac0053b710d2059a}{encode\+\_\+mcu\+\_\+gather}} (\mbox{\hyperlink{jpeglib_8h_add2a072c54e3a51550f4975f7ddb91e7}{j\+\_\+compress\+\_\+ptr}} cinfo, \mbox{\hyperlink{jpeglib_8h_a04dea0959d9bd9e8ddad83597161453b}{JBLOCKROW}} $\ast$MCU\+\_\+data)
+\item 
+\mbox{\hyperlink{jchuff_8c_a3f40436fc5d3ec20e1124b84e3256b93}{jpeg\+\_\+gen\+\_\+optimal\+\_\+table}} (\mbox{\hyperlink{jpeglib_8h_add2a072c54e3a51550f4975f7ddb91e7}{j\+\_\+compress\+\_\+ptr}} cinfo, \mbox{\hyperlink{struct_j_h_u_f_f___t_b_l}{JHUFF\+\_\+\+TBL}} $\ast$\mbox{\hyperlink{jdhuff_8h_af74dba4716a8b51205604367fb049bdc}{htbl}}, long \mbox{\hyperlink{jchuff_8h_a4d6507be80120e3919afbfdc34cebb3c}{freq}}\mbox{[}$\,$\mbox{]})
+\item 
+\mbox{\hyperlink{jchuff_8c_a92d1ffa5f916814234009ccd220ef6da}{finish\+\_\+pass\+\_\+gather}} (\mbox{\hyperlink{jpeglib_8h_add2a072c54e3a51550f4975f7ddb91e7}{j\+\_\+compress\+\_\+ptr}} cinfo)
+\item 
+\mbox{\hyperlink{jchuff_8c_a77341cca2feceb164c104fdf8b79756b}{jinit\+\_\+huff\+\_\+encoder}} (\mbox{\hyperlink{jpeglib_8h_add2a072c54e3a51550f4975f7ddb91e7}{j\+\_\+compress\+\_\+ptr}} cinfo)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{jchuff_8c_a0aa59fa38553f2f947f0880637cf0865}\label{jchuff_8c_a0aa59fa38553f2f947f0880637cf0865}} 
+\index{jchuff.c@{jchuff.c}!ASSIGN\_STATE@{ASSIGN\_STATE}}
+\index{ASSIGN\_STATE@{ASSIGN\_STATE}!jchuff.c@{jchuff.c}}
+\doxysubsubsection{\texorpdfstring{ASSIGN\_STATE}{ASSIGN\_STATE}}
+{\footnotesize\ttfamily \#define ASSIGN\+\_\+\+STATE(\begin{DoxyParamCaption}\item[{}]{dest,  }\item[{}]{src }\end{DoxyParamCaption})~((dest) = (src))}
+
+\mbox{\Hypertarget{jchuff_8c_abb7d8d00694e31aa9fb8b6a222acd34b}\label{jchuff_8c_abb7d8d00694e31aa9fb8b6a222acd34b}} 
+\index{jchuff.c@{jchuff.c}!emit\_byte@{emit\_byte}}
+\index{emit\_byte@{emit\_byte}!jchuff.c@{jchuff.c}}
+\doxysubsubsection{\texorpdfstring{emit\_byte}{emit\_byte}}
+{\footnotesize\ttfamily \#define emit\+\_\+byte(\begin{DoxyParamCaption}\item[{}]{state,  }\item[{}]{\mbox{\hyperlink{jpeglib_8h_aa0ccb5ee6d882ee3605ff47745c6467b}{val}},  }\item[{}]{action }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \{ *(state)-\/>next\_output\_byte++ = (\mbox{\hyperlink{jmorecfg_8h_a356ad249f20e691b520da439f92cccbc}{JOCTET}}) (\mbox{\hyperlink{jpeglib_8h_aa0ccb5ee6d882ee3605ff47745c6467b}{val}});  \(\backslash\)}
+\DoxyCodeLine{      if (-\/-\/(state)-\/>free\_in\_buffer == 0)  \(\backslash\)}
+\DoxyCodeLine{        if (! \mbox{\hyperlink{jchuff_8c_aa2805132a531cf972869eb39d5a4f724}{dump\_buffer}}(state))  \(\backslash\)}
+\DoxyCodeLine{          \{ action; \} \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{jchuff_8c_ad5c3cdfae3019b8223973041a2a1304b}\label{jchuff_8c_ad5c3cdfae3019b8223973041a2a1304b}} 
+\index{jchuff.c@{jchuff.c}!JPEG\_INTERNALS@{JPEG\_INTERNALS}}
+\index{JPEG\_INTERNALS@{JPEG\_INTERNALS}!jchuff.c@{jchuff.c}}
+\doxysubsubsection{\texorpdfstring{JPEG\_INTERNALS}{JPEG\_INTERNALS}}
+{\footnotesize\ttfamily \#define JPEG\+\_\+\+INTERNALS}
+
+\mbox{\Hypertarget{jchuff_8c_a82509103366dba59196d5c326a495766}\label{jchuff_8c_a82509103366dba59196d5c326a495766}} 
+\index{jchuff.c@{jchuff.c}!MAX\_CLEN@{MAX\_CLEN}}
+\index{MAX\_CLEN@{MAX\_CLEN}!jchuff.c@{jchuff.c}}
+\doxysubsubsection{\texorpdfstring{MAX\_CLEN}{MAX\_CLEN}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+CLEN~32  /$\ast$ assumed maximum initial \mbox{\hyperlink{structcode}{code}} \mbox{\hyperlink{png_8c_a209c8e470817686b5ca6730db67f8d67}{length}} $\ast$/}
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{jchuff_8c_affce96a1cce448f0bd2b830395f68cca}\label{jchuff_8c_affce96a1cce448f0bd2b830395f68cca}} 
+\index{jchuff.c@{jchuff.c}!huff\_entropy\_ptr@{huff\_entropy\_ptr}}
+\index{huff\_entropy\_ptr@{huff\_entropy\_ptr}!jchuff.c@{jchuff.c}}
+\doxysubsubsection{\texorpdfstring{huff\_entropy\_ptr}{huff\_entropy\_ptr}}
+{\footnotesize\ttfamily typedef \mbox{\hyperlink{structhuff__entropy__encoder}{huff\+\_\+entropy\+\_\+encoder}}$\ast$ \mbox{\hyperlink{jchuff_8c_affce96a1cce448f0bd2b830395f68cca}{huff\+\_\+entropy\+\_\+ptr}}}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{jchuff_8c_aa2805132a531cf972869eb39d5a4f724}\label{jchuff_8c_aa2805132a531cf972869eb39d5a4f724}} 
+\index{jchuff.c@{jchuff.c}!dump\_buffer@{dump\_buffer}}
+\index{dump\_buffer@{dump\_buffer}!jchuff.c@{jchuff.c}}
+\doxysubsubsection{\texorpdfstring{dump\_buffer()}{dump\_buffer()}}
+{\footnotesize\ttfamily dump\+\_\+buffer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structworking__state}{working\+\_\+state}} $\ast$}]{state }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{jchuff_8c_a812e1cbcd3af76239a0e8ebb0923a9d8}\label{jchuff_8c_a812e1cbcd3af76239a0e8ebb0923a9d8}} 
+\index{jchuff.c@{jchuff.c}!emit\_bits@{emit\_bits}}
+\index{emit\_bits@{emit\_bits}!jchuff.c@{jchuff.c}}
+\doxysubsubsection{\texorpdfstring{emit\_bits()}{emit\_bits()}}
+{\footnotesize\ttfamily INLINE emit\+\_\+bits (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structworking__state}{working\+\_\+state}} $\ast$}]{state,  }\item[{unsigned \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{code,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{size }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{jchuff_8c_af7d99c3ac2571bac5e1f2549b189459c}\label{jchuff_8c_af7d99c3ac2571bac5e1f2549b189459c}} 
+\index{jchuff.c@{jchuff.c}!emit\_restart@{emit\_restart}}
+\index{emit\_restart@{emit\_restart}!jchuff.c@{jchuff.c}}
+\doxysubsubsection{\texorpdfstring{emit\_restart()}{emit\_restart()}}
+{\footnotesize\ttfamily emit\+\_\+restart (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structworking__state}{working\+\_\+state}} $\ast$}]{state,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{restart\+\_\+num }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{jchuff_8c_a2d8ec90784ce5332ac0053b710d2059a}\label{jchuff_8c_a2d8ec90784ce5332ac0053b710d2059a}} 
+\index{jchuff.c@{jchuff.c}!encode\_mcu\_gather@{encode\_mcu\_gather}}
+\index{encode\_mcu\_gather@{encode\_mcu\_gather}!jchuff.c@{jchuff.c}}
+\doxysubsubsection{\texorpdfstring{encode\_mcu\_gather()}{encode\_mcu\_gather()}}
+{\footnotesize\ttfamily encode\+\_\+mcu\+\_\+gather (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{jpeglib_8h_add2a072c54e3a51550f4975f7ddb91e7}{j\+\_\+compress\+\_\+ptr}}}]{cinfo,  }\item[{\mbox{\hyperlink{jpeglib_8h_a04dea0959d9bd9e8ddad83597161453b}{JBLOCKROW}} $\ast$}]{MCU\+\_\+data }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{jchuff_8c_a5f17abbb322e422572e38aba28612a65}\label{jchuff_8c_a5f17abbb322e422572e38aba28612a65}} 
+\index{jchuff.c@{jchuff.c}!encode\_mcu\_huff@{encode\_mcu\_huff}}
+\index{encode\_mcu\_huff@{encode\_mcu\_huff}!jchuff.c@{jchuff.c}}
+\doxysubsubsection{\texorpdfstring{encode\_mcu\_huff()}{encode\_mcu\_huff()}}
+{\footnotesize\ttfamily encode\+\_\+mcu\+\_\+huff (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{jpeglib_8h_add2a072c54e3a51550f4975f7ddb91e7}{j\+\_\+compress\+\_\+ptr}}}]{cinfo,  }\item[{\mbox{\hyperlink{jpeglib_8h_a04dea0959d9bd9e8ddad83597161453b}{JBLOCKROW}} $\ast$}]{MCU\+\_\+data }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{jchuff_8c_ace50da25851d39478557d1cc19365f21}\label{jchuff_8c_ace50da25851d39478557d1cc19365f21}} 
+\index{jchuff.c@{jchuff.c}!encode\_one\_block@{encode\_one\_block}}
+\index{encode\_one\_block@{encode\_one\_block}!jchuff.c@{jchuff.c}}
+\doxysubsubsection{\texorpdfstring{encode\_one\_block()}{encode\_one\_block()}}
+{\footnotesize\ttfamily encode\+\_\+one\+\_\+block (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structworking__state}{working\+\_\+state}} $\ast$}]{state,  }\item[{\mbox{\hyperlink{jpeglib_8h_a7cffaee4be349c90c1d541f480aa62e3}{JCOEFPTR}}}]{block,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{last\+\_\+dc\+\_\+val,  }\item[{\mbox{\hyperlink{structc__derived__tbl}{c\+\_\+derived\+\_\+tbl}} $\ast$}]{dctbl,  }\item[{\mbox{\hyperlink{structc__derived__tbl}{c\+\_\+derived\+\_\+tbl}} $\ast$}]{actbl }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{jchuff_8c_a92d1ffa5f916814234009ccd220ef6da}\label{jchuff_8c_a92d1ffa5f916814234009ccd220ef6da}} 
+\index{jchuff.c@{jchuff.c}!finish\_pass\_gather@{finish\_pass\_gather}}
+\index{finish\_pass\_gather@{finish\_pass\_gather}!jchuff.c@{jchuff.c}}
+\doxysubsubsection{\texorpdfstring{finish\_pass\_gather()}{finish\_pass\_gather()}}
+{\footnotesize\ttfamily finish\+\_\+pass\+\_\+gather (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{jpeglib_8h_add2a072c54e3a51550f4975f7ddb91e7}{j\+\_\+compress\+\_\+ptr}}}]{cinfo }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{jchuff_8c_ab0f7f271927d5e929992cc4b3af7b131}\label{jchuff_8c_ab0f7f271927d5e929992cc4b3af7b131}} 
+\index{jchuff.c@{jchuff.c}!finish\_pass\_huff@{finish\_pass\_huff}}
+\index{finish\_pass\_huff@{finish\_pass\_huff}!jchuff.c@{jchuff.c}}
+\doxysubsubsection{\texorpdfstring{finish\_pass\_huff()}{finish\_pass\_huff()}}
+{\footnotesize\ttfamily finish\+\_\+pass\+\_\+huff (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{jpeglib_8h_add2a072c54e3a51550f4975f7ddb91e7}{j\+\_\+compress\+\_\+ptr}}}]{cinfo }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{jchuff_8c_a2f510ca46c87b004c651d6ecf65da254}\label{jchuff_8c_a2f510ca46c87b004c651d6ecf65da254}} 
+\index{jchuff.c@{jchuff.c}!flush\_bits@{flush\_bits}}
+\index{flush\_bits@{flush\_bits}!jchuff.c@{jchuff.c}}
+\doxysubsubsection{\texorpdfstring{flush\_bits()}{flush\_bits()}}
+{\footnotesize\ttfamily flush\+\_\+bits (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structworking__state}{working\+\_\+state}} $\ast$}]{state }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{jchuff_8c_a047d325de5ab123028c4489c07c4db64}\label{jchuff_8c_a047d325de5ab123028c4489c07c4db64}} 
+\index{jchuff.c@{jchuff.c}!htest\_one\_block@{htest\_one\_block}}
+\index{htest\_one\_block@{htest\_one\_block}!jchuff.c@{jchuff.c}}
+\doxysubsubsection{\texorpdfstring{htest\_one\_block()}{htest\_one\_block()}}
+{\footnotesize\ttfamily htest\+\_\+one\+\_\+block (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{jpeglib_8h_add2a072c54e3a51550f4975f7ddb91e7}{j\+\_\+compress\+\_\+ptr}}}]{cinfo,  }\item[{\mbox{\hyperlink{jpeglib_8h_a7cffaee4be349c90c1d541f480aa62e3}{JCOEFPTR}}}]{block,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{last\+\_\+dc\+\_\+val,  }\item[{long}]{dc\+\_\+counts\mbox{[}$\,$\mbox{]},  }\item[{long}]{ac\+\_\+counts\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{jchuff_8c_a77341cca2feceb164c104fdf8b79756b}\label{jchuff_8c_a77341cca2feceb164c104fdf8b79756b}} 
+\index{jchuff.c@{jchuff.c}!jinit\_huff\_encoder@{jinit\_huff\_encoder}}
+\index{jinit\_huff\_encoder@{jinit\_huff\_encoder}!jchuff.c@{jchuff.c}}
+\doxysubsubsection{\texorpdfstring{jinit\_huff\_encoder()}{jinit\_huff\_encoder()}}
+{\footnotesize\ttfamily jinit\+\_\+huff\+\_\+encoder (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{jpeglib_8h_add2a072c54e3a51550f4975f7ddb91e7}{j\+\_\+compress\+\_\+ptr}}}]{cinfo }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{jchuff_8c_a3f40436fc5d3ec20e1124b84e3256b93}\label{jchuff_8c_a3f40436fc5d3ec20e1124b84e3256b93}} 
+\index{jchuff.c@{jchuff.c}!jpeg\_gen\_optimal\_table@{jpeg\_gen\_optimal\_table}}
+\index{jpeg\_gen\_optimal\_table@{jpeg\_gen\_optimal\_table}!jchuff.c@{jchuff.c}}
+\doxysubsubsection{\texorpdfstring{jpeg\_gen\_optimal\_table()}{jpeg\_gen\_optimal\_table()}}
+{\footnotesize\ttfamily jpeg\+\_\+gen\+\_\+optimal\+\_\+table (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{jpeglib_8h_add2a072c54e3a51550f4975f7ddb91e7}{j\+\_\+compress\+\_\+ptr}}}]{cinfo,  }\item[{\mbox{\hyperlink{struct_j_h_u_f_f___t_b_l}{JHUFF\+\_\+\+TBL}} $\ast$}]{htbl,  }\item[{long}]{freq\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{jchuff_8c_a6ba6c9dfe4c088663cdde4f09eaf11e8}\label{jchuff_8c_a6ba6c9dfe4c088663cdde4f09eaf11e8}} 
+\index{jchuff.c@{jchuff.c}!jpeg\_make\_c\_derived\_tbl@{jpeg\_make\_c\_derived\_tbl}}
+\index{jpeg\_make\_c\_derived\_tbl@{jpeg\_make\_c\_derived\_tbl}!jchuff.c@{jchuff.c}}
+\doxysubsubsection{\texorpdfstring{jpeg\_make\_c\_derived\_tbl()}{jpeg\_make\_c\_derived\_tbl()}}
+{\footnotesize\ttfamily jpeg\+\_\+make\+\_\+c\+\_\+derived\+\_\+tbl (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{jpeglib_8h_add2a072c54e3a51550f4975f7ddb91e7}{j\+\_\+compress\+\_\+ptr}}}]{cinfo,  }\item[{\mbox{\hyperlink{jconfig_8h_a7670a4e8a07d9ebb00411948b0bbf86d}{boolean}}}]{is\+DC,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{tblno,  }\item[{\mbox{\hyperlink{structc__derived__tbl}{c\+\_\+derived\+\_\+tbl}} $\ast$$\ast$}]{pdtbl }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{jchuff_8c_a1a64d09a8eaa504dd788c52dfb3cf6d6}\label{jchuff_8c_a1a64d09a8eaa504dd788c52dfb3cf6d6}} 
+\index{jchuff.c@{jchuff.c}!METHODDEF@{METHODDEF}}
+\index{METHODDEF@{METHODDEF}!jchuff.c@{jchuff.c}}
+\doxysubsubsection{\texorpdfstring{METHODDEF()}{METHODDEF()}}
+{\footnotesize\ttfamily METHODDEF (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{jconfig_8h_a7670a4e8a07d9ebb00411948b0bbf86d}{boolean}}}]{ }\end{DoxyParamCaption})}
+

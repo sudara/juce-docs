@@ -1,0 +1,120 @@
+\hypertarget{class_interprocess_connection_server}{}\doxysection{Interprocess\+Connection\+Server Class Reference}
+\label{class_interprocess_connection_server}\index{InterprocessConnectionServer@{InterprocessConnectionServer}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Interprocess\+Connection\+Server.\+h$>$}
+
+Inheritance diagram for Interprocess\+Connection\+Server\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{df/da5/class_interprocess_connection_server}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_interprocess_connection_server_af1449e1e8da7ad7a7a30a15e3edea59f}{Interprocess\+Connection\+Server}} ()
+\item 
+\mbox{\hyperlink{class_interprocess_connection_server_a070852787c123b870041ce14963ebabf}{$\sim$\+Interprocess\+Connection\+Server}} () override
+\item 
+bool \mbox{\hyperlink{class_interprocess_connection_server_a2f4fb097909c5baeaf1646d88a54c695}{begin\+Waiting\+For\+Socket}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} port\+Number, \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&bind\+Address=\mbox{\hyperlink{class_string}{String}}())
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_interprocess_connection_server_ac8a4c37b9e77848e48b499f441749324}{stop}} ()
+\item 
+\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{class_interprocess_connection_server_ae364144bb7bb0c402b765a10ae090cbb}{get\+Bound\+Port}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_interprocess_connection}{Interprocess\+Connection}} $\ast$ \mbox{\hyperlink{class_interprocess_connection_server_a94b5fa117974fda8748c54f2e526de88}{create\+Connection\+Object}} ()=0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+An object that waits for client sockets to connect to a port on this host, and creates \mbox{\hyperlink{class_interprocess_connection}{Interprocess\+Connection}} objects for each one.
+
+To use this, create a class derived from it which implements the \mbox{\hyperlink{class_interprocess_connection_server_a94b5fa117974fda8748c54f2e526de88}{create\+Connection\+Object()}} method, so that it creates suitable connection objects for each client that tries to connect.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_interprocess_connection}{Interprocess\+Connection}}
+\end{DoxySeeAlso}
+@tags\{Events\} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_interprocess_connection_server_af1449e1e8da7ad7a7a30a15e3edea59f}\label{class_interprocess_connection_server_af1449e1e8da7ad7a7a30a15e3edea59f}} 
+\index{InterprocessConnectionServer@{InterprocessConnectionServer}!InterprocessConnectionServer@{InterprocessConnectionServer}}
+\index{InterprocessConnectionServer@{InterprocessConnectionServer}!InterprocessConnectionServer@{InterprocessConnectionServer}}
+\doxysubsubsection{\texorpdfstring{InterprocessConnectionServer()}{InterprocessConnectionServer()}}
+{\footnotesize\ttfamily Interprocess\+Connection\+Server\+::\+Interprocess\+Connection\+Server (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Creates an uninitialised server object. \mbox{\Hypertarget{class_interprocess_connection_server_a070852787c123b870041ce14963ebabf}\label{class_interprocess_connection_server_a070852787c123b870041ce14963ebabf}} 
+\index{InterprocessConnectionServer@{InterprocessConnectionServer}!````~InterprocessConnectionServer@{$\sim$InterprocessConnectionServer}}
+\index{````~InterprocessConnectionServer@{$\sim$InterprocessConnectionServer}!InterprocessConnectionServer@{InterprocessConnectionServer}}
+\doxysubsubsection{\texorpdfstring{$\sim$InterprocessConnectionServer()}{~InterprocessConnectionServer()}}
+{\footnotesize\ttfamily Interprocess\+Connection\+Server\+::$\sim$\+Interprocess\+Connection\+Server (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+Destructor. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_interprocess_connection_server_a2f4fb097909c5baeaf1646d88a54c695}\label{class_interprocess_connection_server_a2f4fb097909c5baeaf1646d88a54c695}} 
+\index{InterprocessConnectionServer@{InterprocessConnectionServer}!beginWaitingForSocket@{beginWaitingForSocket}}
+\index{beginWaitingForSocket@{beginWaitingForSocket}!InterprocessConnectionServer@{InterprocessConnectionServer}}
+\doxysubsubsection{\texorpdfstring{beginWaitingForSocket()}{beginWaitingForSocket()}}
+{\footnotesize\ttfamily bool Interprocess\+Connection\+Server\+::begin\+Waiting\+For\+Socket (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{port\+Number,  }\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&}]{bind\+Address = {\ttfamily \mbox{\hyperlink{class_string}{String}}()} }\end{DoxyParamCaption})}
+
+Starts an internal thread which listens on the given port number.
+
+While this is running, if another process tries to connect with the \mbox{\hyperlink{class_interprocess_connection_a007450a6ca6dc60bb48d384479d9a49d}{Interprocess\+Connection\+::connect\+To\+Socket()}} method, this object will call \mbox{\hyperlink{class_interprocess_connection_server_a94b5fa117974fda8748c54f2e526de88}{create\+Connection\+Object()}} to create a connection to that client.
+
+Use \mbox{\hyperlink{class_interprocess_connection_server_ac8a4c37b9e77848e48b499f441749324}{stop()}} to stop the thread running.
+
+
+\begin{DoxyParams}{Parameters}
+{\em port\+Number} & The port on which the server will receive connections \\
+\hline
+{\em bind\+Address} & The address on which the server will listen for connections. An empty string indicates that it should listen on all addresses assigned to this machine.\\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_interprocess_connection_server_a94b5fa117974fda8748c54f2e526de88}{create\+Connection\+Object}}, \mbox{\hyperlink{class_interprocess_connection_server_ac8a4c37b9e77848e48b499f441749324}{stop}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_interprocess_connection_server_a94b5fa117974fda8748c54f2e526de88}\label{class_interprocess_connection_server_a94b5fa117974fda8748c54f2e526de88}} 
+\index{InterprocessConnectionServer@{InterprocessConnectionServer}!createConnectionObject@{createConnectionObject}}
+\index{createConnectionObject@{createConnectionObject}!InterprocessConnectionServer@{InterprocessConnectionServer}}
+\doxysubsubsection{\texorpdfstring{createConnectionObject()}{createConnectionObject()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{class_interprocess_connection}{Interprocess\+Connection}} $\ast$ Interprocess\+Connection\+Server\+::create\+Connection\+Object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+Creates a suitable connection object for a client process that wants to connect to this one.
+
+This will be called by the listener thread when a client process tries to connect, and must return a new \mbox{\hyperlink{class_interprocess_connection}{Interprocess\+Connection}} object that will then run as this end of the connection.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_interprocess_connection}{Interprocess\+Connection}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_interprocess_connection_server_ae364144bb7bb0c402b765a10ae090cbb}\label{class_interprocess_connection_server_ae364144bb7bb0c402b765a10ae090cbb}} 
+\index{InterprocessConnectionServer@{InterprocessConnectionServer}!getBoundPort@{getBoundPort}}
+\index{getBoundPort@{getBoundPort}!InterprocessConnectionServer@{InterprocessConnectionServer}}
+\doxysubsubsection{\texorpdfstring{getBoundPort()}{getBoundPort()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} Interprocess\+Connection\+Server\+::get\+Bound\+Port (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns the local port number to which this server is currently bound.
+
+This is useful if you need to know to which port the OS has actually bound your socket when calling begin\+Waiting\+For\+Socket with a port number of zero.
+
+Returns -\/1 if the function fails. \mbox{\Hypertarget{class_interprocess_connection_server_ac8a4c37b9e77848e48b499f441749324}\label{class_interprocess_connection_server_ac8a4c37b9e77848e48b499f441749324}} 
+\index{InterprocessConnectionServer@{InterprocessConnectionServer}!stop@{stop}}
+\index{stop@{stop}!InterprocessConnectionServer@{InterprocessConnectionServer}}
+\doxysubsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Interprocess\+Connection\+Server\+::stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Terminates the listener thread, if it\textquotesingle{}s active.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_interprocess_connection_server_a2f4fb097909c5baeaf1646d88a54c695}{begin\+Waiting\+For\+Socket}} 
+\end{DoxySeeAlso}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+events/interprocess/\mbox{\hyperlink{juce___interprocess_connection_server_8h}{juce\+\_\+\+Interprocess\+Connection\+Server.\+h}}\item 
+build/juce\+\_\+events/interprocess/\mbox{\hyperlink{juce___interprocess_connection_server_8cpp}{juce\+\_\+\+Interprocess\+Connection\+Server.\+cpp}}\end{DoxyCompactItemize}

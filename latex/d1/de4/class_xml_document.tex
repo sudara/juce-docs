@@ -1,0 +1,182 @@
+\hypertarget{class_xml_document}{}\doxysection{Xml\+Document Class Reference}
+\label{class_xml_document}\index{XmlDocument@{XmlDocument}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Xml\+Document.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_xml_document_a87ad794c62c8ee9ac78961af99b2f30d}{Xml\+Document}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&document\+Text)
+\item 
+\mbox{\hyperlink{class_xml_document_a0bb84c6d5a591e3ab53199b081766901}{Xml\+Document}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_file}{File}} \&file)
+\item 
+\mbox{\hyperlink{class_xml_document_ab18742228f580a5e4ec87e4b39c8a68c}{$\sim$\+Xml\+Document}} ()
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_xml_element}{Xml\+Element}} $>$ \mbox{\hyperlink{class_xml_document_a4cf2768b783387f89c2d09c298b65aa4}{get\+Document\+Element}} (bool only\+Read\+Outer\+Document\+Element=\mbox{\hyperlink{ordinals_8h_a65e9886d74aaee76545e83dd09011727}{false}})
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_xml_element}{Xml\+Element}} $>$ \mbox{\hyperlink{class_xml_document_a18fa69eda7d6a623bdaab037b62de88c}{get\+Document\+Element\+If\+Tag\+Matches}} (\mbox{\hyperlink{class_string_ref}{String\+Ref}} required\+Tag)
+\item 
+\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \& \mbox{\hyperlink{class_xml_document_ae20a375c2f865b0b5f20b6b4e490f03e}{get\+Last\+Parse\+Error}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_xml_document_aa89d5cf6602e6d3d1506f36fd17e3c3c}{set\+Input\+Source}} (\mbox{\hyperlink{class_input_source}{Input\+Source}} $\ast$new\+Source) noexcept
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_xml_document_a96421df16677c4e4c838383516d37f28}{set\+Empty\+Text\+Elements\+Ignored}} (bool should\+Be\+Ignored) noexcept
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_xml_element}{Xml\+Element}} $>$ \mbox{\hyperlink{class_xml_document_a1de9e2b0565459f52a2d8a3ab4ccad6a}{parse}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_file}{File}} \&file)
+\item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_xml_element}{Xml\+Element}} $>$ \mbox{\hyperlink{class_xml_document_afa486f7603478c7e7414a67374d56dc3}{parse}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&xml\+Data)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Parses a text-\/based XML document and creates an \mbox{\hyperlink{class_xml_element}{Xml\+Element}} object from it.
+
+The parser will parse DTDs to load external entities but won\textquotesingle{}t check the document for validity against the DTD.
+
+e.\+g. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{class_xml_document}{XmlDocument}} myDocument (\mbox{\hyperlink{class_file}{File}} (\textcolor{stringliteral}{"{}myfile.xml"{}}));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (\textcolor{keyword}{auto} mainElement = myDocument.getDocumentElement())}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    ..use the element}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{keywordflow}{else}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_af44443f87d7b66dff07b3d884445dca1}{error}} = myDocument.getLastParseError();}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Or you can use the helper functions for much less verbose parsing..
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (\textcolor{keyword}{auto} xml = \mbox{\hyperlink{namespacejuce_a82892a02eb9a14f94343ca04127dd15a}{parseXML}} (myXmlFile))}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (xml-\/>hasTagName (\textcolor{stringliteral}{"{}foobar"{}}))}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        ...etc}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_xml_element}{Xml\+Element}}
+\end{DoxySeeAlso}
+@tags\{Core\} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_xml_document_a87ad794c62c8ee9ac78961af99b2f30d}\label{class_xml_document_a87ad794c62c8ee9ac78961af99b2f30d}} 
+\index{XmlDocument@{XmlDocument}!XmlDocument@{XmlDocument}}
+\index{XmlDocument@{XmlDocument}!XmlDocument@{XmlDocument}}
+\doxysubsubsection{\texorpdfstring{XmlDocument()}{XmlDocument()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Xml\+Document\+::\+Xml\+Document (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&}]{document\+Text }\end{DoxyParamCaption})}
+
+Creates an \mbox{\hyperlink{class_xml_document}{Xml\+Document}} from the xml text. The text doesn\textquotesingle{}t actually get parsed until the \mbox{\hyperlink{class_xml_document_a4cf2768b783387f89c2d09c298b65aa4}{get\+Document\+Element()}} method is called. \mbox{\Hypertarget{class_xml_document_a0bb84c6d5a591e3ab53199b081766901}\label{class_xml_document_a0bb84c6d5a591e3ab53199b081766901}} 
+\index{XmlDocument@{XmlDocument}!XmlDocument@{XmlDocument}}
+\index{XmlDocument@{XmlDocument}!XmlDocument@{XmlDocument}}
+\doxysubsubsection{\texorpdfstring{XmlDocument()}{XmlDocument()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Xml\+Document\+::\+Xml\+Document (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_file}{File}} \&}]{file }\end{DoxyParamCaption})}
+
+Creates an \mbox{\hyperlink{class_xml_document}{Xml\+Document}} from a file. The text doesn\textquotesingle{}t actually get parsed until the \mbox{\hyperlink{class_xml_document_a4cf2768b783387f89c2d09c298b65aa4}{get\+Document\+Element()}} method is called. \mbox{\Hypertarget{class_xml_document_ab18742228f580a5e4ec87e4b39c8a68c}\label{class_xml_document_ab18742228f580a5e4ec87e4b39c8a68c}} 
+\index{XmlDocument@{XmlDocument}!````~XmlDocument@{$\sim$XmlDocument}}
+\index{````~XmlDocument@{$\sim$XmlDocument}!XmlDocument@{XmlDocument}}
+\doxysubsubsection{\texorpdfstring{$\sim$XmlDocument()}{~XmlDocument()}}
+{\footnotesize\ttfamily Xml\+Document\+::$\sim$\+Xml\+Document (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Destructor. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_xml_document_a4cf2768b783387f89c2d09c298b65aa4}\label{class_xml_document_a4cf2768b783387f89c2d09c298b65aa4}} 
+\index{XmlDocument@{XmlDocument}!getDocumentElement@{getDocumentElement}}
+\index{getDocumentElement@{getDocumentElement}!XmlDocument@{XmlDocument}}
+\doxysubsubsection{\texorpdfstring{getDocumentElement()}{getDocumentElement()}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_xml_element}{Xml\+Element}} $>$ Xml\+Document\+::get\+Document\+Element (\begin{DoxyParamCaption}\item[{bool}]{only\+Read\+Outer\+Document\+Element = {\ttfamily \mbox{\hyperlink{ordinals_8h_a65e9886d74aaee76545e83dd09011727}{false}}} }\end{DoxyParamCaption})}
+
+Creates an \mbox{\hyperlink{class_xml_element}{Xml\+Element}} object to represent the main document node.
+
+This method will do the actual parsing of the text, and if there\textquotesingle{}s a parse error, it may returns nullptr (and you can find out the error using the \mbox{\hyperlink{class_xml_document_ae20a375c2f865b0b5f20b6b4e490f03e}{get\+Last\+Parse\+Error()}} method).
+
+See also the \mbox{\hyperlink{class_xml_document_a1de9e2b0565459f52a2d8a3ab4ccad6a}{parse()}} methods, which provide a shorthand way to quickly parse a file or string.
+
+
+\begin{DoxyParams}{Parameters}
+{\em only\+Read\+Outer\+Document\+Element} & if true, the parser will only read the first section of the file, and will only return the outer document element -\/ this allows quick checking of large files to see if they contain the correct type of tag, without having to parse the entire file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a new \mbox{\hyperlink{class_xml_element}{Xml\+Element}}, or nullptr if there was an error. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_xml_document_ae20a375c2f865b0b5f20b6b4e490f03e}{get\+Last\+Parse\+Error}}, \mbox{\hyperlink{class_xml_document_a18fa69eda7d6a623bdaab037b62de88c}{get\+Document\+Element\+If\+Tag\+Matches}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_xml_document_a18fa69eda7d6a623bdaab037b62de88c}\label{class_xml_document_a18fa69eda7d6a623bdaab037b62de88c}} 
+\index{XmlDocument@{XmlDocument}!getDocumentElementIfTagMatches@{getDocumentElementIfTagMatches}}
+\index{getDocumentElementIfTagMatches@{getDocumentElementIfTagMatches}!XmlDocument@{XmlDocument}}
+\doxysubsubsection{\texorpdfstring{getDocumentElementIfTagMatches()}{getDocumentElementIfTagMatches()}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_xml_element}{Xml\+Element}} $>$ Xml\+Document\+::get\+Document\+Element\+If\+Tag\+Matches (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_string_ref}{String\+Ref}}}]{required\+Tag }\end{DoxyParamCaption})}
+
+Does an inexpensive check to see whether the outer element has the given tag name, and then does a full parse if it matches. If the tag is different, or the XML parse fails, this will return nullptr. \mbox{\Hypertarget{class_xml_document_ae20a375c2f865b0b5f20b6b4e490f03e}\label{class_xml_document_ae20a375c2f865b0b5f20b6b4e490f03e}} 
+\index{XmlDocument@{XmlDocument}!getLastParseError@{getLastParseError}}
+\index{getLastParseError@{getLastParseError}!XmlDocument@{XmlDocument}}
+\doxysubsubsection{\texorpdfstring{getLastParseError()}{getLastParseError()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \& Xml\+Document\+::get\+Last\+Parse\+Error (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns the parsing error that occurred the last time get\+Document\+Element was called. \begin{DoxyReturn}{Returns}
+the error, or an empty string if there was no error. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_xml_document_a1de9e2b0565459f52a2d8a3ab4ccad6a}\label{class_xml_document_a1de9e2b0565459f52a2d8a3ab4ccad6a}} 
+\index{XmlDocument@{XmlDocument}!parse@{parse}}
+\index{parse@{parse}!XmlDocument@{XmlDocument}}
+\doxysubsubsection{\texorpdfstring{parse()}{parse()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_xml_element}{Xml\+Element}} $>$ Xml\+Document\+::parse (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_file}{File}} \&}]{file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+A handy static method that parses a file. This is a shortcut for creating an \mbox{\hyperlink{class_xml_document}{Xml\+Document}} object and calling \mbox{\hyperlink{class_xml_document_a4cf2768b783387f89c2d09c298b65aa4}{get\+Document\+Element()}} on it. \begin{DoxyReturn}{Returns}
+a new \mbox{\hyperlink{class_xml_element}{Xml\+Element}}, or nullptr if there was an error. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_xml_document_afa486f7603478c7e7414a67374d56dc3}\label{class_xml_document_afa486f7603478c7e7414a67374d56dc3}} 
+\index{XmlDocument@{XmlDocument}!parse@{parse}}
+\index{parse@{parse}!XmlDocument@{XmlDocument}}
+\doxysubsubsection{\texorpdfstring{parse()}{parse()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_xml_element}{Xml\+Element}} $>$ Xml\+Document\+::parse (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&}]{xml\+Data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+A handy static method that parses some XML data. This is a shortcut for creating an \mbox{\hyperlink{class_xml_document}{Xml\+Document}} object and calling \mbox{\hyperlink{class_xml_document_a4cf2768b783387f89c2d09c298b65aa4}{get\+Document\+Element()}} on it. \begin{DoxyReturn}{Returns}
+a new \mbox{\hyperlink{class_xml_element}{Xml\+Element}}, or nullptr if there was an error. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_xml_document_a96421df16677c4e4c838383516d37f28}\label{class_xml_document_a96421df16677c4e4c838383516d37f28}} 
+\index{XmlDocument@{XmlDocument}!setEmptyTextElementsIgnored@{setEmptyTextElementsIgnored}}
+\index{setEmptyTextElementsIgnored@{setEmptyTextElementsIgnored}!XmlDocument@{XmlDocument}}
+\doxysubsubsection{\texorpdfstring{setEmptyTextElementsIgnored()}{setEmptyTextElementsIgnored()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Xml\+Document\+::set\+Empty\+Text\+Elements\+Ignored (\begin{DoxyParamCaption}\item[{bool}]{should\+Be\+Ignored }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Sets a flag to change the treatment of empty text elements.
+
+If this is true (the default state), then any text elements that contain only whitespace characters will be ignored during parsing. If you need to catch whitespace-\/only text, then you should set this to false before calling the \mbox{\hyperlink{class_xml_document_a4cf2768b783387f89c2d09c298b65aa4}{get\+Document\+Element()}} method. \mbox{\Hypertarget{class_xml_document_aa89d5cf6602e6d3d1506f36fd17e3c3c}\label{class_xml_document_aa89d5cf6602e6d3d1506f36fd17e3c3c}} 
+\index{XmlDocument@{XmlDocument}!setInputSource@{setInputSource}}
+\index{setInputSource@{setInputSource}!XmlDocument@{XmlDocument}}
+\doxysubsubsection{\texorpdfstring{setInputSource()}{setInputSource()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Xml\+Document\+::set\+Input\+Source (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_input_source}{Input\+Source}} $\ast$}]{new\+Source }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Sets an input source object to use for parsing documents that reference external entities.
+
+If the document has been created from a file, this probably won\textquotesingle{}t be needed, but if you\textquotesingle{}re parsing some text and there might be a DTD that references external files, you may need to create a custom input source that can retrieve the other files it needs.
+
+The object that is passed-\/in will be deleted automatically when no longer needed.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_input_source}{Input\+Source}} 
+\end{DoxySeeAlso}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+core/xml/\mbox{\hyperlink{juce___xml_document_8h}{juce\+\_\+\+Xml\+Document.\+h}}\item 
+build/juce\+\_\+core/xml/\mbox{\hyperlink{juce___xml_document_8cpp}{juce\+\_\+\+Xml\+Document.\+cpp}}\end{DoxyCompactItemize}

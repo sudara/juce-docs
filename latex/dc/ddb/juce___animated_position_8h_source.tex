@@ -1,0 +1,156 @@
+\hypertarget{juce___animated_position_8h_source}{}\doxysection{juce\+\_\+\+Animated\+Position.\+h}
+\label{juce___animated_position_8h_source}\index{build/juce\_gui\_basics/layout/juce\_AnimatedPosition.h@{build/juce\_gui\_basics/layout/juce\_AnimatedPosition.h}}
+\mbox{\hyperlink{juce___animated_position_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{53 \textcolor{comment}{}\textcolor{keyword}{template} <\textcolor{keyword}{typename} Behaviour>}
+\DoxyCodeLine{54 \textcolor{keyword}{class }\mbox{\hyperlink{class_animated_position}{AnimatedPosition}}  : \textcolor{keyword}{private} \mbox{\hyperlink{class_timer}{Timer}}}
+\DoxyCodeLine{55 \{}
+\DoxyCodeLine{56 \textcolor{keyword}{public}:}
+\DoxyCodeLine{57     \mbox{\hyperlink{class_animated_position_a364daf059e5e4ac2bce94ea8a236c02c}{AnimatedPosition}}()}
+\DoxyCodeLine{58         :  range (-\/\mbox{\hyperlink{namespacestd}{std}}::numeric\_limits<double>::\mbox{\hyperlink{os_8h_ac39d9cef6a5e030ba8d9e11121054268}{max}}(),}
+\DoxyCodeLine{59                    \mbox{\hyperlink{namespacestd}{std}}::numeric\_limits<double>::\mbox{\hyperlink{os_8h_ac39d9cef6a5e030ba8d9e11121054268}{max}}())}
+\DoxyCodeLine{60     \{}
+\DoxyCodeLine{61     \}}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{64     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_animated_position_ab8837ee82f8f478d01c3eb815edb96a2}{setLimits}} (\mbox{\hyperlink{class_range}{Range<double>}} newRange) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{65     \{}
+\DoxyCodeLine{66         range = newRange;}
+\DoxyCodeLine{67     \}}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{78 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_animated_position_a3378dd6b200539ef684f5d8031a4f69a}{beginDrag}}()}
+\DoxyCodeLine{79     \{}
+\DoxyCodeLine{80         grabbedPos = position;}
+\DoxyCodeLine{81         releaseVelocity = 0;}
+\DoxyCodeLine{82         \mbox{\hyperlink{class_timer_ab918b8c1f80bf1de92dd1a5878f498bd}{stopTimer}}();}
+\DoxyCodeLine{83     \}}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{89     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_animated_position_aecd11c12c444387d46ef54931c5cbd86}{drag}} (\textcolor{keywordtype}{double} deltaFromStartOfDrag)}
+\DoxyCodeLine{90     \{}
+\DoxyCodeLine{91         moveTo (grabbedPos + deltaFromStartOfDrag);}
+\DoxyCodeLine{92     \}}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{97     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_animated_position_a31520fda363c37afac010416dab7707f}{endDrag}}()}
+\DoxyCodeLine{98     \{}
+\DoxyCodeLine{99         \mbox{\hyperlink{class_timer_a457efb22cb11b8518b18a0e8f02d818b}{startTimerHz}} (60);}
+\DoxyCodeLine{100     \}}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{105     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_animated_position_aa58f2a396a133f7325322b5eeb9b1d3b}{nudge}} (\textcolor{keywordtype}{double} deltaFromCurrentPosition)}
+\DoxyCodeLine{106     \{}
+\DoxyCodeLine{107         \mbox{\hyperlink{class_timer_a457efb22cb11b8518b18a0e8f02d818b}{startTimerHz}} (10);}
+\DoxyCodeLine{108         moveTo (position + deltaFromCurrentPosition);}
+\DoxyCodeLine{109     \}}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{113 \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{class_animated_position_a6586cfc0cf0ec99e73d6287b0f2700f5}{getPosition}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{114     \{}
+\DoxyCodeLine{115         \textcolor{keywordflow}{return} position;}
+\DoxyCodeLine{116     \}}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{122     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_animated_position_a18201fedfc570cb04582ff65b9ddbf3d}{setPosition}} (\textcolor{keywordtype}{double} newPosition)}
+\DoxyCodeLine{123     \{}
+\DoxyCodeLine{124         \mbox{\hyperlink{class_timer_ab918b8c1f80bf1de92dd1a5878f498bd}{stopTimer}}();}
+\DoxyCodeLine{125         setPositionAndSendChange (newPosition);}
+\DoxyCodeLine{126     \}}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{128     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{133 \textcolor{comment}{}    \textcolor{keyword}{class }\mbox{\hyperlink{class_animated_position_1_1_listener}{Listener}}}
+\DoxyCodeLine{134     \{}
+\DoxyCodeLine{135     \textcolor{keyword}{public}:}
+\DoxyCodeLine{136         \textcolor{keyword}{virtual} \mbox{\hyperlink{class_animated_position_1_1_listener_a34aad8bd31ce157b147f7dab6586baec}{\string~Listener}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{139         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_animated_position_1_1_listener_ac7cff0f6105eeef1eb76f0daa687c19c}{positionChanged}} (\mbox{\hyperlink{class_animated_position}{AnimatedPosition}}\&, \textcolor{keywordtype}{double} newPosition) = 0;}
+\DoxyCodeLine{140     \};}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{143     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_animated_position_a26cb4a90ef54041d01dfe07be46c0e88}{addListener}} (\mbox{\hyperlink{class_animated_position_1_1_listener}{Listener}}* listener)       \{ listeners.add (listener); \}}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{146     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_animated_position_aea1ba3edaac6d6f86739f64ca03f4597}{removeListener}} (\mbox{\hyperlink{class_animated_position_1_1_listener}{Listener}}* listener)    \{ listeners.remove (listener); \}}
+\DoxyCodeLine{147 }
+\DoxyCodeLine{148     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{152 \textcolor{comment}{}    Behaviour \mbox{\hyperlink{class_animated_position_a8dee430f7730c4f6ff98b7f53d2f1d7b}{behaviour}};}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154 \textcolor{keyword}{private}:}
+\DoxyCodeLine{155     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{156     \textcolor{keywordtype}{double} position = 0.0, grabbedPos = 0.0, releaseVelocity = 0.0;}
+\DoxyCodeLine{157     \mbox{\hyperlink{class_range}{Range<double>}} range;}
+\DoxyCodeLine{158     \mbox{\hyperlink{class_time}{Time}} lastUpdate, lastDrag;}
+\DoxyCodeLine{159     \mbox{\hyperlink{class_listener_list}{ListenerList<Listener>}} listeners;}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161     \textcolor{keyword}{static} \textcolor{keywordtype}{double} getSpeed (\textcolor{keyword}{const} \mbox{\hyperlink{class_time}{Time}} last, \textcolor{keywordtype}{double} lastPos,}
+\DoxyCodeLine{162                             \textcolor{keyword}{const} \mbox{\hyperlink{class_time}{Time}} now, \textcolor{keywordtype}{double} newPos)}
+\DoxyCodeLine{163     \{}
+\DoxyCodeLine{164         \textcolor{keyword}{auto} elapsedSecs = \mbox{\hyperlink{group__juce__core-maths_gadfd716f36f80987d66ebc2fce819c1fe}{jmax}} (0.005, (now -\/ last).inSeconds());}
+\DoxyCodeLine{165         \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}} = (newPos -\/ lastPos) / elapsedSecs;}
+\DoxyCodeLine{166         \textcolor{keywordflow}{return} std::abs (\mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}}) > 0.2 ? \mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}} : 0.0;}
+\DoxyCodeLine{167     \}}
+\DoxyCodeLine{168 }
+\DoxyCodeLine{169     \textcolor{keywordtype}{void} moveTo (\textcolor{keywordtype}{double} newPos)}
+\DoxyCodeLine{170     \{}
+\DoxyCodeLine{171         \textcolor{keyword}{auto} now = \mbox{\hyperlink{class_time_a9acf1454101b83bc3c77b435778d698e}{Time::getCurrentTime}}();}
+\DoxyCodeLine{172         releaseVelocity = getSpeed (lastDrag, position, now, newPos);}
+\DoxyCodeLine{173         \mbox{\hyperlink{class_animated_position_a8dee430f7730c4f6ff98b7f53d2f1d7b}{behaviour}}.releasedWithVelocity (newPos, releaseVelocity);}
+\DoxyCodeLine{174         lastDrag = now;}
+\DoxyCodeLine{175 }
+\DoxyCodeLine{176         setPositionAndSendChange (newPos);}
+\DoxyCodeLine{177     \}}
+\DoxyCodeLine{178 }
+\DoxyCodeLine{179     \textcolor{keywordtype}{void} setPositionAndSendChange (\textcolor{keywordtype}{double} newPosition)}
+\DoxyCodeLine{180     \{}
+\DoxyCodeLine{181         newPosition = \mbox{\hyperlink{namespacegl_ae32af3c263eaecc21093939cdb44aaf3}{range}}.clipValue (newPosition);}
+\DoxyCodeLine{182 }
+\DoxyCodeLine{183         \textcolor{keywordflow}{if} (position != newPosition)}
+\DoxyCodeLine{184         \{}
+\DoxyCodeLine{185             position = newPosition;}
+\DoxyCodeLine{186             listeners.\mbox{\hyperlink{class_listener_list_adea25521b1707f2f5ae242b3353f5751}{call}} ([\textcolor{keyword}{this}, newPosition] (Listener\& l) \{ l.positionChanged (*\textcolor{keyword}{this}, newPosition); \});}
+\DoxyCodeLine{187         \}}
+\DoxyCodeLine{188     \}}
+\DoxyCodeLine{189 }
+\DoxyCodeLine{190     \textcolor{keywordtype}{void} timerCallback()\textcolor{keyword}{ override}}
+\DoxyCodeLine{191 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{192         \textcolor{keyword}{auto} now = \mbox{\hyperlink{class_time_a9acf1454101b83bc3c77b435778d698e}{Time::getCurrentTime}}();}
+\DoxyCodeLine{193         \textcolor{keyword}{auto} elapsed = \mbox{\hyperlink{group__juce__core-maths_gacf7cd562ab136d15d3bf5c3be047cf96}{jlimit}} (0.001, 0.020, (now -\/ lastUpdate).inSeconds());}
+\DoxyCodeLine{194         lastUpdate = now;}
+\DoxyCodeLine{195         \textcolor{keyword}{auto} newPos = \mbox{\hyperlink{class_animated_position_a8dee430f7730c4f6ff98b7f53d2f1d7b}{behaviour}}.getNextPosition (position, elapsed);}
+\DoxyCodeLine{196 }
+\DoxyCodeLine{197         \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_animated_position_a8dee430f7730c4f6ff98b7f53d2f1d7b}{behaviour}}.isStopped (newPos))}
+\DoxyCodeLine{198             \mbox{\hyperlink{class_timer_ab918b8c1f80bf1de92dd1a5878f498bd}{stopTimer}}();}
+\DoxyCodeLine{199         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{200             \mbox{\hyperlink{class_timer_a457efb22cb11b8518b18a0e8f02d818b}{startTimerHz}} (60);}
+\DoxyCodeLine{201 }
+\DoxyCodeLine{202         setPositionAndSendChange (newPos);}
+\DoxyCodeLine{203     \}}
+\DoxyCodeLine{204 }
+\DoxyCodeLine{205     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_animated_position}{AnimatedPosition}})}
+\DoxyCodeLine{206 \};}
+\DoxyCodeLine{207 }
+\DoxyCodeLine{208  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{209 }
+
+\end{DoxyCode}

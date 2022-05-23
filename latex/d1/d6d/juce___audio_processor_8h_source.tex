@@ -1,0 +1,648 @@
+\hypertarget{juce___audio_processor_8h_source}{}\doxysection{juce\+\_\+\+Audio\+Processor.\+h}
+\label{juce___audio_processor_8h_source}\index{build/juce\_audio\_processors/processors/juce\_AudioProcessor.h@{build/juce\_audio\_processors/processors/juce\_AudioProcessor.h}}
+\mbox{\hyperlink{juce___audio_processor_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{46 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_audio_processor}{AudioProcessor}}}
+\DoxyCodeLine{47 \{}
+\DoxyCodeLine{48 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{49     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_audio_processor_1_1_buses_properties}{BusesProperties}};}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{57 \textcolor{comment}{}    \mbox{\hyperlink{class_audio_processor}{AudioProcessor}}();}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{64     \mbox{\hyperlink{class_audio_processor}{AudioProcessor}} (\textcolor{keyword}{const} \mbox{\hyperlink{struct_audio_processor_1_1_buses_properties}{BusesProperties}}\& ioLayouts);}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{69     \mbox{\hyperlink{class_audio_processor_a30360ac3f4fb52e993836efdb1da7b1d}{AudioProcessor}} (\textcolor{keyword}{const} std::initializer\_list<\textcolor{keyword}{const} \textcolor{keywordtype}{short}[2]>\& channelLayoutList)}
+\DoxyCodeLine{70         : \mbox{\hyperlink{class_audio_processor}{AudioProcessor}} (busesPropertiesFromLayoutArray (layoutListToArray (channelLayoutList)))}
+\DoxyCodeLine{71     \{}
+\DoxyCodeLine{72     \}}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74 \textcolor{keyword}{public}:}
+\DoxyCodeLine{75     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{76     \textcolor{keyword}{enum} \mbox{\hyperlink{class_audio_processor_a212c3670b59976559237cbf629af275f}{ProcessingPrecision}}}
+\DoxyCodeLine{77     \{}
+\DoxyCodeLine{78         \mbox{\hyperlink{class_audio_processor_a212c3670b59976559237cbf629af275fabe443816497d7aa69a1cb30a0095dd22}{singlePrecision}},}
+\DoxyCodeLine{79         doublePrecision}
+\DoxyCodeLine{80     \};}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82     \textcolor{keyword}{using} \mbox{\hyperlink{struct_audio_processor_listener_1_1_change_details}{ChangeDetails}} = \mbox{\hyperlink{struct_audio_processor_listener_1_1_change_details}{AudioProcessorListener::ChangeDetails}};}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{86 \textcolor{comment}{}    \textcolor{keyword}{virtual} \mbox{\hyperlink{class_audio_processor}{\string~AudioProcessor}}();}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{90 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{class_audio_processor_a71affad7782adb55b183d6d4d0853253}{getName}}() \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{99     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_string_array}{StringArray}} getAlternateDisplayNames() \textcolor{keyword}{const};}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{120 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_processor_a44b74778247a35a669a3a994d814389e}{prepareToPlay}} (\textcolor{keywordtype}{double} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}},}
+\DoxyCodeLine{121                                 \textcolor{keywordtype}{int} maximumExpectedSamplesPerBlock) = 0;}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{126     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_processor_a49e88e7d6c7c40899624beb9e3508f3a}{releaseResources}}() = 0;}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{136     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_processor_a5b1d9ee950c000e9fc7efa3754866bb3}{memoryWarningReceived}}()     \{ \mbox{\hyperlink{group__juce__core-system_gadc044ce5efecbecf2f5a44cd00db67b3}{jassertfalse}}; \}}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{202     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_processor_abbac77f68ba047cf60c4bc97326dcb58}{processBlock}} (\mbox{\hyperlink{class_audio_buffer}{AudioBuffer<float>}}\& buffer,}
+\DoxyCodeLine{203                                \mbox{\hyperlink{class_midi_buffer}{MidiBuffer}}\& midiMessages) = 0;}
+\DoxyCodeLine{204 }
+\DoxyCodeLine{273     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} processBlock (\mbox{\hyperlink{class_audio_buffer}{AudioBuffer<double>}}\& buffer,}
+\DoxyCodeLine{274                                \mbox{\hyperlink{class_midi_buffer}{MidiBuffer}}\& midiMessages);}
+\DoxyCodeLine{275 }
+\DoxyCodeLine{285     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} processBlockBypassed (\mbox{\hyperlink{class_audio_buffer}{AudioBuffer<float>}}\& buffer,}
+\DoxyCodeLine{286                                        \mbox{\hyperlink{class_midi_buffer}{MidiBuffer}}\& midiMessages);}
+\DoxyCodeLine{287 }
+\DoxyCodeLine{297     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} processBlockBypassed (\mbox{\hyperlink{class_audio_buffer}{AudioBuffer<double>}}\& buffer,}
+\DoxyCodeLine{298                                        \mbox{\hyperlink{class_midi_buffer}{MidiBuffer}}\& midiMessages);}
+\DoxyCodeLine{299 }
+\DoxyCodeLine{300 }
+\DoxyCodeLine{301     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{305 \textcolor{comment}{}    \textcolor{keyword}{struct }\mbox{\hyperlink{struct_audio_processor_1_1_buses_layout}{BusesLayout}}}
+\DoxyCodeLine{306     \{}
+\DoxyCodeLine{308         \mbox{\hyperlink{class_array}{Array<AudioChannelSet>}} \mbox{\hyperlink{struct_audio_processor_1_1_buses_layout_a73c26adffea9b970150aa2c204155db6}{inputBuses}};}
+\DoxyCodeLine{309 }
+\DoxyCodeLine{311         \mbox{\hyperlink{class_array}{Array<AudioChannelSet>}} \mbox{\hyperlink{struct_audio_processor_1_1_buses_layout_aeb39a2b0609cdecfa2b2e7075724acf5}{outputBuses}};}
+\DoxyCodeLine{312 }
+\DoxyCodeLine{314         \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_audio_processor_1_1_buses_layout_a9610324ff03e26720dcc7cbed75a3611}{getNumChannels}} (\textcolor{keywordtype}{bool} isInput, \textcolor{keywordtype}{int} busIndex) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{315         \{}
+\DoxyCodeLine{316             \textcolor{keyword}{auto}\& bus = (isInput ? inputBuses : outputBuses);}
+\DoxyCodeLine{317             \textcolor{keywordflow}{return} \mbox{\hyperlink{group__juce__core-maths_ga5762396fe2a5aa4c39b68ee5b70a96f8}{isPositiveAndBelow}} (busIndex, bus.size()) ? bus.getReference (busIndex).size() : 0;}
+\DoxyCodeLine{318         \}}
+\DoxyCodeLine{319 }
+\DoxyCodeLine{321         \mbox{\hyperlink{class_audio_channel_set}{AudioChannelSet}}\& \mbox{\hyperlink{struct_audio_processor_1_1_buses_layout_a68ece19a3c54bbe8e4c3972cbefecd91}{getChannelSet}} (\textcolor{keywordtype}{bool} isInput, \textcolor{keywordtype}{int} busIndex) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{322         \{}
+\DoxyCodeLine{323             \textcolor{keywordflow}{return} (isInput ? inputBuses : outputBuses).getReference (busIndex);}
+\DoxyCodeLine{324         \}}
+\DoxyCodeLine{325 }
+\DoxyCodeLine{327         \mbox{\hyperlink{class_audio_channel_set}{AudioChannelSet}} \mbox{\hyperlink{struct_audio_processor_1_1_buses_layout_a339aa2f75e7df251a7417577c0cb07c3}{getChannelSet}} (\textcolor{keywordtype}{bool} isInput, \textcolor{keywordtype}{int} busIndex) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{328         \{}
+\DoxyCodeLine{329             \textcolor{keywordflow}{return} (isInput ? inputBuses : outputBuses)[busIndex];}
+\DoxyCodeLine{330         \}}
+\DoxyCodeLine{331 }
+\DoxyCodeLine{333         \mbox{\hyperlink{class_audio_channel_set}{AudioChannelSet}} \mbox{\hyperlink{struct_audio_processor_1_1_buses_layout_a8df1db6f8ef0f07d555d70f27bc4ee2f}{getMainInputChannelSet}}()  \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept    \{ \textcolor{keywordflow}{return} getChannelSet (\textcolor{keyword}{true},  0); \}}
+\DoxyCodeLine{334 }
+\DoxyCodeLine{336         \mbox{\hyperlink{class_audio_channel_set}{AudioChannelSet}} \mbox{\hyperlink{struct_audio_processor_1_1_buses_layout_a9bdf40341da9535884c350e1c1f26029}{getMainOutputChannelSet}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept    \{ \textcolor{keywordflow}{return} getChannelSet (\textcolor{keyword}{false}, 0); \}}
+\DoxyCodeLine{337 }
+\DoxyCodeLine{339         \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_audio_processor_1_1_buses_layout_acf34047071c6e6a7a68df13134838867}{getMainInputChannels}}()  \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                  \{ \textcolor{keywordflow}{return} getNumChannels (\textcolor{keyword}{true}, 0); \}}
+\DoxyCodeLine{340 }
+\DoxyCodeLine{342         \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_audio_processor_1_1_buses_layout_a86b00685a2ed1eea2f200b72682681c0}{getMainOutputChannels}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                  \{ \textcolor{keywordflow}{return} getNumChannels (\textcolor{keyword}{false}, 0); \}}
+\DoxyCodeLine{343 }
+\DoxyCodeLine{344         \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_audio_channel_layout_8cpp_ad569fbf0e2ce80e9b92caaf1cbb3c257}{operator== }}(\textcolor{keyword}{const} \mbox{\hyperlink{struct_audio_processor_1_1_buses_layout}{BusesLayout}}\& other) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}   \{ \textcolor{keywordflow}{return} inputBuses == other.inputBuses \&\& outputBuses == other.outputBuses; \}}
+\DoxyCodeLine{345         \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_audio_channel_layout_8cpp_aa4ad43821a0285a3d7a5c840173f03ac}{operator!= }}(\textcolor{keyword}{const} \mbox{\hyperlink{struct_audio_processor_1_1_buses_layout}{BusesLayout}}\& other) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}   \{ \textcolor{keywordflow}{return} inputBuses != other.inputBuses || outputBuses != other.outputBuses; \}}
+\DoxyCodeLine{346     \};}
+\DoxyCodeLine{347 }
+\DoxyCodeLine{348     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{355 \textcolor{comment}{}    \textcolor{keyword}{class }\mbox{\hyperlink{class_audio_processor_1_1_bus}{Bus}}}
+\DoxyCodeLine{356     \{}
+\DoxyCodeLine{357     \textcolor{keyword}{public}:}
+\DoxyCodeLine{359         \textcolor{keywordtype}{bool} isInput() \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{360 }
+\DoxyCodeLine{362         \textcolor{keywordtype}{int} getBusIndex() \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{363 }
+\DoxyCodeLine{365         \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_processor_1_1_bus_ac7918ad56e7cd61ded9db670081231fe}{isMain}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                                    \{ \textcolor{keywordflow}{return} getBusIndex() == 0; \}}
+\DoxyCodeLine{366 }
+\DoxyCodeLine{367         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{369 \textcolor{comment}{}        \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{class_audio_processor_1_1_bus_a2399cc984a9029b93927980749e737da}{getName}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                          \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}; \}}
+\DoxyCodeLine{370 }
+\DoxyCodeLine{374         \textcolor{keyword}{const} \mbox{\hyperlink{class_audio_channel_set}{AudioChannelSet}}\& \mbox{\hyperlink{class_audio_processor_1_1_bus_a0e6de5169d3a76fdece506dcf21f5e99}{getDefaultLayout}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept        \{ \textcolor{keywordflow}{return} dfltLayout; \}}
+\DoxyCodeLine{375 }
+\DoxyCodeLine{376         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{381 \textcolor{comment}{}        \textcolor{keyword}{const} \mbox{\hyperlink{class_audio_channel_set}{AudioChannelSet}}\& \mbox{\hyperlink{class_audio_processor_1_1_bus_a8bfed693bbc8502b3aec42d909147177}{getCurrentLayout}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept        \{ \textcolor{keywordflow}{return} layout; \}}
+\DoxyCodeLine{382 }
+\DoxyCodeLine{388         \textcolor{keyword}{const} \mbox{\hyperlink{class_audio_channel_set}{AudioChannelSet}}\& \mbox{\hyperlink{class_audio_processor_1_1_bus_af62dc9f0a75781069b23ba0fb497e86b}{getLastEnabledLayout}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept    \{ \textcolor{keywordflow}{return} lastLayout; \}}
+\DoxyCodeLine{389 }
+\DoxyCodeLine{394         \textcolor{keywordtype}{bool} setCurrentLayout (\textcolor{keyword}{const} \mbox{\hyperlink{class_audio_channel_set}{AudioChannelSet}}\& layout);}
+\DoxyCodeLine{395 }
+\DoxyCodeLine{400         \textcolor{keywordtype}{bool} setCurrentLayoutWithoutEnabling (\textcolor{keyword}{const} \mbox{\hyperlink{class_audio_channel_set}{AudioChannelSet}}\& layout);}
+\DoxyCodeLine{401 }
+\DoxyCodeLine{403         \textcolor{keyword}{inline} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_audio_processor_1_1_bus_a45f459543397fae15edbd7c1488323b3}{getNumberOfChannels}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                 \{ \textcolor{keywordflow}{return} cachedChannelCount; \}}
+\DoxyCodeLine{404 }
+\DoxyCodeLine{408         \textcolor{keywordtype}{bool} setNumberOfChannels (\textcolor{keywordtype}{int} channels);}
+\DoxyCodeLine{409 }
+\DoxyCodeLine{410         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{422 \textcolor{comment}{}        \textcolor{keywordtype}{bool} isLayoutSupported (\textcolor{keyword}{const} \mbox{\hyperlink{class_audio_channel_set}{AudioChannelSet}}\& set, \mbox{\hyperlink{struct_audio_processor_1_1_buses_layout}{BusesLayout}}* currentLayout = \textcolor{keyword}{nullptr}) \textcolor{keyword}{const};}
+\DoxyCodeLine{423 }
+\DoxyCodeLine{425         \textcolor{keywordtype}{bool} isNumberOfChannelsSupported (\textcolor{keywordtype}{int} channels) \textcolor{keyword}{const};}
+\DoxyCodeLine{426 }
+\DoxyCodeLine{428         \mbox{\hyperlink{class_audio_channel_set}{AudioChannelSet}} supportedLayoutWithChannels (\textcolor{keywordtype}{int} channels) \textcolor{keyword}{const};}
+\DoxyCodeLine{429 }
+\DoxyCodeLine{433         \textcolor{keywordtype}{int} getMaxSupportedChannels (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a2c38a804a7f6caf800abf0b3b1fa281d}{limit}} = \mbox{\hyperlink{class_audio_channel_set_aa232fc50bb02ddf633ebc4e7522d010fa19df1572e8f673a0433d98d2a3d6bd09}{AudioChannelSet::maxChannelsOfNamedLayout}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{434 }
+\DoxyCodeLine{443         \mbox{\hyperlink{struct_audio_processor_1_1_buses_layout}{BusesLayout}} getBusesLayoutForLayoutChangeOfBus (\textcolor{keyword}{const} \mbox{\hyperlink{class_audio_channel_set}{AudioChannelSet}}\& set) \textcolor{keyword}{const};}
+\DoxyCodeLine{444 }
+\DoxyCodeLine{445         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{447 \textcolor{comment}{}        \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_processor_1_1_bus_a2f6bf1c920a6e9ae4c41279b63d24567}{isEnabled}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                             \{ \textcolor{keywordflow}{return} ! layout.isDisabled(); \}}
+\DoxyCodeLine{448 }
+\DoxyCodeLine{451         \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespacegl_af89c1b4206ea939a57f526855f105f3b}{enable}} (\textcolor{keywordtype}{bool} shouldEnable = \textcolor{keyword}{true});}
+\DoxyCodeLine{452 }
+\DoxyCodeLine{454         \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_processor_1_1_bus_aab5c552903dd9e6856f7dfd3eee1fab2}{isEnabledByDefault}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                    \{ \textcolor{keywordflow}{return} enabledByDefault; \}}
+\DoxyCodeLine{455 }
+\DoxyCodeLine{456         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{461 \textcolor{comment}{}        \textcolor{keywordtype}{int} getChannelIndexInProcessBlockBuffer (\textcolor{keywordtype}{int} channelIndex) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{462 }
+\DoxyCodeLine{463 }
+\DoxyCodeLine{468         \textcolor{keyword}{template} <\textcolor{keyword}{typename} FloatType>}
+\DoxyCodeLine{469         \mbox{\hyperlink{class_audio_buffer}{AudioBuffer<FloatType>}} \mbox{\hyperlink{class_audio_processor_1_1_bus_a8ff0c8c8a84cc77c5117a6387ee45ec4}{getBusBuffer}} (\mbox{\hyperlink{class_audio_buffer}{AudioBuffer<FloatType>}}\& processBlockBuffer)\textcolor{keyword}{ const}}
+\DoxyCodeLine{470 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{471             \textcolor{keyword}{auto} di = getDirectionAndIndex();}
+\DoxyCodeLine{472             \textcolor{keywordflow}{return} owner.getBusBuffer (processBlockBuffer, di.isInput, di.index);}
+\DoxyCodeLine{473         \}}
+\DoxyCodeLine{474 }
+\DoxyCodeLine{475     \textcolor{keyword}{private}:}
+\DoxyCodeLine{476         \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{class_audio_processor}{AudioProcessor}};}
+\DoxyCodeLine{477         \mbox{\hyperlink{class_audio_processor_a96d8550db89cd8c6abb7e0d3e8923eb2}{Bus}} (\mbox{\hyperlink{class_audio_processor}{AudioProcessor}}\&, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\&, \textcolor{keyword}{const} \mbox{\hyperlink{class_audio_channel_set}{AudioChannelSet}}\&, \textcolor{keywordtype}{bool});}
+\DoxyCodeLine{478 }
+\DoxyCodeLine{479         \textcolor{keyword}{struct }BusDirectionAndIndex}
+\DoxyCodeLine{480         \{}
+\DoxyCodeLine{481             \textcolor{keywordtype}{bool} isInput;}
+\DoxyCodeLine{482             \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}};}
+\DoxyCodeLine{483         \};}
+\DoxyCodeLine{484 }
+\DoxyCodeLine{485         BusDirectionAndIndex getDirectionAndIndex() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{486         \textcolor{keywordtype}{void} updateChannelCount() noexcept;}
+\DoxyCodeLine{487 }
+\DoxyCodeLine{488         \mbox{\hyperlink{class_audio_processor}{AudioProcessor}}\& owner;}
+\DoxyCodeLine{489         \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}};}
+\DoxyCodeLine{490         \mbox{\hyperlink{class_audio_channel_set}{AudioChannelSet}} layout, dfltLayout, lastLayout;}
+\DoxyCodeLine{491         \textcolor{keywordtype}{bool} enabledByDefault;}
+\DoxyCodeLine{492         \textcolor{keywordtype}{int} cachedChannelCount;}
+\DoxyCodeLine{493 }
+\DoxyCodeLine{494         \mbox{\hyperlink{group__juce__core-system_ga6ab7a603bf4435c7cb286b1744366eb2}{JUCE\_DECLARE\_NON\_COPYABLE}} (\mbox{\hyperlink{class_audio_processor_1_1_bus}{Bus}})}
+\DoxyCodeLine{495     \};}
+\DoxyCodeLine{496 }
+\DoxyCodeLine{497     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{499 \textcolor{comment}{}    \textcolor{keywordtype}{int} getBusCount (\textcolor{keywordtype}{bool} isInput) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                   \{ \textcolor{keywordflow}{return} (isInput ? inputBuses : outputBuses).size(); \}}
+\DoxyCodeLine{500 }
+\DoxyCodeLine{504     \mbox{\hyperlink{class_audio_processor_1_1_bus}{Bus}}* \mbox{\hyperlink{class_audio_processor_a74d9ed14b762c9cf8f33118c30fb5936}{getBus}} (\textcolor{keywordtype}{bool} isInput, \textcolor{keywordtype}{int} busIndex) \textcolor{keyword}{noexcept}               \{ \textcolor{keywordflow}{return} (isInput ? inputBuses : outputBuses)[busIndex]; \}}
+\DoxyCodeLine{505 }
+\DoxyCodeLine{509     \textcolor{keyword}{const} \mbox{\hyperlink{class_audio_processor_1_1_bus}{Bus}}* \mbox{\hyperlink{class_audio_processor_ac46f4423206318167c749df62bf7e8db}{getBus}} (\textcolor{keywordtype}{bool} isInput, \textcolor{keywordtype}{int} busIndex) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}   \{ \textcolor{keywordflow}{return} \textcolor{keyword}{const\_cast<}\mbox{\hyperlink{class_audio_processor}{AudioProcessor}}*\textcolor{keyword}{>} (\textcolor{keyword}{this})-\/>getBus (isInput, busIndex); \}}
+\DoxyCodeLine{510 }
+\DoxyCodeLine{511     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{522 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_processor_a95d47f823c2b0f44b1a770d36f06948d}{canAddBus}} (\textcolor{keywordtype}{bool} isInput)\textcolor{keyword}{ const                     }\{ \mbox{\hyperlink{group__juce__core-maths_ga5158e6e8faa5553204f90af596fafaf5}{ignoreUnused}} (isInput); \textcolor{keywordflow}{return} \textcolor{keyword}{false}; \}}
+\DoxyCodeLine{523 }
+\DoxyCodeLine{535     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_processor_a426465e849e5a1b02d4054334418e339}{canRemoveBus}} (\textcolor{keywordtype}{bool} isInput)\textcolor{keyword}{ const                  }\{ \mbox{\hyperlink{group__juce__core-maths_ga5158e6e8faa5553204f90af596fafaf5}{ignoreUnused}} (isInput); \textcolor{keywordflow}{return} \textcolor{keyword}{false}; \}}
+\DoxyCodeLine{536 }
+\DoxyCodeLine{551     \textcolor{keywordtype}{bool} addBus (\textcolor{keywordtype}{bool} isInput);}
+\DoxyCodeLine{552 }
+\DoxyCodeLine{569     \textcolor{keywordtype}{bool} removeBus (\textcolor{keywordtype}{bool} isInput);}
+\DoxyCodeLine{570 }
+\DoxyCodeLine{571     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{579 \textcolor{comment}{}    \textcolor{keywordtype}{bool} setBusesLayout (\textcolor{keyword}{const} BusesLayout\&);}
+\DoxyCodeLine{580 }
+\DoxyCodeLine{588     \textcolor{keywordtype}{bool} setBusesLayoutWithoutEnabling (\textcolor{keyword}{const} BusesLayout\&);}
+\DoxyCodeLine{589 }
+\DoxyCodeLine{591     BusesLayout getBusesLayout() \textcolor{keyword}{const};}
+\DoxyCodeLine{592 }
+\DoxyCodeLine{598     \mbox{\hyperlink{class_audio_channel_set}{AudioChannelSet}} getChannelLayoutOfBus (\textcolor{keywordtype}{bool} isInput, \textcolor{keywordtype}{int} busIndex) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{599 }
+\DoxyCodeLine{605     \textcolor{keywordtype}{bool} setChannelLayoutOfBus (\textcolor{keywordtype}{bool} isInput, \textcolor{keywordtype}{int} busIndex, \textcolor{keyword}{const} \mbox{\hyperlink{class_audio_channel_set}{AudioChannelSet}}\& layout);}
+\DoxyCodeLine{606 }
+\DoxyCodeLine{611     \textcolor{keyword}{inline} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_audio_processor_a8860ffb6bcf02cf02da8b55937e90da6}{getChannelCountOfBus}} (\textcolor{keywordtype}{bool} isInput, \textcolor{keywordtype}{int} busIndex) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{612     \{}
+\DoxyCodeLine{613         \textcolor{keywordflow}{if} (\textcolor{keyword}{auto}* bus = getBus (isInput, busIndex))}
+\DoxyCodeLine{614             \textcolor{keywordflow}{return} bus-\/>getNumberOfChannels();}
+\DoxyCodeLine{615 }
+\DoxyCodeLine{616         \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{617     \}}
+\DoxyCodeLine{618 }
+\DoxyCodeLine{620     \textcolor{keywordtype}{bool} enableAllBuses();}
+\DoxyCodeLine{621 }
+\DoxyCodeLine{623     \textcolor{keywordtype}{bool} disableNonMainBuses();}
+\DoxyCodeLine{624 }
+\DoxyCodeLine{625     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{630 \textcolor{comment}{}    \textcolor{keywordtype}{int} getChannelIndexInProcessBlockBuffer (\textcolor{keywordtype}{bool} isInput, \textcolor{keywordtype}{int} busIndex, \textcolor{keywordtype}{int} channelIndex) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{631 }
+\DoxyCodeLine{638     \textcolor{keywordtype}{int} getOffsetInBusBufferForAbsoluteChannelIndex (\textcolor{keywordtype}{bool} isInput, \textcolor{keywordtype}{int} absoluteChannelIndex, \textcolor{keywordtype}{int}\& busIndex) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{639 }
+\DoxyCodeLine{644     \textcolor{keyword}{template} <\textcolor{keyword}{typename} FloatType>}
+\DoxyCodeLine{645     \mbox{\hyperlink{class_audio_buffer}{AudioBuffer<FloatType>}} \mbox{\hyperlink{class_audio_processor_a733377c6d541c099dc5857be77cd1af1}{getBusBuffer}} (\mbox{\hyperlink{class_audio_buffer}{AudioBuffer<FloatType>}}\& processBlockBuffer, \textcolor{keywordtype}{bool} isInput, \textcolor{keywordtype}{int} busIndex)\textcolor{keyword}{ const}}
+\DoxyCodeLine{646 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{647         \textcolor{keyword}{auto} busNumChannels = getChannelCountOfBus (isInput, busIndex);}
+\DoxyCodeLine{648         \textcolor{keyword}{auto} channelOffset = getChannelIndexInProcessBlockBuffer (isInput, busIndex, 0);}
+\DoxyCodeLine{649 }
+\DoxyCodeLine{650         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_audio_buffer}{AudioBuffer<FloatType>}} (processBlockBuffer.\mbox{\hyperlink{class_audio_buffer_af35242a162e59abfb82b7a935df7b9c4}{getArrayOfWritePointers}}() + channelOffset,}
+\DoxyCodeLine{651                                        busNumChannels, processBlockBuffer.\mbox{\hyperlink{class_audio_buffer_a74e3eeed9991f6633570b3bbcd723e2b}{getNumSamples}}());}
+\DoxyCodeLine{652     \}}
+\DoxyCodeLine{653 }
+\DoxyCodeLine{654     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{658 \textcolor{comment}{}    \textcolor{keywordtype}{bool} checkBusesLayoutSupported (\textcolor{keyword}{const} BusesLayout\&) \textcolor{keyword}{const};}
+\DoxyCodeLine{659 }
+\DoxyCodeLine{660     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{669 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} supportsDoublePrecisionProcessing() \textcolor{keyword}{const};}
+\DoxyCodeLine{670 }
+\DoxyCodeLine{676     \mbox{\hyperlink{class_audio_processor_a212c3670b59976559237cbf629af275f}{ProcessingPrecision}} \mbox{\hyperlink{class_audio_processor_a431488bcce04de3caf9f873fe0efbb92}{getProcessingPrecision}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept         \{ \textcolor{keywordflow}{return} processingPrecision; \}}
+\DoxyCodeLine{677 }
+\DoxyCodeLine{679     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_processor_a58f5414e3b89197136ab4fb8f1263d66}{isUsingDoublePrecision}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                        \{ \textcolor{keywordflow}{return} processingPrecision == doublePrecision; \}}
+\DoxyCodeLine{680 }
+\DoxyCodeLine{695     \textcolor{keywordtype}{void} setProcessingPrecision (ProcessingPrecision newPrecision) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{696 }
+\DoxyCodeLine{697     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{713 \textcolor{comment}{}    \mbox{\hyperlink{class_audio_play_head}{AudioPlayHead}}* \mbox{\hyperlink{class_audio_processor_abefbb911eb803e9c67fe6467dd4125d0}{getPlayHead}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                 \{ \textcolor{keywordflow}{return} playHead; \}}
+\DoxyCodeLine{714 }
+\DoxyCodeLine{715     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{728 \textcolor{comment}{}    \textcolor{keywordtype}{int} \mbox{\hyperlink{class_audio_processor_a77571fc8ce02ddf4fe3a56fe57ea9392}{getTotalNumInputChannels}}()  \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept              \{ \textcolor{keywordflow}{return} cachedTotalIns; \}}
+\DoxyCodeLine{729 }
+\DoxyCodeLine{742     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_audio_processor_a2a99a78e2a1e2b7f2d4dffee0819a225}{getTotalNumOutputChannels}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept              \{ \textcolor{keywordflow}{return} cachedTotalOuts; \}}
+\DoxyCodeLine{743 }
+\DoxyCodeLine{745     \textcolor{keyword}{inline} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_audio_processor_a6c273007eacb9926081f1276cb1ad44c}{getMainBusNumInputChannels}}()   \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept    \{ \textcolor{keywordflow}{return} getChannelCountOfBus (\textcolor{keyword}{true},  0); \}}
+\DoxyCodeLine{746 }
+\DoxyCodeLine{748     \textcolor{keyword}{inline} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_audio_processor_a89e5d408f21d930bd56c21dd2aa8f69b}{getMainBusNumOutputChannels}}()  \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept    \{ \textcolor{keywordflow}{return} getChannelCountOfBus (\textcolor{keyword}{false}, 0); \}}
+\DoxyCodeLine{749 }
+\DoxyCodeLine{750     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{763 \textcolor{comment}{}    \textcolor{keyword}{static} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_processor_a825862aa6d73086c8c088ec18ee6999e}{containsLayout}} (\textcolor{keyword}{const} \mbox{\hyperlink{struct_audio_processor_1_1_buses_layout}{BusesLayout}}\& layouts, \textcolor{keyword}{const} std::initializer\_list<\textcolor{keyword}{const} \textcolor{keywordtype}{short}[2]>\& channelLayoutList)}
+\DoxyCodeLine{764     \{}
+\DoxyCodeLine{765         \textcolor{keywordflow}{return} containsLayout (layouts, layoutListToArray (channelLayoutList));}
+\DoxyCodeLine{766     \}}
+\DoxyCodeLine{767 }
+\DoxyCodeLine{768     \textcolor{keyword}{template} <\textcolor{keywordtype}{size\_t} numLayouts>}
+\DoxyCodeLine{769     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_processor_ade9d054d26452735f77401b05a76ce0c}{containsLayout}} (\textcolor{keyword}{const} \mbox{\hyperlink{struct_audio_processor_1_1_buses_layout}{BusesLayout}}\& layouts, \textcolor{keyword}{const} \textcolor{keywordtype}{short} (\&channelLayoutList) [numLayouts][2])}
+\DoxyCodeLine{770     \{}
+\DoxyCodeLine{771         \textcolor{keywordflow}{return} containsLayout (layouts, layoutListToArray (channelLayoutList));}
+\DoxyCodeLine{772     \}}
+\DoxyCodeLine{773 }
+\DoxyCodeLine{785     \textcolor{keyword}{template} <\textcolor{keywordtype}{size\_t} numLayouts>}
+\DoxyCodeLine{786     \mbox{\hyperlink{struct_audio_processor_1_1_buses_layout}{BusesLayout}} \mbox{\hyperlink{class_audio_processor_a82b3815d0d5be7bef661d7e9728b33e8}{getNextBestLayoutInLayoutList}} (\textcolor{keyword}{const} \mbox{\hyperlink{struct_audio_processor_1_1_buses_layout}{BusesLayout}}\& layouts,}
+\DoxyCodeLine{787                                                \textcolor{keyword}{const} \textcolor{keywordtype}{short} (\&channelLayoutList) [numLayouts][2])}
+\DoxyCodeLine{788     \{}
+\DoxyCodeLine{789         \textcolor{keywordflow}{return} getNextBestLayoutInList (layouts, layoutListToArray (channelLayoutList));}
+\DoxyCodeLine{790     \}}
+\DoxyCodeLine{791 }
+\DoxyCodeLine{792     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{798 \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{class_audio_processor_a99b216c491ed4896424a9a075858ca03}{getSampleRate}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                       \{ \textcolor{keywordflow}{return} currentSampleRate; \}}
+\DoxyCodeLine{799 }
+\DoxyCodeLine{809     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_audio_processor_a3b59606e6e85f262d465c7f779ca0c4a}{getBlockSize}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                           \{ \textcolor{keywordflow}{return} blockSize; \}}
+\DoxyCodeLine{810 }
+\DoxyCodeLine{811     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{812 }
+\DoxyCodeLine{819     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_audio_processor_abae54a8c1bcfd88bcba9d42b752e006d}{getLatencySamples}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                      \{ \textcolor{keywordflow}{return} latencySamples; \}}
+\DoxyCodeLine{820 }
+\DoxyCodeLine{826     \textcolor{keywordtype}{void} setLatencySamples (\textcolor{keywordtype}{int} newLatency);}
+\DoxyCodeLine{827 }
+\DoxyCodeLine{829     \textcolor{keyword}{virtual} \textcolor{keywordtype}{double} \mbox{\hyperlink{class_audio_processor_a358db82650c6423968091f8b4d22b09a}{getTailLengthSeconds}}() \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{830 }
+\DoxyCodeLine{832     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_processor_ae482a0c2928bfe77de821e6824ffaee6}{acceptsMidi}}() \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{833 }
+\DoxyCodeLine{835     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_processor_a719715472b12c40e8144109561c04e65}{producesMidi}}() \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{836 }
+\DoxyCodeLine{838     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_processor_a18f523cfcb4ab869eb82390541e2fb75}{supportsMPE}}()\textcolor{keyword}{ const                            }\{ \textcolor{keywordflow}{return} \textcolor{keyword}{false}; \}}
+\DoxyCodeLine{839 }
+\DoxyCodeLine{841     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_processor_ac23ad992a24d00574b9e062f0e4dddf5}{isMidiEffect}}()\textcolor{keyword}{ const                           }\{ \textcolor{keywordflow}{return} \textcolor{keyword}{false}; \}}
+\DoxyCodeLine{842 }
+\DoxyCodeLine{843     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{855 \textcolor{comment}{}    \textcolor{keyword}{const} \mbox{\hyperlink{class_critical_section}{CriticalSection}}\& \mbox{\hyperlink{class_audio_processor_ad53a58641eb8d30fd3182cfd22609853}{getCallbackLock}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept     \{ \textcolor{keywordflow}{return} callbackLock; \}}
+\DoxyCodeLine{856 }
+\DoxyCodeLine{885     \textcolor{keywordtype}{void} suspendProcessing (\textcolor{keywordtype}{bool} shouldBeSuspended);}
+\DoxyCodeLine{886 }
+\DoxyCodeLine{890     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_processor_aab07ed8e72817efe0e12b70890950e3e}{isSuspended}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                                   \{ \textcolor{keywordflow}{return} suspended; \}}
+\DoxyCodeLine{891 }
+\DoxyCodeLine{897     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacegl_a3b437ea454d772211296e220c025bdd2}{reset}}();}
+\DoxyCodeLine{898 }
+\DoxyCodeLine{899     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{912 \textcolor{comment}{}    \textcolor{keyword}{virtual} \mbox{\hyperlink{class_audio_processor_parameter}{AudioProcessorParameter}}* \mbox{\hyperlink{class_audio_processor_a08975ed39146521de90f52aa52ba3f9e}{getBypassParameter}}()\textcolor{keyword}{ const        }\{ \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr}; \}}
+\DoxyCodeLine{913 }
+\DoxyCodeLine{914     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{925 \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_processor_ac61949900870c9f6dca63d53ee68f7a0}{isNonRealtime}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                                 \{ \textcolor{keywordflow}{return} nonRealtime; \}}
+\DoxyCodeLine{926 }
+\DoxyCodeLine{930     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} setNonRealtime (\textcolor{keywordtype}{bool} isNonRealtime) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{931 }
+\DoxyCodeLine{932     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{960 \textcolor{comment}{}    \textcolor{keyword}{virtual} \mbox{\hyperlink{class_audio_processor_editor}{AudioProcessorEditor}}* \mbox{\hyperlink{class_audio_processor_adf76a112d670baa25b40d13cf87e1306}{createEditor}}() = 0;}
+\DoxyCodeLine{961 }
+\DoxyCodeLine{966     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_processor_a00be8f595da09ba01d74cb7c52b8fb81}{hasEditor}}() \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{967 }
+\DoxyCodeLine{968     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{975 \textcolor{comment}{}    \mbox{\hyperlink{class_audio_processor_editor}{AudioProcessorEditor}}* getActiveEditor() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{976 }
+\DoxyCodeLine{980     \mbox{\hyperlink{class_audio_processor_editor}{AudioProcessorEditor}}* createEditorIfNeeded();}
+\DoxyCodeLine{981 }
+\DoxyCodeLine{982     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{990 \textcolor{comment}{}    static \textcolor{keywordtype}{int} getDefaultNumParameterSteps() noexcept;}
+\DoxyCodeLine{991 }
+\DoxyCodeLine{997     \textcolor{keywordtype}{void} updateHostDisplay (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{struct_audio_processor_listener_1_1_change_details}{ChangeDetails}}\& details = \mbox{\hyperlink{struct_audio_processor_listener_1_1_change_details}{ChangeDetails}}::getDefaultFlags());}
+\DoxyCodeLine{998 }
+\DoxyCodeLine{999     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1005 \textcolor{comment}{}    \textcolor{keywordtype}{void} addParameter (\mbox{\hyperlink{class_audio_processor_parameter}{AudioProcessorParameter}}*);}
+\DoxyCodeLine{1006 }
+\DoxyCodeLine{1014     \textcolor{keywordtype}{void} addParameterGroup (\mbox{\hyperlink{namespacestd}{std}}::unique\_ptr<\mbox{\hyperlink{class_audio_processor_parameter_group}{AudioProcessorParameterGroup}}>);}
+\DoxyCodeLine{1015 }
+\DoxyCodeLine{1017     \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_audio_processor_parameter_group}{AudioProcessorParameterGroup}}\& getParameterTree() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{1018 }
+\DoxyCodeLine{1027     \textcolor{keywordtype}{void} setParameterTree (\mbox{\hyperlink{class_audio_processor_parameter_group}{AudioProcessorParameterGroup}}\&\& newTree);}
+\DoxyCodeLine{1028 }
+\DoxyCodeLine{1035     virtual \textcolor{keywordtype}{void} refreshParameterList();}
+\DoxyCodeLine{1036 }
+\DoxyCodeLine{1038     \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_array}{Array}}<\mbox{\hyperlink{class_audio_processor_parameter}{AudioProcessorParameter}}*>\& getParameters() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{1039 }
+\DoxyCodeLine{1040     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1048 \textcolor{comment}{}    virtual \textcolor{keywordtype}{int} getNumPrograms() = 0;}
+\DoxyCodeLine{1049 }
+\DoxyCodeLine{1051     virtual \textcolor{keywordtype}{int} getCurrentProgram() = 0;}
+\DoxyCodeLine{1052 }
+\DoxyCodeLine{1054     virtual \textcolor{keywordtype}{void} setCurrentProgram (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) = 0;}
+\DoxyCodeLine{1055 }
+\DoxyCodeLine{1057     virtual \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} getProgramName (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) = 0;}
+\DoxyCodeLine{1058 }
+\DoxyCodeLine{1060     virtual \textcolor{keywordtype}{void} changeProgramName (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}, \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}}\& newName) = 0;}
+\DoxyCodeLine{1061 }
+\DoxyCodeLine{1062     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1075 \textcolor{comment}{}    virtual \textcolor{keywordtype}{void} getStateInformation (\mbox{\hyperlink{namespacejuce}{juce}}::\mbox{\hyperlink{class_memory_block}{MemoryBlock}}\& destData) = 0;}
+\DoxyCodeLine{1076 }
+\DoxyCodeLine{1088     virtual \textcolor{keywordtype}{void} getCurrentProgramStateInformation (\mbox{\hyperlink{namespacejuce}{juce}}::\mbox{\hyperlink{class_memory_block}{MemoryBlock}}\& destData);}
+\DoxyCodeLine{1089 }
+\DoxyCodeLine{1100     virtual \textcolor{keywordtype}{void} setStateInformation (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \textcolor{keywordtype}{void}* \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, \textcolor{keywordtype}{int} sizeInBytes) = 0;}
+\DoxyCodeLine{1101 }
+\DoxyCodeLine{1111     virtual \textcolor{keywordtype}{void} setCurrentProgramStateInformation (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \textcolor{keywordtype}{void}* \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, \textcolor{keywordtype}{int} sizeInBytes);}
+\DoxyCodeLine{1112 }
+\DoxyCodeLine{1114     virtual \textcolor{keywordtype}{void} numChannelsChanged();}
+\DoxyCodeLine{1115 }
+\DoxyCodeLine{1117     virtual \textcolor{keywordtype}{void} numBusesChanged();}
+\DoxyCodeLine{1118 }
+\DoxyCodeLine{1120     virtual \textcolor{keywordtype}{void} processorLayoutsChanged();}
+\DoxyCodeLine{1121 }
+\DoxyCodeLine{1122     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1124 \textcolor{comment}{}    virtual \textcolor{keywordtype}{void} addListener (\mbox{\hyperlink{class_audio_processor_listener}{AudioProcessorListener}}* newListener);}
+\DoxyCodeLine{1125 }
+\DoxyCodeLine{1127     virtual \textcolor{keywordtype}{void} removeListener (\mbox{\hyperlink{class_audio_processor_listener}{AudioProcessorListener}}* listenerToRemove);}
+\DoxyCodeLine{1128 }
+\DoxyCodeLine{1129     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1134 \textcolor{comment}{}    virtual \textcolor{keywordtype}{void} setPlayHead (\mbox{\hyperlink{class_audio_play_head}{AudioPlayHead}}* newPlayHead);}
+\DoxyCodeLine{1135 }
+\DoxyCodeLine{1136     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1140 \textcolor{comment}{}    \textcolor{keywordtype}{void} setPlayConfigDetails (\textcolor{keywordtype}{int} numIns, \textcolor{keywordtype}{int} numOuts, \textcolor{keywordtype}{double} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}}, \textcolor{keywordtype}{int} blockSize);}
+\DoxyCodeLine{1141 }
+\DoxyCodeLine{1148     \textcolor{keywordtype}{void} setRateAndBufferSizeDetails (\textcolor{keywordtype}{double} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}}, \textcolor{keywordtype}{int} blockSize) noexcept;}
+\DoxyCodeLine{1149 }
+\DoxyCodeLine{1150     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1160 \textcolor{comment}{}    virtual \mbox{\hyperlink{juce__box2d_8cpp_a6a5a8e94340b94579afb83ab477a983c}{int32}} getAAXPluginIDForMainBusConfig (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_audio_channel_set}{AudioChannelSet}}\& mainInputLayout,}
+\DoxyCodeLine{1161                                                   \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_audio_channel_set}{AudioChannelSet}}\& mainOutputLayout,}
+\DoxyCodeLine{1162                                                   \textcolor{keywordtype}{bool} idForAudioSuite) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{1163 }
+\DoxyCodeLine{1164     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1169 \textcolor{comment}{}    struct \mbox{\hyperlink{struct_audio_processor_1_1_curve_data}{CurveData}}}
+\DoxyCodeLine{1170     \{}
+\DoxyCodeLine{1171         \textcolor{keyword}{enum class} \mbox{\hyperlink{struct_audio_processor_1_1_curve_data_a40813f0ebb00a486ddab9f3a5ebfdcb1}{Type}}  : \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}
+\DoxyCodeLine{1172         \{}
+\DoxyCodeLine{1173             EQ,             \textcolor{comment}{// an EQ curve -\/ input is in Hz, output is in dB}}
+\DoxyCodeLine{1174             Dynamics,       \textcolor{comment}{// a dynamics curve -\/ input and output is in dB}}
+\DoxyCodeLine{1175             GainReduction,  \textcolor{comment}{// a gain reduction curve -\/ input and output is in dB}}
+\DoxyCodeLine{1176 }
+\DoxyCodeLine{1177             Unknown = -\/1}
+\DoxyCodeLine{1178         \};}
+\DoxyCodeLine{1179 }
+\DoxyCodeLine{1180         \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<float (\textcolor{keywordtype}{float})> \mbox{\hyperlink{struct_audio_processor_1_1_curve_data_a8edaae39cd3055757bf7698a8049c3db}{curve}};   \textcolor{comment}{// a function which represents your curve (such as an eq)}}
+\DoxyCodeLine{1181         \mbox{\hyperlink{class_range}{Range<float>}} \mbox{\hyperlink{struct_audio_processor_1_1_curve_data_ace933174e560607efa236cb9db2383e3}{xRange}}, yRange;          \textcolor{comment}{// the data range of your curve}}
+\DoxyCodeLine{1182 }
+\DoxyCodeLine{1183         \textcolor{comment}{// For some curve types, your plug-\/in may already measure the current input and output values.}}
+\DoxyCodeLine{1184         \textcolor{comment}{// An host can use to indicate where on the curve the current signal is (for example}}
+\DoxyCodeLine{1185         \textcolor{comment}{// by putting a dot on the curve). Simply leave these strings empty if you do not want to}}
+\DoxyCodeLine{1186         \textcolor{comment}{// support this.}}
+\DoxyCodeLine{1187         \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{struct_audio_processor_1_1_curve_data_ad735f0bc82c0d43e7c9273aca90c7712}{xMeterID}}, yMeterID;}
+\DoxyCodeLine{1188     \};}
+\DoxyCodeLine{1189 }
+\DoxyCodeLine{1190     \textcolor{keyword}{virtual} \mbox{\hyperlink{struct_audio_processor_1_1_curve_data}{CurveData}} \mbox{\hyperlink{class_audio_processor_a2b84f9b383bdf57e11363ae768c82972}{getResponseCurve}} (\mbox{\hyperlink{struct_audio_processor_1_1_curve_data_a40813f0ebb00a486ddab9f3a5ebfdcb1}{CurveData::Type}} \textcolor{comment}{/*curveType*/})\textcolor{keyword}{ const      }\{ \textcolor{keywordflow}{return} \{\}; \}}
+\DoxyCodeLine{1191 }
+\DoxyCodeLine{1192     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1194 \textcolor{comment}{}    \textcolor{keywordtype}{void} editorBeingDeleted (\mbox{\hyperlink{class_audio_processor_editor}{AudioProcessorEditor}}*) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{1195 }
+\DoxyCodeLine{1197     \textcolor{keyword}{enum} \mbox{\hyperlink{class_audio_processor_a2e1b21b8831ac529965abffc96223dcf}{WrapperType}}}
+\DoxyCodeLine{1198     \{}
+\DoxyCodeLine{1199         wrapperType\_Undefined = 0,}
+\DoxyCodeLine{1200         \mbox{\hyperlink{class_audio_processor_a2e1b21b8831ac529965abffc96223dcfa5313891416ab9b1b2ae5db6b673e4061}{wrapperType\_VST}},}
+\DoxyCodeLine{1201         \mbox{\hyperlink{class_audio_processor_a2e1b21b8831ac529965abffc96223dcfac12c7f266e9f234367307597b332fa10}{wrapperType\_VST3}},}
+\DoxyCodeLine{1202         \mbox{\hyperlink{class_audio_processor_a2e1b21b8831ac529965abffc96223dcfa3942e92d75c1edf6096405a400a12100}{wrapperType\_AudioUnit}},}
+\DoxyCodeLine{1203         \mbox{\hyperlink{class_audio_processor_a2e1b21b8831ac529965abffc96223dcfa24c1746c07b93d66ef9a906285c3d782}{wrapperType\_AudioUnitv3}},}
+\DoxyCodeLine{1204         \mbox{\hyperlink{class_audio_processor_a2e1b21b8831ac529965abffc96223dcfa0d1334a563a3764a0a026703fec73ff6}{wrapperType\_RTAS}},}
+\DoxyCodeLine{1205         \mbox{\hyperlink{class_audio_processor_a2e1b21b8831ac529965abffc96223dcfa9a43d586134e1bf0ceacdd2de2defbb3}{wrapperType\_AAX}},}
+\DoxyCodeLine{1206         \mbox{\hyperlink{class_audio_processor_a2e1b21b8831ac529965abffc96223dcfaad6832e63028f039a818f3eed72cf06f}{wrapperType\_Standalone}},}
+\DoxyCodeLine{1207         wrapperType\_Unity}
+\DoxyCodeLine{1208     \};}
+\DoxyCodeLine{1209 }
+\DoxyCodeLine{1213     \textcolor{keyword}{const} \mbox{\hyperlink{class_audio_processor_a2e1b21b8831ac529965abffc96223dcf}{WrapperType}} \mbox{\hyperlink{class_audio_processor_a091b617d5bf926e54b510fb038917534}{wrapperType}};}
+\DoxyCodeLine{1214 }
+\DoxyCodeLine{1216     \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{char}* getWrapperTypeDescription (\mbox{\hyperlink{class_audio_processor_a2e1b21b8831ac529965abffc96223dcf}{AudioProcessor::WrapperType}}) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{1217 }
+\DoxyCodeLine{1218 }
+\DoxyCodeLine{1221     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_audio_processor_1_1_track_properties}{TrackProperties}}}
+\DoxyCodeLine{1222     \{}
+\DoxyCodeLine{1223         \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{struct_audio_processor_1_1_track_properties_aae71382223cc2011346dee79c0eb5e74}{name}};    \textcolor{comment}{// The name of the track -\/ this will be empty if the track name is not known}}
+\DoxyCodeLine{1224         \mbox{\hyperlink{class_colour}{Colour}} \mbox{\hyperlink{struct_audio_processor_1_1_track_properties_a7c59b53402cee38e8dd3f64c9e73dbd7}{colour}};  \textcolor{comment}{// The colour of the track -\/ this will be transparentBlack if the colour is not known}}
+\DoxyCodeLine{1225 }
+\DoxyCodeLine{1226         \textcolor{comment}{// other properties may be added in the future}}
+\DoxyCodeLine{1227     \};}
+\DoxyCodeLine{1228 }
+\DoxyCodeLine{1243     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} updateTrackProperties (\textcolor{keyword}{const} \mbox{\hyperlink{struct_audio_processor_1_1_track_properties}{TrackProperties}}\& properties);}
+\DoxyCodeLine{1244 }
+\DoxyCodeLine{1245     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1254 \textcolor{comment}{}    \textcolor{keyword}{static} \textcolor{keywordtype}{void} copyXmlToBinary (\textcolor{keyword}{const} \mbox{\hyperlink{class_xml_element}{XmlElement}}\& xml,}
+\DoxyCodeLine{1255                                  juce::MemoryBlock\& destData);}
+\DoxyCodeLine{1256 }
+\DoxyCodeLine{1260     \textcolor{keyword}{static} std::unique\_ptr<XmlElement> getXmlFromBinary (\textcolor{keyword}{const} \textcolor{keywordtype}{void}* \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, \textcolor{keywordtype}{int} sizeInBytes);}
+\DoxyCodeLine{1261 }
+\DoxyCodeLine{1263     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} setTypeOfNextNewPlugin (\mbox{\hyperlink{class_audio_processor_a2e1b21b8831ac529965abffc96223dcf}{WrapperType}});}
+\DoxyCodeLine{1264 }
+\DoxyCodeLine{1265 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{1277     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_processor_a6e206c1d2987a250a2d6c2af4c3af01a}{isBusesLayoutSupported}} (\textcolor{keyword}{const} \mbox{\hyperlink{struct_audio_processor_1_1_buses_layout}{BusesLayout}}\&)\textcolor{keyword}{ const          }\{ \textcolor{keywordflow}{return} \textcolor{keyword}{true}; \}}
+\DoxyCodeLine{1278 }
+\DoxyCodeLine{1310     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_processor_a7e36934d17a82a4264552f7fda1b8889}{canApplyBusesLayout}} (\textcolor{keyword}{const} \mbox{\hyperlink{struct_audio_processor_1_1_buses_layout}{BusesLayout}}\& layouts)\textcolor{keyword}{ const     }\{ \textcolor{keywordflow}{return} isBusesLayoutSupported (layouts); \}}
+\DoxyCodeLine{1311 }
+\DoxyCodeLine{1317     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} applyBusLayouts (\textcolor{keyword}{const} BusesLayout\& layouts);}
+\DoxyCodeLine{1318 }
+\DoxyCodeLine{1319     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1321 \textcolor{comment}{}    \textcolor{keyword}{struct }\mbox{\hyperlink{struct_audio_processor_1_1_bus_properties}{BusProperties}}}
+\DoxyCodeLine{1322     \{}
+\DoxyCodeLine{1324         \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{struct_audio_processor_1_1_bus_properties_a43722826739bc1bc65598fa0b7ce77a5}{busName}};}
+\DoxyCodeLine{1325 }
+\DoxyCodeLine{1327         \mbox{\hyperlink{class_audio_channel_set}{AudioChannelSet}} \mbox{\hyperlink{struct_audio_processor_1_1_bus_properties_a72866039f0acaecb38d84a43f74fe95d}{defaultLayout}};}
+\DoxyCodeLine{1328 }
+\DoxyCodeLine{1330         \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_audio_processor_1_1_bus_properties_a9f1acd435666c510282b378fc805d199}{isActivatedByDefault}};}
+\DoxyCodeLine{1331     \};}
+\DoxyCodeLine{1332 }
+\DoxyCodeLine{1334     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_audio_processor_1_1_buses_properties}{BusesProperties}}}
+\DoxyCodeLine{1335     \{}
+\DoxyCodeLine{1337         \mbox{\hyperlink{class_array}{Array<BusProperties>}} \mbox{\hyperlink{struct_audio_processor_1_1_buses_properties_a97d88a6caefa14f20e7572eea844575b}{inputLayouts}};}
+\DoxyCodeLine{1338 }
+\DoxyCodeLine{1340         \mbox{\hyperlink{class_array}{Array<BusProperties>}} \mbox{\hyperlink{struct_audio_processor_1_1_buses_properties_ad62c87a7502481e0b70cc7cebfd9b04d}{outputLayouts}};}
+\DoxyCodeLine{1341 }
+\DoxyCodeLine{1342         \textcolor{keywordtype}{void} addBus (\textcolor{keywordtype}{bool} isInput, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}, \textcolor{keyword}{const} \mbox{\hyperlink{class_audio_channel_set}{AudioChannelSet}}\& defaultLayout, \textcolor{keywordtype}{bool} isActivatedByDefault = \textcolor{keyword}{true});}
+\DoxyCodeLine{1343 }
+\DoxyCodeLine{1344         \mbox{\hyperlink{group__juce__core-system_ga73895ce668ec3b0d108f741e8500d28c}{JUCE\_NODISCARD}} \mbox{\hyperlink{struct_audio_processor_1_1_buses_properties}{BusesProperties}} withInput  (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}, \textcolor{keyword}{const} \mbox{\hyperlink{class_audio_channel_set}{AudioChannelSet}}\& defaultLayout, \textcolor{keywordtype}{bool} isActivatedByDefault = \textcolor{keyword}{true}) \textcolor{keyword}{const};}
+\DoxyCodeLine{1345         \mbox{\hyperlink{group__juce__core-system_ga73895ce668ec3b0d108f741e8500d28c}{JUCE\_NODISCARD}} \mbox{\hyperlink{struct_audio_processor_1_1_buses_properties}{BusesProperties}} withOutput (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}, \textcolor{keyword}{const} \mbox{\hyperlink{class_audio_channel_set}{AudioChannelSet}}\& defaultLayout, \textcolor{keywordtype}{bool} isActivatedByDefault = \textcolor{keyword}{true}) \textcolor{keyword}{const};}
+\DoxyCodeLine{1346     \};}
+\DoxyCodeLine{1347 }
+\DoxyCodeLine{1372     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} canApplyBusCountChange (\textcolor{keywordtype}{bool} isInput, \textcolor{keywordtype}{bool} isAddingBuses,}
+\DoxyCodeLine{1373                                          \mbox{\hyperlink{struct_audio_processor_1_1_bus_properties}{BusProperties}}\& outNewBusProperties);}
+\DoxyCodeLine{1374 }
+\DoxyCodeLine{1375     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1377 \textcolor{comment}{}    std::atomic<AudioPlayHead*> playHead \{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{1378 }
+\DoxyCodeLine{1380     \textcolor{keywordtype}{void} sendParamChangeMessageToListeners (\textcolor{keywordtype}{int} parameterIndex, \textcolor{keywordtype}{float} newValue);}
+\DoxyCodeLine{1381 }
+\DoxyCodeLine{1382 \textcolor{keyword}{public}:}
+\DoxyCodeLine{1383 \textcolor{preprocessor}{   \#ifndef DOXYGEN}}
+\DoxyCodeLine{1384     \textcolor{comment}{// These methods are all deprecated in favour of using AudioProcessorParameter}}
+\DoxyCodeLine{1385     \textcolor{comment}{// and AudioProcessorParameterGroup}}
+\DoxyCodeLine{1386     [[deprecated]] \textcolor{keyword}{virtual} \textcolor{keywordtype}{int} getNumParameters();}
+\DoxyCodeLine{1387     [[deprecated]] \textcolor{keyword}{virtual} \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}} getParameterName (\textcolor{keywordtype}{int} parameterIndex);}
+\DoxyCodeLine{1388     [[deprecated]] \textcolor{keyword}{virtual} \mbox{\hyperlink{class_string}{String}} getParameterID (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}});}
+\DoxyCodeLine{1389     [[deprecated]] \textcolor{keyword}{virtual} \textcolor{keywordtype}{float} getParameter (\textcolor{keywordtype}{int} parameterIndex);}
+\DoxyCodeLine{1390     [[deprecated]] \textcolor{keyword}{virtual} \mbox{\hyperlink{class_string}{String}} getParameterName (\textcolor{keywordtype}{int} parameterIndex, \textcolor{keywordtype}{int} maximumStringLength);}
+\DoxyCodeLine{1391     [[deprecated]] \textcolor{keyword}{virtual} \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}} getParameterText (\textcolor{keywordtype}{int} parameterIndex);}
+\DoxyCodeLine{1392     [[deprecated]] \textcolor{keyword}{virtual} \mbox{\hyperlink{class_string}{String}} getParameterText (\textcolor{keywordtype}{int} parameterIndex, \textcolor{keywordtype}{int} maximumStringLength);}
+\DoxyCodeLine{1393     [[deprecated]] \textcolor{keyword}{virtual} \textcolor{keywordtype}{int} getParameterNumSteps (\textcolor{keywordtype}{int} parameterIndex);}
+\DoxyCodeLine{1394     [[deprecated]] \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} isParameterDiscrete (\textcolor{keywordtype}{int} parameterIndex) \textcolor{keyword}{const};}
+\DoxyCodeLine{1395     [[deprecated]] \textcolor{keyword}{virtual} \textcolor{keywordtype}{float} getParameterDefaultValue (\textcolor{keywordtype}{int} parameterIndex);}
+\DoxyCodeLine{1396     [[deprecated]] \textcolor{keyword}{virtual} \mbox{\hyperlink{class_string}{String}} getParameterLabel (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{1397     [[deprecated]] \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} isParameterOrientationInverted (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{1398     [[deprecated]] \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} setParameter (\textcolor{keywordtype}{int} parameterIndex, \textcolor{keywordtype}{float} newValue);}
+\DoxyCodeLine{1399     [[deprecated]] \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} isParameterAutomatable (\textcolor{keywordtype}{int} parameterIndex) \textcolor{keyword}{const};}
+\DoxyCodeLine{1400     [[deprecated]] \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} isMetaParameter (\textcolor{keywordtype}{int} parameterIndex) \textcolor{keyword}{const};}
+\DoxyCodeLine{1401     [[deprecated]] \textcolor{keyword}{virtual} \mbox{\hyperlink{class_audio_processor_parameter_aef73dff71cb1abfdadd5b6f3649d7db2}{AudioProcessorParameter::Category}} getParameterCategory (\textcolor{keywordtype}{int} parameterIndex) \textcolor{keyword}{const};}
+\DoxyCodeLine{1402     [[deprecated]] \textcolor{keywordtype}{void} beginParameterChangeGesture (\textcolor{keywordtype}{int} parameterIndex);}
+\DoxyCodeLine{1403     [[deprecated]] \textcolor{keywordtype}{void} endParameterChangeGesture (\textcolor{keywordtype}{int} parameterIndex);}
+\DoxyCodeLine{1404     [[deprecated]] \textcolor{keywordtype}{void} setParameterNotifyingHost (\textcolor{keywordtype}{int} parameterIndex, \textcolor{keywordtype}{float} newValue);}
+\DoxyCodeLine{1405 }
+\DoxyCodeLine{1406     \textcolor{comment}{// These functions are deprecated: your audio processor can inform the host}}
+\DoxyCodeLine{1407     \textcolor{comment}{// on its bus and channel layouts and names using the AudioChannelSet and various bus classes.}}
+\DoxyCodeLine{1408     [[deprecated]] \textcolor{keywordtype}{int} \mbox{\hyperlink{class_audio_processor_ae8fda9da6062e47181544a9ac25baaea}{getNumInputChannels}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                   \{ \textcolor{keywordflow}{return} getTotalNumInputChannels(); \}}
+\DoxyCodeLine{1409     [[deprecated]] \textcolor{keywordtype}{int} \mbox{\hyperlink{class_audio_processor_ad628a9699d9b6c9859c8240e21ec9d90}{getNumOutputChannels}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                  \{ \textcolor{keywordflow}{return} getTotalNumOutputChannels(); \}}
+\DoxyCodeLine{1410     [[deprecated]] \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{class_audio_processor_a9bfc09ab0ced35a67267a0f3840976f6}{getInputSpeakerArrangement}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept   \{ \textcolor{keywordflow}{return} cachedInputSpeakerArrString; \}}
+\DoxyCodeLine{1411     [[deprecated]] \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{class_audio_processor_acd8e2aeba8fc0f17918fd609f8d42880}{getOutputSpeakerArrangement}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept  \{ \textcolor{keywordflow}{return} cachedOutputSpeakerArrString; \}}
+\DoxyCodeLine{1412     [[deprecated]] \textcolor{keyword}{virtual} \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}} getInputChannelName  (\textcolor{keywordtype}{int} channelIndex) \textcolor{keyword}{const};}
+\DoxyCodeLine{1413     [[deprecated]] \textcolor{keyword}{virtual} \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}} getOutputChannelName (\textcolor{keywordtype}{int} channelIndex) \textcolor{keyword}{const};}
+\DoxyCodeLine{1414     [[deprecated]] \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} isInputChannelStereoPair  (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{1415     [[deprecated]] \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} isOutputChannelStereoPair (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{1416 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{1417 }
+\DoxyCodeLine{1418 \textcolor{keyword}{private}:}
+\DoxyCodeLine{1419     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1420     \textcolor{keyword}{struct }InOutChannelPair}
+\DoxyCodeLine{1421     \{}
+\DoxyCodeLine{1422         InOutChannelPair() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{1423 }
+\DoxyCodeLine{1424         InOutChannelPair (\mbox{\hyperlink{juce__box2d_8cpp_a1336d6dad274f1bead955274a953c13d}{int16}} inCh, \mbox{\hyperlink{juce__box2d_8cpp_a1336d6dad274f1bead955274a953c13d}{int16}} outCh) noexcept    : inChannels (inCh), outChannels (outCh) \{\}}
+\DoxyCodeLine{1425         InOutChannelPair (\textcolor{keyword}{const} \mbox{\hyperlink{juce__box2d_8cpp_a1336d6dad274f1bead955274a953c13d}{int16}} (\&\mbox{\hyperlink{structconfig__s}{config}})[2]) noexcept   : inChannels (\mbox{\hyperlink{structconfig__s}{config}}[0]), outChannels (\mbox{\hyperlink{structconfig__s}{config}}[1]) \{\}}
+\DoxyCodeLine{1426 }
+\DoxyCodeLine{1427         \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_audio_channel_layout_8cpp_ad569fbf0e2ce80e9b92caaf1cbb3c257}{operator== }}(\textcolor{keyword}{const} InOutChannelPair\& other) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{1428         \{}
+\DoxyCodeLine{1429             \textcolor{keywordflow}{return} other.inChannels == inChannels \&\& other.outChannels == outChannels;}
+\DoxyCodeLine{1430         \}}
+\DoxyCodeLine{1431 }
+\DoxyCodeLine{1432         \mbox{\hyperlink{juce__box2d_8cpp_a1336d6dad274f1bead955274a953c13d}{int16}} inChannels = 0, outChannels = 0;}
+\DoxyCodeLine{1433     \};}
+\DoxyCodeLine{1434 }
+\DoxyCodeLine{1435     \textcolor{keyword}{template} <\textcolor{keywordtype}{size\_t} numLayouts>}
+\DoxyCodeLine{1436     \textcolor{keyword}{static} \mbox{\hyperlink{class_array}{Array<InOutChannelPair>}} layoutListToArray (\textcolor{keyword}{const} \textcolor{keywordtype}{short} (\&configuration) [numLayouts][2])}
+\DoxyCodeLine{1437     \{}
+\DoxyCodeLine{1438         \mbox{\hyperlink{class_array}{Array<InOutChannelPair>}} layouts;}
+\DoxyCodeLine{1439 }
+\DoxyCodeLine{1440         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < numLayouts; ++i)}
+\DoxyCodeLine{1441             layouts.\mbox{\hyperlink{class_array_a52da22e285e44171b6d6fa785a7d536a}{add}} (InOutChannelPair (configuration[(\textcolor{keywordtype}{int}) i]));}
+\DoxyCodeLine{1442 }
+\DoxyCodeLine{1443         \textcolor{keywordflow}{return} layouts;}
+\DoxyCodeLine{1444     \}}
+\DoxyCodeLine{1445 }
+\DoxyCodeLine{1446     \textcolor{keyword}{static} \mbox{\hyperlink{class_array}{Array<InOutChannelPair>}} layoutListToArray (\textcolor{keyword}{const} std::initializer\_list<\textcolor{keyword}{const} \textcolor{keywordtype}{short}[2]>\& configuration)}
+\DoxyCodeLine{1447     \{}
+\DoxyCodeLine{1448         \mbox{\hyperlink{class_array}{Array<InOutChannelPair>}} layouts;}
+\DoxyCodeLine{1449 }
+\DoxyCodeLine{1450         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}\&\& i : configuration)}
+\DoxyCodeLine{1451             layouts.\mbox{\hyperlink{class_array_a52da22e285e44171b6d6fa785a7d536a}{add}} (InOutChannelPair (i));}
+\DoxyCodeLine{1452 }
+\DoxyCodeLine{1453         \textcolor{keywordflow}{return} layouts;}
+\DoxyCodeLine{1454     \}}
+\DoxyCodeLine{1455 }
+\DoxyCodeLine{1456     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1457     \textcolor{keyword}{static} BusesProperties busesPropertiesFromLayoutArray (\textcolor{keyword}{const} \mbox{\hyperlink{class_array}{Array<InOutChannelPair>}}\&);}
+\DoxyCodeLine{1458 }
+\DoxyCodeLine{1459     BusesLayout getNextBestLayoutInList (\textcolor{keyword}{const} BusesLayout\&, \textcolor{keyword}{const} \mbox{\hyperlink{class_array}{Array<InOutChannelPair>}}\&) \textcolor{keyword}{const};}
+\DoxyCodeLine{1460     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} containsLayout (\textcolor{keyword}{const} BusesLayout\&, \textcolor{keyword}{const} \mbox{\hyperlink{class_array}{Array<InOutChannelPair>}}\&);}
+\DoxyCodeLine{1461 }
+\DoxyCodeLine{1462     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1463     \textcolor{keywordtype}{void} createBus (\textcolor{keywordtype}{bool} isInput, \textcolor{keyword}{const} BusProperties\&);}
+\DoxyCodeLine{1464 }
+\DoxyCodeLine{1465     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1466     \mbox{\hyperlink{class_array}{Array<AudioProcessorListener*>}} listeners;}
+\DoxyCodeLine{1467     \mbox{\hyperlink{class_component_1_1_safe_pointer}{Component::SafePointer<AudioProcessorEditor>}} activeEditor;}
+\DoxyCodeLine{1468     \textcolor{keywordtype}{double} currentSampleRate = 0;}
+\DoxyCodeLine{1469     \textcolor{keywordtype}{int} blockSize = 0, latencySamples = 0;}
+\DoxyCodeLine{1470     \textcolor{keywordtype}{bool} suspended = \textcolor{keyword}{false};}
+\DoxyCodeLine{1471     std::atomic<bool> nonRealtime \{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{1472     ProcessingPrecision processingPrecision = singlePrecision;}
+\DoxyCodeLine{1473     \mbox{\hyperlink{class_critical_section}{CriticalSection}} callbackLock, listenerLock, activeEditorLock;}
+\DoxyCodeLine{1474 }
+\DoxyCodeLine{1475     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{class_audio_processor_1_1_bus}{Bus}};}
+\DoxyCodeLine{1476     \textcolor{keyword}{mutable} \mbox{\hyperlink{class_owned_array}{OwnedArray<Bus>}} inputBuses, outputBuses;}
+\DoxyCodeLine{1477 }
+\DoxyCodeLine{1478     \mbox{\hyperlink{class_string}{String}} cachedInputSpeakerArrString, cachedOutputSpeakerArrString;}
+\DoxyCodeLine{1479     \textcolor{keywordtype}{int} cachedTotalIns = 0, cachedTotalOuts = 0;}
+\DoxyCodeLine{1480 }
+\DoxyCodeLine{1481     \mbox{\hyperlink{class_audio_processor_parameter_group}{AudioProcessorParameterGroup}} parameterTree;}
+\DoxyCodeLine{1482     \mbox{\hyperlink{class_array}{Array<AudioProcessorParameter*>}} flatParameterList;}
+\DoxyCodeLine{1483 }
+\DoxyCodeLine{1484     \mbox{\hyperlink{class_audio_processor_parameter}{AudioProcessorParameter}}* getParamChecked (\textcolor{keywordtype}{int}) \textcolor{keyword}{const};}
+\DoxyCodeLine{1485 }
+\DoxyCodeLine{1486 \textcolor{preprocessor}{  \#if JUCE\_DEBUG}}
+\DoxyCodeLine{1487 \textcolor{preprocessor}{   \#if ! JUCE\_DISABLE\_AUDIOPROCESSOR\_BEGIN\_END\_GESTURE\_CHECKING}}
+\DoxyCodeLine{1488     \mbox{\hyperlink{class_big_integer}{BigInteger}} changingParams;}
+\DoxyCodeLine{1489 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{1490 }
+\DoxyCodeLine{1491     \textcolor{keywordtype}{bool} textRecursionCheck = \textcolor{keyword}{false};}
+\DoxyCodeLine{1492     std::unordered\_set<String> paramIDs, groupIDs;}
+\DoxyCodeLine{1493 \textcolor{preprocessor}{   \#if ! JUCE\_DISABLE\_CAUTIOUS\_PARAMETER\_ID\_CHECKING}}
+\DoxyCodeLine{1494     std::unordered\_set<String> trimmedParamIDs;}
+\DoxyCodeLine{1495 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{1496 \textcolor{preprocessor}{  \#endif}}
+\DoxyCodeLine{1497 }
+\DoxyCodeLine{1498     \textcolor{keywordtype}{void} checkForDuplicateTrimmedParamID (\mbox{\hyperlink{class_audio_processor_parameter}{AudioProcessorParameter}}*);}
+\DoxyCodeLine{1499     \textcolor{keywordtype}{void} checkForUnsafeParamID (\mbox{\hyperlink{class_audio_processor_parameter}{AudioProcessorParameter}}*);}
+\DoxyCodeLine{1500     \textcolor{keywordtype}{void} checkForDuplicateParamID (\mbox{\hyperlink{class_audio_processor_parameter}{AudioProcessorParameter}}*);}
+\DoxyCodeLine{1501     \textcolor{keywordtype}{void} checkForDuplicateGroupIDs (\textcolor{keyword}{const} \mbox{\hyperlink{class_audio_processor_parameter_group}{AudioProcessorParameterGroup}}\&);}
+\DoxyCodeLine{1502 }
+\DoxyCodeLine{1503     \mbox{\hyperlink{class_audio_processor_listener}{AudioProcessorListener}}* getListenerLocked (\textcolor{keywordtype}{int}) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{1504     \textcolor{keywordtype}{void} updateSpeakerFormatStrings();}
+\DoxyCodeLine{1505     \textcolor{keywordtype}{void} audioIOChanged (\textcolor{keywordtype}{bool} busNumberChanged, \textcolor{keywordtype}{bool} channelNumChanged);}
+\DoxyCodeLine{1506     \textcolor{keywordtype}{void} getNextBestLayout (\textcolor{keyword}{const} \mbox{\hyperlink{struct_audio_processor_1_1_buses_layout}{BusesLayout}}\&, \mbox{\hyperlink{struct_audio_processor_1_1_buses_layout}{BusesLayout}}\&) \textcolor{keyword}{const};}
+\DoxyCodeLine{1507 }
+\DoxyCodeLine{1508     \textcolor{keyword}{template} <\textcolor{keyword}{typename} \textcolor{keywordtype}{float}Type>}
+\DoxyCodeLine{1509     \textcolor{keywordtype}{void} processBypassed (\mbox{\hyperlink{class_audio_buffer}{AudioBuffer<floatType>}}\&, \mbox{\hyperlink{class_midi_buffer}{MidiBuffer}}\&);}
+\DoxyCodeLine{1510 }
+\DoxyCodeLine{1511     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{class_audio_processor_parameter}{AudioProcessorParameter}};}
+\DoxyCodeLine{1512     \textcolor{keyword}{friend} \textcolor{keyword}{class }LADSPAPluginInstance;}
+\DoxyCodeLine{1513 }
+\DoxyCodeLine{1514     [[deprecated (\textcolor{stringliteral}{"{}This method is no longer used -\/ you can delete it from your AudioProcessor classes."{}})]]}
+\DoxyCodeLine{1515     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} silenceInProducesSilenceOut()\textcolor{keyword}{ const  }\{ \textcolor{keywordflow}{return} \textcolor{keyword}{false}; \}}
+\DoxyCodeLine{1516 }
+\DoxyCodeLine{1517     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_audio_processor}{AudioProcessor}})}
+\DoxyCodeLine{1518 \};}
+\DoxyCodeLine{1519 }
+\DoxyCodeLine{1520  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{1521 }
+
+\end{DoxyCode}

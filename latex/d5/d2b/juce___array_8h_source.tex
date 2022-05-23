@@ -1,0 +1,706 @@
+\hypertarget{juce___array_8h_source}{}\doxysection{juce\+\_\+\+Array.\+h}
+\label{juce___array_8h_source}\index{build/juce\_core/containers/juce\_Array.h@{build/juce\_core/containers/juce\_Array.h}}
+\mbox{\hyperlink{juce___array_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{53 \textcolor{comment}{}\textcolor{keyword}{template} <\textcolor{keyword}{typename} ElementType,}
+\DoxyCodeLine{54           \textcolor{keyword}{typename} TypeOfCriticalSectionToUse = \mbox{\hyperlink{class_dummy_critical_section}{DummyCriticalSection}},}
+\DoxyCodeLine{55           \textcolor{keywordtype}{int} minimumAllocatedSize = 0>}
+\DoxyCodeLine{56 \textcolor{keyword}{class }\mbox{\hyperlink{class_array}{Array}}}
+\DoxyCodeLine{57 \{}
+\DoxyCodeLine{58 \textcolor{keyword}{private}:}
+\DoxyCodeLine{59     \textcolor{keyword}{using} ParameterType = \textcolor{keyword}{typename} \mbox{\hyperlink{struct_type_helpers_1_1_parameter_type_ad57e75d9eb3f3f675b9156c3850636a6}{TypeHelpers::ParameterType<ElementType>::type}};}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61 \textcolor{keyword}{public}:}
+\DoxyCodeLine{62     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{64 \textcolor{comment}{}    \mbox{\hyperlink{class_array_ab1d9ca52e1b69cc8dc27702f3f761f95}{Array}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{69     \mbox{\hyperlink{class_array_a73bffe8f1dc3c01078a300428703daaa}{Array}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_array}{Array}}\& other)}
+\DoxyCodeLine{70     \{}
+\DoxyCodeLine{71         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (other.\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{72         values.addArray (other.values.begin(), other.values.size());}
+\DoxyCodeLine{73     \}}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75     \mbox{\hyperlink{class_array_a7b91e5a4297e1beabd2189763908458a}{Array}} (\mbox{\hyperlink{class_array}{Array}}\&\& other) noexcept}
+\DoxyCodeLine{76         : values (\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (other.values))}
+\DoxyCodeLine{77     \{}
+\DoxyCodeLine{78     \}}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{83     \textcolor{keyword}{template} <\textcolor{keyword}{typename} TypeToCreateFrom>}
+\DoxyCodeLine{84     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_array_a4906475196d568102d5fb99dd37b95c5}{Array}} (\textcolor{keyword}{const} TypeToCreateFrom* \mbox{\hyperlink{class_array_ac21432f6172f3fc5b3bfcf5e9dec6b32}{data}})}
+\DoxyCodeLine{85     \{}
+\DoxyCodeLine{86         \textcolor{keywordflow}{while} (*values != TypeToCreateFrom())}
+\DoxyCodeLine{87             \mbox{\hyperlink{class_array_a52da22e285e44171b6d6fa785a7d536a}{add}} (*\mbox{\hyperlink{class_array_ac21432f6172f3fc5b3bfcf5e9dec6b32}{data}}++);}
+\DoxyCodeLine{88     \}}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{94     \textcolor{keyword}{template} <\textcolor{keyword}{typename} TypeToCreateFrom>}
+\DoxyCodeLine{95     \mbox{\hyperlink{class_array_abbe29739db85990445aa6a13e8a72e1e}{Array}} (\textcolor{keyword}{const} TypeToCreateFrom* \mbox{\hyperlink{class_array_ac21432f6172f3fc5b3bfcf5e9dec6b32}{data}}, \textcolor{keywordtype}{int} numValues)}
+\DoxyCodeLine{96     \{}
+\DoxyCodeLine{97         values.addArray (\mbox{\hyperlink{class_array_ac21432f6172f3fc5b3bfcf5e9dec6b32}{data}}, numValues);}
+\DoxyCodeLine{98     \}}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{101     \mbox{\hyperlink{class_array_a5047a5b795c424ce68e0cc6b3b871a22}{Array}} (\textcolor{keyword}{const} ElementType\& singleElementToAdd)}
+\DoxyCodeLine{102     \{}
+\DoxyCodeLine{103         \mbox{\hyperlink{class_array_a52da22e285e44171b6d6fa785a7d536a}{add}} (singleElementToAdd);}
+\DoxyCodeLine{104     \}}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{107     \mbox{\hyperlink{class_array_ad289f5f351935d282de81167a689c8a4}{Array}} (ElementType\&\& singleElementToAdd)}
+\DoxyCodeLine{108     \{}
+\DoxyCodeLine{109         \mbox{\hyperlink{class_array_a52da22e285e44171b6d6fa785a7d536a}{add}} (\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (singleElementToAdd));}
+\DoxyCodeLine{110     \}}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{113     \textcolor{keyword}{template} <\textcolor{keyword}{typename}... OtherElements>}
+\DoxyCodeLine{114     \mbox{\hyperlink{class_array_ae658b3779a97249805c7f5045bff1e0d}{Array}} (\textcolor{keyword}{const} ElementType\& firstNewElement, OtherElements\&\&... otherElements)}
+\DoxyCodeLine{115     \{}
+\DoxyCodeLine{116         values.add (firstNewElement, std::forward<OtherElements> (otherElements)...);}
+\DoxyCodeLine{117     \}}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{120     \textcolor{keyword}{template} <\textcolor{keyword}{typename}... OtherElements>}
+\DoxyCodeLine{121     \mbox{\hyperlink{class_array_a168f2c1672dd0806573ff1ce28abd9f7}{Array}} (ElementType\&\& firstNewElement, OtherElements\&\&... otherElements)}
+\DoxyCodeLine{122     \{}
+\DoxyCodeLine{123         values.add (\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (firstNewElement), std::forward<OtherElements> (otherElements)...);}
+\DoxyCodeLine{124     \}}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126     \textcolor{keyword}{template} <\textcolor{keyword}{typename} TypeToCreateFrom>}
+\DoxyCodeLine{127     \mbox{\hyperlink{class_array_aca95e27784b27bea22d931fd21dd3141}{Array}} (\textcolor{keyword}{const} std::initializer\_list<TypeToCreateFrom>\& items)}
+\DoxyCodeLine{128     \{}
+\DoxyCodeLine{129         \mbox{\hyperlink{class_array_a3cb98449214bf8993d64dd06c33133eb}{addArray}} (items);}
+\DoxyCodeLine{130     \}}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{133     \mbox{\hyperlink{class_array_a21d72c448039c2f4eb2b665c93379619}{\string~Array}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{138     \mbox{\hyperlink{class_array}{Array}}\& \mbox{\hyperlink{class_array_ad9e76f102121a0f12bc459c6220b06b2}{operator= }}(\textcolor{keyword}{const} \mbox{\hyperlink{class_array}{Array}}\& other)}
+\DoxyCodeLine{139     \{}
+\DoxyCodeLine{140         \textcolor{keywordflow}{if} (\textcolor{keyword}{this} != \&other)}
+\DoxyCodeLine{141         \{}
+\DoxyCodeLine{142             \textcolor{keyword}{auto} otherCopy (other);}
+\DoxyCodeLine{143             \mbox{\hyperlink{class_array_a921a70882553967e2998beeb30d99f83}{swapWith}} (otherCopy);}
+\DoxyCodeLine{144         \}}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{146         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{147     \}}
+\DoxyCodeLine{148 }
+\DoxyCodeLine{149     \mbox{\hyperlink{class_array}{Array}}\& \mbox{\hyperlink{class_array_ad9e76f102121a0f12bc459c6220b06b2}{operator= }}(\mbox{\hyperlink{class_array}{Array}}\&\& other) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{150     \{}
+\DoxyCodeLine{151         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{152         values = \mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (other.values);}
+\DoxyCodeLine{153         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{154     \}}
+\DoxyCodeLine{155 }
+\DoxyCodeLine{156     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{162 \textcolor{comment}{}    \textcolor{keyword}{template} <\textcolor{keyword}{class} OtherArrayType>}
+\DoxyCodeLine{163     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_array_a37f79b96f5c24b20428f8cfc616b4e9b}{operator== }}(\textcolor{keyword}{const} OtherArrayType\& other)\textcolor{keyword}{ const}}
+\DoxyCodeLine{164 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{165         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{166         \textcolor{keyword}{const} \textcolor{keyword}{typename} OtherArrayType::ScopedLockType lock2 (other.getLock());}
+\DoxyCodeLine{167         \textcolor{keywordflow}{return} values == other;}
+\DoxyCodeLine{168     \}}
+\DoxyCodeLine{169 }
+\DoxyCodeLine{175     \textcolor{keyword}{template} <\textcolor{keyword}{class} OtherArrayType>}
+\DoxyCodeLine{176     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_array_aeb72713c3b2e32beb7488ea6ae72ab88}{operator!= }}(\textcolor{keyword}{const} OtherArrayType\& other)\textcolor{keyword}{ const}}
+\DoxyCodeLine{177 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{178         \textcolor{keywordflow}{return} ! \mbox{\hyperlink{class_array_a37f79b96f5c24b20428f8cfc616b4e9b}{operator== }}(other);}
+\DoxyCodeLine{179     \}}
+\DoxyCodeLine{180 }
+\DoxyCodeLine{181     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{189 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_a86dc5fe378bb99b85beb8ab86c279654}{clear}}()}
+\DoxyCodeLine{190     \{}
+\DoxyCodeLine{191         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{192         \mbox{\hyperlink{class_array_a96bcb7013ec2d56da8b918da7fc0809c}{clearQuick}}();}
+\DoxyCodeLine{193         values.setAllocatedSize (0);}
+\DoxyCodeLine{194     \}}
+\DoxyCodeLine{195 }
+\DoxyCodeLine{199     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_a96bcb7013ec2d56da8b918da7fc0809c}{clearQuick}}()}
+\DoxyCodeLine{200     \{}
+\DoxyCodeLine{201         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{202         values.clear();}
+\DoxyCodeLine{203     \}}
+\DoxyCodeLine{204 }
+\DoxyCodeLine{206     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_ad00bf412578e2730347a112b58d3ccba}{fill}} (\textcolor{keyword}{const} ParameterType\& newValue) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{207     \{}
+\DoxyCodeLine{208         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{209 }
+\DoxyCodeLine{210         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}\& e : *\textcolor{keyword}{this})}
+\DoxyCodeLine{211             e = newValue;}
+\DoxyCodeLine{212     \}}
+\DoxyCodeLine{213 }
+\DoxyCodeLine{214     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{216 \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_array_ae79ec3b32d0c9a80dfff8ffbc41f8523}{size}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{217     \{}
+\DoxyCodeLine{218         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{219         \textcolor{keywordflow}{return} values.size();}
+\DoxyCodeLine{220     \}}
+\DoxyCodeLine{221 }
+\DoxyCodeLine{223     \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_array_a1abb3c832ea321cca9a4a0d9d3883c27}{isEmpty}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{224     \{}
+\DoxyCodeLine{225         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_array_ae79ec3b32d0c9a80dfff8ffbc41f8523}{size}}() == 0;}
+\DoxyCodeLine{226     \}}
+\DoxyCodeLine{227 }
+\DoxyCodeLine{238     ElementType \mbox{\hyperlink{class_array_ac6e3df46508c04f379641a436213c078}{operator[] }}(\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}})\textcolor{keyword}{ const}}
+\DoxyCodeLine{239 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{240         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{241         \textcolor{keywordflow}{return} values.getValueWithDefault (\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}});}
+\DoxyCodeLine{242     \}}
+\DoxyCodeLine{243 }
+\DoxyCodeLine{253     \textcolor{keyword}{inline} ElementType \mbox{\hyperlink{class_array_a0e36fd4f8eda27d10a7044a8fa8a2ae4}{getUnchecked}} (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}})\textcolor{keyword}{ const}}
+\DoxyCodeLine{254 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{255         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{256         \textcolor{keywordflow}{return} values[\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}];}
+\DoxyCodeLine{257     \}}
+\DoxyCodeLine{258 }
+\DoxyCodeLine{268     \textcolor{keyword}{inline} ElementType\& \mbox{\hyperlink{class_array_a56b441ad9d0ea576318120cd0088d2f2}{getReference}} (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{269     \{}
+\DoxyCodeLine{270         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{271         \textcolor{keywordflow}{return} values[\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}];}
+\DoxyCodeLine{272     \}}
+\DoxyCodeLine{273 }
+\DoxyCodeLine{282     \textcolor{keyword}{inline} \textcolor{keyword}{const} ElementType\& \mbox{\hyperlink{class_array_ab98250df3d8e095c46f7072383cf0dda}{getReference}} (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{283     \{}
+\DoxyCodeLine{284         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{285         \textcolor{keywordflow}{return} values[\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}];}
+\DoxyCodeLine{286     \}}
+\DoxyCodeLine{287 }
+\DoxyCodeLine{291     \textcolor{keyword}{inline} ElementType \mbox{\hyperlink{class_array_af1ce5b4b9a3a17638d3504ab926e3c9c}{getFirst}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{292     \{}
+\DoxyCodeLine{293         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{294         \textcolor{keywordflow}{return} values.getFirst();}
+\DoxyCodeLine{295     \}}
+\DoxyCodeLine{296 }
+\DoxyCodeLine{301     \textcolor{keyword}{inline} ElementType \mbox{\hyperlink{class_array_a1a7002d374da13bfbc5a0703763021cd}{getLast}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{302     \{}
+\DoxyCodeLine{303         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{304         \textcolor{keywordflow}{return} values.getLast();}
+\DoxyCodeLine{305     \}}
+\DoxyCodeLine{306 }
+\DoxyCodeLine{311     \textcolor{keyword}{inline} ElementType* \mbox{\hyperlink{class_array_a72183f1a9e7eac684ce85bf5760c7173}{getRawDataPointer}}() noexcept}
+\DoxyCodeLine{312     \{}
+\DoxyCodeLine{313         \textcolor{keywordflow}{return} values.begin();}
+\DoxyCodeLine{314     \}}
+\DoxyCodeLine{315 }
+\DoxyCodeLine{320     \textcolor{keyword}{inline} \textcolor{keyword}{const} ElementType* \mbox{\hyperlink{class_array_a7565f522293ce2f8b63272c3d015f7ad}{getRawDataPointer}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{321     \{}
+\DoxyCodeLine{322         \textcolor{keywordflow}{return} values.begin();}
+\DoxyCodeLine{323     \}}
+\DoxyCodeLine{324 }
+\DoxyCodeLine{325     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{329 \textcolor{comment}{}    \textcolor{keyword}{inline} ElementType* \mbox{\hyperlink{class_array_a8183087614c341bce3903a2f425d2557}{begin}}() noexcept}
+\DoxyCodeLine{330     \{}
+\DoxyCodeLine{331         \textcolor{keywordflow}{return} values.begin();}
+\DoxyCodeLine{332     \}}
+\DoxyCodeLine{333 }
+\DoxyCodeLine{337     \textcolor{keyword}{inline} \textcolor{keyword}{const} ElementType* \mbox{\hyperlink{class_array_a084f7aa9d90347874a8b50ad360b8e9c}{begin}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{338     \{}
+\DoxyCodeLine{339         \textcolor{keywordflow}{return} values.begin();}
+\DoxyCodeLine{340     \}}
+\DoxyCodeLine{341 }
+\DoxyCodeLine{345     \textcolor{keyword}{inline} ElementType* \mbox{\hyperlink{class_array_a27e3dcdc4f936e0cc3d7290dbfd25a5c}{end}}() noexcept}
+\DoxyCodeLine{346     \{}
+\DoxyCodeLine{347         \textcolor{keywordflow}{return} values.end();}
+\DoxyCodeLine{348     \}}
+\DoxyCodeLine{349 }
+\DoxyCodeLine{353     \textcolor{keyword}{inline} \textcolor{keyword}{const} ElementType* \mbox{\hyperlink{class_array_aa5e73860df9b229e3775db066edd72ba}{end}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{354     \{}
+\DoxyCodeLine{355         \textcolor{keywordflow}{return} values.end();}
+\DoxyCodeLine{356     \}}
+\DoxyCodeLine{357 }
+\DoxyCodeLine{361     \textcolor{keyword}{inline} ElementType* \mbox{\hyperlink{class_array_ac21432f6172f3fc5b3bfcf5e9dec6b32}{data}}() noexcept}
+\DoxyCodeLine{362     \{}
+\DoxyCodeLine{363         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_array_a8183087614c341bce3903a2f425d2557}{begin}}();}
+\DoxyCodeLine{364     \}}
+\DoxyCodeLine{365 }
+\DoxyCodeLine{369     \textcolor{keyword}{inline} \textcolor{keyword}{const} ElementType* \mbox{\hyperlink{class_array_a98e69724fe23b3958e4f534b477bc888}{data}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{370     \{}
+\DoxyCodeLine{371         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_array_a8183087614c341bce3903a2f425d2557}{begin}}();}
+\DoxyCodeLine{372     \}}
+\DoxyCodeLine{373 }
+\DoxyCodeLine{374     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{383 \textcolor{comment}{}    \textcolor{keywordtype}{int} \mbox{\hyperlink{class_array_a77dd097ed2af62ac2663d90fdb2d71d6}{indexOf}} (ParameterType elementToLookFor)\textcolor{keyword}{ const}}
+\DoxyCodeLine{384 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{385         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{386         \textcolor{keyword}{auto} e = values.begin();}
+\DoxyCodeLine{387         \textcolor{keyword}{auto} endPtr = values.end();}
+\DoxyCodeLine{388 }
+\DoxyCodeLine{389         \textcolor{keywordflow}{for} (; e != endPtr; ++e)}
+\DoxyCodeLine{390             \textcolor{keywordflow}{if} (elementToLookFor == *e)}
+\DoxyCodeLine{391                 \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>} (e -\/ values.begin());}
+\DoxyCodeLine{392 }
+\DoxyCodeLine{393         \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{394     \}}
+\DoxyCodeLine{395 }
+\DoxyCodeLine{401     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_array_a947c542225413c51e06b46cd300bcd9a}{contains}} (ParameterType elementToLookFor)\textcolor{keyword}{ const}}
+\DoxyCodeLine{402 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{403         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{404         \textcolor{keyword}{auto} e = values.begin();}
+\DoxyCodeLine{405         \textcolor{keyword}{auto} endPtr = values.end();}
+\DoxyCodeLine{406 }
+\DoxyCodeLine{407         \textcolor{keywordflow}{for} (; e != endPtr; ++e)}
+\DoxyCodeLine{408             \textcolor{keywordflow}{if} (elementToLookFor == *e)}
+\DoxyCodeLine{409                 \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{410 }
+\DoxyCodeLine{411         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{412     \}}
+\DoxyCodeLine{413 }
+\DoxyCodeLine{414     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{419 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_a52da22e285e44171b6d6fa785a7d536a}{add}} (\textcolor{keyword}{const} ElementType\& newElement)}
+\DoxyCodeLine{420     \{}
+\DoxyCodeLine{421         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{422         values.add (newElement);}
+\DoxyCodeLine{423     \}}
+\DoxyCodeLine{424 }
+\DoxyCodeLine{429     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_ae81ab0d9abbd36bf4aab593c255eef38}{add}} (ElementType\&\& newElement)}
+\DoxyCodeLine{430     \{}
+\DoxyCodeLine{431         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{432         values.add (\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (newElement));}
+\DoxyCodeLine{433     \}}
+\DoxyCodeLine{434 }
+\DoxyCodeLine{436     \textcolor{keyword}{template} <\textcolor{keyword}{typename}... OtherElements>}
+\DoxyCodeLine{437     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_a142897a460ceb0c5267fd14af58d8f2e}{add}} (\textcolor{keyword}{const} ElementType\& firstNewElement, OtherElements\&\&... otherElements)}
+\DoxyCodeLine{438     \{}
+\DoxyCodeLine{439         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{440         values.add (firstNewElement, std::forward<OtherElements> (otherElements)...);}
+\DoxyCodeLine{441     \}}
+\DoxyCodeLine{442 }
+\DoxyCodeLine{444     \textcolor{keyword}{template} <\textcolor{keyword}{typename}... OtherElements>}
+\DoxyCodeLine{445     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_a948a06504bfea8e5179ab2ff797de326}{add}} (ElementType\&\& firstNewElement, OtherElements\&\&... otherElements)}
+\DoxyCodeLine{446     \{}
+\DoxyCodeLine{447         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{448         values.add (\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (firstNewElement), std::forward<OtherElements> (otherElements)...);}
+\DoxyCodeLine{449     \}}
+\DoxyCodeLine{450 }
+\DoxyCodeLine{463     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_aef96810c21931d9676c08cad82de45c7}{insert}} (\textcolor{keywordtype}{int} indexToInsertAt, ParameterType newElement)}
+\DoxyCodeLine{464     \{}
+\DoxyCodeLine{465         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{466         values.insert (indexToInsertAt, newElement, 1);}
+\DoxyCodeLine{467     \}}
+\DoxyCodeLine{468 }
+\DoxyCodeLine{481     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_a0cadf83bcfba696c6a4adc15f4e0a78f}{insertMultiple}} (\textcolor{keywordtype}{int} indexToInsertAt, ParameterType newElement,}
+\DoxyCodeLine{482                          \textcolor{keywordtype}{int} numberOfTimesToInsertIt)}
+\DoxyCodeLine{483     \{}
+\DoxyCodeLine{484         \textcolor{keywordflow}{if} (numberOfTimesToInsertIt > 0)}
+\DoxyCodeLine{485         \{}
+\DoxyCodeLine{486             \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{487             values.insert (indexToInsertAt, newElement, numberOfTimesToInsertIt);}
+\DoxyCodeLine{488         \}}
+\DoxyCodeLine{489     \}}
+\DoxyCodeLine{490 }
+\DoxyCodeLine{503     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_acb0477221ce1538611a9fcd84028b387}{insertArray}} (\textcolor{keywordtype}{int} indexToInsertAt,}
+\DoxyCodeLine{504                       \textcolor{keyword}{const} ElementType* newElements,}
+\DoxyCodeLine{505                       \textcolor{keywordtype}{int} numberOfElements)}
+\DoxyCodeLine{506     \{}
+\DoxyCodeLine{507         \textcolor{keywordflow}{if} (numberOfElements > 0)}
+\DoxyCodeLine{508         \{}
+\DoxyCodeLine{509             \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{510             values.insertArray (indexToInsertAt, newElements, numberOfElements);}
+\DoxyCodeLine{511         \}}
+\DoxyCodeLine{512     \}}
+\DoxyCodeLine{513 }
+\DoxyCodeLine{523     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_array_a41d110cdb239af70fa8416cb8a430a03}{addIfNotAlreadyThere}} (ParameterType newElement)}
+\DoxyCodeLine{524     \{}
+\DoxyCodeLine{525         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{526 }
+\DoxyCodeLine{527         \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_array_a947c542225413c51e06b46cd300bcd9a}{contains}} (newElement))}
+\DoxyCodeLine{528             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{529 }
+\DoxyCodeLine{530         \mbox{\hyperlink{class_array_a52da22e285e44171b6d6fa785a7d536a}{add}} (newElement);}
+\DoxyCodeLine{531         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{532     \}}
+\DoxyCodeLine{533 }
+\DoxyCodeLine{543     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_a3eb4d3f8301b65d0b41aadcf08b614a5}{set}} (\textcolor{keywordtype}{int} indexToChange, ParameterType newValue)}
+\DoxyCodeLine{544     \{}
+\DoxyCodeLine{545         \textcolor{keywordflow}{if} (indexToChange >= 0)}
+\DoxyCodeLine{546         \{}
+\DoxyCodeLine{547             \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{548 }
+\DoxyCodeLine{549             \textcolor{keywordflow}{if} (indexToChange < values.size())}
+\DoxyCodeLine{550                 values[indexToChange] = newValue;}
+\DoxyCodeLine{551             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{552                 values.add (newValue);}
+\DoxyCodeLine{553         \}}
+\DoxyCodeLine{554         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{555         \{}
+\DoxyCodeLine{556             \mbox{\hyperlink{group__juce__core-system_gadc044ce5efecbecf2f5a44cd00db67b3}{jassertfalse}};}
+\DoxyCodeLine{557         \}}
+\DoxyCodeLine{558     \}}
+\DoxyCodeLine{559 }
+\DoxyCodeLine{569     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_a9640d5b3c6e2cc9b812c26ba7690cfe9}{setUnchecked}} (\textcolor{keywordtype}{int} indexToChange, ParameterType newValue)}
+\DoxyCodeLine{570     \{}
+\DoxyCodeLine{571         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{572         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (\mbox{\hyperlink{group__juce__core-maths_ga5762396fe2a5aa4c39b68ee5b70a96f8}{isPositiveAndBelow}} (indexToChange, values.size()));}
+\DoxyCodeLine{573         values[indexToChange] = newValue;}
+\DoxyCodeLine{574     \}}
+\DoxyCodeLine{575 }
+\DoxyCodeLine{583     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type>}
+\DoxyCodeLine{584     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_a3cb98449214bf8993d64dd06c33133eb}{addArray}} (\textcolor{keyword}{const} Type* elementsToAdd, \textcolor{keywordtype}{int} numElementsToAdd)}
+\DoxyCodeLine{585     \{}
+\DoxyCodeLine{586         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{587 }
+\DoxyCodeLine{588         \textcolor{keywordflow}{if} (numElementsToAdd > 0)}
+\DoxyCodeLine{589             values.addArray (elementsToAdd, numElementsToAdd);}
+\DoxyCodeLine{590     \}}
+\DoxyCodeLine{591 }
+\DoxyCodeLine{592     \textcolor{keyword}{template} <\textcolor{keyword}{typename} TypeToCreateFrom>}
+\DoxyCodeLine{593     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_a1dfc3af39d920424b645b40e2bb8cf05}{addArray}} (\textcolor{keyword}{const} std::initializer\_list<TypeToCreateFrom>\& items)}
+\DoxyCodeLine{594     \{}
+\DoxyCodeLine{595         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{596         values.addArray (items);}
+\DoxyCodeLine{597     \}}
+\DoxyCodeLine{598 }
+\DoxyCodeLine{605     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type>}
+\DoxyCodeLine{606     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_a9dbaaaeea2b8e6ab7eede5c3f080adf8}{addNullTerminatedArray}} (\textcolor{keyword}{const} Type* \textcolor{keyword}{const}* elementsToAdd)}
+\DoxyCodeLine{607     \{}
+\DoxyCodeLine{608         \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_aaed5c28b6e2fe572794fada7bfb4862c}{num}} = 0;}
+\DoxyCodeLine{609 }
+\DoxyCodeLine{610         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} e = elementsToAdd; *e != \textcolor{keyword}{nullptr}; ++e)}
+\DoxyCodeLine{611             ++\mbox{\hyperlink{namespacegl_aaed5c28b6e2fe572794fada7bfb4862c}{num}};}
+\DoxyCodeLine{612 }
+\DoxyCodeLine{613         \mbox{\hyperlink{class_array_a3cb98449214bf8993d64dd06c33133eb}{addArray}} (elementsToAdd, \mbox{\hyperlink{namespacegl_aaed5c28b6e2fe572794fada7bfb4862c}{num}});}
+\DoxyCodeLine{614     \}}
+\DoxyCodeLine{615 }
+\DoxyCodeLine{621     \textcolor{keyword}{template} <\textcolor{keyword}{class} OtherArrayType>}
+\DoxyCodeLine{622     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_a921a70882553967e2998beeb30d99f83}{swapWith}} (OtherArrayType\& otherArray) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{623     \{}
+\DoxyCodeLine{624         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock1 (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{625         \textcolor{keyword}{const} \textcolor{keyword}{typename} OtherArrayType::ScopedLockType lock2 (otherArray.getLock());}
+\DoxyCodeLine{626         values.swapWith (otherArray.values);}
+\DoxyCodeLine{627     \}}
+\DoxyCodeLine{628 }
+\DoxyCodeLine{634     \textcolor{keyword}{template} <\textcolor{keyword}{class} OtherArrayType>}
+\DoxyCodeLine{635     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_ac36a8e230f0d01ca02148c24fb672166}{addArray}} (\textcolor{keyword}{const} OtherArrayType\& arrayToAddFrom)}
+\DoxyCodeLine{636     \{}
+\DoxyCodeLine{637         \textcolor{keyword}{const} \textcolor{keyword}{typename} OtherArrayType::ScopedLockType lock1 (arrayToAddFrom.getLock());}
+\DoxyCodeLine{638         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock2 (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{639 }
+\DoxyCodeLine{640         values.addArray (arrayToAddFrom);}
+\DoxyCodeLine{641     \}}
+\DoxyCodeLine{642 }
+\DoxyCodeLine{652     \textcolor{keyword}{template} <\textcolor{keyword}{class} OtherArrayType>}
+\DoxyCodeLine{653     \textcolor{keyword}{typename} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{std::enable\_if<! std::is\_pointer<OtherArrayType>::value}}, \textcolor{keywordtype}{void}>\mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{::type}}}
+\DoxyCodeLine{654     \mbox{\hyperlink{class_array_a683c7cdc45c8b515a74967435355561a}{addArray}} (\textcolor{keyword}{const} OtherArrayType\& arrayToAddFrom,}
+\DoxyCodeLine{655               \textcolor{keywordtype}{int} startIndex,}
+\DoxyCodeLine{656               \textcolor{keywordtype}{int} numElementsToAdd = -\/1)}
+\DoxyCodeLine{657     \{}
+\DoxyCodeLine{658         \textcolor{keyword}{const} \textcolor{keyword}{typename} OtherArrayType::ScopedLockType lock1 (arrayToAddFrom.getLock());}
+\DoxyCodeLine{659         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock2 (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{660 }
+\DoxyCodeLine{661         values.addArray (arrayToAddFrom, startIndex, numElementsToAdd);}
+\DoxyCodeLine{662     \}}
+\DoxyCodeLine{663 }
+\DoxyCodeLine{671     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_ade015d02494b59f2e8e7600f136c09af}{resize}} (\textcolor{keywordtype}{int} targetNumItems)}
+\DoxyCodeLine{672     \{}
+\DoxyCodeLine{673         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (targetNumItems >= 0);}
+\DoxyCodeLine{674         \textcolor{keyword}{auto} numToAdd = targetNumItems -\/ values.size();}
+\DoxyCodeLine{675 }
+\DoxyCodeLine{676         \textcolor{keywordflow}{if} (numToAdd > 0)}
+\DoxyCodeLine{677             \mbox{\hyperlink{class_array_a0cadf83bcfba696c6a4adc15f4e0a78f}{insertMultiple}} (values.size(), ElementType(), numToAdd);}
+\DoxyCodeLine{678         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (numToAdd < 0)}
+\DoxyCodeLine{679             \mbox{\hyperlink{class_array_ae9f26706cc40ce178424b2b4ba1f9647}{removeRange}} (targetNumItems, -\/numToAdd);}
+\DoxyCodeLine{680     \}}
+\DoxyCodeLine{681 }
+\DoxyCodeLine{694     \textcolor{keyword}{template} <\textcolor{keyword}{class} ElementComparator>}
+\DoxyCodeLine{695     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_array_afc5417019f110034658b3c1c02af5a5e}{addSorted}} (ElementComparator\& comparator, ParameterType newElement)}
+\DoxyCodeLine{696     \{}
+\DoxyCodeLine{697         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{698         \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}} = findInsertIndexInSortedArray (comparator, values.begin(), newElement, 0, values.size());}
+\DoxyCodeLine{699         \mbox{\hyperlink{class_array_aef96810c21931d9676c08cad82de45c7}{insert}} (\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}, newElement);}
+\DoxyCodeLine{700         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}};}
+\DoxyCodeLine{701     \}}
+\DoxyCodeLine{702 }
+\DoxyCodeLine{712     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_a88466744eccb48806b74defa442c843b}{addUsingDefaultSort}} (ParameterType newElement)}
+\DoxyCodeLine{713     \{}
+\DoxyCodeLine{714         \mbox{\hyperlink{class_default_element_comparator}{DefaultElementComparator <ElementType>}} comparator;}
+\DoxyCodeLine{715         \mbox{\hyperlink{class_array_afc5417019f110034658b3c1c02af5a5e}{addSorted}} (comparator, newElement);}
+\DoxyCodeLine{716     \}}
+\DoxyCodeLine{717 }
+\DoxyCodeLine{730     \textcolor{keyword}{template} <\textcolor{keyword}{typename} ElementComparator, \textcolor{keyword}{typename} TargetValueType>}
+\DoxyCodeLine{731     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_array_ab3787616ae5ae65a64ac0a706e348a7c}{indexOfSorted}} (ElementComparator\& comparator, TargetValueType elementToLookFor)\textcolor{keyword}{ const}}
+\DoxyCodeLine{732 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{733         \mbox{\hyperlink{group__juce__core-maths_ga5158e6e8faa5553204f90af596fafaf5}{ignoreUnused}} (comparator); \textcolor{comment}{// if you pass in an object with a static compareElements() method, this}}
+\DoxyCodeLine{734                                    \textcolor{comment}{// avoids getting warning messages about the parameter being unused}}
+\DoxyCodeLine{735 }
+\DoxyCodeLine{736         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{737 }
+\DoxyCodeLine{738         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}} = 0, e = values.size();;)}
+\DoxyCodeLine{739         \{}
+\DoxyCodeLine{740             \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}} >= e)}
+\DoxyCodeLine{741                 \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{742 }
+\DoxyCodeLine{743             \textcolor{keywordflow}{if} (comparator.compareElements (elementToLookFor, values[\mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}}]) == 0)}
+\DoxyCodeLine{744                 \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}};}
+\DoxyCodeLine{745 }
+\DoxyCodeLine{746             \textcolor{keyword}{auto} halfway = (\mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}} + e) / 2;}
+\DoxyCodeLine{747 }
+\DoxyCodeLine{748             \textcolor{keywordflow}{if} (halfway == \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}})}
+\DoxyCodeLine{749                 \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{750 }
+\DoxyCodeLine{751             \textcolor{keywordflow}{if} (comparator.compareElements (elementToLookFor, values[halfway]) >= 0)}
+\DoxyCodeLine{752                 \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}} = halfway;}
+\DoxyCodeLine{753             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{754                 e = halfway;}
+\DoxyCodeLine{755         \}}
+\DoxyCodeLine{756     \}}
+\DoxyCodeLine{757 }
+\DoxyCodeLine{758     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{768 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_ae3ca48a00050e5fec873488300049eea}{remove}} (\textcolor{keywordtype}{int} indexToRemove)}
+\DoxyCodeLine{769     \{}
+\DoxyCodeLine{770         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{771 }
+\DoxyCodeLine{772         \textcolor{keywordflow}{if} (\mbox{\hyperlink{group__juce__core-maths_ga5762396fe2a5aa4c39b68ee5b70a96f8}{isPositiveAndBelow}} (indexToRemove, values.size()))}
+\DoxyCodeLine{773             removeInternal (indexToRemove);}
+\DoxyCodeLine{774     \}}
+\DoxyCodeLine{775 }
+\DoxyCodeLine{786     ElementType \mbox{\hyperlink{class_array_a1db30bedb108c88d145cf9e13457c65a}{removeAndReturn}} (\textcolor{keywordtype}{int} indexToRemove)}
+\DoxyCodeLine{787     \{}
+\DoxyCodeLine{788         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{789 }
+\DoxyCodeLine{790         \textcolor{keywordflow}{if} (\mbox{\hyperlink{group__juce__core-maths_ga5762396fe2a5aa4c39b68ee5b70a96f8}{isPositiveAndBelow}} (indexToRemove, values.size()))}
+\DoxyCodeLine{791         \{}
+\DoxyCodeLine{792             ElementType removed (values[indexToRemove]);}
+\DoxyCodeLine{793             removeInternal (indexToRemove);}
+\DoxyCodeLine{794             \textcolor{keywordflow}{return} removed;}
+\DoxyCodeLine{795         \}}
+\DoxyCodeLine{796 }
+\DoxyCodeLine{797         \textcolor{keywordflow}{return} ElementType();}
+\DoxyCodeLine{798     \}}
+\DoxyCodeLine{799 }
+\DoxyCodeLine{810     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_a327c9e19074544bfef2caa5d41ff8131}{remove}} (\textcolor{keyword}{const} ElementType* elementToRemove)}
+\DoxyCodeLine{811     \{}
+\DoxyCodeLine{812         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (elementToRemove != \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{813         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{814 }
+\DoxyCodeLine{815         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (values.begin() != \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{816         \textcolor{keyword}{auto} indexToRemove = (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}) (elementToRemove -\/ values.begin());}
+\DoxyCodeLine{817 }
+\DoxyCodeLine{818         \textcolor{keywordflow}{if} (! \mbox{\hyperlink{group__juce__core-maths_ga5762396fe2a5aa4c39b68ee5b70a96f8}{isPositiveAndBelow}} (indexToRemove, values.size()))}
+\DoxyCodeLine{819         \{}
+\DoxyCodeLine{820             \mbox{\hyperlink{group__juce__core-system_gadc044ce5efecbecf2f5a44cd00db67b3}{jassertfalse}};}
+\DoxyCodeLine{821             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{822         \}}
+\DoxyCodeLine{823 }
+\DoxyCodeLine{824         removeInternal (indexToRemove);}
+\DoxyCodeLine{825     \}}
+\DoxyCodeLine{826 }
+\DoxyCodeLine{835     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_adb629ebfbcba98f1f5e1ca47ccca594e}{removeFirstMatchingValue}} (ParameterType valueToRemove)}
+\DoxyCodeLine{836     \{}
+\DoxyCodeLine{837         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{838         \textcolor{keyword}{auto}* e = values.begin();}
+\DoxyCodeLine{839 }
+\DoxyCodeLine{840         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < values.size(); ++i)}
+\DoxyCodeLine{841         \{}
+\DoxyCodeLine{842             \textcolor{keywordflow}{if} (valueToRemove == e[i])}
+\DoxyCodeLine{843             \{}
+\DoxyCodeLine{844                 removeInternal (i);}
+\DoxyCodeLine{845                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{846             \}}
+\DoxyCodeLine{847         \}}
+\DoxyCodeLine{848     \}}
+\DoxyCodeLine{849 }
+\DoxyCodeLine{859     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_array_a30b2ea3341f9c6156a42da4821438299}{removeAllInstancesOf}} (ParameterType valueToRemove)}
+\DoxyCodeLine{860     \{}
+\DoxyCodeLine{861         \textcolor{keywordtype}{int} numRemoved = 0;}
+\DoxyCodeLine{862         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{863 }
+\DoxyCodeLine{864         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = values.size(); -\/-\/i >= 0;)}
+\DoxyCodeLine{865         \{}
+\DoxyCodeLine{866             \textcolor{keywordflow}{if} (valueToRemove == values[i])}
+\DoxyCodeLine{867             \{}
+\DoxyCodeLine{868                 removeInternal (i);}
+\DoxyCodeLine{869                 ++numRemoved;}
+\DoxyCodeLine{870             \}}
+\DoxyCodeLine{871         \}}
+\DoxyCodeLine{872 }
+\DoxyCodeLine{873         \textcolor{keywordflow}{return} numRemoved;}
+\DoxyCodeLine{874     \}}
+\DoxyCodeLine{875 }
+\DoxyCodeLine{887     \textcolor{keyword}{template} <\textcolor{keyword}{typename} PredicateType>}
+\DoxyCodeLine{888     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_array_ad01b418c28d42d7037486aa6def5ac03}{removeIf}} (PredicateType\&\& predicate)}
+\DoxyCodeLine{889     \{}
+\DoxyCodeLine{890         \textcolor{keywordtype}{int} numRemoved = 0;}
+\DoxyCodeLine{891         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{892 }
+\DoxyCodeLine{893         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = values.size(); -\/-\/i >= 0;)}
+\DoxyCodeLine{894         \{}
+\DoxyCodeLine{895             \textcolor{keywordflow}{if} (predicate (values[i]))}
+\DoxyCodeLine{896             \{}
+\DoxyCodeLine{897                 removeInternal (i);}
+\DoxyCodeLine{898                 ++numRemoved;}
+\DoxyCodeLine{899             \}}
+\DoxyCodeLine{900         \}}
+\DoxyCodeLine{901 }
+\DoxyCodeLine{902         \textcolor{keywordflow}{return} numRemoved;}
+\DoxyCodeLine{903     \}}
+\DoxyCodeLine{904 }
+\DoxyCodeLine{917     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_ae9f26706cc40ce178424b2b4ba1f9647}{removeRange}} (\textcolor{keywordtype}{int} startIndex, \textcolor{keywordtype}{int} numberToRemove)}
+\DoxyCodeLine{918     \{}
+\DoxyCodeLine{919         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{920 }
+\DoxyCodeLine{921         \textcolor{keyword}{auto} endIndex = \mbox{\hyperlink{group__juce__core-maths_gacf7cd562ab136d15d3bf5c3be047cf96}{jlimit}} (0, values.size(), startIndex + numberToRemove);}
+\DoxyCodeLine{922         startIndex    = \mbox{\hyperlink{group__juce__core-maths_gacf7cd562ab136d15d3bf5c3be047cf96}{jlimit}} (0, values.size(), startIndex);}
+\DoxyCodeLine{923         numberToRemove = endIndex -\/ startIndex;}
+\DoxyCodeLine{924 }
+\DoxyCodeLine{925         \textcolor{keywordflow}{if} (numberToRemove > 0)}
+\DoxyCodeLine{926         \{}
+\DoxyCodeLine{927             values.removeElements (startIndex, numberToRemove);}
+\DoxyCodeLine{928             minimiseStorageAfterRemoval();}
+\DoxyCodeLine{929         \}}
+\DoxyCodeLine{930     \}}
+\DoxyCodeLine{931 }
+\DoxyCodeLine{937     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_af6fe3614e877f04a42330f440a5548da}{removeLast}} (\textcolor{keywordtype}{int} howManyToRemove = 1)}
+\DoxyCodeLine{938     \{}
+\DoxyCodeLine{939         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (howManyToRemove >= 0);}
+\DoxyCodeLine{940 }
+\DoxyCodeLine{941         \textcolor{keywordflow}{if} (howManyToRemove > 0)}
+\DoxyCodeLine{942         \{}
+\DoxyCodeLine{943             \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{944 }
+\DoxyCodeLine{945             \textcolor{keywordflow}{if} (howManyToRemove > values.size())}
+\DoxyCodeLine{946                 howManyToRemove = values.size();}
+\DoxyCodeLine{947 }
+\DoxyCodeLine{948             values.removeElements (values.size() -\/ howManyToRemove, howManyToRemove);}
+\DoxyCodeLine{949             minimiseStorageAfterRemoval();}
+\DoxyCodeLine{950         \}}
+\DoxyCodeLine{951     \}}
+\DoxyCodeLine{952 }
+\DoxyCodeLine{958     \textcolor{keyword}{template} <\textcolor{keyword}{class} OtherArrayType>}
+\DoxyCodeLine{959     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_a1474eae027a73758ca12734001ec9da0}{removeValuesIn}} (\textcolor{keyword}{const} OtherArrayType\& otherArray)}
+\DoxyCodeLine{960     \{}
+\DoxyCodeLine{961         \textcolor{keyword}{const} \textcolor{keyword}{typename} OtherArrayType::ScopedLockType lock1 (otherArray.getLock());}
+\DoxyCodeLine{962         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock2 (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{963 }
+\DoxyCodeLine{964         \textcolor{keywordflow}{if} (\textcolor{keyword}{this} == \&otherArray)}
+\DoxyCodeLine{965         \{}
+\DoxyCodeLine{966             \mbox{\hyperlink{class_array_a86dc5fe378bb99b85beb8ab86c279654}{clear}}();}
+\DoxyCodeLine{967         \}}
+\DoxyCodeLine{968         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{969         \{}
+\DoxyCodeLine{970             \textcolor{keywordflow}{if} (otherArray.size() > 0)}
+\DoxyCodeLine{971             \{}
+\DoxyCodeLine{972                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = values.size(); -\/-\/i >= 0;)}
+\DoxyCodeLine{973                     \textcolor{keywordflow}{if} (otherArray.contains (values[i]))}
+\DoxyCodeLine{974                         removeInternal (i);}
+\DoxyCodeLine{975             \}}
+\DoxyCodeLine{976         \}}
+\DoxyCodeLine{977     \}}
+\DoxyCodeLine{978 }
+\DoxyCodeLine{986     \textcolor{keyword}{template} <\textcolor{keyword}{class} OtherArrayType>}
+\DoxyCodeLine{987     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_af3d9c435c3cddb0de674306b809430e3}{removeValuesNotIn}} (\textcolor{keyword}{const} OtherArrayType\& otherArray)}
+\DoxyCodeLine{988     \{}
+\DoxyCodeLine{989         \textcolor{keyword}{const} \textcolor{keyword}{typename} OtherArrayType::ScopedLockType lock1 (otherArray.getLock());}
+\DoxyCodeLine{990         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock2 (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{991 }
+\DoxyCodeLine{992         \textcolor{keywordflow}{if} (\textcolor{keyword}{this} != \&otherArray)}
+\DoxyCodeLine{993         \{}
+\DoxyCodeLine{994             \textcolor{keywordflow}{if} (otherArray.size() <= 0)}
+\DoxyCodeLine{995             \{}
+\DoxyCodeLine{996                 \mbox{\hyperlink{class_array_a86dc5fe378bb99b85beb8ab86c279654}{clear}}();}
+\DoxyCodeLine{997             \}}
+\DoxyCodeLine{998             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{999             \{}
+\DoxyCodeLine{1000                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = values.size(); -\/-\/i >= 0;)}
+\DoxyCodeLine{1001                     \textcolor{keywordflow}{if} (! otherArray.contains (values[i]))}
+\DoxyCodeLine{1002                         removeInternal (i);}
+\DoxyCodeLine{1003             \}}
+\DoxyCodeLine{1004         \}}
+\DoxyCodeLine{1005     \}}
+\DoxyCodeLine{1006 }
+\DoxyCodeLine{1015     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_a27a6d4d6fe65364ec9913070a1d2aa0f}{swap}} (\textcolor{keywordtype}{int} index1, \textcolor{keywordtype}{int} index2)}
+\DoxyCodeLine{1016     \{}
+\DoxyCodeLine{1017         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{1018         values.swap (index1, index2);}
+\DoxyCodeLine{1019     \}}
+\DoxyCodeLine{1020 }
+\DoxyCodeLine{1035     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_ab8ebba42fc93c9de52020b62da1872fe}{move}} (\textcolor{keywordtype}{int} currentIndex, \textcolor{keywordtype}{int} newIndex) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{1036     \{}
+\DoxyCodeLine{1037         \textcolor{keywordflow}{if} (currentIndex != newIndex)}
+\DoxyCodeLine{1038         \{}
+\DoxyCodeLine{1039             \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{1040             values.move (currentIndex, newIndex);}
+\DoxyCodeLine{1041         \}}
+\DoxyCodeLine{1042     \}}
+\DoxyCodeLine{1043 }
+\DoxyCodeLine{1044     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1051 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_a0773349e71721e177ee12c8ffd20b5d8}{minimiseStorageOverheads}}()}
+\DoxyCodeLine{1052     \{}
+\DoxyCodeLine{1053         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{1054         values.shrinkToNoMoreThan (values.size());}
+\DoxyCodeLine{1055     \}}
+\DoxyCodeLine{1056 }
+\DoxyCodeLine{1063     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_a5099340060ffbc6170c4b8d3936ff8d5}{ensureStorageAllocated}} (\textcolor{keywordtype}{int} minNumElements)}
+\DoxyCodeLine{1064     \{}
+\DoxyCodeLine{1065         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{1066         values.ensureAllocatedSize (minNumElements);}
+\DoxyCodeLine{1067     \}}
+\DoxyCodeLine{1068 }
+\DoxyCodeLine{1069     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1074 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_abd6210cb3337f1cc11b89bc7b63f9c72}{sort}}()}
+\DoxyCodeLine{1075     \{}
+\DoxyCodeLine{1076         \mbox{\hyperlink{class_default_element_comparator}{DefaultElementComparator<ElementType>}} comparator;}
+\DoxyCodeLine{1077         \mbox{\hyperlink{class_array_abd6210cb3337f1cc11b89bc7b63f9c72}{sort}} (comparator);}
+\DoxyCodeLine{1078     \}}
+\DoxyCodeLine{1079 }
+\DoxyCodeLine{1106     \textcolor{keyword}{template} <\textcolor{keyword}{class} ElementComparator>}
+\DoxyCodeLine{1107     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_a526081df81183ddd47f9f514de483a8f}{sort}} (ElementComparator\& comparator,}
+\DoxyCodeLine{1108                \textcolor{keywordtype}{bool} retainOrderOfEquivalentItems = \textcolor{keyword}{false})}
+\DoxyCodeLine{1109     \{}
+\DoxyCodeLine{1110         \textcolor{keyword}{const} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} lock (\mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}());}
+\DoxyCodeLine{1111         \mbox{\hyperlink{group__juce__core-maths_ga5158e6e8faa5553204f90af596fafaf5}{ignoreUnused}} (comparator); \textcolor{comment}{// if you pass in an object with a static compareElements() method, this}}
+\DoxyCodeLine{1112                                    \textcolor{comment}{// avoids getting warning messages about the parameter being unused}}
+\DoxyCodeLine{1113         sortArray (comparator, values.begin(), 0, \mbox{\hyperlink{class_array_ae79ec3b32d0c9a80dfff8ffbc41f8523}{size}}() -\/ 1, retainOrderOfEquivalentItems);}
+\DoxyCodeLine{1114     \}}
+\DoxyCodeLine{1115 }
+\DoxyCodeLine{1116     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1121 \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keyword}{const} TypeOfCriticalSectionToUse\& \mbox{\hyperlink{class_array_a807af5d19acf78c261f2b39b423cd447}{getLock}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept      \{ \textcolor{keywordflow}{return} values; \}}
+\DoxyCodeLine{1122 }
+\DoxyCodeLine{1124     \textcolor{keyword}{using} \mbox{\hyperlink{class_array_a8578fcd9dcc67356c54d237b6555f6b0}{ScopedLockType}} = \textcolor{keyword}{typename} TypeOfCriticalSectionToUse::ScopedLockType;}
+\DoxyCodeLine{1125 }
+\DoxyCodeLine{1126 }
+\DoxyCodeLine{1127     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1128 \textcolor{preprocessor}{   \#ifndef DOXYGEN}}
+\DoxyCodeLine{1129     [[deprecated (\textcolor{stringliteral}{"{}This method has been replaced by a more flexible templated version and renamed "{}}}
+\DoxyCodeLine{1130                  \textcolor{stringliteral}{"{}to swapWith to be more consistent with the names used in other classes."{}})]]}
+\DoxyCodeLine{1131     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_ac4a316f41d221785eb5a5990cf4bf763}{swapWithArray}} (\mbox{\hyperlink{class_array}{Array}}\& other) \textcolor{keyword}{noexcept} \{ \mbox{\hyperlink{class_array_a921a70882553967e2998beeb30d99f83}{swapWith}} (other); \}}
+\DoxyCodeLine{1132 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{1133 }
+\DoxyCodeLine{1134 \textcolor{keyword}{private}:}
+\DoxyCodeLine{1135     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1136     \mbox{\hyperlink{class_array_base}{ArrayBase<ElementType, TypeOfCriticalSectionToUse>}} values;}
+\DoxyCodeLine{1137 }
+\DoxyCodeLine{1138     \textcolor{keywordtype}{void} removeInternal (\textcolor{keywordtype}{int} indexToRemove)}
+\DoxyCodeLine{1139     \{}
+\DoxyCodeLine{1140         values.removeElements (indexToRemove, 1);}
+\DoxyCodeLine{1141         minimiseStorageAfterRemoval();}
+\DoxyCodeLine{1142     \}}
+\DoxyCodeLine{1143 }
+\DoxyCodeLine{1144     \textcolor{keywordtype}{void} minimiseStorageAfterRemoval()}
+\DoxyCodeLine{1145     \{}
+\DoxyCodeLine{1146         \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_aef6c3714c06e47cb675c9a378d8e49d6}{values}}.capacity() > \mbox{\hyperlink{group__juce__core-maths_gadfd716f36f80987d66ebc2fce819c1fe}{jmax}} (minimumAllocatedSize, \mbox{\hyperlink{namespacegl_aef6c3714c06e47cb675c9a378d8e49d6}{values}}.size() * 2))}
+\DoxyCodeLine{1147             \mbox{\hyperlink{namespacegl_aef6c3714c06e47cb675c9a378d8e49d6}{values}}.shrinkToNoMoreThan (\mbox{\hyperlink{group__juce__core-maths_gadfd716f36f80987d66ebc2fce819c1fe}{jmax}} (\mbox{\hyperlink{namespacegl_aef6c3714c06e47cb675c9a378d8e49d6}{values}}.size(), \mbox{\hyperlink{group__juce__core-maths_gadfd716f36f80987d66ebc2fce819c1fe}{jmax}} (minimumAllocatedSize, 64 / (\textcolor{keywordtype}{int}) \textcolor{keyword}{sizeof} (ElementType))));}
+\DoxyCodeLine{1148     \}}
+\DoxyCodeLine{1149 \};}
+\DoxyCodeLine{1150 }
+\DoxyCodeLine{1151  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{1152 }
+
+\end{DoxyCode}

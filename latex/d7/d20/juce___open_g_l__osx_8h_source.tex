@@ -1,0 +1,293 @@
+\hypertarget{juce___open_g_l__osx_8h_source}{}\doxysection{juce\+\_\+\+Open\+GL\+\_\+osx.\+h}
+\label{juce___open_g_l__osx_8h_source}\index{build/juce\_opengl/native/juce\_OpenGL\_osx.h@{build/juce\_opengl/native/juce\_OpenGL\_osx.h}}
+\mbox{\hyperlink{juce___open_g_l__osx_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{5 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{6 \textcolor{comment}{}}
+\DoxyCodeLine{7 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{8 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{9 \textcolor{comment}{}}
+\DoxyCodeLine{10 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{11 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{12 \textcolor{comment}{}}
+\DoxyCodeLine{13 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{14 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{15 \textcolor{comment}{}}
+\DoxyCodeLine{16 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{17 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{18 \textcolor{comment}{}}
+\DoxyCodeLine{19 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{20 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{21 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{24 \textcolor{comment}{*/}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacejuce}{juce}}}
+\DoxyCodeLine{27 \{}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29 \mbox{\hyperlink{group__juce__core-system_ga0112339834a6548e4123e394b9ed95e2}{JUCE\_BEGIN\_IGNORE\_WARNINGS\_GCC\_LIKE}} (\textcolor{stringliteral}{"{}-\/Wdeprecated-\/declarations"{}})}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31 class \mbox{\hyperlink{class_open_g_l_context}{OpenGLContext}}::NativeContext}
+\DoxyCodeLine{32 \{}
+\DoxyCodeLine{33 \textcolor{keyword}{public}:}
+\DoxyCodeLine{34     \mbox{\hyperlink{classjuce_1_1_open_g_l_context_1_1_native_context_ae740b7764bdc651aa1217a55be5eb121}{NativeContext}} (\mbox{\hyperlink{class_component}{Component}}\& component,}
+\DoxyCodeLine{35                    \textcolor{keyword}{const} \mbox{\hyperlink{class_open_g_l_pixel_format}{OpenGLPixelFormat}}\& pixFormat,}
+\DoxyCodeLine{36                    \textcolor{keywordtype}{void}* contextToShare,}
+\DoxyCodeLine{37                    \textcolor{keywordtype}{bool} shouldUseMultisampling,}
+\DoxyCodeLine{38                    OpenGLVersion \mbox{\hyperlink{jpeglib_8h_aad880fc4455c253781e8968f2239d56f}{version}})}
+\DoxyCodeLine{39     \{}
+\DoxyCodeLine{40         NSOpenGLPixelFormatAttribute \mbox{\hyperlink{namespacegl_a9ff75f81f0f882e00ee4093577b72317}{attribs}}[64] = \{ 0 \};}
+\DoxyCodeLine{41         createAttribs (\mbox{\hyperlink{namespacegl_a9ff75f81f0f882e00ee4093577b72317}{attribs}}, \mbox{\hyperlink{jpeglib_8h_aad880fc4455c253781e8968f2239d56f}{version}}, pixFormat, shouldUseMultisampling);}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43         NSOpenGLPixelFormat* \mbox{\hyperlink{namespacegl_a597b77c61fc6d444d2bfc6bf69dee277}{format}} = [[NSOpenGLPixelFormat alloc] initWithAttributes: \mbox{\hyperlink{namespacegl_a9ff75f81f0f882e00ee4093577b72317}{attribs}}];}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45         \textcolor{keyword}{static} \mbox{\hyperlink{structjuce_1_1_open_g_l_context_1_1_native_context_1_1_mouse_forwarding_n_s_open_g_l_view_class}{MouseForwardingNSOpenGLViewClass}} cls;}
+\DoxyCodeLine{46         view = [cls.\mbox{\hyperlink{structjuce_1_1_obj_c_class_a963470486a706eeab84a5248e83df93d}{createInstance}}() initWithFrame: NSMakeRect (0, 0, 100.0f, 100.0f)}
+\DoxyCodeLine{47                                        pixelFormat: \mbox{\hyperlink{namespacegl_a597b77c61fc6d444d2bfc6bf69dee277}{format}}];}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49         \textcolor{keywordflow}{if} ([view respondsToSelector: \textcolor{keyword}{@selector} (setWantsBestResolutionOpenGLSurface:)])}
+\DoxyCodeLine{50             [view setWantsBestResolutionOpenGLSurface: YES];}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52         \mbox{\hyperlink{group__juce__core-system_ga0112339834a6548e4123e394b9ed95e2}{JUCE\_BEGIN\_IGNORE\_WARNINGS\_GCC\_LIKE}} (\textcolor{stringliteral}{"{}-\/Wundeclared-\/selector"{}})}
+\DoxyCodeLine{53         [[NSNotificationCenter defaultCenter] addObserver: view}
+\DoxyCodeLine{54                                                  selector: \textcolor{keyword}{@selector} (\_surfaceNeedsUpdate:)}
+\DoxyCodeLine{55                                                      \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}: NSViewGlobalFrameDidChangeNotification}
+\DoxyCodeLine{56                                                    \textcolor{keywordtype}{object}: view];}
+\DoxyCodeLine{57         \mbox{\hyperlink{group__juce__core-system_ga157f2229764b17137d8814bec95df109}{JUCE\_END\_IGNORE\_WARNINGS\_GCC\_LIKE}}}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59         renderContext = [[[NSOpenGLContext alloc] initWithFormat: \mbox{\hyperlink{namespacegl_a597b77c61fc6d444d2bfc6bf69dee277}{format}}}
+\DoxyCodeLine{60                                                     shareContext: (NSOpenGLContext*) contextToShare] autorelease];}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62         [view setOpenGLContext: renderContext];}
+\DoxyCodeLine{63         [\mbox{\hyperlink{namespacegl_a597b77c61fc6d444d2bfc6bf69dee277}{format}} release];}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65         viewAttachment = NSViewComponent::attachViewToComponent (component, view);}
+\DoxyCodeLine{66     \}}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68     \mbox{\hyperlink{classjuce_1_1_open_g_l_context_1_1_native_context_a4dcd9465383664cb47599c1bcf36cead}{\string~NativeContext}}()}
+\DoxyCodeLine{69     \{}
+\DoxyCodeLine{70         [[NSNotificationCenter defaultCenter] removeObserver: view];}
+\DoxyCodeLine{71         [renderContext clearDrawable];}
+\DoxyCodeLine{72         [renderContext setView: nil];}
+\DoxyCodeLine{73         [view setOpenGLContext: nil];}
+\DoxyCodeLine{74         [view release];}
+\DoxyCodeLine{75     \}}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_open_g_l_context_1_1_native_context_a4e8e9e1ec87c8e10c9f5d404615558cf}{createAttribs}} (NSOpenGLPixelFormatAttribute* \mbox{\hyperlink{namespacegl_a9ff75f81f0f882e00ee4093577b72317}{attribs}}, OpenGLVersion \mbox{\hyperlink{jpeglib_8h_aad880fc4455c253781e8968f2239d56f}{version}},}
+\DoxyCodeLine{78                                \textcolor{keyword}{const} \mbox{\hyperlink{class_open_g_l_pixel_format}{OpenGLPixelFormat}}\& pixFormat, \textcolor{keywordtype}{bool} shouldUseMultisampling)}
+\DoxyCodeLine{79     \{}
+\DoxyCodeLine{80         \mbox{\hyperlink{group__juce__core-maths_ga5158e6e8faa5553204f90af596fafaf5}{ignoreUnused}} (\mbox{\hyperlink{jpeglib_8h_aad880fc4455c253781e8968f2239d56f}{version}});}
+\DoxyCodeLine{81         \textcolor{keywordtype}{int} numAttribs = 0;}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83         \mbox{\hyperlink{namespacegl_a9ff75f81f0f882e00ee4093577b72317}{attribs}}[numAttribs++] = NSOpenGLPFAOpenGLProfile;}
+\DoxyCodeLine{84         \mbox{\hyperlink{namespacegl_a9ff75f81f0f882e00ee4093577b72317}{attribs}}[numAttribs++] = \mbox{\hyperlink{jpeglib_8h_aad880fc4455c253781e8968f2239d56f}{version}} >= openGL3\_2 ? NSOpenGLProfileVersion3\_2Core}
+\DoxyCodeLine{85                                                      : NSOpenGLProfileVersionLegacy;}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87         \mbox{\hyperlink{namespacegl_a9ff75f81f0f882e00ee4093577b72317}{attribs}}[numAttribs++] = NSOpenGLPFADoubleBuffer;}
+\DoxyCodeLine{88         \mbox{\hyperlink{namespacegl_a9ff75f81f0f882e00ee4093577b72317}{attribs}}[numAttribs++] = NSOpenGLPFAClosestPolicy;}
+\DoxyCodeLine{89         \mbox{\hyperlink{namespacegl_a9ff75f81f0f882e00ee4093577b72317}{attribs}}[numAttribs++] = NSOpenGLPFANoRecovery;}
+\DoxyCodeLine{90         \mbox{\hyperlink{namespacegl_a9ff75f81f0f882e00ee4093577b72317}{attribs}}[numAttribs++] = NSOpenGLPFAColorSize;}
+\DoxyCodeLine{91         \mbox{\hyperlink{namespacegl_a9ff75f81f0f882e00ee4093577b72317}{attribs}}[numAttribs++] = (NSOpenGLPixelFormatAttribute) (pixFormat.\mbox{\hyperlink{class_open_g_l_pixel_format_ae35395197ac66ebfed1a94d1748a20b8}{redBits}} + pixFormat.\mbox{\hyperlink{class_open_g_l_pixel_format_a75cc537f0d7ad936b3353426735515dd}{greenBits}} + pixFormat.\mbox{\hyperlink{class_open_g_l_pixel_format_a309d74a66aa876591508d76573597a04}{blueBits}});}
+\DoxyCodeLine{92         \mbox{\hyperlink{namespacegl_a9ff75f81f0f882e00ee4093577b72317}{attribs}}[numAttribs++] = NSOpenGLPFAAlphaSize;}
+\DoxyCodeLine{93         \mbox{\hyperlink{namespacegl_a9ff75f81f0f882e00ee4093577b72317}{attribs}}[numAttribs++] = (NSOpenGLPixelFormatAttribute) pixFormat.\mbox{\hyperlink{class_open_g_l_pixel_format_a4d947e7a9831d9158f2a0b519d7d3497}{alphaBits}};}
+\DoxyCodeLine{94         \mbox{\hyperlink{namespacegl_a9ff75f81f0f882e00ee4093577b72317}{attribs}}[numAttribs++] = NSOpenGLPFADepthSize;}
+\DoxyCodeLine{95         \mbox{\hyperlink{namespacegl_a9ff75f81f0f882e00ee4093577b72317}{attribs}}[numAttribs++] = (NSOpenGLPixelFormatAttribute) pixFormat.\mbox{\hyperlink{class_open_g_l_pixel_format_a9783fd7c1c9d5ade28eac2eb7c710be4}{depthBufferBits}};}
+\DoxyCodeLine{96         \mbox{\hyperlink{namespacegl_a9ff75f81f0f882e00ee4093577b72317}{attribs}}[numAttribs++] = NSOpenGLPFAStencilSize;}
+\DoxyCodeLine{97         \mbox{\hyperlink{namespacegl_a9ff75f81f0f882e00ee4093577b72317}{attribs}}[numAttribs++] = (NSOpenGLPixelFormatAttribute) pixFormat.\mbox{\hyperlink{class_open_g_l_pixel_format_aa94f3f667e41465ea29b6f259d9abf8b}{stencilBufferBits}};}
+\DoxyCodeLine{98         \mbox{\hyperlink{namespacegl_a9ff75f81f0f882e00ee4093577b72317}{attribs}}[numAttribs++] = NSOpenGLPFAAccumSize;}
+\DoxyCodeLine{99         \mbox{\hyperlink{namespacegl_a9ff75f81f0f882e00ee4093577b72317}{attribs}}[numAttribs++] = (NSOpenGLPixelFormatAttribute) (pixFormat.\mbox{\hyperlink{class_open_g_l_pixel_format_a1b07ee8f12cbb9c8b4671fa29c326490}{accumulationBufferRedBits}} + pixFormat.\mbox{\hyperlink{class_open_g_l_pixel_format_a473582e91fe1a2c9c1585185ee57e03c}{accumulationBufferGreenBits}}}
+\DoxyCodeLine{100                                                                    + pixFormat.\mbox{\hyperlink{class_open_g_l_pixel_format_abc38758c1e8b54f5002a0518c78c328d}{accumulationBufferBlueBits}} + pixFormat.\mbox{\hyperlink{class_open_g_l_pixel_format_aa3bfc867775483eed692c117c44c4da6}{accumulationBufferAlphaBits}});}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{102         \textcolor{keywordflow}{if} (shouldUseMultisampling)}
+\DoxyCodeLine{103         \{}
+\DoxyCodeLine{104             \mbox{\hyperlink{namespacegl_a9ff75f81f0f882e00ee4093577b72317}{attribs}}[numAttribs++] = NSOpenGLPFAMultisample;}
+\DoxyCodeLine{105             \mbox{\hyperlink{namespacegl_a9ff75f81f0f882e00ee4093577b72317}{attribs}}[numAttribs++] = NSOpenGLPFASampleBuffers;}
+\DoxyCodeLine{106             \mbox{\hyperlink{namespacegl_a9ff75f81f0f882e00ee4093577b72317}{attribs}}[numAttribs++] = (NSOpenGLPixelFormatAttribute) 1;}
+\DoxyCodeLine{107             \mbox{\hyperlink{namespacegl_a9ff75f81f0f882e00ee4093577b72317}{attribs}}[numAttribs++] = NSOpenGLPFASamples;}
+\DoxyCodeLine{108             \mbox{\hyperlink{namespacegl_a9ff75f81f0f882e00ee4093577b72317}{attribs}}[numAttribs++] = (NSOpenGLPixelFormatAttribute) pixFormat.\mbox{\hyperlink{class_open_g_l_pixel_format_afa2032cde8affb7698f038ba5784365a}{multisamplingLevel}};}
+\DoxyCodeLine{109         \}}
+\DoxyCodeLine{110     \}}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classjuce_1_1_open_g_l_context_1_1_native_context_a742182ad07d682c5c8b2510278aa76cf}{initialiseOnRenderThread}} (\mbox{\hyperlink{class_open_g_l_context}{OpenGLContext}}\&)    \{ \textcolor{keywordflow}{return} \textcolor{keyword}{true}; \}}
+\DoxyCodeLine{113     \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_open_g_l_context_1_1_native_context_a6e1196b3b781c7c19482d05da617c278}{shutdownOnRenderThread}}()                     \{ deactivateCurrentContext(); \}}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classjuce_1_1_open_g_l_context_1_1_native_context_a2ecb6616cf2f6245ca612926ca2abb36}{createdOk}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                   \{ \textcolor{keywordflow}{return} getRawContext() != \textcolor{keyword}{nullptr}; \}}
+\DoxyCodeLine{116     \textcolor{keywordtype}{void}* \mbox{\hyperlink{classjuce_1_1_open_g_l_context_1_1_native_context_a257ae639ec056fd40dc2cdab4ce5b0a1}{getRawContext}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept              \{ \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{void}*\textcolor{keyword}{>} (renderContext); \}}
+\DoxyCodeLine{117     \mbox{\hyperlink{group__juce__opengl-opengl_gaa311c7f0d6ec4f1a33f9235c3651b86b}{GLuint}} \mbox{\hyperlink{classjuce_1_1_open_g_l_context_1_1_native_context_a73edff45b80aff59be9d9d97f31ebf08}{getFrameBufferID}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept          \{ \textcolor{keywordflow}{return} 0; \}}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{119     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classjuce_1_1_open_g_l_context_1_1_native_context_a19faa47bc4f990290a9bcf012dc52ffd}{makeActive}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{120     \{}
+\DoxyCodeLine{121         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (renderContext != nil);}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{123         \textcolor{keywordflow}{if} ([renderContext view] != view)}
+\DoxyCodeLine{124             [renderContext setView: view];}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126         \textcolor{keywordflow}{if} (NSOpenGLContext* context = [view openGLContext])}
+\DoxyCodeLine{127         \{}
+\DoxyCodeLine{128             [context makeCurrentContext];}
+\DoxyCodeLine{129             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{130         \}}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{132         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{133     \}}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classjuce_1_1_open_g_l_context_1_1_native_context_a5fcab534018251ab17a12b0955381247}{isActive}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{136     \{}
+\DoxyCodeLine{137         \textcolor{keywordflow}{return} [NSOpenGLContext currentContext] == renderContext;}
+\DoxyCodeLine{138     \}}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_open_g_l_context_1_1_native_context_ac55d381f7cff0548693ce2248bae5be5}{deactivateCurrentContext}}()}
+\DoxyCodeLine{141     \{}
+\DoxyCodeLine{142         [NSOpenGLContext clearCurrentContext];}
+\DoxyCodeLine{143     \}}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145     \textcolor{keyword}{struct }Locker}
+\DoxyCodeLine{146     \{}
+\DoxyCodeLine{147         \mbox{\hyperlink{structjuce_1_1_open_g_l_context_1_1_native_context_1_1_locker_a3eef567754cab5c6ab60edd3d8eee471}{Locker}} (\mbox{\hyperlink{classjuce_1_1_open_g_l_context_1_1_native_context}{NativeContext}}\& nc) : cglContext ((CGLContextObj) [nc.renderContext CGLContextObj])}
+\DoxyCodeLine{148         \{}
+\DoxyCodeLine{149             CGLLockContext (cglContext);}
+\DoxyCodeLine{150         \}}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{152         \mbox{\hyperlink{structjuce_1_1_open_g_l_context_1_1_native_context_1_1_locker_a755d8c074f4348beb65b8b44de808af6}{\string~Locker}}()}
+\DoxyCodeLine{153         \{}
+\DoxyCodeLine{154             CGLUnlockContext (cglContext);}
+\DoxyCodeLine{155         \}}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{157     \textcolor{keyword}{private}:}
+\DoxyCodeLine{158         CGLContextObj cglContext;}
+\DoxyCodeLine{159     \};}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161     \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_open_g_l_context_1_1_native_context_a1464c376f70efa8d5302ffcd8c85e7fe}{swapBuffers}}()}
+\DoxyCodeLine{162     \{}
+\DoxyCodeLine{163         \textcolor{keyword}{auto} now = \mbox{\hyperlink{class_time_aae046eea242de9a40bb9847ef733fa06}{Time::getMillisecondCounterHiRes}}();}
+\DoxyCodeLine{164         [renderContext flushBuffer];}
+\DoxyCodeLine{165 }
+\DoxyCodeLine{166         \textcolor{keywordflow}{if} (minSwapTimeMs > 0)}
+\DoxyCodeLine{167         \{}
+\DoxyCodeLine{168             \textcolor{comment}{// When our window is entirely occluded by other windows, flushBuffer}}
+\DoxyCodeLine{169             \textcolor{comment}{// fails to wait for the swap interval, so the render loop spins at full}}
+\DoxyCodeLine{170             \textcolor{comment}{// speed, burning CPU. This hack detects when things are going too fast}}
+\DoxyCodeLine{171             \textcolor{comment}{// and sleeps if necessary.}}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{173             \textcolor{keyword}{auto} swapTime = \mbox{\hyperlink{class_time_aae046eea242de9a40bb9847ef733fa06}{Time::getMillisecondCounterHiRes}}() -\/ now;}
+\DoxyCodeLine{174             \textcolor{keyword}{auto} frameTime = (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}) (now -\/ lastSwapTime);}
+\DoxyCodeLine{175 }
+\DoxyCodeLine{176             \textcolor{keywordflow}{if} (swapTime < 0.5 \&\& frameTime < minSwapTimeMs -\/ 3)}
+\DoxyCodeLine{177             \{}
+\DoxyCodeLine{178                 \textcolor{keywordflow}{if} (underrunCounter > 3)}
+\DoxyCodeLine{179                 \{}
+\DoxyCodeLine{180                     \mbox{\hyperlink{class_thread_ace8d1c984cb6900b2b47912a69261bc4}{Thread::sleep}} (2 * (minSwapTimeMs -\/ frameTime));}
+\DoxyCodeLine{181                     now = \mbox{\hyperlink{class_time_aae046eea242de9a40bb9847ef733fa06}{Time::getMillisecondCounterHiRes}}();}
+\DoxyCodeLine{182                 \}}
+\DoxyCodeLine{183                 \textcolor{keywordflow}{else}}
+\DoxyCodeLine{184                 \{}
+\DoxyCodeLine{185                     ++underrunCounter;}
+\DoxyCodeLine{186                 \}}
+\DoxyCodeLine{187             \}}
+\DoxyCodeLine{188             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{189             \{}
+\DoxyCodeLine{190                 \textcolor{keywordflow}{if} (underrunCounter > 0)}
+\DoxyCodeLine{191                     -\/-\/underrunCounter;}
+\DoxyCodeLine{192             \}}
+\DoxyCodeLine{193         \}}
+\DoxyCodeLine{194 }
+\DoxyCodeLine{195         lastSwapTime = now;}
+\DoxyCodeLine{196     \}}
+\DoxyCodeLine{197 }
+\DoxyCodeLine{198     \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_open_g_l_context_1_1_native_context_a0b097ab48785251dcbba68a186b22dc8}{updateWindowPosition}} (\mbox{\hyperlink{class_rectangle}{Rectangle<int>}}) \{\}}
+\DoxyCodeLine{199 }
+\DoxyCodeLine{200     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classjuce_1_1_open_g_l_context_1_1_native_context_a2f7b745ee9f96f7a15bc2fedf08de462}{setSwapInterval}} (\textcolor{keywordtype}{int} numFramesPerSwapIn)}
+\DoxyCodeLine{201     \{}
+\DoxyCodeLine{202         numFramesPerSwap = numFramesPerSwapIn;}
+\DoxyCodeLine{203 }
+\DoxyCodeLine{204         \textcolor{comment}{// The macOS OpenGL programming guide says that numFramesPerSwap}}
+\DoxyCodeLine{205         \textcolor{comment}{// can only be 0 or 1.}}
+\DoxyCodeLine{206         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (\mbox{\hyperlink{group__juce__core-maths_ga5762396fe2a5aa4c39b68ee5b70a96f8}{isPositiveAndBelow}} (numFramesPerSwap, 2));}
+\DoxyCodeLine{207 }
+\DoxyCodeLine{208         [renderContext setValues: (\textcolor{keyword}{const} \mbox{\hyperlink{group__juce__opengl-opengl_ga5ac0f3c4d7fafd42b284b5487a791017}{GLint}}*) \&numFramesPerSwap}
+\DoxyCodeLine{209                     forParameter: getSwapIntervalParameter()];}
+\DoxyCodeLine{210 }
+\DoxyCodeLine{211         updateMinSwapTime();}
+\DoxyCodeLine{212 }
+\DoxyCodeLine{213         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{214     \}}
+\DoxyCodeLine{215 }
+\DoxyCodeLine{216     \textcolor{keywordtype}{int} \mbox{\hyperlink{classjuce_1_1_open_g_l_context_1_1_native_context_ad20800f1b57bb4cd0136aa16337d9da9}{getSwapInterval}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{217 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{218         \mbox{\hyperlink{group__juce__opengl-opengl_ga5ac0f3c4d7fafd42b284b5487a791017}{GLint}} numFrames = 0;}
+\DoxyCodeLine{219         [renderContext getValues: \&numFrames}
+\DoxyCodeLine{220                     forParameter: getSwapIntervalParameter()];}
+\DoxyCodeLine{221 }
+\DoxyCodeLine{222         \textcolor{keywordflow}{return} numFrames;}
+\DoxyCodeLine{223     \}}
+\DoxyCodeLine{224 }
+\DoxyCodeLine{225     \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_open_g_l_context_1_1_native_context_a32b56dd167b7056d0b17d564e5e6f6fe}{setNominalVideoRefreshPeriodS}} (\textcolor{keywordtype}{double} periodS)}
+\DoxyCodeLine{226     \{}
+\DoxyCodeLine{227         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (periodS > 0.0);}
+\DoxyCodeLine{228         videoRefreshPeriodS = periodS;}
+\DoxyCodeLine{229         updateMinSwapTime();}
+\DoxyCodeLine{230     \}}
+\DoxyCodeLine{231 }
+\DoxyCodeLine{232     \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_open_g_l_context_1_1_native_context_a7c6a3d471c3e10031ed340460a21b302}{updateMinSwapTime}}()}
+\DoxyCodeLine{233     \{}
+\DoxyCodeLine{234         minSwapTimeMs = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>} (numFramesPerSwap * 1000 * videoRefreshPeriodS);}
+\DoxyCodeLine{235     \}}
+\DoxyCodeLine{236 }
+\DoxyCodeLine{237     \textcolor{keyword}{static} NSOpenGLContextParameter \mbox{\hyperlink{classjuce_1_1_open_g_l_context_1_1_native_context_ac3552adbca1365940d09e996811459b7}{getSwapIntervalParameter}}()}
+\DoxyCodeLine{238     \{}
+\DoxyCodeLine{239 \textcolor{preprocessor}{        \#if defined (MAC\_OS\_X\_VERSION\_10\_12) \&\& MAC\_OS\_X\_VERSION\_MAX\_ALLOWED >= MAC\_OS\_X\_VERSION\_10\_12}}
+\DoxyCodeLine{240          \textcolor{keywordflow}{if} (@available (macOS 10.12, *))}
+\DoxyCodeLine{241              \textcolor{keywordflow}{return} NSOpenGLContextParameterSwapInterval;}
+\DoxyCodeLine{242 \textcolor{preprocessor}{        \#endif}}
+\DoxyCodeLine{243 }
+\DoxyCodeLine{244         \textcolor{keywordflow}{return} NSOpenGLCPSwapInterval;}
+\DoxyCodeLine{245     \}}
+\DoxyCodeLine{246 }
+\DoxyCodeLine{247     NSOpenGLContext* renderContext = nil;}
+\DoxyCodeLine{248     NSOpenGLView* view = nil;}
+\DoxyCodeLine{249     \mbox{\hyperlink{class_reference_counted_object_ptr}{ReferenceCountedObjectPtr<ReferenceCountedObject>}} \mbox{\hyperlink{classjuce_1_1_open_g_l_context_1_1_native_context_a4a1dc7c96a45d3f5f4f301af945708d7}{viewAttachment}};}
+\DoxyCodeLine{250     \textcolor{keywordtype}{double} lastSwapTime = 0;}
+\DoxyCodeLine{251     std::atomic<int> minSwapTimeMs \{ 0 \};}
+\DoxyCodeLine{252     \textcolor{keywordtype}{int} underrunCounter = 0, numFramesPerSwap = 0;}
+\DoxyCodeLine{253     \textcolor{keywordtype}{double} videoRefreshPeriodS = 1.0 / 60.0;}
+\DoxyCodeLine{254 }
+\DoxyCodeLine{255     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{256     \textcolor{keyword}{struct }\mbox{\hyperlink{structjuce_1_1_open_g_l_context_1_1_native_context_1_1_mouse_forwarding_n_s_open_g_l_view_class}{MouseForwardingNSOpenGLViewClass}}  : \textcolor{keyword}{public} \mbox{\hyperlink{structjuce_1_1_obj_c_class}{ObjCClass}}<NSOpenGLView>}
+\DoxyCodeLine{257     \{}
+\DoxyCodeLine{258         \mbox{\hyperlink{structjuce_1_1_open_g_l_context_1_1_native_context_1_1_mouse_forwarding_n_s_open_g_l_view_class_a61bfac30db41b2aa25e7fb360ec7a495}{MouseForwardingNSOpenGLViewClass}}()  : \mbox{\hyperlink{structjuce_1_1_obj_c_class}{ObjCClass}}<NSOpenGLView> (\textcolor{stringliteral}{"{}JUCEGLView\_"{}})}
+\DoxyCodeLine{259         \{}
+\DoxyCodeLine{260             addMethod (\textcolor{keyword}{@selector} (rightMouseDown:),       rightMouseDown);}
+\DoxyCodeLine{261             addMethod (\textcolor{keyword}{@selector} (rightMouseUp:),         rightMouseUp);}
+\DoxyCodeLine{262             addMethod (\textcolor{keyword}{@selector} (acceptsFirstMouse:),    acceptsFirstMouse);}
+\DoxyCodeLine{263             addMethod (\textcolor{keyword}{@selector} (accessibilityHitTest:), accessibilityHitTest);}
+\DoxyCodeLine{264 }
+\DoxyCodeLine{265             registerClass();}
+\DoxyCodeLine{266         \}}
+\DoxyCodeLine{267 }
+\DoxyCodeLine{268     \textcolor{keyword}{private}:}
+\DoxyCodeLine{269         \textcolor{keyword}{static} \textcolor{keywordtype}{void} rightMouseDown (\textcolor{keywordtype}{id} \textcolor{keyword}{self}, \textcolor{keywordtype}{SEL}, NSEvent* ev)      \{ [[(NSOpenGLView*) \textcolor{keyword}{self} superview] rightMouseDown: ev]; \}}
+\DoxyCodeLine{270         \textcolor{keyword}{static} \textcolor{keywordtype}{void} rightMouseUp   (\textcolor{keywordtype}{id} \textcolor{keyword}{self}, \textcolor{keywordtype}{SEL}, NSEvent* ev)      \{ [[(NSOpenGLView*) \textcolor{keyword}{self} superview] rightMouseUp:   ev]; \}}
+\DoxyCodeLine{271         \textcolor{keyword}{static} BOOL acceptsFirstMouse (\textcolor{keywordtype}{id}, \textcolor{keywordtype}{SEL}, NSEvent*)           \{ \textcolor{keywordflow}{return} YES; \}}
+\DoxyCodeLine{272         \textcolor{keyword}{static} \textcolor{keywordtype}{id} accessibilityHitTest (\textcolor{keywordtype}{id} \textcolor{keyword}{self}, \textcolor{keywordtype}{SEL}, NSPoint \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}})    \{ \textcolor{keywordflow}{return} [[(NSOpenGLView*) \textcolor{keyword}{self} superview] accessibilityHitTest: \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}}]; \}}
+\DoxyCodeLine{273     \};}
+\DoxyCodeLine{274 }
+\DoxyCodeLine{275 }
+\DoxyCodeLine{276     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (NativeContext)}
+\DoxyCodeLine{277 \};}
+\DoxyCodeLine{278 }
+\DoxyCodeLine{279 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{280 \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_open_g_l_helpers_a73632afa87e775c2d1dcbd4f2ac3ad13}{OpenGLHelpers::isContextActive}}()}
+\DoxyCodeLine{281 \{}
+\DoxyCodeLine{282     \textcolor{keywordflow}{return} CGLGetCurrentContext() != CGLContextObj();}
+\DoxyCodeLine{283 \}}
+\DoxyCodeLine{284 }
+\DoxyCodeLine{285 \mbox{\hyperlink{group__juce__core-system_ga157f2229764b17137d8814bec95df109}{JUCE\_END\_IGNORE\_WARNINGS\_GCC\_LIKE}}}
+\DoxyCodeLine{286 }
+\DoxyCodeLine{287 \} \textcolor{comment}{// namespace juce}}
+
+\end{DoxyCode}

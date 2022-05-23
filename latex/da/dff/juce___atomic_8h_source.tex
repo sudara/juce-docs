@@ -1,0 +1,102 @@
+\hypertarget{juce___atomic_8h_source}{}\doxysection{juce\+\_\+\+Atomic.\+h}
+\label{juce___atomic_8h_source}\index{build/juce\_core/memory/juce\_Atomic.h@{build/juce\_core/memory/juce\_Atomic.h}}
+\mbox{\hyperlink{juce___atomic_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#ifndef DOXYGEN}}
+\DoxyCodeLine{28  \textcolor{keyword}{namespace }\mbox{\hyperlink{namespace_atomic_helpers}{AtomicHelpers}}}
+\DoxyCodeLine{29  \{}
+\DoxyCodeLine{30      \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keyword}{struct }\mbox{\hyperlink{struct_atomic_helpers_1_1_diff_type_helper}{DiffTypeHelper}}     \{ \textcolor{keyword}{using} \mbox{\hyperlink{struct_atomic_helpers_1_1_diff_type_helper_ae38feaa9d335c7c3b27d5a9e578e2a4f}{Type}} = T; \};}
+\DoxyCodeLine{31      \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keyword}{struct }\mbox{\hyperlink{struct_atomic_helpers_1_1_diff_type_helper}{DiffTypeHelper}}<T*> \{ \textcolor{keyword}{using} \mbox{\hyperlink{struct_atomic_helpers_1_1_diff_type_helper_3_01_t_01_5_01_4_ac9a9fd67222780cabb92b9882012a2db}{Type}} = std::ptrdiff\_t; \};}
+\DoxyCodeLine{32  \}}
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{41 \textcolor{comment}{}\textcolor{keyword}{template} <\textcolor{keyword}{typename} Type>}
+\DoxyCodeLine{42 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_atomic}{Atomic}}  final}
+\DoxyCodeLine{43 \{}
+\DoxyCodeLine{44     \textcolor{keyword}{using} \mbox{\hyperlink{struct_atomic_aaded77b60b5e3527e38034a7c72243cd}{DiffType}} = \textcolor{keyword}{typename} \mbox{\hyperlink{struct_atomic_helpers_1_1_diff_type_helper_ae38feaa9d335c7c3b27d5a9e578e2a4f}{AtomicHelpers::DiffTypeHelper<Type>::Type}};}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{47     \mbox{\hyperlink{struct_atomic_a903ef283284109ee6bdaa43d9b477224}{Atomic}}() noexcept  : \mbox{\hyperlink{struct_atomic_ac07d27537523e75989dc1bd7ee978e5f}{value}} (Type()) \{\}}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{50     \mbox{\hyperlink{struct_atomic_abf82947f4041182b22ec5c8035575519}{Atomic}} (Type initialValue) noexcept  : \mbox{\hyperlink{struct_atomic_ac07d27537523e75989dc1bd7ee978e5f}{value}} (initialValue) \{\}}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{53     \mbox{\hyperlink{struct_atomic_a482fb9fec9e47b18884a5d1f1ac4c815}{Atomic}} (\textcolor{keyword}{const} \mbox{\hyperlink{struct_atomic}{Atomic}}\& other) noexcept  : \mbox{\hyperlink{struct_atomic_ac07d27537523e75989dc1bd7ee978e5f}{value}} (other.get()) \{\}}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{56     \mbox{\hyperlink{struct_atomic_a25b0fe07fad7cfd1cf68bd02d7da2a3f}{\string~Atomic}}() noexcept}
+\DoxyCodeLine{57     \{}
+\DoxyCodeLine{58 \textcolor{preprocessor}{       \#if \_\_cpp\_lib\_atomic\_is\_always\_lock\_free}}
+\DoxyCodeLine{59         \textcolor{keyword}{static\_assert} (std::atomic<Type>::is\_always\_lock\_free,}
+\DoxyCodeLine{60                        \textcolor{stringliteral}{"{}This class can only be used for lock-\/free types"{}});}
+\DoxyCodeLine{61 \textcolor{preprocessor}{       \#endif}}
+\DoxyCodeLine{62     \}}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{65     Type \mbox{\hyperlink{struct_atomic_ad39856229e8d4e3da9088d31bad55b9e}{get}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept               \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{struct_atomic_ac07d27537523e75989dc1bd7ee978e5f}{value}}.load(); \}}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{68     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_atomic_a52abf7d407845b5ff44b46b1c96f00d1}{set}} (Type newValue) \textcolor{keyword}{noexcept}       \{ \mbox{\hyperlink{struct_atomic_ac07d27537523e75989dc1bd7ee978e5f}{value}} = newValue; \}}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{71     Type \mbox{\hyperlink{struct_atomic_a7748be1ffe12e46b6ff99a3898d90c27}{exchange}} (Type newValue) \textcolor{keyword}{noexcept}  \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{struct_atomic_ac07d27537523e75989dc1bd7ee978e5f}{value}}.exchange (newValue); \}}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{97     \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_atomic_a9c0966a21db3a9d4649f8c869bb38fa0}{compareAndSetBool}} (Type newValue, Type valueToCompare) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{98     \{}
+\DoxyCodeLine{99         \textcolor{keywordflow}{return} \mbox{\hyperlink{struct_atomic_ac07d27537523e75989dc1bd7ee978e5f}{value}}.compare\_exchange\_strong (valueToCompare, newValue);}
+\DoxyCodeLine{100     \}}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{103     \mbox{\hyperlink{struct_atomic}{Atomic<Type>}}\& \mbox{\hyperlink{struct_atomic_a81a1c1dfd8bff930a97ad3c4091101af}{operator= }}(\textcolor{keyword}{const} \mbox{\hyperlink{struct_atomic}{Atomic}}\& other) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{104     \{}
+\DoxyCodeLine{105         \mbox{\hyperlink{struct_atomic_ac07d27537523e75989dc1bd7ee978e5f}{value}} = other.value.load();}
+\DoxyCodeLine{106         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{107     \}}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{110     \mbox{\hyperlink{struct_atomic}{Atomic<Type>}}\& \mbox{\hyperlink{struct_atomic_a81a1c1dfd8bff930a97ad3c4091101af}{operator= }}(Type newValue) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{111     \{}
+\DoxyCodeLine{112         \mbox{\hyperlink{struct_atomic_ac07d27537523e75989dc1bd7ee978e5f}{value}} = newValue;}
+\DoxyCodeLine{113         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{114     \}}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{117     Type \mbox{\hyperlink{struct_atomic_a4a7ba896941874fb59a3f128913a3aaf}{operator+= }}(\mbox{\hyperlink{struct_atomic_aaded77b60b5e3527e38034a7c72243cd}{DiffType}} amountToAdd) \textcolor{keyword}{noexcept} \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{struct_atomic_ac07d27537523e75989dc1bd7ee978e5f}{value}} += amountToAdd; \}}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{120     Type \mbox{\hyperlink{struct_atomic_a07571339cdc9cb7b5f3e92f6e7542b14}{operator-\/= }}(\mbox{\hyperlink{struct_atomic_aaded77b60b5e3527e38034a7c72243cd}{DiffType}} amountToSubtract) \textcolor{keyword}{noexcept} \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{struct_atomic_ac07d27537523e75989dc1bd7ee978e5f}{value}} -\/= amountToSubtract; \}}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{123     Type \mbox{\hyperlink{struct_atomic_a9cc5a6c2e1f07cc097317fe1685819dd}{operator++}}() noexcept \{ \textcolor{keywordflow}{return} ++\mbox{\hyperlink{struct_atomic_ac07d27537523e75989dc1bd7ee978e5f}{value}}; \}}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{126     Type \mbox{\hyperlink{struct_atomic_adf3a3f87cb87e822d678dfb67f458895}{operator-\/-\/}}() noexcept \{ \textcolor{keywordflow}{return} -\/-\/\mbox{\hyperlink{struct_atomic_ac07d27537523e75989dc1bd7ee978e5f}{value}}; \}}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{133     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_atomic_a33a7257fe866463a370c8e92a208be01}{memoryBarrier}}() noexcept          \{ atomic\_thread\_fence (std::memory\_order\_seq\_cst); \}}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{136     std::atomic<Type> \mbox{\hyperlink{struct_atomic_ac07d27537523e75989dc1bd7ee978e5f}{value}};}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{138     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{139 \textcolor{preprocessor}{   \#ifndef DOXYGEN}}
+\DoxyCodeLine{140     [[deprecated (\textcolor{stringliteral}{"{}This method has been deprecated as there is no equivalent method in "{}}}
+\DoxyCodeLine{141                  \textcolor{stringliteral}{"{}std::atomic. Use compareAndSetBool instead."{}})]]}
+\DoxyCodeLine{142     Type \mbox{\hyperlink{struct_atomic_a58c15fb8f266309f4ac023e965af5b73}{compareAndSetValue}} (Type, Type) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{143 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{144 \};}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{146  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{147 }
+
+\end{DoxyCode}

@@ -1,0 +1,131 @@
+\hypertarget{juce__android___high_performance_audio_helpers_8h_source}{}\doxysection{juce\+\_\+android\+\_\+\+High\+Performance\+Audio\+Helpers.\+h}
+\label{juce__android___high_performance_audio_helpers_8h_source}\index{build/juce\_audio\_devices/native/juce\_android\_HighPerformanceAudioHelpers.h@{build/juce\_audio\_devices/native/juce\_android\_HighPerformanceAudioHelpers.h}}
+\mbox{\hyperlink{juce__android___high_performance_audio_helpers_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{5 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{6 \textcolor{comment}{}}
+\DoxyCodeLine{7 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{8 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{9 \textcolor{comment}{}}
+\DoxyCodeLine{10 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{11 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{12 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{13 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{14 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{15 \textcolor{comment}{}}
+\DoxyCodeLine{16 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{17 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{18 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{21 \textcolor{comment}{*/}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacejuce}{juce}}}
+\DoxyCodeLine{24 \{}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{33 \textcolor{comment}{}\textcolor{keyword}{namespace }AndroidHighPerformanceAudioHelpers}
+\DoxyCodeLine{34 \{}
+\DoxyCodeLine{35     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{36     \textcolor{keyword}{static} \textcolor{keywordtype}{double} getNativeSampleRate()}
+\DoxyCodeLine{37     \{}
+\DoxyCodeLine{38         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacejuce_a17bb9d32711d88dcf7a48c3728b37b08}{audioManagerGetProperty}} (\textcolor{stringliteral}{"{}android.media.property.OUTPUT\_SAMPLE\_RATE"{}}).\mbox{\hyperlink{class_string_a6d747e66888a9c7ee562ab5b67e78c3b}{getDoubleValue}}();}
+\DoxyCodeLine{39     \}}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41     \textcolor{keyword}{static} \textcolor{keywordtype}{int} getNativeBufferSizeHint()}
+\DoxyCodeLine{42     \{}
+\DoxyCodeLine{43         \textcolor{comment}{// This property is a hint of a native buffer size but it does not guarantee the size used.}}
+\DoxyCodeLine{44         \textcolor{keyword}{auto} deviceBufferSize = \mbox{\hyperlink{namespacejuce_a17bb9d32711d88dcf7a48c3728b37b08}{audioManagerGetProperty}} (\textcolor{stringliteral}{"{}android.media.property.OUTPUT\_FRAMES\_PER\_BUFFER"{}}).\mbox{\hyperlink{class_string_accbe0d347261658661458bad2c63dbe1}{getIntValue}}();}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46         \textcolor{keywordflow}{if} (deviceBufferSize == 0)}
+\DoxyCodeLine{47             \textcolor{keywordflow}{return} 192;}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49         \textcolor{keywordflow}{return} deviceBufferSize;}
+\DoxyCodeLine{50     \}}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} isProAudioDevice()}
+\DoxyCodeLine{53     \{}
+\DoxyCodeLine{54         \textcolor{keyword}{static} \textcolor{keywordtype}{bool} isSapaSupported = \mbox{\hyperlink{class_system_stats_ac7c9111c08d44389ac4b405a0eac3009}{SystemStats::getDeviceManufacturer}}().\mbox{\hyperlink{class_string_aee0b65ec25ce0a6f9c3590552ee1b2e8}{containsIgnoreCase}} (\textcolor{stringliteral}{"{}SAMSUNG"{}})}
+\DoxyCodeLine{55                                      \&\& \mbox{\hyperlink{class_dynamic_library}{DynamicLibrary}}().\mbox{\hyperlink{class_dynamic_library_ab64b6f35270c87d0c69b422854683674}{open}} (\textcolor{stringliteral}{"{}libapa\_jni.so"{}});}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacejuce_adc2f96dcc8556f828acdb0b50ee6ef41}{androidHasSystemFeature}} (\textcolor{stringliteral}{"{}android.hardware.audio.pro"{}}) || isSapaSupported;}
+\DoxyCodeLine{58     \}}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} hasLowLatencyAudioPath()}
+\DoxyCodeLine{61     \{}
+\DoxyCodeLine{62         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacejuce_adc2f96dcc8556f828acdb0b50ee6ef41}{androidHasSystemFeature}} (\textcolor{stringliteral}{"{}android.hardware.audio.low\_latency"{}});}
+\DoxyCodeLine{63     \}}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} canUseHighPerformanceAudioPath (\textcolor{keywordtype}{int} nativeBufferSize, \textcolor{keywordtype}{int} requestedBufferSize, \textcolor{keywordtype}{int} requestedSampleRate)}
+\DoxyCodeLine{66     \{}
+\DoxyCodeLine{67         \textcolor{keywordflow}{return} ((requestedBufferSize \% nativeBufferSize) == 0)}
+\DoxyCodeLine{68                \&\& (requestedSampleRate == getNativeSampleRate())}
+\DoxyCodeLine{69                \&\& isProAudioDevice();}
+\DoxyCodeLine{70     \}}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{73     \textcolor{keyword}{static} \textcolor{keywordtype}{int} getMinimumBuffersToEnqueue (\textcolor{keywordtype}{int} nativeBufferSize, \textcolor{keywordtype}{double} requestedSampleRate)}
+\DoxyCodeLine{74     \{}
+\DoxyCodeLine{75         \textcolor{keywordflow}{if} (canUseHighPerformanceAudioPath (nativeBufferSize, nativeBufferSize, (\textcolor{keywordtype}{int}) requestedSampleRate))}
+\DoxyCodeLine{76         \{}
+\DoxyCodeLine{77             \textcolor{comment}{// see https://developer.android.com/ndk/guides/audio/opensl/opensl-\/prog-\/notes.html\#sandp}}
+\DoxyCodeLine{78             \textcolor{comment}{// "{}For Android 4.2 (API level 17) and earlier, a buffer count of two or more is required}}
+\DoxyCodeLine{79             \textcolor{comment}{//  for lower latency. Beginning with Android 4.3 (API level 18), a buffer count of one}}
+\DoxyCodeLine{80             \textcolor{comment}{//  is sufficient for lower latency."{}}}
+\DoxyCodeLine{81             \textcolor{keywordflow}{return} (\mbox{\hyperlink{namespacejuce_a5f3f814b10a0af4c725415ceacdfde7c}{getAndroidSDKVersion}}() >= 18 ? 1 : 2);}
+\DoxyCodeLine{82         \}}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84         \textcolor{comment}{// not using low-\/latency path so we can use the absolute minimum number of buffers to queue}}
+\DoxyCodeLine{85         \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{86     \}}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88     \textcolor{keyword}{static} \textcolor{keywordtype}{int} buffersToQueueForBufferDuration (\textcolor{keywordtype}{int} nativeBufferSize, \textcolor{keywordtype}{int} bufferDurationInMs, \textcolor{keywordtype}{double} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{89     \{}
+\DoxyCodeLine{90         \textcolor{keyword}{auto} maxBufferFrames = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>} (std::ceil (bufferDurationInMs * \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}} / 1000.0));}
+\DoxyCodeLine{91         \textcolor{keyword}{auto} maxNumBuffers   = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>} (std::ceil (\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>} (maxBufferFrames)}
+\DoxyCodeLine{92                                                   / \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>} (nativeBufferSize)));}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{94         \textcolor{keywordflow}{return} \mbox{\hyperlink{group__juce__core-maths_gadfd716f36f80987d66ebc2fce819c1fe}{jmax}} (getMinimumBuffersToEnqueue (nativeBufferSize, \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}}), maxNumBuffers);}
+\DoxyCodeLine{95     \}}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97     \textcolor{keyword}{static} \textcolor{keywordtype}{int} getMaximumBuffersToEnqueue (\textcolor{keywordtype}{int} nativeBufferSize, \textcolor{keywordtype}{double} maximumSampleRate) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{98     \{}
+\DoxyCodeLine{99         \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{int} maxBufferSizeMs = 200;}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101         \textcolor{keywordflow}{return} \mbox{\hyperlink{group__juce__core-maths_gadfd716f36f80987d66ebc2fce819c1fe}{jmax}} (8, buffersToQueueForBufferDuration (nativeBufferSize, maxBufferSizeMs, maximumSampleRate));}
+\DoxyCodeLine{102     \}}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104     \textcolor{keyword}{static} \mbox{\hyperlink{class_array}{Array<int>}} getAvailableBufferSizes (\textcolor{keywordtype}{int} nativeBufferSize, \mbox{\hyperlink{class_array}{Array<double>}} availableSampleRates)}
+\DoxyCodeLine{105     \{}
+\DoxyCodeLine{106         \textcolor{keyword}{auto} minBuffersToQueue = getMinimumBuffersToEnqueue (nativeBufferSize, getNativeSampleRate());}
+\DoxyCodeLine{107         \textcolor{keyword}{auto} maxBuffersToQueue = getMaximumBuffersToEnqueue (nativeBufferSize, \mbox{\hyperlink{group__juce__core-maths_gade8104e135fee3c8b6924180e0c5c58d}{findMaximum}} (availableSampleRates.\mbox{\hyperlink{class_array_a72183f1a9e7eac684ce85bf5760c7173}{getRawDataPointer}}(),}
+\DoxyCodeLine{108                                                                                             availableSampleRates.\mbox{\hyperlink{class_array_ae79ec3b32d0c9a80dfff8ffbc41f8523}{size}}()));}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110         \mbox{\hyperlink{class_array}{Array<int>}} bufferSizes;}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = minBuffersToQueue; i <= maxBuffersToQueue; ++i)}
+\DoxyCodeLine{113             bufferSizes.\mbox{\hyperlink{class_array_a52da22e285e44171b6d6fa785a7d536a}{add}} (i * nativeBufferSize);}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115         \textcolor{keywordflow}{return} bufferSizes;}
+\DoxyCodeLine{116     \}}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118     \textcolor{keyword}{static} \textcolor{keywordtype}{int} getDefaultBufferSize (\textcolor{keywordtype}{int} nativeBufferSize, \textcolor{keywordtype}{double} currentSampleRate)}
+\DoxyCodeLine{119     \{}
+\DoxyCodeLine{120         \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{int} defaultBufferSizeForLowLatencyDeviceMs = 40;}
+\DoxyCodeLine{121         \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{int} defaultBufferSizeForStandardLatencyDeviceMs = 100;}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{123         \textcolor{keyword}{auto} defaultBufferLength = (hasLowLatencyAudioPath() ? defaultBufferSizeForLowLatencyDeviceMs}
+\DoxyCodeLine{124                                                              : defaultBufferSizeForStandardLatencyDeviceMs);}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126         \textcolor{keyword}{auto} defaultBuffersToEnqueue = buffersToQueueForBufferDuration (nativeBufferSize, defaultBufferLength, currentSampleRate);}
+\DoxyCodeLine{127         \textcolor{keywordflow}{return} defaultBuffersToEnqueue * nativeBufferSize;}
+\DoxyCodeLine{128     \}}
+\DoxyCodeLine{129 \}}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{131 \} \textcolor{comment}{// namespace juce}}
+
+\end{DoxyCode}

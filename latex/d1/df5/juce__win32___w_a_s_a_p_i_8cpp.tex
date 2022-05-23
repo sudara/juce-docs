@@ -1,0 +1,166 @@
+\hypertarget{juce__win32___w_a_s_a_p_i_8cpp}{}\doxysection{build/juce\+\_\+audio\+\_\+devices/native/juce\+\_\+win32\+\_\+\+WASAPI.cpp File Reference}
+\label{juce__win32___w_a_s_a_p_i_8cpp}\index{build/juce\_audio\_devices/native/juce\_win32\_WASAPI.cpp@{build/juce\_audio\_devices/native/juce\_win32\_WASAPI.cpp}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structjuce_1_1_i_m_m_device_collection}{juce\+::\+IMMDevice\+Collection}}
+\item 
+struct \mbox{\hyperlink{structjuce_1_1_audio_client_properties}{juce\+::\+Audio\+Client\+Properties}}
+\item 
+class \mbox{\hyperlink{classjuce_1_1_wasapi_classes_1_1_w_a_s_a_p_i_device_base}{juce\+::\+Wasapi\+Classes\+::\+WASAPIDevice\+Base}}
+\item 
+class \mbox{\hyperlink{classjuce_1_1_wasapi_classes_1_1_w_a_s_a_p_i_input_device}{juce\+::\+Wasapi\+Classes\+::\+WASAPIInput\+Device}}
+\item 
+class \mbox{\hyperlink{classjuce_1_1_wasapi_classes_1_1_w_a_s_a_p_i_output_device}{juce\+::\+Wasapi\+Classes\+::\+WASAPIOutput\+Device}}
+\item 
+class \mbox{\hyperlink{classjuce_1_1_wasapi_classes_1_1_w_a_s_a_p_i_audio_i_o_device}{juce\+::\+Wasapi\+Classes\+::\+WASAPIAudio\+IODevice}}
+\item 
+class \mbox{\hyperlink{classjuce_1_1_wasapi_classes_1_1_w_a_s_a_p_i_audio_i_o_device_type}{juce\+::\+Wasapi\+Classes\+::\+WASAPIAudio\+IODevice\+Type}}
+\item 
+struct \mbox{\hyperlink{structjuce_1_1_wasapi_classes_1_1_m_m_device_master_volume}{juce\+::\+Wasapi\+Classes\+::\+MMDevice\+Master\+Volume}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacejuce}{juce}}
+\item 
+namespace \mbox{\hyperlink{namespacejuce_1_1_wasapi_classes}{juce\+::\+Wasapi\+Classes}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{juce__win32___w_a_s_a_p_i_8cpp_a4846d8f2fc6c59aca6711f1439b17c30}{JUCE\+\_\+\+WASAPI\+\_\+\+LOGGING}}~0
+\item 
+\#define \mbox{\hyperlink{juce__win32___w_a_s_a_p_i_8cpp_a549f89a2358aff91fd489c6a2377319b}{KSDATAFORMAT\+\_\+\+SUBTYPE\+\_\+\+PCM}}~uuid\+From\+String (\char`\"{}00000001-\/0000-\/0010-\/8000-\/00aa00389b71\char`\"{})
+\item 
+\#define \mbox{\hyperlink{juce__win32___w_a_s_a_p_i_8cpp_aeb822e65423606d9bb1651b1d95d8888}{KSDATAFORMAT\+\_\+\+SUBTYPE\+\_\+\+IEEE\+\_\+\+FLOAT}}~uuid\+From\+String (\char`\"{}00000003-\/0000-\/0010-\/8000-\/00aa00389b71\char`\"{})
+\item 
+\#define \mbox{\hyperlink{juce__win32___w_a_s_a_p_i_8cpp_a1a6b9465352b17b368cd8e3d1b40179a}{JUCE\+\_\+\+SYSTEMAUDIOVOL\+\_\+\+IMPLEMENTED}}~1
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespacejuce_aa61c33896ddf86654e387058c589eff7}{juce\+::\+REFERENCE\+\_\+\+TIME}} = LONGLONG
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{namespacejuce_a641ab6ed403b2075120d0c1abf43a3c3}{juce\+::\+EData\+Flow}} \{ \mbox{\hyperlink{namespacejuce_a641ab6ed403b2075120d0c1abf43a3c3acf28cfc1054ef2282f5c396c0e0b66c5}{juce\+::e\+Render}} = 0
+, \mbox{\hyperlink{namespacejuce_a641ab6ed403b2075120d0c1abf43a3c3aaee82503df689cbd857dbd4b95b7a399}{juce\+::e\+Capture}} = (e\+Render + 1)
+, \mbox{\hyperlink{namespacejuce_a641ab6ed403b2075120d0c1abf43a3c3a31cb2dc8bad3a824df73f483261e7875}{juce\+::e\+All}} = (e\+Capture + 1)
+ \}
+\item 
+enum \{ \mbox{\hyperlink{namespacejuce_af75112d0f76a115380200dde4dbe881ea3586fcb2ae82fd1c1471903ece027163}{juce\+::\+DEVICE\+\_\+\+STATE\+\_\+\+ACTIVE}} = 1
+ \}
+\item 
+enum \{ \mbox{\hyperlink{namespacejuce_af496228e6b5e0d3774a44d4b05b63087ac04bba2640f97aea1f4201a25229d1e4}{juce\+::\+AUDCLNT\+\_\+\+BUFFERFLAGS\+\_\+\+DATA\+\_\+\+DISCONTINUITY}} = 1
+, \mbox{\hyperlink{namespacejuce_af496228e6b5e0d3774a44d4b05b63087ac004d4cceebc9ae0eea61440d75de553}{juce\+::\+AUDCLNT\+\_\+\+BUFFERFLAGS\+\_\+\+SILENT}} = 2
+ \}
+\item 
+enum \mbox{\hyperlink{namespacejuce_acbb649d5824028469691aab3dfd65093}{juce\+::\+ERole}} \{ \mbox{\hyperlink{namespacejuce_acbb649d5824028469691aab3dfd65093a0ee7e9db08c99b65a0d2e46a7fec194e}{juce\+::e\+Console}} = 0
+, \mbox{\hyperlink{namespacejuce_acbb649d5824028469691aab3dfd65093a2bcc8e3c4f50420b35d19aa68adccfa0}{juce\+::e\+Multimedia}} = (e\+Console + 1)
+, \mbox{\hyperlink{namespacejuce_acbb649d5824028469691aab3dfd65093a7db4e65d56a013456dba9e51826b36a9}{juce\+::e\+Communications}} = (e\+Multimedia + 1)
+ \}
+\item 
+enum \mbox{\hyperlink{namespacejuce_a27f5058949712918c5493bc4fae64b3c}{juce\+::\+AVRT\+\_\+\+PRIORITY}} \{ \mbox{\hyperlink{namespacejuce_a27f5058949712918c5493bc4fae64b3ca7df7f7d0e002c8ed3dd07bf7252eea50}{juce\+::\+AVRT\+\_\+\+PRIORITY\+\_\+\+LOW}} = -\/1
+, \mbox{\hyperlink{namespacejuce_a27f5058949712918c5493bc4fae64b3ca81ee2c3cf36d8ad133cf3c65b59fcee5}{juce\+::\+AVRT\+\_\+\+PRIORITY\+\_\+\+NORMAL}}
+, \mbox{\hyperlink{namespacejuce_a27f5058949712918c5493bc4fae64b3cad86d7b1a57c2a063dd2dd287df0c781d}{juce\+::\+AVRT\+\_\+\+PRIORITY\+\_\+\+HIGH}}
+, \mbox{\hyperlink{namespacejuce_a27f5058949712918c5493bc4fae64b3cabc800e23dd6fc6d0a1a02effae478dfd}{juce\+::\+AVRT\+\_\+\+PRIORITY\+\_\+\+CRITICAL}}
+ \}
+\item 
+enum \mbox{\hyperlink{namespacejuce_a873e689effaae27c504c8773cea8e5de}{juce\+::\+AUDCLNT\+\_\+\+SHAREMODE}} \{ \mbox{\hyperlink{namespacejuce_a873e689effaae27c504c8773cea8e5deac503fda450159e186523a208f46df027}{juce\+::\+AUDCLNT\+\_\+\+SHAREMODE\+\_\+\+SHARED}}
+, \mbox{\hyperlink{namespacejuce_a873e689effaae27c504c8773cea8e5dea48506e93cd19547ca018c4cb47b9c8f8}{juce\+::\+AUDCLNT\+\_\+\+SHAREMODE\+\_\+\+EXCLUSIVE}}
+ \}
+\item 
+enum \mbox{\hyperlink{namespacejuce_aeff560b9eae3bc7ad2da8a96d91648b0}{juce\+::\+AUDIO\+\_\+\+STREAM\+\_\+\+CATEGORY}} \{ \newline
+\mbox{\hyperlink{namespacejuce_aeff560b9eae3bc7ad2da8a96d91648b0abd2aff5c03ccc80d7f6166173c0d5ac6}{juce\+::\+Audio\+Category\+\_\+\+Other}} = 0
+, \mbox{\hyperlink{namespacejuce_aeff560b9eae3bc7ad2da8a96d91648b0a63b17ffaa29a17b9ab74941705389d73}{juce\+::\+Audio\+Category\+\_\+\+Foreground\+Only\+Media}}
+, \mbox{\hyperlink{namespacejuce_aeff560b9eae3bc7ad2da8a96d91648b0a0396515b69df4acd7e06dd9f3f1d9743}{juce\+::\+Audio\+Category\+\_\+\+Background\+Capable\+Media}}
+, \mbox{\hyperlink{namespacejuce_aeff560b9eae3bc7ad2da8a96d91648b0a2f91dd497ad119e39c0130816b47fa2d}{juce\+::\+Audio\+Category\+\_\+\+Communications}}
+, \newline
+\mbox{\hyperlink{namespacejuce_aeff560b9eae3bc7ad2da8a96d91648b0ab53eaf8e2566dac4083686f0014f1b63}{juce\+::\+Audio\+Category\+\_\+\+Alerts}}
+, \mbox{\hyperlink{namespacejuce_aeff560b9eae3bc7ad2da8a96d91648b0afb4219c0c93d2e0e6ef1cd598da93cb7}{juce\+::\+Audio\+Category\+\_\+\+Sound\+Effects}}
+, \mbox{\hyperlink{namespacejuce_aeff560b9eae3bc7ad2da8a96d91648b0a01bf12e25f96b7add977193970c7c185}{juce\+::\+Audio\+Category\+\_\+\+Game\+Effects}}
+, \mbox{\hyperlink{namespacejuce_aeff560b9eae3bc7ad2da8a96d91648b0a6b43dad3777f057a2bd389427c150eda}{juce\+::\+Audio\+Category\+\_\+\+Game\+Media}}
+, \newline
+\mbox{\hyperlink{namespacejuce_aeff560b9eae3bc7ad2da8a96d91648b0ab36e5c871dc2e6412c4de45e6643d94d}{juce\+::\+Audio\+Category\+\_\+\+Game\+Chat}}
+, \mbox{\hyperlink{namespacejuce_aeff560b9eae3bc7ad2da8a96d91648b0a6b4774b26a9d35c8308eeb7022cbf459}{juce\+::\+Audio\+Category\+\_\+\+Speech}}
+, \mbox{\hyperlink{namespacejuce_aeff560b9eae3bc7ad2da8a96d91648b0a74f581e46d4e7960de3d21a4b88557a7}{juce\+::\+Audio\+Category\+\_\+\+Movie}}
+, \mbox{\hyperlink{namespacejuce_aeff560b9eae3bc7ad2da8a96d91648b0a40e8f6f7facf202cfc5468fba7e71d80}{juce\+::\+Audio\+Category\+\_\+\+Media}}
+ \}
+\item 
+enum \mbox{\hyperlink{namespacejuce_ae938c941db64a7c2eb100f1d6e7d90cb}{juce\+::\+Audio\+Session\+Disconnect\+Reason}} \{ \newline
+\mbox{\hyperlink{namespacejuce_ae938c941db64a7c2eb100f1d6e7d90cbafc211d8e6957f3a66b5b21037eb18998}{juce\+::\+Disconnect\+Reason\+Device\+Removal}} = 0
+, \mbox{\hyperlink{namespacejuce_ae938c941db64a7c2eb100f1d6e7d90cba6b45d81e735475397c4df82717d54fb9}{juce\+::\+Disconnect\+Reason\+Server\+Shutdown}} = 1
+, \mbox{\hyperlink{namespacejuce_ae938c941db64a7c2eb100f1d6e7d90cbadbe13843d7bdae747909f4d529c737c6}{juce\+::\+Disconnect\+Reason\+Format\+Changed}} = 2
+, \mbox{\hyperlink{namespacejuce_ae938c941db64a7c2eb100f1d6e7d90cba0c1209d6c2538bd0544dca32e37f79bc}{juce\+::\+Disconnect\+Reason\+Session\+Logoff}} = 3
+, \newline
+\mbox{\hyperlink{namespacejuce_ae938c941db64a7c2eb100f1d6e7d90cbab4ff7f86a3b29527166091f6f5060417}{juce\+::\+Disconnect\+Reason\+Session\+Disconnected}} = 4
+, \mbox{\hyperlink{namespacejuce_ae938c941db64a7c2eb100f1d6e7d90cba52d0ce540882fa25c91dc38942e396ad}{juce\+::\+Disconnect\+Reason\+Exclusive\+Mode\+Override}} = 5
+ \}
+\item 
+enum \mbox{\hyperlink{namespacejuce_a2d4450ab7c38799a8551cfc56199f467}{juce\+::\+Audio\+Session\+State}} \{ \mbox{\hyperlink{namespacejuce_a2d4450ab7c38799a8551cfc56199f467ad4f8dc69d48c6c4817037db53971b947}{juce\+::\+Audio\+Session\+State\+Inactive}} = 0
+, \mbox{\hyperlink{namespacejuce_a2d4450ab7c38799a8551cfc56199f467a1c5cfd3f634a778c641b0adcae1deb6c}{juce\+::\+Audio\+Session\+State\+Active}} = 1
+, \mbox{\hyperlink{namespacejuce_a2d4450ab7c38799a8551cfc56199f467afe07eac0d13d56b50f4f021069b08ae9}{juce\+::\+Audio\+Session\+State\+Expired}} = 2
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{namespacejuce_1_1_wasapi_classes_a02cdce9090f54e972543758de2f0e124}{juce\+::\+Wasapi\+Classes\+::log\+Failure}} (HRESULT hr)
+\item 
+bool \mbox{\hyperlink{namespacejuce_1_1_wasapi_classes_a5b767bd7f8dd75d748eab32c03d2b8cf}{juce\+::\+Wasapi\+Classes\+::check}} (HRESULT hr)
+\item 
+\mbox{\hyperlink{namespacejuce_a4d9ff008e3a8d68fb5f620da6a75d7da}{juce\+::\+JUCE\+\_\+\+IUNKNOWNCLASS}} (IProperty\+Store, \char`\"{}886d8eeb-\/8cf2-\/4446-\/8d02-\/cdba1dbdcf99\char`\"{})
+\item 
+\mbox{\hyperlink{namespacejuce_a29145467db0b123b7bb635c4157e8b5b}{juce\+::\+JUCE\+\_\+\+IUNKNOWNCLASS}} (IMMDevice, \char`\"{}D666063F-\/1587-\/4E43-\/81\mbox{\hyperlink{md5_8c_a3c2b6b2959faadfcf644757cb570b734}{F1}}-\/B948\+E807363F\char`\"{})
+\item 
+\mbox{\hyperlink{namespacejuce_a092b42c5b4d46781bdaac824267f3b5e}{juce\+::\+JUCE\+\_\+\+IUNKNOWNCLASS}} (IMMEndpoint, \char`\"{}1BE09788-\/6894-\/4089-\/8586-\/9A2\+A6\+C265\+AC5\char`\"{})
+\item 
+\mbox{\hyperlink{namespacejuce_ae006edab87f36a99de1d1221d39eedf5}{juce\+::\+JUCE\+\_\+\+IUNKNOWNCLASS}} (IMMNotification\+Client, \char`\"{}7991EEC9-\/7E89-\/4D85-\/8390-\/6C703\+CEC60\+C0\char`\"{})
+\item 
+\mbox{\hyperlink{namespacejuce_ad7528a2e7efd2b3c0929203f292a7bc6}{juce\+::\+JUCE\+\_\+\+IUNKNOWNCLASS}} (IMMDevice\+Enumerator, \char`\"{}A95664\+D2-\/9614-\/4F35-\/A746-\/DE8\+DB63617\+E6\char`\"{})
+\item 
+\mbox{\hyperlink{namespacejuce_aa9418dea713095d724e2729260a095d9}{juce\+::\+JUCE\+\_\+\+COMCLASS}} (MMDevice\+Enumerator, \char`\"{}BCDE0395-\/E52F-\/467C-\/8E3D-\/C4579291692E\char`\"{})
+\item 
+\mbox{\hyperlink{namespacejuce_a0bf5e86e2af59af006096645f3fa525f}{juce\+::\+JUCE\+\_\+\+IUNKNOWNCLASS}} (IAudio\+Client, \char`\"{}1CB9\+AD4C-\/DBFA-\/4c32-\/B178-\/C2\+F568\+A703\+B2\char`\"{})
+\item 
+\mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a8bc7b3278c6bc0a777a832f39cf37ae0}{JUCE\+\_\+\+COMCLASS}}(IAudio\+Client2, \char`\"{}726778CD-\/F60A-\/4eda-\/82DE-\/E47610\+CD78\+AA\char`\"{}) JUCE\+\_\+\+COMCLASS(IAudio\+Client3, \char`\"{}1CB9\+AD4C-\/DBFA-\/4c32-\/B178-\/C2\+F568\+A703\+B2\char`\"{}) \mbox{\hyperlink{namespacejuce_a1dce14c7411b4ffeb4a4f98cbd87fc6c}{juce\+::\+JUCE\+\_\+\+IUNKNOWNCLASS}} (IAudio\+Capture\+Client, \char`\"{}C8\+ADBD64-\/E71E-\/48a0-\/A4\+DE-\/185C395\+CD317\char`\"{})
+\item 
+\mbox{\hyperlink{namespacejuce_aacbfa3529933c2c5f9c22a1e11f70ed6}{juce\+::\+JUCE\+\_\+\+IUNKNOWNCLASS}} (IAudio\+Render\+Client, \char`\"{}F294\+ACFC-\/3146-\/4483-\/A7\+BF-\/ADDCA7\+C260\+E2\char`\"{})
+\item 
+\mbox{\hyperlink{namespacejuce_ad2beeb14788bd7c7aa3714ea0a1b03b2}{juce\+::\+JUCE\+\_\+\+IUNKNOWNCLASS}} (IAudio\+Endpoint\+Volume, \char`\"{}5CDF2\+C82-\/841E-\/4546-\/9722-\/0\+CF74078229A\char`\"{})
+\item 
+\mbox{\hyperlink{namespacejuce_a54e6950a0a93aeb0cd72fbf65d2e2672}{juce\+::\+JUCE\+\_\+\+IUNKNOWNCLASS}} (IAudio\+Session\+Events, \char`\"{}24918ACC-\/64B3-\/37C1-\/8CA9-\/74A66\+E9957\+A8\char`\"{})
+\item 
+\mbox{\hyperlink{namespacejuce_aa07e3fd74c3b32493a81588325b6cd7d}{juce\+::\+JUCE\+\_\+\+IUNKNOWNCLASS}} (IAudio\+Session\+Control, \char`\"{}F4\+B1\+A599-\/7266-\/4319-\/A8\+CA-\/E70\+ACB11\+E8\+CD\char`\"{})
+\item 
+\mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{namespacejuce_1_1_wasapi_classes_a94d351f40d09a1b9e23e9fefe95e4cf5}{juce\+::\+Wasapi\+Classes\+::get\+Device\+ID}} (IMMDevice $\ast$device)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{juce__win32___w_a_s_a_p_i_8cpp_a1a6b9465352b17b368cd8e3d1b40179a}\label{juce__win32___w_a_s_a_p_i_8cpp_a1a6b9465352b17b368cd8e3d1b40179a}} 
+\index{juce\_win32\_WASAPI.cpp@{juce\_win32\_WASAPI.cpp}!JUCE\_SYSTEMAUDIOVOL\_IMPLEMENTED@{JUCE\_SYSTEMAUDIOVOL\_IMPLEMENTED}}
+\index{JUCE\_SYSTEMAUDIOVOL\_IMPLEMENTED@{JUCE\_SYSTEMAUDIOVOL\_IMPLEMENTED}!juce\_win32\_WASAPI.cpp@{juce\_win32\_WASAPI.cpp}}
+\doxysubsubsection{\texorpdfstring{JUCE\_SYSTEMAUDIOVOL\_IMPLEMENTED}{JUCE\_SYSTEMAUDIOVOL\_IMPLEMENTED}}
+{\footnotesize\ttfamily \#define JUCE\+\_\+\+SYSTEMAUDIOVOL\+\_\+\+IMPLEMENTED~1}
+
+\mbox{\Hypertarget{juce__win32___w_a_s_a_p_i_8cpp_a4846d8f2fc6c59aca6711f1439b17c30}\label{juce__win32___w_a_s_a_p_i_8cpp_a4846d8f2fc6c59aca6711f1439b17c30}} 
+\index{juce\_win32\_WASAPI.cpp@{juce\_win32\_WASAPI.cpp}!JUCE\_WASAPI\_LOGGING@{JUCE\_WASAPI\_LOGGING}}
+\index{JUCE\_WASAPI\_LOGGING@{JUCE\_WASAPI\_LOGGING}!juce\_win32\_WASAPI.cpp@{juce\_win32\_WASAPI.cpp}}
+\doxysubsubsection{\texorpdfstring{JUCE\_WASAPI\_LOGGING}{JUCE\_WASAPI\_LOGGING}}
+{\footnotesize\ttfamily \#define JUCE\+\_\+\+WASAPI\+\_\+\+LOGGING~0}
+
+\mbox{\Hypertarget{juce__win32___w_a_s_a_p_i_8cpp_aeb822e65423606d9bb1651b1d95d8888}\label{juce__win32___w_a_s_a_p_i_8cpp_aeb822e65423606d9bb1651b1d95d8888}} 
+\index{juce\_win32\_WASAPI.cpp@{juce\_win32\_WASAPI.cpp}!KSDATAFORMAT\_SUBTYPE\_IEEE\_FLOAT@{KSDATAFORMAT\_SUBTYPE\_IEEE\_FLOAT}}
+\index{KSDATAFORMAT\_SUBTYPE\_IEEE\_FLOAT@{KSDATAFORMAT\_SUBTYPE\_IEEE\_FLOAT}!juce\_win32\_WASAPI.cpp@{juce\_win32\_WASAPI.cpp}}
+\doxysubsubsection{\texorpdfstring{KSDATAFORMAT\_SUBTYPE\_IEEE\_FLOAT}{KSDATAFORMAT\_SUBTYPE\_IEEE\_FLOAT}}
+{\footnotesize\ttfamily \#define KSDATAFORMAT\+\_\+\+SUBTYPE\+\_\+\+IEEE\+\_\+\+FLOAT~uuid\+From\+String (\char`\"{}00000003-\/0000-\/0010-\/8000-\/00aa00389b71\char`\"{})}
+
+\mbox{\Hypertarget{juce__win32___w_a_s_a_p_i_8cpp_a549f89a2358aff91fd489c6a2377319b}\label{juce__win32___w_a_s_a_p_i_8cpp_a549f89a2358aff91fd489c6a2377319b}} 
+\index{juce\_win32\_WASAPI.cpp@{juce\_win32\_WASAPI.cpp}!KSDATAFORMAT\_SUBTYPE\_PCM@{KSDATAFORMAT\_SUBTYPE\_PCM}}
+\index{KSDATAFORMAT\_SUBTYPE\_PCM@{KSDATAFORMAT\_SUBTYPE\_PCM}!juce\_win32\_WASAPI.cpp@{juce\_win32\_WASAPI.cpp}}
+\doxysubsubsection{\texorpdfstring{KSDATAFORMAT\_SUBTYPE\_PCM}{KSDATAFORMAT\_SUBTYPE\_PCM}}
+{\footnotesize\ttfamily \#define KSDATAFORMAT\+\_\+\+SUBTYPE\+\_\+\+PCM~uuid\+From\+String (\char`\"{}00000001-\/0000-\/0010-\/8000-\/00aa00389b71\char`\"{})}
+

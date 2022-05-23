@@ -1,0 +1,421 @@
+\hypertarget{juce___text_editor_8h_source}{}\doxysection{juce\+\_\+\+Text\+Editor.\+h}
+\label{juce___text_editor_8h_source}\index{build/juce\_gui\_basics/widgets/juce\_TextEditor.h@{build/juce\_gui\_basics/widgets/juce\_TextEditor.h}}
+\mbox{\hyperlink{juce___text_editor_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{41 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_text_editor}{TextEditor}}  : \textcolor{keyword}{public} \mbox{\hyperlink{class_component}{Component}},}
+\DoxyCodeLine{42                               \textcolor{keyword}{public} \mbox{\hyperlink{class_text_input_target}{TextInputTarget}},}
+\DoxyCodeLine{43                               \textcolor{keyword}{public} \mbox{\hyperlink{class_settable_tooltip_client}{SettableTooltipClient}}}
+\DoxyCodeLine{44 \{}
+\DoxyCodeLine{45 \textcolor{keyword}{public}:}
+\DoxyCodeLine{46     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{57 \textcolor{comment}{}    \textcolor{keyword}{explicit} \mbox{\hyperlink{class_text_editor_ad34439cf56ba1ded149c0d7e88cde6fa}{TextEditor}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& componentName = \mbox{\hyperlink{class_string}{String}}(),}
+\DoxyCodeLine{58                          \mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} passwordCharacter = 0);}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{61     \mbox{\hyperlink{class_text_editor_ac231bb1489fd327db0ee13385d1b625a}{\string~TextEditor}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{79 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_a939bf23c983f695379a92f9612928160}{setMultiLine}} (\textcolor{keywordtype}{bool} shouldBeMultiLine,}
+\DoxyCodeLine{80                        \textcolor{keywordtype}{bool} shouldWordWrap = \textcolor{keyword}{true});}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{83     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_text_editor_a95dadf0e5c4ced9a7f740b7339ecbc82}{isMultiLine}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{93 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_a60e99221178fe5510edcfcd246a8bf2c}{setReturnKeyStartsNewLine}} (\textcolor{keywordtype}{bool} shouldStartNewLine);}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{98     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_text_editor_ac61bc1508cdbdff9e6075b554f647f7a}{getReturnKeyStartsNewLine}}()\textcolor{keyword}{ const                      }\{ \textcolor{keywordflow}{return} returnKeyStartsNewLine; \}}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{106     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_ac2ac11e5eab2ec09cf47a26d84f5bf85}{setTabKeyUsedAsCharacter}} (\textcolor{keywordtype}{bool} shouldTabKeyBeUsed);}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{111     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_text_editor_aa341e626652e47de0e22cda9bd51ece1}{isTabKeyUsedAsCharacter}}()\textcolor{keyword}{ const                        }\{ \textcolor{keywordflow}{return} tabKeyUsed; \}}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{119     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_a60a856b5c49ff27fb5f2a00f92bd251f}{setEscapeAndReturnKeysConsumed}} (\textcolor{keywordtype}{bool} shouldBeConsumed) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{121     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{131 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_a046d359a0f6709b02a21d45c5958817a}{setReadOnly}} (\textcolor{keywordtype}{bool} shouldBeReadOnly);}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{134     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_text_editor_ada40a35cf274597068915046856ed1e3}{isReadOnly}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{136     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{141 \textcolor{comment}{}    \textcolor{keywordtype}{void} setCaretVisible (\textcolor{keywordtype}{bool} shouldBeVisible);}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{146     \textcolor{keywordtype}{bool} isCaretVisible() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                            \{ \textcolor{keywordflow}{return} caretVisible \&\& ! isReadOnly(); \}}
+\DoxyCodeLine{147 }
+\DoxyCodeLine{148     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{157 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_aea30c7c5e684898eb2cac76983c38b48}{setScrollbarsShown}} (\textcolor{keywordtype}{bool} shouldBeEnabled);}
+\DoxyCodeLine{158 }
+\DoxyCodeLine{162     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_text_editor_aa30f090abb8e9c8804f35f4fd45e8bb7}{areScrollbarsShown}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                        \{ \textcolor{keywordflow}{return} scrollbarVisible; \}}
+\DoxyCodeLine{163 }
+\DoxyCodeLine{173     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_a8978b1e9eecf1c1ac3576f024bb7bde0}{setPasswordCharacter}} (\mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} passwordCharacter);}
+\DoxyCodeLine{174 }
+\DoxyCodeLine{178     \mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} \mbox{\hyperlink{class_text_editor_ad77f87717c15cc311d21ec4e01c9f52f}{getPasswordCharacter}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                \{ \textcolor{keywordflow}{return} passwordCharacter; \}}
+\DoxyCodeLine{179 }
+\DoxyCodeLine{180     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{188 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_abe2b07aad6f2a7d95f9a31d672964d52}{setPopupMenuEnabled}} (\textcolor{keywordtype}{bool} menuEnabled);}
+\DoxyCodeLine{189 }
+\DoxyCodeLine{193     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_text_editor_ac6480b421592f4d2cd4dd309193d8dff}{isPopupMenuEnabled}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                        \{ \textcolor{keywordflow}{return} popupMenuEnabled; \}}
+\DoxyCodeLine{194 }
+\DoxyCodeLine{196     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_text_editor_a7dd76244ccf284b367d6bef080f20746}{isPopupMenuCurrentlyActive}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                \{ \textcolor{keywordflow}{return} menuActive; \}}
+\DoxyCodeLine{197 }
+\DoxyCodeLine{198     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{208 \textcolor{comment}{}    \textcolor{keyword}{enum} \mbox{\hyperlink{class_text_editor_aa805220923c93cd808a92fff0e3fb71d}{ColourIds}}}
+\DoxyCodeLine{209     \{}
+\DoxyCodeLine{210         backgroundColourId       = 0x1000200, }
+\DoxyCodeLine{213         textColourId             = 0x1000201, }
+\DoxyCodeLine{218         highlightColourId        = 0x1000202, }
+\DoxyCodeLine{222         highlightedTextColourId  = 0x1000203, }
+\DoxyCodeLine{224         outlineColourId          = 0x1000205, }
+\DoxyCodeLine{227         focusedOutlineColourId   = 0x1000206, }
+\DoxyCodeLine{230         shadowColourId           = 0x1000207, }
+\DoxyCodeLine{232     \};}
+\DoxyCodeLine{233 }
+\DoxyCodeLine{234     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{243 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_a92819cc8faf1b9755d23c3757948f1c7}{setFont}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_font}{Font}}\& newFont);}
+\DoxyCodeLine{244 }
+\DoxyCodeLine{252     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_af446cfc2b48595e3c724d34ae4b0082e}{applyFontToAllText}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_font}{Font}}\& newFont, \textcolor{keywordtype}{bool} changeCurrentFont = \textcolor{keyword}{true});}
+\DoxyCodeLine{253 }
+\DoxyCodeLine{258     \textcolor{keyword}{const} \mbox{\hyperlink{class_font}{Font}}\& \mbox{\hyperlink{class_text_editor_a04adb7e93c1847fcb5bbf2efc5508405}{getFont}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept  \{ \textcolor{keywordflow}{return} currentFont; \}}
+\DoxyCodeLine{259 }
+\DoxyCodeLine{265     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_a9c4c1cceaadc0ce0531789c39a2715c2}{applyColourToAllText}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_colour}{Colour}}\& newColour, \textcolor{keywordtype}{bool} changeCurrentTextColour = \textcolor{keyword}{true});}
+\DoxyCodeLine{266 }
+\DoxyCodeLine{271     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_a9282d3c2ee79f3063fa83fd6b28c176e}{setWhitespaceUnderlined}} (\textcolor{keywordtype}{bool} shouldUnderlineWhitespace) \textcolor{keyword}{noexcept}  \{ underlineWhitespace = shouldUnderlineWhitespace; \}}
+\DoxyCodeLine{272 }
+\DoxyCodeLine{277     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_text_editor_ab28dee2edc03bb2b4f49a12f4aceb7d4}{isWhitespaceUnderlined}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                            \{ \textcolor{keywordflow}{return} underlineWhitespace; \}}
+\DoxyCodeLine{278 }
+\DoxyCodeLine{279     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{287 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_a12de680fb05a19ca5d20107787ec73cf}{setSelectAllWhenFocused}} (\textcolor{keywordtype}{bool} shouldSelectAll);}
+\DoxyCodeLine{288 }
+\DoxyCodeLine{295     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_a868535223456be989e6d3411bf62f2d2}{setTextToShowWhenEmpty}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& text, \mbox{\hyperlink{class_colour}{Colour}} colourToUse);}
+\DoxyCodeLine{296 }
+\DoxyCodeLine{301     \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{class_text_editor_a810458136128f010b34b606269b5e74f}{getTextToShowWhenEmpty}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept    \{ \textcolor{keywordflow}{return} textToShowWhenEmpty; \}}
+\DoxyCodeLine{302 }
+\DoxyCodeLine{303     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{307 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_a9f71873e9e95c27cf8d5ef8b3c12b1e0}{setScrollBarThickness}} (\textcolor{keywordtype}{int} newThicknessPixels);}
+\DoxyCodeLine{308 }
+\DoxyCodeLine{309     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{315 \textcolor{comment}{}    \textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_text_editor_1_1_listener}{Listener}}}
+\DoxyCodeLine{316     \{}
+\DoxyCodeLine{317     \textcolor{keyword}{public}:}
+\DoxyCodeLine{319         \textcolor{keyword}{virtual} \mbox{\hyperlink{class_text_editor_1_1_listener_a42da54f2ebea73a7a300cee4b74be0bb}{\string~Listener}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{320 }
+\DoxyCodeLine{322         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_1_1_listener_a17ec33c8bc4e83799f0edbfc559c761c}{textEditorTextChanged}} (\mbox{\hyperlink{class_text_editor}{TextEditor}}\&) \{\}}
+\DoxyCodeLine{323 }
+\DoxyCodeLine{325         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_1_1_listener_a77e21f1f397b50355221f8fff152958f}{textEditorReturnKeyPressed}} (\mbox{\hyperlink{class_text_editor}{TextEditor}}\&) \{\}}
+\DoxyCodeLine{326 }
+\DoxyCodeLine{328         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_1_1_listener_a8c927f60d0a7266d4895f577aceb7e50}{textEditorEscapeKeyPressed}} (\mbox{\hyperlink{class_text_editor}{TextEditor}}\&) \{\}}
+\DoxyCodeLine{329 }
+\DoxyCodeLine{331         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_1_1_listener_a9010f8bb6a6e712402ba39e76fafb9fe}{textEditorFocusLost}} (\mbox{\hyperlink{class_text_editor}{TextEditor}}\&) \{\}}
+\DoxyCodeLine{332     \};}
+\DoxyCodeLine{333 }
+\DoxyCodeLine{337     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_a393bac9005237b946c8ef81bd783477d}{addListener}} (\mbox{\hyperlink{class_text_editor_1_1_listener}{Listener}}* newListener);}
+\DoxyCodeLine{338 }
+\DoxyCodeLine{342     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_af3008955686b9efd7cbb723646260f06}{removeListener}} (\mbox{\hyperlink{class_text_editor_1_1_listener}{Listener}}* listenerToRemove);}
+\DoxyCodeLine{343 }
+\DoxyCodeLine{344     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{346 \textcolor{comment}{}    \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}}()> \mbox{\hyperlink{class_text_editor_a26a5f4afddb5fee9801bf6951b7e7ae9}{onTextChange}};}
+\DoxyCodeLine{347 }
+\DoxyCodeLine{349     \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}}()> \mbox{\hyperlink{class_text_editor_ac5ba45ff247b024411782937a8eab829}{onReturnKey}};}
+\DoxyCodeLine{350 }
+\DoxyCodeLine{352     \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}}()> \mbox{\hyperlink{class_text_editor_a23265c4ea9faadcbb5dbc21359ace16b}{onEscapeKey}};}
+\DoxyCodeLine{353 }
+\DoxyCodeLine{355     \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}}()> \mbox{\hyperlink{class_text_editor_a6b50b93169799fcd65be706fc7a5703c}{onFocusLost}};}
+\DoxyCodeLine{356 }
+\DoxyCodeLine{357     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{359 \textcolor{comment}{}    \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{class_text_editor_a1abc38160319685104de2b0aeadf990b}{getText}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{360 }
+\DoxyCodeLine{362     \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{class_text_editor_a43ad456e17f0234da93370b913e2ba3a}{getTextInRange}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_range}{Range<int>}}\& textRange) \textcolor{keyword}{const override};}
+\DoxyCodeLine{363 }
+\DoxyCodeLine{367     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_text_editor_a5dccdf96ca603e6b632418a36441fc67}{isEmpty}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{368 }
+\DoxyCodeLine{381     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_a9fd6243466c8122ccfffc03fa39f6c4f}{setText}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& newText,}
+\DoxyCodeLine{382                   \textcolor{keywordtype}{bool} sendTextChangeMessage = \textcolor{keyword}{true});}
+\DoxyCodeLine{383 }
+\DoxyCodeLine{390     \mbox{\hyperlink{class_value}{Value}}\& \mbox{\hyperlink{class_text_editor_ad1f3d5354b3dae36816fe60453484ba8}{getTextValue}}();}
+\DoxyCodeLine{391 }
+\DoxyCodeLine{402     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_a366156a95212e4aa7001e4bb2ebe1282}{insertTextAtCaret}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& textToInsert) \textcolor{keyword}{override};}
+\DoxyCodeLine{403 }
+\DoxyCodeLine{405     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_a63f9bab8dcbec46cf840bf199e7768a1}{clear}}();}
+\DoxyCodeLine{406 }
+\DoxyCodeLine{411     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_acbdfebceaf8ba07a6242078c2da7473c}{cut}}();}
+\DoxyCodeLine{412 }
+\DoxyCodeLine{416     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_afed2255126c654d5936c242233c9153b}{copy}}();}
+\DoxyCodeLine{417 }
+\DoxyCodeLine{421     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_a2a8829c00507b8747ae6ffe71b8e18cc}{paste}}();}
+\DoxyCodeLine{422 }
+\DoxyCodeLine{423     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{427 \textcolor{comment}{}    \textcolor{keywordtype}{int} \mbox{\hyperlink{class_text_editor_a835dd55475f3f174b4694ac0e1fbfe08}{getCaretPosition}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{428 }
+\DoxyCodeLine{432     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_ae83d8245dfe738d0b2d05d0501c5e39e}{setCaretPosition}} (\textcolor{keywordtype}{int} newIndex);}
+\DoxyCodeLine{433 }
+\DoxyCodeLine{445     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_a98c2a07e4f2d75014005ea2a343d30e8}{scrollEditorToPositionCaret}} (\textcolor{keywordtype}{int} desiredCaretX, \textcolor{keywordtype}{int} desiredCaretY);}
+\DoxyCodeLine{446 }
+\DoxyCodeLine{452     \mbox{\hyperlink{class_rectangle}{Rectangle<int>}} \mbox{\hyperlink{class_text_editor_a3cf829687707c126065bf9bef909c556}{getCaretRectangle}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{453 }
+\DoxyCodeLine{455     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_a8ecda909495a70bc8d55d89a2a07a959}{setHighlightedRegion}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_range}{Range<int>}}\& newSelection) \textcolor{keyword}{override};}
+\DoxyCodeLine{456 }
+\DoxyCodeLine{461     \mbox{\hyperlink{class_range}{Range<int>}} \mbox{\hyperlink{class_text_editor_a80dc26e2b41b53e9c3b0b477a8180522}{getHighlightedRegion}}()\textcolor{keyword}{ const override            }\{ \textcolor{keywordflow}{return} selection; \}}
+\DoxyCodeLine{462 }
+\DoxyCodeLine{464     \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{class_text_editor_a933ab9cb0e2618fb83b7a6088722755a}{getHighlightedText}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{465 }
+\DoxyCodeLine{469     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_text_editor_a840302f0b45b6e1012a29bbf5eff77db}{getTextIndexAt}} (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{470 }
+\DoxyCodeLine{476     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_text_editor_a2e2686c3bf9fa2be28440e24d4c9010b}{getTotalNumChars}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{477 }
+\DoxyCodeLine{483     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_text_editor_a91804ec8a81f106fd644c9feb490f19a}{getTextWidth}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{484 }
+\DoxyCodeLine{490     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_text_editor_a450479cff80433224408eb0f5f76585a}{getTextHeight}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{491 }
+\DoxyCodeLine{495     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_a33de8e25ff72f21f74fa4cb22343e3bf}{setIndents}} (\textcolor{keywordtype}{int} newLeftIndent, \textcolor{keywordtype}{int} newTopIndent);}
+\DoxyCodeLine{496 }
+\DoxyCodeLine{500     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_text_editor_abb5dfef9ea5b4a99d694f6975bd4f311}{getTopIndent}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept   \{ \textcolor{keywordflow}{return} topIndent; \}}
+\DoxyCodeLine{501 }
+\DoxyCodeLine{505     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_text_editor_a2c28cfce24a60eac4c562451cd1462d9}{getLeftIndent}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept  \{ \textcolor{keywordflow}{return} leftIndent; \}}
+\DoxyCodeLine{506 }
+\DoxyCodeLine{510     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_a0e064a3389a8ba10cb3acfa5888b69fe}{setBorder}} (\mbox{\hyperlink{class_border_size}{BorderSize<int>}} \mbox{\hyperlink{namespacegl_a42d88a41fffe190a32983d0a38a53e6e}{border}});}
+\DoxyCodeLine{511 }
+\DoxyCodeLine{515     \mbox{\hyperlink{class_border_size}{BorderSize<int>}} \mbox{\hyperlink{class_text_editor_aeca92720e5236d5ec6ac016f48bb8d34}{getBorder}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{516 }
+\DoxyCodeLine{522     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_ac263b589275580c0a2a89de9e02f0061}{setScrollToShowCursor}} (\textcolor{keywordtype}{bool} shouldScrollToShowCaret);}
+\DoxyCodeLine{523 }
+\DoxyCodeLine{525     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_a3bb389a4c9392a32d0514399ab22dedc}{setJustification}} (\mbox{\hyperlink{class_justification}{Justification}} newJustification);}
+\DoxyCodeLine{526 }
+\DoxyCodeLine{528     \mbox{\hyperlink{class_justification}{Justification}} \mbox{\hyperlink{class_text_editor_a410fb7313aea8e0e6ff3bdecd3eb4c9f}{getJustificationType}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept             \{ \textcolor{keywordflow}{return} justification; \}}
+\DoxyCodeLine{529 }
+\DoxyCodeLine{534     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_a16a4fd8f52f4ef0f2c9a3be499ef5fca}{setLineSpacing}} (\textcolor{keywordtype}{float} newLineSpacing) \textcolor{keyword}{noexcept}             \{ lineSpacing = \mbox{\hyperlink{group__juce__core-maths_gadfd716f36f80987d66ebc2fce819c1fe}{jmax}} (1.0f, newLineSpacing); \}}
+\DoxyCodeLine{535 }
+\DoxyCodeLine{537     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_text_editor_a2a9baf01223dba7bcc90c67b4ad4a372}{getLineSpacing}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                           \{ \textcolor{keywordflow}{return} lineSpacing; \}}
+\DoxyCodeLine{538 }
+\DoxyCodeLine{545     \mbox{\hyperlink{class_rectangle_list}{RectangleList<int>}} \mbox{\hyperlink{class_text_editor_a29a0e76ab97d235d3ec504567dd14d93}{getTextBounds}} (\mbox{\hyperlink{class_range}{Range<int>}} textRange);}
+\DoxyCodeLine{546 }
+\DoxyCodeLine{547     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{548     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_af6410ba48e5c16b668d83e2f661a6b54}{moveCaretToEnd}}();}
+\DoxyCodeLine{549     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_text_editor_ab707c995a249a259d27d86c271ed2822}{moveCaretLeft}} (\textcolor{keywordtype}{bool} moveInWholeWordSteps, \textcolor{keywordtype}{bool} selecting);}
+\DoxyCodeLine{550     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_text_editor_a4020204e5c9bb2afbca36981d396b9de}{moveCaretRight}} (\textcolor{keywordtype}{bool} moveInWholeWordSteps, \textcolor{keywordtype}{bool} selecting);}
+\DoxyCodeLine{551     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_text_editor_ac823fa08b0a21a2edb100f91e3c82d57}{moveCaretUp}} (\textcolor{keywordtype}{bool} selecting);}
+\DoxyCodeLine{552     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_text_editor_adc5ff1f6ecad74fc03e702f44be6397f}{moveCaretDown}} (\textcolor{keywordtype}{bool} selecting);}
+\DoxyCodeLine{553     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_text_editor_a0df48900d231dc9d0551894ddce5dbea}{pageUp}} (\textcolor{keywordtype}{bool} selecting);}
+\DoxyCodeLine{554     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_text_editor_a58f8c5dbdcc028969013c0c16159b1df}{pageDown}} (\textcolor{keywordtype}{bool} selecting);}
+\DoxyCodeLine{555     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_text_editor_a9e7f388d8583124959d48c8c7e1a28da}{scrollDown}}();}
+\DoxyCodeLine{556     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_text_editor_af48c91e4f02e28779a7fb94689b67ad6}{scrollUp}}();}
+\DoxyCodeLine{557     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_text_editor_a8a76b9fa0e44840f19dfbac6c291a868}{moveCaretToTop}} (\textcolor{keywordtype}{bool} selecting);}
+\DoxyCodeLine{558     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_text_editor_a2089a2c71524d5c384924e5b0b8f928c}{moveCaretToStartOfLine}} (\textcolor{keywordtype}{bool} selecting);}
+\DoxyCodeLine{559     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_text_editor_a92c7bd8c9a78c55195f287c13b3e5a0e}{moveCaretToEnd}} (\textcolor{keywordtype}{bool} selecting);}
+\DoxyCodeLine{560     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_text_editor_a243ae1922d80f422222799e011a678f4}{moveCaretToEndOfLine}} (\textcolor{keywordtype}{bool} selecting);}
+\DoxyCodeLine{561     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_text_editor_a7779055c39661e834c359f6fcb5cf6b3}{deleteBackwards}} (\textcolor{keywordtype}{bool} moveInWholeWordSteps);}
+\DoxyCodeLine{562     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_text_editor_a855bfe3297879cdb7000e23f1f4d3695}{deleteForwards}} (\textcolor{keywordtype}{bool} moveInWholeWordSteps);}
+\DoxyCodeLine{563     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_text_editor_a6765bf476a80e6e69351a4971466be6f}{copyToClipboard}}();}
+\DoxyCodeLine{564     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_text_editor_aa2591b146a4707830cbd607323fd77e3}{cutToClipboard}}();}
+\DoxyCodeLine{565     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_text_editor_a15edfe8b94924ad79c517b5810955f35}{pasteFromClipboard}}();}
+\DoxyCodeLine{566     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_text_editor_a1a7c8738491f129f8811fe969b5ecaa3}{selectAll}}();}
+\DoxyCodeLine{567     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_text_editor_a66fea7cc1a783ab14dd5a6386afc53e8}{undo}}();}
+\DoxyCodeLine{568     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_text_editor_a864db67116dd13ed7a29d1d99353458c}{redo}}();}
+\DoxyCodeLine{569 }
+\DoxyCodeLine{570     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{591 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_a5887eae43a0517c2c986d54b0f02e9bd}{addPopupMenuItems}} (\mbox{\hyperlink{class_popup_menu}{PopupMenu}}\& menuToAddTo,}
+\DoxyCodeLine{592                                     \textcolor{keyword}{const} \mbox{\hyperlink{class_mouse_event}{MouseEvent}}* mouseClickEvent);}
+\DoxyCodeLine{593 }
+\DoxyCodeLine{605     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_ac90236dab0312511ba8bc38b2507a575}{performPopupMenuAction}} (\textcolor{keywordtype}{int} menuItemID);}
+\DoxyCodeLine{606 }
+\DoxyCodeLine{607     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{611 \textcolor{comment}{}    \textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_text_editor_1_1_input_filter}{InputFilter}}}
+\DoxyCodeLine{612     \{}
+\DoxyCodeLine{613     \textcolor{keyword}{public}:}
+\DoxyCodeLine{614         \mbox{\hyperlink{class_text_editor_1_1_input_filter_af08ed42cc06c02de303b134ee2766b3e}{InputFilter}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{615         \textcolor{keyword}{virtual} \mbox{\hyperlink{class_text_editor_1_1_input_filter_afb4677c48bb8b41e55a3970f687aaf99}{\string~InputFilter}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{616 }
+\DoxyCodeLine{621         \textcolor{keyword}{virtual} \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{class_text_editor_1_1_input_filter_a756742d178e4898f532bc5afa8453e56}{filterNewText}} (\mbox{\hyperlink{class_text_editor}{TextEditor}}\&, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& newInput) = 0;}
+\DoxyCodeLine{622     \};}
+\DoxyCodeLine{623 }
+\DoxyCodeLine{627     \textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_text_editor_1_1_length_and_character_restriction}{LengthAndCharacterRestriction}}  : \textcolor{keyword}{public} \mbox{\hyperlink{class_text_editor_1_1_input_filter}{InputFilter}}}
+\DoxyCodeLine{628     \{}
+\DoxyCodeLine{629     \textcolor{keyword}{public}:}
+\DoxyCodeLine{636         \mbox{\hyperlink{class_text_editor_1_1_length_and_character_restriction}{LengthAndCharacterRestriction}} (\textcolor{keywordtype}{int} maxNumChars, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& allowedCharacters);}
+\DoxyCodeLine{637 }
+\DoxyCodeLine{638         \mbox{\hyperlink{class_string}{String}} filterNewText (\mbox{\hyperlink{class_text_editor}{TextEditor}}\&, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{639 }
+\DoxyCodeLine{640     \textcolor{keyword}{private}:}
+\DoxyCodeLine{641         \mbox{\hyperlink{class_string}{String}} allowedCharacters;}
+\DoxyCodeLine{642         \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_ad63c8c128fa8b517481fc0e4973c0fce}{maxLength}};}
+\DoxyCodeLine{643 }
+\DoxyCodeLine{644         \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_text_editor_1_1_length_and_character_restriction}{LengthAndCharacterRestriction}})}
+\DoxyCodeLine{645     \};}
+\DoxyCodeLine{646 }
+\DoxyCodeLine{652     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_ad89f3ea5b240342e0cc09881919cb7bb}{setInputFilter}} (\mbox{\hyperlink{class_text_editor_1_1_input_filter}{InputFilter}}* newFilter, \textcolor{keywordtype}{bool} takeOwnership);}
+\DoxyCodeLine{653 }
+\DoxyCodeLine{655     \mbox{\hyperlink{class_text_editor_1_1_input_filter}{InputFilter}}* \mbox{\hyperlink{class_text_editor_a75c3bf76f6f016115861958e0599aad0}{getInputFilter}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                \{ \textcolor{keywordflow}{return} inputFilter; \}}
+\DoxyCodeLine{656 }
+\DoxyCodeLine{666     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_aeda595bb13ea799cce7ac121cf432f26}{setInputRestrictions}} (\textcolor{keywordtype}{int} maxTextLength,}
+\DoxyCodeLine{667                                \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& allowedCharacters = \mbox{\hyperlink{class_string}{String}}());}
+\DoxyCodeLine{668 }
+\DoxyCodeLine{669     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_a1d5a2835750358428ae45b187d10575a}{setKeyboardType}} (\mbox{\hyperlink{class_text_input_target_a097550317e3bf2aee470a20540b9edc7}{VirtualKeyboardType}} \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}}) \textcolor{keyword}{noexcept}    \{ keyboardType = \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}}; \}}
+\DoxyCodeLine{670 }
+\DoxyCodeLine{671     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{675 \textcolor{comment}{}    \textcolor{keyword}{struct }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{struct_text_editor_1_1_look_and_feel_methods}{LookAndFeelMethods}}}
+\DoxyCodeLine{676     \{}
+\DoxyCodeLine{677         \textcolor{keyword}{virtual} \mbox{\hyperlink{struct_text_editor_1_1_look_and_feel_methods_a9aea39639c8b1560a205658ff1aaac92}{\string~LookAndFeelMethods}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{678 }
+\DoxyCodeLine{679         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_text_editor_1_1_look_and_feel_methods_a6299d5ea71ce9aa65b1e6ccfd185ff38}{fillTextEditorBackground}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \textcolor{keywordtype}{int} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}}, \mbox{\hyperlink{class_text_editor}{TextEditor}}\&) = 0;}
+\DoxyCodeLine{680         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_text_editor_1_1_look_and_feel_methods_a2d619d802bcbd3180522714a795f5328}{drawTextEditorOutline}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \textcolor{keywordtype}{int} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}}, \mbox{\hyperlink{class_text_editor}{TextEditor}}\&) = 0;}
+\DoxyCodeLine{681 }
+\DoxyCodeLine{682         \textcolor{keyword}{virtual} \mbox{\hyperlink{class_caret_component}{CaretComponent}}* \mbox{\hyperlink{struct_text_editor_1_1_look_and_feel_methods_a3cd119f8734100e11b36a92ca15845c1}{createCaretComponent}} (\mbox{\hyperlink{class_component}{Component}}* keyFocusOwner) = 0;}
+\DoxyCodeLine{683     \};}
+\DoxyCodeLine{684 }
+\DoxyCodeLine{685     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{687 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_a8b7485621bf88d75d8e51c01f9d2b82c}{paint}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{689     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_a2a8635846ebc9fd09bc42a256b3480f4}{paintOverChildren}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{691     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_ab4b237febe69d1883696ac0abbde67ac}{mouseDown}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_mouse_event}{MouseEvent}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{693     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_a25254d51088d9492d1ef446f6dc2f71f}{mouseUp}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_mouse_event}{MouseEvent}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{695     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_a909826b0a96f31a75731ce2743d83342}{mouseDrag}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_mouse_event}{MouseEvent}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{697     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_a85bc41e6a8dcb730353ad1ac65c59e70}{mouseDoubleClick}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_mouse_event}{MouseEvent}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{699     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_ac5d9cb318b86e1661d39d65e4cc91aef}{mouseWheelMove}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_mouse_event}{MouseEvent}}\&, \textcolor{keyword}{const} \mbox{\hyperlink{struct_mouse_wheel_details}{MouseWheelDetails}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{701     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_text_editor_aeedd8eda4f9b64a9c1d71fe39890e1c7}{keyPressed}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_key_press}{KeyPress}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{703     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_text_editor_a616706ad06c8a6a1c00f62a4c6e0d448}{keyStateChanged}} (\textcolor{keywordtype}{bool}) \textcolor{keyword}{override};}
+\DoxyCodeLine{705     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_a3243d2a2465fac6be33fdb9f9a38b9c0}{focusGained}} (\mbox{\hyperlink{class_component_a7fd775ea6b1190d5d694fdffa539dfac}{FocusChangeType}}) \textcolor{keyword}{override};}
+\DoxyCodeLine{707     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_a7272691f16e13dde9631397de63422db}{focusLost}} (\mbox{\hyperlink{class_component_a7fd775ea6b1190d5d694fdffa539dfac}{FocusChangeType}}) \textcolor{keyword}{override};}
+\DoxyCodeLine{709     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_abe670d0ecdbbf419f76631565bc2600b}{resized}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{711     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_ae323b4ceb59be7c1e8a1f9a637193267}{enablementChanged}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{713     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_a4811e9bd7ee7ec96f2e4e1e118d9d0e9}{lookAndFeelChanged}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{715     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_ae16a68946f5921b4c36605d0d6b6eb67}{parentHierarchyChanged}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{717     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_text_editor_a591af598b901d22a058b8043ced32a36}{isTextInputActive}}() \textcolor{keyword}{const override};}
+\DoxyCodeLine{719     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_a9ce8f410e566c1998a8751e8d8bec34b}{setTemporaryUnderlining}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_array}{Array}}<\mbox{\hyperlink{class_range}{Range<int>}}>\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{721     \mbox{\hyperlink{class_text_input_target_a097550317e3bf2aee470a20540b9edc7}{VirtualKeyboardType}} \mbox{\hyperlink{class_text_editor_a188d3a05803ae9493b9241d0d95f6cfb}{getKeyboardType}}()\textcolor{keyword}{ override    }\{ \textcolor{keywordflow}{return} keyboardType; \}}
+\DoxyCodeLine{722 }
+\DoxyCodeLine{723 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{724     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{726 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_aa8f2e41661dec5b6584cb655b3622475}{scrollToMakeSureCursorIsVisible}}();}
+\DoxyCodeLine{727 }
+\DoxyCodeLine{729     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_a34e3b8ad5395d493da6fee6ce9775dc1}{textChanged}}();}
+\DoxyCodeLine{730 }
+\DoxyCodeLine{732     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_ac1cdc461e88ca484f3528d74a7e1d27c}{newTransaction}}();}
+\DoxyCodeLine{733 }
+\DoxyCodeLine{735     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_aea9150456f5680f7a83c54e1aa561155}{returnPressed}}();}
+\DoxyCodeLine{736 }
+\DoxyCodeLine{738     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_text_editor_a113d5961e0129c872f606492dc0e8fab}{escapePressed}}();}
+\DoxyCodeLine{739 }
+\DoxyCodeLine{740 \textcolor{keyword}{private}:}
+\DoxyCodeLine{741     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{742     \mbox{\hyperlink{group__juce__core-system_ga8d339dd1e85e6fbefaf7638692d085c2}{JUCE\_PUBLIC\_IN\_DLL\_BUILD}} (\textcolor{keyword}{class} UniformTextSection)}
+\DoxyCodeLine{743     \textcolor{keyword}{struct }Iterator;}
+\DoxyCodeLine{744     \textcolor{keyword}{struct }TextHolderComponent;}
+\DoxyCodeLine{745     \textcolor{keyword}{struct }TextEditorViewport;}
+\DoxyCodeLine{746     \textcolor{keyword}{struct }InsertAction;}
+\DoxyCodeLine{747     \textcolor{keyword}{struct }RemoveAction;}
+\DoxyCodeLine{748 }
+\DoxyCodeLine{749     std::unique\_ptr<Viewport> viewport;}
+\DoxyCodeLine{750     TextHolderComponent* textHolder;}
+\DoxyCodeLine{751     \mbox{\hyperlink{class_border_size}{BorderSize<int>}} borderSize \{ 1, 1, 1, 3 \};}
+\DoxyCodeLine{752     \mbox{\hyperlink{class_justification}{Justification}} justification \{ \mbox{\hyperlink{class_justification_a1f8c07756c56fe8f31ed44964e51bfbcaf2d7cc575db9d4d9a1305407625b7afd}{Justification::topLeft}} \};}
+\DoxyCodeLine{753 }
+\DoxyCodeLine{754     \textcolor{keywordtype}{bool} readOnly = \textcolor{keyword}{false};}
+\DoxyCodeLine{755     \textcolor{keywordtype}{bool} caretVisible = \textcolor{keyword}{true};}
+\DoxyCodeLine{756     \textcolor{keywordtype}{bool} multiline = \textcolor{keyword}{false};}
+\DoxyCodeLine{757     \textcolor{keywordtype}{bool} wordWrap = \textcolor{keyword}{false};}
+\DoxyCodeLine{758     \textcolor{keywordtype}{bool} returnKeyStartsNewLine = \textcolor{keyword}{false};}
+\DoxyCodeLine{759     \textcolor{keywordtype}{bool} popupMenuEnabled = \textcolor{keyword}{true};}
+\DoxyCodeLine{760     \textcolor{keywordtype}{bool} selectAllTextWhenFocused = \textcolor{keyword}{false};}
+\DoxyCodeLine{761     \textcolor{keywordtype}{bool} scrollbarVisible = \textcolor{keyword}{true};}
+\DoxyCodeLine{762     \textcolor{keywordtype}{bool} wasFocused = \textcolor{keyword}{false};}
+\DoxyCodeLine{763     \textcolor{keywordtype}{bool} keepCaretOnScreen = \textcolor{keyword}{true};}
+\DoxyCodeLine{764     \textcolor{keywordtype}{bool} tabKeyUsed = \textcolor{keyword}{false};}
+\DoxyCodeLine{765     \textcolor{keywordtype}{bool} menuActive = \textcolor{keyword}{false};}
+\DoxyCodeLine{766     \textcolor{keywordtype}{bool} valueTextNeedsUpdating = \textcolor{keyword}{false};}
+\DoxyCodeLine{767     \textcolor{keywordtype}{bool} consumeEscAndReturnKeys = \textcolor{keyword}{true};}
+\DoxyCodeLine{768     \textcolor{keywordtype}{bool} underlineWhitespace = \textcolor{keyword}{true};}
+\DoxyCodeLine{769 }
+\DoxyCodeLine{770     \mbox{\hyperlink{class_undo_manager}{UndoManager}} undoManager;}
+\DoxyCodeLine{771     std::unique\_ptr<CaretComponent> caret;}
+\DoxyCodeLine{772     \mbox{\hyperlink{class_range}{Range<int>}} selection;}
+\DoxyCodeLine{773     \textcolor{keywordtype}{int} leftIndent = 4, topIndent = 4;}
+\DoxyCodeLine{774     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} lastTransactionTime = 0;}
+\DoxyCodeLine{775     \mbox{\hyperlink{class_font}{Font}} currentFont \{ 14.0f \};}
+\DoxyCodeLine{776     \textcolor{keyword}{mutable} \textcolor{keywordtype}{int} totalNumChars = 0;}
+\DoxyCodeLine{777     \textcolor{keywordtype}{int} caretPosition = 0;}
+\DoxyCodeLine{778     \mbox{\hyperlink{class_owned_array}{OwnedArray<UniformTextSection>}} sections;}
+\DoxyCodeLine{779     \mbox{\hyperlink{class_string}{String}} textToShowWhenEmpty;}
+\DoxyCodeLine{780     \mbox{\hyperlink{class_colour}{Colour}} colourForTextWhenEmpty;}
+\DoxyCodeLine{781     \mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} passwordCharacter;}
+\DoxyCodeLine{782     \mbox{\hyperlink{class_optional_scoped_pointer}{OptionalScopedPointer<InputFilter>}} inputFilter;}
+\DoxyCodeLine{783     \mbox{\hyperlink{class_value}{Value}} textValue;}
+\DoxyCodeLine{784     VirtualKeyboardType keyboardType = \mbox{\hyperlink{class_text_input_target_a097550317e3bf2aee470a20540b9edc7a11c126feb4e4a2a3f7695fbf8bfedf47}{TextInputTarget::textKeyboard}};}
+\DoxyCodeLine{785     \textcolor{keywordtype}{float} lineSpacing = 1.0f;}
+\DoxyCodeLine{786 }
+\DoxyCodeLine{787     \textcolor{keyword}{enum} DragType}
+\DoxyCodeLine{788     \{}
+\DoxyCodeLine{789         notDragging,}
+\DoxyCodeLine{790         draggingSelectionStart,}
+\DoxyCodeLine{791         draggingSelectionEnd}
+\DoxyCodeLine{792     \};}
+\DoxyCodeLine{793 }
+\DoxyCodeLine{794     DragType dragType = notDragging;}
+\DoxyCodeLine{795 }
+\DoxyCodeLine{796     \mbox{\hyperlink{class_listener_list}{ListenerList<Listener>}} listeners;}
+\DoxyCodeLine{797     \mbox{\hyperlink{class_array}{Array<Range<int>}}> underlinedSections;}
+\DoxyCodeLine{798 }
+\DoxyCodeLine{799     std::unique\_ptr<AccessibilityHandler> createAccessibilityHandler() \textcolor{keyword}{override};}
+\DoxyCodeLine{800     \textcolor{keywordtype}{void} moveCaret (\textcolor{keywordtype}{int} newCaretPos);}
+\DoxyCodeLine{801     \textcolor{keywordtype}{void} moveCaretTo (\textcolor{keywordtype}{int} newPosition, \textcolor{keywordtype}{bool} isSelecting);}
+\DoxyCodeLine{802     \textcolor{keywordtype}{void} recreateCaret();}
+\DoxyCodeLine{803     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_component_a9ba6fa31d1397c7e90050b2cd4f2089b}{handleCommandMessage}} (\textcolor{keywordtype}{int}) \textcolor{keyword}{override};}
+\DoxyCodeLine{804     \textcolor{keywordtype}{void} coalesceSimilarSections();}
+\DoxyCodeLine{805     \textcolor{keywordtype}{void} splitSection (\textcolor{keywordtype}{int} sectionIndex, \textcolor{keywordtype}{int} charToSplitAt);}
+\DoxyCodeLine{806     \textcolor{keywordtype}{void} clearInternal (\mbox{\hyperlink{class_undo_manager}{UndoManager}}*);}
+\DoxyCodeLine{807     \textcolor{keywordtype}{void} insert (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\&, \textcolor{keywordtype}{int} insertIndex, \textcolor{keyword}{const} \mbox{\hyperlink{class_font}{Font}}\&, \mbox{\hyperlink{class_colour}{Colour}}, \mbox{\hyperlink{class_undo_manager}{UndoManager}}*, \textcolor{keywordtype}{int} newCaretPos);}
+\DoxyCodeLine{808     \textcolor{keywordtype}{void} reinsert (\textcolor{keywordtype}{int} insertIndex, \textcolor{keyword}{const} \mbox{\hyperlink{class_owned_array}{OwnedArray<UniformTextSection>}}\&);}
+\DoxyCodeLine{809     \textcolor{keywordtype}{void} remove (\mbox{\hyperlink{class_range}{Range<int>}}, \mbox{\hyperlink{class_undo_manager}{UndoManager}}*, \textcolor{keywordtype}{int} caretPositionToMoveTo);}
+\DoxyCodeLine{810     \textcolor{keywordtype}{void} getCharPosition (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}, \mbox{\hyperlink{class_point}{Point<float>}}\&, \textcolor{keywordtype}{float}\& lineHeight) \textcolor{keyword}{const};}
+\DoxyCodeLine{811     \mbox{\hyperlink{class_rectangle}{Rectangle<float>}} getCaretRectangleFloat() \textcolor{keyword}{const};}
+\DoxyCodeLine{812     \textcolor{keywordtype}{void} updateCaretPosition();}
+\DoxyCodeLine{813     \textcolor{keywordtype}{void} updateValueFromText();}
+\DoxyCodeLine{814     \textcolor{keywordtype}{void} textWasChangedByValue();}
+\DoxyCodeLine{815     \textcolor{keywordtype}{int} indexAtPosition (\textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{816     \textcolor{keywordtype}{int} findWordBreakAfter (\textcolor{keywordtype}{int} position) \textcolor{keyword}{const};}
+\DoxyCodeLine{817     \textcolor{keywordtype}{int} findWordBreakBefore (\textcolor{keywordtype}{int} position) \textcolor{keyword}{const};}
+\DoxyCodeLine{818     \textcolor{keywordtype}{bool} moveCaretWithTransaction (\textcolor{keywordtype}{int} newPos, \textcolor{keywordtype}{bool} selecting);}
+\DoxyCodeLine{819     \textcolor{keywordtype}{void} drawContent (\mbox{\hyperlink{class_graphics}{Graphics}}\&);}
+\DoxyCodeLine{820     \textcolor{keywordtype}{void} checkLayout();}
+\DoxyCodeLine{821     \textcolor{keywordtype}{int} getWordWrapWidth() \textcolor{keyword}{const};}
+\DoxyCodeLine{822     \textcolor{keywordtype}{int} getMaximumTextWidth() \textcolor{keyword}{const};}
+\DoxyCodeLine{823     \textcolor{keywordtype}{int} getMaximumTextHeight() \textcolor{keyword}{const};}
+\DoxyCodeLine{824     \textcolor{keywordtype}{void} timerCallbackInt();}
+\DoxyCodeLine{825     \textcolor{keywordtype}{void} checkFocus();}
+\DoxyCodeLine{826     \textcolor{keywordtype}{void} repaintText (\mbox{\hyperlink{class_range}{Range<int>}});}
+\DoxyCodeLine{827     \textcolor{keywordtype}{void} scrollByLines (\textcolor{keywordtype}{int} deltaLines);}
+\DoxyCodeLine{828     \textcolor{keywordtype}{bool} undoOrRedo (\textcolor{keywordtype}{bool} shouldUndo);}
+\DoxyCodeLine{829     \mbox{\hyperlink{class_undo_manager}{UndoManager}}* getUndoManager() noexcept;}
+\DoxyCodeLine{830     \textcolor{keywordtype}{void} setSelection (\mbox{\hyperlink{class_range}{Range}}<\textcolor{keywordtype}{int}>) noexcept;}
+\DoxyCodeLine{831     \mbox{\hyperlink{class_point}{Point}}<\textcolor{keywordtype}{int}> getTextOffset() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{832 }
+\DoxyCodeLine{833     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_text_editor}{TextEditor}})}
+\DoxyCodeLine{834 \};}
+\DoxyCodeLine{835 }
+\DoxyCodeLine{836 }
+\DoxyCodeLine{837  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{838 }
+
+\end{DoxyCode}

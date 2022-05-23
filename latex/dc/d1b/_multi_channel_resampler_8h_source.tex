@@ -1,0 +1,200 @@
+\hypertarget{_multi_channel_resampler_8h_source}{}\doxysection{Multi\+Channel\+Resampler.\+h}
+\label{_multi_channel_resampler_8h_source}\index{build/juce\_audio\_devices/native/oboe/src/flowgraph/resampler/MultiChannelResampler.h@{build/juce\_audio\_devices/native/oboe/src/flowgraph/resampler/MultiChannelResampler.h}}
+\mbox{\hyperlink{_multi_channel_resampler_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{ * Copyright 2019 The Android Open Source Project}}
+\DoxyCodeLine{3 \textcolor{comment}{ *}}
+\DoxyCodeLine{4 \textcolor{comment}{ * Licensed under the Apache License, Version 2.0 (the "{}License"{});}}
+\DoxyCodeLine{5 \textcolor{comment}{ * you may not use this file except in compliance with the License.}}
+\DoxyCodeLine{6 \textcolor{comment}{ * You may obtain a copy of the License at}}
+\DoxyCodeLine{7 \textcolor{comment}{ *}}
+\DoxyCodeLine{8 \textcolor{comment}{ *      http://www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{9 \textcolor{comment}{ *}}
+\DoxyCodeLine{10 \textcolor{comment}{ * Unless required by applicable law or agreed to in writing, software}}
+\DoxyCodeLine{11 \textcolor{comment}{ * distributed under the License is distributed on an "{}AS IS"{} BASIS,}}
+\DoxyCodeLine{12 \textcolor{comment}{ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.}}
+\DoxyCodeLine{13 \textcolor{comment}{ * See the License for the specific language governing permissions and}}
+\DoxyCodeLine{14 \textcolor{comment}{ * limitations under the License.}}
+\DoxyCodeLine{15 \textcolor{comment}{ */}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#ifndef OBOE\_MULTICHANNEL\_RESAMPLER\_H}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#define OBOE\_MULTICHANNEL\_RESAMPLER\_H}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#include <sys/types.h>}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#include <unistd.h>}}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#ifndef MCR\_USE\_KAISER}}
+\DoxyCodeLine{26 \textcolor{comment}{// It appears from the spectrogram that the HyperbolicCosine window leads to fewer artifacts.}}
+\DoxyCodeLine{27 \textcolor{comment}{// And it is faster to calculate.}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#define MCR\_USE\_KAISER 0}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#if MCR\_USE\_KAISER}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_kaiser_window_8h}{KaiserWindow.h}}"{}}}
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_hyperbolic_cosine_window_8h}{HyperbolicCosineWindow.h}}"{}}}
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceresampler}{resampler}} \{}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 \textcolor{keyword}{class }\mbox{\hyperlink{classresampler_1_1_multi_channel_resampler}{MultiChannelResampler}} \{}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41 \textcolor{keyword}{public}:}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43     \textcolor{keyword}{enum class} \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_a04b79714972d45a4243d979365b95699}{Quality}} : int32\_t \{}
+\DoxyCodeLine{44         \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_a04b79714972d45a4243d979365b95699a90fd7fdf6f41406a75e5265b9583bb4e}{Fastest}},}
+\DoxyCodeLine{45         \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_a04b79714972d45a4243d979365b95699a28d0edd045e05cf5af64e35ae0c4c6ef}{Low}},}
+\DoxyCodeLine{46         \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_a04b79714972d45a4243d979365b95699a87f8a6ab85c9ced3702b4ea641ad4bb5}{Medium}},}
+\DoxyCodeLine{47         \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_a04b79714972d45a4243d979365b95699a655d20c1ca69519ca647684edbb2db35}{High}},}
+\DoxyCodeLine{48         \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_a04b79714972d45a4243d979365b95699a68ef004de6166492c1d668eb8efe09bd}{Best}},}
+\DoxyCodeLine{49     \};}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51     \textcolor{keyword}{class }\mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_1_1_builder}{Builder}} \{}
+\DoxyCodeLine{52     \textcolor{keyword}{public}:}
+\DoxyCodeLine{57         \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler}{MultiChannelResampler}} *\mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_1_1_builder_a08e0c39c908d163d367d7d69381f65b5}{build}}();}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{68         \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_1_1_builder}{Builder}} *\mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_1_1_builder_a308ae1aae00e24585114f386e0ea1327}{setNumTaps}}(int32\_t numTaps) \{}
+\DoxyCodeLine{69             \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_1_1_builder_a27863e41c4cca065dec5bcd22b420cee}{mNumTaps}} = numTaps;}
+\DoxyCodeLine{70             \textcolor{keywordflow}{return} \textcolor{keyword}{this};}
+\DoxyCodeLine{71         \}}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{79         \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_1_1_builder}{Builder}} *\mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_1_1_builder_a7a0a6637a6554b77b0cafe3a3cd8c379}{setChannelCount}}(int32\_t channelCount) \{}
+\DoxyCodeLine{80             \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_1_1_builder_ab00e244fa36966d8a03e768f69fdc641}{mChannelCount}} = channelCount;}
+\DoxyCodeLine{81             \textcolor{keywordflow}{return} \textcolor{keyword}{this};}
+\DoxyCodeLine{82         \}}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{90         \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_1_1_builder}{Builder}} *\mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_1_1_builder_ac5e9c0cbe149d361c2c5495af69006bd}{setInputRate}}(int32\_t inputRate) \{}
+\DoxyCodeLine{91             \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_1_1_builder_aa8ed03efbcaf20fe90baffcc9f0d1636}{mInputRate}} = inputRate;}
+\DoxyCodeLine{92             \textcolor{keywordflow}{return} \textcolor{keyword}{this};}
+\DoxyCodeLine{93         \}}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{101         \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_1_1_builder}{Builder}} *\mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_1_1_builder_a473c38e9ff5e3d424826fa737715db43}{setOutputRate}}(int32\_t outputRate) \{}
+\DoxyCodeLine{102             \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_1_1_builder_aacc2517940a736e7ecea64dc6798b8ba}{mOutputRate}} = outputRate;}
+\DoxyCodeLine{103             \textcolor{keywordflow}{return} \textcolor{keyword}{this};}
+\DoxyCodeLine{104         \}}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{115         \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_1_1_builder}{Builder}} *\mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_1_1_builder_ab34a8dc914e339632a16fd7b314bcc1f}{setNormalizedCutoff}}(\textcolor{keywordtype}{float} normalizedCutoff) \{}
+\DoxyCodeLine{116             \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_1_1_builder_a96ee315067113957980d9686dc4757cd}{mNormalizedCutoff}} = normalizedCutoff;}
+\DoxyCodeLine{117             \textcolor{keywordflow}{return} \textcolor{keyword}{this};}
+\DoxyCodeLine{118         \}}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120         int32\_t \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_1_1_builder_a37045d73aa36aef85cfba295a01d70ef}{getNumTaps}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{121             \textcolor{keywordflow}{return} \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_1_1_builder_a27863e41c4cca065dec5bcd22b420cee}{mNumTaps}};}
+\DoxyCodeLine{122         \}}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{124         int32\_t \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_1_1_builder_ad4ac0375028fcf6b850234e1dd3f3fcf}{getChannelCount}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{125             \textcolor{keywordflow}{return} \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_1_1_builder_ab00e244fa36966d8a03e768f69fdc641}{mChannelCount}};}
+\DoxyCodeLine{126         \}}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{128         int32\_t \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_1_1_builder_a1b1f3c2fe4f9d051ce47650c40a13aaa}{getInputRate}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{129             \textcolor{keywordflow}{return} \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_1_1_builder_aa8ed03efbcaf20fe90baffcc9f0d1636}{mInputRate}};}
+\DoxyCodeLine{130         \}}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{132         int32\_t \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_1_1_builder_a91ae12542129b66ccc49302bc6537857}{getOutputRate}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{133             \textcolor{keywordflow}{return} \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_1_1_builder_aacc2517940a736e7ecea64dc6798b8ba}{mOutputRate}};}
+\DoxyCodeLine{134         \}}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{136         \textcolor{keywordtype}{float} \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_1_1_builder_a35b667335ce3cc5b3d41f98bb6fa62f8}{getNormalizedCutoff}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{137             \textcolor{keywordflow}{return} \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_1_1_builder_a96ee315067113957980d9686dc4757cd}{mNormalizedCutoff}};}
+\DoxyCodeLine{138         \}}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{141         int32\_t \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_1_1_builder_ab00e244fa36966d8a03e768f69fdc641}{mChannelCount}} = 1;}
+\DoxyCodeLine{142         int32\_t \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_1_1_builder_a27863e41c4cca065dec5bcd22b420cee}{mNumTaps}} = 16;}
+\DoxyCodeLine{143         int32\_t \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_1_1_builder_aa8ed03efbcaf20fe90baffcc9f0d1636}{mInputRate}} = 48000;}
+\DoxyCodeLine{144         int32\_t \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_1_1_builder_aacc2517940a736e7ecea64dc6798b8ba}{mOutputRate}} = 48000;}
+\DoxyCodeLine{145         \textcolor{keywordtype}{float}   \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_1_1_builder_a96ee315067113957980d9686dc4757cd}{mNormalizedCutoff}} = kDefaultNormalizedCutoff;}
+\DoxyCodeLine{146     \};}
+\DoxyCodeLine{147 }
+\DoxyCodeLine{148     \textcolor{keyword}{virtual} \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_aee56d299e9071b1ece4a3e9d73e512d5}{\string~MultiChannelResampler}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{149 }
+\DoxyCodeLine{159     \textcolor{keyword}{static} \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler}{MultiChannelResampler}} *\mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_a27707668058ce540119cdedea7972cdd}{make}}(int32\_t channelCount,}
+\DoxyCodeLine{160                                        int32\_t inputRate,}
+\DoxyCodeLine{161                                        int32\_t outputRate,}
+\DoxyCodeLine{162                                        \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_a04b79714972d45a4243d979365b95699}{Quality}} \mbox{\hyperlink{jpeglib_8h_acac7df77df55f2a1bfd8d8d18340b773}{quality}});}
+\DoxyCodeLine{163 }
+\DoxyCodeLine{164     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_a80808196315692b3bc7f503f01413a56}{isWriteNeeded}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{165         \textcolor{keywordflow}{return} \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_aede5c5fcf828128167e25a82f0afac93}{mIntegerPhase}} >= \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_a344652a8a5be045d5646f27ec2cff253}{mDenominator}};}
+\DoxyCodeLine{166     \}}
+\DoxyCodeLine{167 }
+\DoxyCodeLine{173     \textcolor{keywordtype}{void} \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_ac2926a315ad760cc188135607017c862}{writeNextFrame}}(\textcolor{keyword}{const} \textcolor{keywordtype}{float} *frame) \{}
+\DoxyCodeLine{174         \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_a753333090c7c7e69bf1fc9e32ee1be30}{writeFrame}}(frame);}
+\DoxyCodeLine{175         \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_a174830e82e41d0343eaa6e9d9d529046}{advanceWrite}}();}
+\DoxyCodeLine{176     \}}
+\DoxyCodeLine{177 }
+\DoxyCodeLine{183     \textcolor{keywordtype}{void} \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_a02dc2702d89480e4466e910818c07606}{readNextFrame}}(\textcolor{keywordtype}{float} *frame) \{}
+\DoxyCodeLine{184         \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_a64a7a7208032495aac595ff00c0fac4b}{readFrame}}(frame);}
+\DoxyCodeLine{185         \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_a600508939d683bf8b08d7f45f06450e0}{advanceRead}}();}
+\DoxyCodeLine{186     \}}
+\DoxyCodeLine{187 }
+\DoxyCodeLine{188     \textcolor{keywordtype}{int} \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_a921d738ce5959171b2629b4f6d6c6aae}{getNumTaps}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{189         \textcolor{keywordflow}{return} \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_a3e282262e460d26e26fc6f7f7ce0fe9b}{mNumTaps}};}
+\DoxyCodeLine{190     \}}
+\DoxyCodeLine{191 }
+\DoxyCodeLine{192     \textcolor{keywordtype}{int} \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_a5b9ece6716934bea0a33958e624c8e4e}{getChannelCount}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{193         \textcolor{keywordflow}{return} mChannelCount;}
+\DoxyCodeLine{194     \}}
+\DoxyCodeLine{195 }
+\DoxyCodeLine{196     \textcolor{keyword}{static} \textcolor{keywordtype}{float} \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_a5205c081f2620617c6bb188bb46c2698}{hammingWindow}}(\textcolor{keywordtype}{float} radians, \textcolor{keywordtype}{float} spread);}
+\DoxyCodeLine{197 }
+\DoxyCodeLine{198     \textcolor{keyword}{static} \textcolor{keywordtype}{float} \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_ab54be225cbe000632c1691768418b65d}{sinc}}(\textcolor{keywordtype}{float} radians);}
+\DoxyCodeLine{199 }
+\DoxyCodeLine{200 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{201 }
+\DoxyCodeLine{202     \textcolor{keyword}{explicit} \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_ae840ec1efd5c57abd73643f4287d1943}{MultiChannelResampler}}(\textcolor{keyword}{const} \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_1_1_builder}{MultiChannelResampler::Builder}} \&builder);}
+\DoxyCodeLine{203 }
+\DoxyCodeLine{209     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_a753333090c7c7e69bf1fc9e32ee1be30}{writeFrame}}(\textcolor{keyword}{const} \textcolor{keywordtype}{float} *frame);}
+\DoxyCodeLine{210 }
+\DoxyCodeLine{216     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_a64a7a7208032495aac595ff00c0fac4b}{readFrame}}(\textcolor{keywordtype}{float} *frame) = 0;}
+\DoxyCodeLine{217 }
+\DoxyCodeLine{218     \textcolor{keywordtype}{void} \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_a174830e82e41d0343eaa6e9d9d529046}{advanceWrite}}() \{}
+\DoxyCodeLine{219         \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_aede5c5fcf828128167e25a82f0afac93}{mIntegerPhase}} -\/= \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_a344652a8a5be045d5646f27ec2cff253}{mDenominator}};}
+\DoxyCodeLine{220     \}}
+\DoxyCodeLine{221 }
+\DoxyCodeLine{222     \textcolor{keywordtype}{void} \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_a600508939d683bf8b08d7f45f06450e0}{advanceRead}}() \{}
+\DoxyCodeLine{223         \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_aede5c5fcf828128167e25a82f0afac93}{mIntegerPhase}} += \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_a11d895daa4deca365836cfc6bb0661dd}{mNumerator}};}
+\DoxyCodeLine{224     \}}
+\DoxyCodeLine{225 }
+\DoxyCodeLine{234     \textcolor{keywordtype}{void} \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_add0e6aa27256707363b0d7f84b451e05}{generateCoefficients}}(int32\_t inputRate,}
+\DoxyCodeLine{235                               int32\_t outputRate,}
+\DoxyCodeLine{236                               int32\_t numRows,}
+\DoxyCodeLine{237                               \textcolor{keywordtype}{double} phaseIncrement,}
+\DoxyCodeLine{238                               \textcolor{keywordtype}{float} normalizedCutoff);}
+\DoxyCodeLine{239 }
+\DoxyCodeLine{240 }
+\DoxyCodeLine{241     int32\_t \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_a1f9aec5ef7ac9d2bff3195e6d03f3f83}{getIntegerPhase}}() \{}
+\DoxyCodeLine{242         \textcolor{keywordflow}{return} \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_aede5c5fcf828128167e25a82f0afac93}{mIntegerPhase}};}
+\DoxyCodeLine{243     \}}
+\DoxyCodeLine{244 }
+\DoxyCodeLine{245     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{int} \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_ac30e82c67bb82d3661a913e1920dd243}{kMaxCoefficients}} = 8 * 1024;}
+\DoxyCodeLine{246     std::vector<float>   \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_a0f78891dc61e73e94931d43c3c0bb44e}{mCoefficients}};}
+\DoxyCodeLine{247 }
+\DoxyCodeLine{248     \textcolor{keyword}{const} \textcolor{keywordtype}{int}            \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_a3e282262e460d26e26fc6f7f7ce0fe9b}{mNumTaps}};}
+\DoxyCodeLine{249     \textcolor{keywordtype}{int}                  \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_a7edd680d209ab8b9582470eaf49cc471}{mCursor}} = 0;}
+\DoxyCodeLine{250     std::vector<float>   \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_a2dc0c3375a4269021eb535c4fe0d0704}{mX}};           \textcolor{comment}{// delayed input values for the FIR}}
+\DoxyCodeLine{251     std::vector<float>   \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_a22e3aa14f553e85ac14cc3348a189ed2}{mSingleFrame}}; \textcolor{comment}{// one frame for temporary use}}
+\DoxyCodeLine{252     int32\_t              \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_aede5c5fcf828128167e25a82f0afac93}{mIntegerPhase}} = 0;}
+\DoxyCodeLine{253     int32\_t              \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_a11d895daa4deca365836cfc6bb0661dd}{mNumerator}} = 0;}
+\DoxyCodeLine{254     int32\_t              \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_a344652a8a5be045d5646f27ec2cff253}{mDenominator}} = 0;}
+\DoxyCodeLine{255 }
+\DoxyCodeLine{256 }
+\DoxyCodeLine{257 \textcolor{keyword}{private}:}
+\DoxyCodeLine{258 }
+\DoxyCodeLine{259 \textcolor{preprocessor}{\#if MCR\_USE\_KAISER}}
+\DoxyCodeLine{260     \mbox{\hyperlink{classresampler_1_1_kaiser_window}{KaiserWindow}}           mKaiserWindow;}
+\DoxyCodeLine{261 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{262     \mbox{\hyperlink{classresampler_1_1_hyperbolic_cosine_window}{HyperbolicCosineWindow}} mCoshWindow;}
+\DoxyCodeLine{263 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{264 }
+\DoxyCodeLine{265     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{float} kDefaultNormalizedCutoff = 0.70f;}
+\DoxyCodeLine{266 }
+\DoxyCodeLine{267     \textcolor{keyword}{const} \textcolor{keywordtype}{int}              mChannelCount;}
+\DoxyCodeLine{268 \};}
+\DoxyCodeLine{269 }
+\DoxyCodeLine{270 \}}
+\DoxyCodeLine{271 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//OBOE\_MULTICHANNEL\_RESAMPLER\_H}}
+
+\end{DoxyCode}

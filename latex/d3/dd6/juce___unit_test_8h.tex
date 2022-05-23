@@ -1,0 +1,85 @@
+\hypertarget{juce___unit_test_8h}{}\doxysection{build/juce\+\_\+core/unit\+\_\+tests/juce\+\_\+\+Unit\+Test.h File Reference}
+\label{juce___unit_test_8h}\index{build/juce\_core/unit\_tests/juce\_UnitTest.h@{build/juce\_core/unit\_tests/juce\_UnitTest.h}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_unit_test}{Unit\+Test}}
+\item 
+class \mbox{\hyperlink{class_unit_test_runner}{Unit\+Test\+Runner}}
+\item 
+struct \mbox{\hyperlink{struct_unit_test_runner_1_1_test_result}{Unit\+Test\+Runner\+::\+Test\+Result}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{juce___unit_test_8h_a108369a73746eca6742100e413ed7e9c}{expect\+Does\+Not\+Throw}}(expr)
+\item 
+\#define \mbox{\hyperlink{juce___unit_test_8h_aa204d9cf44beea9c7480dfab1c526158}{expect\+Throws}}(expr)
+\item 
+\#define \mbox{\hyperlink{juce___unit_test_8h_ac75dc7b80ef6c1bc768059b3f6372103}{expect\+Throws\+Type}}(expr,  type)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{juce___unit_test_8h_a108369a73746eca6742100e413ed7e9c}\label{juce___unit_test_8h_a108369a73746eca6742100e413ed7e9c}} 
+\index{juce\_UnitTest.h@{juce\_UnitTest.h}!expectDoesNotThrow@{expectDoesNotThrow}}
+\index{expectDoesNotThrow@{expectDoesNotThrow}!juce\_UnitTest.h@{juce\_UnitTest.h}}
+\doxysubsubsection{\texorpdfstring{expectDoesNotThrow}{expectDoesNotThrow}}
+{\footnotesize\ttfamily \#define expect\+Does\+Not\+Throw(\begin{DoxyParamCaption}\item[{}]{expr }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{        \textcolor{keywordflow}{try}                                  \(\backslash\)}
+\DoxyCodeLine{        \{                                    \(\backslash\)}
+\DoxyCodeLine{            (expr);                          \(\backslash\)}
+\DoxyCodeLine{            expect (\textcolor{keyword}{true});                   \(\backslash\)}
+\DoxyCodeLine{        \}                                    \(\backslash\)}
+\DoxyCodeLine{        catch (...)                          \(\backslash\)}
+\DoxyCodeLine{        \{                                    \(\backslash\)}
+\DoxyCodeLine{            expect (\textcolor{keyword}{false}, \textcolor{stringliteral}{"{}Expected: does not throw an exception, Actual: throws."{}}); \(\backslash\)}
+\DoxyCodeLine{        \}}
+
+\end{DoxyCode}
+Checks that the result of an expression does not throw an exception. \mbox{\Hypertarget{juce___unit_test_8h_aa204d9cf44beea9c7480dfab1c526158}\label{juce___unit_test_8h_aa204d9cf44beea9c7480dfab1c526158}} 
+\index{juce\_UnitTest.h@{juce\_UnitTest.h}!expectThrows@{expectThrows}}
+\index{expectThrows@{expectThrows}!juce\_UnitTest.h@{juce\_UnitTest.h}}
+\doxysubsubsection{\texorpdfstring{expectThrows}{expectThrows}}
+{\footnotesize\ttfamily \#define expect\+Throws(\begin{DoxyParamCaption}\item[{}]{expr }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{        \textcolor{keywordflow}{try}                                  \(\backslash\)}
+\DoxyCodeLine{        \{                                    \(\backslash\)}
+\DoxyCodeLine{            (expr);                          \(\backslash\)}
+\DoxyCodeLine{            expect (\textcolor{keyword}{false}, \textcolor{stringliteral}{"{}Expected: throws an exception, Actual: does not throw."{}}); \(\backslash\)}
+\DoxyCodeLine{        \}                                    \(\backslash\)}
+\DoxyCodeLine{        catch (...)                          \(\backslash\)}
+\DoxyCodeLine{        \{                                    \(\backslash\)}
+\DoxyCodeLine{            expect (\textcolor{keyword}{true});                   \(\backslash\)}
+\DoxyCodeLine{        \}}
+
+\end{DoxyCode}
+Checks that the result of an expression throws an exception. \mbox{\Hypertarget{juce___unit_test_8h_ac75dc7b80ef6c1bc768059b3f6372103}\label{juce___unit_test_8h_ac75dc7b80ef6c1bc768059b3f6372103}} 
+\index{juce\_UnitTest.h@{juce\_UnitTest.h}!expectThrowsType@{expectThrowsType}}
+\index{expectThrowsType@{expectThrowsType}!juce\_UnitTest.h@{juce\_UnitTest.h}}
+\doxysubsubsection{\texorpdfstring{expectThrowsType}{expectThrowsType}}
+{\footnotesize\ttfamily \#define expect\+Throws\+Type(\begin{DoxyParamCaption}\item[{}]{expr,  }\item[{}]{type }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{        \textcolor{keywordflow}{try}                                  \(\backslash\)}
+\DoxyCodeLine{        \{                                    \(\backslash\)}
+\DoxyCodeLine{            (expr);                          \(\backslash\)}
+\DoxyCodeLine{            expect (\textcolor{keyword}{false}, \textcolor{stringliteral}{"{}Expected: throws an exception of type "{}} \#\mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}} \textcolor{stringliteral}{"{}, Actual: does not throw."{}}); \(\backslash\)}
+\DoxyCodeLine{        \}                                    \(\backslash\)}
+\DoxyCodeLine{        catch (\mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}}\&)                        \(\backslash\)}
+\DoxyCodeLine{        \{                                    \(\backslash\)}
+\DoxyCodeLine{            expect (\textcolor{keyword}{true});                   \(\backslash\)}
+\DoxyCodeLine{        \}                                    \(\backslash\)}
+\DoxyCodeLine{        catch (...)                          \(\backslash\)}
+\DoxyCodeLine{        \{                                    \(\backslash\)}
+\DoxyCodeLine{            expect (\textcolor{keyword}{false}, \textcolor{stringliteral}{"{}Expected: throws an exception of type "{}} \#\mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}} \textcolor{stringliteral}{"{}, Actual: throws another type."{}}); \(\backslash\)}
+\DoxyCodeLine{        \}}
+
+\end{DoxyCode}
+Checks that the result of an expression throws an exception of a certain type. 

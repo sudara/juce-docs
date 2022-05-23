@@ -1,0 +1,67 @@
+\hypertarget{juce___mixer_audio_source_8h_source}{}\doxysection{juce\+\_\+\+Mixer\+Audio\+Source.\+h}
+\label{juce___mixer_audio_source_8h_source}\index{build/juce\_audio\_basics/sources/juce\_MixerAudioSource.h@{build/juce\_audio\_basics/sources/juce\_MixerAudioSource.h}}
+\mbox{\hyperlink{juce___mixer_audio_source_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{37 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_mixer_audio_source}{MixerAudioSource}}  : \textcolor{keyword}{public} \mbox{\hyperlink{class_audio_source}{AudioSource}}}
+\DoxyCodeLine{38 \{}
+\DoxyCodeLine{39 \textcolor{keyword}{public}:}
+\DoxyCodeLine{40     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{42 \textcolor{comment}{}    \mbox{\hyperlink{class_mixer_audio_source}{MixerAudioSource}}();}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{45     \mbox{\hyperlink{class_mixer_audio_source}{\string~MixerAudioSource}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{59 \textcolor{comment}{}    \textcolor{keywordtype}{void} addInputSource (\mbox{\hyperlink{class_audio_source}{AudioSource}}* newInput, \textcolor{keywordtype}{bool} deleteWhenRemoved);}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{65     \textcolor{keywordtype}{void} removeInputSource (\mbox{\hyperlink{class_audio_source}{AudioSource}}* \mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}});}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{71     \textcolor{keywordtype}{void} removeAllInputs();}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{77 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_source_a653279dbd167f70e318fd280681dbddf}{prepareToPlay}} (\textcolor{keywordtype}{int} samplesPerBlockExpected, \textcolor{keywordtype}{double} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}}) \textcolor{keyword}{override};}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{82     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_source_a7823bf0f1c43333eed41664c7994f290}{releaseResources}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{85     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_source_a36fc2484ead8fb8dc03be57d09dd5735}{getNextAudioBlock}} (\textcolor{keyword}{const} \mbox{\hyperlink{struct_audio_source_channel_info}{AudioSourceChannelInfo}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88 \textcolor{keyword}{private}:}
+\DoxyCodeLine{89     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{90     \mbox{\hyperlink{class_array}{Array<AudioSource*>}} inputs;}
+\DoxyCodeLine{91     \mbox{\hyperlink{class_big_integer}{BigInteger}} inputsToDelete;}
+\DoxyCodeLine{92     \mbox{\hyperlink{class_critical_section}{CriticalSection}} lock;}
+\DoxyCodeLine{93     \mbox{\hyperlink{class_audio_buffer}{AudioBuffer<float>}} tempBuffer;}
+\DoxyCodeLine{94     \textcolor{keywordtype}{double} currentSampleRate;}
+\DoxyCodeLine{95     \textcolor{keywordtype}{int} bufferSizeExpected;}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_mixer_audio_source}{MixerAudioSource}})}
+\DoxyCodeLine{98 \};}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{101 }
+
+\end{DoxyCode}

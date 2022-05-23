@@ -1,0 +1,240 @@
+\hypertarget{juce___v_s_t3_headers_8h_source}{}\doxysection{juce\+\_\+\+VST3\+Headers.\+h}
+\label{juce___v_s_t3_headers_8h_source}\index{build/juce\_audio\_processors/format\_types/juce\_VST3Headers.h@{build/juce\_audio\_processors/format\_types/juce\_VST3Headers.h}}
+\mbox{\hyperlink{juce___v_s_t3_headers_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#if JUCE\_BSD \&\& ! JUCE\_CUSTOM\_VST3\_SDK}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{ \#error To build JUCE VST3 plug-\/ins on BSD you must use an external BSD-\/compatible VST3 SDK with JUCE\_CUSTOM\_VST3\_SDK=1}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 \textcolor{comment}{// Wow, those Steinberg guys really don't worry too much about compiler warnings.}}
+\DoxyCodeLine{35 \mbox{\hyperlink{group__juce__core-system_ga999df32bf9ce4295fd2c2682a483efee}{JUCE\_BEGIN\_IGNORE\_WARNINGS\_LEVEL\_MSVC}} (0, 4505 4702 6011 6031 6221 6386 6387 6330 6001 28199)}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37 \mbox{\hyperlink{group__juce__audio__processors-format__types_ga7f569f06f410e415d1a81406b6b03214}{JUCE\_BEGIN\_IGNORE\_WARNINGS\_GCC\_LIKE}} ("{}-\/Wnon-\/virtual-\/dtor"{},}
+\DoxyCodeLine{38                                      "{}-\/Wreorder"{},}
+\DoxyCodeLine{39                                      "{}-\/Wunsequenced"{},}
+\DoxyCodeLine{40                                      "{}-\/Wint-\/to-\/\mbox{\hyperlink{namespacegl_aaed9478f30f9e6b0b29bc31827876c3a}{pointer}}-\/cast"{},}
+\DoxyCodeLine{41                                      "{}-\/Wunused-\/parameter"{},}
+\DoxyCodeLine{42                                      "{}-\/Wconversion"{},}
+\DoxyCodeLine{43                                      "{}-\/Woverloaded-\/virtual"{},}
+\DoxyCodeLine{44                                      "{}-\/Wshadow"{},}
+\DoxyCodeLine{45                                      "{}-\/Wdeprecated-\/register"{},}
+\DoxyCodeLine{46                                      "{}-\/Wunused-\/\mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{function}}"{},}
+\DoxyCodeLine{47                                      "{}-\/Wsign-\/conversion"{},}
+\DoxyCodeLine{48                                      "{}-\/Wsign-\/compare"{},}
+\DoxyCodeLine{49                                      "{}-\/Wdelete-\/non-\/virtual-\/dtor"{},}
+\DoxyCodeLine{50                                      "{}-\/Wdeprecated-\/declarations"{},}
+\DoxyCodeLine{51                                      "{}-\/Wextra-\/semi"{},}
+\DoxyCodeLine{52                                      "{}-\/Wmissing-\/braces"{},}
+\DoxyCodeLine{53                                      "{}-\/Wswitch-\/default"{},}
+\DoxyCodeLine{54                                      "{}-\/Wshadow-\/field"{},}
+\DoxyCodeLine{55                                      "{}-\/Wpragma-\/pack"{},}
+\DoxyCodeLine{56                                      "{}-\/Wcomma"{},}
+\DoxyCodeLine{57                                      "{}-\/Wzero-\/as-\/null-\/\mbox{\hyperlink{namespacegl_aaed9478f30f9e6b0b29bc31827876c3a}{pointer}}-\/constant"{},}
+\DoxyCodeLine{58                                      "{}-\/Winconsistent-\/missing-\/destructor-\/override"{},}
+\DoxyCodeLine{59                                      "{}-\/Wcast-\/align"{},}
+\DoxyCodeLine{60                                      "{}-\/Wignored-\/qualifiers"{},}
+\DoxyCodeLine{61                                      "{}-\/Wmissing-\/field-\/initializers"{},}
+\DoxyCodeLine{62                                      "{}-\/Wformat="{},}
+\DoxyCodeLine{63                                      "{}-\/Wformat"{},}
+\DoxyCodeLine{64                                      "{}-\/Wpedantic"{},}
+\DoxyCodeLine{65                                      "{}-\/Wextra"{},}
+\DoxyCodeLine{66                                      "{}-\/Wclass-\/memaccess"{},}
+\DoxyCodeLine{67                                      "{}-\/Wmissing-\/prototypes"{},}
+\DoxyCodeLine{68                                      "{}-\/Wtype-\/limits"{},}
+\DoxyCodeLine{69                                      "{}-\/Wcpp"{},}
+\DoxyCodeLine{70                                      "{}-\/W\textcolor{preprocessor}{\#warnings"{})}}
+\DoxyCodeLine{71 \textcolor{preprocessor}{}}
+\DoxyCodeLine{72 \textcolor{preprocessor}{\#undef DEVELOPMENT}}
+\DoxyCodeLine{73 \textcolor{preprocessor}{\#define DEVELOPMENT 0  // This avoids a Clang warning in Steinberg code about unused values}}
+\DoxyCodeLine{74 \textcolor{preprocessor}{}}
+\DoxyCodeLine{75 \textcolor{preprocessor}{/*  These files come with the Steinberg VST3 SDK -\/ to get them, you'll need to}}
+\DoxyCodeLine{76 \textcolor{preprocessor}{    visit the Steinberg website and agree to whatever is currently required to}}
+\DoxyCodeLine{77 \textcolor{preprocessor}{    get them.}}
+\DoxyCodeLine{78 \textcolor{preprocessor}{}}
+\DoxyCodeLine{79 \textcolor{preprocessor}{    Then, you'll need to make sure your include path contains your "{}}VST3 SDK"{}}
+\DoxyCodeLine{80     directory (or whatever you've named it on your machine). The Projucer has}
+\DoxyCodeLine{81     a special box for setting this path.}
+\DoxyCodeLine{82 */}
+\DoxyCodeLine{83 \#if JUCE\_VST3HEADERS\_INCLUDE\_HEADERS\_ONLY}
+\DoxyCodeLine{84  \#include <base/source/fstring.h>}
+\DoxyCodeLine{85  \#include <pluginterfaces/base/conststringtable.h>}
+\DoxyCodeLine{86  \#include <pluginterfaces/base/funknown.h>}
+\DoxyCodeLine{87  \#include <pluginterfaces/base/ipluginbase.h>}
+\DoxyCodeLine{88  \#include <pluginterfaces/base/ustring.h>}
+\DoxyCodeLine{89  \#include <pluginterfaces/gui/iplugview.h>}
+\DoxyCodeLine{90  \#include <pluginterfaces/gui/iplugviewcontentscalesupport.h>}
+\DoxyCodeLine{91  \#include <pluginterfaces/vst/ivstattributes.h>}
+\DoxyCodeLine{92  \#include <pluginterfaces/vst/ivstaudioprocessor.h>}
+\DoxyCodeLine{93  \#include <pluginterfaces/vst/ivstcomponent.h>}
+\DoxyCodeLine{94  \#include <pluginterfaces/vst/ivstcontextmenu.h>}
+\DoxyCodeLine{95  \#include <pluginterfaces/vst/ivsteditcontroller.h>}
+\DoxyCodeLine{96  \#include <pluginterfaces/vst/ivstevents.h>}
+\DoxyCodeLine{97  \#include <pluginterfaces/vst/ivsthostapplication.h>}
+\DoxyCodeLine{98  \#include <pluginterfaces/vst/ivstmessage.h>}
+\DoxyCodeLine{99  \#include <pluginterfaces/vst/ivstmidicontrollers.h>}
+\DoxyCodeLine{100  \#include <pluginterfaces/vst/ivstparameterchanges.h>}
+\DoxyCodeLine{101  \#include <pluginterfaces/vst/ivstplugview.h>}
+\DoxyCodeLine{102  \#include <pluginterfaces/vst/ivstprocesscontext.h>}
+\DoxyCodeLine{103  \#include <pluginterfaces/vst/vsttypes.h>}
+\DoxyCodeLine{104  \#include <pluginterfaces/vst/ivstunits.h>}
+\DoxyCodeLine{105  \#include <pluginterfaces/vst/ivstmidicontrollers.h>}
+\DoxyCodeLine{106  \#include <pluginterfaces/vst/ivstchannelcontextinfo.h>}
+\DoxyCodeLine{107  \#include <public.sdk/source/common/memorystream.h>}
+\DoxyCodeLine{108  \#include <public.sdk/source/vst/vsteditcontroller.h>}
+\DoxyCodeLine{109  \#include <public.sdk/source/vst/vstpresetfile.h>}
+\DoxyCodeLine{110 \#else}
+\DoxyCodeLine{111  // needed for VST\_VERSION}
+\DoxyCodeLine{112  \#include <pluginterfaces/vst/vsttypes.h>}
+\DoxyCodeLine{113 }
+\DoxyCodeLine{114  \#include <base/source/baseiids.cpp>}
+\DoxyCodeLine{115  \#include <base/source/fbuffer.cpp>}
+\DoxyCodeLine{116  \#include <base/source/fdebug.cpp>}
+\DoxyCodeLine{117  \#include <base/source/fobject.cpp>}
+\DoxyCodeLine{118  \#include <base/source/fstreamer.cpp>}
+\DoxyCodeLine{119  \#include <base/source/fstring.cpp>}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{121  // The following shouldn't leak from fstring.cpp}
+\DoxyCodeLine{122  \#undef stricmp}
+\DoxyCodeLine{123  \#undef strnicmp}
+\DoxyCodeLine{124  \#undef snprintf}
+\DoxyCodeLine{125  \#undef vsnprintf}
+\DoxyCodeLine{126  \#undef snwprintf}
+\DoxyCodeLine{127  \#undef vsnwprintf}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129  \#if VST\_VERSION >= 0x030608}
+\DoxyCodeLine{130   \#include <base/thread/source/flock.cpp>}
+\DoxyCodeLine{131   \#include <pluginterfaces/base/coreiids.cpp>}
+\DoxyCodeLine{132  \#else}
+\DoxyCodeLine{133   \#include <base/source/flock.cpp>}
+\DoxyCodeLine{134  \#endif}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{136  \#include <base/source/updatehandler.cpp>}
+\DoxyCodeLine{137  \#include <pluginterfaces/base/conststringtable.cpp>}
+\DoxyCodeLine{138  \#include <pluginterfaces/base/funknown.cpp>}
+\DoxyCodeLine{139  \#include <pluginterfaces/base/ipluginbase.h>}
+\DoxyCodeLine{140  \#include <pluginterfaces/base/ustring.cpp>}
+\DoxyCodeLine{141  \#include <pluginterfaces/gui/iplugview.h>}
+\DoxyCodeLine{142  \#include <pluginterfaces/gui/iplugviewcontentscalesupport.h>}
+\DoxyCodeLine{143  \#include <pluginterfaces/vst/ivstmidicontrollers.h>}
+\DoxyCodeLine{144  \#include <pluginterfaces/vst/ivstchannelcontextinfo.h>}
+\DoxyCodeLine{145  \#include <public.sdk/source/common/memorystream.cpp>}
+\DoxyCodeLine{146  \#include <public.sdk/source/common/pluginview.cpp>}
+\DoxyCodeLine{147  \#include <public.sdk/source/vst/vsteditcontroller.cpp>}
+\DoxyCodeLine{148  \#include <public.sdk/source/vst/vstbus.cpp>}
+\DoxyCodeLine{149  \#include <public.sdk/source/vst/vstinitiids.cpp>}
+\DoxyCodeLine{150  \#include <public.sdk/source/vst/vstcomponent.cpp>}
+\DoxyCodeLine{151  \#include <public.sdk/source/vst/vstcomponentbase.cpp>}
+\DoxyCodeLine{152  \#include <public.sdk/source/vst/vstparameters.cpp>}
+\DoxyCodeLine{153  \#include <public.sdk/source/vst/vstpresetfile.cpp>}
+\DoxyCodeLine{154  \#include <public.sdk/source/vst/hosting/hostclasses.cpp>}
+\DoxyCodeLine{155 }
+\DoxyCodeLine{156  \#if VST\_VERSION >= 0x03060c   // 3.6.12}
+\DoxyCodeLine{157   \#include <public.sdk/source/vst/hosting/pluginterfacesupport.cpp>}
+\DoxyCodeLine{158  \#endif}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160 //==============================================================================}
+\DoxyCodeLine{161 namespace Steinberg}
+\DoxyCodeLine{162 \{}
+\DoxyCodeLine{164   \#if VST\_VERSION < 0x03060d   // 3.6.13}
+\DoxyCodeLine{165     DEF\_CLASS\_IID (IPluginBase)}
+\DoxyCodeLine{166     DEF\_CLASS\_IID (IPluginFactory)}
+\DoxyCodeLine{167     DEF\_CLASS\_IID (IPluginFactory2)}
+\DoxyCodeLine{168     DEF\_CLASS\_IID (IPluginFactory3)}
+\DoxyCodeLine{169    \#if VST\_VERSION < 0x030608}
+\DoxyCodeLine{170     DEF\_CLASS\_IID (IBStream)}
+\DoxyCodeLine{171    \#endif}
+\DoxyCodeLine{172   \#endif}
+\DoxyCodeLine{173     DEF\_CLASS\_IID (IPlugView)}
+\DoxyCodeLine{174     DEF\_CLASS\_IID (IPlugFrame)}
+\DoxyCodeLine{175     DEF\_CLASS\_IID (IPlugViewContentScaleSupport)}
+\DoxyCodeLine{176 }
+\DoxyCodeLine{177    \#if JUCE\_LINUX || JUCE\_BSD}
+\DoxyCodeLine{178     DEF\_CLASS\_IID (Linux::IRunLoop)}
+\DoxyCodeLine{179     DEF\_CLASS\_IID (Linux::IEventHandler)}
+\DoxyCodeLine{180    \#endif}
+\DoxyCodeLine{181 \}}
+\DoxyCodeLine{182 \#endif // JUCE\_VST3HEADERS\_INCLUDE\_HEADERS\_ONLY}
+\DoxyCodeLine{183 }
+\DoxyCodeLine{184 JUCE\_END\_IGNORE\_WARNINGS\_MSVC}
+\DoxyCodeLine{185 JUCE\_END\_IGNORE\_WARNINGS\_GCC\_LIKE}
+\DoxyCodeLine{186 }
+\DoxyCodeLine{187 \#if JUCE\_WINDOWS}
+\DoxyCodeLine{188  \#include <windows.h>}
+\DoxyCodeLine{189 \#endif}
+\DoxyCodeLine{190 }
+\DoxyCodeLine{191 //==============================================================================}
+\DoxyCodeLine{192 \#undef ASSERT}
+\DoxyCodeLine{193 \#undef WARNING}
+\DoxyCodeLine{194 \#undef PRINTSYSERROR}
+\DoxyCodeLine{195 \#undef DEBUGSTR}
+\DoxyCodeLine{196 \#undef DBPRT0}
+\DoxyCodeLine{197 \#undef DBPRT1}
+\DoxyCodeLine{198 \#undef DBPRT2}
+\DoxyCodeLine{199 \#undef DBPRT3}
+\DoxyCodeLine{200 \#undef DBPRT4}
+\DoxyCodeLine{201 \#undef DBPRT5}
+\DoxyCodeLine{202 \#undef min}
+\DoxyCodeLine{203 \#undef max}
+\DoxyCodeLine{204 \#undef MIN}
+\DoxyCodeLine{205 \#undef MAX}
+\DoxyCodeLine{206 \#undef calloc}
+\DoxyCodeLine{207 \#undef free}
+\DoxyCodeLine{208 \#undef malloc}
+\DoxyCodeLine{209 \#undef realloc}
+\DoxyCodeLine{210 \#undef NEW}
+\DoxyCodeLine{211 \#undef NEWVEC}
+\DoxyCodeLine{212 \#undef VERIFY}
+\DoxyCodeLine{213 \#undef VERIFY\_IS}
+\DoxyCodeLine{214 \#undef VERIFY\_NOT}
+\DoxyCodeLine{215 \#undef META\_CREATE\_FUNC}
+\DoxyCodeLine{216 \#undef CLASS\_CREATE\_FUNC}
+\DoxyCodeLine{217 \#undef SINGLE\_CREATE\_FUNC}
+\DoxyCodeLine{218 \#undef \_META\_CLASS}
+\DoxyCodeLine{219 \#undef \_META\_CLASS\_IFACE}
+\DoxyCodeLine{220 \#undef \_META\_CLASS\_SINGLE}
+\DoxyCodeLine{221 \#undef META\_CLASS}
+\DoxyCodeLine{222 \#undef META\_CLASS\_IFACE}
+\DoxyCodeLine{223 \#undef META\_CLASS\_SINGLE}
+\DoxyCodeLine{224 \#undef SINGLETON}
+\DoxyCodeLine{225 \#undef OBJ\_METHODS}
+\DoxyCodeLine{226 \#undef QUERY\_INTERFACE}
+\DoxyCodeLine{227 \#undef LICENCE\_UID}
+\DoxyCodeLine{228 \#undef BEGIN\_FACTORY}
+\DoxyCodeLine{229 \#undef DEF\_CLASS}
+\DoxyCodeLine{230 \#undef DEF\_CLASS1}
+\DoxyCodeLine{231 \#undef DEF\_CLASS2}
+\DoxyCodeLine{232 \#undef DEF\_CLASS\_W}
+\DoxyCodeLine{233 \#undef END\_FACTORY}
+\DoxyCodeLine{234 }
+\DoxyCodeLine{235 \#ifdef atomic\_thread\_fence}
+\DoxyCodeLine{236  \#undef atomic\_thread\_fence}
+\DoxyCodeLine{237 \#endif}
+\DoxyCodeLine{238 }
+
+\end{DoxyCode}

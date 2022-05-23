@@ -1,0 +1,126 @@
+\hypertarget{class_m_p_e_messages}{}\doxysection{MPEMessages Class Reference}
+\label{class_m_p_e_messages}\index{MPEMessages@{MPEMessages}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+MPEMessages.\+h$>$}
+
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_midi_buffer}{Midi\+Buffer}} \mbox{\hyperlink{class_m_p_e_messages_a5a34b1ec462678269b296ba1e1862e72}{set\+Lower\+Zone}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} num\+Member\+Channels=0, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} per\+Note\+Pitchbend\+Range=48, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} master\+Pitchbend\+Range=2)
+\item 
+static \mbox{\hyperlink{class_midi_buffer}{Midi\+Buffer}} \mbox{\hyperlink{class_m_p_e_messages_a97c0265a5302fd048cd0ca9a7bf3446b}{set\+Upper\+Zone}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} num\+Member\+Channels=0, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} per\+Note\+Pitchbend\+Range=48, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} master\+Pitchbend\+Range=2)
+\item 
+static \mbox{\hyperlink{class_midi_buffer}{Midi\+Buffer}} \mbox{\hyperlink{class_m_p_e_messages_af2ed8ac87ae0401cf2ebe45344a5892a}{set\+Lower\+Zone\+Per\+Note\+Pitchbend\+Range}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} per\+Note\+Pitchbend\+Range=48)
+\item 
+static \mbox{\hyperlink{class_midi_buffer}{Midi\+Buffer}} \mbox{\hyperlink{class_m_p_e_messages_ad7bf405935573b3b9202fd3c2ed2c235}{set\+Upper\+Zone\+Per\+Note\+Pitchbend\+Range}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} per\+Note\+Pitchbend\+Range=48)
+\item 
+static \mbox{\hyperlink{class_midi_buffer}{Midi\+Buffer}} \mbox{\hyperlink{class_m_p_e_messages_ace2087946eeb2d38fdc6ca5b141a9f6a}{set\+Lower\+Zone\+Master\+Pitchbend\+Range}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} master\+Pitchbend\+Range=2)
+\item 
+static \mbox{\hyperlink{class_midi_buffer}{Midi\+Buffer}} \mbox{\hyperlink{class_m_p_e_messages_ae51a0fc57ea90a20ca2a9b82259eff17}{set\+Upper\+Zone\+Master\+Pitchbend\+Range}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} master\+Pitchbend\+Range=2)
+\item 
+static \mbox{\hyperlink{class_midi_buffer}{Midi\+Buffer}} \mbox{\hyperlink{class_m_p_e_messages_aa6a318e6c18f925c8d68763a7bd3ea60}{clear\+Lower\+Zone}} ()
+\item 
+static \mbox{\hyperlink{class_midi_buffer}{Midi\+Buffer}} \mbox{\hyperlink{class_m_p_e_messages_ac775fd28dc6e2f8a0da9b19eb3f64c70}{clear\+Upper\+Zone}} ()
+\item 
+static \mbox{\hyperlink{class_midi_buffer}{Midi\+Buffer}} \mbox{\hyperlink{class_m_p_e_messages_a3f0420a2f38a8dff5fd82eccbfed4c17}{clear\+All\+Zones}} ()
+\item 
+static \mbox{\hyperlink{class_midi_buffer}{Midi\+Buffer}} \mbox{\hyperlink{class_m_p_e_messages_ab842451c8fa2899042c4c7585c5ab974}{set\+Zone\+Layout}} (\mbox{\hyperlink{class_m_p_e_zone_layout}{MPEZone\+Layout}} layout)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{class_m_p_e_messages_abef11ba61a0031916d74066f718b407d}{zone\+Layout\+Messages\+Rpn\+Number}} = 6
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This helper class contains the necessary helper functions to generate MIDI messages that are exclusive to MPE, such as defining the upper and lower MPE zones and setting per-\/note and master pitchbend ranges. You can then send them to your MPE device using \mbox{\hyperlink{class_midi_output_ae54072205364d56260eaa11c7771289f}{Midi\+Output\+::send\+Block\+Of\+Messages\+Now}}.
+
+All other MPE messages like per-\/note pitchbend, pressure, and third dimension, are ordinary MIDI messages that should be created using the \mbox{\hyperlink{class_midi_message}{Midi\+Message}} class instead. You just need to take care to send them to the appropriate per-\/note MIDI channel.
+
+Note\+: If you are working with an \mbox{\hyperlink{class_m_p_e_zone_layout}{MPEZone\+Layout}} object inside your app, you should not use the message sequences provided here. Instead, you should change the zone layout programmatically with the member functions provided in the \mbox{\hyperlink{class_m_p_e_zone_layout}{MPEZone\+Layout}} class itself. You should also make sure that the Expressive MIDI zone layout of your C++ code and of the MPE device are kept in sync.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_midi_message}{Midi\+Message}}, \mbox{\hyperlink{class_m_p_e_zone_layout}{MPEZone\+Layout}}
+\end{DoxySeeAlso}
+@tags\{Audio\} 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_m_p_e_messages_a3f0420a2f38a8dff5fd82eccbfed4c17}\label{class_m_p_e_messages_a3f0420a2f38a8dff5fd82eccbfed4c17}} 
+\index{MPEMessages@{MPEMessages}!clearAllZones@{clearAllZones}}
+\index{clearAllZones@{clearAllZones}!MPEMessages@{MPEMessages}}
+\doxysubsubsection{\texorpdfstring{clearAllZones()}{clearAllZones()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_buffer}{Midi\+Buffer}} MPEMessages\+::clear\+All\+Zones (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Returns the sequence of MIDI messages that, if sent to an Expressive MIDI device, will clear the lower and upper zones. \mbox{\Hypertarget{class_m_p_e_messages_aa6a318e6c18f925c8d68763a7bd3ea60}\label{class_m_p_e_messages_aa6a318e6c18f925c8d68763a7bd3ea60}} 
+\index{MPEMessages@{MPEMessages}!clearLowerZone@{clearLowerZone}}
+\index{clearLowerZone@{clearLowerZone}!MPEMessages@{MPEMessages}}
+\doxysubsubsection{\texorpdfstring{clearLowerZone()}{clearLowerZone()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_buffer}{Midi\+Buffer}} MPEMessages\+::clear\+Lower\+Zone (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Returns the sequence of MIDI messages that, if sent to an Expressive MIDI device, will clear the lower zone. \mbox{\Hypertarget{class_m_p_e_messages_ac775fd28dc6e2f8a0da9b19eb3f64c70}\label{class_m_p_e_messages_ac775fd28dc6e2f8a0da9b19eb3f64c70}} 
+\index{MPEMessages@{MPEMessages}!clearUpperZone@{clearUpperZone}}
+\index{clearUpperZone@{clearUpperZone}!MPEMessages@{MPEMessages}}
+\doxysubsubsection{\texorpdfstring{clearUpperZone()}{clearUpperZone()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_buffer}{Midi\+Buffer}} MPEMessages\+::clear\+Upper\+Zone (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Returns the sequence of MIDI messages that, if sent to an Expressive MIDI device, will clear the upper zone. \mbox{\Hypertarget{class_m_p_e_messages_a5a34b1ec462678269b296ba1e1862e72}\label{class_m_p_e_messages_a5a34b1ec462678269b296ba1e1862e72}} 
+\index{MPEMessages@{MPEMessages}!setLowerZone@{setLowerZone}}
+\index{setLowerZone@{setLowerZone}!MPEMessages@{MPEMessages}}
+\doxysubsubsection{\texorpdfstring{setLowerZone()}{setLowerZone()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_buffer}{Midi\+Buffer}} MPEMessages\+::set\+Lower\+Zone (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{num\+Member\+Channels = {\ttfamily 0},  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{per\+Note\+Pitchbend\+Range = {\ttfamily 48},  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{master\+Pitchbend\+Range = {\ttfamily 2} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Returns the sequence of MIDI messages that, if sent to an Expressive MIDI device, will set the lower MPE zone. \mbox{\Hypertarget{class_m_p_e_messages_ace2087946eeb2d38fdc6ca5b141a9f6a}\label{class_m_p_e_messages_ace2087946eeb2d38fdc6ca5b141a9f6a}} 
+\index{MPEMessages@{MPEMessages}!setLowerZoneMasterPitchbendRange@{setLowerZoneMasterPitchbendRange}}
+\index{setLowerZoneMasterPitchbendRange@{setLowerZoneMasterPitchbendRange}!MPEMessages@{MPEMessages}}
+\doxysubsubsection{\texorpdfstring{setLowerZoneMasterPitchbendRange()}{setLowerZoneMasterPitchbendRange()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_buffer}{Midi\+Buffer}} MPEMessages\+::set\+Lower\+Zone\+Master\+Pitchbend\+Range (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{master\+Pitchbend\+Range = {\ttfamily 2} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Returns the sequence of MIDI messages that, if sent to an Expressive MIDI device, will set the master pitchbend range of the lower MPE zone. \mbox{\Hypertarget{class_m_p_e_messages_af2ed8ac87ae0401cf2ebe45344a5892a}\label{class_m_p_e_messages_af2ed8ac87ae0401cf2ebe45344a5892a}} 
+\index{MPEMessages@{MPEMessages}!setLowerZonePerNotePitchbendRange@{setLowerZonePerNotePitchbendRange}}
+\index{setLowerZonePerNotePitchbendRange@{setLowerZonePerNotePitchbendRange}!MPEMessages@{MPEMessages}}
+\doxysubsubsection{\texorpdfstring{setLowerZonePerNotePitchbendRange()}{setLowerZonePerNotePitchbendRange()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_buffer}{Midi\+Buffer}} MPEMessages\+::set\+Lower\+Zone\+Per\+Note\+Pitchbend\+Range (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{per\+Note\+Pitchbend\+Range = {\ttfamily 48} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Returns the sequence of MIDI messages that, if sent to an Expressive MIDI device, will set the per-\/note pitchbend range of the lower MPE zone. \mbox{\Hypertarget{class_m_p_e_messages_a97c0265a5302fd048cd0ca9a7bf3446b}\label{class_m_p_e_messages_a97c0265a5302fd048cd0ca9a7bf3446b}} 
+\index{MPEMessages@{MPEMessages}!setUpperZone@{setUpperZone}}
+\index{setUpperZone@{setUpperZone}!MPEMessages@{MPEMessages}}
+\doxysubsubsection{\texorpdfstring{setUpperZone()}{setUpperZone()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_buffer}{Midi\+Buffer}} MPEMessages\+::set\+Upper\+Zone (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{num\+Member\+Channels = {\ttfamily 0},  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{per\+Note\+Pitchbend\+Range = {\ttfamily 48},  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{master\+Pitchbend\+Range = {\ttfamily 2} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Returns the sequence of MIDI messages that, if sent to an Expressive MIDI device, will set the upper MPE zone. \mbox{\Hypertarget{class_m_p_e_messages_ae51a0fc57ea90a20ca2a9b82259eff17}\label{class_m_p_e_messages_ae51a0fc57ea90a20ca2a9b82259eff17}} 
+\index{MPEMessages@{MPEMessages}!setUpperZoneMasterPitchbendRange@{setUpperZoneMasterPitchbendRange}}
+\index{setUpperZoneMasterPitchbendRange@{setUpperZoneMasterPitchbendRange}!MPEMessages@{MPEMessages}}
+\doxysubsubsection{\texorpdfstring{setUpperZoneMasterPitchbendRange()}{setUpperZoneMasterPitchbendRange()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_buffer}{Midi\+Buffer}} MPEMessages\+::set\+Upper\+Zone\+Master\+Pitchbend\+Range (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{master\+Pitchbend\+Range = {\ttfamily 2} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Returns the sequence of MIDI messages that, if sent to an Expressive MIDI device, will set the master pitchbend range of the upper MPE zone. \mbox{\Hypertarget{class_m_p_e_messages_ad7bf405935573b3b9202fd3c2ed2c235}\label{class_m_p_e_messages_ad7bf405935573b3b9202fd3c2ed2c235}} 
+\index{MPEMessages@{MPEMessages}!setUpperZonePerNotePitchbendRange@{setUpperZonePerNotePitchbendRange}}
+\index{setUpperZonePerNotePitchbendRange@{setUpperZonePerNotePitchbendRange}!MPEMessages@{MPEMessages}}
+\doxysubsubsection{\texorpdfstring{setUpperZonePerNotePitchbendRange()}{setUpperZonePerNotePitchbendRange()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_buffer}{Midi\+Buffer}} MPEMessages\+::set\+Upper\+Zone\+Per\+Note\+Pitchbend\+Range (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{per\+Note\+Pitchbend\+Range = {\ttfamily 48} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Returns the sequence of MIDI messages that, if sent to an Expressive MIDI device, will set the per-\/note pitchbend range of the upper MPE zone. \mbox{\Hypertarget{class_m_p_e_messages_ab842451c8fa2899042c4c7585c5ab974}\label{class_m_p_e_messages_ab842451c8fa2899042c4c7585c5ab974}} 
+\index{MPEMessages@{MPEMessages}!setZoneLayout@{setZoneLayout}}
+\index{setZoneLayout@{setZoneLayout}!MPEMessages@{MPEMessages}}
+\doxysubsubsection{\texorpdfstring{setZoneLayout()}{setZoneLayout()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_midi_buffer}{Midi\+Buffer}} MPEMessages\+::set\+Zone\+Layout (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_m_p_e_zone_layout}{MPEZone\+Layout}}}]{layout }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Returns the sequence of MIDI messages that, if sent to an Expressive MIDI device, will reset the whole MPE zone layout of the device to the layout passed in. This will first clear the current lower and upper zones, then then set the zones contained in the passed-\/in zone layout, and set their per-\/note and master pitchbend ranges to their current values. 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_m_p_e_messages_abef11ba61a0031916d74066f718b407d}\label{class_m_p_e_messages_abef11ba61a0031916d74066f718b407d}} 
+\index{MPEMessages@{MPEMessages}!zoneLayoutMessagesRpnNumber@{zoneLayoutMessagesRpnNumber}}
+\index{zoneLayoutMessagesRpnNumber@{zoneLayoutMessagesRpnNumber}!MPEMessages@{MPEMessages}}
+\doxysubsubsection{\texorpdfstring{zoneLayoutMessagesRpnNumber}{zoneLayoutMessagesRpnNumber}}
+{\footnotesize\ttfamily \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} MPEMessages\+::zone\+Layout\+Messages\+Rpn\+Number = 6\hspace{0.3cm}{\ttfamily [static]}}
+
+The RPN number used for MPE zone layout messages.
+
+Pitchbend range messages (both per-\/note and master) are instead sent on RPN 0 as in standard MIDI 1.\+0. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+audio\+\_\+basics/mpe/\mbox{\hyperlink{juce___m_p_e_messages_8h}{juce\+\_\+\+MPEMessages.\+h}}\item 
+build/juce\+\_\+audio\+\_\+basics/mpe/\mbox{\hyperlink{juce___m_p_e_messages_8cpp}{juce\+\_\+\+MPEMessages.\+cpp}}\end{DoxyCompactItemize}

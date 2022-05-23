@@ -1,0 +1,66 @@
+\hypertarget{b2_stack_allocator_8h_source}{}\doxysection{b2\+Stack\+Allocator.\+h}
+\label{b2_stack_allocator_8h_source}\index{build/juce\_box2d/box2d/Common/b2StackAllocator.h@{build/juce\_box2d/box2d/Common/b2StackAllocator.h}}
+\mbox{\hyperlink{b2_stack_allocator_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{* Copyright (c) 2006-\/2009 Erin Catto http://www.box2d.org}}
+\DoxyCodeLine{3 \textcolor{comment}{*}}
+\DoxyCodeLine{4 \textcolor{comment}{* This software is provided 'as-\/is', without any express or implied}}
+\DoxyCodeLine{5 \textcolor{comment}{* warranty.  In no event will the authors be held liable for any damages}}
+\DoxyCodeLine{6 \textcolor{comment}{* arising from the use of this software.}}
+\DoxyCodeLine{7 \textcolor{comment}{* Permission is granted to anyone to use this software for any purpose,}}
+\DoxyCodeLine{8 \textcolor{comment}{* including commercial applications, and to alter it and redistribute it}}
+\DoxyCodeLine{9 \textcolor{comment}{* freely, subject to the following restrictions:}}
+\DoxyCodeLine{10 \textcolor{comment}{* 1. The origin of this software must not be misrepresented; you must not}}
+\DoxyCodeLine{11 \textcolor{comment}{* claim that you wrote the original software. If you use this software}}
+\DoxyCodeLine{12 \textcolor{comment}{* in a product, an acknowledgment in the product documentation would be}}
+\DoxyCodeLine{13 \textcolor{comment}{* appreciated but is not required.}}
+\DoxyCodeLine{14 \textcolor{comment}{* 2. Altered source versions must be plainly marked as such, and must not be}}
+\DoxyCodeLine{15 \textcolor{comment}{* misrepresented as being the original software.}}
+\DoxyCodeLine{16 \textcolor{comment}{* 3. This notice may not be removed or altered from any source distribution.}}
+\DoxyCodeLine{17 \textcolor{comment}{*/}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#ifndef B2\_STACK\_ALLOCATOR\_H}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#define B2\_STACK\_ALLOCATOR\_H}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{b2_settings_8h}{b2Settings.h}}"{}}}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} \mbox{\hyperlink{b2_stack_allocator_8h_a05c027761724b656927b5f5f8c9e6974}{b2\_stackSize}} = 100 * 1024; \textcolor{comment}{// 100k}}
+\DoxyCodeLine{25 \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} \mbox{\hyperlink{b2_stack_allocator_8h_a31daa6e4d9f019c802c32c0cd799cda7}{b2\_maxStackEntries}} = 32;}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{keyword}{struct }\mbox{\hyperlink{structb2_stack_entry}{b2StackEntry}}}
+\DoxyCodeLine{28 \{}
+\DoxyCodeLine{29     \textcolor{keywordtype}{char}* \mbox{\hyperlink{structb2_stack_entry_af98aedeec2c20af0b7d3508a687ddd86}{data}};}
+\DoxyCodeLine{30     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} \mbox{\hyperlink{structb2_stack_entry_a87d5d3d0fbc54d6f5f77af0c03482deb}{size}};}
+\DoxyCodeLine{31     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structb2_stack_entry_a581b5e4699bb66a28ec0727497a4e478}{usedMalloc}};}
+\DoxyCodeLine{32 \};}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 \textcolor{comment}{// This is a stack allocator used for fast per step allocations.}}
+\DoxyCodeLine{35 \textcolor{comment}{// You must nest allocate/free pairs. The code will assert}}
+\DoxyCodeLine{36 \textcolor{comment}{// if you try to interleave multiple allocate/free pairs.}}
+\DoxyCodeLine{37 \textcolor{keyword}{class }\mbox{\hyperlink{classb2_stack_allocator}{b2StackAllocator}}}
+\DoxyCodeLine{38 \{}
+\DoxyCodeLine{39 \textcolor{keyword}{public}:}
+\DoxyCodeLine{40     \mbox{\hyperlink{classb2_stack_allocator_a00f8771300fe1efeb6fbaab489a8dd0a}{b2StackAllocator}}();}
+\DoxyCodeLine{41     \mbox{\hyperlink{classb2_stack_allocator_a9f9bd23569d3521316d2f00b1de454b2}{\string~b2StackAllocator}}();}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43     \textcolor{keywordtype}{void}* \mbox{\hyperlink{classb2_stack_allocator_a21bcc8d75de66b34f097632b9074a264}{Allocate}}(\mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} \mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}});}
+\DoxyCodeLine{44     \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_stack_allocator_a3a4384cf5f467828db3022985673db66}{Free}}(\textcolor{keywordtype}{void}* \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}});}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} \mbox{\hyperlink{classb2_stack_allocator_a9670b9ce67f939004f227d1be883404f}{GetMaxAllocation}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48 \textcolor{keyword}{private}:}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50     \textcolor{keywordtype}{char} m\_data[\mbox{\hyperlink{b2_stack_allocator_8h_a05c027761724b656927b5f5f8c9e6974}{b2\_stackSize}}];}
+\DoxyCodeLine{51     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} m\_index;}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} m\_allocation;}
+\DoxyCodeLine{54     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} m\_maxAllocation;}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56     \mbox{\hyperlink{structb2_stack_entry}{b2StackEntry}} m\_entries[\mbox{\hyperlink{b2_stack_allocator_8h_a31daa6e4d9f019c802c32c0cd799cda7}{b2\_maxStackEntries}}];}
+\DoxyCodeLine{57     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} m\_entryCount;}
+\DoxyCodeLine{58 \};}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

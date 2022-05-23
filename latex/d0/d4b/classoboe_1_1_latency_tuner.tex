@@ -1,0 +1,144 @@
+\hypertarget{classoboe_1_1_latency_tuner}{}\doxysection{oboe\+::Latency\+Tuner Class Reference}
+\label{classoboe_1_1_latency_tuner}\index{oboe::LatencyTuner@{oboe::LatencyTuner}}
+
+
+{\ttfamily \#include $<$Latency\+Tuner.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoboe_1_1_latency_tuner_a5359702c8d6072329e159ba79891993a}{Latency\+Tuner}} (\mbox{\hyperlink{classoboe_1_1_audio_stream}{Audio\+Stream}} \&stream)
+\item 
+\mbox{\hyperlink{classoboe_1_1_latency_tuner_acc13aa20fb2b2308baa0f14d2ca887e2}{Latency\+Tuner}} (\mbox{\hyperlink{classoboe_1_1_audio_stream}{Audio\+Stream}} \&stream, int32\+\_\+t maximum\+Buffer\+Size)
+\item 
+\mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1}{Result}} \mbox{\hyperlink{classoboe_1_1_latency_tuner_ab6071fb5619ec14d94df007bf36c0c9f}{tune}} ()
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{classoboe_1_1_latency_tuner_a30e2d2132654fd468b5ee81dcfb3b1e7}{request\+Reset}} ()
+\item 
+bool \mbox{\hyperlink{classoboe_1_1_latency_tuner_ad89e6108585d6b342cddd48ca3b2a5a9}{is\+At\+Maximum\+Buffer\+Size}} ()
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{classoboe_1_1_latency_tuner_adc96aa53b18a051b6ccdacb838139bf8}{set\+Minimum\+Buffer\+Size}} (int32\+\_\+t \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8556d19b129aa550f5b2819ed0320e83}{buffer\+Size}})
+\item 
+int32\+\_\+t \mbox{\hyperlink{classoboe_1_1_latency_tuner_aaba4b3f075ed8d7c7ad4cad392545c08}{get\+Minimum\+Buffer\+Size}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}}
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{classoboe_1_1_latency_tuner_a2684b30205126c8acd2f75d01cce05db}{set\+Buffer\+Size\+Increment}} (int32\+\_\+t size\+Increment)
+\item 
+int32\+\_\+t \mbox{\hyperlink{classoboe_1_1_latency_tuner_a5ea6114ac4f78f3e050d405168905123}{get\+Buffer\+Size\+Increment}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{classoboe_1_1_latency_tuner}{Latency\+Tuner}} can be used to dynamically tune the latency of an output stream. It adjusts the stream\textquotesingle{}s buffer\+Size by monitoring the number of underruns.
+
+This only affects the latency associated with the first level of buffering that is closest to the application. It does not affect low latency in the HAL, or touch latency in the UI.
+
+Call \mbox{\hyperlink{classoboe_1_1_latency_tuner_ab6071fb5619ec14d94df007bf36c0c9f}{tune()}} right before returning from your data callback function if using callbacks. Call \mbox{\hyperlink{classoboe_1_1_latency_tuner_ab6071fb5619ec14d94df007bf36c0c9f}{tune()}} right before calling write() if using blocking writes.
+
+If you want to see the ongoing results of this tuning process then call stream-\/\texorpdfstring{$>$}{>}get\+Buffer\+Size() periodically. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoboe_1_1_latency_tuner_a5359702c8d6072329e159ba79891993a}\label{classoboe_1_1_latency_tuner_a5359702c8d6072329e159ba79891993a}} 
+\index{oboe::LatencyTuner@{oboe::LatencyTuner}!LatencyTuner@{LatencyTuner}}
+\index{LatencyTuner@{LatencyTuner}!oboe::LatencyTuner@{oboe::LatencyTuner}}
+\doxysubsubsection{\texorpdfstring{LatencyTuner()}{LatencyTuner()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Latency\+Tuner\+::\+Latency\+Tuner (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoboe_1_1_audio_stream}{Audio\+Stream}} \&}]{stream }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+Construct a new \mbox{\hyperlink{classoboe_1_1_latency_tuner}{Latency\+Tuner}} object which will act on the given audio stream
+
+
+\begin{DoxyParams}{Parameters}
+{\em stream} & the stream who\textquotesingle{}s latency will be tuned \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classoboe_1_1_latency_tuner_acc13aa20fb2b2308baa0f14d2ca887e2}\label{classoboe_1_1_latency_tuner_acc13aa20fb2b2308baa0f14d2ca887e2}} 
+\index{oboe::LatencyTuner@{oboe::LatencyTuner}!LatencyTuner@{LatencyTuner}}
+\index{LatencyTuner@{LatencyTuner}!oboe::LatencyTuner@{oboe::LatencyTuner}}
+\doxysubsubsection{\texorpdfstring{LatencyTuner()}{LatencyTuner()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Latency\+Tuner\+::\+Latency\+Tuner (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoboe_1_1_audio_stream}{oboe\+::\+Audio\+Stream}} \&}]{stream,  }\item[{int32\+\_\+t}]{maximum\+Buffer\+Size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+Construct a new \mbox{\hyperlink{classoboe_1_1_latency_tuner}{Latency\+Tuner}} object which will act on the given audio stream.
+
+
+\begin{DoxyParams}{Parameters}
+{\em stream} & the stream who\textquotesingle{}s latency will be tuned \\
+\hline
+{\em the} & maximum buffer size which the \mbox{\hyperlink{classoboe_1_1_latency_tuner_ab6071fb5619ec14d94df007bf36c0c9f}{tune()}} operation will set the buffer size to \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoboe_1_1_latency_tuner_a5ea6114ac4f78f3e050d405168905123}\label{classoboe_1_1_latency_tuner_a5ea6114ac4f78f3e050d405168905123}} 
+\index{oboe::LatencyTuner@{oboe::LatencyTuner}!getBufferSizeIncrement@{getBufferSizeIncrement}}
+\index{getBufferSizeIncrement@{getBufferSizeIncrement}!oboe::LatencyTuner@{oboe::LatencyTuner}}
+\doxysubsubsection{\texorpdfstring{getBufferSizeIncrement()}{getBufferSizeIncrement()}}
+{\footnotesize\ttfamily int32\+\_\+t oboe\+::\+Latency\+Tuner\+::get\+Buffer\+Size\+Increment (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classoboe_1_1_latency_tuner_aaba4b3f075ed8d7c7ad4cad392545c08}\label{classoboe_1_1_latency_tuner_aaba4b3f075ed8d7c7ad4cad392545c08}} 
+\index{oboe::LatencyTuner@{oboe::LatencyTuner}!getMinimumBufferSize@{getMinimumBufferSize}}
+\index{getMinimumBufferSize@{getMinimumBufferSize}!oboe::LatencyTuner@{oboe::LatencyTuner}}
+\doxysubsubsection{\texorpdfstring{getMinimumBufferSize()}{getMinimumBufferSize()}}
+{\footnotesize\ttfamily int32\+\_\+t oboe\+::\+Latency\+Tuner\+::get\+Minimum\+Buffer\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classoboe_1_1_latency_tuner_ad89e6108585d6b342cddd48ca3b2a5a9}\label{classoboe_1_1_latency_tuner_ad89e6108585d6b342cddd48ca3b2a5a9}} 
+\index{oboe::LatencyTuner@{oboe::LatencyTuner}!isAtMaximumBufferSize@{isAtMaximumBufferSize}}
+\index{isAtMaximumBufferSize@{isAtMaximumBufferSize}!oboe::LatencyTuner@{oboe::LatencyTuner}}
+\doxysubsubsection{\texorpdfstring{isAtMaximumBufferSize()}{isAtMaximumBufferSize()}}
+{\footnotesize\ttfamily bool Latency\+Tuner\+::is\+At\+Maximum\+Buffer\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+true if the audio stream\textquotesingle{}s buffer size is at the maximum value. If no maximum value was specified when constructing the \mbox{\hyperlink{classoboe_1_1_latency_tuner}{Latency\+Tuner}} then the value of stream-\/\texorpdfstring{$>$}{>}get\+Buffer\+Capacity\+In\+Frames is used 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classoboe_1_1_latency_tuner_a30e2d2132654fd468b5ee81dcfb3b1e7}\label{classoboe_1_1_latency_tuner_a30e2d2132654fd468b5ee81dcfb3b1e7}} 
+\index{oboe::LatencyTuner@{oboe::LatencyTuner}!requestReset@{requestReset}}
+\index{requestReset@{requestReset}!oboe::LatencyTuner@{oboe::LatencyTuner}}
+\doxysubsubsection{\texorpdfstring{requestReset()}{requestReset()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Latency\+Tuner\+::request\+Reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This may be called from another thread. Then \mbox{\hyperlink{classoboe_1_1_latency_tuner_ab6071fb5619ec14d94df007bf36c0c9f}{tune()}} will call \mbox{\hyperlink{namespacegl_a3b437ea454d772211296e220c025bdd2}{reset()}}, which will lower the latency to the minimum and then allow it to rise back up if there are glitches.
+
+This is typically called in response to a user decision to minimize latency. In other words, call this from a button handler. \mbox{\Hypertarget{classoboe_1_1_latency_tuner_a2684b30205126c8acd2f75d01cce05db}\label{classoboe_1_1_latency_tuner_a2684b30205126c8acd2f75d01cce05db}} 
+\index{oboe::LatencyTuner@{oboe::LatencyTuner}!setBufferSizeIncrement@{setBufferSizeIncrement}}
+\index{setBufferSizeIncrement@{setBufferSizeIncrement}!oboe::LatencyTuner@{oboe::LatencyTuner}}
+\doxysubsubsection{\texorpdfstring{setBufferSizeIncrement()}{setBufferSizeIncrement()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} oboe\+::\+Latency\+Tuner\+::set\+Buffer\+Size\+Increment (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{size\+Increment }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Set the amount the buffer\+Size will be incremented while tuning. By default, this will be one burst.
+
+Note that AAudio will quantize the buffer size to a multiple of the burst\+Size. So the final buffer sizes may not be a multiple of this increment.
+
+
+\begin{DoxyParams}{Parameters}
+{\em size\+Increment} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classoboe_1_1_latency_tuner_adc96aa53b18a051b6ccdacb838139bf8}\label{classoboe_1_1_latency_tuner_adc96aa53b18a051b6ccdacb838139bf8}} 
+\index{oboe::LatencyTuner@{oboe::LatencyTuner}!setMinimumBufferSize@{setMinimumBufferSize}}
+\index{setMinimumBufferSize@{setMinimumBufferSize}!oboe::LatencyTuner@{oboe::LatencyTuner}}
+\doxysubsubsection{\texorpdfstring{setMinimumBufferSize()}{setMinimumBufferSize()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} oboe\+::\+Latency\+Tuner\+::set\+Minimum\+Buffer\+Size (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{buffer\+Size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Set the minimum buffer\+Size in frames that is used when the tuner is reset. You may wish to call \mbox{\hyperlink{classoboe_1_1_latency_tuner_a30e2d2132654fd468b5ee81dcfb3b1e7}{request\+Reset()}} after calling this. 
+\begin{DoxyParams}{Parameters}
+{\em buffer\+Size} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classoboe_1_1_latency_tuner_ab6071fb5619ec14d94df007bf36c0c9f}\label{classoboe_1_1_latency_tuner_ab6071fb5619ec14d94df007bf36c0c9f}} 
+\index{oboe::LatencyTuner@{oboe::LatencyTuner}!tune@{tune}}
+\index{tune@{tune}!oboe::LatencyTuner@{oboe::LatencyTuner}}
+\doxysubsubsection{\texorpdfstring{tune()}{tune()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1}{Result}} Latency\+Tuner\+::tune (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Adjust the buffer\+Size\+In\+Frames to optimize latency. It will start with a low latency and then raise it if an underrun occurs.
+
+Latency tuning is only supported for AAudio.
+
+\begin{DoxyReturn}{Returns}
+OK or negative error, Error\+Unimplemented for Open\+SL ES 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+audio\+\_\+devices/native/oboe/include/oboe/\mbox{\hyperlink{_latency_tuner_8h}{Latency\+Tuner.\+h}}\item 
+build/juce\+\_\+audio\+\_\+devices/native/oboe/src/common/\mbox{\hyperlink{_latency_tuner_8cpp}{Latency\+Tuner.\+cpp}}\end{DoxyCompactItemize}

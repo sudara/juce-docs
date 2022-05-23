@@ -1,0 +1,195 @@
+\hypertarget{juce___grid_8h_source}{}\doxysection{juce\+\_\+\+Grid.\+h}
+\label{juce___grid_8h_source}\index{build/juce\_gui\_basics/layout/juce\_Grid.h@{build/juce\_gui\_basics/layout/juce\_Grid.h}}
+\mbox{\hyperlink{juce___grid_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{40 \textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_grid}{Grid}}  final}
+\DoxyCodeLine{41 \{}
+\DoxyCodeLine{42 \textcolor{keyword}{public}:}
+\DoxyCodeLine{43     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{45 \textcolor{comment}{}    \textcolor{keyword}{struct }\mbox{\hyperlink{struct_grid_1_1_px}{Px}}  final}
+\DoxyCodeLine{46     \{}
+\DoxyCodeLine{47         \textcolor{keyword}{explicit} \mbox{\hyperlink{struct_grid_1_1_px_a60d9325ff928ffbbf8a35333659a5a05}{Px}} (\textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}}) : \mbox{\hyperlink{namespacegl_a10ae038bf21558cd0a21dd19607e04b8}{pixels}} (static\_cast<long double>(\mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}})) \{ \textcolor{comment}{/*sta (p >= 0.0f);*/} \}}
+\DoxyCodeLine{48         \textcolor{keyword}{explicit} \mbox{\hyperlink{struct_grid_1_1_px_a73eac8335489332ab515d5781a09122b}{Px}} (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}})   : \mbox{\hyperlink{namespacegl_a10ae038bf21558cd0a21dd19607e04b8}{pixels}} (static\_cast<long double>(\mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}})) \{ \textcolor{comment}{/*sta (p >= 0.0f);*/} \}}
+\DoxyCodeLine{49         \textcolor{keyword}{explicit} \textcolor{keyword}{constexpr} \mbox{\hyperlink{struct_grid_1_1_px_ae3bd89b1d11075386d33d458c4de0e73}{Px}} (\textcolor{keywordtype}{long} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}})        : \mbox{\hyperlink{namespacegl_a10ae038bf21558cd0a21dd19607e04b8}{pixels}} (\mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}}) \{\}}
+\DoxyCodeLine{50         \textcolor{keyword}{explicit} \textcolor{keyword}{constexpr} \mbox{\hyperlink{struct_grid_1_1_px_a1fe46f6c83c7b078fa392594c1a39373}{Px}} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}}) : \mbox{\hyperlink{namespacegl_a10ae038bf21558cd0a21dd19607e04b8}{pixels}} (static\_cast<long double>(\mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}})) \{\}}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52         \textcolor{keywordtype}{long} \textcolor{keywordtype}{double} \mbox{\hyperlink{struct_grid_1_1_px_a9e04a04d3b8452bfcde9c4320187b7c0}{pixels}};}
+\DoxyCodeLine{53     \};}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{56     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_grid_1_1_fr}{Fr}}  final}
+\DoxyCodeLine{57     \{}
+\DoxyCodeLine{58         \textcolor{keyword}{explicit} \mbox{\hyperlink{struct_grid_1_1_fr_ae9cfd6a7de736af0440cb79406804b25}{Fr}} (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}}) : fraction (static\_cast<unsigned long long> (\mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}})) \{\}}
+\DoxyCodeLine{59         \textcolor{keyword}{explicit} \textcolor{keyword}{constexpr} \mbox{\hyperlink{struct_grid_1_1_fr_abb5b184f336ff1e54e648715426ddd31}{Fr}} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}}) : fraction (\mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}}) \{\}}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} \mbox{\hyperlink{struct_grid_1_1_fr_a61017c40010278bfb0b7bde8a2d470f0}{fraction}};}
+\DoxyCodeLine{62     \};}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{66 \textcolor{comment}{}    \textcolor{keyword}{struct }\mbox{\hyperlink{struct_grid_1_1_track_info}{TrackInfo}}  final}
+\DoxyCodeLine{67     \{}
+\DoxyCodeLine{69         \mbox{\hyperlink{struct_grid_1_1_track_info_a59b526c5c9e68687c32fb7105d21ad7e}{TrackInfo}}() noexcept;}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71         \mbox{\hyperlink{struct_grid_1_1_track_info}{TrackInfo}} (\mbox{\hyperlink{struct_grid_1_1_px}{Px}} sizeInPixels) noexcept;}
+\DoxyCodeLine{72         \mbox{\hyperlink{struct_grid_1_1_track_info}{TrackInfo}} (\mbox{\hyperlink{struct_grid_1_1_fr}{Fr}} fractionOfFreeSpace) noexcept;}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74         \mbox{\hyperlink{struct_grid_1_1_track_info}{TrackInfo}} (\mbox{\hyperlink{struct_grid_1_1_px}{Px}} sizeInPixels, \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}}\& endLineNameToUse) noexcept;}
+\DoxyCodeLine{75         \mbox{\hyperlink{struct_grid_1_1_track_info}{TrackInfo}} (\mbox{\hyperlink{struct_grid_1_1_fr}{Fr}} fractionOfFreeSpace, \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}}\& endLineNameToUse) noexcept;}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77         \mbox{\hyperlink{struct_grid_1_1_track_info}{TrackInfo}} (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}}\& startLineNameToUse, \mbox{\hyperlink{struct_grid_1_1_px}{Px}} sizeInPixels) noexcept;}
+\DoxyCodeLine{78         \mbox{\hyperlink{struct_grid_1_1_track_info}{TrackInfo}} (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}}\& startLineNameToUse, \mbox{\hyperlink{struct_grid_1_1_fr}{Fr}} fractionOfFreeSpace) noexcept;}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80         \mbox{\hyperlink{struct_grid_1_1_track_info}{TrackInfo}} (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}}\& startLineNameToUse, \mbox{\hyperlink{struct_grid_1_1_px}{Px}} sizeInPixels, \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}}\& endLineNameToUse) noexcept;}
+\DoxyCodeLine{81         \mbox{\hyperlink{struct_grid_1_1_track_info}{TrackInfo}} (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}}\& startLineNameToUse, \mbox{\hyperlink{struct_grid_1_1_fr}{Fr}} fractionOfFreeSpace, \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}}\& endLineNameToUse) noexcept;}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83         \textcolor{keywordtype}{bool} isAuto() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept \{ \textcolor{keywordflow}{return} hasKeyword; \}}
+\DoxyCodeLine{84         \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_grid_1_1_track_info_a64c85ac3a1bb62b8e179700a5eacfa84}{isFractional}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept \{ \textcolor{keywordflow}{return} isFraction; \}}
+\DoxyCodeLine{85         \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_grid_1_1_track_info_ac4407d52fb47786355af300799fdc736}{isPixels}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept \{ \textcolor{keywordflow}{return} ! isFraction; \}}
+\DoxyCodeLine{86         \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{struct_grid_1_1_track_info_a2e2c88cb252bd80456cb909fdfa82666}{getStartLineName}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept \{ \textcolor{keywordflow}{return} startLineName; \}}
+\DoxyCodeLine{87         \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{struct_grid_1_1_track_info_a7be0b90ac9851622ee5a34d1d240c255}{getEndLineName}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept \{ \textcolor{keywordflow}{return} endLineName; \}}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{90         \textcolor{keywordtype}{float} \mbox{\hyperlink{struct_grid_1_1_track_info_a79ff1228bfd8b6fc6fc9ab7c4a916c04}{getSize}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}}; \}}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92     \textcolor{keyword}{private}:}
+\DoxyCodeLine{93         \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{class_grid}{Grid}};}
+\DoxyCodeLine{94         \textcolor{keywordtype}{float} getAbsoluteSize (\textcolor{keywordtype}{float} relativeFractionalUnit) \textcolor{keyword}{const};}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{96         \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}} = 0; \textcolor{comment}{// Either a fraction or an absolute size in pixels}}
+\DoxyCodeLine{97         \textcolor{keywordtype}{bool} isFraction = \textcolor{keyword}{false};}
+\DoxyCodeLine{98         \textcolor{keywordtype}{bool} hasKeyword = \textcolor{keyword}{false};}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100         \mbox{\hyperlink{class_string}{String}} startLineName, endLineName;}
+\DoxyCodeLine{101     \};}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{105 \textcolor{comment}{}    \textcolor{keyword}{enum class} \mbox{\hyperlink{class_grid_afbf79b83305b5be690b37136e2b08ed0}{JustifyItems}} : \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}
+\DoxyCodeLine{106     \{}
+\DoxyCodeLine{107         \mbox{\hyperlink{namespacegl_adad3a3824fbe72fb0b01074bb01ebe75}{start}} = 0,                }
+\DoxyCodeLine{108         \mbox{\hyperlink{group__juce__core-files_ga4a3194f4f741f9bd653f28733358f62c}{end}},                      }
+\DoxyCodeLine{109         center,                   }
+\DoxyCodeLine{110         stretch                   }
+\DoxyCodeLine{111     \};}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{114     \textcolor{keyword}{enum class} \mbox{\hyperlink{class_grid_a2da60621ddd7f571005268e6a4c02c95}{AlignItems}} : \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}
+\DoxyCodeLine{115     \{}
+\DoxyCodeLine{116         \mbox{\hyperlink{namespacegl_adad3a3824fbe72fb0b01074bb01ebe75}{start}} = 0,                }
+\DoxyCodeLine{117         \mbox{\hyperlink{group__juce__core-files_ga4a3194f4f741f9bd653f28733358f62c}{end}},                      }
+\DoxyCodeLine{118         center,                   }
+\DoxyCodeLine{119         stretch                   }
+\DoxyCodeLine{120     \};}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{123     \textcolor{keyword}{enum class} \mbox{\hyperlink{class_grid_a409e1ab0e5437a211a6c0234f6dff4f6}{JustifyContent}}}
+\DoxyCodeLine{124     \{}
+\DoxyCodeLine{125         \mbox{\hyperlink{namespacegl_adad3a3824fbe72fb0b01074bb01ebe75}{start}},                    }
+\DoxyCodeLine{126         \mbox{\hyperlink{group__juce__core-files_ga4a3194f4f741f9bd653f28733358f62c}{end}},                      }
+\DoxyCodeLine{127         center,                   }
+\DoxyCodeLine{128         stretch,                  }
+\DoxyCodeLine{129         spaceAround,              }
+\DoxyCodeLine{130         spaceBetween,             }
+\DoxyCodeLine{131         spaceEvenly               }
+\DoxyCodeLine{132     \};}
+\DoxyCodeLine{133 }
+\DoxyCodeLine{135     \textcolor{keyword}{enum class} \mbox{\hyperlink{class_grid_a2b6407a788846a62b2c1c39e48dbe93c}{AlignContent}}}
+\DoxyCodeLine{136     \{}
+\DoxyCodeLine{137         \mbox{\hyperlink{namespacegl_adad3a3824fbe72fb0b01074bb01ebe75}{start}},                    }
+\DoxyCodeLine{138         \mbox{\hyperlink{group__juce__core-files_ga4a3194f4f741f9bd653f28733358f62c}{end}},                      }
+\DoxyCodeLine{139         center,                   }
+\DoxyCodeLine{140         stretch,                  }
+\DoxyCodeLine{141         spaceAround,              }
+\DoxyCodeLine{142         spaceBetween,             }
+\DoxyCodeLine{143         spaceEvenly               }
+\DoxyCodeLine{144     \};}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{147     \textcolor{keyword}{enum class} \mbox{\hyperlink{class_grid_a1987dcfa56a91b8c3b41dff63dc6364a}{AutoFlow}}}
+\DoxyCodeLine{148     \{}
+\DoxyCodeLine{149         \mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682caf1965a857bc285d26fe22023aa5ab50d}{row}},                      }
+\DoxyCodeLine{150         \mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca1afd32818d1c9525f82aff4c09efd254}{column}},                   }
+\DoxyCodeLine{151         rowDense,                 }
+\DoxyCodeLine{152         columnDense               }
+\DoxyCodeLine{153     \};}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{155 }
+\DoxyCodeLine{156     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{158 \textcolor{comment}{}    \mbox{\hyperlink{class_grid_a775ad2cbbd0fa863c84748eccdb707ad}{Grid}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{161     \mbox{\hyperlink{class_grid_a9df87fb122eceadad2624f36e83c8889}{\string~Grid}}() noexcept = default;}
+\DoxyCodeLine{162 }
+\DoxyCodeLine{163     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{165 \textcolor{comment}{}    \mbox{\hyperlink{class_grid_afbf79b83305b5be690b37136e2b08ed0}{JustifyItems}}   justifyItems   = \mbox{\hyperlink{class_grid_afbf79b83305b5be690b37136e2b08ed0}{JustifyItems}}::stretch;}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{168     \mbox{\hyperlink{class_grid_a2da60621ddd7f571005268e6a4c02c95}{AlignItems}}     alignItems     = \mbox{\hyperlink{class_grid_a2da60621ddd7f571005268e6a4c02c95}{AlignItems}}::stretch;}
+\DoxyCodeLine{169 }
+\DoxyCodeLine{171     \mbox{\hyperlink{class_grid_a409e1ab0e5437a211a6c0234f6dff4f6}{JustifyContent}} justifyContent = \mbox{\hyperlink{class_grid_a409e1ab0e5437a211a6c0234f6dff4f6}{JustifyContent}}::stretch;}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{174     \mbox{\hyperlink{class_grid_a2b6407a788846a62b2c1c39e48dbe93c}{AlignContent}}   alignContent   = \mbox{\hyperlink{class_grid_a2b6407a788846a62b2c1c39e48dbe93c}{AlignContent}}::stretch;}
+\DoxyCodeLine{175 }
+\DoxyCodeLine{177     \mbox{\hyperlink{class_grid_a1987dcfa56a91b8c3b41dff63dc6364a}{AutoFlow}}       autoFlow       = \mbox{\hyperlink{class_grid_a1987dcfa56a91b8c3b41dff63dc6364a}{AutoFlow}}::\mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682caf1965a857bc285d26fe22023aa5ab50d}{row}};}
+\DoxyCodeLine{178 }
+\DoxyCodeLine{179 }
+\DoxyCodeLine{180     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{182 \textcolor{comment}{}    \mbox{\hyperlink{class_array}{Array}}<\mbox{\hyperlink{struct_grid_1_1_track_info}{TrackInfo}}> templateColumns;}
+\DoxyCodeLine{183 }
+\DoxyCodeLine{185     \mbox{\hyperlink{class_array}{Array}}<\mbox{\hyperlink{struct_grid_1_1_track_info}{TrackInfo}}> templateRows;}
+\DoxyCodeLine{186 }
+\DoxyCodeLine{188     \mbox{\hyperlink{class_string_array}{StringArray}} templateAreas;}
+\DoxyCodeLine{189 }
+\DoxyCodeLine{191     \mbox{\hyperlink{struct_grid_1_1_track_info}{TrackInfo}} autoRows;}
+\DoxyCodeLine{192 }
+\DoxyCodeLine{194     \mbox{\hyperlink{struct_grid_1_1_track_info}{TrackInfo}} autoColumns;}
+\DoxyCodeLine{195 }
+\DoxyCodeLine{197     \mbox{\hyperlink{struct_grid_1_1_px}{Px}} columnGap \{ 0 \};}
+\DoxyCodeLine{199     \mbox{\hyperlink{struct_grid_1_1_px}{Px}} rowGap \{ 0 \};}
+\DoxyCodeLine{200 }
+\DoxyCodeLine{202     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_grid_a3c3c44c47e976ec053eba7d7de210989}{setGap}} (\mbox{\hyperlink{struct_grid_1_1_px}{Px}} sizeInPixels) \textcolor{keyword}{noexcept}          \{ rowGap = columnGap = sizeInPixels; \}}
+\DoxyCodeLine{203 }
+\DoxyCodeLine{204     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{206 \textcolor{comment}{}    \mbox{\hyperlink{class_array}{Array<GridItem>}} \mbox{\hyperlink{class_grid_a6d48af5319886013f42e0b75d0f1d6db}{items}};}
+\DoxyCodeLine{207 }
+\DoxyCodeLine{208     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{210 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_grid_a1fca18142e3dbe38dbffb84fe40e8f36}{performLayout}} (\mbox{\hyperlink{class_rectangle}{Rectangle<int>}});}
+\DoxyCodeLine{211 }
+\DoxyCodeLine{212     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{214 \textcolor{comment}{}    \textcolor{keywordtype}{int} \mbox{\hyperlink{class_grid_a0ba155985b9e1a5f44d16921dca486a4}{getNumberOfColumns}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept         \{ \textcolor{keywordflow}{return} templateColumns.size(); \}}
+\DoxyCodeLine{216     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_grid_a34600f234c1fa4f7d02074ec3ec99050}{getNumberOfRows}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept            \{ \textcolor{keywordflow}{return} templateRows.size(); \}}
+\DoxyCodeLine{217 }
+\DoxyCodeLine{218 \textcolor{keyword}{private}:}
+\DoxyCodeLine{219     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{220     \textcolor{keyword}{struct }SizeCalculation;}
+\DoxyCodeLine{221     \textcolor{keyword}{struct }PlacementHelpers;}
+\DoxyCodeLine{222     \textcolor{keyword}{struct }AutoPlacement;}
+\DoxyCodeLine{223     \textcolor{keyword}{struct }BoxAlignment;}
+\DoxyCodeLine{224 \};}
+\DoxyCodeLine{225 }
+\DoxyCodeLine{226 \textcolor{keyword}{constexpr} \mbox{\hyperlink{struct_grid_1_1_px}{Grid::Px}} \textcolor{keyword}{operator}\textcolor{stringliteral}{"{}"{}} \_px (\textcolor{keywordtype}{long} \textcolor{keywordtype}{double} px)          \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{struct_grid_1_1_px}{Grid::Px}} \{ px \}; \}}
+\DoxyCodeLine{227 \textcolor{keyword}{constexpr} \mbox{\hyperlink{struct_grid_1_1_px}{Grid::Px}} \textcolor{keyword}{operator}\textcolor{stringliteral}{"{}"{}} \_px (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} px)   \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{struct_grid_1_1_px}{Grid::Px}} \{ px \}; \}}
+\DoxyCodeLine{228 \textcolor{keyword}{constexpr} \mbox{\hyperlink{struct_grid_1_1_fr}{Grid::Fr}} \textcolor{keyword}{operator}\textcolor{stringliteral}{"{}"{}} \_fr (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} fr)   \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{struct_grid_1_1_fr}{Grid::Fr}} \{ fr \}; \}}
+\DoxyCodeLine{229 }
+\DoxyCodeLine{230  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{231 }
+
+\end{DoxyCode}

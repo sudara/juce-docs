@@ -1,0 +1,256 @@
+\hypertarget{_definitions_8h_source}{}\doxysection{Definitions.\+h}
+\label{_definitions_8h_source}\index{build/juce\_audio\_devices/native/oboe/include/oboe/Definitions.h@{build/juce\_audio\_devices/native/oboe/include/oboe/Definitions.h}}
+\mbox{\hyperlink{_definitions_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{ * Copyright (C) 2016 The Android Open Source Project}}
+\DoxyCodeLine{3 \textcolor{comment}{ *}}
+\DoxyCodeLine{4 \textcolor{comment}{ * Licensed under the Apache License, Version 2.0 (the "{}License"{});}}
+\DoxyCodeLine{5 \textcolor{comment}{ * you may not use this file except in compliance with the License.}}
+\DoxyCodeLine{6 \textcolor{comment}{ * You may obtain a copy of the License at}}
+\DoxyCodeLine{7 \textcolor{comment}{ *}}
+\DoxyCodeLine{8 \textcolor{comment}{ *      http://www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{9 \textcolor{comment}{ *}}
+\DoxyCodeLine{10 \textcolor{comment}{ * Unless required by applicable law or agreed to in writing, software}}
+\DoxyCodeLine{11 \textcolor{comment}{ * distributed under the License is distributed on an "{}AS IS"{} BASIS,}}
+\DoxyCodeLine{12 \textcolor{comment}{ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.}}
+\DoxyCodeLine{13 \textcolor{comment}{ * See the License for the specific language governing permissions and}}
+\DoxyCodeLine{14 \textcolor{comment}{ * limitations under the License.}}
+\DoxyCodeLine{15 \textcolor{comment}{ */}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#ifndef OBOE\_DEFINITIONS\_H}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#define OBOE\_DEFINITIONS\_H}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#include <cstdint>}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#include <type\_traits>}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{comment}{// Oboe needs to be able to build on old NDKs so we use hard coded constants.}}
+\DoxyCodeLine{24 \textcolor{comment}{// The correctness of these constants is verified in "{}aaudio/AAudioLoader.cpp"{}.}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceoboe}{oboe}} \{}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{31     \textcolor{keyword}{constexpr} int32\_t \mbox{\hyperlink{namespaceoboe_ab0772052200184e514082eaa89be7905}{kUnspecified}} = 0;}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33     \textcolor{comment}{// TODO: Investigate using std::chrono}}
+\DoxyCodeLine{37 \textcolor{comment}{}    \textcolor{keyword}{constexpr} int64\_t \mbox{\hyperlink{namespaceoboe_aedef0759ae3622b6f0324799bcbdebf0}{kNanosPerMicrosecond}} =    1000;}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{42     \textcolor{keyword}{constexpr} int64\_t \mbox{\hyperlink{namespaceoboe_a831e887150474c087170679eaca8672b}{kNanosPerMillisecond}} =    \mbox{\hyperlink{namespaceoboe_aedef0759ae3622b6f0324799bcbdebf0}{kNanosPerMicrosecond}} * 1000;}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{47     \textcolor{keyword}{constexpr} int64\_t \mbox{\hyperlink{namespaceoboe_ad1bb9f5626cec20d3a052a8721959873}{kMillisPerSecond}} =        1000;}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{52     \textcolor{keyword}{constexpr} int64\_t \mbox{\hyperlink{namespaceoboe_a5948466b593c4eab65f7025846a39f51}{kNanosPerSecond}} =         \mbox{\hyperlink{namespaceoboe_a831e887150474c087170679eaca8672b}{kNanosPerMillisecond}} * \mbox{\hyperlink{namespaceoboe_ad1bb9f5626cec20d3a052a8721959873}{kMillisPerSecond}};}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{57     \textcolor{keyword}{enum class} \mbox{\hyperlink{namespaceoboe_a89fa2ce046723764618c29db737917f6}{StreamState}} : int32\_t \{ \textcolor{comment}{// aaudio\_stream\_state\_t}}
+\DoxyCodeLine{58         \mbox{\hyperlink{namespaceoboe_a89fa2ce046723764618c29db737917f6af704f57ea420275ad51bf55b7dec2c96}{Uninitialized}} = 0, \textcolor{comment}{// AAUDIO\_STREAM\_STATE\_UNINITIALIZED,}}
+\DoxyCodeLine{59         \mbox{\hyperlink{namespaceoboe_a89fa2ce046723764618c29db737917f6a88183b946cc5f0e8c96b2e66e1c74a7e}{Unknown}} = 1, \textcolor{comment}{// AAUDIO\_STREAM\_STATE\_UNKNOWN,}}
+\DoxyCodeLine{60         \mbox{\hyperlink{namespaceoboe_a89fa2ce046723764618c29db737917f6ac3bf447eabe632720a3aa1a7ce401274}{Open}} = 2, \textcolor{comment}{// AAUDIO\_STREAM\_STATE\_OPEN,}}
+\DoxyCodeLine{61         \mbox{\hyperlink{namespaceoboe_a89fa2ce046723764618c29db737917f6ac2efe4bbd13e6cb0db293e72884273c0}{Starting}} = 3, \textcolor{comment}{// AAUDIO\_STREAM\_STATE\_STARTING,}}
+\DoxyCodeLine{62         \mbox{\hyperlink{namespaceoboe_a89fa2ce046723764618c29db737917f6a8428552d86c0d262a542a528af490afa}{Started}} = 4, \textcolor{comment}{// AAUDIO\_STREAM\_STATE\_STARTED,}}
+\DoxyCodeLine{63         \mbox{\hyperlink{namespaceoboe_a89fa2ce046723764618c29db737917f6af89bf2973f11fc8bac3db5669252725a}{Pausing}} = 5, \textcolor{comment}{// AAUDIO\_STREAM\_STATE\_PAUSING,}}
+\DoxyCodeLine{64         \mbox{\hyperlink{namespaceoboe_a89fa2ce046723764618c29db737917f6ae99180abf47a8b3a856e0bcb2656990a}{Paused}} = 6, \textcolor{comment}{// AAUDIO\_STREAM\_STATE\_PAUSED,}}
+\DoxyCodeLine{65         \mbox{\hyperlink{namespaceoboe_a89fa2ce046723764618c29db737917f6a89781dde9ab0d3a78f0969b253a644e7}{Flushing}} = 7, \textcolor{comment}{// AAUDIO\_STREAM\_STATE\_FLUSHING,}}
+\DoxyCodeLine{66         \mbox{\hyperlink{namespaceoboe_a89fa2ce046723764618c29db737917f6a4a574f3347e1b435a3fafe863b52a604}{Flushed}} = 8, \textcolor{comment}{// AAUDIO\_STREAM\_STATE\_FLUSHED,}}
+\DoxyCodeLine{67         \mbox{\hyperlink{namespaceoboe_a89fa2ce046723764618c29db737917f6a7b7ecb39b9e110c2a31409a1672bad23}{Stopping}} = 9, \textcolor{comment}{// AAUDIO\_STREAM\_STATE\_STOPPING,}}
+\DoxyCodeLine{68         \mbox{\hyperlink{namespaceoboe_a89fa2ce046723764618c29db737917f6ac23e2b09ebe6bf4cb5e2a9abe85c0be2}{Stopped}} = 10, \textcolor{comment}{// AAUDIO\_STREAM\_STATE\_STOPPED,}}
+\DoxyCodeLine{69         \mbox{\hyperlink{namespaceoboe_a89fa2ce046723764618c29db737917f6a5c8de6f894682fdb1786037b2040a26e}{Closing}} = 11, \textcolor{comment}{// AAUDIO\_STREAM\_STATE\_CLOSING,}}
+\DoxyCodeLine{70         \mbox{\hyperlink{namespaceoboe_a89fa2ce046723764618c29db737917f6a03f4a47830f97377a35321051685071e}{Closed}} = 12, \textcolor{comment}{// AAUDIO\_STREAM\_STATE\_CLOSED,}}
+\DoxyCodeLine{71         \mbox{\hyperlink{namespaceoboe_a89fa2ce046723764618c29db737917f6aef70e46fd3bbc21e3e1f0b6815e750c0}{Disconnected}} = 13, \textcolor{comment}{// AAUDIO\_STREAM\_STATE\_DISCONNECTED,}}
+\DoxyCodeLine{72     \};}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{77     \textcolor{keyword}{enum class} \mbox{\hyperlink{namespaceoboe_af2147500089212955498a08ef2edb5ae}{Direction}} : int32\_t \{ \textcolor{comment}{// aaudio\_direction\_t}}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{82         \mbox{\hyperlink{namespaceoboe_af2147500089212955498a08ef2edb5aea29c2c02a361c9d7028472e5d92cd4a54}{Output}} = 0, \textcolor{comment}{// AAUDIO\_DIRECTION\_OUTPUT,}}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{87         \mbox{\hyperlink{namespaceoboe_af2147500089212955498a08ef2edb5aea324118a6721dd6b8a9b9f4e327df2bf5}{Input}} = 1, \textcolor{comment}{// AAUDIO\_DIRECTION\_INPUT,}}
+\DoxyCodeLine{88     \};}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{93     \textcolor{keyword}{enum class} \mbox{\hyperlink{class_audio_format}{AudioFormat}} : int32\_t \{ \textcolor{comment}{// aaudio\_format\_t}}
+\DoxyCodeLine{97 \textcolor{comment}{}        \mbox{\hyperlink{namespaceoboe_a92afc593e856571aacbfd02e57075df6a4bbb8f967da6d1a610596d7257179c2b}{Invalid}} = -\/1, \textcolor{comment}{// AAUDIO\_FORMAT\_INVALID,}}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{102         \mbox{\hyperlink{namespaceoboe_a522e6806948369987639a0d1df03c029a946257a568f77c12df4fc4c49125da76}{Unspecified}} = 0, \textcolor{comment}{// AAUDIO\_FORMAT\_UNSPECIFIED,}}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{107         \mbox{\hyperlink{namespaceoboe_a92afc593e856571aacbfd02e57075df6abcd774f891b5f9df7099f3ea75dadf8d}{I16}} = 1, \textcolor{comment}{// AAUDIO\_FORMAT\_PCM\_I16,}}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{116         \mbox{\hyperlink{namespaceoboe_a92afc593e856571aacbfd02e57075df6a22ae0e2b89e5e3d477f988cc36d3272b}{Float}} = 2, \textcolor{comment}{// AAUDIO\_FORMAT\_PCM\_FLOAT,}}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{127         \mbox{\hyperlink{namespaceoboe_a92afc593e856571aacbfd02e57075df6acd843ec248d0b4cac64ece9662ce5c72}{I24}} = 3, \textcolor{comment}{// AAUDIO\_FORMAT\_PCM\_I24\_PACKED}}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{138         \mbox{\hyperlink{namespaceoboe_a92afc593e856571aacbfd02e57075df6ad878ea6016bfe01729548bf442de5a8b}{I32}} = 4, \textcolor{comment}{// AAUDIO\_FORMAT\_PCM\_I32}}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140     \};}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{145     \textcolor{keyword}{enum class} \mbox{\hyperlink{namespaceoboe_af85fc9910a287df6c5df0ed396bb75cd}{DataCallbackResult}} : int32\_t \{ \textcolor{comment}{// aaudio\_data\_callback\_result\_t}}
+\DoxyCodeLine{146         \textcolor{comment}{// Indicates to the caller that the callbacks should continue.}}
+\DoxyCodeLine{147         \mbox{\hyperlink{namespaceoboe_af85fc9910a287df6c5df0ed396bb75cdaa0bfb8e59e6c13fc8d990781f77694fe}{Continue}} = 0, \textcolor{comment}{// AAUDIO\_CALLBACK\_RESULT\_CONTINUE,}}
+\DoxyCodeLine{148 }
+\DoxyCodeLine{149         \textcolor{comment}{// Indicates to the caller that the callbacks should stop immediately.}}
+\DoxyCodeLine{150         \mbox{\hyperlink{namespaceoboe_af85fc9910a287df6c5df0ed396bb75cda11a755d598c0c417f9a36758c3da7481}{Stop}} = 1, \textcolor{comment}{// AAUDIO\_CALLBACK\_RESULT\_STOP,}}
+\DoxyCodeLine{151     \};}
+\DoxyCodeLine{152 }
+\DoxyCodeLine{157     \textcolor{keyword}{enum class} \mbox{\hyperlink{class_result}{Result}} : int32\_t \{ \textcolor{comment}{// aaudio\_result\_t}}
+\DoxyCodeLine{158         \mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1ae0aa021e21dddbd6d8cecec71e9cf564}{OK}} = 0, \textcolor{comment}{// AAUDIO\_OK}}
+\DoxyCodeLine{159         \mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1a0f3d563ba0059add29d47cde1cd35449}{ErrorBase}} = -\/900, \textcolor{comment}{// AAUDIO\_ERROR\_BASE,}}
+\DoxyCodeLine{160         \mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1a16d4a60f9f33d6263a3079e55f582759}{ErrorDisconnected}} = -\/899, \textcolor{comment}{// AAUDIO\_ERROR\_DISCONNECTED,}}
+\DoxyCodeLine{161         \mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1abe2b67e90b953272e816f7af9bd6d2f2}{ErrorIllegalArgument}} = -\/898, \textcolor{comment}{// AAUDIO\_ERROR\_ILLEGAL\_ARGUMENT,}}
+\DoxyCodeLine{162         \mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1aa4b8fe38709fba050b2ba197c8805053}{ErrorInternal}} = -\/896, \textcolor{comment}{// AAUDIO\_ERROR\_INTERNAL,}}
+\DoxyCodeLine{163         \mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1ad4d046aba453a3cdb1e0a58684fc1ae7}{ErrorInvalidState}} = -\/895, \textcolor{comment}{// AAUDIO\_ERROR\_INVALID\_STATE,}}
+\DoxyCodeLine{164         \mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1a0a08c83ae6fb9efeb99724c349327684}{ErrorInvalidHandle}} = -\/892, \textcolor{comment}{// AAUDIO\_ERROR\_INVALID\_HANDLE,}}
+\DoxyCodeLine{165         \mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1a8f38f61d007ba1d051c907d2788e6963}{ErrorUnimplemented}} = -\/890, \textcolor{comment}{// AAUDIO\_ERROR\_UNIMPLEMENTED,}}
+\DoxyCodeLine{166         \mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1a508f0296e6e352f11953132b6f53becd}{ErrorUnavailable}} = -\/889, \textcolor{comment}{// AAUDIO\_ERROR\_UNAVAILABLE,}}
+\DoxyCodeLine{167         \mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1a065c4dfb62897e1f2387ce36d7ccf864}{ErrorNoFreeHandles}} = -\/888, \textcolor{comment}{// AAUDIO\_ERROR\_NO\_FREE\_HANDLES,}}
+\DoxyCodeLine{168         \mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1a16ec663e33d93b065a889cd0bcf20a84}{ErrorNoMemory}} = -\/887, \textcolor{comment}{// AAUDIO\_ERROR\_NO\_MEMORY,}}
+\DoxyCodeLine{169         \mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1a75f52ef8acd47c4b4e6bc71bd5831157}{ErrorNull}} = -\/886, \textcolor{comment}{// AAUDIO\_ERROR\_NULL,}}
+\DoxyCodeLine{170         \mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1afadba55caf9fb091e11169bbb8082486}{ErrorTimeout}} = -\/885, \textcolor{comment}{// AAUDIO\_ERROR\_TIMEOUT,}}
+\DoxyCodeLine{171         \mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1ad55d4d3676debf240e8ec6559169e34d}{ErrorWouldBlock}} = -\/884, \textcolor{comment}{// AAUDIO\_ERROR\_WOULD\_BLOCK,}}
+\DoxyCodeLine{172         \mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1a20309a5f8548513a7cf626f394d8fb3c}{ErrorInvalidFormat}} = -\/883, \textcolor{comment}{// AAUDIO\_ERROR\_INVALID\_FORMAT,}}
+\DoxyCodeLine{173         \mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1a536f9484c5fa481f6ae38902f0767450}{ErrorOutOfRange}} = -\/882, \textcolor{comment}{// AAUDIO\_ERROR\_OUT\_OF\_RANGE,}}
+\DoxyCodeLine{174         \mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1a8facee903d6e720af8ec672bc46f5a7c}{ErrorNoService}} = -\/881, \textcolor{comment}{// AAUDIO\_ERROR\_NO\_SERVICE,}}
+\DoxyCodeLine{175         \mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1aa1cee2c0314da49d384faca5bd8ea1a3}{ErrorInvalidRate}} = -\/880, \textcolor{comment}{// AAUDIO\_ERROR\_INVALID\_RATE,}}
+\DoxyCodeLine{176         \textcolor{comment}{// Reserved for future AAudio result types}}
+\DoxyCodeLine{177         \mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1a93876cb309016fa725517b046474c44b}{Reserved1}},}
+\DoxyCodeLine{178         \mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1ad783eb173ee49cc2a004bc1ca1313615}{Reserved2}},}
+\DoxyCodeLine{179         \mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1ab3edf740b9a6b5d2be22c377fe076c04}{Reserved3}},}
+\DoxyCodeLine{180         \mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1a34deb90418b2775e73aee1a6d90defea}{Reserved4}},}
+\DoxyCodeLine{181         \mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1a1960c923a15a24d843473fd22023eea1}{Reserved5}},}
+\DoxyCodeLine{182         \mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1ae43a782b567789a403c52581821cc538}{Reserved6}},}
+\DoxyCodeLine{183         \mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1a6bfa8aa28d901b8a2a489e7edef42897}{Reserved7}},}
+\DoxyCodeLine{184         \mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1af1815ef33cbdfc91a6c12fc6ce34caec}{Reserved8}},}
+\DoxyCodeLine{185         \mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1a58229395553fe05863343dec97153cba}{Reserved9}},}
+\DoxyCodeLine{186         \mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1ad0c671d8070ad84b03c20d36d278a85e}{Reserved10}},}
+\DoxyCodeLine{187         \mbox{\hyperlink{namespaceoboe_a486512e787b609c80ba4436f23929af1a00b3824f6deffa2ad3f890f0d83c5f54}{ErrorClosed}} = -\/869,}
+\DoxyCodeLine{188     \};}
+\DoxyCodeLine{189 }
+\DoxyCodeLine{193     \textcolor{keyword}{enum class} \mbox{\hyperlink{namespaceoboe_a8330247b25429953a08354f41834d520}{SharingMode}} : int32\_t \{ \textcolor{comment}{// aaudio\_sharing\_mode\_t}}
+\DoxyCodeLine{194 }
+\DoxyCodeLine{203         \mbox{\hyperlink{namespaceoboe_a8330247b25429953a08354f41834d520a2ef50b4c466304dc6ac77bac8a779971}{Exclusive}} = 0, \textcolor{comment}{// AAUDIO\_SHARING\_MODE\_EXCLUSIVE,}}
+\DoxyCodeLine{204 }
+\DoxyCodeLine{212         \mbox{\hyperlink{namespaceoboe_a8330247b25429953a08354f41834d520aa6156ea9d66fef24e87e841fbabf7cca}{Shared}} = 1, \textcolor{comment}{// AAUDIO\_SHARING\_MODE\_SHARED,}}
+\DoxyCodeLine{213     \};}
+\DoxyCodeLine{214 }
+\DoxyCodeLine{218     \textcolor{keyword}{enum class} \mbox{\hyperlink{namespaceoboe_a1068781f3920654b1bfd7ed136468184}{PerformanceMode}} : int32\_t \{ \textcolor{comment}{// aaudio\_performance\_mode\_t}}
+\DoxyCodeLine{219 }
+\DoxyCodeLine{223         \mbox{\hyperlink{namespaceoboe_a5752250c10e96179e3618d7f72937eafa58c518b26e83ea48393a76f6c9ecb51f}{None}} = 10, \textcolor{comment}{// AAUDIO\_PERFORMANCE\_MODE\_NONE,}}
+\DoxyCodeLine{224 }
+\DoxyCodeLine{228         \mbox{\hyperlink{namespaceoboe_a1068781f3920654b1bfd7ed136468184abbad080463ed11f9d77797c04aa1e5b1}{PowerSaving}} = 11, \textcolor{comment}{// AAUDIO\_PERFORMANCE\_MODE\_POWER\_SAVING,}}
+\DoxyCodeLine{229 }
+\DoxyCodeLine{233         \mbox{\hyperlink{namespaceoboe_a1068781f3920654b1bfd7ed136468184a611907b5ab1865515c35357efa41a9b9}{LowLatency}} = 12, \textcolor{comment}{// AAUDIO\_PERFORMANCE\_MODE\_LOW\_LATENCY}}
+\DoxyCodeLine{234     \};}
+\DoxyCodeLine{235 }
+\DoxyCodeLine{239     \textcolor{keyword}{enum class} \mbox{\hyperlink{namespaceoboe_a92972414867c81d5974cb2ed7abefbf6}{AudioApi}} : int32\_t \{}
+\DoxyCodeLine{243         \mbox{\hyperlink{namespaceoboe_a522e6806948369987639a0d1df03c029a946257a568f77c12df4fc4c49125da76}{Unspecified}} = \mbox{\hyperlink{namespaceoboe_ab0772052200184e514082eaa89be7905}{kUnspecified}},}
+\DoxyCodeLine{244 }
+\DoxyCodeLine{248         \mbox{\hyperlink{namespaceoboe_a92972414867c81d5974cb2ed7abefbf6a24e758ea9c1e842ef71cc8ff8b63fa9b}{OpenSLES}},}
+\DoxyCodeLine{249 }
+\DoxyCodeLine{253         \mbox{\hyperlink{namespaceoboe_a92972414867c81d5974cb2ed7abefbf6a99780b1e8d754eb42abed0ca5253e55b}{AAudio}}}
+\DoxyCodeLine{254     \};}
+\DoxyCodeLine{255 }
+\DoxyCodeLine{261     \textcolor{keyword}{enum class} \mbox{\hyperlink{namespaceoboe_a82f3720eba7654aceb7282be36f9ff1d}{SampleRateConversionQuality}} : int32\_t \{}
+\DoxyCodeLine{265         \mbox{\hyperlink{namespaceoboe_a5752250c10e96179e3618d7f72937eafa58c518b26e83ea48393a76f6c9ecb51f}{None}},}
+\DoxyCodeLine{270         \mbox{\hyperlink{namespaceoboe_a82f3720eba7654aceb7282be36f9ff1da90fd7fdf6f41406a75e5265b9583bb4e}{Fastest}},}
+\DoxyCodeLine{271         \mbox{\hyperlink{namespaceoboe_a82f3720eba7654aceb7282be36f9ff1da28d0edd045e05cf5af64e35ae0c4c6ef}{Low}},}
+\DoxyCodeLine{272         \mbox{\hyperlink{namespaceoboe_a82f3720eba7654aceb7282be36f9ff1da87f8a6ab85c9ced3702b4ea641ad4bb5}{Medium}},}
+\DoxyCodeLine{273         \mbox{\hyperlink{namespaceoboe_a82f3720eba7654aceb7282be36f9ff1da655d20c1ca69519ca647684edbb2db35}{High}},}
+\DoxyCodeLine{277         \mbox{\hyperlink{namespaceoboe_a82f3720eba7654aceb7282be36f9ff1da68ef004de6166492c1d668eb8efe09bd}{Best}},}
+\DoxyCodeLine{278     \};}
+\DoxyCodeLine{279 }
+\DoxyCodeLine{289     \textcolor{keyword}{enum class} \mbox{\hyperlink{namespaceoboe_a104ee8396c173fefac429759ea3c21a0}{Usage}} : int32\_t \{ \textcolor{comment}{// aaudio\_usage\_t}}
+\DoxyCodeLine{293 \textcolor{comment}{}        \mbox{\hyperlink{namespaceoboe_a104ee8396c173fefac429759ea3c21a0a3b563524fdb17b4a86590470d40bef74}{Media}} =  1, \textcolor{comment}{// AAUDIO\_USAGE\_MEDIA}}
+\DoxyCodeLine{294 }
+\DoxyCodeLine{298         \mbox{\hyperlink{namespaceoboe_a4477ed232b02e2694d9309baf55a8f06a1862e72c9730c448fbec6f61a5d8234d}{VoiceCommunication}} = 2, \textcolor{comment}{// AAUDIO\_USAGE\_VOICE\_COMMUNICATION}}
+\DoxyCodeLine{299 }
+\DoxyCodeLine{303         \mbox{\hyperlink{namespaceoboe_a104ee8396c173fefac429759ea3c21a0a404f62633744bf4da0c6a27a2b78ce74}{VoiceCommunicationSignalling}} = 3, \textcolor{comment}{// AAUDIO\_USAGE\_VOICE\_COMMUNICATION\_SIGNALLING}}
+\DoxyCodeLine{304 }
+\DoxyCodeLine{308         \mbox{\hyperlink{namespaceoboe_a104ee8396c173fefac429759ea3c21a0a46c4c4d980dfe025ae5b35aa0011dde4}{Alarm}} = 4, \textcolor{comment}{// AAUDIO\_USAGE\_ALARM}}
+\DoxyCodeLine{309 }
+\DoxyCodeLine{314         \mbox{\hyperlink{namespaceoboe_a104ee8396c173fefac429759ea3c21a0a96d008db67fc0b5551a926842bbb6a71}{Notification}} = 5, \textcolor{comment}{// AAUDIO\_USAGE\_NOTIFICATION}}
+\DoxyCodeLine{315 }
+\DoxyCodeLine{319         \mbox{\hyperlink{namespaceoboe_a104ee8396c173fefac429759ea3c21a0a4e7a4b08274d472394b740a20d3bbdaf}{NotificationRingtone}} = 6, \textcolor{comment}{// AAUDIO\_USAGE\_NOTIFICATION\_RINGTONE}}
+\DoxyCodeLine{320 }
+\DoxyCodeLine{324         \mbox{\hyperlink{namespaceoboe_a104ee8396c173fefac429759ea3c21a0a089240b5380dbd12f1eac0ec258a3b2f}{NotificationEvent}} = 10, \textcolor{comment}{// AAUDIO\_USAGE\_NOTIFICATION\_EVENT}}
+\DoxyCodeLine{325 }
+\DoxyCodeLine{329         \mbox{\hyperlink{namespaceoboe_a104ee8396c173fefac429759ea3c21a0a639ffd54516c1a84a288a363c9469df8}{AssistanceAccessibility}} = 11, \textcolor{comment}{// AAUDIO\_USAGE\_ASSISTANCE\_ACCESSIBILITY}}
+\DoxyCodeLine{330 }
+\DoxyCodeLine{334         \mbox{\hyperlink{namespaceoboe_a104ee8396c173fefac429759ea3c21a0ade058a1314f9a8504593259ff4f21a1e}{AssistanceNavigationGuidance}} = 12, \textcolor{comment}{// AAUDIO\_USAGE\_ASSISTANCE\_NAVIGATION\_GUIDANCE}}
+\DoxyCodeLine{335 }
+\DoxyCodeLine{339         \mbox{\hyperlink{namespaceoboe_a104ee8396c173fefac429759ea3c21a0a1ce57a0572748beebfc0c664ca1077e7}{AssistanceSonification}} = 13, \textcolor{comment}{// AAUDIO\_USAGE\_ASSISTANCE\_SONIFICATION}}
+\DoxyCodeLine{340 }
+\DoxyCodeLine{344         \mbox{\hyperlink{namespaceoboe_a104ee8396c173fefac429759ea3c21a0a63d72051e901c069f8aa1b32aa0c43bb}{Game}} = 14, \textcolor{comment}{// AAUDIO\_USAGE\_GAME}}
+\DoxyCodeLine{345 }
+\DoxyCodeLine{349         \mbox{\hyperlink{namespaceoboe_a104ee8396c173fefac429759ea3c21a0a9b1363da9503dbd4142c0274a88e8d4b}{Assistant}} = 16, \textcolor{comment}{// AAUDIO\_USAGE\_ASSISTANT}}
+\DoxyCodeLine{350     \};}
+\DoxyCodeLine{351 }
+\DoxyCodeLine{352 }
+\DoxyCodeLine{365     \textcolor{keyword}{enum} \mbox{\hyperlink{namespaceoboe_a2a3cec6f021c1a324df60273710c604b}{ContentType}} : int32\_t \{ \textcolor{comment}{// aaudio\_content\_type\_t}}
+\DoxyCodeLine{366 }
+\DoxyCodeLine{370         \mbox{\hyperlink{namespaceoboe_a2a3cec6f021c1a324df60273710c604ba3dc48a4b4619aa4edd1da7b937b4dcd1}{Speech}} = 1, \textcolor{comment}{// AAUDIO\_CONTENT\_TYPE\_SPEECH}}
+\DoxyCodeLine{371 }
+\DoxyCodeLine{375         \mbox{\hyperlink{namespaceoboe_a2a3cec6f021c1a324df60273710c604bac156fcc7b29059305cef26f3904d4517}{Music}} = 2, \textcolor{comment}{// AAUDIO\_CONTENT\_TYPE\_MUSIC}}
+\DoxyCodeLine{376 }
+\DoxyCodeLine{380         \mbox{\hyperlink{namespaceoboe_a2a3cec6f021c1a324df60273710c604ba8b3b366178c2b7b1688bca6cd33758b1}{Movie}} = 3, \textcolor{comment}{// AAUDIO\_CONTENT\_TYPE\_MOVIE}}
+\DoxyCodeLine{381 }
+\DoxyCodeLine{386         \mbox{\hyperlink{namespaceoboe_a2a3cec6f021c1a324df60273710c604ba0885eef555037e94a7cf39fe683c2799}{Sonification}} = 4, \textcolor{comment}{// AAUDIO\_CONTENT\_TYPE\_SONIFICATION}}
+\DoxyCodeLine{387     \};}
+\DoxyCodeLine{388 }
+\DoxyCodeLine{398     \textcolor{keyword}{enum} \mbox{\hyperlink{namespaceoboe_a4477ed232b02e2694d9309baf55a8f06}{InputPreset}} : int32\_t \{ \textcolor{comment}{// aaudio\_input\_preset\_t}}
+\DoxyCodeLine{402 \textcolor{comment}{}        \mbox{\hyperlink{namespaceoboe_a4477ed232b02e2694d9309baf55a8f06a0ba6f369e7f8a700c14afe2992290544}{Generic}} = 1, \textcolor{comment}{// AAUDIO\_INPUT\_PRESET\_GENERIC}}
+\DoxyCodeLine{403 }
+\DoxyCodeLine{407         \mbox{\hyperlink{namespaceoboe_a4477ed232b02e2694d9309baf55a8f06a6e8ef178769235d18b44fe2bb5ab33fe}{Camcorder}} = 5, \textcolor{comment}{// AAUDIO\_INPUT\_PRESET\_CAMCORDER}}
+\DoxyCodeLine{408 }
+\DoxyCodeLine{412         \mbox{\hyperlink{namespaceoboe_a4477ed232b02e2694d9309baf55a8f06af6e440b4e9edf49afe18aa4be77be6fc}{VoiceRecognition}} = 6, \textcolor{comment}{// AAUDIO\_INPUT\_PRESET\_VOICE\_RECOGNITION}}
+\DoxyCodeLine{413 }
+\DoxyCodeLine{417         \mbox{\hyperlink{namespaceoboe_a4477ed232b02e2694d9309baf55a8f06a1862e72c9730c448fbec6f61a5d8234d}{VoiceCommunication}} = 7, \textcolor{comment}{// AAUDIO\_INPUT\_PRESET\_VOICE\_COMMUNICATION}}
+\DoxyCodeLine{418 }
+\DoxyCodeLine{424         \mbox{\hyperlink{namespaceoboe_a4477ed232b02e2694d9309baf55a8f06acad9424158aefae0af7975901b11d85f}{Unprocessed}} = 9, \textcolor{comment}{// AAUDIO\_INPUT\_PRESET\_UNPROCESSED}}
+\DoxyCodeLine{425 }
+\DoxyCodeLine{431          \mbox{\hyperlink{namespaceoboe_a4477ed232b02e2694d9309baf55a8f06ad19edec0a23e435c774bf3bbcf1d999c}{VoicePerformance}} = 10, \textcolor{comment}{// AAUDIO\_INPUT\_PRESET\_VOICE\_PERFORMANCE}}
+\DoxyCodeLine{432 }
+\DoxyCodeLine{433     \};}
+\DoxyCodeLine{434 }
+\DoxyCodeLine{440     \textcolor{keyword}{enum} \mbox{\hyperlink{namespaceoboe_a5752250c10e96179e3618d7f72937eaf}{SessionId}} \{}
+\DoxyCodeLine{446          \mbox{\hyperlink{namespaceoboe_a5752250c10e96179e3618d7f72937eafa58c518b26e83ea48393a76f6c9ecb51f}{None}} = -\/1, \textcolor{comment}{// AAUDIO\_SESSION\_ID\_NONE}}
+\DoxyCodeLine{447 }
+\DoxyCodeLine{455          \mbox{\hyperlink{namespaceoboe_a5752250c10e96179e3618d7f72937eafa8485ca716c8cd4aafee372fd7028c123}{Allocate}} = 0, \textcolor{comment}{// AAUDIO\_SESSION\_ID\_ALLOCATE}}
+\DoxyCodeLine{456     \};}
+\DoxyCodeLine{457 }
+\DoxyCodeLine{468     \textcolor{keyword}{enum} \mbox{\hyperlink{namespaceoboe_a522e6806948369987639a0d1df03c029}{ChannelCount}} : int32\_t \{}
+\DoxyCodeLine{472       \mbox{\hyperlink{namespaceoboe_a522e6806948369987639a0d1df03c029a946257a568f77c12df4fc4c49125da76}{Unspecified}} = \mbox{\hyperlink{namespaceoboe_ab0772052200184e514082eaa89be7905}{kUnspecified}},}
+\DoxyCodeLine{473 }
+\DoxyCodeLine{477       \mbox{\hyperlink{namespaceoboe_a522e6806948369987639a0d1df03c029a8be103218645e121b51078620f452c79}{Mono}} = 1,}
+\DoxyCodeLine{478 }
+\DoxyCodeLine{482       \mbox{\hyperlink{namespaceoboe_a522e6806948369987639a0d1df03c029a534e646333ca7568317b171ea96b89ba}{Stereo}} = 2,}
+\DoxyCodeLine{483     \};}
+\DoxyCodeLine{484 }
+\DoxyCodeLine{503     \textcolor{keyword}{class }\mbox{\hyperlink{classoboe_1_1_default_stream_values}{DefaultStreamValues}} \{}
+\DoxyCodeLine{504 }
+\DoxyCodeLine{505     \textcolor{keyword}{public}:}
+\DoxyCodeLine{506 }
+\DoxyCodeLine{508         \textcolor{keyword}{static} int32\_t \mbox{\hyperlink{classoboe_1_1_default_stream_values_a46a5d9a653f2153f618cadcab764e1b1}{SampleRate}};}
+\DoxyCodeLine{510         \textcolor{keyword}{static} int32\_t \mbox{\hyperlink{classoboe_1_1_default_stream_values_ab5ea5576699cebc56193f5c297d3e300}{FramesPerBurst}};}
+\DoxyCodeLine{512         \textcolor{keyword}{static} int32\_t \mbox{\hyperlink{classoboe_1_1_default_stream_values_ad5dce538d5963c81bf58350ab730962d}{ChannelCount}};}
+\DoxyCodeLine{513 }
+\DoxyCodeLine{514     \};}
+\DoxyCodeLine{515 }
+\DoxyCodeLine{519     \textcolor{keyword}{struct }\mbox{\hyperlink{structoboe_1_1_frame_timestamp}{FrameTimestamp}} \{}
+\DoxyCodeLine{520         int64\_t \mbox{\hyperlink{structoboe_1_1_frame_timestamp_ae8b0baab150dc8359a51f1d4020821df}{position}}; \textcolor{comment}{// in frames}}
+\DoxyCodeLine{521         int64\_t \mbox{\hyperlink{structoboe_1_1_frame_timestamp_a5ed8520f3d07594c3cb0c0ea63f7fbe5}{timestamp}}; \textcolor{comment}{// in nanoseconds}}
+\DoxyCodeLine{522     \};}
+\DoxyCodeLine{523 }
+\DoxyCodeLine{524     \textcolor{keyword}{class }\mbox{\hyperlink{classoboe_1_1_oboe_globals}{OboeGlobals}} \{}
+\DoxyCodeLine{525     \textcolor{keyword}{public}:}
+\DoxyCodeLine{526 }
+\DoxyCodeLine{527         \textcolor{keyword}{static} \textcolor{keywordtype}{bool} \mbox{\hyperlink{classoboe_1_1_oboe_globals_a37ba77c944e44c36a6b599eb4d630c9f}{areWorkaroundsEnabled}}() \{}
+\DoxyCodeLine{528             \textcolor{keywordflow}{return} mWorkaroundsEnabled;}
+\DoxyCodeLine{529         \}}
+\DoxyCodeLine{530 }
+\DoxyCodeLine{536         \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoboe_1_1_oboe_globals_af2b8af764c5a5e6fc007b7725117303b}{setWorkaroundsEnabled}}(\textcolor{keywordtype}{bool} \mbox{\hyperlink{namespacegl_a6dfcb2772a382ca14a671d9869edce40}{enabled}}) \{}
+\DoxyCodeLine{537             mWorkaroundsEnabled = \mbox{\hyperlink{namespacegl_a6dfcb2772a382ca14a671d9869edce40}{enabled}};}
+\DoxyCodeLine{538         \}}
+\DoxyCodeLine{539 }
+\DoxyCodeLine{540     \textcolor{keyword}{private}:}
+\DoxyCodeLine{541         \textcolor{keyword}{static} \textcolor{keywordtype}{bool} mWorkaroundsEnabled;}
+\DoxyCodeLine{542     \};}
+\DoxyCodeLine{543 \} \textcolor{comment}{// namespace oboe}}
+\DoxyCodeLine{544 }
+\DoxyCodeLine{545 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// OBOE\_DEFINITIONS\_H}}
+
+\end{DoxyCode}

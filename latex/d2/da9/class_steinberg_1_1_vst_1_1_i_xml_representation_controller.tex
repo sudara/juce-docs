@@ -1,0 +1,156 @@
+\hypertarget{class_steinberg_1_1_vst_1_1_i_xml_representation_controller}{}\doxysection{Steinberg\+::Vst\+::IXml\+Representation\+Controller Class Reference}
+\label{class_steinberg_1_1_vst_1_1_i_xml_representation_controller}\index{Steinberg::Vst::IXmlRepresentationController@{Steinberg::Vst::IXmlRepresentationController}}
+
+
+{\ttfamily \#include $<$ivstrepresentation.\+h$>$}
+
+Inheritance diagram for Steinberg\+::Vst\+::IXml\+Representation\+Controller\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d2/da9/class_steinberg_1_1_vst_1_1_i_xml_representation_controller}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\+\_\+\+API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_xml_representation_controller_aa06a3a0e814ce2dd9981bec6fb5130a5}{get\+Xml\+Representation\+Stream}} (\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_representation_info}{Representation\+Info}} \&\mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}, \mbox{\hyperlink{class_steinberg_1_1_i_b_stream}{IBStream}} $\ast$stream)=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_steinberg_1_1_f_u_i_d}{FUID}} \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_xml_representation_controller_a0d1bdb1edec273588b96340a3e0588a0}{iid}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Extended plug-\/in interface \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_edit_controller}{IEdit\+Controller}} for a component\+: \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_xml_representation_controller}{Vst\+::\+IXml\+Representation\+Controller}}
+
+
+\begin{DoxyItemize}
+\item \mbox{[}plug imp\mbox{]}
+\item \mbox{[}extends \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_edit_controller}{IEdit\+Controller}}\mbox{]}
+\item \mbox{[}released\+: 3.\+5.\+0\mbox{]}
+\item \mbox{[}optional\mbox{]}
+\end{DoxyItemize}
+
+A representation based on XML is a way to export, structure, and group plug-\/ins parameters for a specific remote (hardware or software rack (such as quick controls)). ~\newline
+It allows to describe each parameter more precisely (what is the best matching to a knob, different title lengths matching limited remote display,...).~\newline
+ See an \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_xml_representation_controller_Example}{Example}}. ~\newline
+~\newline
+
+\begin{DoxyItemize}
+\item A representation is composed of pages (this means that to see all exported parameters, the user has to navigate through the pages).
+\item A page is composed of cells (for example 8 cells per page).
+\item A cell is composed of layers (for example a cell could have a knob, a display, and a button, which means 3 layers).
+\item A layer is associated to a plug-\/in parameter using the Parameter\+ID as identifier\+:
+\begin{DoxyItemize}
+\item it could be a knob with a display for title and/or value, this display uses the same parameter\+Id, but it could an another one.
+\item switch
+\item link which allows to jump directly to a subpage (another page)
+\item more... See \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_layer_type}{Vst\+::\+Layer\+Type}}
+\end{DoxyItemize}
+\end{DoxyItemize}~\newline
+This representation is implemented as XML text following the Document Type Definition (DTD)\+: \href{http://dtd.steinberg.net/VST-Remote-1.1.dtd}{\texttt{ http\+://dtd.\+steinberg.\+net/\+VST-\/\+Remote-\/1.\+1.\+dtd}}\hypertarget{class_steinberg_1_1_vst_1_1_i_xml_representation_controller_Example}{}\doxysubsection{Example}\label{class_steinberg_1_1_vst_1_1_i_xml_representation_controller_Example}
+Here an example of what should be passed in the stream of get\+Xml\+Representation\+Stream\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<?xml \mbox{\hyperlink{jpeglib_8h_aad880fc4455c253781e8968f2239d56f}{version}}=\textcolor{stringliteral}{"{}1.0"{}} encoding=\textcolor{stringliteral}{"{}utf-\/8"{}}?>}
+\DoxyCodeLine{<!DOCTYPE vstXML PUBLIC \textcolor{stringliteral}{"{}-\///Steinberg//DTD VST Remote 1.1//EN"{}} \textcolor{stringliteral}{"{}http://dtd.steinberg.net/VST-\/Remote-\/1.1.dtd"{}}>}
+\DoxyCodeLine{<vstXML \mbox{\hyperlink{jpeglib_8h_aad880fc4455c253781e8968f2239d56f}{version}}=\textcolor{stringliteral}{"{}1.0"{}}>}
+\DoxyCodeLine{    <plugin classID=\textcolor{stringliteral}{"{}341FC5898AAA46A7A506BC0799E882AE"{}} \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}=\textcolor{stringliteral}{"{}Chorus"{}} vendor=\textcolor{stringliteral}{"{}Steinberg Media Technologies"{}} />}
+\DoxyCodeLine{    <originator>My \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}</originator>}
+\DoxyCodeLine{    <date>2010-\/12-\/31</date>}
+\DoxyCodeLine{    <comment>This is an example \textcolor{keywordflow}{for} 4 Cells per Page \textcolor{keywordflow}{for} the Remote named ProductRemote }
+\DoxyCodeLine{             from company HardwareCompany.</comment>}
+\DoxyCodeLine{}
+\DoxyCodeLine{    <!-\/-\/ ===================================== -\/-\/>}
+\DoxyCodeLine{    <representation \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}=\textcolor{stringliteral}{"{}ProductRemote"{}} vendor=\textcolor{stringliteral}{"{}HardwareCompany"{}} \mbox{\hyperlink{jpeglib_8h_aad880fc4455c253781e8968f2239d56f}{version}}=\textcolor{stringliteral}{"{}1.0"{}}>}
+\DoxyCodeLine{        <page \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}=\textcolor{stringliteral}{"{}Root"{}}>}
+\DoxyCodeLine{            <\mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca8d27600b0cae5308441ddf6d9bb3c74c}{cell}}>}
+\DoxyCodeLine{                <\mbox{\hyperlink{namespacegl_ad4ec37b767f7e70cf277b69177030d3f}{layer}} \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}}=\textcolor{stringliteral}{"{}knob"{}} parameterID=\textcolor{stringliteral}{"{}0"{}}>}
+\DoxyCodeLine{                    <titleDisplay>}
+\DoxyCodeLine{                        <\mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}>Mix dry/wet</\mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}>}
+\DoxyCodeLine{                        <\mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}>Mix</\mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}>}
+\DoxyCodeLine{                    </titleDisplay>}
+\DoxyCodeLine{                </\mbox{\hyperlink{namespacegl_ad4ec37b767f7e70cf277b69177030d3f}{layer}}>}
+\DoxyCodeLine{            </\mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca8d27600b0cae5308441ddf6d9bb3c74c}{cell}}>}
+\DoxyCodeLine{            <\mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca8d27600b0cae5308441ddf6d9bb3c74c}{cell}}>}
+\DoxyCodeLine{                <\mbox{\hyperlink{namespacegl_ad4ec37b767f7e70cf277b69177030d3f}{layer}} \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}}=\textcolor{stringliteral}{"{}display"{}}></\mbox{\hyperlink{namespacegl_ad4ec37b767f7e70cf277b69177030d3f}{layer}}>}
+\DoxyCodeLine{            </\mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca8d27600b0cae5308441ddf6d9bb3c74c}{cell}}>}
+\DoxyCodeLine{            <\mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca8d27600b0cae5308441ddf6d9bb3c74c}{cell}}>}
+\DoxyCodeLine{                <\mbox{\hyperlink{namespacegl_ad4ec37b767f7e70cf277b69177030d3f}{layer}} \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}}=\textcolor{stringliteral}{"{}knob"{}} parameterID=\textcolor{stringliteral}{"{}3"{}}>}
+\DoxyCodeLine{                    <titleDisplay>}
+\DoxyCodeLine{                        <\mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}>Delay</\mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}>}
+\DoxyCodeLine{                        <\mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}>Dly</\mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}>}
+\DoxyCodeLine{                    </titleDisplay>}
+\DoxyCodeLine{                </\mbox{\hyperlink{namespacegl_ad4ec37b767f7e70cf277b69177030d3f}{layer}}>}
+\DoxyCodeLine{            </\mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca8d27600b0cae5308441ddf6d9bb3c74c}{cell}}>}
+\DoxyCodeLine{            <\mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca8d27600b0cae5308441ddf6d9bb3c74c}{cell}}>}
+\DoxyCodeLine{                <\mbox{\hyperlink{namespacegl_ad4ec37b767f7e70cf277b69177030d3f}{layer}} \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}}=\textcolor{stringliteral}{"{}knob"{}} parameterID=\textcolor{stringliteral}{"{}15"{}}>}
+\DoxyCodeLine{                    <titleDisplay>}
+\DoxyCodeLine{                        <\mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}>Spatial</\mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}>}
+\DoxyCodeLine{                        <\mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}>Spat</\mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}>}
+\DoxyCodeLine{                    </titleDisplay>}
+\DoxyCodeLine{                </\mbox{\hyperlink{namespacegl_ad4ec37b767f7e70cf277b69177030d3f}{layer}}>}
+\DoxyCodeLine{            </\mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca8d27600b0cae5308441ddf6d9bb3c74c}{cell}}>}
+\DoxyCodeLine{        </page>}
+\DoxyCodeLine{        <page \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}=\textcolor{stringliteral}{"{}Page 2"{}}>}
+\DoxyCodeLine{            <\mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca8d27600b0cae5308441ddf6d9bb3c74c}{cell}}>}
+\DoxyCodeLine{                <\mbox{\hyperlink{namespacegl_ad4ec37b767f7e70cf277b69177030d3f}{layer}} \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}}=\textcolor{stringliteral}{"{}LED"{}} ledStyle=\textcolor{stringliteral}{"{}spread"{}} parameterID=\textcolor{stringliteral}{"{}2"{}}>}
+\DoxyCodeLine{                    <titleDisplay>}
+\DoxyCodeLine{                        <\mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}>Width +</\mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}>}
+\DoxyCodeLine{                        <\mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}>Widt</\mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}>}
+\DoxyCodeLine{                    </titleDisplay>}
+\DoxyCodeLine{                </\mbox{\hyperlink{namespacegl_ad4ec37b767f7e70cf277b69177030d3f}{layer}}>}
+\DoxyCodeLine{                <!-\/-\/\textcolor{keyword}{this} is the \textcolor{keywordflow}{switch} \textcolor{keywordflow}{for} shape A/B-\/-\/>}
+\DoxyCodeLine{                <\mbox{\hyperlink{namespacegl_ad4ec37b767f7e70cf277b69177030d3f}{layer}} \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}}=\textcolor{stringliteral}{"{}switch"{}} switchStyle=\textcolor{stringliteral}{"{}pushIncLooped"{}} parameterID=\textcolor{stringliteral}{"{}4"{}}></\mbox{\hyperlink{namespacegl_ad4ec37b767f7e70cf277b69177030d3f}{layer}}>}
+\DoxyCodeLine{            </\mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca8d27600b0cae5308441ddf6d9bb3c74c}{cell}}>}
+\DoxyCodeLine{            <\mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca8d27600b0cae5308441ddf6d9bb3c74c}{cell}}>}
+\DoxyCodeLine{                <\mbox{\hyperlink{namespacegl_ad4ec37b767f7e70cf277b69177030d3f}{layer}} \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}}=\textcolor{stringliteral}{"{}display"{}}></\mbox{\hyperlink{namespacegl_ad4ec37b767f7e70cf277b69177030d3f}{layer}}>}
+\DoxyCodeLine{            </\mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca8d27600b0cae5308441ddf6d9bb3c74c}{cell}}>}
+\DoxyCodeLine{            <\mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca8d27600b0cae5308441ddf6d9bb3c74c}{cell}}>}
+\DoxyCodeLine{                <\mbox{\hyperlink{namespacegl_ad4ec37b767f7e70cf277b69177030d3f}{layer}} \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}}=\textcolor{stringliteral}{"{}LED"{}} ledStyle=\textcolor{stringliteral}{"{}singleDot"{}} parameterID=\textcolor{stringliteral}{"{}17"{}}>}
+\DoxyCodeLine{                    <titleDisplay>}
+\DoxyCodeLine{                        <\mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}>Sync Note +</\mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}>}
+\DoxyCodeLine{                        <\mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}>Note</\mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}>}
+\DoxyCodeLine{                    </titleDisplay>}
+\DoxyCodeLine{                </\mbox{\hyperlink{namespacegl_ad4ec37b767f7e70cf277b69177030d3f}{layer}}>}
+\DoxyCodeLine{                <!-\/-\/\textcolor{keyword}{this} is the \textcolor{keywordflow}{switch} \textcolor{keywordflow}{for} sync to tempo on /off-\/-\/>}
+\DoxyCodeLine{                <\mbox{\hyperlink{namespacegl_ad4ec37b767f7e70cf277b69177030d3f}{layer}} \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}}=\textcolor{stringliteral}{"{}switch"{}} switchStyle=\textcolor{stringliteral}{"{}pushIncLooped"{}} parameterID=\textcolor{stringliteral}{"{}16"{}}></\mbox{\hyperlink{namespacegl_ad4ec37b767f7e70cf277b69177030d3f}{layer}}>}
+\DoxyCodeLine{            </\mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca8d27600b0cae5308441ddf6d9bb3c74c}{cell}}>}
+\DoxyCodeLine{            <\mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca8d27600b0cae5308441ddf6d9bb3c74c}{cell}}>}
+\DoxyCodeLine{                <\mbox{\hyperlink{namespacegl_ad4ec37b767f7e70cf277b69177030d3f}{layer}} \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}}=\textcolor{stringliteral}{"{}knob"{}} parameterID=\textcolor{stringliteral}{"{}1"{}}>}
+\DoxyCodeLine{                    <titleDisplay>}
+\DoxyCodeLine{                        <\mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}>Rate</\mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}>}
+\DoxyCodeLine{                    </titleDisplay>}
+\DoxyCodeLine{                </\mbox{\hyperlink{namespacegl_ad4ec37b767f7e70cf277b69177030d3f}{layer}}>}
+\DoxyCodeLine{            </\mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca8d27600b0cae5308441ddf6d9bb3c74c}{cell}}>}
+\DoxyCodeLine{        </page>}
+\DoxyCodeLine{    </representation>}
+\DoxyCodeLine{</vstXML>}
+
+\end{DoxyCode}
+ 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_steinberg_1_1_vst_1_1_i_xml_representation_controller_aa06a3a0e814ce2dd9981bec6fb5130a5}\label{class_steinberg_1_1_vst_1_1_i_xml_representation_controller_aa06a3a0e814ce2dd9981bec6fb5130a5}} 
+\index{Steinberg::Vst::IXmlRepresentationController@{Steinberg::Vst::IXmlRepresentationController}!getXmlRepresentationStream@{getXmlRepresentationStream}}
+\index{getXmlRepresentationStream@{getXmlRepresentationStream}!Steinberg::Vst::IXmlRepresentationController@{Steinberg::Vst::IXmlRepresentationController}}
+\doxysubsubsection{\texorpdfstring{getXmlRepresentationStream()}{getXmlRepresentationStream()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\+\_\+\+API Steinberg\+::\+Vst\+::\+IXml\+Representation\+Controller\+::get\+Xml\+Representation\+Stream (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_representation_info}{Representation\+Info}} \&}]{info,  }\item[{\mbox{\hyperlink{class_steinberg_1_1_i_b_stream}{IBStream}} $\ast$}]{stream }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Retrieves a stream containing a Xml\+Representation for a wanted representation info 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_steinberg_1_1_vst_1_1_i_xml_representation_controller_a0d1bdb1edec273588b96340a3e0588a0}\label{class_steinberg_1_1_vst_1_1_i_xml_representation_controller_a0d1bdb1edec273588b96340a3e0588a0}} 
+\index{Steinberg::Vst::IXmlRepresentationController@{Steinberg::Vst::IXmlRepresentationController}!iid@{iid}}
+\index{iid@{iid}!Steinberg::Vst::IXmlRepresentationController@{Steinberg::Vst::IXmlRepresentationController}}
+\doxysubsubsection{\texorpdfstring{iid}{iid}}
+{\footnotesize\ttfamily \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_steinberg_1_1_f_u_i_d}{FUID}} Steinberg\+::\+Vst\+::\+IXml\+Representation\+Controller\+::iid\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+audio\+\_\+processors/format\+\_\+types/\+VST3\+\_\+\+SDK/pluginterfaces/vst/\mbox{\hyperlink{ivstrepresentation_8h}{ivstrepresentation.\+h}}\end{DoxyCompactItemize}

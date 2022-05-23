@@ -1,0 +1,336 @@
+\hypertarget{juce___path_8h_source}{}\doxysection{juce\+\_\+\+Path.\+h}
+\label{juce___path_8h_source}\index{build/juce\_graphics/geometry/juce\_Path.h@{build/juce\_graphics/geometry/juce\_Path.h}}
+\mbox{\hyperlink{juce___path_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{65 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_path}{Path}}  final}
+\DoxyCodeLine{66 \{}
+\DoxyCodeLine{67 \textcolor{keyword}{public}:}
+\DoxyCodeLine{68     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{70 \textcolor{comment}{}    \mbox{\hyperlink{class_path}{Path}}();}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{73     \mbox{\hyperlink{class_path}{Path}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_path}{Path}}\&);}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{76     \mbox{\hyperlink{class_path}{\string~Path}}();}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{79     \mbox{\hyperlink{class_path}{Path}}\& operator= (\textcolor{keyword}{const} \mbox{\hyperlink{class_path}{Path}}\&);}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{82     \mbox{\hyperlink{class_path}{Path}} (\mbox{\hyperlink{class_path}{Path}}\&\&) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{85     \mbox{\hyperlink{class_path}{Path}}\& operator= (\mbox{\hyperlink{class_path}{Path}}\&\&) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87     \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_audio_channel_layout_8cpp_ad569fbf0e2ce80e9b92caaf1cbb3c257}{operator== }}(\textcolor{keyword}{const} \mbox{\hyperlink{class_path}{Path}}\&) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{88     \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_audio_channel_layout_8cpp_aa4ad43821a0285a3d7a5c840173f03ac}{operator!= }}(\textcolor{keyword}{const} \mbox{\hyperlink{class_path}{Path}}\&) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90     \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{float} \mbox{\hyperlink{class_path_aa23f987b8292143c3c9a6d9b0a131c3b}{defaultToleranceForTesting}};}
+\DoxyCodeLine{91     \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{float} \mbox{\hyperlink{class_path_a8e27579a740ab71d223ea7398a995fbb}{defaultToleranceForMeasurement}};}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{95 \textcolor{comment}{}    \textcolor{keywordtype}{bool} isEmpty() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{98     \mbox{\hyperlink{class_rectangle}{Rectangle}}<\textcolor{keywordtype}{float}> getBounds() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{103     \mbox{\hyperlink{class_rectangle}{Rectangle}}<\textcolor{keywordtype}{float}> getBoundsTransformed (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_affine_transform}{AffineTransform}}\& \mbox{\hyperlink{namespacegl_afb5567981d8120d47c7dccb93e2c4db2}{transform}}) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{118     \textcolor{keywordtype}{bool} contains (\textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}},}
+\DoxyCodeLine{119                    \textcolor{keywordtype}{float} tolerance = defaultToleranceForTesting) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{134     \textcolor{keywordtype}{bool} contains (\mbox{\hyperlink{class_point}{Point}}<\textcolor{keywordtype}{float}> point,}
+\DoxyCodeLine{135                    \textcolor{keywordtype}{float} tolerance = defaultToleranceForTesting) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{147     \textcolor{keywordtype}{bool} intersectsLine (\mbox{\hyperlink{class_line}{Line}}<\textcolor{keywordtype}{float}> line,}
+\DoxyCodeLine{148                          \textcolor{keywordtype}{float} tolerance = defaultToleranceForTesting) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{149 }
+\DoxyCodeLine{162     \mbox{\hyperlink{class_line}{Line}}<\textcolor{keywordtype}{float}> getClippedLine (\mbox{\hyperlink{class_line}{Line}}<\textcolor{keywordtype}{float}> line, \textcolor{keywordtype}{bool} keepSectionOutsidePath) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{163 }
+\DoxyCodeLine{167     \textcolor{keywordtype}{float} getLength (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_affine_transform}{AffineTransform}}\& \mbox{\hyperlink{namespacegl_afb5567981d8120d47c7dccb93e2c4db2}{transform}} = \mbox{\hyperlink{class_affine_transform}{AffineTransform}}(),}
+\DoxyCodeLine{168                      \textcolor{keywordtype}{float} tolerance = defaultToleranceForMeasurement) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{169 }
+\DoxyCodeLine{175     \mbox{\hyperlink{class_point}{Point}}<\textcolor{keywordtype}{float}> getPointAlongPath (\textcolor{keywordtype}{float} distanceFromStart,}
+\DoxyCodeLine{176                                     \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_affine_transform}{AffineTransform}}\& \mbox{\hyperlink{namespacegl_afb5567981d8120d47c7dccb93e2c4db2}{transform}} = \mbox{\hyperlink{class_affine_transform}{AffineTransform}}(),}
+\DoxyCodeLine{177                                     \textcolor{keywordtype}{float} tolerance = defaultToleranceForMeasurement) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{178 }
+\DoxyCodeLine{183     \textcolor{keywordtype}{float} getNearestPoint (\mbox{\hyperlink{class_point}{Point}}<\textcolor{keywordtype}{float}> targetPoint,}
+\DoxyCodeLine{184                            \mbox{\hyperlink{class_point}{Point}}<\textcolor{keywordtype}{float}>\& pointOnPath,}
+\DoxyCodeLine{185                            \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_affine_transform}{AffineTransform}}\& \mbox{\hyperlink{namespacegl_afb5567981d8120d47c7dccb93e2c4db2}{transform}} = \mbox{\hyperlink{class_affine_transform}{AffineTransform}}(),}
+\DoxyCodeLine{186                            \textcolor{keywordtype}{float} tolerance = defaultToleranceForMeasurement) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{187 }
+\DoxyCodeLine{188     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{190 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacedsp_1_1detail_a953fbe1bf6236c0f3a95d12aad7ffffb}{clear}}() noexcept;}
+\DoxyCodeLine{191 }
+\DoxyCodeLine{203     \textcolor{keywordtype}{void} startNewSubPath (\textcolor{keywordtype}{float} startX, \textcolor{keywordtype}{float} startY);}
+\DoxyCodeLine{204 }
+\DoxyCodeLine{216     \textcolor{keywordtype}{void} startNewSubPath (\mbox{\hyperlink{class_point}{Point}}<\textcolor{keywordtype}{float}> \mbox{\hyperlink{namespacegl_adad3a3824fbe72fb0b01074bb01ebe75}{start}});}
+\DoxyCodeLine{217 }
+\DoxyCodeLine{230     \textcolor{keywordtype}{void} closeSubPath();}
+\DoxyCodeLine{231 }
+\DoxyCodeLine{241     \textcolor{keywordtype}{void} lineTo (\textcolor{keywordtype}{float} endX, \textcolor{keywordtype}{float} endY);}
+\DoxyCodeLine{242 }
+\DoxyCodeLine{252     \textcolor{keywordtype}{void} lineTo (\mbox{\hyperlink{class_point}{Point}}<\textcolor{keywordtype}{float}> \mbox{\hyperlink{group__juce__core-files_ga4a3194f4f741f9bd653f28733358f62c}{end}});}
+\DoxyCodeLine{253 }
+\DoxyCodeLine{263     \textcolor{keywordtype}{void} quadraticTo (\textcolor{keywordtype}{float} controlPointX,}
+\DoxyCodeLine{264                       \textcolor{keywordtype}{float} controlPointY,}
+\DoxyCodeLine{265                       \textcolor{keywordtype}{float} endPointX,}
+\DoxyCodeLine{266                       \textcolor{keywordtype}{float} endPointY);}
+\DoxyCodeLine{267 }
+\DoxyCodeLine{277     \textcolor{keywordtype}{void} quadraticTo (\mbox{\hyperlink{class_point}{Point}}<\textcolor{keywordtype}{float}> controlPoint,}
+\DoxyCodeLine{278                       \mbox{\hyperlink{class_point}{Point}}<\textcolor{keywordtype}{float}> endPoint);}
+\DoxyCodeLine{279 }
+\DoxyCodeLine{289     \textcolor{keywordtype}{void} cubicTo (\textcolor{keywordtype}{float} controlPoint1X,}
+\DoxyCodeLine{290                   \textcolor{keywordtype}{float} controlPoint1Y,}
+\DoxyCodeLine{291                   \textcolor{keywordtype}{float} controlPoint2X,}
+\DoxyCodeLine{292                   \textcolor{keywordtype}{float} controlPoint2Y,}
+\DoxyCodeLine{293                   \textcolor{keywordtype}{float} endPointX,}
+\DoxyCodeLine{294                   \textcolor{keywordtype}{float} endPointY);}
+\DoxyCodeLine{295 }
+\DoxyCodeLine{305     \textcolor{keywordtype}{void} cubicTo (\mbox{\hyperlink{class_point}{Point}}<\textcolor{keywordtype}{float}> controlPoint1,}
+\DoxyCodeLine{306                   \mbox{\hyperlink{class_point}{Point}}<\textcolor{keywordtype}{float}> controlPoint2,}
+\DoxyCodeLine{307                   \mbox{\hyperlink{class_point}{Point}}<\textcolor{keywordtype}{float}> endPoint);}
+\DoxyCodeLine{308 }
+\DoxyCodeLine{311     \mbox{\hyperlink{class_point}{Point}}<\textcolor{keywordtype}{float}> getCurrentPosition() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{312 }
+\DoxyCodeLine{313     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{318 \textcolor{comment}{}    \textcolor{keywordtype}{void} addRectangle (\textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}});}
+\DoxyCodeLine{319 }
+\DoxyCodeLine{324     template <typename ValueType>}
+\DoxyCodeLine{325     \textcolor{keywordtype}{void} addRectangle (\mbox{\hyperlink{class_rectangle}{Rectangle}}<ValueType> rectangle)}
+\DoxyCodeLine{326     \{}
+\DoxyCodeLine{327         addRectangle (\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>} (rectangle.getX()), \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>} (rectangle.getY()),}
+\DoxyCodeLine{328                       \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>} (rectangle.getWidth()), \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>} (rectangle.getHeight()));}
+\DoxyCodeLine{329     \}}
+\DoxyCodeLine{330 }
+\DoxyCodeLine{335     \textcolor{keywordtype}{void} addRoundedRectangle (\textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}},}
+\DoxyCodeLine{336                               \textcolor{keywordtype}{float} cornerSize);}
+\DoxyCodeLine{337 }
+\DoxyCodeLine{342     \textcolor{keywordtype}{void} addRoundedRectangle (\textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}},}
+\DoxyCodeLine{343                               \textcolor{keywordtype}{float} cornerSizeX,}
+\DoxyCodeLine{344                               \textcolor{keywordtype}{float} cornerSizeY);}
+\DoxyCodeLine{345 }
+\DoxyCodeLine{350     \textcolor{keywordtype}{void} addRoundedRectangle (\textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}},}
+\DoxyCodeLine{351                               \textcolor{keywordtype}{float} cornerSizeX, \textcolor{keywordtype}{float} cornerSizeY,}
+\DoxyCodeLine{352                               \textcolor{keywordtype}{bool} curveTopLeft, \textcolor{keywordtype}{bool} curveTopRight,}
+\DoxyCodeLine{353                               \textcolor{keywordtype}{bool} curveBottomLeft, \textcolor{keywordtype}{bool} curveBottomRight);}
+\DoxyCodeLine{354 }
+\DoxyCodeLine{359     \textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType>}
+\DoxyCodeLine{360     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_path_a35bf5aa8bf831dba1bf302ec899a7fdb}{addRoundedRectangle}} (\mbox{\hyperlink{class_rectangle}{Rectangle<ValueType>}} rectangle, \textcolor{keywordtype}{float} cornerSizeX, \textcolor{keywordtype}{float} cornerSizeY)}
+\DoxyCodeLine{361     \{}
+\DoxyCodeLine{362         addRoundedRectangle (\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>} (rectangle.\mbox{\hyperlink{class_rectangle_a4b8223fb659d6c7f95a72e8d3fbe793d}{getX}}()), \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>} (rectangle.\mbox{\hyperlink{class_rectangle_a3050042669b496be5f029b1ab6fc1f52}{getY}}()),}
+\DoxyCodeLine{363                              \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>} (rectangle.\mbox{\hyperlink{class_rectangle_a76c51bd8fcbdd3ac5d8f6dff3cf4a57e}{getWidth}}()), \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>} (rectangle.\mbox{\hyperlink{class_rectangle_a92fff07d827126d92607d0d7c395c323}{getHeight}}()),}
+\DoxyCodeLine{364                              cornerSizeX, cornerSizeY);}
+\DoxyCodeLine{365     \}}
+\DoxyCodeLine{366 }
+\DoxyCodeLine{371     \textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType>}
+\DoxyCodeLine{372     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_path_a654fb058593e963b8268476ec348e7ce}{addRoundedRectangle}} (\mbox{\hyperlink{class_rectangle}{Rectangle<ValueType>}} rectangle, \textcolor{keywordtype}{float} cornerSize)}
+\DoxyCodeLine{373     \{}
+\DoxyCodeLine{374         addRoundedRectangle (rectangle, cornerSize, cornerSize);}
+\DoxyCodeLine{375     \}}
+\DoxyCodeLine{376 }
+\DoxyCodeLine{385     \textcolor{keywordtype}{void} addTriangle (\textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a0cdc45daf9e0c16b723274598e07ade4}{x1}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a3412c80a61c260e478b8085d4ed7a245}{y1}},}
+\DoxyCodeLine{386                       \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a95978d40e4513069cd0bd5b5c77d2023}{x2}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_aecde589503dc680cf0bc0572eea34a19}{y2}},}
+\DoxyCodeLine{387                       \textcolor{keywordtype}{float} x3, \textcolor{keywordtype}{float} y3);}
+\DoxyCodeLine{388 }
+\DoxyCodeLine{397     \textcolor{keywordtype}{void} addTriangle (\mbox{\hyperlink{class_point}{Point<float>}} point1,}
+\DoxyCodeLine{398                       \mbox{\hyperlink{class_point}{Point<float>}} point2,}
+\DoxyCodeLine{399                       \mbox{\hyperlink{class_point}{Point<float>}} point3);}
+\DoxyCodeLine{400 }
+\DoxyCodeLine{409     \textcolor{keywordtype}{void} addQuadrilateral (\textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a0cdc45daf9e0c16b723274598e07ade4}{x1}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a3412c80a61c260e478b8085d4ed7a245}{y1}},}
+\DoxyCodeLine{410                            \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a95978d40e4513069cd0bd5b5c77d2023}{x2}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_aecde589503dc680cf0bc0572eea34a19}{y2}},}
+\DoxyCodeLine{411                            \textcolor{keywordtype}{float} x3, \textcolor{keywordtype}{float} y3,}
+\DoxyCodeLine{412                            \textcolor{keywordtype}{float} x4, \textcolor{keywordtype}{float} y4);}
+\DoxyCodeLine{413 }
+\DoxyCodeLine{418     \textcolor{keywordtype}{void} addEllipse (\textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}});}
+\DoxyCodeLine{419 }
+\DoxyCodeLine{424     \textcolor{keywordtype}{void} addEllipse (\mbox{\hyperlink{class_rectangle}{Rectangle<float>}} area);}
+\DoxyCodeLine{425 }
+\DoxyCodeLine{447     \textcolor{keywordtype}{void} addArc (\textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}},}
+\DoxyCodeLine{448                  \textcolor{keywordtype}{float} fromRadians,}
+\DoxyCodeLine{449                  \textcolor{keywordtype}{float} toRadians,}
+\DoxyCodeLine{450                  \textcolor{keywordtype}{bool} startAsNewSubPath = \textcolor{keyword}{false});}
+\DoxyCodeLine{451 }
+\DoxyCodeLine{474     \textcolor{keywordtype}{void} addCentredArc (\textcolor{keywordtype}{float} centreX, \textcolor{keywordtype}{float} centreY,}
+\DoxyCodeLine{475                         \textcolor{keywordtype}{float} radiusX, \textcolor{keywordtype}{float} radiusY,}
+\DoxyCodeLine{476                         \textcolor{keywordtype}{float} rotationOfEllipse,}
+\DoxyCodeLine{477                         \textcolor{keywordtype}{float} fromRadians,}
+\DoxyCodeLine{478                         \textcolor{keywordtype}{float} toRadians,}
+\DoxyCodeLine{479                         \textcolor{keywordtype}{bool} startAsNewSubPath = \textcolor{keyword}{false});}
+\DoxyCodeLine{480 }
+\DoxyCodeLine{503     \textcolor{keywordtype}{void} addPieSegment (\textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}},}
+\DoxyCodeLine{504                         \textcolor{keywordtype}{float} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}},}
+\DoxyCodeLine{505                         \textcolor{keywordtype}{float} fromRadians,}
+\DoxyCodeLine{506                         \textcolor{keywordtype}{float} toRadians,}
+\DoxyCodeLine{507                         \textcolor{keywordtype}{float} innerCircleProportionalSize);}
+\DoxyCodeLine{508 }
+\DoxyCodeLine{527     \textcolor{keywordtype}{void} addPieSegment (\mbox{\hyperlink{class_rectangle}{Rectangle<float>}} segmentBounds,}
+\DoxyCodeLine{528                         \textcolor{keywordtype}{float} fromRadians,}
+\DoxyCodeLine{529                         \textcolor{keywordtype}{float} toRadians,}
+\DoxyCodeLine{530                         \textcolor{keywordtype}{float} innerCircleProportionalSize);}
+\DoxyCodeLine{531 }
+\DoxyCodeLine{539     \textcolor{keywordtype}{void} addLineSegment (\mbox{\hyperlink{class_line}{Line<float>}} line, \textcolor{keywordtype}{float} lineThickness);}
+\DoxyCodeLine{540 }
+\DoxyCodeLine{545     \textcolor{keywordtype}{void} addArrow (\mbox{\hyperlink{class_line}{Line<float>}} line,}
+\DoxyCodeLine{546                    \textcolor{keywordtype}{float} lineThickness,}
+\DoxyCodeLine{547                    \textcolor{keywordtype}{float} arrowheadWidth,}
+\DoxyCodeLine{548                    \textcolor{keywordtype}{float} arrowheadLength);}
+\DoxyCodeLine{549 }
+\DoxyCodeLine{553     \textcolor{keywordtype}{void} addPolygon (\mbox{\hyperlink{class_point}{Point<float>}} centre,}
+\DoxyCodeLine{554                      \textcolor{keywordtype}{int} numberOfSides,}
+\DoxyCodeLine{555                      \textcolor{keywordtype}{float} radius,}
+\DoxyCodeLine{556                      \textcolor{keywordtype}{float} startAngle = 0.0f);}
+\DoxyCodeLine{557 }
+\DoxyCodeLine{561     \textcolor{keywordtype}{void} addStar (\mbox{\hyperlink{class_point}{Point<float>}} centre,}
+\DoxyCodeLine{562                   \textcolor{keywordtype}{int} numberOfPoints,}
+\DoxyCodeLine{563                   \textcolor{keywordtype}{float} innerRadius,}
+\DoxyCodeLine{564                   \textcolor{keywordtype}{float} outerRadius,}
+\DoxyCodeLine{565                   \textcolor{keywordtype}{float} startAngle = 0.0f);}
+\DoxyCodeLine{566 }
+\DoxyCodeLine{577     \textcolor{keywordtype}{void} addBubble (\mbox{\hyperlink{class_rectangle}{Rectangle<float>}} bodyArea,}
+\DoxyCodeLine{578                     \mbox{\hyperlink{class_rectangle}{Rectangle<float>}} maximumArea,}
+\DoxyCodeLine{579                     \textcolor{keyword}{const} \mbox{\hyperlink{class_point}{Point<float>}} arrowTipPosition,}
+\DoxyCodeLine{580                     \textcolor{keyword}{const} \textcolor{keywordtype}{float} cornerSize,}
+\DoxyCodeLine{581                     \textcolor{keyword}{const} \textcolor{keywordtype}{float} arrowBaseWidth);}
+\DoxyCodeLine{582 }
+\DoxyCodeLine{590     \textcolor{keywordtype}{void} addPath (\textcolor{keyword}{const} \mbox{\hyperlink{class_path}{Path}}\& pathToAppend);}
+\DoxyCodeLine{591 }
+\DoxyCodeLine{600     \textcolor{keywordtype}{void} addPath (\textcolor{keyword}{const} \mbox{\hyperlink{class_path}{Path}}\& pathToAppend,}
+\DoxyCodeLine{601                   \textcolor{keyword}{const} \mbox{\hyperlink{class_affine_transform}{AffineTransform}}\& transformToApply);}
+\DoxyCodeLine{602 }
+\DoxyCodeLine{608     \textcolor{keywordtype}{void} swapWithPath (\mbox{\hyperlink{class_path}{Path}}\&) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{609 }
+\DoxyCodeLine{610     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{620 \textcolor{comment}{}    \textcolor{keywordtype}{void} preallocateSpace (\textcolor{keywordtype}{int} numExtraCoordsToMakeSpaceFor);}
+\DoxyCodeLine{621 }
+\DoxyCodeLine{622     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{627 \textcolor{comment}{}    \textcolor{keywordtype}{void} applyTransform (\textcolor{keyword}{const} \mbox{\hyperlink{class_affine_transform}{AffineTransform}}\& \mbox{\hyperlink{namespacegl_afb5567981d8120d47c7dccb93e2c4db2}{transform}}) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{628 }
+\DoxyCodeLine{644     \textcolor{keywordtype}{void} scaleToFit (\textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}},}
+\DoxyCodeLine{645                      \textcolor{keywordtype}{bool} preserveProportions) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{646 }
+\DoxyCodeLine{664     \mbox{\hyperlink{class_affine_transform}{AffineTransform}} getTransformToScaleToFit (\textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}},}
+\DoxyCodeLine{665                                               \textcolor{keywordtype}{bool} preserveProportions,}
+\DoxyCodeLine{666                                               \mbox{\hyperlink{class_justification}{Justification}} justificationType = \mbox{\hyperlink{class_justification_a1f8c07756c56fe8f31ed44964e51bfbcaf9d9adde20dce1aa38ff9a69be2b4384}{Justification::centred}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{667 }
+\DoxyCodeLine{682     \mbox{\hyperlink{class_affine_transform}{AffineTransform}} getTransformToScaleToFit (\mbox{\hyperlink{class_rectangle}{Rectangle<float>}} area,}
+\DoxyCodeLine{683                                               \textcolor{keywordtype}{bool} preserveProportions,}
+\DoxyCodeLine{684                                               \mbox{\hyperlink{class_justification}{Justification}} justificationType = \mbox{\hyperlink{class_justification_a1f8c07756c56fe8f31ed44964e51bfbcaf9d9adde20dce1aa38ff9a69be2b4384}{Justification::centred}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{685 }
+\DoxyCodeLine{691     \mbox{\hyperlink{class_path}{Path}} createPathWithRoundedCorners (\textcolor{keywordtype}{float} cornerRadius) \textcolor{keyword}{const};}
+\DoxyCodeLine{692 }
+\DoxyCodeLine{693     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{709 \textcolor{comment}{}    \textcolor{keywordtype}{void} setUsingNonZeroWinding (\textcolor{keywordtype}{bool} isNonZeroWinding) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{710 }
+\DoxyCodeLine{717     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_path_a1ccb7d18e3b0ca2dde5aa4ba64729b96}{isUsingNonZeroWinding}}()\textcolor{keyword}{ const                  }\{ \textcolor{keywordflow}{return} useNonZeroWinding; \}}
+\DoxyCodeLine{718 }
+\DoxyCodeLine{719 }
+\DoxyCodeLine{720     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{725 \textcolor{comment}{}    \textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_path_1_1_iterator}{Iterator}}}
+\DoxyCodeLine{726     \{}
+\DoxyCodeLine{727     \textcolor{keyword}{public}:}
+\DoxyCodeLine{728         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{729         \mbox{\hyperlink{class_path_1_1_iterator}{Iterator}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_path}{Path}}\& \mbox{\hyperlink{namespacegl_aa24d70da9c7853cfd8a8fc343e72c20d}{path}}) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{730         \mbox{\hyperlink{class_path_1_1_iterator}{\string~Iterator}}() \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{731 }
+\DoxyCodeLine{732         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{739 \textcolor{comment}{}        \textcolor{keywordtype}{bool} next() \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{740 }
+\DoxyCodeLine{741         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{742         \textcolor{keyword}{enum} \mbox{\hyperlink{class_path_1_1_iterator_a62b1a329e3fdbcbdad78bb6c90c7bcfd}{PathElementType}}}
+\DoxyCodeLine{743         \{}
+\DoxyCodeLine{744             \mbox{\hyperlink{class_path_1_1_iterator_a62b1a329e3fdbcbdad78bb6c90c7bcfdaebfff5dcac5415d6c7274ad2ef633215}{startNewSubPath}},    }
+\DoxyCodeLine{745             \mbox{\hyperlink{class_path_1_1_iterator_a62b1a329e3fdbcbdad78bb6c90c7bcfdabbd031b257d50abb77ee0c755f31b8e0}{lineTo}},             }
+\DoxyCodeLine{746             \mbox{\hyperlink{class_path_1_1_iterator_a62b1a329e3fdbcbdad78bb6c90c7bcfda3a092657aa2dec64c33926a6528c9f9b}{quadraticTo}},        }
+\DoxyCodeLine{747             \mbox{\hyperlink{class_path_1_1_iterator_a62b1a329e3fdbcbdad78bb6c90c7bcfda564006cee15d99bd97abe4a506231d87}{cubicTo}},            }
+\DoxyCodeLine{748             closePath           }
+\DoxyCodeLine{749         \};}
+\DoxyCodeLine{750 }
+\DoxyCodeLine{751         \mbox{\hyperlink{class_path_1_1_iterator_a62b1a329e3fdbcbdad78bb6c90c7bcfd}{PathElementType}} \mbox{\hyperlink{class_path_1_1_iterator_a3b33636d181ff130a4c0e475da2824db}{elementType}};}
+\DoxyCodeLine{752 }
+\DoxyCodeLine{753         \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a0cdc45daf9e0c16b723274598e07ade4}{x1}} = 0, \mbox{\hyperlink{namespacegl_a3412c80a61c260e478b8085d4ed7a245}{y1}} = 0, \mbox{\hyperlink{namespacegl_a95978d40e4513069cd0bd5b5c77d2023}{x2}} = 0, \mbox{\hyperlink{namespacegl_aecde589503dc680cf0bc0572eea34a19}{y2}} = 0, x3 = 0, y3 = 0;}
+\DoxyCodeLine{754 }
+\DoxyCodeLine{755         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{756     \textcolor{keyword}{private}:}
+\DoxyCodeLine{757         \textcolor{keyword}{const} \mbox{\hyperlink{class_path}{Path}}\& \mbox{\hyperlink{namespacegl_aa24d70da9c7853cfd8a8fc343e72c20d}{path}};}
+\DoxyCodeLine{758         \textcolor{keyword}{const} \textcolor{keywordtype}{float}* \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}};}
+\DoxyCodeLine{759 }
+\DoxyCodeLine{760         \mbox{\hyperlink{group__juce__core-system_ga6ab7a603bf4435c7cb286b1744366eb2}{JUCE\_DECLARE\_NON\_COPYABLE}} (\mbox{\hyperlink{class_path_1_1_iterator}{Iterator}})}
+\DoxyCodeLine{761     \};}
+\DoxyCodeLine{762 }
+\DoxyCodeLine{763     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{773 \textcolor{comment}{}    \textcolor{keywordtype}{void} loadPathFromStream (\mbox{\hyperlink{class_input_stream}{InputStream}}\& \mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}});}
+\DoxyCodeLine{774 }
+\DoxyCodeLine{783     \textcolor{keywordtype}{void} loadPathFromData (\textcolor{keyword}{const} \textcolor{keywordtype}{void}* \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, \textcolor{keywordtype}{size\_t} numberOfBytes);}
+\DoxyCodeLine{784 }
+\DoxyCodeLine{789     \textcolor{keywordtype}{void} writePathToStream (\mbox{\hyperlink{class_output_stream}{OutputStream}}\& destination) \textcolor{keyword}{const};}
+\DoxyCodeLine{790 }
+\DoxyCodeLine{791     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{795 \textcolor{comment}{}    \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{group__juce__audio__processors-format__types_ga8f3527e6704741db4e2a281817d02522}{toString}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{796 }
+\DoxyCodeLine{800     \textcolor{keywordtype}{void} restoreFromString (\mbox{\hyperlink{class_string_ref}{StringRef}} stringVersion);}
+\DoxyCodeLine{801 }
+\DoxyCodeLine{802 \textcolor{keyword}{private}:}
+\DoxyCodeLine{803     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{804     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{class_path_flattening_iterator}{PathFlatteningIterator}};}
+\DoxyCodeLine{805     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{class_path_1_1_iterator}{Path::Iterator}};}
+\DoxyCodeLine{806     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{class_edge_table}{EdgeTable}};}
+\DoxyCodeLine{807 }
+\DoxyCodeLine{808     \mbox{\hyperlink{class_array}{Array<float>}} \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}};}
+\DoxyCodeLine{809 }
+\DoxyCodeLine{810     \textcolor{keyword}{struct }PathBounds}
+\DoxyCodeLine{811     \{}
+\DoxyCodeLine{812         PathBounds() noexcept;}
+\DoxyCodeLine{813         \mbox{\hyperlink{class_rectangle}{Rectangle}}<\textcolor{keywordtype}{float}> getRectangle() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{814         \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacegl_a3b437ea454d772211296e220c025bdd2}{reset}}() noexcept;}
+\DoxyCodeLine{815         \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacegl_a3b437ea454d772211296e220c025bdd2}{reset}} (\textcolor{keywordtype}{float}, \textcolor{keywordtype}{float}) noexcept;}
+\DoxyCodeLine{816         \textcolor{keywordtype}{void} extend (\textcolor{keywordtype}{float}, \textcolor{keywordtype}{float}) noexcept;}
+\DoxyCodeLine{817 }
+\DoxyCodeLine{818         template <typename... Coords>}
+\DoxyCodeLine{819         \textcolor{keywordtype}{void} extend (\textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}}, Coords... \mbox{\hyperlink{namespacegl_ac4409ff71b230d4a120747f329e29c33}{coords}}) noexcept}
+\DoxyCodeLine{820         \{}
+\DoxyCodeLine{821             extend (\mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}});}
+\DoxyCodeLine{822             extend (\mbox{\hyperlink{namespacegl_ac4409ff71b230d4a120747f329e29c33}{coords}}...);}
+\DoxyCodeLine{823         \}}
+\DoxyCodeLine{824 }
+\DoxyCodeLine{825         \textcolor{keywordtype}{float} pathXMin = 0, pathXMax = 0, pathYMin = 0, pathYMax = 0;}
+\DoxyCodeLine{826     \};}
+\DoxyCodeLine{827 }
+\DoxyCodeLine{828     PathBounds bounds;}
+\DoxyCodeLine{829     \textcolor{keywordtype}{bool} useNonZeroWinding = \textcolor{keyword}{true};}
+\DoxyCodeLine{830 }
+\DoxyCodeLine{831     \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{float} lineMarker;}
+\DoxyCodeLine{832     \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{float} moveMarker;}
+\DoxyCodeLine{833     \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{float} quadMarker;}
+\DoxyCodeLine{834     \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{float} cubicMarker;}
+\DoxyCodeLine{835     \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{float} closeSubPathMarker;}
+\DoxyCodeLine{836 }
+\DoxyCodeLine{837     \mbox{\hyperlink{group__juce__core-memory_gab3639a79598b35f2116f4572af0d93f1}{JUCE\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_path}{Path}})}
+\DoxyCodeLine{838 \};}
+\DoxyCodeLine{839 }
+\DoxyCodeLine{840  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{841 }
+
+\end{DoxyCode}

@@ -1,0 +1,166 @@
+\hypertarget{juce___audio_format_writer_8h_source}{}\doxysection{juce\+\_\+\+Audio\+Format\+Writer.\+h}
+\label{juce___audio_format_writer_8h_source}\index{build/juce\_audio\_formats/format/juce\_AudioFormatWriter.h@{build/juce\_audio\_formats/format/juce\_AudioFormatWriter.h}}
+\mbox{\hyperlink{juce___audio_format_writer_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{44 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_audio_format_writer}{AudioFormatWriter}}}
+\DoxyCodeLine{45 \{}
+\DoxyCodeLine{46 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{47     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{61 \textcolor{comment}{}    \mbox{\hyperlink{class_audio_format_writer_ad13516434d025d9427fab9ac9b208a77}{AudioFormatWriter}} (\mbox{\hyperlink{class_output_stream}{OutputStream}}* destStream,}
+\DoxyCodeLine{62                        \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& formatName,}
+\DoxyCodeLine{63                        \textcolor{keywordtype}{double} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}},}
+\DoxyCodeLine{64                        \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} numberOfChannels,}
+\DoxyCodeLine{65                        \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} bitsPerSample);}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{81 \textcolor{comment}{}    \mbox{\hyperlink{class_audio_format_writer_ae80fc17df0e5d0d893abb11e0ce53c21}{AudioFormatWriter}} (\mbox{\hyperlink{class_output_stream}{OutputStream}}* destStream,}
+\DoxyCodeLine{82                        \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& formatName,}
+\DoxyCodeLine{83                        \textcolor{keywordtype}{double} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}},}
+\DoxyCodeLine{84                        \textcolor{keyword}{const} \mbox{\hyperlink{class_audio_channel_set}{AudioChannelSet}}\& audioChannelLayout,}
+\DoxyCodeLine{85                        \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} bitsPerSample);}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87 \textcolor{keyword}{public}:}
+\DoxyCodeLine{89     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_audio_format_writer_ad3e3c4a5e1ba629c0d1aaa47827389f8}{\string~AudioFormatWriter}}();}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{96 \textcolor{comment}{}    \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{class_audio_format_writer_ad279a4e2803cea6d6481cf40d20d555d}{getFormatName}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept        \{ \textcolor{keywordflow}{return} formatName; \}}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{117 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_format_writer_a60dc79a5cd9ed0307ea04637ed25ea8b}{write}} (\textcolor{keyword}{const} \textcolor{keywordtype}{int}** samplesToWrite, \textcolor{keywordtype}{int} numSamples) = 0;}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{128     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_format_writer_ac83a728db8d8abf6cf39a3bd34390a6a}{flush}}();}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{130     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{141 \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_format_writer_a3a691c94e9609383c915af71cbf760db}{writeFromAudioReader}} (\mbox{\hyperlink{class_audio_format_reader}{AudioFormatReader}}\& reader,}
+\DoxyCodeLine{142                                \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} startSample,}
+\DoxyCodeLine{143                                \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} numSamplesToRead);}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{154     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_format_writer_a4d09d96836ebe2779d2e82a090d0b29f}{writeFromAudioSource}} (\mbox{\hyperlink{class_audio_source}{AudioSource}}\& \mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}},}
+\DoxyCodeLine{155                                \textcolor{keywordtype}{int} numSamplesToRead,}
+\DoxyCodeLine{156                                \textcolor{keywordtype}{int} samplesPerBlock = 2048);}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{158 }
+\DoxyCodeLine{160     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_format_writer_a172a2a4e347ba187655eabb5ebf304b3}{writeFromAudioSampleBuffer}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_audio_buffer}{AudioBuffer<float>}}\& \mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}},}
+\DoxyCodeLine{161                                      \textcolor{keywordtype}{int} startSample, \textcolor{keywordtype}{int} numSamples);}
+\DoxyCodeLine{162 }
+\DoxyCodeLine{164     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_format_writer_ad3ceaa6f20c49a692f92b2e1603786be}{writeFromFloatArrays}} (\textcolor{keyword}{const} \textcolor{keywordtype}{float}* \textcolor{keyword}{const}* channels, \textcolor{keywordtype}{int} numChannels, \textcolor{keywordtype}{int} numSamples);}
+\DoxyCodeLine{165 }
+\DoxyCodeLine{166     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{168 \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{class_audio_format_writer_ae31a1427413b3ac45c7f02d7384e156e}{getSampleRate}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept       \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}}; \}}
+\DoxyCodeLine{169 }
+\DoxyCodeLine{171     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_audio_format_writer_a436de23247a535b447ed8ddf6100c496}{getNumChannels}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept         \{ \textcolor{keywordflow}{return} (\textcolor{keywordtype}{int}) numChannels; \}}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{174     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_audio_format_writer_a893f8254a9d1978511806ee414cce929}{getBitsPerSample}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept       \{ \textcolor{keywordflow}{return} (\textcolor{keywordtype}{int}) bitsPerSample; \}}
+\DoxyCodeLine{175 }
+\DoxyCodeLine{177     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_format_writer_ac51a620bf86a2e501eaae93e2e2c331c}{isFloatingPoint}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept       \{ \textcolor{keywordflow}{return} usesFloatingPointData; \}}
+\DoxyCodeLine{178 }
+\DoxyCodeLine{179     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{184 \textcolor{comment}{}    \textcolor{keyword}{class }\mbox{\hyperlink{class_audio_format_writer_1_1_threaded_writer}{ThreadedWriter}}}
+\DoxyCodeLine{185     \{}
+\DoxyCodeLine{186     \textcolor{keyword}{public}:}
+\DoxyCodeLine{194         \mbox{\hyperlink{class_audio_format_writer_1_1_threaded_writer_a8efb067cf742fdac8b2bc6e21a084531}{ThreadedWriter}} (\mbox{\hyperlink{class_audio_format_writer}{AudioFormatWriter}}* writer,}
+\DoxyCodeLine{195                         \mbox{\hyperlink{class_time_slice_thread}{TimeSliceThread}}\& backgroundThread,}
+\DoxyCodeLine{196                         \textcolor{keywordtype}{int} numSamplesToBuffer);}
+\DoxyCodeLine{197 }
+\DoxyCodeLine{199         \mbox{\hyperlink{class_audio_format_writer_1_1_threaded_writer_acb40f07ce4ffd0bdff82533d61ca79f2}{\string~ThreadedWriter}}();}
+\DoxyCodeLine{200 }
+\DoxyCodeLine{213         \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_format_writer_1_1_threaded_writer_a75e83af285e9c0ce5d74522220821051}{write}} (\textcolor{keyword}{const} \textcolor{keywordtype}{float}* \textcolor{keyword}{const}* \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, \textcolor{keywordtype}{int} numSamples);}
+\DoxyCodeLine{214 }
+\DoxyCodeLine{216         \textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_audio_format_writer_1_1_threaded_writer_1_1_incoming_data_receiver}{IncomingDataReceiver}}}
+\DoxyCodeLine{217         \{}
+\DoxyCodeLine{218         \textcolor{keyword}{public}:}
+\DoxyCodeLine{219             \mbox{\hyperlink{class_audio_format_writer_1_1_threaded_writer_1_1_incoming_data_receiver_addc9623d8ebafb393737dd395839ecc3}{IncomingDataReceiver}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{220             \textcolor{keyword}{virtual} \mbox{\hyperlink{class_audio_format_writer_1_1_threaded_writer_1_1_incoming_data_receiver_a2da0ba443ac037300f5617e4e9889bb2}{\string~IncomingDataReceiver}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{221 }
+\DoxyCodeLine{222             \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_format_writer_1_1_threaded_writer_1_1_incoming_data_receiver_a48e39e836142669e489b04389123536a}{reset}} (\textcolor{keywordtype}{int} numChannels, \textcolor{keywordtype}{double} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}}, \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} totalSamplesInSource) = 0;}
+\DoxyCodeLine{223             \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_format_writer_1_1_threaded_writer_1_1_incoming_data_receiver_a99266c872fd4ba2106800b5422a18bda}{addBlock}} (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} sampleNumberInSource, \textcolor{keyword}{const} \mbox{\hyperlink{class_audio_buffer}{AudioBuffer<float>}}\& newData,}
+\DoxyCodeLine{224                                    \textcolor{keywordtype}{int} startOffsetInBuffer, \textcolor{keywordtype}{int} numSamples) = 0;}
+\DoxyCodeLine{225         \};}
+\DoxyCodeLine{226 }
+\DoxyCodeLine{234         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_format_writer_1_1_threaded_writer_af9af3b0ff01f3e62427c0526087f5ab3}{setDataReceiver}} (\mbox{\hyperlink{class_audio_format_writer_1_1_threaded_writer_1_1_incoming_data_receiver}{IncomingDataReceiver}}*);}
+\DoxyCodeLine{235 }
+\DoxyCodeLine{239         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_format_writer_1_1_threaded_writer_aed11ea43682211de3bc3c2f86799686f}{setFlushInterval}} (\textcolor{keywordtype}{int} numSamplesPerFlush) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{240 }
+\DoxyCodeLine{241     \textcolor{keyword}{private}:}
+\DoxyCodeLine{242         \textcolor{keyword}{class }Buffer;}
+\DoxyCodeLine{243         std::unique\_ptr<Buffer> buffer;}
+\DoxyCodeLine{244     \};}
+\DoxyCodeLine{245 }
+\DoxyCodeLine{246 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{247     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{249 \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{class_audio_format_writer_aafefbda90e2a58cb057e89e995decfd2}{sampleRate}};}
+\DoxyCodeLine{250 }
+\DoxyCodeLine{252     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_audio_format_writer_af33e6836e6dbbcd774ac166453c5446c}{numChannels}};}
+\DoxyCodeLine{253 }
+\DoxyCodeLine{255     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_audio_format_writer_aa1c1c0accbc262067e2f9ad75d70d155}{bitsPerSample}};}
+\DoxyCodeLine{256 }
+\DoxyCodeLine{258     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_format_writer_a876800b982bbe25e583633d3876a9a02}{usesFloatingPointData}};}
+\DoxyCodeLine{259 }
+\DoxyCodeLine{261     \mbox{\hyperlink{class_audio_channel_set}{AudioChannelSet}} \mbox{\hyperlink{class_audio_format_writer_abfd821aaba068593364888cb97c47a0b}{channelLayout}};}
+\DoxyCodeLine{262 }
+\DoxyCodeLine{264     \mbox{\hyperlink{class_output_stream}{OutputStream}}* \mbox{\hyperlink{class_audio_format_writer_aeef1f96e051a7f40b69664636393bf5f}{output}};}
+\DoxyCodeLine{265 }
+\DoxyCodeLine{267     \textcolor{keyword}{template} <\textcolor{keyword}{class} DestSampleType, \textcolor{keyword}{class} SourceSampleType, \textcolor{keyword}{class} DestEndianness>}
+\DoxyCodeLine{268     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_audio_format_writer_1_1_write_helper}{WriteHelper}}}
+\DoxyCodeLine{269     \{}
+\DoxyCodeLine{270         \textcolor{keyword}{using} \mbox{\hyperlink{class_audio_data_1_1_pointer}{DestType}}   = \mbox{\hyperlink{class_audio_data_1_1_pointer}{AudioData::Pointer <DestSampleType,   DestEndianness,          AudioData::Interleaved,    AudioData::NonConst>}};}
+\DoxyCodeLine{271         \textcolor{keyword}{using} \mbox{\hyperlink{class_audio_data_1_1_pointer}{SourceType}} = \mbox{\hyperlink{class_audio_data_1_1_pointer}{AudioData::Pointer <SourceSampleType, AudioData::NativeEndian, AudioData::NonInterleaved, AudioData::Const>}};}
+\DoxyCodeLine{272 }
+\DoxyCodeLine{273         \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_audio_format_writer_1_1_write_helper_af9c774c70ec8e459e633be63c049c915}{write}} (\textcolor{keywordtype}{void}* destData, \textcolor{keywordtype}{int} numDestChannels, \textcolor{keyword}{const} \textcolor{keywordtype}{int}* \textcolor{keyword}{const}* \mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}},}
+\DoxyCodeLine{274                            \textcolor{keywordtype}{int} numSamples, \textcolor{keyword}{const} \textcolor{keywordtype}{int} sourceOffset = 0) noexcept}
+\DoxyCodeLine{275         \{}
+\DoxyCodeLine{276             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < numDestChannels; ++i)}
+\DoxyCodeLine{277             \{}
+\DoxyCodeLine{278                 \textcolor{keyword}{const} \mbox{\hyperlink{class_audio_data_1_1_pointer}{DestType}} dest (\mbox{\hyperlink{group__juce__core-memory_ga8482f5e38a2a6adc3cd3f31869e4fe34}{addBytesToPointer}} (destData, i * DestType::getBytesPerSample()), numDestChannels);}
+\DoxyCodeLine{279 }
+\DoxyCodeLine{280                 \textcolor{keywordflow}{if} (*\mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}} != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{281                 \{}
+\DoxyCodeLine{282                     dest.\mbox{\hyperlink{class_audio_data_1_1_pointer_aed75d8a75052aec8fb0ca7c9cb19dfd2}{convertSamples}} (\mbox{\hyperlink{class_audio_data_1_1_pointer}{SourceType}} (*\mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}} + sourceOffset), numSamples);}
+\DoxyCodeLine{283                     ++\mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}};}
+\DoxyCodeLine{284                 \}}
+\DoxyCodeLine{285                 \textcolor{keywordflow}{else}}
+\DoxyCodeLine{286                 \{}
+\DoxyCodeLine{287                     dest.\mbox{\hyperlink{class_audio_data_1_1_pointer_a8b123e357446ef1faa6731790d421969}{clearSamples}} (numSamples);}
+\DoxyCodeLine{288                 \}}
+\DoxyCodeLine{289             \}}
+\DoxyCodeLine{290         \}}
+\DoxyCodeLine{291     \};}
+\DoxyCodeLine{292 }
+\DoxyCodeLine{293 \textcolor{keyword}{private}:}
+\DoxyCodeLine{294     \mbox{\hyperlink{class_string}{String}} formatName;}
+\DoxyCodeLine{295     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{class_audio_format_writer_1_1_threaded_writer}{ThreadedWriter}};}
+\DoxyCodeLine{296 }
+\DoxyCodeLine{297     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_audio_format_writer}{AudioFormatWriter}})}
+\DoxyCodeLine{298 \};}
+\DoxyCodeLine{299 }
+\DoxyCodeLine{300  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{301 }
+
+\end{DoxyCode}

@@ -1,0 +1,125 @@
+\hypertarget{juce___directory_contents_list_8h_source}{}\doxysection{juce\+\_\+\+Directory\+Contents\+List.\+h}
+\label{juce___directory_contents_list_8h_source}\index{build/juce\_gui\_basics/filebrowser/juce\_DirectoryContentsList.h@{build/juce\_gui\_basics/filebrowser/juce\_DirectoryContentsList.h}}
+\mbox{\hyperlink{juce___directory_contents_list_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{42 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_directory_contents_list}{DirectoryContentsList}}   : \textcolor{keyword}{public} \mbox{\hyperlink{class_change_broadcaster}{ChangeBroadcaster}},}
+\DoxyCodeLine{43                                           \textcolor{keyword}{private} \mbox{\hyperlink{class_time_slice_client}{TimeSliceClient}}}
+\DoxyCodeLine{44 \{}
+\DoxyCodeLine{45 \textcolor{keyword}{public}:}
+\DoxyCodeLine{46     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{65 \textcolor{comment}{}    \mbox{\hyperlink{class_directory_contents_list}{DirectoryContentsList}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_file_filter}{FileFilter}}* fileFilter,}
+\DoxyCodeLine{66                            \mbox{\hyperlink{class_time_slice_thread}{TimeSliceThread}}\& threadToUse);}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{69     \mbox{\hyperlink{class_directory_contents_list}{\string~DirectoryContentsList}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{74 \textcolor{comment}{}    \textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& \mbox{\hyperlink{class_directory_contents_list_acd370107623c95312bb0493099013e6c}{getDirectory}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept               \{ \textcolor{keywordflow}{return} root; \}}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{81     \textcolor{keywordtype}{void} setDirectory (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& directory,}
+\DoxyCodeLine{82                        \textcolor{keywordtype}{bool} includeDirectories,}
+\DoxyCodeLine{83                        \textcolor{keywordtype}{bool} includeFiles);}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{88     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_directory_contents_list_a4ec1c329d1c2d5d7707b3c6d33633a44}{isFindingDirectories}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept              \{ \textcolor{keywordflow}{return} (fileTypeFlags \& \mbox{\hyperlink{class_file_a2e3d1ed8a9022434f3ddb7d34b24198ca35b223e26e0f30ee49e320b60af41965}{File::findDirectories}}) != 0; \}}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{93     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_directory_contents_list_a71c4285997939e2e5eddd5504c20b0b4}{isFindingFiles}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                    \{ \textcolor{keywordflow}{return} (fileTypeFlags \& \mbox{\hyperlink{class_file_a2e3d1ed8a9022434f3ddb7d34b24198ca0804ff838a8bfd66eaa300e5e0a3884a}{File::findFiles}}) != 0; \}}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{96     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacedsp_1_1detail_a953fbe1bf6236c0f3a95d12aad7ffffb}{clear}}();}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{99     \textcolor{keywordtype}{void} refresh();}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{102     \textcolor{keywordtype}{bool} isStillLoading() \textcolor{keyword}{const};}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{107     \textcolor{keywordtype}{void} setIgnoresHiddenFiles (\textcolor{keywordtype}{bool} shouldIgnoreHiddenFiles);}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{112     \textcolor{keywordtype}{bool} ignoresHiddenFiles() \textcolor{keyword}{const};}
+\DoxyCodeLine{113 }
+\DoxyCodeLine{121     \textcolor{keywordtype}{void} setFileFilter (\textcolor{keyword}{const} \mbox{\hyperlink{class_file_filter}{FileFilter}}* newFileFilter);}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{123     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{126 \textcolor{comment}{}    \textcolor{keyword}{struct }\mbox{\hyperlink{struct_directory_contents_list_1_1_file_info}{FileInfo}}}
+\DoxyCodeLine{127     \{}
+\DoxyCodeLine{128         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{136 \textcolor{comment}{}        \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{struct_directory_contents_list_1_1_file_info_a14b9647b7281512bbedddb25ebeee1b1}{filename}};}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{139         \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} \mbox{\hyperlink{struct_directory_contents_list_1_1_file_info_a0ef892081704ac1b7d4de84854b60a3c}{fileSize}};}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{144         \mbox{\hyperlink{class_time}{Time}} \mbox{\hyperlink{struct_directory_contents_list_1_1_file_info_a35f194ff92e35671d7616d1d9e1524b7}{modificationTime}};}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{149         \mbox{\hyperlink{class_time}{Time}} \mbox{\hyperlink{struct_directory_contents_list_1_1_file_info_a903e1211fd14c33fe7af486e4e91b9b0}{creationTime}};}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{152         \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_directory_contents_list_1_1_file_info_a493b51197cd6cc4042d9c8b13a0dbdab}{isDirectory}};}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{155         \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_directory_contents_list_1_1_file_info_a73e256209bd193d238465977d4493114}{isReadOnly}};}
+\DoxyCodeLine{156     \};}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{158     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{168 \textcolor{comment}{}    \textcolor{keywordtype}{int} getNumFiles() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{169 }
+\DoxyCodeLine{180     \textcolor{keywordtype}{bool} getFileInfo (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}, \mbox{\hyperlink{struct_directory_contents_list_1_1_file_info}{FileInfo}}\& resultInfo) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{181 }
+\DoxyCodeLine{188     \mbox{\hyperlink{class_file}{File}} getFile (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{189 }
+\DoxyCodeLine{193     \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_file_filter}{FileFilter}}* getFilter() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept            \{ \textcolor{keywordflow}{return} fileFilter; \}}
+\DoxyCodeLine{194 }
+\DoxyCodeLine{196     \textcolor{keywordtype}{bool} contains (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\&) \textcolor{keyword}{const};}
+\DoxyCodeLine{197 }
+\DoxyCodeLine{198     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{200 \textcolor{comment}{}    \mbox{\hyperlink{class_time_slice_thread}{TimeSliceThread}}\& \mbox{\hyperlink{class_directory_contents_list_a27eae352de45a90c108e819edaf47e13}{getTimeSliceThread}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept    \{ \textcolor{keywordflow}{return} thread; \}}
+\DoxyCodeLine{201 }
+\DoxyCodeLine{202 \textcolor{keyword}{private}:}
+\DoxyCodeLine{203     \mbox{\hyperlink{class_file}{File}} root;}
+\DoxyCodeLine{204     \textcolor{keyword}{const} \mbox{\hyperlink{class_file_filter}{FileFilter}}* fileFilter = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{205     \mbox{\hyperlink{class_time_slice_thread}{TimeSliceThread}}\& thread;}
+\DoxyCodeLine{206     \textcolor{keywordtype}{int} fileTypeFlags = \mbox{\hyperlink{class_file_a2e3d1ed8a9022434f3ddb7d34b24198ca7913a92e21bc03cb18cecf6aa21221bf}{File::ignoreHiddenFiles}} | \mbox{\hyperlink{class_file_a2e3d1ed8a9022434f3ddb7d34b24198ca0804ff838a8bfd66eaa300e5e0a3884a}{File::findFiles}};}
+\DoxyCodeLine{207 }
+\DoxyCodeLine{208     \mbox{\hyperlink{class_critical_section}{CriticalSection}} fileListLock;}
+\DoxyCodeLine{209     \mbox{\hyperlink{class_owned_array}{OwnedArray<FileInfo>}} files;}
+\DoxyCodeLine{210 }
+\DoxyCodeLine{211     std::unique\_ptr<RangedDirectoryIterator> fileFindHandle;}
+\DoxyCodeLine{212     std::atomic<bool> shouldStop \{ \textcolor{keyword}{true} \};}
+\DoxyCodeLine{213 }
+\DoxyCodeLine{214     \textcolor{keywordtype}{bool} wasEmpty = \textcolor{keyword}{true};}
+\DoxyCodeLine{215 }
+\DoxyCodeLine{216     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_time_slice_client_a272b0868c9bd0b5c281cf09dbaa69a9c}{useTimeSlice}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{217     \textcolor{keywordtype}{void} stopSearching();}
+\DoxyCodeLine{218     \textcolor{keywordtype}{void} changed();}
+\DoxyCodeLine{219     \textcolor{keywordtype}{bool} checkNextFile (\textcolor{keywordtype}{bool}\& hasChanged);}
+\DoxyCodeLine{220     \textcolor{keywordtype}{bool} addFile (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\&, \textcolor{keywordtype}{bool} isDir, \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} fileSize, \mbox{\hyperlink{class_time}{Time}} modTime,}
+\DoxyCodeLine{221                   \mbox{\hyperlink{class_time}{Time}} creationTime, \textcolor{keywordtype}{bool} isReadOnly);}
+\DoxyCodeLine{222     \textcolor{keywordtype}{void} setTypeFlags (\textcolor{keywordtype}{int});}
+\DoxyCodeLine{223 }
+\DoxyCodeLine{224     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_directory_contents_list}{DirectoryContentsList}})}
+\DoxyCodeLine{225 \};}
+\DoxyCodeLine{226 }
+\DoxyCodeLine{227  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{228 }
+
+\end{DoxyCode}

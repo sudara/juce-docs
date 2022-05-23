@@ -1,0 +1,81 @@
+\hypertarget{juce___key_file_generation_8h_source}{}\doxysection{juce\+\_\+\+Key\+File\+Generation.\+h}
+\label{juce___key_file_generation_8h_source}\index{build/juce\_product\_unlocking/marketplace/juce\_KeyFileGeneration.h@{build/juce\_product\_unlocking/marketplace/juce\_KeyFileGeneration.h}}
+\mbox{\hyperlink{juce___key_file_generation_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{36 \textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_key_generation}{KeyGeneration}}}
+\DoxyCodeLine{37 \{}
+\DoxyCodeLine{38 \textcolor{keyword}{public}:}
+\DoxyCodeLine{55     \textcolor{keyword}{static} \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} generateKeyFile (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& appName,}
+\DoxyCodeLine{56                                                  \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& userEmail,}
+\DoxyCodeLine{57                                                  \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& userName,}
+\DoxyCodeLine{58                                                  \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& machineNumbers,}
+\DoxyCodeLine{59                                                  \textcolor{keyword}{const} \mbox{\hyperlink{class_r_s_a_key}{RSAKey}}\& privateKey);}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{70     \textcolor{keyword}{static} \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} generateExpiringKeyFile (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& appName,}
+\DoxyCodeLine{71                                                          \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& userEmail,}
+\DoxyCodeLine{72                                                          \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& userName,}
+\DoxyCodeLine{73                                                          \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& machineNumbers,}
+\DoxyCodeLine{74                                                          \textcolor{keyword}{const} \mbox{\hyperlink{class_time}{Time}} expiryTime,}
+\DoxyCodeLine{75                                                          \textcolor{keyword}{const} \mbox{\hyperlink{class_r_s_a_key}{RSAKey}}\& privateKey);}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{86 \textcolor{comment}{}    \textcolor{keyword}{static} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_key_generation_a608c4ffe01796eba24a5ab563b5d488e}{keyGenerationAppMain}} (\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
+\DoxyCodeLine{87     \{}
+\DoxyCodeLine{88         \mbox{\hyperlink{class_string_array}{StringArray}} args;}
+\DoxyCodeLine{89         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 1; i < argc; ++i)}
+\DoxyCodeLine{90             args.\mbox{\hyperlink{class_string_array_a18cb8087b39a81c462e9c67b03453901}{add}} (argv[i]);}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92         \textcolor{keywordflow}{if} (args.\mbox{\hyperlink{class_string_array_af1eb48dd90938eb34d9f43cf7d81510b}{size}}() != 5)}
+\DoxyCodeLine{93         \{}
+\DoxyCodeLine{94             std::cout << \textcolor{stringliteral}{"{}Requires 5 arguments: app-\/name user-\/email username machine-\/numbers private-\/key"{}} << std::endl}
+\DoxyCodeLine{95                       << \textcolor{stringliteral}{"{}  app-\/name:         name of the product being unlocked"{}} << std::endl}
+\DoxyCodeLine{96                       << \textcolor{stringliteral}{"{}  user-\/email:       user's email address"{}} << std::endl}
+\DoxyCodeLine{97                       << \textcolor{stringliteral}{"{}  username:         name of the user. Careful not to allow any spaces!"{}} << std::endl}
+\DoxyCodeLine{98                       << \textcolor{stringliteral}{"{}  machine-\/numbers:  a comma-\/ or semicolon-\/separated list of all machine ID strings this user can run this product on (no whitespace between items!)"{}} << std::endl}
+\DoxyCodeLine{99                       << \textcolor{stringliteral}{"{}  private-\/key:      the RSA private key corresponding to the public key you've used in the app"{}} << std::endl}
+\DoxyCodeLine{100                       << std::endl;}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{102             \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{103         \}}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105         \textcolor{keywordflow}{if} (! args[4].containsChar (\textcolor{charliteral}{','}))}
+\DoxyCodeLine{106         \{}
+\DoxyCodeLine{107             std::cout << \textcolor{stringliteral}{"{}Not a valid RSA key!"{}} << std::endl;}
+\DoxyCodeLine{108             \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{109         \}}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111         std::cout << generateKeyFile (args[0], args[1], args[2], args[3], \mbox{\hyperlink{class_r_s_a_key}{RSAKey}} (args[4])) << std::endl;}
+\DoxyCodeLine{112         \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{113     \}}
+\DoxyCodeLine{114 \};}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{116  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{117 }
+
+\end{DoxyCode}

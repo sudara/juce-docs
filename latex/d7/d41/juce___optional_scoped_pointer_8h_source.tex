@@ -1,0 +1,131 @@
+\hypertarget{juce___optional_scoped_pointer_8h_source}{}\doxysection{juce\+\_\+\+Optional\+Scoped\+Pointer.\+h}
+\label{juce___optional_scoped_pointer_8h_source}\index{build/juce\_core/memory/juce\_OptionalScopedPointer.h@{build/juce\_core/memory/juce\_OptionalScopedPointer.h}}
+\mbox{\hyperlink{juce___optional_scoped_pointer_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{37 \textcolor{comment}{}\textcolor{keyword}{template} <\textcolor{keyword}{class} ObjectType>}
+\DoxyCodeLine{38 \textcolor{keyword}{class }\mbox{\hyperlink{class_optional_scoped_pointer}{OptionalScopedPointer}}}
+\DoxyCodeLine{39 \{}
+\DoxyCodeLine{40 \textcolor{keyword}{public}:}
+\DoxyCodeLine{41     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{43 \textcolor{comment}{}    \mbox{\hyperlink{class_optional_scoped_pointer_ae4635f69a7c853d886389d6fa8e1ca01}{OptionalScopedPointer}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{52     \mbox{\hyperlink{class_optional_scoped_pointer_a3ea2cd6ce97953c223ac0ab3789f9127}{OptionalScopedPointer}} (ObjectType* objectToHold, \textcolor{keywordtype}{bool} takeOwnership)}
+\DoxyCodeLine{53         : object (objectToHold),}
+\DoxyCodeLine{54           shouldDelete (takeOwnership)}
+\DoxyCodeLine{55     \{}
+\DoxyCodeLine{56     \}}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{66     \mbox{\hyperlink{class_optional_scoped_pointer_af82e12f9ea1694f471236e87a38dc861}{OptionalScopedPointer}} (\mbox{\hyperlink{class_optional_scoped_pointer}{OptionalScopedPointer}}\&\& other) noexcept}
+\DoxyCodeLine{67         : object (\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (other.object)),}
+\DoxyCodeLine{68           shouldDelete (\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (other.shouldDelete))}
+\DoxyCodeLine{69     \{}
+\DoxyCodeLine{70     \}}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{73     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_optional_scoped_pointer_a3d33119abb6edd8c5fd8408503e409c7}{OptionalScopedPointer}} (std::unique\_ptr<ObjectType>\&\& \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}}) noexcept}
+\DoxyCodeLine{74         : \mbox{\hyperlink{class_optional_scoped_pointer_ae4635f69a7c853d886389d6fa8e1ca01}{OptionalScopedPointer}} (\mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}}.release(), \textcolor{keyword}{true})}
+\DoxyCodeLine{75     \{}
+\DoxyCodeLine{76     \}}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{79     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_optional_scoped_pointer_a21b45b2eef3126af7c1470d88ca31446}{OptionalScopedPointer}} (ObjectType\& \mbox{\hyperlink{namespacegl_a237a6f23fb34c46ca9b58edb5b1d6013}{ref}}) noexcept}
+\DoxyCodeLine{80         : \mbox{\hyperlink{class_optional_scoped_pointer_ae4635f69a7c853d886389d6fa8e1ca01}{OptionalScopedPointer}} (std::addressof (\mbox{\hyperlink{namespacegl_a237a6f23fb34c46ca9b58edb5b1d6013}{ref}}), \textcolor{keyword}{false})}
+\DoxyCodeLine{81     \{}
+\DoxyCodeLine{82     \}}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{92     \mbox{\hyperlink{class_optional_scoped_pointer}{OptionalScopedPointer}}\& \mbox{\hyperlink{class_optional_scoped_pointer_a6c9c111b6109b9b283150e34718c3aa0}{operator= }}(\mbox{\hyperlink{class_optional_scoped_pointer}{OptionalScopedPointer}}\&\& other) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{93     \{}
+\DoxyCodeLine{94         \mbox{\hyperlink{class_optional_scoped_pointer_a378381bc4cb56b452de6eb198a796fbb}{swapWith}} (other);}
+\DoxyCodeLine{95         other.reset();}
+\DoxyCodeLine{96         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{97     \}}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{103     \mbox{\hyperlink{class_optional_scoped_pointer_aa95ebb1fed28561b05adea5ce2f45107}{\string~OptionalScopedPointer}}() noexcept}
+\DoxyCodeLine{104     \{}
+\DoxyCodeLine{105         \mbox{\hyperlink{class_optional_scoped_pointer_aa99ce2c4f67af2441f42bcb1c0bffa56}{reset}}();}
+\DoxyCodeLine{106     \}}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{108     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{110 \textcolor{comment}{}    \textcolor{keyword}{operator} ObjectType*() \textcolor{keyword}{const} \textcolor{keyword}{noexcept}                    \{ \textcolor{keywordflow}{return} \textcolor{keywordtype}{object}.get(); \}}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{113     ObjectType* \mbox{\hyperlink{class_optional_scoped_pointer_ab27b38881247b73b14d33c7a9b691dae}{get}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                         \{ \textcolor{keywordflow}{return} \textcolor{keywordtype}{object}.get(); \}}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{116     ObjectType\& \mbox{\hyperlink{class_optional_scoped_pointer_aff009592a84814dd20f7613d83469a5d}{operator*}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                   \{ \textcolor{keywordflow}{return} *object; \}}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{119     ObjectType* \mbox{\hyperlink{class_optional_scoped_pointer_aa27d8089a961263b3ca1fadc613ddee8}{operator-\/>}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                  \{ \textcolor{keywordflow}{return} \textcolor{keywordtype}{object}.get(); \}}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{121     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{125 \textcolor{comment}{}    ObjectType* \mbox{\hyperlink{class_optional_scoped_pointer_a482064c6556626870496e477bdd74b8f}{release}}() noexcept                                  \{ \textcolor{keywordflow}{return} \textcolor{keywordtype}{object}.release(); \}}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{130     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_optional_scoped_pointer_aa99ce2c4f67af2441f42bcb1c0bffa56}{reset}}() noexcept}
+\DoxyCodeLine{131     \{}
+\DoxyCodeLine{132         \textcolor{keywordflow}{if} (! shouldDelete)}
+\DoxyCodeLine{133             \textcolor{keywordtype}{object}.release();}
+\DoxyCodeLine{134         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{135             \textcolor{keywordtype}{object}.reset();}
+\DoxyCodeLine{136     \}}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{139     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_optional_scoped_pointer_ae30fe3a7e3ff51f427056ab155dbafd0}{clear}}()                                                    \{ \mbox{\hyperlink{class_optional_scoped_pointer_aa99ce2c4f67af2441f42bcb1c0bffa56}{reset}}(); \}}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{148     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_optional_scoped_pointer_ae526986fb0292d7b3623687e52b96fb7}{set}} (ObjectType* newObject, \textcolor{keywordtype}{bool} takeOwnership)}
+\DoxyCodeLine{149     \{}
+\DoxyCodeLine{150         \textcolor{keywordflow}{if} (\textcolor{keywordtype}{object}.\mbox{\hyperlink{class_optional_scoped_pointer_ab27b38881247b73b14d33c7a9b691dae}{get}}() != newObject)}
+\DoxyCodeLine{151         \{}
+\DoxyCodeLine{152             \mbox{\hyperlink{class_optional_scoped_pointer_aa99ce2c4f67af2441f42bcb1c0bffa56}{reset}}();}
+\DoxyCodeLine{153             \textcolor{keywordtype}{object}.reset (newObject);}
+\DoxyCodeLine{154         \}}
+\DoxyCodeLine{155 }
+\DoxyCodeLine{156         shouldDelete = takeOwnership;}
+\DoxyCodeLine{157     \}}
+\DoxyCodeLine{158 }
+\DoxyCodeLine{160     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_optional_scoped_pointer_a44d17e536c3584231f3ded73499cf09b}{setOwned}} (ObjectType* newObject)}
+\DoxyCodeLine{161     \{}
+\DoxyCodeLine{162         \mbox{\hyperlink{class_optional_scoped_pointer_ae526986fb0292d7b3623687e52b96fb7}{set}} (newObject, \textcolor{keyword}{true});}
+\DoxyCodeLine{163     \}}
+\DoxyCodeLine{164 }
+\DoxyCodeLine{166     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_optional_scoped_pointer_ad002438efbea088d4114470c78cf77da}{setNonOwned}} (ObjectType* newObject)}
+\DoxyCodeLine{167     \{}
+\DoxyCodeLine{168         \mbox{\hyperlink{class_optional_scoped_pointer_ae526986fb0292d7b3623687e52b96fb7}{set}} (newObject, \textcolor{keyword}{false});}
+\DoxyCodeLine{169     \}}
+\DoxyCodeLine{170 }
+\DoxyCodeLine{174     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_optional_scoped_pointer_a0eb696aae75b039bc1309dc7125bda7a}{willDeleteObject}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                          \{ \textcolor{keywordflow}{return} shouldDelete; \}}
+\DoxyCodeLine{175 }
+\DoxyCodeLine{176     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{180 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_optional_scoped_pointer_a378381bc4cb56b452de6eb198a796fbb}{swapWith}} (\mbox{\hyperlink{class_optional_scoped_pointer}{OptionalScopedPointer<ObjectType>}}\& other) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{181     \{}
+\DoxyCodeLine{182         std::swap (other.object, \textcolor{keywordtype}{object});}
+\DoxyCodeLine{183         std::swap (other.shouldDelete, shouldDelete);}
+\DoxyCodeLine{184     \}}
+\DoxyCodeLine{185 }
+\DoxyCodeLine{186 \textcolor{keyword}{private}:}
+\DoxyCodeLine{187     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{188     std::unique\_ptr<ObjectType> object;}
+\DoxyCodeLine{189     \textcolor{keywordtype}{bool} shouldDelete = \textcolor{keyword}{false};}
+\DoxyCodeLine{190 \};}
+\DoxyCodeLine{191 }
+\DoxyCodeLine{192  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{193 }
+
+\end{DoxyCode}

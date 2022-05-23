@@ -1,0 +1,136 @@
+\hypertarget{juce___parameter_attachments_8h_source}{}\doxysection{juce\+\_\+\+Parameter\+Attachments.\+h}
+\label{juce___parameter_attachments_8h_source}\index{build/juce\_audio\_processors/utilities/juce\_ParameterAttachments.h@{build/juce\_audio\_processors/utilities/juce\_ParameterAttachments.h}}
+\mbox{\hyperlink{juce___parameter_attachments_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{47 \textcolor{keyword}{class }\mbox{\hyperlink{class_parameter_attachment}{ParameterAttachment}}   : \textcolor{keyword}{private} \mbox{\hyperlink{class_audio_processor_parameter_1_1_listener}{AudioProcessorParameter::Listener}},}
+\DoxyCodeLine{48                               \textcolor{keyword}{private} \mbox{\hyperlink{class_async_updater}{AsyncUpdater}}}
+\DoxyCodeLine{49 \{}
+\DoxyCodeLine{50 \textcolor{keyword}{public}:}
+\DoxyCodeLine{61     \mbox{\hyperlink{class_parameter_attachment_a35086dd5037783e2896f26e312e297da}{ParameterAttachment}} (\mbox{\hyperlink{class_ranged_audio_parameter}{RangedAudioParameter}}\& parameter,}
+\DoxyCodeLine{62                          \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\textcolor{keywordtype}{void} (\textcolor{keywordtype}{float})> parameterChangedCallback,}
+\DoxyCodeLine{63                          \mbox{\hyperlink{class_undo_manager}{UndoManager}}* undoManager = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{66     \mbox{\hyperlink{class_parameter_attachment_ace88dac332ec410af02d0b93b1a1fe91}{\string~ParameterAttachment}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{75     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_parameter_attachment_af8b9b9c1cc93b2c66fe9ee33b7389fa0}{sendInitialUpdate}}();}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{82     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_parameter_attachment_a425ac2bdd3a12358969a70d8742f9602}{setValueAsCompleteGesture}} (\textcolor{keywordtype}{float} newDenormalisedValue);}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{89     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_parameter_attachment_aa1205d973f112771fa22e605ac007867}{beginGesture}}();}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{96     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_parameter_attachment_a7ce37df5c0e1dea020b256a4fdb0cbc4}{setValueAsPartOfGesture}} (\textcolor{keywordtype}{float} newDenormalisedValue);}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{103     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_parameter_attachment_a4d579b9961e9c84ec65fa38cd8d6976a}{endGesture}}();}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105 \textcolor{keyword}{private}:}
+\DoxyCodeLine{106     \textcolor{keywordtype}{float} normalise (\textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}})\textcolor{keyword}{ const   }\{ \textcolor{keywordflow}{return} parameter.\mbox{\hyperlink{class_ranged_audio_parameter_a357fa2ccafea6998591ff448769c7d84}{convertTo0to1}} (\mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}}); \}}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{108     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Callback>}
+\DoxyCodeLine{109     \textcolor{keywordtype}{void} callIfParameterValueChanged (\textcolor{keywordtype}{float} newDenormalisedValue, Callback\&\& \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}});}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111     \textcolor{keywordtype}{void} parameterValueChanged (\textcolor{keywordtype}{int}, \textcolor{keywordtype}{float}) \textcolor{keyword}{override};}
+\DoxyCodeLine{112     \textcolor{keywordtype}{void} parameterGestureChanged (\textcolor{keywordtype}{int}, \textcolor{keywordtype}{bool})\textcolor{keyword}{ override }\{\}}
+\DoxyCodeLine{113     \textcolor{keywordtype}{void} handleAsyncUpdate() \textcolor{keyword}{override};}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115     \mbox{\hyperlink{class_ranged_audio_parameter}{RangedAudioParameter}}\& parameter;}
+\DoxyCodeLine{116     std::atomic<float> lastValue \{ 0.0f \};}
+\DoxyCodeLine{117     \mbox{\hyperlink{class_undo_manager}{UndoManager}}* undoManager = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{118     \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} (\textcolor{keywordtype}{float})> setValue;}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_parameter_attachment}{ParameterAttachment}})}
+\DoxyCodeLine{121 \};}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{123 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{134 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{class_slider_parameter_attachment}{SliderParameterAttachment}}   : \textcolor{keyword}{private} \mbox{\hyperlink{class_slider_1_1_listener}{Slider::Listener}}}
+\DoxyCodeLine{135 \{}
+\DoxyCodeLine{136 \textcolor{keyword}{public}:}
+\DoxyCodeLine{143     \mbox{\hyperlink{class_slider_parameter_attachment_aadb0bd6db3042304a704008663ce65b5}{SliderParameterAttachment}} (\mbox{\hyperlink{class_ranged_audio_parameter}{RangedAudioParameter}}\& parameter, \mbox{\hyperlink{class_slider}{Slider}}\& slider,}
+\DoxyCodeLine{144                                \mbox{\hyperlink{class_undo_manager}{UndoManager}}* undoManager = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{147     \mbox{\hyperlink{class_slider_parameter_attachment_a0594032d34bcef92fed5fb17546f97ca}{\string~SliderParameterAttachment}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{148 }
+\DoxyCodeLine{152     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_parameter_attachment_aeeda293775b3bc80e5cbe1783652c6d5}{sendInitialUpdate}}();}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154 \textcolor{keyword}{private}:}
+\DoxyCodeLine{155     \textcolor{keywordtype}{void} setValue (\textcolor{keywordtype}{float} newValue);}
+\DoxyCodeLine{156     \textcolor{keywordtype}{void} sliderValueChanged (\mbox{\hyperlink{class_slider}{Slider}}*) \textcolor{keyword}{override};}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{158     \textcolor{keywordtype}{void} sliderDragStarted (\mbox{\hyperlink{class_slider}{Slider}}*)\textcolor{keyword}{ override }\{ attachment.\mbox{\hyperlink{class_parameter_attachment_aa1205d973f112771fa22e605ac007867}{beginGesture}}(); \}}
+\DoxyCodeLine{159     \textcolor{keywordtype}{void} sliderDragEnded   (\mbox{\hyperlink{class_slider}{Slider}}*)\textcolor{keyword}{ override }\{ attachment.\mbox{\hyperlink{class_parameter_attachment_a4d579b9961e9c84ec65fa38cd8d6976a}{endGesture}}(); \}}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161     \mbox{\hyperlink{class_slider}{Slider}}\& \mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca10bf08f0bbd6689475be65b4ae441bd9}{slider}};}
+\DoxyCodeLine{162     \mbox{\hyperlink{class_parameter_attachment}{ParameterAttachment}} attachment;}
+\DoxyCodeLine{163     \textcolor{keywordtype}{bool} ignoreCallbacks = \textcolor{keyword}{false};}
+\DoxyCodeLine{164 \};}
+\DoxyCodeLine{165 }
+\DoxyCodeLine{166 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{182 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{class_combo_box_parameter_attachment}{ComboBoxParameterAttachment}}   : \textcolor{keyword}{private} \mbox{\hyperlink{class_combo_box_1_1_listener}{ComboBox::Listener}}}
+\DoxyCodeLine{183 \{}
+\DoxyCodeLine{184 \textcolor{keyword}{public}:}
+\DoxyCodeLine{191     \mbox{\hyperlink{class_combo_box_parameter_attachment_a290790d49dd23e12b659593cb434953a}{ComboBoxParameterAttachment}} (\mbox{\hyperlink{class_ranged_audio_parameter}{RangedAudioParameter}}\& parameter, \mbox{\hyperlink{class_combo_box}{ComboBox}}\& combo,}
+\DoxyCodeLine{192                                  \mbox{\hyperlink{class_undo_manager}{UndoManager}}* undoManager = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{193 }
+\DoxyCodeLine{195     \mbox{\hyperlink{class_combo_box_parameter_attachment_ab84423dbf225cb6dfd63c35b5d525ff9}{\string~ComboBoxParameterAttachment}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{196 }
+\DoxyCodeLine{200     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_combo_box_parameter_attachment_ab9ee47f76ede662e4cf9bf108f4c869e}{sendInitialUpdate}}();}
+\DoxyCodeLine{201 }
+\DoxyCodeLine{202 \textcolor{keyword}{private}:}
+\DoxyCodeLine{203     \textcolor{keywordtype}{void} setValue (\textcolor{keywordtype}{float} newValue);}
+\DoxyCodeLine{204     \textcolor{keywordtype}{void} comboBoxChanged (\mbox{\hyperlink{class_combo_box}{ComboBox}}*) \textcolor{keyword}{override};}
+\DoxyCodeLine{205 }
+\DoxyCodeLine{206     \mbox{\hyperlink{class_combo_box}{ComboBox}}\& comboBox;}
+\DoxyCodeLine{207     \mbox{\hyperlink{class_ranged_audio_parameter}{RangedAudioParameter}}\& storedParameter;}
+\DoxyCodeLine{208     \mbox{\hyperlink{class_parameter_attachment}{ParameterAttachment}} attachment;}
+\DoxyCodeLine{209     \textcolor{keywordtype}{bool} ignoreCallbacks = \textcolor{keyword}{false};}
+\DoxyCodeLine{210 \};}
+\DoxyCodeLine{211 }
+\DoxyCodeLine{212 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{223 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{class_button_parameter_attachment}{ButtonParameterAttachment}}   : \textcolor{keyword}{private} \mbox{\hyperlink{class_button_1_1_listener}{Button::Listener}}}
+\DoxyCodeLine{224 \{}
+\DoxyCodeLine{225 \textcolor{keyword}{public}:}
+\DoxyCodeLine{232     \mbox{\hyperlink{class_button_parameter_attachment_a7fd6694f579bfea1aa4479d727672580}{ButtonParameterAttachment}} (\mbox{\hyperlink{class_ranged_audio_parameter}{RangedAudioParameter}}\& parameter, \mbox{\hyperlink{class_button}{Button}}\& button,}
+\DoxyCodeLine{233                                \mbox{\hyperlink{class_undo_manager}{UndoManager}}* undoManager = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{234 }
+\DoxyCodeLine{236     \mbox{\hyperlink{class_button_parameter_attachment_a31459feb47c130e852669bba26ae1036}{\string~ButtonParameterAttachment}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{237 }
+\DoxyCodeLine{241     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_button_parameter_attachment_a7f287a0d4f2e9ae6c34b1f676f358b74}{sendInitialUpdate}}();}
+\DoxyCodeLine{242 }
+\DoxyCodeLine{243 \textcolor{keyword}{private}:}
+\DoxyCodeLine{244     \textcolor{keywordtype}{void} setValue (\textcolor{keywordtype}{float} newValue);}
+\DoxyCodeLine{245     \textcolor{keywordtype}{void} buttonClicked (\mbox{\hyperlink{class_button}{Button}}*) \textcolor{keyword}{override};}
+\DoxyCodeLine{246 }
+\DoxyCodeLine{247     \mbox{\hyperlink{class_button}{Button}}\& \mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682cace50a09343724eb82df11390e2c1de18}{button}};}
+\DoxyCodeLine{248     \mbox{\hyperlink{class_parameter_attachment}{ParameterAttachment}} attachment;}
+\DoxyCodeLine{249     \textcolor{keywordtype}{bool} ignoreCallbacks = \textcolor{keyword}{false};}
+\DoxyCodeLine{250 \};}
+\DoxyCodeLine{251 }
+\DoxyCodeLine{252  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{253 }
+
+\end{DoxyCode}

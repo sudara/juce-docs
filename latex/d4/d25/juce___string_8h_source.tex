@@ -1,0 +1,639 @@
+\hypertarget{juce___string_8h_source}{}\doxysection{juce\+\_\+\+String.\+h}
+\label{juce___string_8h_source}\index{build/juce\_core/text/juce\_String.h@{build/juce\_core/text/juce\_String.h}}
+\mbox{\hyperlink{juce___string_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#if ! defined (DOXYGEN) \&\& (JUCE\_MAC || JUCE\_IOS)}}
+\DoxyCodeLine{28  \textcolor{comment}{// Annoyingly we can only forward-\/declare a typedef by forward-\/declaring the}}
+\DoxyCodeLine{29  \textcolor{comment}{// aliased type}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{ \#if \_\_has\_attribute(objc\_bridge)}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{  \#define JUCE\_CF\_BRIDGED\_TYPE(T) \_\_attribute\_\_((objc\_bridge(T)))}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{ \#else}}
+\DoxyCodeLine{33 \textcolor{preprocessor}{  \#define JUCE\_CF\_BRIDGED\_TYPE(T)}}
+\DoxyCodeLine{34 \textcolor{preprocessor}{ \#endif}}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36  \textcolor{keyword}{typedef} \textcolor{keyword}{const} \textcolor{keyword}{struct }JUCE\_CF\_BRIDGED\_TYPE(NSString) \_\_CFString * CFStringRef;}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38 \textcolor{preprocessor}{ \#undef JUCE\_CF\_BRIDGED\_TYPE}}
+\DoxyCodeLine{39 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{53 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_string}{String}}  final}
+\DoxyCodeLine{54 \{}
+\DoxyCodeLine{55 \textcolor{keyword}{public}:}
+\DoxyCodeLine{56     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{60 \textcolor{comment}{}    \mbox{\hyperlink{class_string}{String}}() \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{63     \mbox{\hyperlink{class_string}{String}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\&) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{66     \mbox{\hyperlink{class_string}{String}} (\mbox{\hyperlink{class_string}{String}}\&\&) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{81     \mbox{\hyperlink{class_string}{String}} (\textcolor{keyword}{const} \textcolor{keywordtype}{char}* text);}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{99     \mbox{\hyperlink{class_string}{String}} (\textcolor{keyword}{const} \textcolor{keywordtype}{char}* text, \textcolor{keywordtype}{size\_t} maxChars);}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{104     \mbox{\hyperlink{class_string}{String}} (\textcolor{keyword}{const} \textcolor{keywordtype}{wchar\_t}* text);}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{109     \mbox{\hyperlink{class_string}{String}} (\textcolor{keyword}{const} \textcolor{keywordtype}{wchar\_t}* text, \textcolor{keywordtype}{size\_t} maxChars);}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{113 \textcolor{comment}{}    \mbox{\hyperlink{class_string}{String}} (\mbox{\hyperlink{class_char_pointer___u_t_f8}{CharPointer\_UTF8}} text);}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{116     \mbox{\hyperlink{class_string}{String}} (\mbox{\hyperlink{class_char_pointer___u_t_f8}{CharPointer\_UTF8}} text, \textcolor{keywordtype}{size\_t} maxChars);}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{119     \mbox{\hyperlink{class_string}{String}} (\mbox{\hyperlink{class_char_pointer___u_t_f8}{CharPointer\_UTF8}} \mbox{\hyperlink{namespacegl_adad3a3824fbe72fb0b01074bb01ebe75}{start}}, \mbox{\hyperlink{class_char_pointer___u_t_f8}{CharPointer\_UTF8}} \mbox{\hyperlink{group__juce__core-files_ga4a3194f4f741f9bd653f28733358f62c}{end}});}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{121     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{123 \textcolor{comment}{}    \mbox{\hyperlink{class_string}{String}} (\mbox{\hyperlink{class_char_pointer___u_t_f16}{CharPointer\_UTF16}} text);}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{126     \mbox{\hyperlink{class_string}{String}} (\mbox{\hyperlink{class_char_pointer___u_t_f16}{CharPointer\_UTF16}} text, \textcolor{keywordtype}{size\_t} maxChars);}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{129     \mbox{\hyperlink{class_string}{String}} (\mbox{\hyperlink{class_char_pointer___u_t_f16}{CharPointer\_UTF16}} \mbox{\hyperlink{namespacegl_adad3a3824fbe72fb0b01074bb01ebe75}{start}}, \mbox{\hyperlink{class_char_pointer___u_t_f16}{CharPointer\_UTF16}} \mbox{\hyperlink{group__juce__core-files_ga4a3194f4f741f9bd653f28733358f62c}{end}});}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{131     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{133 \textcolor{comment}{}    \mbox{\hyperlink{class_string}{String}} (\mbox{\hyperlink{class_char_pointer___u_t_f32}{CharPointer\_UTF32}} text);}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{136     \mbox{\hyperlink{class_string}{String}} (\mbox{\hyperlink{class_char_pointer___u_t_f32}{CharPointer\_UTF32}} text, \textcolor{keywordtype}{size\_t} maxChars);}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{139     \mbox{\hyperlink{class_string}{String}} (\mbox{\hyperlink{class_char_pointer___u_t_f32}{CharPointer\_UTF32}} \mbox{\hyperlink{namespacegl_adad3a3824fbe72fb0b01074bb01ebe75}{start}}, \mbox{\hyperlink{class_char_pointer___u_t_f32}{CharPointer\_UTF32}} \mbox{\hyperlink{group__juce__core-files_ga4a3194f4f741f9bd653f28733358f62c}{end}});}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{141     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{143 \textcolor{comment}{}    \mbox{\hyperlink{class_string}{String}} (\mbox{\hyperlink{class_char_pointer___a_s_c_i_i}{CharPointer\_ASCII}} text);}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{146     \mbox{\hyperlink{class_string}{String}} (\textcolor{keyword}{const} \mbox{\hyperlink{namespacegl_ad7acdf57d94829f964ff1dc581fc4705}{std::string}}\&);}
+\DoxyCodeLine{147 }
+\DoxyCodeLine{149     \mbox{\hyperlink{class_string}{String}} (\mbox{\hyperlink{class_string_ref}{StringRef}});}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{151     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{153 \textcolor{comment}{}    \textcolor{keyword}{static} \mbox{\hyperlink{class_string}{String}} charToString (\mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} character);}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{156     \mbox{\hyperlink{class_string}{\string~String}}() \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{170 \textcolor{preprocessor}{   \#if (JUCE\_STRING\_UTF\_TYPE == 32)}}
+\DoxyCodeLine{171     \textcolor{keyword}{using} CharPointerType = \mbox{\hyperlink{class_char_pointer___u_t_f32}{CharPointer\_UTF32}};}
+\DoxyCodeLine{172 \textcolor{preprocessor}{   \#elif (JUCE\_STRING\_UTF\_TYPE == 16)}}
+\DoxyCodeLine{173     \textcolor{keyword}{using} CharPointerType = \mbox{\hyperlink{class_char_pointer___u_t_f16}{CharPointer\_UTF16}};}
+\DoxyCodeLine{174 \textcolor{preprocessor}{   \#elif (DOXYGEN || JUCE\_STRING\_UTF\_TYPE == 8)}}
+\DoxyCodeLine{175     \textcolor{keyword}{using} CharPointerType = \mbox{\hyperlink{class_char_pointer___u_t_f8}{CharPointer\_UTF8}};}
+\DoxyCodeLine{176 \textcolor{preprocessor}{   \#else}}
+\DoxyCodeLine{177 \textcolor{preprocessor}{    \#error "{}You must set the value of JUCE\_STRING\_UTF\_TYPE to be either 8, 16, or 32!"{}}}
+\DoxyCodeLine{178 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{179 }
+\DoxyCodeLine{180     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{182 \textcolor{comment}{}    \textcolor{keywordtype}{int} hashCode() \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{183 }
+\DoxyCodeLine{185     \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} hashCode64() \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{186 }
+\DoxyCodeLine{188     \textcolor{keywordtype}{size\_t} hash() \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{189 }
+\DoxyCodeLine{191     \textcolor{keywordtype}{int} \mbox{\hyperlink{png_8c_a209c8e470817686b5ca6730db67f8d67}{length}}() \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{192 }
+\DoxyCodeLine{193     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{194     \textcolor{comment}{// Assignment and concatenation operators..}}
+\DoxyCodeLine{195 }
+\DoxyCodeLine{197     \mbox{\hyperlink{class_string}{String}}\& operator= (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& other) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{198 }
+\DoxyCodeLine{200     \mbox{\hyperlink{class_string}{String}}\& operator= (\mbox{\hyperlink{class_string}{String}}\&\& other) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{201 }
+\DoxyCodeLine{203     \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{group__juce__core-text_ga185659df4f125d6be8ff07328768e2c3}{operator+= }}(\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& stringToAppend);}
+\DoxyCodeLine{205     \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{group__juce__core-text_ga185659df4f125d6be8ff07328768e2c3}{operator+= }}(\textcolor{keyword}{const} \textcolor{keywordtype}{char}* textToAppend);}
+\DoxyCodeLine{207     \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{group__juce__core-text_ga185659df4f125d6be8ff07328768e2c3}{operator+= }}(\textcolor{keyword}{const} \textcolor{keywordtype}{wchar\_t}* textToAppend);}
+\DoxyCodeLine{209     \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{group__juce__core-text_ga185659df4f125d6be8ff07328768e2c3}{operator+= }}(\mbox{\hyperlink{class_string_ref}{StringRef}} textToAppend);}
+\DoxyCodeLine{211     \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{group__juce__core-text_ga185659df4f125d6be8ff07328768e2c3}{operator+= }}(\textcolor{keywordtype}{int} numberToAppend);}
+\DoxyCodeLine{213     \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{group__juce__core-text_ga185659df4f125d6be8ff07328768e2c3}{operator+= }}(\textcolor{keywordtype}{long} numberToAppend);}
+\DoxyCodeLine{215     \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{group__juce__core-text_ga185659df4f125d6be8ff07328768e2c3}{operator+= }}(\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} numberToAppend);}
+\DoxyCodeLine{217     \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{group__juce__core-text_ga185659df4f125d6be8ff07328768e2c3}{operator+= }}(\mbox{\hyperlink{group__juce__core-maths_gaba41bf2b6f6da5945ee08fb99931aede}{uint64}} numberToAppend);}
+\DoxyCodeLine{219     \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{group__juce__core-text_ga185659df4f125d6be8ff07328768e2c3}{operator+= }}(\textcolor{keywordtype}{char} characterToAppend);}
+\DoxyCodeLine{221     \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{group__juce__core-text_ga185659df4f125d6be8ff07328768e2c3}{operator+= }}(\textcolor{keywordtype}{wchar\_t} characterToAppend);}
+\DoxyCodeLine{222 \textcolor{preprocessor}{   \#if ! JUCE\_NATIVE\_WCHAR\_IS\_UTF32}}
+\DoxyCodeLine{224     \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{group__juce__core-text_ga185659df4f125d6be8ff07328768e2c3}{operator+= }}(\mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} characterToAppend);}
+\DoxyCodeLine{225 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{226 }
+\DoxyCodeLine{232     \textcolor{keywordtype}{void} append (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& textToAppend, \textcolor{keywordtype}{size\_t} maxCharsToTake);}
+\DoxyCodeLine{233 }
+\DoxyCodeLine{239     \textcolor{keywordtype}{void} appendCharPointer (CharPointerType startOfTextToAppend,}
+\DoxyCodeLine{240                             CharPointerType endOfTextToAppend);}
+\DoxyCodeLine{241 }
+\DoxyCodeLine{247     \textcolor{keyword}{template} <\textcolor{keyword}{class} CharPo\textcolor{keywordtype}{int}er>}
+\DoxyCodeLine{248     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_string_a5221f442a255fc6211a2c365dfbd97f7}{appendCharPointer}} (CharPointer startOfTextToAppend,}
+\DoxyCodeLine{249                             CharPointer endOfTextToAppend)}
+\DoxyCodeLine{250     \{}
+\DoxyCodeLine{251         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (startOfTextToAppend.getAddress() != \textcolor{keyword}{nullptr} \&\& endOfTextToAppend.getAddress() != \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{252 }
+\DoxyCodeLine{253         \textcolor{keywordtype}{size\_t} extraBytesNeeded = 0, numChars = 1;}
+\DoxyCodeLine{254 }
+\DoxyCodeLine{255         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_ad0bd70fc9115453f6f5f5ac53accea65}{t}} = startOfTextToAppend; \mbox{\hyperlink{namespacegl_ad0bd70fc9115453f6f5f5ac53accea65}{t}} != endOfTextToAppend \&\& ! \mbox{\hyperlink{namespacegl_ad0bd70fc9115453f6f5f5ac53accea65}{t}}.isEmpty(); ++numChars)}
+\DoxyCodeLine{256             extraBytesNeeded += CharPointerType::getBytesRequiredFor (\mbox{\hyperlink{namespacegl_ad0bd70fc9115453f6f5f5ac53accea65}{t}}.getAndAdvance());}
+\DoxyCodeLine{257 }
+\DoxyCodeLine{258         \textcolor{keywordflow}{if} (extraBytesNeeded > 0)}
+\DoxyCodeLine{259         \{}
+\DoxyCodeLine{260             \textcolor{keyword}{auto} byteOffsetOfNull = getByteOffsetOfEnd();}
+\DoxyCodeLine{261 }
+\DoxyCodeLine{262             preallocateBytes (byteOffsetOfNull + extraBytesNeeded);}
+\DoxyCodeLine{263             CharPointerType (\mbox{\hyperlink{group__juce__core-memory_ga8482f5e38a2a6adc3cd3f31869e4fe34}{addBytesToPointer}} (text.getAddress(), (\textcolor{keywordtype}{int}) byteOffsetOfNull))}
+\DoxyCodeLine{264                 .writeWithCharLimit (startOfTextToAppend, (\textcolor{keywordtype}{int}) numChars);}
+\DoxyCodeLine{265         \}}
+\DoxyCodeLine{266     \}}
+\DoxyCodeLine{267 }
+\DoxyCodeLine{269     \textcolor{keywordtype}{void} appendCharPointer (CharPointerType textToAppend);}
+\DoxyCodeLine{270 }
+\DoxyCodeLine{276     \textcolor{keyword}{template} <\textcolor{keyword}{class} CharPo\textcolor{keywordtype}{int}er>}
+\DoxyCodeLine{277     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_string_af79fc9e68ad06df898eec56da3a4ba34}{appendCharPointer}} (CharPointer textToAppend, \textcolor{keywordtype}{size\_t} maxCharsToTake)}
+\DoxyCodeLine{278     \{}
+\DoxyCodeLine{279         \textcolor{keywordflow}{if} (textToAppend.getAddress() != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{280         \{}
+\DoxyCodeLine{281             \textcolor{keywordtype}{size\_t} extraBytesNeeded = 0, numChars = 1;}
+\DoxyCodeLine{282 }
+\DoxyCodeLine{283             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_ad0bd70fc9115453f6f5f5ac53accea65}{t}} = textToAppend; numChars <= maxCharsToTake \&\& ! \mbox{\hyperlink{namespacegl_ad0bd70fc9115453f6f5f5ac53accea65}{t}}.isEmpty(); ++numChars)}
+\DoxyCodeLine{284                 extraBytesNeeded += CharPointerType::getBytesRequiredFor (\mbox{\hyperlink{namespacegl_ad0bd70fc9115453f6f5f5ac53accea65}{t}}.getAndAdvance());}
+\DoxyCodeLine{285 }
+\DoxyCodeLine{286             \textcolor{keywordflow}{if} (extraBytesNeeded > 0)}
+\DoxyCodeLine{287             \{}
+\DoxyCodeLine{288                 \textcolor{keyword}{auto} byteOffsetOfNull = getByteOffsetOfEnd();}
+\DoxyCodeLine{289 }
+\DoxyCodeLine{290                 preallocateBytes (byteOffsetOfNull + extraBytesNeeded);}
+\DoxyCodeLine{291                 CharPointerType (\mbox{\hyperlink{group__juce__core-memory_ga8482f5e38a2a6adc3cd3f31869e4fe34}{addBytesToPointer}} (text.getAddress(), (\textcolor{keywordtype}{int}) byteOffsetOfNull))}
+\DoxyCodeLine{292                     .writeWithCharLimit (textToAppend, (\textcolor{keywordtype}{int}) numChars);}
+\DoxyCodeLine{293             \}}
+\DoxyCodeLine{294         \}}
+\DoxyCodeLine{295     \}}
+\DoxyCodeLine{296 }
+\DoxyCodeLine{298     \textcolor{keyword}{template} <\textcolor{keyword}{class} CharPo\textcolor{keywordtype}{int}er>}
+\DoxyCodeLine{299     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_string_afbd201f97c54e59862492059e46a6aa3}{appendCharPointer}} (CharPointer textToAppend)}
+\DoxyCodeLine{300     \{}
+\DoxyCodeLine{301         appendCharPointer (textToAppend, \mbox{\hyperlink{os_8h_ac39d9cef6a5e030ba8d9e11121054268}{std::numeric\_limits<size\_t>::max}}());}
+\DoxyCodeLine{302     \}}
+\DoxyCodeLine{303 }
+\DoxyCodeLine{304     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{305     \textcolor{comment}{// Comparison methods..}}
+\DoxyCodeLine{306 }
+\DoxyCodeLine{311     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_string_ab31a36bda8c789ba3c0ed37bb16c978c}{isEmpty}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                           \{ \textcolor{keywordflow}{return} text.isEmpty(); \}}
+\DoxyCodeLine{312 }
+\DoxyCodeLine{317     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_string_a46001a29fcbd7c867f0f3a42598a1495}{isNotEmpty}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                        \{ \textcolor{keywordflow}{return} ! text.isEmpty(); \}}
+\DoxyCodeLine{318 }
+\DoxyCodeLine{320     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacedsp_1_1detail_a953fbe1bf6236c0f3a95d12aad7ffffb}{clear}}() noexcept;}
+\DoxyCodeLine{321 }
+\DoxyCodeLine{323     \textcolor{keywordtype}{bool} equalsIgnoreCase (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}}\& other) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{324 }
+\DoxyCodeLine{326     \textcolor{keywordtype}{bool} equalsIgnoreCase (\mbox{\hyperlink{class_string_ref}{StringRef}} other) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{327 }
+\DoxyCodeLine{329     \textcolor{keywordtype}{bool} equalsIgnoreCase (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \textcolor{keywordtype}{wchar\_t}* other) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{330 }
+\DoxyCodeLine{332     \textcolor{keywordtype}{bool} equalsIgnoreCase (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \textcolor{keywordtype}{char}* other) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{333 }
+\DoxyCodeLine{338     \textcolor{keywordtype}{int} compare (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}}\& other) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{339 }
+\DoxyCodeLine{344     \textcolor{keywordtype}{int} compare (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \textcolor{keywordtype}{char}* other) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{345 }
+\DoxyCodeLine{350     \textcolor{keywordtype}{int} compare (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \textcolor{keywordtype}{wchar\_t}* other) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{351 }
+\DoxyCodeLine{356     \textcolor{keywordtype}{int} compareIgnoreCase (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}}\& other) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{357 }
+\DoxyCodeLine{366     \textcolor{keywordtype}{int} compareNatural (\mbox{\hyperlink{class_string_ref}{StringRef}} other, \textcolor{keywordtype}{bool} isCaseSensitive = \mbox{\hyperlink{ordinals_8h_a65e9886d74aaee76545e83dd09011727}{false}}) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{367 }
+\DoxyCodeLine{372     \textcolor{keywordtype}{bool} startsWith (\mbox{\hyperlink{class_string_ref}{StringRef}} text) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{373 }
+\DoxyCodeLine{378     \textcolor{keywordtype}{bool} startsWithChar (\mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} character) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{379 }
+\DoxyCodeLine{384     \textcolor{keywordtype}{bool} startsWithIgnoreCase (\mbox{\hyperlink{class_string_ref}{StringRef}} text) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{385 }
+\DoxyCodeLine{390     \textcolor{keywordtype}{bool} endsWith (\mbox{\hyperlink{class_string_ref}{StringRef}} text) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{391 }
+\DoxyCodeLine{396     \textcolor{keywordtype}{bool} endsWithChar (\mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} character) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{397 }
+\DoxyCodeLine{402     \textcolor{keywordtype}{bool} endsWithIgnoreCase (\mbox{\hyperlink{class_string_ref}{StringRef}} text) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{403 }
+\DoxyCodeLine{408     \textcolor{keywordtype}{bool} contains (\mbox{\hyperlink{class_string_ref}{StringRef}} text) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{409 }
+\DoxyCodeLine{413     \textcolor{keywordtype}{bool} containsChar (\mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} character) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{414 }
+\DoxyCodeLine{418     \textcolor{keywordtype}{bool} containsIgnoreCase (\mbox{\hyperlink{class_string_ref}{StringRef}} text) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{419 }
+\DoxyCodeLine{426     \textcolor{keywordtype}{bool} containsWholeWord (\mbox{\hyperlink{class_string_ref}{StringRef}} wordToLookFor) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{427 }
+\DoxyCodeLine{434     \textcolor{keywordtype}{bool} containsWholeWordIgnoreCase (\mbox{\hyperlink{class_string_ref}{StringRef}} wordToLookFor) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{435 }
+\DoxyCodeLine{443     \textcolor{keywordtype}{int} indexOfWholeWord (\mbox{\hyperlink{class_string_ref}{StringRef}} wordToLookFor) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{444 }
+\DoxyCodeLine{452     \textcolor{keywordtype}{int} indexOfWholeWordIgnoreCase (\mbox{\hyperlink{class_string_ref}{StringRef}} wordToLookFor) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{453 }
+\DoxyCodeLine{460     \textcolor{keywordtype}{bool} containsAnyOf (\mbox{\hyperlink{class_string_ref}{StringRef}} charactersItMightContain) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{461 }
+\DoxyCodeLine{469     \textcolor{keywordtype}{bool} containsOnly (\mbox{\hyperlink{class_string_ref}{StringRef}} charactersItMightContain) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{470 }
+\DoxyCodeLine{478     \textcolor{keywordtype}{bool} containsNonWhitespaceChars() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{479 }
+\DoxyCodeLine{487     \textcolor{keywordtype}{bool} matchesWildcard (\mbox{\hyperlink{class_string_ref}{StringRef}} wildcard, \textcolor{keywordtype}{bool} ignoreCase) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{488 }
+\DoxyCodeLine{489     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{490     \textcolor{comment}{// Substring location methods..}}
+\DoxyCodeLine{491 }
+\DoxyCodeLine{497     \textcolor{keywordtype}{int} indexOfChar (\mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} characterToLookFor) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{498 }
+\DoxyCodeLine{506     \textcolor{keywordtype}{int} indexOfChar (\textcolor{keywordtype}{int} startIndex, \mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} characterToLookFor) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{507 }
+\DoxyCodeLine{520     \textcolor{keywordtype}{int} indexOfAnyOf (\mbox{\hyperlink{class_string_ref}{StringRef}} charactersToLookFor,}
+\DoxyCodeLine{521                       \textcolor{keywordtype}{int} startIndex = 0,}
+\DoxyCodeLine{522                       \textcolor{keywordtype}{bool} ignoreCase = \mbox{\hyperlink{ordinals_8h_a65e9886d74aaee76545e83dd09011727}{false}}) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{523 }
+\DoxyCodeLine{529     \textcolor{keywordtype}{int} indexOf (\mbox{\hyperlink{class_string_ref}{StringRef}} textToLookFor) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{530 }
+\DoxyCodeLine{538     \textcolor{keywordtype}{int} indexOf (\textcolor{keywordtype}{int} startIndex, \mbox{\hyperlink{class_string_ref}{StringRef}} textToLookFor) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{539 }
+\DoxyCodeLine{545     \textcolor{keywordtype}{int} indexOfIgnoreCase (\mbox{\hyperlink{class_string_ref}{StringRef}} textToLookFor) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{546 }
+\DoxyCodeLine{554     \textcolor{keywordtype}{int} indexOfIgnoreCase (\textcolor{keywordtype}{int} startIndex, \mbox{\hyperlink{class_string_ref}{StringRef}} textToLookFor) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{555 }
+\DoxyCodeLine{560     \textcolor{keywordtype}{int} lastIndexOfChar (\mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} character) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{561 }
+\DoxyCodeLine{567     \textcolor{keywordtype}{int} lastIndexOf (\mbox{\hyperlink{class_string_ref}{StringRef}} textToLookFor) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{568 }
+\DoxyCodeLine{574     \textcolor{keywordtype}{int} lastIndexOfIgnoreCase (\mbox{\hyperlink{class_string_ref}{StringRef}} textToLookFor) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{575 }
+\DoxyCodeLine{588     \textcolor{keywordtype}{int} lastIndexOfAnyOf (\mbox{\hyperlink{class_string_ref}{StringRef}} charactersToLookFor,}
+\DoxyCodeLine{589                           \textcolor{keywordtype}{bool} ignoreCase = \mbox{\hyperlink{ordinals_8h_a65e9886d74aaee76545e83dd09011727}{false}}) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{590 }
+\DoxyCodeLine{591 }
+\DoxyCodeLine{592     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{593     \textcolor{comment}{// Substring extraction and manipulation methods..}}
+\DoxyCodeLine{594 }
+\DoxyCodeLine{606     \mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} operator[] (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{607 }
+\DoxyCodeLine{611     \mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} getLastCharacter() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{612 }
+\DoxyCodeLine{613     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{624 \textcolor{comment}{}    \mbox{\hyperlink{class_string}{String}} substring (\textcolor{keywordtype}{int} startIndex, \textcolor{keywordtype}{int} endIndex) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{625 }
+\DoxyCodeLine{634     \mbox{\hyperlink{class_string}{String}} substring (\textcolor{keywordtype}{int} startIndex) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{635 }
+\DoxyCodeLine{645     \mbox{\hyperlink{class_string}{String}} dropLastCharacters (\textcolor{keywordtype}{int} numberToDrop) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{646 }
+\DoxyCodeLine{654     \mbox{\hyperlink{class_string}{String}} getLastCharacters (\textcolor{keywordtype}{int} numCharacters) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{655 }
+\DoxyCodeLine{656     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{672 \textcolor{comment}{}    \mbox{\hyperlink{class_string}{String}} fromFirstOccurrenceOf (\mbox{\hyperlink{class_string_ref}{StringRef}} substringToStartFrom,}
+\DoxyCodeLine{673                                   \textcolor{keywordtype}{bool} includeSubStringInResult,}
+\DoxyCodeLine{674                                   \textcolor{keywordtype}{bool} ignoreCase) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{675 }
+\DoxyCodeLine{684     \mbox{\hyperlink{class_string}{String}} fromLastOccurrenceOf (\mbox{\hyperlink{class_string_ref}{StringRef}} substringToFind,}
+\DoxyCodeLine{685                                  \textcolor{keywordtype}{bool} includeSubStringInResult,}
+\DoxyCodeLine{686                                  \textcolor{keywordtype}{bool} ignoreCase) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{687 }
+\DoxyCodeLine{701     \mbox{\hyperlink{class_string}{String}} upToFirstOccurrenceOf (\mbox{\hyperlink{class_string_ref}{StringRef}} substringToEndWith,}
+\DoxyCodeLine{702                                   \textcolor{keywordtype}{bool} includeSubStringInResult,}
+\DoxyCodeLine{703                                   \textcolor{keywordtype}{bool} ignoreCase) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{704 }
+\DoxyCodeLine{712     \mbox{\hyperlink{class_string}{String}} upToLastOccurrenceOf (\mbox{\hyperlink{class_string_ref}{StringRef}} substringToFind,}
+\DoxyCodeLine{713                                  \textcolor{keywordtype}{bool} includeSubStringInResult,}
+\DoxyCodeLine{714                                  \textcolor{keywordtype}{bool} ignoreCase) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{715 }
+\DoxyCodeLine{716     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{718 \textcolor{comment}{}    \mbox{\hyperlink{class_string}{String}} trim() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{719 }
+\DoxyCodeLine{721     \mbox{\hyperlink{class_string}{String}} trimStart() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{722 }
+\DoxyCodeLine{724     \mbox{\hyperlink{class_string}{String}} trimEnd() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{725 }
+\DoxyCodeLine{732     \mbox{\hyperlink{class_string}{String}} trimCharactersAtStart (\mbox{\hyperlink{class_string_ref}{StringRef}} charactersToTrim) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{733 }
+\DoxyCodeLine{740     \mbox{\hyperlink{class_string}{String}} trimCharactersAtEnd (\mbox{\hyperlink{class_string_ref}{StringRef}} charactersToTrim) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{741 }
+\DoxyCodeLine{742     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{744 \textcolor{comment}{}    \mbox{\hyperlink{class_string}{String}} toUpperCase() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{745 }
+\DoxyCodeLine{747     \mbox{\hyperlink{class_string}{String}} toLowerCase() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{748 }
+\DoxyCodeLine{749     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{765 \textcolor{comment}{}    \mbox{\hyperlink{class_string}{String}} replaceSection (\textcolor{keywordtype}{int} startIndex,}
+\DoxyCodeLine{766                            \textcolor{keywordtype}{int} numCharactersToReplace,}
+\DoxyCodeLine{767                            \mbox{\hyperlink{class_string_ref}{StringRef}} stringToInsert) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{768 }
+\DoxyCodeLine{776     \mbox{\hyperlink{class_string}{String}} replace (\mbox{\hyperlink{class_string_ref}{StringRef}} stringToReplace,}
+\DoxyCodeLine{777                     \mbox{\hyperlink{class_string_ref}{StringRef}} stringToInsertInstead,}
+\DoxyCodeLine{778                     \textcolor{keywordtype}{bool} ignoreCase = \mbox{\hyperlink{ordinals_8h_a65e9886d74aaee76545e83dd09011727}{false}}) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{779 }
+\DoxyCodeLine{787     \mbox{\hyperlink{class_string}{String}} replaceFirstOccurrenceOf (\mbox{\hyperlink{class_string_ref}{StringRef}} stringToReplace,}
+\DoxyCodeLine{788                                      \mbox{\hyperlink{class_string_ref}{StringRef}} stringToInsertInstead,}
+\DoxyCodeLine{789                                      \textcolor{keywordtype}{bool} ignoreCase = \mbox{\hyperlink{ordinals_8h_a65e9886d74aaee76545e83dd09011727}{false}}) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{790 }
+\DoxyCodeLine{792     \mbox{\hyperlink{class_string}{String}} replaceCharacter (\mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} characterToReplace,}
+\DoxyCodeLine{793                              \mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} characterToInsertInstead) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{794 }
+\DoxyCodeLine{805     \mbox{\hyperlink{class_string}{String}} replaceCharacters (\mbox{\hyperlink{class_string_ref}{StringRef}} charactersToReplace,}
+\DoxyCodeLine{806                               \mbox{\hyperlink{class_string_ref}{StringRef}} charactersToInsertInstead) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{807 }
+\DoxyCodeLine{817     \mbox{\hyperlink{class_string}{String}} retainCharacters (\mbox{\hyperlink{class_string_ref}{StringRef}} charactersToRetain) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{818 }
+\DoxyCodeLine{828     \mbox{\hyperlink{class_string}{String}} removeCharacters (\mbox{\hyperlink{class_string_ref}{StringRef}} charactersToRemove) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{829 }
+\DoxyCodeLine{835     \mbox{\hyperlink{class_string}{String}} initialSectionContainingOnly (\mbox{\hyperlink{class_string_ref}{StringRef}} permittedCharacters) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{836 }
+\DoxyCodeLine{843     \mbox{\hyperlink{class_string}{String}} initialSectionNotContaining (\mbox{\hyperlink{class_string_ref}{StringRef}} charactersToStopAt) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{844 }
+\DoxyCodeLine{845     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{852 \textcolor{comment}{}    \textcolor{keywordtype}{bool} isQuotedString() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{853 }
+\DoxyCodeLine{864     \mbox{\hyperlink{class_string}{String}} unquoted() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{865 }
+\DoxyCodeLine{877     \mbox{\hyperlink{class_string}{String}} quoted (\mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} quoteCharacter = '"{}') \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{878 }
+\DoxyCodeLine{879 }
+\DoxyCodeLine{880     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{886 \textcolor{comment}{}    static \mbox{\hyperlink{class_string}{String}} repeatedString (\mbox{\hyperlink{class_string_ref}{StringRef}} stringToRepeat,}
+\DoxyCodeLine{887                                   \textcolor{keywordtype}{int} numberOfTimesToRepeat);}
+\DoxyCodeLine{888 }
+\DoxyCodeLine{892     \mbox{\hyperlink{class_string}{String}} paddedLeft (\mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} padCharacter, \textcolor{keywordtype}{int} minimumLength) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{893 }
+\DoxyCodeLine{897     \mbox{\hyperlink{class_string}{String}} paddedRight (\mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} padCharacter, \textcolor{keywordtype}{int} minimumLength) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{898 }
+\DoxyCodeLine{907     static \mbox{\hyperlink{class_string}{String}} createStringFromData (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \textcolor{keywordtype}{void}* \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}});}
+\DoxyCodeLine{908 }
+\DoxyCodeLine{920     template <typename... Args>}
+\DoxyCodeLine{921     static \mbox{\hyperlink{class_string}{String}} formatted (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}}\& formatStr, Args... args)      \{ \textcolor{keywordflow}{return} formattedRaw (formatStr.toRawUTF8(), args...); \}}
+\DoxyCodeLine{922 }
+\DoxyCodeLine{924     CharPointerType \mbox{\hyperlink{class_string_a442767199d64a29cfabf29570c47d5e3}{begin}}()\textcolor{keyword}{ const                                        }\{ \textcolor{keywordflow}{return} getCharPointer(); \}}
+\DoxyCodeLine{925 }
+\DoxyCodeLine{950     CharPointerType \mbox{\hyperlink{class_string_ac6e3744a29d5cc77e1eecdfa2500e828}{end}}()\textcolor{keyword}{ const                                          }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{group__juce__core-files_ga3b8789907a46172ef0bdc8f656d6e355}{begin}}().findTerminatingNull(); \}}
+\DoxyCodeLine{951 }
+\DoxyCodeLine{952     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{953     \textcolor{comment}{// Numeric conversions..}}
+\DoxyCodeLine{954 }
+\DoxyCodeLine{958     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_string}{String}} (\textcolor{keywordtype}{int} decimalInteger);}
+\DoxyCodeLine{959 }
+\DoxyCodeLine{963     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_string}{String}} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} decimalInteger);}
+\DoxyCodeLine{964 }
+\DoxyCodeLine{968     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_string}{String}} (\textcolor{keywordtype}{short} decimalInteger);}
+\DoxyCodeLine{969 }
+\DoxyCodeLine{973     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_string}{String}} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} decimalInteger);}
+\DoxyCodeLine{974 }
+\DoxyCodeLine{978     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_string}{String}} (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} largeIntegerValue);}
+\DoxyCodeLine{979 }
+\DoxyCodeLine{983     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_string}{String}} (\mbox{\hyperlink{group__juce__core-maths_gaba41bf2b6f6da5945ee08fb99931aede}{uint64}} largeIntegerValue);}
+\DoxyCodeLine{984 }
+\DoxyCodeLine{988     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_string}{String}} (\textcolor{keywordtype}{long} decimalInteger);}
+\DoxyCodeLine{989 }
+\DoxyCodeLine{993     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_string}{String}} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} decimalInteger);}
+\DoxyCodeLine{994 }
+\DoxyCodeLine{999     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_string}{String}} (\textcolor{keywordtype}{float} floatValue);}
+\DoxyCodeLine{1000 }
+\DoxyCodeLine{1005     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_string}{String}} (\textcolor{keywordtype}{double} doubleValue);}
+\DoxyCodeLine{1006 }
+\DoxyCodeLine{1017     \mbox{\hyperlink{class_string}{String}} (\textcolor{keywordtype}{float} floatValue, \textcolor{keywordtype}{int} numberOfDecimalPlaces, \textcolor{keywordtype}{bool} useScientificNotation = \textcolor{keyword}{false});}
+\DoxyCodeLine{1018 }
+\DoxyCodeLine{1028     \mbox{\hyperlink{class_string}{String}} (\textcolor{keywordtype}{double} doubleValue, \textcolor{keywordtype}{int} numberOfDecimalPlaces, \textcolor{keywordtype}{bool} useScientificNotation = \textcolor{keyword}{false});}
+\DoxyCodeLine{1029 }
+\DoxyCodeLine{1030 \textcolor{preprocessor}{   \#ifndef DOXYGEN}}
+\DoxyCodeLine{1031     \textcolor{comment}{// Automatically creating a String from a bool opens up lots of nasty type conversion edge cases.}}
+\DoxyCodeLine{1032     \textcolor{comment}{// If you want a String representation of a bool you can cast the bool to an int first.}}
+\DoxyCodeLine{1033     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_string_a1625659d77ac1eda748a3948cd7b1cab}{String}} (\textcolor{keywordtype}{bool}) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{1034 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{1035 }
+\DoxyCodeLine{1041     \textcolor{keywordtype}{int} getIntValue() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{1042 }
+\DoxyCodeLine{1046     \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} getLargeIntValue() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{1047 }
+\DoxyCodeLine{1058     \textcolor{keywordtype}{int} getTrailingIntValue() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{1059 }
+\DoxyCodeLine{1065     \textcolor{keywordtype}{float} getFloatValue() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{1066 }
+\DoxyCodeLine{1072     \textcolor{keywordtype}{double} getDoubleValue() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{1073 }
+\DoxyCodeLine{1083     \textcolor{keywordtype}{int} getHexValue32() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{1084 }
+\DoxyCodeLine{1094     \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} getHexValue64() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{1095 }
+\DoxyCodeLine{1097     template <typename IntegerType>}
+\DoxyCodeLine{1098     static \mbox{\hyperlink{class_string}{String}} toHexString (IntegerType number)      \{ \textcolor{keywordflow}{return} createHex (number); \}}
+\DoxyCodeLine{1099 }
+\DoxyCodeLine{1109     \textcolor{keyword}{static} \mbox{\hyperlink{class_string}{String}} toHexString (\textcolor{keyword}{const} \textcolor{keywordtype}{void}* \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}}, \textcolor{keywordtype}{int} groupSize = 1);}
+\DoxyCodeLine{1110 }
+\DoxyCodeLine{1116     \textcolor{keyword}{template} <\textcolor{keyword}{typename} DecimalType>}
+\DoxyCodeLine{1117     \textcolor{keyword}{static} \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{class_string_aa4ecbb61a758329a88a2bd568e3c7502}{toDecimalStringWithSignificantFigures}} (DecimalType number, \textcolor{keywordtype}{int} numberOfSignificantFigures)}
+\DoxyCodeLine{1118     \{}
+\DoxyCodeLine{1119         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (numberOfSignificantFigures > 0);}
+\DoxyCodeLine{1120 }
+\DoxyCodeLine{1121         \textcolor{keywordflow}{if} (number == 0)}
+\DoxyCodeLine{1122         \{}
+\DoxyCodeLine{1123             \textcolor{keywordflow}{if} (numberOfSignificantFigures > 1)}
+\DoxyCodeLine{1124             \{}
+\DoxyCodeLine{1125                 \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} (\textcolor{stringliteral}{"{}0.0"{}});}
+\DoxyCodeLine{1126 }
+\DoxyCodeLine{1127                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 2; i < numberOfSignificantFigures; ++i)}
+\DoxyCodeLine{1128                     \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} += \textcolor{stringliteral}{"{}0"{}};}
+\DoxyCodeLine{1129 }
+\DoxyCodeLine{1130                 \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}};}
+\DoxyCodeLine{1131             \}}
+\DoxyCodeLine{1132 }
+\DoxyCodeLine{1133             \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}0"{}};}
+\DoxyCodeLine{1134         \}}
+\DoxyCodeLine{1135 }
+\DoxyCodeLine{1136         \textcolor{keyword}{auto} numDigitsBeforePoint = (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}) std::ceil (std::log10 (number < 0 ? -\/number : number));}
+\DoxyCodeLine{1137 }
+\DoxyCodeLine{1138         \textcolor{keyword}{auto} \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_gga485dc2a0e5ed7da3d9f826367b36ee55aa844ac0d299bd083b2938e6cbf34743a}{shift}} = numberOfSignificantFigures -\/ numDigitsBeforePoint;}
+\DoxyCodeLine{1139         \textcolor{keyword}{auto} factor = std::pow (10.0, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_gga485dc2a0e5ed7da3d9f826367b36ee55aa844ac0d299bd083b2938e6cbf34743a}{shift}});}
+\DoxyCodeLine{1140         \textcolor{keyword}{auto} rounded = std::round (number * factor) / factor;}
+\DoxyCodeLine{1141 }
+\DoxyCodeLine{1142         std::stringstream ss;}
+\DoxyCodeLine{1143         ss << std::fixed << std::setprecision (\mbox{\hyperlink{os_8h_ac39d9cef6a5e030ba8d9e11121054268}{std::max}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_gga485dc2a0e5ed7da3d9f826367b36ee55aa844ac0d299bd083b2938e6cbf34743a}{shift}}, 0)) << rounded;}
+\DoxyCodeLine{1144         \textcolor{keywordflow}{return} ss.str();}
+\DoxyCodeLine{1145     \}}
+\DoxyCodeLine{1146 }
+\DoxyCodeLine{1147     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1154 \textcolor{comment}{}    CharPointerType \mbox{\hyperlink{class_string_a026f5d21f882d2ffe0406ef1e4907897}{getCharPointer}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept             \{ \textcolor{keywordflow}{return} text; \}}
+\DoxyCodeLine{1155 }
+\DoxyCodeLine{1167     \mbox{\hyperlink{class_char_pointer___u_t_f8}{CharPointer\_UTF8}} toUTF8() \textcolor{keyword}{const};}
+\DoxyCodeLine{1168 }
+\DoxyCodeLine{1180     \textcolor{keyword}{const} \textcolor{keywordtype}{char}* toRawUTF8() \textcolor{keyword}{const};}
+\DoxyCodeLine{1181 }
+\DoxyCodeLine{1193     \mbox{\hyperlink{class_char_pointer___u_t_f16}{CharPointer\_UTF16}} toUTF16() \textcolor{keyword}{const};}
+\DoxyCodeLine{1194 }
+\DoxyCodeLine{1203     \mbox{\hyperlink{class_char_pointer___u_t_f32}{CharPointer\_UTF32}} toUTF32() \textcolor{keyword}{const};}
+\DoxyCodeLine{1204 }
+\DoxyCodeLine{1217     \textcolor{keyword}{const} \textcolor{keywordtype}{wchar\_t}* toWideCharPointer() \textcolor{keyword}{const};}
+\DoxyCodeLine{1218 }
+\DoxyCodeLine{1220     \mbox{\hyperlink{namespacegl_ad7acdf57d94829f964ff1dc581fc4705}{std::string}} toStdString() \textcolor{keyword}{const};}
+\DoxyCodeLine{1221 }
+\DoxyCodeLine{1222     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1226 \textcolor{comment}{}    \textcolor{keyword}{static} \mbox{\hyperlink{class_string}{String}} fromUTF8 (\textcolor{keyword}{const} \textcolor{keywordtype}{char}* utf8buffer, \textcolor{keywordtype}{int} bufferSizeBytes = -\/1);}
+\DoxyCodeLine{1227 }
+\DoxyCodeLine{1232     \textcolor{keywordtype}{size\_t} getNumBytesAsUTF8() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{1233 }
+\DoxyCodeLine{1234     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1250 \textcolor{comment}{}    \textcolor{keywordtype}{size\_t} copyToUTF8 (\mbox{\hyperlink{class_char_pointer___u_t_f8}{CharPointer\_UTF8}}::CharType* destBuffer, \textcolor{keywordtype}{size\_t} maxBufferSizeBytes) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{1251 }
+\DoxyCodeLine{1267     \textcolor{keywordtype}{size\_t} copyToUTF16 (\mbox{\hyperlink{class_char_pointer___u_t_f16}{CharPointer\_UTF16}}::CharType* destBuffer, \textcolor{keywordtype}{size\_t} maxBufferSizeBytes) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{1268 }
+\DoxyCodeLine{1284     \textcolor{keywordtype}{size\_t} copyToUTF32 (\mbox{\hyperlink{class_char_pointer___u_t_f32}{CharPointer\_UTF32}}::CharType* destBuffer, \textcolor{keywordtype}{size\_t} maxBufferSizeBytes) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{1285 }
+\DoxyCodeLine{1286     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1301 \textcolor{comment}{}    \textcolor{keywordtype}{void} preallocateBytes (\textcolor{keywordtype}{size\_t} numBytesNeeded);}
+\DoxyCodeLine{1302 }
+\DoxyCodeLine{1306     \textcolor{keywordtype}{void} swapWith (\mbox{\hyperlink{class_string}{String}}\& other) noexcept;}
+\DoxyCodeLine{1307 }
+\DoxyCodeLine{1308     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1309    \textcolor{preprocessor}{\#if JUCE\_MAC || JUCE\_IOS || DOXYGEN}}
+\DoxyCodeLine{1311     \textcolor{keyword}{static} \mbox{\hyperlink{class_string}{String}} fromCFString (CFStringRef cfString);}
+\DoxyCodeLine{1312 }
+\DoxyCodeLine{1317     CFStringRef toCFString() \textcolor{keyword}{const};}
+\DoxyCodeLine{1318 }
+\DoxyCodeLine{1321     \mbox{\hyperlink{class_string}{String}} convertToPrecomposedUnicode() \textcolor{keyword}{const};}
+\DoxyCodeLine{1322 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{1323 }
+\DoxyCodeLine{1327     \textcolor{keywordtype}{int} getReferenceCount() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{1328 }
+\DoxyCodeLine{1329     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1330    \textcolor{preprocessor}{\#if JUCE\_ALLOW\_STATIC\_NULL\_VARIABLES \&\& ! defined (DOXYGEN)}}
+\DoxyCodeLine{1331     [[deprecated (\textcolor{stringliteral}{"{}This was a static empty string object, but is now deprecated as it's too easy to accidentally "{}}}
+\DoxyCodeLine{1332                  \textcolor{stringliteral}{"{}use it indirectly during a static constructor, leading to hard-\/to-\/find order-\/of-\/initialisation "{}}}
+\DoxyCodeLine{1333                  \textcolor{stringliteral}{"{}problems. If you need an empty String object, just use String() or \{\}. For returning an empty "{}}}
+\DoxyCodeLine{1334                  \textcolor{stringliteral}{"{}String from a function by reference, use a function-\/local static String object and return that."{}})]]}
+\DoxyCodeLine{1335     \textcolor{keyword}{static} \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}} empty;}
+\DoxyCodeLine{1336 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{1337 }
+\DoxyCodeLine{1338 \textcolor{keyword}{private}:}
+\DoxyCodeLine{1339     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1340     CharPointerType text;}
+\DoxyCodeLine{1341 }
+\DoxyCodeLine{1342     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1343     \textcolor{keyword}{struct }PreallocationBytes}
+\DoxyCodeLine{1344     \{}
+\DoxyCodeLine{1345         \textcolor{keyword}{explicit} PreallocationBytes (\textcolor{keywordtype}{size\_t}) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{1346         \textcolor{keywordtype}{size\_t} numBytes;}
+\DoxyCodeLine{1347     \};}
+\DoxyCodeLine{1348 }
+\DoxyCodeLine{1349     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_string}{String}} (\textcolor{keyword}{const} PreallocationBytes\&); \textcolor{comment}{// This constructor preallocates a certain amount of memory}}
+\DoxyCodeLine{1350     \textcolor{keywordtype}{size\_t} getByteOffsetOfEnd() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{1351 }
+\DoxyCodeLine{1352     \textcolor{comment}{// This private cast operator should prevent strings being accidentally cast}}
+\DoxyCodeLine{1353     \textcolor{comment}{// to bools (this is possible because the compiler can add an implicit cast}}
+\DoxyCodeLine{1354     \textcolor{comment}{// via a const char*)}}
+\DoxyCodeLine{1355     operator \textcolor{keywordtype}{bool}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept  \{ \textcolor{keywordflow}{return} \textcolor{keyword}{false}; \}}
+\DoxyCodeLine{1356 }
+\DoxyCodeLine{1357     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1358     \textcolor{keyword}{static} \mbox{\hyperlink{class_string}{String}} formattedRaw (\textcolor{keyword}{const} \textcolor{keywordtype}{char}*, ...);}
+\DoxyCodeLine{1359 }
+\DoxyCodeLine{1360     \textcolor{keyword}{static} \mbox{\hyperlink{class_string}{String}} createHex (\mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}});}
+\DoxyCodeLine{1361     \textcolor{keyword}{static} \mbox{\hyperlink{class_string}{String}} createHex (\mbox{\hyperlink{juce__box2d_8cpp_acc2cb9a2f3246f6f4775ef16196fd983}{uint16}});}
+\DoxyCodeLine{1362     \textcolor{keyword}{static} \mbox{\hyperlink{class_string}{String}} createHex (\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}});}
+\DoxyCodeLine{1363     \textcolor{keyword}{static} \mbox{\hyperlink{class_string}{String}} createHex (\mbox{\hyperlink{group__juce__core-maths_gaba41bf2b6f6da5945ee08fb99931aede}{uint64}});}
+\DoxyCodeLine{1364 }
+\DoxyCodeLine{1365     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type>}
+\DoxyCodeLine{1366     \textcolor{keyword}{static} \mbox{\hyperlink{class_string}{String}} createHex (Type \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}})  \{ \textcolor{keywordflow}{return} createHex (\textcolor{keyword}{static\_cast<}typename \mbox{\hyperlink{struct_type_helpers_1_1_unsigned_type_with_size}{TypeHelpers::UnsignedTypeWithSize}}<(\textcolor{keywordtype}{int}) sizeof (\mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}})\textcolor{keyword}{>}::\mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}}> (\mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}})); \}}
+\DoxyCodeLine{1367 \};}
+\DoxyCodeLine{1368 }
+\DoxyCodeLine{1369 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1371 \textcolor{comment}{}\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gae0f6b7a1acb4a2d3060666bf04b31f4e}{operator+ }}(\textcolor{keyword}{const} \textcolor{keywordtype}{char}* string1,     \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& string2);}
+\DoxyCodeLine{1373 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gae0f6b7a1acb4a2d3060666bf04b31f4e}{operator+ }}(\textcolor{keyword}{const} \textcolor{keywordtype}{wchar\_t}* string1,  \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& string2);}
+\DoxyCodeLine{1375 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gae0f6b7a1acb4a2d3060666bf04b31f4e}{operator+ }}(\textcolor{keywordtype}{char} string1,            \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& string2);}
+\DoxyCodeLine{1377 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gae0f6b7a1acb4a2d3060666bf04b31f4e}{operator+ }}(\textcolor{keywordtype}{wchar\_t} string1,         \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& string2);}
+\DoxyCodeLine{1378 \textcolor{preprocessor}{\#if ! JUCE\_NATIVE\_WCHAR\_IS\_UTF32}}
+\DoxyCodeLine{1380 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gae0f6b7a1acb4a2d3060666bf04b31f4e}{operator+ }}(\mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} string1,      \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& string2);}
+\DoxyCodeLine{1381 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{1382 }
+\DoxyCodeLine{1384 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gae0f6b7a1acb4a2d3060666bf04b31f4e}{operator+ }}(\mbox{\hyperlink{class_string}{String}} string1, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& string2);}
+\DoxyCodeLine{1386 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gae0f6b7a1acb4a2d3060666bf04b31f4e}{operator+ }}(\mbox{\hyperlink{class_string}{String}} string1, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* string2);}
+\DoxyCodeLine{1388 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gae0f6b7a1acb4a2d3060666bf04b31f4e}{operator+ }}(\mbox{\hyperlink{class_string}{String}} string1, \textcolor{keyword}{const} \textcolor{keywordtype}{wchar\_t}* string2);}
+\DoxyCodeLine{1390 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gae0f6b7a1acb4a2d3060666bf04b31f4e}{operator+ }}(\mbox{\hyperlink{class_string}{String}} string1, \textcolor{keyword}{const} \mbox{\hyperlink{namespacegl_ad7acdf57d94829f964ff1dc581fc4705}{std::string}}\& string2);}
+\DoxyCodeLine{1392 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gae0f6b7a1acb4a2d3060666bf04b31f4e}{operator+ }}(\mbox{\hyperlink{class_string}{String}} string1, \textcolor{keywordtype}{char} characterToAppend);}
+\DoxyCodeLine{1394 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gae0f6b7a1acb4a2d3060666bf04b31f4e}{operator+ }}(\mbox{\hyperlink{class_string}{String}} string1, \textcolor{keywordtype}{wchar\_t} characterToAppend);}
+\DoxyCodeLine{1395 \textcolor{preprocessor}{\#if ! JUCE\_NATIVE\_WCHAR\_IS\_UTF32}}
+\DoxyCodeLine{1397 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gae0f6b7a1acb4a2d3060666bf04b31f4e}{operator+ }}(\mbox{\hyperlink{class_string}{String}} string1, \mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} characterToAppend);}
+\DoxyCodeLine{1398 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{1399 }
+\DoxyCodeLine{1400 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1402 \textcolor{comment}{}\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gada10ac0bd7058155a6eea214f6f2f9f5}{operator<< }}(\mbox{\hyperlink{class_string}{String}}\& string1, \textcolor{keywordtype}{char} characterToAppend);}
+\DoxyCodeLine{1404 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gada10ac0bd7058155a6eea214f6f2f9f5}{operator<< }}(\mbox{\hyperlink{class_string}{String}}\& string1, \textcolor{keywordtype}{wchar\_t} characterToAppend);}
+\DoxyCodeLine{1405 \textcolor{preprocessor}{\#if ! JUCE\_NATIVE\_WCHAR\_IS\_UTF32}}
+\DoxyCodeLine{1407 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gada10ac0bd7058155a6eea214f6f2f9f5}{operator<< }}(\mbox{\hyperlink{class_string}{String}}\& string1, \mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} characterToAppend);}
+\DoxyCodeLine{1408 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{1409 }
+\DoxyCodeLine{1411 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gada10ac0bd7058155a6eea214f6f2f9f5}{operator<< }}(\mbox{\hyperlink{class_string}{String}}\& string1, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* string2);}
+\DoxyCodeLine{1413 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gada10ac0bd7058155a6eea214f6f2f9f5}{operator<< }}(\mbox{\hyperlink{class_string}{String}}\& string1, \textcolor{keyword}{const} \textcolor{keywordtype}{wchar\_t}* string2);}
+\DoxyCodeLine{1415 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gada10ac0bd7058155a6eea214f6f2f9f5}{operator<< }}(\mbox{\hyperlink{class_string}{String}}\& string1, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& string2);}
+\DoxyCodeLine{1417 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gada10ac0bd7058155a6eea214f6f2f9f5}{operator<< }}(\mbox{\hyperlink{class_string}{String}}\& string1, \mbox{\hyperlink{class_string_ref}{StringRef}} string2);}
+\DoxyCodeLine{1419 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gada10ac0bd7058155a6eea214f6f2f9f5}{operator<< }}(\mbox{\hyperlink{class_string}{String}}\& string1, \textcolor{keyword}{const} \mbox{\hyperlink{namespacegl_ad7acdf57d94829f964ff1dc581fc4705}{std::string}}\& string2);}
+\DoxyCodeLine{1420 }
+\DoxyCodeLine{1422 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gada10ac0bd7058155a6eea214f6f2f9f5}{operator<< }}(\mbox{\hyperlink{class_string}{String}}\& string1, \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}} number);}
+\DoxyCodeLine{1424 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gada10ac0bd7058155a6eea214f6f2f9f5}{operator<< }}(\mbox{\hyperlink{class_string}{String}}\& string1, \textcolor{keywordtype}{short} number);}
+\DoxyCodeLine{1426 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gada10ac0bd7058155a6eea214f6f2f9f5}{operator<< }}(\mbox{\hyperlink{class_string}{String}}\& string1, \textcolor{keywordtype}{int} number);}
+\DoxyCodeLine{1428 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gada10ac0bd7058155a6eea214f6f2f9f5}{operator<< }}(\mbox{\hyperlink{class_string}{String}}\& string1, \textcolor{keywordtype}{long} number);}
+\DoxyCodeLine{1430 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gada10ac0bd7058155a6eea214f6f2f9f5}{operator<< }}(\mbox{\hyperlink{class_string}{String}}\& string1, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} number);}
+\DoxyCodeLine{1432 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gada10ac0bd7058155a6eea214f6f2f9f5}{operator<< }}(\mbox{\hyperlink{class_string}{String}}\& string1, \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} number);}
+\DoxyCodeLine{1434 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gada10ac0bd7058155a6eea214f6f2f9f5}{operator<< }}(\mbox{\hyperlink{class_string}{String}}\& string1, \mbox{\hyperlink{group__juce__core-maths_gaba41bf2b6f6da5945ee08fb99931aede}{uint64}} number);}
+\DoxyCodeLine{1436 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gada10ac0bd7058155a6eea214f6f2f9f5}{operator<< }}(\mbox{\hyperlink{class_string}{String}}\& string1, \textcolor{keywordtype}{float} number);}
+\DoxyCodeLine{1438 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gada10ac0bd7058155a6eea214f6f2f9f5}{operator<< }}(\mbox{\hyperlink{class_string}{String}}\& string1, \textcolor{keywordtype}{double} number);}
+\DoxyCodeLine{1439 }
+\DoxyCodeLine{1440 \textcolor{preprocessor}{\#ifndef DOXYGEN}}
+\DoxyCodeLine{1441 \textcolor{comment}{// Automatically creating a String from a bool opens up lots of nasty type conversion edge cases.}}
+\DoxyCodeLine{1442 \textcolor{comment}{// If you want a String representation of a bool you can cast the bool to an int first.}}
+\DoxyCodeLine{1443 \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gada10ac0bd7058155a6eea214f6f2f9f5}{operator<< }}(\mbox{\hyperlink{class_string}{String}}\&, \textcolor{keywordtype}{bool}) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{1444 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{1445 }
+\DoxyCodeLine{1446 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1448 \textcolor{comment}{}\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \textcolor{keywordtype}{bool} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gac63080f46c282d58b2cf9ad5c36ea1bd}{operator== }}(\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& string1, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& string2) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{1450 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \textcolor{keywordtype}{bool} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gac63080f46c282d58b2cf9ad5c36ea1bd}{operator== }}(\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& string1, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* string2) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{1452 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \textcolor{keywordtype}{bool} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gac63080f46c282d58b2cf9ad5c36ea1bd}{operator== }}(\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& string1, \textcolor{keyword}{const} \textcolor{keywordtype}{wchar\_t}* string2) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{1454 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \textcolor{keywordtype}{bool} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gac63080f46c282d58b2cf9ad5c36ea1bd}{operator== }}(\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& string1, \mbox{\hyperlink{class_char_pointer___u_t_f8}{CharPointer\_UTF8}} string2) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{1456 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \textcolor{keywordtype}{bool} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gac63080f46c282d58b2cf9ad5c36ea1bd}{operator== }}(\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& string1, \mbox{\hyperlink{class_char_pointer___u_t_f16}{CharPointer\_UTF16}} string2) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{1458 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \textcolor{keywordtype}{bool} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gac63080f46c282d58b2cf9ad5c36ea1bd}{operator== }}(\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& string1, \mbox{\hyperlink{class_char_pointer___u_t_f32}{CharPointer\_UTF32}} string2) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{1459 }
+\DoxyCodeLine{1461 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \textcolor{keywordtype}{bool} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_ga2b8ed7c3d382fe5764b0b2dd4d7885ad}{operator!= }}(\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& string1, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& string2) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{1463 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \textcolor{keywordtype}{bool} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_ga2b8ed7c3d382fe5764b0b2dd4d7885ad}{operator!= }}(\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& string1, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* string2) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{1465 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \textcolor{keywordtype}{bool} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_ga2b8ed7c3d382fe5764b0b2dd4d7885ad}{operator!= }}(\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& string1, \textcolor{keyword}{const} \textcolor{keywordtype}{wchar\_t}* string2) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{1467 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \textcolor{keywordtype}{bool} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_ga2b8ed7c3d382fe5764b0b2dd4d7885ad}{operator!= }}(\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& string1, \mbox{\hyperlink{class_char_pointer___u_t_f8}{CharPointer\_UTF8}} string2) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{1469 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \textcolor{keywordtype}{bool} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_ga2b8ed7c3d382fe5764b0b2dd4d7885ad}{operator!= }}(\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& string1, \mbox{\hyperlink{class_char_pointer___u_t_f16}{CharPointer\_UTF16}} string2) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{1471 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \textcolor{keywordtype}{bool} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_ga2b8ed7c3d382fe5764b0b2dd4d7885ad}{operator!= }}(\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& string1, \mbox{\hyperlink{class_char_pointer___u_t_f32}{CharPointer\_UTF32}} string2) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{1472 }
+\DoxyCodeLine{1473 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1477 \textcolor{comment}{}\textcolor{keyword}{template} <\textcolor{keyword}{class} traits>}
+\DoxyCodeLine{1478 std::basic\_ostream <char, traits>\& \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gada10ac0bd7058155a6eea214f6f2f9f5}{operator<< }}(std::basic\_ostream <char, traits>\& \mbox{\hyperlink{namespacegl_a3a0f500782e4461d09f1e29189835b3d}{stream}}, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& stringToWrite)}
+\DoxyCodeLine{1479 \{}
+\DoxyCodeLine{1480     \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a3a0f500782e4461d09f1e29189835b3d}{stream}} << stringToWrite.\mbox{\hyperlink{class_string_a424fa16847cbf75b9fba3151cbe0fc77}{toRawUTF8}}();}
+\DoxyCodeLine{1481 \}}
+\DoxyCodeLine{1482 }
+\DoxyCodeLine{1486 \textcolor{keyword}{template} <\textcolor{keyword}{class} traits>}
+\DoxyCodeLine{1487 std::basic\_ostream <wchar\_t, traits>\& \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gada10ac0bd7058155a6eea214f6f2f9f5}{operator<< }}(std::basic\_ostream <wchar\_t, traits>\& \mbox{\hyperlink{namespacegl_a3a0f500782e4461d09f1e29189835b3d}{stream}}, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& stringToWrite)}
+\DoxyCodeLine{1488 \{}
+\DoxyCodeLine{1489     \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a3a0f500782e4461d09f1e29189835b3d}{stream}} << stringToWrite.\mbox{\hyperlink{class_string_a1861bc68125754e7a0b30f1a3e91937f}{toWideCharPointer}}();}
+\DoxyCodeLine{1490 \}}
+\DoxyCodeLine{1491 }
+\DoxyCodeLine{1493 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \mbox{\hyperlink{class_output_stream}{OutputStream}}\& \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gada10ac0bd7058155a6eea214f6f2f9f5}{operator<< }}(\mbox{\hyperlink{class_output_stream}{OutputStream}}\& \mbox{\hyperlink{namespacegl_a3a0f500782e4461d09f1e29189835b3d}{stream}}, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& stringToWrite);}
+\DoxyCodeLine{1494 }
+\DoxyCodeLine{1496 \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \mbox{\hyperlink{class_output_stream}{OutputStream}}\& \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{group__juce__core-text_gada10ac0bd7058155a6eea214f6f2f9f5}{operator<< }}(\mbox{\hyperlink{class_output_stream}{OutputStream}}\& \mbox{\hyperlink{namespacegl_a3a0f500782e4461d09f1e29189835b3d}{stream}}, \mbox{\hyperlink{class_string_ref}{StringRef}} stringToWrite);}
+\DoxyCodeLine{1497 }
+\DoxyCodeLine{1498  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{1499 }
+\DoxyCodeLine{1500 \textcolor{preprocessor}{\#ifndef DOXYGEN}}
+\DoxyCodeLine{1501 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacestd}{std}}}
+\DoxyCodeLine{1502 \{}
+\DoxyCodeLine{1503     \textcolor{keyword}{template} <> \textcolor{keyword}{struct }hash<\mbox{\hyperlink{namespacejuce}{juce}}::\mbox{\hyperlink{class_string}{String}}>}
+\DoxyCodeLine{1504     \{}
+\DoxyCodeLine{1505         \textcolor{keywordtype}{size\_t} operator() (\textcolor{keyword}{const} juce::String\& \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}}) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}    \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}}.hash(); \}}
+\DoxyCodeLine{1506     \};}
+\DoxyCodeLine{1507 \}}
+\DoxyCodeLine{1508 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{1509 }
+
+\end{DoxyCode}

@@ -1,0 +1,78 @@
+\hypertarget{juce___buffering_audio_format_reader_8h_source}{}\doxysection{juce\+\_\+\+Buffering\+Audio\+Format\+Reader.\+h}
+\label{juce___buffering_audio_format_reader_8h_source}\index{build/juce\_audio\_formats/format/juce\_BufferingAudioFormatReader.h@{build/juce\_audio\_formats/format/juce\_BufferingAudioFormatReader.h}}
+\mbox{\hyperlink{juce___buffering_audio_format_reader_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{39 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_buffering_audio_reader}{BufferingAudioReader}}  : \textcolor{keyword}{public} \mbox{\hyperlink{class_audio_format_reader}{AudioFormatReader}},}
+\DoxyCodeLine{40                                         \textcolor{keyword}{private} \mbox{\hyperlink{class_time_slice_client}{TimeSliceClient}}}
+\DoxyCodeLine{41 \{}
+\DoxyCodeLine{42 \textcolor{keyword}{public}:}
+\DoxyCodeLine{53     \mbox{\hyperlink{class_buffering_audio_reader}{BufferingAudioReader}} (\mbox{\hyperlink{class_audio_format_reader}{AudioFormatReader}}* sourceReader,}
+\DoxyCodeLine{54                           \mbox{\hyperlink{class_time_slice_thread}{TimeSliceThread}}\& timeSliceThread,}
+\DoxyCodeLine{55                           \textcolor{keywordtype}{int} samplesToBuffer);}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57     \mbox{\hyperlink{class_buffering_audio_reader}{\string~BufferingAudioReader}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{64     \textcolor{keywordtype}{void} setReadTimeout (\textcolor{keywordtype}{int} timeoutMilliseconds) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{67     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_format_reader_a75d3df1c8d1b84a08fb5f1037d1754dd}{readSamples}} (\textcolor{keywordtype}{int}** destSamples, \textcolor{keywordtype}{int} numDestChannels, \textcolor{keywordtype}{int} startOffsetInDestBuffer,}
+\DoxyCodeLine{68                       \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} startSampleInFile, \textcolor{keywordtype}{int} numSamples) \textcolor{keyword}{override};}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70 \textcolor{keyword}{private}:}
+\DoxyCodeLine{71     \textcolor{keyword}{struct }BufferedBlock}
+\DoxyCodeLine{72     \{}
+\DoxyCodeLine{73         BufferedBlock (\mbox{\hyperlink{class_audio_format_reader}{AudioFormatReader}}\& reader, \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} pos, \textcolor{keywordtype}{int} numSamples);}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75         \mbox{\hyperlink{class_range}{Range<int64>}} \mbox{\hyperlink{namespacegl_ae32af3c263eaecc21093939cdb44aaf3}{range}};}
+\DoxyCodeLine{76         \mbox{\hyperlink{class_audio_buffer}{AudioBuffer<float>}} buffer;}
+\DoxyCodeLine{77     \};}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_time_slice_client_a272b0868c9bd0b5c281cf09dbaa69a9c}{useTimeSlice}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{80     BufferedBlock* getBlockContaining (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} pos) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{81     \textcolor{keywordtype}{bool} readNextBufferChunk();}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{int} samplesPerBlock = 32768;}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85     std::unique\_ptr<AudioFormatReader> \mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}};}
+\DoxyCodeLine{86     \mbox{\hyperlink{class_time_slice_thread}{TimeSliceThread}}\& thread;}
+\DoxyCodeLine{87     std::atomic<int64> nextReadPosition \{ 0 \};}
+\DoxyCodeLine{88     \textcolor{keyword}{const} \textcolor{keywordtype}{int} numBlocks;}
+\DoxyCodeLine{89     \textcolor{keywordtype}{int} timeoutMs = 0;}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91     \mbox{\hyperlink{class_critical_section}{CriticalSection}} lock;}
+\DoxyCodeLine{92     \mbox{\hyperlink{class_owned_array}{OwnedArray<BufferedBlock>}} blocks;}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{94     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_buffering_audio_reader}{BufferingAudioReader}})}
+\DoxyCodeLine{95 \};}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{98 }
+
+\end{DoxyCode}

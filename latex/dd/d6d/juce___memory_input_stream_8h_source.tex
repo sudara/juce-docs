@@ -1,0 +1,68 @@
+\hypertarget{juce___memory_input_stream_8h_source}{}\doxysection{juce\+\_\+\+Memory\+Input\+Stream.\+h}
+\label{juce___memory_input_stream_8h_source}\index{build/juce\_core/streams/juce\_MemoryInputStream.h@{build/juce\_core/streams/juce\_MemoryInputStream.h}}
+\mbox{\hyperlink{juce___memory_input_stream_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{36 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_memory_input_stream}{MemoryInputStream}}  : \textcolor{keyword}{public} \mbox{\hyperlink{class_input_stream}{InputStream}}}
+\DoxyCodeLine{37 \{}
+\DoxyCodeLine{38 \textcolor{keyword}{public}:}
+\DoxyCodeLine{39     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{50 \textcolor{comment}{}    \mbox{\hyperlink{class_memory_input_stream}{MemoryInputStream}} (\textcolor{keyword}{const} \textcolor{keywordtype}{void}* sourceData,}
+\DoxyCodeLine{51                        \textcolor{keywordtype}{size\_t} sourceDataSize,}
+\DoxyCodeLine{52                        \textcolor{keywordtype}{bool} keepInternalCopyOfData);}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{63     \mbox{\hyperlink{class_memory_input_stream}{MemoryInputStream}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_memory_block}{MemoryBlock}}\& \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}},}
+\DoxyCodeLine{64                        \textcolor{keywordtype}{bool} keepInternalCopyOfData);}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{67     \mbox{\hyperlink{class_memory_input_stream}{MemoryInputStream}} (\mbox{\hyperlink{class_memory_block}{MemoryBlock}}\&\& blockToTake);}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{70     \mbox{\hyperlink{class_memory_input_stream_a653e9d5182612a7b17ad18b8e74094f9}{\string~MemoryInputStream}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{73     \textcolor{keyword}{const} \textcolor{keywordtype}{void}* \mbox{\hyperlink{class_memory_input_stream_a06e6ac25f373d363479ae11142342a80}{getData}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept        \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}; \}}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{76     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_memory_input_stream_aca7db79c18dbd0d425249aef22b22ba3}{getDataSize}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept         \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_aad9a72deace31d0f7eb498f22443ec86}{dataSize}}; \}}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{79     \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} \mbox{\hyperlink{class_input_stream_abf909e2de145df97221ab4deb2824c5c}{getPosition}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{80     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_input_stream_ad7b4e8cec1e383657900e27bbcb3b06c}{setPosition}} (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}) \textcolor{keyword}{override};}
+\DoxyCodeLine{81     \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} \mbox{\hyperlink{class_input_stream_aebacb933570264e9697f6c984e348d01}{getTotalLength}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{82     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_input_stream_aabacc50cde9fcabe4752c796648fde49}{isExhausted}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{83     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_input_stream_aa5350c414bad6b97ae3b463a3401c0d6}{read}} (\textcolor{keywordtype}{void}* destBuffer, \textcolor{keywordtype}{int} maxBytesToRead) \textcolor{keyword}{override};}
+\DoxyCodeLine{84     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_input_stream_ab0d4a6eb965fe8ffa27d547c90a667f0}{skipNextBytes}} (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} numBytesToSkip) \textcolor{keyword}{override};}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86 \textcolor{keyword}{private}:}
+\DoxyCodeLine{87     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{88     \textcolor{keyword}{const} \textcolor{keywordtype}{void}* \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}};}
+\DoxyCodeLine{89     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegl_aad9a72deace31d0f7eb498f22443ec86}{dataSize}}, position = 0;}
+\DoxyCodeLine{90     \mbox{\hyperlink{class_memory_block}{MemoryBlock}} internalCopy;}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_memory_input_stream}{MemoryInputStream}})}
+\DoxyCodeLine{93 \};}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{96 }
+
+\end{DoxyCode}

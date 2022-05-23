@@ -1,0 +1,143 @@
+\hypertarget{class_sampler_sound}{}\doxysection{Sampler\+Sound Class Reference}
+\label{class_sampler_sound}\index{SamplerSound@{SamplerSound}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Sampler.\+h$>$}
+
+Inheritance diagram for Sampler\+Sound\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{d1/df8/class_sampler_sound}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_sampler_sound_ad26e044243f4802000b8dcbb6dd15cee}{Sampler\+Sound}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&name, \mbox{\hyperlink{class_audio_format_reader}{Audio\+Format\+Reader}} \&source, \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_big_integer}{Big\+Integer}} \&midi\+Notes, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} midi\+Note\+For\+Normal\+Pitch, double attack\+Time\+Secs, double release\+Time\+Secs, double max\+Sample\+Length\+Seconds)
+\item 
+\mbox{\hyperlink{class_sampler_sound_a3f2bb996eedf799c2bbb0f2f01dfa3e1}{$\sim$\+Sampler\+Sound}} () override
+\item 
+\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \& \mbox{\hyperlink{class_sampler_sound_aba3dcdb98e08eb4dd78a5586bc9fbe9d}{get\+Name}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{class_audio_buffer}{Audio\+Buffer}}$<$ float $>$ $\ast$ \mbox{\hyperlink{class_sampler_sound_a2abe71ccaf4f5a1e7bab533dcfc0a2e4}{get\+Audio\+Data}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_sampler_sound_ae4bee9efd5149d6c14dd3635535c703a}{set\+Envelope\+Parameters}} (\mbox{\hyperlink{struct_a_d_s_r_1_1_parameters}{ADSR\+::\+Parameters}} parameters\+To\+Use)
+\item 
+bool \mbox{\hyperlink{class_sampler_sound_ac579ceea6ee78e6dae8026b4b9b33038}{applies\+To\+Note}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} midi\+Note\+Number) override
+\item 
+bool \mbox{\hyperlink{class_sampler_sound_a6f69ffcba849228995ab63d93439a339}{applies\+To\+Channel}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} midi\+Channel) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_sampler_sound_a86dcdd68bbb824d51dca4e79bd39642c}{Sampler\+Voice}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+A subclass of \mbox{\hyperlink{class_synthesiser_sound}{Synthesiser\+Sound}} that represents a sampled audio clip.
+
+This is a pretty basic sampler, and just attempts to load the whole audio stream into memory.
+
+To use it, create a \mbox{\hyperlink{class_synthesiser}{Synthesiser}}, add some \mbox{\hyperlink{class_sampler_voice}{Sampler\+Voice}} objects to it, then give it some Sampled\+Sound objects to play.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_sampler_voice}{Sampler\+Voice}}, \mbox{\hyperlink{class_synthesiser}{Synthesiser}}, \mbox{\hyperlink{class_synthesiser_sound}{Synthesiser\+Sound}}
+\end{DoxySeeAlso}
+@tags\{Audio\} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_sampler_sound_ad26e044243f4802000b8dcbb6dd15cee}\label{class_sampler_sound_ad26e044243f4802000b8dcbb6dd15cee}} 
+\index{SamplerSound@{SamplerSound}!SamplerSound@{SamplerSound}}
+\index{SamplerSound@{SamplerSound}!SamplerSound@{SamplerSound}}
+\doxysubsubsection{\texorpdfstring{SamplerSound()}{SamplerSound()}}
+{\footnotesize\ttfamily Sampler\+Sound\+::\+Sampler\+Sound (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&}]{name,  }\item[{\mbox{\hyperlink{class_audio_format_reader}{Audio\+Format\+Reader}} \&}]{source,  }\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_big_integer}{Big\+Integer}} \&}]{midi\+Notes,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{midi\+Note\+For\+Normal\+Pitch,  }\item[{double}]{attack\+Time\+Secs,  }\item[{double}]{release\+Time\+Secs,  }\item[{double}]{max\+Sample\+Length\+Seconds }\end{DoxyParamCaption})}
+
+Creates a sampled sound from an audio reader.
+
+This will attempt to load the audio from the source into memory and store it in this object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & a name for the sample \\
+\hline
+{\em source} & the audio to load. This object can be safely deleted by the caller after this constructor returns \\
+\hline
+{\em midi\+Notes} & the set of midi keys that this sound should be played on. This is used by the \mbox{\hyperlink{class_synthesiser_sound_abc192aba46964c8539206db1e6f6f747}{Synthesiser\+Sound\+::applies\+To\+Note()}} method \\
+\hline
+{\em midi\+Note\+For\+Normal\+Pitch} & the midi note at which the sample should be played with its natural rate. All other notes will be pitched up or down relative to this one \\
+\hline
+{\em attack\+Time\+Secs} & the attack (fade-\/in) time, in seconds \\
+\hline
+{\em release\+Time\+Secs} & the decay (fade-\/out) time, in seconds \\
+\hline
+{\em max\+Sample\+Length\+Seconds} & a maximum length of audio to read from the audio source, in seconds \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_sampler_sound_a3f2bb996eedf799c2bbb0f2f01dfa3e1}\label{class_sampler_sound_a3f2bb996eedf799c2bbb0f2f01dfa3e1}} 
+\index{SamplerSound@{SamplerSound}!````~SamplerSound@{$\sim$SamplerSound}}
+\index{````~SamplerSound@{$\sim$SamplerSound}!SamplerSound@{SamplerSound}}
+\doxysubsubsection{\texorpdfstring{$\sim$SamplerSound()}{~SamplerSound()}}
+{\footnotesize\ttfamily Sampler\+Sound\+::$\sim$\+Sampler\+Sound (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+Destructor. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_sampler_sound_a6f69ffcba849228995ab63d93439a339}\label{class_sampler_sound_a6f69ffcba849228995ab63d93439a339}} 
+\index{SamplerSound@{SamplerSound}!appliesToChannel@{appliesToChannel}}
+\index{appliesToChannel@{appliesToChannel}!SamplerSound@{SamplerSound}}
+\doxysubsubsection{\texorpdfstring{appliesToChannel()}{appliesToChannel()}}
+{\footnotesize\ttfamily bool Sampler\+Sound\+::applies\+To\+Channel (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{midi\+Channel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Returns true if the sound should be triggered by midi events on a given channel.
+
+The \mbox{\hyperlink{class_synthesiser}{Synthesiser}} will use this information when deciding which sounds to trigger for a given note. 
+
+Implements \mbox{\hyperlink{class_synthesiser_sound_a3910c5fd83df051b05925bbddf4960cd}{Synthesiser\+Sound}}.
+
+\mbox{\Hypertarget{class_sampler_sound_ac579ceea6ee78e6dae8026b4b9b33038}\label{class_sampler_sound_ac579ceea6ee78e6dae8026b4b9b33038}} 
+\index{SamplerSound@{SamplerSound}!appliesToNote@{appliesToNote}}
+\index{appliesToNote@{appliesToNote}!SamplerSound@{SamplerSound}}
+\doxysubsubsection{\texorpdfstring{appliesToNote()}{appliesToNote()}}
+{\footnotesize\ttfamily bool Sampler\+Sound\+::applies\+To\+Note (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{midi\+Note\+Number }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Returns true if this sound should be played when a given midi note is pressed.
+
+The \mbox{\hyperlink{class_synthesiser}{Synthesiser}} will use this information when deciding which sounds to trigger for a given note. 
+
+Implements \mbox{\hyperlink{class_synthesiser_sound_abc192aba46964c8539206db1e6f6f747}{Synthesiser\+Sound}}.
+
+\mbox{\Hypertarget{class_sampler_sound_a2abe71ccaf4f5a1e7bab533dcfc0a2e4}\label{class_sampler_sound_a2abe71ccaf4f5a1e7bab533dcfc0a2e4}} 
+\index{SamplerSound@{SamplerSound}!getAudioData@{getAudioData}}
+\index{getAudioData@{getAudioData}!SamplerSound@{SamplerSound}}
+\doxysubsubsection{\texorpdfstring{getAudioData()}{getAudioData()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_audio_buffer}{Audio\+Buffer}}$<$ float $>$ $\ast$ Sampler\+Sound\+::get\+Audio\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Returns the audio sample data. This could return nullptr if there was a problem loading the data. \mbox{\Hypertarget{class_sampler_sound_aba3dcdb98e08eb4dd78a5586bc9fbe9d}\label{class_sampler_sound_aba3dcdb98e08eb4dd78a5586bc9fbe9d}} 
+\index{SamplerSound@{SamplerSound}!getName@{getName}}
+\index{getName@{getName}!SamplerSound@{SamplerSound}}
+\doxysubsubsection{\texorpdfstring{getName()}{getName()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \& Sampler\+Sound\+::get\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Returns the sample\textquotesingle{}s name \mbox{\Hypertarget{class_sampler_sound_ae4bee9efd5149d6c14dd3635535c703a}\label{class_sampler_sound_ae4bee9efd5149d6c14dd3635535c703a}} 
+\index{SamplerSound@{SamplerSound}!setEnvelopeParameters@{setEnvelopeParameters}}
+\index{setEnvelopeParameters@{setEnvelopeParameters}!SamplerSound@{SamplerSound}}
+\doxysubsubsection{\texorpdfstring{setEnvelopeParameters()}{setEnvelopeParameters()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Sampler\+Sound\+::set\+Envelope\+Parameters (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_a_d_s_r_1_1_parameters}{ADSR\+::\+Parameters}}}]{parameters\+To\+Use }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Changes the parameters of the \mbox{\hyperlink{class_a_d_s_r}{ADSR}} envelope which will be applied to the sample. 
+
+\doxysubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{class_sampler_sound_a86dcdd68bbb824d51dca4e79bd39642c}\label{class_sampler_sound_a86dcdd68bbb824d51dca4e79bd39642c}} 
+\index{SamplerSound@{SamplerSound}!SamplerVoice@{SamplerVoice}}
+\index{SamplerVoice@{SamplerVoice}!SamplerSound@{SamplerSound}}
+\doxysubsubsection{\texorpdfstring{SamplerVoice}{SamplerVoice}}
+{\footnotesize\ttfamily friend class \mbox{\hyperlink{class_sampler_voice}{Sampler\+Voice}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+audio\+\_\+formats/sampler/\mbox{\hyperlink{juce___sampler_8h}{juce\+\_\+\+Sampler.\+h}}\item 
+build/juce\+\_\+audio\+\_\+formats/sampler/\mbox{\hyperlink{juce___sampler_8cpp}{juce\+\_\+\+Sampler.\+cpp}}\end{DoxyCompactItemize}

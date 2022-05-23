@@ -1,0 +1,103 @@
+\hypertarget{class_spin_lock}{}\doxysection{Spin\+Lock Class Reference}
+\label{class_spin_lock}\index{SpinLock@{SpinLock}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Spin\+Lock.\+h$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{class_spin_lock_aa59812d716b0ec23ca34ea426c3e854d}{Scoped\+Lock\+Type}} = \mbox{\hyperlink{class_generic_scoped_lock}{Generic\+Scoped\+Lock}}$<$ \mbox{\hyperlink{class_spin_lock}{Spin\+Lock}} $>$
+\item 
+using \mbox{\hyperlink{class_spin_lock_a8d1225ea615f305552a2921bc8fa9148}{Scoped\+Unlock\+Type}} = \mbox{\hyperlink{class_generic_scoped_unlock}{Generic\+Scoped\+Unlock}}$<$ \mbox{\hyperlink{class_spin_lock}{Spin\+Lock}} $>$
+\item 
+using \mbox{\hyperlink{class_spin_lock_ae061c0c3f45847df70c6eaa9311d4465}{Scoped\+Try\+Lock\+Type}} = \mbox{\hyperlink{class_generic_scoped_try_lock}{Generic\+Scoped\+Try\+Lock}}$<$ \mbox{\hyperlink{class_spin_lock}{Spin\+Lock}} $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_spin_lock_acea76678a5c2d99fc671e57c3726371c}{Spin\+Lock}} ()=default
+\item 
+\mbox{\hyperlink{class_spin_lock_a4a830f6f53914c00e2f56510a5565529}{$\sim$\+Spin\+Lock}} ()=default
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_spin_lock_a9079933ef4fdd1527fd0bf90f1062e02}{enter}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_spin_lock_a4581a24b50dad1a9803b19f65af70aaf}{try\+Enter}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_spin_lock_a13a3a2f0d2a659b493a9c6e93e8d95f8}{exit}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A simple spin-\/lock class that can be used as a simple, low-\/overhead mutex for uncontended situations.
+
+Note that unlike a \mbox{\hyperlink{class_critical_section}{Critical\+Section}}, this type of lock is not re-\/entrant, and may be less efficient when used in a highly contended situation, but it\textquotesingle{}s very small and requires almost no initialisation. It\textquotesingle{}s most appropriate for simple situations where you\textquotesingle{}re only going to hold the lock for a very brief time.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_critical_section}{Critical\+Section}}
+\end{DoxySeeAlso}
+@tags\{Core\} 
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{class_spin_lock_aa59812d716b0ec23ca34ea426c3e854d}\label{class_spin_lock_aa59812d716b0ec23ca34ea426c3e854d}} 
+\index{SpinLock@{SpinLock}!ScopedLockType@{ScopedLockType}}
+\index{ScopedLockType@{ScopedLockType}!SpinLock@{SpinLock}}
+\doxysubsubsection{\texorpdfstring{ScopedLockType}{ScopedLockType}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{class_spin_lock_aa59812d716b0ec23ca34ea426c3e854d}{Spin\+Lock\+::\+Scoped\+Lock\+Type}} =  \mbox{\hyperlink{class_generic_scoped_lock}{Generic\+Scoped\+Lock}}$<$\mbox{\hyperlink{class_spin_lock}{Spin\+Lock}}$>$}
+
+Provides the type of scoped lock to use for locking a \mbox{\hyperlink{class_spin_lock}{Spin\+Lock}}. \mbox{\Hypertarget{class_spin_lock_ae061c0c3f45847df70c6eaa9311d4465}\label{class_spin_lock_ae061c0c3f45847df70c6eaa9311d4465}} 
+\index{SpinLock@{SpinLock}!ScopedTryLockType@{ScopedTryLockType}}
+\index{ScopedTryLockType@{ScopedTryLockType}!SpinLock@{SpinLock}}
+\doxysubsubsection{\texorpdfstring{ScopedTryLockType}{ScopedTryLockType}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{class_spin_lock_ae061c0c3f45847df70c6eaa9311d4465}{Spin\+Lock\+::\+Scoped\+Try\+Lock\+Type}} =  \mbox{\hyperlink{class_generic_scoped_try_lock}{Generic\+Scoped\+Try\+Lock}}$<$\mbox{\hyperlink{class_spin_lock}{Spin\+Lock}}$>$}
+
+Provides the type of scoped try-\/lock to use for locking a \mbox{\hyperlink{class_spin_lock}{Spin\+Lock}}. \mbox{\Hypertarget{class_spin_lock_a8d1225ea615f305552a2921bc8fa9148}\label{class_spin_lock_a8d1225ea615f305552a2921bc8fa9148}} 
+\index{SpinLock@{SpinLock}!ScopedUnlockType@{ScopedUnlockType}}
+\index{ScopedUnlockType@{ScopedUnlockType}!SpinLock@{SpinLock}}
+\doxysubsubsection{\texorpdfstring{ScopedUnlockType}{ScopedUnlockType}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{class_spin_lock_a8d1225ea615f305552a2921bc8fa9148}{Spin\+Lock\+::\+Scoped\+Unlock\+Type}} =  \mbox{\hyperlink{class_generic_scoped_unlock}{Generic\+Scoped\+Unlock}}$<$\mbox{\hyperlink{class_spin_lock}{Spin\+Lock}}$>$}
+
+Provides the type of scoped unlocker to use with a \mbox{\hyperlink{class_spin_lock}{Spin\+Lock}}. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_spin_lock_acea76678a5c2d99fc671e57c3726371c}\label{class_spin_lock_acea76678a5c2d99fc671e57c3726371c}} 
+\index{SpinLock@{SpinLock}!SpinLock@{SpinLock}}
+\index{SpinLock@{SpinLock}!SpinLock@{SpinLock}}
+\doxysubsubsection{\texorpdfstring{SpinLock()}{SpinLock()}}
+{\footnotesize\ttfamily Spin\+Lock\+::\+Spin\+Lock (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [default]}}
+
+\mbox{\Hypertarget{class_spin_lock_a4a830f6f53914c00e2f56510a5565529}\label{class_spin_lock_a4a830f6f53914c00e2f56510a5565529}} 
+\index{SpinLock@{SpinLock}!````~SpinLock@{$\sim$SpinLock}}
+\index{````~SpinLock@{$\sim$SpinLock}!SpinLock@{SpinLock}}
+\doxysubsubsection{\texorpdfstring{$\sim$SpinLock()}{~SpinLock()}}
+{\footnotesize\ttfamily Spin\+Lock\+::$\sim$\+Spin\+Lock (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_spin_lock_a9079933ef4fdd1527fd0bf90f1062e02}\label{class_spin_lock_a9079933ef4fdd1527fd0bf90f1062e02}} 
+\index{SpinLock@{SpinLock}!enter@{enter}}
+\index{enter@{enter}!SpinLock@{SpinLock}}
+\doxysubsubsection{\texorpdfstring{enter()}{enter()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Spin\+Lock\+::enter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Acquires the lock. This will block until the lock has been successfully acquired by this thread. Note that a \mbox{\hyperlink{class_spin_lock}{Spin\+Lock}} is NOT re-\/entrant, and is not smart enough to know whether the caller thread already has the lock -\/ so if a thread tries to acquire a lock that it already holds, this method will never return!
+
+It\textquotesingle{}s strongly recommended that you never call this method directly -\/ instead use the Scoped\+Lock\+Type class to manage the locking using an RAII pattern instead. \mbox{\Hypertarget{class_spin_lock_a13a3a2f0d2a659b493a9c6e93e8d95f8}\label{class_spin_lock_a13a3a2f0d2a659b493a9c6e93e8d95f8}} 
+\index{SpinLock@{SpinLock}!exit@{exit}}
+\index{exit@{exit}!SpinLock@{SpinLock}}
+\doxysubsubsection{\texorpdfstring{exit()}{exit()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Spin\+Lock\+::exit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Releases the lock. \mbox{\Hypertarget{class_spin_lock_a4581a24b50dad1a9803b19f65af70aaf}\label{class_spin_lock_a4581a24b50dad1a9803b19f65af70aaf}} 
+\index{SpinLock@{SpinLock}!tryEnter@{tryEnter}}
+\index{tryEnter@{tryEnter}!SpinLock@{SpinLock}}
+\doxysubsubsection{\texorpdfstring{tryEnter()}{tryEnter()}}
+{\footnotesize\ttfamily bool Spin\+Lock\+::try\+Enter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Attempts to acquire the lock, returning true if this was successful. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+core/threads/\mbox{\hyperlink{juce___spin_lock_8h}{juce\+\_\+\+Spin\+Lock.\+h}}\item 
+build/juce\+\_\+core/threads/\mbox{\hyperlink{juce___thread_8cpp}{juce\+\_\+\+Thread.\+cpp}}\end{DoxyCompactItemize}

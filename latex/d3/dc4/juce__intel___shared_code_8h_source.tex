@@ -1,0 +1,114 @@
+\hypertarget{juce__intel___shared_code_8h_source}{}\doxysection{juce\+\_\+intel\+\_\+\+Shared\+Code.\+h}
+\label{juce__intel___shared_code_8h_source}\index{build/juce\_core/native/juce\_intel\_SharedCode.h@{build/juce\_core/native/juce\_intel\_SharedCode.h}}
+\mbox{\hyperlink{juce__intel___shared_code_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{5 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{6 \textcolor{comment}{}}
+\DoxyCodeLine{7 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{8 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{9 \textcolor{comment}{}}
+\DoxyCodeLine{10 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{11 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{12 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{13 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{14 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{15 \textcolor{comment}{}}
+\DoxyCodeLine{16 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{17 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{18 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{21 \textcolor{comment}{*/}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacejuce}{juce}}}
+\DoxyCodeLine{24 \{}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#if JUCE\_INTEL \&\& ! JUCE\_NO\_INLINE\_ASM}}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{keyword}{namespace }SystemStatsHelpers}
+\DoxyCodeLine{29 \{}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31 \textcolor{keyword}{static} \textcolor{keywordtype}{void} doCPUID (\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}}\& \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}}\& \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}, \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}}\& \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}, \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}}\& d, \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}})}
+\DoxyCodeLine{32 \{}
+\DoxyCodeLine{33     \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} la = \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, lb = \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}, lc = \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}, ld = d;}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35 \textcolor{preprocessor}{   \#if JUCE\_32BIT \&\& defined (\_\_pic\_\_)}}
+\DoxyCodeLine{36     \textcolor{keyword}{asm} (\textcolor{stringliteral}{"{}mov \%\%ebx, \%\%edi\(\backslash\)n"{}}}
+\DoxyCodeLine{37          \textcolor{stringliteral}{"{}cpuid\(\backslash\)n"{}}}
+\DoxyCodeLine{38          \textcolor{stringliteral}{"{}xchg \%\%edi, \%\%ebx\(\backslash\)n"{}}}
+\DoxyCodeLine{39            : \textcolor{stringliteral}{"{}=a"{}} (la), \textcolor{stringliteral}{"{}=D"{}} (lb), \textcolor{stringliteral}{"{}=c"{}} (lc), \textcolor{stringliteral}{"{}=d"{}} (ld)}
+\DoxyCodeLine{40            : \textcolor{stringliteral}{"{}a"{}} (\mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}}), \textcolor{stringliteral}{"{}c"{}} (0));}
+\DoxyCodeLine{41 \textcolor{preprocessor}{   \#else}}
+\DoxyCodeLine{42     \textcolor{keyword}{asm} (\textcolor{stringliteral}{"{}cpuid\(\backslash\)n"{}}}
+\DoxyCodeLine{43            : \textcolor{stringliteral}{"{}=a"{}} (la), \textcolor{stringliteral}{"{}=b"{}} (lb), \textcolor{stringliteral}{"{}=c"{}} (lc), \textcolor{stringliteral}{"{}=d"{}} (ld)}
+\DoxyCodeLine{44            : \textcolor{stringliteral}{"{}a"{}} (\mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}}), \textcolor{stringliteral}{"{}c"{}} (0));}
+\DoxyCodeLine{45 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47     \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} = la; \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} = lb; \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} = lc; d = ld;}
+\DoxyCodeLine{48 \}}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50 \textcolor{keyword}{static} \textcolor{keywordtype}{void} getCPUInfo (\textcolor{keywordtype}{bool}\& hasMMX,}
+\DoxyCodeLine{51                         \textcolor{keywordtype}{bool}\& hasSSE,}
+\DoxyCodeLine{52                         \textcolor{keywordtype}{bool}\& hasSSE2,}
+\DoxyCodeLine{53                         \textcolor{keywordtype}{bool}\& has3DNow,}
+\DoxyCodeLine{54                         \textcolor{keywordtype}{bool}\& hasSSE3,}
+\DoxyCodeLine{55                         \textcolor{keywordtype}{bool}\& hasSSSE3,}
+\DoxyCodeLine{56                         \textcolor{keywordtype}{bool}\& hasFMA3,}
+\DoxyCodeLine{57                         \textcolor{keywordtype}{bool}\& hasSSE41,}
+\DoxyCodeLine{58                         \textcolor{keywordtype}{bool}\& hasSSE42,}
+\DoxyCodeLine{59                         \textcolor{keywordtype}{bool}\& hasAVX,}
+\DoxyCodeLine{60                         \textcolor{keywordtype}{bool}\& hasFMA4,}
+\DoxyCodeLine{61                         \textcolor{keywordtype}{bool}\& hasAVX2,}
+\DoxyCodeLine{62                         \textcolor{keywordtype}{bool}\& hasAVX512F,}
+\DoxyCodeLine{63                         \textcolor{keywordtype}{bool}\& hasAVX512DQ,}
+\DoxyCodeLine{64                         \textcolor{keywordtype}{bool}\& hasAVX512IFMA,}
+\DoxyCodeLine{65                         \textcolor{keywordtype}{bool}\& hasAVX512PF,}
+\DoxyCodeLine{66                         \textcolor{keywordtype}{bool}\& hasAVX512ER,}
+\DoxyCodeLine{67                         \textcolor{keywordtype}{bool}\& hasAVX512CD,}
+\DoxyCodeLine{68                         \textcolor{keywordtype}{bool}\& hasAVX512BW,}
+\DoxyCodeLine{69                         \textcolor{keywordtype}{bool}\& hasAVX512VL,}
+\DoxyCodeLine{70                         \textcolor{keywordtype}{bool}\& hasAVX512VBMI,}
+\DoxyCodeLine{71                         \textcolor{keywordtype}{bool}\& hasAVX512VPOPCNTDQ)}
+\DoxyCodeLine{72 \{}
+\DoxyCodeLine{73     \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} = 0, \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} = 0, d = 0, \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} = 0;}
+\DoxyCodeLine{74     SystemStatsHelpers::doCPUID (\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}, \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}, d, 1);}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76     hasMMX   = (d \& (1u << 23)) != 0;}
+\DoxyCodeLine{77     hasSSE   = (d \& (1u << 25)) != 0;}
+\DoxyCodeLine{78     hasSSE2  = (d \& (1u << 26)) != 0;}
+\DoxyCodeLine{79     has3DNow = (\mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} \& (1u << 31)) != 0;}
+\DoxyCodeLine{80     hasSSE3  = (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} \& (1u <<  0)) != 0;}
+\DoxyCodeLine{81     hasSSSE3 = (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} \& (1u <<  9)) != 0;}
+\DoxyCodeLine{82     hasFMA3  = (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} \& (1u << 12)) != 0;}
+\DoxyCodeLine{83     hasSSE41 = (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} \& (1u << 19)) != 0;}
+\DoxyCodeLine{84     hasSSE42 = (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} \& (1u << 20)) != 0;}
+\DoxyCodeLine{85     hasAVX   = (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} \& (1u << 28)) != 0;}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87     SystemStatsHelpers::doCPUID (\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}, \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}, d, 0x80000001);}
+\DoxyCodeLine{88     hasFMA4  = (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} \& (1u << 16)) != 0;}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90     SystemStatsHelpers::doCPUID (\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}, \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}, d, 7);}
+\DoxyCodeLine{91     hasAVX2            = (\mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} \& (1u <<  5)) != 0;}
+\DoxyCodeLine{92     hasAVX512F         = (\mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} \& (1u << 16)) != 0;}
+\DoxyCodeLine{93     hasAVX512DQ        = (\mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} \& (1u << 17)) != 0;}
+\DoxyCodeLine{94     hasAVX512IFMA      = (\mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} \& (1u << 21)) != 0;}
+\DoxyCodeLine{95     hasAVX512PF        = (\mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} \& (1u << 26)) != 0;}
+\DoxyCodeLine{96     hasAVX512ER        = (\mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} \& (1u << 27)) != 0;}
+\DoxyCodeLine{97     hasAVX512CD        = (\mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} \& (1u << 28)) != 0;}
+\DoxyCodeLine{98     hasAVX512BW        = (\mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} \& (1u << 30)) != 0;}
+\DoxyCodeLine{99     hasAVX512VL        = (\mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} \& (1u << 31)) != 0;}
+\DoxyCodeLine{100     hasAVX512VBMI      = (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} \& (1u <<  1)) != 0;}
+\DoxyCodeLine{101     hasAVX512VPOPCNTDQ = (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} \& (1u << 14)) != 0;}
+\DoxyCodeLine{102 \}}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104 \} \textcolor{comment}{// namespace SystemStatsHelpers}}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{106 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{108 \} \textcolor{comment}{// namespace juce}}
+
+\end{DoxyCode}

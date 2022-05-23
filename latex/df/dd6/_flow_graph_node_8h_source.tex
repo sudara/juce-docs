@@ -1,0 +1,314 @@
+\hypertarget{_flow_graph_node_8h_source}{}\doxysection{Flow\+Graph\+Node.\+h}
+\label{_flow_graph_node_8h_source}\index{build/juce\_audio\_devices/native/oboe/src/flowgraph/FlowGraphNode.h@{build/juce\_audio\_devices/native/oboe/src/flowgraph/FlowGraphNode.h}}
+\mbox{\hyperlink{_flow_graph_node_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{ * Copyright 2015 The Android Open Source Project}}
+\DoxyCodeLine{3 \textcolor{comment}{ *}}
+\DoxyCodeLine{4 \textcolor{comment}{ * Licensed under the Apache License, Version 2.0 (the "{}License"{});}}
+\DoxyCodeLine{5 \textcolor{comment}{ * you may not use this file except in compliance with the License.}}
+\DoxyCodeLine{6 \textcolor{comment}{ * You may obtain a copy of the License at}}
+\DoxyCodeLine{7 \textcolor{comment}{ *}}
+\DoxyCodeLine{8 \textcolor{comment}{ *      http://www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{9 \textcolor{comment}{ *}}
+\DoxyCodeLine{10 \textcolor{comment}{ * Unless required by applicable law or agreed to in writing, software}}
+\DoxyCodeLine{11 \textcolor{comment}{ * distributed under the License is distributed on an "{}AS IS"{} BASIS,}}
+\DoxyCodeLine{12 \textcolor{comment}{ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.}}
+\DoxyCodeLine{13 \textcolor{comment}{ * See the License for the specific language governing permissions and}}
+\DoxyCodeLine{14 \textcolor{comment}{ * limitations under the License.}}
+\DoxyCodeLine{15 \textcolor{comment}{ */}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{comment}{/*}}
+\DoxyCodeLine{18 \textcolor{comment}{ * FlowGraph.h}}
+\DoxyCodeLine{19 \textcolor{comment}{ *}}
+\DoxyCodeLine{20 \textcolor{comment}{ * Processing node and ports that can be used in a simple data flow graph.}}
+\DoxyCodeLine{21 \textcolor{comment}{ * This was designed to work with audio but could be used for other}}
+\DoxyCodeLine{22 \textcolor{comment}{ * types of data.}}
+\DoxyCodeLine{23 \textcolor{comment}{ */}}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#ifndef FLOWGRAPH\_FLOW\_GRAPH\_NODE\_H}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#define FLOWGRAPH\_FLOW\_GRAPH\_NODE\_H}}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#include <cassert>}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#include <cstring>}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#include <math.h>}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#include <sys/types.h>}}
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#include <time.h>}}
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#include <unistd.h>}}
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37 \textcolor{comment}{// TODO Move these classes into separate files.}}
+\DoxyCodeLine{38 \textcolor{comment}{// TODO Review use of raw pointers for connect(). Maybe use smart pointers but need to avoid}}
+\DoxyCodeLine{39 \textcolor{comment}{//      run-\/time deallocation in audio thread.}}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41 \textcolor{comment}{// Set this to 1 if using it inside the Android framework.}}
+\DoxyCodeLine{42 \textcolor{comment}{// This code is kept here so that it can be moved easily between Oboe and AAudio.}}
+\DoxyCodeLine{43 \textcolor{preprocessor}{\#ifndef FLOWGRAPH\_ANDROID\_INTERNAL}}
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#define FLOWGRAPH\_ANDROID\_INTERNAL 0}}
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47 \textcolor{comment}{// Set this to a name that will prevent AAudio from calling into Oboe.}}
+\DoxyCodeLine{48 \textcolor{comment}{// AAudio and Oboe both use a version of this flowgraph package.}}
+\DoxyCodeLine{49 \textcolor{comment}{// There was a problem in the unit tests where AAudio would call a constructor}}
+\DoxyCodeLine{50 \textcolor{comment}{// in AAudio and then call a destructor in Oboe! That caused memory corruption.}}
+\DoxyCodeLine{51 \textcolor{comment}{// For more details, see Issue \#930.}}
+\DoxyCodeLine{52 \textcolor{preprocessor}{\#ifndef FLOWGRAPH\_OUTER\_NAMESPACE}}
+\DoxyCodeLine{53 \textcolor{preprocessor}{\#define FLOWGRAPH\_OUTER\_NAMESPACE oboe}}
+\DoxyCodeLine{54 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespace_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e}{FLOWGRAPH\_OUTER\_NAMESPACE}} \{}
+\DoxyCodeLine{57 \textcolor{keyword}{namespace }flowgraph \{}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59 \textcolor{comment}{// Default block size that can be overridden when the FlowGraphPortFloat is created.}}
+\DoxyCodeLine{60 \textcolor{comment}{// If it is too small then we will have too much overhead from switching between nodes.}}
+\DoxyCodeLine{61 \textcolor{comment}{// If it is too high then we will thrash the caches.}}
+\DoxyCodeLine{62 \textcolor{keyword}{constexpr} \textcolor{keywordtype}{int} \mbox{\hyperlink{namespace_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_ab0aae57c11baa428f12960feab7849be}{kDefaultBufferSize}} = 8; \textcolor{comment}{// arbitrary}}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64 \textcolor{keyword}{class }\mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port}{FlowGraphPort}};}
+\DoxyCodeLine{65 \textcolor{keyword}{class }\mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float_input}{FlowGraphPortFloatInput}};}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67 \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{71 \textcolor{keyword}{class }\mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_node}{FlowGraphNode}} \{}
+\DoxyCodeLine{72 \textcolor{keyword}{public}:}
+\DoxyCodeLine{73     \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_node_a709f0f1389e0ec30d6fd7c78d6529a11}{FlowGraphNode}}() \{\}}
+\DoxyCodeLine{74     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_node_a1b63ad2d64a3ff71c37c6a2bcbe4d8c5}{\string~FlowGraphNode}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{83     \textcolor{keyword}{virtual} int32\_t \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_node_a7c97375e88969937f967d9c39f42fd7a}{onProcess}}(int32\_t numFrames) = 0;}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{96     int32\_t \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_node_a14cebd80e44d32bd50203987c70cb1e1}{pullData}}(int32\_t numFrames, int64\_t callCount);}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{103     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_node_a42648a0b2a373e9275801dcacef71c2e}{pullReset}}();}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{108     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_node_a839da35719d0d208f97fae05f5bf6ed6}{reset}}();}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_node_a0484b87c98398a76fd5e218d90259c31}{addInputPort}}(\mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port}{FlowGraphPort}} \&\mbox{\hyperlink{namespacejuce_a6d327326870c2c2f1ca1d681842b923f}{port}}) \{}
+\DoxyCodeLine{111         \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_node_a63415281b1bc57184e138003601d40ba}{mInputPorts}}.push\_back(\mbox{\hyperlink{namespacejuce_a6d327326870c2c2f1ca1d681842b923f}{port}});}
+\DoxyCodeLine{112     \}}
+\DoxyCodeLine{113 }
+\DoxyCodeLine{114     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_node_a0f81e754b645881e3aff9ed2ee2c1d64}{isDataPulledAutomatically}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{115         \textcolor{keywordflow}{return} mDataPulledAutomatically;}
+\DoxyCodeLine{116     \}}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{127     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_node_adb4af7763825c424d577cbd5e3a46a5b}{setDataPulledAutomatically}}(\textcolor{keywordtype}{bool} automatic) \{}
+\DoxyCodeLine{128         mDataPulledAutomatically = automatic;}
+\DoxyCodeLine{129     \}}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{131     \textcolor{keyword}{virtual} \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_node_a2b51ca3a8b14c24b39e1641ef3e3267d}{getName}}() \{}
+\DoxyCodeLine{132         \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}FlowGraph"{}};}
+\DoxyCodeLine{133     \}}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135     int64\_t \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_node_af68f1de4dd20f906b9c378c4bfcd0814}{getLastCallCount}}() \{}
+\DoxyCodeLine{136         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_node_a8f7258de362a617d240fd39c72d78f2d}{mLastCallCount}};}
+\DoxyCodeLine{137     \}}
+\DoxyCodeLine{138 }
+\DoxyCodeLine{139 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{141     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} int64\_t  \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_node_a5dfd7fcc1b1450abf7114642d49e279e}{kInitialCallCount}} = -\/1;}
+\DoxyCodeLine{142     int64\_t  \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_node_a8f7258de362a617d240fd39c72d78f2d}{mLastCallCount}} = \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_node_a5dfd7fcc1b1450abf7114642d49e279e}{kInitialCallCount}};}
+\DoxyCodeLine{143 }
+\DoxyCodeLine{144     std::vector<std::reference\_wrapper<FlowGraphPort>> \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_node_a63415281b1bc57184e138003601d40ba}{mInputPorts}};}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{146 \textcolor{keyword}{private}:}
+\DoxyCodeLine{147     \textcolor{keywordtype}{bool}     mDataPulledAutomatically = \textcolor{keyword}{true};}
+\DoxyCodeLine{148     \textcolor{keywordtype}{bool}     mBlockRecursion = \textcolor{keyword}{false};}
+\DoxyCodeLine{149     int32\_t  mLastFrameCount = 0;}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{151 \};}
+\DoxyCodeLine{152 }
+\DoxyCodeLine{153 \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{161 \textcolor{keyword}{class }\mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port}{FlowGraphPort}} \{}
+\DoxyCodeLine{162 \textcolor{keyword}{public}:}
+\DoxyCodeLine{163     \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_a135add1e1532a2849ffed01e01162c9d}{FlowGraphPort}}(\mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_node}{FlowGraphNode}} \&parent, int32\_t \mbox{\hyperlink{namespacejuce_1_1_c_d_reader_helpers_a8957802fbeeb9dec3e009fe78676213f}{samplesPerFrame}})}
+\DoxyCodeLine{164             : \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_a3373742cc4e59b80a69631701076d008}{mContainingNode}}(parent)}
+\DoxyCodeLine{165             , mSamplesPerFrame(\mbox{\hyperlink{namespacejuce_1_1_c_d_reader_helpers_a8957802fbeeb9dec3e009fe78676213f}{samplesPerFrame}}) \{}
+\DoxyCodeLine{166     \}}
+\DoxyCodeLine{167     }
+\DoxyCodeLine{168     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_aa09f637b4952a2fb8204b8b99673afb2}{\string~FlowGraphPort}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{169 }
+\DoxyCodeLine{170     \textcolor{comment}{// Ports are often declared public. So let's make them non-\/copyable.}}
+\DoxyCodeLine{171     \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_a2f2009bafadc4b965737a97ead173063}{FlowGraphPort}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port}{FlowGraphPort}}\&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{172     \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port}{FlowGraphPort}}\& \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_aec292d98db09bffffb0d2f9fdff4fea3}{operator=}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port}{FlowGraphPort}}\&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{173 }
+\DoxyCodeLine{174     int32\_t \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_ab47ccf22861b34ffa13fc0a6b1424023}{getSamplesPerFrame}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{175         \textcolor{keywordflow}{return} mSamplesPerFrame;}
+\DoxyCodeLine{176     \}}
+\DoxyCodeLine{177 }
+\DoxyCodeLine{178     \textcolor{keyword}{virtual} int32\_t \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_a6a26311b8e63024958294b94a11e554a}{pullData}}(int64\_t framePosition, int32\_t numFrames) = 0;}
+\DoxyCodeLine{179 }
+\DoxyCodeLine{180     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_a43091723855c78c1af0ac7e65cfe5948}{pullReset}}() \{\}}
+\DoxyCodeLine{181 }
+\DoxyCodeLine{182 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{183     \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_node}{FlowGraphNode}} \&\mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_a3373742cc4e59b80a69631701076d008}{mContainingNode}};}
+\DoxyCodeLine{184 }
+\DoxyCodeLine{185 \textcolor{keyword}{private}:}
+\DoxyCodeLine{186     \textcolor{keyword}{const} int32\_t    mSamplesPerFrame = 1;}
+\DoxyCodeLine{187 \};}
+\DoxyCodeLine{188 }
+\DoxyCodeLine{189 \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{196 \textcolor{keyword}{class }\mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float}{FlowGraphPortFloat}}  : \textcolor{keyword}{public} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port}{FlowGraphPort}} \{}
+\DoxyCodeLine{197 \textcolor{keyword}{public}:}
+\DoxyCodeLine{198     \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float_a09caa7c7d79a1a861f777e5bb45fb5f3}{FlowGraphPortFloat}}(\mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_node}{FlowGraphNode}} \&parent,}
+\DoxyCodeLine{199                    int32\_t \mbox{\hyperlink{namespacejuce_1_1_c_d_reader_helpers_a8957802fbeeb9dec3e009fe78676213f}{samplesPerFrame}},}
+\DoxyCodeLine{200                    int32\_t framesPerBuffer = \mbox{\hyperlink{namespace_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_ab0aae57c11baa428f12960feab7849be}{kDefaultBufferSize}}}
+\DoxyCodeLine{201                 );}
+\DoxyCodeLine{202 }
+\DoxyCodeLine{203     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float_a78a09de444bd44a76131a928e388f8f1}{\string~FlowGraphPortFloat}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{204 }
+\DoxyCodeLine{205     int32\_t \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float_ab897f1050cf72aec97087a8929fa0646}{getFramesPerBuffer}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{206         \textcolor{keywordflow}{return} mFramesPerBuffer;}
+\DoxyCodeLine{207     \}}
+\DoxyCodeLine{208 }
+\DoxyCodeLine{209 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{210 }
+\DoxyCodeLine{214     \textcolor{keyword}{virtual} \textcolor{keywordtype}{float} *\mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float_a1e997b1035bcc753742f4ac43b90ec72}{getBuffer}}() \{}
+\DoxyCodeLine{215         \textcolor{keywordflow}{return} mBuffer.get();}
+\DoxyCodeLine{216     \}}
+\DoxyCodeLine{217 }
+\DoxyCodeLine{218 \textcolor{keyword}{private}:}
+\DoxyCodeLine{219     \textcolor{keyword}{const} int32\_t    mFramesPerBuffer = 1;}
+\DoxyCodeLine{220     std::unique\_ptr<float[]> mBuffer; \textcolor{comment}{// allocated in constructor}}
+\DoxyCodeLine{221 \};}
+\DoxyCodeLine{222 }
+\DoxyCodeLine{223 \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{227 \textcolor{keyword}{class }\mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float_output}{FlowGraphPortFloatOutput}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float}{FlowGraphPortFloat}} \{}
+\DoxyCodeLine{228 \textcolor{keyword}{public}:}
+\DoxyCodeLine{229     \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float_output_ac19819b81badc0734421b4a5369f6df2}{FlowGraphPortFloatOutput}}(\mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_node}{FlowGraphNode}} \&parent, int32\_t \mbox{\hyperlink{namespacejuce_1_1_c_d_reader_helpers_a8957802fbeeb9dec3e009fe78676213f}{samplesPerFrame}})}
+\DoxyCodeLine{230             : \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float}{FlowGraphPortFloat}}(parent, \mbox{\hyperlink{namespacejuce_1_1_c_d_reader_helpers_a8957802fbeeb9dec3e009fe78676213f}{samplesPerFrame}}) \{}
+\DoxyCodeLine{231     \}}
+\DoxyCodeLine{232 }
+\DoxyCodeLine{233     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float_output_aad6cfabbddac46713650c0e92f94bb7a}{\string~FlowGraphPortFloatOutput}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{234 }
+\DoxyCodeLine{235     \textcolor{keyword}{using} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float_a1e997b1035bcc753742f4ac43b90ec72}{FlowGraphPortFloat::getBuffer}};}
+\DoxyCodeLine{236 }
+\DoxyCodeLine{247     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float_output_a911f340fe38346060c578aa535d36ec3}{connect}}(\mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float_input}{FlowGraphPortFloatInput}} *\mbox{\hyperlink{namespacejuce_a6d327326870c2c2f1ca1d681842b923f}{port}});}
+\DoxyCodeLine{248 }
+\DoxyCodeLine{253     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float_output_a96c2010292be3a4a214c233be96bfb57}{disconnect}}(\mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float_input}{FlowGraphPortFloatInput}} *\mbox{\hyperlink{namespacejuce_a6d327326870c2c2f1ca1d681842b923f}{port}});}
+\DoxyCodeLine{254 }
+\DoxyCodeLine{261     int32\_t \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float_output_af932b9c08a9527a6b259b4072cdb240b}{pullData}}(int64\_t framePosition, int32\_t numFrames) \textcolor{keyword}{override};}
+\DoxyCodeLine{262 }
+\DoxyCodeLine{263 }
+\DoxyCodeLine{264     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float_output_a7aa6051adf4ef01d458c3332f2e0c05d}{pullReset}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{265 }
+\DoxyCodeLine{266 \};}
+\DoxyCodeLine{267 }
+\DoxyCodeLine{268 \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{269 }
+\DoxyCodeLine{275 \textcolor{keyword}{class }\mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float_input}{FlowGraphPortFloatInput}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float}{FlowGraphPortFloat}} \{}
+\DoxyCodeLine{276 \textcolor{keyword}{public}:}
+\DoxyCodeLine{277     \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float_input_a193b056a645ce75f66018dc598b2bbe2}{FlowGraphPortFloatInput}}(\mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_node}{FlowGraphNode}} \&parent, int32\_t \mbox{\hyperlink{namespacejuce_1_1_c_d_reader_helpers_a8957802fbeeb9dec3e009fe78676213f}{samplesPerFrame}})}
+\DoxyCodeLine{278             : \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float}{FlowGraphPortFloat}}(parent, \mbox{\hyperlink{namespacejuce_1_1_c_d_reader_helpers_a8957802fbeeb9dec3e009fe78676213f}{samplesPerFrame}}) \{}
+\DoxyCodeLine{279         \textcolor{comment}{// Add to parent so it can pull data from each input.}}
+\DoxyCodeLine{280         parent.\mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_node_a0484b87c98398a76fd5e218d90259c31}{addInputPort}}(*\textcolor{keyword}{this});}
+\DoxyCodeLine{281     \}}
+\DoxyCodeLine{282 }
+\DoxyCodeLine{283     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float_input_a3ce261bb5122f865ba087933738a7a24}{\string~FlowGraphPortFloatInput}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{284 }
+\DoxyCodeLine{291     \textcolor{keywordtype}{float} *\mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float_input_a7677b6372dc6761203a29f64d9442a20}{getBuffer}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{292 }
+\DoxyCodeLine{298     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float_input_af82a42ecf8f096eff0c00086e11d8b73}{setValue}}(\textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}) \{}
+\DoxyCodeLine{299         \textcolor{keywordtype}{int} numFloats = \mbox{\hyperlink{namespace_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_ab0aae57c11baa428f12960feab7849be}{kDefaultBufferSize}} * \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_ab47ccf22861b34ffa13fc0a6b1424023}{getSamplesPerFrame}}();}
+\DoxyCodeLine{300         \textcolor{keywordtype}{float} *buffer = \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float_input_a7677b6372dc6761203a29f64d9442a20}{getBuffer}}();}
+\DoxyCodeLine{301         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < numFloats; i++) \{}
+\DoxyCodeLine{302             *buffer++ = \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}};}
+\DoxyCodeLine{303         \}}
+\DoxyCodeLine{304     \}}
+\DoxyCodeLine{305 }
+\DoxyCodeLine{312     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float_input_a6b86970959828b56246f41f4427f5621}{connect}}(\mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float_output}{FlowGraphPortFloatOutput}} *\mbox{\hyperlink{namespacejuce_a6d327326870c2c2f1ca1d681842b923f}{port}}) \{}
+\DoxyCodeLine{313         assert(\mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_ab47ccf22861b34ffa13fc0a6b1424023}{getSamplesPerFrame}}() == \mbox{\hyperlink{namespacejuce_a6d327326870c2c2f1ca1d681842b923f}{port}}-\/>getSamplesPerFrame());}
+\DoxyCodeLine{314         mConnected = \mbox{\hyperlink{namespacejuce_a6d327326870c2c2f1ca1d681842b923f}{port}};}
+\DoxyCodeLine{315     \}}
+\DoxyCodeLine{316 }
+\DoxyCodeLine{317     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float_input_a487c3e81e1d8aa9f568f3f76a451d365}{disconnect}}(\mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float_output}{FlowGraphPortFloatOutput}} *\mbox{\hyperlink{namespacejuce_a6d327326870c2c2f1ca1d681842b923f}{port}}) \{}
+\DoxyCodeLine{318         assert(mConnected == \mbox{\hyperlink{namespacejuce_a6d327326870c2c2f1ca1d681842b923f}{port}});}
+\DoxyCodeLine{319         (\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}}) \mbox{\hyperlink{namespacejuce_a6d327326870c2c2f1ca1d681842b923f}{port}};}
+\DoxyCodeLine{320         mConnected = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{321     \}}
+\DoxyCodeLine{322 }
+\DoxyCodeLine{323     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float_input_aa120c91e1f660b5d93398e3bee37c99a}{disconnect}}() \{}
+\DoxyCodeLine{324         mConnected = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{325     \}}
+\DoxyCodeLine{326 }
+\DoxyCodeLine{330     int32\_t \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float_input_a7a22677f21458bd820f14436c336f45c}{pullData}}(int64\_t framePosition, int32\_t numFrames) \textcolor{keyword}{override};}
+\DoxyCodeLine{331 }
+\DoxyCodeLine{332     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float_input_a335e749e4f3a7317fda5608c27f1cbb7}{pullReset}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{333 }
+\DoxyCodeLine{334 \textcolor{keyword}{private}:}
+\DoxyCodeLine{335     \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float_output}{FlowGraphPortFloatOutput}} *mConnected = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{336 \};}
+\DoxyCodeLine{337 }
+\DoxyCodeLine{338 \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{339 }
+\DoxyCodeLine{345 \textcolor{keyword}{class }\mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_source}{FlowGraphSource}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_node}{FlowGraphNode}} \{}
+\DoxyCodeLine{346 \textcolor{keyword}{public}:}
+\DoxyCodeLine{347     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_source_ae52162380f1037a0f97bd313455778ea}{FlowGraphSource}}(int32\_t channelCount)}
+\DoxyCodeLine{348             : \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_source_a507d7bd20a7890ba705bd9dfa301334c}{output}}(*this, channelCount) \{}
+\DoxyCodeLine{349     \}}
+\DoxyCodeLine{350 }
+\DoxyCodeLine{351     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_source_a34f7e3451de4754c6011ed5f32af60c8}{\string~FlowGraphSource}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{352 }
+\DoxyCodeLine{353     \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float_output}{FlowGraphPortFloatOutput}} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_source_a507d7bd20a7890ba705bd9dfa301334c}{output}};}
+\DoxyCodeLine{354 \};}
+\DoxyCodeLine{355 }
+\DoxyCodeLine{356 \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{357 }
+\DoxyCodeLine{363 \textcolor{keyword}{class }\mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_source_buffered}{FlowGraphSourceBuffered}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_source}{FlowGraphSource}} \{}
+\DoxyCodeLine{364 \textcolor{keyword}{public}:}
+\DoxyCodeLine{365     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_source_buffered_a5f4dfcc3cb48ce0c2b893391fe7afe15}{FlowGraphSourceBuffered}}(int32\_t channelCount)}
+\DoxyCodeLine{366             : \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_source}{FlowGraphSource}}(channelCount) \{\}}
+\DoxyCodeLine{367 }
+\DoxyCodeLine{368     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_source_buffered_a9a0a88c59c8a27539fd5cb6f248409e8}{\string~FlowGraphSourceBuffered}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{369 }
+\DoxyCodeLine{376     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_source_buffered_a96aac1c4fa16aa0149dc201199ebfdd3}{setData}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void} *\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, int32\_t numFrames) \{}
+\DoxyCodeLine{377         \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_source_buffered_ad67f316335e1daaa0dde171817361d1e}{mData}} = \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}};}
+\DoxyCodeLine{378         \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_source_buffered_a9f0316f4a0b14e57c425a1dde49f144c}{mSizeInFrames}} = numFrames;}
+\DoxyCodeLine{379         \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_source_buffered_a7cf574dd18a95a1a8e967a70b8e14065}{mFrameIndex}} = 0;}
+\DoxyCodeLine{380     \}}
+\DoxyCodeLine{381 }
+\DoxyCodeLine{382 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{383     \textcolor{keyword}{const} \textcolor{keywordtype}{void} *\mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_source_buffered_ad67f316335e1daaa0dde171817361d1e}{mData}} = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{384     int32\_t     \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_source_buffered_a9f0316f4a0b14e57c425a1dde49f144c}{mSizeInFrames}} = 0; \textcolor{comment}{// number of frames in mData}}
+\DoxyCodeLine{385     int32\_t     \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_source_buffered_a7cf574dd18a95a1a8e967a70b8e14065}{mFrameIndex}} = 0; \textcolor{comment}{// index of next frame to be processed}}
+\DoxyCodeLine{386 \};}
+\DoxyCodeLine{387 }
+\DoxyCodeLine{388 \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{395 \textcolor{keyword}{class }\mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_sink}{FlowGraphSink}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_node}{FlowGraphNode}} \{}
+\DoxyCodeLine{396 \textcolor{keyword}{public}:}
+\DoxyCodeLine{397     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_sink_ae203cf6539bdb47a71968a18c125d3bc}{FlowGraphSink}}(int32\_t channelCount)}
+\DoxyCodeLine{398             : \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_sink_a9aa74a9424d6773ebbc6780b697ef7c6}{input}}(*this, channelCount) \{}
+\DoxyCodeLine{399     \}}
+\DoxyCodeLine{400 }
+\DoxyCodeLine{401     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_sink_abc36ae48e8f163d8594f2a43674feb74}{\string~FlowGraphSink}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{402 }
+\DoxyCodeLine{403     \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float_input}{FlowGraphPortFloatInput}} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_sink_a9aa74a9424d6773ebbc6780b697ef7c6}{input}};}
+\DoxyCodeLine{404 }
+\DoxyCodeLine{411     int32\_t \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_sink_a06d3f3ec3d7c87f3ecc34673e036fd08}{onProcess}}(int32\_t numFrames)\textcolor{keyword}{ override }\{}
+\DoxyCodeLine{412         \textcolor{keywordflow}{return} numFrames;}
+\DoxyCodeLine{413     \}}
+\DoxyCodeLine{414 }
+\DoxyCodeLine{415     \textcolor{keyword}{virtual} int32\_t \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_sink_a1a085e33ba6623fe252a6ef5f8c36b37}{read}}(\textcolor{keywordtype}{void} *\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, int32\_t numFrames) = 0;}
+\DoxyCodeLine{416 }
+\DoxyCodeLine{417 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{423     int32\_t \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_sink_adf979164429943b19c46fbef363e1697}{pullData}}(int32\_t numFrames);}
+\DoxyCodeLine{424 \};}
+\DoxyCodeLine{425 }
+\DoxyCodeLine{426 \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{432 \textcolor{keyword}{class }\mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_filter}{FlowGraphFilter}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_node}{FlowGraphNode}} \{}
+\DoxyCodeLine{433 \textcolor{keyword}{public}:}
+\DoxyCodeLine{434     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_filter_a05fdc34afdbcfc82172cb75cb1dd9198}{FlowGraphFilter}}(int32\_t channelCount)}
+\DoxyCodeLine{435             : \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_filter_a60ce92e1c5749e5b334c64a5f701a74f}{input}}(*this, channelCount)}
+\DoxyCodeLine{436             , \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_filter_a1b4b82d513f304ae80eb20260827e6e9}{output}}(*this, channelCount) \{}
+\DoxyCodeLine{437     \}}
+\DoxyCodeLine{438 }
+\DoxyCodeLine{439     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_filter_a52e566c93948825376997eff5ed798a3}{\string~FlowGraphFilter}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{440 }
+\DoxyCodeLine{441     \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float_input}{FlowGraphPortFloatInput}} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_filter_a60ce92e1c5749e5b334c64a5f701a74f}{input}};}
+\DoxyCodeLine{442     \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_port_float_output}{FlowGraphPortFloatOutput}} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_filter_a1b4b82d513f304ae80eb20260827e6e9}{output}};}
+\DoxyCodeLine{443 \};}
+\DoxyCodeLine{444 }
+\DoxyCodeLine{445 \} \textcolor{comment}{/* namespace flowgraph */}}
+\DoxyCodeLine{446 \} \textcolor{comment}{/* namespace FLOWGRAPH\_OUTER\_NAMESPACE */}}
+\DoxyCodeLine{447 }
+\DoxyCodeLine{448 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* FLOWGRAPH\_FLOW\_GRAPH\_NODE\_H */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

@@ -1,0 +1,190 @@
+\hypertarget{juce___scroll_bar_8h_source}{}\doxysection{juce\+\_\+\+Scroll\+Bar.\+h}
+\label{juce___scroll_bar_8h_source}\index{build/juce\_gui\_basics/layout/juce\_ScrollBar.h@{build/juce\_gui\_basics/layout/juce\_ScrollBar.h}}
+\mbox{\hyperlink{juce___scroll_bar_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{52 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_scroll_bar}{ScrollBar}}  : \textcolor{keyword}{public} \mbox{\hyperlink{class_component}{Component}},}
+\DoxyCodeLine{53                              \textcolor{keyword}{public} \mbox{\hyperlink{class_async_updater}{AsyncUpdater}},}
+\DoxyCodeLine{54                              \textcolor{keyword}{private} \mbox{\hyperlink{class_timer}{Timer}}}
+\DoxyCodeLine{55 \{}
+\DoxyCodeLine{56 \textcolor{keyword}{public}:}
+\DoxyCodeLine{57     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{61 \textcolor{comment}{}    \mbox{\hyperlink{class_scroll_bar_acf801150166a66875c170bc93d241ea6}{ScrollBar}} (\textcolor{keywordtype}{bool} isVertical);}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{64     \mbox{\hyperlink{class_scroll_bar_af6e8fe841716b36565c6f7f034fd82fa}{\string~ScrollBar}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{68 \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_scroll_bar_a3e3ffc36d969185c06382f98996de425}{isVertical}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                                \{ \textcolor{keywordflow}{return} vertical; \}}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{77     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_scroll_bar_a5676d739d423d3daeeffd3d4176ef8ef}{setOrientation}} (\textcolor{keywordtype}{bool} shouldBeVertical);}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{86     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_scroll_bar_a85f03e3ca1a3b16894152c29bd4dcff0}{setAutoHide}} (\textcolor{keywordtype}{bool} shouldHideWhenFullRange);}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{92     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_scroll_bar_a2f638b949f8642a3a8675854c811378d}{autoHides}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{94     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{106 \textcolor{comment}{}    \textcolor{keywordtype}{void} setRangeLimits (\mbox{\hyperlink{class_range}{Range}}<\textcolor{keywordtype}{double}> newRangeLimit,}
+\DoxyCodeLine{107                          \mbox{\hyperlink{group__juce__events-messages_ga25a31a4bdc02a0d0adb743e26dd14ba9}{NotificationType}} notification = \mbox{\hyperlink{group__juce__events-messages_gga25a31a4bdc02a0d0adb743e26dd14ba9aa70e4499b93d1738b0ee53de03f7a9c4}{sendNotificationAsync}});}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{121     \textcolor{keywordtype}{void} setRangeLimits (\textcolor{keywordtype}{double} minimum, \textcolor{keywordtype}{double} maximum,}
+\DoxyCodeLine{122                          \mbox{\hyperlink{group__juce__events-messages_ga25a31a4bdc02a0d0adb743e26dd14ba9}{NotificationType}} notification = \mbox{\hyperlink{group__juce__events-messages_gga25a31a4bdc02a0d0adb743e26dd14ba9aa70e4499b93d1738b0ee53de03f7a9c4}{sendNotificationAsync}});}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{127     \mbox{\hyperlink{class_range}{Range}}<\textcolor{keywordtype}{double}> getRangeLimit() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                    \{ \textcolor{keywordflow}{return} totalRange; \}}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{133     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_scroll_bar_a438704ee01c11fc84e8cbd1f766c3269}{getMinimumRangeLimit}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                    \{ \textcolor{keywordflow}{return} totalRange.getStart(); \}}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{139     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_scroll_bar_aad13763a765d119a2790a9bf67a7f85a}{getMaximumRangeLimit}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                    \{ \textcolor{keywordflow}{return} totalRange.getEnd(); \}}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{141     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{157 \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_scroll_bar_af807244de9bb5f597c4791ae1d72a722}{setCurrentRange}} (\mbox{\hyperlink{class_range}{Range<double>}} newRange,}
+\DoxyCodeLine{158                           \mbox{\hyperlink{group__juce__events-messages_ga25a31a4bdc02a0d0adb743e26dd14ba9}{NotificationType}} notification = \mbox{\hyperlink{group__juce__events-messages_gga25a31a4bdc02a0d0adb743e26dd14ba9aa70e4499b93d1738b0ee53de03f7a9c4}{sendNotificationAsync}});}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{175     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_scroll_bar_a456e74af8b6a6c5b14bbde6cd3787f3b}{setCurrentRange}} (\textcolor{keywordtype}{double} newStart, \textcolor{keywordtype}{double} newSize,}
+\DoxyCodeLine{176                           \mbox{\hyperlink{group__juce__events-messages_ga25a31a4bdc02a0d0adb743e26dd14ba9}{NotificationType}} notification = \mbox{\hyperlink{group__juce__events-messages_gga25a31a4bdc02a0d0adb743e26dd14ba9aa70e4499b93d1738b0ee53de03f7a9c4}{sendNotificationAsync}});}
+\DoxyCodeLine{177 }
+\DoxyCodeLine{189     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_scroll_bar_a74c085897bb6fd71895e72ea5de21ae4}{setCurrentRangeStart}} (\textcolor{keywordtype}{double} newStart,}
+\DoxyCodeLine{190                                \mbox{\hyperlink{group__juce__events-messages_ga25a31a4bdc02a0d0adb743e26dd14ba9}{NotificationType}} notification = \mbox{\hyperlink{group__juce__events-messages_gga25a31a4bdc02a0d0adb743e26dd14ba9aa70e4499b93d1738b0ee53de03f7a9c4}{sendNotificationAsync}});}
+\DoxyCodeLine{191 }
+\DoxyCodeLine{195     \mbox{\hyperlink{class_range}{Range<double>}} \mbox{\hyperlink{class_scroll_bar_ad5d646fdb08cacc4ef379826c2f9ab75}{getCurrentRange}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                  \{ \textcolor{keywordflow}{return} visibleRange; \}}
+\DoxyCodeLine{196 }
+\DoxyCodeLine{200     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_scroll_bar_ab7ef22412ff54aa573807a9acbf5b050}{getCurrentRangeStart}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                    \{ \textcolor{keywordflow}{return} visibleRange.getStart(); \}}
+\DoxyCodeLine{201 }
+\DoxyCodeLine{205     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_scroll_bar_a681e8686f439c6cc57a0426136961b5e}{getCurrentRangeSize}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                     \{ \textcolor{keywordflow}{return} visibleRange.getLength(); \}}
+\DoxyCodeLine{206 }
+\DoxyCodeLine{207     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{213 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_scroll_bar_a4aa3ea30550b8b8a4bea07f1a2ce1ca7}{setSingleStepSize}} (\textcolor{keywordtype}{double} newSingleStepSize) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{214 }
+\DoxyCodeLine{218     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_scroll_bar_a5890807ab491607308a63ebfafa61388}{getSingleStepSize}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                       \{ \textcolor{keywordflow}{return} singleStepSize; \}}
+\DoxyCodeLine{219 }
+\DoxyCodeLine{234     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_scroll_bar_a9dbe4f09c8e652f6e28f6e51b0cd92bb}{moveScrollbarInSteps}} (\textcolor{keywordtype}{int} howManySteps,}
+\DoxyCodeLine{235                                \mbox{\hyperlink{group__juce__events-messages_ga25a31a4bdc02a0d0adb743e26dd14ba9}{NotificationType}} notification = \mbox{\hyperlink{group__juce__events-messages_gga25a31a4bdc02a0d0adb743e26dd14ba9aa70e4499b93d1738b0ee53de03f7a9c4}{sendNotificationAsync}});}
+\DoxyCodeLine{236 }
+\DoxyCodeLine{251     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_scroll_bar_a43c7d84c43879763344f29427b6bca95}{moveScrollbarInPages}} (\textcolor{keywordtype}{int} howManyPages,}
+\DoxyCodeLine{252                                \mbox{\hyperlink{group__juce__events-messages_ga25a31a4bdc02a0d0adb743e26dd14ba9}{NotificationType}} notification = \mbox{\hyperlink{group__juce__events-messages_gga25a31a4bdc02a0d0adb743e26dd14ba9aa70e4499b93d1738b0ee53de03f7a9c4}{sendNotificationAsync}});}
+\DoxyCodeLine{253 }
+\DoxyCodeLine{262     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_scroll_bar_ae3e4bf0e394d03c9fdbdb2025490b1a1}{scrollToTop}} (\mbox{\hyperlink{group__juce__events-messages_ga25a31a4bdc02a0d0adb743e26dd14ba9}{NotificationType}} notification = \mbox{\hyperlink{group__juce__events-messages_gga25a31a4bdc02a0d0adb743e26dd14ba9aa70e4499b93d1738b0ee53de03f7a9c4}{sendNotificationAsync}});}
+\DoxyCodeLine{263 }
+\DoxyCodeLine{272     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_scroll_bar_a4886ebe773db1d88f6f7d22a03275472}{scrollToBottom}} (\mbox{\hyperlink{group__juce__events-messages_ga25a31a4bdc02a0d0adb743e26dd14ba9}{NotificationType}} notification = \mbox{\hyperlink{group__juce__events-messages_gga25a31a4bdc02a0d0adb743e26dd14ba9aa70e4499b93d1738b0ee53de03f7a9c4}{sendNotificationAsync}});}
+\DoxyCodeLine{273 }
+\DoxyCodeLine{281     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_scroll_bar_a65b128f173c754300cdc9db8589d2a36}{setButtonRepeatSpeed}} (\textcolor{keywordtype}{int} initialDelayInMillisecs,}
+\DoxyCodeLine{282                                \textcolor{keywordtype}{int} repeatDelayInMillisecs,}
+\DoxyCodeLine{283                                \textcolor{keywordtype}{int} minimumDelayInMillisecs = -\/1);}
+\DoxyCodeLine{284 }
+\DoxyCodeLine{285     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{293 \textcolor{comment}{}    \textcolor{keyword}{enum} \mbox{\hyperlink{class_scroll_bar_a5cdce553497ae1b7fc7fcd3caa805167}{ColourIds}}}
+\DoxyCodeLine{294     \{}
+\DoxyCodeLine{295         backgroundColourId          = 0x1000300,    }
+\DoxyCodeLine{296         thumbColourId               = 0x1000400,    }
+\DoxyCodeLine{297         trackColourId               = 0x1000401     }
+\DoxyCodeLine{298     \};}
+\DoxyCodeLine{299 }
+\DoxyCodeLine{300     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{309 \textcolor{comment}{}    \textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_scroll_bar_1_1_listener}{Listener}}}
+\DoxyCodeLine{310     \{}
+\DoxyCodeLine{311     \textcolor{keyword}{public}:}
+\DoxyCodeLine{313         \textcolor{keyword}{virtual} \mbox{\hyperlink{class_scroll_bar_1_1_listener_a4f3410a2b78e9252f8d3f7f176f67449}{\string~Listener}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{314 }
+\DoxyCodeLine{320         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_scroll_bar_1_1_listener_a2fb3f2cdec354939ba4282fc4631fc1f}{scrollBarMoved}} (\mbox{\hyperlink{class_scroll_bar}{ScrollBar}}* scrollBarThatHasMoved,}
+\DoxyCodeLine{321                                      \textcolor{keywordtype}{double} newRangeStart) = 0;}
+\DoxyCodeLine{322     \};}
+\DoxyCodeLine{323 }
+\DoxyCodeLine{325     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_scroll_bar_a231620a2e529f6c1ff846d8b5faccc80}{addListener}} (\mbox{\hyperlink{class_scroll_bar_1_1_listener}{Listener}}* listener);}
+\DoxyCodeLine{326 }
+\DoxyCodeLine{328     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_scroll_bar_aef360a50049a02ffcac094507267cd5d}{removeListener}} (\mbox{\hyperlink{class_scroll_bar_1_1_listener}{Listener}}* listener);}
+\DoxyCodeLine{329 }
+\DoxyCodeLine{330     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{334 \textcolor{comment}{}    \textcolor{keyword}{struct }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{struct_scroll_bar_1_1_look_and_feel_methods}{LookAndFeelMethods}}}
+\DoxyCodeLine{335     \{}
+\DoxyCodeLine{336         \textcolor{keyword}{virtual} \mbox{\hyperlink{struct_scroll_bar_1_1_look_and_feel_methods_a69c29f68f1bebd5d0bd4559e10553fb5}{\string~LookAndFeelMethods}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{337 }
+\DoxyCodeLine{338         \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_scroll_bar_1_1_look_and_feel_methods_ae0fada1aa2636e2845b137f08ae0ede5}{areScrollbarButtonsVisible}}() = 0;}
+\DoxyCodeLine{339 }
+\DoxyCodeLine{351         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_scroll_bar_1_1_look_and_feel_methods_a0520365d8aed2fc4391503629eb09d7d}{drawScrollbarButton}} (\mbox{\hyperlink{class_graphics}{Graphics}}\& \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}},}
+\DoxyCodeLine{352                                           \mbox{\hyperlink{class_scroll_bar}{ScrollBar}}\& scrollbar,}
+\DoxyCodeLine{353                                           \textcolor{keywordtype}{int} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}},}
+\DoxyCodeLine{354                                           \textcolor{keywordtype}{int} buttonDirection,}
+\DoxyCodeLine{355                                           \textcolor{keywordtype}{bool} isScrollbarVertical,}
+\DoxyCodeLine{356                                           \textcolor{keywordtype}{bool} isMouseOverButton,}
+\DoxyCodeLine{357                                           \textcolor{keywordtype}{bool} isButtonDown) = 0;}
+\DoxyCodeLine{358 }
+\DoxyCodeLine{376         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_scroll_bar_1_1_look_and_feel_methods_ad096796eb73636308c4cdc884a2dc244}{drawScrollbar}} (\mbox{\hyperlink{class_graphics}{Graphics}}\& \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}}, \mbox{\hyperlink{class_scroll_bar}{ScrollBar}}\& scrollbar,}
+\DoxyCodeLine{377                                     \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}},}
+\DoxyCodeLine{378                                     \textcolor{keywordtype}{bool} isScrollbarVertical,}
+\DoxyCodeLine{379                                     \textcolor{keywordtype}{int} thumbStartPosition,}
+\DoxyCodeLine{380                                     \textcolor{keywordtype}{int} thumbSize,}
+\DoxyCodeLine{381                                     \textcolor{keywordtype}{bool} isMouseOver,}
+\DoxyCodeLine{382                                     \textcolor{keywordtype}{bool} isMouseDown) = 0;}
+\DoxyCodeLine{383 }
+\DoxyCodeLine{385         \textcolor{keyword}{virtual} \mbox{\hyperlink{class_image_effect_filter}{ImageEffectFilter}}* \mbox{\hyperlink{struct_scroll_bar_1_1_look_and_feel_methods_a30925902ba9b33e529cb895a8e839cad}{getScrollbarEffect}}() = 0;}
+\DoxyCodeLine{386 }
+\DoxyCodeLine{388         \textcolor{keyword}{virtual} \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_scroll_bar_1_1_look_and_feel_methods_ac783295f6f863a9303261e624660828e}{getMinimumScrollbarThumbSize}} (\mbox{\hyperlink{class_scroll_bar}{ScrollBar}}\&) = 0;}
+\DoxyCodeLine{389 }
+\DoxyCodeLine{391         \textcolor{keyword}{virtual} \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_scroll_bar_1_1_look_and_feel_methods_a368b37f896619b1c65efc8dc53d42dde}{getDefaultScrollbarWidth}}() = 0;}
+\DoxyCodeLine{392 }
+\DoxyCodeLine{394         \textcolor{keyword}{virtual} \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_scroll_bar_1_1_look_and_feel_methods_ae0ec1c556eda3ccfc40b58ed4b999cee}{getScrollbarButtonSize}} (\mbox{\hyperlink{class_scroll_bar}{ScrollBar}}\&) = 0;}
+\DoxyCodeLine{395     \};}
+\DoxyCodeLine{396 }
+\DoxyCodeLine{397     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{399 \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_scroll_bar_aeb97c58ef66f2dd034f6b7bc9ecb7748}{keyPressed}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_key_press}{KeyPress}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{401     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_scroll_bar_a308b14576da7818ec9b1032745b33dc3}{mouseWheelMove}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_mouse_event}{MouseEvent}}\&, \textcolor{keyword}{const} \mbox{\hyperlink{struct_mouse_wheel_details}{MouseWheelDetails}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{403     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_scroll_bar_a4afc1abba05d3cc8470ea9d8212aa9bb}{lookAndFeelChanged}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{405     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_scroll_bar_a7f11688cde2eeae737779e1e44fb2b98}{mouseDown}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_mouse_event}{MouseEvent}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{407     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_scroll_bar_acf0979e09f19392a4b453abcd9295c0d}{mouseDrag}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_mouse_event}{MouseEvent}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{409     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_scroll_bar_ab87813c334f9df71538212ba00e6eb55}{mouseUp}}   (\textcolor{keyword}{const} \mbox{\hyperlink{class_mouse_event}{MouseEvent}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{411     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_scroll_bar_a2ecc1047bbc102868b7c97a249425885}{paint}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{413     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_scroll_bar_a18ed7a67fa5a0641939c03a1186655d7}{resized}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{415     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_scroll_bar_a25a885450775c67139b9305663969d14}{parentHierarchyChanged}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{417     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_scroll_bar_a5ea44388211e76c21ee4a625ec217d41}{setVisible}} (\textcolor{keywordtype}{bool}) \textcolor{keyword}{override};}
+\DoxyCodeLine{418 }
+\DoxyCodeLine{419 \textcolor{keyword}{private}:}
+\DoxyCodeLine{420     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{421     \mbox{\hyperlink{class_range}{Range<double>}} totalRange \{ 0.0, 1.0 \}, visibleRange \{ 0.0, 1.0 \};}
+\DoxyCodeLine{422     \textcolor{keywordtype}{double} singleStepSize = 0.1, dragStartRange = 0;}
+\DoxyCodeLine{423     \textcolor{keywordtype}{int} thumbAreaStart = 0, thumbAreaSize = 0, thumbStart = 0, thumbSize = 0;}
+\DoxyCodeLine{424     \textcolor{keywordtype}{int} dragStartMousePos = 0, lastMousePos = 0;}
+\DoxyCodeLine{425     \textcolor{keywordtype}{int} initialDelayInMillisecs = 100, repeatDelayInMillisecs = 50, minimumDelayInMillisecs = 10;}
+\DoxyCodeLine{426     \textcolor{keywordtype}{bool} vertical, isDraggingThumb = \textcolor{keyword}{false}, autohides = \textcolor{keyword}{true}, userVisibilityFlag = \textcolor{keyword}{false};}
+\DoxyCodeLine{427     \textcolor{keyword}{class }ScrollbarButton;}
+\DoxyCodeLine{428     std::unique\_ptr<ScrollbarButton> upButton, downButton;}
+\DoxyCodeLine{429     \mbox{\hyperlink{class_listener_list}{ListenerList<Listener>}} listeners;}
+\DoxyCodeLine{430 }
+\DoxyCodeLine{431     std::unique\_ptr<AccessibilityHandler> createAccessibilityHandler() \textcolor{keyword}{override};}
+\DoxyCodeLine{432     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_async_updater_a446f3af793131f8772329f1f8b526578}{handleAsyncUpdate}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{433     \textcolor{keywordtype}{void} updateThumbPosition();}
+\DoxyCodeLine{434     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_timer_a8adc40ca0fb4170737ba12e30481b9d8}{timerCallback}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{435     \textcolor{keywordtype}{bool} getVisibility() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{436 }
+\DoxyCodeLine{437     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_scroll_bar}{ScrollBar}})}
+\DoxyCodeLine{438 \};}
+\DoxyCodeLine{439 }
+\DoxyCodeLine{440 }
+\DoxyCodeLine{441  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{442 }
+
+\end{DoxyCode}

@@ -1,0 +1,1406 @@
+\hypertarget{juce__posix___shared_code_8h_source}{}\doxysection{juce\+\_\+posix\+\_\+\+Shared\+Code.\+h}
+\label{juce__posix___shared_code_8h_source}\index{build/juce\_core/native/juce\_posix\_SharedCode.h@{build/juce\_core/native/juce\_posix\_SharedCode.h}}
+\mbox{\hyperlink{juce__posix___shared_code_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{5 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{6 \textcolor{comment}{}}
+\DoxyCodeLine{7 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{8 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{9 \textcolor{comment}{}}
+\DoxyCodeLine{10 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{11 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{12 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{13 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{14 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{15 \textcolor{comment}{}}
+\DoxyCodeLine{16 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{17 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{18 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{21 \textcolor{comment}{*/}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacejuce}{juce}}}
+\DoxyCodeLine{24 \{}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \mbox{\hyperlink{class_critical_section_aaa4d9ea166cd7ce8ef369a7934e26b97}{CriticalSection::CriticalSection}}() noexcept}
+\DoxyCodeLine{27 \{}
+\DoxyCodeLine{28     pthread\_mutexattr\_t atts;}
+\DoxyCodeLine{29     pthread\_mutexattr\_init (\&atts);}
+\DoxyCodeLine{30     pthread\_mutexattr\_settype (\&atts, PTHREAD\_MUTEX\_RECURSIVE);}
+\DoxyCodeLine{31 \textcolor{preprocessor}{   \#if ! JUCE\_ANDROID}}
+\DoxyCodeLine{32     pthread\_mutexattr\_setprotocol (\&atts, PTHREAD\_PRIO\_INHERIT);}
+\DoxyCodeLine{33 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{34     pthread\_mutex\_init (\&lock, \&atts);}
+\DoxyCodeLine{35     pthread\_mutexattr\_destroy (\&atts);}
+\DoxyCodeLine{36 \}}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38 \mbox{\hyperlink{class_critical_section_ae1ed672427d129fb5102459354d33422}{CriticalSection::\string~CriticalSection}}() noexcept        \{ pthread\_mutex\_destroy (\&lock); \}}
+\DoxyCodeLine{39 \textcolor{keywordtype}{void} \mbox{\hyperlink{class_critical_section_a20c4b0714061cc488d220b1b5a77aa1c}{CriticalSection::enter}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept        \{ pthread\_mutex\_lock (\&lock); \}}
+\DoxyCodeLine{40 \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_critical_section_a2c12101da7ebf8455de49652f377d313}{CriticalSection::tryEnter}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept     \{ \textcolor{keywordflow}{return} pthread\_mutex\_trylock (\&lock) == 0; \}}
+\DoxyCodeLine{41 \textcolor{keywordtype}{void} \mbox{\hyperlink{class_critical_section_a856bbcc18f0367ae231f7277d9cb33f8}{CriticalSection::exit}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept         \{ pthread\_mutex\_unlock (\&lock); \}}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{44 \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{class_thread_ace8d1c984cb6900b2b47912a69261bc4}{Thread::sleep}} (\textcolor{keywordtype}{int} millisecs)}
+\DoxyCodeLine{45 \{}
+\DoxyCodeLine{46     \textcolor{keyword}{struct }timespec time;}
+\DoxyCodeLine{47     time.tv\_sec = millisecs / 1000;}
+\DoxyCodeLine{48     time.tv\_nsec = (millisecs \% 1000) * 1000000;}
+\DoxyCodeLine{49     nanosleep (\&time, \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{50 \}}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52 \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{class_process_ab80dd8c8dd186929978a8a9cb3904f8a}{Process::terminate}}()}
+\DoxyCodeLine{53 \{}
+\DoxyCodeLine{54 \textcolor{preprocessor}{   \#if JUCE\_ANDROID}}
+\DoxyCodeLine{55     \_exit (\mbox{\hyperlink{jerror_8c_a73efe787c131b385070f25d18b7c9aa4}{EXIT\_FAILURE}});}
+\DoxyCodeLine{56 \textcolor{preprocessor}{   \#else}}
+\DoxyCodeLine{57     std::\_Exit (\mbox{\hyperlink{jerror_8c_a73efe787c131b385070f25d18b7c9aa4}{EXIT\_FAILURE}});}
+\DoxyCodeLine{58 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{59 \}}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62 \textcolor{preprocessor}{\#if JUCE\_MAC || JUCE\_LINUX || JUCE\_BSD}}
+\DoxyCodeLine{63 \textcolor{keywordtype}{bool} Process::setMaxNumberOfFileHandles (\textcolor{keywordtype}{int} newMaxNumber) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{64 \{}
+\DoxyCodeLine{65     rlimit lim;}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67     \textcolor{keywordflow}{if} (getrlimit (RLIMIT\_NOFILE, \&lim) == 0)}
+\DoxyCodeLine{68     \{}
+\DoxyCodeLine{69         \textcolor{keywordflow}{if} (newMaxNumber <= 0 \&\& lim.rlim\_cur == RLIM\_INFINITY \&\& lim.rlim\_max == RLIM\_INFINITY)}
+\DoxyCodeLine{70             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72         \textcolor{keywordflow}{if} (newMaxNumber > 0 \&\& lim.rlim\_cur >= (rlim\_t) newMaxNumber)}
+\DoxyCodeLine{73             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{74     \}}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76     lim.rlim\_cur = lim.rlim\_max = newMaxNumber <= 0 ? RLIM\_INFINITY : (rlim\_t) newMaxNumber;}
+\DoxyCodeLine{77     \textcolor{keywordflow}{return} setrlimit (RLIMIT\_NOFILE, \&lim) == 0;}
+\DoxyCodeLine{78 \}}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80 \textcolor{keyword}{struct }MaxNumFileHandlesInitialiser}
+\DoxyCodeLine{81 \{}
+\DoxyCodeLine{82     MaxNumFileHandlesInitialiser() noexcept}
+\DoxyCodeLine{83     \{}
+\DoxyCodeLine{84 \textcolor{preprocessor}{       \#ifndef JUCE\_PREFERRED\_MAX\_FILE\_HANDLES}}
+\DoxyCodeLine{85         \textcolor{keyword}{enum} \{ JUCE\_PREFERRED\_MAX\_FILE\_HANDLES = 8192 \};}
+\DoxyCodeLine{86 \textcolor{preprocessor}{       \#endif}}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88         \textcolor{comment}{// Try to give our app a decent number of file handles by default}}
+\DoxyCodeLine{89         \textcolor{keywordflow}{if} (! Process::setMaxNumberOfFileHandles (0))}
+\DoxyCodeLine{90         \{}
+\DoxyCodeLine{91             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_aaed5c28b6e2fe572794fada7bfb4862c}{num}} = JUCE\_PREFERRED\_MAX\_FILE\_HANDLES; \mbox{\hyperlink{namespacegl_aaed5c28b6e2fe572794fada7bfb4862c}{num}} > 256; \mbox{\hyperlink{namespacegl_aaed5c28b6e2fe572794fada7bfb4862c}{num}} -\/= 1024)}
+\DoxyCodeLine{92                 \textcolor{keywordflow}{if} (Process::setMaxNumberOfFileHandles (\mbox{\hyperlink{namespacegl_aaed5c28b6e2fe572794fada7bfb4862c}{num}}))}
+\DoxyCodeLine{93                     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{94         \}}
+\DoxyCodeLine{95     \}}
+\DoxyCodeLine{96 \};}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98 \textcolor{keyword}{static} MaxNumFileHandlesInitialiser maxNumFileHandlesInitialiser;}
+\DoxyCodeLine{99 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{102 \textcolor{preprocessor}{\#if JUCE\_ALLOW\_STATIC\_NULL\_VARIABLES}}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104 \mbox{\hyperlink{group__juce__core-system_ga0112339834a6548e4123e394b9ed95e2}{JUCE\_BEGIN\_IGNORE\_WARNINGS\_GCC\_LIKE}} (\textcolor{stringliteral}{"{}-\/Wdeprecated-\/declarations"{}})}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{106 \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} \mbox{\hyperlink{class_file}{File}}::separator = '/';}
+\DoxyCodeLine{107 \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string_ref}{StringRef}} \mbox{\hyperlink{class_file}{File}}::separatorString ("{}/"{});}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109 \mbox{\hyperlink{group__juce__core-system_ga157f2229764b17137d8814bec95df109}{JUCE\_END\_IGNORE\_WARNINGS\_GCC\_LIKE}}}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113 \mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} \mbox{\hyperlink{class_file_ac878ee05362a8d16cd024eab181d3e35}{File::getSeparatorChar}}()    \{ \textcolor{keywordflow}{return} \textcolor{charliteral}{'/'}; \}}
+\DoxyCodeLine{114 \mbox{\hyperlink{class_string_ref}{StringRef}} \mbox{\hyperlink{class_file_a9853e7e83a42be8be3bfc15c06095c03}{File::getSeparatorString}}()   \{ \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}/"{}}; \}}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{118 \mbox{\hyperlink{class_file}{File}} \mbox{\hyperlink{class_file_aac662f89bbeed8128f11f8747bca938c}{File::getCurrentWorkingDirectory}}()}
+\DoxyCodeLine{119 \{}
+\DoxyCodeLine{120     \mbox{\hyperlink{class_heap_block}{HeapBlock<char>}} heapBuffer;}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{122     \textcolor{keywordtype}{char} localBuffer[1024];}
+\DoxyCodeLine{123     \textcolor{keyword}{auto} cwd = getcwd (localBuffer, \textcolor{keyword}{sizeof} (localBuffer) -\/ 1);}
+\DoxyCodeLine{124     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8556d19b129aa550f5b2819ed0320e83}{bufferSize}} = 4096;}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126     \textcolor{keywordflow}{while} (cwd == \textcolor{keyword}{nullptr} \&\& errno == ERANGE)}
+\DoxyCodeLine{127     \{}
+\DoxyCodeLine{128         heapBuffer.\mbox{\hyperlink{class_heap_block_a29b2353f2433660bbb98066bbe3cf059}{malloc}} (\mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8556d19b129aa550f5b2819ed0320e83}{bufferSize}});}
+\DoxyCodeLine{129         cwd = getcwd (heapBuffer, \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8556d19b129aa550f5b2819ed0320e83}{bufferSize}} -\/ 1);}
+\DoxyCodeLine{130         \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8556d19b129aa550f5b2819ed0320e83}{bufferSize}} += 1024;}
+\DoxyCodeLine{131     \}}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{133     \textcolor{keywordflow}{return} \mbox{\hyperlink{class_file}{File}} (\mbox{\hyperlink{class_char_pointer___u_t_f8}{CharPointer\_UTF8}} (cwd));}
+\DoxyCodeLine{134 \}}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{136 \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_file_af349d3b788121eb6968744e94ff38032}{File::setAsCurrentWorkingDirectory}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{137 \textcolor{keyword}{}\{}
+\DoxyCodeLine{138     \textcolor{keywordflow}{return} chdir (getFullPathName().toUTF8()) == 0;}
+\DoxyCodeLine{139 \}}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{141 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{142 \textcolor{comment}{// The unix siginterrupt function is deprecated -\/ this does the same job.}}
+\DoxyCodeLine{143 \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacejuce_a195ee90ce70047314feca0f0838e9c74}{juce\_siginterrupt}} (\textcolor{keywordtype}{int} sig, \textcolor{keywordtype}{int} flag)}
+\DoxyCodeLine{144 \{}
+\DoxyCodeLine{145 \textcolor{preprocessor}{   \#if JUCE\_WASM}}
+\DoxyCodeLine{146     \mbox{\hyperlink{group__juce__core-maths_ga5158e6e8faa5553204f90af596fafaf5}{ignoreUnused}} (sig, flag);}
+\DoxyCodeLine{147     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{148 \textcolor{preprocessor}{   \#else}}
+\DoxyCodeLine{149 \textcolor{preprocessor}{    \#if JUCE\_ANDROID}}
+\DoxyCodeLine{150      \textcolor{keyword}{using} juce\_sigactionflags\_type = \textcolor{keywordtype}{unsigned} long;}
+\DoxyCodeLine{151 \textcolor{preprocessor}{    \#else}}
+\DoxyCodeLine{152      \textcolor{keyword}{using} juce\_sigactionflags\_type = \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}};}
+\DoxyCodeLine{153 \textcolor{preprocessor}{    \#endif}}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{155     struct ::sigaction act;}
+\DoxyCodeLine{156     (\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}}) ::sigaction (sig, \textcolor{keyword}{nullptr}, \&act);}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{158     \textcolor{keywordflow}{if} (flag != 0)}
+\DoxyCodeLine{159         act.sa\_flags \&= \textcolor{keyword}{static\_cast<}juce\_sigactionflags\_type\textcolor{keyword}{>} (\string~SA\_RESTART);}
+\DoxyCodeLine{160     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{161         act.sa\_flags |= \textcolor{keyword}{static\_cast<}juce\_sigactionflags\_type\textcolor{keyword}{>} (SA\_RESTART);}
+\DoxyCodeLine{162 }
+\DoxyCodeLine{163     return ::sigaction (sig, \&act, \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{164 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{165 \}}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{167 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{168 \textcolor{keyword}{namespace}}
+\DoxyCodeLine{169 \{}
+\DoxyCodeLine{170 \textcolor{preprocessor}{   \#if JUCE\_LINUX || (JUCE\_IOS \&\& ! \_\_DARWIN\_ONLY\_64\_BIT\_INO\_T) }\textcolor{comment}{// (this iOS stuff is to avoid a simulator bug)}}
+\DoxyCodeLine{171     \textcolor{keyword}{using} juce\_statStruct = \textcolor{keyword}{struct }stat64;}
+\DoxyCodeLine{172 \textcolor{preprocessor}{    \#define JUCE\_STAT  stat64}}
+\DoxyCodeLine{173 \textcolor{preprocessor}{   \#else}}
+\DoxyCodeLine{174     \textcolor{keyword}{using} juce\_statStruct = \textcolor{keyword}{struct }stat;}
+\DoxyCodeLine{175 \textcolor{preprocessor}{    \#define JUCE\_STAT  stat}}
+\DoxyCodeLine{176 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{177 }
+\DoxyCodeLine{178     \textcolor{keywordtype}{bool} juce\_stat (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& fileName, juce\_statStruct\& \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}})}
+\DoxyCodeLine{179     \{}
+\DoxyCodeLine{180         \textcolor{keywordflow}{return} fileName.\mbox{\hyperlink{class_string_a46001a29fcbd7c867f0f3a42598a1495}{isNotEmpty}}()}
+\DoxyCodeLine{181                  \&\& \mbox{\hyperlink{juce__posix___shared_code_8h_a5cb77c0134484e1823aabeaf327d32ee}{JUCE\_STAT}} (fileName.\mbox{\hyperlink{class_string_aabef96ce5e32ca15473b3694309f2647}{toUTF8}}(), \&\mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}) == 0;}
+\DoxyCodeLine{182     \}}
+\DoxyCodeLine{183 }
+\DoxyCodeLine{184 \textcolor{preprocessor}{   \#if ! JUCE\_WASM}}
+\DoxyCodeLine{185     \textcolor{comment}{// if this file doesn't exist, find a parent of it that does..}}
+\DoxyCodeLine{186     \textcolor{keywordtype}{bool} juce\_doStatFS (\mbox{\hyperlink{class_file}{File}} \mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}}, \textcolor{keyword}{struct} statfs\& \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}})}
+\DoxyCodeLine{187     \{}
+\DoxyCodeLine{188         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 5; -\/-\/i >= 0;)}
+\DoxyCodeLine{189         \{}
+\DoxyCodeLine{190             \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}}.exists())}
+\DoxyCodeLine{191                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{192 }
+\DoxyCodeLine{193             \mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}} = \mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}}.getParentDirectory();}
+\DoxyCodeLine{194         \}}
+\DoxyCodeLine{195 }
+\DoxyCodeLine{196         \textcolor{keywordflow}{return} statfs (\mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}}.getFullPathName().toUTF8(), \&\mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}) == 0;}
+\DoxyCodeLine{197     \}}
+\DoxyCodeLine{198 }
+\DoxyCodeLine{199 \textcolor{preprocessor}{   \#if JUCE\_MAC || JUCE\_IOS}}
+\DoxyCodeLine{200     \textcolor{keyword}{static} \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} getCreationTime (\textcolor{keyword}{const} juce\_statStruct\& \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}}) \textcolor{keyword}{noexcept}     \{ \textcolor{keywordflow}{return} (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}) \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}}.st\_birthtime; \}}
+\DoxyCodeLine{201 \textcolor{preprocessor}{   \#else}}
+\DoxyCodeLine{202     \textcolor{keyword}{static} \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} getCreationTime (\textcolor{keyword}{const} juce\_statStruct\& \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}}) \textcolor{keyword}{noexcept}     \{ \textcolor{keywordflow}{return} (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}) \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}}.st\_ctime; \}}
+\DoxyCodeLine{203 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{204 }
+\DoxyCodeLine{205     \textcolor{keywordtype}{void} updateStatInfoForFile (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{namespacegl_aa24d70da9c7853cfd8a8fc343e72c20d}{path}}, \textcolor{keywordtype}{bool}* isDir, \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}* fileSize,}
+\DoxyCodeLine{206                                 \mbox{\hyperlink{class_time}{Time}}* modTime, \mbox{\hyperlink{class_time}{Time}}* creationTime, \textcolor{keywordtype}{bool}* isReadOnly)}
+\DoxyCodeLine{207     \{}
+\DoxyCodeLine{208         \textcolor{keywordflow}{if} (isDir != \textcolor{keyword}{nullptr} || fileSize != \textcolor{keyword}{nullptr} || modTime != \textcolor{keyword}{nullptr} || creationTime != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{209         \{}
+\DoxyCodeLine{210             juce\_statStruct \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}};}
+\DoxyCodeLine{211             \textcolor{keyword}{const} \textcolor{keywordtype}{bool} statOk = juce\_stat (\mbox{\hyperlink{namespacegl_aa24d70da9c7853cfd8a8fc343e72c20d}{path}}, \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}});}
+\DoxyCodeLine{212 }
+\DoxyCodeLine{213             \textcolor{keywordflow}{if} (isDir != \textcolor{keyword}{nullptr})         *isDir        = statOk \&\& ((\mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}.st\_mode \& S\_IFDIR) != 0);}
+\DoxyCodeLine{214             \textcolor{keywordflow}{if} (fileSize != \textcolor{keyword}{nullptr})      *fileSize     = statOk ? (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}) \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}.st\_size : 0;}
+\DoxyCodeLine{215             if (modTime != \textcolor{keyword}{nullptr})       *modTime      = \mbox{\hyperlink{class_time}{Time}} (statOk ? (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}) \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}.st\_mtime  * 1000 : 0);}
+\DoxyCodeLine{216             \textcolor{keywordflow}{if} (creationTime != \textcolor{keyword}{nullptr})  *creationTime = \mbox{\hyperlink{class_time}{Time}} (statOk ? getCreationTime (\mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}) * 1000 : 0);}
+\DoxyCodeLine{217         \}}
+\DoxyCodeLine{218 }
+\DoxyCodeLine{219         \textcolor{keywordflow}{if} (isReadOnly != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{220             *isReadOnly = \mbox{\hyperlink{namespacegl_af615820fdf685ec1c4df56c7e37d3a7f}{access}} (\mbox{\hyperlink{namespacegl_aa24d70da9c7853cfd8a8fc343e72c20d}{path}}.toUTF8(), W\_OK) != 0;}
+\DoxyCodeLine{221     \}}
+\DoxyCodeLine{222 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{223 }
+\DoxyCodeLine{224     \mbox{\hyperlink{class_result}{Result}} getResultForErrno()}
+\DoxyCodeLine{225     \{}
+\DoxyCodeLine{226         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_result_a2b51de8f6f8c27c3de29f9da5cce8f75}{Result::fail}} (\mbox{\hyperlink{class_string}{String}} (strerror (errno)));}
+\DoxyCodeLine{227     \}}
+\DoxyCodeLine{228 }
+\DoxyCodeLine{229     \mbox{\hyperlink{class_result}{Result}} getResultForReturnValue (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}})}
+\DoxyCodeLine{230     \{}
+\DoxyCodeLine{231         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}} == -\/1 ? getResultForErrno() : \mbox{\hyperlink{class_result}{Result}}::ok();}
+\DoxyCodeLine{232     \}}
+\DoxyCodeLine{233 }
+\DoxyCodeLine{234     \textcolor{keywordtype}{int} getFD (\textcolor{keywordtype}{void}* \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8530736c0c7f7f4dc724c8246e301f83}{handle}}) \textcolor{keyword}{noexcept}        \{ \textcolor{keywordflow}{return} (\textcolor{keywordtype}{int}) (\mbox{\hyperlink{group__juce__core-maths_ga004ecd75303f3a1653f937d35a67e41d}{pointer\_sized\_int}}) \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8530736c0c7f7f4dc724c8246e301f83}{handle}}; \}}
+\DoxyCodeLine{235     \textcolor{keywordtype}{void}* fdToVoidPointer (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a1af1643b175375d13a594f4a555199bf}{fd}}) \textcolor{keyword}{noexcept}  \{ \textcolor{keywordflow}{return} (\textcolor{keywordtype}{void}*) (\mbox{\hyperlink{group__juce__core-maths_ga004ecd75303f3a1653f937d35a67e41d}{pointer\_sized\_int}}) \mbox{\hyperlink{namespacegl_a1af1643b175375d13a594f4a555199bf}{fd}}; \}}
+\DoxyCodeLine{236 \}}
+\DoxyCodeLine{237 }
+\DoxyCodeLine{238 \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_file_ac7db97d8e1c60f9b443def08e7d1758f}{File::isDirectory}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{239 \textcolor{keyword}{}\{}
+\DoxyCodeLine{240     juce\_statStruct \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}};}
+\DoxyCodeLine{241 }
+\DoxyCodeLine{242     \textcolor{keywordflow}{return} fullPath.isNotEmpty()}
+\DoxyCodeLine{243              \&\& (juce\_stat (fullPath, \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}) \&\& ((\mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}.st\_mode \& S\_IFDIR) != 0));}
+\DoxyCodeLine{244 \}}
+\DoxyCodeLine{245 }
+\DoxyCodeLine{246 \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_file_a53118ce36851cb1c6845a82f915fd8ba}{File::exists}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{247 \textcolor{keyword}{}\{}
+\DoxyCodeLine{248     \textcolor{keywordflow}{return} fullPath.isNotEmpty()}
+\DoxyCodeLine{249              \&\& \mbox{\hyperlink{namespacegl_af615820fdf685ec1c4df56c7e37d3a7f}{access}} (fullPath.toUTF8(), F\_OK) == 0;}
+\DoxyCodeLine{250 \}}
+\DoxyCodeLine{251 }
+\DoxyCodeLine{252 \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_file_a2d79c296f148b00041aeeac0013716d9}{File::existsAsFile}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{253 \textcolor{keyword}{}\{}
+\DoxyCodeLine{254     \textcolor{keywordflow}{return} exists() \&\& ! isDirectory();}
+\DoxyCodeLine{255 \}}
+\DoxyCodeLine{256 }
+\DoxyCodeLine{257 \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} \mbox{\hyperlink{class_file_a25b6ca23e3f1ee3b5c3fc108110a1dd9}{File::getSize}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{258 \textcolor{keyword}{}\{}
+\DoxyCodeLine{259     juce\_statStruct \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}};}
+\DoxyCodeLine{260     \textcolor{keywordflow}{return} juce\_stat (fullPath, \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}) ? \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}.st\_size : 0;}
+\DoxyCodeLine{261 \}}
+\DoxyCodeLine{262 }
+\DoxyCodeLine{263 \mbox{\hyperlink{group__juce__core-maths_gaba41bf2b6f6da5945ee08fb99931aede}{uint64}} \mbox{\hyperlink{class_file_aecfdd1e7651673770b793d53a5482bca}{File::getFileIdentifier}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{264 \textcolor{keyword}{}\{}
+\DoxyCodeLine{265     juce\_statStruct \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}};}
+\DoxyCodeLine{266     \textcolor{keywordflow}{return} juce\_stat (fullPath, \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}) ? (\mbox{\hyperlink{group__juce__core-maths_gaba41bf2b6f6da5945ee08fb99931aede}{uint64}}) \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}.st\_ino : 0;}
+\DoxyCodeLine{267 \}}
+\DoxyCodeLine{268 }
+\DoxyCodeLine{269 \textcolor{keyword}{static} \textcolor{keywordtype}{bool} hasEffectiveRootFilePermissions()}
+\DoxyCodeLine{270 \{}
+\DoxyCodeLine{271 \textcolor{preprocessor}{   \#if JUCE\_LINUX || JUCE\_BSD}}
+\DoxyCodeLine{272     \textcolor{keywordflow}{return} geteuid() == 0;}
+\DoxyCodeLine{273 \textcolor{preprocessor}{   \#else}}
+\DoxyCodeLine{274     \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{275 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{276 \}}
+\DoxyCodeLine{277 }
+\DoxyCodeLine{278 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{279 \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_file_a5335004d1a8ec1673c616358adee00e7}{File::hasWriteAccess}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{280 \textcolor{keyword}{}\{}
+\DoxyCodeLine{281     \textcolor{keywordflow}{if} (exists())}
+\DoxyCodeLine{282         \textcolor{keywordflow}{return} (hasEffectiveRootFilePermissions()}
+\DoxyCodeLine{283              || \mbox{\hyperlink{namespacegl_af615820fdf685ec1c4df56c7e37d3a7f}{access}} (fullPath.toUTF8(), W\_OK) == 0);}
+\DoxyCodeLine{284 }
+\DoxyCodeLine{285     \textcolor{keywordflow}{if} ((! isDirectory()) \&\& fullPath.containsChar (getSeparatorChar()))}
+\DoxyCodeLine{286         \textcolor{keywordflow}{return} getParentDirectory().hasWriteAccess();}
+\DoxyCodeLine{287 }
+\DoxyCodeLine{288     \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{289 \}}
+\DoxyCodeLine{290 }
+\DoxyCodeLine{291 \textcolor{keyword}{static} \textcolor{keywordtype}{bool} setFileModeFlags (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& fullPath, mode\_t \mbox{\hyperlink{namespacejuce_a848bbbcf606d6a8175b2c2712055d209}{flags}}, \textcolor{keywordtype}{bool} shouldSet) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{292 \{}
+\DoxyCodeLine{293     juce\_statStruct \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}};}
+\DoxyCodeLine{294 }
+\DoxyCodeLine{295     \textcolor{keywordflow}{if} (! juce\_stat (fullPath, \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}))}
+\DoxyCodeLine{296         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{297 }
+\DoxyCodeLine{298     \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}.st\_mode \&= 0777;}
+\DoxyCodeLine{299 }
+\DoxyCodeLine{300     \textcolor{keywordflow}{if} (shouldSet)}
+\DoxyCodeLine{301         \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}.st\_mode |= \mbox{\hyperlink{namespacejuce_a848bbbcf606d6a8175b2c2712055d209}{flags}};}
+\DoxyCodeLine{302     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{303         \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}.st\_mode \&= \string~flags;}
+\DoxyCodeLine{304 }
+\DoxyCodeLine{305     \textcolor{keywordflow}{return} chmod (fullPath.toUTF8(), (mode\_t) \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}.st\_mode) == 0;}
+\DoxyCodeLine{306 \}}
+\DoxyCodeLine{307 }
+\DoxyCodeLine{308 \textcolor{keywordtype}{bool} File::setFileReadOnlyInternal (\textcolor{keywordtype}{bool} shouldBeReadOnly)\textcolor{keyword}{ const}}
+\DoxyCodeLine{309 \textcolor{keyword}{}\{}
+\DoxyCodeLine{310     \textcolor{comment}{// Hmm.. should we give global write permission or just the current user?}}
+\DoxyCodeLine{311     \textcolor{keywordflow}{return} setFileModeFlags (fullPath, S\_IWUSR | S\_IWGRP | S\_IWOTH, ! shouldBeReadOnly);}
+\DoxyCodeLine{312 \}}
+\DoxyCodeLine{313 }
+\DoxyCodeLine{314 \textcolor{keywordtype}{bool} File::setFileExecutableInternal (\textcolor{keywordtype}{bool} shouldBeExecutable)\textcolor{keyword}{ const}}
+\DoxyCodeLine{315 \textcolor{keyword}{}\{}
+\DoxyCodeLine{316     \textcolor{keywordflow}{return} setFileModeFlags (fullPath, S\_IXUSR | S\_IXGRP | S\_IXOTH, shouldBeExecutable);}
+\DoxyCodeLine{317 \}}
+\DoxyCodeLine{318 }
+\DoxyCodeLine{319 \textcolor{keywordtype}{void} File::getFileTimesInternal (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}\& modificationTime, \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}\& accessTime, \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}\& creationTime)\textcolor{keyword}{ const}}
+\DoxyCodeLine{320 \textcolor{keyword}{}\{}
+\DoxyCodeLine{321     modificationTime = 0;}
+\DoxyCodeLine{322     accessTime = 0;}
+\DoxyCodeLine{323     creationTime = 0;}
+\DoxyCodeLine{324 }
+\DoxyCodeLine{325     juce\_statStruct \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}};}
+\DoxyCodeLine{326 }
+\DoxyCodeLine{327     \textcolor{keywordflow}{if} (juce\_stat (fullPath, \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}))}
+\DoxyCodeLine{328     \{}
+\DoxyCodeLine{329 \textcolor{preprocessor}{      \#if JUCE\_MAC || (JUCE\_IOS \&\& \_\_DARWIN\_ONLY\_64\_BIT\_INO\_T)}}
+\DoxyCodeLine{330         modificationTime  = (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}) \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}.st\_mtimespec.tv\_sec * 1000 + \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}.st\_mtimespec.tv\_nsec / 1000000;}
+\DoxyCodeLine{331         accessTime        = (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}) \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}.st\_atimespec.tv\_sec * 1000 + \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}.st\_atimespec.tv\_nsec / 1000000;}
+\DoxyCodeLine{332         creationTime      = (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}) \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}.st\_birthtimespec.tv\_sec * 1000 + \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}.st\_birthtimespec.tv\_nsec / 1000000;}
+\DoxyCodeLine{333       \#\textcolor{keywordflow}{else}}
+\DoxyCodeLine{334         modificationTime  = (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}) \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}.st\_mtime * 1000;}
+\DoxyCodeLine{335         accessTime        = (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}) \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}.st\_atime * 1000;}
+\DoxyCodeLine{336        \#\textcolor{keywordflow}{if} JUCE\_IOS}
+\DoxyCodeLine{337         creationTime      = (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}) \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}.st\_birthtime * 1000;}
+\DoxyCodeLine{338 \textcolor{preprocessor}{       \#else}}
+\DoxyCodeLine{339         creationTime      = (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}) \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}.st\_ctime * 1000;}
+\DoxyCodeLine{340        \#endif}
+\DoxyCodeLine{341       \#endif}
+\DoxyCodeLine{342     \}}
+\DoxyCodeLine{343 \}}
+\DoxyCodeLine{344 }
+\DoxyCodeLine{345 \textcolor{keywordtype}{bool} File::setFileTimesInternal (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} modificationTime, \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} accessTime, \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} \textcolor{comment}{/*creationTime*/})\textcolor{keyword}{ const}}
+\DoxyCodeLine{346 \textcolor{keyword}{}\{}
+\DoxyCodeLine{347 \textcolor{preprocessor}{   \#if ! JUCE\_WASM}}
+\DoxyCodeLine{348     juce\_statStruct \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}};}
+\DoxyCodeLine{349 }
+\DoxyCodeLine{350     \textcolor{keywordflow}{if} ((modificationTime != 0 || accessTime != 0) \&\& juce\_stat (fullPath, \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}))}
+\DoxyCodeLine{351     \{}
+\DoxyCodeLine{352 \textcolor{preprocessor}{       \#if JUCE\_MAC || (JUCE\_IOS \&\& \_\_DARWIN\_ONLY\_64\_BIT\_INO\_T)}}
+\DoxyCodeLine{353         \textcolor{keyword}{struct }timeval times[2];}
+\DoxyCodeLine{354 }
+\DoxyCodeLine{355         \textcolor{keywordtype}{bool} setModificationTime = (modificationTime != 0);}
+\DoxyCodeLine{356         \textcolor{keywordtype}{bool} setAccessTime       = (accessTime != 0);}
+\DoxyCodeLine{357 }
+\DoxyCodeLine{358         times[0].tv\_sec  = setAccessTime ? \textcolor{keyword}{static\_cast<}\_\_darwin\_time\_t\textcolor{keyword}{>} (accessTime / 1000)}
+\DoxyCodeLine{359                                          : \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}.st\_atimespec.tv\_sec;}
+\DoxyCodeLine{360 }
+\DoxyCodeLine{361         times[0].tv\_usec = setAccessTime ? \textcolor{keyword}{static\_cast<}\_\_darwin\_suseconds\_t\textcolor{keyword}{>} ((accessTime \% 1000) * 1000)}
+\DoxyCodeLine{362                                          : \textcolor{keyword}{static\_cast<}\_\_darwin\_suseconds\_t\textcolor{keyword}{>} (\mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}.st\_atimespec.tv\_nsec / 1000);}
+\DoxyCodeLine{363 }
+\DoxyCodeLine{364         times[1].tv\_sec  = setModificationTime ? \textcolor{keyword}{static\_cast<}\_\_darwin\_time\_t\textcolor{keyword}{>} (modificationTime / 1000)}
+\DoxyCodeLine{365                                                : \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}.st\_mtimespec.tv\_sec;}
+\DoxyCodeLine{366 }
+\DoxyCodeLine{367         times[1].tv\_usec = setModificationTime ? \textcolor{keyword}{static\_cast<}\_\_darwin\_suseconds\_t\textcolor{keyword}{>} ((modificationTime \% 1000) * 1000)}
+\DoxyCodeLine{368                                                : \textcolor{keyword}{static\_cast<}\_\_darwin\_suseconds\_t\textcolor{keyword}{>} (\mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}.st\_mtimespec.tv\_nsec / 1000);}
+\DoxyCodeLine{369 }
+\DoxyCodeLine{370         \textcolor{keywordflow}{return} utimes (fullPath.toUTF8(), times) == 0;}
+\DoxyCodeLine{371 \textcolor{preprocessor}{       \#else}}
+\DoxyCodeLine{372         \textcolor{keyword}{struct }utimbuf times;}
+\DoxyCodeLine{373         times.actime  = accessTime != 0       ? \textcolor{keyword}{static\_cast<}time\_t\textcolor{keyword}{>} (accessTime / 1000)       : \textcolor{keyword}{static\_cast<}time\_t\textcolor{keyword}{>} (\mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}.st\_atime);}
+\DoxyCodeLine{374         times.modtime = modificationTime != 0 ? \textcolor{keyword}{static\_cast<}time\_t\textcolor{keyword}{>} (modificationTime / 1000) : \textcolor{keyword}{static\_cast<}time\_t\textcolor{keyword}{>} (\mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}.st\_mtime);}
+\DoxyCodeLine{375 }
+\DoxyCodeLine{376         \textcolor{keywordflow}{return} utime (fullPath.toUTF8(), \&times) == 0;}
+\DoxyCodeLine{377 \textcolor{preprocessor}{       \#endif}}
+\DoxyCodeLine{378     \}}
+\DoxyCodeLine{379 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{380 }
+\DoxyCodeLine{381     \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{382 \}}
+\DoxyCodeLine{383 }
+\DoxyCodeLine{384 \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_file_adc64f67a869db306afd65a67758e5a3e}{File::deleteFile}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{385 \textcolor{keyword}{}\{}
+\DoxyCodeLine{386     \textcolor{keywordflow}{if} (! isSymbolicLink())}
+\DoxyCodeLine{387     \{}
+\DoxyCodeLine{388         \textcolor{keywordflow}{if} (! exists())}
+\DoxyCodeLine{389             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{390 }
+\DoxyCodeLine{391         \textcolor{keywordflow}{if} (isDirectory())}
+\DoxyCodeLine{392             \textcolor{keywordflow}{return} rmdir (fullPath.toUTF8()) == 0;}
+\DoxyCodeLine{393     \}}
+\DoxyCodeLine{394 }
+\DoxyCodeLine{395     \textcolor{keywordflow}{return} remove (fullPath.toUTF8()) == 0;}
+\DoxyCodeLine{396 \}}
+\DoxyCodeLine{397 }
+\DoxyCodeLine{398 \textcolor{keywordtype}{bool} File::moveInternal (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& dest)\textcolor{keyword}{ const}}
+\DoxyCodeLine{399 \textcolor{keyword}{}\{}
+\DoxyCodeLine{400     \textcolor{keywordflow}{if} (rename (fullPath.toUTF8(), dest.\mbox{\hyperlink{class_file_ab46bb1ff1b9e41ebd907c51d4d6e8743}{getFullPathName}}().\mbox{\hyperlink{class_string_aabef96ce5e32ca15473b3694309f2647}{toUTF8}}()) == 0)}
+\DoxyCodeLine{401         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{402 }
+\DoxyCodeLine{403     \textcolor{keywordflow}{if} (hasWriteAccess() \&\& copyInternal (dest))}
+\DoxyCodeLine{404     \{}
+\DoxyCodeLine{405         \textcolor{keywordflow}{if} (deleteFile())}
+\DoxyCodeLine{406             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{407 }
+\DoxyCodeLine{408         dest.\mbox{\hyperlink{class_file_adc64f67a869db306afd65a67758e5a3e}{deleteFile}}();}
+\DoxyCodeLine{409     \}}
+\DoxyCodeLine{410 }
+\DoxyCodeLine{411     \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{412 \}}
+\DoxyCodeLine{413 }
+\DoxyCodeLine{414 \textcolor{keywordtype}{bool} File::replaceInternal (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& dest)\textcolor{keyword}{ const}}
+\DoxyCodeLine{415 \textcolor{keyword}{}\{}
+\DoxyCodeLine{416     \textcolor{keywordflow}{return} moveInternal (dest);}
+\DoxyCodeLine{417 \}}
+\DoxyCodeLine{418 }
+\DoxyCodeLine{419 \mbox{\hyperlink{class_result}{Result}} File::createDirectoryInternal (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& fileName)\textcolor{keyword}{ const}}
+\DoxyCodeLine{420 \textcolor{keyword}{}\{}
+\DoxyCodeLine{421     \textcolor{keywordflow}{return} getResultForReturnValue (mkdir (fileName.\mbox{\hyperlink{class_string_aabef96ce5e32ca15473b3694309f2647}{toUTF8}}(), 0777));}
+\DoxyCodeLine{422 \}}
+\DoxyCodeLine{423 }
+\DoxyCodeLine{424 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{425 \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} \mbox{\hyperlink{namespacejuce_a292018cba514e9fee940dd24787c210e}{juce\_fileSetPosition}} (\textcolor{keywordtype}{void}* \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8530736c0c7f7f4dc724c8246e301f83}{handle}}, \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} pos)}
+\DoxyCodeLine{426 \{}
+\DoxyCodeLine{427     \textcolor{keywordflow}{if} (\mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8530736c0c7f7f4dc724c8246e301f83}{handle}} != \textcolor{keyword}{nullptr} \&\& lseek (getFD (\mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8530736c0c7f7f4dc724c8246e301f83}{handle}}), (off\_t) pos, \mbox{\hyperlink{zconf_8h_a0d112bae8fd35be772185b6ec6bcbe64}{SEEK\_SET}}) == pos)}
+\DoxyCodeLine{428         \textcolor{keywordflow}{return} pos;}
+\DoxyCodeLine{429 }
+\DoxyCodeLine{430     \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{431 \}}
+\DoxyCodeLine{432 }
+\DoxyCodeLine{433 \textcolor{keywordtype}{void} FileInputStream::openHandle()}
+\DoxyCodeLine{434 \{}
+\DoxyCodeLine{435     \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}} = open (file.getFullPathName().toUTF8(), O\_RDONLY);}
+\DoxyCodeLine{436 }
+\DoxyCodeLine{437     \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}} != -\/1)}
+\DoxyCodeLine{438         fileHandle = fdToVoidPointer (\mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}});}
+\DoxyCodeLine{439     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{440         status = getResultForErrno();}
+\DoxyCodeLine{441 \}}
+\DoxyCodeLine{442 }
+\DoxyCodeLine{443 \mbox{\hyperlink{class_file_input_stream_a84fb0034da8acefb823aec9089d30239}{FileInputStream::\string~FileInputStream}}()}
+\DoxyCodeLine{444 \{}
+\DoxyCodeLine{445     \textcolor{keywordflow}{if} (fileHandle != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{446         close (getFD (fileHandle));}
+\DoxyCodeLine{447 \}}
+\DoxyCodeLine{448 }
+\DoxyCodeLine{449 \textcolor{keywordtype}{size\_t} FileInputStream::readInternal (\textcolor{keywordtype}{void}* buffer, \textcolor{keywordtype}{size\_t} numBytes)}
+\DoxyCodeLine{450 \{}
+\DoxyCodeLine{451     ssize\_t \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = 0;}
+\DoxyCodeLine{452 }
+\DoxyCodeLine{453     \textcolor{keywordflow}{if} (fileHandle != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{454     \{}
+\DoxyCodeLine{455         \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = ::read (getFD (fileHandle), buffer, numBytes);}
+\DoxyCodeLine{456 }
+\DoxyCodeLine{457         \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} < 0)}
+\DoxyCodeLine{458         \{}
+\DoxyCodeLine{459             status = getResultForErrno();}
+\DoxyCodeLine{460             \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = 0;}
+\DoxyCodeLine{461         \}}
+\DoxyCodeLine{462     \}}
+\DoxyCodeLine{463 }
+\DoxyCodeLine{464     \textcolor{keywordflow}{return} (\textcolor{keywordtype}{size\_t}) \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}};}
+\DoxyCodeLine{465 \}}
+\DoxyCodeLine{466 }
+\DoxyCodeLine{467 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{468 \textcolor{keywordtype}{void} FileOutputStream::openHandle()}
+\DoxyCodeLine{469 \{}
+\DoxyCodeLine{470     \textcolor{keywordflow}{if} (file.exists())}
+\DoxyCodeLine{471     \{}
+\DoxyCodeLine{472         \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}} = open (file.getFullPathName().toUTF8(), O\_RDWR);}
+\DoxyCodeLine{473 }
+\DoxyCodeLine{474         \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}} != -\/1)}
+\DoxyCodeLine{475         \{}
+\DoxyCodeLine{476             currentPosition = lseek (\mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}}, 0, \mbox{\hyperlink{zconf_8h_ad2a2e6c114780c3071efd24f16c7f7d8}{SEEK\_END}});}
+\DoxyCodeLine{477 }
+\DoxyCodeLine{478             \textcolor{keywordflow}{if} (currentPosition >= 0)}
+\DoxyCodeLine{479             \{}
+\DoxyCodeLine{480                 fileHandle = fdToVoidPointer (\mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}});}
+\DoxyCodeLine{481             \}}
+\DoxyCodeLine{482             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{483             \{}
+\DoxyCodeLine{484                 status = getResultForErrno();}
+\DoxyCodeLine{485                 close (\mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}});}
+\DoxyCodeLine{486             \}}
+\DoxyCodeLine{487         \}}
+\DoxyCodeLine{488         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{489         \{}
+\DoxyCodeLine{490             status = getResultForErrno();}
+\DoxyCodeLine{491         \}}
+\DoxyCodeLine{492     \}}
+\DoxyCodeLine{493     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{494     \{}
+\DoxyCodeLine{495         \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}} = open (file.getFullPathName().toUTF8(), O\_RDWR | O\_CREAT, 00644);}
+\DoxyCodeLine{496 }
+\DoxyCodeLine{497         \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}} != -\/1)}
+\DoxyCodeLine{498             fileHandle = fdToVoidPointer (\mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}});}
+\DoxyCodeLine{499         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{500             status = getResultForErrno();}
+\DoxyCodeLine{501     \}}
+\DoxyCodeLine{502 \}}
+\DoxyCodeLine{503 }
+\DoxyCodeLine{504 \textcolor{keywordtype}{void} FileOutputStream::closeHandle()}
+\DoxyCodeLine{505 \{}
+\DoxyCodeLine{506     \textcolor{keywordflow}{if} (fileHandle != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{507     \{}
+\DoxyCodeLine{508         close (getFD (fileHandle));}
+\DoxyCodeLine{509         fileHandle = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{510     \}}
+\DoxyCodeLine{511 \}}
+\DoxyCodeLine{512 }
+\DoxyCodeLine{513 ssize\_t FileOutputStream::writeInternal (\textcolor{keyword}{const} \textcolor{keywordtype}{void}* \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, \textcolor{keywordtype}{size\_t} numBytes)}
+\DoxyCodeLine{514 \{}
+\DoxyCodeLine{515     \textcolor{keywordflow}{if} (fileHandle == \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{516         \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{517 }
+\DoxyCodeLine{518     \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = ::write (getFD (fileHandle), \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, numBytes);}
+\DoxyCodeLine{519 }
+\DoxyCodeLine{520     \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} == -\/1)}
+\DoxyCodeLine{521         status = getResultForErrno();}
+\DoxyCodeLine{522 }
+\DoxyCodeLine{523     \textcolor{keywordflow}{return} (ssize\_t) \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}};}
+\DoxyCodeLine{524 \}}
+\DoxyCodeLine{525 }
+\DoxyCodeLine{526 \textcolor{preprocessor}{\#ifndef JUCE\_ANDROID}}
+\DoxyCodeLine{527 \textcolor{keywordtype}{void} FileOutputStream::flushInternal()}
+\DoxyCodeLine{528 \{}
+\DoxyCodeLine{529     \textcolor{keywordflow}{if} (fileHandle != \textcolor{keyword}{nullptr} \&\& fsync (getFD (fileHandle)) == -\/1)}
+\DoxyCodeLine{530         status = getResultForErrno();}
+\DoxyCodeLine{531 \}}
+\DoxyCodeLine{532 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{533 }
+\DoxyCodeLine{534 \mbox{\hyperlink{class_result}{Result}} \mbox{\hyperlink{class_file_output_stream_a663c7e264306c74ed58f2639acec5797}{FileOutputStream::truncate}}()}
+\DoxyCodeLine{535 \{}
+\DoxyCodeLine{536     \textcolor{keywordflow}{if} (fileHandle == \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{537         \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{538 }
+\DoxyCodeLine{539     flush();}
+\DoxyCodeLine{540     \textcolor{keywordflow}{return} getResultForReturnValue (ftruncate (getFD (fileHandle), (off\_t) currentPosition));}
+\DoxyCodeLine{541 \}}
+\DoxyCodeLine{542 }
+\DoxyCodeLine{543 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{544 \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{class_system_stats_ac39e30e13c6d5cda19ebd10bcf8a3fa0}{SystemStats::getEnvironmentVariable}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& defaultValue)}
+\DoxyCodeLine{545 \{}
+\DoxyCodeLine{546     \textcolor{keywordflow}{if} (\textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}} = ::getenv (\mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}.toUTF8()))}
+\DoxyCodeLine{547         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_string_af0bb8ecf1f5e1e5be13993625a0c40f0}{String::fromUTF8}} (\mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}});}
+\DoxyCodeLine{548 }
+\DoxyCodeLine{549     \textcolor{keywordflow}{return} defaultValue;}
+\DoxyCodeLine{550 \}}
+\DoxyCodeLine{551 }
+\DoxyCodeLine{552 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{553 \textcolor{preprocessor}{\#if ! JUCE\_WASM}}
+\DoxyCodeLine{554 \textcolor{keywordtype}{void} MemoryMappedFile::openInternal (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& file, AccessMode \mbox{\hyperlink{png_8h_a3eabae3e1e65723a7ec3445646cb7795}{mode}}, \textcolor{keywordtype}{bool} exclusive)}
+\DoxyCodeLine{555 \{}
+\DoxyCodeLine{556     \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (\mbox{\hyperlink{png_8h_a3eabae3e1e65723a7ec3445646cb7795}{mode}} == readOnly || \mbox{\hyperlink{png_8h_a3eabae3e1e65723a7ec3445646cb7795}{mode}} == readWrite);}
+\DoxyCodeLine{557 }
+\DoxyCodeLine{558     \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_ae32af3c263eaecc21093939cdb44aaf3}{range}}.getStart() > 0)}
+\DoxyCodeLine{559     \{}
+\DoxyCodeLine{560         \textcolor{keyword}{auto} pageSize = sysconf (\_SC\_PAGE\_SIZE);}
+\DoxyCodeLine{561         \mbox{\hyperlink{namespacegl_ae32af3c263eaecc21093939cdb44aaf3}{range}}.setStart (\mbox{\hyperlink{namespacegl_ae32af3c263eaecc21093939cdb44aaf3}{range}}.getStart() -\/ (\mbox{\hyperlink{namespacegl_ae32af3c263eaecc21093939cdb44aaf3}{range}}.getStart() \% pageSize));}
+\DoxyCodeLine{562     \}}
+\DoxyCodeLine{563 }
+\DoxyCodeLine{564     \textcolor{keyword}{auto} filename = file.\mbox{\hyperlink{class_file_ab46bb1ff1b9e41ebd907c51d4d6e8743}{getFullPathName}}().\mbox{\hyperlink{class_string_aabef96ce5e32ca15473b3694309f2647}{toUTF8}}();}
+\DoxyCodeLine{565 }
+\DoxyCodeLine{566     \textcolor{keywordflow}{if} (\mbox{\hyperlink{png_8h_a3eabae3e1e65723a7ec3445646cb7795}{mode}} == readWrite)}
+\DoxyCodeLine{567         fileHandle = open (filename, O\_CREAT | O\_RDWR, 00644);}
+\DoxyCodeLine{568     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{569         fileHandle = open (filename, O\_RDONLY);}
+\DoxyCodeLine{570 }
+\DoxyCodeLine{571     \textcolor{keywordflow}{if} (fileHandle != -\/1)}
+\DoxyCodeLine{572     \{}
+\DoxyCodeLine{573         \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a0927a7b4232e61481fa501d12209467e}{m}} = mmap (\textcolor{keyword}{nullptr}, (\textcolor{keywordtype}{size\_t}) \mbox{\hyperlink{namespacegl_ae32af3c263eaecc21093939cdb44aaf3}{range}}.getLength(),}
+\DoxyCodeLine{574                        \mbox{\hyperlink{png_8h_a3eabae3e1e65723a7ec3445646cb7795}{mode}} == readWrite ? (PROT\_READ | PROT\_WRITE) : PROT\_READ,}
+\DoxyCodeLine{575                        exclusive ? MAP\_PRIVATE : MAP\_SHARED, fileHandle,}
+\DoxyCodeLine{576                        (off\_t) \mbox{\hyperlink{namespacegl_ae32af3c263eaecc21093939cdb44aaf3}{range}}.getStart());}
+\DoxyCodeLine{577 }
+\DoxyCodeLine{578         \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a0927a7b4232e61481fa501d12209467e}{m}} != MAP\_FAILED)}
+\DoxyCodeLine{579         \{}
+\DoxyCodeLine{580             \mbox{\hyperlink{namespacegl_a806bc647401f0b1530e579b97b65de84}{address}} = \mbox{\hyperlink{namespacegl_a0927a7b4232e61481fa501d12209467e}{m}};}
+\DoxyCodeLine{581             madvise (\mbox{\hyperlink{namespacegl_a0927a7b4232e61481fa501d12209467e}{m}}, (\textcolor{keywordtype}{size\_t}) \mbox{\hyperlink{namespacegl_ae32af3c263eaecc21093939cdb44aaf3}{range}}.getLength(), MADV\_SEQUENTIAL);}
+\DoxyCodeLine{582         \}}
+\DoxyCodeLine{583         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{584         \{}
+\DoxyCodeLine{585             \mbox{\hyperlink{namespacegl_ae32af3c263eaecc21093939cdb44aaf3}{range}} = \mbox{\hyperlink{class_range}{Range<int64>}}();}
+\DoxyCodeLine{586         \}}
+\DoxyCodeLine{587 }
+\DoxyCodeLine{588         close (fileHandle);}
+\DoxyCodeLine{589         fileHandle = 0;}
+\DoxyCodeLine{590     \}}
+\DoxyCodeLine{591 \}}
+\DoxyCodeLine{592 }
+\DoxyCodeLine{593 \mbox{\hyperlink{class_memory_mapped_file_a50f37ae28ddf9c0e57823c0b75743878}{MemoryMappedFile::\string~MemoryMappedFile}}()}
+\DoxyCodeLine{594 \{}
+\DoxyCodeLine{595     \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a806bc647401f0b1530e579b97b65de84}{address}} != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{596         munmap (\mbox{\hyperlink{namespacegl_a806bc647401f0b1530e579b97b65de84}{address}}, (\textcolor{keywordtype}{size\_t}) \mbox{\hyperlink{namespacegl_ae32af3c263eaecc21093939cdb44aaf3}{range}}.getLength());}
+\DoxyCodeLine{597 }
+\DoxyCodeLine{598     \textcolor{keywordflow}{if} (fileHandle != 0)}
+\DoxyCodeLine{599         close (fileHandle);}
+\DoxyCodeLine{600 \}}
+\DoxyCodeLine{601 }
+\DoxyCodeLine{602 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{603 \mbox{\hyperlink{class_file}{File}} \mbox{\hyperlink{namespacejuce_a1cd57f917fee1d3edd996b8f204c92ee}{juce\_getExecutableFile}}();}
+\DoxyCodeLine{604 \mbox{\hyperlink{class_file}{File}} \mbox{\hyperlink{namespacejuce_a1cd57f917fee1d3edd996b8f204c92ee}{juce\_getExecutableFile}}()}
+\DoxyCodeLine{605 \{}
+\DoxyCodeLine{606     \textcolor{keyword}{struct }DLAddrReader}
+\DoxyCodeLine{607     \{}
+\DoxyCodeLine{608         \textcolor{keyword}{static} \mbox{\hyperlink{class_string}{String}} getFilename()}
+\DoxyCodeLine{609         \{}
+\DoxyCodeLine{610             Dl\_info exeInfo;}
+\DoxyCodeLine{611 }
+\DoxyCodeLine{612             \textcolor{keyword}{auto} localSymbol = (\textcolor{keywordtype}{void}*) \mbox{\hyperlink{namespacejuce_a1cd57f917fee1d3edd996b8f204c92ee}{juce\_getExecutableFile}};}
+\DoxyCodeLine{613             dladdr (localSymbol, \&exeInfo);}
+\DoxyCodeLine{614             \textcolor{keywordflow}{return} \mbox{\hyperlink{class_char_pointer___u_t_f8}{CharPointer\_UTF8}} (exeInfo.dli\_fname);}
+\DoxyCodeLine{615         \}}
+\DoxyCodeLine{616     \};}
+\DoxyCodeLine{617 }
+\DoxyCodeLine{618     \textcolor{keyword}{static} \mbox{\hyperlink{class_string}{String}} filename = DLAddrReader::getFilename();}
+\DoxyCodeLine{619     \textcolor{keywordflow}{return} \mbox{\hyperlink{class_file_aac662f89bbeed8128f11f8747bca938c}{File::getCurrentWorkingDirectory}}().\mbox{\hyperlink{class_file_a087bb8f0a60069234b13ab965fb5014a}{getChildFile}} (filename);}
+\DoxyCodeLine{620 \}}
+\DoxyCodeLine{621 }
+\DoxyCodeLine{622 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{623 \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} \mbox{\hyperlink{class_file_a018a4bacf33f814ee2beb2226f044872}{File::getBytesFreeOnVolume}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{624 \textcolor{keyword}{}\{}
+\DoxyCodeLine{625     \textcolor{keyword}{struct }statfs \mbox{\hyperlink{namespacegl_ab998012e627da2312fc60f51c0c2f313}{buf}};}
+\DoxyCodeLine{626 }
+\DoxyCodeLine{627     \textcolor{keywordflow}{if} (juce\_doStatFS (*\textcolor{keyword}{this}, \mbox{\hyperlink{namespacegl_ab998012e627da2312fc60f51c0c2f313}{buf}}))}
+\DoxyCodeLine{628         \textcolor{keywordflow}{return} (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}) \mbox{\hyperlink{namespacegl_ab998012e627da2312fc60f51c0c2f313}{buf}}.f\_bsize * (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}) \mbox{\hyperlink{namespacegl_ab998012e627da2312fc60f51c0c2f313}{buf}}.f\_bavail; \textcolor{comment}{// Note: this returns space available to non-\/super user}}
+\DoxyCodeLine{629 }
+\DoxyCodeLine{630     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{631 \}}
+\DoxyCodeLine{632 }
+\DoxyCodeLine{633 \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} \mbox{\hyperlink{class_file_a04099b2a106bd9d0dc8fd9ebb896e067}{File::getVolumeTotalSize}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{634 \textcolor{keyword}{}\{}
+\DoxyCodeLine{635     \textcolor{keyword}{struct }statfs \mbox{\hyperlink{namespacegl_ab998012e627da2312fc60f51c0c2f313}{buf}};}
+\DoxyCodeLine{636 }
+\DoxyCodeLine{637     \textcolor{keywordflow}{if} (juce\_doStatFS (*\textcolor{keyword}{this}, \mbox{\hyperlink{namespacegl_ab998012e627da2312fc60f51c0c2f313}{buf}}))}
+\DoxyCodeLine{638         \textcolor{keywordflow}{return} (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}) \mbox{\hyperlink{namespacegl_ab998012e627da2312fc60f51c0c2f313}{buf}}.f\_bsize * (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}) \mbox{\hyperlink{namespacegl_ab998012e627da2312fc60f51c0c2f313}{buf}}.f\_blocks;}
+\DoxyCodeLine{639 }
+\DoxyCodeLine{640     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{641 \}}
+\DoxyCodeLine{642 }
+\DoxyCodeLine{643 \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{class_file_a9332e3d1aa82e6e9523536749a1c5cd4}{File::getVolumeLabel}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{644 \textcolor{keyword}{}\{}
+\DoxyCodeLine{645 \textcolor{preprocessor}{   \#if JUCE\_MAC}}
+\DoxyCodeLine{646     \textcolor{keyword}{struct }VolAttrBuf}
+\DoxyCodeLine{647     \{}
+\DoxyCodeLine{648         u\_int32\_t       \mbox{\hyperlink{png_8c_a209c8e470817686b5ca6730db67f8d67}{length}};}
+\DoxyCodeLine{649         attrreference\_t mountPointRef;}
+\DoxyCodeLine{650         \textcolor{keywordtype}{char}            mountPointSpace[MAXPATHLEN];}
+\DoxyCodeLine{651     \} attrBuf;}
+\DoxyCodeLine{652 }
+\DoxyCodeLine{653     \textcolor{keyword}{struct }attrlist attrList;}
+\DoxyCodeLine{654     \mbox{\hyperlink{group__juce__core-memory_ga1f3dbe374ad9280ed9ba72f510d8e5b0}{zerostruct}} (attrList); \textcolor{comment}{// (can't use "{}= \{\}"{} on this object because it's a C struct)}}
+\DoxyCodeLine{655     attrList.bitmapcount = ATTR\_BIT\_MAP\_COUNT;}
+\DoxyCodeLine{656     attrList.volattr = ATTR\_VOL\_INFO | ATTR\_VOL\_NAME;}
+\DoxyCodeLine{657 }
+\DoxyCodeLine{658     \mbox{\hyperlink{class_file}{File}} \mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}} (*\textcolor{keyword}{this});}
+\DoxyCodeLine{659 }
+\DoxyCodeLine{660     \textcolor{keywordflow}{for} (;;)}
+\DoxyCodeLine{661     \{}
+\DoxyCodeLine{662         \textcolor{keywordflow}{if} (getattrlist (\mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}}.getFullPathName().toUTF8(), \&attrList, \&attrBuf, sizeof (attrBuf), 0) == 0)}
+\DoxyCodeLine{663             \textcolor{keywordflow}{return} \mbox{\hyperlink{class_string_af0bb8ecf1f5e1e5be13993625a0c40f0}{String::fromUTF8}} (((\textcolor{keyword}{const} \textcolor{keywordtype}{char}*) \&attrBuf.mountPointRef) + attrBuf.mountPointRef.attr\_dataoffset,}
+\DoxyCodeLine{664                                      (\textcolor{keywordtype}{int}) attrBuf.mountPointRef.attr\_length);}
+\DoxyCodeLine{665 }
+\DoxyCodeLine{666         \textcolor{keyword}{auto} parent = \mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}}.getParentDirectory();}
+\DoxyCodeLine{667 }
+\DoxyCodeLine{668         \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}} == parent)}
+\DoxyCodeLine{669             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{670 }
+\DoxyCodeLine{671         \mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}} = parent;}
+\DoxyCodeLine{672     \}}
+\DoxyCodeLine{673 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{674 }
+\DoxyCodeLine{675     \textcolor{keywordflow}{return} \{\};}
+\DoxyCodeLine{676 \}}
+\DoxyCodeLine{677 }
+\DoxyCodeLine{678 \textcolor{keywordtype}{int} \mbox{\hyperlink{class_file_a0fe0856884245c96e1e487f1555d6067}{File::getVolumeSerialNumber}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{679 \textcolor{keyword}{}\{}
+\DoxyCodeLine{680     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{681 \}}
+\DoxyCodeLine{682 }
+\DoxyCodeLine{683 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{684 }
+\DoxyCodeLine{685 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{686 \textcolor{preprocessor}{\#if ! JUCE\_IOS}}
+\DoxyCodeLine{687 \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacejuce_ac45bbf8ab3de10646f32147b5791ccf6}{juce\_runSystemCommand}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\&);}
+\DoxyCodeLine{688 \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacejuce_ac45bbf8ab3de10646f32147b5791ccf6}{juce\_runSystemCommand}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_gga485dc2a0e5ed7da3d9f826367b36ee55a6440030ae8284cee96c1c88b356c45a7}{command}})}
+\DoxyCodeLine{689 \{}
+\DoxyCodeLine{690     \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = system (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_gga485dc2a0e5ed7da3d9f826367b36ee55a6440030ae8284cee96c1c88b356c45a7}{command}}.toUTF8());}
+\DoxyCodeLine{691     \mbox{\hyperlink{group__juce__core-maths_ga5158e6e8faa5553204f90af596fafaf5}{ignoreUnused}} (\mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}});}
+\DoxyCodeLine{692 \}}
+\DoxyCodeLine{693 }
+\DoxyCodeLine{694 \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{namespacejuce_a65144c7a64a8297acb938dac52cc84ea}{juce\_getOutputFromCommand}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\&);}
+\DoxyCodeLine{695 \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{namespacejuce_a65144c7a64a8297acb938dac52cc84ea}{juce\_getOutputFromCommand}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_gga485dc2a0e5ed7da3d9f826367b36ee55a6440030ae8284cee96c1c88b356c45a7}{command}})}
+\DoxyCodeLine{696 \{}
+\DoxyCodeLine{697     \textcolor{comment}{// slight bodge here, as we just pipe the output into a temp file and read it...}}
+\DoxyCodeLine{698     \textcolor{keyword}{auto} tempFile = \mbox{\hyperlink{class_file_a723a07bf78cdb77dfdfe1a81087bc053}{File::getSpecialLocation}} (\mbox{\hyperlink{class_file_a3e19cafabb03c5838160263a6e76313da08818a8233a97db2e3c54a917adf4954}{File::tempDirectory}})}
+\DoxyCodeLine{699                       .\mbox{\hyperlink{class_file_a27b9836a055b69f2e18962d3bab2a018}{getNonexistentChildFile}} (\mbox{\hyperlink{class_string_aab501daf0fa0bbba1479218447d1f936}{String::toHexString}} (\mbox{\hyperlink{class_random_a1c8b03bde53a63ee1127d5fab9e2677c}{Random::getSystemRandom}}().nextInt()), \textcolor{stringliteral}{"{}.tmp"{}}, \textcolor{keyword}{false});}
+\DoxyCodeLine{700 }
+\DoxyCodeLine{701     \mbox{\hyperlink{namespacejuce_ac45bbf8ab3de10646f32147b5791ccf6}{juce\_runSystemCommand}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_gga485dc2a0e5ed7da3d9f826367b36ee55a6440030ae8284cee96c1c88b356c45a7}{command}} + \textcolor{stringliteral}{"{} > "{}} + tempFile.getFullPathName());}
+\DoxyCodeLine{702 }
+\DoxyCodeLine{703     \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = tempFile.loadFileAsString();}
+\DoxyCodeLine{704     tempFile.deleteFile();}
+\DoxyCodeLine{705     \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}};}
+\DoxyCodeLine{706 \}}
+\DoxyCodeLine{707 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{708 }
+\DoxyCodeLine{709 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{710 \textcolor{preprocessor}{\#if JUCE\_IOS}}
+\DoxyCodeLine{711 \textcolor{keyword}{class }InterProcessLock::Pimpl}
+\DoxyCodeLine{712 \{}
+\DoxyCodeLine{713 \textcolor{keyword}{public}:}
+\DoxyCodeLine{714     \mbox{\hyperlink{classjuce_1_1_inter_process_lock_1_1_pimpl_a29c3d16bf9bad8ea691efd2a43836da3}{Pimpl}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\&, \textcolor{keywordtype}{int})  \{\}}
+\DoxyCodeLine{715 }
+\DoxyCodeLine{716     \textcolor{keywordtype}{int} \mbox{\hyperlink{classjuce_1_1_inter_process_lock_1_1_pimpl_a32eed74af9ee7f1734fd33cbc45b9018}{handle}} = 1, \mbox{\hyperlink{classjuce_1_1_inter_process_lock_1_1_pimpl_a87b784573617484de31750580ef59c15}{refCount}} = 1;  \textcolor{comment}{// On iOS just fake success..}}
+\DoxyCodeLine{717 \};}
+\DoxyCodeLine{718 }
+\DoxyCodeLine{719 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{720 }
+\DoxyCodeLine{721 \textcolor{keyword}{class }\mbox{\hyperlink{classjuce_1_1_inter_process_lock_1_1_pimpl}{InterProcessLock::Pimpl}}}
+\DoxyCodeLine{722 \{}
+\DoxyCodeLine{723 \textcolor{keyword}{public}:}
+\DoxyCodeLine{724     \mbox{\hyperlink{classjuce_1_1_inter_process_lock_1_1_pimpl_a29c3d16bf9bad8ea691efd2a43836da3}{Pimpl}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& lockName, \textcolor{keywordtype}{int} timeOutMillisecs)}
+\DoxyCodeLine{725     \{}
+\DoxyCodeLine{726 \textcolor{preprocessor}{       \#if JUCE\_MAC}}
+\DoxyCodeLine{727         \textcolor{keywordflow}{if} (! \mbox{\hyperlink{classjuce_1_1_inter_process_lock_1_1_pimpl_a3ed56ba7fba8a6da937637d1b7a5841d}{createLockFile}} (\mbox{\hyperlink{class_file}{File}} (\textcolor{stringliteral}{"{}\string~/Library/Caches/com.juce.locks"{}}).getChildFile (lockName), timeOutMillisecs))}
+\DoxyCodeLine{728             \textcolor{comment}{// Fallback if the user's home folder is on a network drive with no ability to lock..}}
+\DoxyCodeLine{729             \mbox{\hyperlink{classjuce_1_1_inter_process_lock_1_1_pimpl_a3ed56ba7fba8a6da937637d1b7a5841d}{createLockFile}} (\mbox{\hyperlink{class_file}{File}} (\textcolor{stringliteral}{"{}/tmp/com.juce.locks"{}}).getChildFile (lockName), timeOutMillisecs);}
+\DoxyCodeLine{730 }
+\DoxyCodeLine{731 \textcolor{preprocessor}{       \#else}}
+\DoxyCodeLine{732         \mbox{\hyperlink{class_file}{File}} tempFolder (\textcolor{stringliteral}{"{}/var/tmp"{}});}
+\DoxyCodeLine{733 }
+\DoxyCodeLine{734         \textcolor{keywordflow}{if} (! tempFolder.\mbox{\hyperlink{class_file_ac7db97d8e1c60f9b443def08e7d1758f}{isDirectory}}())}
+\DoxyCodeLine{735             tempFolder = \textcolor{stringliteral}{"{}/tmp"{}};}
+\DoxyCodeLine{736 }
+\DoxyCodeLine{737         \mbox{\hyperlink{classjuce_1_1_inter_process_lock_1_1_pimpl_a3ed56ba7fba8a6da937637d1b7a5841d}{createLockFile}} (tempFolder.\mbox{\hyperlink{class_file_a087bb8f0a60069234b13ab965fb5014a}{getChildFile}} (lockName), timeOutMillisecs);}
+\DoxyCodeLine{738 \textcolor{preprocessor}{       \#endif}}
+\DoxyCodeLine{739     \}}
+\DoxyCodeLine{740 }
+\DoxyCodeLine{741     \mbox{\hyperlink{classjuce_1_1_inter_process_lock_1_1_pimpl_a66b616ad8c48b686122f01dde791bd16}{\string~Pimpl}}()}
+\DoxyCodeLine{742     \{}
+\DoxyCodeLine{743         \mbox{\hyperlink{classjuce_1_1_inter_process_lock_1_1_pimpl_a3b249839ebe0e4f015470ad6b572cc2f}{closeFile}}();}
+\DoxyCodeLine{744     \}}
+\DoxyCodeLine{745 }
+\DoxyCodeLine{746     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classjuce_1_1_inter_process_lock_1_1_pimpl_a3ed56ba7fba8a6da937637d1b7a5841d}{createLockFile}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& file, \textcolor{keywordtype}{int} timeOutMillisecs)}
+\DoxyCodeLine{747     \{}
+\DoxyCodeLine{748         file.\mbox{\hyperlink{class_file_abafe426da97eb12e8c445b16dae8a4cd}{create}}();}
+\DoxyCodeLine{749         \mbox{\hyperlink{classjuce_1_1_inter_process_lock_1_1_pimpl_a32eed74af9ee7f1734fd33cbc45b9018}{handle}} = open (file.\mbox{\hyperlink{class_file_ab46bb1ff1b9e41ebd907c51d4d6e8743}{getFullPathName}}().\mbox{\hyperlink{class_string_aabef96ce5e32ca15473b3694309f2647}{toUTF8}}(), O\_RDWR);}
+\DoxyCodeLine{750 }
+\DoxyCodeLine{751         \textcolor{keywordflow}{if} (\mbox{\hyperlink{classjuce_1_1_inter_process_lock_1_1_pimpl_a32eed74af9ee7f1734fd33cbc45b9018}{handle}} != 0)}
+\DoxyCodeLine{752         \{}
+\DoxyCodeLine{753             \textcolor{keyword}{struct }flock fl;}
+\DoxyCodeLine{754             \mbox{\hyperlink{group__juce__core-memory_ga1f3dbe374ad9280ed9ba72f510d8e5b0}{zerostruct}} (fl);}
+\DoxyCodeLine{755 }
+\DoxyCodeLine{756             fl.l\_whence = \mbox{\hyperlink{zconf_8h_a0d112bae8fd35be772185b6ec6bcbe64}{SEEK\_SET}};}
+\DoxyCodeLine{757             fl.l\_type = F\_WRLCK;}
+\DoxyCodeLine{758 }
+\DoxyCodeLine{759             \textcolor{keyword}{auto} endTime = \mbox{\hyperlink{class_time_a18ceeea45072a31c8b6b68f08e107bc0}{Time::currentTimeMillis}}() + timeOutMillisecs;}
+\DoxyCodeLine{760 }
+\DoxyCodeLine{761             \textcolor{keywordflow}{for} (;;)}
+\DoxyCodeLine{762             \{}
+\DoxyCodeLine{763                 \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = fcntl (\mbox{\hyperlink{classjuce_1_1_inter_process_lock_1_1_pimpl_a32eed74af9ee7f1734fd33cbc45b9018}{handle}}, F\_SETLK, \&fl);}
+\DoxyCodeLine{764 }
+\DoxyCodeLine{765                 \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} >= 0)}
+\DoxyCodeLine{766                     \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{767 }
+\DoxyCodeLine{768                 \textcolor{keyword}{auto} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_af44443f87d7b66dff07b3d884445dca1}{error}} = errno;}
+\DoxyCodeLine{769 }
+\DoxyCodeLine{770                 \textcolor{keywordflow}{if} (\mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_af44443f87d7b66dff07b3d884445dca1}{error}} != EINTR)}
+\DoxyCodeLine{771                 \{}
+\DoxyCodeLine{772                     \textcolor{keywordflow}{if} (\mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_af44443f87d7b66dff07b3d884445dca1}{error}} == EBADF || \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_af44443f87d7b66dff07b3d884445dca1}{error}} == ENOTSUP)}
+\DoxyCodeLine{773                         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{774 }
+\DoxyCodeLine{775                     \textcolor{keywordflow}{if} (timeOutMillisecs == 0}
+\DoxyCodeLine{776                          || (timeOutMillisecs > 0 \&\& \mbox{\hyperlink{class_time_a18ceeea45072a31c8b6b68f08e107bc0}{Time::currentTimeMillis}}() >= endTime))}
+\DoxyCodeLine{777                         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{778 }
+\DoxyCodeLine{779                     \mbox{\hyperlink{class_thread_ace8d1c984cb6900b2b47912a69261bc4}{Thread::sleep}} (10);}
+\DoxyCodeLine{780                 \}}
+\DoxyCodeLine{781             \}}
+\DoxyCodeLine{782         \}}
+\DoxyCodeLine{783 }
+\DoxyCodeLine{784         \mbox{\hyperlink{classjuce_1_1_inter_process_lock_1_1_pimpl_a3b249839ebe0e4f015470ad6b572cc2f}{closeFile}}();}
+\DoxyCodeLine{785         \textcolor{keywordflow}{return} \textcolor{keyword}{true}; \textcolor{comment}{// only false if there's a file system error. Failure to lock still returns true.}}
+\DoxyCodeLine{786     \}}
+\DoxyCodeLine{787 }
+\DoxyCodeLine{788     \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_inter_process_lock_1_1_pimpl_a3b249839ebe0e4f015470ad6b572cc2f}{closeFile}}()}
+\DoxyCodeLine{789     \{}
+\DoxyCodeLine{790         \textcolor{keywordflow}{if} (\mbox{\hyperlink{classjuce_1_1_inter_process_lock_1_1_pimpl_a32eed74af9ee7f1734fd33cbc45b9018}{handle}} != 0)}
+\DoxyCodeLine{791         \{}
+\DoxyCodeLine{792             \textcolor{keyword}{struct }flock fl;}
+\DoxyCodeLine{793             \mbox{\hyperlink{group__juce__core-memory_ga1f3dbe374ad9280ed9ba72f510d8e5b0}{zerostruct}} (fl);}
+\DoxyCodeLine{794 }
+\DoxyCodeLine{795             fl.l\_whence = \mbox{\hyperlink{zconf_8h_a0d112bae8fd35be772185b6ec6bcbe64}{SEEK\_SET}};}
+\DoxyCodeLine{796             fl.l\_type = F\_UNLCK;}
+\DoxyCodeLine{797 }
+\DoxyCodeLine{798             \textcolor{keywordflow}{while} (! (fcntl (\mbox{\hyperlink{classjuce_1_1_inter_process_lock_1_1_pimpl_a32eed74af9ee7f1734fd33cbc45b9018}{handle}}, F\_SETLKW, \&fl) >= 0 || errno != EINTR))}
+\DoxyCodeLine{799             \{\}}
+\DoxyCodeLine{800 }
+\DoxyCodeLine{801             \mbox{\hyperlink{classjuce_1_1_inter_process_lock_1_1_pimpl_ab1c7ba066300187f9f5727e589af920f}{close}} (\mbox{\hyperlink{classjuce_1_1_inter_process_lock_1_1_pimpl_a32eed74af9ee7f1734fd33cbc45b9018}{handle}});}
+\DoxyCodeLine{802             \mbox{\hyperlink{classjuce_1_1_inter_process_lock_1_1_pimpl_a32eed74af9ee7f1734fd33cbc45b9018}{handle}} = 0;}
+\DoxyCodeLine{803         \}}
+\DoxyCodeLine{804     \}}
+\DoxyCodeLine{805 }
+\DoxyCodeLine{806     \textcolor{keywordtype}{int} \mbox{\hyperlink{classjuce_1_1_inter_process_lock_1_1_pimpl_a32eed74af9ee7f1734fd33cbc45b9018}{handle}} = 0, \mbox{\hyperlink{classjuce_1_1_inter_process_lock_1_1_pimpl_a87b784573617484de31750580ef59c15}{refCount}} = 1;}
+\DoxyCodeLine{807 \};}
+\DoxyCodeLine{808 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{809 }
+\DoxyCodeLine{810 \mbox{\hyperlink{class_inter_process_lock_aa4bb20ad9b280ba608e570f8ece8351e}{InterProcessLock::InterProcessLock}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& nm)  : \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}} (nm)}
+\DoxyCodeLine{811 \{}
+\DoxyCodeLine{812 \}}
+\DoxyCodeLine{813 }
+\DoxyCodeLine{814 \mbox{\hyperlink{class_inter_process_lock_a464f2a7c6a841b37534f1d1cbe5c1571}{InterProcessLock::\string~InterProcessLock}}()}
+\DoxyCodeLine{815 \{}
+\DoxyCodeLine{816 \}}
+\DoxyCodeLine{817 }
+\DoxyCodeLine{818 \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_inter_process_lock_a00d7b9e49bf365eedc923f622e330179}{InterProcessLock::enter}} (\textcolor{keywordtype}{int} timeOutMillisecs)}
+\DoxyCodeLine{819 \{}
+\DoxyCodeLine{820     \textcolor{keyword}{const} \mbox{\hyperlink{class_generic_scoped_lock}{ScopedLock}} sl (lock);}
+\DoxyCodeLine{821 }
+\DoxyCodeLine{822     \textcolor{keywordflow}{if} (pimpl == \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{823     \{}
+\DoxyCodeLine{824         pimpl.reset (\textcolor{keyword}{new} Pimpl (\mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}, timeOutMillisecs));}
+\DoxyCodeLine{825 }
+\DoxyCodeLine{826         \textcolor{keywordflow}{if} (pimpl-\/>handle == 0)}
+\DoxyCodeLine{827             pimpl.reset();}
+\DoxyCodeLine{828     \}}
+\DoxyCodeLine{829     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{830     \{}
+\DoxyCodeLine{831         pimpl-\/>refCount++;}
+\DoxyCodeLine{832     \}}
+\DoxyCodeLine{833 }
+\DoxyCodeLine{834     \textcolor{keywordflow}{return} pimpl != \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{835 \}}
+\DoxyCodeLine{836 }
+\DoxyCodeLine{837 \textcolor{keywordtype}{void} \mbox{\hyperlink{class_inter_process_lock_a3387e77951f1777be407cf76d2691bd0}{InterProcessLock::exit}}()}
+\DoxyCodeLine{838 \{}
+\DoxyCodeLine{839     \textcolor{keyword}{const} \mbox{\hyperlink{class_generic_scoped_lock}{ScopedLock}} sl (lock);}
+\DoxyCodeLine{840 }
+\DoxyCodeLine{841     \textcolor{comment}{// Trying to release the lock too many times!}}
+\DoxyCodeLine{842     \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (pimpl != \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{843 }
+\DoxyCodeLine{844     \textcolor{keywordflow}{if} (pimpl != \textcolor{keyword}{nullptr} \&\& -\/-\/(pimpl-\/>refCount) == 0)}
+\DoxyCodeLine{845         pimpl.reset();}
+\DoxyCodeLine{846 \}}
+\DoxyCodeLine{847 }
+\DoxyCodeLine{848 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{849 \textcolor{preprocessor}{\#if JUCE\_ANDROID}}
+\DoxyCodeLine{850 \textcolor{keyword}{extern} JavaVM* \mbox{\hyperlink{namespacejuce_a48500e7eaa1293d03d3f2988b766d5ca}{androidJNIJavaVM}};}
+\DoxyCodeLine{851 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{852 }
+\DoxyCodeLine{853 \textcolor{keyword}{static} \textcolor{keywordtype}{void}* threadEntryProc (\textcolor{keywordtype}{void}* userData)}
+\DoxyCodeLine{854 \{}
+\DoxyCodeLine{855     \textcolor{keyword}{auto}* myself = \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{class_thread}{Thread}}*\textcolor{keyword}{>} (userData);}
+\DoxyCodeLine{856 }
+\DoxyCodeLine{857     \mbox{\hyperlink{group__juce__core-memory_gad73fadcd76040b11a626d5bdf833ad49}{JUCE\_AUTORELEASEPOOL}}}
+\DoxyCodeLine{858     \{}
+\DoxyCodeLine{859         \mbox{\hyperlink{namespacejuce_ae04d190dc08dd42051050e85bff770a8}{juce\_threadEntryPoint}} (myself);}
+\DoxyCodeLine{860     \}}
+\DoxyCodeLine{861 }
+\DoxyCodeLine{862 \textcolor{preprocessor}{   \#if JUCE\_ANDROID}}
+\DoxyCodeLine{863     \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacejuce_a48500e7eaa1293d03d3f2988b766d5ca}{androidJNIJavaVM}} != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{864     \{}
+\DoxyCodeLine{865         \textcolor{keywordtype}{void}* env = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{866         \mbox{\hyperlink{namespacejuce_a48500e7eaa1293d03d3f2988b766d5ca}{androidJNIJavaVM}}-\/>GetEnv(\&env, JNI\_VERSION\_1\_2);}
+\DoxyCodeLine{867 }
+\DoxyCodeLine{868         \textcolor{comment}{// only detach if we have actually been attached}}
+\DoxyCodeLine{869         \textcolor{keywordflow}{if} (env != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{870             \mbox{\hyperlink{namespacejuce_a48500e7eaa1293d03d3f2988b766d5ca}{androidJNIJavaVM}}-\/>DetachCurrentThread();}
+\DoxyCodeLine{871     \}}
+\DoxyCodeLine{872 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{873 }
+\DoxyCodeLine{874     \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{875 \}}
+\DoxyCodeLine{876 }
+\DoxyCodeLine{877 \textcolor{preprocessor}{\#if JUCE\_ANDROID \&\& JUCE\_MODULE\_AVAILABLE\_juce\_audio\_devices \&\& (JUCE\_USE\_ANDROID\_OPENSLES || JUCE\_USE\_ANDROID\_OBOE)}}
+\DoxyCodeLine{878 \textcolor{preprocessor}{ \#define JUCE\_ANDROID\_REALTIME\_THREAD\_AVAILABLE 1}}
+\DoxyCodeLine{879 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{880 }
+\DoxyCodeLine{881 \textcolor{preprocessor}{\#if JUCE\_ANDROID\_REALTIME\_THREAD\_AVAILABLE}}
+\DoxyCodeLine{882 \textcolor{keyword}{extern} pthread\_t \mbox{\hyperlink{namespacejuce_ac646be6c6bd67b10c4c88b0248a5e523}{juce\_createRealtimeAudioThread}} (\textcolor{keywordtype}{void}* (*\mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}}) (\textcolor{keywordtype}{void}*), \textcolor{keywordtype}{void}* userPtr);}
+\DoxyCodeLine{883 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{884 }
+\DoxyCodeLine{885 \textcolor{keywordtype}{void} Thread::launchThread()}
+\DoxyCodeLine{886 \{}
+\DoxyCodeLine{887 \textcolor{preprocessor}{   \#if JUCE\_ANDROID}}
+\DoxyCodeLine{888     \textcolor{keywordflow}{if} (isAndroidRealtimeThread)}
+\DoxyCodeLine{889     \{}
+\DoxyCodeLine{890 \textcolor{preprocessor}{       \#if JUCE\_ANDROID\_REALTIME\_THREAD\_AVAILABLE}}
+\DoxyCodeLine{891         threadHandle = (\textcolor{keywordtype}{void}*) \mbox{\hyperlink{namespacejuce_ac646be6c6bd67b10c4c88b0248a5e523}{juce\_createRealtimeAudioThread}} (threadEntryProc, \textcolor{keyword}{this});}
+\DoxyCodeLine{892         threadId = (ThreadID) threadHandle.get();}
+\DoxyCodeLine{893 }
+\DoxyCodeLine{894         \textcolor{keywordflow}{return};}
+\DoxyCodeLine{895 \textcolor{preprocessor}{       \#else}}
+\DoxyCodeLine{896         \mbox{\hyperlink{group__juce__core-system_gadc044ce5efecbecf2f5a44cd00db67b3}{jassertfalse}};}
+\DoxyCodeLine{897 \textcolor{preprocessor}{       \#endif}}
+\DoxyCodeLine{898     \}}
+\DoxyCodeLine{899 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{900 }
+\DoxyCodeLine{901     threadHandle = \{\};}
+\DoxyCodeLine{902     pthread\_t \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8530736c0c7f7f4dc724c8246e301f83}{handle}} = \{\};}
+\DoxyCodeLine{903     pthread\_attr\_t attr;}
+\DoxyCodeLine{904     pthread\_attr\_t* attrPtr = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{905 }
+\DoxyCodeLine{906     \textcolor{keywordflow}{if} (pthread\_attr\_init (\&attr) == 0)}
+\DoxyCodeLine{907     \{}
+\DoxyCodeLine{908         attrPtr = \&attr;}
+\DoxyCodeLine{909         pthread\_attr\_setstacksize (attrPtr, threadStackSize);}
+\DoxyCodeLine{910     \}}
+\DoxyCodeLine{911 }
+\DoxyCodeLine{912 }
+\DoxyCodeLine{913     \textcolor{keywordflow}{if} (pthread\_create (\&\mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8530736c0c7f7f4dc724c8246e301f83}{handle}}, attrPtr, threadEntryProc, \textcolor{keyword}{this}) == 0)}
+\DoxyCodeLine{914     \{}
+\DoxyCodeLine{915         pthread\_detach (\mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8530736c0c7f7f4dc724c8246e301f83}{handle}});}
+\DoxyCodeLine{916         threadHandle = (\textcolor{keywordtype}{void}*) \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8530736c0c7f7f4dc724c8246e301f83}{handle}};}
+\DoxyCodeLine{917         threadId = (ThreadID) threadHandle.get();}
+\DoxyCodeLine{918     \}}
+\DoxyCodeLine{919 }
+\DoxyCodeLine{920     \textcolor{keywordflow}{if} (attrPtr != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{921         pthread\_attr\_destroy (attrPtr);}
+\DoxyCodeLine{922 \}}
+\DoxyCodeLine{923 }
+\DoxyCodeLine{924 \textcolor{keywordtype}{void} Thread::closeThreadHandle()}
+\DoxyCodeLine{925 \{}
+\DoxyCodeLine{926     threadId = \{\};}
+\DoxyCodeLine{927     threadHandle = \{\};}
+\DoxyCodeLine{928 \}}
+\DoxyCodeLine{929 }
+\DoxyCodeLine{930 \textcolor{keywordtype}{void} Thread::killThread()}
+\DoxyCodeLine{931 \{}
+\DoxyCodeLine{932     \textcolor{keywordflow}{if} (threadHandle.get() != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{933     \{}
+\DoxyCodeLine{934 \textcolor{preprocessor}{       \#if JUCE\_ANDROID}}
+\DoxyCodeLine{935         \mbox{\hyperlink{group__juce__core-system_gadc044ce5efecbecf2f5a44cd00db67b3}{jassertfalse}}; \textcolor{comment}{// pthread\_cancel not available!}}
+\DoxyCodeLine{936 \textcolor{preprocessor}{       \#else}}
+\DoxyCodeLine{937         pthread\_cancel ((pthread\_t) threadHandle.get());}
+\DoxyCodeLine{938 \textcolor{preprocessor}{       \#endif}}
+\DoxyCodeLine{939     \}}
+\DoxyCodeLine{940 \}}
+\DoxyCodeLine{941 }
+\DoxyCodeLine{942 \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{class_thread_ac82782d05f278543bdcedf68ae9fd2cd}{Thread::setCurrentThreadName}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}})}
+\DoxyCodeLine{943 \{}
+\DoxyCodeLine{944 \textcolor{preprocessor}{   \#if JUCE\_IOS || JUCE\_MAC}}
+\DoxyCodeLine{945     \mbox{\hyperlink{group__juce__core-memory_gad73fadcd76040b11a626d5bdf833ad49}{JUCE\_AUTORELEASEPOOL}}}
+\DoxyCodeLine{946     \{}
+\DoxyCodeLine{947         [[NSThread currentThread] setName: \mbox{\hyperlink{namespacejuce_aad733be42bb4bbaddc08213b864faf9c}{juceStringToNS}} (\mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}})];}
+\DoxyCodeLine{948     \}}
+\DoxyCodeLine{949 \textcolor{preprocessor}{   \#elif JUCE\_LINUX || JUCE\_BSD || JUCE\_ANDROID}}
+\DoxyCodeLine{950 \textcolor{preprocessor}{    \#if (JUCE\_BSD \(\backslash\)}}
+\DoxyCodeLine{951 \textcolor{preprocessor}{          || (JUCE\_LINUX \&\& (\_\_GLIBC\_\_ * 1000 + \_\_GLIBC\_MINOR\_\_) >= 2012) \(\backslash\)}}
+\DoxyCodeLine{952 \textcolor{preprocessor}{          || (JUCE\_ANDROID \&\& \_\_ANDROID\_API\_\_ >= 9))}}
+\DoxyCodeLine{953      pthread\_setname\_np (pthread\_self(), \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}.toRawUTF8());}
+\DoxyCodeLine{954 \textcolor{preprocessor}{    \#else}}
+\DoxyCodeLine{955      prctl (PR\_SET\_NAME, \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}.toRawUTF8(), 0, 0, 0);}
+\DoxyCodeLine{956 \textcolor{preprocessor}{    \#endif}}
+\DoxyCodeLine{957 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{958 \}}
+\DoxyCodeLine{959 }
+\DoxyCodeLine{960 \textcolor{keywordtype}{bool} Thread::setThreadPriority (\textcolor{keywordtype}{void}* \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8530736c0c7f7f4dc724c8246e301f83}{handle}}, \textcolor{keywordtype}{int} priority)}
+\DoxyCodeLine{961 \{}
+\DoxyCodeLine{962     \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} maxInputPriority = 10;}
+\DoxyCodeLine{963 }
+\DoxyCodeLine{964 \textcolor{preprocessor}{   \#if JUCE\_LINUX || JUCE\_BSD}}
+\DoxyCodeLine{965     \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} lowestRrPriority = 8;}
+\DoxyCodeLine{966 \textcolor{preprocessor}{   \#else}}
+\DoxyCodeLine{967     \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} lowestRrPriority = 0;}
+\DoxyCodeLine{968 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{969 }
+\DoxyCodeLine{970     \textcolor{keyword}{struct }sched\_param \mbox{\hyperlink{namespacegl_a4183e00b2c28020528ce95cfcce5b571}{param}};}
+\DoxyCodeLine{971     \textcolor{keywordtype}{int} policy;}
+\DoxyCodeLine{972 }
+\DoxyCodeLine{973     \textcolor{keywordflow}{if} (\mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8530736c0c7f7f4dc724c8246e301f83}{handle}} == \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{974         \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8530736c0c7f7f4dc724c8246e301f83}{handle}} = (\textcolor{keywordtype}{void}*) pthread\_self();}
+\DoxyCodeLine{975 }
+\DoxyCodeLine{976     \textcolor{keywordflow}{if} (pthread\_getschedparam ((pthread\_t) \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8530736c0c7f7f4dc724c8246e301f83}{handle}}, \&policy, \&\mbox{\hyperlink{namespacegl_a4183e00b2c28020528ce95cfcce5b571}{param}}) != 0)}
+\DoxyCodeLine{977         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{978 }
+\DoxyCodeLine{979     policy = priority < lowestRrPriority ? SCHED\_OTHER : SCHED\_RR;}
+\DoxyCodeLine{980 }
+\DoxyCodeLine{981     \textcolor{keyword}{const} \textcolor{keyword}{auto} minPriority = sched\_get\_priority\_min (policy);}
+\DoxyCodeLine{982     \textcolor{keyword}{const} \textcolor{keyword}{auto} maxPriority = sched\_get\_priority\_max (policy);}
+\DoxyCodeLine{983 }
+\DoxyCodeLine{984     \mbox{\hyperlink{namespacegl_a4183e00b2c28020528ce95cfcce5b571}{param}}.sched\_priority = [\&]}
+\DoxyCodeLine{985     \{}
+\DoxyCodeLine{986         \textcolor{keywordflow}{if} (policy == SCHED\_OTHER)}
+\DoxyCodeLine{987             \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{988 }
+\DoxyCodeLine{989         \textcolor{keywordflow}{return} \mbox{\hyperlink{group__juce__core-maths_ga53851e83e8f5c5faeb5dbc64196bb329}{jmap}} (priority, lowestRrPriority, maxInputPriority, minPriority, maxPriority);}
+\DoxyCodeLine{990     \}();}
+\DoxyCodeLine{991 }
+\DoxyCodeLine{992     \textcolor{keywordflow}{return} pthread\_setschedparam ((pthread\_t) \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8530736c0c7f7f4dc724c8246e301f83}{handle}}, policy, \&\mbox{\hyperlink{namespacegl_a4183e00b2c28020528ce95cfcce5b571}{param}}) == 0;}
+\DoxyCodeLine{993 \}}
+\DoxyCodeLine{994 }
+\DoxyCodeLine{995 \mbox{\hyperlink{class_thread_adcf5808753df4373be08d38938880f65}{Thread::ThreadID}} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{class_thread_a12c11ba5fa9bee7ebeefe952c5d66ceb}{Thread::getCurrentThreadId}}()}
+\DoxyCodeLine{996 \{}
+\DoxyCodeLine{997     \textcolor{keywordflow}{return} (\mbox{\hyperlink{class_thread_adcf5808753df4373be08d38938880f65}{ThreadID}}) pthread\_self();}
+\DoxyCodeLine{998 \}}
+\DoxyCodeLine{999 }
+\DoxyCodeLine{1000 \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{class_thread_a51beecba775ba0562eb48873aabd5397}{Thread::yield}}()}
+\DoxyCodeLine{1001 \{}
+\DoxyCodeLine{1002     sched\_yield();}
+\DoxyCodeLine{1003 \}}
+\DoxyCodeLine{1004 }
+\DoxyCodeLine{1005 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1006 \textcolor{comment}{/* Remove this macro if you're having problems compiling the cpu affinity}}
+\DoxyCodeLine{1007 \textcolor{comment}{   calls (the API for these has changed about quite a bit in various Linux}}
+\DoxyCodeLine{1008 \textcolor{comment}{   versions, and a lot of distros seem to ship with obsolete versions)}}
+\DoxyCodeLine{1009 \textcolor{comment}{*/}}
+\DoxyCodeLine{1010 \textcolor{preprocessor}{\#if defined (CPU\_ISSET) \&\& ! defined (SUPPORT\_AFFINITIES)}}
+\DoxyCodeLine{1011 \textcolor{preprocessor}{ \#define SUPPORT\_AFFINITIES 1}}
+\DoxyCodeLine{1012 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{1013 }
+\DoxyCodeLine{1014 \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{class_thread_aef3b03212a048b1afa86f63beec82f94}{Thread::setCurrentThreadAffinityMask}} (\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} affinityMask)}
+\DoxyCodeLine{1015 \{}
+\DoxyCodeLine{1016 \textcolor{preprocessor}{   \#if SUPPORT\_AFFINITIES}}
+\DoxyCodeLine{1017     cpu\_set\_t affinity;}
+\DoxyCodeLine{1018     CPU\_ZERO (\&affinity);}
+\DoxyCodeLine{1019 }
+\DoxyCodeLine{1020     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 32; ++i)}
+\DoxyCodeLine{1021         \textcolor{keywordflow}{if} ((affinityMask \& (\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}}) (1 << i)) != 0)}
+\DoxyCodeLine{1022             CPU\_SET ((\textcolor{keywordtype}{size\_t}) i, \&affinity);}
+\DoxyCodeLine{1023 }
+\DoxyCodeLine{1024 \textcolor{preprocessor}{   \#if (! JUCE\_ANDROID) \&\& ((! (JUCE\_LINUX || JUCE\_BSD)) || ((\_\_GLIBC\_\_ * 1000 + \_\_GLIBC\_MINOR\_\_) >= 2004))}}
+\DoxyCodeLine{1025     pthread\_setaffinity\_np (pthread\_self(), \textcolor{keyword}{sizeof} (cpu\_set\_t), \&affinity);}
+\DoxyCodeLine{1026 \textcolor{preprocessor}{   \#elif JUCE\_ANDROID}}
+\DoxyCodeLine{1027     sched\_setaffinity (gettid(), \textcolor{keyword}{sizeof} (cpu\_set\_t), \&affinity);}
+\DoxyCodeLine{1028 \textcolor{preprocessor}{   \#else}}
+\DoxyCodeLine{1029     \textcolor{comment}{// NB: this call isn't really correct because it sets the affinity of the process,}}
+\DoxyCodeLine{1030     \textcolor{comment}{// (getpid) not the thread (not gettid). But it's included here as a fallback for}}
+\DoxyCodeLine{1031     \textcolor{comment}{// people who are using ridiculously old versions of glibc}}
+\DoxyCodeLine{1032     sched\_setaffinity (getpid(), \textcolor{keyword}{sizeof} (cpu\_set\_t), \&affinity);}
+\DoxyCodeLine{1033 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{1034 }
+\DoxyCodeLine{1035     sched\_yield();}
+\DoxyCodeLine{1036 }
+\DoxyCodeLine{1037 \textcolor{preprocessor}{   \#else}}
+\DoxyCodeLine{1038     \textcolor{comment}{// affinities aren't supported because either the appropriate header files weren't found,}}
+\DoxyCodeLine{1039     \textcolor{comment}{// or the SUPPORT\_AFFINITIES macro was turned off}}
+\DoxyCodeLine{1040     \mbox{\hyperlink{group__juce__core-system_gadc044ce5efecbecf2f5a44cd00db67b3}{jassertfalse}};}
+\DoxyCodeLine{1041     \mbox{\hyperlink{group__juce__core-maths_ga5158e6e8faa5553204f90af596fafaf5}{ignoreUnused}} (affinityMask);}
+\DoxyCodeLine{1042 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{1043 \}}
+\DoxyCodeLine{1044 }
+\DoxyCodeLine{1045 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1046 \textcolor{preprocessor}{\#if ! JUCE\_WASM}}
+\DoxyCodeLine{1047 \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_dynamic_library_ab64b6f35270c87d0c69b422854683674}{DynamicLibrary::open}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}})}
+\DoxyCodeLine{1048 \{}
+\DoxyCodeLine{1049     close();}
+\DoxyCodeLine{1050     \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8530736c0c7f7f4dc724c8246e301f83}{handle}} = dlopen (\mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}.isEmpty() ? \textcolor{keyword}{nullptr} : \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}.toUTF8().getAddress(), RTLD\_LOCAL | RTLD\_NOW);}
+\DoxyCodeLine{1051     \textcolor{keywordflow}{return} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8530736c0c7f7f4dc724c8246e301f83}{handle}} != \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{1052 \}}
+\DoxyCodeLine{1053 }
+\DoxyCodeLine{1054 \textcolor{keywordtype}{void} \mbox{\hyperlink{class_dynamic_library_ac894163d2ef226237fd6d6cfaeb77fce}{DynamicLibrary::close}}()}
+\DoxyCodeLine{1055 \{}
+\DoxyCodeLine{1056     \textcolor{keywordflow}{if} (\mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8530736c0c7f7f4dc724c8246e301f83}{handle}} != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{1057     \{}
+\DoxyCodeLine{1058         dlclose (\mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8530736c0c7f7f4dc724c8246e301f83}{handle}});}
+\DoxyCodeLine{1059         \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8530736c0c7f7f4dc724c8246e301f83}{handle}} = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{1060     \}}
+\DoxyCodeLine{1061 \}}
+\DoxyCodeLine{1062 }
+\DoxyCodeLine{1063 \textcolor{keywordtype}{void}* \mbox{\hyperlink{class_dynamic_library_abd1a071cf7da091958e52c6baf1b2442}{DynamicLibrary::getFunction}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& functionName) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{1064 \{}
+\DoxyCodeLine{1065     \textcolor{keywordflow}{return} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8530736c0c7f7f4dc724c8246e301f83}{handle}} != \textcolor{keyword}{nullptr} ? dlsym (\mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8530736c0c7f7f4dc724c8246e301f83}{handle}}, functionName.toUTF8()) : \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{1066 \}}
+\DoxyCodeLine{1067 }
+\DoxyCodeLine{1068 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1069 \textcolor{preprocessor}{\#if JUCE\_LINUX || JUCE\_ANDROID}}
+\DoxyCodeLine{1070 \textcolor{keyword}{static} \mbox{\hyperlink{class_string}{String}} readPosixConfigFileValue (\textcolor{keyword}{const} \textcolor{keywordtype}{char}* file, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* \mbox{\hyperlink{namespacegl_a45e4cfc4b70136c9a7e0000e34f4ed4e}{key}})}
+\DoxyCodeLine{1071 \{}
+\DoxyCodeLine{1072     \mbox{\hyperlink{class_string_array}{StringArray}} lines;}
+\DoxyCodeLine{1073     \mbox{\hyperlink{class_file}{File}} (file).\mbox{\hyperlink{class_file_ae01410aae2f46cec5ee4863977ffc4fe}{readLines}} (lines);}
+\DoxyCodeLine{1074 }
+\DoxyCodeLine{1075     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = lines.\mbox{\hyperlink{class_string_array_af1eb48dd90938eb34d9f43cf7d81510b}{size}}(); -\/-\/i >= 0;) \textcolor{comment}{// (NB -\/ it's important that this runs in reverse order)}}
+\DoxyCodeLine{1076         \textcolor{keywordflow}{if} (lines[i].upToFirstOccurrenceOf (\textcolor{stringliteral}{"{}:"{}}, \textcolor{keyword}{false}, \textcolor{keyword}{false}).trim().equalsIgnoreCase (\mbox{\hyperlink{namespacegl_a45e4cfc4b70136c9a7e0000e34f4ed4e}{key}}))}
+\DoxyCodeLine{1077             \textcolor{keywordflow}{return} lines[i].fromFirstOccurrenceOf (\textcolor{stringliteral}{"{}:"{}}, \textcolor{keyword}{false}, \textcolor{keyword}{false}).\mbox{\hyperlink{class_string_array_ad490560fcac30925d422ad98709ca361}{trim}}();}
+\DoxyCodeLine{1078 }
+\DoxyCodeLine{1079     \textcolor{keywordflow}{return} \{\};}
+\DoxyCodeLine{1080 \}}
+\DoxyCodeLine{1081 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{1082 }
+\DoxyCodeLine{1083 }
+\DoxyCodeLine{1084 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1085 \textcolor{keyword}{class }\mbox{\hyperlink{classjuce_1_1_child_process_1_1_active_process}{ChildProcess::ActiveProcess}}}
+\DoxyCodeLine{1086 \{}
+\DoxyCodeLine{1087 \textcolor{keyword}{public}:}
+\DoxyCodeLine{1088     \mbox{\hyperlink{classjuce_1_1_child_process_1_1_active_process_a9bc96657d402c5ba84fd159321505816}{ActiveProcess}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string_array}{StringArray}}\& arguments, \textcolor{keywordtype}{int} streamFlags)}
+\DoxyCodeLine{1089     \{}
+\DoxyCodeLine{1090         \textcolor{keyword}{auto} exe = arguments[0].unquoted();}
+\DoxyCodeLine{1091 }
+\DoxyCodeLine{1092         \textcolor{comment}{// Looks like you're trying to launch a non-\/existent exe or a folder (perhaps on OSX}}
+\DoxyCodeLine{1093         \textcolor{comment}{// you're trying to launch the .app folder rather than the actual binary inside it?)}}
+\DoxyCodeLine{1094         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (\mbox{\hyperlink{class_file_aac662f89bbeed8128f11f8747bca938c}{File::getCurrentWorkingDirectory}}().getChildFile (exe).existsAsFile()}
+\DoxyCodeLine{1095                   || ! exe.containsChar (\mbox{\hyperlink{class_file_ac878ee05362a8d16cd024eab181d3e35}{File::getSeparatorChar}}()));}
+\DoxyCodeLine{1096 }
+\DoxyCodeLine{1097         \textcolor{keywordtype}{int} pipeHandles[2] = \{\};}
+\DoxyCodeLine{1098 }
+\DoxyCodeLine{1099         \textcolor{keywordflow}{if} (pipe (pipeHandles) == 0)}
+\DoxyCodeLine{1100         \{}
+\DoxyCodeLine{1101             \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = fork();}
+\DoxyCodeLine{1102 }
+\DoxyCodeLine{1103             \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} < 0)}
+\DoxyCodeLine{1104             \{}
+\DoxyCodeLine{1105                 close (pipeHandles[0]);}
+\DoxyCodeLine{1106                 close (pipeHandles[1]);}
+\DoxyCodeLine{1107             \}}
+\DoxyCodeLine{1108             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} == 0)}
+\DoxyCodeLine{1109             \{}
+\DoxyCodeLine{1110                 \textcolor{comment}{// we're the child process..}}
+\DoxyCodeLine{1111                 close (pipeHandles[0]);   \textcolor{comment}{// close the read handle}}
+\DoxyCodeLine{1112 }
+\DoxyCodeLine{1113                 \textcolor{keywordflow}{if} ((streamFlags \& wantStdOut) != 0)}
+\DoxyCodeLine{1114                     dup2 (pipeHandles[1], STDOUT\_FILENO); \textcolor{comment}{// turns the pipe into stdout}}
+\DoxyCodeLine{1115                 \textcolor{keywordflow}{else}}
+\DoxyCodeLine{1116                     dup2 (open (\textcolor{stringliteral}{"{}/dev/null"{}}, O\_WRONLY), STDOUT\_FILENO);}
+\DoxyCodeLine{1117 }
+\DoxyCodeLine{1118                 \textcolor{keywordflow}{if} ((streamFlags \& wantStdErr) != 0)}
+\DoxyCodeLine{1119                     dup2 (pipeHandles[1], STDERR\_FILENO);}
+\DoxyCodeLine{1120                 \textcolor{keywordflow}{else}}
+\DoxyCodeLine{1121                     dup2 (open (\textcolor{stringliteral}{"{}/dev/null"{}}, O\_WRONLY), STDERR\_FILENO);}
+\DoxyCodeLine{1122 }
+\DoxyCodeLine{1123                 close (pipeHandles[1]);}
+\DoxyCodeLine{1124 }
+\DoxyCodeLine{1125                 \mbox{\hyperlink{class_array}{Array<char*>}} argv;}
+\DoxyCodeLine{1126 }
+\DoxyCodeLine{1127                 \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}\& \mbox{\hyperlink{namespacejuce_a03c03570cfa8f0b4fa35b6fe493b5796}{arg}} : arguments)}
+\DoxyCodeLine{1128                     \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacejuce_a03c03570cfa8f0b4fa35b6fe493b5796}{arg}}.isNotEmpty())}
+\DoxyCodeLine{1129                         argv.\mbox{\hyperlink{class_array_a52da22e285e44171b6d6fa785a7d536a}{add}} (\textcolor{keyword}{const\_cast<}\textcolor{keywordtype}{char}*\textcolor{keyword}{>} (\mbox{\hyperlink{namespacejuce_a03c03570cfa8f0b4fa35b6fe493b5796}{arg}}.toRawUTF8()));}
+\DoxyCodeLine{1130 }
+\DoxyCodeLine{1131                 argv.\mbox{\hyperlink{class_array_a52da22e285e44171b6d6fa785a7d536a}{add}} (\textcolor{keyword}{nullptr});}
+\DoxyCodeLine{1132 }
+\DoxyCodeLine{1133                 execvp (exe.toRawUTF8(), argv.\mbox{\hyperlink{class_array_a72183f1a9e7eac684ce85bf5760c7173}{getRawDataPointer}}());}
+\DoxyCodeLine{1134                 \_exit (-\/1);}
+\DoxyCodeLine{1135             \}}
+\DoxyCodeLine{1136             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{1137             \{}
+\DoxyCodeLine{1138                 \textcolor{comment}{// we're the parent process..}}
+\DoxyCodeLine{1139                 childPID = \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}};}
+\DoxyCodeLine{1140                 pipeHandle = pipeHandles[0];}
+\DoxyCodeLine{1141                 close (pipeHandles[1]); \textcolor{comment}{// close the write handle}}
+\DoxyCodeLine{1142             \}}
+\DoxyCodeLine{1143         \}}
+\DoxyCodeLine{1144     \}}
+\DoxyCodeLine{1145 }
+\DoxyCodeLine{1146     \mbox{\hyperlink{classjuce_1_1_child_process_1_1_active_process_acbb06de12a94f1d1a2a08ce0eaaae8f3}{\string~ActiveProcess}}()}
+\DoxyCodeLine{1147     \{}
+\DoxyCodeLine{1148         \textcolor{keywordflow}{if} (readHandle != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{1149             fclose (readHandle);}
+\DoxyCodeLine{1150 }
+\DoxyCodeLine{1151         \textcolor{keywordflow}{if} (pipeHandle != 0)}
+\DoxyCodeLine{1152             close (pipeHandle);}
+\DoxyCodeLine{1153     \}}
+\DoxyCodeLine{1154 }
+\DoxyCodeLine{1155     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classjuce_1_1_child_process_1_1_active_process_ae545e59daf48991cfb8fd2dfe0180b0f}{isRunning}}() noexcept}
+\DoxyCodeLine{1156     \{}
+\DoxyCodeLine{1157         \textcolor{keywordflow}{if} (childPID == 0)}
+\DoxyCodeLine{1158             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{1159 }
+\DoxyCodeLine{1160         \textcolor{keywordtype}{int} childState = 0;}
+\DoxyCodeLine{1161         \textcolor{keyword}{auto} pid = waitpid (childPID, \&childState, WNOHANG);}
+\DoxyCodeLine{1162 }
+\DoxyCodeLine{1163         \textcolor{keywordflow}{if} (pid == 0)}
+\DoxyCodeLine{1164             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{1165 }
+\DoxyCodeLine{1166         \textcolor{keywordflow}{if} (WIFEXITED (childState))}
+\DoxyCodeLine{1167         \{}
+\DoxyCodeLine{1168             exitCode = WEXITSTATUS (childState);}
+\DoxyCodeLine{1169             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{1170         \}}
+\DoxyCodeLine{1171 }
+\DoxyCodeLine{1172         \textcolor{keywordflow}{return} ! WIFSIGNALED (childState);}
+\DoxyCodeLine{1173     \}}
+\DoxyCodeLine{1174 }
+\DoxyCodeLine{1175     \textcolor{keywordtype}{int} \mbox{\hyperlink{classjuce_1_1_child_process_1_1_active_process_a5bcd7b6f4bd92df99e9bfce5ed21ef38}{read}} (\textcolor{keywordtype}{void}* dest, \textcolor{keywordtype}{int} numBytes) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{1176     \{}
+\DoxyCodeLine{1177         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (dest != \textcolor{keyword}{nullptr} \&\& numBytes > 0);}
+\DoxyCodeLine{1178 }
+\DoxyCodeLine{1179 \textcolor{preprocessor}{        \#ifdef fdopen}}
+\DoxyCodeLine{1180 \textcolor{preprocessor}{         \#error }\textcolor{comment}{// some crazy 3rd party headers (e.g. zlib) define this function as NULL!}}
+\DoxyCodeLine{1181 \textcolor{preprocessor}{        \#endif}}
+\DoxyCodeLine{1182 }
+\DoxyCodeLine{1183         \textcolor{keywordflow}{if} (readHandle == \textcolor{keyword}{nullptr} \&\& childPID != 0)}
+\DoxyCodeLine{1184             readHandle = fdopen (pipeHandle, \textcolor{stringliteral}{"{}r"{}});}
+\DoxyCodeLine{1185 }
+\DoxyCodeLine{1186         \textcolor{keywordflow}{if} (readHandle != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{1187         \{}
+\DoxyCodeLine{1188             \textcolor{keywordflow}{for} (;;)}
+\DoxyCodeLine{1189             \{}
+\DoxyCodeLine{1190                 \textcolor{keyword}{auto} numBytesRead = (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}) fread (dest, 1, (\textcolor{keywordtype}{size\_t}) numBytes, readHandle);}
+\DoxyCodeLine{1191 }
+\DoxyCodeLine{1192                 \textcolor{keywordflow}{if} (numBytesRead > 0 || feof (readHandle))}
+\DoxyCodeLine{1193                     \textcolor{keywordflow}{return} numBytesRead;}
+\DoxyCodeLine{1194 }
+\DoxyCodeLine{1195                 \textcolor{comment}{// signal occurred during fread() so try again}}
+\DoxyCodeLine{1196                 \textcolor{keywordflow}{if} (ferror (readHandle) \&\& errno == EINTR)}
+\DoxyCodeLine{1197                     \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{1198 }
+\DoxyCodeLine{1199                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1200             \}}
+\DoxyCodeLine{1201         \}}
+\DoxyCodeLine{1202 }
+\DoxyCodeLine{1203         \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{1204     \}}
+\DoxyCodeLine{1205 }
+\DoxyCodeLine{1206     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classjuce_1_1_child_process_1_1_active_process_ada0f4e4565fe8b47f47c019c047b903b}{killProcess}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{1207     \{}
+\DoxyCodeLine{1208         return ::kill (childPID, SIGKILL) == 0;}
+\DoxyCodeLine{1209     \}}
+\DoxyCodeLine{1210 }
+\DoxyCodeLine{1211     \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} \mbox{\hyperlink{classjuce_1_1_child_process_1_1_active_process_a0b692a258340d0cac09bbb8b128d5d7b}{getExitCode}}() noexcept}
+\DoxyCodeLine{1212     \{}
+\DoxyCodeLine{1213         \textcolor{keywordflow}{if} (exitCode >= 0)}
+\DoxyCodeLine{1214             \textcolor{keywordflow}{return} (\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}}) exitCode;}
+\DoxyCodeLine{1215 }
+\DoxyCodeLine{1216         \textcolor{keywordflow}{if} (childPID != 0)}
+\DoxyCodeLine{1217         \{}
+\DoxyCodeLine{1218             \textcolor{keywordtype}{int} childState = 0;}
+\DoxyCodeLine{1219             \textcolor{keyword}{auto} pid = waitpid (childPID, \&childState, WNOHANG);}
+\DoxyCodeLine{1220 }
+\DoxyCodeLine{1221             \textcolor{keywordflow}{if} (pid >= 0 \&\& WIFEXITED (childState))}
+\DoxyCodeLine{1222             \{}
+\DoxyCodeLine{1223                 exitCode = WEXITSTATUS (childState);}
+\DoxyCodeLine{1224                 \textcolor{keywordflow}{return} (\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}}) exitCode;}
+\DoxyCodeLine{1225             \}}
+\DoxyCodeLine{1226         \}}
+\DoxyCodeLine{1227 }
+\DoxyCodeLine{1228         \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{1229     \}}
+\DoxyCodeLine{1230 }
+\DoxyCodeLine{1231     \textcolor{keywordtype}{int} childPID = 0;}
+\DoxyCodeLine{1232     \textcolor{keywordtype}{int} pipeHandle = 0;}
+\DoxyCodeLine{1233     \textcolor{keywordtype}{int} exitCode = -\/1;}
+\DoxyCodeLine{1234     FILE* readHandle = \{\};}
+\DoxyCodeLine{1235 }
+\DoxyCodeLine{1236     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{classjuce_1_1_child_process_1_1_active_process}{ActiveProcess}})}
+\DoxyCodeLine{1237 \};}
+\DoxyCodeLine{1238 }
+\DoxyCodeLine{1239 \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_child_process_aa5e6f939a0f0c3e87bd7c58dcec9f13c}{ChildProcess::start}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_gga485dc2a0e5ed7da3d9f826367b36ee55a6440030ae8284cee96c1c88b356c45a7}{command}}, \textcolor{keywordtype}{int} streamFlags)}
+\DoxyCodeLine{1240 \{}
+\DoxyCodeLine{1241     \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_adad3a3824fbe72fb0b01074bb01ebe75}{start}} (\mbox{\hyperlink{class_string_array_a3d85f8199f9dab4db19119fc9a2243b0}{StringArray::fromTokens}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_gga485dc2a0e5ed7da3d9f826367b36ee55a6440030ae8284cee96c1c88b356c45a7}{command}}, \textcolor{keyword}{true}), streamFlags);}
+\DoxyCodeLine{1242 \}}
+\DoxyCodeLine{1243 }
+\DoxyCodeLine{1244 \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_child_process_aa5e6f939a0f0c3e87bd7c58dcec9f13c}{ChildProcess::start}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string_array}{StringArray}}\& args, \textcolor{keywordtype}{int} streamFlags)}
+\DoxyCodeLine{1245 \{}
+\DoxyCodeLine{1246     \textcolor{keywordflow}{if} (args.\mbox{\hyperlink{class_string_array_af1eb48dd90938eb34d9f43cf7d81510b}{size}}() == 0)}
+\DoxyCodeLine{1247         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{1248 }
+\DoxyCodeLine{1249     activeProcess.reset (\textcolor{keyword}{new} ActiveProcess (args, streamFlags));}
+\DoxyCodeLine{1250 }
+\DoxyCodeLine{1251     \textcolor{keywordflow}{if} (activeProcess-\/>childPID == 0)}
+\DoxyCodeLine{1252         activeProcess.reset();}
+\DoxyCodeLine{1253 }
+\DoxyCodeLine{1254     \textcolor{keywordflow}{return} activeProcess != \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{1255 \}}
+\DoxyCodeLine{1256 }
+\DoxyCodeLine{1257 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{1258 }
+\DoxyCodeLine{1259 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1260 \textcolor{keyword}{struct }\mbox{\hyperlink{structjuce_1_1_high_resolution_timer_1_1_pimpl}{HighResolutionTimer::Pimpl}}}
+\DoxyCodeLine{1261 \{}
+\DoxyCodeLine{1262     \textcolor{keyword}{explicit} \mbox{\hyperlink{structjuce_1_1_high_resolution_timer_1_1_pimpl_aed80f910cdc3645b336fdc295bceb725}{Pimpl}} (\mbox{\hyperlink{class_high_resolution_timer}{HighResolutionTimer}}\& \mbox{\hyperlink{namespacegl_ad0bd70fc9115453f6f5f5ac53accea65}{t}})}
+\DoxyCodeLine{1263         : owner (\mbox{\hyperlink{namespacegl_ad0bd70fc9115453f6f5f5ac53accea65}{t}})}
+\DoxyCodeLine{1264     \{\}}
+\DoxyCodeLine{1265 }
+\DoxyCodeLine{1266     \mbox{\hyperlink{structjuce_1_1_high_resolution_timer_1_1_pimpl_a839929ab13d1577378a79b21bfdcb8f8}{\string~Pimpl}}()}
+\DoxyCodeLine{1267     \{}
+\DoxyCodeLine{1268         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (periodMs == 0);}
+\DoxyCodeLine{1269         stop();}
+\DoxyCodeLine{1270     \}}
+\DoxyCodeLine{1271 }
+\DoxyCodeLine{1272     \textcolor{keywordtype}{void} \mbox{\hyperlink{structjuce_1_1_high_resolution_timer_1_1_pimpl_a7549a5f1150f871ce28edf22122fc084}{start}} (\textcolor{keywordtype}{int} newPeriod)}
+\DoxyCodeLine{1273     \{}
+\DoxyCodeLine{1274         \textcolor{keywordflow}{if} (periodMs == newPeriod)}
+\DoxyCodeLine{1275             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{1276 }
+\DoxyCodeLine{1277         \textcolor{keywordflow}{if} (thread.get\_id() == std::this\_thread::get\_id())}
+\DoxyCodeLine{1278         \{}
+\DoxyCodeLine{1279             periodMs = newPeriod;}
+\DoxyCodeLine{1280             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{1281         \}}
+\DoxyCodeLine{1282 }
+\DoxyCodeLine{1283         stop();}
+\DoxyCodeLine{1284 }
+\DoxyCodeLine{1285         periodMs = newPeriod;}
+\DoxyCodeLine{1286 }
+\DoxyCodeLine{1287         thread = std::thread ([\textcolor{keyword}{this}, newPeriod]}
+\DoxyCodeLine{1288         \{}
+\DoxyCodeLine{1289             setThisThreadToRealtime ((\mbox{\hyperlink{group__juce__core-maths_gaba41bf2b6f6da5945ee08fb99931aede}{uint64}}) newPeriod);}
+\DoxyCodeLine{1290 }
+\DoxyCodeLine{1291             \textcolor{keyword}{auto} lastPeriod = periodMs.load();}
+\DoxyCodeLine{1292             Clock clock (lastPeriod);}
+\DoxyCodeLine{1293 }
+\DoxyCodeLine{1294             std::unique\_lock<std::mutex> unique\_lock (timerMutex);}
+\DoxyCodeLine{1295 }
+\DoxyCodeLine{1296             \textcolor{keywordflow}{while} (periodMs != 0)}
+\DoxyCodeLine{1297             \{}
+\DoxyCodeLine{1298                 clock.next();}
+\DoxyCodeLine{1299                 \textcolor{keywordflow}{while} (periodMs != 0 \&\& clock.wait (stopCond, unique\_lock));}
+\DoxyCodeLine{1300 }
+\DoxyCodeLine{1301                 \textcolor{keywordflow}{if} (periodMs == 0)}
+\DoxyCodeLine{1302                     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1303 }
+\DoxyCodeLine{1304                 owner.hiResTimerCallback();}
+\DoxyCodeLine{1305 }
+\DoxyCodeLine{1306                 \textcolor{keyword}{auto} nextPeriod = periodMs.load();}
+\DoxyCodeLine{1307 }
+\DoxyCodeLine{1308                 \textcolor{keywordflow}{if} (lastPeriod != nextPeriod)}
+\DoxyCodeLine{1309                 \{}
+\DoxyCodeLine{1310                     lastPeriod = nextPeriod;}
+\DoxyCodeLine{1311                     clock = Clock (lastPeriod);}
+\DoxyCodeLine{1312                 \}}
+\DoxyCodeLine{1313             \}}
+\DoxyCodeLine{1314 }
+\DoxyCodeLine{1315             periodMs = 0;}
+\DoxyCodeLine{1316         \});}
+\DoxyCodeLine{1317     \}}
+\DoxyCodeLine{1318 }
+\DoxyCodeLine{1319     \textcolor{keywordtype}{void} \mbox{\hyperlink{structjuce_1_1_high_resolution_timer_1_1_pimpl_af7871b8bc54a60af5ee96528469b48bc}{stop}}()}
+\DoxyCodeLine{1320     \{}
+\DoxyCodeLine{1321         periodMs = 0;}
+\DoxyCodeLine{1322 }
+\DoxyCodeLine{1323         \textcolor{keyword}{const} \textcolor{keyword}{auto} thread\_id = thread.get\_id();}
+\DoxyCodeLine{1324 }
+\DoxyCodeLine{1325         \textcolor{keywordflow}{if} (thread\_id == \mbox{\hyperlink{namespacegl_a99c1966a0e18bfab2c6a4416943fde16}{std::thread::id}}() || thread\_id == std::this\_thread::get\_id())}
+\DoxyCodeLine{1326             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{1327 }
+\DoxyCodeLine{1328         \{}
+\DoxyCodeLine{1329             std::unique\_lock<std::mutex> unique\_lock (timerMutex);}
+\DoxyCodeLine{1330             stopCond.notify\_one();}
+\DoxyCodeLine{1331         \}}
+\DoxyCodeLine{1332 }
+\DoxyCodeLine{1333         thread.join();}
+\DoxyCodeLine{1334     \}}
+\DoxyCodeLine{1335 }
+\DoxyCodeLine{1336     \mbox{\hyperlink{class_high_resolution_timer}{HighResolutionTimer}}\& \mbox{\hyperlink{structjuce_1_1_high_resolution_timer_1_1_pimpl_af4b14102bdb6371220869eea66c4341b}{owner}};}
+\DoxyCodeLine{1337     std::atomic<int> periodMs \{ 0 \};}
+\DoxyCodeLine{1338 }
+\DoxyCodeLine{1339 \textcolor{keyword}{private}:}
+\DoxyCodeLine{1340     std::thread thread;}
+\DoxyCodeLine{1341     std::condition\_variable stopCond;}
+\DoxyCodeLine{1342     std::mutex timerMutex;}
+\DoxyCodeLine{1343 }
+\DoxyCodeLine{1344     \textcolor{keyword}{class }Clock}
+\DoxyCodeLine{1345     \{}
+\DoxyCodeLine{1346     \textcolor{keyword}{public}:}
+\DoxyCodeLine{1347         \textcolor{keyword}{explicit} Clock (std::chrono::steady\_clock::rep millis) noexcept}
+\DoxyCodeLine{1348             : time (std::chrono::steady\_clock::now()),}
+\DoxyCodeLine{1349               delta (std::chrono::milliseconds (millis))}
+\DoxyCodeLine{1350         \{\}}
+\DoxyCodeLine{1351 }
+\DoxyCodeLine{1352         \textcolor{keywordtype}{bool} wait (std::condition\_variable\& cond, std::unique\_lock<std::mutex>\& lock) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{1353         \{}
+\DoxyCodeLine{1354             \textcolor{keywordflow}{return} cond.wait\_until (lock, time) != \mbox{\hyperlink{namespacegl_a6fe57eada232d62b410539dffca5e1ad}{std::cv\_status::timeout}};}
+\DoxyCodeLine{1355         \}}
+\DoxyCodeLine{1356 }
+\DoxyCodeLine{1357         \textcolor{keywordtype}{void} next() noexcept}
+\DoxyCodeLine{1358         \{}
+\DoxyCodeLine{1359             time += delta;}
+\DoxyCodeLine{1360         \}}
+\DoxyCodeLine{1361 }
+\DoxyCodeLine{1362     \textcolor{keyword}{private}:}
+\DoxyCodeLine{1363         std::chrono::time\_point<std::chrono::steady\_clock> time;}
+\DoxyCodeLine{1364         std::chrono::steady\_clock::duration delta;}
+\DoxyCodeLine{1365     \};}
+\DoxyCodeLine{1366 }
+\DoxyCodeLine{1367     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} setThisThreadToRealtime (\mbox{\hyperlink{group__juce__core-maths_gaba41bf2b6f6da5945ee08fb99931aede}{uint64}} periodMs)}
+\DoxyCodeLine{1368     \{}
+\DoxyCodeLine{1369         \textcolor{keyword}{const} \textcolor{keyword}{auto} thread = pthread\_self();}
+\DoxyCodeLine{1370 }
+\DoxyCodeLine{1371 \textcolor{preprocessor}{       \#if JUCE\_MAC || JUCE\_IOS}}
+\DoxyCodeLine{1372         mach\_timebase\_info\_data\_t timebase;}
+\DoxyCodeLine{1373         mach\_timebase\_info (\&timebase);}
+\DoxyCodeLine{1374 }
+\DoxyCodeLine{1375         \textcolor{keyword}{const} \textcolor{keyword}{auto} ticksPerMs = ((double) timebase.denom * 1000000.0) / (double) timebase.numer;}
+\DoxyCodeLine{1376         \textcolor{keyword}{const} \textcolor{keyword}{auto} periodTicks = (uint32\_t) \mbox{\hyperlink{group__juce__core-maths_gae8394cdf11279b266f4aa741758c1669}{jmin}} ((\textcolor{keywordtype}{double}) \mbox{\hyperlink{os_8h_ac39d9cef6a5e030ba8d9e11121054268}{std::numeric\_limits<uint32\_t>::max}}(), periodMs * ticksPerMs);}
+\DoxyCodeLine{1377 }
+\DoxyCodeLine{1378         thread\_time\_constraint\_policy\_data\_t policy;}
+\DoxyCodeLine{1379         policy.period      = periodTicks;}
+\DoxyCodeLine{1380         policy.computation = \mbox{\hyperlink{group__juce__core-maths_gae8394cdf11279b266f4aa741758c1669}{jmin}} ((uint32\_t) 50000, policy.period);}
+\DoxyCodeLine{1381         policy.constraint  = policy.period;}
+\DoxyCodeLine{1382         policy.preemptible = \textcolor{keyword}{true};}
+\DoxyCodeLine{1383 }
+\DoxyCodeLine{1384         \textcolor{keywordflow}{return} thread\_policy\_set (pthread\_mach\_thread\_np (thread),}
+\DoxyCodeLine{1385                                   THREAD\_TIME\_CONSTRAINT\_POLICY,}
+\DoxyCodeLine{1386                                   (thread\_policy\_t) \&policy,}
+\DoxyCodeLine{1387                                   THREAD\_TIME\_CONSTRAINT\_POLICY\_COUNT) == KERN\_SUCCESS;}
+\DoxyCodeLine{1388 }
+\DoxyCodeLine{1389 \textcolor{preprocessor}{       \#else}}
+\DoxyCodeLine{1390         \mbox{\hyperlink{group__juce__core-maths_ga5158e6e8faa5553204f90af596fafaf5}{ignoreUnused}} (periodMs);}
+\DoxyCodeLine{1391         \textcolor{keyword}{struct }sched\_param \mbox{\hyperlink{namespacegl_a4183e00b2c28020528ce95cfcce5b571}{param}};}
+\DoxyCodeLine{1392         \mbox{\hyperlink{namespacegl_a4183e00b2c28020528ce95cfcce5b571}{param}}.sched\_priority = sched\_get\_priority\_max (SCHED\_RR);}
+\DoxyCodeLine{1393         \textcolor{keywordflow}{return} pthread\_setschedparam (thread, SCHED\_RR, \&\mbox{\hyperlink{namespacegl_a4183e00b2c28020528ce95cfcce5b571}{param}}) == 0;}
+\DoxyCodeLine{1394 \textcolor{preprocessor}{       \#endif}}
+\DoxyCodeLine{1395     \}}
+\DoxyCodeLine{1396 }
+\DoxyCodeLine{1397     \mbox{\hyperlink{group__juce__core-system_ga6ab7a603bf4435c7cb286b1744366eb2}{JUCE\_DECLARE\_NON\_COPYABLE}} (Pimpl)}
+\DoxyCodeLine{1398 \};}
+\DoxyCodeLine{1399 }
+\DoxyCodeLine{1400 \} \textcolor{comment}{// namespace juce}}
+
+\end{DoxyCode}

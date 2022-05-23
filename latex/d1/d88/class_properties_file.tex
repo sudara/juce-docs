@@ -1,0 +1,189 @@
+\hypertarget{class_properties_file}{}\doxysection{Properties\+File Class Reference}
+\label{class_properties_file}\index{PropertiesFile@{PropertiesFile}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Properties\+File.\+h$>$}
+
+Inheritance diagram for Properties\+File\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d1/d88/class_properties_file}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_properties_file_1_1_options}{Options}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_properties_file_ac4d1ac9a6b624f7e0de7787de46dc05e}{Storage\+Format}} \{ \mbox{\hyperlink{class_properties_file_ac4d1ac9a6b624f7e0de7787de46dc05eadd1552fd266d926522dfa0e162de5328}{store\+As\+Binary}}
+, \mbox{\hyperlink{class_properties_file_ac4d1ac9a6b624f7e0de7787de46dc05eab1ddcaf9fc8d45b4141749e325844f42}{store\+As\+Compressed\+Binary}}
+, \mbox{\hyperlink{class_properties_file_ac4d1ac9a6b624f7e0de7787de46dc05eab0145370e12c4174bd36dc6ac6ccc147}{store\+As\+XML}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_properties_file_a8e47a02c7600f3758f600ed2376589a4}{Properties\+File}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{struct_properties_file_1_1_options}{Options}} \&options)
+\item 
+\mbox{\hyperlink{class_properties_file_acf3dbec910950b70fe405cc51f7a10e6}{Properties\+File}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_file}{File}} \&file, \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{struct_properties_file_1_1_options}{Options}} \&options)
+\item 
+\mbox{\hyperlink{class_properties_file_af6df4687711a6dc697852eef4f7cd84a}{$\sim$\+Properties\+File}} () override
+\item 
+bool \mbox{\hyperlink{class_properties_file_a31ca79cdb1a4b7c9863d981c9b438904}{is\+Valid\+File}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_properties_file_a61b439f35faf3f1add5cdfdd49a85d49}{save\+If\+Needed}} ()
+\item 
+bool \mbox{\hyperlink{class_properties_file_ad0c24e1809b203c8347ee07cfb599250}{save}} ()
+\item 
+bool \mbox{\hyperlink{class_properties_file_a47742aee82eacbc1259a93df9b0d2ad4}{needs\+To\+Be\+Saved}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}}
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_properties_file_a205cb3e66cef5d064578dc22b8b205cb}{set\+Needs\+To\+Be\+Saved}} (bool \mbox{\hyperlink{class_properties_file_a47742aee82eacbc1259a93df9b0d2ad4}{needs\+To\+Be\+Saved}})
+\item 
+bool \mbox{\hyperlink{class_properties_file_abb0e0d0ea6f6c820719ef8542440e846}{reload}} ()
+\item 
+\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_file}{File}} \& \mbox{\hyperlink{class_properties_file_ae1f8e1ee136e03759d2b3f2552e0db86}{get\+File}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_properties_file_a02e12b829e5b30f6c41df04242541b9c}{property\+Changed}} () override
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Wrapper on a file that stores a list of key/value data pairs.
+
+Useful for storing application settings, etc. See the \mbox{\hyperlink{class_property_set}{Property\+Set}} class for the interfaces that read and write values.
+
+Not designed for very large amounts of data, as it keeps all the values in memory and writes them out to disk lazily when they are changed.
+
+Because this class derives from \mbox{\hyperlink{class_change_broadcaster}{Change\+Broadcaster}}, Change\+Listeners can be registered with it, and these will be signalled when a value changes.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_property_set}{Property\+Set}}
+\end{DoxySeeAlso}
+@tags\{Data\+Structures\} 
+
+\doxysubsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{class_properties_file_ac4d1ac9a6b624f7e0de7787de46dc05e}\label{class_properties_file_ac4d1ac9a6b624f7e0de7787de46dc05e}} 
+\index{PropertiesFile@{PropertiesFile}!StorageFormat@{StorageFormat}}
+\index{StorageFormat@{StorageFormat}!PropertiesFile@{PropertiesFile}}
+\doxysubsubsection{\texorpdfstring{StorageFormat}{StorageFormat}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{class_properties_file_ac4d1ac9a6b624f7e0de7787de46dc05e}{Properties\+File\+::\+Storage\+Format}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{storeAsBinary@{storeAsBinary}!PropertiesFile@{PropertiesFile}}\index{PropertiesFile@{PropertiesFile}!storeAsBinary@{storeAsBinary}}}\mbox{\Hypertarget{class_properties_file_ac4d1ac9a6b624f7e0de7787de46dc05eadd1552fd266d926522dfa0e162de5328}\label{class_properties_file_ac4d1ac9a6b624f7e0de7787de46dc05eadd1552fd266d926522dfa0e162de5328}} 
+store\+As\+Binary&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{storeAsCompressedBinary@{storeAsCompressedBinary}!PropertiesFile@{PropertiesFile}}\index{PropertiesFile@{PropertiesFile}!storeAsCompressedBinary@{storeAsCompressedBinary}}}\mbox{\Hypertarget{class_properties_file_ac4d1ac9a6b624f7e0de7787de46dc05eab1ddcaf9fc8d45b4141749e325844f42}\label{class_properties_file_ac4d1ac9a6b624f7e0de7787de46dc05eab1ddcaf9fc8d45b4141749e325844f42}} 
+store\+As\+Compressed\+Binary&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{storeAsXML@{storeAsXML}!PropertiesFile@{PropertiesFile}}\index{PropertiesFile@{PropertiesFile}!storeAsXML@{storeAsXML}}}\mbox{\Hypertarget{class_properties_file_ac4d1ac9a6b624f7e0de7787de46dc05eab0145370e12c4174bd36dc6ac6ccc147}\label{class_properties_file_ac4d1ac9a6b624f7e0de7787de46dc05eab0145370e12c4174bd36dc6ac6ccc147}} 
+store\+As\+XML&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_properties_file_a8e47a02c7600f3758f600ed2376589a4}\label{class_properties_file_a8e47a02c7600f3758f600ed2376589a4}} 
+\index{PropertiesFile@{PropertiesFile}!PropertiesFile@{PropertiesFile}}
+\index{PropertiesFile@{PropertiesFile}!PropertiesFile@{PropertiesFile}}
+\doxysubsubsection{\texorpdfstring{PropertiesFile()}{PropertiesFile()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Properties\+File\+::\+Properties\+File (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{struct_properties_file_1_1_options}{Options}} \&}]{options }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+Creates a \mbox{\hyperlink{class_properties_file}{Properties\+File}} object. The file used will be chosen by calling \mbox{\hyperlink{struct_properties_file_1_1_options_a2e20c2c3ce5012d69cc70d4e38763c39}{Properties\+File\+::\+Options\+::get\+Default\+File()}} for the options provided. To set the file explicitly, use the other constructor. \mbox{\Hypertarget{class_properties_file_acf3dbec910950b70fe405cc51f7a10e6}\label{class_properties_file_acf3dbec910950b70fe405cc51f7a10e6}} 
+\index{PropertiesFile@{PropertiesFile}!PropertiesFile@{PropertiesFile}}
+\index{PropertiesFile@{PropertiesFile}!PropertiesFile@{PropertiesFile}}
+\doxysubsubsection{\texorpdfstring{PropertiesFile()}{PropertiesFile()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Properties\+File\+::\+Properties\+File (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_file}{File}} \&}]{file,  }\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{struct_properties_file_1_1_options}{Options}} \&}]{options }\end{DoxyParamCaption})}
+
+Creates a \mbox{\hyperlink{class_properties_file}{Properties\+File}} object. Unlike the other constructor, this one allows you to explicitly set the file that you want to be used, rather than using the default one. \mbox{\Hypertarget{class_properties_file_af6df4687711a6dc697852eef4f7cd84a}\label{class_properties_file_af6df4687711a6dc697852eef4f7cd84a}} 
+\index{PropertiesFile@{PropertiesFile}!````~PropertiesFile@{$\sim$PropertiesFile}}
+\index{````~PropertiesFile@{$\sim$PropertiesFile}!PropertiesFile@{PropertiesFile}}
+\doxysubsubsection{\texorpdfstring{$\sim$PropertiesFile()}{~PropertiesFile()}}
+{\footnotesize\ttfamily Properties\+File\+::$\sim$\+Properties\+File (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+Destructor. When deleted, the file will first call \mbox{\hyperlink{class_properties_file_a61b439f35faf3f1add5cdfdd49a85d49}{save\+If\+Needed()}} to flush any changes to disk. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_properties_file_ae1f8e1ee136e03759d2b3f2552e0db86}\label{class_properties_file_ae1f8e1ee136e03759d2b3f2552e0db86}} 
+\index{PropertiesFile@{PropertiesFile}!getFile@{getFile}}
+\index{getFile@{getFile}!PropertiesFile@{PropertiesFile}}
+\doxysubsubsection{\texorpdfstring{getFile()}{getFile()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_file}{File}} \& Properties\+File\+::get\+File (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Returns the file that\textquotesingle{}s being used. \mbox{\Hypertarget{class_properties_file_a31ca79cdb1a4b7c9863d981c9b438904}\label{class_properties_file_a31ca79cdb1a4b7c9863d981c9b438904}} 
+\index{PropertiesFile@{PropertiesFile}!isValidFile@{isValidFile}}
+\index{isValidFile@{isValidFile}!PropertiesFile@{PropertiesFile}}
+\doxysubsubsection{\texorpdfstring{isValidFile()}{isValidFile()}}
+{\footnotesize\ttfamily bool Properties\+File\+::is\+Valid\+File (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Returns true if this file was created from a valid (or non-\/existent) file. If the file failed to load correctly because it was corrupt or had insufficient access, this will be false. \mbox{\Hypertarget{class_properties_file_a47742aee82eacbc1259a93df9b0d2ad4}\label{class_properties_file_a47742aee82eacbc1259a93df9b0d2ad4}} 
+\index{PropertiesFile@{PropertiesFile}!needsToBeSaved@{needsToBeSaved}}
+\index{needsToBeSaved@{needsToBeSaved}!PropertiesFile@{PropertiesFile}}
+\doxysubsubsection{\texorpdfstring{needsToBeSaved()}{needsToBeSaved()}}
+{\footnotesize\ttfamily bool Properties\+File\+::needs\+To\+Be\+Saved (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Returns true if the properties have been altered since the last time they were saved. The file is flagged as needing to be saved when you change a value, but you can explicitly set this flag with \mbox{\hyperlink{class_properties_file_a205cb3e66cef5d064578dc22b8b205cb}{set\+Needs\+To\+Be\+Saved()}}. \mbox{\Hypertarget{class_properties_file_a02e12b829e5b30f6c41df04242541b9c}\label{class_properties_file_a02e12b829e5b30f6c41df04242541b9c}} 
+\index{PropertiesFile@{PropertiesFile}!propertyChanged@{propertyChanged}}
+\index{propertyChanged@{propertyChanged}!PropertiesFile@{PropertiesFile}}
+\doxysubsubsection{\texorpdfstring{propertyChanged()}{propertyChanged()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Properties\+File\+::property\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+Subclasses can override this to be told when one of the properties has been changed. 
+
+Reimplemented from \mbox{\hyperlink{class_property_set_ad084d204d695f47f38f5ffb5bb0f4222}{Property\+Set}}.
+
+\mbox{\Hypertarget{class_properties_file_abb0e0d0ea6f6c820719ef8542440e846}\label{class_properties_file_abb0e0d0ea6f6c820719ef8542440e846}} 
+\index{PropertiesFile@{PropertiesFile}!reload@{reload}}
+\index{reload@{reload}!PropertiesFile@{PropertiesFile}}
+\doxysubsubsection{\texorpdfstring{reload()}{reload()}}
+{\footnotesize\ttfamily bool Properties\+File\+::reload (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Attempts to reload the settings from the file. \mbox{\Hypertarget{class_properties_file_ad0c24e1809b203c8347ee07cfb599250}\label{class_properties_file_ad0c24e1809b203c8347ee07cfb599250}} 
+\index{PropertiesFile@{PropertiesFile}!save@{save}}
+\index{save@{save}!PropertiesFile@{PropertiesFile}}
+\doxysubsubsection{\texorpdfstring{save()}{save()}}
+{\footnotesize\ttfamily bool Properties\+File\+::save (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This will force a write-\/to-\/disk of the current values, regardless of whether anything has changed since the last save.
+
+Returns false if it fails to write to the file for some reason (maybe because it\textquotesingle{}s read-\/only or the directory doesn\textquotesingle{}t exist or something).
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_properties_file_a61b439f35faf3f1add5cdfdd49a85d49}{save\+If\+Needed}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_properties_file_a61b439f35faf3f1add5cdfdd49a85d49}\label{class_properties_file_a61b439f35faf3f1add5cdfdd49a85d49}} 
+\index{PropertiesFile@{PropertiesFile}!saveIfNeeded@{saveIfNeeded}}
+\index{saveIfNeeded@{saveIfNeeded}!PropertiesFile@{PropertiesFile}}
+\doxysubsubsection{\texorpdfstring{saveIfNeeded()}{saveIfNeeded()}}
+{\footnotesize\ttfamily bool Properties\+File\+::save\+If\+Needed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This will flush all the values to disk if they\textquotesingle{}ve changed since the last time they were saved.
+
+Returns false if it fails to write to the file for some reason (maybe because it\textquotesingle{}s read-\/only or the directory doesn\textquotesingle{}t exist or something).
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_properties_file_ad0c24e1809b203c8347ee07cfb599250}{save}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_properties_file_a205cb3e66cef5d064578dc22b8b205cb}\label{class_properties_file_a205cb3e66cef5d064578dc22b8b205cb}} 
+\index{PropertiesFile@{PropertiesFile}!setNeedsToBeSaved@{setNeedsToBeSaved}}
+\index{setNeedsToBeSaved@{setNeedsToBeSaved}!PropertiesFile@{PropertiesFile}}
+\doxysubsubsection{\texorpdfstring{setNeedsToBeSaved()}{setNeedsToBeSaved()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Properties\+File\+::set\+Needs\+To\+Be\+Saved (\begin{DoxyParamCaption}\item[{bool}]{needs\+To\+Be\+Saved }\end{DoxyParamCaption})}
+
+Explicitly sets the flag to indicate whether the file needs saving or not. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_properties_file_a47742aee82eacbc1259a93df9b0d2ad4}{needs\+To\+Be\+Saved}} 
+\end{DoxySeeAlso}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+data\+\_\+structures/app\+\_\+properties/\mbox{\hyperlink{juce___properties_file_8h}{juce\+\_\+\+Properties\+File.\+h}}\item 
+build/juce\+\_\+data\+\_\+structures/app\+\_\+properties/\mbox{\hyperlink{juce___properties_file_8cpp}{juce\+\_\+\+Properties\+File.\+cpp}}\end{DoxyCompactItemize}

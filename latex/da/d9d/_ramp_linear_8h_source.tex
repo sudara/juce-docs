@@ -1,0 +1,80 @@
+\hypertarget{_ramp_linear_8h_source}{}\doxysection{Ramp\+Linear.\+h}
+\label{_ramp_linear_8h_source}\index{build/juce\_audio\_devices/native/oboe/src/flowgraph/RampLinear.h@{build/juce\_audio\_devices/native/oboe/src/flowgraph/RampLinear.h}}
+\mbox{\hyperlink{_ramp_linear_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{ * Copyright 2015 The Android Open Source Project}}
+\DoxyCodeLine{3 \textcolor{comment}{ *}}
+\DoxyCodeLine{4 \textcolor{comment}{ * Licensed under the Apache License, Version 2.0 (the "{}License"{});}}
+\DoxyCodeLine{5 \textcolor{comment}{ * you may not use this file except in compliance with the License.}}
+\DoxyCodeLine{6 \textcolor{comment}{ * You may obtain a copy of the License at}}
+\DoxyCodeLine{7 \textcolor{comment}{ *}}
+\DoxyCodeLine{8 \textcolor{comment}{ *      http://www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{9 \textcolor{comment}{ *}}
+\DoxyCodeLine{10 \textcolor{comment}{ * Unless required by applicable law or agreed to in writing, software}}
+\DoxyCodeLine{11 \textcolor{comment}{ * distributed under the License is distributed on an "{}AS IS"{} BASIS,}}
+\DoxyCodeLine{12 \textcolor{comment}{ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.}}
+\DoxyCodeLine{13 \textcolor{comment}{ * See the License for the specific language governing permissions and}}
+\DoxyCodeLine{14 \textcolor{comment}{ * limitations under the License.}}
+\DoxyCodeLine{15 \textcolor{comment}{ */}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#ifndef FLOWGRAPH\_RAMP\_LINEAR\_H}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#define FLOWGRAPH\_RAMP\_LINEAR\_H}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#include <atomic>}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#include <unistd.h>}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#include <sys/types.h>}}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_flow_graph_node_8h}{FlowGraphNode.h}}"{}}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespace_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e}{FLOWGRAPH\_OUTER\_NAMESPACE}} \{}
+\DoxyCodeLine{27 \textcolor{keyword}{namespace }flowgraph \{}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{37 \textcolor{keyword}{class }\mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_ramp_linear}{RampLinear}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_flow_graph_filter}{FlowGraphFilter}} \{}
+\DoxyCodeLine{38 \textcolor{keyword}{public}:}
+\DoxyCodeLine{39     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_ramp_linear_a6ae13b50fa0249199400f0a24b25e269}{RampLinear}}(int32\_t channelCount);}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_ramp_linear_ae37f171b82ed9a4465fa614dd3f42a60}{\string~RampLinear}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43     int32\_t \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_ramp_linear_a7b4c3a47d5b111fdf09f06664698494d}{onProcess}}(int32\_t numFrames) \textcolor{keyword}{override};}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{49     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_ramp_linear_a5f82e388db5aca8b029e43072021afc1}{setLengthInFrames}}(int32\_t frames);}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51     int32\_t \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_ramp_linear_a1e146d321d8c76fcc48d284daada2271}{getLengthInFrames}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{52         \textcolor{keywordflow}{return} mLengthInFrames;}
+\DoxyCodeLine{53     \}}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{59     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_ramp_linear_a1634ea92668a5f9fdd0810d8684c80ba}{setTarget}}(\textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a61228f5aa014ae6a6f7d537c7b0943b7}{target}});}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_ramp_linear_a5deff54611642f83452826cefe8be689}{getTarget}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{62         \textcolor{keywordflow}{return} mTarget.load();}
+\DoxyCodeLine{63     \}}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{73     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_ramp_linear_a22731ff8e3a0c3b6d74873501caf3905}{forceCurrent}}(\textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a3037cfec75442657d7a3f8830cb97c34}{level}}) \{}
+\DoxyCodeLine{74         mLevelFrom = \mbox{\hyperlink{namespacegl_a3037cfec75442657d7a3f8830cb97c34}{level}};}
+\DoxyCodeLine{75         mLevelTo = \mbox{\hyperlink{namespacegl_a3037cfec75442657d7a3f8830cb97c34}{level}};}
+\DoxyCodeLine{76     \}}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78     \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{class_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph_1_1_ramp_linear_a11d0fc174d951b7526c14257bbdead8f}{getName}}()\textcolor{keyword}{ override }\{}
+\DoxyCodeLine{79         \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}RampLinear"{}};}
+\DoxyCodeLine{80     \}}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82 \textcolor{keyword}{private}:}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84     \textcolor{keywordtype}{float} interpolateCurrent();}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86     std::atomic<float>  mTarget;}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88     int32\_t             mLengthInFrames  = 48000.0f / 100.0f ; \textcolor{comment}{// 10 msec at 48000 Hz;}}
+\DoxyCodeLine{89     int32\_t             mRemaining       = 0;}
+\DoxyCodeLine{90     \textcolor{keywordtype}{float}               mScaler          = 0.0f;}
+\DoxyCodeLine{91     \textcolor{keywordtype}{float}               mLevelFrom       = 0.0f;}
+\DoxyCodeLine{92     \textcolor{keywordtype}{float}               mLevelTo         = 0.0f;}
+\DoxyCodeLine{93 \};}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95 \} \textcolor{comment}{/* namespace flowgraph */}}
+\DoxyCodeLine{96 \} \textcolor{comment}{/* namespace FLOWGRAPH\_OUTER\_NAMESPACE */}}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//FLOWGRAPH\_RAMP\_LINEAR\_H}}
+
+\end{DoxyCode}

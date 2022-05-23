@@ -1,0 +1,70 @@
+\hypertarget{juce___child_process_8h_source}{}\doxysection{juce\+\_\+\+Child\+Process.\+h}
+\label{juce___child_process_8h_source}\index{build/juce\_core/threads/juce\_ChildProcess.h@{build/juce\_core/threads/juce\_ChildProcess.h}}
+\mbox{\hyperlink{juce___child_process_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{36 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_child_process}{ChildProcess}}}
+\DoxyCodeLine{37 \{}
+\DoxyCodeLine{38 \textcolor{keyword}{public}:}
+\DoxyCodeLine{39     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{43 \textcolor{comment}{}    \mbox{\hyperlink{class_child_process_a7a3ac50868578dc8b65203e4ccfb8038}{ChildProcess}}();}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{48     \mbox{\hyperlink{class_child_process_a3749642d15c9fce912f9e7f9daaf52f0}{\string~ChildProcess}}();}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{51     \textcolor{keyword}{enum} \mbox{\hyperlink{class_child_process_a9e7be158550b4d2a470e4cceef501892}{StreamFlags}}}
+\DoxyCodeLine{52     \{}
+\DoxyCodeLine{53         wantStdOut = 1,}
+\DoxyCodeLine{54         wantStdErr = 2}
+\DoxyCodeLine{55     \};}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{66     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_child_process_aa5e6f939a0f0c3e87bd7c58dcec9f13c}{start}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_gga485dc2a0e5ed7da3d9f826367b36ee55a6440030ae8284cee96c1c88b356c45a7}{command}}, \textcolor{keywordtype}{int} streamFlags = wantStdOut | wantStdErr);}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{77     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_child_process_ae1b54ec34a8fa09e679aed90c167cb64}{start}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string_array}{StringArray}}\& arguments, \textcolor{keywordtype}{int} streamFlags = wantStdOut | wantStdErr);}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{80     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_child_process_a283a92893590cd8fc199933c0d691670}{isRunning}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{86     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_child_process_af6f8f31a8c86fadeba06b8be21e94e30}{readProcessOutput}} (\textcolor{keywordtype}{void}* destBuffer, \textcolor{keywordtype}{int} numBytesToRead);}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{91     \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{class_child_process_ae91e215618cd1861c2e2ca13e5f4166e}{readAllProcessOutput}}();}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{94     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_child_process_a767ec1edb651a654ef217a0f5f4f29d8}{waitForProcessToFinish}} (\textcolor{keywordtype}{int} timeoutMs) \textcolor{keyword}{const};}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{97     \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} \mbox{\hyperlink{class_child_process_acbafc3e15c0abdb2bd6a5f9e45a2f620}{getExitCode}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{103     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_child_process_a524fd75e18a0aa94a8518ce49432413c}{kill}}();}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105 \textcolor{keyword}{private}:}
+\DoxyCodeLine{106     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{107     \textcolor{keyword}{class }ActiveProcess;}
+\DoxyCodeLine{108     std::unique\_ptr<ActiveProcess> activeProcess;}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_child_process}{ChildProcess}})}
+\DoxyCodeLine{111 \};}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{114 }
+
+\end{DoxyCode}

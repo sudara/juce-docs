@@ -1,0 +1,371 @@
+\hypertarget{juce___hash_map_8h_source}{}\doxysection{juce\+\_\+\+Hash\+Map.\+h}
+\label{juce___hash_map_8h_source}\index{build/juce\_core/containers/juce\_HashMap.h@{build/juce\_core/containers/juce\_HashMap.h}}
+\mbox{\hyperlink{juce___hash_map_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{35 \textcolor{comment}{}\textcolor{keyword}{struct }\mbox{\hyperlink{struct_default_hash_functions}{DefaultHashFunctions}}}
+\DoxyCodeLine{36 \{}
+\DoxyCodeLine{38     \textcolor{keyword}{static} \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_default_hash_functions_ae5c47d8de93c49744491d64f2532d75f}{generateHash}} (\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} \mbox{\hyperlink{namespacegl_a45e4cfc4b70136c9a7e0000e34f4ed4e}{key}}, \textcolor{keywordtype}{int} upperLimit) \textcolor{keyword}{noexcept}           \{ \textcolor{keywordflow}{return} (\textcolor{keywordtype}{int}) (\mbox{\hyperlink{namespacegl_a45e4cfc4b70136c9a7e0000e34f4ed4e}{key}} \% (\mbox{\hyperlink{namespace_steinberg_af4518d725547bee20d4e185e8d3f1965}{uint32}}) upperLimit); \}}
+\DoxyCodeLine{40     \textcolor{keyword}{static} \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_default_hash_functions_a1c4464bc58d8bb2de8be3cf4b5d4c585}{generateHash}} (\mbox{\hyperlink{juce__box2d_8cpp_a6a5a8e94340b94579afb83ab477a983c}{int32}} \mbox{\hyperlink{namespacegl_a45e4cfc4b70136c9a7e0000e34f4ed4e}{key}}, \textcolor{keywordtype}{int} upperLimit) \textcolor{keyword}{noexcept}            \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{struct_default_hash_functions_a1c4464bc58d8bb2de8be3cf4b5d4c585}{generateHash}} ((\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}}) \mbox{\hyperlink{namespacegl_a45e4cfc4b70136c9a7e0000e34f4ed4e}{key}}, upperLimit); \}}
+\DoxyCodeLine{42     \textcolor{keyword}{static} \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_default_hash_functions_a4de19776c90a3c127b3aacf9b26f3aaa}{generateHash}} (\mbox{\hyperlink{group__juce__core-maths_gaba41bf2b6f6da5945ee08fb99931aede}{uint64}} \mbox{\hyperlink{namespacegl_a45e4cfc4b70136c9a7e0000e34f4ed4e}{key}}, \textcolor{keywordtype}{int} upperLimit) \textcolor{keyword}{noexcept}           \{ \textcolor{keywordflow}{return} (\textcolor{keywordtype}{int}) (\mbox{\hyperlink{namespacegl_a45e4cfc4b70136c9a7e0000e34f4ed4e}{key}} \% (\mbox{\hyperlink{group__juce__core-maths_gaba41bf2b6f6da5945ee08fb99931aede}{uint64}}) upperLimit); \}}
+\DoxyCodeLine{44     \textcolor{keyword}{static} \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_default_hash_functions_af7f7fa63b837b1a519eba7a43f223ff3}{generateHash}} (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} \mbox{\hyperlink{namespacegl_a45e4cfc4b70136c9a7e0000e34f4ed4e}{key}}, \textcolor{keywordtype}{int} upperLimit) \textcolor{keyword}{noexcept}            \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{struct_default_hash_functions_af7f7fa63b837b1a519eba7a43f223ff3}{generateHash}} ((\mbox{\hyperlink{group__juce__core-maths_gaba41bf2b6f6da5945ee08fb99931aede}{uint64}}) \mbox{\hyperlink{namespacegl_a45e4cfc4b70136c9a7e0000e34f4ed4e}{key}}, upperLimit); \}}
+\DoxyCodeLine{46     \textcolor{keyword}{static} \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_default_hash_functions_ab3ad9697d3bbe3a07b64f49eddb259f7}{generateHash}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{namespacegl_a45e4cfc4b70136c9a7e0000e34f4ed4e}{key}}, \textcolor{keywordtype}{int} upperLimit) \textcolor{keyword}{noexcept}    \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{struct_default_hash_functions_ab3ad9697d3bbe3a07b64f49eddb259f7}{generateHash}} ((\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}}) \mbox{\hyperlink{namespacegl_a45e4cfc4b70136c9a7e0000e34f4ed4e}{key}}.hashCode(), upperLimit); \}}
+\DoxyCodeLine{48     \textcolor{keyword}{static} \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_default_hash_functions_aa0382e4efe3c4eb76106a9bcca3fe9a8}{generateHash}} (\textcolor{keyword}{const} \mbox{\hyperlink{classvar}{var}}\& \mbox{\hyperlink{namespacegl_a45e4cfc4b70136c9a7e0000e34f4ed4e}{key}}, \textcolor{keywordtype}{int} upperLimit) \textcolor{keyword}{noexcept}       \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{struct_default_hash_functions_aa0382e4efe3c4eb76106a9bcca3fe9a8}{generateHash}} (\mbox{\hyperlink{namespacegl_a45e4cfc4b70136c9a7e0000e34f4ed4e}{key}}.toString(), upperLimit); \}}
+\DoxyCodeLine{50     \textcolor{keyword}{static} \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_default_hash_functions_ab68d8e76eb0cd41ed222aa187189a563}{generateHash}} (\textcolor{keyword}{const} \textcolor{keywordtype}{void}* \mbox{\hyperlink{namespacegl_a45e4cfc4b70136c9a7e0000e34f4ed4e}{key}}, \textcolor{keywordtype}{int} upperLimit) \textcolor{keyword}{noexcept}      \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{struct_default_hash_functions_ab68d8e76eb0cd41ed222aa187189a563}{generateHash}} ((\mbox{\hyperlink{group__juce__core-maths_gaba41bf2b6f6da5945ee08fb99931aede}{uint64}}) (\mbox{\hyperlink{group__juce__core-maths_gafb24e6184dde2b29ecfb687686e8fec2}{pointer\_sized\_uint}}) \mbox{\hyperlink{namespacegl_a45e4cfc4b70136c9a7e0000e34f4ed4e}{key}}, upperLimit); \}}
+\DoxyCodeLine{52     \textcolor{keyword}{static} \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_default_hash_functions_a6a18c27d7c1065ede5b05d7eec3febd0}{generateHash}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_uuid}{Uuid}}\& \mbox{\hyperlink{namespacegl_a45e4cfc4b70136c9a7e0000e34f4ed4e}{key}}, \textcolor{keywordtype}{int} upperLimit) \textcolor{keyword}{noexcept}      \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{struct_default_hash_functions_a6a18c27d7c1065ede5b05d7eec3febd0}{generateHash}} (\mbox{\hyperlink{namespacegl_a45e4cfc4b70136c9a7e0000e34f4ed4e}{key}}.hash(), upperLimit); \}}
+\DoxyCodeLine{53 \};}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{100 \textcolor{comment}{}\textcolor{keyword}{template} <\textcolor{keyword}{typename} KeyType,}
+\DoxyCodeLine{101           \textcolor{keyword}{typename} ValueType,}
+\DoxyCodeLine{102           \textcolor{keyword}{class }HashFunctionType = \mbox{\hyperlink{struct_default_hash_functions}{DefaultHashFunctions}},}
+\DoxyCodeLine{103           \textcolor{keyword}{class }TypeOfCriticalSectionToUse = \mbox{\hyperlink{class_dummy_critical_section}{DummyCriticalSection}}>}
+\DoxyCodeLine{104 \textcolor{keyword}{class }\mbox{\hyperlink{class_hash_map}{HashMap}}}
+\DoxyCodeLine{105 \{}
+\DoxyCodeLine{106 \textcolor{keyword}{private}:}
+\DoxyCodeLine{107     \textcolor{keyword}{using} KeyTypeParameter   = \textcolor{keyword}{typename} \mbox{\hyperlink{struct_type_helpers_1_1_parameter_type_ad57e75d9eb3f3f675b9156c3850636a6}{TypeHelpers::ParameterType<KeyType>::type}};}
+\DoxyCodeLine{108     \textcolor{keyword}{using} ValueTypeParameter = \textcolor{keyword}{typename} \mbox{\hyperlink{struct_type_helpers_1_1_parameter_type_ad57e75d9eb3f3f675b9156c3850636a6}{TypeHelpers::ParameterType<ValueType>::type}};}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110 \textcolor{keyword}{public}:}
+\DoxyCodeLine{111     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{122 \textcolor{comment}{}    \textcolor{keyword}{explicit} \mbox{\hyperlink{class_hash_map_a4d6d41cfc524ccc0a73f0251d7fc1fab}{HashMap}} (\textcolor{keywordtype}{int} numberOfSlots = defaultHashTableSize,}
+\DoxyCodeLine{123                       HashFunctionType hashFunction = HashFunctionType())}
+\DoxyCodeLine{124        : hashFunctionToUse (hashFunction)}
+\DoxyCodeLine{125     \{}
+\DoxyCodeLine{126         hashSlots.insertMultiple (0, \textcolor{keyword}{nullptr}, numberOfSlots);}
+\DoxyCodeLine{127     \}}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{130     \mbox{\hyperlink{class_hash_map_a33001fb7329c32bdca37d969984f1e58}{\string~HashMap}}()}
+\DoxyCodeLine{131     \{}
+\DoxyCodeLine{132         \mbox{\hyperlink{class_hash_map_a2922931b85fa384901d82de2b46b0845}{clear}}();}
+\DoxyCodeLine{133     \}}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{140 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_hash_map_a2922931b85fa384901d82de2b46b0845}{clear}}()}
+\DoxyCodeLine{141     \{}
+\DoxyCodeLine{142         \textcolor{keyword}{const} \mbox{\hyperlink{class_hash_map_a81b1cddb2c5eafbde0ae4eb9fd31fa3c}{ScopedLockType}} sl (\mbox{\hyperlink{class_hash_map_ab46d9df4e0ffd804c284e9b65dba791f}{getLock}}());}
+\DoxyCodeLine{143 }
+\DoxyCodeLine{144         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} i = hashSlots.size(); -\/-\/i >= 0;)}
+\DoxyCodeLine{145         \{}
+\DoxyCodeLine{146             \textcolor{keyword}{auto}* \mbox{\hyperlink{namespacegl_ae0306c9e6aca74fac45e19b5f64f7ba7}{h}} = hashSlots.getUnchecked(i);}
+\DoxyCodeLine{147 }
+\DoxyCodeLine{148             \textcolor{keywordflow}{while} (\mbox{\hyperlink{namespacegl_ae0306c9e6aca74fac45e19b5f64f7ba7}{h}} != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{149             \{}
+\DoxyCodeLine{150                 \textcolor{keyword}{const} std::unique\_ptr<HashEntry> \mbox{\hyperlink{namespace_steinberg_1_1_singleton_a5a1f7e48e8bb4adec3a275450b69c026}{deleter}} (\mbox{\hyperlink{namespacegl_ae0306c9e6aca74fac45e19b5f64f7ba7}{h}});}
+\DoxyCodeLine{151                 \mbox{\hyperlink{namespacegl_ae0306c9e6aca74fac45e19b5f64f7ba7}{h}} = \mbox{\hyperlink{namespacegl_ae0306c9e6aca74fac45e19b5f64f7ba7}{h}}-\/>nextEntry;}
+\DoxyCodeLine{152             \}}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154             hashSlots.set (i, \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{155         \}}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{157         totalNumItems = 0;}
+\DoxyCodeLine{158     \}}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{162 \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_hash_map_a79c34c9f6a0799d6cae1b84ff61b7a34}{size}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{163     \{}
+\DoxyCodeLine{164         \textcolor{keywordflow}{return} totalNumItems;}
+\DoxyCodeLine{165     \}}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{171     \textcolor{keyword}{inline} ValueType \mbox{\hyperlink{class_hash_map_a474cb5ceff88a13e2b15f54e675411ad}{operator[] }}(KeyTypeParameter keyToLookFor)\textcolor{keyword}{ const}}
+\DoxyCodeLine{172 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{173         \textcolor{keyword}{const} \mbox{\hyperlink{class_hash_map_a81b1cddb2c5eafbde0ae4eb9fd31fa3c}{ScopedLockType}} sl (\mbox{\hyperlink{class_hash_map_ab46d9df4e0ffd804c284e9b65dba791f}{getLock}}());}
+\DoxyCodeLine{174 }
+\DoxyCodeLine{175         \textcolor{keywordflow}{if} (\textcolor{keyword}{auto}* \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}} = getEntry (getSlot (keyToLookFor), keyToLookFor))}
+\DoxyCodeLine{176             \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}}-\/>value;}
+\DoxyCodeLine{177 }
+\DoxyCodeLine{178         \textcolor{keywordflow}{return} ValueType();}
+\DoxyCodeLine{179     \}}
+\DoxyCodeLine{180 }
+\DoxyCodeLine{186     \textcolor{keyword}{inline} ValueType\& \mbox{\hyperlink{class_hash_map_a79d815c684ed501a47010ece20c6e07f}{getReference}} (KeyTypeParameter keyToLookFor)}
+\DoxyCodeLine{187     \{}
+\DoxyCodeLine{188         \textcolor{keyword}{const} \mbox{\hyperlink{class_hash_map_a81b1cddb2c5eafbde0ae4eb9fd31fa3c}{ScopedLockType}} sl (\mbox{\hyperlink{class_hash_map_ab46d9df4e0ffd804c284e9b65dba791f}{getLock}}());}
+\DoxyCodeLine{189         \textcolor{keyword}{auto} hashIndex = generateHashFor (keyToLookFor, \mbox{\hyperlink{class_hash_map_a28c5938ec533466631b98451c6b78072}{getNumSlots}}());}
+\DoxyCodeLine{190 }
+\DoxyCodeLine{191         \textcolor{keyword}{auto}* firstEntry = hashSlots.getUnchecked (hashIndex);}
+\DoxyCodeLine{192 }
+\DoxyCodeLine{193         \textcolor{keywordflow}{if} (\textcolor{keyword}{auto}* \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}} = getEntry (firstEntry, keyToLookFor))}
+\DoxyCodeLine{194             \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}}-\/>value;}
+\DoxyCodeLine{195 }
+\DoxyCodeLine{196         \textcolor{keyword}{auto}* \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}} = \textcolor{keyword}{new} HashEntry (keyToLookFor, ValueType(), firstEntry);}
+\DoxyCodeLine{197         hashSlots.set (hashIndex, \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}});}
+\DoxyCodeLine{198         ++totalNumItems;}
+\DoxyCodeLine{199 }
+\DoxyCodeLine{200         \textcolor{keywordflow}{if} (totalNumItems > (\mbox{\hyperlink{class_hash_map_a28c5938ec533466631b98451c6b78072}{getNumSlots}}() * 3) / 2)}
+\DoxyCodeLine{201             \mbox{\hyperlink{class_hash_map_aadd0f7eaeacd996eed49440b27d9f308}{remapTable}} (\mbox{\hyperlink{class_hash_map_a28c5938ec533466631b98451c6b78072}{getNumSlots}}() * 2);}
+\DoxyCodeLine{202 }
+\DoxyCodeLine{203         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}}-\/>value;}
+\DoxyCodeLine{204     \}}
+\DoxyCodeLine{205 }
+\DoxyCodeLine{206     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{208 \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_hash_map_a134779c6595424e65d74c846ef3e8672}{contains}} (KeyTypeParameter keyToLookFor)\textcolor{keyword}{ const}}
+\DoxyCodeLine{209 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{210         \textcolor{keyword}{const} \mbox{\hyperlink{class_hash_map_a81b1cddb2c5eafbde0ae4eb9fd31fa3c}{ScopedLockType}} sl (\mbox{\hyperlink{class_hash_map_ab46d9df4e0ffd804c284e9b65dba791f}{getLock}}());}
+\DoxyCodeLine{211 }
+\DoxyCodeLine{212         \textcolor{keywordflow}{return} (getEntry (getSlot (keyToLookFor), keyToLookFor) != \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{213     \}}
+\DoxyCodeLine{214 }
+\DoxyCodeLine{216     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_hash_map_ab0d3799b8b807e4de6a8893c44087a03}{containsValue}} (ValueTypeParameter valueToLookFor)\textcolor{keyword}{ const}}
+\DoxyCodeLine{217 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{218         \textcolor{keyword}{const} \mbox{\hyperlink{class_hash_map_a81b1cddb2c5eafbde0ae4eb9fd31fa3c}{ScopedLockType}} sl (\mbox{\hyperlink{class_hash_map_ab46d9df4e0ffd804c284e9b65dba791f}{getLock}}());}
+\DoxyCodeLine{219 }
+\DoxyCodeLine{220         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} i = \mbox{\hyperlink{class_hash_map_a28c5938ec533466631b98451c6b78072}{getNumSlots}}(); -\/-\/i >= 0;)}
+\DoxyCodeLine{221             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}* \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}} = hashSlots.getUnchecked(i); \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}} != \textcolor{keyword}{nullptr}; \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}} = \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}}-\/>nextEntry)}
+\DoxyCodeLine{222                 \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}}-\/>value == valueToLookFor)}
+\DoxyCodeLine{223                     \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{224 }
+\DoxyCodeLine{225         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{226     \}}
+\DoxyCodeLine{227 }
+\DoxyCodeLine{228     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{233 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_hash_map_a875c55a3b720118cd6687fd6494f7afd}{set}} (KeyTypeParameter newKey, ValueTypeParameter newValue)        \{ \mbox{\hyperlink{class_hash_map_a79d815c684ed501a47010ece20c6e07f}{getReference}} (newKey) = newValue; \}}
+\DoxyCodeLine{234 }
+\DoxyCodeLine{236     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_hash_map_ac308687ea47efa4d1559ec1b35505ad2}{remove}} (KeyTypeParameter keyToRemove)}
+\DoxyCodeLine{237     \{}
+\DoxyCodeLine{238         \textcolor{keyword}{const} \mbox{\hyperlink{class_hash_map_a81b1cddb2c5eafbde0ae4eb9fd31fa3c}{ScopedLockType}} sl (\mbox{\hyperlink{class_hash_map_ab46d9df4e0ffd804c284e9b65dba791f}{getLock}}());}
+\DoxyCodeLine{239         \textcolor{keyword}{auto} hashIndex = generateHashFor (keyToRemove, \mbox{\hyperlink{class_hash_map_a28c5938ec533466631b98451c6b78072}{getNumSlots}}());}
+\DoxyCodeLine{240         \textcolor{keyword}{auto}* \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}} = hashSlots.getUnchecked (hashIndex);}
+\DoxyCodeLine{241         HashEntry* previous = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{242 }
+\DoxyCodeLine{243         \textcolor{keywordflow}{while} (\mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}} != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{244         \{}
+\DoxyCodeLine{245             \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}}-\/>key == keyToRemove)}
+\DoxyCodeLine{246             \{}
+\DoxyCodeLine{247                 \textcolor{keyword}{const} std::unique\_ptr<HashEntry> \mbox{\hyperlink{namespace_steinberg_1_1_singleton_a5a1f7e48e8bb4adec3a275450b69c026}{deleter}} (\mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}});}
+\DoxyCodeLine{248 }
+\DoxyCodeLine{249                 \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}} = \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}}-\/>nextEntry;}
+\DoxyCodeLine{250 }
+\DoxyCodeLine{251                 \textcolor{keywordflow}{if} (previous != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{252                     previous-\/>nextEntry = \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}};}
+\DoxyCodeLine{253                 \textcolor{keywordflow}{else}}
+\DoxyCodeLine{254                     hashSlots.set (hashIndex, \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}});}
+\DoxyCodeLine{255 }
+\DoxyCodeLine{256                 -\/-\/totalNumItems;}
+\DoxyCodeLine{257             \}}
+\DoxyCodeLine{258             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{259             \{}
+\DoxyCodeLine{260                 previous = \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}};}
+\DoxyCodeLine{261                 \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}} = \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}}-\/>nextEntry;}
+\DoxyCodeLine{262             \}}
+\DoxyCodeLine{263         \}}
+\DoxyCodeLine{264     \}}
+\DoxyCodeLine{265 }
+\DoxyCodeLine{267     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_hash_map_a7c7e68766babe36a8ae07033d3652f2f}{removeValue}} (ValueTypeParameter valueToRemove)}
+\DoxyCodeLine{268     \{}
+\DoxyCodeLine{269         \textcolor{keyword}{const} \mbox{\hyperlink{class_hash_map_a81b1cddb2c5eafbde0ae4eb9fd31fa3c}{ScopedLockType}} sl (\mbox{\hyperlink{class_hash_map_ab46d9df4e0ffd804c284e9b65dba791f}{getLock}}());}
+\DoxyCodeLine{270 }
+\DoxyCodeLine{271         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} i = \mbox{\hyperlink{class_hash_map_a28c5938ec533466631b98451c6b78072}{getNumSlots}}(); -\/-\/i >= 0;)}
+\DoxyCodeLine{272         \{}
+\DoxyCodeLine{273             \textcolor{keyword}{auto}* \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}} = hashSlots.getUnchecked(i);}
+\DoxyCodeLine{274             HashEntry* previous = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{275 }
+\DoxyCodeLine{276             \textcolor{keywordflow}{while} (\mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}} != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{277             \{}
+\DoxyCodeLine{278                 \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}}-\/>value == valueToRemove)}
+\DoxyCodeLine{279                 \{}
+\DoxyCodeLine{280                     \textcolor{keyword}{const} std::unique\_ptr<HashEntry> \mbox{\hyperlink{namespace_steinberg_1_1_singleton_a5a1f7e48e8bb4adec3a275450b69c026}{deleter}} (\mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}});}
+\DoxyCodeLine{281 }
+\DoxyCodeLine{282                     \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}} = \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}}-\/>nextEntry;}
+\DoxyCodeLine{283 }
+\DoxyCodeLine{284                     \textcolor{keywordflow}{if} (previous != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{285                         previous-\/>nextEntry = \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}};}
+\DoxyCodeLine{286                     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{287                         hashSlots.set (i, \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}});}
+\DoxyCodeLine{288 }
+\DoxyCodeLine{289                     -\/-\/totalNumItems;}
+\DoxyCodeLine{290                 \}}
+\DoxyCodeLine{291                 \textcolor{keywordflow}{else}}
+\DoxyCodeLine{292                 \{}
+\DoxyCodeLine{293                     previous = \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}};}
+\DoxyCodeLine{294                     \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}} = \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}}-\/>nextEntry;}
+\DoxyCodeLine{295                 \}}
+\DoxyCodeLine{296             \}}
+\DoxyCodeLine{297         \}}
+\DoxyCodeLine{298     \}}
+\DoxyCodeLine{299 }
+\DoxyCodeLine{304     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_hash_map_aadd0f7eaeacd996eed49440b27d9f308}{remapTable}} (\textcolor{keywordtype}{int} newNumberOfSlots)}
+\DoxyCodeLine{305     \{}
+\DoxyCodeLine{306         \textcolor{keyword}{const} \mbox{\hyperlink{class_hash_map_a81b1cddb2c5eafbde0ae4eb9fd31fa3c}{ScopedLockType}} sl (\mbox{\hyperlink{class_hash_map_ab46d9df4e0ffd804c284e9b65dba791f}{getLock}}());}
+\DoxyCodeLine{307 }
+\DoxyCodeLine{308         \mbox{\hyperlink{class_array}{Array<HashEntry*>}} newSlots;}
+\DoxyCodeLine{309         newSlots.\mbox{\hyperlink{class_array_a0cadf83bcfba696c6a4adc15f4e0a78f}{insertMultiple}} (0, \textcolor{keyword}{nullptr}, newNumberOfSlots);}
+\DoxyCodeLine{310 }
+\DoxyCodeLine{311         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} i = \mbox{\hyperlink{class_hash_map_a28c5938ec533466631b98451c6b78072}{getNumSlots}}(); -\/-\/i >= 0;)}
+\DoxyCodeLine{312         \{}
+\DoxyCodeLine{313             HashEntry* nextEntry = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{314 }
+\DoxyCodeLine{315             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}* \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}} = hashSlots.getUnchecked(i); \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}} != \textcolor{keyword}{nullptr}; \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}} = nextEntry)}
+\DoxyCodeLine{316             \{}
+\DoxyCodeLine{317                 \textcolor{keyword}{auto} hashIndex = generateHashFor (\mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}}-\/>key, newNumberOfSlots);}
+\DoxyCodeLine{318 }
+\DoxyCodeLine{319                 nextEntry = \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}}-\/>nextEntry;}
+\DoxyCodeLine{320                 \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}}-\/>nextEntry = newSlots.\mbox{\hyperlink{class_array_a0e36fd4f8eda27d10a7044a8fa8a2ae4}{getUnchecked}} (hashIndex);}
+\DoxyCodeLine{321 }
+\DoxyCodeLine{322                 newSlots.\mbox{\hyperlink{class_array_a3eb4d3f8301b65d0b41aadcf08b614a5}{set}} (hashIndex, \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}});}
+\DoxyCodeLine{323             \}}
+\DoxyCodeLine{324         \}}
+\DoxyCodeLine{325 }
+\DoxyCodeLine{326         hashSlots.swapWith (newSlots);}
+\DoxyCodeLine{327     \}}
+\DoxyCodeLine{328 }
+\DoxyCodeLine{333     \textcolor{keyword}{inline} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_hash_map_a28c5938ec533466631b98451c6b78072}{getNumSlots}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{334     \{}
+\DoxyCodeLine{335         \textcolor{keywordflow}{return} hashSlots.size();}
+\DoxyCodeLine{336     \}}
+\DoxyCodeLine{337 }
+\DoxyCodeLine{338     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{340 \textcolor{comment}{}    \textcolor{keyword}{template} <\textcolor{keyword}{class} OtherHashMapType>}
+\DoxyCodeLine{341     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_hash_map_a885345c5f15712041e6e46d38d6e564b}{swapWith}} (OtherHashMapType\& otherHashMap) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{342     \{}
+\DoxyCodeLine{343         \textcolor{keyword}{const} \mbox{\hyperlink{class_hash_map_a81b1cddb2c5eafbde0ae4eb9fd31fa3c}{ScopedLockType}} lock1 (\mbox{\hyperlink{class_hash_map_ab46d9df4e0ffd804c284e9b65dba791f}{getLock}}());}
+\DoxyCodeLine{344         \textcolor{keyword}{const} \textcolor{keyword}{typename} OtherHashMapType::ScopedLockType lock2 (otherHashMap.getLock());}
+\DoxyCodeLine{345 }
+\DoxyCodeLine{346         hashSlots.swapWith (otherHashMap.hashSlots);}
+\DoxyCodeLine{347         std::swap (totalNumItems, otherHashMap.totalNumItems);}
+\DoxyCodeLine{348     \}}
+\DoxyCodeLine{349 }
+\DoxyCodeLine{350     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{355 \textcolor{comment}{}    \textcolor{keyword}{inline} \textcolor{keyword}{const} TypeOfCriticalSectionToUse\& \mbox{\hyperlink{class_hash_map_ab46d9df4e0ffd804c284e9b65dba791f}{getLock}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept      \{ \textcolor{keywordflow}{return} lock; \}}
+\DoxyCodeLine{356 }
+\DoxyCodeLine{358     \textcolor{keyword}{using} \mbox{\hyperlink{class_hash_map_a81b1cddb2c5eafbde0ae4eb9fd31fa3c}{ScopedLockType}} = \textcolor{keyword}{typename} TypeOfCriticalSectionToUse::ScopedLockType;}
+\DoxyCodeLine{359 }
+\DoxyCodeLine{360 \textcolor{keyword}{private}:}
+\DoxyCodeLine{361     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{362     \textcolor{keyword}{class }HashEntry}
+\DoxyCodeLine{363     \{}
+\DoxyCodeLine{364     \textcolor{keyword}{public}:}
+\DoxyCodeLine{365         HashEntry (KeyTypeParameter k, ValueTypeParameter \mbox{\hyperlink{jpeglib_8h_aa0ccb5ee6d882ee3605ff47745c6467b}{val}}, HashEntry* \textcolor{keyword}{const} next)}
+\DoxyCodeLine{366             : \mbox{\hyperlink{namespacegl_a45e4cfc4b70136c9a7e0000e34f4ed4e}{key}} (k), \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}} (\mbox{\hyperlink{jpeglib_8h_aa0ccb5ee6d882ee3605ff47745c6467b}{val}}), nextEntry (next)}
+\DoxyCodeLine{367         \{\}}
+\DoxyCodeLine{368 }
+\DoxyCodeLine{369         \textcolor{keyword}{const} KeyType \mbox{\hyperlink{namespacegl_a45e4cfc4b70136c9a7e0000e34f4ed4e}{key}};}
+\DoxyCodeLine{370         ValueType \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}};}
+\DoxyCodeLine{371         HashEntry* nextEntry;}
+\DoxyCodeLine{372 }
+\DoxyCodeLine{373         \mbox{\hyperlink{group__juce__core-system_ga6ab7a603bf4435c7cb286b1744366eb2}{JUCE\_DECLARE\_NON\_COPYABLE}} (HashEntry)}
+\DoxyCodeLine{374     \};}
+\DoxyCodeLine{375 }
+\DoxyCodeLine{376 \textcolor{keyword}{public}:}
+\DoxyCodeLine{377     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{400 \textcolor{comment}{}    \textcolor{keyword}{struct }\mbox{\hyperlink{struct_hash_map_1_1_iterator}{Iterator}}}
+\DoxyCodeLine{401     \{}
+\DoxyCodeLine{402         \mbox{\hyperlink{struct_hash_map_1_1_iterator_a1f638b01f90ece3081f6456a57f9991e}{Iterator}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_hash_map}{HashMap}}\& hashMapToIterate) noexcept}
+\DoxyCodeLine{403             : hashMap (hashMapToIterate), entry (\textcolor{keyword}{nullptr}), index (0)}
+\DoxyCodeLine{404         \{\}}
+\DoxyCodeLine{405 }
+\DoxyCodeLine{406         \mbox{\hyperlink{struct_hash_map_1_1_iterator_a1e2e802a4f40adec1120079695142869}{Iterator}} (\textcolor{keyword}{const} \mbox{\hyperlink{struct_hash_map_1_1_iterator}{Iterator}}\& other) noexcept}
+\DoxyCodeLine{407             : hashMap (other.hashMap), entry (other.entry), index (other.index)}
+\DoxyCodeLine{408         \{\}}
+\DoxyCodeLine{409 }
+\DoxyCodeLine{414         \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_hash_map_1_1_iterator_a4266d184eebca2ad08e4b72025a98804}{next}}() noexcept}
+\DoxyCodeLine{415         \{}
+\DoxyCodeLine{416             \textcolor{keywordflow}{if} (entry != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{417                 entry = entry-\/>nextEntry;}
+\DoxyCodeLine{418 }
+\DoxyCodeLine{419             \textcolor{keywordflow}{while} (entry == \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{420             \{}
+\DoxyCodeLine{421                 \textcolor{keywordflow}{if} (index >= hashMap.\mbox{\hyperlink{class_hash_map_a28c5938ec533466631b98451c6b78072}{getNumSlots}}())}
+\DoxyCodeLine{422                     \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{423 }
+\DoxyCodeLine{424                 entry = hashMap.hashSlots.getUnchecked (index++);}
+\DoxyCodeLine{425             \}}
+\DoxyCodeLine{426 }
+\DoxyCodeLine{427             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{428         \}}
+\DoxyCodeLine{429 }
+\DoxyCodeLine{433         KeyType \mbox{\hyperlink{struct_hash_map_1_1_iterator_a75db8b32382dba1475950f145f0b8a62}{getKey}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{434 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{435             \textcolor{keywordflow}{return} entry != \textcolor{keyword}{nullptr} ? entry-\/>key : KeyType();}
+\DoxyCodeLine{436         \}}
+\DoxyCodeLine{437 }
+\DoxyCodeLine{441         ValueType \mbox{\hyperlink{struct_hash_map_1_1_iterator_a0900e91c3caed8322b50160e12f2685f}{getValue}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{442 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{443             \textcolor{keywordflow}{return} entry != \textcolor{keyword}{nullptr} ? entry-\/>value : ValueType();}
+\DoxyCodeLine{444         \}}
+\DoxyCodeLine{445 }
+\DoxyCodeLine{447         \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_hash_map_1_1_iterator_a341bf8a8ebd064bccb0739fc73b48fa7}{reset}}() noexcept}
+\DoxyCodeLine{448         \{}
+\DoxyCodeLine{449             entry = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{450             index = 0;}
+\DoxyCodeLine{451         \}}
+\DoxyCodeLine{452 }
+\DoxyCodeLine{453         \mbox{\hyperlink{struct_hash_map_1_1_iterator}{Iterator}}\& \mbox{\hyperlink{struct_hash_map_1_1_iterator_ac2ce2c7614b70d07ca6775554c3f5f11}{operator++}}() noexcept                         \{ \mbox{\hyperlink{struct_hash_map_1_1_iterator_a4266d184eebca2ad08e4b72025a98804}{next}}(); \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{454         ValueType \mbox{\hyperlink{struct_hash_map_1_1_iterator_a22f9cc653673789c305df74aa6f2a79e}{operator*}}()\textcolor{keyword}{ const                             }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{struct_hash_map_1_1_iterator_a0900e91c3caed8322b50160e12f2685f}{getValue}}(); \}}
+\DoxyCodeLine{455         \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_hash_map_1_1_iterator_ae9131d21611dc5bdcd15020930c76744}{operator!= }}(\textcolor{keyword}{const} \mbox{\hyperlink{struct_hash_map_1_1_iterator}{Iterator}}\& other) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}  \{ \textcolor{keywordflow}{return} entry != other.entry || index != other.index; \}}
+\DoxyCodeLine{456         \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_hash_map_1_1_iterator_a23667db4b0294862723097ed5230fb3e}{resetToEnd}}() noexcept                              \{ index = hashMap.\mbox{\hyperlink{class_hash_map_a28c5938ec533466631b98451c6b78072}{getNumSlots}}(); \}}
+\DoxyCodeLine{457 }
+\DoxyCodeLine{458     \textcolor{keyword}{private}:}
+\DoxyCodeLine{459         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{460         \textcolor{keyword}{const} \mbox{\hyperlink{class_hash_map}{HashMap}}\& hashMap;}
+\DoxyCodeLine{461         HashEntry* entry;}
+\DoxyCodeLine{462         \textcolor{keywordtype}{int} index;}
+\DoxyCodeLine{463 }
+\DoxyCodeLine{464         \textcolor{comment}{// using the copy constructor is ok, but you cannot assign iterators}}
+\DoxyCodeLine{465         \mbox{\hyperlink{struct_hash_map_1_1_iterator}{Iterator}}\& operator= (\textcolor{keyword}{const} \mbox{\hyperlink{struct_hash_map_1_1_iterator}{Iterator}}\&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{466 }
+\DoxyCodeLine{467         \mbox{\hyperlink{group__juce__core-memory_gab3639a79598b35f2116f4572af0d93f1}{JUCE\_LEAK\_DETECTOR}} (\mbox{\hyperlink{struct_hash_map_1_1_iterator}{Iterator}})}
+\DoxyCodeLine{468     \};}
+\DoxyCodeLine{469 }
+\DoxyCodeLine{471     \mbox{\hyperlink{struct_hash_map_1_1_iterator}{Iterator}} \mbox{\hyperlink{class_hash_map_a877ab31364ccaf45379d018a0b126fe1}{begin}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept             \{ \mbox{\hyperlink{struct_hash_map_1_1_iterator}{Iterator}} i (*\textcolor{keyword}{this}); i.\mbox{\hyperlink{struct_hash_map_1_1_iterator_a4266d184eebca2ad08e4b72025a98804}{next}}(); \textcolor{keywordflow}{return} i; \}}
+\DoxyCodeLine{472 }
+\DoxyCodeLine{474     \mbox{\hyperlink{struct_hash_map_1_1_iterator}{Iterator}} \mbox{\hyperlink{class_hash_map_a42a1631cad1bf4b1bd74f3429359e415}{end}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept               \{ \mbox{\hyperlink{struct_hash_map_1_1_iterator}{Iterator}} i (*\textcolor{keyword}{this}); i.\mbox{\hyperlink{struct_hash_map_1_1_iterator_a23667db4b0294862723097ed5230fb3e}{resetToEnd}}(); \textcolor{keywordflow}{return} i; \}}
+\DoxyCodeLine{475 }
+\DoxyCodeLine{476 \textcolor{keyword}{private}:}
+\DoxyCodeLine{477     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{478     \textcolor{keyword}{enum} \{ defaultHashTableSize = 101 \};}
+\DoxyCodeLine{479     \textcolor{keyword}{friend} \textcolor{keyword}{struct }\mbox{\hyperlink{struct_hash_map_1_1_iterator}{Iterator}};}
+\DoxyCodeLine{480 }
+\DoxyCodeLine{481     HashFunctionType hashFunctionToUse;}
+\DoxyCodeLine{482     \mbox{\hyperlink{class_array}{Array<HashEntry*>}} hashSlots;}
+\DoxyCodeLine{483     \textcolor{keywordtype}{int} totalNumItems = 0;}
+\DoxyCodeLine{484     TypeOfCriticalSectionToUse lock;}
+\DoxyCodeLine{485 }
+\DoxyCodeLine{486     \textcolor{keywordtype}{int} generateHashFor (KeyTypeParameter \mbox{\hyperlink{namespacegl_a45e4cfc4b70136c9a7e0000e34f4ed4e}{key}}, \textcolor{keywordtype}{int} numSlots)\textcolor{keyword}{ const}}
+\DoxyCodeLine{487 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{488         \textcolor{keyword}{const} \textcolor{keywordtype}{int} hash = hashFunctionToUse.\mbox{\hyperlink{struct_default_hash_functions_ae5c47d8de93c49744491d64f2532d75f}{generateHash}} (\mbox{\hyperlink{namespacegl_a45e4cfc4b70136c9a7e0000e34f4ed4e}{key}}, numSlots);}
+\DoxyCodeLine{489         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (\mbox{\hyperlink{group__juce__core-maths_ga5762396fe2a5aa4c39b68ee5b70a96f8}{isPositiveAndBelow}} (hash, numSlots)); \textcolor{comment}{// your hash function is generating out-\/of-\/range numbers!}}
+\DoxyCodeLine{490         \textcolor{keywordflow}{return} hash;}
+\DoxyCodeLine{491     \}}
+\DoxyCodeLine{492 }
+\DoxyCodeLine{493     \textcolor{keyword}{static} HashEntry* getEntry (HashEntry* firstEntry, KeyType keyToLookFor) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{494     \{}
+\DoxyCodeLine{495         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}* \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}} = firstEntry; \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}} != \textcolor{keyword}{nullptr}; \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}} = \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}}-\/>nextEntry)}
+\DoxyCodeLine{496             \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}}-\/>key == keyToLookFor)}
+\DoxyCodeLine{497                 \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}};}
+\DoxyCodeLine{498 }
+\DoxyCodeLine{499         \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{500     \}}
+\DoxyCodeLine{501 }
+\DoxyCodeLine{502     \textcolor{keyword}{inline} HashEntry* getSlot (KeyType \mbox{\hyperlink{namespacegl_a45e4cfc4b70136c9a7e0000e34f4ed4e}{key}}) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}     \{ \textcolor{keywordflow}{return} hashSlots.\mbox{\hyperlink{class_array_a0e36fd4f8eda27d10a7044a8fa8a2ae4}{getUnchecked}} (generateHashFor (\mbox{\hyperlink{namespacegl_a45e4cfc4b70136c9a7e0000e34f4ed4e}{key}}, \mbox{\hyperlink{class_hash_map_a28c5938ec533466631b98451c6b78072}{getNumSlots}}())); \}}
+\DoxyCodeLine{503 }
+\DoxyCodeLine{504     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_hash_map}{HashMap}})}
+\DoxyCodeLine{505 \};}
+\DoxyCodeLine{506 }
+\DoxyCodeLine{507  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{508 }
+
+\end{DoxyCode}

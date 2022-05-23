@@ -1,0 +1,143 @@
+\hypertarget{juce__core_8cpp}{}\doxysection{build/juce\+\_\+core/juce\+\_\+core.cpp File Reference}
+\label{juce__core_8cpp}\index{build/juce\_core/juce\_core.cpp@{build/juce\_core/juce\_core.cpp}}
+{\ttfamily \#include \char`\"{}juce\+\_\+core.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$cctype$>$}\newline
+{\ttfamily \#include $<$cstdarg$>$}\newline
+{\ttfamily \#include $<$locale$>$}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+{\ttfamily \#include $<$sys/timeb.\+h$>$}\newline
+{\ttfamily \#include $<$cwctype$>$}\newline
+{\ttfamily \#include $<$pwd.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$netdb.\+h$>$}\newline
+{\ttfamily \#include $<$arpa/inet.\+h$>$}\newline
+{\ttfamily \#include $<$netinet/tcp.\+h$>$}\newline
+{\ttfamily \#include $<$sys/time.\+h$>$}\newline
+{\ttfamily \#include $<$net/if.\+h$>$}\newline
+{\ttfamily \#include $<$sys/ioctl.\+h$>$}\newline
+{\ttfamily \#include $<$execinfo.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}containers/juce\+\_\+\+Abstract\+Fifo.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}containers/juce\+\_\+\+Array\+Base.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}containers/juce\+\_\+\+Named\+Value\+Set.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}containers/juce\+\_\+\+Owned\+Array.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}containers/juce\+\_\+\+Property\+Set.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}containers/juce\+\_\+\+Reference\+Counted\+Array.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}containers/juce\+\_\+\+Sparse\+Set.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}files/juce\+\_\+\+Directory\+Iterator.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}files/juce\+\_\+\+Ranged\+Directory\+Iterator.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}files/juce\+\_\+\+File.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}files/juce\+\_\+\+File\+Input\+Stream.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}files/juce\+\_\+\+File\+Output\+Stream.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}files/juce\+\_\+\+File\+Search\+Path.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}files/juce\+\_\+\+Temporary\+File.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}logging/juce\+\_\+\+File\+Logger.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}logging/juce\+\_\+\+Logger.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}maths/juce\+\_\+\+Big\+Integer.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}maths/juce\+\_\+\+Expression.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}maths/juce\+\_\+\+Random.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}memory/juce\+\_\+\+Memory\+Block.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}memory/juce\+\_\+\+Allocation\+Hooks.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}misc/juce\+\_\+\+Runtime\+Permissions.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}misc/juce\+\_\+\+Result.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}misc/juce\+\_\+\+Uuid.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}misc/juce\+\_\+\+Console\+Application.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}network/juce\+\_\+\+MACAddress.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}network/juce\+\_\+\+Named\+Pipe.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}network/juce\+\_\+\+Socket.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}network/juce\+\_\+\+IPAddress.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}streams/juce\+\_\+\+Buffered\+Input\+Stream.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}streams/juce\+\_\+\+File\+Input\+Source.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}streams/juce\+\_\+\+Input\+Stream.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}streams/juce\+\_\+\+Memory\+Input\+Stream.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}streams/juce\+\_\+\+Memory\+Output\+Stream.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}streams/juce\+\_\+\+Subregion\+Stream.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}system/juce\+\_\+\+System\+Stats.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}text/juce\+\_\+\+Character\+Functions.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}text/juce\+\_\+\+Identifier.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}text/juce\+\_\+\+Localised\+Strings.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}text/juce\+\_\+\+String.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}streams/juce\+\_\+\+Output\+Stream.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}text/juce\+\_\+\+String\+Array.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}text/juce\+\_\+\+String\+Pair\+Array.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}text/juce\+\_\+\+String\+Pool.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}text/juce\+\_\+\+Text\+Diff.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}text/juce\+\_\+\+Base64.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}threads/juce\+\_\+\+Read\+Write\+Lock.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}threads/juce\+\_\+\+Thread.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}threads/juce\+\_\+\+Thread\+Pool.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}threads/juce\+\_\+\+Time\+Slice\+Thread.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}time/juce\+\_\+\+Performance\+Counter.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}time/juce\+\_\+\+Relative\+Time.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}time/juce\+\_\+\+Time.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}unit\+\_\+tests/juce\+\_\+\+Unit\+Test.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}containers/juce\+\_\+\+Variant.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}javascript/juce\+\_\+\+JSON.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}javascript/juce\+\_\+\+Javascript.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}containers/juce\+\_\+\+Dynamic\+Object.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}xml/juce\+\_\+\+Xml\+Document.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}xml/juce\+\_\+\+Xml\+Element.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}zip/juce\+\_\+\+GZIPDecompressor\+Input\+Stream.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}zip/juce\+\_\+\+GZIPCompressor\+Output\+Stream.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}zip/juce\+\_\+\+Zip\+File.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}files/juce\+\_\+\+File\+Filter.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}files/juce\+\_\+\+Wildcard\+File\+Filter.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}native/juce\+\_\+posix\+\_\+\+Shared\+Code.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}native/juce\+\_\+posix\+\_\+\+Named\+Pipe.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}native/juce\+\_\+posix\+\_\+\+IPAddress.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}threads/juce\+\_\+\+High\+Resolution\+Timer.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}threads/juce\+\_\+\+Waitable\+Event.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}network/juce\+\_\+\+URL.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}threads/juce\+\_\+\+Child\+Process.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}network/juce\+\_\+\+Web\+Input\+Stream.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}streams/juce\+\_\+\+URLInput\+Source.\+cpp\char`\"{}}\newline
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacejuce}{juce}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{juce__core_8cpp_a01f234a727269ea39a6912b758b5f261}{JUCE\+\_\+\+CORE\+\_\+\+INCLUDE\+\_\+\+OBJC\+\_\+\+HELPERS}}~1
+\item 
+\#define \mbox{\hyperlink{juce__core_8cpp_aeaef2a4db63e6185bf9eb23020a5964a}{JUCE\+\_\+\+CORE\+\_\+\+INCLUDE\+\_\+\+COM\+\_\+\+SMART\+\_\+\+PTR}}~1
+\item 
+\#define \mbox{\hyperlink{juce__core_8cpp_ac13048286d5778137959086d2ede980a}{JUCE\+\_\+\+CORE\+\_\+\+INCLUDE\+\_\+\+NATIVE\+\_\+\+HEADERS}}~1
+\item 
+\#define \mbox{\hyperlink{juce__core_8cpp_aa63bfeb10b6b0a7a1357fd64fba1ae2f}{JUCE\+\_\+\+CORE\+\_\+\+INCLUDE\+\_\+\+JNI\+\_\+\+HELPERS}}~1
+\item 
+\#define \mbox{\hyperlink{juce__core_8cpp_ab0ba1932d5fbb954af970774c96f48ba}{JUCE\+\_\+\+STANDALONE\+\_\+\+APPLICATION}}~0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{juce__core_8cpp_aeaef2a4db63e6185bf9eb23020a5964a}\label{juce__core_8cpp_aeaef2a4db63e6185bf9eb23020a5964a}} 
+\index{juce\_core.cpp@{juce\_core.cpp}!JUCE\_CORE\_INCLUDE\_COM\_SMART\_PTR@{JUCE\_CORE\_INCLUDE\_COM\_SMART\_PTR}}
+\index{JUCE\_CORE\_INCLUDE\_COM\_SMART\_PTR@{JUCE\_CORE\_INCLUDE\_COM\_SMART\_PTR}!juce\_core.cpp@{juce\_core.cpp}}
+\doxysubsubsection{\texorpdfstring{JUCE\_CORE\_INCLUDE\_COM\_SMART\_PTR}{JUCE\_CORE\_INCLUDE\_COM\_SMART\_PTR}}
+{\footnotesize\ttfamily \#define JUCE\+\_\+\+CORE\+\_\+\+INCLUDE\+\_\+\+COM\+\_\+\+SMART\+\_\+\+PTR~1}
+
+\mbox{\Hypertarget{juce__core_8cpp_aa63bfeb10b6b0a7a1357fd64fba1ae2f}\label{juce__core_8cpp_aa63bfeb10b6b0a7a1357fd64fba1ae2f}} 
+\index{juce\_core.cpp@{juce\_core.cpp}!JUCE\_CORE\_INCLUDE\_JNI\_HELPERS@{JUCE\_CORE\_INCLUDE\_JNI\_HELPERS}}
+\index{JUCE\_CORE\_INCLUDE\_JNI\_HELPERS@{JUCE\_CORE\_INCLUDE\_JNI\_HELPERS}!juce\_core.cpp@{juce\_core.cpp}}
+\doxysubsubsection{\texorpdfstring{JUCE\_CORE\_INCLUDE\_JNI\_HELPERS}{JUCE\_CORE\_INCLUDE\_JNI\_HELPERS}}
+{\footnotesize\ttfamily \#define JUCE\+\_\+\+CORE\+\_\+\+INCLUDE\+\_\+\+JNI\+\_\+\+HELPERS~1}
+
+\mbox{\Hypertarget{juce__core_8cpp_ac13048286d5778137959086d2ede980a}\label{juce__core_8cpp_ac13048286d5778137959086d2ede980a}} 
+\index{juce\_core.cpp@{juce\_core.cpp}!JUCE\_CORE\_INCLUDE\_NATIVE\_HEADERS@{JUCE\_CORE\_INCLUDE\_NATIVE\_HEADERS}}
+\index{JUCE\_CORE\_INCLUDE\_NATIVE\_HEADERS@{JUCE\_CORE\_INCLUDE\_NATIVE\_HEADERS}!juce\_core.cpp@{juce\_core.cpp}}
+\doxysubsubsection{\texorpdfstring{JUCE\_CORE\_INCLUDE\_NATIVE\_HEADERS}{JUCE\_CORE\_INCLUDE\_NATIVE\_HEADERS}}
+{\footnotesize\ttfamily \#define JUCE\+\_\+\+CORE\+\_\+\+INCLUDE\+\_\+\+NATIVE\+\_\+\+HEADERS~1}
+
+\mbox{\Hypertarget{juce__core_8cpp_a01f234a727269ea39a6912b758b5f261}\label{juce__core_8cpp_a01f234a727269ea39a6912b758b5f261}} 
+\index{juce\_core.cpp@{juce\_core.cpp}!JUCE\_CORE\_INCLUDE\_OBJC\_HELPERS@{JUCE\_CORE\_INCLUDE\_OBJC\_HELPERS}}
+\index{JUCE\_CORE\_INCLUDE\_OBJC\_HELPERS@{JUCE\_CORE\_INCLUDE\_OBJC\_HELPERS}!juce\_core.cpp@{juce\_core.cpp}}
+\doxysubsubsection{\texorpdfstring{JUCE\_CORE\_INCLUDE\_OBJC\_HELPERS}{JUCE\_CORE\_INCLUDE\_OBJC\_HELPERS}}
+{\footnotesize\ttfamily \#define JUCE\+\_\+\+CORE\+\_\+\+INCLUDE\+\_\+\+OBJC\+\_\+\+HELPERS~1}
+
+\mbox{\Hypertarget{juce__core_8cpp_ab0ba1932d5fbb954af970774c96f48ba}\label{juce__core_8cpp_ab0ba1932d5fbb954af970774c96f48ba}} 
+\index{juce\_core.cpp@{juce\_core.cpp}!JUCE\_STANDALONE\_APPLICATION@{JUCE\_STANDALONE\_APPLICATION}}
+\index{JUCE\_STANDALONE\_APPLICATION@{JUCE\_STANDALONE\_APPLICATION}!juce\_core.cpp@{juce\_core.cpp}}
+\doxysubsubsection{\texorpdfstring{JUCE\_STANDALONE\_APPLICATION}{JUCE\_STANDALONE\_APPLICATION}}
+{\footnotesize\ttfamily \#define JUCE\+\_\+\+STANDALONE\+\_\+\+APPLICATION~0}
+

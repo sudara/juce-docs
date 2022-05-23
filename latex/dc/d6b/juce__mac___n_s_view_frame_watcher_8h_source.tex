@@ -1,0 +1,117 @@
+\hypertarget{juce__mac___n_s_view_frame_watcher_8h_source}{}\doxysection{juce\+\_\+mac\+\_\+\+NSView\+Frame\+Watcher.\+h}
+\label{juce__mac___n_s_view_frame_watcher_8h_source}\index{build/juce\_gui\_extra/native/juce\_mac\_NSViewFrameWatcher.h@{build/juce\_gui\_extra/native/juce\_mac\_NSViewFrameWatcher.h}}
+\mbox{\hyperlink{juce__mac___n_s_view_frame_watcher_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{5 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{6 \textcolor{comment}{}}
+\DoxyCodeLine{7 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{8 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{9 \textcolor{comment}{}}
+\DoxyCodeLine{10 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{11 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{12 \textcolor{comment}{}}
+\DoxyCodeLine{13 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{14 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{15 \textcolor{comment}{}}
+\DoxyCodeLine{16 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{17 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{18 \textcolor{comment}{}}
+\DoxyCodeLine{19 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{20 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{21 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{24 \textcolor{comment}{*/}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#if JUCE\_MAC}}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacejuce}{juce}}}
+\DoxyCodeLine{29 \{}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31 \mbox{\hyperlink{group__juce__core-system_ga0112339834a6548e4123e394b9ed95e2}{JUCE\_BEGIN\_IGNORE\_WARNINGS\_GCC\_LIKE}} (\textcolor{stringliteral}{"{}-\/Wundeclared-\/selector"{}})}
+\DoxyCodeLine{32 \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} auto nsViewFrameChangedSelector = @selector (frameChanged:);}
+\DoxyCodeLine{33 \mbox{\hyperlink{group__juce__core-system_ga157f2229764b17137d8814bec95df109}{JUCE\_END\_IGNORE\_WARNINGS\_GCC\_LIKE}}}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35 struct NSViewCallbackInterface}
+\DoxyCodeLine{36 \{}
+\DoxyCodeLine{37     \textcolor{keyword}{virtual} \string~NSViewCallbackInterface() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{38     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} frameChanged() = 0;}
+\DoxyCodeLine{39 \};}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{42 \textcolor{keyword}{struct }NSViewFrameChangeCallbackClass   : \textcolor{keyword}{public} ObjCClass<NSObject>}
+\DoxyCodeLine{43 \{}
+\DoxyCodeLine{44     NSViewFrameChangeCallbackClass()}
+\DoxyCodeLine{45         : ObjCClass (\textcolor{stringliteral}{"{}JUCE\_NSViewCallback\_"{}})}
+\DoxyCodeLine{46     \{}
+\DoxyCodeLine{47         addIvar<NSViewCallbackInterface*> (\textcolor{stringliteral}{"{}target"{}});}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49         addMethod (nsViewFrameChangedSelector, frameChanged);}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51         registerClass();}
+\DoxyCodeLine{52     \}}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54     \textcolor{keyword}{static} \textcolor{keywordtype}{void} setTarget (\textcolor{keywordtype}{id} \textcolor{keyword}{self}, NSViewCallbackInterface* \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}})}
+\DoxyCodeLine{55     \{}
+\DoxyCodeLine{56         object\_setInstanceVariable (\textcolor{keyword}{self}, \textcolor{stringliteral}{"{}target"{}}, \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}});}
+\DoxyCodeLine{57     \}}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59 \textcolor{keyword}{private}:}
+\DoxyCodeLine{60     \textcolor{keyword}{static} \textcolor{keywordtype}{void} frameChanged (\textcolor{keywordtype}{id} \textcolor{keyword}{self}, \textcolor{keywordtype}{SEL}, NSNotification*)}
+\DoxyCodeLine{61     \{}
+\DoxyCodeLine{62         \textcolor{keywordflow}{if} (\textcolor{keyword}{auto}* \mbox{\hyperlink{namespacegl_a61228f5aa014ae6a6f7d537c7b0943b7}{target}} = getIvar<NSViewCallbackInterface*> (\textcolor{keyword}{self}, \textcolor{stringliteral}{"{}target"{}}))}
+\DoxyCodeLine{63             \mbox{\hyperlink{namespacegl_a61228f5aa014ae6a6f7d537c7b0943b7}{target}}-\/>frameChanged();}
+\DoxyCodeLine{64     \}}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66     \mbox{\hyperlink{group__juce__core-system_ga6ab7a603bf4435c7cb286b1744366eb2}{JUCE\_DECLARE\_NON\_COPYABLE}} (NSViewFrameChangeCallbackClass)}
+\DoxyCodeLine{67 \};}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{70 \textcolor{keyword}{class }NSViewFrameWatcher : \textcolor{keyword}{private} NSViewCallbackInterface}
+\DoxyCodeLine{71 \{}
+\DoxyCodeLine{72 \textcolor{keyword}{public}:}
+\DoxyCodeLine{73     NSViewFrameWatcher (NSView* viewToWatch, \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\textcolor{keywordtype}{void}()> viewResizedIn)}
+\DoxyCodeLine{74         : viewResized (\mbox{\hyperlink{namespacestd}{std}}::\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{move}} (viewResizedIn)), \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}} (makeCallbackForView (viewToWatch))}
+\DoxyCodeLine{75     \{}
+\DoxyCodeLine{76     \}}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78     \string~NSViewFrameWatcher()\textcolor{keyword}{ override}}
+\DoxyCodeLine{79 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{80         [[NSNotificationCenter defaultCenter] removeObserver: \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}}];}
+\DoxyCodeLine{81         [\mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}} release];}
+\DoxyCodeLine{82         \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}} = nil;}
+\DoxyCodeLine{83     \}}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85     \mbox{\hyperlink{group__juce__core-system_ga6ab7a603bf4435c7cb286b1744366eb2}{JUCE\_DECLARE\_NON\_COPYABLE}} (NSViewFrameWatcher)}
+\DoxyCodeLine{86     \mbox{\hyperlink{group__juce__core-system_ga599c5e38096f3427fea328a9deb3fde7}{JUCE\_DECLARE\_NON\_MOVEABLE}} (NSViewFrameWatcher)}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88 \textcolor{keyword}{private}:}
+\DoxyCodeLine{89     \textcolor{keywordtype}{id} makeCallbackForView (NSView* view)}
+\DoxyCodeLine{90     \{}
+\DoxyCodeLine{91         \textcolor{keyword}{static} NSViewFrameChangeCallbackClass cls;}
+\DoxyCodeLine{92         \textcolor{keyword}{auto}* \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = [cls.createInstance() init];}
+\DoxyCodeLine{93         NSViewFrameChangeCallbackClass::setTarget (\mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}, \textcolor{keyword}{this});}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95         [[NSNotificationCenter defaultCenter]  addObserver: \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}}
+\DoxyCodeLine{96                                                   selector: nsViewFrameChangedSelector}
+\DoxyCodeLine{97                                                       \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}: NSViewFrameDidChangeNotification}
+\DoxyCodeLine{98                                                     \mbox{\hyperlink{jmemsys_8h_a77e1d3f325098324c3925e8faf6ae5cf}{object}}: view];}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}};}
+\DoxyCodeLine{101     \}}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103     \textcolor{keywordtype}{void} frameChanged()\textcolor{keyword}{ override }\{ viewResized(); \}}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105     \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}}()> viewResized;}
+\DoxyCodeLine{106     \textcolor{keywordtype}{id} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}};}
+\DoxyCodeLine{107 \};}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109 \} \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,218 @@
+\hypertarget{juce___v_s_t_midi_event_list_8h_source}{}\doxysection{juce\+\_\+\+VSTMidi\+Event\+List.\+h}
+\label{juce___v_s_t_midi_event_list_8h_source}\index{build/juce\_audio\_processors/format\_types/juce\_VSTMidiEventList.h@{build/juce\_audio\_processors/format\_types/juce\_VSTMidiEventList.h}}
+\mbox{\hyperlink{juce___v_s_t_midi_event_list_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{comment}{// NB: this must come first, *before* the header-\/guard.}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#ifdef JUCE\_VSTINTERFACE\_H\_INCLUDED}}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{41 \textcolor{comment}{}\textcolor{keyword}{class }VSTMidiEventList}
+\DoxyCodeLine{42 \{}
+\DoxyCodeLine{43     \textcolor{comment}{// "{}events"{} is expected to be a const-\/ or non-\/const-\/ref to Vst2::VstEvents.}}
+\DoxyCodeLine{44     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Events>}
+\DoxyCodeLine{45     \textcolor{keyword}{static} \textcolor{keyword}{auto}\& getEvent (Events\& events, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}})}
+\DoxyCodeLine{46     \{}
+\DoxyCodeLine{47         \textcolor{keyword}{using} EventType = \textcolor{keyword}{decltype} (\&*events.events);}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49         \textcolor{comment}{// We static cast rather than using a direct array index here to circumvent}}
+\DoxyCodeLine{50         \textcolor{comment}{// UB sanitizer's bounds-\/checks. The original struct is supposed to contain}}
+\DoxyCodeLine{51         \textcolor{comment}{// a variable-\/length array, but the declaration uses a size of "{}2"{} for this}}
+\DoxyCodeLine{52         \textcolor{comment}{// member.}}
+\DoxyCodeLine{53         \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}EventType\textcolor{keyword}{>} (events.events)[\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}];}
+\DoxyCodeLine{54     \}}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56     Vst2::VstEvent* \textcolor{keyword}{const}\& getEvent (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}})\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} getEvent (*events, \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}); \}}
+\DoxyCodeLine{57     Vst2::VstEvent*      \& getEvent (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}})       \{ \textcolor{keywordflow}{return} getEvent (*events, \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}); \}}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59 \textcolor{keyword}{public}:}
+\DoxyCodeLine{60     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{61     VSTMidiEventList()}
+\DoxyCodeLine{62         : numEventsUsed (0), numEventsAllocated (0)}
+\DoxyCodeLine{63     \{}
+\DoxyCodeLine{64     \}}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66     \string~VSTMidiEventList()}
+\DoxyCodeLine{67     \{}
+\DoxyCodeLine{68         freeEvents();}
+\DoxyCodeLine{69     \}}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{72     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacedsp_1_1detail_a953fbe1bf6236c0f3a95d12aad7ffffb}{clear}}()}
+\DoxyCodeLine{73     \{}
+\DoxyCodeLine{74         numEventsUsed = 0;}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76         \textcolor{keywordflow}{if} (events != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{77             events-\/>numEvents = 0;}
+\DoxyCodeLine{78     \}}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80     \textcolor{keywordtype}{void} addEvent (\textcolor{keyword}{const} \textcolor{keywordtype}{void}* \textcolor{keyword}{const} midiData, \textcolor{keywordtype}{int} numBytes, \textcolor{keywordtype}{int} frameOffset)}
+\DoxyCodeLine{81     \{}
+\DoxyCodeLine{82         ensureSize (numEventsUsed + 1);}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84         \textcolor{keywordtype}{void}* \textcolor{keyword}{const} \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}} = getEvent (numEventsUsed);}
+\DoxyCodeLine{85         events-\/>numEvents = ++numEventsUsed;}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87         \textcolor{keywordflow}{if} (numBytes <= 4)}
+\DoxyCodeLine{88         \{}
+\DoxyCodeLine{89             \textcolor{keyword}{auto}* \textcolor{keyword}{const} e = \textcolor{keyword}{static\_cast<}Vst2::VstMidiEvent*\textcolor{keyword}{>} (\mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}});}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91             \textcolor{keywordflow}{if} (e-\/>type == Vst2::kVstSysExType)}
+\DoxyCodeLine{92             \{}
+\DoxyCodeLine{93                 \textcolor{keyword}{delete}[] \textcolor{keyword}{reinterpret\_cast<}Vst2::VstMidiSysexEvent*\textcolor{keyword}{>} (e)-\/>sysexDump;}
+\DoxyCodeLine{94                 e-\/>type = Vst2::kVstMidiType;}
+\DoxyCodeLine{95                 e-\/>byteSize = \textcolor{keyword}{sizeof} (Vst2::VstMidiEvent);}
+\DoxyCodeLine{96                 e-\/>noteLength = 0;}
+\DoxyCodeLine{97                 e-\/>noteOffset = 0;}
+\DoxyCodeLine{98                 e-\/>detune = 0;}
+\DoxyCodeLine{99                 e-\/>noteOffVelocity = 0;}
+\DoxyCodeLine{100             \}}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{102             e-\/>deltaFrames = frameOffset;}
+\DoxyCodeLine{103             memcpy (e-\/>midiData, midiData, (\textcolor{keywordtype}{size\_t}) numBytes);}
+\DoxyCodeLine{104         \}}
+\DoxyCodeLine{105         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{106         \{}
+\DoxyCodeLine{107             \textcolor{keyword}{auto}* \textcolor{keyword}{const} se = \textcolor{keyword}{static\_cast<}Vst2::VstMidiSysexEvent*\textcolor{keyword}{>} (\mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}});}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109             \textcolor{keywordflow}{if} (se-\/>type == Vst2::kVstSysExType)}
+\DoxyCodeLine{110                 \textcolor{keyword}{delete}[] se-\/>sysexDump;}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112             se-\/>sysexDump = \textcolor{keyword}{new} \textcolor{keywordtype}{char} [(size\_t) numBytes];}
+\DoxyCodeLine{113             memcpy (se-\/>sysexDump, midiData, (\textcolor{keywordtype}{size\_t}) numBytes);}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115             se-\/>type = Vst2::kVstSysExType;}
+\DoxyCodeLine{116             se-\/>byteSize = \textcolor{keyword}{sizeof} (Vst2::VstMidiSysexEvent);}
+\DoxyCodeLine{117             se-\/>deltaFrames = frameOffset;}
+\DoxyCodeLine{118             se-\/>flags = 0;}
+\DoxyCodeLine{119             se-\/>dumpBytes = numBytes;}
+\DoxyCodeLine{120             se-\/>resvd1 = 0;}
+\DoxyCodeLine{121             se-\/>resvd2 = 0;}
+\DoxyCodeLine{122         \}}
+\DoxyCodeLine{123     \}}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{125     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{126     \textcolor{comment}{// Handy method to pull the events out of an event buffer supplied by the host}}
+\DoxyCodeLine{127     \textcolor{comment}{// or plugin.}}
+\DoxyCodeLine{128     \textcolor{keyword}{static} \textcolor{keywordtype}{void} addEventsToMidiBuffer (\textcolor{keyword}{const} Vst2::VstEvents* events, \mbox{\hyperlink{class_midi_buffer}{MidiBuffer}}\& dest)}
+\DoxyCodeLine{129     \{}
+\DoxyCodeLine{130         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < events-\/>numEvents; ++i)}
+\DoxyCodeLine{131         \{}
+\DoxyCodeLine{132             \textcolor{keyword}{const} \textcolor{keyword}{auto}* \textcolor{keyword}{const} e = getEvent (*events, i);}
+\DoxyCodeLine{133 }
+\DoxyCodeLine{134             \textcolor{keywordflow}{if} (e != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{135             \{}
+\DoxyCodeLine{136                 \textcolor{keyword}{const} \textcolor{keywordtype}{void}* \textcolor{keyword}{const} \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}} = e;}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{138                 \textcolor{keywordflow}{if} (e-\/>type == Vst2::kVstMidiType)}
+\DoxyCodeLine{139                 \{}
+\DoxyCodeLine{140                     dest.\mbox{\hyperlink{class_midi_buffer_a845368d1fa4a8b3f315e2f3508b2003a}{addEvent}} ((\textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{juce::uint8}}*) \textcolor{keyword}{static\_cast<}\textcolor{keyword}{const }Vst2::VstMidiEvent*\textcolor{keyword}{>} (\mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}})-\/>midiData,}
+\DoxyCodeLine{141                                    4, e-\/>deltaFrames);}
+\DoxyCodeLine{142                 \}}
+\DoxyCodeLine{143                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (e-\/>type == Vst2::kVstSysExType)}
+\DoxyCodeLine{144                 \{}
+\DoxyCodeLine{145                     \textcolor{keyword}{const} \textcolor{keyword}{auto}* se = \textcolor{keyword}{static\_cast<}\textcolor{keyword}{const }Vst2::VstMidiSysexEvent*\textcolor{keyword}{>} (\mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}});}
+\DoxyCodeLine{146                     dest.\mbox{\hyperlink{class_midi_buffer_a845368d1fa4a8b3f315e2f3508b2003a}{addEvent}} ((\textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_ac26ab57d77dced6ef40e21775a18e4fd}{juce::uint8}}*) se-\/>sysexDump,}
+\DoxyCodeLine{147                                    (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}) se-\/>dumpBytes,}
+\DoxyCodeLine{148                                    e-\/>deltaFrames);}
+\DoxyCodeLine{149                 \}}
+\DoxyCodeLine{150             \}}
+\DoxyCodeLine{151         \}}
+\DoxyCodeLine{152     \}}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{155     \textcolor{keywordtype}{void} ensureSize (\textcolor{keywordtype}{int} numEventsNeeded)}
+\DoxyCodeLine{156     \{}
+\DoxyCodeLine{157         \textcolor{keywordflow}{if} (numEventsNeeded > numEventsAllocated)}
+\DoxyCodeLine{158         \{}
+\DoxyCodeLine{159             numEventsNeeded = (numEventsNeeded + 32) \& \string~31;}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161             \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}} = 20 + (size\_t) numEventsNeeded * \textcolor{keyword}{sizeof} (Vst2::VstEvent*);}
+\DoxyCodeLine{162 }
+\DoxyCodeLine{163             \textcolor{keywordflow}{if} (events == \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{164                 events.calloc (\mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}}, 1);}
+\DoxyCodeLine{165             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{166                 events.realloc (\mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}}, 1);}
+\DoxyCodeLine{167 }
+\DoxyCodeLine{168             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = numEventsAllocated; i < numEventsNeeded; ++i)}
+\DoxyCodeLine{169                 getEvent (i) = allocateVSTEvent();}
+\DoxyCodeLine{170 }
+\DoxyCodeLine{171             numEventsAllocated = numEventsNeeded;}
+\DoxyCodeLine{172         \}}
+\DoxyCodeLine{173     \}}
+\DoxyCodeLine{174 }
+\DoxyCodeLine{175     \textcolor{keywordtype}{void} freeEvents()}
+\DoxyCodeLine{176     \{}
+\DoxyCodeLine{177         \textcolor{keywordflow}{if} (events != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{178         \{}
+\DoxyCodeLine{179             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = numEventsAllocated; -\/-\/i >= 0;)}
+\DoxyCodeLine{180                 freeVSTEvent (getEvent (i));}
+\DoxyCodeLine{181 }
+\DoxyCodeLine{182             events.free();}
+\DoxyCodeLine{183             numEventsUsed = 0;}
+\DoxyCodeLine{184             numEventsAllocated = 0;}
+\DoxyCodeLine{185         \}}
+\DoxyCodeLine{186     \}}
+\DoxyCodeLine{187 }
+\DoxyCodeLine{188     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{189     \mbox{\hyperlink{class_heap_block}{HeapBlock<Vst2::VstEvents>}} events;}
+\DoxyCodeLine{190 }
+\DoxyCodeLine{191 \textcolor{keyword}{private}:}
+\DoxyCodeLine{192     \textcolor{keywordtype}{int} numEventsUsed, numEventsAllocated;}
+\DoxyCodeLine{193 }
+\DoxyCodeLine{194     \textcolor{keyword}{static} Vst2::VstEvent* allocateVSTEvent()}
+\DoxyCodeLine{195     \{}
+\DoxyCodeLine{196         \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}} = \mbox{\hyperlink{group__juce__core-maths_gadfd716f36f80987d66ebc2fce819c1fe}{jmax}} (\textcolor{keyword}{sizeof} (Vst2::VstMidiEvent), \textcolor{keyword}{sizeof} (Vst2::VstMidiSysexEvent));}
+\DoxyCodeLine{197 }
+\DoxyCodeLine{198         \textcolor{keywordflow}{if} (\textcolor{keyword}{auto}* e = \textcolor{keyword}{static\_cast<}Vst2::VstEvent*\textcolor{keyword}{>} (std::calloc (1, \mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}})))}
+\DoxyCodeLine{199         \{}
+\DoxyCodeLine{200             e-\/>type = Vst2::kVstMidiType;}
+\DoxyCodeLine{201             e-\/>byteSize = \textcolor{keyword}{sizeof} (Vst2::VstMidiEvent);}
+\DoxyCodeLine{202             \textcolor{keywordflow}{return} e;}
+\DoxyCodeLine{203         \}}
+\DoxyCodeLine{204 }
+\DoxyCodeLine{205         \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{206     \}}
+\DoxyCodeLine{207 }
+\DoxyCodeLine{208     \textcolor{keyword}{static} \textcolor{keywordtype}{void} freeVSTEvent (Vst2::VstEvent* e)}
+\DoxyCodeLine{209     \{}
+\DoxyCodeLine{210         \textcolor{keywordflow}{if} (e-\/>type == Vst2::kVstSysExType)}
+\DoxyCodeLine{211         \{}
+\DoxyCodeLine{212             \textcolor{keyword}{delete}[] (\textcolor{keyword}{reinterpret\_cast<}Vst2::VstMidiSysexEvent*\textcolor{keyword}{>} (e)-\/>sysexDump);}
+\DoxyCodeLine{213         \}}
+\DoxyCodeLine{214 }
+\DoxyCodeLine{215         \mbox{\hyperlink{_c_a_auto_disposer_8h_ad6789ba73d47afb261058c686ba7089e}{std::free}} (e);}
+\DoxyCodeLine{216     \}}
+\DoxyCodeLine{217 \};}
+\DoxyCodeLine{218 }
+\DoxyCodeLine{219  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{220 }
+\DoxyCodeLine{221 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// JUCE\_VSTINTERFACE\_H\_INCLUDED}}
+\DoxyCodeLine{222 }
+
+\end{DoxyCode}

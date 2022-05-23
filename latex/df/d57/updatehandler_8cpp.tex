@@ -1,0 +1,88 @@
+\hypertarget{updatehandler_8cpp}{}\doxysection{build/juce\+\_\+audio\+\_\+processors/format\+\_\+types/\+VST3\+\_\+\+SDK/base/source/updatehandler.cpp File Reference}
+\label{updatehandler_8cpp}\index{build/juce\_audio\_processors/format\_types/VST3\_SDK/base/source/updatehandler.cpp@{build/juce\_audio\_processors/format\_types/VST3\_SDK/base/source/updatehandler.cpp}}
+{\ttfamily \#include \char`\"{}base/source/updatehandler.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}base/source/classfactoryhelpers.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}base/source/fstring.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$map$>$}\newline
+{\ttfamily \#include $<$deque$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_steinberg_1_1_update_1_1_defered_change}{Steinberg\+::\+Update\+::\+Defered\+Change}}
+\item 
+struct \mbox{\hyperlink{struct_steinberg_1_1_update_1_1_update_data}{Steinberg\+::\+Update\+::\+Update\+Data}}
+\item 
+struct \mbox{\hyperlink{struct_steinberg_1_1_update_1_1_table}{Steinberg\+::\+Update\+::\+Table}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespace_steinberg}{Steinberg}}
+\item 
+namespace \mbox{\hyperlink{namespace_steinberg_1_1_update}{Steinberg\+::\+Update}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{updatehandler_8cpp_a71de32ab81686f17de125be381adefd7}{NON\+\_\+\+EXISTING\+\_\+\+DEPENDENCY\+\_\+\+CHECK}}~0
+\item 
+\#define \mbox{\hyperlink{updatehandler_8cpp_a748343c42faddaaa8b263d379c45a1a6}{CLASS\+\_\+\+NAME\+\_\+\+TRACKED}}~\mbox{\hyperlink{juce___v_s_t3_headers_8h_a70bcb76882aaa86901adf5030a8a8d44}{DEVELOPMENT}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespace_steinberg_1_1_update_af5d4bacbf172c1de04a8624a585d3397}{Steinberg\+::\+Update\+::\+Defered\+Change\+List}} = std\+::deque$<$ Defered\+Change $>$
+\item 
+using \mbox{\hyperlink{namespace_steinberg_1_1_update_a93c686bc431b593a537b536f830ee5f0}{Steinberg\+::\+Update\+::\+Defered\+Change\+List\+Iter\+Const}} = Defered\+Change\+List\+::const\+\_\+iterator
+\item 
+using \mbox{\hyperlink{namespace_steinberg_1_1_update_a4ecd8fd7599ee8075ded5566d4172633}{Steinberg\+::\+Update\+::\+Defered\+Change\+List\+Iter}} = Defered\+Change\+List\+::iterator
+\item 
+using \mbox{\hyperlink{namespace_steinberg_1_1_update_a8382db909275ed447bc187ad9c535f94}{Steinberg\+::\+Update\+::\+Update\+Data\+List}} = std\+::deque$<$ Update\+Data $>$
+\item 
+using \mbox{\hyperlink{namespace_steinberg_1_1_update_a1ee1a2d721ad07699a612277f965d776}{Steinberg\+::\+Update\+::\+Update\+Data\+List\+Iter\+Const}} = Update\+Data\+List\+::const\+\_\+iterator
+\item 
+typedef std\+::vector$<$ IDependent $\ast$ $>$ \mbox{\hyperlink{namespace_steinberg_1_1_update_a1afaa6b1f54ba6a919e2f494ef1e9f43}{Steinberg\+::\+Update\+::\+Dependent\+List}}
+\item 
+using \mbox{\hyperlink{namespace_steinberg_1_1_update_abc2b3fb3a5017a934769fd3d6d7583a0}{Steinberg\+::\+Update\+::\+Dependent\+List\+Iter}} = Dependent\+List\+::iterator
+\item 
+using \mbox{\hyperlink{namespace_steinberg_1_1_update_a024b75130f1bad26a834223c725ad8b8}{Steinberg\+::\+Update\+::\+Dependent\+List\+Iter\+Const}} = Dependent\+List\+::const\+\_\+iterator
+\item 
+typedef std\+::map$<$ \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} FUnknown $\ast$, Dependent\+List $>$ \mbox{\hyperlink{namespace_steinberg_1_1_update_a32a561a5a08d80190a28e6ff97669606}{Steinberg\+::\+Update\+::\+Dependent\+Map}}
+\item 
+using \mbox{\hyperlink{namespace_steinberg_1_1_update_a6986eeb5c3e516166edd4ffd28deb514}{Steinberg\+::\+Update\+::\+Dependent\+Map\+Iter}} = Dependent\+Map\+::iterator
+\item 
+using \mbox{\hyperlink{namespace_steinberg_1_1_update_a1318efe037ee484da96886272164f4f4}{Steinberg\+::\+Update\+::\+Dependent\+Map\+Iter\+Const}} = Dependent\+Map\+::const\+\_\+iterator
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} \mbox{\hyperlink{namespace_steinberg_1_1_update_a246841eba5cadc4df121e9d25c850834}{Steinberg\+::\+Update\+::hash\+Pointer}} (\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} $\ast$p)
+\item 
+IPtr$<$ FUnknown $>$ \mbox{\hyperlink{namespace_steinberg_1_1_update_a354faefe6253172db7fa1b40c0b4740a}{Steinberg\+::\+Update\+::get\+Unknown\+Base}} (FUnknown $\ast$unknown)
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{namespace_steinberg_1_1_update_a03d2e8f5e97048b6bb17dc6745ae314c}{Steinberg\+::\+Update\+::update\+Done}} (FUnknown $\ast$unknown, \mbox{\hyperlink{juce__box2d_8cpp_a6a5a8e94340b94579afb83ab477a983c}{int32}} message)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} \mbox{\hyperlink{namespace_steinberg_1_1_update_a0013462ad93f341cab85a0503b095d7a}{Steinberg\+::\+Update\+::k\+Hash\+Size}} = (1 $<$$<$ 8)
+\item 
+\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} \mbox{\hyperlink{namespace_steinberg_1_1_update_a4dad7c99a0a3c4863348a63b456305fd}{Steinberg\+::\+Update\+::k\+Map\+Size}} = 1024 $\ast$ 10
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{updatehandler_8cpp_a748343c42faddaaa8b263d379c45a1a6}\label{updatehandler_8cpp_a748343c42faddaaa8b263d379c45a1a6}} 
+\index{updatehandler.cpp@{updatehandler.cpp}!CLASS\_NAME\_TRACKED@{CLASS\_NAME\_TRACKED}}
+\index{CLASS\_NAME\_TRACKED@{CLASS\_NAME\_TRACKED}!updatehandler.cpp@{updatehandler.cpp}}
+\doxysubsubsection{\texorpdfstring{CLASS\_NAME\_TRACKED}{CLASS\_NAME\_TRACKED}}
+{\footnotesize\ttfamily \#define CLASS\+\_\+\+NAME\+\_\+\+TRACKED~\mbox{\hyperlink{juce___v_s_t3_headers_8h_a70bcb76882aaa86901adf5030a8a8d44}{DEVELOPMENT}}}
+
+\mbox{\Hypertarget{updatehandler_8cpp_a71de32ab81686f17de125be381adefd7}\label{updatehandler_8cpp_a71de32ab81686f17de125be381adefd7}} 
+\index{updatehandler.cpp@{updatehandler.cpp}!NON\_EXISTING\_DEPENDENCY\_CHECK@{NON\_EXISTING\_DEPENDENCY\_CHECK}}
+\index{NON\_EXISTING\_DEPENDENCY\_CHECK@{NON\_EXISTING\_DEPENDENCY\_CHECK}!updatehandler.cpp@{updatehandler.cpp}}
+\doxysubsubsection{\texorpdfstring{NON\_EXISTING\_DEPENDENCY\_CHECK}{NON\_EXISTING\_DEPENDENCY\_CHECK}}
+{\footnotesize\ttfamily \#define NON\+\_\+\+EXISTING\+\_\+\+DEPENDENCY\+\_\+\+CHECK~0}
+

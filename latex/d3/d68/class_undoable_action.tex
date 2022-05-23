@@ -1,0 +1,138 @@
+\hypertarget{class_undoable_action}{}\doxysection{Undoable\+Action Class Reference}
+\label{class_undoable_action}\index{UndoableAction@{UndoableAction}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Undoable\+Action.\+h$>$}
+
+Inheritance diagram for Undoable\+Action\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=0.461095cm]{d3/d68/class_undoable_action}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_undoable_action_ad887f85b0a3f5f8c98a544a0dca76d15}{$\sim$\+Undoable\+Action}} ()=default
+\item 
+virtual bool \mbox{\hyperlink{class_undoable_action_a6411ef8343148b52fef4bdc0290dfe06}{perform}} ()=0
+\item 
+virtual bool \mbox{\hyperlink{class_undoable_action_a535a5ca2bdc00edebe2b868ec7c13482}{undo}} ()=0
+\item 
+virtual \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{class_undoable_action_a77613c64378930b1af6255ea5ec8df0d}{get\+Size\+In\+Units}} ()
+\item 
+virtual \mbox{\hyperlink{class_undoable_action}{Undoable\+Action}} $\ast$ \mbox{\hyperlink{class_undoable_action_a62646f526656f929fe2cdfb84d478c99}{create\+Coalesced\+Action}} (\mbox{\hyperlink{class_undoable_action}{Undoable\+Action}} $\ast$next\+Action)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_undoable_action_a6a6c5364778d5e863faf4a3def321d55}{Undoable\+Action}} ()=default
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Used by the \mbox{\hyperlink{class_undo_manager}{Undo\+Manager}} class to store an action which can be done and undone.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_undo_manager}{Undo\+Manager}}
+\end{DoxySeeAlso}
+@tags\{Data\+Structures\} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_undoable_action_a6a6c5364778d5e863faf4a3def321d55}\label{class_undoable_action_a6a6c5364778d5e863faf4a3def321d55}} 
+\index{UndoableAction@{UndoableAction}!UndoableAction@{UndoableAction}}
+\index{UndoableAction@{UndoableAction}!UndoableAction@{UndoableAction}}
+\doxysubsubsection{\texorpdfstring{UndoableAction()}{UndoableAction()}}
+{\footnotesize\ttfamily Undoable\+Action\+::\+Undoable\+Action (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [default]}}
+
+Creates an action. \mbox{\Hypertarget{class_undoable_action_ad887f85b0a3f5f8c98a544a0dca76d15}\label{class_undoable_action_ad887f85b0a3f5f8c98a544a0dca76d15}} 
+\index{UndoableAction@{UndoableAction}!````~UndoableAction@{$\sim$UndoableAction}}
+\index{````~UndoableAction@{$\sim$UndoableAction}!UndoableAction@{UndoableAction}}
+\doxysubsubsection{\texorpdfstring{$\sim$UndoableAction()}{~UndoableAction()}}
+{\footnotesize\ttfamily virtual Undoable\+Action\+::$\sim$\+Undoable\+Action (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+Destructor. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_undoable_action_a62646f526656f929fe2cdfb84d478c99}\label{class_undoable_action_a62646f526656f929fe2cdfb84d478c99}} 
+\index{UndoableAction@{UndoableAction}!createCoalescedAction@{createCoalescedAction}}
+\index{createCoalescedAction@{createCoalescedAction}!UndoableAction@{UndoableAction}}
+\doxysubsubsection{\texorpdfstring{createCoalescedAction()}{createCoalescedAction()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{class_undoable_action}{Undoable\+Action}} $\ast$ Undoable\+Action\+::create\+Coalesced\+Action (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_undoable_action}{Undoable\+Action}} $\ast$}]{next\+Action }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Allows multiple actions to be coalesced into a single action object, to reduce storage space.
+
+If possible, this method should create and return a single action that does the same job as this one followed by the supplied action.
+
+If it\textquotesingle{}s not possible to merge the two actions, the method should return a nullptr. 
+
+Reimplemented in \mbox{\hyperlink{structjuce_1_1_value_tree_1_1_shared_object_1_1_set_property_action_a96c551433c356d062cf25728ca5a53c6}{juce\+::\+Value\+Tree\+::\+Shared\+Object\+::\+Set\+Property\+Action}}, and \mbox{\hyperlink{structjuce_1_1_value_tree_1_1_shared_object_1_1_move_child_action_ade1f4df932cfc320145c8f3ef6b44117}{juce\+::\+Value\+Tree\+::\+Shared\+Object\+::\+Move\+Child\+Action}}.
+
+\mbox{\Hypertarget{class_undoable_action_a77613c64378930b1af6255ea5ec8df0d}\label{class_undoable_action_a77613c64378930b1af6255ea5ec8df0d}} 
+\index{UndoableAction@{UndoableAction}!getSizeInUnits@{getSizeInUnits}}
+\index{getSizeInUnits@{getSizeInUnits}!UndoableAction@{UndoableAction}}
+\doxysubsubsection{\texorpdfstring{getSizeInUnits()}{getSizeInUnits()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} Undoable\+Action\+::get\+Size\+In\+Units (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Returns a value to indicate how much memory this object takes up.
+
+Because the \mbox{\hyperlink{class_undo_manager}{Undo\+Manager}} keeps a list of Undoable\+Actions, this is used to work out how much space each one will take up, so that the \mbox{\hyperlink{class_undo_manager}{Undo\+Manager}} can work out how many to keep.
+
+The default value returned here is 10 -\/ units are arbitrary and don\textquotesingle{}t have to be accurate.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_undo_manager_aa9665feaecf58905d1dc515dc2f24893}{Undo\+Manager\+::get\+Number\+Of\+Units\+Taken\+Up\+By\+Stored\+Commands}}, \mbox{\hyperlink{class_undo_manager_a371dddb00a010caf5e3bb88d4009bdfb}{Undo\+Manager\+::set\+Max\+Number\+Of\+Stored\+Units}} 
+\end{DoxySeeAlso}
+
+
+Reimplemented in \mbox{\hyperlink{structjuce_1_1_value_tree_1_1_shared_object_1_1_set_property_action_a3498c416dd7904e376651705f2a3ce5c}{juce\+::\+Value\+Tree\+::\+Shared\+Object\+::\+Set\+Property\+Action}}, \mbox{\hyperlink{structjuce_1_1_value_tree_1_1_shared_object_1_1_add_or_remove_child_action_a8fbc1f7fe07f2a23cedfc955324f6216}{juce\+::\+Value\+Tree\+::\+Shared\+Object\+::\+Add\+Or\+Remove\+Child\+Action}}, \mbox{\hyperlink{structjuce_1_1_value_tree_1_1_shared_object_1_1_move_child_action_a642204b3a737c47c0ac3b243499a4d6c}{juce\+::\+Value\+Tree\+::\+Shared\+Object\+::\+Move\+Child\+Action}}, \mbox{\hyperlink{structjuce_1_1_text_editor_1_1_insert_action_a2678e2ec8691fa7546fca4e8cb3941a7}{juce\+::\+Text\+Editor\+::\+Insert\+Action}}, \mbox{\hyperlink{structjuce_1_1_text_editor_1_1_remove_action_a800d0c696f24c587d9534ee7b527ff0c}{juce\+::\+Text\+Editor\+::\+Remove\+Action}}, \mbox{\hyperlink{structjuce_1_1_code_document_1_1_insert_action_a49408bdf8b630b2ef96cdb8023248c1a}{juce\+::\+Code\+Document\+::\+Insert\+Action}}, and \mbox{\hyperlink{structjuce_1_1_code_document_1_1_delete_action_af2f9e4e4c9f16222c8ef33e016e7219f}{juce\+::\+Code\+Document\+::\+Delete\+Action}}.
+
+\mbox{\Hypertarget{class_undoable_action_a6411ef8343148b52fef4bdc0290dfe06}\label{class_undoable_action_a6411ef8343148b52fef4bdc0290dfe06}} 
+\index{UndoableAction@{UndoableAction}!perform@{perform}}
+\index{perform@{perform}!UndoableAction@{UndoableAction}}
+\doxysubsubsection{\texorpdfstring{perform()}{perform()}}
+{\footnotesize\ttfamily virtual bool Undoable\+Action\+::perform (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Overridden by a subclass to perform the action.
+
+This method is called by the \mbox{\hyperlink{class_undo_manager}{Undo\+Manager}}, and shouldn\textquotesingle{}t be used directly by applications.
+
+Be careful not to make any calls in a \mbox{\hyperlink{class_undoable_action_a6411ef8343148b52fef4bdc0290dfe06}{perform()}} method that could call recursively back into the \mbox{\hyperlink{class_undo_manager_a5f8b51dbb061ca3a1a8916938e0e2f49}{Undo\+Manager\+::perform()}} method
+
+\begin{DoxyReturn}{Returns}
+true if the action could be performed. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_undo_manager_a5f8b51dbb061ca3a1a8916938e0e2f49}{Undo\+Manager\+::perform}} 
+\end{DoxySeeAlso}
+
+
+Implemented in \mbox{\hyperlink{structjuce_1_1_value_tree_1_1_shared_object_1_1_set_property_action_afe6a672bddeb26bb9b4d4adcafcef8f6}{juce\+::\+Value\+Tree\+::\+Shared\+Object\+::\+Set\+Property\+Action}}, \mbox{\hyperlink{structjuce_1_1_value_tree_1_1_shared_object_1_1_add_or_remove_child_action_af960291d6e6aba6d19dcdf58730cfde3}{juce\+::\+Value\+Tree\+::\+Shared\+Object\+::\+Add\+Or\+Remove\+Child\+Action}}, \mbox{\hyperlink{structjuce_1_1_value_tree_1_1_shared_object_1_1_move_child_action_a07a7e470277d0b66c9627fede7db418a}{juce\+::\+Value\+Tree\+::\+Shared\+Object\+::\+Move\+Child\+Action}}, \mbox{\hyperlink{structjuce_1_1_text_editor_1_1_insert_action_ae0a512b5603e686228bd3e0e7e203798}{juce\+::\+Text\+Editor\+::\+Insert\+Action}}, \mbox{\hyperlink{structjuce_1_1_text_editor_1_1_remove_action_a4793c7ab0f3dc4a793fc08eef5ac37c3}{juce\+::\+Text\+Editor\+::\+Remove\+Action}}, \mbox{\hyperlink{structjuce_1_1_code_document_1_1_insert_action_a6141ef1080441543bc16b2516ab1fd41}{juce\+::\+Code\+Document\+::\+Insert\+Action}}, and \mbox{\hyperlink{structjuce_1_1_code_document_1_1_delete_action_a11279b092967188cc0d9cef9cea5cb63}{juce\+::\+Code\+Document\+::\+Delete\+Action}}.
+
+\mbox{\Hypertarget{class_undoable_action_a535a5ca2bdc00edebe2b868ec7c13482}\label{class_undoable_action_a535a5ca2bdc00edebe2b868ec7c13482}} 
+\index{UndoableAction@{UndoableAction}!undo@{undo}}
+\index{undo@{undo}!UndoableAction@{UndoableAction}}
+\doxysubsubsection{\texorpdfstring{undo()}{undo()}}
+{\footnotesize\ttfamily virtual bool Undoable\+Action\+::undo (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Overridden by a subclass to undo the action.
+
+This method is called by the \mbox{\hyperlink{class_undo_manager}{Undo\+Manager}}, and shouldn\textquotesingle{}t be used directly by applications.
+
+Be careful not to make any calls in an \mbox{\hyperlink{class_undoable_action_a535a5ca2bdc00edebe2b868ec7c13482}{undo()}} method that could call recursively back into the \mbox{\hyperlink{class_undo_manager_a5f8b51dbb061ca3a1a8916938e0e2f49}{Undo\+Manager\+::perform()}} method
+
+\begin{DoxyReturn}{Returns}
+true if the action could be undone without any errors. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_undo_manager_a5f8b51dbb061ca3a1a8916938e0e2f49}{Undo\+Manager\+::perform}} 
+\end{DoxySeeAlso}
+
+
+Implemented in \mbox{\hyperlink{structjuce_1_1_value_tree_1_1_shared_object_1_1_set_property_action_a00b9b677a339d265bbcbdefa65bb7284}{juce\+::\+Value\+Tree\+::\+Shared\+Object\+::\+Set\+Property\+Action}}, \mbox{\hyperlink{structjuce_1_1_value_tree_1_1_shared_object_1_1_add_or_remove_child_action_ad6f2e1e72af3a1197b36f98cc72b76ad}{juce\+::\+Value\+Tree\+::\+Shared\+Object\+::\+Add\+Or\+Remove\+Child\+Action}}, \mbox{\hyperlink{structjuce_1_1_value_tree_1_1_shared_object_1_1_move_child_action_a4c0bd88656e9e697ffc4cb4b7cef64fb}{juce\+::\+Value\+Tree\+::\+Shared\+Object\+::\+Move\+Child\+Action}}, \mbox{\hyperlink{structjuce_1_1_text_editor_1_1_insert_action_a9b1c0306b192d02e25c11829d0588ccc}{juce\+::\+Text\+Editor\+::\+Insert\+Action}}, \mbox{\hyperlink{structjuce_1_1_text_editor_1_1_remove_action_aade21cac16b2d0716fe2456aff237445}{juce\+::\+Text\+Editor\+::\+Remove\+Action}}, \mbox{\hyperlink{structjuce_1_1_code_document_1_1_insert_action_a207417de693d5d238b0283493f12828d}{juce\+::\+Code\+Document\+::\+Insert\+Action}}, and \mbox{\hyperlink{structjuce_1_1_code_document_1_1_delete_action_a92befdb4a98a9aaf1769b42b8d541c96}{juce\+::\+Code\+Document\+::\+Delete\+Action}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+data\+\_\+structures/undomanager/\mbox{\hyperlink{juce___undoable_action_8h}{juce\+\_\+\+Undoable\+Action.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,99 @@
+\hypertarget{juce___shared_resource_pointer_8h_source}{}\doxysection{juce\+\_\+\+Shared\+Resource\+Pointer.\+h}
+\label{juce___shared_resource_pointer_8h_source}\index{build/juce\_core/memory/juce\_SharedResourcePointer.h@{build/juce\_core/memory/juce\_SharedResourcePointer.h}}
+\mbox{\hyperlink{juce___shared_resource_pointer_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{81 \textcolor{comment}{}\textcolor{keyword}{template} <\textcolor{keyword}{typename} SharedObjectType>}
+\DoxyCodeLine{82 \textcolor{keyword}{class }\mbox{\hyperlink{class_shared_resource_pointer}{SharedResourcePointer}}}
+\DoxyCodeLine{83 \{}
+\DoxyCodeLine{84 \textcolor{keyword}{public}:}
+\DoxyCodeLine{91     \mbox{\hyperlink{class_shared_resource_pointer_a37f5da91a94a3f34a8d467a11b1db2ae}{SharedResourcePointer}}()}
+\DoxyCodeLine{92     \{}
+\DoxyCodeLine{93         initialise();}
+\DoxyCodeLine{94     \}}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{96     \mbox{\hyperlink{class_shared_resource_pointer_ae0e471d40bbf73438dec6480935341bf}{SharedResourcePointer}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_shared_resource_pointer}{SharedResourcePointer}}\&)}
+\DoxyCodeLine{97     \{}
+\DoxyCodeLine{98         initialise();}
+\DoxyCodeLine{99     \}}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{105     \mbox{\hyperlink{class_shared_resource_pointer_a47c04d52fa4de0490c3d3873dbc2ecf2}{\string~SharedResourcePointer}}()}
+\DoxyCodeLine{106     \{}
+\DoxyCodeLine{107         \textcolor{keyword}{auto}\& holder = getSharedObjectHolder();}
+\DoxyCodeLine{108         \textcolor{keyword}{const} \mbox{\hyperlink{class_generic_scoped_lock}{SpinLock::ScopedLockType}} sl (holder.lock);}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110         \textcolor{keywordflow}{if} (-\/-\/(holder.refCount) == 0)}
+\DoxyCodeLine{111             holder.sharedInstance = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{112     \}}
+\DoxyCodeLine{113 }
+\DoxyCodeLine{115     \textcolor{keyword}{operator} SharedObjectType*() \textcolor{keyword}{const} \textcolor{keyword}{noexcept}         \{ \textcolor{keywordflow}{return} sharedObject; \}}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{118     SharedObjectType\& \mbox{\hyperlink{class_shared_resource_pointer_a04d30f01fb74d8589d7a84d4fe05923a}{get}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept              \{ \textcolor{keywordflow}{return} *sharedObject; \}}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{121     SharedObjectType\& \mbox{\hyperlink{class_shared_resource_pointer_a2779ff566a665e7d1b3bfdea40248114}{getObject}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept        \{ \textcolor{keywordflow}{return} *sharedObject; \}}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{124     SharedObjectType* \mbox{\hyperlink{class_shared_resource_pointer_a1267ed7028e66290ecd7b9956f55b367}{operator-\/>}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept       \{ \textcolor{keywordflow}{return} sharedObject; \}}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{127     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_shared_resource_pointer_abff7933c3ea884dda535acdfba665c48}{getReferenceCount}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept              \{ \textcolor{keywordflow}{return} getSharedObjectHolder().refCount; \}}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129 \textcolor{keyword}{private}:}
+\DoxyCodeLine{130     \textcolor{keyword}{struct }SharedObjectHolder}
+\DoxyCodeLine{131     \{}
+\DoxyCodeLine{132         \mbox{\hyperlink{class_spin_lock}{SpinLock}} lock;}
+\DoxyCodeLine{133         std::unique\_ptr<SharedObjectType> sharedInstance;}
+\DoxyCodeLine{134         \textcolor{keywordtype}{int} refCount;}
+\DoxyCodeLine{135     \};}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{137     \textcolor{keyword}{static} SharedObjectHolder\& getSharedObjectHolder() noexcept}
+\DoxyCodeLine{138     \{}
+\DoxyCodeLine{139         \textcolor{keyword}{static} \textcolor{keywordtype}{void}* holder [(\textcolor{keyword}{sizeof} (SharedObjectHolder) + \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{void}*) -\/ 1) / \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{void}*)] = \{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{140         \textcolor{keywordflow}{return} *\textcolor{keyword}{reinterpret\_cast<}SharedObjectHolder*\textcolor{keyword}{>} (holder);}
+\DoxyCodeLine{141     \}}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{143     SharedObjectType* sharedObject;}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145     \textcolor{keywordtype}{void} initialise()}
+\DoxyCodeLine{146     \{}
+\DoxyCodeLine{147         \textcolor{keyword}{auto}\& holder = getSharedObjectHolder();}
+\DoxyCodeLine{148         \textcolor{keyword}{const} \mbox{\hyperlink{class_generic_scoped_lock}{SpinLock::ScopedLockType}} sl (holder.lock);}
+\DoxyCodeLine{149 }
+\DoxyCodeLine{150         \textcolor{keywordflow}{if} (++(holder.refCount) == 1)}
+\DoxyCodeLine{151             holder.sharedInstance.reset (\textcolor{keyword}{new} SharedObjectType());}
+\DoxyCodeLine{152 }
+\DoxyCodeLine{153         sharedObject = holder.sharedInstance.get();}
+\DoxyCodeLine{154     \}}
+\DoxyCodeLine{155 }
+\DoxyCodeLine{156     \textcolor{comment}{// There's no need to assign to a SharedResourcePointer because every}}
+\DoxyCodeLine{157     \textcolor{comment}{// instance of the class is exactly the same!}}
+\DoxyCodeLine{158     \mbox{\hyperlink{class_shared_resource_pointer}{SharedResourcePointer}}\& operator= (\textcolor{keyword}{const} \mbox{\hyperlink{class_shared_resource_pointer}{SharedResourcePointer}}\&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160     \mbox{\hyperlink{group__juce__core-memory_gab3639a79598b35f2116f4572af0d93f1}{JUCE\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_shared_resource_pointer}{SharedResourcePointer}})}
+\DoxyCodeLine{161 \};}
+\DoxyCodeLine{162 }
+\DoxyCodeLine{163  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{164 }
+
+\end{DoxyCode}

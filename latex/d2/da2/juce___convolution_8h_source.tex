@@ -1,0 +1,154 @@
+\hypertarget{juce___convolution_8h_source}{}\doxysection{juce\+\_\+\+Convolution.\+h}
+\label{juce___convolution_8h_source}\index{build/juce\_dsp/frequency/juce\_Convolution.h@{build/juce\_dsp/frequency/juce\_Convolution.h}}
+\mbox{\hyperlink{juce___convolution_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacedsp}{dsp}}}
+\DoxyCodeLine{30 \{}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{40 \textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \mbox{\hyperlink{classdsp_1_1_convolution_message_queue}{ConvolutionMessageQueue}}}
+\DoxyCodeLine{41 \{}
+\DoxyCodeLine{42 \textcolor{keyword}{public}:}
+\DoxyCodeLine{49     \mbox{\hyperlink{classdsp_1_1_convolution_message_queue_afcd66835ef5c3ef37c38ebff1b98e639}{ConvolutionMessageQueue}}();}
+\DoxyCodeLine{50     \mbox{\hyperlink{classdsp_1_1_convolution_message_queue_ae0be9ac4f38059c38d74118430f34470}{\string~ConvolutionMessageQueue}}() noexcept;}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{58     explicit \mbox{\hyperlink{classdsp_1_1_convolution_message_queue}{ConvolutionMessageQueue}} (\textcolor{keywordtype}{int} numEntries);}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60     \mbox{\hyperlink{classdsp_1_1_convolution_message_queue}{ConvolutionMessageQueue}} (\mbox{\hyperlink{classdsp_1_1_convolution_message_queue}{ConvolutionMessageQueue}}\&\&) noexcept;}
+\DoxyCodeLine{61     \mbox{\hyperlink{classdsp_1_1_convolution_message_queue}{ConvolutionMessageQueue}}\& operator= (\mbox{\hyperlink{classdsp_1_1_convolution_message_queue}{ConvolutionMessageQueue}}\&\&) noexcept;}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63     \mbox{\hyperlink{classdsp_1_1_convolution_message_queue}{ConvolutionMessageQueue}} (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{classdsp_1_1_convolution_message_queue}{ConvolutionMessageQueue}}\&) = delete;}
+\DoxyCodeLine{64     \mbox{\hyperlink{classdsp_1_1_convolution_message_queue}{ConvolutionMessageQueue}}\& operator= (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{classdsp_1_1_convolution_message_queue}{ConvolutionMessageQueue}}\&) = delete;}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66 private:}
+\DoxyCodeLine{67     struct Impl;}
+\DoxyCodeLine{68     \mbox{\hyperlink{namespacestd}{std}}::unique\_ptr<Impl> pimpl;}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70     friend class \mbox{\hyperlink{classdsp_1_1_convolution}{Convolution}};}
+\DoxyCodeLine{71 \};}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{105 class \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{classdsp_1_1_convolution}{Convolution}}}
+\DoxyCodeLine{106 \{}
+\DoxyCodeLine{107 \textcolor{keyword}{public}:}
+\DoxyCodeLine{108     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{110 \textcolor{comment}{}    \mbox{\hyperlink{classdsp_1_1_convolution_a50446810cf3afb2dc8e7935b49b854d7}{Convolution}}();}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{117     \textcolor{keyword}{explicit} \mbox{\hyperlink{classdsp_1_1_convolution_a25a34f9c4e575468d9e904f012796334}{Convolution}} (\mbox{\hyperlink{classdsp_1_1_convolution_message_queue}{ConvolutionMessageQueue}}\& queue);}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{120     \textcolor{keyword}{struct }\mbox{\hyperlink{structdsp_1_1_convolution_1_1_latency}{Latency}} \{ \textcolor{keywordtype}{int} \mbox{\hyperlink{structdsp_1_1_convolution_1_1_latency_a3469b662ff9d8ec08d256ecf873d9306}{latencyInSamples}}; \};}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{132     \textcolor{keyword}{explicit} \mbox{\hyperlink{classdsp_1_1_convolution_a040f4d5989512a043ca7713cfcd712a4}{Convolution}} (\textcolor{keyword}{const} \mbox{\hyperlink{structdsp_1_1_convolution_1_1_latency}{Latency}}\& requiredLatency);}
+\DoxyCodeLine{133 }
+\DoxyCodeLine{135     \textcolor{keyword}{struct }\mbox{\hyperlink{structdsp_1_1_convolution_1_1_non_uniform}{NonUniform}} \{ \textcolor{keywordtype}{int} \mbox{\hyperlink{structdsp_1_1_convolution_1_1_non_uniform_a10f4dc3f474f2591606fbd458ed6c56d}{headSizeInSamples}}; \};}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{147     \textcolor{keyword}{explicit} \mbox{\hyperlink{classdsp_1_1_convolution_ae12b522ada39738580df00bbd4c69c4a}{Convolution}} (\textcolor{keyword}{const} \mbox{\hyperlink{structdsp_1_1_convolution_1_1_non_uniform}{NonUniform}}\& requiredHeadSize);}
+\DoxyCodeLine{148 }
+\DoxyCodeLine{155     \mbox{\hyperlink{classdsp_1_1_convolution_ad6ac8b6cf14f184e39a86a521c4fcc24}{Convolution}} (\textcolor{keyword}{const} \mbox{\hyperlink{structdsp_1_1_convolution_1_1_latency}{Latency}}\&, \mbox{\hyperlink{classdsp_1_1_convolution_message_queue}{ConvolutionMessageQueue}}\&);}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{163     \mbox{\hyperlink{classdsp_1_1_convolution_a8582fad0c3849250ce32a10df2c66e42}{Convolution}} (\textcolor{keyword}{const} \mbox{\hyperlink{structdsp_1_1_convolution_1_1_non_uniform}{NonUniform}}\&, \mbox{\hyperlink{classdsp_1_1_convolution_message_queue}{ConvolutionMessageQueue}}\&);}
+\DoxyCodeLine{164 }
+\DoxyCodeLine{165     \mbox{\hyperlink{classdsp_1_1_convolution_ad69f27f121c9db6761accbacad9a004e}{\string~Convolution}}() noexcept;}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{167     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{179 \textcolor{comment}{}    \textcolor{keywordtype}{void} prepare (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{structdsp_1_1_process_spec}{ProcessSpec}}\&);}
+\DoxyCodeLine{180 }
+\DoxyCodeLine{182     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacegl_a3b437ea454d772211296e220c025bdd2}{reset}}() noexcept;}
+\DoxyCodeLine{183 }
+\DoxyCodeLine{187     template <typename ProcessContext,}
+\DoxyCodeLine{188               \mbox{\hyperlink{namespacestd}{std}}::enable\_if\_t<\mbox{\hyperlink{namespacestd}{std}}::is\_same<typename ProcessContext::SampleType, \textcolor{keywordtype}{float}>::\mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}, \textcolor{keywordtype}{int}> = 0>}
+\DoxyCodeLine{189     \textcolor{keywordtype}{void} process (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} ProcessContext\& context) noexcept}
+\DoxyCodeLine{190     \{}
+\DoxyCodeLine{191         processSamples (context.getInputBlock(), context.getOutputBlock(), context.isBypassed);}
+\DoxyCodeLine{192     \}}
+\DoxyCodeLine{193 }
+\DoxyCodeLine{194     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{195     \textcolor{keyword}{enum class} \mbox{\hyperlink{classdsp_1_1_convolution_a7ac3ad9411cff6c9c97b0ac86de26ebe}{Stereo}}    \{ no, yes \};}
+\DoxyCodeLine{196     \textcolor{keyword}{enum class} \mbox{\hyperlink{classdsp_1_1_convolution_a655defbd819d6ee59e8b8ef677150a74}{Trim}}      \{ no, yes \};}
+\DoxyCodeLine{197     \textcolor{keyword}{enum class} \mbox{\hyperlink{classdsp_1_1_convolution_aa01a51e26ebd0833594ea3a5b7ffa66c}{Normalise}} \{ no, yes \};}
+\DoxyCodeLine{198 }
+\DoxyCodeLine{199     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{219 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_convolution_ae9685352b8bde909518af360f9cbee7b}{loadImpulseResponse}} (\textcolor{keyword}{const} \textcolor{keywordtype}{void}* sourceData, \textcolor{keywordtype}{size\_t} sourceDataSize,}
+\DoxyCodeLine{220                               \mbox{\hyperlink{classdsp_1_1_convolution_a7ac3ad9411cff6c9c97b0ac86de26ebe}{Stereo}} isStereo, \mbox{\hyperlink{classdsp_1_1_convolution_a655defbd819d6ee59e8b8ef677150a74}{Trim}} requiresTrimming, \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}},}
+\DoxyCodeLine{221                               \mbox{\hyperlink{classdsp_1_1_convolution_aa01a51e26ebd0833594ea3a5b7ffa66c}{Normalise}} requiresNormalisation = Normalise::yes);}
+\DoxyCodeLine{222 }
+\DoxyCodeLine{234     \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_convolution_a2d74d8ab7945f4805cd00ad1d67f08de}{loadImpulseResponse}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& fileImpulseResponse,}
+\DoxyCodeLine{235                               \mbox{\hyperlink{classdsp_1_1_convolution_a7ac3ad9411cff6c9c97b0ac86de26ebe}{Stereo}} isStereo, \mbox{\hyperlink{classdsp_1_1_convolution_a655defbd819d6ee59e8b8ef677150a74}{Trim}} requiresTrimming, \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}},}
+\DoxyCodeLine{236                               \mbox{\hyperlink{classdsp_1_1_convolution_aa01a51e26ebd0833594ea3a5b7ffa66c}{Normalise}} requiresNormalisation = Normalise::yes);}
+\DoxyCodeLine{237 }
+\DoxyCodeLine{255     \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_convolution_add9aaabf3c0211a00f7533dd3951069f}{loadImpulseResponse}} (\mbox{\hyperlink{class_audio_buffer}{AudioBuffer<float>}}\&\& buffer, \textcolor{keywordtype}{double} bufferSampleRate,}
+\DoxyCodeLine{256                               \mbox{\hyperlink{classdsp_1_1_convolution_a7ac3ad9411cff6c9c97b0ac86de26ebe}{Stereo}} isStereo, \mbox{\hyperlink{classdsp_1_1_convolution_a655defbd819d6ee59e8b8ef677150a74}{Trim}} requiresTrimming, \mbox{\hyperlink{classdsp_1_1_convolution_aa01a51e26ebd0833594ea3a5b7ffa66c}{Normalise}} requiresNormalisation);}
+\DoxyCodeLine{257 }
+\DoxyCodeLine{259     \textcolor{keywordtype}{int} \mbox{\hyperlink{classdsp_1_1_convolution_a1bc53c6258642301de80eafe20fa4247}{getCurrentIRSize}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{260 }
+\DoxyCodeLine{267     \textcolor{keywordtype}{int} \mbox{\hyperlink{classdsp_1_1_convolution_a8a218b76da29128919560cafabd66e08}{getLatency}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{268 }
+\DoxyCodeLine{269 \textcolor{keyword}{private}:}
+\DoxyCodeLine{270     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{271     \mbox{\hyperlink{classdsp_1_1_convolution}{Convolution}} (\textcolor{keyword}{const} \mbox{\hyperlink{structdsp_1_1_convolution_1_1_latency}{Latency}}\&,}
+\DoxyCodeLine{272                  \textcolor{keyword}{const} \mbox{\hyperlink{structdsp_1_1_convolution_1_1_non_uniform}{NonUniform}}\&,}
+\DoxyCodeLine{273                  \mbox{\hyperlink{class_optional_scoped_pointer}{OptionalScopedPointer<ConvolutionMessageQueue>}}\&\&);}
+\DoxyCodeLine{274 }
+\DoxyCodeLine{275     \textcolor{keywordtype}{void} processSamples (\textcolor{keyword}{const} \mbox{\hyperlink{classdsp_1_1_audio_block}{AudioBlock<const float>}}\&, \mbox{\hyperlink{classdsp_1_1_audio_block}{AudioBlock<float>}}\&, \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespacedsp_a18bbc5840c500566f2cb30129497beda}{isBypassed}}) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{276 }
+\DoxyCodeLine{277     \textcolor{keyword}{class }Mixer}
+\DoxyCodeLine{278     \{}
+\DoxyCodeLine{279     \textcolor{keyword}{public}:}
+\DoxyCodeLine{280         \textcolor{keywordtype}{void} prepare (\textcolor{keyword}{const} \mbox{\hyperlink{structdsp_1_1_process_spec}{ProcessSpec}}\&);}
+\DoxyCodeLine{281 }
+\DoxyCodeLine{282         \textcolor{keyword}{template} <\textcolor{keyword}{typename} ProcessWet>}
+\DoxyCodeLine{283         \textcolor{keywordtype}{void} processSamples (\textcolor{keyword}{const} \mbox{\hyperlink{classdsp_1_1_audio_block}{AudioBlock<const float>}}\&,}
+\DoxyCodeLine{284                              \mbox{\hyperlink{classdsp_1_1_audio_block}{AudioBlock<float>}}\&,}
+\DoxyCodeLine{285                              \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespacedsp_a18bbc5840c500566f2cb30129497beda}{isBypassed}},}
+\DoxyCodeLine{286                              ProcessWet\&\&) noexcept;}
+\DoxyCodeLine{287 }
+\DoxyCodeLine{288         \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacegl_a3b437ea454d772211296e220c025bdd2}{reset}}();}
+\DoxyCodeLine{289 }
+\DoxyCodeLine{290     private:}
+\DoxyCodeLine{291         \mbox{\hyperlink{namespacestd}{std}}::\mbox{\hyperlink{namespacegl_a0d93833c93ca0e4d285c4b5610272a52}{array}}<\mbox{\hyperlink{class_smoothed_value}{SmoothedValue}}<\textcolor{keywordtype}{float}>, 2> volumeDry, volumeWet;}
+\DoxyCodeLine{292         \mbox{\hyperlink{classdsp_1_1_audio_block}{AudioBlock}}<\textcolor{keywordtype}{float}> dryBlock;}
+\DoxyCodeLine{293         \mbox{\hyperlink{class_heap_block}{HeapBlock}}<\textcolor{keywordtype}{char}> dryBlockStorage;}
+\DoxyCodeLine{294         \textcolor{keywordtype}{double} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}} = 0;}
+\DoxyCodeLine{295         \textcolor{keywordtype}{bool} currentIsBypassed = \mbox{\hyperlink{ordinals_8h_a65e9886d74aaee76545e83dd09011727}{false}};}
+\DoxyCodeLine{296     \};}
+\DoxyCodeLine{297 }
+\DoxyCodeLine{298     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{299     class Impl;}
+\DoxyCodeLine{300     \mbox{\hyperlink{namespacestd}{std}}::unique\_ptr<Impl> pimpl;}
+\DoxyCodeLine{301 }
+\DoxyCodeLine{302     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{303     Mixer mixer;}
+\DoxyCodeLine{304     \textcolor{keywordtype}{bool} isActive = \mbox{\hyperlink{ordinals_8h_a65e9886d74aaee76545e83dd09011727}{false}};}
+\DoxyCodeLine{305 }
+\DoxyCodeLine{306     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{307     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{classdsp_1_1_convolution}{Convolution}})}
+\DoxyCodeLine{308 \};}
+\DoxyCodeLine{309 }
+\DoxyCodeLine{310 \} \textcolor{comment}{// namespace dsp}}
+\DoxyCodeLine{311  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{312 }
+
+\end{DoxyCode}

@@ -1,0 +1,66 @@
+\hypertarget{juce___open_g_l_app_component_8h_source}{}\doxysection{juce\+\_\+\+Open\+GLApp\+Component.\+h}
+\label{juce___open_g_l_app_component_8h_source}\index{build/juce\_opengl/utils/juce\_OpenGLAppComponent.h@{build/juce\_opengl/utils/juce\_OpenGLAppComponent.h}}
+\mbox{\hyperlink{juce___open_g_l_app_component_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{40 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_open_g_l_app_component}{OpenGLAppComponent}}   : \textcolor{keyword}{public} \mbox{\hyperlink{class_component}{Component}},}
+\DoxyCodeLine{41                                        \textcolor{keyword}{private} \mbox{\hyperlink{class_open_g_l_renderer}{OpenGLRenderer}}}
+\DoxyCodeLine{42 \{}
+\DoxyCodeLine{43 \textcolor{keyword}{public}:}
+\DoxyCodeLine{44     \mbox{\hyperlink{class_open_g_l_app_component}{OpenGLAppComponent}}();}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{47     \mbox{\hyperlink{class_open_g_l_app_component}{\string~OpenGLAppComponent}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{52     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_open_g_l_app_component_a64d49b9969f324b180507339beda1902}{getFrameCounter}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept        \{ \textcolor{keywordflow}{return} frameCounter; \}}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{57     \textcolor{keywordtype}{void} shutdownOpenGL();}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{67     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_open_g_l_app_component_a153ccca8ccf6852000af46e5a437bef3}{initialise}}() = 0;}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{77     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_open_g_l_app_component_ae6d8beb75f3b1f8a8d4c9c34282cc008}{shutdown}}() = 0;}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{82     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_open_g_l_app_component_af4e76e80318343d5302be7af6bf4cdbc}{render}}() = 0;}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{85     \mbox{\hyperlink{class_open_g_l_context}{OpenGLContext}} \mbox{\hyperlink{class_open_g_l_app_component_a1237b3326c1c7c571107548d4fc20cf8}{openGLContext}};}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87 \textcolor{keyword}{private}:}
+\DoxyCodeLine{88     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{89     \textcolor{keywordtype}{int} frameCounter = 0;}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_open_g_l_renderer_a59d6279104b47109cf2042b13ae5b61d}{newOpenGLContextCreated}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{92     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_open_g_l_renderer_a34077b4eaeb3207814b9e4302f724912}{renderOpenGL}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{93     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_open_g_l_renderer_ad943c5ed2b9962d5de71f668d1ddf0d7}{openGLContextClosing}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_open_g_l_app_component}{OpenGLAppComponent}})}
+\DoxyCodeLine{96 \};}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{99 }
+
+\end{DoxyCode}

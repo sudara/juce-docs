@@ -1,0 +1,227 @@
+\hypertarget{juce___table_header_component_8h_source}{}\doxysection{juce\+\_\+\+Table\+Header\+Component.\+h}
+\label{juce___table_header_component_8h_source}\index{build/juce\_gui\_basics/widgets/juce\_TableHeaderComponent.h@{build/juce\_gui\_basics/widgets/juce\_TableHeaderComponent.h}}
+\mbox{\hyperlink{juce___table_header_component_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{46 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_table_header_component}{TableHeaderComponent}}   : \textcolor{keyword}{public} \mbox{\hyperlink{class_component}{Component}},}
+\DoxyCodeLine{47                                          \textcolor{keyword}{private} \mbox{\hyperlink{class_async_updater}{AsyncUpdater}}}
+\DoxyCodeLine{48 \{}
+\DoxyCodeLine{49 \textcolor{keyword}{public}:}
+\DoxyCodeLine{50     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{53 \textcolor{comment}{}    \mbox{\hyperlink{class_table_header_component_aef4b0bf0dfc1d5c7b91cb72ac96aed95}{TableHeaderComponent}}();}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{56     \mbox{\hyperlink{class_table_header_component_a5278021805148d46c4db35f3cabed5e1}{\string~TableHeaderComponent}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{62 \textcolor{comment}{}    \textcolor{keyword}{enum} \mbox{\hyperlink{class_table_header_component_abfee3b5ccd3289efb38e7b7dd1162831}{ColumnPropertyFlags}}}
+\DoxyCodeLine{63     \{}
+\DoxyCodeLine{64         visible                     = 1,    }
+\DoxyCodeLine{65         resizable                   = 2,    }
+\DoxyCodeLine{66         draggable                   = 4,    }
+\DoxyCodeLine{67         appearsOnColumnMenu         = 8,    }
+\DoxyCodeLine{68         sortable                    = 16,   }
+\DoxyCodeLine{69         sortedForwards              = 32,   }
+\DoxyCodeLine{70         sortedBackwards             = 64,   }
+\DoxyCodeLine{73         defaultFlags                = (visible | resizable | draggable | appearsOnColumnMenu | sortable),}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{76         notResizable                = (visible | draggable | appearsOnColumnMenu | sortable),}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{79         notResizableOrSortable      = (visible | draggable | appearsOnColumnMenu),}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{82         notSortable                 = (visible | resizable | draggable | appearsOnColumnMenu)}
+\DoxyCodeLine{83     \};}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{105     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_table_header_component_af6bf8a2bb896b74ed6afd6f667a4a959}{addColumn}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& columnName,}
+\DoxyCodeLine{106                     \textcolor{keywordtype}{int} columnId,}
+\DoxyCodeLine{107                     \textcolor{keywordtype}{int} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}},}
+\DoxyCodeLine{108                     \textcolor{keywordtype}{int} minimumWidth = 30,}
+\DoxyCodeLine{109                     \textcolor{keywordtype}{int} maximumWidth = -\/1,}
+\DoxyCodeLine{110                     \textcolor{keywordtype}{int} propertyFlags = defaultFlags,}
+\DoxyCodeLine{111                     \textcolor{keywordtype}{int} insertIndex = -\/1);}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{118     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_table_header_component_a6642d29de80979c31d0b5ee6bd399730}{removeColumn}} (\textcolor{keywordtype}{int} columnIdToRemove);}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{125     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_table_header_component_a87cef13bc2cc1b6463af7f4286fc9642}{removeAllColumns}}();}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{134     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_table_header_component_ac117cb0e51fc659d028658d3b0a1f9ca}{getNumColumns}} (\textcolor{keywordtype}{bool} onlyCountVisibleColumns) \textcolor{keyword}{const};}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{139     \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{class_table_header_component_a37a113f5902a9dd743e65e0d7a66afa5}{getColumnName}} (\textcolor{keywordtype}{int} columnId) \textcolor{keyword}{const};}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{142     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_table_header_component_a4f3269b9f69aa75a9d7387c97408c138}{setColumnName}} (\textcolor{keywordtype}{int} columnId, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& newName);}
+\DoxyCodeLine{143 }
+\DoxyCodeLine{149     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_table_header_component_a183bd15db8f1b3cc61ef612cbcc2aa8f}{moveColumn}} (\textcolor{keywordtype}{int} columnId, \textcolor{keywordtype}{int} newVisibleIndex);}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{153     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_table_header_component_a99c7181812d2f1957d9d3a9bbd6ea4a1}{getColumnWidth}} (\textcolor{keywordtype}{int} columnId) \textcolor{keyword}{const};}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{159     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_table_header_component_a777fe28faa03d04b9d46105516eb1f8c}{setColumnWidth}} (\textcolor{keywordtype}{int} columnId, \textcolor{keywordtype}{int} newWidth);}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{166     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_table_header_component_ac91853f78f09564e887b98b481bae95f}{setColumnVisible}} (\textcolor{keywordtype}{int} columnId, \textcolor{keywordtype}{bool} shouldBeVisible);}
+\DoxyCodeLine{167 }
+\DoxyCodeLine{171     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_table_header_component_a6b0cf8c8cac4cc33d252f94d0f30aace}{isColumnVisible}} (\textcolor{keywordtype}{int} columnId) \textcolor{keyword}{const};}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{182     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_table_header_component_a51558625c4ed006561e5bf468d5af605}{setSortColumnId}} (\textcolor{keywordtype}{int} columnId, \textcolor{keywordtype}{bool} sortForwards);}
+\DoxyCodeLine{183 }
+\DoxyCodeLine{188     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_table_header_component_a4e5058eb13d428a08a793f5a6b054f34}{getSortColumnId}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{189 }
+\DoxyCodeLine{193     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_table_header_component_a65738cc55941ce2c173060162df557e7}{isSortedForwards}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{194 }
+\DoxyCodeLine{203     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_table_header_component_a39a03757452b664a3645c55a02e6d76a}{reSortTable}}();}
+\DoxyCodeLine{204 }
+\DoxyCodeLine{205     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{208 \textcolor{comment}{}    \textcolor{keywordtype}{int} \mbox{\hyperlink{class_table_header_component_a90f99de31c850cc603564c1d6b5d8d7d}{getTotalWidth}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{209 }
+\DoxyCodeLine{217     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_table_header_component_a66b2b70c4a404f86a3da2eeb1c6423f8}{getIndexOfColumnId}} (\textcolor{keywordtype}{int} columnId, \textcolor{keywordtype}{bool} onlyCountVisibleColumns) \textcolor{keyword}{const};}
+\DoxyCodeLine{218 }
+\DoxyCodeLine{226     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_table_header_component_ae65e463e8799cb0b8439d6efca42c15b}{getColumnIdOfIndex}} (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}, \textcolor{keywordtype}{bool} onlyCountVisibleColumns) \textcolor{keyword}{const};}
+\DoxyCodeLine{227 }
+\DoxyCodeLine{234     \mbox{\hyperlink{class_rectangle}{Rectangle<int>}} \mbox{\hyperlink{class_table_header_component_aac369d85f1253b3881f9f1d46d79dc12}{getColumnPosition}} (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{235 }
+\DoxyCodeLine{239     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_table_header_component_a2cbf551356cf3136287be94810d087ad}{getColumnIdAtX}} (\textcolor{keywordtype}{int} xToFind) \textcolor{keyword}{const};}
+\DoxyCodeLine{240 }
+\DoxyCodeLine{247     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_table_header_component_ae338d49514b8c120db62fbd9ad3be4c7}{setStretchToFitActive}} (\textcolor{keywordtype}{bool} shouldStretchToFit);}
+\DoxyCodeLine{248 }
+\DoxyCodeLine{252     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_table_header_component_a4f031ea60e3a1bd6a835ba302a74c70c}{isStretchToFitActive}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{253 }
+\DoxyCodeLine{260     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_table_header_component_abccd726884264ed9fed54b23c55c3b94}{resizeAllColumnsToFit}} (\textcolor{keywordtype}{int} targetTotalWidth);}
+\DoxyCodeLine{261 }
+\DoxyCodeLine{262     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{272 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_table_header_component_a5a4f382bea75073d84cf93afbbf3fdc6}{setPopupMenuActive}} (\textcolor{keywordtype}{bool} hasMenu);}
+\DoxyCodeLine{273 }
+\DoxyCodeLine{277     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_table_header_component_abc529c830d5d9359e5462329d3b1f950}{isPopupMenuActive}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{278 }
+\DoxyCodeLine{279     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{287 \textcolor{comment}{}    \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{class_table_header_component_a91557aad0a0c0a2d40d5c60f6ac55532}{toString}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{288 }
+\DoxyCodeLine{294     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_table_header_component_ae4a9ef600e4187d86a3c4f6567ebe14c}{restoreFromString}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& storedVersion);}
+\DoxyCodeLine{295 }
+\DoxyCodeLine{296     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{305 \textcolor{comment}{}    \textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_table_header_component_1_1_listener}{Listener}}}
+\DoxyCodeLine{306     \{}
+\DoxyCodeLine{307     \textcolor{keyword}{public}:}
+\DoxyCodeLine{308         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{309         \mbox{\hyperlink{class_table_header_component_1_1_listener_ab6a793a88c362f7868c09cf763cc6059}{Listener}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{310 }
+\DoxyCodeLine{312         \textcolor{keyword}{virtual} \mbox{\hyperlink{class_table_header_component_1_1_listener_a101a8bad5103a7bba040dc6e451a910d}{\string~Listener}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{313 }
+\DoxyCodeLine{314         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{318 \textcolor{comment}{}        \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_table_header_component_1_1_listener_ae70ef4e1a9974456be0fb28aee95d21d}{tableColumnsChanged}} (\mbox{\hyperlink{class_table_header_component}{TableHeaderComponent}}* \mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca26ba19743fa1b879878dd9e65d63c3b5}{tableHeader}}) = 0;}
+\DoxyCodeLine{319 }
+\DoxyCodeLine{321         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_table_header_component_1_1_listener_a146a7c7f933beb75b863993f1af7989c}{tableColumnsResized}} (\mbox{\hyperlink{class_table_header_component}{TableHeaderComponent}}* \mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca26ba19743fa1b879878dd9e65d63c3b5}{tableHeader}}) = 0;}
+\DoxyCodeLine{322 }
+\DoxyCodeLine{324         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_table_header_component_1_1_listener_a6d48b82741757d13ad2d75257292d615}{tableSortOrderChanged}} (\mbox{\hyperlink{class_table_header_component}{TableHeaderComponent}}* \mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca26ba19743fa1b879878dd9e65d63c3b5}{tableHeader}}) = 0;}
+\DoxyCodeLine{325 }
+\DoxyCodeLine{331         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} tableColumnDraggingChanged (\mbox{\hyperlink{class_table_header_component}{TableHeaderComponent}}* \mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca26ba19743fa1b879878dd9e65d63c3b5}{tableHeader}},}
+\DoxyCodeLine{332                                                  \textcolor{keywordtype}{int} columnIdNowBeingDragged);}
+\DoxyCodeLine{333     \};}
+\DoxyCodeLine{334 }
+\DoxyCodeLine{336     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_table_header_component_aad34038b492dbba89a4e0683e0e73dd4}{addListener}} (\mbox{\hyperlink{class_table_header_component_1_1_listener}{Listener}}* newListener);}
+\DoxyCodeLine{337 }
+\DoxyCodeLine{339     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_table_header_component_aeada8b63822d57cb5169316c9b336388}{removeListener}} (\mbox{\hyperlink{class_table_header_component_1_1_listener}{Listener}}* listenerToRemove);}
+\DoxyCodeLine{340 }
+\DoxyCodeLine{341     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{347 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_table_header_component_a5208c784a0fa38581aa512323c4be183}{columnClicked}} (\textcolor{keywordtype}{int} columnId, \textcolor{keyword}{const} \mbox{\hyperlink{class_modifier_keys}{ModifierKeys}}\& mods);}
+\DoxyCodeLine{348 }
+\DoxyCodeLine{358     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_table_header_component_a15df2bd39e5225c2838b82404b10b1b5}{addMenuItems}} (\mbox{\hyperlink{class_popup_menu}{PopupMenu}}\& menu, \textcolor{keywordtype}{int} columnIdClicked);}
+\DoxyCodeLine{359 }
+\DoxyCodeLine{369     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_table_header_component_a6d73ed05285a4386b50472710e10ad3d}{reactToMenuItem}} (\textcolor{keywordtype}{int} menuReturnId, \textcolor{keywordtype}{int} columnIdClicked);}
+\DoxyCodeLine{370 }
+\DoxyCodeLine{371     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{376 \textcolor{comment}{}    \textcolor{keyword}{enum} \mbox{\hyperlink{class_table_header_component_ab28acd9bb9297d1a695e55fd9136b3cf}{ColourIds}}}
+\DoxyCodeLine{377     \{}
+\DoxyCodeLine{378         textColourId                   = 0x1003800, }
+\DoxyCodeLine{379         backgroundColourId             = 0x1003810, }
+\DoxyCodeLine{381         outlineColourId                = 0x1003820, }
+\DoxyCodeLine{382         highlightColourId              = 0x1003830, }
+\DoxyCodeLine{387     \};}
+\DoxyCodeLine{388 }
+\DoxyCodeLine{389     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{391 \textcolor{comment}{}    \textcolor{keyword}{struct }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{struct_table_header_component_1_1_look_and_feel_methods}{LookAndFeelMethods}}}
+\DoxyCodeLine{392     \{}
+\DoxyCodeLine{393         \textcolor{keyword}{virtual} \mbox{\hyperlink{struct_table_header_component_1_1_look_and_feel_methods_acb9f2e23b98bc8c908df192d037109fe}{\string~LookAndFeelMethods}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{394 }
+\DoxyCodeLine{395         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_table_header_component_1_1_look_and_feel_methods_a128f5aee0753e6c802c6dd73643fb5da}{drawTableHeaderBackground}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \mbox{\hyperlink{class_table_header_component}{TableHeaderComponent}}\&) = 0;}
+\DoxyCodeLine{396 }
+\DoxyCodeLine{397         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_table_header_component_1_1_look_and_feel_methods_a5cc7de168423748b04660b3787cf3d50}{drawTableHeaderColumn}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \mbox{\hyperlink{class_table_header_component}{TableHeaderComponent}}\&,}
+\DoxyCodeLine{398                                             \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& columnName, \textcolor{keywordtype}{int} columnId,}
+\DoxyCodeLine{399                                             \textcolor{keywordtype}{int} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}},}
+\DoxyCodeLine{400                                             \textcolor{keywordtype}{bool} isMouseOver, \textcolor{keywordtype}{bool} isMouseDown, \textcolor{keywordtype}{int} columnFlags) = 0;}
+\DoxyCodeLine{401     \};}
+\DoxyCodeLine{402 }
+\DoxyCodeLine{403     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{405 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_table_header_component_a61332eb0982fa8872e1fec9aadf03082}{paint}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{407     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_table_header_component_a358870898bb0cbd599e4838e51db31ed}{mouseMove}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_mouse_event}{MouseEvent}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{409     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_table_header_component_ab981915bf8abab35ec95a8c285187f66}{mouseEnter}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_mouse_event}{MouseEvent}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{411     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_table_header_component_a90c64b020bf0d1d4f1330ca44b42766e}{mouseExit}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_mouse_event}{MouseEvent}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{413     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_table_header_component_a32469da187cc0be3cea930016db9798d}{mouseDown}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_mouse_event}{MouseEvent}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{415     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_table_header_component_a35c899dfec1e378e805b319ce6dedae4}{mouseDrag}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_mouse_event}{MouseEvent}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{417     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_table_header_component_aacaa015bac5a61a92136250a752c6cb7}{mouseUp}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_mouse_event}{MouseEvent}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{419     \mbox{\hyperlink{class_mouse_cursor}{MouseCursor}} \mbox{\hyperlink{class_table_header_component_ab6d14fafe7422458c91fc3ed0257338c}{getMouseCursor}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{420 }
+\DoxyCodeLine{422     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_table_header_component_ae479aaba67ffcb18e6abd7ec0686d20a}{showColumnChooserMenu}} (\textcolor{keywordtype}{int} columnIdClicked);}
+\DoxyCodeLine{423 }
+\DoxyCodeLine{424 \textcolor{keyword}{private}:}
+\DoxyCodeLine{425     \textcolor{keyword}{struct }ColumnInfo}
+\DoxyCodeLine{426     \{}
+\DoxyCodeLine{427         \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}};}
+\DoxyCodeLine{428         \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a99c1966a0e18bfab2c6a4416943fde16}{id}}, propertyFlags, \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, minimumWidth, maximumWidth;}
+\DoxyCodeLine{429         \textcolor{keywordtype}{double} lastDeliberateWidth;}
+\DoxyCodeLine{430 }
+\DoxyCodeLine{431         \textcolor{keywordtype}{bool} isVisible() \textcolor{keyword}{const};}
+\DoxyCodeLine{432     \};}
+\DoxyCodeLine{433 }
+\DoxyCodeLine{434     \mbox{\hyperlink{class_owned_array}{OwnedArray<ColumnInfo>}} columns;}
+\DoxyCodeLine{435     \mbox{\hyperlink{class_array}{Array<Listener*>}} listeners;}
+\DoxyCodeLine{436     std::unique\_ptr<Component> dragOverlayComp;}
+\DoxyCodeLine{437     \textcolor{keyword}{class }DragOverlayComp;}
+\DoxyCodeLine{438 }
+\DoxyCodeLine{439     \textcolor{keywordtype}{bool} columnsChanged = \textcolor{keyword}{false}, columnsResized = \textcolor{keyword}{false}, sortChanged = \textcolor{keyword}{false};}
+\DoxyCodeLine{440     \textcolor{keywordtype}{bool} menuActive = \textcolor{keyword}{true}, stretchToFit = \textcolor{keyword}{false};}
+\DoxyCodeLine{441     \textcolor{keywordtype}{int} columnIdBeingResized = 0, columnIdBeingDragged = 0, initialColumnWidth = 0;}
+\DoxyCodeLine{442     \textcolor{keywordtype}{int} columnIdUnderMouse = 0, draggingColumnOffset = 0, draggingColumnOriginalIndex = 0, lastDeliberateWidth = 0;}
+\DoxyCodeLine{443 }
+\DoxyCodeLine{444     std::unique\_ptr<AccessibilityHandler> createAccessibilityHandler() \textcolor{keyword}{override};}
+\DoxyCodeLine{445     ColumnInfo* getInfoForId (\textcolor{keywordtype}{int} columnId) \textcolor{keyword}{const};}
+\DoxyCodeLine{446     \textcolor{keywordtype}{int} visibleIndexToTotalIndex (\textcolor{keywordtype}{int} visibleIndex) \textcolor{keyword}{const};}
+\DoxyCodeLine{447     \textcolor{keywordtype}{void} sendColumnsChanged();}
+\DoxyCodeLine{448     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_async_updater_a446f3af793131f8772329f1f8b526578}{handleAsyncUpdate}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{449     \textcolor{keywordtype}{void} beginDrag (\textcolor{keyword}{const} \mbox{\hyperlink{class_mouse_event}{MouseEvent}}\&);}
+\DoxyCodeLine{450     \textcolor{keywordtype}{void} endDrag (\textcolor{keywordtype}{int} finalIndex);}
+\DoxyCodeLine{451     \textcolor{keywordtype}{int} getResizeDraggerAt (\textcolor{keywordtype}{int} mouseX) \textcolor{keyword}{const};}
+\DoxyCodeLine{452     \textcolor{keywordtype}{void} updateColumnUnderMouse (\textcolor{keyword}{const} \mbox{\hyperlink{class_mouse_event}{MouseEvent}}\&);}
+\DoxyCodeLine{453     \textcolor{keywordtype}{void} setColumnUnderMouse (\textcolor{keywordtype}{int} columnId);}
+\DoxyCodeLine{454     \textcolor{keywordtype}{void} resizeColumnsToFit (\textcolor{keywordtype}{int} firstColumnIndex, \textcolor{keywordtype}{int} targetTotalWidth);}
+\DoxyCodeLine{455 }
+\DoxyCodeLine{456     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_table_header_component}{TableHeaderComponent}})}
+\DoxyCodeLine{457 \};}
+\DoxyCodeLine{458 }
+\DoxyCodeLine{459 }
+\DoxyCodeLine{460  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{461 }
+
+\end{DoxyCode}

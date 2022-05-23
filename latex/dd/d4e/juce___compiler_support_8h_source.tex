@@ -1,0 +1,117 @@
+\hypertarget{juce___compiler_support_8h_source}{}\doxysection{juce\+\_\+\+Compiler\+Support.\+h}
+\label{juce___compiler_support_8h_source}\index{build/juce\_core/system/juce\_CompilerSupport.h@{build/juce\_core/system/juce\_CompilerSupport.h}}
+\mbox{\hyperlink{juce___compiler_support_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29 \textcolor{comment}{/*}}
+\DoxyCodeLine{30 \textcolor{comment}{   This file provides flags for compiler features that aren't supported on all platforms.}}
+\DoxyCodeLine{31 \textcolor{comment}{*/}}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{34 \textcolor{comment}{// GCC}}
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#if JUCE\_GCC}}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37 \textcolor{preprocessor}{ \#if (\_\_GNUC\_\_ * 100 + \_\_GNUC\_MINOR\_\_) < 500}}
+\DoxyCodeLine{38 \textcolor{preprocessor}{  \#error "{}JUCE requires GCC 5.0 or later"{}}}
+\DoxyCodeLine{39 \textcolor{preprocessor}{ \#endif}}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41 \textcolor{preprocessor}{ \#ifndef JUCE\_EXCEPTIONS\_DISABLED}}
+\DoxyCodeLine{42 \textcolor{preprocessor}{  \#if ! \_\_EXCEPTIONS}}
+\DoxyCodeLine{43 \textcolor{preprocessor}{   \#define JUCE\_EXCEPTIONS\_DISABLED 1}}
+\DoxyCodeLine{44 \textcolor{preprocessor}{  \#endif}}
+\DoxyCodeLine{45 \textcolor{preprocessor}{ \#endif}}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47 \textcolor{preprocessor}{ \#define JUCE\_CXX14\_IS\_AVAILABLE (\_\_cplusplus >= 201402L)}}
+\DoxyCodeLine{48 \textcolor{preprocessor}{ \#define JUCE\_CXX17\_IS\_AVAILABLE (\_\_cplusplus >= 201703L)}}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{53 \textcolor{comment}{// Clang}}
+\DoxyCodeLine{54 \textcolor{preprocessor}{\#if JUCE\_CLANG}}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56 \textcolor{preprocessor}{ \#if (\_\_clang\_major\_\_ < 3) || (\_\_clang\_major\_\_ == 3 \&\& \_\_clang\_minor\_\_ < 4)}}
+\DoxyCodeLine{57 \textcolor{preprocessor}{  \#error "{}JUCE requires Clang 3.4 or later"{}}}
+\DoxyCodeLine{58 \textcolor{preprocessor}{ \#endif}}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60 \textcolor{preprocessor}{ \#ifndef JUCE\_COMPILER\_SUPPORTS\_ARC}}
+\DoxyCodeLine{61 \textcolor{preprocessor}{  \#define JUCE\_COMPILER\_SUPPORTS\_ARC 1}}
+\DoxyCodeLine{62 \textcolor{preprocessor}{ \#endif}}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64 \textcolor{preprocessor}{ \#ifndef JUCE\_EXCEPTIONS\_DISABLED}}
+\DoxyCodeLine{65 \textcolor{preprocessor}{  \#if ! \_\_has\_feature (cxx\_exceptions)}}
+\DoxyCodeLine{66 \textcolor{preprocessor}{   \#define JUCE\_EXCEPTIONS\_DISABLED 1}}
+\DoxyCodeLine{67 \textcolor{preprocessor}{  \#endif}}
+\DoxyCodeLine{68 \textcolor{preprocessor}{ \#endif}}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70 \textcolor{preprocessor}{ \#define JUCE\_CXX14\_IS\_AVAILABLE (\_\_cplusplus >= 201402L)}}
+\DoxyCodeLine{71 \textcolor{preprocessor}{ \#define JUCE\_CXX17\_IS\_AVAILABLE (\_\_cplusplus >= 201703L)}}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{76 \textcolor{comment}{// MSVC}}
+\DoxyCodeLine{77 \textcolor{preprocessor}{\#if JUCE\_MSVC}}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79 \textcolor{preprocessor}{ \#if \_MSC\_FULL\_VER < 190024210  }\textcolor{comment}{// VS2015}}
+\DoxyCodeLine{80 \textcolor{preprocessor}{   \#error "{}JUCE requires Visual Studio 2015 Update 3 or later"{}}}
+\DoxyCodeLine{81 \textcolor{preprocessor}{ \#endif}}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83 \textcolor{preprocessor}{ \#ifndef JUCE\_EXCEPTIONS\_DISABLED}}
+\DoxyCodeLine{84 \textcolor{preprocessor}{  \#if ! \_CPPUNWIND}}
+\DoxyCodeLine{85 \textcolor{preprocessor}{   \#define JUCE\_EXCEPTIONS\_DISABLED 1}}
+\DoxyCodeLine{86 \textcolor{preprocessor}{  \#endif}}
+\DoxyCodeLine{87 \textcolor{preprocessor}{ \#endif}}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89 \textcolor{preprocessor}{  \#define JUCE\_CXX14\_IS\_AVAILABLE (\_MSVC\_LANG >= 201402L)}}
+\DoxyCodeLine{90 \textcolor{preprocessor}{  \#define JUCE\_CXX17\_IS\_AVAILABLE (\_MSVC\_LANG >= 201703L)}}
+\DoxyCodeLine{91 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{94 \textcolor{preprocessor}{\#if ! JUCE\_CXX14\_IS\_AVAILABLE}}
+\DoxyCodeLine{95 \textcolor{preprocessor}{ \#error "{}JUCE requires C++14 or later"{}}}
+\DoxyCodeLine{96 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{99 \textcolor{preprocessor}{\#ifndef DOXYGEN}}
+\DoxyCodeLine{100  \textcolor{comment}{// These are old flags that are now supported on all compatible build targets}}
+\DoxyCodeLine{101 \textcolor{preprocessor}{ \#define JUCE\_COMPILER\_SUPPORTS\_OVERRIDE\_AND\_FINAL 1}}
+\DoxyCodeLine{102 \textcolor{preprocessor}{ \#define JUCE\_COMPILER\_SUPPORTS\_VARIADIC\_TEMPLATES 1}}
+\DoxyCodeLine{103 \textcolor{preprocessor}{ \#define JUCE\_COMPILER\_SUPPORTS\_INITIALIZER\_LISTS 1}}
+\DoxyCodeLine{104 \textcolor{preprocessor}{ \#define JUCE\_COMPILER\_SUPPORTS\_NOEXCEPT 1}}
+\DoxyCodeLine{105 \textcolor{preprocessor}{ \#define JUCE\_DELETED\_FUNCTION = delete}}
+\DoxyCodeLine{106 \textcolor{preprocessor}{ \#define JUCE\_CONSTEXPR constexpr}}
+\DoxyCodeLine{107 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109 \textcolor{preprocessor}{\#if JUCE\_CXX17\_IS\_AVAILABLE}}
+\DoxyCodeLine{110 \textcolor{preprocessor}{ \#define JUCE\_NODISCARD [[nodiscard]]}}
+\DoxyCodeLine{111 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{112 \textcolor{preprocessor}{ \#define JUCE\_NODISCARD}}
+\DoxyCodeLine{113 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{114 }
+
+\end{DoxyCode}

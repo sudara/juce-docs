@@ -1,0 +1,89 @@
+\hypertarget{juce___m_p_e_synthesiser_voice_8h_source}{}\doxysection{juce\+\_\+\+MPESynthesiser\+Voice.\+h}
+\label{juce___m_p_e_synthesiser_voice_8h_source}\index{build/juce\_audio\_basics/mpe/juce\_MPESynthesiserVoice.h@{build/juce\_audio\_basics/mpe/juce\_MPESynthesiserVoice.h}}
+\mbox{\hyperlink{juce___m_p_e_synthesiser_voice_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{38 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_m_p_e_synthesiser_voice}{MPESynthesiserVoice}}}
+\DoxyCodeLine{39 \{}
+\DoxyCodeLine{40 \textcolor{keyword}{public}:}
+\DoxyCodeLine{41     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{43 \textcolor{comment}{}    \mbox{\hyperlink{class_m_p_e_synthesiser_voice}{MPESynthesiserVoice}}();}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{46     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_m_p_e_synthesiser_voice}{\string~MPESynthesiserVoice}}();}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{52     \mbox{\hyperlink{struct_m_p_e_note}{MPENote}} \mbox{\hyperlink{class_m_p_e_synthesiser_voice_a073572535bfb518f0825b72ad52ddccb}{getCurrentlyPlayingNote}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept     \{ \textcolor{keywordflow}{return} currentlyPlayingNote;  \}}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{57     \textcolor{keywordtype}{bool} isCurrentlyPlayingNote (\mbox{\hyperlink{struct_m_p_e_note}{MPENote}} note) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{63     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_m_p_e_synthesiser_voice_afbb658b840fa1568fa2565c254ed9692}{isActive}}()\textcolor{keyword}{ const                       }\{ \textcolor{keywordflow}{return} currentlyPlayingNote.isValid(); \}}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{66     \textcolor{keywordtype}{bool} isPlayingButReleased() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{71     virtual \textcolor{keywordtype}{void} noteStarted() = 0;}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{85     virtual \textcolor{keywordtype}{void} noteStopped (\textcolor{keywordtype}{bool} allowTailOff) = 0;}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{91     virtual \textcolor{keywordtype}{void} notePressureChanged() = 0;}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{100     virtual \textcolor{keywordtype}{void} notePitchbendChanged() = 0;}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{106     virtual \textcolor{keywordtype}{void} noteTimbreChanged() = 0;}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{115     virtual \textcolor{keywordtype}{void} noteKeyStateChanged() = 0;}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{132     virtual \textcolor{keywordtype}{void} renderNextBlock (\mbox{\hyperlink{class_audio_buffer}{AudioBuffer}}<\textcolor{keywordtype}{float}>\& outputBuffer,}
+\DoxyCodeLine{133                                   \textcolor{keywordtype}{int} startSample,}
+\DoxyCodeLine{134                                   \textcolor{keywordtype}{int} numSamples) = 0;}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{141     virtual \textcolor{keywordtype}{void} renderNextBlock (\mbox{\hyperlink{class_audio_buffer}{AudioBuffer}}<\textcolor{keywordtype}{double}>\& \textcolor{comment}{/*outputBuffer*/},}
+\DoxyCodeLine{142                                   \textcolor{keywordtype}{int} \textcolor{comment}{/*startSample*/},}
+\DoxyCodeLine{143                                   \textcolor{keywordtype}{int} \textcolor{comment}{/*numSamples*/}) \{\}}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{153     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_m_p_e_synthesiser_voice_a0cc2f469d88ea14b0e48476017da70a7}{setCurrentSampleRate}} (\textcolor{keywordtype}{double} newRate)    \{ currentSampleRate = newRate; \}}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{158     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_m_p_e_synthesiser_voice_ae4a38948a044093709fcfa2295a8110a}{getSampleRate}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                 \{ \textcolor{keywordflow}{return} currentSampleRate; \}}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{163     \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} noteOnTime = 0;}
+\DoxyCodeLine{164 }
+\DoxyCodeLine{165 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{166     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{179 \textcolor{comment}{}    \textcolor{keywordtype}{void} clearCurrentNote() noexcept;}
+\DoxyCodeLine{180 }
+\DoxyCodeLine{181     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{182     \textcolor{keywordtype}{double} currentSampleRate = 0.0;}
+\DoxyCodeLine{183     \mbox{\hyperlink{struct_m_p_e_note}{MPENote}} currentlyPlayingNote;}
+\DoxyCodeLine{184 }
+\DoxyCodeLine{185 private:}
+\DoxyCodeLine{186     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{187     friend class \mbox{\hyperlink{class_m_p_e_synthesiser}{MPESynthesiser}};}
+\DoxyCodeLine{188 }
+\DoxyCodeLine{189     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_m_p_e_synthesiser_voice}{MPESynthesiserVoice}})}
+\DoxyCodeLine{190 \};}
+\DoxyCodeLine{191 }
+\DoxyCodeLine{192  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{193 }
+
+\end{DoxyCode}

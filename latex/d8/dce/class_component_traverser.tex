@@ -1,0 +1,98 @@
+\hypertarget{class_component_traverser}{}\doxysection{Component\+Traverser Class Reference}
+\label{class_component_traverser}\index{ComponentTraverser@{ComponentTraverser}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Component\+Traverser.\+h$>$}
+
+Inheritance diagram for Component\+Traverser\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{d8/dce/class_component_traverser}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_component_traverser_a459dcd5dd6f55b7e267b1c55184c0d5a}{$\sim$\+Component\+Traverser}} ()=default
+\item 
+virtual \mbox{\hyperlink{class_component}{Component}} $\ast$ \mbox{\hyperlink{class_component_traverser_aba94a42fca848f8d0be60983fcb00cf2}{get\+Default\+Component}} (\mbox{\hyperlink{class_component}{Component}} $\ast$parent\+Component)=0
+\item 
+virtual \mbox{\hyperlink{class_component}{Component}} $\ast$ \mbox{\hyperlink{class_component_traverser_a466ed63b19069dd2ce8aeeeea279726a}{get\+Next\+Component}} (\mbox{\hyperlink{class_component}{Component}} $\ast$current)=0
+\item 
+virtual \mbox{\hyperlink{class_component}{Component}} $\ast$ \mbox{\hyperlink{class_component_traverser_a76640a6d9d8538b64e669c09425356b2}{get\+Previous\+Component}} (\mbox{\hyperlink{class_component}{Component}} $\ast$current)=0
+\item 
+virtual std\+::vector$<$ \mbox{\hyperlink{class_component}{Component}} $\ast$ $>$ \mbox{\hyperlink{class_component_traverser_afa0b098ef0e08681d91015072119b455}{get\+All\+Components}} (\mbox{\hyperlink{class_component}{Component}} $\ast$parent\+Component)=0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class for traversing components.
+
+If you need custom focus or keyboard focus traversal for a component you can create a subclass of \mbox{\hyperlink{class_component_traverser}{Component\+Traverser}} and return it from \mbox{\hyperlink{class_component_a138dc2e3c7f4836d7c127409dab8a56d}{Component\+::create\+Focus\+Traverser()}} or \mbox{\hyperlink{class_component_a8dc872ef83fedecd89cf814d28236cd0}{Component\+::create\+Keyboard\+Focus\+Traverser()}}.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_component_a138dc2e3c7f4836d7c127409dab8a56d}{Component\+::create\+Focus\+Traverser}}, \mbox{\hyperlink{class_component_a8dc872ef83fedecd89cf814d28236cd0}{Component\+::create\+Keyboard\+Focus\+Traverser}}
+\end{DoxySeeAlso}
+@tags\{GUI\} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_component_traverser_a459dcd5dd6f55b7e267b1c55184c0d5a}\label{class_component_traverser_a459dcd5dd6f55b7e267b1c55184c0d5a}} 
+\index{ComponentTraverser@{ComponentTraverser}!````~ComponentTraverser@{$\sim$ComponentTraverser}}
+\index{````~ComponentTraverser@{$\sim$ComponentTraverser}!ComponentTraverser@{ComponentTraverser}}
+\doxysubsubsection{\texorpdfstring{$\sim$ComponentTraverser()}{~ComponentTraverser()}}
+{\footnotesize\ttfamily virtual Component\+Traverser\+::$\sim$\+Component\+Traverser (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+Destructor. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_component_traverser_afa0b098ef0e08681d91015072119b455}\label{class_component_traverser_afa0b098ef0e08681d91015072119b455}} 
+\index{ComponentTraverser@{ComponentTraverser}!getAllComponents@{getAllComponents}}
+\index{getAllComponents@{getAllComponents}!ComponentTraverser@{ComponentTraverser}}
+\doxysubsubsection{\texorpdfstring{getAllComponents()}{getAllComponents()}}
+{\footnotesize\ttfamily virtual std\+::vector$<$ \mbox{\hyperlink{class_component}{Component}} $\ast$ $>$ Component\+Traverser\+::get\+All\+Components (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_component}{Component}} $\ast$}]{parent\+Component }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Returns all of the traversable components within the given parent component in traversal order. 
+
+Implemented in \mbox{\hyperlink{classjuce_1_1_label_keyboard_focus_traverser_adcd31fdf805c95a880d78e9b5605b283}{juce\+::\+Label\+Keyboard\+Focus\+Traverser}}, \mbox{\hyperlink{class_focus_traverser_af72bac555d3598e9af891e4604607896}{Focus\+Traverser}}, and \mbox{\hyperlink{class_keyboard_focus_traverser_a7300369ec0af9777d429b8fa9dde3151}{Keyboard\+Focus\+Traverser}}.
+
+\mbox{\Hypertarget{class_component_traverser_aba94a42fca848f8d0be60983fcb00cf2}\label{class_component_traverser_aba94a42fca848f8d0be60983fcb00cf2}} 
+\index{ComponentTraverser@{ComponentTraverser}!getDefaultComponent@{getDefaultComponent}}
+\index{getDefaultComponent@{getDefaultComponent}!ComponentTraverser@{ComponentTraverser}}
+\doxysubsubsection{\texorpdfstring{getDefaultComponent()}{getDefaultComponent()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{class_component}{Component}} $\ast$ Component\+Traverser\+::get\+Default\+Component (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_component}{Component}} $\ast$}]{parent\+Component }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Returns the component that should be used as the traversal entry point within the given parent component.
+
+This must return nullptr if there is no default component. 
+
+Implemented in \mbox{\hyperlink{classjuce_1_1_label_keyboard_focus_traverser_a2bc650fe8a85cd6af6b19013320a9432}{juce\+::\+Label\+Keyboard\+Focus\+Traverser}}, \mbox{\hyperlink{class_focus_traverser_a0ed5565c361b388354d2a8cdd2b79cce}{Focus\+Traverser}}, and \mbox{\hyperlink{class_keyboard_focus_traverser_a3d97b08d9bbee6422aa631fc78b3d701}{Keyboard\+Focus\+Traverser}}.
+
+\mbox{\Hypertarget{class_component_traverser_a466ed63b19069dd2ce8aeeeea279726a}\label{class_component_traverser_a466ed63b19069dd2ce8aeeeea279726a}} 
+\index{ComponentTraverser@{ComponentTraverser}!getNextComponent@{getNextComponent}}
+\index{getNextComponent@{getNextComponent}!ComponentTraverser@{ComponentTraverser}}
+\doxysubsubsection{\texorpdfstring{getNextComponent()}{getNextComponent()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{class_component}{Component}} $\ast$ Component\+Traverser\+::get\+Next\+Component (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_component}{Component}} $\ast$}]{current }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Returns the component that comes after the specified one when moving \char`\"{}forwards\char`\"{}.
+
+This must return nullptr if there is no next component. 
+
+Implemented in \mbox{\hyperlink{classjuce_1_1_label_keyboard_focus_traverser_a0ccd278eea2a1add5963e8f3082a2d1b}{juce\+::\+Label\+Keyboard\+Focus\+Traverser}}, \mbox{\hyperlink{class_focus_traverser_a5963aa13c673e790a21c522fb9af16f8}{Focus\+Traverser}}, and \mbox{\hyperlink{class_keyboard_focus_traverser_a03f85e6c3fea8e389f85022373ff3676}{Keyboard\+Focus\+Traverser}}.
+
+\mbox{\Hypertarget{class_component_traverser_a76640a6d9d8538b64e669c09425356b2}\label{class_component_traverser_a76640a6d9d8538b64e669c09425356b2}} 
+\index{ComponentTraverser@{ComponentTraverser}!getPreviousComponent@{getPreviousComponent}}
+\index{getPreviousComponent@{getPreviousComponent}!ComponentTraverser@{ComponentTraverser}}
+\doxysubsubsection{\texorpdfstring{getPreviousComponent()}{getPreviousComponent()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{class_component}{Component}} $\ast$ Component\+Traverser\+::get\+Previous\+Component (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_component}{Component}} $\ast$}]{current }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Returns the component that comes after the specified one when moving \char`\"{}backwards\char`\"{}.
+
+This must return nullptr if there is no previous component. 
+
+Implemented in \mbox{\hyperlink{classjuce_1_1_label_keyboard_focus_traverser_a15508a62462c9a01c117eb9bde1de8f4}{juce\+::\+Label\+Keyboard\+Focus\+Traverser}}, \mbox{\hyperlink{class_focus_traverser_a22da3110bf4a13a2ce59f095a9e8792f}{Focus\+Traverser}}, and \mbox{\hyperlink{class_keyboard_focus_traverser_a5ef4e29e3c64a5d9ef1f125432769ac6}{Keyboard\+Focus\+Traverser}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+gui\+\_\+basics/components/\mbox{\hyperlink{juce___component_traverser_8h}{juce\+\_\+\+Component\+Traverser.\+h}}\end{DoxyCompactItemize}

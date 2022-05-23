@@ -1,0 +1,108 @@
+\hypertarget{juce___flex_box_8h_source}{}\doxysection{juce\+\_\+\+Flex\+Box.\+h}
+\label{juce___flex_box_8h_source}\index{build/juce\_gui\_basics/layout/juce\_FlexBox.h@{build/juce\_gui\_basics/layout/juce\_FlexBox.h}}
+\mbox{\hyperlink{juce___flex_box_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{43 \textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_flex_box}{FlexBox}}  final}
+\DoxyCodeLine{44 \{}
+\DoxyCodeLine{45 \textcolor{keyword}{public}:}
+\DoxyCodeLine{47     \textcolor{keyword}{enum class} \mbox{\hyperlink{class_flex_box_a674e8e1e731b68c17d600715fca63015}{Direction}}}
+\DoxyCodeLine{48     \{}
+\DoxyCodeLine{49         \mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682caf1965a857bc285d26fe22023aa5ab50d}{row}},                  }
+\DoxyCodeLine{50         rowReverse,           }
+\DoxyCodeLine{51         \mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca1afd32818d1c9525f82aff4c09efd254}{column}},               }
+\DoxyCodeLine{52         columnReverse         }
+\DoxyCodeLine{53     \};}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{56     \textcolor{keyword}{enum class} \mbox{\hyperlink{class_flex_box_a252f351ef4317467a58ad25922f64e63}{Wrap}}}
+\DoxyCodeLine{57     \{}
+\DoxyCodeLine{58         noWrap,               }
+\DoxyCodeLine{59         wrap,                 }
+\DoxyCodeLine{60         wrapReverse           }
+\DoxyCodeLine{61     \};}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{64     \textcolor{keyword}{enum class} \mbox{\hyperlink{class_flex_box_a11793a1ebd50cc74be89f720f4a05084}{AlignContent}}}
+\DoxyCodeLine{65     \{}
+\DoxyCodeLine{66         stretch,              }
+\DoxyCodeLine{67         flexStart,            }
+\DoxyCodeLine{68         flexEnd,              }
+\DoxyCodeLine{69         center,               }
+\DoxyCodeLine{70         spaceBetween,         }
+\DoxyCodeLine{71         spaceAround           }
+\DoxyCodeLine{72     \};}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{75     \textcolor{keyword}{enum class} \mbox{\hyperlink{class_flex_box_ae187b70583f1446fb017cfeea7a91c09}{AlignItems}}}
+\DoxyCodeLine{76     \{}
+\DoxyCodeLine{77         stretch,              }
+\DoxyCodeLine{78         flexStart,            }
+\DoxyCodeLine{79         flexEnd,              }
+\DoxyCodeLine{80         center                }
+\DoxyCodeLine{81     \};}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{84     \textcolor{keyword}{enum class} \mbox{\hyperlink{class_flex_box_afa615fca8a66bca45dc4b7ecdb75c3fd}{JustifyContent}}}
+\DoxyCodeLine{85     \{}
+\DoxyCodeLine{86         flexStart,            }
+\DoxyCodeLine{87         flexEnd,              }
+\DoxyCodeLine{88         center,               }
+\DoxyCodeLine{89         spaceBetween,         }
+\DoxyCodeLine{90         spaceAround           }
+\DoxyCodeLine{91     \};}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{95 \textcolor{comment}{}    \mbox{\hyperlink{class_flex_box_a23d49633442ebe9951106240f21457f4}{FlexBox}}() noexcept = default;}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{98     \mbox{\hyperlink{class_flex_box}{FlexBox}} (\mbox{\hyperlink{class_flex_box_a674e8e1e731b68c17d600715fca63015}{Direction}}, \mbox{\hyperlink{class_flex_box_a252f351ef4317467a58ad25922f64e63}{Wrap}}, \mbox{\hyperlink{class_flex_box_a11793a1ebd50cc74be89f720f4a05084}{AlignContent}}, \mbox{\hyperlink{class_flex_box_ae187b70583f1446fb017cfeea7a91c09}{AlignItems}}, \mbox{\hyperlink{class_flex_box_afa615fca8a66bca45dc4b7ecdb75c3fd}{JustifyContent}}) noexcept;}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{101     \mbox{\hyperlink{class_flex_box}{FlexBox}} (\mbox{\hyperlink{class_flex_box_afa615fca8a66bca45dc4b7ecdb75c3fd}{JustifyContent}}) noexcept;}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{105 \textcolor{comment}{}    \textcolor{keywordtype}{void} performLayout (\mbox{\hyperlink{class_rectangle}{Rectangle}}<\textcolor{keywordtype}{float}> targetArea);}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{108     \textcolor{keywordtype}{void} performLayout (\mbox{\hyperlink{class_rectangle}{Rectangle}}<\textcolor{keywordtype}{int}> targetArea);}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{114 \textcolor{comment}{}    \mbox{\hyperlink{class_flex_box_a674e8e1e731b68c17d600715fca63015}{Direction}} flexDirection = \mbox{\hyperlink{class_flex_box_a674e8e1e731b68c17d600715fca63015}{Direction}}::\mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682caf1965a857bc285d26fe22023aa5ab50d}{row}};}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{119     \mbox{\hyperlink{class_flex_box_a252f351ef4317467a58ad25922f64e63}{Wrap}} flexWrap = \mbox{\hyperlink{class_flex_box_a252f351ef4317467a58ad25922f64e63}{Wrap}}::noWrap;}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{125     \mbox{\hyperlink{class_flex_box_a11793a1ebd50cc74be89f720f4a05084}{AlignContent}} alignContent = \mbox{\hyperlink{class_flex_box_a11793a1ebd50cc74be89f720f4a05084}{AlignContent}}::stretch;}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{128     \mbox{\hyperlink{class_flex_box_ae187b70583f1446fb017cfeea7a91c09}{AlignItems}} alignItems = \mbox{\hyperlink{class_flex_box_ae187b70583f1446fb017cfeea7a91c09}{AlignItems}}::stretch;}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{135     \mbox{\hyperlink{class_flex_box_afa615fca8a66bca45dc4b7ecdb75c3fd}{JustifyContent}} justifyContent = \mbox{\hyperlink{class_flex_box_afa615fca8a66bca45dc4b7ecdb75c3fd}{JustifyContent}}::flexStart;}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{138     \mbox{\hyperlink{class_array}{Array}}<\mbox{\hyperlink{class_flex_item}{FlexItem}}> items;}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140 private:}
+\DoxyCodeLine{141     \mbox{\hyperlink{group__juce__core-memory_gab3639a79598b35f2116f4572af0d93f1}{JUCE\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_flex_box}{FlexBox}})}
+\DoxyCodeLine{142 \};}
+\DoxyCodeLine{143 }
+\DoxyCodeLine{144  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{145 }
+
+\end{DoxyCode}

@@ -1,0 +1,210 @@
+\hypertarget{class_weak_reference}{}\doxysection{Weak\+Reference\texorpdfstring{$<$}{<} Object\+Type, Reference\+Counting\+Type \texorpdfstring{$>$}{>} Class Template Reference}
+\label{class_weak_reference}\index{WeakReference$<$ ObjectType, ReferenceCountingType $>$@{WeakReference$<$ ObjectType, ReferenceCountingType $>$}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Weak\+Reference.\+h$>$}
+
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_weak_reference_1_1_master}{Master}}
+\item 
+class \mbox{\hyperlink{class_weak_reference_1_1_shared_pointer}{Shared\+Pointer}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{class_weak_reference_ad4d39a0c388b7d0811e1f755cadd3fdf}{Shared\+Ref}} = \mbox{\hyperlink{class_reference_counted_object_ptr}{Reference\+Counted\+Object\+Ptr}}$<$ \mbox{\hyperlink{class_weak_reference_1_1_shared_pointer}{Shared\+Pointer}} $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_weak_reference_a7311a4b2d696dc46533f562576ab848b}{Weak\+Reference}} ()=default
+\item 
+\mbox{\hyperlink{class_weak_reference_ad158fa3b994aa2cbf4ffbd7209afcdee}{Weak\+Reference}} (Object\+Type $\ast$\mbox{\hyperlink{jmemsys_8h_a77e1d3f325098324c3925e8faf6ae5cf}{object}})
+\item 
+\mbox{\hyperlink{class_weak_reference_a1dd877a29a839b13a046411f5c68f235}{Weak\+Reference}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_weak_reference}{Weak\+Reference}} \&other) noexcept
+\item 
+\mbox{\hyperlink{class_weak_reference_a7942f7ee23b8109f9fa591d25db7a810}{Weak\+Reference}} (\mbox{\hyperlink{class_weak_reference}{Weak\+Reference}} \&\&other) noexcept
+\item 
+\mbox{\hyperlink{class_weak_reference}{Weak\+Reference}} \& \mbox{\hyperlink{class_weak_reference_af85cf5fb4349bc5d186e3586fbe4be67}{operator=}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_weak_reference}{Weak\+Reference}} \&other)
+\item 
+\mbox{\hyperlink{class_weak_reference}{Weak\+Reference}} \& \mbox{\hyperlink{class_weak_reference_a6b16c9187bfed70afce3f048d66b878c}{operator=}} (Object\+Type $\ast$new\+Object)
+\item 
+\mbox{\hyperlink{class_weak_reference}{Weak\+Reference}} \& \mbox{\hyperlink{class_weak_reference_a6d9aae8b146266f392e3cd6055eea58e}{operator=}} (\mbox{\hyperlink{class_weak_reference}{Weak\+Reference}} \&\&other) noexcept
+\item 
+Object\+Type $\ast$ \mbox{\hyperlink{class_weak_reference_a9fcb356095e78d707f7d70c4674297e8}{get}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{class_weak_reference_a91892403a30e5fa2d85b5dfae9a8d93e}{operator Object\+Type $\ast$}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+Object\+Type $\ast$ \mbox{\hyperlink{class_weak_reference_a5430af8d0bd9e4dd2f5903470eb35a97}{operator-\/$>$}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_weak_reference_a523f66357f106bdf39cd5b49973b3177}{was\+Object\+Deleted}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_weak_reference_a446e41345121d74a68be8a45166c09d3}{operator==}} (Object\+Type $\ast$\mbox{\hyperlink{jmemsys_8h_a77e1d3f325098324c3925e8faf6ae5cf}{object}}) \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_weak_reference_af4b60878d8ee882b27ba39592a128c8e}{operator!=}} (Object\+Type $\ast$\mbox{\hyperlink{jmemsys_8h_a77e1d3f325098324c3925e8faf6ae5cf}{object}}) \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class Object\+Type, class Reference\+Counting\+Type = Reference\+Counted\+Object$>$\newline
+class Weak\+Reference$<$ Object\+Type, Reference\+Counting\+Type $>$}
+This class acts as a pointer which will automatically become null if the object to which it points is deleted.
+
+To accomplish this, the source object needs to cooperate by performing a couple of simple tasks. It must embed a \mbox{\hyperlink{class_weak_reference_1_1_master}{Weak\+Reference\+::\+Master}} object, which stores a shared pointer object, and must clear this master pointer in its destructor.
+
+Note that \mbox{\hyperlink{class_weak_reference}{Weak\+Reference}} is not designed to be thread-\/safe, so if you\textquotesingle{}re accessing it from different threads, you\textquotesingle{}ll need to do your own locking around all uses of the pointer and the object it refers to.
+
+E.\+g. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{class }MyObject}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{    MyObject() \{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \string~MyObject()}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        \textcolor{comment}{// This will zero all the references -\/ you need to call this in your destructor.}}
+\DoxyCodeLine{        masterReference.clear();}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{    \textcolor{comment}{// You need to embed a variable of this type, with the name "{}masterReference"{} inside your object. If the}}
+\DoxyCodeLine{    \textcolor{comment}{// variable is not public, you should make your class a friend of WeakReference<MyObject> so that the}}
+\DoxyCodeLine{    \textcolor{comment}{// WeakReference class can access it.}}
+\DoxyCodeLine{    \mbox{\hyperlink{class_weak_reference_1_1_master}{WeakReference<MyObject>::Master}} masterReference;}
+\DoxyCodeLine{    \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{class_weak_reference}{WeakReference}}<MyObject>;}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{OR: just use the handy \mbox{\hyperlink{group__juce__core-memory_ga557fa9dbf924a150e27f0cf0dad368b0}{JUCE\_DECLARE\_WEAK\_REFERENCEABLE}} macro to \textcolor{keywordflow}{do} all \textcolor{keyword}{this} \textcolor{keywordflow}{for} you.}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Here's an example of using a pointer..}}
+\DoxyCodeLine{}
+\DoxyCodeLine{auto* \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}} = \textcolor{keyword}{new} MyObject();}
+\DoxyCodeLine{\mbox{\hyperlink{class_weak_reference}{WeakReference<MyObject>}} myObjectRef = \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{auto} pointer1 = myObjectRef.\mbox{\hyperlink{class_weak_reference_a9fcb356095e78d707f7d70c4674297e8}{get}}();  \textcolor{comment}{// returns a valid pointer to 'n'}}
+\DoxyCodeLine{\textcolor{keyword}{delete} \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}};}
+\DoxyCodeLine{\textcolor{keyword}{auto} pointer2 = myObjectRef.\mbox{\hyperlink{class_weak_reference_a9fcb356095e78d707f7d70c4674297e8}{get}}();  \textcolor{comment}{// now returns nullptr}}
+
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_weak_reference_1_1_master}{Weak\+Reference\+::\+Master}}
+\end{DoxySeeAlso}
+@tags\{Core\} 
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{class_weak_reference_ad4d39a0c388b7d0811e1f755cadd3fdf}\label{class_weak_reference_ad4d39a0c388b7d0811e1f755cadd3fdf}} 
+\index{WeakReference$<$ ObjectType, ReferenceCountingType $>$@{WeakReference$<$ ObjectType, ReferenceCountingType $>$}!SharedRef@{SharedRef}}
+\index{SharedRef@{SharedRef}!WeakReference$<$ ObjectType, ReferenceCountingType $>$@{WeakReference$<$ ObjectType, ReferenceCountingType $>$}}
+\doxysubsubsection{\texorpdfstring{SharedRef}{SharedRef}}
+{\footnotesize\ttfamily template$<$class Object\+Type , class Reference\+Counting\+Type  = Reference\+Counted\+Object$>$ \\
+using \mbox{\hyperlink{class_weak_reference}{Weak\+Reference}}$<$ Object\+Type, Reference\+Counting\+Type $>$\+::\mbox{\hyperlink{class_weak_reference_ad4d39a0c388b7d0811e1f755cadd3fdf}{Shared\+Ref}} =  \mbox{\hyperlink{class_reference_counted_object_ptr}{Reference\+Counted\+Object\+Ptr}}$<$\mbox{\hyperlink{class_weak_reference_1_1_shared_pointer}{Shared\+Pointer}}$>$}
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_weak_reference_a7311a4b2d696dc46533f562576ab848b}\label{class_weak_reference_a7311a4b2d696dc46533f562576ab848b}} 
+\index{WeakReference$<$ ObjectType, ReferenceCountingType $>$@{WeakReference$<$ ObjectType, ReferenceCountingType $>$}!WeakReference@{WeakReference}}
+\index{WeakReference@{WeakReference}!WeakReference$<$ ObjectType, ReferenceCountingType $>$@{WeakReference$<$ ObjectType, ReferenceCountingType $>$}}
+\doxysubsubsection{\texorpdfstring{WeakReference()}{WeakReference()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$class Object\+Type , class Reference\+Counting\+Type  = Reference\+Counted\+Object$>$ \\
+\mbox{\hyperlink{class_weak_reference}{Weak\+Reference}}$<$ Object\+Type, Reference\+Counting\+Type $>$\+::\mbox{\hyperlink{class_weak_reference}{Weak\+Reference}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [default]}}
+
+Creates a null \mbox{\hyperlink{class_weak_reference}{Weak\+Reference}}. \mbox{\Hypertarget{class_weak_reference_ad158fa3b994aa2cbf4ffbd7209afcdee}\label{class_weak_reference_ad158fa3b994aa2cbf4ffbd7209afcdee}} 
+\index{WeakReference$<$ ObjectType, ReferenceCountingType $>$@{WeakReference$<$ ObjectType, ReferenceCountingType $>$}!WeakReference@{WeakReference}}
+\index{WeakReference@{WeakReference}!WeakReference$<$ ObjectType, ReferenceCountingType $>$@{WeakReference$<$ ObjectType, ReferenceCountingType $>$}}
+\doxysubsubsection{\texorpdfstring{WeakReference()}{WeakReference()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$class Object\+Type , class Reference\+Counting\+Type  = Reference\+Counted\+Object$>$ \\
+\mbox{\hyperlink{class_weak_reference}{Weak\+Reference}}$<$ Object\+Type, Reference\+Counting\+Type $>$\+::\mbox{\hyperlink{class_weak_reference}{Weak\+Reference}} (\begin{DoxyParamCaption}\item[{Object\+Type $\ast$}]{object }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Creates a \mbox{\hyperlink{class_weak_reference}{Weak\+Reference}} that points at the given object. \mbox{\Hypertarget{class_weak_reference_a1dd877a29a839b13a046411f5c68f235}\label{class_weak_reference_a1dd877a29a839b13a046411f5c68f235}} 
+\index{WeakReference$<$ ObjectType, ReferenceCountingType $>$@{WeakReference$<$ ObjectType, ReferenceCountingType $>$}!WeakReference@{WeakReference}}
+\index{WeakReference@{WeakReference}!WeakReference$<$ ObjectType, ReferenceCountingType $>$@{WeakReference$<$ ObjectType, ReferenceCountingType $>$}}
+\doxysubsubsection{\texorpdfstring{WeakReference()}{WeakReference()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$class Object\+Type , class Reference\+Counting\+Type  = Reference\+Counted\+Object$>$ \\
+\mbox{\hyperlink{class_weak_reference}{Weak\+Reference}}$<$ Object\+Type, Reference\+Counting\+Type $>$\+::\mbox{\hyperlink{class_weak_reference}{Weak\+Reference}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_weak_reference}{Weak\+Reference}}$<$ Object\+Type, Reference\+Counting\+Type $>$ \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Creates a copy of another \mbox{\hyperlink{class_weak_reference}{Weak\+Reference}}. \mbox{\Hypertarget{class_weak_reference_a7942f7ee23b8109f9fa591d25db7a810}\label{class_weak_reference_a7942f7ee23b8109f9fa591d25db7a810}} 
+\index{WeakReference$<$ ObjectType, ReferenceCountingType $>$@{WeakReference$<$ ObjectType, ReferenceCountingType $>$}!WeakReference@{WeakReference}}
+\index{WeakReference@{WeakReference}!WeakReference$<$ ObjectType, ReferenceCountingType $>$@{WeakReference$<$ ObjectType, ReferenceCountingType $>$}}
+\doxysubsubsection{\texorpdfstring{WeakReference()}{WeakReference()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$class Object\+Type , class Reference\+Counting\+Type  = Reference\+Counted\+Object$>$ \\
+\mbox{\hyperlink{class_weak_reference}{Weak\+Reference}}$<$ Object\+Type, Reference\+Counting\+Type $>$\+::\mbox{\hyperlink{class_weak_reference}{Weak\+Reference}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_weak_reference}{Weak\+Reference}}$<$ Object\+Type, Reference\+Counting\+Type $>$ \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Move constructor 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_weak_reference_a9fcb356095e78d707f7d70c4674297e8}\label{class_weak_reference_a9fcb356095e78d707f7d70c4674297e8}} 
+\index{WeakReference$<$ ObjectType, ReferenceCountingType $>$@{WeakReference$<$ ObjectType, ReferenceCountingType $>$}!get@{get}}
+\index{get@{get}!WeakReference$<$ ObjectType, ReferenceCountingType $>$@{WeakReference$<$ ObjectType, ReferenceCountingType $>$}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily template$<$class Object\+Type , class Reference\+Counting\+Type  = Reference\+Counted\+Object$>$ \\
+Object\+Type $\ast$ \mbox{\hyperlink{class_weak_reference}{Weak\+Reference}}$<$ Object\+Type, Reference\+Counting\+Type $>$\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Returns the object that this pointer refers to, or null if the object no longer exists. \mbox{\Hypertarget{class_weak_reference_a91892403a30e5fa2d85b5dfae9a8d93e}\label{class_weak_reference_a91892403a30e5fa2d85b5dfae9a8d93e}} 
+\index{WeakReference$<$ ObjectType, ReferenceCountingType $>$@{WeakReference$<$ ObjectType, ReferenceCountingType $>$}!operator ObjectType $\ast$@{operator ObjectType $\ast$}}
+\index{operator ObjectType $\ast$@{operator ObjectType $\ast$}!WeakReference$<$ ObjectType, ReferenceCountingType $>$@{WeakReference$<$ ObjectType, ReferenceCountingType $>$}}
+\doxysubsubsection{\texorpdfstring{operator ObjectType $\ast$()}{operator ObjectType *()}}
+{\footnotesize\ttfamily template$<$class Object\+Type , class Reference\+Counting\+Type  = Reference\+Counted\+Object$>$ \\
+\mbox{\hyperlink{class_weak_reference}{Weak\+Reference}}$<$ Object\+Type, Reference\+Counting\+Type $>$\+::operator Object\+Type $\ast$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Returns the object that this pointer refers to, or null if the object no longer exists. \mbox{\Hypertarget{class_weak_reference_af4b60878d8ee882b27ba39592a128c8e}\label{class_weak_reference_af4b60878d8ee882b27ba39592a128c8e}} 
+\index{WeakReference$<$ ObjectType, ReferenceCountingType $>$@{WeakReference$<$ ObjectType, ReferenceCountingType $>$}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!WeakReference$<$ ObjectType, ReferenceCountingType $>$@{WeakReference$<$ ObjectType, ReferenceCountingType $>$}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily template$<$class Object\+Type , class Reference\+Counting\+Type  = Reference\+Counted\+Object$>$ \\
+bool \mbox{\hyperlink{class_weak_reference}{Weak\+Reference}}$<$ Object\+Type, Reference\+Counting\+Type $>$\+::operator!= (\begin{DoxyParamCaption}\item[{Object\+Type $\ast$}]{object }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+\mbox{\Hypertarget{class_weak_reference_a5430af8d0bd9e4dd2f5903470eb35a97}\label{class_weak_reference_a5430af8d0bd9e4dd2f5903470eb35a97}} 
+\index{WeakReference$<$ ObjectType, ReferenceCountingType $>$@{WeakReference$<$ ObjectType, ReferenceCountingType $>$}!operator-\/$>$@{operator-\/$>$}}
+\index{operator-\/$>$@{operator-\/$>$}!WeakReference$<$ ObjectType, ReferenceCountingType $>$@{WeakReference$<$ ObjectType, ReferenceCountingType $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/$>$()}{operator->()}}
+{\footnotesize\ttfamily template$<$class Object\+Type , class Reference\+Counting\+Type  = Reference\+Counted\+Object$>$ \\
+Object\+Type $\ast$ \mbox{\hyperlink{class_weak_reference}{Weak\+Reference}}$<$ Object\+Type, Reference\+Counting\+Type $>$\+::operator-\/$>$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Returns the object that this pointer refers to, or null if the object no longer exists. \mbox{\Hypertarget{class_weak_reference_af85cf5fb4349bc5d186e3586fbe4be67}\label{class_weak_reference_af85cf5fb4349bc5d186e3586fbe4be67}} 
+\index{WeakReference$<$ ObjectType, ReferenceCountingType $>$@{WeakReference$<$ ObjectType, ReferenceCountingType $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!WeakReference$<$ ObjectType, ReferenceCountingType $>$@{WeakReference$<$ ObjectType, ReferenceCountingType $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$class Object\+Type , class Reference\+Counting\+Type  = Reference\+Counted\+Object$>$ \\
+\mbox{\hyperlink{class_weak_reference}{Weak\+Reference}} \& \mbox{\hyperlink{class_weak_reference}{Weak\+Reference}}$<$ Object\+Type, Reference\+Counting\+Type $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_weak_reference}{Weak\+Reference}}$<$ Object\+Type, Reference\+Counting\+Type $>$ \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Copies another pointer to this one. \mbox{\Hypertarget{class_weak_reference_a6b16c9187bfed70afce3f048d66b878c}\label{class_weak_reference_a6b16c9187bfed70afce3f048d66b878c}} 
+\index{WeakReference$<$ ObjectType, ReferenceCountingType $>$@{WeakReference$<$ ObjectType, ReferenceCountingType $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!WeakReference$<$ ObjectType, ReferenceCountingType $>$@{WeakReference$<$ ObjectType, ReferenceCountingType $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$class Object\+Type , class Reference\+Counting\+Type  = Reference\+Counted\+Object$>$ \\
+\mbox{\hyperlink{class_weak_reference}{Weak\+Reference}} \& \mbox{\hyperlink{class_weak_reference}{Weak\+Reference}}$<$ Object\+Type, Reference\+Counting\+Type $>$\+::operator= (\begin{DoxyParamCaption}\item[{Object\+Type $\ast$}]{new\+Object }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Copies another pointer to this one. \mbox{\Hypertarget{class_weak_reference_a6d9aae8b146266f392e3cd6055eea58e}\label{class_weak_reference_a6d9aae8b146266f392e3cd6055eea58e}} 
+\index{WeakReference$<$ ObjectType, ReferenceCountingType $>$@{WeakReference$<$ ObjectType, ReferenceCountingType $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!WeakReference$<$ ObjectType, ReferenceCountingType $>$@{WeakReference$<$ ObjectType, ReferenceCountingType $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$class Object\+Type , class Reference\+Counting\+Type  = Reference\+Counted\+Object$>$ \\
+\mbox{\hyperlink{class_weak_reference}{Weak\+Reference}} \& \mbox{\hyperlink{class_weak_reference}{Weak\+Reference}}$<$ Object\+Type, Reference\+Counting\+Type $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_weak_reference}{Weak\+Reference}}$<$ Object\+Type, Reference\+Counting\+Type $>$ \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Move assignment operator \mbox{\Hypertarget{class_weak_reference_a446e41345121d74a68be8a45166c09d3}\label{class_weak_reference_a446e41345121d74a68be8a45166c09d3}} 
+\index{WeakReference$<$ ObjectType, ReferenceCountingType $>$@{WeakReference$<$ ObjectType, ReferenceCountingType $>$}!operator==@{operator==}}
+\index{operator==@{operator==}!WeakReference$<$ ObjectType, ReferenceCountingType $>$@{WeakReference$<$ ObjectType, ReferenceCountingType $>$}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily template$<$class Object\+Type , class Reference\+Counting\+Type  = Reference\+Counted\+Object$>$ \\
+bool \mbox{\hyperlink{class_weak_reference}{Weak\+Reference}}$<$ Object\+Type, Reference\+Counting\+Type $>$\+::operator== (\begin{DoxyParamCaption}\item[{Object\+Type $\ast$}]{object }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+\mbox{\Hypertarget{class_weak_reference_a523f66357f106bdf39cd5b49973b3177}\label{class_weak_reference_a523f66357f106bdf39cd5b49973b3177}} 
+\index{WeakReference$<$ ObjectType, ReferenceCountingType $>$@{WeakReference$<$ ObjectType, ReferenceCountingType $>$}!wasObjectDeleted@{wasObjectDeleted}}
+\index{wasObjectDeleted@{wasObjectDeleted}!WeakReference$<$ ObjectType, ReferenceCountingType $>$@{WeakReference$<$ ObjectType, ReferenceCountingType $>$}}
+\doxysubsubsection{\texorpdfstring{wasObjectDeleted()}{wasObjectDeleted()}}
+{\footnotesize\ttfamily template$<$class Object\+Type , class Reference\+Counting\+Type  = Reference\+Counted\+Object$>$ \\
+bool \mbox{\hyperlink{class_weak_reference}{Weak\+Reference}}$<$ Object\+Type, Reference\+Counting\+Type $>$\+::was\+Object\+Deleted (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+This returns true if this reference has been pointing at an object, but that object has since been deleted.
+
+If this reference was only ever pointing at a null pointer, this will return false. Using \mbox{\hyperlink{class_weak_reference_af85cf5fb4349bc5d186e3586fbe4be67}{operator=()}} to make this refer to a different object will reset this flag to match the status of the reference from which you\textquotesingle{}re copying. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+core/memory/\mbox{\hyperlink{juce___weak_reference_8h}{juce\+\_\+\+Weak\+Reference.\+h}}\end{DoxyCompactItemize}

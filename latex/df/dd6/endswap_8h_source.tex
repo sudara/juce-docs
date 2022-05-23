@@ -1,0 +1,86 @@
+\hypertarget{endswap_8h_source}{}\doxysection{endswap.\+h}
+\label{endswap_8h_source}\index{build/juce\_audio\_formats/codecs/flac/endswap.h@{build/juce\_audio\_formats/codecs/flac/endswap.h}}
+\mbox{\hyperlink{endswap_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/* libFLAC -\/ Free Lossless Audio Codec library}}
+\DoxyCodeLine{2 \textcolor{comment}{ * Copyright (C) 2012-\/2014  Xiph.org Foundation}}
+\DoxyCodeLine{3 \textcolor{comment}{ *}}
+\DoxyCodeLine{4 \textcolor{comment}{ * Redistribution and use in source and binary forms, with or without}}
+\DoxyCodeLine{5 \textcolor{comment}{ * modification, are permitted provided that the following conditions}}
+\DoxyCodeLine{6 \textcolor{comment}{ * are met:}}
+\DoxyCodeLine{7 \textcolor{comment}{ *}}
+\DoxyCodeLine{8 \textcolor{comment}{ * -\/ Redistributions of source code must retain the above copyright}}
+\DoxyCodeLine{9 \textcolor{comment}{ * notice, this list of conditions and the following disclaimer.}}
+\DoxyCodeLine{10 \textcolor{comment}{ *}}
+\DoxyCodeLine{11 \textcolor{comment}{ * -\/ Redistributions in binary form must reproduce the above copyright}}
+\DoxyCodeLine{12 \textcolor{comment}{ * notice, this list of conditions and the following disclaimer in the}}
+\DoxyCodeLine{13 \textcolor{comment}{ * documentation and/or other materials provided with the distribution.}}
+\DoxyCodeLine{14 \textcolor{comment}{ *}}
+\DoxyCodeLine{15 \textcolor{comment}{ * -\/ Neither the name of the Xiph.org Foundation nor the names of its}}
+\DoxyCodeLine{16 \textcolor{comment}{ * contributors may be used to endorse or promote products derived from}}
+\DoxyCodeLine{17 \textcolor{comment}{ * this software without specific prior written permission.}}
+\DoxyCodeLine{18 \textcolor{comment}{ *}}
+\DoxyCodeLine{19 \textcolor{comment}{ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS}}
+\DoxyCodeLine{20 \textcolor{comment}{ * ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT}}
+\DoxyCodeLine{21 \textcolor{comment}{ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR}}
+\DoxyCodeLine{22 \textcolor{comment}{ * A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE FOUNDATION OR}}
+\DoxyCodeLine{23 \textcolor{comment}{ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,}}
+\DoxyCodeLine{24 \textcolor{comment}{ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,}}
+\DoxyCodeLine{25 \textcolor{comment}{ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR}}
+\DoxyCodeLine{26 \textcolor{comment}{ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF}}
+\DoxyCodeLine{27 \textcolor{comment}{ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING}}
+\DoxyCodeLine{28 \textcolor{comment}{ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS}}
+\DoxyCodeLine{29 \textcolor{comment}{ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.}}
+\DoxyCodeLine{30 \textcolor{comment}{ */}}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \textcolor{comment}{/* It is assumed that this header will be included after "{}config.h"{}. */}}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#if HAVE\_BSWAP32            }\textcolor{comment}{/* GCC and Clang */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 \textcolor{comment}{/* GCC prior to 4.8 didn't provide bswap16 on x86\_64 */}}
+\DoxyCodeLine{37 \textcolor{preprocessor}{\#if ! HAVE\_BSWAP16}}
+\DoxyCodeLine{38 \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} \_\_builtin\_bswap16(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}})}
+\DoxyCodeLine{39 \{}
+\DoxyCodeLine{40     \textcolor{keywordflow}{return} (\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}<<8)|(\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}>>8);}
+\DoxyCodeLine{41 \}}
+\DoxyCodeLine{42 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#define ENDSWAP\_16(x)       (\_\_builtin\_bswap16 (x))}}
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#define ENDSWAP\_32(x)       (\_\_builtin\_bswap32 (x))}}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#elif defined \_MSC\_VER      }\textcolor{comment}{/* Windows. Apparently in <stdlib.h>. */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49 \textcolor{preprocessor}{\#define ENDSWAP\_16(x)       (\_byteswap\_ushort (x))}}
+\DoxyCodeLine{50 \textcolor{preprocessor}{\#define ENDSWAP\_32(x)       (\_byteswap\_ulong (x))}}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52 \textcolor{preprocessor}{\#elif defined HAVE\_BYTESWAP\_H       }\textcolor{comment}{/* Linux */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54 \textcolor{comment}{// JUCE: removed as JUCE already includes standard headers and including}}
+\DoxyCodeLine{55 \textcolor{comment}{// these in FlacNamespace will cause problems}}
+\DoxyCodeLine{56 \textcolor{comment}{//\#include <byteswap.h>}}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58 \textcolor{preprocessor}{\#define ENDSWAP\_16(x)       (bswap\_16 (x))}}
+\DoxyCodeLine{59 \textcolor{preprocessor}{\#define ENDSWAP\_32(x)       (bswap\_32 (x))}}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63 \textcolor{preprocessor}{\#define ENDSWAP\_16(x)       ((((x) >> 8) \& 0xFF) | (((x) \& 0xFF) << 8))}}
+\DoxyCodeLine{64 \textcolor{preprocessor}{\#define ENDSWAP\_32(x)       ((((x) >> 24) \& 0xFF) | (((x) >> 8) \& 0xFF00) | (((x) \& 0xFF00) << 8) | (((x) \& 0xFF) << 24))}}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69 \textcolor{comment}{/* Host to little-\/endian byte swapping. */}}
+\DoxyCodeLine{70 \textcolor{preprocessor}{\#if CPU\_IS\_BIG\_ENDIAN}}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72 \textcolor{preprocessor}{\#define H2LE\_16(x)      ENDSWAP\_16 (x)}}
+\DoxyCodeLine{73 \textcolor{preprocessor}{\#define H2LE\_32(x)      ENDSWAP\_32 (x)}}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77 \textcolor{preprocessor}{\#define H2LE\_16(x)      (x)}}
+\DoxyCodeLine{78 \textcolor{preprocessor}{\#define H2LE\_32(x)      (x)}}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,92 @@
+\hypertarget{juce___network_service_discovery_8h_source}{}\doxysection{juce\+\_\+\+Network\+Service\+Discovery.\+h}
+\label{juce___network_service_discovery_8h_source}\index{build/juce\_events/interprocess/juce\_NetworkServiceDiscovery.h@{build/juce\_events/interprocess/juce\_NetworkServiceDiscovery.h}}
+\mbox{\hyperlink{juce___network_service_discovery_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{35 \textcolor{comment}{}\textcolor{keyword}{struct }\mbox{\hyperlink{struct_network_service_discovery}{NetworkServiceDiscovery}}}
+\DoxyCodeLine{36 \{}
+\DoxyCodeLine{45     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_network_service_discovery_1_1_advertiser}{Advertiser}}  : \textcolor{keyword}{private} \mbox{\hyperlink{class_thread}{Thread}}}
+\DoxyCodeLine{46     \{}
+\DoxyCodeLine{54         \mbox{\hyperlink{struct_network_service_discovery_1_1_advertiser_a35be71d9da20fd3ecfb482ade4699b12}{Advertiser}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& serviceTypeUID,}
+\DoxyCodeLine{55                     \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& serviceDescription,}
+\DoxyCodeLine{56                     \textcolor{keywordtype}{int} broadcastPort,}
+\DoxyCodeLine{57                     \textcolor{keywordtype}{int} connectionPort,}
+\DoxyCodeLine{58                     \mbox{\hyperlink{class_relative_time}{RelativeTime}} minTimeBetweenBroadcasts = \mbox{\hyperlink{class_relative_time_ae8f10e8d1ca94b422cfe9a7f4b2f05ba}{RelativeTime::seconds}} (1.5));}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{61         \mbox{\hyperlink{struct_network_service_discovery_1_1_advertiser_aaf515986c4d82136d3cdc7246c917f73}{\string~Advertiser}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63     \textcolor{keyword}{private}:}
+\DoxyCodeLine{64         \mbox{\hyperlink{class_xml_element}{XmlElement}} message;}
+\DoxyCodeLine{65         \textcolor{keyword}{const} \textcolor{keywordtype}{int} broadcastPort;}
+\DoxyCodeLine{66         \textcolor{keyword}{const} \mbox{\hyperlink{class_relative_time}{RelativeTime}} minInterval;}
+\DoxyCodeLine{67         \mbox{\hyperlink{class_datagram_socket}{DatagramSocket}} socket \{ \textcolor{keyword}{true} \};}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69         \textcolor{keywordtype}{void} run() \textcolor{keyword}{override};}
+\DoxyCodeLine{70         \textcolor{keywordtype}{void} sendBroadcast();}
+\DoxyCodeLine{71     \};}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{81 \textcolor{comment}{}    \textcolor{keyword}{struct }\mbox{\hyperlink{struct_network_service_discovery_1_1_service}{Service}}}
+\DoxyCodeLine{82     \{}
+\DoxyCodeLine{83         \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{struct_network_service_discovery_1_1_service_a4ae0343d6a62d619d92de9c6760f0219}{instanceID}};   }
+\DoxyCodeLine{84         \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{struct_network_service_discovery_1_1_service_adc99ae2b16376f56d4e0f1b244edd1c0}{description}};  }
+\DoxyCodeLine{85         \mbox{\hyperlink{class_i_p_address}{IPAddress}} \mbox{\hyperlink{struct_network_service_discovery_1_1_service_ade832707345fb61ef8ed0332ef995ee9}{address}};   }
+\DoxyCodeLine{86         \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_network_service_discovery_1_1_service_af76251f9eb7b124162829d0a86ccee5d}{port}};            }
+\DoxyCodeLine{87         \mbox{\hyperlink{class_time}{Time}} \mbox{\hyperlink{struct_network_service_discovery_1_1_service_ad2e70cfd5386092dc69d6be8cf38a333}{lastSeen}};       }
+\DoxyCodeLine{88     \};}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{103 \textcolor{comment}{}    \textcolor{keyword}{struct }\mbox{\hyperlink{struct_network_service_discovery_1_1_available_service_list}{AvailableServiceList}}  : \textcolor{keyword}{private} \mbox{\hyperlink{class_thread}{Thread}},}
+\DoxyCodeLine{104                                    \textcolor{keyword}{private} \mbox{\hyperlink{class_async_updater}{AsyncUpdater}}}
+\DoxyCodeLine{105     \{}
+\DoxyCodeLine{112         \mbox{\hyperlink{struct_network_service_discovery_1_1_available_service_list_aaae2e9e50970a1ef4259052c5d31b4cf}{AvailableServiceList}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& serviceTypeUID, \textcolor{keywordtype}{int} broadcastPort);}
+\DoxyCodeLine{113 }
+\DoxyCodeLine{115         \mbox{\hyperlink{struct_network_service_discovery_1_1_available_service_list_ac45045aa1def5cc4b3cf054e692dba05}{\string~AvailableServiceList}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{118         \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}}()> \mbox{\hyperlink{struct_network_service_discovery_1_1_available_service_list_a9b2c707bd1865b3676c46a25967ac7e5}{onChange}};}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{121         std::vector<Service> \mbox{\hyperlink{struct_network_service_discovery_1_1_available_service_list_a6c281f52de09c0d7dabfc8d20e8b130b}{getServices}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{123     \textcolor{keyword}{private}:}
+\DoxyCodeLine{124         \mbox{\hyperlink{class_datagram_socket}{DatagramSocket}} socket \{ \textcolor{keyword}{true} \};}
+\DoxyCodeLine{125         \mbox{\hyperlink{class_string}{String}} serviceTypeUID;}
+\DoxyCodeLine{126         \mbox{\hyperlink{class_critical_section}{CriticalSection}} listLock;}
+\DoxyCodeLine{127         std::vector<Service> services;}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129         \textcolor{keywordtype}{void} run() \textcolor{keyword}{override};}
+\DoxyCodeLine{130         \textcolor{keywordtype}{void} handleAsyncUpdate() \textcolor{keyword}{override};}
+\DoxyCodeLine{131         \textcolor{keywordtype}{void} handleMessage (\textcolor{keyword}{const} \mbox{\hyperlink{class_xml_element}{XmlElement}}\&);}
+\DoxyCodeLine{132         \textcolor{keywordtype}{void} handleMessage (\textcolor{keyword}{const} \mbox{\hyperlink{struct_network_service_discovery_1_1_service}{Service}}\&);}
+\DoxyCodeLine{133         \textcolor{keywordtype}{void} removeTimedOutServices();}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135         \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{struct_network_service_discovery_1_1_available_service_list}{AvailableServiceList}})}
+\DoxyCodeLine{136     \};}
+\DoxyCodeLine{137 \};}
+\DoxyCodeLine{138 }
+\DoxyCodeLine{139  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{140 }
+
+\end{DoxyCode}

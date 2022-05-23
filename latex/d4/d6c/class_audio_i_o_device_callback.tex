@@ -1,0 +1,123 @@
+\hypertarget{class_audio_i_o_device_callback}{}\doxysection{Audio\+IODevice\+Callback Class Reference}
+\label{class_audio_i_o_device_callback}\index{AudioIODeviceCallback@{AudioIODeviceCallback}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Audio\+IODevice.\+h$>$}
+
+Inheritance diagram for Audio\+IODevice\+Callback\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=0.817518cm]{d4/d6c/class_audio_i_o_device_callback}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_audio_i_o_device_callback_aa9e609118dfa6772d4dd176666a44b23}{$\sim$\+Audio\+IODevice\+Callback}} ()=default
+\item 
+virtual \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_audio_i_o_device_callback_a9ba147cd10fe995c3016dbf35132f995}{audio\+Device\+IOCallback}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} float $\ast$$\ast$input\+Channel\+Data, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} num\+Input\+Channels, float $\ast$$\ast$output\+Channel\+Data, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} num\+Output\+Channels, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} num\+Samples)=0
+\item 
+virtual \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_audio_i_o_device_callback_a1bec2ae89543a93e31461991f7404aec}{audio\+Device\+About\+To\+Start}} (\mbox{\hyperlink{class_audio_i_o_device}{Audio\+IODevice}} $\ast$device)=0
+\item 
+virtual \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_audio_i_o_device_callback_a7b3e3c479e4e0b3b19ea992960ef46f5}{audio\+Device\+Stopped}} ()=0
+\item 
+virtual \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_audio_i_o_device_callback_a8786a055f0d776a0dc18cee792dedfe7}{audio\+Device\+Error}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&error\+Message)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+One of these is passed to an \mbox{\hyperlink{class_audio_i_o_device}{Audio\+IODevice}} object to stream the audio data in and out.
+
+The \mbox{\hyperlink{class_audio_i_o_device}{Audio\+IODevice}} will repeatedly call this class\textquotesingle{}s \mbox{\hyperlink{class_audio_i_o_device_callback_a9ba147cd10fe995c3016dbf35132f995}{audio\+Device\+IOCallback()}} method on its own high-\/priority audio thread, when it needs to send or receive the next block of data.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_audio_i_o_device}{Audio\+IODevice}}, \mbox{\hyperlink{class_audio_device_manager}{Audio\+Device\+Manager}}
+\end{DoxySeeAlso}
+@tags\{Audio\} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_audio_i_o_device_callback_aa9e609118dfa6772d4dd176666a44b23}\label{class_audio_i_o_device_callback_aa9e609118dfa6772d4dd176666a44b23}} 
+\index{AudioIODeviceCallback@{AudioIODeviceCallback}!````~AudioIODeviceCallback@{$\sim$AudioIODeviceCallback}}
+\index{````~AudioIODeviceCallback@{$\sim$AudioIODeviceCallback}!AudioIODeviceCallback@{AudioIODeviceCallback}}
+\doxysubsubsection{\texorpdfstring{$\sim$AudioIODeviceCallback()}{~AudioIODeviceCallback()}}
+{\footnotesize\ttfamily virtual Audio\+IODevice\+Callback\+::$\sim$\+Audio\+IODevice\+Callback (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+Destructor. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_audio_i_o_device_callback_a1bec2ae89543a93e31461991f7404aec}\label{class_audio_i_o_device_callback_a1bec2ae89543a93e31461991f7404aec}} 
+\index{AudioIODeviceCallback@{AudioIODeviceCallback}!audioDeviceAboutToStart@{audioDeviceAboutToStart}}
+\index{audioDeviceAboutToStart@{audioDeviceAboutToStart}!AudioIODeviceCallback@{AudioIODeviceCallback}}
+\doxysubsubsection{\texorpdfstring{audioDeviceAboutToStart()}{audioDeviceAboutToStart()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Audio\+IODevice\+Callback\+::audio\+Device\+About\+To\+Start (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_audio_i_o_device}{Audio\+IODevice}} $\ast$}]{device }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Called to indicate that the device is about to start calling back.
+
+This will be called just before the audio callbacks begin, either when this callback has just been added to an audio device, or after the device has been restarted because of a sample-\/rate or block-\/size change.
+
+You can use this opportunity to find out the sample rate and block size that the device is going to use by calling the \mbox{\hyperlink{class_audio_i_o_device_afba31b6d244b7cc257e925a04c5c383c}{Audio\+IODevice\+::get\+Current\+Sample\+Rate()}} and \mbox{\hyperlink{class_audio_i_o_device_af7636fe06f58b58c41bc8575184f518f}{Audio\+IODevice\+::get\+Current\+Buffer\+Size\+Samples()}} on the supplied pointer.
+
+
+\begin{DoxyParams}{Parameters}
+{\em device} & the audio IO device that will be used to drive the callback. Note that if you\textquotesingle{}re going to store this this pointer, it is only valid until the next time that audio\+Device\+Stopped is called. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_audio_processor_player_a6e86ec16b53690d894d67fd7cfd7fcc4}{Audio\+Processor\+Player}}, \mbox{\hyperlink{class_sound_player_a655a273e8d700f0b251d5bc732b7dd55}{Sound\+Player}}, and \mbox{\hyperlink{class_audio_source_player_a873c307b234e375b25aa589aba5ebaca}{Audio\+Source\+Player}}.
+
+\mbox{\Hypertarget{class_audio_i_o_device_callback_a8786a055f0d776a0dc18cee792dedfe7}\label{class_audio_i_o_device_callback_a8786a055f0d776a0dc18cee792dedfe7}} 
+\index{AudioIODeviceCallback@{AudioIODeviceCallback}!audioDeviceError@{audioDeviceError}}
+\index{audioDeviceError@{audioDeviceError}!AudioIODeviceCallback@{AudioIODeviceCallback}}
+\doxysubsubsection{\texorpdfstring{audioDeviceError()}{audioDeviceError()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Audio\+IODevice\+Callback\+::audio\+Device\+Error (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&}]{error\+Message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+This can be overridden to be told if the device generates an error while operating. Be aware that this could be called by any thread! And not all devices perform this callback. 
+
+Reimplemented in \mbox{\hyperlink{class_sound_player_a2e4fbd35c60ab3af1f46fb9963a433ad}{Sound\+Player}}.
+
+\mbox{\Hypertarget{class_audio_i_o_device_callback_a9ba147cd10fe995c3016dbf35132f995}\label{class_audio_i_o_device_callback_a9ba147cd10fe995c3016dbf35132f995}} 
+\index{AudioIODeviceCallback@{AudioIODeviceCallback}!audioDeviceIOCallback@{audioDeviceIOCallback}}
+\index{audioDeviceIOCallback@{audioDeviceIOCallback}!AudioIODeviceCallback@{AudioIODeviceCallback}}
+\doxysubsubsection{\texorpdfstring{audioDeviceIOCallback()}{audioDeviceIOCallback()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Audio\+IODevice\+Callback\+::audio\+Device\+IOCallback (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} float $\ast$$\ast$}]{input\+Channel\+Data,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{num\+Input\+Channels,  }\item[{float $\ast$$\ast$}]{output\+Channel\+Data,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{num\+Output\+Channels,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{num\+Samples }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Processes a block of incoming and outgoing audio data.
+
+The subclass\textquotesingle{}s implementation should use the incoming audio for whatever purposes it needs to, and must fill all the output channels with the next block of output data before returning.
+
+The channel data is arranged with the same array indices as the channel name array returned by \mbox{\hyperlink{class_audio_i_o_device_a49d09c50d23685dfeb881594c6e8a621}{Audio\+IODevice\+::get\+Output\+Channel\+Names()}}, but those channels that aren\textquotesingle{}t specified in \mbox{\hyperlink{class_audio_i_o_device_a519b91efd6bf7bf88fbe85eb5510629f}{Audio\+IODevice\+::open()}} will have a null pointer for their associated channel, so remember to check for this.
+
+
+\begin{DoxyParams}{Parameters}
+{\em input\+Channel\+Data} & a set of arrays containing the audio data for each incoming channel -\/ this data is valid until the function returns. There will be one channel of data for each input channel that was enabled when the audio device was opened (see \mbox{\hyperlink{class_audio_i_o_device_a519b91efd6bf7bf88fbe85eb5510629f}{Audio\+IODevice\+::open()}}) \\
+\hline
+{\em num\+Input\+Channels} & the number of pointers to channel data in the input\+Channel\+Data array. \\
+\hline
+{\em output\+Channel\+Data} & a set of arrays which need to be filled with the data that should be sent to each outgoing channel of the device. There will be one channel of data for each output channel that was enabled when the audio device was opened (see \mbox{\hyperlink{class_audio_i_o_device_a519b91efd6bf7bf88fbe85eb5510629f}{Audio\+IODevice\+::open()}}) The initial contents of the array is undefined, so the callback function must fill all the channels with zeros if its output is silence. Failing to do this could cause quite an unpleasant noise! \\
+\hline
+{\em num\+Output\+Channels} & the number of pointers to channel data in the output\+Channel\+Data array. \\
+\hline
+{\em num\+Samples} & the number of samples in each channel of the input and output arrays. The number of samples will depend on the audio device\textquotesingle{}s buffer size and will usually remain constant, although this isn\textquotesingle{}t guaranteed. For example, on Android, on devices which support it, Android will chop up your audio processing into several smaller callbacks to ensure higher audio performance. So make sure your code can cope with reasonable changes in the buffer size from one callback to the next. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_audio_processor_player_aa9ec99f33b14a00a4dc33d47f29576f6}{Audio\+Processor\+Player}}, \mbox{\hyperlink{class_sound_player_a90ec033e5d30ddb9168698b08b749576}{Sound\+Player}}, and \mbox{\hyperlink{class_audio_source_player_affe24f50bfa4d73f8e2d220bec2433ec}{Audio\+Source\+Player}}.
+
+\mbox{\Hypertarget{class_audio_i_o_device_callback_a7b3e3c479e4e0b3b19ea992960ef46f5}\label{class_audio_i_o_device_callback_a7b3e3c479e4e0b3b19ea992960ef46f5}} 
+\index{AudioIODeviceCallback@{AudioIODeviceCallback}!audioDeviceStopped@{audioDeviceStopped}}
+\index{audioDeviceStopped@{audioDeviceStopped}!AudioIODeviceCallback@{AudioIODeviceCallback}}
+\doxysubsubsection{\texorpdfstring{audioDeviceStopped()}{audioDeviceStopped()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Audio\+IODevice\+Callback\+::audio\+Device\+Stopped (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Called to indicate that the device has stopped. 
+
+Implemented in \mbox{\hyperlink{class_audio_source_player_a4858c64b3dc045c9fd400ea72bed1898}{Audio\+Source\+Player}}, \mbox{\hyperlink{class_audio_processor_player_ab7ce7ac03e058c2fe908b98f2889c65b}{Audio\+Processor\+Player}}, and \mbox{\hyperlink{class_sound_player_a31316aeaf085210d8c3c9ad516116ce4}{Sound\+Player}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+audio\+\_\+devices/audio\+\_\+io/\mbox{\hyperlink{juce___audio_i_o_device_8h}{juce\+\_\+\+Audio\+IODevice.\+h}}\item 
+build/juce\+\_\+audio\+\_\+devices/audio\+\_\+io/\mbox{\hyperlink{juce___audio_i_o_device_8cpp}{juce\+\_\+\+Audio\+IODevice.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,181 @@
+\hypertarget{class_audio_format_manager}{}\doxysection{Audio\+Format\+Manager Class Reference}
+\label{class_audio_format_manager}\index{AudioFormatManager@{AudioFormatManager}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Audio\+Format\+Manager.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_audio_format_manager_ab6f17392bd6758b6ee2c544cfc377850}{Audio\+Format\+Manager}} ()
+\item 
+\mbox{\hyperlink{class_audio_format_manager_ae5e43f96f3854585e116637732c798d7}{$\sim$\+Audio\+Format\+Manager}} ()
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_audio_format_manager_aa9527a11651cbf1f34c4942f44ea5bf4}{register\+Format}} (\mbox{\hyperlink{class_audio_format}{Audio\+Format}} $\ast$new\+Format, bool make\+This\+The\+Default\+Format)
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_audio_format_manager_a1a8510b3078662358013ad78239d688e}{register\+Basic\+Formats}} ()
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_audio_format_manager_aa321a315fd1fdb294779832386092450}{clear\+Formats}} ()
+\item 
+\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{class_audio_format_manager_a013c73d91e514853f44bfe6b67c284a5}{get\+Num\+Known\+Formats}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}}
+\item 
+\mbox{\hyperlink{class_audio_format}{Audio\+Format}} $\ast$ \mbox{\hyperlink{class_audio_format_manager_aa57686de7ff7c37f679a1843214be96b}{get\+Known\+Format}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} index) \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}}
+\item 
+\mbox{\hyperlink{class_audio_format}{Audio\+Format}} $\ast$$\ast$ \mbox{\hyperlink{class_audio_format_manager_a5b3592527ef8a17472c1a19304e43159}{begin}} () noexcept
+\item 
+\mbox{\hyperlink{class_audio_format}{Audio\+Format}} $\ast$\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} $\ast$ \mbox{\hyperlink{class_audio_format_manager_aae2cfe84d61bd5f720a2bde0587b37ca}{begin}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{class_audio_format}{Audio\+Format}} $\ast$$\ast$ \mbox{\hyperlink{class_audio_format_manager_ac9996d4676be479481196e185f8c39d9}{end}} () noexcept
+\item 
+\mbox{\hyperlink{class_audio_format}{Audio\+Format}} $\ast$\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} $\ast$ \mbox{\hyperlink{class_audio_format_manager_aee863d8fad3770f8079cca31fd75f1f6}{end}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{class_audio_format}{Audio\+Format}} $\ast$ \mbox{\hyperlink{class_audio_format_manager_ac3425df62f58af2168dc4c6ea407be43}{find\+Format\+For\+File\+Extension}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&file\+Extension) \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}}
+\item 
+\mbox{\hyperlink{class_audio_format}{Audio\+Format}} $\ast$ \mbox{\hyperlink{class_audio_format_manager_a7c1b92f72bf99cad242d65a7b68eb638}{get\+Default\+Format}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}}
+\item 
+\mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{class_audio_format_manager_a2cbd8623b8012b33f6f6cc55201d5b7d}{get\+Wildcard\+For\+All\+Formats}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}}
+\item 
+\mbox{\hyperlink{class_audio_format_reader}{Audio\+Format\+Reader}} $\ast$ \mbox{\hyperlink{class_audio_format_manager_a4eed7ecbb353d3d85154182de5057221}{create\+Reader\+For}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_file}{File}} \&audio\+File)
+\item 
+\mbox{\hyperlink{class_audio_format_reader}{Audio\+Format\+Reader}} $\ast$ \mbox{\hyperlink{class_audio_format_manager_aaf93f7383c757891510090185951c98c}{create\+Reader\+For}} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_input_stream}{Input\+Stream}} $>$ audio\+File\+Stream)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class for keeping a list of available audio formats, and for deciding which one to use to open a given file.
+
+After creating an \mbox{\hyperlink{class_audio_format_manager}{Audio\+Format\+Manager}} object, you should call \mbox{\hyperlink{class_audio_format_manager_aa9527a11651cbf1f34c4942f44ea5bf4}{register\+Format()}} or \mbox{\hyperlink{class_audio_format_manager_a1a8510b3078662358013ad78239d688e}{register\+Basic\+Formats()}} to give it a list of format types that it can use.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_audio_format}{Audio\+Format}}
+\end{DoxySeeAlso}
+@tags\{Audio\} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_audio_format_manager_ab6f17392bd6758b6ee2c544cfc377850}\label{class_audio_format_manager_ab6f17392bd6758b6ee2c544cfc377850}} 
+\index{AudioFormatManager@{AudioFormatManager}!AudioFormatManager@{AudioFormatManager}}
+\index{AudioFormatManager@{AudioFormatManager}!AudioFormatManager@{AudioFormatManager}}
+\doxysubsubsection{\texorpdfstring{AudioFormatManager()}{AudioFormatManager()}}
+{\footnotesize\ttfamily Audio\+Format\+Manager\+::\+Audio\+Format\+Manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Creates an empty format manager.
+
+Before it\textquotesingle{}ll be any use, you\textquotesingle{}ll need to call \mbox{\hyperlink{class_audio_format_manager_aa9527a11651cbf1f34c4942f44ea5bf4}{register\+Format()}} with all the formats you want it to be able to recognise. \mbox{\Hypertarget{class_audio_format_manager_ae5e43f96f3854585e116637732c798d7}\label{class_audio_format_manager_ae5e43f96f3854585e116637732c798d7}} 
+\index{AudioFormatManager@{AudioFormatManager}!````~AudioFormatManager@{$\sim$AudioFormatManager}}
+\index{````~AudioFormatManager@{$\sim$AudioFormatManager}!AudioFormatManager@{AudioFormatManager}}
+\doxysubsubsection{\texorpdfstring{$\sim$AudioFormatManager()}{~AudioFormatManager()}}
+{\footnotesize\ttfamily Audio\+Format\+Manager\+::$\sim$\+Audio\+Format\+Manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Destructor. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_audio_format_manager_aae2cfe84d61bd5f720a2bde0587b37ca}\label{class_audio_format_manager_aae2cfe84d61bd5f720a2bde0587b37ca}} 
+\index{AudioFormatManager@{AudioFormatManager}!begin@{begin}}
+\index{begin@{begin}!AudioFormatManager@{AudioFormatManager}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_audio_format}{Audio\+Format}} $\ast$\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}}  $\ast$ Audio\+Format\+Manager\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Iterator access to the list of known formats. \mbox{\Hypertarget{class_audio_format_manager_a5b3592527ef8a17472c1a19304e43159}\label{class_audio_format_manager_a5b3592527ef8a17472c1a19304e43159}} 
+\index{AudioFormatManager@{AudioFormatManager}!begin@{begin}}
+\index{begin@{begin}!AudioFormatManager@{AudioFormatManager}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_audio_format}{Audio\+Format}} $\ast$$\ast$ Audio\+Format\+Manager\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Iterator access to the list of known formats. \mbox{\Hypertarget{class_audio_format_manager_aa321a315fd1fdb294779832386092450}\label{class_audio_format_manager_aa321a315fd1fdb294779832386092450}} 
+\index{AudioFormatManager@{AudioFormatManager}!clearFormats@{clearFormats}}
+\index{clearFormats@{clearFormats}!AudioFormatManager@{AudioFormatManager}}
+\doxysubsubsection{\texorpdfstring{clearFormats()}{clearFormats()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Audio\+Format\+Manager\+::clear\+Formats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Clears the list of known formats. \mbox{\Hypertarget{class_audio_format_manager_a4eed7ecbb353d3d85154182de5057221}\label{class_audio_format_manager_a4eed7ecbb353d3d85154182de5057221}} 
+\index{AudioFormatManager@{AudioFormatManager}!createReaderFor@{createReaderFor}}
+\index{createReaderFor@{createReaderFor}!AudioFormatManager@{AudioFormatManager}}
+\doxysubsubsection{\texorpdfstring{createReaderFor()}{createReaderFor()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_audio_format_reader}{Audio\+Format\+Reader}} $\ast$ Audio\+Format\+Manager\+::create\+Reader\+For (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_file}{File}} \&}]{audio\+File }\end{DoxyParamCaption})}
+
+Searches through the known formats to try to create a suitable reader for this file.
+
+If none of the registered formats can open the file, it\textquotesingle{}ll return nullptr. It\textquotesingle{}s the caller\textquotesingle{}s responsibility to delete the reader that is returned. \mbox{\Hypertarget{class_audio_format_manager_aaf93f7383c757891510090185951c98c}\label{class_audio_format_manager_aaf93f7383c757891510090185951c98c}} 
+\index{AudioFormatManager@{AudioFormatManager}!createReaderFor@{createReaderFor}}
+\index{createReaderFor@{createReaderFor}!AudioFormatManager@{AudioFormatManager}}
+\doxysubsubsection{\texorpdfstring{createReaderFor()}{createReaderFor()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_audio_format_reader}{Audio\+Format\+Reader}} $\ast$ Audio\+Format\+Manager\+::create\+Reader\+For (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_input_stream}{Input\+Stream}} $>$}]{audio\+File\+Stream }\end{DoxyParamCaption})}
+
+Searches through the known formats to try to create a suitable reader for this stream.
+
+The stream object that is passed-\/in will be deleted by this method or by the reader that is returned, so the caller should not keep any references to it.
+
+The stream that is passed-\/in must be capable of being repositioned so that all the formats can have a go at opening it.
+
+If none of the registered formats can open the stream, it\textquotesingle{}ll return nullptr. If it returns a reader, it\textquotesingle{}s the caller\textquotesingle{}s responsibility to delete the reader. \mbox{\Hypertarget{class_audio_format_manager_aee863d8fad3770f8079cca31fd75f1f6}\label{class_audio_format_manager_aee863d8fad3770f8079cca31fd75f1f6}} 
+\index{AudioFormatManager@{AudioFormatManager}!end@{end}}
+\index{end@{end}!AudioFormatManager@{AudioFormatManager}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_audio_format}{Audio\+Format}} $\ast$\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}}  $\ast$ Audio\+Format\+Manager\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Iterator access to the list of known formats. \mbox{\Hypertarget{class_audio_format_manager_ac9996d4676be479481196e185f8c39d9}\label{class_audio_format_manager_ac9996d4676be479481196e185f8c39d9}} 
+\index{AudioFormatManager@{AudioFormatManager}!end@{end}}
+\index{end@{end}!AudioFormatManager@{AudioFormatManager}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_audio_format}{Audio\+Format}} $\ast$$\ast$ Audio\+Format\+Manager\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Iterator access to the list of known formats. \mbox{\Hypertarget{class_audio_format_manager_ac3425df62f58af2168dc4c6ea407be43}\label{class_audio_format_manager_ac3425df62f58af2168dc4c6ea407be43}} 
+\index{AudioFormatManager@{AudioFormatManager}!findFormatForFileExtension@{findFormatForFileExtension}}
+\index{findFormatForFileExtension@{findFormatForFileExtension}!AudioFormatManager@{AudioFormatManager}}
+\doxysubsubsection{\texorpdfstring{findFormatForFileExtension()}{findFormatForFileExtension()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_audio_format}{Audio\+Format}} $\ast$ Audio\+Format\+Manager\+::find\+Format\+For\+File\+Extension (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&}]{file\+Extension }\end{DoxyParamCaption}) const}
+
+Looks for which of the known formats is listed as being for a given file extension.
+
+The extension may have a dot before it, so e.\+g. \char`\"{}.\+wav\char`\"{} or \char`\"{}wav\char`\"{} are both ok. \mbox{\Hypertarget{class_audio_format_manager_a7c1b92f72bf99cad242d65a7b68eb638}\label{class_audio_format_manager_a7c1b92f72bf99cad242d65a7b68eb638}} 
+\index{AudioFormatManager@{AudioFormatManager}!getDefaultFormat@{getDefaultFormat}}
+\index{getDefaultFormat@{getDefaultFormat}!AudioFormatManager@{AudioFormatManager}}
+\doxysubsubsection{\texorpdfstring{getDefaultFormat()}{getDefaultFormat()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_audio_format}{Audio\+Format}} $\ast$ Audio\+Format\+Manager\+::get\+Default\+Format (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Returns the format which has been set as the default one.
+
+You can set a format as being the default when it is registered. It\textquotesingle{}s useful when you want to write to a file, because the best format may change between platforms, e.\+g. AIFF is preferred on the Mac, WAV on Windows.
+
+If none has been set as the default, this method will just return the first one in the list. \mbox{\Hypertarget{class_audio_format_manager_aa57686de7ff7c37f679a1843214be96b}\label{class_audio_format_manager_aa57686de7ff7c37f679a1843214be96b}} 
+\index{AudioFormatManager@{AudioFormatManager}!getKnownFormat@{getKnownFormat}}
+\index{getKnownFormat@{getKnownFormat}!AudioFormatManager@{AudioFormatManager}}
+\doxysubsubsection{\texorpdfstring{getKnownFormat()}{getKnownFormat()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_audio_format}{Audio\+Format}} $\ast$ Audio\+Format\+Manager\+::get\+Known\+Format (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{index }\end{DoxyParamCaption}) const}
+
+Returns one of the registered file formats. \mbox{\Hypertarget{class_audio_format_manager_a013c73d91e514853f44bfe6b67c284a5}\label{class_audio_format_manager_a013c73d91e514853f44bfe6b67c284a5}} 
+\index{AudioFormatManager@{AudioFormatManager}!getNumKnownFormats@{getNumKnownFormats}}
+\index{getNumKnownFormats@{getNumKnownFormats}!AudioFormatManager@{AudioFormatManager}}
+\doxysubsubsection{\texorpdfstring{getNumKnownFormats()}{getNumKnownFormats()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} Audio\+Format\+Manager\+::get\+Num\+Known\+Formats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Returns the number of currently registered file formats. \mbox{\Hypertarget{class_audio_format_manager_a2cbd8623b8012b33f6f6cc55201d5b7d}\label{class_audio_format_manager_a2cbd8623b8012b33f6f6cc55201d5b7d}} 
+\index{AudioFormatManager@{AudioFormatManager}!getWildcardForAllFormats@{getWildcardForAllFormats}}
+\index{getWildcardForAllFormats@{getWildcardForAllFormats}!AudioFormatManager@{AudioFormatManager}}
+\doxysubsubsection{\texorpdfstring{getWildcardForAllFormats()}{getWildcardForAllFormats()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_string}{String}} Audio\+Format\+Manager\+::get\+Wildcard\+For\+All\+Formats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Returns a set of wildcards for file-\/matching that contains the extensions for all known formats.
+
+E.\+g. if might return \char`\"{}$\ast$.\+wav;$\ast$.\+aiff\char`\"{} if it just knows about wavs and aiffs. \mbox{\Hypertarget{class_audio_format_manager_a1a8510b3078662358013ad78239d688e}\label{class_audio_format_manager_a1a8510b3078662358013ad78239d688e}} 
+\index{AudioFormatManager@{AudioFormatManager}!registerBasicFormats@{registerBasicFormats}}
+\index{registerBasicFormats@{registerBasicFormats}!AudioFormatManager@{AudioFormatManager}}
+\doxysubsubsection{\texorpdfstring{registerBasicFormats()}{registerBasicFormats()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Audio\+Format\+Manager\+::register\+Basic\+Formats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Handy method to make it easy to register the formats that come with JUCE. This will add WAV and AIFF to the list, along with any other formats enabled in either the Projucer or your application\textquotesingle{}s preprocessor definitions. \mbox{\Hypertarget{class_audio_format_manager_aa9527a11651cbf1f34c4942f44ea5bf4}\label{class_audio_format_manager_aa9527a11651cbf1f34c4942f44ea5bf4}} 
+\index{AudioFormatManager@{AudioFormatManager}!registerFormat@{registerFormat}}
+\index{registerFormat@{registerFormat}!AudioFormatManager@{AudioFormatManager}}
+\doxysubsubsection{\texorpdfstring{registerFormat()}{registerFormat()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Audio\+Format\+Manager\+::register\+Format (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_audio_format}{Audio\+Format}} $\ast$}]{new\+Format,  }\item[{bool}]{make\+This\+The\+Default\+Format }\end{DoxyParamCaption})}
+
+Adds a format to the manager\textquotesingle{}s list of available file types.
+
+The object passed-\/in will be deleted by this object, so don\textquotesingle{}t keep a pointer to it!
+
+If make\+This\+The\+Default\+Format is true, then the \mbox{\hyperlink{class_audio_format_manager_a7c1b92f72bf99cad242d65a7b68eb638}{get\+Default\+Format()}} method will return this one when called. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+audio\+\_\+formats/format/\mbox{\hyperlink{juce___audio_format_manager_8h}{juce\+\_\+\+Audio\+Format\+Manager.\+h}}\item 
+build/juce\+\_\+audio\+\_\+formats/format/\mbox{\hyperlink{juce___audio_format_manager_8cpp}{juce\+\_\+\+Audio\+Format\+Manager.\+cpp}}\end{DoxyCompactItemize}

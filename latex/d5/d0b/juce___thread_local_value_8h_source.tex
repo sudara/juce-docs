@@ -1,0 +1,106 @@
+\hypertarget{juce___thread_local_value_8h_source}{}\doxysection{juce\+\_\+\+Thread\+Local\+Value.\+h}
+\label{juce___thread_local_value_8h_source}\index{build/juce\_core/threads/juce\_ThreadLocalValue.h@{build/juce\_core/threads/juce\_ThreadLocalValue.h}}
+\mbox{\hyperlink{juce___thread_local_value_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{47 \textcolor{comment}{}\textcolor{keyword}{template} <\textcolor{keyword}{typename} Type>}
+\DoxyCodeLine{48 \textcolor{keyword}{class }\mbox{\hyperlink{class_thread_local_value}{ThreadLocalValue}}}
+\DoxyCodeLine{49 \{}
+\DoxyCodeLine{50 \textcolor{keyword}{public}:}
+\DoxyCodeLine{52     \mbox{\hyperlink{class_thread_local_value_a8eddfbf44c904df38a528fb5b1d00e20}{ThreadLocalValue}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{57     \mbox{\hyperlink{class_thread_local_value_a5f84ce8c97c0c3d76be387b0d9cd5feb}{\string~ThreadLocalValue}}()}
+\DoxyCodeLine{58     \{}
+\DoxyCodeLine{59         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}* o = first.get(); o != \textcolor{keyword}{nullptr};)}
+\DoxyCodeLine{60         \{}
+\DoxyCodeLine{61             \textcolor{keyword}{auto}* next = o-\/>next;}
+\DoxyCodeLine{62             \textcolor{keyword}{delete} o;}
+\DoxyCodeLine{63             o = next;}
+\DoxyCodeLine{64         \}}
+\DoxyCodeLine{65     \}}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{72     Type\& \mbox{\hyperlink{class_thread_local_value_ab67bc069ee528cb04b4884c462ba8d42}{operator*}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                        \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_thread_local_value_acfba4720f04999b3160aa73455e10c66}{get}}(); \}}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{79     \textcolor{keyword}{operator} Type*() \textcolor{keyword}{const} \textcolor{keyword}{noexcept}                         \{ \textcolor{keywordflow}{return} \&\mbox{\hyperlink{class_thread_local_value_acfba4720f04999b3160aa73455e10c66}{get}}(); \}}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{86     Type* \mbox{\hyperlink{class_thread_local_value_aeb7eb5ddc5e5818f1ce968caa3777a1d}{operator-\/>}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                       \{ \textcolor{keywordflow}{return} \&\mbox{\hyperlink{class_thread_local_value_acfba4720f04999b3160aa73455e10c66}{get}}(); \}}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{89     \mbox{\hyperlink{class_thread_local_value}{ThreadLocalValue}}\& \mbox{\hyperlink{class_thread_local_value_a642a616f63c9b84c12460a6fd77afdda}{operator= }}(\textcolor{keyword}{const} Type\& newValue)      \{ \mbox{\hyperlink{class_thread_local_value_acfba4720f04999b3160aa73455e10c66}{get}}() = newValue; \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{96     Type\& \mbox{\hyperlink{class_thread_local_value_acfba4720f04999b3160aa73455e10c66}{get}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{97     \{}
+\DoxyCodeLine{98         \textcolor{keyword}{auto} threadId = \mbox{\hyperlink{class_thread_a12c11ba5fa9bee7ebeefe952c5d66ceb}{Thread::getCurrentThreadId}}();}
+\DoxyCodeLine{99         ObjectHolder* o = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101         \textcolor{keywordflow}{for} (o = first.get(); o != \textcolor{keyword}{nullptr}; o = o-\/>next)}
+\DoxyCodeLine{102             \textcolor{keywordflow}{if} (o-\/>threadId.get() == threadId)}
+\DoxyCodeLine{103                 \textcolor{keywordflow}{return} o-\/>object;}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105         \textcolor{keywordflow}{for} (o = first.get(); o != \textcolor{keyword}{nullptr}; o = o-\/>next)}
+\DoxyCodeLine{106             \textcolor{keywordflow}{if} (o-\/>threadId.compareAndSetBool (threadId, \textcolor{keyword}{nullptr}))}
+\DoxyCodeLine{107                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109         \textcolor{keywordflow}{if} (o != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{110             o-\/>object = Type();}
+\DoxyCodeLine{111         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{112             \textcolor{keywordflow}{for} (o = \textcolor{keyword}{new} ObjectHolder (threadId, first.get());}
+\DoxyCodeLine{113                  ! first.compareAndSetBool (o, o-\/>next);}
+\DoxyCodeLine{114                  o-\/>next = first.get());}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{116         \textcolor{keywordflow}{return} o-\/>object;}
+\DoxyCodeLine{117     \}}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{122     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_thread_local_value_a78af45671b2b057f0f584a75f79ff5b5}{releaseCurrentThreadStorage}}()}
+\DoxyCodeLine{123     \{}
+\DoxyCodeLine{124         \textcolor{keyword}{auto} threadId = \mbox{\hyperlink{class_thread_a12c11ba5fa9bee7ebeefe952c5d66ceb}{Thread::getCurrentThreadId}}();}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}* o = first.get(); o != \textcolor{keyword}{nullptr}; o = o-\/>next)}
+\DoxyCodeLine{127             \textcolor{keywordflow}{if} (o-\/>threadId.compareAndSetBool (\textcolor{keyword}{nullptr}, threadId))}
+\DoxyCodeLine{128                 \textcolor{keywordflow}{return};}
+\DoxyCodeLine{129     \}}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{131 \textcolor{keyword}{private}:}
+\DoxyCodeLine{132     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{133     \textcolor{keyword}{struct }ObjectHolder}
+\DoxyCodeLine{134     \{}
+\DoxyCodeLine{135         ObjectHolder (\mbox{\hyperlink{class_thread_adcf5808753df4373be08d38938880f65}{Thread::ThreadID}} idToUse, ObjectHolder* \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}}) : threadId (idToUse), next (\mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}}), \mbox{\hyperlink{jmemsys_8h_a77e1d3f325098324c3925e8faf6ae5cf}{object}}() \{\}}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{137         \mbox{\hyperlink{struct_atomic}{Atomic<Thread::ThreadID>}} threadId;}
+\DoxyCodeLine{138         ObjectHolder* next;}
+\DoxyCodeLine{139         Type \mbox{\hyperlink{jmemsys_8h_a77e1d3f325098324c3925e8faf6ae5cf}{object}};}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{141         \mbox{\hyperlink{group__juce__core-system_ga6ab7a603bf4435c7cb286b1744366eb2}{JUCE\_DECLARE\_NON\_COPYABLE}} (ObjectHolder)}
+\DoxyCodeLine{142     \};}
+\DoxyCodeLine{143 }
+\DoxyCodeLine{144     \textcolor{keyword}{mutable} \mbox{\hyperlink{struct_atomic}{Atomic<ObjectHolder*>}} first;}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{146     \mbox{\hyperlink{group__juce__core-system_ga6ab7a603bf4435c7cb286b1744366eb2}{JUCE\_DECLARE\_NON\_COPYABLE}} (\mbox{\hyperlink{class_thread_local_value}{ThreadLocalValue}})}
+\DoxyCodeLine{147 \};}
+\DoxyCodeLine{148 }
+\DoxyCodeLine{149  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{150 }
+
+\end{DoxyCode}

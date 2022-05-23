@@ -1,0 +1,74 @@
+\hypertarget{juce___timer_8h_source}{}\doxysection{juce\+\_\+\+Timer.\+h}
+\label{juce___timer_8h_source}\index{build/juce\_events/timers/juce\_Timer.h@{build/juce\_events/timers/juce\_Timer.h}}
+\mbox{\hyperlink{juce___timer_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{52 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_timer}{Timer}}}
+\DoxyCodeLine{53 \{}
+\DoxyCodeLine{54 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{55     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{59 \textcolor{comment}{}    \mbox{\hyperlink{class_timer_a3d18ff196960cc65f19ff5452ece31db}{Timer}}() noexcept;}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{66     \mbox{\hyperlink{class_timer}{Timer}} (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_timer}{Timer}}\&) noexcept;}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68 public:}
+\DoxyCodeLine{69     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{71 \textcolor{comment}{}    virtual \string~\mbox{\hyperlink{class_timer}{Timer}}();}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{79 \textcolor{comment}{}    virtual \textcolor{keywordtype}{void} timerCallback() = 0;}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{91 \textcolor{comment}{}    \textcolor{keywordtype}{void} startTimer (\textcolor{keywordtype}{int} intervalInMilliseconds) noexcept;}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{96     \textcolor{keywordtype}{void} startTimerHz (\textcolor{keywordtype}{int} timerFrequencyHz) noexcept;}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{108     \textcolor{keywordtype}{void} stopTimer() noexcept;}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{112 \textcolor{comment}{}    \textcolor{keywordtype}{bool} isTimerRunning() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                    \{ \textcolor{keywordflow}{return} timerPeriodMs > 0; \}}
+\DoxyCodeLine{113 }
+\DoxyCodeLine{117     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_timer_a3515b6e7a1e3777965e35686eaeb2da7}{getTimerInterval}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                   \{ \textcolor{keywordflow}{return} timerPeriodMs; \}}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{119     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{121 \textcolor{comment}{}    \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{class_timer_ae7100e8b84d2a8d6adac3d14cbbd27d6}{callAfterDelay}} (\textcolor{keywordtype}{int} milliseconds, \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\textcolor{keywordtype}{void}()> functionToCall);}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{123     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{127 \textcolor{comment}{}    \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{class_timer_a7074d145c7408da67fdbbe7359aa3b74}{callPendingTimersSynchronously}}();}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129 \textcolor{keyword}{private}:}
+\DoxyCodeLine{130     \textcolor{keyword}{class }TimerThread;}
+\DoxyCodeLine{131     \textcolor{keyword}{friend} \textcolor{keyword}{class }TimerThread;}
+\DoxyCodeLine{132     \textcolor{keywordtype}{size\_t} positionInQueue = (size\_t) -\/1;}
+\DoxyCodeLine{133     \textcolor{keywordtype}{int} timerPeriodMs = 0;}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135     \mbox{\hyperlink{class_timer}{Timer}}\& operator= (\textcolor{keyword}{const} \mbox{\hyperlink{class_timer}{Timer}}\&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{136 \};}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{138  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{139 }
+
+\end{DoxyCode}

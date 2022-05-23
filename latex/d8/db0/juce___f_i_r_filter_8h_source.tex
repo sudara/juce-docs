@@ -1,0 +1,220 @@
+\hypertarget{juce___f_i_r_filter_8h_source}{}\doxysection{juce\+\_\+\+FIRFilter.\+h}
+\label{juce___f_i_r_filter_8h_source}\index{build/juce\_dsp/processors/juce\_FIRFilter.h@{build/juce\_dsp/processors/juce\_FIRFilter.h}}
+\mbox{\hyperlink{juce___f_i_r_filter_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacedsp}{dsp}}}
+\DoxyCodeLine{30 \{}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{35 \textcolor{keyword}{namespace }FIR}
+\DoxyCodeLine{36 \{}
+\DoxyCodeLine{37     \textcolor{keyword}{template} <\textcolor{keyword}{typename} NumericType>}
+\DoxyCodeLine{38     \textcolor{keyword}{struct }\mbox{\hyperlink{structdsp_1_1_f_i_r_1_1_coefficients}{Coefficients}};}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{54 \textcolor{comment}{}    \textcolor{keyword}{template} <\textcolor{keyword}{typename} SampleType>}
+\DoxyCodeLine{55     \textcolor{keyword}{class }\mbox{\hyperlink{classdsp_1_1_f_i_r_1_1_filter}{Filter}}}
+\DoxyCodeLine{56     \{}
+\DoxyCodeLine{57     \textcolor{keyword}{public}:}
+\DoxyCodeLine{61         \textcolor{keyword}{using} \mbox{\hyperlink{classdsp_1_1_f_i_r_1_1_filter_a8c3bd0d2b3fccb19734072b42d929a76}{NumericType}} = \textcolor{keyword}{typename} \mbox{\hyperlink{structdsp_1_1_sample_type_helpers_1_1_element_type_a65d7742b9bc8bcc31efa26df071df244}{SampleTypeHelpers::ElementType<SampleType>::Type}};}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{64         \textcolor{keyword}{using} \mbox{\hyperlink{classdsp_1_1_f_i_r_1_1_filter_afe61c42041c7eb5e07e74d5d73cd8e71}{CoefficientsPtr}} = \textcolor{keyword}{typename} \mbox{\hyperlink{class_reference_counted_object_ptr}{Coefficients<NumericType>::Ptr}};}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{68 \textcolor{comment}{}        \mbox{\hyperlink{classdsp_1_1_f_i_r_1_1_filter_abc2e3befdf42f6ff3492cc1ed6a029b8}{Filter}}() : \mbox{\hyperlink{classdsp_1_1_f_i_r_1_1_filter_a4ff0c17a36a81521d4d56bf58f2dc318}{coefficients}} (new \mbox{\hyperlink{structdsp_1_1_f_i_r_1_1_coefficients}{Coefficients}}<\mbox{\hyperlink{classdsp_1_1_f_i_r_1_1_filter_a8c3bd0d2b3fccb19734072b42d929a76}{NumericType}}>)                                     \{ \mbox{\hyperlink{classdsp_1_1_f_i_r_1_1_filter_abac4f624e95a75fb073ed890ea32228c}{reset}}(); \}}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{71         \mbox{\hyperlink{classdsp_1_1_f_i_r_1_1_filter_a7ce1b9109a00603e20bdc91c0184a7c2}{Filter}} (\mbox{\hyperlink{classdsp_1_1_f_i_r_1_1_filter_afe61c42041c7eb5e07e74d5d73cd8e71}{CoefficientsPtr}} coefficientsToUse)  : \mbox{\hyperlink{classdsp_1_1_f_i_r_1_1_filter_a4ff0c17a36a81521d4d56bf58f2dc318}{coefficients}} (\mbox{\hyperlink{namespacestd}{std}}::\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{move}} (coefficientsToUse))   \{ \mbox{\hyperlink{classdsp_1_1_f_i_r_1_1_filter_abac4f624e95a75fb073ed890ea32228c}{reset}}(); \}}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73         \mbox{\hyperlink{classdsp_1_1_f_i_r_1_1_filter_a8c5ec8d58a0faeaa3aecb240acbb87f4}{Filter}} (\textcolor{keyword}{const} \mbox{\hyperlink{classdsp_1_1_f_i_r_1_1_filter}{Filter}}\&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{74         \mbox{\hyperlink{classdsp_1_1_f_i_r_1_1_filter_aebc4ff4feff50f63740640009cf50713}{Filter}} (\mbox{\hyperlink{classdsp_1_1_f_i_r_1_1_filter}{Filter}}\&\&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{75         \mbox{\hyperlink{classdsp_1_1_f_i_r_1_1_filter}{Filter}}\& \mbox{\hyperlink{classdsp_1_1_f_i_r_1_1_filter_adf52875c4772ad0ab2997dd23d515a69}{operator= }}(\textcolor{keyword}{const} \mbox{\hyperlink{classdsp_1_1_f_i_r_1_1_filter}{Filter}}\&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{76         \mbox{\hyperlink{classdsp_1_1_f_i_r_1_1_filter}{Filter}}\& \mbox{\hyperlink{classdsp_1_1_f_i_r_1_1_filter_adf52875c4772ad0ab2997dd23d515a69}{operator= }}(\mbox{\hyperlink{classdsp_1_1_f_i_r_1_1_filter}{Filter}}\&\&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{80 \textcolor{comment}{}        \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_f_i_r_1_1_filter_a8cbf1da072e55e9110eacc25bee9090a}{prepare}} (\textcolor{keyword}{const} \mbox{\hyperlink{structdsp_1_1_process_spec}{ProcessSpec}}\& spec) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{81         \{}
+\DoxyCodeLine{82             \textcolor{comment}{// This class can only process mono signals. Use the ProcessorDuplicator class}}
+\DoxyCodeLine{83             \textcolor{comment}{// to apply this filter on a multi-\/channel audio stream.}}
+\DoxyCodeLine{84             \mbox{\hyperlink{group__juce__core-system_ga61fbc12f0f914e38d0d26e6b4f3ee760}{jassertquiet}} (spec.numChannels == 1);}
+\DoxyCodeLine{85             \mbox{\hyperlink{classdsp_1_1_f_i_r_1_1_filter_abac4f624e95a75fb073ed890ea32228c}{reset}}();}
+\DoxyCodeLine{86         \}}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{93         \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_f_i_r_1_1_filter_abac4f624e95a75fb073ed890ea32228c}{reset}}()}
+\DoxyCodeLine{94         \{}
+\DoxyCodeLine{95             \textcolor{keywordflow}{if} (\mbox{\hyperlink{classdsp_1_1_f_i_r_1_1_filter_a4ff0c17a36a81521d4d56bf58f2dc318}{coefficients}} != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{96             \{}
+\DoxyCodeLine{97                 \textcolor{keyword}{auto} newSize = \mbox{\hyperlink{classdsp_1_1_f_i_r_1_1_filter_a4ff0c17a36a81521d4d56bf58f2dc318}{coefficients}}-\/>getFilterOrder() + 1;}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99                 \textcolor{keywordflow}{if} (newSize != size)}
+\DoxyCodeLine{100                 \{}
+\DoxyCodeLine{101                     memory.malloc (1 + \mbox{\hyperlink{group__juce__core-maths_gadfd716f36f80987d66ebc2fce819c1fe}{jmax}} (newSize, size, \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>} (128)));}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103                     fifo = \mbox{\hyperlink{group__juce__core-memory_gae3c97d720fa1e6288c70ea497aa6045d}{snapPointerToAlignment}} (memory.getData(), sizeof (SampleType));}
+\DoxyCodeLine{104                     size = newSize;}
+\DoxyCodeLine{105                 \}}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{107                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < size; ++i)}
+\DoxyCodeLine{108                     fifo[i] = SampleType \{0\};}
+\DoxyCodeLine{109             \}}
+\DoxyCodeLine{110         \}}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{119 \textcolor{comment}{}        \textcolor{keyword}{typename} \mbox{\hyperlink{class_reference_counted_object_ptr}{Coefficients<NumericType>::Ptr}} \mbox{\hyperlink{classdsp_1_1_f_i_r_1_1_filter_a4ff0c17a36a81521d4d56bf58f2dc318}{coefficients}};}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{121         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{123 \textcolor{comment}{}        \textcolor{keyword}{template} <\textcolor{keyword}{typename} ProcessContext>}
+\DoxyCodeLine{124         \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_f_i_r_1_1_filter_a292070b0e961a976cd4ee2d2a395b2f4}{process}} (\textcolor{keyword}{const} ProcessContext\& context) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{125         \{}
+\DoxyCodeLine{126             \textcolor{keyword}{static\_assert} (\mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{std::is\_same<typename ProcessContext::SampleType, SampleType>::value}},}
+\DoxyCodeLine{127                            \textcolor{stringliteral}{"{}The sample-\/type of the FIR filter must match the sample-\/type supplied to this process callback"{}});}
+\DoxyCodeLine{128             check();}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{130             \textcolor{keyword}{auto}\&\& inputBlock  = context.getInputBlock();}
+\DoxyCodeLine{131             \textcolor{keyword}{auto}\&\& outputBlock = context.getOutputBlock();}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{133             \textcolor{comment}{// This class can only process mono signals. Use the ProcessorDuplicator class}}
+\DoxyCodeLine{134             \textcolor{comment}{// to apply this filter on a multi-\/channel audio stream.}}
+\DoxyCodeLine{135             \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (inputBlock.getNumChannels()  == 1);}
+\DoxyCodeLine{136             \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (outputBlock.getNumChannels() == 1);}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{138             \textcolor{keyword}{auto} numSamples = inputBlock.getNumSamples();}
+\DoxyCodeLine{139             \textcolor{keyword}{auto}* \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}} = inputBlock .getChannelPointer (0);}
+\DoxyCodeLine{140             \textcolor{keyword}{auto}* \mbox{\hyperlink{namespacegl_a174f1a72ee763b6703711da180ac5d79}{dst}} = outputBlock.getChannelPointer (0);}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{142             \textcolor{keyword}{auto}* fir = \mbox{\hyperlink{classdsp_1_1_f_i_r_1_1_filter_a4ff0c17a36a81521d4d56bf58f2dc318}{coefficients}}-\/>getRawCoefficients();}
+\DoxyCodeLine{143             \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}} = pos;}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145             \textcolor{keywordflow}{if} (context.isBypassed)}
+\DoxyCodeLine{146             \{}
+\DoxyCodeLine{147                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < numSamples; ++i)}
+\DoxyCodeLine{148                 \{}
+\DoxyCodeLine{149                     fifo[\mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}}] = \mbox{\hyperlink{namespacegl_a174f1a72ee763b6703711da180ac5d79}{dst}}[i] = \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}[i];}
+\DoxyCodeLine{150                     \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}} = (\mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}} == 0 ? size -\/ 1 : \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}} -\/ 1);}
+\DoxyCodeLine{151                 \}}
+\DoxyCodeLine{152             \}}
+\DoxyCodeLine{153             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{154             \{}
+\DoxyCodeLine{155                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < numSamples; ++i)}
+\DoxyCodeLine{156                     \mbox{\hyperlink{namespacegl_a174f1a72ee763b6703711da180ac5d79}{dst}}[i] = processSingleSample (\mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}[i], fifo, fir, size, \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}});}
+\DoxyCodeLine{157             \}}
+\DoxyCodeLine{158 }
+\DoxyCodeLine{159             pos = \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}};}
+\DoxyCodeLine{160         \}}
+\DoxyCodeLine{161 }
+\DoxyCodeLine{162 }
+\DoxyCodeLine{166         SampleType JUCE\_VECTOR\_CALLTYPE \mbox{\hyperlink{classdsp_1_1_f_i_r_1_1_filter_ae03bfdf2c3e94f7bb2d32134ec72ca7f}{processSample}} (SampleType sample) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{167         \{}
+\DoxyCodeLine{168             check();}
+\DoxyCodeLine{169             \textcolor{keywordflow}{return} processSingleSample (sample, fifo, \mbox{\hyperlink{classdsp_1_1_f_i_r_1_1_filter_a4ff0c17a36a81521d4d56bf58f2dc318}{coefficients}}-\/>getRawCoefficients(), size, pos);}
+\DoxyCodeLine{170         \}}
+\DoxyCodeLine{171 }
+\DoxyCodeLine{172     \textcolor{keyword}{private}:}
+\DoxyCodeLine{173         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{174         \mbox{\hyperlink{class_heap_block}{HeapBlock<SampleType>}} memory;}
+\DoxyCodeLine{175         SampleType* fifo = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{176         \textcolor{keywordtype}{size\_t} pos = 0, size = 0;}
+\DoxyCodeLine{177 }
+\DoxyCodeLine{178         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{179         \textcolor{keywordtype}{void} check()}
+\DoxyCodeLine{180         \{}
+\DoxyCodeLine{181             \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (\mbox{\hyperlink{classdsp_1_1_f_i_r_1_1_filter_a4ff0c17a36a81521d4d56bf58f2dc318}{coefficients}} != \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{182 }
+\DoxyCodeLine{183             \textcolor{keywordflow}{if} (size != (\mbox{\hyperlink{classdsp_1_1_f_i_r_1_1_filter_a4ff0c17a36a81521d4d56bf58f2dc318}{coefficients}}-\/>getFilterOrder() + 1))}
+\DoxyCodeLine{184                 \mbox{\hyperlink{classdsp_1_1_f_i_r_1_1_filter_abac4f624e95a75fb073ed890ea32228c}{reset}}();}
+\DoxyCodeLine{185         \}}
+\DoxyCodeLine{186 }
+\DoxyCodeLine{187         \textcolor{keyword}{static} SampleType JUCE\_VECTOR\_CALLTYPE processSingleSample (SampleType sample, SampleType* \mbox{\hyperlink{namespacegl_ab998012e627da2312fc60f51c0c2f313}{buf}},}
+\DoxyCodeLine{188                                                                     \textcolor{keyword}{const} \mbox{\hyperlink{classdsp_1_1_f_i_r_1_1_filter_a8c3bd0d2b3fccb19734072b42d929a76}{NumericType}}* fir, \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegl_a0927a7b4232e61481fa501d12209467e}{m}}, \textcolor{keywordtype}{size\_t}\& \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{189         \{}
+\DoxyCodeLine{190             SampleType out (0);}
+\DoxyCodeLine{191 }
+\DoxyCodeLine{192             \mbox{\hyperlink{namespacegl_ab998012e627da2312fc60f51c0c2f313}{buf}}[\mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}}] = sample;}
+\DoxyCodeLine{193 }
+\DoxyCodeLine{194             \textcolor{keywordtype}{size\_t} k;}
+\DoxyCodeLine{195             \textcolor{keywordflow}{for} (k = 0; k < \mbox{\hyperlink{namespacegl_a0927a7b4232e61481fa501d12209467e}{m}} -\/ \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}}; ++k)}
+\DoxyCodeLine{196                 out += \mbox{\hyperlink{namespacegl_ab998012e627da2312fc60f51c0c2f313}{buf}}[(\mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}} + k)] * fir[k];}
+\DoxyCodeLine{197 }
+\DoxyCodeLine{198             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}} = 0; \mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}} < \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}}; ++\mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}})}
+\DoxyCodeLine{199                 out += \mbox{\hyperlink{namespacegl_ab998012e627da2312fc60f51c0c2f313}{buf}}[\mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}}] * fir[\mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}} + k];}
+\DoxyCodeLine{200 }
+\DoxyCodeLine{201             \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}} = (\mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}} == 0 ? \mbox{\hyperlink{namespacegl_a0927a7b4232e61481fa501d12209467e}{m}} -\/ 1 : \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}} -\/ 1);}
+\DoxyCodeLine{202 }
+\DoxyCodeLine{203             \textcolor{keywordflow}{return} out;}
+\DoxyCodeLine{204         \}}
+\DoxyCodeLine{205 }
+\DoxyCodeLine{206 }
+\DoxyCodeLine{207         \mbox{\hyperlink{group__juce__core-memory_gab3639a79598b35f2116f4572af0d93f1}{JUCE\_LEAK\_DETECTOR}} (\mbox{\hyperlink{classdsp_1_1_f_i_r_1_1_filter_abc2e3befdf42f6ff3492cc1ed6a029b8}{Filter}})}
+\DoxyCodeLine{208     \};}
+\DoxyCodeLine{209 }
+\DoxyCodeLine{210     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{218 \textcolor{comment}{}    \textcolor{keyword}{template} <\textcolor{keyword}{typename} NumericType>}
+\DoxyCodeLine{219     \textcolor{keyword}{struct }\mbox{\hyperlink{structdsp_1_1_f_i_r_1_1_coefficients}{Coefficients}}  : \textcolor{keyword}{public} \mbox{\hyperlink{structdsp_1_1_processor_state}{ProcessorState}}}
+\DoxyCodeLine{220     \{}
+\DoxyCodeLine{221         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{223 \textcolor{comment}{}        \mbox{\hyperlink{structdsp_1_1_f_i_r_1_1_coefficients_aeded3999ea3bc91b1b6ebb9588abfd78}{Coefficients}}()  : \mbox{\hyperlink{structdsp_1_1_f_i_r_1_1_coefficients_a67c1af2e9f13855e4285f9c74b45c47c}{coefficients}} (\{ NumericType() \}) \{\}}
+\DoxyCodeLine{224 }
+\DoxyCodeLine{226         \mbox{\hyperlink{structdsp_1_1_f_i_r_1_1_coefficients_ab12510c9718051bae3b1dce7a6b48b7d}{Coefficients}} (\textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}})    \{ \mbox{\hyperlink{structdsp_1_1_f_i_r_1_1_coefficients_a67c1af2e9f13855e4285f9c74b45c47c}{coefficients}}.resize ((\textcolor{keywordtype}{int}) \mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}}); \}}
+\DoxyCodeLine{227 }
+\DoxyCodeLine{229         \mbox{\hyperlink{structdsp_1_1_f_i_r_1_1_coefficients_ab8c64bff9e67d9fa672d601042b571e0}{Coefficients}} (\textcolor{keyword}{const} NumericType* \mbox{\hyperlink{namespacegl_a86d4caaead9cc2b5ad0ad5e23ae0568d}{samples}}, \textcolor{keywordtype}{size\_t} numSamples)   : \mbox{\hyperlink{structdsp_1_1_f_i_r_1_1_coefficients_a67c1af2e9f13855e4285f9c74b45c47c}{coefficients}} (\mbox{\hyperlink{namespacegl_a86d4caaead9cc2b5ad0ad5e23ae0568d}{samples}}, (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}) numSamples) \{\}}
+\DoxyCodeLine{230 }
+\DoxyCodeLine{231         \mbox{\hyperlink{structdsp_1_1_f_i_r_1_1_coefficients_af517218ef10691ae1a9b204971ca28e4}{Coefficients}} (\textcolor{keyword}{const} \mbox{\hyperlink{structdsp_1_1_f_i_r_1_1_coefficients}{Coefficients}}\&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{232         \mbox{\hyperlink{structdsp_1_1_f_i_r_1_1_coefficients_a22ce4e051c06a17dfbc4d9719076cbf7}{Coefficients}} (\mbox{\hyperlink{structdsp_1_1_f_i_r_1_1_coefficients}{Coefficients}}\&\&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{233         \mbox{\hyperlink{structdsp_1_1_f_i_r_1_1_coefficients}{Coefficients}}\& \mbox{\hyperlink{structdsp_1_1_f_i_r_1_1_coefficients_af905c18cb63f7d23450250c9766ce8d9}{operator= }}(\textcolor{keyword}{const} \mbox{\hyperlink{structdsp_1_1_f_i_r_1_1_coefficients}{Coefficients}}\&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{234         \mbox{\hyperlink{structdsp_1_1_f_i_r_1_1_coefficients}{Coefficients}}\& \mbox{\hyperlink{structdsp_1_1_f_i_r_1_1_coefficients_af905c18cb63f7d23450250c9766ce8d9}{operator= }}(\mbox{\hyperlink{structdsp_1_1_f_i_r_1_1_coefficients}{Coefficients}}\&\&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{235 }
+\DoxyCodeLine{239         \textcolor{keyword}{using} \mbox{\hyperlink{class_reference_counted_object_ptr}{Ptr}} = \mbox{\hyperlink{class_reference_counted_object_ptr}{ReferenceCountedObjectPtr<Coefficients>}};}
+\DoxyCodeLine{240 }
+\DoxyCodeLine{241         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{243 \textcolor{comment}{}        \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{structdsp_1_1_f_i_r_1_1_coefficients_a356dcbfbaf8a3a4e3aecfc7b7d3f1910}{getFilterOrder}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept  \{ \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>} (\mbox{\hyperlink{structdsp_1_1_f_i_r_1_1_coefficients_a67c1af2e9f13855e4285f9c74b45c47c}{coefficients}}.size()) -\/ 1; \}}
+\DoxyCodeLine{244 }
+\DoxyCodeLine{248         \textcolor{keywordtype}{double} \mbox{\hyperlink{structdsp_1_1_f_i_r_1_1_coefficients_ab1514d92438ab2576000b97442019a31}{getMagnitudeForFrequency}} (\textcolor{keywordtype}{double} frequency, \textcolor{keywordtype}{double} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}}) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{249 }
+\DoxyCodeLine{253         \textcolor{keywordtype}{void} \mbox{\hyperlink{structdsp_1_1_f_i_r_1_1_coefficients_a26664c232c4e0a01491f512e3e91c145}{getMagnitudeForFrequencyArray}} (\textcolor{keywordtype}{double}* frequencies, \textcolor{keywordtype}{double}* magnitudes,}
+\DoxyCodeLine{254                                             \textcolor{keywordtype}{size\_t} numSamples, \textcolor{keywordtype}{double} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}}) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{255 }
+\DoxyCodeLine{259         \textcolor{keywordtype}{double} \mbox{\hyperlink{structdsp_1_1_f_i_r_1_1_coefficients_adcb1082e5dfffaec0c27b5821d1a04eb}{getPhaseForFrequency}} (\textcolor{keywordtype}{double} frequency, \textcolor{keywordtype}{double} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}}) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{260 }
+\DoxyCodeLine{264         \textcolor{keywordtype}{void} \mbox{\hyperlink{structdsp_1_1_f_i_r_1_1_coefficients_aa5f5d3fdb2bc450af14ed90e5341a7f8}{getPhaseForFrequencyArray}} (\textcolor{keywordtype}{double}* frequencies, \textcolor{keywordtype}{double}* phases,}
+\DoxyCodeLine{265                                         \textcolor{keywordtype}{size\_t} numSamples, \textcolor{keywordtype}{double} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}}) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{266 }
+\DoxyCodeLine{268         NumericType* \mbox{\hyperlink{structdsp_1_1_f_i_r_1_1_coefficients_a488e924460ca1284f5e892b45eff861d}{getRawCoefficients}}() noexcept              \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{structdsp_1_1_f_i_r_1_1_coefficients_a67c1af2e9f13855e4285f9c74b45c47c}{coefficients}}.getRawDataPointer(); \}}
+\DoxyCodeLine{269 }
+\DoxyCodeLine{271         \textcolor{keyword}{const} NumericType* \mbox{\hyperlink{structdsp_1_1_f_i_r_1_1_coefficients_a9d118dd2c9ef7f8185ab7e3e92729e3a}{getRawCoefficients}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept  \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{structdsp_1_1_f_i_r_1_1_coefficients_a67c1af2e9f13855e4285f9c74b45c47c}{coefficients}}.begin(); \}}
+\DoxyCodeLine{272 }
+\DoxyCodeLine{273         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{275 \textcolor{comment}{}        \textcolor{keywordtype}{void} \mbox{\hyperlink{structdsp_1_1_f_i_r_1_1_coefficients_a5184f756d7cccf8589726c358fcc354b}{normalise}}() noexcept;}
+\DoxyCodeLine{276 }
+\DoxyCodeLine{277         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{281 \textcolor{comment}{}        \mbox{\hyperlink{class_array}{Array}}<NumericType> \mbox{\hyperlink{structdsp_1_1_f_i_r_1_1_coefficients_a67c1af2e9f13855e4285f9c74b45c47c}{coefficients}};}
+\DoxyCodeLine{282     \};}
+\DoxyCodeLine{283 \}}
+\DoxyCodeLine{284 }
+\DoxyCodeLine{285 \} \textcolor{comment}{// namespace dsp}}
+\DoxyCodeLine{286  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{287 }
+
+\end{DoxyCode}

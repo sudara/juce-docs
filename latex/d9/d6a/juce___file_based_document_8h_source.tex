@@ -1,0 +1,142 @@
+\hypertarget{juce___file_based_document_8h_source}{}\doxysection{juce\+\_\+\+File\+Based\+Document.\+h}
+\label{juce___file_based_document_8h_source}\index{build/juce\_gui\_extra/documents/juce\_FileBasedDocument.h@{build/juce\_gui\_extra/documents/juce\_FileBasedDocument.h}}
+\mbox{\hyperlink{juce___file_based_document_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{52 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \mbox{\hyperlink{class_file_based_document}{FileBasedDocument}}  : \textcolor{keyword}{public} \mbox{\hyperlink{class_change_broadcaster}{ChangeBroadcaster}}}
+\DoxyCodeLine{53 \{}
+\DoxyCodeLine{54 \textcolor{keyword}{public}:}
+\DoxyCodeLine{62     \mbox{\hyperlink{class_file_based_document_a67651e24e6e4bd15b08edb2d101910aa}{FileBasedDocument}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& fileExtension,}
+\DoxyCodeLine{63                        \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& fileWildCard,}
+\DoxyCodeLine{64                        \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& openFileDialogTitle,}
+\DoxyCodeLine{65                        \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& saveFileDialogTitle);}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{68     \mbox{\hyperlink{class_file_based_document_a3625c0c2cae088138986507355bb9cc2}{\string~FileBasedDocument}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{76 \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_file_based_document_a5676fb4537c68957616bd24f54b58f22}{hasChangedSinceSaved}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{88     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_file_based_document_a3a058b73776404d76b828205ca058e42}{changed}}();}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{97     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_file_based_document_a60543bfd5b8889f23714e1b5cc72c44a}{setChangedFlag}} (\textcolor{keywordtype}{bool} hasChanged);}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{110 \textcolor{comment}{}    \mbox{\hyperlink{class_result}{Result}} \mbox{\hyperlink{class_file_based_document_a6d758f915b502d1211643fe5b9731f2b}{loadFrom}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& fileToLoadFrom,}
+\DoxyCodeLine{111                      \textcolor{keywordtype}{bool} showMessageOnFailure,}
+\DoxyCodeLine{112                      \textcolor{keywordtype}{bool} showWaitCursor = \textcolor{keyword}{true});}
+\DoxyCodeLine{113 }
+\DoxyCodeLine{125     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_file_based_document_aa8522753a5e3d02a07cb89bddf51742a}{loadFromAsync}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& fileToLoadFrom,}
+\DoxyCodeLine{126                         \textcolor{keywordtype}{bool} showMessageOnFailure,}
+\DoxyCodeLine{127                         \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\textcolor{keywordtype}{void} (\mbox{\hyperlink{class_result}{Result}})> \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}});}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129 \textcolor{preprocessor}{   \#if JUCE\_MODAL\_LOOPS\_PERMITTED}}
+\DoxyCodeLine{141     \mbox{\hyperlink{class_result}{Result}} loadFromUserSpecifiedFile (\textcolor{keywordtype}{bool} showMessageOnFailure);}
+\DoxyCodeLine{142 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{143 }
+\DoxyCodeLine{154     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_file_based_document_a2d7e152e9d1d182cb7e869d7fddaa5f5}{loadFromUserSpecifiedFileAsync}} (\textcolor{keywordtype}{bool} showMessageOnFailure, \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\textcolor{keywordtype}{void} (\mbox{\hyperlink{class_result}{Result}})> \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}});}
+\DoxyCodeLine{155 }
+\DoxyCodeLine{156     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{159 \textcolor{comment}{}    \textcolor{keyword}{enum} \mbox{\hyperlink{class_file_based_document_a89d417326aed46fb561c599265e426d2}{SaveResult}}}
+\DoxyCodeLine{160     \{}
+\DoxyCodeLine{161         savedOk = 0,            }
+\DoxyCodeLine{162         \mbox{\hyperlink{class_file_based_document_a89d417326aed46fb561c599265e426d2a29ad285f4aa606eb17b9f7f0de211f5f}{userCancelledSave}},      }
+\DoxyCodeLine{163         failedToWriteToFile     }
+\DoxyCodeLine{164     \};}
+\DoxyCodeLine{165 }
+\DoxyCodeLine{166 \textcolor{preprocessor}{   \#if JUCE\_MODAL\_LOOPS\_PERMITTED}}
+\DoxyCodeLine{179     SaveResult save (\textcolor{keywordtype}{bool} askUserForFileIfNotSpecified,}
+\DoxyCodeLine{180                      \textcolor{keywordtype}{bool} showMessageOnFailure);}
+\DoxyCodeLine{181 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{182 }
+\DoxyCodeLine{196     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_file_based_document_adcfb4b05633e2bcef730d3ee84a67221}{saveAsync}} (\textcolor{keywordtype}{bool} askUserForFileIfNotSpecified,}
+\DoxyCodeLine{197                     \textcolor{keywordtype}{bool} showMessageOnFailure,}
+\DoxyCodeLine{198                     \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\textcolor{keywordtype}{void} (\mbox{\hyperlink{class_file_based_document_a89d417326aed46fb561c599265e426d2}{SaveResult}})> \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}});}
+\DoxyCodeLine{199 }
+\DoxyCodeLine{200 \textcolor{preprocessor}{   \#if JUCE\_MODAL\_LOOPS\_PERMITTED}}
+\DoxyCodeLine{221     \mbox{\hyperlink{class_file_based_document_a89d417326aed46fb561c599265e426d2}{SaveResult}} saveIfNeededAndUserAgrees();}
+\DoxyCodeLine{222 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{223 }
+\DoxyCodeLine{244     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_file_based_document_a368bc1fcfc97a0379c000029280f8fd1}{saveIfNeededAndUserAgreesAsync}} (\mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\textcolor{keywordtype}{void} (\mbox{\hyperlink{class_file_based_document_a89d417326aed46fb561c599265e426d2}{SaveResult}})> \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}});}
+\DoxyCodeLine{245 }
+\DoxyCodeLine{246 \textcolor{preprocessor}{   \#if JUCE\_MODAL\_LOOPS\_PERMITTED}}
+\DoxyCodeLine{264     \mbox{\hyperlink{class_file_based_document_a89d417326aed46fb561c599265e426d2}{SaveResult}} saveAs (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& newFile,}
+\DoxyCodeLine{265                        \textcolor{keywordtype}{bool} warnAboutOverwritingExistingFiles,}
+\DoxyCodeLine{266                        \textcolor{keywordtype}{bool} askUserForFileIfNotSpecified,}
+\DoxyCodeLine{267                        \textcolor{keywordtype}{bool} showMessageOnFailure,}
+\DoxyCodeLine{268                        \textcolor{keywordtype}{bool} showWaitCursor = \textcolor{keyword}{true});}
+\DoxyCodeLine{269 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{270 }
+\DoxyCodeLine{288     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_file_based_document_ad76d6b947e5f6a6490b3f72c8f3171d9}{saveAsAsync}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& newFile,}
+\DoxyCodeLine{289                       \textcolor{keywordtype}{bool} warnAboutOverwritingExistingFiles,}
+\DoxyCodeLine{290                       \textcolor{keywordtype}{bool} askUserForFileIfNotSpecified,}
+\DoxyCodeLine{291                       \textcolor{keywordtype}{bool} showMessageOnFailure,}
+\DoxyCodeLine{292                       \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\textcolor{keywordtype}{void} (\mbox{\hyperlink{class_file_based_document_a89d417326aed46fb561c599265e426d2}{SaveResult}})> \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}});}
+\DoxyCodeLine{293 }
+\DoxyCodeLine{294 \textcolor{preprocessor}{   \#if JUCE\_MODAL\_LOOPS\_PERMITTED}}
+\DoxyCodeLine{306     \mbox{\hyperlink{class_file_based_document_a89d417326aed46fb561c599265e426d2}{SaveResult}} saveAsInteractive (\textcolor{keywordtype}{bool} warnAboutOverwritingExistingFiles);}
+\DoxyCodeLine{307 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{308 }
+\DoxyCodeLine{321     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_file_based_document_aa9e9f9f3ff92ec7389896fd7a065bacc}{saveAsInteractiveAsync}} (\textcolor{keywordtype}{bool} warnAboutOverwritingExistingFiles,}
+\DoxyCodeLine{322                                  \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\textcolor{keywordtype}{void} (\mbox{\hyperlink{class_file_based_document_a89d417326aed46fb561c599265e426d2}{SaveResult}})> \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}});}
+\DoxyCodeLine{323 }
+\DoxyCodeLine{324     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{332 \textcolor{comment}{}    \textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& \mbox{\hyperlink{class_file_based_document_aa601eea0e822c49b1033fbef6105c8a5}{getFile}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{333 }
+\DoxyCodeLine{340     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_file_based_document_ae9831c5ca4576665d1876c129976a3f8}{setFile}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& newFile);}
+\DoxyCodeLine{341 }
+\DoxyCodeLine{342 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{343     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{349 \textcolor{comment}{}    \textcolor{keyword}{virtual} \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{class_file_based_document_abf86feb0316f1d010c956bd687bc2bf8}{getDocumentTitle}}() = 0;}
+\DoxyCodeLine{350 }
+\DoxyCodeLine{354     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_result}{Result}} \mbox{\hyperlink{class_file_based_document_a88999864b31dbda9bb0be1e593428cef}{loadDocument}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& file) = 0;}
+\DoxyCodeLine{355 }
+\DoxyCodeLine{365     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_file_based_document_a5f0d065897bf68b61d97dcd29d44e756}{loadDocumentAsync}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& file, \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\textcolor{keywordtype}{void} (\mbox{\hyperlink{class_result}{Result}})> \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}});}
+\DoxyCodeLine{366 }
+\DoxyCodeLine{370     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_result}{Result}} \mbox{\hyperlink{class_file_based_document_a2042b565e85118d3a2b34f677f61cbd8}{saveDocument}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& file) = 0;}
+\DoxyCodeLine{371 }
+\DoxyCodeLine{381     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_file_based_document_a9dac4f65e30eed2a401151fb500782a8}{saveDocumentAsync}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& file, \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\textcolor{keywordtype}{void} (\mbox{\hyperlink{class_result}{Result}})> \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}});}
+\DoxyCodeLine{382 }
+\DoxyCodeLine{399     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_file}{File}} \mbox{\hyperlink{class_file_based_document_a5d71efccf45d29de2c2dcbb801e8021a}{getLastDocumentOpened}}() = 0;}
+\DoxyCodeLine{400 }
+\DoxyCodeLine{414     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_file_based_document_ad8fa1517b5af884e0213ee365dcf65f4}{setLastDocumentOpened}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& file) = 0;}
+\DoxyCodeLine{415 }
+\DoxyCodeLine{422     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_file}{File}} \mbox{\hyperlink{class_file_based_document_a8eea22697f626904d28cee0082d3d076}{getSuggestedSaveAsFile}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& defaultFile);}
+\DoxyCodeLine{423 }
+\DoxyCodeLine{424 \textcolor{keyword}{private}:}
+\DoxyCodeLine{425     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{426     \textcolor{keyword}{class }Pimpl;}
+\DoxyCodeLine{427     std::unique\_ptr<Pimpl> pimpl;}
+\DoxyCodeLine{428 }
+\DoxyCodeLine{429     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_file_based_document}{FileBasedDocument}})}
+\DoxyCodeLine{430 \};}
+\DoxyCodeLine{431 }
+\DoxyCodeLine{432  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{433 }
+
+\end{DoxyCode}

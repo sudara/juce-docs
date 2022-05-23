@@ -1,0 +1,137 @@
+\hypertarget{juce___gain_8h_source}{}\doxysection{juce\+\_\+\+Gain.\+h}
+\label{juce___gain_8h_source}\index{build/juce\_dsp/widgets/juce\_Gain.h@{build/juce\_dsp/widgets/juce\_Gain.h}}
+\mbox{\hyperlink{juce___gain_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacedsp}{dsp}}}
+\DoxyCodeLine{30 \{}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{37 \textcolor{keyword}{template} <\textcolor{keyword}{typename} FloatType>}
+\DoxyCodeLine{38 \textcolor{keyword}{class }\mbox{\hyperlink{classdsp_1_1_gain}{Gain}}}
+\DoxyCodeLine{39 \{}
+\DoxyCodeLine{40 \textcolor{keyword}{public}:}
+\DoxyCodeLine{41     \mbox{\hyperlink{classdsp_1_1_gain_a200ed41d5146959da2854053cb5489f2}{Gain}}() noexcept = default;}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{45 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_gain_a5229331bdc6b9e539a23def4fff4b367}{setGainLinear}} (FloatType newGain) noexcept             \{ gain.setTargetValue (newGain); \}}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{48     \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_gain_a45261e40b2cd4a7330caecf9d8da94bf}{setGainDecibels}} (FloatType newGainDecibels) \textcolor{keyword}{noexcept}   \{ \mbox{\hyperlink{classdsp_1_1_gain_a5229331bdc6b9e539a23def4fff4b367}{setGainLinear}} (Decibels::decibelsToGain<FloatType> (newGainDecibels)); \}}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{51     FloatType \mbox{\hyperlink{classdsp_1_1_gain_a9812ceecd1285cb8cb606ce1f92a3484}{getGainLinear}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                    \{ \textcolor{keywordflow}{return} gain.getTargetValue(); \}}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{54     FloatType \mbox{\hyperlink{classdsp_1_1_gain_abda3fca0ee012124275e0d5b9d39e877}{getGainDecibels}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                  \{ \textcolor{keywordflow}{return} Decibels::gainToDecibels<FloatType> (\mbox{\hyperlink{classdsp_1_1_gain_a9812ceecd1285cb8cb606ce1f92a3484}{getGainLinear}}()); \}}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{57     \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_gain_aa77fbd3b382a5e072b44c4faa13df2eb}{setRampDurationSeconds}} (\textcolor{keywordtype}{double} newDurationSeconds) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{58     \{}
+\DoxyCodeLine{59         \textcolor{keywordflow}{if} (rampDurationSeconds != newDurationSeconds)}
+\DoxyCodeLine{60         \{}
+\DoxyCodeLine{61             rampDurationSeconds = newDurationSeconds;}
+\DoxyCodeLine{62             \mbox{\hyperlink{classdsp_1_1_gain_ae6b4e13fc4130fa84aac69ef0267baa1}{reset}}();}
+\DoxyCodeLine{63         \}}
+\DoxyCodeLine{64     \}}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{67     \textcolor{keywordtype}{double} \mbox{\hyperlink{classdsp_1_1_gain_aa825c963e8aab250bea20be7b9303b47}{getRampDurationSeconds}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept              \{ \textcolor{keywordflow}{return} rampDurationSeconds; \}}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{70     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classdsp_1_1_gain_a0a97200da210aa72c0bc7675ab7e6258}{isSmoothing}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                           \{ \textcolor{keywordflow}{return} gain.isSmoothing(); \}}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{74 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_gain_a7e2fd31eedeb003bd9c1c0addaf2b6fd}{prepare}} (\textcolor{keyword}{const} \mbox{\hyperlink{structdsp_1_1_process_spec}{ProcessSpec}}\& spec) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{75     \{}
+\DoxyCodeLine{76         sampleRate = spec.sampleRate;}
+\DoxyCodeLine{77         \mbox{\hyperlink{classdsp_1_1_gain_ae6b4e13fc4130fa84aac69ef0267baa1}{reset}}();}
+\DoxyCodeLine{78     \}}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{81     \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_gain_ae6b4e13fc4130fa84aac69ef0267baa1}{reset}}() noexcept}
+\DoxyCodeLine{82     \{}
+\DoxyCodeLine{83         \textcolor{keywordflow}{if} (sampleRate > 0)}
+\DoxyCodeLine{84             gain.reset (sampleRate, rampDurationSeconds);}
+\DoxyCodeLine{85     \}}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{89 \textcolor{comment}{}    \textcolor{keyword}{template} <\textcolor{keyword}{typename} SampleType>}
+\DoxyCodeLine{90     SampleType JUCE\_VECTOR\_CALLTYPE \mbox{\hyperlink{classdsp_1_1_gain_a9815db26b8959a4537182d2d2e165ee9}{processSample}} (SampleType \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{91     \{}
+\DoxyCodeLine{92         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}} * gain.getNextValue();}
+\DoxyCodeLine{93     \}}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{96     \textcolor{keyword}{template} <\textcolor{keyword}{typename} ProcessContext>}
+\DoxyCodeLine{97     \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_gain_a998a6c8a796a3e36060aea9dcbb8c4cc}{process}} (\textcolor{keyword}{const} ProcessContext\& context) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{98     \{}
+\DoxyCodeLine{99         \textcolor{keyword}{auto}\&\& inBlock  = context.getInputBlock();}
+\DoxyCodeLine{100         \textcolor{keyword}{auto}\&\& outBlock = context.getOutputBlock();}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{102         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (inBlock.getNumChannels() == outBlock.getNumChannels());}
+\DoxyCodeLine{103         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (inBlock.getNumSamples() == outBlock.getNumSamples());}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105         \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a8703aca610f6fee6039234f569470dbf}{len}}         = inBlock.getNumSamples();}
+\DoxyCodeLine{106         \textcolor{keyword}{auto} numChannels = inBlock.getNumChannels();}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{108         \textcolor{keywordflow}{if} (context.isBypassed)}
+\DoxyCodeLine{109         \{}
+\DoxyCodeLine{110             gain.skip (\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>} (\mbox{\hyperlink{namespacegl_a8703aca610f6fee6039234f569470dbf}{len}}));}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112             \textcolor{keywordflow}{if} (context.usesSeparateInputAndOutputBlocks())}
+\DoxyCodeLine{113                 outBlock.copyFrom (inBlock);}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{116         \}}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118         \textcolor{keywordflow}{if} (numChannels == 1)}
+\DoxyCodeLine{119         \{}
+\DoxyCodeLine{120             \textcolor{keyword}{auto}* \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}} = inBlock.getChannelPointer (0);}
+\DoxyCodeLine{121             \textcolor{keyword}{auto}* \mbox{\hyperlink{namespacegl_a174f1a72ee763b6703711da180ac5d79}{dst}} = outBlock.getChannelPointer (0);}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{123             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < \mbox{\hyperlink{namespacegl_a8703aca610f6fee6039234f569470dbf}{len}}; ++i)}
+\DoxyCodeLine{124                 \mbox{\hyperlink{namespacegl_a174f1a72ee763b6703711da180ac5d79}{dst}}[i] = \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}[i] * gain.getNextValue();}
+\DoxyCodeLine{125         \}}
+\DoxyCodeLine{126         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{127         \{}
+\DoxyCodeLine{128             \mbox{\hyperlink{group__juce__core-system_ga2b5e72f0aed7e03859e4964392e57a43}{JUCE\_BEGIN\_IGNORE\_WARNINGS\_MSVC}} (6255 6386)}
+\DoxyCodeLine{129             \textcolor{keyword}{auto}* gains = \textcolor{keyword}{static\_cast<}FloatType*\textcolor{keyword}{>} (alloca (\textcolor{keyword}{sizeof} (FloatType) * \mbox{\hyperlink{namespacegl_a8703aca610f6fee6039234f569470dbf}{len}}));}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{131             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < \mbox{\hyperlink{namespacegl_a8703aca610f6fee6039234f569470dbf}{len}}; ++i)}
+\DoxyCodeLine{132                 gains[i] = gain.getNextValue();}
+\DoxyCodeLine{133             \mbox{\hyperlink{group__juce__core-system_gab840349e4194162156441dce088062ec}{JUCE\_END\_IGNORE\_WARNINGS\_MSVC}}}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} chan = 0; chan < numChannels; ++chan)}
+\DoxyCodeLine{136                 FloatVectorOperations::multiply (outBlock.getChannelPointer (chan),}
+\DoxyCodeLine{137                                                  inBlock.getChannelPointer (chan),}
+\DoxyCodeLine{138                                                  gains, \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>} (\mbox{\hyperlink{namespacegl_a8703aca610f6fee6039234f569470dbf}{len}}));}
+\DoxyCodeLine{139         \}}
+\DoxyCodeLine{140     \}}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{142 \textcolor{keyword}{private}:}
+\DoxyCodeLine{143     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{144     \mbox{\hyperlink{class_smoothed_value}{SmoothedValue<FloatType>}} gain;}
+\DoxyCodeLine{145     \textcolor{keywordtype}{double} sampleRate = 0, rampDurationSeconds = 0;}
+\DoxyCodeLine{146 \};}
+\DoxyCodeLine{147 }
+\DoxyCodeLine{148 \} \textcolor{comment}{// namespace dsp}}
+\DoxyCodeLine{149  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{150 }
+
+\end{DoxyCode}

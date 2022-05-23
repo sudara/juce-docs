@@ -1,0 +1,252 @@
+\hypertarget{flac_2lib_f_l_a_c_2include_2private_2lpc_8h_source}{}\doxysection{lpc.\+h}
+\label{flac_2lib_f_l_a_c_2include_2private_2lpc_8h_source}\index{build/juce\_audio\_formats/codecs/flac/libFLAC/include/private/lpc.h@{build/juce\_audio\_formats/codecs/flac/libFLAC/include/private/lpc.h}}
+\mbox{\hyperlink{flac_2lib_f_l_a_c_2include_2private_2lpc_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/* libFLAC -\/ Free Lossless Audio Codec library}}
+\DoxyCodeLine{2 \textcolor{comment}{ * Copyright (C) 2000-\/2009  Josh Coalson}}
+\DoxyCodeLine{3 \textcolor{comment}{ * Copyright (C) 2011-\/2014  Xiph.Org Foundation}}
+\DoxyCodeLine{4 \textcolor{comment}{ *}}
+\DoxyCodeLine{5 \textcolor{comment}{ * Redistribution and use in source and binary forms, with or without}}
+\DoxyCodeLine{6 \textcolor{comment}{ * modification, are permitted provided that the following conditions}}
+\DoxyCodeLine{7 \textcolor{comment}{ * are met:}}
+\DoxyCodeLine{8 \textcolor{comment}{ *}}
+\DoxyCodeLine{9 \textcolor{comment}{ * -\/ Redistributions of source code must retain the above copyright}}
+\DoxyCodeLine{10 \textcolor{comment}{ * notice, this list of conditions and the following disclaimer.}}
+\DoxyCodeLine{11 \textcolor{comment}{ *}}
+\DoxyCodeLine{12 \textcolor{comment}{ * -\/ Redistributions in binary form must reproduce the above copyright}}
+\DoxyCodeLine{13 \textcolor{comment}{ * notice, this list of conditions and the following disclaimer in the}}
+\DoxyCodeLine{14 \textcolor{comment}{ * documentation and/or other materials provided with the distribution.}}
+\DoxyCodeLine{15 \textcolor{comment}{ *}}
+\DoxyCodeLine{16 \textcolor{comment}{ * -\/ Neither the name of the Xiph.org Foundation nor the names of its}}
+\DoxyCodeLine{17 \textcolor{comment}{ * contributors may be used to endorse or promote products derived from}}
+\DoxyCodeLine{18 \textcolor{comment}{ * this software without specific prior written permission.}}
+\DoxyCodeLine{19 \textcolor{comment}{ *}}
+\DoxyCodeLine{20 \textcolor{comment}{ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS}}
+\DoxyCodeLine{21 \textcolor{comment}{ * ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT}}
+\DoxyCodeLine{22 \textcolor{comment}{ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR}}
+\DoxyCodeLine{23 \textcolor{comment}{ * A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE FOUNDATION OR}}
+\DoxyCodeLine{24 \textcolor{comment}{ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,}}
+\DoxyCodeLine{25 \textcolor{comment}{ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,}}
+\DoxyCodeLine{26 \textcolor{comment}{ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR}}
+\DoxyCodeLine{27 \textcolor{comment}{ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF}}
+\DoxyCodeLine{28 \textcolor{comment}{ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING}}
+\DoxyCodeLine{29 \textcolor{comment}{ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS}}
+\DoxyCodeLine{30 \textcolor{comment}{ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.}}
+\DoxyCodeLine{31 \textcolor{comment}{ */}}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#ifndef FLAC\_\_PRIVATE\_\_LPC\_H}}
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#define FLAC\_\_PRIVATE\_\_LPC\_H}}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#ifdef HAVE\_CONFIG\_H}}
+\DoxyCodeLine{37 \textcolor{preprocessor}{\#include <config.h>}}
+\DoxyCodeLine{38 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{cpu_8h}{cpu.h}}"{}}}
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{float_8h}{float.h}}"{}}}
+\DoxyCodeLine{42 \textcolor{preprocessor}{\#include "{}../../../format.h"{}}}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#ifndef FLAC\_\_INTEGER\_ONLY\_LIBRARY}}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46 \textcolor{comment}{/*}}
+\DoxyCodeLine{47 \textcolor{comment}{ *  FLAC\_\_lpc\_window\_data()}}
+\DoxyCodeLine{48 \textcolor{comment}{ *  -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{49 \textcolor{comment}{ *  Applies the given window to the data.}}
+\DoxyCodeLine{50 \textcolor{comment}{ *  OPT: asm implementation}}
+\DoxyCodeLine{51 \textcolor{comment}{ *}}
+\DoxyCodeLine{52 \textcolor{comment}{ *  IN in[0,data\_len-\/1]}}
+\DoxyCodeLine{53 \textcolor{comment}{ *  IN window[0,data\_len-\/1]}}
+\DoxyCodeLine{54 \textcolor{comment}{ *  OUT out[0,lag-\/1]}}
+\DoxyCodeLine{55 \textcolor{comment}{ *  IN data\_len}}
+\DoxyCodeLine{56 \textcolor{comment}{ */}}
+\DoxyCodeLine{57 \textcolor{keywordtype}{void} \mbox{\hyperlink{flac_2lib_f_l_a_c_2include_2private_2lpc_8h_a867119f4574bc1b16298da882da0dc25}{FLAC\_\_lpc\_window\_data}}(\textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} \mbox{\hyperlink{namespacegl_a72039bf7996167e32bca54980c5595e4}{in}}[], \textcolor{keyword}{const} \mbox{\hyperlink{float_8h_a72409a67c78d2af7d29a9e9362cd49b8}{FLAC\_\_real}} window[], \mbox{\hyperlink{float_8h_a72409a67c78d2af7d29a9e9362cd49b8}{FLAC\_\_real}} out[], \textcolor{keywordtype}{unsigned} data\_len);}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59 \textcolor{comment}{/*}}
+\DoxyCodeLine{60 \textcolor{comment}{ *  FLAC\_\_lpc\_compute\_autocorrelation()}}
+\DoxyCodeLine{61 \textcolor{comment}{ *  -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{62 \textcolor{comment}{ *  Compute the autocorrelation for lags between 0 and lag-\/1.}}
+\DoxyCodeLine{63 \textcolor{comment}{ *  Assumes data[] outside of [0,data\_len-\/1] == 0.}}
+\DoxyCodeLine{64 \textcolor{comment}{ *  Asserts that lag > 0.}}
+\DoxyCodeLine{65 \textcolor{comment}{ *}}
+\DoxyCodeLine{66 \textcolor{comment}{ *  IN data[0,data\_len-\/1]}}
+\DoxyCodeLine{67 \textcolor{comment}{ *  IN data\_len}}
+\DoxyCodeLine{68 \textcolor{comment}{ *  IN 0 < lag <= data\_len}}
+\DoxyCodeLine{69 \textcolor{comment}{ *  OUT autoc[0,lag-\/1]}}
+\DoxyCodeLine{70 \textcolor{comment}{ */}}
+\DoxyCodeLine{71 \textcolor{keywordtype}{void} \mbox{\hyperlink{flac_2lib_f_l_a_c_2include_2private_2lpc_8h_a6683172b6e1a5f5c742d214a2abac428}{FLAC\_\_lpc\_compute\_autocorrelation}}(\textcolor{keyword}{const} \mbox{\hyperlink{float_8h_a72409a67c78d2af7d29a9e9362cd49b8}{FLAC\_\_real}} \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}[], \textcolor{keywordtype}{unsigned} data\_len, \textcolor{keywordtype}{unsigned} lag, \mbox{\hyperlink{float_8h_a72409a67c78d2af7d29a9e9362cd49b8}{FLAC\_\_real}} autoc[]);}
+\DoxyCodeLine{72 \textcolor{preprocessor}{\#ifndef FLAC\_\_NO\_ASM}}
+\DoxyCodeLine{73 \textcolor{preprocessor}{\#  ifdef FLAC\_\_CPU\_IA32}}
+\DoxyCodeLine{74 \textcolor{preprocessor}{\#    ifdef FLAC\_\_HAS\_NASM}}
+\DoxyCodeLine{75 \textcolor{keywordtype}{void} FLAC\_\_lpc\_compute\_autocorrelation\_asm\_ia32(\textcolor{keyword}{const} \mbox{\hyperlink{float_8h_a72409a67c78d2af7d29a9e9362cd49b8}{FLAC\_\_real}} \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}[], \textcolor{keywordtype}{unsigned} data\_len, \textcolor{keywordtype}{unsigned} lag, \mbox{\hyperlink{float_8h_a72409a67c78d2af7d29a9e9362cd49b8}{FLAC\_\_real}} autoc[]);}
+\DoxyCodeLine{76 \textcolor{keywordtype}{void} FLAC\_\_lpc\_compute\_autocorrelation\_asm\_ia32\_sse\_lag\_4(\textcolor{keyword}{const} \mbox{\hyperlink{float_8h_a72409a67c78d2af7d29a9e9362cd49b8}{FLAC\_\_real}} \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}[], \textcolor{keywordtype}{unsigned} data\_len, \textcolor{keywordtype}{unsigned} lag, \mbox{\hyperlink{float_8h_a72409a67c78d2af7d29a9e9362cd49b8}{FLAC\_\_real}} autoc[]);}
+\DoxyCodeLine{77 \textcolor{keywordtype}{void} FLAC\_\_lpc\_compute\_autocorrelation\_asm\_ia32\_sse\_lag\_8(\textcolor{keyword}{const} \mbox{\hyperlink{float_8h_a72409a67c78d2af7d29a9e9362cd49b8}{FLAC\_\_real}} \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}[], \textcolor{keywordtype}{unsigned} data\_len, \textcolor{keywordtype}{unsigned} lag, \mbox{\hyperlink{float_8h_a72409a67c78d2af7d29a9e9362cd49b8}{FLAC\_\_real}} autoc[]);}
+\DoxyCodeLine{78 \textcolor{keywordtype}{void} FLAC\_\_lpc\_compute\_autocorrelation\_asm\_ia32\_sse\_lag\_12(\textcolor{keyword}{const} \mbox{\hyperlink{float_8h_a72409a67c78d2af7d29a9e9362cd49b8}{FLAC\_\_real}} \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}[], \textcolor{keywordtype}{unsigned} data\_len, \textcolor{keywordtype}{unsigned} lag, \mbox{\hyperlink{float_8h_a72409a67c78d2af7d29a9e9362cd49b8}{FLAC\_\_real}} autoc[]);}
+\DoxyCodeLine{79 \textcolor{keywordtype}{void} FLAC\_\_lpc\_compute\_autocorrelation\_asm\_ia32\_sse\_lag\_16(\textcolor{keyword}{const} \mbox{\hyperlink{float_8h_a72409a67c78d2af7d29a9e9362cd49b8}{FLAC\_\_real}} \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}[], \textcolor{keywordtype}{unsigned} data\_len, \textcolor{keywordtype}{unsigned} lag, \mbox{\hyperlink{float_8h_a72409a67c78d2af7d29a9e9362cd49b8}{FLAC\_\_real}} autoc[]);}
+\DoxyCodeLine{80 \textcolor{preprocessor}{\#    endif}}
+\DoxyCodeLine{81 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{82 \textcolor{preprocessor}{\#  if (defined FLAC\_\_CPU\_IA32 || defined FLAC\_\_CPU\_X86\_64) \&\& defined FLAC\_\_HAS\_X86INTRIN}}
+\DoxyCodeLine{83 \textcolor{preprocessor}{\#    ifdef FLAC\_\_SSE\_SUPPORTED}}
+\DoxyCodeLine{84 \textcolor{keywordtype}{void} FLAC\_\_lpc\_compute\_autocorrelation\_intrin\_sse\_lag\_4(\textcolor{keyword}{const} \mbox{\hyperlink{float_8h_a72409a67c78d2af7d29a9e9362cd49b8}{FLAC\_\_real}} \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}[], \textcolor{keywordtype}{unsigned} data\_len, \textcolor{keywordtype}{unsigned} lag, \mbox{\hyperlink{float_8h_a72409a67c78d2af7d29a9e9362cd49b8}{FLAC\_\_real}} autoc[]);}
+\DoxyCodeLine{85 \textcolor{keywordtype}{void} FLAC\_\_lpc\_compute\_autocorrelation\_intrin\_sse\_lag\_8(\textcolor{keyword}{const} \mbox{\hyperlink{float_8h_a72409a67c78d2af7d29a9e9362cd49b8}{FLAC\_\_real}} \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}[], \textcolor{keywordtype}{unsigned} data\_len, \textcolor{keywordtype}{unsigned} lag, \mbox{\hyperlink{float_8h_a72409a67c78d2af7d29a9e9362cd49b8}{FLAC\_\_real}} autoc[]);}
+\DoxyCodeLine{86 \textcolor{keywordtype}{void} FLAC\_\_lpc\_compute\_autocorrelation\_intrin\_sse\_lag\_12(\textcolor{keyword}{const} \mbox{\hyperlink{float_8h_a72409a67c78d2af7d29a9e9362cd49b8}{FLAC\_\_real}} \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}[], \textcolor{keywordtype}{unsigned} data\_len, \textcolor{keywordtype}{unsigned} lag, \mbox{\hyperlink{float_8h_a72409a67c78d2af7d29a9e9362cd49b8}{FLAC\_\_real}} autoc[]);}
+\DoxyCodeLine{87 \textcolor{keywordtype}{void} FLAC\_\_lpc\_compute\_autocorrelation\_intrin\_sse\_lag\_16(\textcolor{keyword}{const} \mbox{\hyperlink{float_8h_a72409a67c78d2af7d29a9e9362cd49b8}{FLAC\_\_real}} \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}[], \textcolor{keywordtype}{unsigned} data\_len, \textcolor{keywordtype}{unsigned} lag, \mbox{\hyperlink{float_8h_a72409a67c78d2af7d29a9e9362cd49b8}{FLAC\_\_real}} autoc[]);}
+\DoxyCodeLine{88 \textcolor{preprocessor}{\#    endif}}
+\DoxyCodeLine{89 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{90 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92 \textcolor{comment}{/*}}
+\DoxyCodeLine{93 \textcolor{comment}{ *  FLAC\_\_lpc\_compute\_lp\_coefficients()}}
+\DoxyCodeLine{94 \textcolor{comment}{ *  -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{95 \textcolor{comment}{ *  Computes LP coefficients for orders 1..max\_order.}}
+\DoxyCodeLine{96 \textcolor{comment}{ *  Do not call if autoc[0] == 0.0.  This means the signal is zero}}
+\DoxyCodeLine{97 \textcolor{comment}{ *  and there is no point in calculating a predictor.}}
+\DoxyCodeLine{98 \textcolor{comment}{ *}}
+\DoxyCodeLine{99 \textcolor{comment}{ *  IN autoc[0,max\_order]                      autocorrelation values}}
+\DoxyCodeLine{100 \textcolor{comment}{ *  IN 0 < max\_order <= FLAC\_\_MAX\_LPC\_ORDER    max LP order to compute}}
+\DoxyCodeLine{101 \textcolor{comment}{ *  OUT lp\_coeff[0,max\_order-\/1][0,max\_order-\/1] LP coefficients for each order}}
+\DoxyCodeLine{102 \textcolor{comment}{ *  *** IMPORTANT:}}
+\DoxyCodeLine{103 \textcolor{comment}{ *  *** lp\_coeff[0,max\_order-\/1][max\_order,FLAC\_\_MAX\_LPC\_ORDER-\/1] are untouched}}
+\DoxyCodeLine{104 \textcolor{comment}{ *  OUT error[0,max\_order-\/1]                   error for each order (more}}
+\DoxyCodeLine{105 \textcolor{comment}{ *                                             specifically, the variance of}}
+\DoxyCodeLine{106 \textcolor{comment}{ *                                             the error signal times \# of}}
+\DoxyCodeLine{107 \textcolor{comment}{ *                                             samples in the signal)}}
+\DoxyCodeLine{108 \textcolor{comment}{ *}}
+\DoxyCodeLine{109 \textcolor{comment}{ *  Example: if max\_order is 9, the LP coefficients for order 9 will be}}
+\DoxyCodeLine{110 \textcolor{comment}{ *           in lp\_coeff[8][0,8], the LP coefficients for order 8 will be}}
+\DoxyCodeLine{111 \textcolor{comment}{ *           in lp\_coeff[7][0,7], etc.}}
+\DoxyCodeLine{112 \textcolor{comment}{ */}}
+\DoxyCodeLine{113 \textcolor{keywordtype}{void} \mbox{\hyperlink{flac_2lib_f_l_a_c_2include_2private_2lpc_8h_a72b473b1bb93bbda9865aa72fc8bfd5f}{FLAC\_\_lpc\_compute\_lp\_coefficients}}(\textcolor{keyword}{const} \mbox{\hyperlink{float_8h_a72409a67c78d2af7d29a9e9362cd49b8}{FLAC\_\_real}} autoc[], \textcolor{keywordtype}{unsigned} *max\_order, \mbox{\hyperlink{float_8h_a72409a67c78d2af7d29a9e9362cd49b8}{FLAC\_\_real}} lp\_coeff[][\mbox{\hyperlink{group__flac__format_ga16108d413f524329f338cff6e05f3aff}{FLAC\_\_MAX\_LPC\_ORDER}}], \mbox{\hyperlink{float_8h_ae412de69b520c73194a464bfcdc1104d}{FLAC\_\_double}} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_af44443f87d7b66dff07b3d884445dca1}{error}}[]);}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115 \textcolor{comment}{/*}}
+\DoxyCodeLine{116 \textcolor{comment}{ *  FLAC\_\_lpc\_quantize\_coefficients()}}
+\DoxyCodeLine{117 \textcolor{comment}{ *  -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{118 \textcolor{comment}{ *  Quantizes the LP coefficients.  NOTE: precision + bits\_per\_sample}}
+\DoxyCodeLine{119 \textcolor{comment}{ *  must be less than 32 (sizeof(FLAC\_\_int32)*8).}}
+\DoxyCodeLine{120 \textcolor{comment}{ *}}
+\DoxyCodeLine{121 \textcolor{comment}{ *  IN lp\_coeff[0,order-\/1]    LP coefficients}}
+\DoxyCodeLine{122 \textcolor{comment}{ *  IN order                  LP order}}
+\DoxyCodeLine{123 \textcolor{comment}{ *  IN FLAC\_\_MIN\_QLP\_COEFF\_PRECISION < precision}}
+\DoxyCodeLine{124 \textcolor{comment}{ *                            desired precision (in bits, including sign}}
+\DoxyCodeLine{125 \textcolor{comment}{ *                            bit) of largest coefficient}}
+\DoxyCodeLine{126 \textcolor{comment}{ *  OUT qlp\_coeff[0,order-\/1]  quantized coefficients}}
+\DoxyCodeLine{127 \textcolor{comment}{ *  OUT shift                 \# of bits to shift right to get approximated}}
+\DoxyCodeLine{128 \textcolor{comment}{ *                            LP coefficients.  NOTE: could be negative.}}
+\DoxyCodeLine{129 \textcolor{comment}{ *  RETURN 0 => quantization OK}}
+\DoxyCodeLine{130 \textcolor{comment}{ *         1 => coefficients require too much shifting for *shift to}}
+\DoxyCodeLine{131 \textcolor{comment}{ *              fit in the LPC subframe header.  'shift' is unset.}}
+\DoxyCodeLine{132 \textcolor{comment}{ *         2 => coefficients are all zero, which is bad.  'shift' is}}
+\DoxyCodeLine{133 \textcolor{comment}{ *              unset.}}
+\DoxyCodeLine{134 \textcolor{comment}{ */}}
+\DoxyCodeLine{135 \textcolor{keywordtype}{int} \mbox{\hyperlink{flac_2lib_f_l_a_c_2include_2private_2lpc_8h_aa9d3b8ced80ee25bc221458ea65b844c}{FLAC\_\_lpc\_quantize\_coefficients}}(\textcolor{keyword}{const} \mbox{\hyperlink{float_8h_a72409a67c78d2af7d29a9e9362cd49b8}{FLAC\_\_real}} lp\_coeff[], \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}}, \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespacegl_a4cca4e97acf0cb7c0b75ced489ffa6f0}{precision}}, \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} qlp\_coeff[], \textcolor{keywordtype}{int} *\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_gga485dc2a0e5ed7da3d9f826367b36ee55aa844ac0d299bd083b2938e6cbf34743a}{shift}});}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{137 \textcolor{comment}{/*}}
+\DoxyCodeLine{138 \textcolor{comment}{ *  FLAC\_\_lpc\_compute\_residual\_from\_qlp\_coefficients()}}
+\DoxyCodeLine{139 \textcolor{comment}{ *  -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{140 \textcolor{comment}{ *  Compute the residual signal obtained from sutracting the predicted}}
+\DoxyCodeLine{141 \textcolor{comment}{ *  signal from the original.}}
+\DoxyCodeLine{142 \textcolor{comment}{ *}}
+\DoxyCodeLine{143 \textcolor{comment}{ *  IN data[-\/order,data\_len-\/1] original signal (NOTE THE INDICES!)}}
+\DoxyCodeLine{144 \textcolor{comment}{ *  IN data\_len                length of original signal}}
+\DoxyCodeLine{145 \textcolor{comment}{ *  IN qlp\_coeff[0,order-\/1]    quantized LP coefficients}}
+\DoxyCodeLine{146 \textcolor{comment}{ *  IN order > 0               LP order}}
+\DoxyCodeLine{147 \textcolor{comment}{ *  IN lp\_quantization         quantization of LP coefficients in bits}}
+\DoxyCodeLine{148 \textcolor{comment}{ *  OUT residual[0,data\_len-\/1] residual signal}}
+\DoxyCodeLine{149 \textcolor{comment}{ */}}
+\DoxyCodeLine{150 \textcolor{keywordtype}{void} \mbox{\hyperlink{flac_2lib_f_l_a_c_2include_2private_2lpc_8h_a2980e47119fc429f5f16fed7d02beb38}{FLAC\_\_lpc\_compute\_residual\_from\_qlp\_coefficients}}(\textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} *\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, \textcolor{keywordtype}{unsigned} data\_len, \textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} qlp\_coeff[], \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}}, \textcolor{keywordtype}{int} lp\_quantization, \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} residual[]);}
+\DoxyCodeLine{151 \textcolor{keywordtype}{void} \mbox{\hyperlink{flac_2lib_f_l_a_c_2include_2private_2lpc_8h_a6dad11bf241f3bec6311c1a96a09435f}{FLAC\_\_lpc\_compute\_residual\_from\_qlp\_coefficients\_wide}}(\textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} *\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, \textcolor{keywordtype}{unsigned} data\_len, \textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} qlp\_coeff[], \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}}, \textcolor{keywordtype}{int} lp\_quantization, \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} residual[]);}
+\DoxyCodeLine{152 \textcolor{preprocessor}{\#ifndef FLAC\_\_NO\_ASM}}
+\DoxyCodeLine{153 \textcolor{preprocessor}{\#  ifdef FLAC\_\_CPU\_IA32}}
+\DoxyCodeLine{154 \textcolor{preprocessor}{\#    ifdef FLAC\_\_HAS\_NASM}}
+\DoxyCodeLine{155 \textcolor{keywordtype}{void} FLAC\_\_lpc\_compute\_residual\_from\_qlp\_coefficients\_asm\_ia32(\textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} *\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, \textcolor{keywordtype}{unsigned} data\_len, \textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} qlp\_coeff[], \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}}, \textcolor{keywordtype}{int} lp\_quantization, \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} residual[]);}
+\DoxyCodeLine{156 \textcolor{keywordtype}{void} FLAC\_\_lpc\_compute\_residual\_from\_qlp\_coefficients\_asm\_ia32\_mmx(\textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} *\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, \textcolor{keywordtype}{unsigned} data\_len, \textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} qlp\_coeff[], \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}}, \textcolor{keywordtype}{int} lp\_quantization, \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} residual[]);}
+\DoxyCodeLine{157 \textcolor{keywordtype}{void} FLAC\_\_lpc\_compute\_residual\_from\_qlp\_coefficients\_wide\_asm\_ia32(\textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} *\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, \textcolor{keywordtype}{unsigned} data\_len, \textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} qlp\_coeff[], \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}}, \textcolor{keywordtype}{int} lp\_quantization, \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} residual[]);}
+\DoxyCodeLine{158 \textcolor{preprocessor}{\#    endif}}
+\DoxyCodeLine{159 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{160 \textcolor{preprocessor}{\#  if (defined FLAC\_\_CPU\_IA32 || defined FLAC\_\_CPU\_X86\_64) \&\& defined FLAC\_\_HAS\_X86INTRIN}}
+\DoxyCodeLine{161 \textcolor{preprocessor}{\#    ifdef FLAC\_\_SSE2\_SUPPORTED}}
+\DoxyCodeLine{162 \textcolor{keywordtype}{void} FLAC\_\_lpc\_compute\_residual\_from\_qlp\_coefficients\_16\_intrin\_sse2(\textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} *\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, \textcolor{keywordtype}{unsigned} data\_len, \textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} qlp\_coeff[], \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}}, \textcolor{keywordtype}{int} lp\_quantization, \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} residual[]);}
+\DoxyCodeLine{163 \textcolor{keywordtype}{void} FLAC\_\_lpc\_compute\_residual\_from\_qlp\_coefficients\_intrin\_sse2(\textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} *\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, \textcolor{keywordtype}{unsigned} data\_len, \textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} qlp\_coeff[], \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}}, \textcolor{keywordtype}{int} lp\_quantization, \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} residual[]);}
+\DoxyCodeLine{164 \textcolor{preprocessor}{\#    endif}}
+\DoxyCodeLine{165 \textcolor{preprocessor}{\#    ifdef FLAC\_\_SSE4\_1\_SUPPORTED}}
+\DoxyCodeLine{166 \textcolor{keywordtype}{void} FLAC\_\_lpc\_compute\_residual\_from\_qlp\_coefficients\_intrin\_sse41(\textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} *\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, \textcolor{keywordtype}{unsigned} data\_len, \textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} qlp\_coeff[], \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}}, \textcolor{keywordtype}{int} lp\_quantization, \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} residual[]);}
+\DoxyCodeLine{167 \textcolor{keywordtype}{void} FLAC\_\_lpc\_compute\_residual\_from\_qlp\_coefficients\_wide\_intrin\_sse41(\textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} *\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, \textcolor{keywordtype}{unsigned} data\_len, \textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} qlp\_coeff[], \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}}, \textcolor{keywordtype}{int} lp\_quantization, \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} residual[]);}
+\DoxyCodeLine{168 \textcolor{preprocessor}{\#    endif}}
+\DoxyCodeLine{169 \textcolor{preprocessor}{\#    ifdef FLAC\_\_AVX2\_SUPPORTED}}
+\DoxyCodeLine{170 \textcolor{keywordtype}{void} FLAC\_\_lpc\_compute\_residual\_from\_qlp\_coefficients\_16\_intrin\_avx2(\textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} *\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, \textcolor{keywordtype}{unsigned} data\_len, \textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} qlp\_coeff[], \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}}, \textcolor{keywordtype}{int} lp\_quantization, \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} residual[]);}
+\DoxyCodeLine{171 \textcolor{keywordtype}{void} FLAC\_\_lpc\_compute\_residual\_from\_qlp\_coefficients\_intrin\_avx2(\textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} *\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, \textcolor{keywordtype}{unsigned} data\_len, \textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} qlp\_coeff[], \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}}, \textcolor{keywordtype}{int} lp\_quantization, \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} residual[]);}
+\DoxyCodeLine{172 \textcolor{keywordtype}{void} FLAC\_\_lpc\_compute\_residual\_from\_qlp\_coefficients\_wide\_intrin\_avx2(\textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} *\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, \textcolor{keywordtype}{unsigned} data\_len, \textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} qlp\_coeff[], \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}}, \textcolor{keywordtype}{int} lp\_quantization, \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} residual[]);}
+\DoxyCodeLine{173 \textcolor{preprocessor}{\#    endif}}
+\DoxyCodeLine{174 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{175 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{176 }
+\DoxyCodeLine{177 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* !defined FLAC\_\_INTEGER\_ONLY\_LIBRARY */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{178 }
+\DoxyCodeLine{179 \textcolor{comment}{/*}}
+\DoxyCodeLine{180 \textcolor{comment}{ *  FLAC\_\_lpc\_restore\_signal()}}
+\DoxyCodeLine{181 \textcolor{comment}{ *  -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{182 \textcolor{comment}{ *  Restore the original signal by summing the residual and the}}
+\DoxyCodeLine{183 \textcolor{comment}{ *  predictor.}}
+\DoxyCodeLine{184 \textcolor{comment}{ *}}
+\DoxyCodeLine{185 \textcolor{comment}{ *  IN residual[0,data\_len-\/1]  residual signal}}
+\DoxyCodeLine{186 \textcolor{comment}{ *  IN data\_len                length of original signal}}
+\DoxyCodeLine{187 \textcolor{comment}{ *  IN qlp\_coeff[0,order-\/1]    quantized LP coefficients}}
+\DoxyCodeLine{188 \textcolor{comment}{ *  IN order > 0               LP order}}
+\DoxyCodeLine{189 \textcolor{comment}{ *  IN lp\_quantization         quantization of LP coefficients in bits}}
+\DoxyCodeLine{190 \textcolor{comment}{ *  *** IMPORTANT: the caller must pass in the historical samples:}}
+\DoxyCodeLine{191 \textcolor{comment}{ *  IN  data[-\/order,-\/1]        previously-\/reconstructed historical samples}}
+\DoxyCodeLine{192 \textcolor{comment}{ *  OUT data[0,data\_len-\/1]     original signal}}
+\DoxyCodeLine{193 \textcolor{comment}{ */}}
+\DoxyCodeLine{194 \textcolor{keywordtype}{void} \mbox{\hyperlink{flac_2lib_f_l_a_c_2include_2private_2lpc_8h_a495bcc3fe74d9ff194c956aec40cbcda}{FLAC\_\_lpc\_restore\_signal}}(\textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} residual[], \textcolor{keywordtype}{unsigned} data\_len, \textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} qlp\_coeff[], \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}}, \textcolor{keywordtype}{int} lp\_quantization, \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}[]);}
+\DoxyCodeLine{195 \textcolor{keywordtype}{void} \mbox{\hyperlink{flac_2lib_f_l_a_c_2include_2private_2lpc_8h_aed6dd7a799dce7c49217ffcc0bda7333}{FLAC\_\_lpc\_restore\_signal\_wide}}(\textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} residual[], \textcolor{keywordtype}{unsigned} data\_len, \textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} qlp\_coeff[], \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}}, \textcolor{keywordtype}{int} lp\_quantization, \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}[]);}
+\DoxyCodeLine{196 \textcolor{preprocessor}{\#ifndef FLAC\_\_NO\_ASM}}
+\DoxyCodeLine{197 \textcolor{preprocessor}{\#  ifdef FLAC\_\_CPU\_IA32}}
+\DoxyCodeLine{198 \textcolor{preprocessor}{\#    ifdef FLAC\_\_HAS\_NASM}}
+\DoxyCodeLine{199 \textcolor{keywordtype}{void} FLAC\_\_lpc\_restore\_signal\_asm\_ia32(\textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} residual[], \textcolor{keywordtype}{unsigned} data\_len, \textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} qlp\_coeff[], \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}}, \textcolor{keywordtype}{int} lp\_quantization, \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}[]);}
+\DoxyCodeLine{200 \textcolor{keywordtype}{void} FLAC\_\_lpc\_restore\_signal\_asm\_ia32\_mmx(\textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} residual[], \textcolor{keywordtype}{unsigned} data\_len, \textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} qlp\_coeff[], \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}}, \textcolor{keywordtype}{int} lp\_quantization, \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}[]);}
+\DoxyCodeLine{201 \textcolor{keywordtype}{void} FLAC\_\_lpc\_restore\_signal\_wide\_asm\_ia32(\textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} residual[], \textcolor{keywordtype}{unsigned} data\_len, \textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} qlp\_coeff[], \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}}, \textcolor{keywordtype}{int} lp\_quantization, \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}[]);}
+\DoxyCodeLine{202 \textcolor{preprocessor}{\#    endif }\textcolor{comment}{/* FLAC\_\_HAS\_NASM */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{203 \textcolor{preprocessor}{\#  endif }\textcolor{comment}{/* FLAC\_\_CPU\_IA32 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{204 \textcolor{preprocessor}{\#  if (defined FLAC\_\_CPU\_IA32 || defined FLAC\_\_CPU\_X86\_64) \&\& defined FLAC\_\_HAS\_X86INTRIN}}
+\DoxyCodeLine{205 \textcolor{preprocessor}{\#    ifdef FLAC\_\_SSE2\_SUPPORTED}}
+\DoxyCodeLine{206 \textcolor{keywordtype}{void} FLAC\_\_lpc\_restore\_signal\_16\_intrin\_sse2(\textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} residual[], \textcolor{keywordtype}{unsigned} data\_len, \textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} qlp\_coeff[], \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}}, \textcolor{keywordtype}{int} lp\_quantization, \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}[]);}
+\DoxyCodeLine{207 \textcolor{preprocessor}{\#    endif}}
+\DoxyCodeLine{208 \textcolor{preprocessor}{\#    ifdef FLAC\_\_SSE4\_1\_SUPPORTED}}
+\DoxyCodeLine{209 \textcolor{keywordtype}{void} FLAC\_\_lpc\_restore\_signal\_wide\_intrin\_sse41(\textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} residual[], \textcolor{keywordtype}{unsigned} data\_len, \textcolor{keyword}{const} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} qlp\_coeff[], \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}}, \textcolor{keywordtype}{int} lp\_quantization, \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\_\_int32}} \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}[]);}
+\DoxyCodeLine{210 \textcolor{preprocessor}{\#    endif}}
+\DoxyCodeLine{211 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{212 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* FLAC\_\_NO\_ASM */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{213 }
+\DoxyCodeLine{214 \textcolor{preprocessor}{\#ifndef FLAC\_\_INTEGER\_ONLY\_LIBRARY}}
+\DoxyCodeLine{215 }
+\DoxyCodeLine{216 \textcolor{comment}{/*}}
+\DoxyCodeLine{217 \textcolor{comment}{ *  FLAC\_\_lpc\_compute\_expected\_bits\_per\_residual\_sample()}}
+\DoxyCodeLine{218 \textcolor{comment}{ *  -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{219 \textcolor{comment}{ *  Compute the expected number of bits per residual signal sample}}
+\DoxyCodeLine{220 \textcolor{comment}{ *  based on the LP error (which is related to the residual variance).}}
+\DoxyCodeLine{221 \textcolor{comment}{ *}}
+\DoxyCodeLine{222 \textcolor{comment}{ *  IN lpc\_error >= 0.0   error returned from calculating LP coefficients}}
+\DoxyCodeLine{223 \textcolor{comment}{ *  IN total\_samples > 0  \# of samples in residual signal}}
+\DoxyCodeLine{224 \textcolor{comment}{ *  RETURN                expected bits per sample}}
+\DoxyCodeLine{225 \textcolor{comment}{ */}}
+\DoxyCodeLine{226 \mbox{\hyperlink{float_8h_ae412de69b520c73194a464bfcdc1104d}{FLAC\_\_double}} \mbox{\hyperlink{flac_2lib_f_l_a_c_2include_2private_2lpc_8h_adb5854ebd677194f744e7921b7950a63}{FLAC\_\_lpc\_compute\_expected\_bits\_per\_residual\_sample}}(\mbox{\hyperlink{float_8h_ae412de69b520c73194a464bfcdc1104d}{FLAC\_\_double}} lpc\_error, \textcolor{keywordtype}{unsigned} total\_samples);}
+\DoxyCodeLine{227 \mbox{\hyperlink{float_8h_ae412de69b520c73194a464bfcdc1104d}{FLAC\_\_double}} \mbox{\hyperlink{flac_2lib_f_l_a_c_2include_2private_2lpc_8h_a06788a2a0664a67ab047c4a3a2075eaf}{FLAC\_\_lpc\_compute\_expected\_bits\_per\_residual\_sample\_with\_error\_scale}}(\mbox{\hyperlink{float_8h_ae412de69b520c73194a464bfcdc1104d}{FLAC\_\_double}} lpc\_error, \mbox{\hyperlink{float_8h_ae412de69b520c73194a464bfcdc1104d}{FLAC\_\_double}} error\_scale);}
+\DoxyCodeLine{228 }
+\DoxyCodeLine{229 \textcolor{comment}{/*}}
+\DoxyCodeLine{230 \textcolor{comment}{ *  FLAC\_\_lpc\_compute\_best\_order()}}
+\DoxyCodeLine{231 \textcolor{comment}{ *  -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{232 \textcolor{comment}{ *  Compute the best order from the array of signal errors returned}}
+\DoxyCodeLine{233 \textcolor{comment}{ *  during coefficient computation.}}
+\DoxyCodeLine{234 \textcolor{comment}{ *}}
+\DoxyCodeLine{235 \textcolor{comment}{ *  IN lpc\_error[0,max\_order-\/1] >= 0.0  error returned from calculating LP coefficients}}
+\DoxyCodeLine{236 \textcolor{comment}{ *  IN max\_order > 0                    max LP order}}
+\DoxyCodeLine{237 \textcolor{comment}{ *  IN total\_samples > 0                \# of samples in residual signal}}
+\DoxyCodeLine{238 \textcolor{comment}{ *  IN overhead\_bits\_per\_order          \# of bits overhead for each increased LP order}}
+\DoxyCodeLine{239 \textcolor{comment}{ *                                      (includes warmup sample size and quantized LP coefficient)}}
+\DoxyCodeLine{240 \textcolor{comment}{ *  RETURN [1,max\_order]                best order}}
+\DoxyCodeLine{241 \textcolor{comment}{ */}}
+\DoxyCodeLine{242 \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{flac_2lib_f_l_a_c_2include_2private_2lpc_8h_adc783d4add3a752d4709c0bb414d3c9a}{FLAC\_\_lpc\_compute\_best\_order}}(\textcolor{keyword}{const} \mbox{\hyperlink{float_8h_ae412de69b520c73194a464bfcdc1104d}{FLAC\_\_double}} lpc\_error[], \textcolor{keywordtype}{unsigned} max\_order, \textcolor{keywordtype}{unsigned} total\_samples, \textcolor{keywordtype}{unsigned} overhead\_bits\_per\_order);}
+\DoxyCodeLine{243 }
+\DoxyCodeLine{244 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* !defined FLAC\_\_INTEGER\_ONLY\_LIBRARY */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{245 }
+\DoxyCodeLine{246 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

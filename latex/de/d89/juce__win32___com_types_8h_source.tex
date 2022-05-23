@@ -1,0 +1,518 @@
+\hypertarget{juce__win32___com_types_8h_source}{}\doxysection{juce\+\_\+win32\+\_\+\+Com\+Types.\+h}
+\label{juce__win32___com_types_8h_source}\index{build/juce\_video/native/juce\_win32\_ComTypes.h@{build/juce\_video/native/juce\_win32\_ComTypes.h}}
+\mbox{\hyperlink{juce__win32___com_types_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{5 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{6 \textcolor{comment}{}}
+\DoxyCodeLine{7 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{8 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{9 \textcolor{comment}{}}
+\DoxyCodeLine{10 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{11 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{12 \textcolor{comment}{}}
+\DoxyCodeLine{13 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{14 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{15 \textcolor{comment}{}}
+\DoxyCodeLine{16 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{17 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{18 \textcolor{comment}{}}
+\DoxyCodeLine{19 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{20 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{21 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{24 \textcolor{comment}{*/}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacejuce}{juce}}}
+\DoxyCodeLine{27 \{}
+\DoxyCodeLine{28 \textcolor{keyword}{namespace }ComTypes}
+\DoxyCodeLine{29 \{}
+\DoxyCodeLine{30 \textcolor{comment}{/*}}
+\DoxyCodeLine{31 \textcolor{comment}{    These interfaces would normally be included in the system platform headers.}}
+\DoxyCodeLine{32 \textcolor{comment}{    However, those headers are likely to be incomplete when building with}}
+\DoxyCodeLine{33 \textcolor{comment}{    MinGW. In order to allow building video applications under MinGW,}}
+\DoxyCodeLine{34 \textcolor{comment}{    we reproduce all necessary definitions here.}}
+\DoxyCodeLine{35 \textcolor{comment}{*/}}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37 \textcolor{keyword}{enum} \mbox{\hyperlink{namespacejuce_1_1_com_types_ad28813b6bfb7816e22bb8b088d3eea16}{PIN\_DIRECTION}}}
+\DoxyCodeLine{38 \{}
+\DoxyCodeLine{39     \mbox{\hyperlink{namespacejuce_1_1_com_types_ad28813b6bfb7816e22bb8b088d3eea16a7cc198183b78e75c10f2bf3c9318ce80}{PINDIR\_INPUT}} = 0,}
+\DoxyCodeLine{40     \mbox{\hyperlink{namespacejuce_1_1_com_types_ad28813b6bfb7816e22bb8b088d3eea16af2d47d2f3589003986eaf37902d29ae9}{PINDIR\_OUTPUT}} = \mbox{\hyperlink{namespacejuce_1_1_com_types_ad28813b6bfb7816e22bb8b088d3eea16a7cc198183b78e75c10f2bf3c9318ce80}{PINDIR\_INPUT}} + 1}
+\DoxyCodeLine{41 \};}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43 \textcolor{keyword}{enum} \mbox{\hyperlink{namespacejuce_1_1_com_types_a459278d3d363b277de03d8b17aefffda}{VMRMode}}}
+\DoxyCodeLine{44 \{}
+\DoxyCodeLine{45     \mbox{\hyperlink{namespacejuce_1_1_com_types_a459278d3d363b277de03d8b17aefffdaa5bffa18795d2524a88f4f99791c71eef}{VMRMode\_Windowed}} = 0x1,}
+\DoxyCodeLine{46     \mbox{\hyperlink{namespacejuce_1_1_com_types_a459278d3d363b277de03d8b17aefffdaacefb2fdb681bfdee5d3fd136d4f55357}{VMRMode\_Windowless}} = 0x2,}
+\DoxyCodeLine{47     \mbox{\hyperlink{namespacejuce_1_1_com_types_a459278d3d363b277de03d8b17aefffdaa16a539c270684d92c4e978a33f1a4be5}{VMRMode\_Renderless}} = 0x4,}
+\DoxyCodeLine{48     \mbox{\hyperlink{namespacejuce_1_1_com_types_a459278d3d363b277de03d8b17aefffdaa1e98515924d91c1d1282c03d7adaa5b8}{VMRMode\_Mask}} = 0x7}
+\DoxyCodeLine{49 \};}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51 \textcolor{keyword}{enum} \mbox{\hyperlink{namespacejuce_1_1_com_types_ab2e0269fdaf99bcf361fba16d85303ad}{VMR\_ASPECT\_RATIO\_MODE}}}
+\DoxyCodeLine{52 \{}
+\DoxyCodeLine{53     \mbox{\hyperlink{namespacejuce_1_1_com_types_ab2e0269fdaf99bcf361fba16d85303adaab42fde4edbefce8365abcda83e282b7}{VMR\_ARMODE\_NONE}} = 0,}
+\DoxyCodeLine{54     \mbox{\hyperlink{namespacejuce_1_1_com_types_ab2e0269fdaf99bcf361fba16d85303adadc26ad080f989124c1aa2dbd3a45272c}{VMR\_ARMODE\_LETTER\_BOX}} = \mbox{\hyperlink{namespacejuce_1_1_com_types_ab2e0269fdaf99bcf361fba16d85303adaab42fde4edbefce8365abcda83e282b7}{VMR\_ARMODE\_NONE}} + 1}
+\DoxyCodeLine{55 \};}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57 \textcolor{keyword}{enum} \mbox{\hyperlink{namespacejuce_1_1_com_types_a06c7ea740e0e2821c847f9d6c8970275}{MFVideoAspectRatioMode}}}
+\DoxyCodeLine{58 \{}
+\DoxyCodeLine{59     \mbox{\hyperlink{namespacejuce_1_1_com_types_a06c7ea740e0e2821c847f9d6c8970275a1db7ae5a91ce94660ffe05f082d375f2}{MFVideoARMode\_None}} = 0,}
+\DoxyCodeLine{60     \mbox{\hyperlink{namespacejuce_1_1_com_types_a06c7ea740e0e2821c847f9d6c8970275a3351bcea31b0a4d07705060e2b2e579c}{MFVideoARMode\_PreservePicture}} = 0x1,}
+\DoxyCodeLine{61     \mbox{\hyperlink{namespacejuce_1_1_com_types_a06c7ea740e0e2821c847f9d6c8970275abd26c9ef8ed08e60a4c8701f3ff3717b}{MFVideoARMode\_PreservePixel}} = 0x2,}
+\DoxyCodeLine{62     \mbox{\hyperlink{namespacejuce_1_1_com_types_a06c7ea740e0e2821c847f9d6c8970275aeea63e6fbf86690ce9574e5c4aa05f8e}{MFVideoARMode\_NonLinearStretch}} = 0x4,}
+\DoxyCodeLine{63     \mbox{\hyperlink{namespacejuce_1_1_com_types_a06c7ea740e0e2821c847f9d6c8970275a0e51eeffa1c53c95bbb29934d56f96a4}{MFVideoARMode\_Mask}} = 0x7}
+\DoxyCodeLine{64 \};}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66 \textcolor{keyword}{enum} \mbox{\hyperlink{namespacejuce_1_1_com_types_ab3abe9b6f2e7a079b9a9ec6343614e89}{FILTER\_STATE}}}
+\DoxyCodeLine{67 \{}
+\DoxyCodeLine{68     \mbox{\hyperlink{namespacejuce_1_1_com_types_ab3abe9b6f2e7a079b9a9ec6343614e89abcaa7a4477983dc28983659c5ce470a9}{State\_Stopped}} = 0,}
+\DoxyCodeLine{69     \mbox{\hyperlink{namespacejuce_1_1_com_types_ab3abe9b6f2e7a079b9a9ec6343614e89a23853d80082905f7c0a98aa941adbfcb}{State\_Paused}} = \mbox{\hyperlink{namespacejuce_1_1_com_types_ab3abe9b6f2e7a079b9a9ec6343614e89abcaa7a4477983dc28983659c5ce470a9}{State\_Stopped}} + 1,}
+\DoxyCodeLine{70     \mbox{\hyperlink{namespacejuce_1_1_com_types_ab3abe9b6f2e7a079b9a9ec6343614e89ad81c4e683e7a7140a1fcd89810957667}{State\_Running}} = \mbox{\hyperlink{namespacejuce_1_1_com_types_ab3abe9b6f2e7a079b9a9ec6343614e89a23853d80082905f7c0a98aa941adbfcb}{State\_Paused}} + 1}
+\DoxyCodeLine{71 \};}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73 \textcolor{keyword}{enum} \mbox{\hyperlink{namespacejuce_1_1_com_types_aa6285c7c47783b595982d3022300c47b}{WMT\_VERSION}}}
+\DoxyCodeLine{74 \{}
+\DoxyCodeLine{75     \mbox{\hyperlink{namespacejuce_1_1_com_types_aa6285c7c47783b595982d3022300c47ba85e23e4cc442962be93106eb520cd418}{WMT\_VER\_4\_0}} = 0x40000,}
+\DoxyCodeLine{76     \mbox{\hyperlink{namespacejuce_1_1_com_types_aa6285c7c47783b595982d3022300c47baaf52b87f13040d7abb018bec62646e02}{WMT\_VER\_7\_0}} = 0x70000,}
+\DoxyCodeLine{77     \mbox{\hyperlink{namespacejuce_1_1_com_types_aa6285c7c47783b595982d3022300c47ba1e699fff459b62a032a73b96c128c593}{WMT\_VER\_8\_0}} = 0x80000,}
+\DoxyCodeLine{78     \mbox{\hyperlink{namespacejuce_1_1_com_types_aa6285c7c47783b595982d3022300c47ba43b386a84c6da53e149e959960267996}{WMT\_VER\_9\_0}} = 0x90000}
+\DoxyCodeLine{79 \};}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81 \textcolor{comment}{// We only ever refer to these through a pointer, so we don't need definitions for them.}}
+\DoxyCodeLine{82 \textcolor{keyword}{struct }IAMCopyCaptureFileProgress;}
+\DoxyCodeLine{83 \textcolor{keyword}{struct }IBaseFilter;}
+\DoxyCodeLine{84 \textcolor{keyword}{struct }IEnumFilters;}
+\DoxyCodeLine{85 \textcolor{keyword}{struct }IEnumMediaTypes;}
+\DoxyCodeLine{86 \textcolor{keyword}{struct }IReferenceClock;}
+\DoxyCodeLine{87 \textcolor{keyword}{struct }IVMRImageCompositor;}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89 \textcolor{keyword}{struct }FILTER\_INFO;}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91 \textcolor{keyword}{struct }\mbox{\hyperlink{structjuce_1_1_com_types_1_1_a_m___m_e_d_i_a___t_y_p_e}{AM\_MEDIA\_TYPE}}}
+\DoxyCodeLine{92 \{}
+\DoxyCodeLine{93     GUID \mbox{\hyperlink{structjuce_1_1_com_types_1_1_a_m___m_e_d_i_a___t_y_p_e_a4ddab34cd3ba391ed02900b8c685e8e4}{majortype}};}
+\DoxyCodeLine{94     GUID \mbox{\hyperlink{structjuce_1_1_com_types_1_1_a_m___m_e_d_i_a___t_y_p_e_a323f54ea2ef3615400f2e26286b32be6}{subtype}};}
+\DoxyCodeLine{95     BOOL \mbox{\hyperlink{structjuce_1_1_com_types_1_1_a_m___m_e_d_i_a___t_y_p_e_a36853071c7fb43111527edface2b427a}{bFixedSizeSamples}};}
+\DoxyCodeLine{96     BOOL \mbox{\hyperlink{structjuce_1_1_com_types_1_1_a_m___m_e_d_i_a___t_y_p_e_aa46fcfcf4a28f08ea4c957da0a37e853}{bTemporalCompression}};}
+\DoxyCodeLine{97     ULONG \mbox{\hyperlink{structjuce_1_1_com_types_1_1_a_m___m_e_d_i_a___t_y_p_e_a6381674ea92405bf29fe170306c0cef3}{lSampleSize}};}
+\DoxyCodeLine{98     GUID \mbox{\hyperlink{structjuce_1_1_com_types_1_1_a_m___m_e_d_i_a___t_y_p_e_aeb4b3ac83595afdf701269418683dfeb}{formattype}};}
+\DoxyCodeLine{99     IUnknown* \mbox{\hyperlink{structjuce_1_1_com_types_1_1_a_m___m_e_d_i_a___t_y_p_e_a5cbe5d3a8056fefd58035784f5fc751e}{pUnk}};}
+\DoxyCodeLine{100     ULONG \mbox{\hyperlink{structjuce_1_1_com_types_1_1_a_m___m_e_d_i_a___t_y_p_e_a325075d466716ac951b0c9540b425dea}{cbFormat}};}
+\DoxyCodeLine{101     BYTE* \mbox{\hyperlink{structjuce_1_1_com_types_1_1_a_m___m_e_d_i_a___t_y_p_e_ab15f6695560a9b825dd14df2d87e44f3}{pbFormat}};}
+\DoxyCodeLine{102 \};}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104 \textcolor{keyword}{typedef} LONGLONG \mbox{\hyperlink{namespacejuce_1_1_com_types_af704376b59394418a281d40b3af29c55}{REFERENCE\_TIME}};}
+\DoxyCodeLine{105 \textcolor{keyword}{typedef} LONG\_PTR \mbox{\hyperlink{namespacejuce_1_1_com_types_aff2162e3fe9c529aaed562688c71d21b}{OAEVENT}};}
+\DoxyCodeLine{106 \textcolor{keyword}{typedef} LONG\_PTR \mbox{\hyperlink{namespacejuce_1_1_com_types_af51160f30837f276b0cca1b11e32e68b}{OAHWND}};}
+\DoxyCodeLine{107 \textcolor{keyword}{typedef} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespacejuce_1_1_com_types_ab88d3de4bdd8800278843e7fc37516f1}{REFTIME}};}
+\DoxyCodeLine{108 \textcolor{keyword}{typedef} \textcolor{keywordtype}{long} \mbox{\hyperlink{namespacejuce_1_1_com_types_a69341810ad6134ed05c80ad5f4752c0e}{OAFilterState}};}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110 \textcolor{keyword}{enum} \mbox{\hyperlink{namespacejuce_1_1_com_types_a60d7ced5732301bd6d56d6af3326d9c3}{Constants}}}
+\DoxyCodeLine{111 \{}
+\DoxyCodeLine{112     \mbox{\hyperlink{namespacejuce_1_1_com_types_a60d7ced5732301bd6d56d6af3326d9c3ae9747b7b243b56348f9624d082ed099b}{EC\_STATE\_CHANGE}} = 0x32,}
+\DoxyCodeLine{113     \mbox{\hyperlink{namespacejuce_1_1_com_types_a60d7ced5732301bd6d56d6af3326d9c3a64512e1743c47b5ea2f58b4d72e73566}{EC\_REPAINT}} = 0x05,}
+\DoxyCodeLine{114     \mbox{\hyperlink{namespacejuce_1_1_com_types_a60d7ced5732301bd6d56d6af3326d9c3a2187da27915e102508446e176408ca7a}{EC\_COMPLETE}} = 0x01,}
+\DoxyCodeLine{115     \mbox{\hyperlink{namespacejuce_1_1_com_types_a60d7ced5732301bd6d56d6af3326d9c3a829599da08f7a62c71d3c8360baf4c97}{EC\_ERRORABORT}} = 0x03,}
+\DoxyCodeLine{116     \mbox{\hyperlink{namespacejuce_1_1_com_types_a60d7ced5732301bd6d56d6af3326d9c3a94fe97ae392d7bf04bd3d4ba9f392106}{EC\_ERRORABORTEX}} = 0x45,}
+\DoxyCodeLine{117     \mbox{\hyperlink{namespacejuce_1_1_com_types_a60d7ced5732301bd6d56d6af3326d9c3ae6f8c04ef3e534d67e0b6c4d5b893fca}{EC\_USERABORT}} = 0x02,}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{119     \mbox{\hyperlink{namespacejuce_1_1_com_types_a60d7ced5732301bd6d56d6af3326d9c3a72f473317225609f25f6937ac93fcb98}{VFW\_E\_INVALID\_FILE\_FORMAT}} = (HRESULT) 0x8004022FL,}
+\DoxyCodeLine{120     \mbox{\hyperlink{namespacejuce_1_1_com_types_a60d7ced5732301bd6d56d6af3326d9c3a6eeba12ff39d388188296aabdcd435df}{VFW\_E\_NOT\_FOUND}} = (HRESULT) 0x80040216L,}
+\DoxyCodeLine{121     \mbox{\hyperlink{namespacejuce_1_1_com_types_a60d7ced5732301bd6d56d6af3326d9c3a399d4a35b3b2d49a5e79e5b8cfa1a118}{VFW\_E\_UNKNOWN\_FILE\_TYPE}} = (HRESULT) 0x80040240L,}
+\DoxyCodeLine{122     \mbox{\hyperlink{namespacejuce_1_1_com_types_a60d7ced5732301bd6d56d6af3326d9c3a597e821efcfc1f94bc26084b4a415448}{VFW\_E\_UNSUPPORTED\_STREAM}} = (HRESULT) 0x80040265L,}
+\DoxyCodeLine{123     \mbox{\hyperlink{namespacejuce_1_1_com_types_a60d7ced5732301bd6d56d6af3326d9c3a9c1002d95261a49bde92a605a747c2ac}{VFW\_E\_CANNOT\_CONNECT}} = (HRESULT) 0x80040217L,}
+\DoxyCodeLine{124     \mbox{\hyperlink{namespacejuce_1_1_com_types_a60d7ced5732301bd6d56d6af3326d9c3a5859254ac3fd2d2c2a7b5f489098272a}{VFW\_E\_CANNOT\_LOAD\_SOURCE\_FILTER}} = (HRESULT) 0x80040241L,}
+\DoxyCodeLine{125     \mbox{\hyperlink{namespacejuce_1_1_com_types_a60d7ced5732301bd6d56d6af3326d9c3aeee7ee58effc8c0a5b5ebf07e8e18180}{VFW\_E\_NOT\_CONNECTED}} = (HRESULT) 0x80040209L}
+\DoxyCodeLine{126 \};}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{128 \textcolor{keyword}{struct }\mbox{\hyperlink{structjuce_1_1_com_types_1_1_m_f_video_normalized_rect}{MFVideoNormalizedRect}}}
+\DoxyCodeLine{129 \{}
+\DoxyCodeLine{130     \textcolor{keywordtype}{float} \mbox{\hyperlink{structjuce_1_1_com_types_1_1_m_f_video_normalized_rect_a80e2f759db17555c4c31285fd91b47d5}{left}};}
+\DoxyCodeLine{131     \textcolor{keywordtype}{float} \mbox{\hyperlink{structjuce_1_1_com_types_1_1_m_f_video_normalized_rect_a318d107f708448da9791ffdb8c66596c}{top}};}
+\DoxyCodeLine{132     \textcolor{keywordtype}{float} \mbox{\hyperlink{structjuce_1_1_com_types_1_1_m_f_video_normalized_rect_a56ab34cad762bcb0a46953c516d173fa}{right}};}
+\DoxyCodeLine{133     \textcolor{keywordtype}{float} \mbox{\hyperlink{structjuce_1_1_com_types_1_1_m_f_video_normalized_rect_aaa9f3f40d621359f184b528304a4563f}{bottom}};}
+\DoxyCodeLine{134 \};}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{136 \textcolor{keyword}{struct }\mbox{\hyperlink{structjuce_1_1_com_types_1_1_v_i_d_e_o_i_n_f_o_h_e_a_d_e_r}{VIDEOINFOHEADER}}}
+\DoxyCodeLine{137 \{}
+\DoxyCodeLine{138     RECT \mbox{\hyperlink{structjuce_1_1_com_types_1_1_v_i_d_e_o_i_n_f_o_h_e_a_d_e_r_ae1ce024966d8222680a73d57c5fe3e58}{rcSource}};}
+\DoxyCodeLine{139     RECT \mbox{\hyperlink{structjuce_1_1_com_types_1_1_v_i_d_e_o_i_n_f_o_h_e_a_d_e_r_abcdfe0abbb1175d340a991a9d1a0a792}{rcTarget}};}
+\DoxyCodeLine{140     DWORD \mbox{\hyperlink{structjuce_1_1_com_types_1_1_v_i_d_e_o_i_n_f_o_h_e_a_d_e_r_a5aaf12319205b44eb76870fe6515f8ec}{dwBitRate}};}
+\DoxyCodeLine{141     DWORD \mbox{\hyperlink{structjuce_1_1_com_types_1_1_v_i_d_e_o_i_n_f_o_h_e_a_d_e_r_aa25bb5f7f190575e45b5c07488a005cd}{dwBitErrorRate}};}
+\DoxyCodeLine{142     \mbox{\hyperlink{namespacejuce_1_1_com_types_af704376b59394418a281d40b3af29c55}{REFERENCE\_TIME}} \mbox{\hyperlink{structjuce_1_1_com_types_1_1_v_i_d_e_o_i_n_f_o_h_e_a_d_e_r_a8d05a80d91cad0280b867ebf8dfc3440}{AvgTimePerFrame}};}
+\DoxyCodeLine{143     BITMAPINFOHEADER \mbox{\hyperlink{structjuce_1_1_com_types_1_1_v_i_d_e_o_i_n_f_o_h_e_a_d_e_r_a259a609fbbbaa08d1b37c926a1d94c08}{bmiHeader}};}
+\DoxyCodeLine{144 \};}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{146 \textcolor{keyword}{struct }\mbox{\hyperlink{structjuce_1_1_com_types_1_1_v_i_d_e_o___s_t_r_e_a_m___c_o_n_f_i_g___c_a_p_s}{VIDEO\_STREAM\_CONFIG\_CAPS}}}
+\DoxyCodeLine{147 \{}
+\DoxyCodeLine{148     GUID \mbox{\hyperlink{structjuce_1_1_com_types_1_1_v_i_d_e_o___s_t_r_e_a_m___c_o_n_f_i_g___c_a_p_s_a082bda1f15372cad420b47c31d051047}{guid}};}
+\DoxyCodeLine{149     ULONG \mbox{\hyperlink{structjuce_1_1_com_types_1_1_v_i_d_e_o___s_t_r_e_a_m___c_o_n_f_i_g___c_a_p_s_acc159f5f9000301db89aa7be66fbdc08}{VideoStandard}};}
+\DoxyCodeLine{150     SIZE \mbox{\hyperlink{structjuce_1_1_com_types_1_1_v_i_d_e_o___s_t_r_e_a_m___c_o_n_f_i_g___c_a_p_s_a50232b056218d66b1c43e4651c68bbf7}{InputSize}};}
+\DoxyCodeLine{151     SIZE \mbox{\hyperlink{structjuce_1_1_com_types_1_1_v_i_d_e_o___s_t_r_e_a_m___c_o_n_f_i_g___c_a_p_s_aec75bf283b1e17c8843a215edd777956}{MinCroppingSize}};}
+\DoxyCodeLine{152     SIZE \mbox{\hyperlink{structjuce_1_1_com_types_1_1_v_i_d_e_o___s_t_r_e_a_m___c_o_n_f_i_g___c_a_p_s_aa6cd866bb47424f24153e9369119f08e}{MaxCroppingSize}};}
+\DoxyCodeLine{153     \textcolor{keywordtype}{int} \mbox{\hyperlink{structjuce_1_1_com_types_1_1_v_i_d_e_o___s_t_r_e_a_m___c_o_n_f_i_g___c_a_p_s_a82c1275e9b862e6f8eaa300b5ba9fa6e}{CropGranularityX}};}
+\DoxyCodeLine{154     \textcolor{keywordtype}{int} \mbox{\hyperlink{structjuce_1_1_com_types_1_1_v_i_d_e_o___s_t_r_e_a_m___c_o_n_f_i_g___c_a_p_s_a04b3c8e0638ae8203f95558f8efe749a}{CropGranularityY}};}
+\DoxyCodeLine{155     \textcolor{keywordtype}{int} \mbox{\hyperlink{structjuce_1_1_com_types_1_1_v_i_d_e_o___s_t_r_e_a_m___c_o_n_f_i_g___c_a_p_s_a2443992bf801ed57962ae773218e5b4e}{CropAlignX}};}
+\DoxyCodeLine{156     \textcolor{keywordtype}{int} \mbox{\hyperlink{structjuce_1_1_com_types_1_1_v_i_d_e_o___s_t_r_e_a_m___c_o_n_f_i_g___c_a_p_s_a56735af941c471b4bef6774faced647f}{CropAlignY}};}
+\DoxyCodeLine{157     SIZE \mbox{\hyperlink{structjuce_1_1_com_types_1_1_v_i_d_e_o___s_t_r_e_a_m___c_o_n_f_i_g___c_a_p_s_aecfd2fa10dbd073919a15cf2f6055073}{MinOutputSize}};}
+\DoxyCodeLine{158     SIZE \mbox{\hyperlink{structjuce_1_1_com_types_1_1_v_i_d_e_o___s_t_r_e_a_m___c_o_n_f_i_g___c_a_p_s_a1ba614869cf604c39ac54f3a361949bd}{MaxOutputSize}};}
+\DoxyCodeLine{159     \textcolor{keywordtype}{int} \mbox{\hyperlink{structjuce_1_1_com_types_1_1_v_i_d_e_o___s_t_r_e_a_m___c_o_n_f_i_g___c_a_p_s_ac0b5c935b2066482e1b28bbc8c6b4e79}{OutputGranularityX}};}
+\DoxyCodeLine{160     \textcolor{keywordtype}{int} \mbox{\hyperlink{structjuce_1_1_com_types_1_1_v_i_d_e_o___s_t_r_e_a_m___c_o_n_f_i_g___c_a_p_s_ad4136e82f8f58ff749c27dbee9bfe4e2}{OutputGranularityY}};}
+\DoxyCodeLine{161     \textcolor{keywordtype}{int} \mbox{\hyperlink{structjuce_1_1_com_types_1_1_v_i_d_e_o___s_t_r_e_a_m___c_o_n_f_i_g___c_a_p_s_af15ce12883460f73a6d9a6f8a44747c1}{StretchTapsX}};}
+\DoxyCodeLine{162     \textcolor{keywordtype}{int} \mbox{\hyperlink{structjuce_1_1_com_types_1_1_v_i_d_e_o___s_t_r_e_a_m___c_o_n_f_i_g___c_a_p_s_a565ac856dd881f71bd4f8748629a49c8}{StretchTapsY}};}
+\DoxyCodeLine{163     \textcolor{keywordtype}{int} \mbox{\hyperlink{structjuce_1_1_com_types_1_1_v_i_d_e_o___s_t_r_e_a_m___c_o_n_f_i_g___c_a_p_s_a8a706ea21c3bce93c013f974ff3d702c}{ShrinkTapsX}};}
+\DoxyCodeLine{164     \textcolor{keywordtype}{int} \mbox{\hyperlink{structjuce_1_1_com_types_1_1_v_i_d_e_o___s_t_r_e_a_m___c_o_n_f_i_g___c_a_p_s_a00913373e6039f9c25bd0f31c049bf48}{ShrinkTapsY}};}
+\DoxyCodeLine{165     LONGLONG \mbox{\hyperlink{structjuce_1_1_com_types_1_1_v_i_d_e_o___s_t_r_e_a_m___c_o_n_f_i_g___c_a_p_s_afca305da6fc2061e9d7db2eae57e0abb}{MinFrameInterval}};}
+\DoxyCodeLine{166     LONGLONG \mbox{\hyperlink{structjuce_1_1_com_types_1_1_v_i_d_e_o___s_t_r_e_a_m___c_o_n_f_i_g___c_a_p_s_a6e71063ae61bba05b3200f674b42f9e2}{MaxFrameInterval}};}
+\DoxyCodeLine{167     LONG \mbox{\hyperlink{structjuce_1_1_com_types_1_1_v_i_d_e_o___s_t_r_e_a_m___c_o_n_f_i_g___c_a_p_s_a933b9b51affc7849bdcf39d77674119b}{MinBitsPerSecond}};}
+\DoxyCodeLine{168     LONG \mbox{\hyperlink{structjuce_1_1_com_types_1_1_v_i_d_e_o___s_t_r_e_a_m___c_o_n_f_i_g___c_a_p_s_ad19b1aa2db00d6bb1b23a1916ed0ffbc}{MaxBitsPerSecond}};}
+\DoxyCodeLine{169 \};}
+\DoxyCodeLine{170 }
+\DoxyCodeLine{171 \textcolor{keyword}{struct }\mbox{\hyperlink{structjuce_1_1_com_types_1_1_p_i_n___i_n_f_o}{PIN\_INFO}}}
+\DoxyCodeLine{172 \{}
+\DoxyCodeLine{173     IBaseFilter* \mbox{\hyperlink{structjuce_1_1_com_types_1_1_p_i_n___i_n_f_o_a50ba43b2584b2f5512c0b2092c8a8a35}{pFilter}};}
+\DoxyCodeLine{174     \mbox{\hyperlink{namespacejuce_1_1_com_types_ad28813b6bfb7816e22bb8b088d3eea16}{PIN\_DIRECTION}} \mbox{\hyperlink{structjuce_1_1_com_types_1_1_p_i_n___i_n_f_o_a4fdae83ee80474df8755be275e775580}{dir}};}
+\DoxyCodeLine{175     WCHAR \mbox{\hyperlink{structjuce_1_1_com_types_1_1_p_i_n___i_n_f_o_a2059e04f5c24511a34529252228a3279}{achName}}[128];}
+\DoxyCodeLine{176 \};}
+\DoxyCodeLine{177 }
+\DoxyCodeLine{178 \mbox{\hyperlink{namespacejuce_aa9418dea713095d724e2729260a095d9}{JUCE\_COMCLASS}} (ICreateDevEnum, \textcolor{stringliteral}{"{}29840822-\/5B84-\/11D0-\/BD3B-\/00A0C911CE86"{}}) : public IUnknown}
+\DoxyCodeLine{179 \{}
+\DoxyCodeLine{180 \textcolor{keyword}{public}:}
+\DoxyCodeLine{181     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} CreateClassEnumerator (REFCLSID clsidDeviceClass, \_Out\_ IEnumMoniker * *ppEnumMoniker, DWORD dwFlags) = 0;}
+\DoxyCodeLine{182 \};}
+\DoxyCodeLine{183 }
+\DoxyCodeLine{184 \mbox{\hyperlink{namespacejuce_aa9418dea713095d724e2729260a095d9}{JUCE\_COMCLASS}} (IPin, \textcolor{stringliteral}{"{}56a86891-\/0ad4-\/11ce-\/b03a-\/0020af0ba770"{}}) : public IUnknown}
+\DoxyCodeLine{185 \{}
+\DoxyCodeLine{186 \textcolor{keyword}{public}:}
+\DoxyCodeLine{187     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} Connect (IPin * pReceivePin, \_In\_opt\_ \textcolor{keyword}{const} AM\_MEDIA\_TYPE* pmt) = 0;}
+\DoxyCodeLine{188     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} ReceiveConnection (IPin * pConnector, \textcolor{keyword}{const} AM\_MEDIA\_TYPE* pmt) = 0;}
+\DoxyCodeLine{189     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} Disconnect() = 0;}
+\DoxyCodeLine{190     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} ConnectedTo (\_Out\_ IPin * *pPin) = 0;}
+\DoxyCodeLine{191     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} ConnectionMediaType (\_Out\_ AM\_MEDIA\_TYPE * pmt) = 0;}
+\DoxyCodeLine{192     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} QueryPinInfo (\_Out\_ PIN\_INFO * pInfo) = 0;}
+\DoxyCodeLine{193     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} QueryDirection (\_Out\_ \mbox{\hyperlink{namespacejuce_1_1_com_types_ad28813b6bfb7816e22bb8b088d3eea16}{PIN\_DIRECTION}} * pPinDir) = 0;}
+\DoxyCodeLine{194     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} QueryId (\_Out\_ LPWSTR * Id) = 0;}
+\DoxyCodeLine{195     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} QueryAccept (\textcolor{keyword}{const} AM\_MEDIA\_TYPE* pmt) = 0;}
+\DoxyCodeLine{196     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} EnumMediaTypes (\_Out\_ IEnumMediaTypes * *ppEnum) = 0;}
+\DoxyCodeLine{197     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} QueryInternalConnections (\_Out\_writes\_to\_opt\_ (*nPin, *nPin) IPin * *apPin, ULONG * nPin) = 0;}
+\DoxyCodeLine{198     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} EndOfStream() = 0;}
+\DoxyCodeLine{199     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} BeginFlush() = 0;}
+\DoxyCodeLine{200     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} EndFlush() = 0;}
+\DoxyCodeLine{201     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} NewSegment (\mbox{\hyperlink{namespacejuce_aa61c33896ddf86654e387058c589eff7}{REFERENCE\_TIME}} tStart, \mbox{\hyperlink{namespacejuce_aa61c33896ddf86654e387058c589eff7}{REFERENCE\_TIME}} tStop, \textcolor{keywordtype}{double} dRate) = 0;}
+\DoxyCodeLine{202 \};}
+\DoxyCodeLine{203 }
+\DoxyCodeLine{204 \mbox{\hyperlink{namespacejuce_aa9418dea713095d724e2729260a095d9}{JUCE\_COMCLASS}} (IFilterGraph, \textcolor{stringliteral}{"{}56a8689f-\/0ad4-\/11ce-\/b03a-\/0020af0ba770"{}}) : public IUnknown}
+\DoxyCodeLine{205 \{}
+\DoxyCodeLine{206 \textcolor{keyword}{public}:}
+\DoxyCodeLine{207     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} AddFilter (IBaseFilter * pFilter, LPCWSTR pName) = 0;}
+\DoxyCodeLine{208     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} RemoveFilter (IBaseFilter * pFilter) = 0;}
+\DoxyCodeLine{209     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} EnumFilters (\_Out\_ IEnumFilters * *ppEnum) = 0;}
+\DoxyCodeLine{210     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} FindFilterByName (LPCWSTR pName, \_Out\_ IBaseFilter * *ppFilter) = 0;}
+\DoxyCodeLine{211     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} ConnectDirect (IPin * ppinOut, IPin * ppinIn, \_In\_opt\_ \textcolor{keyword}{const} AM\_MEDIA\_TYPE* pmt) = 0;}
+\DoxyCodeLine{212     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} Reconnect (IPin * ppin) = 0;}
+\DoxyCodeLine{213     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} Disconnect (IPin * ppin) = 0;}
+\DoxyCodeLine{214     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetDefaultSyncSource() = 0;}
+\DoxyCodeLine{215 \};}
+\DoxyCodeLine{216 }
+\DoxyCodeLine{217 \mbox{\hyperlink{namespacejuce_aa9418dea713095d724e2729260a095d9}{JUCE\_COMCLASS}} (IGraphBuilder, \textcolor{stringliteral}{"{}56a868a9-\/0ad4-\/11ce-\/b03a-\/0020af0ba770"{}}) : public IFilterGraph}
+\DoxyCodeLine{218 \{}
+\DoxyCodeLine{219 \textcolor{keyword}{public}:}
+\DoxyCodeLine{220     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} Connect (IPin * ppinOut, IPin * ppinIn) = 0;}
+\DoxyCodeLine{221     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} Render (IPin * ppinOut) = 0;}
+\DoxyCodeLine{222     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} RenderFile (LPCWSTR lpcwstrFile, \_In\_opt\_ LPCWSTR lpcwstrPlayList) = 0;}
+\DoxyCodeLine{223     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} AddSourceFilter (LPCWSTR lpcwstrFileName, \_In\_opt\_ LPCWSTR lpcwstrFilterName, \_Out\_ IBaseFilter * *ppFilter) = 0;}
+\DoxyCodeLine{224     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetLogFile (DWORD\_PTR hFile) = 0;}
+\DoxyCodeLine{225     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} Abort() = 0;}
+\DoxyCodeLine{226     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} ShouldOperationContinue() = 0;}
+\DoxyCodeLine{227 \};}
+\DoxyCodeLine{228 }
+\DoxyCodeLine{229 \mbox{\hyperlink{namespacejuce_aa9418dea713095d724e2729260a095d9}{JUCE\_COMCLASS}} (IMediaFilter, \textcolor{stringliteral}{"{}56a86899-\/0ad4-\/11ce-\/b03a-\/0020af0ba770"{}}) : public IPersist}
+\DoxyCodeLine{230 \{}
+\DoxyCodeLine{231 \textcolor{keyword}{public}:}
+\DoxyCodeLine{232     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} \mbox{\hyperlink{namespaceoboe_af85fc9910a287df6c5df0ed396bb75cda11a755d598c0c417f9a36758c3da7481}{Stop}}() = 0;}
+\DoxyCodeLine{233     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} Pause() = 0;}
+\DoxyCodeLine{234     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} Run (\mbox{\hyperlink{namespacejuce_1_1_com_types_af704376b59394418a281d40b3af29c55}{REFERENCE\_TIME}} tStart) = 0;}
+\DoxyCodeLine{235     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetState (DWORD dwMilliSecsTimeout, \_Out\_ \mbox{\hyperlink{namespacejuce_1_1_com_types_ab3abe9b6f2e7a079b9a9ec6343614e89}{FILTER\_STATE}} * State) = 0;}
+\DoxyCodeLine{236     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetSyncSource (\_In\_opt\_ IReferenceClock * pClock) = 0;}
+\DoxyCodeLine{237     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetSyncSource (\_Outptr\_result\_maybenull\_ IReferenceClock * *pClock) = 0;}
+\DoxyCodeLine{238 \};}
+\DoxyCodeLine{239 }
+\DoxyCodeLine{240 \mbox{\hyperlink{namespacejuce_aa9418dea713095d724e2729260a095d9}{JUCE\_COMCLASS}} (IEnumPins, \textcolor{stringliteral}{"{}56a86892-\/0ad4-\/11ce-\/b03a-\/0020af0ba770"{}}) : public IUnknown}
+\DoxyCodeLine{241 \{}
+\DoxyCodeLine{242 \textcolor{keyword}{public}:}
+\DoxyCodeLine{243     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} Next (ULONG cPins, \_Out\_writes\_to\_ (cPins, *pcFetched) IPin * *ppPins, \_Out\_opt\_ ULONG * pcFetched) = 0;}
+\DoxyCodeLine{244     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} Skip (ULONG cPins) = 0;}
+\DoxyCodeLine{245     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} Reset() = 0;}
+\DoxyCodeLine{246     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} Clone (\_Out\_ IEnumPins * *ppEnum) = 0;}
+\DoxyCodeLine{247 \};}
+\DoxyCodeLine{248 }
+\DoxyCodeLine{249 \mbox{\hyperlink{namespacejuce_aa9418dea713095d724e2729260a095d9}{JUCE\_COMCLASS}} (IBaseFilter, \textcolor{stringliteral}{"{}56a86895-\/0ad4-\/11ce-\/b03a-\/0020af0ba770"{}}) : public IMediaFilter}
+\DoxyCodeLine{250 \{}
+\DoxyCodeLine{251 \textcolor{keyword}{public}:}
+\DoxyCodeLine{252     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} EnumPins (\_Out\_ IEnumPins * *ppEnum) = 0;}
+\DoxyCodeLine{253     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} FindPin (LPCWSTR Id, \_Out\_ IPin * *ppPin) = 0;}
+\DoxyCodeLine{254     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} QueryFilterInfo (\_Out\_ FILTER\_INFO * pInfo) = 0;}
+\DoxyCodeLine{255     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} JoinFilterGraph (\_In\_opt\_ IFilterGraph * pGraph, \_In\_opt\_ LPCWSTR pName) = 0;}
+\DoxyCodeLine{256     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} QueryVendorInfo (\_Out\_ LPWSTR * pVendorInfo) = 0;}
+\DoxyCodeLine{257 \};}
+\DoxyCodeLine{258 }
+\DoxyCodeLine{259 \mbox{\hyperlink{namespacejuce_aa9418dea713095d724e2729260a095d9}{JUCE\_COMCLASS}} (IVMRWindowlessControl, \textcolor{stringliteral}{"{}0eb1088c-\/4dcd-\/46f0-\/878f-\/39dae86a51b7"{}}) : public IUnknown}
+\DoxyCodeLine{260 \{}
+\DoxyCodeLine{261 \textcolor{keyword}{public}:}
+\DoxyCodeLine{262     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetNativeVideoSize (LONG * lpWidth, LONG * lpHeight, LONG * lpARWidth, LONG * lpARHeight) = 0;}
+\DoxyCodeLine{263     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetMinIdealVideoSize (LONG * lpWidth, LONG * lpHeight) = 0;}
+\DoxyCodeLine{264     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetMaxIdealVideoSize (LONG * lpWidth, LONG * lpHeight) = 0;}
+\DoxyCodeLine{265     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetVideoPosition (\textcolor{keyword}{const} LPRECT lpSRCRect, \textcolor{keyword}{const} LPRECT lpDSTRect) = 0;}
+\DoxyCodeLine{266     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetVideoPosition (LPRECT lpSRCRect, LPRECT lpDSTRect) = 0;}
+\DoxyCodeLine{267     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetAspectRatioMode (DWORD * lpAspectRatioMode) = 0;}
+\DoxyCodeLine{268     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetAspectRatioMode (DWORD AspectRatioMode) = 0;}
+\DoxyCodeLine{269     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetVideoClippingWindow (\mbox{\hyperlink{namespacejuce_a1b3c3cf7cdbe394e401d5db42e094ac5}{HWND}} hwnd) = 0;}
+\DoxyCodeLine{270     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} RepaintVideo (\mbox{\hyperlink{namespacejuce_a1b3c3cf7cdbe394e401d5db42e094ac5}{HWND}} hwnd, HDC hdc) = 0;}
+\DoxyCodeLine{271     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} DisplayModeChanged() = 0;}
+\DoxyCodeLine{272     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetCurrentImage (BYTE * *lpDib) = 0;}
+\DoxyCodeLine{273     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetBorderColor (COLORREF Clr) = 0;}
+\DoxyCodeLine{274     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetBorderColor (COLORREF * lpClr) = 0;}
+\DoxyCodeLine{275     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetColorKey (COLORREF Clr) = 0;}
+\DoxyCodeLine{276     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetColorKey (COLORREF * lpClr) = 0;}
+\DoxyCodeLine{277 \};}
+\DoxyCodeLine{278 }
+\DoxyCodeLine{279 \mbox{\hyperlink{namespacejuce_aa9418dea713095d724e2729260a095d9}{JUCE\_COMCLASS}} (IVMRFilterConfig, \textcolor{stringliteral}{"{}9e5530c5-\/7034-\/48b4-\/bb46-\/0b8a6efc8e36"{}}) : public IUnknown}
+\DoxyCodeLine{280 \{}
+\DoxyCodeLine{281 \textcolor{keyword}{public}:}
+\DoxyCodeLine{282     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetImageCompositor (IVMRImageCompositor * lpVMRImgCompositor) = 0;}
+\DoxyCodeLine{283     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetNumberOfStreams (DWORD dwMaxStreams) = 0;}
+\DoxyCodeLine{284     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetNumberOfStreams (DWORD * pdwMaxStreams) = 0;}
+\DoxyCodeLine{285     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetRenderingPrefs (DWORD dwRenderFlags) = 0;}
+\DoxyCodeLine{286     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetRenderingPrefs (DWORD * pdwRenderFlags) = 0;}
+\DoxyCodeLine{287     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetRenderingMode (DWORD Mode) = 0;}
+\DoxyCodeLine{288     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetRenderingMode (DWORD * pMode) = 0;}
+\DoxyCodeLine{289 \};}
+\DoxyCodeLine{290 }
+\DoxyCodeLine{291 \mbox{\hyperlink{namespacejuce_aa9418dea713095d724e2729260a095d9}{JUCE\_COMCLASS}} (IMFVideoDisplayControl, \textcolor{stringliteral}{"{}a490b1e4-\/ab84-\/4d31-\/a1b2-\/181e03b1077a"{}}) : public IUnknown}
+\DoxyCodeLine{292 \{}
+\DoxyCodeLine{293 \textcolor{keyword}{public}:}
+\DoxyCodeLine{294     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetNativeVideoSize (\_\_RPC\_\_inout\_opt SIZE * pszVideo, \_\_RPC\_\_inout\_opt SIZE * pszARVideo) = 0;}
+\DoxyCodeLine{295     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetIdealVideoSize (\_\_RPC\_\_inout\_opt SIZE * pszMin, \_\_RPC\_\_inout\_opt SIZE * pszMax) = 0;}
+\DoxyCodeLine{296     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetVideoPosition (\_\_RPC\_\_in\_opt \textcolor{keyword}{const} MFVideoNormalizedRect* pnrcSource, \_\_RPC\_\_in\_opt \textcolor{keyword}{const} LPRECT prcDest) = 0;}
+\DoxyCodeLine{297     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetVideoPosition (\_\_RPC\_\_out MFVideoNormalizedRect * pnrcSource, \_\_RPC\_\_out LPRECT prcDest) = 0;}
+\DoxyCodeLine{298     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetAspectRatioMode (DWORD dwAspectRatioMode) = 0;}
+\DoxyCodeLine{299     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetAspectRatioMode (\_\_RPC\_\_out DWORD * pdwAspectRatioMode) = 0;}
+\DoxyCodeLine{300     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetVideoWindow (\_\_RPC\_\_in \mbox{\hyperlink{namespacejuce_a1b3c3cf7cdbe394e401d5db42e094ac5}{HWND}} hwndVideo) = 0;}
+\DoxyCodeLine{301     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetVideoWindow (\_\_RPC\_\_deref\_out\_opt \mbox{\hyperlink{namespacejuce_a1b3c3cf7cdbe394e401d5db42e094ac5}{HWND}} * phwndVideo) = 0;}
+\DoxyCodeLine{302     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} RepaintVideo() = 0;}
+\DoxyCodeLine{303     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetCurrentImage (\_\_RPC\_\_inout BITMAPINFOHEADER * pBih, \_\_RPC\_\_deref\_out\_ecount\_full\_opt (*pcbDib) BYTE * *pDib, \_\_RPC\_\_out DWORD * pcbDib, \_\_RPC\_\_inout\_opt LONGLONG * pTimeStamp) = 0;}
+\DoxyCodeLine{304     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetBorderColor (COLORREF Clr) = 0;}
+\DoxyCodeLine{305     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetBorderColor (\_\_RPC\_\_out COLORREF * pClr) = 0;}
+\DoxyCodeLine{306     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetRenderingPrefs (DWORD dwRenderFlags) = 0;}
+\DoxyCodeLine{307     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetRenderingPrefs (\_\_RPC\_\_out DWORD * pdwRenderFlags) = 0;}
+\DoxyCodeLine{308     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetFullscreen (BOOL fFullscreen) = 0;}
+\DoxyCodeLine{309     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetFullscreen (\_\_RPC\_\_out BOOL * pfFullscreen) = 0;}
+\DoxyCodeLine{310 \};}
+\DoxyCodeLine{311 }
+\DoxyCodeLine{312 \mbox{\hyperlink{namespacejuce_aa9418dea713095d724e2729260a095d9}{JUCE\_COMCLASS}} (IMFGetService, \textcolor{stringliteral}{"{}fa993888-\/4383-\/415a-\/a930-\/dd472a8cf6f7"{}}) : public IUnknown}
+\DoxyCodeLine{313 \{}
+\DoxyCodeLine{314 \textcolor{keyword}{public}:}
+\DoxyCodeLine{315     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetService (\_\_RPC\_\_in REFGUID guidService, \_\_RPC\_\_in REFIID riid, \_\_RPC\_\_deref\_out\_opt LPVOID * ppvObject) = 0;}
+\DoxyCodeLine{316 \};}
+\DoxyCodeLine{317 }
+\DoxyCodeLine{318 \mbox{\hyperlink{namespacejuce_aa9418dea713095d724e2729260a095d9}{JUCE\_COMCLASS}} (IMediaControl, \textcolor{stringliteral}{"{}56a868b1-\/0ad4-\/11ce-\/b03a-\/0020af0ba770"{}}) : public IDispatch}
+\DoxyCodeLine{319 \{}
+\DoxyCodeLine{320 \textcolor{keyword}{public}:}
+\DoxyCodeLine{321     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} Run() = 0;}
+\DoxyCodeLine{322     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} Pause() = 0;}
+\DoxyCodeLine{323     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} \mbox{\hyperlink{namespaceoboe_af85fc9910a287df6c5df0ed396bb75cda11a755d598c0c417f9a36758c3da7481}{Stop}}() = 0;}
+\DoxyCodeLine{324     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetState (LONG msTimeout, \_\_RPC\_\_out \mbox{\hyperlink{namespacejuce_1_1_com_types_a69341810ad6134ed05c80ad5f4752c0e}{OAFilterState}} * pfs) = 0;}
+\DoxyCodeLine{325     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} RenderFile (\_\_RPC\_\_in BSTR strFilename) = 0;}
+\DoxyCodeLine{326     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} AddSourceFilter (\_\_RPC\_\_in BSTR strFilename, \_\_RPC\_\_deref\_out\_opt IDispatch * *ppUnk) = 0;}
+\DoxyCodeLine{327     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} get\_FilterCollection (\_\_RPC\_\_deref\_out\_opt IDispatch * *ppUnk) = 0;}
+\DoxyCodeLine{328     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} get\_RegFilterCollection (\_\_RPC\_\_deref\_out\_opt IDispatch * *ppUnk) = 0;}
+\DoxyCodeLine{329     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} StopWhenReady() = 0;}
+\DoxyCodeLine{330 \};}
+\DoxyCodeLine{331 }
+\DoxyCodeLine{332 \mbox{\hyperlink{namespacejuce_aa9418dea713095d724e2729260a095d9}{JUCE\_COMCLASS}} (IMediaPosition, \textcolor{stringliteral}{"{}56a868b2-\/0ad4-\/11ce-\/b03a-\/0020af0ba770"{}}) : public IDispatch}
+\DoxyCodeLine{333 \{}
+\DoxyCodeLine{334 \textcolor{keyword}{public}:}
+\DoxyCodeLine{335     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} get\_Duration (\_\_RPC\_\_out \mbox{\hyperlink{namespacejuce_1_1_com_types_ab88d3de4bdd8800278843e7fc37516f1}{REFTIME}} * plength) = 0;}
+\DoxyCodeLine{336     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} put\_CurrentPosition (\mbox{\hyperlink{namespacejuce_1_1_com_types_ab88d3de4bdd8800278843e7fc37516f1}{REFTIME}} llTime) = 0;}
+\DoxyCodeLine{337     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} get\_CurrentPosition (\_\_RPC\_\_out \mbox{\hyperlink{namespacejuce_1_1_com_types_ab88d3de4bdd8800278843e7fc37516f1}{REFTIME}} * pllTime) = 0;}
+\DoxyCodeLine{338     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} get\_StopTime (\_\_RPC\_\_out \mbox{\hyperlink{namespacejuce_1_1_com_types_ab88d3de4bdd8800278843e7fc37516f1}{REFTIME}} * pllTime) = 0;}
+\DoxyCodeLine{339     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} put\_StopTime (\mbox{\hyperlink{namespacejuce_1_1_com_types_ab88d3de4bdd8800278843e7fc37516f1}{REFTIME}} llTime) = 0;}
+\DoxyCodeLine{340     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} get\_PrerollTime (\_\_RPC\_\_out \mbox{\hyperlink{namespacejuce_1_1_com_types_ab88d3de4bdd8800278843e7fc37516f1}{REFTIME}} * pllTime) = 0;}
+\DoxyCodeLine{341     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} put\_PrerollTime (\mbox{\hyperlink{namespacejuce_1_1_com_types_ab88d3de4bdd8800278843e7fc37516f1}{REFTIME}} llTime) = 0;}
+\DoxyCodeLine{342     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} put\_Rate (\textcolor{keywordtype}{double} dRate) = 0;}
+\DoxyCodeLine{343     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} get\_Rate (\_\_RPC\_\_out \textcolor{keywordtype}{double}* pdRate) = 0;}
+\DoxyCodeLine{344     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} CanSeekForward (\_\_RPC\_\_out LONG * pCanSeekForward) = 0;}
+\DoxyCodeLine{345     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} CanSeekBackward (\_\_RPC\_\_out LONG * pCanSeekBackward) = 0;}
+\DoxyCodeLine{346 \};}
+\DoxyCodeLine{347 }
+\DoxyCodeLine{348 \mbox{\hyperlink{namespacejuce_aa9418dea713095d724e2729260a095d9}{JUCE\_COMCLASS}} (IMediaEvent, \textcolor{stringliteral}{"{}56a868b6-\/0ad4-\/11ce-\/b03a-\/0020af0ba770"{}}) : public IDispatch}
+\DoxyCodeLine{349 \{}
+\DoxyCodeLine{350 \textcolor{keyword}{public}:}
+\DoxyCodeLine{351     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetEventHandle (\_\_RPC\_\_out \mbox{\hyperlink{namespacejuce_1_1_com_types_aff2162e3fe9c529aaed562688c71d21b}{OAEVENT}} * hEvent) = 0;}
+\DoxyCodeLine{352     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetEvent (\_\_RPC\_\_out \textcolor{keywordtype}{long}* lEventCode, \_\_RPC\_\_out LONG\_PTR* lParam1, \_\_RPC\_\_out LONG\_PTR* lParam2, \textcolor{keywordtype}{long} msTimeout) = 0;}
+\DoxyCodeLine{353     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} WaitForCompletion (\textcolor{keywordtype}{long} msTimeout, \_\_RPC\_\_out \textcolor{keywordtype}{long}* pEvCode) = 0;}
+\DoxyCodeLine{354     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} CancelDefaultHandling (\textcolor{keywordtype}{long} lEvCode) = 0;}
+\DoxyCodeLine{355     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} RestoreDefaultHandling (\textcolor{keywordtype}{long} lEvCode) = 0;}
+\DoxyCodeLine{356     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} FreeEventParams (\textcolor{keywordtype}{long} lEvCode, LONG\_PTR lParam1, LONG\_PTR lParam2) = 0;}
+\DoxyCodeLine{357 \};}
+\DoxyCodeLine{358 }
+\DoxyCodeLine{359 \mbox{\hyperlink{namespacejuce_aa9418dea713095d724e2729260a095d9}{JUCE\_COMCLASS}} (IMediaEventEx, \textcolor{stringliteral}{"{}56a868c0-\/0ad4-\/11ce-\/b03a-\/0020af0ba770"{}}) : public IMediaEvent}
+\DoxyCodeLine{360 \{}
+\DoxyCodeLine{361 \textcolor{keyword}{public}:}
+\DoxyCodeLine{362     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetNotifyWindow (\mbox{\hyperlink{namespacejuce_1_1_com_types_af51160f30837f276b0cca1b11e32e68b}{OAHWND}} hwnd, \textcolor{keywordtype}{long} lMsg, LONG\_PTR lInstanceData) = 0;}
+\DoxyCodeLine{363     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetNotifyFlags (\textcolor{keywordtype}{long} lNoNotifyFlags) = 0;}
+\DoxyCodeLine{364     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetNotifyFlags (\_\_RPC\_\_out \textcolor{keywordtype}{long}* lplNoNotifyFlags) = 0;}
+\DoxyCodeLine{365 \};}
+\DoxyCodeLine{366 }
+\DoxyCodeLine{367 \mbox{\hyperlink{namespacejuce_aa9418dea713095d724e2729260a095d9}{JUCE\_COMCLASS}} (IBasicAudio, \textcolor{stringliteral}{"{}56a868b3-\/0ad4-\/11ce-\/b03a-\/0020af0ba770"{}}) : public IDispatch}
+\DoxyCodeLine{368 \{}
+\DoxyCodeLine{369 \textcolor{keyword}{public}:}
+\DoxyCodeLine{370     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} put\_Volume (\textcolor{keywordtype}{long} lVolume) = 0;}
+\DoxyCodeLine{371     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} get\_Volume (\_\_RPC\_\_out \textcolor{keywordtype}{long}* plVolume) = 0;}
+\DoxyCodeLine{372     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} put\_Balance (\textcolor{keywordtype}{long} lBalance) = 0;}
+\DoxyCodeLine{373     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} get\_Balance (\_\_RPC\_\_out \textcolor{keywordtype}{long}* plBalance) = 0;}
+\DoxyCodeLine{374 \};}
+\DoxyCodeLine{375 }
+\DoxyCodeLine{376 \mbox{\hyperlink{namespacejuce_aa9418dea713095d724e2729260a095d9}{JUCE\_COMCLASS}} (IMediaSample, \textcolor{stringliteral}{"{}56a8689a-\/0ad4-\/11ce-\/b03a-\/0020af0ba770"{}}) : public IUnknown}
+\DoxyCodeLine{377 \{}
+\DoxyCodeLine{378 \textcolor{keyword}{public}:}
+\DoxyCodeLine{379     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetPointer (BYTE * *ppBuffer) = 0;}
+\DoxyCodeLine{380     \textcolor{keyword}{virtual} \textcolor{keywordtype}{long} STDMETHODCALLTYPE GetSize() = 0;}
+\DoxyCodeLine{381     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetTime (\_Out\_ \mbox{\hyperlink{namespacejuce_1_1_com_types_af704376b59394418a281d40b3af29c55}{REFERENCE\_TIME}} * pTimeStart, \_Out\_ \mbox{\hyperlink{namespacejuce_1_1_com_types_af704376b59394418a281d40b3af29c55}{REFERENCE\_TIME}} * pTimeEnd) = 0;}
+\DoxyCodeLine{382     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetTime (\_In\_opt\_ \mbox{\hyperlink{namespacejuce_1_1_com_types_af704376b59394418a281d40b3af29c55}{REFERENCE\_TIME}} * pTimeStart, \_In\_opt\_ \mbox{\hyperlink{namespacejuce_1_1_com_types_af704376b59394418a281d40b3af29c55}{REFERENCE\_TIME}} * pTimeEnd) = 0;}
+\DoxyCodeLine{383     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} IsSyncPoint() = 0;}
+\DoxyCodeLine{384     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetSyncPoint (BOOL bIsSyncPoint) = 0;}
+\DoxyCodeLine{385     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} IsPreroll() = 0;}
+\DoxyCodeLine{386     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetPreroll (BOOL bIsPreroll) = 0;}
+\DoxyCodeLine{387     \textcolor{keyword}{virtual} \textcolor{keywordtype}{long} STDMETHODCALLTYPE GetActualDataLength() = 0;}
+\DoxyCodeLine{388     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetActualDataLength (\textcolor{keywordtype}{long} \_\_MIDL\_\_IMediaSample0000) = 0;}
+\DoxyCodeLine{389     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetMediaType (\_Out\_ AM\_MEDIA\_TYPE * *ppMediaType) = 0;}
+\DoxyCodeLine{390     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetMediaType (\_In\_ AM\_MEDIA\_TYPE * pMediaType) = 0;}
+\DoxyCodeLine{391     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} IsDiscontinuity() = 0;}
+\DoxyCodeLine{392     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetDiscontinuity (BOOL bDiscontinuity) = 0;}
+\DoxyCodeLine{393     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetMediaTime (\_Out\_ LONGLONG * pTimeStart, \_Out\_ LONGLONG * pTimeEnd) = 0;}
+\DoxyCodeLine{394     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetMediaTime (\_In\_opt\_ LONGLONG * pTimeStart, \_In\_opt\_ LONGLONG * pTimeEnd) = 0;}
+\DoxyCodeLine{395 \};}
+\DoxyCodeLine{396 }
+\DoxyCodeLine{397 \mbox{\hyperlink{namespacejuce_aa9418dea713095d724e2729260a095d9}{JUCE\_COMCLASS}} (IFileSinkFilter, \textcolor{stringliteral}{"{}a2104830-\/7c70-\/11cf-\/8bce-\/00aa00a3f1a6"{}}) : public IUnknown}
+\DoxyCodeLine{398 \{}
+\DoxyCodeLine{399 \textcolor{keyword}{public}:}
+\DoxyCodeLine{400     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetFileName (LPCOLESTR pszFileName, \_In\_opt\_ \textcolor{keyword}{const} AM\_MEDIA\_TYPE* pmt) = 0;}
+\DoxyCodeLine{401     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetCurFile (\_Out\_ LPOLESTR * ppszFileName, \_Out\_ AM\_MEDIA\_TYPE * pmt) = 0;}
+\DoxyCodeLine{402 \};}
+\DoxyCodeLine{403 }
+\DoxyCodeLine{404 \mbox{\hyperlink{namespacejuce_aa9418dea713095d724e2729260a095d9}{JUCE\_COMCLASS}} (ICaptureGraphBuilder2, \textcolor{stringliteral}{"{}93E5A4E0-\/2D50-\/11d2-\/ABFA-\/00A0C9C6E38D"{}}) : public IUnknown}
+\DoxyCodeLine{405 \{}
+\DoxyCodeLine{406 \textcolor{keyword}{public}:}
+\DoxyCodeLine{407     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetFiltergraph (IGraphBuilder * pfg) = 0;}
+\DoxyCodeLine{408     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetFiltergraph (\_Out\_ IGraphBuilder * *ppfg) = 0;}
+\DoxyCodeLine{409     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetOutputFileName (\textcolor{keyword}{const} GUID* pType, LPCOLESTR lpstrFile, \_Outptr\_ IBaseFilter** ppf, \_Outptr\_opt\_ IFileSinkFilter** ppSink) = 0;}
+\DoxyCodeLine{410     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} FindInterface (\_In\_opt\_ \textcolor{keyword}{const} GUID* pCategory, \_In\_opt\_ \textcolor{keyword}{const} GUID* pType, IBaseFilter* pf, REFIID riid, \_Out\_ \textcolor{keywordtype}{void}** ppint) = 0;}
+\DoxyCodeLine{411     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} RenderStream (\_In\_opt\_ \textcolor{keyword}{const} GUID* pCategory, \textcolor{keyword}{const} GUID* pType, IUnknown* pSource, IBaseFilter* pfCompressor, IBaseFilter* pfRenderer) = 0;}
+\DoxyCodeLine{412     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} ControlStream (\textcolor{keyword}{const} GUID* pCategory, \textcolor{keyword}{const} GUID* pType, IBaseFilter* pFilter, \_In\_opt\_ \mbox{\hyperlink{namespacejuce_1_1_com_types_af704376b59394418a281d40b3af29c55}{REFERENCE\_TIME}}* pstart, \_In\_opt\_ \mbox{\hyperlink{namespacejuce_1_1_com_types_af704376b59394418a281d40b3af29c55}{REFERENCE\_TIME}}* pstop, WORD wStartCookie, WORD wStopCookie) = 0;}
+\DoxyCodeLine{413     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} AllocCapFile (LPCOLESTR lpstr, DWORDLONG dwlSize) = 0;}
+\DoxyCodeLine{414     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} CopyCaptureFile (\_In\_ LPOLESTR lpwstrOld, \_In\_ LPOLESTR lpwstrNew, \textcolor{keywordtype}{int} fAllowEscAbort, IAMCopyCaptureFileProgress* pCallback) = 0;}
+\DoxyCodeLine{415     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} FindPin (IUnknown * pSource, \mbox{\hyperlink{namespacejuce_1_1_com_types_ad28813b6bfb7816e22bb8b088d3eea16}{PIN\_DIRECTION}} pindir, \_In\_opt\_ \textcolor{keyword}{const} GUID* pCategory, \_In\_opt\_ \textcolor{keyword}{const} GUID* pType, BOOL fUnconnected, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_aaed5c28b6e2fe572794fada7bfb4862c}{num}}, \_Out\_ IPin** ppPin) = 0;}
+\DoxyCodeLine{416 \};}
+\DoxyCodeLine{417 }
+\DoxyCodeLine{418 \mbox{\hyperlink{namespacejuce_aa9418dea713095d724e2729260a095d9}{JUCE\_COMCLASS}} (IAMStreamConfig, \textcolor{stringliteral}{"{}C6E13340-\/30AC-\/11d0-\/A18C-\/00A0C9118956"{}}) : public IUnknown}
+\DoxyCodeLine{419 \{}
+\DoxyCodeLine{420 \textcolor{keyword}{public}:}
+\DoxyCodeLine{421     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetFormat (AM\_MEDIA\_TYPE * pmt) = 0;}
+\DoxyCodeLine{422     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetFormat (\_Out\_ AM\_MEDIA\_TYPE * *ppmt) = 0;}
+\DoxyCodeLine{423     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetNumberOfCapabilities (\_Out\_ \textcolor{keywordtype}{int}* piCount, \_Out\_ \textcolor{keywordtype}{int}* piSize) = 0;}
+\DoxyCodeLine{424     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetStreamCaps (\textcolor{keywordtype}{int} iIndex, \_Out\_ AM\_MEDIA\_TYPE** ppmt, \_Out\_ BYTE* pSCC) = 0;}
+\DoxyCodeLine{425 \};}
+\DoxyCodeLine{426 }
+\DoxyCodeLine{427 \mbox{\hyperlink{namespacejuce_aa9418dea713095d724e2729260a095d9}{JUCE\_COMCLASS}} (ISampleGrabberCB, \textcolor{stringliteral}{"{}0579154A-\/2B53-\/4994-\/B0D0-\/E773148EFF85"{}}) : public IUnknown}
+\DoxyCodeLine{428 \{}
+\DoxyCodeLine{429     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SampleCB (\textcolor{keywordtype}{double}, ComTypes::IMediaSample*) = 0;}
+\DoxyCodeLine{430     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} BufferCB (\textcolor{keywordtype}{double}, BYTE*, \textcolor{keywordtype}{long}) = 0;}
+\DoxyCodeLine{431 \};}
+\DoxyCodeLine{432 }
+\DoxyCodeLine{433 \mbox{\hyperlink{namespacejuce_aa9418dea713095d724e2729260a095d9}{JUCE\_COMCLASS}} (ISampleGrabber, \textcolor{stringliteral}{"{}6B652FFF-\/11FE-\/4fce-\/92AD-\/0266B5D7C78F"{}}) : public IUnknown}
+\DoxyCodeLine{434 \{}
+\DoxyCodeLine{435     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetOneShot (BOOL) = 0;}
+\DoxyCodeLine{436     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetMediaType (\textcolor{keyword}{const} ComTypes::AM\_MEDIA\_TYPE*) = 0;}
+\DoxyCodeLine{437     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetConnectedMediaType (ComTypes::AM\_MEDIA\_TYPE*) = 0;}
+\DoxyCodeLine{438     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetBufferSamples (BOOL) = 0;}
+\DoxyCodeLine{439     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetCurrentBuffer (\textcolor{keywordtype}{long}*, \textcolor{keywordtype}{long}*) = 0;}
+\DoxyCodeLine{440     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetCurrentSample (ComTypes::IMediaSample**) = 0;}
+\DoxyCodeLine{441     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetCallback (ISampleGrabberCB*, \textcolor{keywordtype}{long}) = 0;}
+\DoxyCodeLine{442 \};}
+\DoxyCodeLine{443 }
+\DoxyCodeLine{444 \mbox{\hyperlink{namespacejuce_aa9418dea713095d724e2729260a095d9}{JUCE\_COMCLASS}} (IAMLatency, \textcolor{stringliteral}{"{}62EA93BA-\/EC62-\/11d2-\/B770-\/00C04FB6BD3D"{}}) : public IUnknown}
+\DoxyCodeLine{445 \{}
+\DoxyCodeLine{446 \textcolor{keyword}{public}:}
+\DoxyCodeLine{447     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetLatency (\_Out\_ \mbox{\hyperlink{namespacejuce_1_1_com_types_af704376b59394418a281d40b3af29c55}{REFERENCE\_TIME}} * prtLatency) = 0;}
+\DoxyCodeLine{448 \};}
+\DoxyCodeLine{449 }
+\DoxyCodeLine{450 \mbox{\hyperlink{namespacejuce_aa9418dea713095d724e2729260a095d9}{JUCE\_COMCLASS}} (IAMPushSource, \textcolor{stringliteral}{"{}F185FE76-\/E64E-\/11d2-\/B76E-\/00C04FB6BD3D"{}}) : public IAMLatency}
+\DoxyCodeLine{451 \{}
+\DoxyCodeLine{452 \textcolor{keyword}{public}:}
+\DoxyCodeLine{453     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetPushSourceFlags (\_Out\_ ULONG * pFlags) = 0;}
+\DoxyCodeLine{454     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetPushSourceFlags (ULONG Flags) = 0;}
+\DoxyCodeLine{455     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetStreamOffset (\mbox{\hyperlink{namespacejuce_1_1_com_types_af704376b59394418a281d40b3af29c55}{REFERENCE\_TIME}} rtOffset) = 0;}
+\DoxyCodeLine{456     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetStreamOffset (\_Out\_ \mbox{\hyperlink{namespacejuce_1_1_com_types_af704376b59394418a281d40b3af29c55}{REFERENCE\_TIME}} * prtOffset) = 0;}
+\DoxyCodeLine{457     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetMaxStreamOffset (\_Out\_ \mbox{\hyperlink{namespacejuce_1_1_com_types_af704376b59394418a281d40b3af29c55}{REFERENCE\_TIME}} * prtMaxOffset) = 0;}
+\DoxyCodeLine{458     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetMaxStreamOffset (\mbox{\hyperlink{namespacejuce_1_1_com_types_af704376b59394418a281d40b3af29c55}{REFERENCE\_TIME}} rtMaxOffset) = 0;}
+\DoxyCodeLine{459 \};}
+\DoxyCodeLine{460 }
+\DoxyCodeLine{461 \mbox{\hyperlink{namespacejuce_aa9418dea713095d724e2729260a095d9}{JUCE\_COMCLASS}} (IConfigAsfWriter, \textcolor{stringliteral}{"{}45086030-\/F7E4-\/486a-\/B504-\/826BB5792A3B"{}}) : public IUnknown}
+\DoxyCodeLine{462 \{}
+\DoxyCodeLine{463 \textcolor{keyword}{public}:}
+\DoxyCodeLine{464     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} ConfigureFilterUsingProfileId (DWORD dwProfileId) = 0;}
+\DoxyCodeLine{465     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetCurrentProfileId (\_\_RPC\_\_out DWORD * pdwProfileId) = 0;}
+\DoxyCodeLine{466     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} ConfigureFilterUsingProfileGuid (\_\_RPC\_\_in REFGUID guidProfile) = 0;}
+\DoxyCodeLine{467     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetCurrentProfileGuid (\_\_RPC\_\_out GUID * pProfileGuid) = 0;}
+\DoxyCodeLine{468     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} ConfigureFilterUsingProfile (\_\_RPC\_\_in\_opt IWMProfile * pProfile) = 0;}
+\DoxyCodeLine{469     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetCurrentProfile (\_\_RPC\_\_deref\_out\_opt IWMProfile * *ppProfile) = 0;}
+\DoxyCodeLine{470     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} SetIndexMode (BOOL bIndexFile) = 0;}
+\DoxyCodeLine{471     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_a01b7a72c95b1f87d38da26050923e857}{JUCE\_COMCALL}} GetIndexMode (\_\_RPC\_\_out BOOL * pbIndexFile) = 0;}
+\DoxyCodeLine{472 \};}
+\DoxyCodeLine{473 }
+\DoxyCodeLine{474 \textcolor{keyword}{constexpr} CLSID \mbox{\hyperlink{namespacejuce_1_1_com_types_af534d5299f46848fa6328cffe2365876}{CLSID\_CaptureGraphBuilder2}}      = \{ 0xBF87B6E1, 0x8C27, 0x11d0, \{ 0xB3, 0xF0, 0x00, 0xAA, 0x00, 0x37, 0x61, 0xC5 \} \};}
+\DoxyCodeLine{475 \textcolor{keyword}{constexpr} CLSID \mbox{\hyperlink{namespacejuce_1_1_com_types_acc1db41214d743ffc3ff796fe074cbf0}{CLSID\_EnhancedVideoRenderer}}     = \{ 0xfa10746c, 0x9b63, 0x4b6c, \{ 0xbc, 0x49, 0xfc, 0x30, 0x0e, 0xa5, 0xf2, 0x56 \} \};}
+\DoxyCodeLine{476 \textcolor{keyword}{constexpr} CLSID \mbox{\hyperlink{namespacejuce_1_1_com_types_abe07280246828c081f759a760e7ace2b}{CLSID\_FilterGraph}}               = \{ 0xe436ebb3, 0x524f, 0x11ce, \{ 0x9f, 0x53, 0x00, 0x20, 0xaf, 0x0b, 0xa7, 0x70 \} \};}
+\DoxyCodeLine{477 \textcolor{keyword}{constexpr} CLSID \mbox{\hyperlink{namespacejuce_1_1_com_types_a6b5d5996057a5184ce54baf72617079f}{CLSID\_NullRenderer}}              = \{ 0xC1F400A4, 0x3F08, 0x11d3, \{ 0x9F, 0x0B, 0x00, 0x60, 0x08, 0x03, 0x9E, 0x37 \} \};}
+\DoxyCodeLine{478 \textcolor{keyword}{constexpr} CLSID \mbox{\hyperlink{namespacejuce_1_1_com_types_acfe50acc76b0a4492cc49e931d9896a4}{CLSID\_SampleGrabber}}             = \{ 0xC1F400A0, 0x3F08, 0x11d3, \{ 0x9F, 0x0B, 0x00, 0x60, 0x08, 0x03, 0x9E, 0x37 \} \};}
+\DoxyCodeLine{479 \textcolor{keyword}{constexpr} CLSID \mbox{\hyperlink{namespacejuce_1_1_com_types_a900222368fd6176e8d11759bbd7b136f}{CLSID\_SmartTee}}                  = \{ 0xcc58e280, 0x8aa1, 0x11d1, \{ 0xb3, 0xf1, 0x00, 0xaa, 0x00, 0x37, 0x61, 0xc5 \} \};}
+\DoxyCodeLine{480 \textcolor{keyword}{constexpr} CLSID \mbox{\hyperlink{namespacejuce_1_1_com_types_ab61a1c1fddc91f48b36a6e4dd4cd96ae}{CLSID\_SystemDeviceEnum}}          = \{ 0x62BE5D10, 0x60EB, 0x11d0, \{ 0xBD, 0x3B, 0x00, 0xA0, 0xC9, 0x11, 0xCE, 0x86 \} \};}
+\DoxyCodeLine{481 \textcolor{keyword}{constexpr} CLSID \mbox{\hyperlink{namespacejuce_1_1_com_types_aacb6c42d091e315ec9e367f3bd5bf574}{CLSID\_VideoInputDeviceCategory}}  = \{ 0x860BB310, 0x5D01, 0x11d0, \{ 0xBD, 0x3B, 0x00, 0xA0, 0xC9, 0x11, 0xCE, 0x86 \} \};}
+\DoxyCodeLine{482 \textcolor{keyword}{constexpr} CLSID \mbox{\hyperlink{namespacejuce_1_1_com_types_ad5b6dc7dc607a461b7aced8fb0c06d80}{CLSID\_VideoMixingRenderer}}       = \{ 0xb87beb7b, 0x8d29, 0x423F, \{ 0xae, 0x4d, 0x65, 0x82, 0xc1, 0x01, 0x75, 0xac \} \};}
+\DoxyCodeLine{483 \textcolor{keyword}{constexpr} CLSID \mbox{\hyperlink{namespacejuce_1_1_com_types_aaae680f89a3d4c73f6fb0e32a649dfe4}{CLSID\_WMAsfWriter}}               = \{ 0x7c23220e, 0x55bb, 0x11d3, \{ 0x8b, 0x16, 0x00, 0xc0, 0x4f, 0xb6, 0xbd, 0x3d \} \};}
+\DoxyCodeLine{484 \textcolor{keyword}{constexpr} CLSID \mbox{\hyperlink{namespacejuce_1_1_com_types_a764b9924846ac29e8d6dd1f32d317c79}{FORMAT\_VideoInfo}}                = \{ 0x05589f80, 0xc356, 0x11ce, \{ 0xbf, 0x01, 0x00, 0xaa, 0x00, 0x55, 0x59, 0x5a \} \};}
+\DoxyCodeLine{485 \textcolor{keyword}{constexpr} CLSID \mbox{\hyperlink{namespacejuce_1_1_com_types_a871a6af604083967d4213b797ff5dd25}{MEDIASUBTYPE\_RGB24}}              = \{ 0xe436eb7d, 0x524f, 0x11ce, \{ 0x9f, 0x53, 0x00, 0x20, 0xaf, 0x0b, 0xa7, 0x70 \} \};}
+\DoxyCodeLine{486 \textcolor{keyword}{constexpr} CLSID \mbox{\hyperlink{namespacejuce_1_1_com_types_ab81bd5fddf71e576f73751bb608d7871}{MEDIATYPE\_Video}}                 = \{ 0x73646976, 0x0000, 0x0010, \{ 0x80, 0x00, 0x00, 0xaa, 0x00, 0x38, 0x9b, 0x71 \} \};}
+\DoxyCodeLine{487 \textcolor{keyword}{constexpr} CLSID \mbox{\hyperlink{namespacejuce_1_1_com_types_ad0f7c1ce119b638577aae264e567f2c3}{MR\_VIDEO\_RENDER\_SERVICE}}         = \{ 0x1092a86c, 0xab1a, 0x459a, \{ 0xa3, 0x36, 0x83, 0x1f, 0xbc, 0x4d, 0x11, 0xff \} \};}
+\DoxyCodeLine{488 \textcolor{keyword}{constexpr} CLSID \mbox{\hyperlink{namespacejuce_1_1_com_types_a6ad14b321b4515bddf85e9827a0d6939}{PIN\_CATEGORY\_CAPTURE}}            = \{ 0xfb6c4281, 0x0353, 0x11d1, \{ 0x90, 0x5f, 0x00, 0x00, 0xc0, 0xcc, 0x16, 0xba \} \};}
+\DoxyCodeLine{489 }
+\DoxyCodeLine{490 \} \textcolor{comment}{// namespace ComTypes}}
+\DoxyCodeLine{491 \} \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{492 }
+\DoxyCodeLine{493 \textcolor{preprocessor}{\#ifdef \_\_CRT\_UUID\_DECL}}
+\DoxyCodeLine{494 \_\_CRT\_UUID\_DECL (juce::ComTypes::IAMPushSource,               0xF185FE76, 0xE64E, 0x11d2, 0xB7, 0x6E, 0x00, 0xC0, 0x4F, 0xB6, 0xBD, 0x3D)}
+\DoxyCodeLine{495 \_\_CRT\_UUID\_DECL (\mbox{\hyperlink{namespacejuce}{juce}}::ComTypes::IAMStreamConfig,             0xC6E13340, 0x30AC, 0x11d0, 0xA1, 0x8C, 0x00, 0xA0, 0xC9, 0x11, 0x89, 0x56)}
+\DoxyCodeLine{496 \_\_CRT\_UUID\_DECL (\mbox{\hyperlink{namespacejuce}{juce}}::ComTypes::IBaseFilter,                 0x56a86895, 0x0ad4, 0x11ce, 0xb0, 0x3a, 0x00, 0x20, 0xaf, 0x0b, 0xa7, 0x70)}
+\DoxyCodeLine{497 \_\_CRT\_UUID\_DECL (\mbox{\hyperlink{namespacejuce}{juce}}::ComTypes::IBasicAudio,                 0x56a868b3, 0x0ad4, 0x11ce, 0xb0, 0x3a, 0x00, 0x20, 0xaf, 0x0b, 0xa7, 0x70)}
+\DoxyCodeLine{498 \_\_CRT\_UUID\_DECL (\mbox{\hyperlink{namespacejuce}{juce}}::ComTypes::ICaptureGraphBuilder2,       0x93E5A4E0, 0x2D50, 0x11d2, 0xAB, 0xFA, 0x00, 0xA0, 0xC9, 0xC6, 0xE3, 0x8D)}
+\DoxyCodeLine{499 \_\_CRT\_UUID\_DECL (\mbox{\hyperlink{namespacejuce}{juce}}::ComTypes::IConfigAsfWriter,            0x45086030, 0xF7E4, 0x486a, 0xB5, 0x04, 0x82, 0x6B, 0xB5, 0x79, 0x2A, 0x3B)}
+\DoxyCodeLine{500 \_\_CRT\_UUID\_DECL (\mbox{\hyperlink{namespacejuce}{juce}}::ComTypes::ICreateDevEnum,              0x29840822, 0x5B84, 0x11D0, 0xBD, 0x3B, 0x00, 0xA0, 0xC9, 0x11, 0xCE, 0x86)}
+\DoxyCodeLine{501 \_\_CRT\_UUID\_DECL (\mbox{\hyperlink{namespacejuce}{juce}}::ComTypes::IFileSinkFilter,             0xa2104830, 0x7c70, 0x11cf, 0x8b, 0xce, 0x00, 0xaa, 0x00, 0xa3, 0xf1, 0xa6)}
+\DoxyCodeLine{502 \_\_CRT\_UUID\_DECL (\mbox{\hyperlink{namespacejuce}{juce}}::ComTypes::IGraphBuilder,               0x56a868a9, 0x0ad4, 0x11ce, 0xb0, 0x3a, 0x00, 0x20, 0xaf, 0x0b, 0xa7, 0x70)}
+\DoxyCodeLine{503 \_\_CRT\_UUID\_DECL (\mbox{\hyperlink{namespacejuce}{juce}}::ComTypes::IMFGetService,               0xfa993888, 0x4383, 0x415a, 0xa9, 0x30, 0xdd, 0x47, 0x2a, 0x8c, 0xf6, 0xf7)}
+\DoxyCodeLine{504 \_\_CRT\_UUID\_DECL (\mbox{\hyperlink{namespacejuce}{juce}}::ComTypes::IMFVideoDisplayControl,      0xa490b1e4, 0xab84, 0x4d31, 0xa1, 0xb2, 0x18, 0x1e, 0x03, 0xb1, 0x07, 0x7a)}
+\DoxyCodeLine{505 \_\_CRT\_UUID\_DECL (\mbox{\hyperlink{namespacejuce}{juce}}::ComTypes::IMediaControl,               0x56a868b1, 0x0ad4, 0x11ce, 0xb0, 0x3a, 0x00, 0x20, 0xaf, 0x0b, 0xa7, 0x70)}
+\DoxyCodeLine{506 \_\_CRT\_UUID\_DECL (\mbox{\hyperlink{namespacejuce}{juce}}::ComTypes::IMediaEventEx,               0x56a868c0, 0x0ad4, 0x11ce, 0xb0, 0x3a, 0x00, 0x20, 0xaf, 0x0b, 0xa7, 0x70)}
+\DoxyCodeLine{507 \_\_CRT\_UUID\_DECL (\mbox{\hyperlink{namespacejuce}{juce}}::ComTypes::IMediaPosition,              0x56a868b2, 0x0ad4, 0x11ce, 0xb0, 0x3a, 0x00, 0x20, 0xaf, 0x0b, 0xa7, 0x70)}
+\DoxyCodeLine{508 \_\_CRT\_UUID\_DECL (\mbox{\hyperlink{namespacejuce}{juce}}::ComTypes::ISampleGrabber,              0x6B652FFF, 0x11FE, 0x4fce, 0x92, 0xAD, 0x02, 0x66, 0xB5, 0xD7, 0xC7, 0x8F)}
+\DoxyCodeLine{509 \_\_CRT\_UUID\_DECL (\mbox{\hyperlink{namespacejuce}{juce}}::ComTypes::ISampleGrabberCB,            0x0579154A, 0x2B53, 0x4994, 0xB0, 0xD0, 0xE7, 0x73, 0x14, 0x8E, 0xFF, 0x85)}
+\DoxyCodeLine{510 \_\_CRT\_UUID\_DECL (\mbox{\hyperlink{namespacejuce}{juce}}::ComTypes::IVMRFilterConfig,            0x9e5530c5, 0x7034, 0x48b4, 0xbb, 0x46, 0x0b, 0x8a, 0x6e, 0xfc, 0x8e, 0x36)}
+\DoxyCodeLine{511 \_\_CRT\_UUID\_DECL (\mbox{\hyperlink{namespacejuce}{juce}}::ComTypes::IVMRWindowlessControl,       0x0eb1088c, 0x4dcd, 0x46f0, 0x87, 0x8f, 0x39, 0xda, 0xe8, 0x6a, 0x51, 0xb7)}
+\DoxyCodeLine{512 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

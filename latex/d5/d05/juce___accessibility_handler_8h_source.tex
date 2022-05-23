@@ -1,0 +1,166 @@
+\hypertarget{juce___accessibility_handler_8h_source}{}\doxysection{juce\+\_\+\+Accessibility\+Handler.\+h}
+\label{juce___accessibility_handler_8h_source}\index{build/juce\_gui\_basics/accessibility/juce\_AccessibilityHandler.h@{build/juce\_gui\_basics/accessibility/juce\_AccessibilityHandler.h}}
+\mbox{\hyperlink{juce___accessibility_handler_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{keyword}{class }AccessibilityNativeHandle;}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{41 \textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_accessibility_handler}{AccessibilityHandler}}}
+\DoxyCodeLine{42 \{}
+\DoxyCodeLine{43 \textcolor{keyword}{public}:}
+\DoxyCodeLine{49     \textcolor{keyword}{struct }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{struct_accessibility_handler_1_1_interfaces}{Interfaces}}}
+\DoxyCodeLine{50     \{}
+\DoxyCodeLine{51         \mbox{\hyperlink{struct_accessibility_handler_1_1_interfaces_a97f8dc69ecbc5d51cdf14e54fb86ecb2}{Interfaces}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53         \mbox{\hyperlink{struct_accessibility_handler_1_1_interfaces_a6d725064ffa96ff5dcbf8766d197dda7}{Interfaces}} (std::unique\_ptr<AccessibilityValueInterface> \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}})  : \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}} (\mbox{\hyperlink{namespacestd}{std}}::\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{move}} (\mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}}))  \{\}}
+\DoxyCodeLine{54         \mbox{\hyperlink{struct_accessibility_handler_1_1_interfaces_a14b675fdc96df530d4563cb7bfc0fbc2}{Interfaces}} (std::unique\_ptr<AccessibilityTextInterface>  \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}})  : text  (\mbox{\hyperlink{namespacestd}{std}}::\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{move}} (\mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}}))  \{\}}
+\DoxyCodeLine{55         \mbox{\hyperlink{struct_accessibility_handler_1_1_interfaces_a29a33e2ece98dee45cfbae0f4b3b7532}{Interfaces}} (std::unique\_ptr<AccessibilityTableInterface> \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}})  : \mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682caaab9e1de16f38176f86d7a92ba337a8d}{table}} (\mbox{\hyperlink{namespacestd}{std}}::\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{move}} (\mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}}))  \{\}}
+\DoxyCodeLine{56         \mbox{\hyperlink{struct_accessibility_handler_1_1_interfaces_a1227cd55f902876a352b7a5579c5d502}{Interfaces}} (std::unique\_ptr<AccessibilityCellInterface>  \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}})  : \mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca8d27600b0cae5308441ddf6d9bb3c74c}{cell}}  (\mbox{\hyperlink{namespacestd}{std}}::\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{move}} (\mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}}))  \{\}}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58         \mbox{\hyperlink{struct_accessibility_handler_1_1_interfaces_a0dfb204028a51b19681ac72f5fe1b21c}{Interfaces}} (std::unique\_ptr<AccessibilityValueInterface> valueIn,}
+\DoxyCodeLine{59                     std::unique\_ptr<AccessibilityTextInterface>  textIn,}
+\DoxyCodeLine{60                     std::unique\_ptr<AccessibilityTableInterface> tableIn,}
+\DoxyCodeLine{61                     std::unique\_ptr<AccessibilityCellInterface>  cellIn)}
+\DoxyCodeLine{62             : \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}} (\mbox{\hyperlink{namespacestd}{std}}::\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{move}} (valueIn)),}
+\DoxyCodeLine{63               text  (\mbox{\hyperlink{namespacestd}{std}}::\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{move}} (textIn)),}
+\DoxyCodeLine{64               \mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682caaab9e1de16f38176f86d7a92ba337a8d}{table}} (\mbox{\hyperlink{namespacestd}{std}}::\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{move}} (tableIn)),}
+\DoxyCodeLine{65               \mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca8d27600b0cae5308441ddf6d9bb3c74c}{cell}}  (\mbox{\hyperlink{namespacestd}{std}}::\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{move}} (cellIn))}
+\DoxyCodeLine{66         \{}
+\DoxyCodeLine{67         \}}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69         std::unique\_ptr<AccessibilityValueInterface> \mbox{\hyperlink{struct_accessibility_handler_1_1_interfaces_a9233e8ebf0f02beecaaee9f693a69743}{value}};}
+\DoxyCodeLine{70         std::unique\_ptr<AccessibilityTextInterface>  \mbox{\hyperlink{struct_accessibility_handler_1_1_interfaces_ae5f0b30df4d29d3dabb5556a070fa003}{text}};}
+\DoxyCodeLine{71         std::unique\_ptr<AccessibilityTableInterface> \mbox{\hyperlink{struct_accessibility_handler_1_1_interfaces_a8e328e89ebb05c4232ba2950fb7ac671}{table}};}
+\DoxyCodeLine{72         std::unique\_ptr<AccessibilityCellInterface>  \mbox{\hyperlink{struct_accessibility_handler_1_1_interfaces_abbe55509600061a8d225354825f872c6}{cell}};}
+\DoxyCodeLine{73     \};}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{89     \mbox{\hyperlink{class_accessibility_handler_a003d64ca212b385ef71df99aa5583340}{AccessibilityHandler}} (\mbox{\hyperlink{class_component}{Component}}\& componentToWrap,}
+\DoxyCodeLine{90                           \mbox{\hyperlink{group__juce__gui__basics-accessibility_gaf1349587ab6cac7e882cd63e1976682c}{AccessibilityRole}} accessibilityRole,}
+\DoxyCodeLine{91                           \mbox{\hyperlink{class_accessibility_actions}{AccessibilityActions}} actions = \{\},}
+\DoxyCodeLine{92                           Interfaces interfaces = \{\});}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{95     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_accessibility_handler_adfd8d5b30966412790a22428216b34e8}{\string~AccessibilityHandler}}();}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{99 \textcolor{comment}{}    \textcolor{keyword}{const} \mbox{\hyperlink{class_component}{Component}}\& \mbox{\hyperlink{class_accessibility_handler_acb0f1a9ba27ae6d444307259ec1dfc62}{getComponent}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept   \{ \textcolor{keywordflow}{return} component; \}}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{102     \mbox{\hyperlink{class_component}{Component}}\& \mbox{\hyperlink{class_accessibility_handler_a6772cb7fb7af229f1b3ae4798b67433b}{getComponent}}() noexcept               \{ \textcolor{keywordflow}{return} component; \}}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{109 \textcolor{comment}{}    \mbox{\hyperlink{group__juce__gui__basics-accessibility_gaf1349587ab6cac7e882cd63e1976682c}{AccessibilityRole}} \mbox{\hyperlink{class_accessibility_handler_a7106798072deb9953742a6aebd41559a}{getRole}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept       \{ \textcolor{keywordflow}{return} role; \}}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{125     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{class_accessibility_handler_ac8e5cccf90033cc687f92350b2590584}{getTitle}}()\textcolor{keyword}{ const                  }\{ \textcolor{keywordflow}{return} component.getTitle(); \}}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{141     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{class_accessibility_handler_a206525900177f0488af941bb24f04692}{getDescription}}()\textcolor{keyword}{ const            }\{ \textcolor{keywordflow}{return} component.getDescription(); \}}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{153     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{class_accessibility_handler_a3dec53a8324f933863eb0e116f1cb530}{getHelp}}()\textcolor{keyword}{ const                   }\{ \textcolor{keywordflow}{return} component.getHelpText(); \}}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{160     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_accessible_state}{AccessibleState}} \mbox{\hyperlink{class_accessibility_handler_abf086024d6f96f1d99d7675cbe3577d7}{getCurrentState}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{161 }
+\DoxyCodeLine{163     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_accessibility_handler_a2beba39a1683e80d745eef86a63ed9f1}{isIgnored}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{164 }
+\DoxyCodeLine{170     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_accessibility_handler_aeed69952148752e93994295438a22254}{isVisibleWithinParent}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{171 }
+\DoxyCodeLine{172     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{176 \textcolor{comment}{}    \textcolor{keyword}{const} \mbox{\hyperlink{class_accessibility_actions}{AccessibilityActions}}\& \mbox{\hyperlink{class_accessibility_handler_aa077f680f79a2b5928cfa48f768c02b9}{getActions}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{177 }
+\DoxyCodeLine{182     \mbox{\hyperlink{class_accessibility_value_interface}{AccessibilityValueInterface}}* getValueInterface() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{183 }
+\DoxyCodeLine{188     \mbox{\hyperlink{class_accessibility_table_interface}{AccessibilityTableInterface}}* getTableInterface() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{189 }
+\DoxyCodeLine{194     \mbox{\hyperlink{class_accessibility_cell_interface}{AccessibilityCellInterface}}* getCellInterface() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{195 }
+\DoxyCodeLine{200     \mbox{\hyperlink{class_accessibility_text_interface}{AccessibilityTextInterface}}* getTextInterface() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{201 }
+\DoxyCodeLine{202     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{206 \textcolor{comment}{}    \mbox{\hyperlink{class_accessibility_handler}{AccessibilityHandler}}* getParent() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{207 }
+\DoxyCodeLine{209     \mbox{\hyperlink{namespacestd}{std}}::vector<\mbox{\hyperlink{class_accessibility_handler}{AccessibilityHandler}}*> getChildren() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{210 }
+\DoxyCodeLine{214     \textcolor{keywordtype}{bool} isParentOf (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_accessibility_handler}{AccessibilityHandler}}* possibleChild) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{215 }
+\DoxyCodeLine{219     \mbox{\hyperlink{class_accessibility_handler}{AccessibilityHandler}}* getChildAt (\mbox{\hyperlink{class_point}{Point}}<\textcolor{keywordtype}{int}> screenPoint);}
+\DoxyCodeLine{220 }
+\DoxyCodeLine{231     \mbox{\hyperlink{class_accessibility_handler}{AccessibilityHandler}}* getChildFocus();}
+\DoxyCodeLine{232 }
+\DoxyCodeLine{239     \textcolor{keywordtype}{bool} hasFocus (\textcolor{keywordtype}{bool} trueIfChildFocused) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{240 }
+\DoxyCodeLine{249     \textcolor{keywordtype}{void} grabFocus();}
+\DoxyCodeLine{250 }
+\DoxyCodeLine{259     \textcolor{keywordtype}{void} giveAwayFocus() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{260 }
+\DoxyCodeLine{261     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{267 \textcolor{comment}{}    \textcolor{keywordtype}{void} notifyAccessibilityEvent (\mbox{\hyperlink{group__juce__gui__basics-accessibility_gaefa5337f5ce957a9403e2eb59d591ffc}{AccessibilityEvent}} \mbox{\hyperlink{namespacegl_a5db3d429ae1833f173b8c4ef6a9b3b82}{event}}) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{268 }
+\DoxyCodeLine{276     enum class \mbox{\hyperlink{class_accessibility_handler_aa4555f97063f6ff38a6bcda7cf8e8b7c}{AnnouncementPriority}}}
+\DoxyCodeLine{277     \{}
+\DoxyCodeLine{278         low,}
+\DoxyCodeLine{279         medium,}
+\DoxyCodeLine{280         high}
+\DoxyCodeLine{281     \};}
+\DoxyCodeLine{282 }
+\DoxyCodeLine{288     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_accessibility_handler_ac23089d9f1d1d47d226039d5af3df60e}{postAnnouncement}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& announcementString, \mbox{\hyperlink{class_accessibility_handler_aa4555f97063f6ff38a6bcda7cf8e8b7c}{AnnouncementPriority}} priority);}
+\DoxyCodeLine{289 }
+\DoxyCodeLine{290     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{292 \textcolor{comment}{}    AccessibilityNativeHandle* \mbox{\hyperlink{class_accessibility_handler_acb4ef2be51fc274df1377a1c3ef099f5}{getNativeImplementation}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{294     std::type\_index \mbox{\hyperlink{class_accessibility_handler_ae3cd997d66a56df5afe4ce675d4ee97e}{getTypeIndex}}()\textcolor{keyword}{ const  }\{ \textcolor{keywordflow}{return} typeIndex; \}}
+\DoxyCodeLine{295 }
+\DoxyCodeLine{296 \textcolor{keyword}{private}:}
+\DoxyCodeLine{297     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{298     \textcolor{keyword}{friend} \textcolor{keyword}{class }AccessibilityNativeHandle;}
+\DoxyCodeLine{299 }
+\DoxyCodeLine{300     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{301     \textcolor{keywordtype}{void} grabFocusInternal (\textcolor{keywordtype}{bool});}
+\DoxyCodeLine{302     \textcolor{keywordtype}{void} giveAwayFocusInternal() \textcolor{keyword}{const};}
+\DoxyCodeLine{303     \textcolor{keywordtype}{void} takeFocus();}
+\DoxyCodeLine{304 }
+\DoxyCodeLine{305     \textcolor{keyword}{static} \mbox{\hyperlink{class_accessibility_handler}{AccessibilityHandler}}* currentlyFocusedHandler;}
+\DoxyCodeLine{306 }
+\DoxyCodeLine{307     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{308     \mbox{\hyperlink{class_component}{Component}}\& component;}
+\DoxyCodeLine{309     std::type\_index typeIndex;}
+\DoxyCodeLine{310 }
+\DoxyCodeLine{311     \textcolor{keyword}{const} \mbox{\hyperlink{group__juce__gui__basics-accessibility_gaf1349587ab6cac7e882cd63e1976682c}{AccessibilityRole}} role;}
+\DoxyCodeLine{312     \mbox{\hyperlink{class_accessibility_actions}{AccessibilityActions}} actions;}
+\DoxyCodeLine{313 }
+\DoxyCodeLine{314     \mbox{\hyperlink{struct_accessibility_handler_1_1_interfaces}{Interfaces}} interfaces;}
+\DoxyCodeLine{315 }
+\DoxyCodeLine{316     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{317     \textcolor{keyword}{class }AccessibilityNativeImpl;}
+\DoxyCodeLine{318     std::unique\_ptr<AccessibilityNativeImpl> nativeImpl;}
+\DoxyCodeLine{319 }
+\DoxyCodeLine{320     \textcolor{keyword}{static} std::unique\_ptr<AccessibilityNativeImpl> createNativeImpl (\mbox{\hyperlink{class_accessibility_handler}{AccessibilityHandler}}\&);}
+\DoxyCodeLine{321 }
+\DoxyCodeLine{322     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{323     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_accessibility_handler}{AccessibilityHandler}})}
+\DoxyCodeLine{324 \};}
+\DoxyCodeLine{325 }
+\DoxyCodeLine{326  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{327 }
+
+\end{DoxyCode}

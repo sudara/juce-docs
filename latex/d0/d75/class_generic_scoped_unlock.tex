@@ -1,0 +1,86 @@
+\hypertarget{class_generic_scoped_unlock}{}\doxysection{Generic\+Scoped\+Unlock\texorpdfstring{$<$}{<} Lock\+Type \texorpdfstring{$>$}{>} Class Template Reference}
+\label{class_generic_scoped_unlock}\index{GenericScopedUnlock$<$ LockType $>$@{GenericScopedUnlock$<$ LockType $>$}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Scoped\+Lock.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_generic_scoped_unlock_ab2dc89287c459355d6a04fb5d58d9ce3}{Generic\+Scoped\+Unlock}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} Lock\+Type \&lock) noexcept
+\item 
+\mbox{\hyperlink{class_generic_scoped_unlock_ab979a8270fadb8bd835ef693cb5ad474}{$\sim$\+Generic\+Scoped\+Unlock}} () noexcept
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class Lock\+Type$>$\newline
+class Generic\+Scoped\+Unlock$<$ Lock\+Type $>$}
+Automatically unlocks and re-\/locks a mutex object.
+
+This is the reverse of a \mbox{\hyperlink{class_generic_scoped_lock}{Generic\+Scoped\+Lock}} object -\/ instead of locking the mutex for the lifetime of this object, it unlocks it.
+
+Make sure you don\textquotesingle{}t try to unlock mutexes that aren\textquotesingle{}t actually locked!
+
+e.\+g. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{class_critical_section}{CriticalSection}} myCriticalSection;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{for} (;;)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{class_generic_scoped_lock}{GenericScopedLock<CriticalSection>}} myScopedLock (myCriticalSection);}
+\DoxyCodeLine{    \textcolor{comment}{// myCriticalSection is now locked}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    ... \textcolor{keywordflow}{do} some stuff with it locked ..}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keywordflow}{while} (xyz)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        ... \textcolor{keywordflow}{do} some stuff with it locked ..}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{keyword}{const} \mbox{\hyperlink{class_generic_scoped_unlock}{GenericScopedUnlock<CriticalSection>}} unlocker (myCriticalSection);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// myCriticalSection is now unlocked for the remainder of this block,}}
+\DoxyCodeLine{        \textcolor{comment}{// and re-\/locked at the end.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{        ...do some stuff with it unlocked ...}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{comment}{// myCriticalSection gets unlocked here.}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_generic_scoped_lock}{Generic\+Scoped\+Lock}}, \mbox{\hyperlink{class_critical_section}{Critical\+Section}}, \mbox{\hyperlink{group__juce__core-threads_gadd0b55041ea549cc9b1dfae71670e543}{Scoped\+Lock}}, \mbox{\hyperlink{group__juce__core-threads_ga1a3fa8167a53f3d021763968a03282ea}{Scoped\+Unlock}}
+\end{DoxySeeAlso}
+@tags\{Core\} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_generic_scoped_unlock_ab2dc89287c459355d6a04fb5d58d9ce3}\label{class_generic_scoped_unlock_ab2dc89287c459355d6a04fb5d58d9ce3}} 
+\index{GenericScopedUnlock$<$ LockType $>$@{GenericScopedUnlock$<$ LockType $>$}!GenericScopedUnlock@{GenericScopedUnlock}}
+\index{GenericScopedUnlock@{GenericScopedUnlock}!GenericScopedUnlock$<$ LockType $>$@{GenericScopedUnlock$<$ LockType $>$}}
+\doxysubsubsection{\texorpdfstring{GenericScopedUnlock()}{GenericScopedUnlock()}}
+{\footnotesize\ttfamily template$<$class Lock\+Type $>$ \\
+\mbox{\hyperlink{class_generic_scoped_unlock}{Generic\+Scoped\+Unlock}}$<$ Lock\+Type $>$\+::\mbox{\hyperlink{class_generic_scoped_unlock}{Generic\+Scoped\+Unlock}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} Lock\+Type \&}]{lock }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}, {\ttfamily [noexcept]}}
+
+Creates a \mbox{\hyperlink{class_generic_scoped_unlock}{Generic\+Scoped\+Unlock}}.
+
+As soon as it is created, this will unlock the \mbox{\hyperlink{class_critical_section}{Critical\+Section}}, and when the Scoped\+Lock object is deleted, the \mbox{\hyperlink{class_critical_section}{Critical\+Section}} will be re-\/locked.
+
+Make sure this object is created and deleted by the same thread, otherwise there are no guarantees what will happen! Best just to use it as a local stack object, rather than creating one with the new() operator. \mbox{\Hypertarget{class_generic_scoped_unlock_ab979a8270fadb8bd835ef693cb5ad474}\label{class_generic_scoped_unlock_ab979a8270fadb8bd835ef693cb5ad474}} 
+\index{GenericScopedUnlock$<$ LockType $>$@{GenericScopedUnlock$<$ LockType $>$}!````~GenericScopedUnlock@{$\sim$GenericScopedUnlock}}
+\index{````~GenericScopedUnlock@{$\sim$GenericScopedUnlock}!GenericScopedUnlock$<$ LockType $>$@{GenericScopedUnlock$<$ LockType $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$GenericScopedUnlock()}{~GenericScopedUnlock()}}
+{\footnotesize\ttfamily template$<$class Lock\+Type $>$ \\
+\mbox{\hyperlink{class_generic_scoped_unlock}{Generic\+Scoped\+Unlock}}$<$ Lock\+Type $>$\+::$\sim$\mbox{\hyperlink{class_generic_scoped_unlock}{Generic\+Scoped\+Unlock}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Destructor.
+
+The \mbox{\hyperlink{class_critical_section}{Critical\+Section}} will be unlocked when the destructor is called.
+
+Make sure this object is created and deleted by the same thread, otherwise there are no guarantees what will happen! 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+core/threads/\mbox{\hyperlink{juce___scoped_lock_8h}{juce\+\_\+\+Scoped\+Lock.\+h}}\end{DoxyCompactItemize}

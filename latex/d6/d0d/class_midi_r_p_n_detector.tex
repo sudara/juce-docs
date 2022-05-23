@@ -1,0 +1,62 @@
+\hypertarget{class_midi_r_p_n_detector}{}\doxysection{Midi\+RPNDetector Class Reference}
+\label{class_midi_r_p_n_detector}\index{MidiRPNDetector@{MidiRPNDetector}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Midi\+RPN.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_midi_r_p_n_detector_aac89378f671f106a6b359ea1fb24487c}{Midi\+RPNDetector}} () noexcept
+\item 
+\mbox{\hyperlink{class_midi_r_p_n_detector_ac174f0bb91d431b47e49201a50b22b15}{$\sim$\+Midi\+RPNDetector}} () noexcept
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_midi_r_p_n_detector_a2e0a21c1cd2ba5d529af947f7199aa79}{reset}} () noexcept
+\item 
+bool \mbox{\hyperlink{class_midi_r_p_n_detector_a12bc6aeca8c5e8acd7e65cb610c13d19}{parse\+Controller\+Message}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} midi\+Channel, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} controller\+Number, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} controller\+Value, \mbox{\hyperlink{struct_midi_r_p_n_message}{Midi\+RPNMessage}} \&result) noexcept
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Parses a stream of MIDI data to assemble RPN and NRPN messages from their constituent MIDI CC messages.
+
+The detector uses the following parsing rules\+: the parameter number LSB/\+MSB can be sent/received in either order and must both come before the parameter value; for the parameter value, LSB always has to be sent/received before the value MSB, otherwise it will be treated as 7-\/bit (MSB only).
+
+@tags\{Audio\} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_midi_r_p_n_detector_aac89378f671f106a6b359ea1fb24487c}\label{class_midi_r_p_n_detector_aac89378f671f106a6b359ea1fb24487c}} 
+\index{MidiRPNDetector@{MidiRPNDetector}!MidiRPNDetector@{MidiRPNDetector}}
+\index{MidiRPNDetector@{MidiRPNDetector}!MidiRPNDetector@{MidiRPNDetector}}
+\doxysubsubsection{\texorpdfstring{MidiRPNDetector()}{MidiRPNDetector()}}
+{\footnotesize\ttfamily Midi\+RPNDetector\+::\+Midi\+RPNDetector (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Constructor. \mbox{\Hypertarget{class_midi_r_p_n_detector_ac174f0bb91d431b47e49201a50b22b15}\label{class_midi_r_p_n_detector_ac174f0bb91d431b47e49201a50b22b15}} 
+\index{MidiRPNDetector@{MidiRPNDetector}!````~MidiRPNDetector@{$\sim$MidiRPNDetector}}
+\index{````~MidiRPNDetector@{$\sim$MidiRPNDetector}!MidiRPNDetector@{MidiRPNDetector}}
+\doxysubsubsection{\texorpdfstring{$\sim$MidiRPNDetector()}{~MidiRPNDetector()}}
+{\footnotesize\ttfamily Midi\+RPNDetector\+::$\sim$\+Midi\+RPNDetector (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Destructor. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_midi_r_p_n_detector_a12bc6aeca8c5e8acd7e65cb610c13d19}\label{class_midi_r_p_n_detector_a12bc6aeca8c5e8acd7e65cb610c13d19}} 
+\index{MidiRPNDetector@{MidiRPNDetector}!parseControllerMessage@{parseControllerMessage}}
+\index{parseControllerMessage@{parseControllerMessage}!MidiRPNDetector@{MidiRPNDetector}}
+\doxysubsubsection{\texorpdfstring{parseControllerMessage()}{parseControllerMessage()}}
+{\footnotesize\ttfamily bool Midi\+RPNDetector\+::parse\+Controller\+Message (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{midi\+Channel,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{controller\+Number,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{controller\+Value,  }\item[{\mbox{\hyperlink{struct_midi_r_p_n_message}{Midi\+RPNMessage}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Takes the next in a stream of incoming MIDI CC messages and returns true if it forms the last of a sequence that makes an RPN or NPRN.
+
+If this returns true, then the RPNMessage object supplied will be filled-\/out with the message\textquotesingle{}s details. (If it returns false then the RPNMessage object will be unchanged). \mbox{\Hypertarget{class_midi_r_p_n_detector_a2e0a21c1cd2ba5d529af947f7199aa79}\label{class_midi_r_p_n_detector_a2e0a21c1cd2ba5d529af947f7199aa79}} 
+\index{MidiRPNDetector@{MidiRPNDetector}!reset@{reset}}
+\index{reset@{reset}!MidiRPNDetector@{MidiRPNDetector}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Midi\+RPNDetector\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Resets the RPN detector\textquotesingle{}s internal state, so that it forgets about previously received MIDI CC messages. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+audio\+\_\+basics/midi/\mbox{\hyperlink{juce___midi_r_p_n_8h}{juce\+\_\+\+Midi\+RPN.\+h}}\item 
+build/juce\+\_\+audio\+\_\+basics/midi/\mbox{\hyperlink{juce___midi_r_p_n_8cpp}{juce\+\_\+\+Midi\+RPN.\+cpp}}\end{DoxyCompactItemize}

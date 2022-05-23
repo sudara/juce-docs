@@ -1,0 +1,110 @@
+\hypertarget{juce__osx___message_queue_8h_source}{}\doxysection{juce\+\_\+osx\+\_\+\+Message\+Queue.\+h}
+\label{juce__osx___message_queue_8h_source}\index{build/juce\_events/native/juce\_osx\_MessageQueue.h@{build/juce\_events/native/juce\_osx\_MessageQueue.h}}
+\mbox{\hyperlink{juce__osx___message_queue_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{5 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{6 \textcolor{comment}{}}
+\DoxyCodeLine{7 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{8 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{9 \textcolor{comment}{}}
+\DoxyCodeLine{10 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{11 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{12 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{13 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{14 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{15 \textcolor{comment}{}}
+\DoxyCodeLine{16 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{17 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{18 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{21 \textcolor{comment}{*/}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacejuce}{juce}}}
+\DoxyCodeLine{24 \{}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{27 \textcolor{comment}{/* An internal message pump class used in OSX and iOS. */}}
+\DoxyCodeLine{28 \textcolor{keyword}{class }\mbox{\hyperlink{classjuce_1_1_message_queue}{MessageQueue}}}
+\DoxyCodeLine{29 \{}
+\DoxyCodeLine{30 \textcolor{keyword}{public}:}
+\DoxyCodeLine{31     \mbox{\hyperlink{classjuce_1_1_message_queue_ab8b4f48b7499ed96bfbd87330b64f344}{MessageQueue}}()}
+\DoxyCodeLine{32     \{}
+\DoxyCodeLine{33 \textcolor{preprocessor}{       \#if JUCE\_IOS}}
+\DoxyCodeLine{34         runLoop = CFRunLoopGetCurrent();}
+\DoxyCodeLine{35 \textcolor{preprocessor}{       \#else}}
+\DoxyCodeLine{36         runLoop = CFRunLoopGetMain();}
+\DoxyCodeLine{37 \textcolor{preprocessor}{       \#endif}}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39         CFRunLoopSourceContext sourceContext;}
+\DoxyCodeLine{40         \mbox{\hyperlink{group__juce__core-memory_ga1f3dbe374ad9280ed9ba72f510d8e5b0}{zerostruct}} (sourceContext); \textcolor{comment}{// (can't use "{}= \{ 0 \}"{} on this object because it's typedef'ed as a C struct)}}
+\DoxyCodeLine{41         sourceContext.info = \textcolor{keyword}{this};}
+\DoxyCodeLine{42         sourceContext.perform = runLoopSourceCallback;}
+\DoxyCodeLine{43         runLoopSource.reset (CFRunLoopSourceCreate (kCFAllocatorDefault, 1, \&sourceContext));}
+\DoxyCodeLine{44         CFRunLoopAddSource (runLoop, runLoopSource.get(), kCFRunLoopCommonModes);}
+\DoxyCodeLine{45     \}}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47     \mbox{\hyperlink{classjuce_1_1_message_queue_a4dfa21b9cd24d20ef4b398fa95185e14}{\string~MessageQueue}}() noexcept}
+\DoxyCodeLine{48     \{}
+\DoxyCodeLine{49         CFRunLoopRemoveSource (runLoop, runLoopSource.get(), kCFRunLoopCommonModes);}
+\DoxyCodeLine{50         CFRunLoopSourceInvalidate (runLoopSource.get());}
+\DoxyCodeLine{51     \}}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53     \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_message_queue_a524a9d40ab49f8182764764db1ade4b7}{post}} (\mbox{\hyperlink{class_message_manager_1_1_message_base}{MessageManager::MessageBase}}* \textcolor{keyword}{const} \mbox{\hyperlink{namespacegl_a1243e1c99f08a099c7a70cc1a258034a}{message}})}
+\DoxyCodeLine{54     \{}
+\DoxyCodeLine{55         messages.add (\mbox{\hyperlink{namespacegl_a1243e1c99f08a099c7a70cc1a258034a}{message}});}
+\DoxyCodeLine{56         wakeUp();}
+\DoxyCodeLine{57     \}}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59 \textcolor{keyword}{private}:}
+\DoxyCodeLine{60     \mbox{\hyperlink{class_reference_counted_array}{ReferenceCountedArray<MessageManager::MessageBase, CriticalSection>}} messages;}
+\DoxyCodeLine{61     CFRunLoopRef runLoop;}
+\DoxyCodeLine{62     \mbox{\hyperlink{namespacejuce_ab3e49ff7ef2dab489ce60ac5757fb077}{CFUniquePtr<CFRunLoopSourceRef>}} runLoopSource;}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64     \textcolor{keywordtype}{void} wakeUp() noexcept}
+\DoxyCodeLine{65     \{}
+\DoxyCodeLine{66         CFRunLoopSourceSignal (runLoopSource.get());}
+\DoxyCodeLine{67         CFRunLoopWakeUp (runLoop);}
+\DoxyCodeLine{68     \}}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70     \textcolor{keywordtype}{bool} deliverNextMessage()}
+\DoxyCodeLine{71     \{}
+\DoxyCodeLine{72         \textcolor{keyword}{const} \mbox{\hyperlink{class_reference_counted_object_ptr}{MessageManager::MessageBase::Ptr}} nextMessage (messages.\mbox{\hyperlink{class_reference_counted_array_aa9a388888e3c833af3e47b903edd0dfc}{removeAndReturn}} (0));}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74         \textcolor{keywordflow}{if} (nextMessage == \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{75             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77         \mbox{\hyperlink{group__juce__core-memory_gad73fadcd76040b11a626d5bdf833ad49}{JUCE\_AUTORELEASEPOOL}}}
+\DoxyCodeLine{78         \{}
+\DoxyCodeLine{79             \mbox{\hyperlink{group__juce__events-messages_ga267fd4f83073fb084b389df70243c52e}{JUCE\_TRY}}}
+\DoxyCodeLine{80             \{}
+\DoxyCodeLine{81                 nextMessage-\/>messageCallback();}
+\DoxyCodeLine{82             \}}
+\DoxyCodeLine{83             \mbox{\hyperlink{group__juce__events-messages_ga76b33d944e52097017e10dbc10de503b}{JUCE\_CATCH\_EXCEPTION}}}
+\DoxyCodeLine{84         \}}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{87     \}}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89     \textcolor{keywordtype}{void} runLoopCallback() noexcept}
+\DoxyCodeLine{90     \{}
+\DoxyCodeLine{91         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 4; -\/-\/i >= 0;)}
+\DoxyCodeLine{92             \textcolor{keywordflow}{if} (! deliverNextMessage())}
+\DoxyCodeLine{93                 \textcolor{keywordflow}{return};}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95         wakeUp();}
+\DoxyCodeLine{96     \}}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98     \textcolor{keyword}{static} \textcolor{keywordtype}{void} runLoopSourceCallback (\textcolor{keywordtype}{void}* \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{99     \{}
+\DoxyCodeLine{100         \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{classjuce_1_1_message_queue_ab8b4f48b7499ed96bfbd87330b64f344}{MessageQueue}}*\textcolor{keyword}{>} (\mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}})-\/>runLoopCallback();}
+\DoxyCodeLine{101     \}}
+\DoxyCodeLine{102 \};}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104 \} \textcolor{comment}{// namespace juce}}
+
+\end{DoxyCode}

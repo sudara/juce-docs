@@ -1,0 +1,246 @@
+\hypertarget{juce___look_and_feel___v4_8h_source}{}\doxysection{juce\+\_\+\+Look\+And\+Feel\+\_\+\+V4.\+h}
+\label{juce___look_and_feel___v4_8h_source}\index{build/juce\_gui\_basics/lookandfeel/juce\_LookAndFeel\_V4.h@{build/juce\_gui\_basics/lookandfeel/juce\_LookAndFeel\_V4.h}}
+\mbox{\hyperlink{juce___look_and_feel___v4_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{37 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_look_and_feel___v4}{LookAndFeel\_V4}}   : \textcolor{keyword}{public} \mbox{\hyperlink{class_look_and_feel___v3}{LookAndFeel\_V3}}}
+\DoxyCodeLine{38 \{}
+\DoxyCodeLine{39 \textcolor{keyword}{public}:}
+\DoxyCodeLine{43     \textcolor{keyword}{class }\mbox{\hyperlink{class_look_and_feel___v4_1_1_colour_scheme}{ColourScheme}}}
+\DoxyCodeLine{44     \{}
+\DoxyCodeLine{45     \textcolor{keyword}{public}:}
+\DoxyCodeLine{47         \textcolor{keyword}{enum} \mbox{\hyperlink{class_look_and_feel___v4_1_1_colour_scheme_a3a0b01b5a192545b3692ed288597b2f4}{UIColour}}}
+\DoxyCodeLine{48         \{}
+\DoxyCodeLine{49             windowBackground = 0,}
+\DoxyCodeLine{50             \mbox{\hyperlink{class_look_and_feel___v4_1_1_colour_scheme_a3a0b01b5a192545b3692ed288597b2f4a695c7f401ba50951b1891e97c540a19a}{widgetBackground}},}
+\DoxyCodeLine{51             \mbox{\hyperlink{class_look_and_feel___v4_1_1_colour_scheme_a3a0b01b5a192545b3692ed288597b2f4ad4b5c737c806ce6ca95b5a8a18aa8f76}{menuBackground}},}
+\DoxyCodeLine{52             \mbox{\hyperlink{class_look_and_feel___v4_1_1_colour_scheme_a3a0b01b5a192545b3692ed288597b2f4a14b94478e1a8aca02eb1f2d8cc7177de}{outline}},}
+\DoxyCodeLine{53             \mbox{\hyperlink{class_look_and_feel___v4_1_1_colour_scheme_a3a0b01b5a192545b3692ed288597b2f4a4592fbe250183875c6b3dd6506abebde}{defaultText}},}
+\DoxyCodeLine{54             \mbox{\hyperlink{class_look_and_feel___v4_1_1_colour_scheme_a3a0b01b5a192545b3692ed288597b2f4ae9f12511493c3841cfb6880bb86b46a8}{defaultFill}},}
+\DoxyCodeLine{55             \mbox{\hyperlink{class_look_and_feel___v4_1_1_colour_scheme_a3a0b01b5a192545b3692ed288597b2f4a0b1fc486b4d9d616f88495ba6b34d748}{highlightedText}},}
+\DoxyCodeLine{56             \mbox{\hyperlink{class_look_and_feel___v4_1_1_colour_scheme_a3a0b01b5a192545b3692ed288597b2f4add67f73730cdcc64b275078f33b34734}{highlightedFill}},}
+\DoxyCodeLine{57             \mbox{\hyperlink{class_look_and_feel___v4_1_1_colour_scheme_a3a0b01b5a192545b3692ed288597b2f4aa97d345b3ef500135ac0a3a36119abd6}{menuText}},}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59             numColours}
+\DoxyCodeLine{60         \};}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62         \textcolor{keyword}{template} <\textcolor{keyword}{typename}... ItemColours>}
+\DoxyCodeLine{63         \mbox{\hyperlink{class_look_and_feel___v4_1_1_colour_scheme_ab6b1b1f0cc7c1ca294b3988b30a56891}{ColourScheme}} (ItemColours... coloursToUse)}
+\DoxyCodeLine{64         \{}
+\DoxyCodeLine{65             \textcolor{keyword}{static\_assert} (\textcolor{keyword}{sizeof}... (coloursToUse) == numColours, \textcolor{stringliteral}{"{}Must supply one colour for each UIColour item"{}});}
+\DoxyCodeLine{66             \textcolor{keyword}{const} \mbox{\hyperlink{class_colour}{Colour}} \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}[] = \{ \mbox{\hyperlink{class_colour}{Colour}} (coloursToUse)... \};}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < numColours; ++i)}
+\DoxyCodeLine{69                 palette[i] = \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}[i];}
+\DoxyCodeLine{70         \}}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72         \mbox{\hyperlink{class_look_and_feel___v4_1_1_colour_scheme_a69e09dc02ca99e3795192117f735217b}{ColourScheme}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_look_and_feel___v4_1_1_colour_scheme}{ColourScheme}}\&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{73         \mbox{\hyperlink{class_look_and_feel___v4_1_1_colour_scheme}{ColourScheme}}\& operator= (\textcolor{keyword}{const} \mbox{\hyperlink{class_look_and_feel___v4_1_1_colour_scheme}{ColourScheme}}\&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{76         \mbox{\hyperlink{class_colour}{Colour}} getUIColour (\mbox{\hyperlink{class_look_and_feel___v4_1_1_colour_scheme_a3a0b01b5a192545b3692ed288597b2f4}{UIColour}} colourToGet) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{79         \textcolor{keywordtype}{void} setUIColour (\mbox{\hyperlink{class_look_and_feel___v4_1_1_colour_scheme_a3a0b01b5a192545b3692ed288597b2f4}{UIColour}} colourToSet, \mbox{\hyperlink{class_colour}{Colour}} newColour) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{82         \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_audio_channel_layout_8cpp_ad569fbf0e2ce80e9b92caaf1cbb3c257}{operator== }}(\textcolor{keyword}{const} \mbox{\hyperlink{class_look_and_feel___v4_1_1_colour_scheme}{ColourScheme}}\&) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{84         \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_audio_channel_layout_8cpp_aa4ad43821a0285a3d7a5c840173f03ac}{operator!= }}(\textcolor{keyword}{const} \mbox{\hyperlink{class_look_and_feel___v4_1_1_colour_scheme}{ColourScheme}}\&) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86     \textcolor{keyword}{private}:}
+\DoxyCodeLine{87         \mbox{\hyperlink{class_colour}{Colour}} palette[numColours];}
+\DoxyCodeLine{88     \};}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{92 \textcolor{comment}{}    \mbox{\hyperlink{class_look_and_feel___v4}{LookAndFeel\_V4}}();}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{95     \mbox{\hyperlink{class_look_and_feel___v4}{LookAndFeel\_V4}} (\mbox{\hyperlink{class_look_and_feel___v4_1_1_colour_scheme}{ColourScheme}});}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{98     \mbox{\hyperlink{class_look_and_feel___v4}{\string~LookAndFeel\_V4}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{101     \textcolor{keywordtype}{void} setColourScheme (\mbox{\hyperlink{class_look_and_feel___v4_1_1_colour_scheme}{ColourScheme}});}
+\DoxyCodeLine{102     \mbox{\hyperlink{class_look_and_feel___v4_1_1_colour_scheme}{ColourScheme}}\& \mbox{\hyperlink{class_look_and_feel___v4_a7cba4bfe1c153c36b75c548cb9b0dcaa}{getCurrentColourScheme}}() noexcept       \{ \textcolor{keywordflow}{return} currentColourScheme; \}}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104     \textcolor{keyword}{static} ColourScheme getDarkColourScheme();}
+\DoxyCodeLine{105     \textcolor{keyword}{static} ColourScheme getMidnightColourScheme();}
+\DoxyCodeLine{106     \textcolor{keyword}{static} ColourScheme getGreyColourScheme();}
+\DoxyCodeLine{107     \textcolor{keyword}{static} ColourScheme getLightColourScheme();}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{110     \mbox{\hyperlink{class_button}{Button}}* \mbox{\hyperlink{class_look_and_feel___v3_a00c1e0d819051c0cdce6dcc755321422}{createDocumentWindowButton}} (\textcolor{keywordtype}{int}) \textcolor{keyword}{override};}
+\DoxyCodeLine{111     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_look_and_feel___v2_ac982dcb599f7c1c5d9814d69b74f7eb0}{positionDocumentWindowButtons}} (\mbox{\hyperlink{class_document_window}{DocumentWindow}}\&, \textcolor{keywordtype}{int}, \textcolor{keywordtype}{int}, \textcolor{keywordtype}{int}, \textcolor{keywordtype}{int}, \mbox{\hyperlink{class_button}{Button}}*, \mbox{\hyperlink{class_button}{Button}}*, \mbox{\hyperlink{class_button}{Button}}*, \textcolor{keywordtype}{bool}) \textcolor{keyword}{override};}
+\DoxyCodeLine{112     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_look_and_feel___v2_ad17321be41d9e309fb444cb9879c3ecb}{drawDocumentWindowTitleBar}} (\mbox{\hyperlink{class_document_window}{DocumentWindow}}\&, \mbox{\hyperlink{class_graphics}{Graphics}}\&, \textcolor{keywordtype}{int}, \textcolor{keywordtype}{int}, \textcolor{keywordtype}{int}, \textcolor{keywordtype}{int}, \textcolor{keyword}{const} \mbox{\hyperlink{class_image}{Image}}*, \textcolor{keywordtype}{bool}) \textcolor{keyword}{override};}
+\DoxyCodeLine{113 }
+\DoxyCodeLine{114     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{115     \mbox{\hyperlink{class_font}{Font}} \mbox{\hyperlink{class_look_and_feel___v2_a256b261cab5ddb423432701fd65848db}{getTextButtonFont}} (\mbox{\hyperlink{class_text_button}{TextButton}}\&, \textcolor{keywordtype}{int} buttonHeight) \textcolor{keyword}{override};}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_look_and_feel___v3_a4985c29ac4adf99211d238229d0f4080}{drawButtonBackground}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \mbox{\hyperlink{class_button}{Button}}\&, \textcolor{keyword}{const} \mbox{\hyperlink{class_colour}{Colour}}\& backgroundColour,}
+\DoxyCodeLine{118                                \textcolor{keywordtype}{bool} shouldDrawButtonAsHighlighted, \textcolor{keywordtype}{bool} shouldDrawButtonAsDown) \textcolor{keyword}{override};}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_look_and_feel___v2_af4ed90218afcf3ac5819ce091a79fe97}{drawToggleButton}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \mbox{\hyperlink{class_toggle_button}{ToggleButton}}\&,}
+\DoxyCodeLine{121                            \textcolor{keywordtype}{bool} shouldDrawButtonAsHighlighted, \textcolor{keywordtype}{bool} shouldDrawButtonAsDown) \textcolor{keyword}{override};}
+\DoxyCodeLine{122     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_look_and_feel___v2_abaed78df30b152cbc77b68ba9c27b339}{drawTickBox}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \mbox{\hyperlink{class_component}{Component}}\&,}
+\DoxyCodeLine{123                       \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a4a17fbf5c7c6ae1f233cf4944a70237d}{w}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_ae0306c9e6aca74fac45e19b5f64f7ba7}{h}},}
+\DoxyCodeLine{124                       \textcolor{keywordtype}{bool} ticked, \textcolor{keywordtype}{bool} isEnabled,}
+\DoxyCodeLine{125                       \textcolor{keywordtype}{bool} shouldDrawButtonAsHighlighted, \textcolor{keywordtype}{bool} shouldDrawButtonAsDown) \textcolor{keyword}{override};}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{127     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_look_and_feel___v2_a36348746bdedec3abbe65a4c9c4c29e6}{changeToggleButtonWidthToFitText}} (\mbox{\hyperlink{class_toggle_button}{ToggleButton}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{130     \mbox{\hyperlink{class_alert_window}{AlertWindow}}* \mbox{\hyperlink{class_look_and_feel___v2_af099b9fb2488e676a9b20bdf7e790f8d}{createAlertWindow}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& title, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{namespacegl_a1243e1c99f08a099c7a70cc1a258034a}{message}},}
+\DoxyCodeLine{131                                     \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& button1,}
+\DoxyCodeLine{132                                     \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& button2,}
+\DoxyCodeLine{133                                     \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& button3,}
+\DoxyCodeLine{134                                     \mbox{\hyperlink{group__juce__gui__basics-windows_ga82b3ccfe63090a7818d1028e04b44bd0}{MessageBoxIconType}} iconType,}
+\DoxyCodeLine{135                                     \textcolor{keywordtype}{int} numButtons, \mbox{\hyperlink{class_component}{Component}}* associatedComponent) \textcolor{keyword}{override};}
+\DoxyCodeLine{136     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_look_and_feel___v2_ad3e082a34ac51b2b1f9f7f1429bdf939}{drawAlertBox}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \mbox{\hyperlink{class_alert_window}{AlertWindow}}\&, \textcolor{keyword}{const} \mbox{\hyperlink{class_rectangle}{Rectangle<int>}}\& textArea, \mbox{\hyperlink{class_text_layout}{TextLayout}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{138     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_look_and_feel___v2_a2b75974dd11df7ec1a30b153d38f79fe}{getAlertWindowButtonHeight}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{139     \mbox{\hyperlink{class_font}{Font}} \mbox{\hyperlink{class_look_and_feel___v2_a646f0af59c220e83de4e060e00baad83}{getAlertWindowTitleFont}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{140     \mbox{\hyperlink{class_font}{Font}} \mbox{\hyperlink{class_look_and_feel___v2_a2a883ef9b505dec279cbb16b1c54564a}{getAlertWindowMessageFont}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{141     \mbox{\hyperlink{class_font}{Font}} \mbox{\hyperlink{class_look_and_feel___v2_afa3b4bc1101112c03708fcb6d554f529}{getAlertWindowFont}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{143     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{144     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_look_and_feel___v2_ae968747b08e6d281a5e0fb51619b7a7c}{drawProgressBar}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \mbox{\hyperlink{class_progress_bar}{ProgressBar}}\&, \textcolor{keywordtype}{int} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}}, \textcolor{keywordtype}{double} progress, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& textToShow) \textcolor{keyword}{override};}
+\DoxyCodeLine{145     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_look_and_feel___v4_a37ddc9ff844ac37eb00332d675f65a9b}{isProgressBarOpaque}} (\mbox{\hyperlink{class_progress_bar}{ProgressBar}}\&)\textcolor{keyword}{ override    }\{ \textcolor{keywordflow}{return} \textcolor{keyword}{false}; \}}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{147     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{148     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_look_and_feel___v2_a63f62e9864c96f47f7a4eb593b786214}{getDefaultScrollbarWidth}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{149     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_look_and_feel___v3_ae006b61af530f81db41e238c6fca093a}{drawScrollbar}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \mbox{\hyperlink{class_scroll_bar}{ScrollBar}}\&, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}}, \textcolor{keywordtype}{bool} isScrollbarVertical,}
+\DoxyCodeLine{150                         \textcolor{keywordtype}{int} thumbStartPosition, \textcolor{keywordtype}{int} thumbSize, \textcolor{keywordtype}{bool} isMouseOver, \textcolor{keywordtype}{bool} isMouseDown) \textcolor{keyword}{override};}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{152     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{153     \mbox{\hyperlink{class_path}{Path}} \mbox{\hyperlink{class_look_and_feel___v3_a7f4548429a6b816775a111cda8d655a1}{getTickShape}} (\textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}}) \textcolor{keyword}{override};}
+\DoxyCodeLine{154     \mbox{\hyperlink{class_path}{Path}} \mbox{\hyperlink{class_look_and_feel___v3_a064814f31d79eb4fadb7dbacda579193}{getCrossShape}} (\textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}}) \textcolor{keyword}{override};}
+\DoxyCodeLine{155 }
+\DoxyCodeLine{156     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{157     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_look_and_feel___v2_a359d99fb5590ac6a03a998f3c3ed89e5}{fillTextEditorBackground}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \textcolor{keywordtype}{int} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}}, \mbox{\hyperlink{class_text_editor}{TextEditor}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{158     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_look_and_feel___v3_a0b7a38d455aa7932c779538892fc120e}{drawTextEditorOutline}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \textcolor{keywordtype}{int} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}}, \mbox{\hyperlink{class_text_editor}{TextEditor}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{161     \mbox{\hyperlink{class_button}{Button}}* \mbox{\hyperlink{class_look_and_feel___v2_a20c863535fa1d7ca20ddf4dd8b318d53}{createFileBrowserGoUpButton}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{162 }
+\DoxyCodeLine{163     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_look_and_feel___v2_ab4aafa08b43adc287dd3f5dd1b0e42f5}{layoutFileBrowserComponent}} (\mbox{\hyperlink{class_file_browser_component}{FileBrowserComponent}}\&,}
+\DoxyCodeLine{164                                      \mbox{\hyperlink{class_directory_contents_display_component}{DirectoryContentsDisplayComponent}}*,}
+\DoxyCodeLine{165                                      \mbox{\hyperlink{class_file_preview_component}{FilePreviewComponent}}*,}
+\DoxyCodeLine{166                                      \mbox{\hyperlink{class_combo_box}{ComboBox}}* currentPathBox,}
+\DoxyCodeLine{167                                      \mbox{\hyperlink{class_text_editor}{TextEditor}}* filenameBox,}
+\DoxyCodeLine{168                                      \mbox{\hyperlink{class_button}{Button}}* goUpButton) \textcolor{keyword}{override};}
+\DoxyCodeLine{169 }
+\DoxyCodeLine{170     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_look_and_feel___v2_a3b564419f60e3f34e4d987f4e50dcdcf}{drawFileBrowserRow}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \textcolor{keywordtype}{int} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}},}
+\DoxyCodeLine{171                              \textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& file, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& filename, \mbox{\hyperlink{class_image}{Image}}* icon,}
+\DoxyCodeLine{172                              \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& fileSizeDescription, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& fileTimeDescription,}
+\DoxyCodeLine{173                              \textcolor{keywordtype}{bool} isDirectory, \textcolor{keywordtype}{bool} isItemSelected, \textcolor{keywordtype}{int} itemIndex,}
+\DoxyCodeLine{174                              \mbox{\hyperlink{class_directory_contents_display_component}{DirectoryContentsDisplayComponent}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{175 }
+\DoxyCodeLine{176     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{177     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_look_and_feel___v2_a397e8ce8c241dbbe1702673bc83691c8}{drawPopupMenuItem}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \textcolor{keyword}{const} \mbox{\hyperlink{class_rectangle}{Rectangle<int>}}\& area,}
+\DoxyCodeLine{178                             \textcolor{keywordtype}{bool} isSeparator, \textcolor{keywordtype}{bool} isActive, \textcolor{keywordtype}{bool} isHighlighted, \textcolor{keywordtype}{bool} isTicked, \textcolor{keywordtype}{bool} hasSubMenu,}
+\DoxyCodeLine{179                             \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& text, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& shortcutKeyText,}
+\DoxyCodeLine{180                             \textcolor{keyword}{const} \mbox{\hyperlink{class_drawable}{Drawable}}* icon, \textcolor{keyword}{const} \mbox{\hyperlink{class_colour}{Colour}}* textColour) \textcolor{keyword}{override};}
+\DoxyCodeLine{181 }
+\DoxyCodeLine{182     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_look_and_feel___v2_a6e52715c2e320e53ee3032ff5a7c6482}{getIdealPopupMenuItemSize}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& text, \textcolor{keywordtype}{bool} isSeparator, \textcolor{keywordtype}{int} standardMenuItemHeight,}
+\DoxyCodeLine{183                                     \textcolor{keywordtype}{int}\& idealWidth, \textcolor{keywordtype}{int}\& idealHeight) \textcolor{keyword}{override};}
+\DoxyCodeLine{184 }
+\DoxyCodeLine{185     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_look_and_feel___v3_abc286c47ed1ccee2eecce10a22f2face}{drawMenuBarBackground}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \textcolor{keywordtype}{int} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}}, \textcolor{keywordtype}{bool} isMouseOverBar, \mbox{\hyperlink{class_menu_bar_component}{MenuBarComponent}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{186 }
+\DoxyCodeLine{187     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_look_and_feel___v2_aab95999ea94bed43aa989e682cbc94c6}{drawMenuBarItem}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \textcolor{keywordtype}{int} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}},}
+\DoxyCodeLine{188                           \textcolor{keywordtype}{int} itemIndex, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& itemText,}
+\DoxyCodeLine{189                           \textcolor{keywordtype}{bool} isMouseOverItem, \textcolor{keywordtype}{bool} isMenuOpen, \textcolor{keywordtype}{bool} isMouseOverBar,}
+\DoxyCodeLine{190                           \mbox{\hyperlink{class_menu_bar_component}{MenuBarComponent}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{191 }
+\DoxyCodeLine{192     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{193     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_look_and_feel___v3_aca8e56bf541904d4991e339dbf57011c}{drawComboBox}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \textcolor{keywordtype}{int} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}}, \textcolor{keywordtype}{bool} isButtonDown,}
+\DoxyCodeLine{194                        \textcolor{keywordtype}{int} buttonX, \textcolor{keywordtype}{int} buttonY, \textcolor{keywordtype}{int} buttonW, \textcolor{keywordtype}{int} buttonH,}
+\DoxyCodeLine{195                        \mbox{\hyperlink{class_combo_box}{ComboBox}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{196     \mbox{\hyperlink{class_font}{Font}} \mbox{\hyperlink{class_look_and_feel___v2_a4076050f06f686b3f74908e888936c1a}{getComboBoxFont}} (\mbox{\hyperlink{class_combo_box}{ComboBox}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{197     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_look_and_feel___v2_a6a00c54f02ae13be98c90979b9683bac}{positionComboBoxText}} (\mbox{\hyperlink{class_combo_box}{ComboBox}}\&, \mbox{\hyperlink{class_label}{Label}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{198 }
+\DoxyCodeLine{199     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{200     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_look_and_feel___v2_ae514defd3f51c0af1ca3ba00d2341242}{getSliderThumbRadius}} (\mbox{\hyperlink{class_slider}{Slider}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{201 }
+\DoxyCodeLine{202     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_look_and_feel___v3_a21bd795e9bdaa44333018ec98c3a74b7}{drawLinearSlider}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}},}
+\DoxyCodeLine{203                            \textcolor{keywordtype}{float} sliderPos, \textcolor{keywordtype}{float} minSliderPos, \textcolor{keywordtype}{float} maxSliderPos,}
+\DoxyCodeLine{204                            \textcolor{keyword}{const} \mbox{\hyperlink{class_slider_af1caee82552143dd9ff0fc9f0cdc0888}{Slider::SliderStyle}}, \mbox{\hyperlink{class_slider}{Slider}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{205 }
+\DoxyCodeLine{206     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_look_and_feel___v2_a2f8bd6754cfeddba496438119ee2c25c}{drawRotarySlider}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}},}
+\DoxyCodeLine{207                            \textcolor{keywordtype}{float} sliderPosProportional, \textcolor{keywordtype}{float} rotaryStartAngle,}
+\DoxyCodeLine{208                            \textcolor{keywordtype}{float} rotaryEndAngle, \mbox{\hyperlink{class_slider}{Slider}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{209 }
+\DoxyCodeLine{210     \textcolor{keywordtype}{void} drawPointer (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}}, \textcolor{keywordtype}{float} diameter,}
+\DoxyCodeLine{211                       \textcolor{keyword}{const} \mbox{\hyperlink{class_colour}{Colour}}\&, \textcolor{keywordtype}{int} direction) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{212 }
+\DoxyCodeLine{213     \mbox{\hyperlink{class_label}{Label}}* \mbox{\hyperlink{class_look_and_feel___v2_aded6035d188d0e8cbfa3491e571ce771}{createSliderTextBox}} (\mbox{\hyperlink{class_slider}{Slider}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{214 }
+\DoxyCodeLine{215     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{216     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_look_and_feel___v2_a562db08c89200d6232c92e5b89d33d7d}{drawTooltip}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& text, \textcolor{keywordtype}{int} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}}) \textcolor{keyword}{override};}
+\DoxyCodeLine{217 }
+\DoxyCodeLine{218     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{219     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_look_and_feel___v3_ae28231e59b5840c4a586f9dee90205a5}{drawConcertinaPanelHeader}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \textcolor{keyword}{const} \mbox{\hyperlink{class_rectangle}{Rectangle<int>}}\& area,}
+\DoxyCodeLine{220                                     \textcolor{keywordtype}{bool} isMouseOver, \textcolor{keywordtype}{bool} isMouseDown,}
+\DoxyCodeLine{221                                     \mbox{\hyperlink{class_concertina_panel}{ConcertinaPanel}}\&, \mbox{\hyperlink{class_component}{Component}}\& panel) \textcolor{keyword}{override};}
+\DoxyCodeLine{222 }
+\DoxyCodeLine{223     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{224     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_look_and_feel___v2_ab0ee2ad7d0731c89999b7eec07670b1b}{drawLevelMeter}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \textcolor{keywordtype}{int}, \textcolor{keywordtype}{int}, \textcolor{keywordtype}{float}) \textcolor{keyword}{override};}
+\DoxyCodeLine{225 }
+\DoxyCodeLine{226     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{227     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_look_and_feel___v2_aa7946eae13b61465706cde65eff2aefd}{paintToolbarBackground}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \textcolor{keywordtype}{int} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}}, \mbox{\hyperlink{class_toolbar}{Toolbar}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{228 }
+\DoxyCodeLine{229     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_look_and_feel___v2_a86122fd1c1ea518a559d9d902453cd4d}{paintToolbarButtonLabel}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}},}
+\DoxyCodeLine{230                                   \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& text, \mbox{\hyperlink{class_toolbar_item_component}{ToolbarItemComponent}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{231 }
+\DoxyCodeLine{232     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{233     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_look_and_feel___v2_a3f80686dd914151f6f85792d381d19a5}{drawPropertyPanelSectionHeader}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}, \textcolor{keywordtype}{bool} isOpen, \textcolor{keywordtype}{int} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}}) \textcolor{keyword}{override};}
+\DoxyCodeLine{234     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_look_and_feel___v2_a85c7bce4160e6a7c9dd81dd51c2a7673}{drawPropertyComponentBackground}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \textcolor{keywordtype}{int} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}}, \mbox{\hyperlink{class_property_component}{PropertyComponent}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{235     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_look_and_feel___v2_a624323f9e514d5020085912008346ccb}{drawPropertyComponentLabel}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \textcolor{keywordtype}{int} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}}, \mbox{\hyperlink{class_property_component}{PropertyComponent}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{236     \mbox{\hyperlink{class_rectangle}{Rectangle<int>}} \mbox{\hyperlink{class_look_and_feel___v2_a67d4534eca3cdbe6f2868db775c34e4f}{getPropertyComponentContentPosition}} (\mbox{\hyperlink{class_property_component}{PropertyComponent}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{237 }
+\DoxyCodeLine{238     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{239     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_look_and_feel___v2_ade3261abc1cff800a73ceff6273ec12e}{drawCallOutBoxBackground}} (\mbox{\hyperlink{class_call_out_box}{CallOutBox}}\&, \mbox{\hyperlink{class_graphics}{Graphics}}\&, \textcolor{keyword}{const} \mbox{\hyperlink{class_path}{Path}}\&, \mbox{\hyperlink{class_image}{Image}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{240 }
+\DoxyCodeLine{241     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{242     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_look_and_feel___v3_a748fdb93f1cba0c8f1d3636c3937ed6d}{drawStretchableLayoutResizerBar}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \textcolor{keywordtype}{int}, \textcolor{keywordtype}{int}, \textcolor{keywordtype}{bool}, \textcolor{keywordtype}{bool}, \textcolor{keywordtype}{bool}) \textcolor{keyword}{override};}
+\DoxyCodeLine{243 }
+\DoxyCodeLine{244 \textcolor{keyword}{private}:}
+\DoxyCodeLine{245     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{246     \textcolor{keywordtype}{void} drawLinearProgressBar (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \mbox{\hyperlink{class_progress_bar}{ProgressBar}}\&, \textcolor{keywordtype}{int} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}}, \textcolor{keywordtype}{double} progress, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\&);}
+\DoxyCodeLine{247     \textcolor{keywordtype}{void} drawCircularProgressBar (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \mbox{\hyperlink{class_progress_bar}{ProgressBar}}\&, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\&);}
+\DoxyCodeLine{248 }
+\DoxyCodeLine{249     \textcolor{keywordtype}{int} getPropertyComponentIndent (\mbox{\hyperlink{class_property_component}{PropertyComponent}}\&);}
+\DoxyCodeLine{250 }
+\DoxyCodeLine{251     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{252     \textcolor{keywordtype}{void} initialiseColours();}
+\DoxyCodeLine{253     ColourScheme currentColourScheme;}
+\DoxyCodeLine{254 }
+\DoxyCodeLine{255     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{256     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_look_and_feel___v4}{LookAndFeel\_V4}})}
+\DoxyCodeLine{257 \};}
+\DoxyCodeLine{258 }
+\DoxyCodeLine{259  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{260 }
+
+\end{DoxyCode}

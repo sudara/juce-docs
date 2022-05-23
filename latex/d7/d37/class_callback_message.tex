@@ -1,0 +1,79 @@
+\hypertarget{class_callback_message}{}\doxysection{Callback\+Message Class Reference}
+\label{class_callback_message}\index{CallbackMessage@{CallbackMessage}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Callback\+Message.\+h$>$}
+
+Inheritance diagram for Callback\+Message\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{d7/d37/class_callback_message}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_callback_message_aeec501b4654cc747076be4717bfea980}{Callback\+Message}} ()=default
+\item 
+\mbox{\hyperlink{class_callback_message_a879f0e2ed0b0baab5c412ee7644cd132}{$\sim$\+Callback\+Message}} () override=default
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_callback_message_a592c9ba0c54db0e96f31599f984f2740}{message\+Callback}} () override=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+A message that invokes a callback method when it gets delivered.
+
+You can use this class to fire off actions that you want to be performed later on the message thread.
+
+To use it, create a subclass of \mbox{\hyperlink{class_callback_message}{Callback\+Message}} which implements the \mbox{\hyperlink{class_callback_message_a592c9ba0c54db0e96f31599f984f2740}{message\+Callback()}} method, then call \mbox{\hyperlink{class_message_manager_1_1_message_base_a6c8de4965391d60d860747641f024da2}{post()}} to dispatch it. The event thread will then invoke your \mbox{\hyperlink{class_callback_message_a592c9ba0c54db0e96f31599f984f2740}{message\+Callback()}} method later on, and will automatically delete the message object afterwards.
+
+Always create a new instance of a \mbox{\hyperlink{class_callback_message}{Callback\+Message}} on the heap, as it will be deleted automatically after the message has been delivered.
+
+Note that this class was essential back in the days before C++11, but in modern times you may prefer to use \mbox{\hyperlink{class_message_manager_acfe6da5271c2ab76fdb0414b235ed095}{Message\+Manager\+::call\+Async()}} with a lambda.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_message_manager_acfe6da5271c2ab76fdb0414b235ed095}{Message\+Manager\+::call\+Async}}, \mbox{\hyperlink{class_message_listener}{Message\+Listener}}, \mbox{\hyperlink{class_action_listener}{Action\+Listener}}, \mbox{\hyperlink{class_change_listener}{Change\+Listener}}
+\end{DoxySeeAlso}
+@tags\{Events\} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_callback_message_aeec501b4654cc747076be4717bfea980}\label{class_callback_message_aeec501b4654cc747076be4717bfea980}} 
+\index{CallbackMessage@{CallbackMessage}!CallbackMessage@{CallbackMessage}}
+\index{CallbackMessage@{CallbackMessage}!CallbackMessage@{CallbackMessage}}
+\doxysubsubsection{\texorpdfstring{CallbackMessage()}{CallbackMessage()}}
+{\footnotesize\ttfamily Callback\+Message\+::\+Callback\+Message (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\mbox{\Hypertarget{class_callback_message_a879f0e2ed0b0baab5c412ee7644cd132}\label{class_callback_message_a879f0e2ed0b0baab5c412ee7644cd132}} 
+\index{CallbackMessage@{CallbackMessage}!````~CallbackMessage@{$\sim$CallbackMessage}}
+\index{````~CallbackMessage@{$\sim$CallbackMessage}!CallbackMessage@{CallbackMessage}}
+\doxysubsubsection{\texorpdfstring{$\sim$CallbackMessage()}{~CallbackMessage()}}
+{\footnotesize\ttfamily Callback\+Message\+::$\sim$\+Callback\+Message (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
+
+Destructor. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_callback_message_a592c9ba0c54db0e96f31599f984f2740}\label{class_callback_message_a592c9ba0c54db0e96f31599f984f2740}} 
+\index{CallbackMessage@{CallbackMessage}!messageCallback@{messageCallback}}
+\index{messageCallback@{messageCallback}!CallbackMessage@{CallbackMessage}}
+\doxysubsubsection{\texorpdfstring{messageCallback()}{messageCallback()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Callback\+Message\+::message\+Callback (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [pure virtual]}}
+
+Called when the message is delivered.
+
+You should implement this method and make it do whatever action you want to perform.
+
+Note that like all other messages, this object will be deleted immediately after this method has been invoked. 
+
+Implements \mbox{\hyperlink{class_message_manager_1_1_message_base_a3cbc8f5a0aa7496a7653fa3c0fd49232}{Message\+Manager\+::\+Message\+Base}}.
+
+
+
+Implemented in \mbox{\hyperlink{classjuce_1_1_async_updater_1_1_async_updater_message_aa985d6087bd8933b9ef0a191c875f4d1}{juce\+::\+Async\+Updater\+::\+Async\+Updater\+Message}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+events/messages/\mbox{\hyperlink{juce___callback_message_8h}{juce\+\_\+\+Callback\+Message.\+h}}\end{DoxyCompactItemize}

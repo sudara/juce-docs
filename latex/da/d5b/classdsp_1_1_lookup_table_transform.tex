@@ -1,0 +1,227 @@
+\hypertarget{classdsp_1_1_lookup_table_transform}{}\doxysection{dsp\+::Lookup\+Table\+Transform\texorpdfstring{$<$}{<} Float\+Type \texorpdfstring{$>$}{>} Class Template Reference}
+\label{classdsp_1_1_lookup_table_transform}\index{dsp::LookupTableTransform$<$ FloatType $>$@{dsp::LookupTableTransform$<$ FloatType $>$}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Lookup\+Table.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classdsp_1_1_lookup_table_transform_a89495c2780627bed5dbeda842982b778}{Lookup\+Table\+Transform}} ()=default
+\item 
+\mbox{\hyperlink{classdsp_1_1_lookup_table_transform_a8b3f42b0f56f57126ab68ece4b91e7b4}{Lookup\+Table\+Transform}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} std\+::function$<$ Float\+Type(Float\+Type)$>$ \&function\+To\+Approximate, Float\+Type min\+Input\+Value\+To\+Use, Float\+Type max\+Input\+Value\+To\+Use, size\+\_\+t num\+Points)
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{classdsp_1_1_lookup_table_transform_a69a7e2435430bc468c791bcecfe3b758}{initialise}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} std\+::function$<$ Float\+Type(Float\+Type)$>$ \&function\+To\+Approximate, Float\+Type min\+Input\+Value\+To\+Use, Float\+Type max\+Input\+Value\+To\+Use, size\+\_\+t num\+Points)
+\item 
+Float\+Type \mbox{\hyperlink{classdsp_1_1_lookup_table_transform_a0bd799bbed9b466e59ccf95be8caeb7d}{process\+Sample\+Unchecked}} (Float\+Type value) \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+Float\+Type \mbox{\hyperlink{classdsp_1_1_lookup_table_transform_a770db1b5029b6fbb0dc8c33ee607be05}{process\+Sample}} (Float\+Type value) \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+Float\+Type \mbox{\hyperlink{classdsp_1_1_lookup_table_transform_abb0d67a992fc077387f14f0920b8f5e0}{operator\mbox{[}$\,$\mbox{]}}} (Float\+Type index) \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+Float\+Type \mbox{\hyperlink{classdsp_1_1_lookup_table_transform_a545836fddbad5d105fc78e7c2ddc627b}{operator()}} (Float\+Type index) \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{classdsp_1_1_lookup_table_transform_ac5be74cb89a20c85d8d4f79cba0ffa7f}{process\+Unchecked}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} Float\+Type $\ast$input, Float\+Type $\ast$output, size\+\_\+t num\+Samples) \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{classdsp_1_1_lookup_table_transform_ac41423c0ed040b1e00453a840077225f}{process}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} Float\+Type $\ast$input, Float\+Type $\ast$output, size\+\_\+t num\+Samples) \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double \mbox{\hyperlink{classdsp_1_1_lookup_table_transform_af32ae1fd6a6c50474aaed994c12783f1}{calculate\+Max\+Relative\+Error}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} std\+::function$<$ Float\+Type(Float\+Type)$>$ \&function\+To\+Approximate, Float\+Type min\+Input\+Value, Float\+Type max\+Input\+Value, size\+\_\+t num\+Points, size\+\_\+t num\+Test\+Points=0)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Float\+Type$>$\newline
+class dsp\+::\+Lookup\+Table\+Transform$<$ Float\+Type $>$}
+Class for approximating expensive arithmetic operations.
+
+Once initialised, this class can be used just like the function it approximates via operator().
+
+Example\+: \begin{DoxyVerb}LookupTableTransform<float> tanhApprox ([] (float x) { return std::tanh (x); }, -5.0f, 5.0f, 64);
+auto outValue = tanhApprox (4.2f);
+\end{DoxyVerb}
+ Note\+: If you try to call the function with an input outside the provided range, it will return either the first or the last recorded \mbox{\hyperlink{classdsp_1_1_lookup_table}{Lookup\+Table}} value.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classdsp_1_1_lookup_table}{Lookup\+Table}}
+\end{DoxySeeAlso}
+@tags\{DSP\} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classdsp_1_1_lookup_table_transform_a89495c2780627bed5dbeda842982b778}\label{classdsp_1_1_lookup_table_transform_a89495c2780627bed5dbeda842982b778}} 
+\index{dsp::LookupTableTransform$<$ FloatType $>$@{dsp::LookupTableTransform$<$ FloatType $>$}!LookupTableTransform@{LookupTableTransform}}
+\index{LookupTableTransform@{LookupTableTransform}!dsp::LookupTableTransform$<$ FloatType $>$@{dsp::LookupTableTransform$<$ FloatType $>$}}
+\doxysubsubsection{\texorpdfstring{LookupTableTransform()}{LookupTableTransform()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Float\+Type $>$ \\
+\mbox{\hyperlink{classdsp_1_1_lookup_table_transform}{dsp\+::\+Lookup\+Table\+Transform}}$<$ Float\+Type $>$\+::\mbox{\hyperlink{classdsp_1_1_lookup_table_transform}{Lookup\+Table\+Transform}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+Creates an uninitialised \mbox{\hyperlink{classdsp_1_1_lookup_table_transform}{Lookup\+Table\+Transform}} object.
+
+You need to call \mbox{\hyperlink{classdsp_1_1_lookup_table_transform_a69a7e2435430bc468c791bcecfe3b758}{initialise()}} before using the object. Prefer using the non-\/default constructor instead.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classdsp_1_1_lookup_table_transform_a69a7e2435430bc468c791bcecfe3b758}{initialise}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classdsp_1_1_lookup_table_transform_a8b3f42b0f56f57126ab68ece4b91e7b4}\label{classdsp_1_1_lookup_table_transform_a8b3f42b0f56f57126ab68ece4b91e7b4}} 
+\index{dsp::LookupTableTransform$<$ FloatType $>$@{dsp::LookupTableTransform$<$ FloatType $>$}!LookupTableTransform@{LookupTableTransform}}
+\index{LookupTableTransform@{LookupTableTransform}!dsp::LookupTableTransform$<$ FloatType $>$@{dsp::LookupTableTransform$<$ FloatType $>$}}
+\doxysubsubsection{\texorpdfstring{LookupTableTransform()}{LookupTableTransform()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Float\+Type $>$ \\
+\mbox{\hyperlink{classdsp_1_1_lookup_table_transform}{dsp\+::\+Lookup\+Table\+Transform}}$<$ Float\+Type $>$\+::\mbox{\hyperlink{classdsp_1_1_lookup_table_transform}{Lookup\+Table\+Transform}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} std\+::function$<$ Float\+Type(Float\+Type)$>$ \&}]{function\+To\+Approximate,  }\item[{Float\+Type}]{min\+Input\+Value\+To\+Use,  }\item[{Float\+Type}]{max\+Input\+Value\+To\+Use,  }\item[{size\+\_\+t}]{num\+Points }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Creates and initialises a \mbox{\hyperlink{classdsp_1_1_lookup_table_transform}{Lookup\+Table\+Transform}} object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em function\+To\+Approximate} & The function to be approximated. This should be a mapping from a Float\+Type to Float\+Type. \\
+\hline
+{\em min\+Input\+Value\+To\+Use} & The lowest input value used. The approximation will fail for values lower than this. \\
+\hline
+{\em max\+Input\+Value\+To\+Use} & The highest input value used. The approximation will fail for values higher than this. \\
+\hline
+{\em num\+Points} & The number of pre-\/calculated values stored. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classdsp_1_1_lookup_table_transform_af32ae1fd6a6c50474aaed994c12783f1}\label{classdsp_1_1_lookup_table_transform_af32ae1fd6a6c50474aaed994c12783f1}} 
+\index{dsp::LookupTableTransform$<$ FloatType $>$@{dsp::LookupTableTransform$<$ FloatType $>$}!calculateMaxRelativeError@{calculateMaxRelativeError}}
+\index{calculateMaxRelativeError@{calculateMaxRelativeError}!dsp::LookupTableTransform$<$ FloatType $>$@{dsp::LookupTableTransform$<$ FloatType $>$}}
+\doxysubsubsection{\texorpdfstring{calculateMaxRelativeError()}{calculateMaxRelativeError()}}
+{\footnotesize\ttfamily template$<$typename Float\+Type $>$ \\
+double juce\+::dsp\+::\+Lookup\+Table\+Transform\+::calculate\+Max\+Relative\+Error (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} std\+::function$<$ Float\+Type(Float\+Type)$>$ \&}]{function\+To\+Approximate,  }\item[{Float\+Type}]{min\+Input\+Value,  }\item[{Float\+Type}]{max\+Input\+Value,  }\item[{size\+\_\+t}]{num\+Points,  }\item[{size\+\_\+t}]{num\+Test\+Points = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Calculates the maximum relative error of the approximation for the specified parameter set.
+
+The closer the returned value is to zero the more accurate the approximation is.
+
+This function compares the approximated output of this class to the function it approximates at a range of points and returns the maximum relative error. This can be used to determine if the approximation is suitable for the given problem. The accuracy of the approximation can generally be improved by increasing num\+Points.
+
+
+\begin{DoxyParams}{Parameters}
+{\em function\+To\+Approximate} & The approximated function. This should be a mapping from a Float\+Type to Float\+Type. \\
+\hline
+{\em min\+Input\+Value} & The lowest input value used. \\
+\hline
+{\em max\+Input\+Value} & The highest input value used. \\
+\hline
+{\em num\+Points} & The number of pre-\/calculated values stored. \\
+\hline
+{\em num\+Test\+Points} & The number of input values used for error calculation. Higher numbers can increase the accuracy of the error calculation. If it\textquotesingle{}s zero then 100 $\ast$ num\+Points will be used. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classdsp_1_1_lookup_table_transform_a69a7e2435430bc468c791bcecfe3b758}\label{classdsp_1_1_lookup_table_transform_a69a7e2435430bc468c791bcecfe3b758}} 
+\index{dsp::LookupTableTransform$<$ FloatType $>$@{dsp::LookupTableTransform$<$ FloatType $>$}!initialise@{initialise}}
+\index{initialise@{initialise}!dsp::LookupTableTransform$<$ FloatType $>$@{dsp::LookupTableTransform$<$ FloatType $>$}}
+\doxysubsubsection{\texorpdfstring{initialise()}{initialise()}}
+{\footnotesize\ttfamily template$<$typename Float\+Type $>$ \\
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} juce\+::dsp\+::\+Lookup\+Table\+Transform\+::initialise (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} std\+::function$<$ Float\+Type(Float\+Type)$>$ \&}]{function\+To\+Approximate,  }\item[{Float\+Type}]{min\+Input\+Value\+To\+Use,  }\item[{Float\+Type}]{max\+Input\+Value\+To\+Use,  }\item[{size\+\_\+t}]{num\+Points }\end{DoxyParamCaption})}
+
+Initialises or changes the parameters of a \mbox{\hyperlink{classdsp_1_1_lookup_table_transform}{Lookup\+Table\+Transform}} object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em function\+To\+Approximate} & The function to be approximated. This should be a mapping from a Float\+Type to Float\+Type. \\
+\hline
+{\em min\+Input\+Value\+To\+Use} & The lowest input value used. The approximation will fail for values lower than this. \\
+\hline
+{\em max\+Input\+Value\+To\+Use} & The highest input value used. The approximation will fail for values higher than this. \\
+\hline
+{\em num\+Points} & The number of pre-\/calculated values stored. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classdsp_1_1_lookup_table_transform_a545836fddbad5d105fc78e7c2ddc627b}\label{classdsp_1_1_lookup_table_transform_a545836fddbad5d105fc78e7c2ddc627b}} 
+\index{dsp::LookupTableTransform$<$ FloatType $>$@{dsp::LookupTableTransform$<$ FloatType $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!dsp::LookupTableTransform$<$ FloatType $>$@{dsp::LookupTableTransform$<$ FloatType $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily template$<$typename Float\+Type $>$ \\
+Float\+Type \mbox{\hyperlink{classdsp_1_1_lookup_table_transform}{dsp\+::\+Lookup\+Table\+Transform}}$<$ Float\+Type $>$\+::operator() (\begin{DoxyParamCaption}\item[{Float\+Type}]{index }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classdsp_1_1_lookup_table_transform_a770db1b5029b6fbb0dc8c33ee607be05}{process\+Sample}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classdsp_1_1_lookup_table_transform_abb0d67a992fc077387f14f0920b8f5e0}\label{classdsp_1_1_lookup_table_transform_abb0d67a992fc077387f14f0920b8f5e0}} 
+\index{dsp::LookupTableTransform$<$ FloatType $>$@{dsp::LookupTableTransform$<$ FloatType $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!dsp::LookupTableTransform$<$ FloatType $>$@{dsp::LookupTableTransform$<$ FloatType $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily template$<$typename Float\+Type $>$ \\
+Float\+Type \mbox{\hyperlink{classdsp_1_1_lookup_table_transform}{dsp\+::\+Lookup\+Table\+Transform}}$<$ Float\+Type $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{Float\+Type}]{index }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classdsp_1_1_lookup_table_transform_a0bd799bbed9b466e59ccf95be8caeb7d}{process\+Sample\+Unchecked}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classdsp_1_1_lookup_table_transform_ac41423c0ed040b1e00453a840077225f}\label{classdsp_1_1_lookup_table_transform_ac41423c0ed040b1e00453a840077225f}} 
+\index{dsp::LookupTableTransform$<$ FloatType $>$@{dsp::LookupTableTransform$<$ FloatType $>$}!process@{process}}
+\index{process@{process}!dsp::LookupTableTransform$<$ FloatType $>$@{dsp::LookupTableTransform$<$ FloatType $>$}}
+\doxysubsubsection{\texorpdfstring{process()}{process()}}
+{\footnotesize\ttfamily template$<$typename Float\+Type $>$ \\
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{classdsp_1_1_lookup_table_transform}{dsp\+::\+Lookup\+Table\+Transform}}$<$ Float\+Type $>$\+::process (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} Float\+Type $\ast$}]{input,  }\item[{Float\+Type $\ast$}]{output,  }\item[{size\+\_\+t}]{num\+Samples }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Processes an array of input values with range checking \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classdsp_1_1_lookup_table_transform_ac5be74cb89a20c85d8d4f79cba0ffa7f}{process\+Unchecked}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classdsp_1_1_lookup_table_transform_a770db1b5029b6fbb0dc8c33ee607be05}\label{classdsp_1_1_lookup_table_transform_a770db1b5029b6fbb0dc8c33ee607be05}} 
+\index{dsp::LookupTableTransform$<$ FloatType $>$@{dsp::LookupTableTransform$<$ FloatType $>$}!processSample@{processSample}}
+\index{processSample@{processSample}!dsp::LookupTableTransform$<$ FloatType $>$@{dsp::LookupTableTransform$<$ FloatType $>$}}
+\doxysubsubsection{\texorpdfstring{processSample()}{processSample()}}
+{\footnotesize\ttfamily template$<$typename Float\+Type $>$ \\
+Float\+Type \mbox{\hyperlink{classdsp_1_1_lookup_table_transform}{dsp\+::\+Lookup\+Table\+Transform}}$<$ Float\+Type $>$\+::process\+Sample (\begin{DoxyParamCaption}\item[{Float\+Type}]{value }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Calculates the approximated value for the given input value with range checking.
+
+This can be called with any input values. Out-\/of-\/range input values will be clipped to the specified input range.
+
+If the index is guaranteed to be in range use the faster \mbox{\hyperlink{classdsp_1_1_lookup_table_transform_a0bd799bbed9b466e59ccf95be8caeb7d}{process\+Sample\+Unchecked()}} instead.
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The approximation is calculated for this input value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The approximated value for the provided input value.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classdsp_1_1_lookup_table_transform_a0bd799bbed9b466e59ccf95be8caeb7d}{process\+Sample\+Unchecked}}, operator(), operator\mbox{[}\mbox{]} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classdsp_1_1_lookup_table_transform_a0bd799bbed9b466e59ccf95be8caeb7d}\label{classdsp_1_1_lookup_table_transform_a0bd799bbed9b466e59ccf95be8caeb7d}} 
+\index{dsp::LookupTableTransform$<$ FloatType $>$@{dsp::LookupTableTransform$<$ FloatType $>$}!processSampleUnchecked@{processSampleUnchecked}}
+\index{processSampleUnchecked@{processSampleUnchecked}!dsp::LookupTableTransform$<$ FloatType $>$@{dsp::LookupTableTransform$<$ FloatType $>$}}
+\doxysubsubsection{\texorpdfstring{processSampleUnchecked()}{processSampleUnchecked()}}
+{\footnotesize\ttfamily template$<$typename Float\+Type $>$ \\
+Float\+Type \mbox{\hyperlink{classdsp_1_1_lookup_table_transform}{dsp\+::\+Lookup\+Table\+Transform}}$<$ Float\+Type $>$\+::process\+Sample\+Unchecked (\begin{DoxyParamCaption}\item[{Float\+Type}]{value }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Calculates the approximated value for the given input value without range checking.
+
+Use this if you can guarantee that the input value is within the range specified in the constructor or \mbox{\hyperlink{classdsp_1_1_lookup_table_transform_a69a7e2435430bc468c791bcecfe3b758}{initialise()}}, otherwise use \mbox{\hyperlink{classdsp_1_1_lookup_table_transform_a770db1b5029b6fbb0dc8c33ee607be05}{process\+Sample()}}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The approximation is calculated for this input value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The approximated value for the provided input value.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classdsp_1_1_lookup_table_transform_a770db1b5029b6fbb0dc8c33ee607be05}{process\+Sample}}, operator(), operator\mbox{[}\mbox{]} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classdsp_1_1_lookup_table_transform_ac5be74cb89a20c85d8d4f79cba0ffa7f}\label{classdsp_1_1_lookup_table_transform_ac5be74cb89a20c85d8d4f79cba0ffa7f}} 
+\index{dsp::LookupTableTransform$<$ FloatType $>$@{dsp::LookupTableTransform$<$ FloatType $>$}!processUnchecked@{processUnchecked}}
+\index{processUnchecked@{processUnchecked}!dsp::LookupTableTransform$<$ FloatType $>$@{dsp::LookupTableTransform$<$ FloatType $>$}}
+\doxysubsubsection{\texorpdfstring{processUnchecked()}{processUnchecked()}}
+{\footnotesize\ttfamily template$<$typename Float\+Type $>$ \\
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{classdsp_1_1_lookup_table_transform}{dsp\+::\+Lookup\+Table\+Transform}}$<$ Float\+Type $>$\+::process\+Unchecked (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} Float\+Type $\ast$}]{input,  }\item[{Float\+Type $\ast$}]{output,  }\item[{size\+\_\+t}]{num\+Samples }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Processes an array of input values without range checking \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classdsp_1_1_lookup_table_transform_ac41423c0ed040b1e00453a840077225f}{process}} 
+\end{DoxySeeAlso}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+dsp/maths/\mbox{\hyperlink{juce___lookup_table_8h}{juce\+\_\+\+Lookup\+Table.\+h}}\item 
+build/juce\+\_\+dsp/maths/\mbox{\hyperlink{juce___lookup_table_8cpp}{juce\+\_\+\+Lookup\+Table.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,68 @@
+\hypertarget{class_scoped_read_lock}{}\doxysection{Scoped\+Read\+Lock Class Reference}
+\label{class_scoped_read_lock}\index{ScopedReadLock@{ScopedReadLock}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Scoped\+Read\+Lock.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_scoped_read_lock_a656bd081a1ce9eaebaf1b612ad35ea18}{Scoped\+Read\+Lock}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_read_write_lock}{Read\+Write\+Lock}} \&lock) noexcept
+\item 
+\mbox{\hyperlink{class_scoped_read_lock_a81becd93947c0103c2c9461e4ddbe594}{$\sim$\+Scoped\+Read\+Lock}} () noexcept
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Automatically locks and unlocks a \mbox{\hyperlink{class_read_write_lock}{Read\+Write\+Lock}} object.
+
+Use one of these as a local variable to control access to a \mbox{\hyperlink{class_read_write_lock}{Read\+Write\+Lock}}.
+
+e.\+g. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{class_read_write_lock}{ReadWriteLock}} myLock;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{for} (;;)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{class_scoped_read_lock}{ScopedReadLock}} myScopedLock (myLock);}
+\DoxyCodeLine{    \textcolor{comment}{// myLock is now locked}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    ...do some stuff...}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{comment}{// myLock gets unlocked here.}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_read_write_lock}{Read\+Write\+Lock}}, \mbox{\hyperlink{class_scoped_write_lock}{Scoped\+Write\+Lock}}
+\end{DoxySeeAlso}
+@tags\{Core\} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_scoped_read_lock_a656bd081a1ce9eaebaf1b612ad35ea18}\label{class_scoped_read_lock_a656bd081a1ce9eaebaf1b612ad35ea18}} 
+\index{ScopedReadLock@{ScopedReadLock}!ScopedReadLock@{ScopedReadLock}}
+\index{ScopedReadLock@{ScopedReadLock}!ScopedReadLock@{ScopedReadLock}}
+\doxysubsubsection{\texorpdfstring{ScopedReadLock()}{ScopedReadLock()}}
+{\footnotesize\ttfamily Scoped\+Read\+Lock\+::\+Scoped\+Read\+Lock (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_read_write_lock}{Read\+Write\+Lock}} \&}]{lock }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}, {\ttfamily [noexcept]}}
+
+Creates a \mbox{\hyperlink{class_scoped_read_lock}{Scoped\+Read\+Lock}}.
+
+As soon as it is created, this will call \mbox{\hyperlink{class_read_write_lock_ae69612d80a6abdccfd0f911eea78bec7}{Read\+Write\+Lock\+::enter\+Read()}}, and when the \mbox{\hyperlink{class_scoped_read_lock}{Scoped\+Read\+Lock}} object is deleted, the \mbox{\hyperlink{class_read_write_lock}{Read\+Write\+Lock}} will be unlocked.
+
+Make sure this object is created and deleted by the same thread, otherwise there are no guarantees what will happen! Best just to use it as a local stack object, rather than creating one with the new() operator. \mbox{\Hypertarget{class_scoped_read_lock_a81becd93947c0103c2c9461e4ddbe594}\label{class_scoped_read_lock_a81becd93947c0103c2c9461e4ddbe594}} 
+\index{ScopedReadLock@{ScopedReadLock}!````~ScopedReadLock@{$\sim$ScopedReadLock}}
+\index{````~ScopedReadLock@{$\sim$ScopedReadLock}!ScopedReadLock@{ScopedReadLock}}
+\doxysubsubsection{\texorpdfstring{$\sim$ScopedReadLock()}{~ScopedReadLock()}}
+{\footnotesize\ttfamily Scoped\+Read\+Lock\+::$\sim$\+Scoped\+Read\+Lock (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Destructor.
+
+The \mbox{\hyperlink{class_read_write_lock}{Read\+Write\+Lock}}\textquotesingle{}s exit\+Read() method will be called when the destructor is called.
+
+Make sure this object is created and deleted by the same thread, otherwise there are no guarantees what will happen! 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+core/threads/\mbox{\hyperlink{juce___scoped_read_lock_8h}{juce\+\_\+\+Scoped\+Read\+Lock.\+h}}\end{DoxyCompactItemize}

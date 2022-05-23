@@ -1,0 +1,914 @@
+\hypertarget{_a_u_base_8h_source}{}\doxysection{AUBase.\+h}
+\label{_a_u_base_8h_source}\index{build/juce\_audio\_plugin\_client/AU/CoreAudioUtilityClasses/AUBase.h@{build/juce\_audio\_plugin\_client/AU/CoreAudioUtilityClasses/AUBase.h}}
+\mbox{\hyperlink{_a_u_base_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{     File: AUBase.h}}
+\DoxyCodeLine{3 \textcolor{comment}{ Abstract: Part of CoreAudio Utility Classes}}
+\DoxyCodeLine{4 \textcolor{comment}{  Version: 1.1}}
+\DoxyCodeLine{5 \textcolor{comment}{}}
+\DoxyCodeLine{6 \textcolor{comment}{ Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple}}
+\DoxyCodeLine{7 \textcolor{comment}{ Inc. ("{}Apple"{}) in consideration of your agreement to the following}}
+\DoxyCodeLine{8 \textcolor{comment}{ terms, and your use, installation, modification or redistribution of}}
+\DoxyCodeLine{9 \textcolor{comment}{ this Apple software constitutes acceptance of these terms.  If you do}}
+\DoxyCodeLine{10 \textcolor{comment}{ not agree with these terms, please do not use, install, modify or}}
+\DoxyCodeLine{11 \textcolor{comment}{ redistribute this Apple software.}}
+\DoxyCodeLine{12 \textcolor{comment}{}}
+\DoxyCodeLine{13 \textcolor{comment}{ In consideration of your agreement to abide by the following terms, and}}
+\DoxyCodeLine{14 \textcolor{comment}{ subject to these terms, Apple grants you a personal, non-\/exclusive}}
+\DoxyCodeLine{15 \textcolor{comment}{ license, under Apple's copyrights in this original Apple software (the}}
+\DoxyCodeLine{16 \textcolor{comment}{ "{}Apple Software"{}), to use, reproduce, modify and redistribute the Apple}}
+\DoxyCodeLine{17 \textcolor{comment}{ Software, with or without modifications, in source and/or binary forms;}}
+\DoxyCodeLine{18 \textcolor{comment}{ provided that if you redistribute the Apple Software in its entirety and}}
+\DoxyCodeLine{19 \textcolor{comment}{ without modifications, you must retain this notice and the following}}
+\DoxyCodeLine{20 \textcolor{comment}{ text and disclaimers in all such redistributions of the Apple Software.}}
+\DoxyCodeLine{21 \textcolor{comment}{ Neither the name, trademarks, service marks or logos of Apple Inc. may}}
+\DoxyCodeLine{22 \textcolor{comment}{ be used to endorse or promote products derived from the Apple Software}}
+\DoxyCodeLine{23 \textcolor{comment}{ without specific prior written permission from Apple.  Except as}}
+\DoxyCodeLine{24 \textcolor{comment}{ expressly stated in this notice, no other rights or licenses, express or}}
+\DoxyCodeLine{25 \textcolor{comment}{ implied, are granted by Apple herein, including but not limited to any}}
+\DoxyCodeLine{26 \textcolor{comment}{ patent rights that may be infringed by your derivative works or by other}}
+\DoxyCodeLine{27 \textcolor{comment}{ works in which the Apple Software may be incorporated.}}
+\DoxyCodeLine{28 \textcolor{comment}{}}
+\DoxyCodeLine{29 \textcolor{comment}{ The Apple Software is provided by Apple on an "{}AS IS"{} basis.  APPLE}}
+\DoxyCodeLine{30 \textcolor{comment}{ MAKES NO WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION}}
+\DoxyCodeLine{31 \textcolor{comment}{ THE IMPLIED WARRANTIES OF NON-\/INFRINGEMENT, MERCHANTABILITY AND FITNESS}}
+\DoxyCodeLine{32 \textcolor{comment}{ FOR A PARTICULAR PURPOSE, REGARDING THE APPLE SOFTWARE OR ITS USE AND}}
+\DoxyCodeLine{33 \textcolor{comment}{ OPERATION ALONE OR IN COMBINATION WITH YOUR PRODUCTS.}}
+\DoxyCodeLine{34 \textcolor{comment}{}}
+\DoxyCodeLine{35 \textcolor{comment}{ IN NO EVENT SHALL APPLE BE LIABLE FOR ANY SPECIAL, INDIRECT, INCIDENTAL}}
+\DoxyCodeLine{36 \textcolor{comment}{ OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF}}
+\DoxyCodeLine{37 \textcolor{comment}{ SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS}}
+\DoxyCodeLine{38 \textcolor{comment}{ INTERRUPTION) ARISING IN ANY WAY OUT OF THE USE, REPRODUCTION,}}
+\DoxyCodeLine{39 \textcolor{comment}{ MODIFICATION AND/OR DISTRIBUTION OF THE APPLE SOFTWARE, HOWEVER CAUSED}}
+\DoxyCodeLine{40 \textcolor{comment}{ AND WHETHER UNDER THEORY OF CONTRACT, TORT (INCLUDING NEGLIGENCE),}}
+\DoxyCodeLine{41 \textcolor{comment}{ STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE}}
+\DoxyCodeLine{42 \textcolor{comment}{ POSSIBILITY OF SUCH DAMAGE.}}
+\DoxyCodeLine{43 \textcolor{comment}{}}
+\DoxyCodeLine{44 \textcolor{comment}{ Copyright (C) 2014 Apple Inc. All Rights Reserved.}}
+\DoxyCodeLine{45 \textcolor{comment}{}}
+\DoxyCodeLine{46 \textcolor{comment}{*/}}
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#ifndef \_\_AUBase\_h\_\_}}
+\DoxyCodeLine{48 \textcolor{preprocessor}{\#define \_\_AUBase\_h\_\_}}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50 \textcolor{preprocessor}{\#pragma clang diagnostic ignored "{}-\/Wdeprecated-\/declarations"{}}}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52 \textcolor{preprocessor}{\#include <TargetConditionals.h>}}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54 \textcolor{preprocessor}{\#if TARGET\_OS\_MAC}}
+\DoxyCodeLine{55 \textcolor{preprocessor}{    \#include <pthread.h>}}
+\DoxyCodeLine{56 \textcolor{preprocessor}{\#elif TARGET\_OS\_WIN32}}
+\DoxyCodeLine{57 \textcolor{preprocessor}{    \#include <windows.h>}}
+\DoxyCodeLine{58 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{59 \textcolor{preprocessor}{    \#error Unsupported Operating System}}
+\DoxyCodeLine{60 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_a_u_scope_element_8h}{AUScopeElement.h}}"{}}}
+\DoxyCodeLine{65 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_a_u_input_element_8h}{AUInputElement.h}}"{}}}
+\DoxyCodeLine{66 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_a_u_output_element_8h}{AUOutputElement.h}}"{}}}
+\DoxyCodeLine{67 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_a_u_buffer_8h}{AUBuffer.h}}"{}}}
+\DoxyCodeLine{68 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_c_a_math_8h}{CAMath.h}}"{}}}
+\DoxyCodeLine{69 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_c_a_thread_safe_list_8h}{CAThreadSafeList.h}}"{}}}
+\DoxyCodeLine{70 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_c_a_vector_unit_8h}{CAVectorUnit.h}}"{}}}
+\DoxyCodeLine{71 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_c_a_mutex_8h}{CAMutex.h}}"{}}}
+\DoxyCodeLine{72 \textcolor{preprocessor}{\#if !defined(\_\_COREAUDIO\_USE\_FLAT\_INCLUDES\_\_)}}
+\DoxyCodeLine{73 \textcolor{preprocessor}{    \#include <AudioUnit/AudioUnit.h>}}
+\DoxyCodeLine{74 \textcolor{preprocessor}{    \#if !CA\_BASIC\_AU\_FEATURES}}
+\DoxyCodeLine{75 \textcolor{preprocessor}{        \#include <AudioUnit/MusicDevice.h>}}
+\DoxyCodeLine{76 \textcolor{preprocessor}{    \#endif}}
+\DoxyCodeLine{77 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{78 \textcolor{preprocessor}{    \#include "{}AudioUnit.h"{}}}
+\DoxyCodeLine{79 \textcolor{preprocessor}{    \#if !CA\_BASIC\_AU\_FEATURES}}
+\DoxyCodeLine{80 \textcolor{preprocessor}{        \#include "{}MusicDevice.h"{}}}
+\DoxyCodeLine{81 \textcolor{preprocessor}{    \#endif}}
+\DoxyCodeLine{82 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84 \textcolor{preprocessor}{\#ifndef AUTRACE}}
+\DoxyCodeLine{85 \textcolor{preprocessor}{    \#define AUTRACE(code, obj, a, b, c, d)}}
+\DoxyCodeLine{86 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_a_u_plug_in_dispatch_8h}{AUPlugInDispatch.h}}"{}}}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92 \textcolor{comment}{// \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}}
+\DoxyCodeLine{93 \textcolor{comment}{// These are to be moved to the public AudioUnit headers}}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95 \textcolor{preprocessor}{\#define kAUDefaultSampleRate        44100.0}}
+\DoxyCodeLine{96 \textcolor{preprocessor}{\#if !TARGET\_OS\_WIN32}}
+\DoxyCodeLine{97 \textcolor{preprocessor}{\#define kAUDefaultMaxFramesPerSlice 1156}}
+\DoxyCodeLine{98 \textcolor{comment}{//this allows enough default frames for a 512 dest 44K and SRC from 96K}}
+\DoxyCodeLine{99 \textcolor{comment}{// add a padding of 4 frames for any altivec rounding}}
+\DoxyCodeLine{100 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{101 \textcolor{preprocessor}{\#define kAUDefaultMaxFramesPerSlice 2048}}
+\DoxyCodeLine{102 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104 \textcolor{comment}{// \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{107 \textcolor{keyword}{class }\mbox{\hyperlink{class_a_u_base}{AUBase}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_component_base}{ComponentBase}} \{}
+\DoxyCodeLine{108 \textcolor{keyword}{public}:}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{111                                 \mbox{\hyperlink{class_a_u_base_a7c3e3c9730acb8a40189809a358b661a}{AUBase}}(                   \mbox{\hyperlink{group__juce__audio__processors-utilities_ga8d76a4b29adb5f5b39318dd91162b8f4}{AudioComponentInstance}}            inInstance,}
+\DoxyCodeLine{112                                                         UInt32                          numInputElements,}
+\DoxyCodeLine{113                                                         UInt32                          numOutputElements,}
+\DoxyCodeLine{114                                                         UInt32                          numGroupElements = 0);}
+\DoxyCodeLine{116     \textcolor{keyword}{virtual}                     \mbox{\hyperlink{class_a_u_base_a093702f4d1df171b5db89a8122597496}{\string~AUBase}}();}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{119     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void}                \mbox{\hyperlink{class_a_u_base_a01469574621df7d7f02fb44e637e1feb}{PostConstructor}}() \{ \mbox{\hyperlink{class_a_u_base_aa39e58da8f2afb68c35a674597319a12}{CreateElements}}(); \}}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{122     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void}                \mbox{\hyperlink{class_a_u_base_acecbb26b2563919b8ae38c99c043d291}{PreDestructor}}();}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{125     \textcolor{keywordtype}{void}                        \mbox{\hyperlink{class_a_u_base_aa39e58da8f2afb68c35a674597319a12}{CreateElements}}();}
+\DoxyCodeLine{126                                     \textcolor{comment}{// Called immediately after construction, when virtual methods work.}}
+\DoxyCodeLine{127                                     \textcolor{comment}{// Or, a subclass may call this in order to have access to elements}}
+\DoxyCodeLine{128                                     \textcolor{comment}{// in its constructor.}}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{131     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_a_u_base_ad0469d752e006bbc20fc6cf70795cd85}{CreateExtendedElements}}() \{\}}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{133 \textcolor{preprocessor}{\#pragma mark -\/}}
+\DoxyCodeLine{134 \textcolor{preprocessor}{\#pragma mark AU dispatch}}
+\DoxyCodeLine{135     \textcolor{comment}{// \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}}
+\DoxyCodeLine{136     \textcolor{comment}{// Virtual methods (mostly) directly corresponding to the entry points.  Many of these}}
+\DoxyCodeLine{137     \textcolor{comment}{// have useful implementations here and will not need overriding.}}
+\DoxyCodeLine{138 }
+\DoxyCodeLine{140             OSStatus            \mbox{\hyperlink{class_a_u_base_a61c0d624b0ca53c3a0d41b33692f88c5}{DoInitialize}}();}
+\DoxyCodeLine{141                 \textcolor{comment}{// this implements the entry point and makes sure that initialization}}
+\DoxyCodeLine{142                 \textcolor{comment}{// is only attempted exactly once...}}
+\DoxyCodeLine{143 }
+\DoxyCodeLine{145     \textcolor{keyword}{virtual} OSStatus            \mbox{\hyperlink{class_a_u_base_a7300a2c2ad9dab1b751ea576f1366910}{Initialize}}();}
+\DoxyCodeLine{146                 \textcolor{comment}{// ... so that overrides to this method can assume that they will only}}
+\DoxyCodeLine{147                 \textcolor{comment}{// be called exactly once.}}
+\DoxyCodeLine{148 }
+\DoxyCodeLine{150             \textcolor{keywordtype}{bool}                \mbox{\hyperlink{class_a_u_base_a1065d0ea4f2cff572e493f9fe730d9bd}{IsInitialized}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_a_u_base_a0d7ffc76d99e580819e5f6cc4c4ad0fd}{mInitialized}}; \}}
+\DoxyCodeLine{152             \textcolor{keywordtype}{bool}                \mbox{\hyperlink{class_a_u_base_ab6dc39db3b20c0fdf8dec956befb9d50}{HasBegunInitializing}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_a_u_base_a2172d8d88cd33eab070b2a954d60d8f1}{mHasBegunInitializing}}; \}}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{155             \textcolor{keywordtype}{void}                \mbox{\hyperlink{class_a_u_base_a27f6d4fe35954482545b9be107d21ca1}{DoCleanup}}();}
+\DoxyCodeLine{156                 \textcolor{comment}{// same pattern as with Initialize}}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{159     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void}                \mbox{\hyperlink{class_a_u_base_af5857d1ff186aadc47b3d588def8785f}{Cleanup}}();}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{162     \textcolor{keyword}{virtual} OSStatus            \mbox{\hyperlink{class_a_u_base_a5fd821c5d72861b2f9605e66ba3e149b}{Reset}}(                 AudioUnitScope                  inScope,}
+\DoxyCodeLine{163                                                         AudioUnitElement                inElement);}
+\DoxyCodeLine{164 }
+\DoxyCodeLine{165     \textcolor{comment}{// Note about GetPropertyInfo, GetProperty, SetProperty:}}
+\DoxyCodeLine{166     \textcolor{comment}{// Certain properties are trapped out in these dispatch functions and handled with different virtual}}
+\DoxyCodeLine{167     \textcolor{comment}{// methods.  (To discourage hacks and keep vtable size down, these are non-\/virtual)}}
+\DoxyCodeLine{168 }
+\DoxyCodeLine{170             OSStatus            \mbox{\hyperlink{class_a_u_base_ac1b311fec52d827c36dbe04e05de29fd}{DispatchGetPropertyInfo}}(AudioUnitPropertyID              inID,}
+\DoxyCodeLine{171                                                         AudioUnitScope                  inScope,}
+\DoxyCodeLine{172                                                         AudioUnitElement                inElement,}
+\DoxyCodeLine{173                                                         UInt32 \&                        outDataSize,}
+\DoxyCodeLine{174                                                         Boolean \&                       outWritable);}
+\DoxyCodeLine{175 }
+\DoxyCodeLine{177             OSStatus            \mbox{\hyperlink{class_a_u_base_a1bda88ad2afdcf1fc70fd7ef1b81cbd9}{DispatchGetProperty}}( AudioUnitPropertyID             inID,}
+\DoxyCodeLine{178                                                         AudioUnitScope                  inScope,}
+\DoxyCodeLine{179                                                         AudioUnitElement                inElement,}
+\DoxyCodeLine{180                                                         \textcolor{keywordtype}{void} *                          outData);}
+\DoxyCodeLine{181 }
+\DoxyCodeLine{183             OSStatus            \mbox{\hyperlink{class_a_u_base_a5a8ba9a1e75b7663bb97776e207e7080}{DispatchSetProperty}}( AudioUnitPropertyID             inID,}
+\DoxyCodeLine{184                                                         AudioUnitScope                  inScope,}
+\DoxyCodeLine{185                                                         AudioUnitElement                inElement,}
+\DoxyCodeLine{186                                                         \textcolor{keyword}{const} \textcolor{keywordtype}{void} *                    inData,}
+\DoxyCodeLine{187                                                         UInt32                          inDataSize);}
+\DoxyCodeLine{188 }
+\DoxyCodeLine{189             OSStatus            \mbox{\hyperlink{class_a_u_base_a42319f0bd61e694ca8a9cdb8a0961039}{DispatchRemovePropertyValue}}( AudioUnitPropertyID     inID,}
+\DoxyCodeLine{190                                                         AudioUnitScope                  inScope,}
+\DoxyCodeLine{191                                                         AudioUnitElement                inElement);}
+\DoxyCodeLine{192 }
+\DoxyCodeLine{194     \textcolor{keyword}{virtual} OSStatus            \mbox{\hyperlink{class_a_u_base_ac760e30cf8a47684914b15f802403d96}{GetPropertyInfo}}(     AudioUnitPropertyID             inID,}
+\DoxyCodeLine{195                                                         AudioUnitScope                  inScope,}
+\DoxyCodeLine{196                                                         AudioUnitElement                inElement,}
+\DoxyCodeLine{197                                                         UInt32 \&                        outDataSize,}
+\DoxyCodeLine{198                                                         Boolean \&                       outWritable);}
+\DoxyCodeLine{199 }
+\DoxyCodeLine{201     \textcolor{keyword}{virtual} OSStatus            \mbox{\hyperlink{class_a_u_base_ade9c748066a1728d2f79dd77ef6bb19e}{GetProperty}}(         AudioUnitPropertyID             inID,}
+\DoxyCodeLine{202                                                         AudioUnitScope                  inScope,}
+\DoxyCodeLine{203                                                         AudioUnitElement                inElement,}
+\DoxyCodeLine{204                                                         \textcolor{keywordtype}{void} *                          outData);}
+\DoxyCodeLine{205 }
+\DoxyCodeLine{207     \textcolor{keyword}{virtual} OSStatus            \mbox{\hyperlink{class_a_u_base_a627a56ae560f1a1209ab6a39be852189}{SetProperty}}(         AudioUnitPropertyID             inID,}
+\DoxyCodeLine{208                                                         AudioUnitScope                  inScope,}
+\DoxyCodeLine{209                                                         AudioUnitElement                inElement,}
+\DoxyCodeLine{210                                                         \textcolor{keyword}{const} \textcolor{keywordtype}{void} *                    inData,}
+\DoxyCodeLine{211                                                         UInt32                          inDataSize);}
+\DoxyCodeLine{212 }
+\DoxyCodeLine{214     \textcolor{keyword}{virtual} OSStatus            \mbox{\hyperlink{class_a_u_base_ad1c04923af3ef371f23ce45e42f58d19}{RemovePropertyValue}} (    AudioUnitPropertyID             inID,}
+\DoxyCodeLine{215                                                         AudioUnitScope                  inScope,}
+\DoxyCodeLine{216                                                         AudioUnitElement                inElement);}
+\DoxyCodeLine{217 }
+\DoxyCodeLine{219     \textcolor{keyword}{virtual} OSStatus            \mbox{\hyperlink{class_a_u_base_a1c10f9bca19006cef02471506fdd9e19}{AddPropertyListener}}( AudioUnitPropertyID             inID,}
+\DoxyCodeLine{220                                                         AudioUnitPropertyListenerProc   inProc,}
+\DoxyCodeLine{221                                                         \textcolor{keywordtype}{void} *                          inProcRefCon);}
+\DoxyCodeLine{222 }
+\DoxyCodeLine{224     \textcolor{keyword}{virtual} OSStatus            \mbox{\hyperlink{class_a_u_base_a14b1a1480b0000585d0a2580d1b1dab4}{RemovePropertyListener}}(   AudioUnitPropertyID             inID,}
+\DoxyCodeLine{225                                                         AudioUnitPropertyListenerProc   inProc,}
+\DoxyCodeLine{226                                                         \textcolor{keywordtype}{void} *                          inProcRefCon,}
+\DoxyCodeLine{227                                                         \textcolor{keywordtype}{bool}                            refConSpecified);}
+\DoxyCodeLine{228 }
+\DoxyCodeLine{230     \textcolor{keyword}{virtual} OSStatus            \mbox{\hyperlink{class_a_u_base_a75124c7786867ca0c3ba8c9a13878d32}{SetRenderNotification}}( AURenderCallback                inProc,}
+\DoxyCodeLine{231                                                         \textcolor{keywordtype}{void} *                          inRefCon);}
+\DoxyCodeLine{232 }
+\DoxyCodeLine{234     \textcolor{keyword}{virtual} OSStatus            \mbox{\hyperlink{class_a_u_base_a7f914dbf22652993845b89e4ee649d77}{RemoveRenderNotification}}(}
+\DoxyCodeLine{235                                                         AURenderCallback                inProc,}
+\DoxyCodeLine{236                                                         \textcolor{keywordtype}{void} *                          inRefCon);}
+\DoxyCodeLine{237 }
+\DoxyCodeLine{239     \textcolor{keyword}{virtual} OSStatus    \mbox{\hyperlink{class_a_u_base_a89386ec99f67591608b610d866dc9c17}{GetParameter}}(           AudioUnitParameterID            inID,}
+\DoxyCodeLine{240                                                         AudioUnitScope                  inScope,}
+\DoxyCodeLine{241                                                         AudioUnitElement                inElement,}
+\DoxyCodeLine{242                                                         \mbox{\hyperlink{_component_base_8h_ad37b0f5817e3f72543294a0e2edb9c26}{AudioUnitParameterValue}} \&        outValue);}
+\DoxyCodeLine{243 }
+\DoxyCodeLine{245     \textcolor{keyword}{virtual} OSStatus    \mbox{\hyperlink{class_a_u_base_ab185edfeb562faf4516b1334e15c15ca}{SetParameter}}(           AudioUnitParameterID            inID,}
+\DoxyCodeLine{246                                                         AudioUnitScope                  inScope,}
+\DoxyCodeLine{247                                                         AudioUnitElement                inElement,}
+\DoxyCodeLine{248                                                         \mbox{\hyperlink{_component_base_8h_ad37b0f5817e3f72543294a0e2edb9c26}{AudioUnitParameterValue}}          inValue,}
+\DoxyCodeLine{249                                                         UInt32                          inBufferOffsetInFrames);}
+\DoxyCodeLine{250 }
+\DoxyCodeLine{252     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_a_u_base_a5747d4c39fc51deb1130a20aa9180ff1}{CanScheduleParameters}}() \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{253 }
+\DoxyCodeLine{255     \textcolor{keyword}{virtual} OSStatus    \mbox{\hyperlink{class_a_u_base_a844f7432f76d113556771edf41481c1c}{ScheduleParameter}} (        \textcolor{keyword}{const} AudioUnitParameterEvent   *inParameterEvent,}
+\DoxyCodeLine{256                                                         UInt32                          inNumEvents);}
+\DoxyCodeLine{257 }
+\DoxyCodeLine{258 }
+\DoxyCodeLine{260     OSStatus    \mbox{\hyperlink{class_a_u_base_aed4d0884d76a35507b134c4e35d46796}{DoRender}}(                               AudioUnitRenderActionFlags \&    ioActionFlags,}
+\DoxyCodeLine{261                                                         \textcolor{keyword}{const} AudioTimeStamp \&          inTimeStamp,}
+\DoxyCodeLine{262                                                         UInt32                          inBusNumber,}
+\DoxyCodeLine{263                                                         UInt32                          inNumberFrames,}
+\DoxyCodeLine{264                                                         AudioBufferList \&               ioData);}
+\DoxyCodeLine{265 }
+\DoxyCodeLine{266 }
+\DoxyCodeLine{268     OSStatus    \mbox{\hyperlink{class_a_u_base_a5fca3bc09533dec232077910b4fdac25}{DoProcess}} (                            AudioUnitRenderActionFlags  \&       ioActionFlags,}
+\DoxyCodeLine{269                                                     \textcolor{keyword}{const} AudioTimeStamp \&              inTimeStamp,}
+\DoxyCodeLine{270                                                     UInt32                              inFramesToProcess,}
+\DoxyCodeLine{271                                                     AudioBufferList \&                   ioData);}
+\DoxyCodeLine{272 }
+\DoxyCodeLine{274     OSStatus    \mbox{\hyperlink{class_a_u_base_adc9eef1e671bc43555d8ddd7e21b1ff4}{DoProcessMultiple}} (                    AudioUnitRenderActionFlags  \&       ioActionFlags,}
+\DoxyCodeLine{275                                                     \textcolor{keyword}{const} AudioTimeStamp \&              inTimeStamp,}
+\DoxyCodeLine{276                                                     UInt32                              inFramesToProcess,}
+\DoxyCodeLine{277                                                     UInt32                              inNumberInputBufferLists,}
+\DoxyCodeLine{278                                                     \textcolor{keyword}{const} AudioBufferList **            inInputBufferLists,}
+\DoxyCodeLine{279                                                     UInt32                              inNumberOutputBufferLists,}
+\DoxyCodeLine{280                                                     AudioBufferList **                  ioOutputBufferLists);}
+\DoxyCodeLine{281 }
+\DoxyCodeLine{283     \textcolor{keyword}{virtual} OSStatus    \mbox{\hyperlink{class_a_u_base_a3f17c2c5a2e109e3da73972f7bf3dd6a}{ProcessBufferLists}}(           AudioUnitRenderActionFlags \&        ioActionFlags,}
+\DoxyCodeLine{284                                                     \textcolor{keyword}{const} AudioBufferList \&             inBuffer,}
+\DoxyCodeLine{285                                                     AudioBufferList \&                   outBuffer,}
+\DoxyCodeLine{286                                                     UInt32                              inFramesToProcess )}
+\DoxyCodeLine{287                         \{}
+\DoxyCodeLine{288                             \textcolor{keywordflow}{return} kAudio\_UnimplementedError;}
+\DoxyCodeLine{289                         \}}
+\DoxyCodeLine{290 }
+\DoxyCodeLine{292     \textcolor{keyword}{virtual} OSStatus    \mbox{\hyperlink{class_a_u_base_a5acb7c563c6daf66f3a11b2d954e4ce8}{ProcessMultipleBufferLists}}(   AudioUnitRenderActionFlags \&        ioActionFlags,}
+\DoxyCodeLine{293                                                     UInt32                              inFramesToProcess,}
+\DoxyCodeLine{294                                                     UInt32                              inNumberInputBufferLists,}
+\DoxyCodeLine{295                                                     \textcolor{keyword}{const} AudioBufferList **            inInputBufferLists,}
+\DoxyCodeLine{296                                                     UInt32                              inNumberOutputBufferLists,}
+\DoxyCodeLine{297                                                     AudioBufferList **                  ioOutputBufferLists)}
+\DoxyCodeLine{298                         \{}
+\DoxyCodeLine{299                             \textcolor{keywordflow}{return} kAudio\_UnimplementedError;}
+\DoxyCodeLine{300                         \}}
+\DoxyCodeLine{301 }
+\DoxyCodeLine{303     \textcolor{keyword}{virtual} OSStatus    \mbox{\hyperlink{class_a_u_base_af4cd7c123e35a00457ee130b0f4400e4}{ComplexRender}}(             AudioUnitRenderActionFlags \&        ioActionFlags,}
+\DoxyCodeLine{304                                                     \textcolor{keyword}{const} AudioTimeStamp \&              inTimeStamp,}
+\DoxyCodeLine{305                                                     UInt32                              inOutputBusNumber,}
+\DoxyCodeLine{306                                                     UInt32                              inNumberOfPackets,}
+\DoxyCodeLine{307                                                     UInt32 *                            outNumberOfPackets,}
+\DoxyCodeLine{308                                                     AudioStreamPacketDescription *      outPacketDescriptions,}
+\DoxyCodeLine{309                                                     AudioBufferList \&                   ioData,}
+\DoxyCodeLine{310                                                     \textcolor{keywordtype}{void} *                              outMetadata,}
+\DoxyCodeLine{311                                                     UInt32 *                            outMetadataByteSize)}
+\DoxyCodeLine{312                         \{}
+\DoxyCodeLine{313                             \textcolor{keywordflow}{return} kAudio\_UnimplementedError;}
+\DoxyCodeLine{314                         \}}
+\DoxyCodeLine{315 }
+\DoxyCodeLine{316     \textcolor{comment}{// Override this method if your AU processes multiple output busses completely independently -\/-\/}}
+\DoxyCodeLine{317     \textcolor{comment}{// you'll want to just call Render without the NeedsToRender check.}}
+\DoxyCodeLine{318     \textcolor{comment}{// Otherwise, override Render().}}
+\DoxyCodeLine{319     \textcolor{comment}{//}}
+\DoxyCodeLine{320     \textcolor{comment}{// N.B. Implementations of this method can assume that the output's buffer list has already been}}
+\DoxyCodeLine{321     \textcolor{comment}{// prepared and access it with GetOutput(inBusNumber)-\/>GetBufferList() instead of}}
+\DoxyCodeLine{322     \textcolor{comment}{// GetOutput(inBusNumber)-\/>PrepareBuffer(nFrames) -\/-\/ if PrepareBuffer is called, a}}
+\DoxyCodeLine{323     \textcolor{comment}{// copy may occur after rendering.}}
+\DoxyCodeLine{325 \textcolor{comment}{}    \textcolor{keyword}{virtual} OSStatus            \mbox{\hyperlink{class_a_u_base_afcc2945deee312555200f1dd8aa09d65}{RenderBus}}(             AudioUnitRenderActionFlags \&    ioActionFlags,}
+\DoxyCodeLine{326                                                         \textcolor{keyword}{const} AudioTimeStamp \&          inTimeStamp,}
+\DoxyCodeLine{327                                                         UInt32                          inBusNumber,}
+\DoxyCodeLine{328                                                         UInt32                          inNumberFrames)}
+\DoxyCodeLine{329                                 \{}
+\DoxyCodeLine{330                                     \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_a_u_base_ad18a9e46d9786d2ba6ef6bc919b61e8b}{NeedsToRender}}(inTimeStamp))}
+\DoxyCodeLine{331                                         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_a_u_base_a4b4837eee6f60c27d3139d1937fcece3}{Render}}(ioActionFlags, inTimeStamp, inNumberFrames);}
+\DoxyCodeLine{332                                     \textcolor{keywordflow}{return} \mbox{\hyperlink{class_component_base_a19f94469b599d3744f81fe3153a6a7feaf4e286767e1bd8839389a71e374716de}{noErr}};  \textcolor{comment}{// was presumably already rendered via another bus}}
+\DoxyCodeLine{333                                 \}}
+\DoxyCodeLine{334 }
+\DoxyCodeLine{335     \textcolor{comment}{// N.B. For a unit with only one output bus, it can assume in its implementation of this}}
+\DoxyCodeLine{336     \textcolor{comment}{// method that the output's buffer list has already been prepared and access it with}}
+\DoxyCodeLine{337     \textcolor{comment}{// GetOutput(0)-\/>GetBufferList() instead of GetOutput(0)-\/>PrepareBuffer(nFrames)}}
+\DoxyCodeLine{338     \textcolor{comment}{//  -\/-\/ if PrepareBuffer is called, a copy may occur after rendering.}}
+\DoxyCodeLine{340 \textcolor{comment}{}    \textcolor{keyword}{virtual} OSStatus            \mbox{\hyperlink{class_a_u_base_a4b4837eee6f60c27d3139d1937fcece3}{Render}}(                   AudioUnitRenderActionFlags \&    ioActionFlags,}
+\DoxyCodeLine{341                                                         \textcolor{keyword}{const} AudioTimeStamp \&          inTimeStamp,}
+\DoxyCodeLine{342                                                         UInt32                          inNumberFrames)}
+\DoxyCodeLine{343                                 \{}
+\DoxyCodeLine{344                                     \textcolor{keywordflow}{return} \mbox{\hyperlink{class_component_base_a19f94469b599d3744f81fe3153a6a7feaf4e286767e1bd8839389a71e374716de}{noErr}};}
+\DoxyCodeLine{345                                 \}}
+\DoxyCodeLine{346 }
+\DoxyCodeLine{347 }
+\DoxyCodeLine{348 \textcolor{preprocessor}{\#pragma mark -\/}}
+\DoxyCodeLine{349 \textcolor{preprocessor}{\#pragma mark Property Dispatch}}
+\DoxyCodeLine{350 }
+\DoxyCodeLine{351     \textcolor{keyword}{static} \textcolor{keyword}{const} Float64 \mbox{\hyperlink{class_a_u_base_a82a1d30ce7664957db06ccd34dc9a1f0}{kNoLastRenderedSampleTime}};}
+\DoxyCodeLine{352 }
+\DoxyCodeLine{353     \textcolor{comment}{// \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}}
+\DoxyCodeLine{354     \textcolor{comment}{// These are generated from DispatchGetProperty/DispatchGetPropertyInfo/DispatchSetProperty}}
+\DoxyCodeLine{355 }
+\DoxyCodeLine{357     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool}                \mbox{\hyperlink{class_a_u_base_a0592acb26c983b56141f08ccc4b0f087}{BusCountWritable}}(       AudioUnitScope                  inScope)}
+\DoxyCodeLine{358                                 \{}
+\DoxyCodeLine{359                                     \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{360                                 \}}
+\DoxyCodeLine{361     \textcolor{keyword}{virtual} OSStatus            \mbox{\hyperlink{class_a_u_base_a55d696531b5e98aec1c751bf2d2206f9}{SetBusCount}}(     AudioUnitScope                  inScope,}
+\DoxyCodeLine{362                                                     UInt32                          inCount);}
+\DoxyCodeLine{363 }
+\DoxyCodeLine{365     \textcolor{keyword}{virtual} OSStatus            \mbox{\hyperlink{class_a_u_base_ad87d6e0a6972f7f45bd4e296e0019010}{SetConnection}}(         \textcolor{keyword}{const} AudioUnitConnection \&     inConnection);}
+\DoxyCodeLine{366 }
+\DoxyCodeLine{368     \textcolor{keyword}{virtual} OSStatus            \mbox{\hyperlink{class_a_u_base_aca77d45eefd7265da415223453460391}{SetInputCallback}}(       UInt32                          inPropertyID,}
+\DoxyCodeLine{369                                                         AudioUnitElement                inElement,}
+\DoxyCodeLine{370                                                         AURenderCallback                inProc,}
+\DoxyCodeLine{371                                                         \textcolor{keywordtype}{void} *                          inRefCon);}
+\DoxyCodeLine{372 }
+\DoxyCodeLine{374     \textcolor{keyword}{virtual} OSStatus            \mbox{\hyperlink{class_a_u_base_a1d1aed5957f54a9d4d38efa284d82e9e}{GetParameterList}}(       AudioUnitScope                  inScope,}
+\DoxyCodeLine{375                                                         AudioUnitParameterID *          outParameterList,}
+\DoxyCodeLine{376                                                         UInt32 \&                        outNumParameters);}
+\DoxyCodeLine{377                                                             \textcolor{comment}{// outParameterList may be a null pointer}}
+\DoxyCodeLine{378 }
+\DoxyCodeLine{380     \textcolor{keyword}{virtual} OSStatus            \mbox{\hyperlink{class_a_u_base_a03d41f964509a995a3fa87ce5845889f}{GetParameterInfo}}(       AudioUnitScope                  inScope,}
+\DoxyCodeLine{381                                                         AudioUnitParameterID            inParameterID,}
+\DoxyCodeLine{382                                                         AudioUnitParameterInfo \&        outParameterInfo);}
+\DoxyCodeLine{383 }
+\DoxyCodeLine{384     \textcolor{keyword}{virtual} OSStatus            \mbox{\hyperlink{class_a_u_base_ad7300ff45a06a4927bb18d9627d72721}{GetParameterHistoryInfo}}(AudioUnitScope                   inScope,}
+\DoxyCodeLine{385                                                         AudioUnitParameterID            inParameterID,}
+\DoxyCodeLine{386                                                         Float32 \&                       outUpdatesPerSecond,}
+\DoxyCodeLine{387                                                         Float32 \&                       outHistoryDurationInSeconds);}
+\DoxyCodeLine{388 }
+\DoxyCodeLine{390     \textcolor{keyword}{virtual} OSStatus            \mbox{\hyperlink{class_a_u_base_ad759f25fec0e66dede559b2c246c739e}{SaveState}}(             CFPropertyListRef *             outData);}
+\DoxyCodeLine{391 }
+\DoxyCodeLine{393     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void}                \mbox{\hyperlink{class_a_u_base_a980eec061c3cb4dcff9586db33be8e6d}{SaveExtendedScopes}}(       CFMutableDataRef                outData) \{\};}
+\DoxyCodeLine{394 }
+\DoxyCodeLine{396     \textcolor{keyword}{virtual} OSStatus            \mbox{\hyperlink{class_a_u_base_a02e7d435af6d6ac1f787d1d8b46b0390}{RestoreState}}(           CFPropertyListRef               inData);}
+\DoxyCodeLine{397 }
+\DoxyCodeLine{399     \textcolor{keyword}{virtual} OSStatus            \mbox{\hyperlink{class_a_u_base_a1a0dd42d200071298a35ab42c49edf10}{GetParameterValueStrings}}(AudioUnitScope                 inScope,}
+\DoxyCodeLine{400                                                         AudioUnitParameterID            inParameterID,}
+\DoxyCodeLine{401                                                         CFArrayRef *                    outStrings);}
+\DoxyCodeLine{402 }
+\DoxyCodeLine{404     \textcolor{keyword}{virtual} OSStatus            \mbox{\hyperlink{class_a_u_base_a1130bbe25e4f9faa6469d1e4201f55b5}{CopyClumpName}}(         AudioUnitScope                  inScope,}
+\DoxyCodeLine{405                                                         UInt32                          inClumpID,}
+\DoxyCodeLine{406                                                         UInt32                          inDesiredNameLength,}
+\DoxyCodeLine{407                                                         CFStringRef *                   outClumpName);}
+\DoxyCodeLine{408 }
+\DoxyCodeLine{410     \textcolor{keyword}{virtual} OSStatus            \mbox{\hyperlink{class_a_u_base_a4282216d37beb22a91ccfa40dcf2c49e}{GetPresets}} (          CFArrayRef *                    outData) \textcolor{keyword}{const};}
+\DoxyCodeLine{411 }
+\DoxyCodeLine{412         \textcolor{comment}{// set the default preset for the unit -\/> the number of the preset MUST be >= 0}}
+\DoxyCodeLine{413         \textcolor{comment}{// and the name should be valid, or the preset WON'T take}}
+\DoxyCodeLine{415 \textcolor{comment}{}    \textcolor{keywordtype}{bool}                        \mbox{\hyperlink{class_a_u_base_ae0a429a4607368b79b215fe36efc74d6}{SetAFactoryPresetAsCurrent}} (\textcolor{keyword}{const} AUPreset \& inPreset);}
+\DoxyCodeLine{416 }
+\DoxyCodeLine{417         \textcolor{comment}{// Called when someone sets a new, valid preset}}
+\DoxyCodeLine{418         \textcolor{comment}{// If this is a valid preset, then the subclass sets its state to that preset}}
+\DoxyCodeLine{419         \textcolor{comment}{// and returns noErr.}}
+\DoxyCodeLine{420         \textcolor{comment}{// If not a valid preset, return an error, and the pre-\/existing preset is restored}}
+\DoxyCodeLine{422 \textcolor{comment}{}    \textcolor{keyword}{virtual} OSStatus            \mbox{\hyperlink{class_a_u_base_a0bcb9f516b5849bab4f89eb03cdb20a4}{NewFactoryPresetSet}} (\textcolor{keyword}{const} AUPreset \& inNewFactoryPreset);}
+\DoxyCodeLine{423 }
+\DoxyCodeLine{425     \textcolor{keyword}{virtual} OSStatus            \mbox{\hyperlink{class_a_u_base_a4bcdd3c62ea19006f335cfe2f78ac17a}{NewCustomPresetSet}} (\textcolor{keyword}{const} AUPreset \& inNewCustomPreset);}
+\DoxyCodeLine{426 }
+\DoxyCodeLine{427 \textcolor{preprocessor}{\#if !CA\_USE\_AUDIO\_PLUGIN\_ONLY}}
+\DoxyCodeLine{429     \textcolor{keyword}{virtual} \textcolor{keywordtype}{int}                 \mbox{\hyperlink{class_a_u_base_afdc55d33cac745f8d17a291816bed61f}{GetNumCustomUIComponents}} ();}
+\DoxyCodeLine{430 }
+\DoxyCodeLine{432     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void}                \mbox{\hyperlink{class_a_u_base_a7557858fee482c90765f99e0da3b1755}{GetUIComponentDescs}} (ComponentDescription* inDescArray);}
+\DoxyCodeLine{433 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{434 }
+\DoxyCodeLine{436     \textcolor{keyword}{virtual} CFURLRef            \mbox{\hyperlink{class_a_u_base_a33177878ecaf72621b1ddcd152b4255f}{CopyIconLocation}} ();}
+\DoxyCodeLine{437 }
+\DoxyCodeLine{438     \textcolor{comment}{// default is no latency, and unimplemented tail time}}
+\DoxyCodeLine{440 \textcolor{comment}{}    \textcolor{keyword}{virtual} Float64             \mbox{\hyperlink{class_a_u_base_a1cd681dcf79adc28b2fe36ebd5c4f575}{GetLatency}}() \{\textcolor{keywordflow}{return} 0.0;\}}
+\DoxyCodeLine{442     \textcolor{keyword}{virtual} Float64             \mbox{\hyperlink{class_a_u_base_a345a8c062a2be9ab4742837cb3efb582}{GetTailTime}}() \{\textcolor{keywordflow}{return} 0;\}}
+\DoxyCodeLine{444     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool}                \mbox{\hyperlink{class_a_u_base_abc563d92b36e345720cad8719a594727}{SupportsTail}} () \{ \textcolor{keywordflow}{return} \textcolor{keyword}{false}; \}}
+\DoxyCodeLine{445 }
+\DoxyCodeLine{447             \textcolor{keywordtype}{bool}                \mbox{\hyperlink{class_a_u_base_a371e05e6b00de9f1856e9d81a4398f9b}{IsStreamFormatWritable}}(   AudioUnitScope                  scope,}
+\DoxyCodeLine{448                                                         AudioUnitElement                element);}
+\DoxyCodeLine{449 }
+\DoxyCodeLine{451     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool}                \mbox{\hyperlink{class_a_u_base_a8c956b223f2a6c5dd961da772c4b2480}{StreamFormatWritable}}(   AudioUnitScope                  scope,}
+\DoxyCodeLine{452                                                         AudioUnitElement                element) = 0;}
+\DoxyCodeLine{453                                                             \textcolor{comment}{// scope will always be input or output}}
+\DoxyCodeLine{454 }
+\DoxyCodeLine{455             \textcolor{comment}{// pass in a pointer to get the struct, and num channel infos}}
+\DoxyCodeLine{456             \textcolor{comment}{// you can pass in NULL to just get the number}}
+\DoxyCodeLine{457             \textcolor{comment}{// a return value of 0 (the default in AUBase) means the property is not supported...}}
+\DoxyCodeLine{459 \textcolor{comment}{}    \textcolor{keyword}{virtual} UInt32              \mbox{\hyperlink{class_a_u_base_ad3507a51757cb829ea2e804b2af88e61}{SupportedNumChannels}} (  \textcolor{keyword}{const} AUChannelInfo**           outInfo);}
+\DoxyCodeLine{460 }
+\DoxyCodeLine{462     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool}                \mbox{\hyperlink{class_a_u_base_ae3fd6e3287d47d0c075a4e3888b800eb}{ValidFormat}}(         AudioUnitScope                  inScope,}
+\DoxyCodeLine{463                                                         AudioUnitElement                inElement,}
+\DoxyCodeLine{464                                                         \textcolor{keyword}{const} \mbox{\hyperlink{class_c_a_stream_basic_description}{CAStreamBasicDescription}} \& inNewFormat);}
+\DoxyCodeLine{465                                                             \textcolor{comment}{// Will only be called after StreamFormatWritable}}
+\DoxyCodeLine{466                                                             \textcolor{comment}{// has succeeded.}}
+\DoxyCodeLine{467                                                             \textcolor{comment}{// Default implementation requires canonical format:}}
+\DoxyCodeLine{468                                                             \textcolor{comment}{// native-\/endian 32-\/bit float, any sample rate,}}
+\DoxyCodeLine{469                                                             \textcolor{comment}{// any number of channels; override when other}}
+\DoxyCodeLine{470                                                             \textcolor{comment}{// formats are supported.  A subclass's override can}}
+\DoxyCodeLine{471                                                             \textcolor{comment}{// choose to always return true and trap invalid}}
+\DoxyCodeLine{472                                                             \textcolor{comment}{// formats in ChangeStreamFormat.}}
+\DoxyCodeLine{473 }
+\DoxyCodeLine{474 }
+\DoxyCodeLine{476             \textcolor{keywordtype}{bool}                \mbox{\hyperlink{class_a_u_base_a18f8a49d136298223860c2cbdacb14cb}{FormatIsCanonical}}(     \textcolor{keyword}{const} \mbox{\hyperlink{class_c_a_stream_basic_description}{CAStreamBasicDescription}} \&\mbox{\hyperlink{namespacegl_a597b77c61fc6d444d2bfc6bf69dee277}{format}});}
+\DoxyCodeLine{477 }
+\DoxyCodeLine{479             \textcolor{keywordtype}{void}                \mbox{\hyperlink{class_a_u_base_a40e6bc9b6dbcb59fa102c64f54e15db3}{MakeCanonicalFormat}}( \mbox{\hyperlink{class_c_a_stream_basic_description}{CAStreamBasicDescription}} \&  outDesc,}
+\DoxyCodeLine{480                                                         \textcolor{keywordtype}{int}                         numChannels = 2);}
+\DoxyCodeLine{481 }
+\DoxyCodeLine{483     \textcolor{keyword}{virtual} \textcolor{keyword}{const} \mbox{\hyperlink{class_c_a_stream_basic_description}{CAStreamBasicDescription}} \&}
+\DoxyCodeLine{484                                 \mbox{\hyperlink{class_a_u_base_ac761f2425907e7a9fa64433cd275f1e6}{GetStreamFormat}}(     AudioUnitScope                  inScope,}
+\DoxyCodeLine{485                                                         AudioUnitElement                inElement);}
+\DoxyCodeLine{486 }
+\DoxyCodeLine{488     \textcolor{keyword}{virtual} OSStatus            \mbox{\hyperlink{class_a_u_base_a138ff5a19b9ec2a70112e66dd04dd0e5}{ChangeStreamFormat}}(       AudioUnitScope                  inScope,}
+\DoxyCodeLine{489                                                         AudioUnitElement                inElement,}
+\DoxyCodeLine{490                                                         \textcolor{keyword}{const} \mbox{\hyperlink{class_c_a_stream_basic_description}{CAStreamBasicDescription}} \& inPrevFormat,}
+\DoxyCodeLine{491                                                         \textcolor{keyword}{const} \mbox{\hyperlink{class_c_a_stream_basic_description}{CAStreamBasicDescription}} \& inNewFormat);}
+\DoxyCodeLine{492                                                             \textcolor{comment}{// Will only be called after StreamFormatWritable}}
+\DoxyCodeLine{493                                                             \textcolor{comment}{// and ValidFormat have succeeded.}}
+\DoxyCodeLine{494 }
+\DoxyCodeLine{495     \textcolor{comment}{// \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}}
+\DoxyCodeLine{496 }
+\DoxyCodeLine{497 \textcolor{preprocessor}{\#if !CA\_USE\_AUDIO\_PLUGIN\_ONLY}}
+\DoxyCodeLine{499     \textcolor{keyword}{static} OSStatus         \mbox{\hyperlink{class_a_u_base_acc9136062306eddeb7ceb2576475372e}{ComponentEntryDispatch}}(   ComponentParameters *           \mbox{\hyperlink{namespacegl_a23c4f2997e7d61ec0804d763f22ee44c}{params}},}
+\DoxyCodeLine{500                                                         \mbox{\hyperlink{class_a_u_base}{AUBase}} *                      This);}
+\DoxyCodeLine{501 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{502 }
+\DoxyCodeLine{503     \textcolor{comment}{// \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}}
+\DoxyCodeLine{504     \textcolor{comment}{// Methods useful for subclasses}}
+\DoxyCodeLine{505 }
+\DoxyCodeLine{507     \mbox{\hyperlink{class_a_u_scope}{AUScope}} \&                    \mbox{\hyperlink{class_a_u_base_ad948a7422282b745ffd28beebfc61a53}{GetScope}}(               AudioUnitScope                  inScope)}
+\DoxyCodeLine{508     \{}
+\DoxyCodeLine{509         \textcolor{keywordflow}{if} (inScope >= kNumScopes) \{}
+\DoxyCodeLine{510             \mbox{\hyperlink{class_a_u_scope}{AUScope}} * scope = \mbox{\hyperlink{class_a_u_base_a543761243afba11c2b4f90ce59458f1d}{GetScopeExtended}}(inScope);}
+\DoxyCodeLine{511             \textcolor{keywordflow}{if} (!scope) \mbox{\hyperlink{_a_u_buffer_8h_a1ef03fa89bd4d61e8b4b34e3be9138e7}{COMPONENT\_THROW}}(kAudioUnitErr\_InvalidScope);}
+\DoxyCodeLine{512             \textcolor{keywordflow}{return} *scope;}
+\DoxyCodeLine{513         \}}
+\DoxyCodeLine{514         \textcolor{keywordflow}{return} mScopes[inScope];}
+\DoxyCodeLine{515     \}}
+\DoxyCodeLine{516 }
+\DoxyCodeLine{518     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_a_u_scope}{AUScope}} *            \mbox{\hyperlink{class_a_u_base_a543761243afba11c2b4f90ce59458f1d}{GetScopeExtended}} (AudioUnitScope inScope) \{ \textcolor{keywordflow}{return} NULL; \}}
+\DoxyCodeLine{519 }
+\DoxyCodeLine{521     \mbox{\hyperlink{class_a_u_scope}{AUScope}} \&                    \mbox{\hyperlink{class_a_u_base_aeeb994a8745cff476fd214e692a19420}{GlobalScope}}() \{ \textcolor{keywordflow}{return} mScopes[kAudioUnitScope\_Global]; \}}
+\DoxyCodeLine{523     \mbox{\hyperlink{class_a_u_scope}{AUScope}} \&                    \mbox{\hyperlink{class_a_u_base_a4a0fd107abddd69a64f614e3cebfb000}{Inputs}}()  \{ \textcolor{keywordflow}{return} mScopes[kAudioUnitScope\_Input]; \}}
+\DoxyCodeLine{525     \mbox{\hyperlink{class_a_u_scope}{AUScope}} \&                    \mbox{\hyperlink{class_a_u_base_a661b04875dc24f6f6e7c058d47147678}{Outputs}}()    \{ \textcolor{keywordflow}{return} mScopes[kAudioUnitScope\_Output]; \}}
+\DoxyCodeLine{526 \textcolor{preprocessor}{\#if !CA\_BASIC\_AU\_FEATURES}}
+\DoxyCodeLine{528     \mbox{\hyperlink{class_a_u_scope}{AUScope}} \&                    \mbox{\hyperlink{class_a_u_base_a0e163252a3c4cdd7d4cfd2954e13b0d0}{Groups}}()  \{ \textcolor{keywordflow}{return} mScopes[kAudioUnitScope\_Group]; \}}
+\DoxyCodeLine{529 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{531     \mbox{\hyperlink{class_a_u_element}{AUElement}} *                    \mbox{\hyperlink{class_a_u_base_abfa4f935996691d47e0bb4b5934f556e}{Globals}}()    \{ \textcolor{keywordflow}{return} mScopes[kAudioUnitScope\_Global].\mbox{\hyperlink{class_a_u_scope_a1f5ae86025b0106b7e6e466a266e479a}{GetElement}}(0); \}}
+\DoxyCodeLine{532 }
+\DoxyCodeLine{534     \textcolor{keywordtype}{void}                        \mbox{\hyperlink{class_a_u_base_adea6ad864c3fc834a078e68e86718637}{SetNumberOfElements}}( AudioUnitScope                  inScope,}
+\DoxyCodeLine{535                                                         UInt32                          numElements);}
+\DoxyCodeLine{536 }
+\DoxyCodeLine{538     \mbox{\hyperlink{class_a_u_element}{AUElement}} *                    \mbox{\hyperlink{class_a_u_base_a414adda7c3a4c9445832985130f64f78}{GetElement}}(               AudioUnitScope                  inScope,}
+\DoxyCodeLine{539                                                         AudioUnitElement                inElement)}
+\DoxyCodeLine{540     \{}
+\DoxyCodeLine{541         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_a_u_base_ad948a7422282b745ffd28beebfc61a53}{GetScope}}(inScope).\mbox{\hyperlink{class_a_u_scope_a1f5ae86025b0106b7e6e466a266e479a}{GetElement}}(inElement);}
+\DoxyCodeLine{542     \}}
+\DoxyCodeLine{543 }
+\DoxyCodeLine{545     \mbox{\hyperlink{class_a_u_i_o_element}{AUIOElement}} *                \mbox{\hyperlink{class_a_u_base_a77798b9d46935be75436d6f97bb92619}{GetIOElement}}(           AudioUnitScope                  inScope,}
+\DoxyCodeLine{546                                                         AudioUnitElement                inElement)}
+\DoxyCodeLine{547     \{}
+\DoxyCodeLine{548         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_a_u_base_ad948a7422282b745ffd28beebfc61a53}{GetScope}}(inScope).\mbox{\hyperlink{class_a_u_scope_ad76096de23ac7a14763dbc3b2225966f}{GetIOElement}}(inElement);}
+\DoxyCodeLine{549     \}}
+\DoxyCodeLine{550 }
+\DoxyCodeLine{552     \mbox{\hyperlink{class_a_u_element}{AUElement}} *                    \mbox{\hyperlink{class_a_u_base_af572cca2740143f6ca0470250ea79b7d}{SafeGetElement}}(           AudioUnitScope                  inScope,}
+\DoxyCodeLine{553                                                         AudioUnitElement                inElement)}
+\DoxyCodeLine{554     \{}
+\DoxyCodeLine{555         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_a_u_base_ad948a7422282b745ffd28beebfc61a53}{GetScope}}(inScope).\mbox{\hyperlink{class_a_u_scope_a68baa42a544b891d8ac9c7e79bbf0006}{SafeGetElement}}(inElement);}
+\DoxyCodeLine{556     \}}
+\DoxyCodeLine{557 }
+\DoxyCodeLine{559     \mbox{\hyperlink{class_a_u_input_element}{AUInputElement}} *          \mbox{\hyperlink{class_a_u_base_a41b307509db5db6cc9eceeb5cfd036d9}{GetInput}}(               AudioUnitElement                inElement)}
+\DoxyCodeLine{560     \{}
+\DoxyCodeLine{561         \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{class_a_u_input_element}{AUInputElement}} *\textcolor{keyword}{>}(\mbox{\hyperlink{class_a_u_base_a4a0fd107abddd69a64f614e3cebfb000}{Inputs}}().\mbox{\hyperlink{class_a_u_scope_a68baa42a544b891d8ac9c7e79bbf0006}{SafeGetElement}}(inElement));}
+\DoxyCodeLine{562     \}}
+\DoxyCodeLine{563 }
+\DoxyCodeLine{565     \mbox{\hyperlink{class_a_u_output_element}{AUOutputElement}} *            \mbox{\hyperlink{class_a_u_base_a440c915ebe9439e345e0c011f520a3ad}{GetOutput}}(             AudioUnitElement                inElement)}
+\DoxyCodeLine{566     \{}
+\DoxyCodeLine{567         \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{class_a_u_output_element}{AUOutputElement}} *\textcolor{keyword}{>}(\mbox{\hyperlink{class_a_u_base_a661b04875dc24f6f6e7c058d47147678}{Outputs}}().\mbox{\hyperlink{class_a_u_scope_a68baa42a544b891d8ac9c7e79bbf0006}{SafeGetElement}}(inElement));}
+\DoxyCodeLine{568     \}}
+\DoxyCodeLine{569 }
+\DoxyCodeLine{570 \textcolor{preprocessor}{\#if !CA\_BASIC\_AU\_FEATURES}}
+\DoxyCodeLine{572     \mbox{\hyperlink{class_a_u_element}{AUElement}} *                    \mbox{\hyperlink{class_a_u_base_a799d5028a739d21c09acbbabfe1222a2}{GetGroup}}(               AudioUnitElement                inElement)}
+\DoxyCodeLine{573     \{}
+\DoxyCodeLine{574         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_a_u_base_a0e163252a3c4cdd7d4cfd2954e13b0d0}{Groups}}().\mbox{\hyperlink{class_a_u_scope_a68baa42a544b891d8ac9c7e79bbf0006}{SafeGetElement}}(inElement);}
+\DoxyCodeLine{575     \}}
+\DoxyCodeLine{576 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{577 }
+\DoxyCodeLine{579     OSStatus                    \mbox{\hyperlink{class_a_u_base_a91517298b71b8024a4172c797d1d4388}{PullInput}}(             UInt32                      inBusNumber,}
+\DoxyCodeLine{580                                                         AudioUnitRenderActionFlags \&ioActionFlags,}
+\DoxyCodeLine{581                                                         \textcolor{keyword}{const} AudioTimeStamp \&      inTimeStamp,}
+\DoxyCodeLine{582                                                         UInt32                      inNumberFrames)}
+\DoxyCodeLine{583     \{}
+\DoxyCodeLine{584         \mbox{\hyperlink{class_a_u_input_element}{AUInputElement}} *\mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}} = \mbox{\hyperlink{class_a_u_base_a41b307509db5db6cc9eceeb5cfd036d9}{GetInput}}(inBusNumber);   \textcolor{comment}{// throws if error}}
+\DoxyCodeLine{585         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}}-\/>PullInput(ioActionFlags, inTimeStamp, inBusNumber, inNumberFrames);}
+\DoxyCodeLine{586     \}}
+\DoxyCodeLine{587 }
+\DoxyCodeLine{589     UInt32                      \mbox{\hyperlink{class_a_u_base_a0f29d1f64a7c2d6af10053a32e38f6ea}{GetMaxFramesPerSlice}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} mMaxFramesPerSlice; \}}
+\DoxyCodeLine{591     \textcolor{keywordtype}{bool}                        \mbox{\hyperlink{class_a_u_base_a7537b84d28ba1b5189aa7f5b0e94af7e}{UsesFixedBlockSize}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_a_u_base_a1f24436ff97eef714e393ad3de445d14}{mUsesFixedBlockSize}}; \}}
+\DoxyCodeLine{593     \textcolor{keywordtype}{void}                        \mbox{\hyperlink{class_a_u_base_a74fd38c2296941c08a08f49901e4a0a5}{SetUsesFixedBlockSize}}(\textcolor{keywordtype}{bool} inUsesFixedBlockSize) \{ \mbox{\hyperlink{class_a_u_base_a1f24436ff97eef714e393ad3de445d14}{mUsesFixedBlockSize}} = inUsesFixedBlockSize; \}}
+\DoxyCodeLine{594 }
+\DoxyCodeLine{596     \textcolor{keyword}{static} SInt32               \mbox{\hyperlink{class_a_u_base_a8da04dba4cd942b33985fc97ae815ec0}{GetVectorUnitType}}() \{ \textcolor{keywordflow}{return} sVectorUnitType; \}}
+\DoxyCodeLine{598     \textcolor{keyword}{static} \textcolor{keywordtype}{bool}                 \mbox{\hyperlink{class_a_u_base_aff94365ac65586383856a2064b49b001}{HasVectorUnit}}() \{ \textcolor{keywordflow}{return} sVectorUnitType > 0; \}}
+\DoxyCodeLine{600     \textcolor{keyword}{static} \textcolor{keywordtype}{bool}                 \mbox{\hyperlink{class_a_u_base_ab09055ffc02e0433cd3ce7209fd680eb}{HasAltivec}}() \{ \textcolor{keywordflow}{return} sVectorUnitType == \mbox{\hyperlink{_c_a_vector_unit_types_8h_a2970898e8a43ce21e1cc510d49f1b89da268b5519a7bc235db4ed49c95ece58ae}{kVecAltivec}}; \}}
+\DoxyCodeLine{602     \textcolor{keyword}{static} \textcolor{keywordtype}{bool}                 \mbox{\hyperlink{class_a_u_base_a695a9073922fe9aed628ef72270fe0a9}{HasSSE2}}() \{ \textcolor{keywordflow}{return} sVectorUnitType >= \mbox{\hyperlink{_c_a_vector_unit_types_8h_a2970898e8a43ce21e1cc510d49f1b89da2f913137d7952b2a748c74afec6179cf}{kVecSSE2}}; \}}
+\DoxyCodeLine{604     \textcolor{keyword}{static} \textcolor{keywordtype}{bool}                 \mbox{\hyperlink{class_a_u_base_ac51e964e7ee76e3a8d800d338f9b22c1}{HasSSE3}}() \{ \textcolor{keywordflow}{return} sVectorUnitType >= \mbox{\hyperlink{_c_a_vector_unit_types_8h_a2970898e8a43ce21e1cc510d49f1b89dacdc1e8e4ac7f81dcd0a070b08b8a0e36}{kVecSSE3}}; \}}
+\DoxyCodeLine{605 }
+\DoxyCodeLine{607     UInt8                       \mbox{\hyperlink{class_a_u_base_a423bbcff8dcdaeb2c657180a534c6889}{AudioUnitAPIVersion}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} mAudioUnitAPIVersion; \}}
+\DoxyCodeLine{608 }
+\DoxyCodeLine{610     \textcolor{keywordtype}{bool}                        \mbox{\hyperlink{class_a_u_base_acfc7bba9a809fce8e312bfdf96c43f70}{InRenderThread}} ()\textcolor{keyword}{ const}}
+\DoxyCodeLine{611 \textcolor{keyword}{                                }\{}
+\DoxyCodeLine{612 \textcolor{preprocessor}{\#if TARGET\_OS\_MAC}}
+\DoxyCodeLine{613                                     \textcolor{keywordflow}{return} (mRenderThreadID ? pthread\_equal (mRenderThreadID, pthread\_self()) : \textcolor{keyword}{false});}
+\DoxyCodeLine{614 \textcolor{preprocessor}{\#elif TARGET\_OS\_WIN32}}
+\DoxyCodeLine{615                                     \textcolor{keywordflow}{return} (mRenderThreadID ? mRenderThreadID == GetCurrentThreadId() : \textcolor{keyword}{false});}
+\DoxyCodeLine{616 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{617                                 \}}
+\DoxyCodeLine{618 }
+\DoxyCodeLine{620     \textcolor{keywordtype}{bool}                        \mbox{\hyperlink{class_a_u_base_ac5d7d6710ef57e857b969e42f31960a8}{HasInput}}(               AudioUnitElement                inElement) \{}
+\DoxyCodeLine{621                                     \mbox{\hyperlink{class_a_u_input_element}{AUInputElement}} *\mbox{\hyperlink{namespacegl_a72039bf7996167e32bca54980c5595e4}{in}} = \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{class_a_u_input_element}{AUInputElement}} *\textcolor{keyword}{>}(\mbox{\hyperlink{class_a_u_base_a4a0fd107abddd69a64f614e3cebfb000}{Inputs}}().\mbox{\hyperlink{class_a_u_scope_a1f5ae86025b0106b7e6e466a266e479a}{GetElement}}(inElement));}
+\DoxyCodeLine{622                                     \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a72039bf7996167e32bca54980c5595e4}{in}} != NULL \&\& \mbox{\hyperlink{namespacegl_a72039bf7996167e32bca54980c5595e4}{in}}-\/>IsActive();}
+\DoxyCodeLine{623                                 \}}
+\DoxyCodeLine{624                                     \textcolor{comment}{// says whether an input is connected or has a callback}}
+\DoxyCodeLine{625 }
+\DoxyCodeLine{627     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void}                \mbox{\hyperlink{class_a_u_base_abec585fd447943eb370bbd923c551bba}{PropertyChanged}}(     AudioUnitPropertyID             inID,}
+\DoxyCodeLine{628                                                         AudioUnitScope                  inScope,}
+\DoxyCodeLine{629                                                         AudioUnitElement                inElement);}
+\DoxyCodeLine{630 }
+\DoxyCodeLine{631 \textcolor{preprocessor}{\#if !CA\_NO\_AU\_UI\_FEATURES}}
+\DoxyCodeLine{632     \textcolor{comment}{// These calls can be used to call a Host's Callbacks. The method returns -\/1 if the host}}
+\DoxyCodeLine{633     \textcolor{comment}{// hasn't supplied the callback. Any other result is returned by the host.}}
+\DoxyCodeLine{634     \textcolor{comment}{// As in the API contract, for a parameter's value, you specify a pointer}}
+\DoxyCodeLine{635     \textcolor{comment}{// to that data type. Specify NULL for a parameter that you are not interested}}
+\DoxyCodeLine{636     \textcolor{comment}{// as this can save work in the host.}}
+\DoxyCodeLine{637 }
+\DoxyCodeLine{639     OSStatus    \mbox{\hyperlink{class_a_u_base_af3940bae8529ebf51cfe21c4749ff8f5}{CallHostBeatAndTempo}} (Float64               *outCurrentBeat,}
+\DoxyCodeLine{640                                         Float64             *outCurrentTempo)}
+\DoxyCodeLine{641     \{}
+\DoxyCodeLine{642         \textcolor{keywordflow}{return} (\mbox{\hyperlink{class_a_u_base_a383c47a2fdf7dd4d90ee3393da61959d}{mHostCallbackInfo}}.beatAndTempoProc}
+\DoxyCodeLine{643                         ? (*\mbox{\hyperlink{class_a_u_base_a383c47a2fdf7dd4d90ee3393da61959d}{mHostCallbackInfo}}.beatAndTempoProc) (\mbox{\hyperlink{class_a_u_base_a383c47a2fdf7dd4d90ee3393da61959d}{mHostCallbackInfo}}.hostUserData,}
+\DoxyCodeLine{644                                                                     outCurrentBeat,}
+\DoxyCodeLine{645                                                                     outCurrentTempo)}
+\DoxyCodeLine{646                         : -\/1);}
+\DoxyCodeLine{647     \}}
+\DoxyCodeLine{648 }
+\DoxyCodeLine{650     OSStatus    \mbox{\hyperlink{class_a_u_base_a4be00e535fb193413e93d097a7c9fdb5}{CallHostMusicalTimeLocation}} (UInt32          *outDeltaSampleOffsetToNextBeat,}
+\DoxyCodeLine{651                                         Float32             *outTimeSig\_Numerator,}
+\DoxyCodeLine{652                                         UInt32              *outTimeSig\_Denominator,}
+\DoxyCodeLine{653                                         Float64             *outCurrentMeasureDownBeat)}
+\DoxyCodeLine{654     \{}
+\DoxyCodeLine{655         \textcolor{keywordflow}{return} (\mbox{\hyperlink{class_a_u_base_a383c47a2fdf7dd4d90ee3393da61959d}{mHostCallbackInfo}}.musicalTimeLocationProc}
+\DoxyCodeLine{656                         ? (*\mbox{\hyperlink{class_a_u_base_a383c47a2fdf7dd4d90ee3393da61959d}{mHostCallbackInfo}}.musicalTimeLocationProc) (\mbox{\hyperlink{class_a_u_base_a383c47a2fdf7dd4d90ee3393da61959d}{mHostCallbackInfo}}.hostUserData,}
+\DoxyCodeLine{657                                                                             outDeltaSampleOffsetToNextBeat,}
+\DoxyCodeLine{658                                                                             outTimeSig\_Numerator,}
+\DoxyCodeLine{659                                                                             outTimeSig\_Denominator,}
+\DoxyCodeLine{660                                                                             outCurrentMeasureDownBeat)}
+\DoxyCodeLine{661                         : -\/1);}
+\DoxyCodeLine{662     \}}
+\DoxyCodeLine{663 }
+\DoxyCodeLine{665     OSStatus    \mbox{\hyperlink{class_a_u_base_aae815ed687f39c6197aaa8290d080829}{CallHostTransportState}} (Boolean           *outIsPlaying,}
+\DoxyCodeLine{666                                         Boolean             *outTransportStateChanged,}
+\DoxyCodeLine{667                                         Float64             *outCurrentSampleInTimeLine,}
+\DoxyCodeLine{668                                         Boolean             *outIsCycling,}
+\DoxyCodeLine{669                                         Float64             *outCycleStartBeat,}
+\DoxyCodeLine{670                                         Float64             *outCycleEndBeat)}
+\DoxyCodeLine{671     \{}
+\DoxyCodeLine{672         \textcolor{keywordflow}{return} (\mbox{\hyperlink{class_a_u_base_a383c47a2fdf7dd4d90ee3393da61959d}{mHostCallbackInfo}}.transportStateProc}
+\DoxyCodeLine{673                         ? (*\mbox{\hyperlink{class_a_u_base_a383c47a2fdf7dd4d90ee3393da61959d}{mHostCallbackInfo}}.transportStateProc) (\mbox{\hyperlink{class_a_u_base_a383c47a2fdf7dd4d90ee3393da61959d}{mHostCallbackInfo}}.hostUserData,}
+\DoxyCodeLine{674                                                                         outIsPlaying,}
+\DoxyCodeLine{675                                                                         outTransportStateChanged,}
+\DoxyCodeLine{676                                                                         outCurrentSampleInTimeLine,}
+\DoxyCodeLine{677                                                                         outIsCycling,}
+\DoxyCodeLine{678                                                                         outCycleStartBeat,}
+\DoxyCodeLine{679                                                                         outCycleEndBeat)}
+\DoxyCodeLine{680                         : -\/1);}
+\DoxyCodeLine{681     \}}
+\DoxyCodeLine{682 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{683 }
+\DoxyCodeLine{684     \textcolor{keywordtype}{char}*                       \mbox{\hyperlink{class_a_u_base_a2802332d65ac90ab3cc12bea55e00118}{GetLoggingString}} () \textcolor{keyword}{const};}
+\DoxyCodeLine{685 }
+\DoxyCodeLine{686     \mbox{\hyperlink{class_c_a_mutex}{CAMutex}}*                 \mbox{\hyperlink{class_a_u_base_a906a238632b5954ef422ec457c199010}{GetMutex}}() \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_a_u_base_af027df4df36b5a743c523d0754fe5fae}{mAUMutex}}; \}}
+\DoxyCodeLine{687 }
+\DoxyCodeLine{688     \textcolor{comment}{// \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}}
+\DoxyCodeLine{690 \textcolor{comment}{}    \textcolor{keyword}{virtual} \mbox{\hyperlink{class_a_u_element}{AUElement}} *            \mbox{\hyperlink{class_a_u_base_a0e91c297a99994297b335204c17ea57d}{CreateElement}}(         AudioUnitScope                  scope,}
+\DoxyCodeLine{691                                                         AudioUnitElement                element);}
+\DoxyCodeLine{692 }
+\DoxyCodeLine{693 \textcolor{preprocessor}{\#pragma mark -\/}}
+\DoxyCodeLine{694 \textcolor{preprocessor}{\#pragma mark AU Output Base Dispatch}}
+\DoxyCodeLine{695     \textcolor{comment}{// \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}}
+\DoxyCodeLine{696     \textcolor{comment}{// \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}}
+\DoxyCodeLine{697     \textcolor{comment}{// \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}}
+\DoxyCodeLine{698     \textcolor{comment}{// output unit methods}}
+\DoxyCodeLine{700 \textcolor{comment}{}    \textcolor{keyword}{virtual} OSStatus    \mbox{\hyperlink{class_a_u_base_afc1bd987e865bb991baa2f23e2ac22a7}{Start}}() \{ \textcolor{keywordflow}{return} kAudio\_UnimplementedError; \}}
+\DoxyCodeLine{702     \textcolor{keyword}{virtual} OSStatus    \mbox{\hyperlink{class_a_u_base_a0189b27899f028b1ed7e56d64dbc77c2}{Stop}}() \{ \textcolor{keywordflow}{return} kAudio\_UnimplementedError; \}}
+\DoxyCodeLine{703 }
+\DoxyCodeLine{704 \textcolor{preprocessor}{\#if !CA\_BASIC\_AU\_FEATURES}}
+\DoxyCodeLine{705 \textcolor{preprocessor}{\#pragma mark -\/}}
+\DoxyCodeLine{706 \textcolor{preprocessor}{\#pragma mark AU Music Base Dispatch}}
+\DoxyCodeLine{707 }
+\DoxyCodeLine{708 \textcolor{preprocessor}{\#if !TARGET\_OS\_IPHONE}}
+\DoxyCodeLine{709 \textcolor{comment}{// these methods are deprecated, so we don't include them except for compatability}}
+\DoxyCodeLine{711 \textcolor{comment}{}    \textcolor{keyword}{virtual} OSStatus            \mbox{\hyperlink{class_a_u_base_ada70709520cc8da4c61d2f740bc80567}{PrepareInstrument}}(MusicDeviceInstrumentID inInstrument) \{ \textcolor{keywordflow}{return} kAudio\_UnimplementedError; \}}
+\DoxyCodeLine{712 }
+\DoxyCodeLine{714     \textcolor{keyword}{virtual} OSStatus            \mbox{\hyperlink{class_a_u_base_abbe38178a9caaea9afd4e32379cb3a6f}{ReleaseInstrument}}(MusicDeviceInstrumentID inInstrument) \{ \textcolor{keywordflow}{return} kAudio\_UnimplementedError; \}}
+\DoxyCodeLine{715 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{716 }
+\DoxyCodeLine{717     \textcolor{comment}{// \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}}
+\DoxyCodeLine{718     \textcolor{comment}{// \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}}
+\DoxyCodeLine{719     \textcolor{comment}{// \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}}
+\DoxyCodeLine{720     \textcolor{comment}{// music device/music effect methods -\/-\/ incomplete}}
+\DoxyCodeLine{722 \textcolor{comment}{}    \textcolor{keyword}{virtual} OSStatus    \mbox{\hyperlink{class_a_u_base_a2f6e5197571fd5a6220280e18aa8010f}{MIDIEvent}}(     UInt32                      inStatus,}
+\DoxyCodeLine{723                                         UInt32                      inData1,}
+\DoxyCodeLine{724                                         UInt32                      inData2,}
+\DoxyCodeLine{725                                         UInt32                      inOffsetSampleFrame) \{ \textcolor{keywordflow}{return} kAudio\_UnimplementedError; \}}
+\DoxyCodeLine{726 }
+\DoxyCodeLine{728     \textcolor{keyword}{virtual} OSStatus    \mbox{\hyperlink{class_a_u_base_a3071956879fdcec7f01df9ada114a9ce}{SysEx}}(         \textcolor{keyword}{const} UInt8 *               inData,}
+\DoxyCodeLine{729                                         UInt32                      inLength) \{ \textcolor{keywordflow}{return} kAudio\_UnimplementedError;\}}
+\DoxyCodeLine{730 }
+\DoxyCodeLine{732     \textcolor{keyword}{virtual} OSStatus    \mbox{\hyperlink{class_a_u_base_a3fdfaab273b03ac42e1a82156b7c549e}{StartNote}}(     MusicDeviceInstrumentID     inInstrument,}
+\DoxyCodeLine{733                                         MusicDeviceGroupID          inGroupID,}
+\DoxyCodeLine{734                                         NoteInstanceID *            outNoteInstanceID,}
+\DoxyCodeLine{735                                         UInt32                      inOffsetSampleFrame,}
+\DoxyCodeLine{736                                         \textcolor{keyword}{const} MusicDeviceNoteParams \&inParams) \{ \textcolor{keywordflow}{return} kAudio\_UnimplementedError; \}}
+\DoxyCodeLine{737 }
+\DoxyCodeLine{739     \textcolor{keyword}{virtual} OSStatus    \mbox{\hyperlink{class_a_u_base_a1ba96a49915602447c3be5482a6347e7}{StopNote}}(       MusicDeviceGroupID          inGroupID,}
+\DoxyCodeLine{740                                         NoteInstanceID              inNoteInstanceID,}
+\DoxyCodeLine{741                                         UInt32                      inOffsetSampleFrame) \{ \textcolor{keywordflow}{return} kAudio\_UnimplementedError; \}}
+\DoxyCodeLine{742 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{743 }
+\DoxyCodeLine{744     \textcolor{comment}{// \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}}
+\DoxyCodeLine{745     \textcolor{comment}{// \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}}
+\DoxyCodeLine{746     \textcolor{comment}{// \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}}
+\DoxyCodeLine{747 }
+\DoxyCodeLine{748 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{749 \textcolor{preprocessor}{\#pragma mark -\/}}
+\DoxyCodeLine{750 \textcolor{preprocessor}{\#pragma mark Implementation methods}}
+\DoxyCodeLine{751 }
+\DoxyCodeLine{753     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void}                \mbox{\hyperlink{class_a_u_base_ae2aff9612d2f20a5928b4ba0b0cda728}{ReallocateBuffers}}();}
+\DoxyCodeLine{754                                     \textcolor{comment}{// needs to be called when mMaxFramesPerSlice changes}}
+\DoxyCodeLine{755     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void}                \mbox{\hyperlink{class_a_u_base_af6abf227eec2041f919a8283bb8c5bfe}{DeallocateIOBuffers}}();}
+\DoxyCodeLine{756 }
+\DoxyCodeLine{758     \textcolor{keyword}{static} \textcolor{keywordtype}{void}                 \mbox{\hyperlink{class_a_u_base_aaaa8a2c0ddb7f3a65660ec320b38a226}{FillInParameterName}} (AudioUnitParameterInfo\& ioInfo, CFStringRef inName, \textcolor{keywordtype}{bool} inShouldRelease)}
+\DoxyCodeLine{759     \{}
+\DoxyCodeLine{760         ioInfo.cfNameString = inName;}
+\DoxyCodeLine{761         ioInfo.flags |= kAudioUnitParameterFlag\_HasCFNameString;}
+\DoxyCodeLine{762         \textcolor{keywordflow}{if} (inShouldRelease)}
+\DoxyCodeLine{763             ioInfo.flags |= kAudioUnitParameterFlag\_CFNameRelease;}
+\DoxyCodeLine{764         CFStringGetCString (inName, ioInfo.name, offsetof (AudioUnitParameterInfo, clumpID), kCFStringEncodingUTF8);}
+\DoxyCodeLine{765     \}}
+\DoxyCodeLine{766 }
+\DoxyCodeLine{767     \textcolor{keyword}{static} \textcolor{keywordtype}{void}                 \mbox{\hyperlink{class_a_u_base_abf0ee2eadf3d9e3aab6edbca6de53aeb}{HasClump}} (AudioUnitParameterInfo\& ioInfo, UInt32 inClumpID)}
+\DoxyCodeLine{768     \{}
+\DoxyCodeLine{769         ioInfo.clumpID = inClumpID;}
+\DoxyCodeLine{770         ioInfo.flags |= kAudioUnitParameterFlag\_HasClump;}
+\DoxyCodeLine{771     \}}
+\DoxyCodeLine{772 }
+\DoxyCodeLine{774     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void}                \mbox{\hyperlink{class_a_u_base_a386a9f3d2996e01fc4cf2814411143d3}{SetMaxFramesPerSlice}}(UInt32 nFrames);}
+\DoxyCodeLine{775 }
+\DoxyCodeLine{777     \textcolor{keyword}{virtual} OSStatus            \mbox{\hyperlink{class_a_u_base_a72300df7850804aa228787d04fe66162}{CanSetMaxFrames}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{778 }
+\DoxyCodeLine{780     \textcolor{keywordtype}{bool}                        \mbox{\hyperlink{class_a_u_base_a42ad9edcf40dd23ca736b1fcb4aba0af}{WantsRenderThreadID}} ()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} mWantsRenderThreadID; \}}
+\DoxyCodeLine{781 }
+\DoxyCodeLine{783     \textcolor{keywordtype}{void}                        \mbox{\hyperlink{class_a_u_base_ad13a8f1f9c36e28a4cc9938af166bc9e}{SetWantsRenderThreadID}} (\textcolor{keywordtype}{bool} inFlag);}
+\DoxyCodeLine{784 }
+\DoxyCodeLine{786     OSStatus                    \mbox{\hyperlink{class_a_u_base_aef1242e69e98f4ff47fe966230d4a04f}{SetRenderError}} (OSStatus inErr)}
+\DoxyCodeLine{787     \{}
+\DoxyCodeLine{788         \textcolor{keywordflow}{if} (inErr \&\& mLastRenderError == 0) \{}
+\DoxyCodeLine{789             mLastRenderError = inErr;}
+\DoxyCodeLine{790             \mbox{\hyperlink{class_a_u_base_abec585fd447943eb370bbd923c551bba}{PropertyChanged}}(kAudioUnitProperty\_LastRenderError, kAudioUnitScope\_Global, 0);}
+\DoxyCodeLine{791         \}}
+\DoxyCodeLine{792         \textcolor{keywordflow}{return} inErr;}
+\DoxyCodeLine{793     \}}
+\DoxyCodeLine{794 }
+\DoxyCodeLine{795 \textcolor{keyword}{private}:}
+\DoxyCodeLine{797     \textcolor{comment}{// shared between Render and RenderSlice, inlined to minimize function call overhead}}
+\DoxyCodeLine{798     OSStatus                    DoRenderBus(            AudioUnitRenderActionFlags \&    ioActionFlags,}
+\DoxyCodeLine{799                                                         \textcolor{keyword}{const} AudioTimeStamp \&          inTimeStamp,}
+\DoxyCodeLine{800                                                         UInt32                          inBusNumber,}
+\DoxyCodeLine{801                                                         \mbox{\hyperlink{class_a_u_output_element}{AUOutputElement}} *                theOutput,}
+\DoxyCodeLine{802                                                         UInt32                          inNumberFrames,}
+\DoxyCodeLine{803                                                         AudioBufferList \&               ioData)}
+\DoxyCodeLine{804     \{}
+\DoxyCodeLine{805         \textcolor{keywordflow}{if} (theOutput != NULL)}
+\DoxyCodeLine{806         \{}
+\DoxyCodeLine{807             \textcolor{keywordflow}{if} (ioData.mBuffers[0].mData == NULL || (theOutput-\/>\mbox{\hyperlink{class_a_u_i_o_element_a45becb0b1d00ec008c9897b45d88c6d4}{WillAllocateBuffer}}() \&\& \mbox{\hyperlink{class_a_u_base_a661b04875dc24f6f6e7c058d47147678}{Outputs}}().GetNumberOfElements() > 1))}
+\DoxyCodeLine{808                 \textcolor{comment}{// will render into cache buffer}}
+\DoxyCodeLine{809                 theOutput-\/>\mbox{\hyperlink{class_a_u_i_o_element_a6f16a5ca7bbdc58fe8e18cce7a9df069}{PrepareBuffer}}(inNumberFrames);}
+\DoxyCodeLine{810             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{811                 \textcolor{comment}{// will render into caller's buffer}}
+\DoxyCodeLine{812                 theOutput-\/>\mbox{\hyperlink{class_a_u_i_o_element_adb1c892631d3804e0e1ec45ae66c338e}{SetBufferList}}(ioData);}
+\DoxyCodeLine{813         \}}
+\DoxyCodeLine{814 }
+\DoxyCodeLine{815         OSStatus \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = \mbox{\hyperlink{class_a_u_base_afcc2945deee312555200f1dd8aa09d65}{RenderBus}}(ioActionFlags, inTimeStamp, inBusNumber, inNumberFrames);}
+\DoxyCodeLine{816         \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} == \mbox{\hyperlink{class_component_base_a19f94469b599d3744f81fe3153a6a7feaf4e286767e1bd8839389a71e374716de}{noErr}} \&\& theOutput != NULL) \{}
+\DoxyCodeLine{817             \textcolor{keywordflow}{if} (ioData.mBuffers[0].mData == NULL) \{}
+\DoxyCodeLine{818                 theOutput-\/>\mbox{\hyperlink{class_a_u_i_o_element_aea87d7732c459e48f3f98473a0b84f33}{CopyBufferListTo}}(ioData);}
+\DoxyCodeLine{819                 \mbox{\hyperlink{_a_u_base_8h_ac623c65ebaef9c1f8ea7657bc88a0505}{AUTRACE}}(kCATrace\_AUBaseDoRenderBus, \mbox{\hyperlink{class_component_base_a9dcad534003a5bdc42b6f39054c19c3e}{mComponentInstance}}, inNumberFrames, (intptr\_t)theOutput-\/>\mbox{\hyperlink{class_a_u_i_o_element_af9bf5c0c1d55928e8d974ae4a380f3d4}{GetBufferList}}().mBuffers[0].mData, 0, *(UInt32 *)ioData.mBuffers[0].mData);}
+\DoxyCodeLine{820             \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{821                 theOutput-\/>\mbox{\hyperlink{class_a_u_i_o_element_a4ad81bc33124baf3149a004cc69449dd}{CopyBufferContentsTo}}(ioData);}
+\DoxyCodeLine{822                 \mbox{\hyperlink{_a_u_base_8h_ac623c65ebaef9c1f8ea7657bc88a0505}{AUTRACE}}(kCATrace\_AUBaseDoRenderBus, \mbox{\hyperlink{class_component_base_a9dcad534003a5bdc42b6f39054c19c3e}{mComponentInstance}}, inNumberFrames, (intptr\_t)theOutput-\/>\mbox{\hyperlink{class_a_u_i_o_element_af9bf5c0c1d55928e8d974ae4a380f3d4}{GetBufferList}}().mBuffers[0].mData, (intptr\_t)ioData.mBuffers[0].mData, *(UInt32 *)ioData.mBuffers[0].mData);}
+\DoxyCodeLine{823                 theOutput-\/>\mbox{\hyperlink{class_a_u_i_o_element_a2cedeae1073ce8af8ff7c8f9e0a7bffe}{InvalidateBufferList}}();}
+\DoxyCodeLine{824             \}}
+\DoxyCodeLine{825         \}}
+\DoxyCodeLine{826         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}};}
+\DoxyCodeLine{827     \}}
+\DoxyCodeLine{828 }
+\DoxyCodeLine{830     \textcolor{keywordtype}{bool}                        HasIcon ();}
+\DoxyCodeLine{831 }
+\DoxyCodeLine{833     \textcolor{keywordtype}{void}                        ResetRenderTime ()}
+\DoxyCodeLine{834                                 \{}
+\DoxyCodeLine{835                                     memset (\&mCurrentRenderTime, 0, \textcolor{keyword}{sizeof}(mCurrentRenderTime));}
+\DoxyCodeLine{836                                     mCurrentRenderTime.mSampleTime = \mbox{\hyperlink{class_a_u_base_a82a1d30ce7664957db06ccd34dc9a1f0}{kNoLastRenderedSampleTime}};}
+\DoxyCodeLine{837                                 \}}
+\DoxyCodeLine{838 }
+\DoxyCodeLine{839 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{841     \textcolor{keyword}{virtual} UInt32              \mbox{\hyperlink{class_a_u_base_aeffd4097edeedcf148fb0bf572d7903e}{GetChannelLayoutTags}}(   AudioUnitScope              scope,}
+\DoxyCodeLine{842                                                         AudioUnitElement            element,}
+\DoxyCodeLine{843                                                         AudioChannelLayoutTag *     outLayoutTags);}
+\DoxyCodeLine{844 }
+\DoxyCodeLine{846     \textcolor{keyword}{virtual} UInt32              \mbox{\hyperlink{class_a_u_base_aec5c09881c5c48819362fd001210469b}{GetAudioChannelLayout}}( AudioUnitScope              scope,}
+\DoxyCodeLine{847                                                         AudioUnitElement            element,}
+\DoxyCodeLine{848                                                         AudioChannelLayout *        outLayoutPtr,}
+\DoxyCodeLine{849                                                         Boolean \&                   outWritable);}
+\DoxyCodeLine{850 }
+\DoxyCodeLine{852     \textcolor{keyword}{virtual} OSStatus            \mbox{\hyperlink{class_a_u_base_adf74cbf92c1e9cca1f3e17346e58f399}{SetAudioChannelLayout}}( AudioUnitScope              scope,}
+\DoxyCodeLine{853                                                         AudioUnitElement            element,}
+\DoxyCodeLine{854                                                         \textcolor{keyword}{const} AudioChannelLayout *  inLayout);}
+\DoxyCodeLine{855 }
+\DoxyCodeLine{857     \textcolor{keyword}{virtual} OSStatus            \mbox{\hyperlink{class_a_u_base_a363e84b6a00f50870202f6a68a1585ee}{RemoveAudioChannelLayout}}(AudioUnitScope scope, AudioUnitElement element);}
+\DoxyCodeLine{858 }
+\DoxyCodeLine{860     \textcolor{keywordtype}{bool}                        \mbox{\hyperlink{class_a_u_base_ad18a9e46d9786d2ba6ef6bc919b61e8b}{NeedsToRender}}(         \textcolor{keyword}{const} AudioTimeStamp \&      inTimeStamp)}
+\DoxyCodeLine{861                                 \{}
+\DoxyCodeLine{862                                     \textcolor{keywordtype}{bool} needsToRender = \mbox{\hyperlink{_c_a_math_8h_ac960f355bfdf3aaba7a4bfe2d8d7b54b}{fnotequal}}(inTimeStamp.mSampleTime, mCurrentRenderTime.mSampleTime);}
+\DoxyCodeLine{863                                     \textcolor{keywordflow}{if} (needsToRender)  \textcolor{comment}{// only copy this if we need to render}}
+\DoxyCodeLine{864                                         mCurrentRenderTime = inTimeStamp;}
+\DoxyCodeLine{865                                     \textcolor{keywordflow}{return} needsToRender;}
+\DoxyCodeLine{866                                 \}}
+\DoxyCodeLine{867 }
+\DoxyCodeLine{868     \textcolor{comment}{// Scheduled parameter implementation:}}
+\DoxyCodeLine{869 }
+\DoxyCodeLine{870     \textcolor{keyword}{typedef} std::vector<AudioUnitParameterEvent> \mbox{\hyperlink{class_a_u_base_ad3fa1764c31d0b7e0f60523dbdc2e3ef}{ParameterEventList}};}
+\DoxyCodeLine{871 }
+\DoxyCodeLine{872     \textcolor{comment}{// Usually, you won't override this method.  You only need to call this if your DSP code}}
+\DoxyCodeLine{873     \textcolor{comment}{// is prepared to handle scheduled immediate and ramped parameter changes.}}
+\DoxyCodeLine{874     \textcolor{comment}{// Before calling this method, it is assumed you have already called PullInput() on the input busses}}
+\DoxyCodeLine{875     \textcolor{comment}{// for which the DSP code depends.  ProcessForScheduledParams() will call (potentially repeatedly)}}
+\DoxyCodeLine{876     \textcolor{comment}{// virtual method ProcessScheduledSlice() to perform the actual DSP for a given sub-\/division of}}
+\DoxyCodeLine{877     \textcolor{comment}{// the buffer.  The job of ProcessForScheduledParams() is to sub-\/divide the buffer into smaller}}
+\DoxyCodeLine{878     \textcolor{comment}{// pieces according to the scheduled times found in the ParameterEventList (usually coming}}
+\DoxyCodeLine{879     \textcolor{comment}{// directly from a previous call to ScheduleParameter() ), setting the appropriate immediate or}}
+\DoxyCodeLine{880     \textcolor{comment}{// ramped parameter values for the corresponding scopes and elements, then calling ProcessScheduledSlice()}}
+\DoxyCodeLine{881     \textcolor{comment}{// to do the actual DSP for each of these divisions.}}
+\DoxyCodeLine{882     \textcolor{keyword}{virtual} OSStatus    \mbox{\hyperlink{class_a_u_base_a26b62a5cba1c8d99bc062a92f7f61c93}{ProcessForScheduledParams}}( \mbox{\hyperlink{class_a_u_base_ad3fa1764c31d0b7e0f60523dbdc2e3ef}{ParameterEventList}}        \&inParamList,}
+\DoxyCodeLine{883                                                             UInt32                  inFramesToProcess,}
+\DoxyCodeLine{884                                                             \textcolor{keywordtype}{void}                    *inUserData );}
+\DoxyCodeLine{885 }
+\DoxyCodeLine{886     \textcolor{comment}{//  This method is called (potentially repeatedly) by ProcessForScheduledParams()}}
+\DoxyCodeLine{887     \textcolor{comment}{//  in order to perform the actual DSP required for this portion of the entire buffer}}
+\DoxyCodeLine{888     \textcolor{comment}{//  being processed.  The entire buffer can be divided up into smaller "{}slices"{}}}
+\DoxyCodeLine{889     \textcolor{comment}{//  according to the timestamps on the scheduled parameters...}}
+\DoxyCodeLine{890     \textcolor{comment}{//}}
+\DoxyCodeLine{891     \textcolor{comment}{//  sub-\/classes wishing to handle scheduled parameter changes should override this method}}
+\DoxyCodeLine{892     \textcolor{comment}{//  in order to do the appropriate DSP.  AUEffectBase already overrides this for standard}}
+\DoxyCodeLine{893     \textcolor{comment}{//  effect AudioUnits.}}
+\DoxyCodeLine{894     \textcolor{keyword}{virtual} OSStatus            \mbox{\hyperlink{class_a_u_base_aa252e079d4a791fab0676d47a026c0b7}{ProcessScheduledSlice}}( \textcolor{keywordtype}{void}                *inUserData,}
+\DoxyCodeLine{895                                                         UInt32              inStartFrameInBuffer,}
+\DoxyCodeLine{896                                                         UInt32              inSliceFramesToProcess,}
+\DoxyCodeLine{897                                                         UInt32              inTotalBufferFrames ) \{\textcolor{keywordflow}{return} \mbox{\hyperlink{class_component_base_a19f94469b599d3744f81fe3153a6a7feaf4e286767e1bd8839389a71e374716de}{noErr}};\}; \textcolor{comment}{// default impl does nothing...}}
+\DoxyCodeLine{898 }
+\DoxyCodeLine{899 }
+\DoxyCodeLine{901     \textcolor{keyword}{const} AudioTimeStamp \&      \mbox{\hyperlink{class_a_u_base_aea3e6cfa74146dc9347b29c206f12a3e}{CurrentRenderTime}} ()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} mCurrentRenderTime; \}}
+\DoxyCodeLine{902 }
+\DoxyCodeLine{903     \textcolor{comment}{// \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}}
+\DoxyCodeLine{904     \textcolor{comment}{//  Private data members to discourage hacking in subclasses}}
+\DoxyCodeLine{905 \textcolor{keyword}{private}:}
+\DoxyCodeLine{906     \textcolor{keyword}{struct }RenderCallback \{}
+\DoxyCodeLine{907         RenderCallback(AURenderCallback proc, \textcolor{keywordtype}{void} *\mbox{\hyperlink{namespacegl_a237a6f23fb34c46ca9b58edb5b1d6013}{ref}}) :}
+\DoxyCodeLine{908             mRenderNotify(proc),}
+\DoxyCodeLine{909             mRenderNotifyRefCon(\mbox{\hyperlink{namespacegl_a237a6f23fb34c46ca9b58edb5b1d6013}{ref}})}
+\DoxyCodeLine{910         \{ \}}
+\DoxyCodeLine{911 }
+\DoxyCodeLine{912         AURenderCallback            mRenderNotify;}
+\DoxyCodeLine{913         \textcolor{keywordtype}{void} *                      mRenderNotifyRefCon;}
+\DoxyCodeLine{914 }
+\DoxyCodeLine{915         \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_audio_channel_layout_8cpp_ad569fbf0e2ce80e9b92caaf1cbb3c257}{operator == }}(\textcolor{keyword}{const} RenderCallback \&other) \{}
+\DoxyCodeLine{916             \textcolor{keywordflow}{return} this-\/>mRenderNotify == other.mRenderNotify \&\&}
+\DoxyCodeLine{917                     this-\/>mRenderNotifyRefCon == other.mRenderNotifyRefCon;}
+\DoxyCodeLine{918         \}}
+\DoxyCodeLine{919     \};}
+\DoxyCodeLine{920     \textcolor{keyword}{typedef} \mbox{\hyperlink{class_t_thread_safe_list}{TThreadSafeList<RenderCallback>}}  RenderCallbackList;}
+\DoxyCodeLine{921 }
+\DoxyCodeLine{922 \textcolor{preprocessor}{\#if !CA\_BASIC\_AU\_FEATURES}}
+\DoxyCodeLine{923     \textcolor{keyword}{enum} \{ kNumScopes = 4 \};}
+\DoxyCodeLine{924 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{925     \textcolor{keyword}{enum} \{ kNumScopes = 3 \};}
+\DoxyCodeLine{926 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{927 }
+\DoxyCodeLine{929     \textcolor{keywordtype}{bool}                        mElementsCreated;}
+\DoxyCodeLine{930 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{932     \textcolor{keywordtype}{bool}                        \mbox{\hyperlink{class_a_u_base_a0d7ffc76d99e580819e5f6cc4c4ad0fd}{mInitialized}};}
+\DoxyCodeLine{934     \textcolor{keywordtype}{bool}                        \mbox{\hyperlink{class_a_u_base_a2172d8d88cd33eab070b2a954d60d8f1}{mHasBegunInitializing}};}
+\DoxyCodeLine{935 \textcolor{keyword}{private}:}
+\DoxyCodeLine{937     UInt8                       mAudioUnitAPIVersion;}
+\DoxyCodeLine{938 }
+\DoxyCodeLine{940     \textcolor{keyword}{const} UInt32                mInitNumInputEls;}
+\DoxyCodeLine{942     \textcolor{keyword}{const} UInt32                mInitNumOutputEls;}
+\DoxyCodeLine{943 \textcolor{preprocessor}{\#if !CA\_BASIC\_AU\_FEATURES}}
+\DoxyCodeLine{945     \textcolor{keyword}{const} UInt32                mInitNumGroupEls;}
+\DoxyCodeLine{946 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{948     \mbox{\hyperlink{class_a_u_scope}{AUScope}}                      mScopes[kNumScopes];}
+\DoxyCodeLine{949 }
+\DoxyCodeLine{951     \mbox{\hyperlink{class_t_thread_safe_list}{RenderCallbackList}}            mRenderCallbacks;}
+\DoxyCodeLine{952     \textcolor{keywordtype}{bool}                        mRenderCallbacksTouched;}
+\DoxyCodeLine{953 }
+\DoxyCodeLine{955 \textcolor{preprocessor}{\#if TARGET\_OS\_MAC}}
+\DoxyCodeLine{956     pthread\_t                   mRenderThreadID;}
+\DoxyCodeLine{957 \textcolor{preprocessor}{\#elif TARGET\_OS\_WIN32}}
+\DoxyCodeLine{958     UInt32                      mRenderThreadID;}
+\DoxyCodeLine{959 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{960 }
+\DoxyCodeLine{962     \textcolor{keywordtype}{bool}                        mWantsRenderThreadID;}
+\DoxyCodeLine{963 }
+\DoxyCodeLine{965     AudioTimeStamp              mCurrentRenderTime;}
+\DoxyCodeLine{966 }
+\DoxyCodeLine{968     UInt32                      mMaxFramesPerSlice;}
+\DoxyCodeLine{969 }
+\DoxyCodeLine{971     OSStatus                    mLastRenderError;}
+\DoxyCodeLine{973     AUPreset                    mCurrentPreset;}
+\DoxyCodeLine{974 }
+\DoxyCodeLine{975 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{977     \textcolor{keywordtype}{bool}                        \mbox{\hyperlink{class_a_u_base_a1f24436ff97eef714e393ad3de445d14}{mUsesFixedBlockSize}};}
+\DoxyCodeLine{978 }
+\DoxyCodeLine{979     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_a_u_base_1_1_property_listener}{PropertyListener}} \{}
+\DoxyCodeLine{980         AudioUnitPropertyID             \mbox{\hyperlink{struct_a_u_base_1_1_property_listener_aa40ee4488bd838a80324976b26211e6e}{propertyID}};}
+\DoxyCodeLine{981         AudioUnitPropertyListenerProc   \mbox{\hyperlink{struct_a_u_base_1_1_property_listener_a30bf881b8d61e24c607a480a7b031fe9}{listenerProc}};}
+\DoxyCodeLine{982         \textcolor{keywordtype}{void} *                          \mbox{\hyperlink{struct_a_u_base_1_1_property_listener_a1b0b34e3db2739f612f9f6ad0b10a866}{listenerRefCon}};}
+\DoxyCodeLine{983     \};}
+\DoxyCodeLine{984     \textcolor{keyword}{typedef} std::vector<PropertyListener>   \mbox{\hyperlink{class_a_u_base_aa03573ae2a5d83ec73bb349e128b7305}{PropertyListeners}};}
+\DoxyCodeLine{985 }
+\DoxyCodeLine{987     \mbox{\hyperlink{class_a_u_base_ad3fa1764c31d0b7e0f60523dbdc2e3ef}{ParameterEventList}}            \mbox{\hyperlink{class_a_u_base_aa5a2843d3932e928e4781c22d6b1e331}{mParamList}};}
+\DoxyCodeLine{989     \mbox{\hyperlink{class_a_u_base_aa03573ae2a5d83ec73bb349e128b7305}{PropertyListeners}}          \mbox{\hyperlink{class_a_u_base_a4f37e2d10c40b372adf3bdd85c5fdf65}{mPropertyListeners}};}
+\DoxyCodeLine{990 }
+\DoxyCodeLine{992     \textcolor{keywordtype}{bool}                        \mbox{\hyperlink{class_a_u_base_a7cf15a6bf2b5e95800d586090116f8f7}{mBuffersAllocated}};}
+\DoxyCodeLine{993 }
+\DoxyCodeLine{995     \textcolor{comment}{// if this is NOT null, it will contain identifying info about this AU.}}
+\DoxyCodeLine{996     \textcolor{keywordtype}{char}*                       \mbox{\hyperlink{class_a_u_base_a5744e015884a647ef97072e8621b19bf}{mLogString}};}
+\DoxyCodeLine{997 }
+\DoxyCodeLine{999     CFStringRef                 \mbox{\hyperlink{class_a_u_base_acb42c60fd6be6173ac944fc2f8835226}{mNickName}};}
+\DoxyCodeLine{1000 }
+\DoxyCodeLine{1002     \mbox{\hyperlink{class_c_a_mutex}{CAMutex}} *                    \mbox{\hyperlink{class_a_u_base_af027df4df36b5a743c523d0754fe5fae}{mAUMutex}};}
+\DoxyCodeLine{1003 }
+\DoxyCodeLine{1004 \textcolor{keyword}{private}:}
+\DoxyCodeLine{1006     \textcolor{keyword}{static} SInt32   sVectorUnitType;}
+\DoxyCodeLine{1007 }
+\DoxyCodeLine{1008 \textcolor{preprocessor}{\#if !CA\_NO\_AU\_HOST\_CALLBACKS}}
+\DoxyCodeLine{1009 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{1011     HostCallbackInfo            \mbox{\hyperlink{class_a_u_base_a383c47a2fdf7dd4d90ee3393da61959d}{mHostCallbackInfo}};}
+\DoxyCodeLine{1012 }
+\DoxyCodeLine{1013 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{1014 \textcolor{preprocessor}{\#if !CA\_NO\_AU\_UI\_FEATURES}}
+\DoxyCodeLine{1015 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{1017     CFStringRef                 \mbox{\hyperlink{class_a_u_base_a11385fbf16ff47ea363cefe307056d86}{mContextName}};}
+\DoxyCodeLine{1018 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{1019 \};}
+\DoxyCodeLine{1020 }
+\DoxyCodeLine{1021 \textcolor{keyword}{inline}  OSStatus    \mbox{\hyperlink{class_a_u_input_element_ad913fb078656bf6f0b10cf93ea1b2e1d}{AUInputElement::PullInputWithBufferList}}(}
+\DoxyCodeLine{1022                                                 AudioUnitRenderActionFlags \&    ioActionFlags,}
+\DoxyCodeLine{1023                                                 \textcolor{keyword}{const} AudioTimeStamp \&          inTimeStamp,}
+\DoxyCodeLine{1024                                                 AudioUnitElement                inElement,}
+\DoxyCodeLine{1025                                                 UInt32                          nFrames,}
+\DoxyCodeLine{1026                                                 AudioBufferList *               inBufferList)}
+\DoxyCodeLine{1027 \{}
+\DoxyCodeLine{1028     OSStatus theResult;}
+\DoxyCodeLine{1029 }
+\DoxyCodeLine{1030     \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_a_u_input_element_a96c775111e5e007e8119aeefced2bc62}{HasConnection}}()) \{}
+\DoxyCodeLine{1031             \textcolor{comment}{// only support connections for V2 audio units}}
+\DoxyCodeLine{1032 \textcolor{preprocessor}{\#if !CA\_USE\_AUDIO\_PLUGIN\_ONLY}}
+\DoxyCodeLine{1033         \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_a_u_input_element_a2b52b826dfa7e69c76b7b388325d10ef}{mConnRenderProc}} != NULL)}
+\DoxyCodeLine{1034             theResult = \textcolor{keyword}{reinterpret\_cast<}AudioUnitRenderProc\textcolor{keyword}{>}(\mbox{\hyperlink{class_a_u_input_element_a2b52b826dfa7e69c76b7b388325d10ef}{mConnRenderProc}})(}
+\DoxyCodeLine{1035                             \mbox{\hyperlink{class_a_u_input_element_a11a4a8721c58a6fb9c417b36e9cceb84}{mConnInstanceStorage}}, \&ioActionFlags, \&inTimeStamp, \mbox{\hyperlink{class_a_u_input_element_ac5fda14965683eaa0e59c8de74549f0a}{mConnection}}.sourceOutputNumber, nFrames, inBufferList);}
+\DoxyCodeLine{1036         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{1037 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{1038             theResult = AudioUnitRender(}
+\DoxyCodeLine{1039                             \mbox{\hyperlink{class_a_u_input_element_ac5fda14965683eaa0e59c8de74549f0a}{mConnection}}.sourceAudioUnit, \&ioActionFlags, \&inTimeStamp, \mbox{\hyperlink{class_a_u_input_element_ac5fda14965683eaa0e59c8de74549f0a}{mConnection}}.sourceOutputNumber, nFrames, inBufferList);}
+\DoxyCodeLine{1040     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{1041         \textcolor{comment}{// kFromCallback:}}
+\DoxyCodeLine{1042             theResult = (\mbox{\hyperlink{class_a_u_input_element_a91ad29ca76f14112563415fed1a46994}{mInputProc}})(}
+\DoxyCodeLine{1043                             \mbox{\hyperlink{class_a_u_input_element_aa0ecb9939e04288336f640c9fe7b983a}{mInputProcRefCon}}, \&ioActionFlags, \&inTimeStamp, inElement, nFrames, inBufferList);}
+\DoxyCodeLine{1044     \}}
+\DoxyCodeLine{1045 }
+\DoxyCodeLine{1046     \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_a_u_input_element_aeb37af628e7ceae8e9e3fb43eabffb4f}{mInputType}} == \mbox{\hyperlink{class_a_u_input_element_a82ed11598ebfd720a27dd695c9f19d78a56df62edc5d9c75a234720a0fd06604c}{kNoInput}})   \textcolor{comment}{// defense: the guy upstream could have disconnected}}
+\DoxyCodeLine{1047                                 \textcolor{comment}{// it's a horrible thing to do, but may happen!}}
+\DoxyCodeLine{1048         \textcolor{keywordflow}{return} kAudioUnitErr\_NoConnection;}
+\DoxyCodeLine{1049 }
+\DoxyCodeLine{1050 }
+\DoxyCodeLine{1051     \textcolor{keywordflow}{return} theResult;}
+\DoxyCodeLine{1052 \}}
+\DoxyCodeLine{1053 }
+\DoxyCodeLine{1054 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// \_\_AUBase\_h\_\_}}
+
+\end{DoxyCode}

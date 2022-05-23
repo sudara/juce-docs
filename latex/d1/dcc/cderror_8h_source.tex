@@ -1,0 +1,138 @@
+\hypertarget{cderror_8h_source}{}\doxysection{cderror.\+h}
+\label{cderror_8h_source}\index{build/juce\_graphics/image\_formats/jpglib/cderror.h@{build/juce\_graphics/image\_formats/jpglib/cderror.h}}
+\mbox{\hyperlink{cderror_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{ * cderror.h}}
+\DoxyCodeLine{3 \textcolor{comment}{ *}}
+\DoxyCodeLine{4 \textcolor{comment}{ * Copyright (C) 1994-\/1997, Thomas G. Lane.}}
+\DoxyCodeLine{5 \textcolor{comment}{ * This file is part of the Independent JPEG Group's software.}}
+\DoxyCodeLine{6 \textcolor{comment}{ * For conditions of distribution and use, see the accompanying README file.}}
+\DoxyCodeLine{7 \textcolor{comment}{ *}}
+\DoxyCodeLine{8 \textcolor{comment}{ * This file defines the error and message codes for the cjpeg/djpeg}}
+\DoxyCodeLine{9 \textcolor{comment}{ * applications.  These strings are not needed as part of the JPEG library}}
+\DoxyCodeLine{10 \textcolor{comment}{ * proper.}}
+\DoxyCodeLine{11 \textcolor{comment}{ * Edit this file to add new codes, or to translate the message strings to}}
+\DoxyCodeLine{12 \textcolor{comment}{ * some other language.}}
+\DoxyCodeLine{13 \textcolor{comment}{ */}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{comment}{/*}}
+\DoxyCodeLine{16 \textcolor{comment}{ * To define the enum list of message codes, include this file without}}
+\DoxyCodeLine{17 \textcolor{comment}{ * defining macro JMESSAGE.  To create a message string table, include it}}
+\DoxyCodeLine{18 \textcolor{comment}{ * again with a suitable JMESSAGE definition (see jerror.c for an example).}}
+\DoxyCodeLine{19 \textcolor{comment}{ */}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#ifndef JMESSAGE}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#ifndef CDERROR\_H}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#define CDERROR\_H}}
+\DoxyCodeLine{23 \textcolor{comment}{/* First time through, define the enum list */}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#define JMAKE\_ENUM\_LIST}}
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{26 \textcolor{comment}{/* Repeated inclusions of this file are no-\/ops unless JMESSAGE is defined */}}
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#define JMESSAGE(code,string)}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* CDERROR\_H */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* JMESSAGE */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#ifdef JMAKE\_ENUM\_LIST}}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} \{}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#define JMESSAGE(code,string)   code ,}}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* JMAKE\_ENUM\_LIST */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JMSG\_FIRSTADDONCODE=1000, NULL) \textcolor{comment}{/* Must be first entry! */}}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#ifdef BMP\_SUPPORTED}}
+\DoxyCodeLine{42 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JERR\_BMP\_BADCMAP, \textcolor{stringliteral}{"{}Unsupported BMP colormap format"{}})}
+\DoxyCodeLine{43 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JERR\_BMP\_BADDEPTH, "{}Only 8-\/ and 24-\/bit BMP files are supported"{})}
+\DoxyCodeLine{44 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JERR\_BMP\_BADHEADER, "{}Invalid BMP file: bad header \mbox{\hyperlink{png_8c_a209c8e470817686b5ca6730db67f8d67}{length}}"{})}
+\DoxyCodeLine{45 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JERR\_BMP\_BADPLANES, "{}Invalid BMP file: biPlanes not equal to 1"{})}
+\DoxyCodeLine{46 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JERR\_BMP\_COLORSPACE, "{}BMP \mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}} must be grayscale or RGB"{})}
+\DoxyCodeLine{47 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JERR\_BMP\_COMPRESSED, "{}Sorry, compressed BMPs not yet supported"{})}
+\DoxyCodeLine{48 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JERR\_BMP\_NOT, "{}Not \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} BMP file -\/ does not \mbox{\hyperlink{namespacegl_adad3a3824fbe72fb0b01074bb01ebe75}{start}} with BM"{})}
+\DoxyCodeLine{49 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JTRC\_BMP, "{}\%ux\%u 24-\/bit BMP image"{})}
+\DoxyCodeLine{50 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JTRC\_BMP\_MAPPED, "{}\%ux\%u 8-\/bit colormapped BMP image"{})}
+\DoxyCodeLine{51 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JTRC\_BMP\_OS2, "{}\%ux\%u 24-\/bit OS2 BMP image"{})}
+\DoxyCodeLine{52 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JTRC\_BMP\_OS2\_MAPPED, "{}\%ux\%u 8-\/bit colormapped OS2 BMP image"{})}
+\DoxyCodeLine{53 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* BMP\_SUPPORTED */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55 \textcolor{preprocessor}{\#ifdef GIF\_SUPPORTED}}
+\DoxyCodeLine{56 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JERR\_GIF\_BUG, \textcolor{stringliteral}{"{}GIF output got confused"{}})}
+\DoxyCodeLine{57 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JERR\_GIF\_CODESIZE, "{}Bogus GIF codesize \%d"{})}
+\DoxyCodeLine{58 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JERR\_GIF\_COLORSPACE, "{}GIF \mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}} must be grayscale or RGB"{})}
+\DoxyCodeLine{59 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JERR\_GIF\_IMAGENOTFOUND, "{}Too few images \mbox{\hyperlink{namespacegl_a72039bf7996167e32bca54980c5595e4}{in}} GIF file"{})}
+\DoxyCodeLine{60 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JERR\_GIF\_NOT, "{}Not \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} GIF file"{})}
+\DoxyCodeLine{61 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JTRC\_GIF, "{}\%ux\%ux\%d GIF image"{})}
+\DoxyCodeLine{62 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JTRC\_GIF\_BADVERSION,}
+\DoxyCodeLine{63      "{}Warning: unexpected GIF \mbox{\hyperlink{jpeglib_8h_aad880fc4455c253781e8968f2239d56f}{version}} number '\%\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}\%\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}\%\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}'"{})}
+\DoxyCodeLine{64 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JTRC\_GIF\_EXTENSION, "{}Ignoring GIF extension block of \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}} 0\mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}\%02\mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}"{})}
+\DoxyCodeLine{65 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JTRC\_GIF\_NONSQUARE, "{}Caution: nonsquare \mbox{\hyperlink{namespacegl_a10ae038bf21558cd0a21dd19607e04b8}{pixels}} \mbox{\hyperlink{namespacegl_a72039bf7996167e32bca54980c5595e4}{in}} \mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}}"{})}
+\DoxyCodeLine{66 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JWRN\_GIF\_BADDATA, "{}Corrupt \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}} \mbox{\hyperlink{namespacegl_a72039bf7996167e32bca54980c5595e4}{in}} GIF file"{})}
+\DoxyCodeLine{67 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JWRN\_GIF\_CHAR, "{}Bogus \textcolor{keywordtype}{char} 0\mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}\%02\mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}} \mbox{\hyperlink{namespacegl_a72039bf7996167e32bca54980c5595e4}{in}} GIF file, ignoring"{})}
+\DoxyCodeLine{68 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JWRN\_GIF\_ENDCODE, "{}Premature \mbox{\hyperlink{group__juce__core-files_ga4a3194f4f741f9bd653f28733358f62c}{end}} of GIF image"{})}
+\DoxyCodeLine{69 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JWRN\_GIF\_NOMOREDATA, "{}Ran out of GIF \mbox{\hyperlink{namespacegl_a2d763e4e2dee4f85a5f19f853667d728}{bits}}"{})}
+\DoxyCodeLine{70 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* GIF\_SUPPORTED */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72 \textcolor{preprocessor}{\#ifdef PPM\_SUPPORTED}}
+\DoxyCodeLine{73 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JERR\_PPM\_COLORSPACE, \textcolor{stringliteral}{"{}PPM output must be grayscale or RGB"{}})}
+\DoxyCodeLine{74 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JERR\_PPM\_NONNUMERIC, "{}Nonnumeric \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}} \mbox{\hyperlink{namespacegl_a72039bf7996167e32bca54980c5595e4}{in}} PPM file"{})}
+\DoxyCodeLine{75 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JERR\_PPM\_NOT, "{}Not \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} PPM/PGM file"{})}
+\DoxyCodeLine{76 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JTRC\_PGM, "{}\%ux\%u PGM image"{})}
+\DoxyCodeLine{77 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JTRC\_PGM\_TEXT, "{}\%ux\%u text PGM image"{})}
+\DoxyCodeLine{78 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JTRC\_PPM, "{}\%ux\%u PPM image"{})}
+\DoxyCodeLine{79 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JTRC\_PPM\_TEXT, "{}\%ux\%u text PPM image"{})}
+\DoxyCodeLine{80 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* PPM\_SUPPORTED */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82 \textcolor{preprocessor}{\#ifdef RLE\_SUPPORTED}}
+\DoxyCodeLine{83 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JERR\_RLE\_BADERROR, \textcolor{stringliteral}{"{}Bogus error code from RLE library"{}})}
+\DoxyCodeLine{84 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JERR\_RLE\_COLORSPACE, "{}RLE \mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}} must be grayscale or RGB"{})}
+\DoxyCodeLine{85 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JERR\_RLE\_DIMENSIONS, "{}\mbox{\hyperlink{class_image}{Image}} dimensions (\%ux\%u) too large for RLE"{})}
+\DoxyCodeLine{86 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JERR\_RLE\_EMPTY, "{}Empty RLE file"{})}
+\DoxyCodeLine{87 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JERR\_RLE\_EOF, "{}Premature EOF \mbox{\hyperlink{namespacegl_a72039bf7996167e32bca54980c5595e4}{in}} RLE header"{})}
+\DoxyCodeLine{88 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JERR\_RLE\_MEM, "{}Insufficient \mbox{\hyperlink{namespacegl_a3a5cfcada98dcfb74023a94251b8345b}{memory}} for RLE header"{})}
+\DoxyCodeLine{89 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JERR\_RLE\_NOT, "{}Not an RLE file"{})}
+\DoxyCodeLine{90 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JERR\_RLE\_TOOMANYCHANNELS, "{}Cannot \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8530736c0c7f7f4dc724c8246e301f83}{handle}} \%d \mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}} channels for RLE"{})}
+\DoxyCodeLine{91 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JERR\_RLE\_UNSUPPORTED, "{}Cannot \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8530736c0c7f7f4dc724c8246e301f83}{handle}} this RLE setup"{})}
+\DoxyCodeLine{92 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JTRC\_RLE, "{}\%ux\%u full-\/\mbox{\hyperlink{namespacegl_a1829ef8ae63cbaa28872bb25f474f1b5}{color}} RLE file"{})}
+\DoxyCodeLine{93 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JTRC\_RLE\_FULLMAP, "{}\%ux\%u full-\/\mbox{\hyperlink{namespacegl_a1829ef8ae63cbaa28872bb25f474f1b5}{color}} RLE file with map of \mbox{\hyperlink{png_8c_a209c8e470817686b5ca6730db67f8d67}{length}} \%d"{})}
+\DoxyCodeLine{94 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JTRC\_RLE\_GRAY, "{}\%ux\%u grayscale RLE file"{})}
+\DoxyCodeLine{95 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JTRC\_RLE\_MAPGRAY, "{}\%ux\%u grayscale RLE file with map of \mbox{\hyperlink{png_8c_a209c8e470817686b5ca6730db67f8d67}{length}} \%d"{})}
+\DoxyCodeLine{96 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JTRC\_RLE\_MAPPED, "{}\%ux\%u colormapped RLE file with map of \mbox{\hyperlink{png_8c_a209c8e470817686b5ca6730db67f8d67}{length}} \%d"{})}
+\DoxyCodeLine{97 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* RLE\_SUPPORTED */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99 \textcolor{preprocessor}{\#ifdef TARGA\_SUPPORTED}}
+\DoxyCodeLine{100 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JERR\_TGA\_BADCMAP, \textcolor{stringliteral}{"{}Unsupported Targa colormap format"{}})}
+\DoxyCodeLine{101 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JERR\_TGA\_BADPARMS, "{}Invalid or unsupported Targa file"{})}
+\DoxyCodeLine{102 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JERR\_TGA\_COLORSPACE, "{}Targa \mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}} must be grayscale or RGB"{})}
+\DoxyCodeLine{103 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JTRC\_TGA, "{}\%ux\%u RGB Targa image"{})}
+\DoxyCodeLine{104 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JTRC\_TGA\_GRAY, "{}\%ux\%u grayscale Targa image"{})}
+\DoxyCodeLine{105 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JTRC\_TGA\_MAPPED, "{}\%ux\%u colormapped Targa image"{})}
+\DoxyCodeLine{106 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{107 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JERR\_TGA\_NOTCOMP, \textcolor{stringliteral}{"{}Targa support was not compiled"{}})}
+\DoxyCodeLine{108 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* TARGA\_SUPPORTED */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JERR\_BAD\_CMAP\_FILE,}
+\DoxyCodeLine{111      \textcolor{stringliteral}{"{}Color map file is invalid or of unsupported format"{}})}
+\DoxyCodeLine{112 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JERR\_TOO\_MANY\_COLORS,}
+\DoxyCodeLine{113      "{}Output file \mbox{\hyperlink{namespacegl_a597b77c61fc6d444d2bfc6bf69dee277}{format}} cannot \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8530736c0c7f7f4dc724c8246e301f83}{handle}} \%d colormap entries"{})}
+\DoxyCodeLine{114 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JERR\_UNGETC\_FAILED, "{}ungetc failed"{})}
+\DoxyCodeLine{115 \textcolor{preprocessor}{\#ifdef TARGA\_SUPPORTED}}
+\DoxyCodeLine{116 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JERR\_UNKNOWN\_FORMAT,}
+\DoxyCodeLine{117      \textcolor{stringliteral}{"{}Unrecognized input file format -\/-\/-\/ perhaps you need -\/targa"{}})}
+\DoxyCodeLine{118 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{119 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JERR\_UNKNOWN\_FORMAT, \textcolor{stringliteral}{"{}Unrecognized input file format"{}})}
+\DoxyCodeLine{120 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{121 \mbox{\hyperlink{cderror_8h_a2cf1ff20bd8937b11087da4ae16fb2a4}{JMESSAGE}}(JERR\_UNSUPPORTED\_FORMAT, \textcolor{stringliteral}{"{}Unsupported output file format"{}})}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{123 \textcolor{preprocessor}{\#ifdef JMAKE\_ENUM\_LIST}}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{125   JMSG\_LASTADDONCODE}
+\DoxyCodeLine{126 \} \mbox{\hyperlink{cderror_8h_a0a4ecb07eb88e2b694f3520a81f3d783}{ADDON\_MESSAGE\_CODE}};}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{128 \textcolor{preprocessor}{\#undef JMAKE\_ENUM\_LIST}}
+\DoxyCodeLine{129 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* JMAKE\_ENUM\_LIST */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{131 \textcolor{comment}{/* Zap JMESSAGE macro so that future re-\/inclusions do nothing by default */}}
+\DoxyCodeLine{132 \textcolor{preprocessor}{\#undef JMESSAGE}}
+
+\end{DoxyCode}

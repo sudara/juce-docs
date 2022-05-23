@@ -1,0 +1,60 @@
+\hypertarget{_output_mixer_open_s_l_e_s_8h_source}{}\doxysection{Output\+Mixer\+Open\+SLES.\+h}
+\label{_output_mixer_open_s_l_e_s_8h_source}\index{build/juce\_audio\_devices/native/oboe/src/opensles/OutputMixerOpenSLES.h@{build/juce\_audio\_devices/native/oboe/src/opensles/OutputMixerOpenSLES.h}}
+\mbox{\hyperlink{_output_mixer_open_s_l_e_s_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{ * Copyright 2017 The Android Open Source Project}}
+\DoxyCodeLine{3 \textcolor{comment}{ *}}
+\DoxyCodeLine{4 \textcolor{comment}{ * Licensed under the Apache License, Version 2.0 (the "{}License"{});}}
+\DoxyCodeLine{5 \textcolor{comment}{ * you may not use this file except in compliance with the License.}}
+\DoxyCodeLine{6 \textcolor{comment}{ * You may obtain a copy of the License at}}
+\DoxyCodeLine{7 \textcolor{comment}{ *}}
+\DoxyCodeLine{8 \textcolor{comment}{ *      http://www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{9 \textcolor{comment}{ *}}
+\DoxyCodeLine{10 \textcolor{comment}{ * Unless required by applicable law or agreed to in writing, software}}
+\DoxyCodeLine{11 \textcolor{comment}{ * distributed under the License is distributed on an "{}AS IS"{} BASIS,}}
+\DoxyCodeLine{12 \textcolor{comment}{ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.}}
+\DoxyCodeLine{13 \textcolor{comment}{ * See the License for the specific language governing permissions and}}
+\DoxyCodeLine{14 \textcolor{comment}{ * limitations under the License.}}
+\DoxyCodeLine{15 \textcolor{comment}{ */}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#ifndef OBOE\_OUTPUT\_MIXER\_OPENSLES\_H}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#define OBOE\_OUTPUT\_MIXER\_OPENSLES\_H}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#include <atomic>}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#include <mutex>}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#include <SLES/OpenSLES.h>}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#include <SLES/OpenSLES\_Android.h>}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceoboe}{oboe}} \{}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{32 \textcolor{keyword}{class }\mbox{\hyperlink{classoboe_1_1_output_mixer_open_s_l}{OutputMixerOpenSL}} \{}
+\DoxyCodeLine{33 \textcolor{keyword}{public}:}
+\DoxyCodeLine{34     \textcolor{keyword}{static} \mbox{\hyperlink{classoboe_1_1_output_mixer_open_s_l}{OutputMixerOpenSL}} \&\mbox{\hyperlink{classoboe_1_1_output_mixer_open_s_l_a9c423c261e8ea9bfe7ec0e3e42e15070}{getInstance}}();}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36     SLresult \mbox{\hyperlink{classoboe_1_1_output_mixer_open_s_l_ad20fd3d01daa2f718bf19da55d13c04f}{open}}();}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38     \textcolor{keywordtype}{void} \mbox{\hyperlink{classoboe_1_1_output_mixer_open_s_l_a29d653ae4dbc1adc453beff62b486555}{close}}();}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40     SLresult \mbox{\hyperlink{classoboe_1_1_output_mixer_open_s_l_abe23de62927a63a203eab833983b0b18}{createAudioPlayer}}(SLObjectItf *objectItf,}
+\DoxyCodeLine{41                                SLDataSource *audioSource);}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43 \textcolor{keyword}{private}:}
+\DoxyCodeLine{44     \textcolor{comment}{// Make this a safe Singleton}}
+\DoxyCodeLine{45     \mbox{\hyperlink{classoboe_1_1_output_mixer_open_s_l}{OutputMixerOpenSL}}()= \textcolor{keywordflow}{default};}
+\DoxyCodeLine{46     \mbox{\hyperlink{classoboe_1_1_output_mixer_open_s_l}{\string~OutputMixerOpenSL}}()= \textcolor{keywordflow}{default};}
+\DoxyCodeLine{47     \mbox{\hyperlink{classoboe_1_1_output_mixer_open_s_l}{OutputMixerOpenSL}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoboe_1_1_output_mixer_open_s_l}{OutputMixerOpenSL}}\&)= \textcolor{keyword}{delete};}
+\DoxyCodeLine{48     \mbox{\hyperlink{classoboe_1_1_output_mixer_open_s_l}{OutputMixerOpenSL}}\& operator=(\textcolor{keyword}{const} \mbox{\hyperlink{classoboe_1_1_output_mixer_open_s_l}{OutputMixerOpenSL}}\&)= \textcolor{keyword}{delete};}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50     std::mutex            mLock;}
+\DoxyCodeLine{51     int32\_t               mOpenCount = 0;}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53     SLObjectItf           mOutputMixObject = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{54 \};}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56 \} \textcolor{comment}{// namespace oboe}}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//OBOE\_OUTPUT\_MIXER\_OPENSLES\_H}}
+
+\end{DoxyCode}

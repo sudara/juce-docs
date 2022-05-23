@@ -1,0 +1,325 @@
+\hypertarget{juce___audio_processor_graph_8h_source}{}\doxysection{juce\+\_\+\+Audio\+Processor\+Graph.\+h}
+\label{juce___audio_processor_graph_8h_source}\index{build/juce\_audio\_processors/processors/juce\_AudioProcessorGraph.h@{build/juce\_audio\_processors/processors/juce\_AudioProcessorGraph.h}}
+\mbox{\hyperlink{juce___audio_processor_graph_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{46 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_audio_processor_graph}{AudioProcessorGraph}}   : \textcolor{keyword}{public} \mbox{\hyperlink{class_audio_processor}{AudioProcessor}},}
+\DoxyCodeLine{47                                         \textcolor{keyword}{public} \mbox{\hyperlink{class_change_broadcaster}{ChangeBroadcaster}},}
+\DoxyCodeLine{48                                         \textcolor{keyword}{private} \mbox{\hyperlink{class_async_updater}{AsyncUpdater}}}
+\DoxyCodeLine{49 \{}
+\DoxyCodeLine{50 \textcolor{keyword}{public}:}
+\DoxyCodeLine{51     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{53 \textcolor{comment}{}    \mbox{\hyperlink{class_audio_processor_graph_a8d33e2e949c97a1a37b47e39bbe43f7a}{AudioProcessorGraph}}();}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{58     \mbox{\hyperlink{class_audio_processor_graph_af8c41bcad94a0a88476e94d34015b72f}{\string~AudioProcessorGraph}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{61     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_audio_processor_graph_1_1_node_i_d}{NodeID}}}
+\DoxyCodeLine{62     \{}
+\DoxyCodeLine{63         \mbox{\hyperlink{struct_audio_processor_graph_1_1_node_i_d_a932035ad8762fb055af4d6f5bd8f49fa}{NodeID}}() \{\}}
+\DoxyCodeLine{64         \textcolor{keyword}{explicit} \mbox{\hyperlink{struct_audio_processor_graph_1_1_node_i_d_a54d3ad55f51b0d2a2ce716d76b50c138}{NodeID}} (\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} i) : uid (i) \{\}}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66         \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} uid = 0;}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68         \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_audio_channel_layout_8cpp_ad569fbf0e2ce80e9b92caaf1cbb3c257}{operator== }}(\textcolor{keyword}{const} \mbox{\hyperlink{struct_audio_processor_graph_1_1_node_i_d}{NodeID}}\& other) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}    \{ \textcolor{keywordflow}{return} uid == other.uid; \}}
+\DoxyCodeLine{69         \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_audio_channel_layout_8cpp_aa4ad43821a0285a3d7a5c840173f03ac}{operator!= }}(\textcolor{keyword}{const} \mbox{\hyperlink{struct_audio_processor_graph_1_1_node_i_d}{NodeID}}\& other) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}    \{ \textcolor{keywordflow}{return} uid != other.uid; \}}
+\DoxyCodeLine{70         \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_stream_basic_description_8cpp_a878a42c3e8d99e69b741cd76d9a0f8db}{operator<  }}(\textcolor{keyword}{const} \mbox{\hyperlink{struct_audio_processor_graph_1_1_node_i_d}{NodeID}}\& other) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}    \{ \textcolor{keywordflow}{return} uid <  other.uid; \}}
+\DoxyCodeLine{71     \};}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{79 \textcolor{comment}{}    \textcolor{keyword}{enum} \{ midiChannelIndex = 0x1000 \};}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{85 \textcolor{comment}{}    \textcolor{keyword}{struct }\mbox{\hyperlink{struct_audio_processor_graph_1_1_node_and_channel}{NodeAndChannel}}}
+\DoxyCodeLine{86     \{}
+\DoxyCodeLine{87         \mbox{\hyperlink{struct_audio_processor_graph_1_1_node_i_d}{NodeID}} \mbox{\hyperlink{struct_audio_processor_graph_1_1_node_and_channel_a8bdf77b5a1f56eb515931cd8bdc1117f}{nodeID}};}
+\DoxyCodeLine{88         \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_audio_processor_graph_1_1_node_and_channel_ab0ad32f6d0aa7608798726fc42eaa11f}{channelIndex}};}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90         \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_audio_processor_graph_1_1_node_and_channel_a48e1d9746424b12e58c9d1b0f1e0decb}{isMIDI}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                                    \{ \textcolor{keywordflow}{return} channelIndex == midiChannelIndex; \}}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92         \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_audio_channel_layout_8cpp_ad569fbf0e2ce80e9b92caaf1cbb3c257}{operator== }}(\textcolor{keyword}{const} \mbox{\hyperlink{struct_audio_processor_graph_1_1_node_and_channel}{NodeAndChannel}}\& other) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}    \{ \textcolor{keywordflow}{return} nodeID == other.nodeID \&\& channelIndex == other.channelIndex; \}}
+\DoxyCodeLine{93         \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_audio_channel_layout_8cpp_aa4ad43821a0285a3d7a5c840173f03ac}{operator!= }}(\textcolor{keyword}{const} \mbox{\hyperlink{struct_audio_processor_graph_1_1_node_and_channel}{NodeAndChannel}}\& other) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}    \{ \textcolor{keywordflow}{return} ! \mbox{\hyperlink{_c_a_audio_channel_layout_8cpp_ad569fbf0e2ce80e9b92caaf1cbb3c257}{operator== }}(other); \}}
+\DoxyCodeLine{94     \};}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{96     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{101 \textcolor{comment}{}    \textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_audio_processor_graph_1_1_node}{Node}}   : \textcolor{keyword}{public} \mbox{\hyperlink{class_reference_counted_object}{ReferenceCountedObject}}}
+\DoxyCodeLine{102     \{}
+\DoxyCodeLine{103     \textcolor{keyword}{public}:}
+\DoxyCodeLine{104         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{108 \textcolor{comment}{}        \textcolor{keyword}{const} \mbox{\hyperlink{struct_audio_processor_graph_1_1_node_i_d}{NodeID}} \mbox{\hyperlink{class_audio_processor_graph_1_1_node_aef3c930c29a9df8a92db6604f61db885}{nodeID}};}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{111         \mbox{\hyperlink{class_audio_processor}{AudioProcessor}}* \mbox{\hyperlink{class_audio_processor_graph_1_1_node_a05c3690d4e1e289cc8f265225bc8b914}{getProcessor}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept           \{ \textcolor{keywordflow}{return} processor.get(); \}}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{119         \mbox{\hyperlink{class_named_value_set}{NamedValueSet}} \mbox{\hyperlink{class_audio_processor_graph_1_1_node_afc706ebfb3beddad1c5bc16bc7fa2a2e}{properties}};}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{121         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{123 \textcolor{comment}{}        \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespacedsp_a18bbc5840c500566f2cb30129497beda}{isBypassed}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{126         \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacedsp_ac33601e867d61deb64412e30e035c6ee}{setBypassed}} (\textcolor{keywordtype}{bool} shouldBeBypassed) noexcept;}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{128         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{130 \textcolor{comment}{}        using \mbox{\hyperlink{class_reference_counted_object_ptr}{Ptr}} = \mbox{\hyperlink{class_reference_counted_object_ptr}{ReferenceCountedObjectPtr}}<\mbox{\hyperlink{class_audio_processor_graph_1_1_node}{Node}}>;}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{132     private:}
+\DoxyCodeLine{133         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{134         friend class \mbox{\hyperlink{class_audio_processor_graph}{AudioProcessorGraph}};}
+\DoxyCodeLine{135         template <typename Float>}
+\DoxyCodeLine{136         friend struct GraphRenderSequence;}
+\DoxyCodeLine{137         template <typename Float>}
+\DoxyCodeLine{138         friend struct RenderSequenceBuilder;}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140         struct Connection}
+\DoxyCodeLine{141         \{}
+\DoxyCodeLine{142             \mbox{\hyperlink{class_audio_processor_graph_1_1_node}{Node}}* otherNode;}
+\DoxyCodeLine{143             \textcolor{keywordtype}{int} otherChannel, thisChannel;}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145             \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_audio_channel_layout_8cpp_ad569fbf0e2ce80e9b92caaf1cbb3c257}{operator== }}(\textcolor{keyword}{const} Connection\&) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{146         \};}
+\DoxyCodeLine{147 }
+\DoxyCodeLine{148         std::unique\_ptr<AudioProcessor> processor;}
+\DoxyCodeLine{149         \mbox{\hyperlink{class_array}{Array<Connection>}} inputs, outputs;}
+\DoxyCodeLine{150         \textcolor{keywordtype}{bool} isPrepared = \textcolor{keyword}{false};}
+\DoxyCodeLine{151         std::atomic<bool> bypassed \{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{152 }
+\DoxyCodeLine{153         Node (NodeID, std::unique\_ptr<AudioProcessor>) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{155         \textcolor{keywordtype}{void} setParentGraph (\mbox{\hyperlink{class_audio_processor_graph}{AudioProcessorGraph}}*) \textcolor{keyword}{const};}
+\DoxyCodeLine{156         \textcolor{keywordtype}{void} prepare (\textcolor{keywordtype}{double} newSampleRate, \textcolor{keywordtype}{int} newBlockSize, \mbox{\hyperlink{class_audio_processor_graph}{AudioProcessorGraph}}*, ProcessingPrecision);}
+\DoxyCodeLine{157         \textcolor{keywordtype}{void} unprepare();}
+\DoxyCodeLine{158 }
+\DoxyCodeLine{159         \textcolor{keyword}{template} <\textcolor{keyword}{typename} Sample>}
+\DoxyCodeLine{160         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_processor_abbac77f68ba047cf60c4bc97326dcb58}{processBlock}} (\mbox{\hyperlink{class_audio_buffer}{AudioBuffer<Sample>}}\& audio, \mbox{\hyperlink{class_midi_buffer}{MidiBuffer}}\& midi)}
+\DoxyCodeLine{161         \{}
+\DoxyCodeLine{162             \textcolor{keyword}{const} \mbox{\hyperlink{class_generic_scoped_lock}{ScopedLock}} lock (processorLock);}
+\DoxyCodeLine{163             processor-\/>processBlock (audio, midi);}
+\DoxyCodeLine{164         \}}
+\DoxyCodeLine{165 }
+\DoxyCodeLine{166         \textcolor{keyword}{template} <\textcolor{keyword}{typename} Sample>}
+\DoxyCodeLine{167         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_processor_a6d57f55c15eca5eec063a5efedaeb8cc}{processBlockBypassed}} (\mbox{\hyperlink{class_audio_buffer}{AudioBuffer<Sample>}}\& audio, \mbox{\hyperlink{class_midi_buffer}{MidiBuffer}}\& midi)}
+\DoxyCodeLine{168         \{}
+\DoxyCodeLine{169             \textcolor{keyword}{const} \mbox{\hyperlink{class_generic_scoped_lock}{ScopedLock}} lock (processorLock);}
+\DoxyCodeLine{170             processor-\/>processBlockBypassed (audio, midi);}
+\DoxyCodeLine{171         \}}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{173         \mbox{\hyperlink{class_critical_section}{CriticalSection}} processorLock;}
+\DoxyCodeLine{174 }
+\DoxyCodeLine{175         \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (Node)}
+\DoxyCodeLine{176     \};}
+\DoxyCodeLine{177 }
+\DoxyCodeLine{178     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{183 \textcolor{comment}{}    \textcolor{keyword}{struct }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{struct_audio_processor_graph_1_1_connection}{Connection}}}
+\DoxyCodeLine{184     \{}
+\DoxyCodeLine{185         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{186         \mbox{\hyperlink{struct_audio_processor_graph_1_1_connection_a6b6679c2d62d353ee019eb1edf56dbc6}{Connection}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{187         \mbox{\hyperlink{struct_audio_processor_graph_1_1_connection_ae7cb72fbe82c57889449c8032782de22}{Connection}} (\mbox{\hyperlink{struct_audio_processor_graph_1_1_node_and_channel}{NodeAndChannel}} \mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}}, \mbox{\hyperlink{struct_audio_processor_graph_1_1_node_and_channel}{NodeAndChannel}} destination) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{188 }
+\DoxyCodeLine{189         \mbox{\hyperlink{struct_audio_processor_graph_1_1_connection_a21211d400613553336aac212f0338418}{Connection}} (\textcolor{keyword}{const} \mbox{\hyperlink{struct_audio_processor_graph_1_1_connection}{Connection}}\&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{190         \mbox{\hyperlink{struct_audio_processor_graph_1_1_connection}{Connection}}\& operator= (\textcolor{keyword}{const} \mbox{\hyperlink{struct_audio_processor_graph_1_1_connection}{Connection}}\&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{191 }
+\DoxyCodeLine{192         \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_audio_channel_layout_8cpp_ad569fbf0e2ce80e9b92caaf1cbb3c257}{operator== }}(\textcolor{keyword}{const} \mbox{\hyperlink{struct_audio_processor_graph_1_1_connection}{Connection}}\&) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{193         \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_audio_channel_layout_8cpp_aa4ad43821a0285a3d7a5c840173f03ac}{operator!= }}(\textcolor{keyword}{const} \mbox{\hyperlink{struct_audio_processor_graph_1_1_connection}{Connection}}\&) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{194         \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_stream_basic_description_8cpp_a878a42c3e8d99e69b741cd76d9a0f8db}{operator<  }}(\textcolor{keyword}{const} \mbox{\hyperlink{struct_audio_processor_graph_1_1_connection}{Connection}}\&) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{195 }
+\DoxyCodeLine{196         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{198 \textcolor{comment}{}        \mbox{\hyperlink{struct_audio_processor_graph_1_1_node_and_channel}{NodeAndChannel}} \mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}} \{ \{\}, 0 \};}
+\DoxyCodeLine{199 }
+\DoxyCodeLine{201         \mbox{\hyperlink{struct_audio_processor_graph_1_1_node_and_channel}{NodeAndChannel}} destination \{ \{\}, 0 \};}
+\DoxyCodeLine{202     \};}
+\DoxyCodeLine{203 }
+\DoxyCodeLine{204     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{208 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_processor_graph_a13486fcb6b0a740331b0cecb3d22109f}{clear}}();}
+\DoxyCodeLine{209 }
+\DoxyCodeLine{211     \textcolor{keyword}{const} \mbox{\hyperlink{class_reference_counted_array}{ReferenceCountedArray<Node>}}\& \mbox{\hyperlink{class_audio_processor_graph_a59309e557bfd820e66d93fd792049683}{getNodes}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept    \{ \textcolor{keywordflow}{return} nodes; \}}
+\DoxyCodeLine{212 }
+\DoxyCodeLine{214     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_audio_processor_graph_ac54590c31a8423051aef75cc3f1edc6f}{getNumNodes}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                                \{ \textcolor{keywordflow}{return} nodes.size(); \}}
+\DoxyCodeLine{215 }
+\DoxyCodeLine{220     \mbox{\hyperlink{class_reference_counted_object_ptr}{Node::Ptr}} \mbox{\hyperlink{class_audio_processor_graph_a0ce30fc71494c7d6e2ad3bcc3a33b0ae}{getNode}} (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}                    \{ \textcolor{keywordflow}{return} nodes[\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}]; \}}
+\DoxyCodeLine{221 }
+\DoxyCodeLine{226     \mbox{\hyperlink{class_audio_processor_graph_1_1_node}{Node}}* \mbox{\hyperlink{class_audio_processor_graph_a00f2d6197bf26f803becbc1540dfc094}{getNodeForId}} (\mbox{\hyperlink{struct_audio_processor_graph_1_1_node_i_d}{NodeID}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{227 }
+\DoxyCodeLine{239     \mbox{\hyperlink{class_reference_counted_object_ptr}{Node::Ptr}} \mbox{\hyperlink{class_audio_processor_graph_a4e0ec59179dcc641da9351eb8ae1aa49}{addNode}} (std::unique\_ptr<AudioProcessor> newProcessor, \mbox{\hyperlink{struct_audio_processor_graph_1_1_node_i_d}{NodeID}} nodeId = \{\});}
+\DoxyCodeLine{240 }
+\DoxyCodeLine{244     \mbox{\hyperlink{class_reference_counted_object_ptr}{Node::Ptr}} \mbox{\hyperlink{class_audio_processor_graph_a78d16c6d13277bdb1db7e5b64b6fa7d9}{removeNode}} (\mbox{\hyperlink{struct_audio_processor_graph_1_1_node_i_d}{NodeID}});}
+\DoxyCodeLine{245 }
+\DoxyCodeLine{249     \mbox{\hyperlink{class_reference_counted_object_ptr}{Node::Ptr}} \mbox{\hyperlink{class_audio_processor_graph_a8daa989572a7bc2fc57dcef70406897a}{removeNode}} (\mbox{\hyperlink{class_audio_processor_graph_1_1_node}{Node}}*);}
+\DoxyCodeLine{250 }
+\DoxyCodeLine{252     std::vector<Connection> \mbox{\hyperlink{class_audio_processor_graph_a2e958bdc28fae7604f3914029fcaf7ca}{getConnections}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{253 }
+\DoxyCodeLine{255     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_processor_graph_ac7b2a4286b4f6c2f9f7d234b3002fd07}{isConnected}} (\textcolor{keyword}{const} \mbox{\hyperlink{struct_audio_processor_graph_1_1_connection}{Connection}}\&) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{256 }
+\DoxyCodeLine{260     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_processor_graph_a41a3b4dcb0d82754de4f3619d59565a9}{isConnected}} (\mbox{\hyperlink{struct_audio_processor_graph_1_1_node_i_d}{NodeID}} possibleSourceNodeID, \mbox{\hyperlink{struct_audio_processor_graph_1_1_node_i_d}{NodeID}} possibleDestNodeID) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{261 }
+\DoxyCodeLine{265     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_processor_graph_a9ba2001987674dbc8842568f79d2540a}{isAnInputTo}} (\mbox{\hyperlink{class_audio_processor_graph_1_1_node}{Node}}\& \mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}}, \mbox{\hyperlink{class_audio_processor_graph_1_1_node}{Node}}\& destination) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{266 }
+\DoxyCodeLine{268     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_processor_graph_a8c7e78a84e5a3e88f7ae2a475a753bfa}{canConnect}} (\textcolor{keyword}{const} \mbox{\hyperlink{struct_audio_processor_graph_1_1_connection}{Connection}}\&) \textcolor{keyword}{const};}
+\DoxyCodeLine{269 }
+\DoxyCodeLine{275     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_processor_graph_a2ae8de1a066fcf1850bd026763e978d1}{addConnection}} (\textcolor{keyword}{const} \mbox{\hyperlink{struct_audio_processor_graph_1_1_connection}{Connection}}\&);}
+\DoxyCodeLine{276 }
+\DoxyCodeLine{278     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_processor_graph_ab246dfc1b52eb0a7b58f7ded39288e8b}{removeConnection}} (\textcolor{keyword}{const} \mbox{\hyperlink{struct_audio_processor_graph_1_1_connection}{Connection}}\&);}
+\DoxyCodeLine{279 }
+\DoxyCodeLine{281     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_processor_graph_a60812fead28a3bb348f0022d5d2bbaa8}{disconnectNode}} (\mbox{\hyperlink{struct_audio_processor_graph_1_1_node_i_d}{NodeID}});}
+\DoxyCodeLine{282 }
+\DoxyCodeLine{288     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_processor_graph_ad42d629e0c5c208ea7124bcb507d2cf6}{isConnectionLegal}} (\textcolor{keyword}{const} \mbox{\hyperlink{struct_audio_processor_graph_1_1_connection}{Connection}}\&) \textcolor{keyword}{const};}
+\DoxyCodeLine{289 }
+\DoxyCodeLine{295     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_processor_graph_a3d025471473ded56797653edd4669220}{removeIllegalConnections}}();}
+\DoxyCodeLine{296 }
+\DoxyCodeLine{297     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{311 \textcolor{comment}{}    \textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_audio_processor_graph_1_1_audio_graph_i_o_processor}{AudioGraphIOProcessor}}     : \textcolor{keyword}{public} \mbox{\hyperlink{class_audio_plugin_instance}{AudioPluginInstance}}}
+\DoxyCodeLine{312     \{}
+\DoxyCodeLine{313     \textcolor{keyword}{public}:}
+\DoxyCodeLine{316         \textcolor{keyword}{enum} \mbox{\hyperlink{class_audio_processor_graph_1_1_audio_graph_i_o_processor_a612fff538a6a57529626b4121934761a}{IODeviceType}}}
+\DoxyCodeLine{317         \{}
+\DoxyCodeLine{318             audioInputNode,     }
+\DoxyCodeLine{321             audioOutputNode,    }
+\DoxyCodeLine{324             midiInputNode,      }
+\DoxyCodeLine{327             midiOutputNode      }
+\DoxyCodeLine{330         \};}
+\DoxyCodeLine{331 }
+\DoxyCodeLine{332         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{334 \textcolor{comment}{}        \mbox{\hyperlink{class_audio_processor_graph_1_1_audio_graph_i_o_processor_a612fff538a6a57529626b4121934761a}{IODeviceType}} \mbox{\hyperlink{class_audio_processor_graph_1_1_audio_graph_i_o_processor_a39e96209b6b596ae5d6ee9b05d1c5760}{getType}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                       \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}}; \}}
+\DoxyCodeLine{335 }
+\DoxyCodeLine{338         \mbox{\hyperlink{class_audio_processor_graph}{AudioProcessorGraph}}* \mbox{\hyperlink{class_audio_processor_graph_1_1_audio_graph_i_o_processor_aa63ae51dc7bdb29f63e6d8e02f93772d}{getParentGraph}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept        \{ \textcolor{keywordflow}{return} graph; \}}
+\DoxyCodeLine{339 }
+\DoxyCodeLine{341         \textcolor{keywordtype}{bool} isInput() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{343         \textcolor{keywordtype}{bool} isOutput() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{344 }
+\DoxyCodeLine{345         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{346         \mbox{\hyperlink{class_audio_processor_graph_1_1_audio_graph_i_o_processor}{AudioGraphIOProcessor}} (IODeviceType);}
+\DoxyCodeLine{347         \string~\mbox{\hyperlink{class_audio_processor_graph_1_1_audio_graph_i_o_processor}{AudioGraphIOProcessor}}() override;}
+\DoxyCodeLine{348 }
+\DoxyCodeLine{349         \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} getName() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} override;}
+\DoxyCodeLine{350         \textcolor{keywordtype}{void} fillInPluginDescription (\mbox{\hyperlink{class_plugin_description}{PluginDescription}}\&) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} override;}
+\DoxyCodeLine{351         \textcolor{keywordtype}{void} prepareToPlay (\textcolor{keywordtype}{double} newSampleRate, \textcolor{keywordtype}{int} estimatedSamplesPerBlock) override;}
+\DoxyCodeLine{352         \textcolor{keywordtype}{void} releaseResources() override;}
+\DoxyCodeLine{353         \textcolor{keywordtype}{void} processBlock (\mbox{\hyperlink{class_audio_buffer}{AudioBuffer}}<\textcolor{keywordtype}{float}>\& , \mbox{\hyperlink{class_midi_buffer}{MidiBuffer}}\&) override;}
+\DoxyCodeLine{354         \textcolor{keywordtype}{void} processBlock (\mbox{\hyperlink{class_audio_buffer}{AudioBuffer}}<\textcolor{keywordtype}{double}>\&, \mbox{\hyperlink{class_midi_buffer}{MidiBuffer}}\&) override;}
+\DoxyCodeLine{355         \textcolor{keywordtype}{bool} supportsDoublePrecisionProcessing() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} override;}
+\DoxyCodeLine{356 }
+\DoxyCodeLine{357         \textcolor{keywordtype}{double} getTailLengthSeconds() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} override;}
+\DoxyCodeLine{358         \textcolor{keywordtype}{bool} acceptsMidi() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} override;}
+\DoxyCodeLine{359         \textcolor{keywordtype}{bool} producesMidi() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} override;}
+\DoxyCodeLine{360 }
+\DoxyCodeLine{361         \textcolor{keywordtype}{bool} hasEditor() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} override;}
+\DoxyCodeLine{362         \mbox{\hyperlink{class_audio_processor_editor}{AudioProcessorEditor}}* createEditor() override;}
+\DoxyCodeLine{363 }
+\DoxyCodeLine{364         \textcolor{keywordtype}{int} getNumPrograms() override;}
+\DoxyCodeLine{365         \textcolor{keywordtype}{int} getCurrentProgram() override;}
+\DoxyCodeLine{366         \textcolor{keywordtype}{void} setCurrentProgram (\textcolor{keywordtype}{int}) override;}
+\DoxyCodeLine{367         \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} getProgramName (\textcolor{keywordtype}{int}) override;}
+\DoxyCodeLine{368         \textcolor{keywordtype}{void} changeProgramName (\textcolor{keywordtype}{int}, \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}}\&) override;}
+\DoxyCodeLine{369 }
+\DoxyCodeLine{370         \textcolor{keywordtype}{void} getStateInformation (\mbox{\hyperlink{namespacejuce}{juce}}::\mbox{\hyperlink{class_memory_block}{MemoryBlock}}\& destData) override;}
+\DoxyCodeLine{371         \textcolor{keywordtype}{void} setStateInformation (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \textcolor{keywordtype}{void}* \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, \textcolor{keywordtype}{int} sizeInBytes) override;}
+\DoxyCodeLine{372 }
+\DoxyCodeLine{374         \textcolor{keywordtype}{void} setParentGraph (\mbox{\hyperlink{class_audio_processor_graph}{AudioProcessorGraph}}*);}
+\DoxyCodeLine{375 }
+\DoxyCodeLine{376     private:}
+\DoxyCodeLine{377         \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_audio_processor_graph_1_1_audio_graph_i_o_processor_a612fff538a6a57529626b4121934761a}{IODeviceType}} \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}};}
+\DoxyCodeLine{378         \mbox{\hyperlink{class_audio_processor_graph}{AudioProcessorGraph}}* graph = \textcolor{keywordtype}{nullptr};}
+\DoxyCodeLine{379 }
+\DoxyCodeLine{380         \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_audio_processor_graph_1_1_audio_graph_i_o_processor}{AudioGraphIOProcessor}})}
+\DoxyCodeLine{381     \};}
+\DoxyCodeLine{382 }
+\DoxyCodeLine{383     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{384     \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} getName() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} override;}
+\DoxyCodeLine{385     \textcolor{keywordtype}{void} prepareToPlay (\textcolor{keywordtype}{double}, \textcolor{keywordtype}{int}) override;}
+\DoxyCodeLine{386     \textcolor{keywordtype}{void} releaseResources() override;}
+\DoxyCodeLine{387     \textcolor{keywordtype}{void} processBlock (\mbox{\hyperlink{class_audio_buffer}{AudioBuffer}}<\textcolor{keywordtype}{float}>\&,  \mbox{\hyperlink{class_midi_buffer}{MidiBuffer}}\&) override;}
+\DoxyCodeLine{388     \textcolor{keywordtype}{void} processBlock (\mbox{\hyperlink{class_audio_buffer}{AudioBuffer}}<\textcolor{keywordtype}{double}>\&, \mbox{\hyperlink{class_midi_buffer}{MidiBuffer}}\&) override;}
+\DoxyCodeLine{389     \textcolor{keywordtype}{bool} supportsDoublePrecisionProcessing() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} override;}
+\DoxyCodeLine{390 }
+\DoxyCodeLine{391     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacegl_a3b437ea454d772211296e220c025bdd2}{reset}}() override;}
+\DoxyCodeLine{392     \textcolor{keywordtype}{void} setNonRealtime (\textcolor{keywordtype}{bool}) noexcept override;}
+\DoxyCodeLine{393 }
+\DoxyCodeLine{394     \textcolor{keywordtype}{double} getTailLengthSeconds() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} override;}
+\DoxyCodeLine{395     \textcolor{keywordtype}{bool} acceptsMidi() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} override;}
+\DoxyCodeLine{396     \textcolor{keywordtype}{bool} producesMidi() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} override;}
+\DoxyCodeLine{397 }
+\DoxyCodeLine{398     \textcolor{keywordtype}{bool} hasEditor()\textcolor{keyword}{ const override                         }\{ \textcolor{keywordflow}{return} \textcolor{keyword}{false}; \}}
+\DoxyCodeLine{399     \mbox{\hyperlink{class_audio_processor_editor}{AudioProcessorEditor}}* \mbox{\hyperlink{class_audio_processor_graph_af4ad4a5ef727db012f1045e0f8fde0c8}{createEditor}}()\textcolor{keyword}{ override           }\{ \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr}; \}}
+\DoxyCodeLine{400     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_audio_processor_graph_a242bb9d08d43f9933fa7438f8233fb14}{getNumPrograms}}()\textcolor{keyword}{ override                           }\{ \textcolor{keywordflow}{return} 0; \}}
+\DoxyCodeLine{401     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_audio_processor_graph_a80e7bec00fa02b22e3cb70dd4b1e5374}{getCurrentProgram}}()\textcolor{keyword}{ override                        }\{ \textcolor{keywordflow}{return} 0; \}}
+\DoxyCodeLine{402     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_processor_graph_ae8fbbe8212372bc3fccfc83186fcf321}{setCurrentProgram}} (\textcolor{keywordtype}{int})\textcolor{keyword}{ override                   }\{ \}}
+\DoxyCodeLine{403     \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{class_audio_processor_graph_af552643b26098bdf4a1c0d51156b6182}{getProgramName}} (\textcolor{keywordtype}{int})\textcolor{keyword}{ override              }\{ \textcolor{keywordflow}{return} \{\}; \}}
+\DoxyCodeLine{404     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_processor_graph_a31a6dcb4995a5af32e80f302222db103}{changeProgramName}} (\textcolor{keywordtype}{int}, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\&)\textcolor{keyword}{ override    }\{ \}}
+\DoxyCodeLine{405     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_processor_graph_ae6957b5e54ca59a628aef5ec564f63d6}{getStateInformation}} (juce::MemoryBlock\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{406     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_processor_graph_a84e6d9e7d6ae555020cd21f887cca889}{setStateInformation}} (\textcolor{keyword}{const} \textcolor{keywordtype}{void}* \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, \textcolor{keywordtype}{int} sizeInBytes) \textcolor{keyword}{override};}
+\DoxyCodeLine{407 }
+\DoxyCodeLine{408 \textcolor{keyword}{private}:}
+\DoxyCodeLine{409     \textcolor{keyword}{struct }PrepareSettings}
+\DoxyCodeLine{410     \{}
+\DoxyCodeLine{411         \mbox{\hyperlink{class_audio_processor_a212c3670b59976559237cbf629af275f}{ProcessingPrecision}} \mbox{\hyperlink{namespacegl_a4cca4e97acf0cb7c0b75ced489ffa6f0}{precision}} = ProcessingPrecision::singlePrecision;}
+\DoxyCodeLine{412         \textcolor{keywordtype}{double} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}}             = 0.0;}
+\DoxyCodeLine{413         \textcolor{keywordtype}{int} blockSize                 = 0;}
+\DoxyCodeLine{414         \textcolor{keywordtype}{bool} valid                    = \textcolor{keyword}{false};}
+\DoxyCodeLine{415 }
+\DoxyCodeLine{416         \textcolor{keyword}{using} Tied = std::tuple<\textcolor{keyword}{const} \mbox{\hyperlink{class_audio_processor_a212c3670b59976559237cbf629af275f}{ProcessingPrecision}}\&,}
+\DoxyCodeLine{417                                 \textcolor{keyword}{const} \textcolor{keywordtype}{double}\&,}
+\DoxyCodeLine{418                                 \textcolor{keyword}{const} \textcolor{keywordtype}{int}\&,}
+\DoxyCodeLine{419                                 \textcolor{keyword}{const} \textcolor{keywordtype}{bool}\&>;}
+\DoxyCodeLine{420 }
+\DoxyCodeLine{421         Tied tie() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept \{ \textcolor{keywordflow}{return} std::tie (\mbox{\hyperlink{namespacegl_a4cca4e97acf0cb7c0b75ced489ffa6f0}{precision}}, \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}}, blockSize, valid); \}}
+\DoxyCodeLine{422 }
+\DoxyCodeLine{423         \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_audio_channel_layout_8cpp_ad569fbf0e2ce80e9b92caaf1cbb3c257}{operator== }}(\textcolor{keyword}{const} PrepareSettings\& other) \textcolor{keyword}{const} \textcolor{keyword}{noexcept} \{ \textcolor{keywordflow}{return} tie() == other.tie(); \}}
+\DoxyCodeLine{424         \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_audio_channel_layout_8cpp_aa4ad43821a0285a3d7a5c840173f03ac}{operator!= }}(\textcolor{keyword}{const} PrepareSettings\& other) \textcolor{keyword}{const} \textcolor{keyword}{noexcept} \{ \textcolor{keywordflow}{return} tie() != other.tie(); \}}
+\DoxyCodeLine{425     \};}
+\DoxyCodeLine{426 }
+\DoxyCodeLine{427     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{428     \mbox{\hyperlink{class_reference_counted_array}{ReferenceCountedArray<Node>}} nodes;}
+\DoxyCodeLine{429     NodeID lastNodeID = \{\};}
+\DoxyCodeLine{430 }
+\DoxyCodeLine{431     \textcolor{keyword}{struct }RenderSequenceFloat;}
+\DoxyCodeLine{432     \textcolor{keyword}{struct }RenderSequenceDouble;}
+\DoxyCodeLine{433     std::unique\_ptr<RenderSequenceFloat> renderSequenceFloat;}
+\DoxyCodeLine{434     std::unique\_ptr<RenderSequenceDouble> renderSequenceDouble;}
+\DoxyCodeLine{435 }
+\DoxyCodeLine{436     PrepareSettings prepareSettings;}
+\DoxyCodeLine{437 }
+\DoxyCodeLine{438     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{class_audio_processor_graph_1_1_audio_graph_i_o_processor}{AudioGraphIOProcessor}};}
+\DoxyCodeLine{439 }
+\DoxyCodeLine{440     std::atomic<bool> isPrepared \{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{441 }
+\DoxyCodeLine{442     \textcolor{keywordtype}{void} topologyChanged();}
+\DoxyCodeLine{443     \textcolor{keywordtype}{void} unprepare();}
+\DoxyCodeLine{444     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_async_updater_a446f3af793131f8772329f1f8b526578}{handleAsyncUpdate}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{445     \textcolor{keywordtype}{void} clearRenderingSequence();}
+\DoxyCodeLine{446     \textcolor{keywordtype}{void} buildRenderingSequence();}
+\DoxyCodeLine{447     \textcolor{keywordtype}{bool} anyNodesNeedPreparing() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{448     \textcolor{keywordtype}{bool} isConnected (Node* \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, \textcolor{keywordtype}{int} sourceChannel, Node* dest, \textcolor{keywordtype}{int} destChannel) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{449     \textcolor{keywordtype}{bool} isAnInputTo (Node\& \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, Node\& \mbox{\hyperlink{namespacegl_a174f1a72ee763b6703711da180ac5d79}{dst}}, \textcolor{keywordtype}{int} recursionCheck) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{450     \textcolor{keywordtype}{bool} canConnect (Node* \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, \textcolor{keywordtype}{int} sourceChannel, Node* dest, \textcolor{keywordtype}{int} destChannel) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{451     \textcolor{keywordtype}{bool} isLegal (Node* \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, \textcolor{keywordtype}{int} sourceChannel, Node* dest, \textcolor{keywordtype}{int} destChannel) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{452     static \textcolor{keywordtype}{void} getNodeConnections (Node\&, \mbox{\hyperlink{namespacestd}{std}}::vector<Connection>\&);}
+\DoxyCodeLine{453 }
+\DoxyCodeLine{454     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_audio_processor_graph}{AudioProcessorGraph}})}
+\DoxyCodeLine{455 \};}
+\DoxyCodeLine{456 }
+\DoxyCodeLine{457  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{458 }
+
+\end{DoxyCode}

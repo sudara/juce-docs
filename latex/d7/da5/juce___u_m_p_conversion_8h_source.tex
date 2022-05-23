@@ -1,0 +1,297 @@
+\hypertarget{juce___u_m_p_conversion_8h_source}{}\doxysection{juce\+\_\+\+UMPConversion.\+h}
+\label{juce___u_m_p_conversion_8h_source}\index{build/juce\_audio\_basics/midi/ump/juce\_UMPConversion.h@{build/juce\_audio\_basics/midi/ump/juce\_UMPConversion.h}}
+\mbox{\hyperlink{juce___u_m_p_conversion_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#ifndef DOXYGEN}}
+\DoxyCodeLine{28 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceuniversal__midi__packets}{universal\_midi\_packets}}}
+\DoxyCodeLine{29 \{}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{37 \textcolor{keyword}{struct }\mbox{\hyperlink{structuniversal__midi__packets_1_1_conversion}{Conversion}}}
+\DoxyCodeLine{38 \{}
+\DoxyCodeLine{43     \textcolor{keyword}{template} <\textcolor{keyword}{typename} PacketCallbackFunction>}
+\DoxyCodeLine{44     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{structuniversal__midi__packets_1_1_conversion_a0ec921efc63dcb4500f23aa301a7cbaa}{toMidi1}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_midi_message}{MidiMessage}}\& \mbox{\hyperlink{namespacegl_a0927a7b4232e61481fa501d12209467e}{m}}, PacketCallbackFunction\&\& \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}})}
+\DoxyCodeLine{45     \{}
+\DoxyCodeLine{46         \textcolor{keyword}{const} \textcolor{keyword}{auto}* \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}} = \mbox{\hyperlink{namespacegl_a0927a7b4232e61481fa501d12209467e}{m}}.getRawData();}
+\DoxyCodeLine{47         \textcolor{keyword}{const} \textcolor{keyword}{auto} firstByte = \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}[0];}
+\DoxyCodeLine{48         \textcolor{keyword}{const} \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}} = \mbox{\hyperlink{namespacegl_a0927a7b4232e61481fa501d12209467e}{m}}.getRawDataSize();}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50         \textcolor{keywordflow}{if} (firstByte != 0xf0)}
+\DoxyCodeLine{51         \{}
+\DoxyCodeLine{52             \textcolor{keyword}{const} \textcolor{keyword}{auto} mask = [\mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}}]() -\/> uint32\_t}
+\DoxyCodeLine{53             \{}
+\DoxyCodeLine{54                 \textcolor{keywordflow}{switch} (\mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}})}
+\DoxyCodeLine{55                 \{}
+\DoxyCodeLine{56                     \textcolor{keywordflow}{case} 0: \textcolor{keywordflow}{return} 0xff000000;}
+\DoxyCodeLine{57                     \textcolor{keywordflow}{case} 1: \textcolor{keywordflow}{return} 0xffff0000;}
+\DoxyCodeLine{58                     \textcolor{keywordflow}{case} 2: \textcolor{keywordflow}{return} 0xffffff00;}
+\DoxyCodeLine{59                     \textcolor{keywordflow}{case} 3: \textcolor{keywordflow}{return} 0xffffffff;}
+\DoxyCodeLine{60                 \}}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62                 \textcolor{keywordflow}{return} 0x00000000;}
+\DoxyCodeLine{63             \}();}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65             \textcolor{keyword}{const} \textcolor{keyword}{auto} extraByte = (uint8\_t) ((((firstByte \& 0xf0) == 0xf0) ? 0x1 : 0x2) << 0x4);}
+\DoxyCodeLine{66             \textcolor{keyword}{const} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} packet \{ mask \& \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_a8293705cacedcccd19735f7a7abcfb78}{Utils::bytesToWord}} (extraByte, \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}[0], \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}[1], \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}[2]) \};}
+\DoxyCodeLine{67             \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}} (\mbox{\hyperlink{classuniversal__midi__packets_1_1_view}{View}} (packet.data()));}
+\DoxyCodeLine{68             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{69         \}}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71         \textcolor{keyword}{const} \textcolor{keyword}{auto} numSysExBytes = \mbox{\hyperlink{namespacegl_a0927a7b4232e61481fa501d12209467e}{m}}.getSysExDataSize();}
+\DoxyCodeLine{72         \textcolor{keyword}{const} \textcolor{keyword}{auto} numMessages = \mbox{\hyperlink{structuniversal__midi__packets_1_1_sys_ex7_a250b61a86b39d9faac04c89d5f1538a1}{SysEx7::getNumPacketsRequiredForDataSize}} ((uint32\_t) numSysExBytes);}
+\DoxyCodeLine{73         \textcolor{keyword}{auto}* dataOffset = \mbox{\hyperlink{namespacegl_a0927a7b4232e61481fa501d12209467e}{m}}.getSysExData();}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75         \textcolor{keywordflow}{if} (numMessages <= 1)}
+\DoxyCodeLine{76         \{}
+\DoxyCodeLine{77             \textcolor{keyword}{const} \textcolor{keyword}{auto} packet = \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_aa711908801a5a7d837d7e2195800f0f9}{Factory::makeSysExIn1Packet}} (0, (uint8\_t) numSysExBytes, dataOffset);}
+\DoxyCodeLine{78             \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}} (\mbox{\hyperlink{classuniversal__midi__packets_1_1_view}{View}} (packet.data()));}
+\DoxyCodeLine{79             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{80         \}}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82         \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} byteIncrement = 6;}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} i = numSysExBytes; i > 0; i -\/= byteIncrement, dataOffset += byteIncrement)}
+\DoxyCodeLine{85         \{}
+\DoxyCodeLine{86             \textcolor{keyword}{const} \textcolor{keyword}{auto} \mbox{\hyperlink{namespacejuce_a3b3d804dd734bb070b4349ec4a65e7ba}{func}} = [\&]}
+\DoxyCodeLine{87             \{}
+\DoxyCodeLine{88                 \textcolor{keywordflow}{if} (i == numSysExBytes)}
+\DoxyCodeLine{89                     \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_a2d9a0835f7dc90b985f9e0281d034214}{Factory::makeSysExStart}};}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91                 \textcolor{keywordflow}{if} (i <= byteIncrement)}
+\DoxyCodeLine{92                     \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_a4b903deada94005b5e92d1e351f3ba5b}{Factory::makeSysExEnd}};}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{94                 \textcolor{keywordflow}{return} \mbox{\hyperlink{structuniversal__midi__packets_1_1_factory_a5b66bd940e8c9bbe5b939ada4273d1be}{Factory::makeSysExContinue}};}
+\DoxyCodeLine{95             \}();}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97             \textcolor{keyword}{const} \textcolor{keyword}{auto} bytesNow = \mbox{\hyperlink{os_8h_abb702d8b501669a23aa0ab3b281b9384}{std::min}} (byteIncrement, i);}
+\DoxyCodeLine{98             \textcolor{keyword}{const} \textcolor{keyword}{auto} packet = \mbox{\hyperlink{namespacejuce_a3b3d804dd734bb070b4349ec4a65e7ba}{func}} (0, (uint8\_t) bytesNow, dataOffset);}
+\DoxyCodeLine{99             \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}} (\mbox{\hyperlink{classuniversal__midi__packets_1_1_view}{View}} (packet.data()));}
+\DoxyCodeLine{100         \}}
+\DoxyCodeLine{101     \}}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{112     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{structuniversal__midi__packets_1_1_conversion_a94acc934f57e39d9e7911bb9b36255af}{toMidi1}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_midi_message}{MidiMessage}}\& \mbox{\hyperlink{namespacegl_a0927a7b4232e61481fa501d12209467e}{m}}, \mbox{\hyperlink{classuniversal__midi__packets_1_1_packets}{Packets}}\& packets)}
+\DoxyCodeLine{113     \{}
+\DoxyCodeLine{114         \mbox{\hyperlink{structuniversal__midi__packets_1_1_conversion_a0ec921efc63dcb4500f23aa301a7cbaa}{toMidi1}} (\mbox{\hyperlink{namespacegl_a0927a7b4232e61481fa501d12209467e}{m}}, [\&] (\textcolor{keyword}{const} \mbox{\hyperlink{classuniversal__midi__packets_1_1_view}{View}}\& view) \{ packets.\mbox{\hyperlink{classuniversal__midi__packets_1_1_packets_a0b28bf31feb823544a839910b0b7d6f6}{add}} (view); \});}
+\DoxyCodeLine{115     \}}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{118     \textcolor{keyword}{static} uint8\_t \mbox{\hyperlink{structuniversal__midi__packets_1_1_conversion_a59691dee9a1655e95c3c288613919ee0}{scaleTo8}} (uint8\_t word7Bit)}
+\DoxyCodeLine{119     \{}
+\DoxyCodeLine{120         \textcolor{keyword}{const} \textcolor{keyword}{auto} shifted = (uint8\_t) (word7Bit << 0x1);}
+\DoxyCodeLine{121         \textcolor{keyword}{const} \textcolor{keyword}{auto} repeat = (uint8\_t) (word7Bit \& 0x3f);}
+\DoxyCodeLine{122         \textcolor{keyword}{const} \textcolor{keyword}{auto} mask = (uint8\_t) (word7Bit <= 0x40 ? 0x0 : 0xff);}
+\DoxyCodeLine{123         \textcolor{keywordflow}{return} (uint8\_t) (shifted | ((repeat >> 5) \& mask));}
+\DoxyCodeLine{124     \}}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{127     \textcolor{keyword}{static} uint16\_t \mbox{\hyperlink{structuniversal__midi__packets_1_1_conversion_a7c2bfb1181bc7c84035de63032bf69f1}{scaleTo16}} (uint8\_t word7Bit)}
+\DoxyCodeLine{128     \{}
+\DoxyCodeLine{129         \textcolor{keyword}{const} \textcolor{keyword}{auto} shifted = (uint16\_t) (word7Bit << 0x9);}
+\DoxyCodeLine{130         \textcolor{keyword}{const} \textcolor{keyword}{auto} repeat = (uint16\_t) (word7Bit \& 0x3f);}
+\DoxyCodeLine{131         \textcolor{keyword}{const} \textcolor{keyword}{auto} mask = (uint16\_t) (word7Bit <= 0x40 ? 0x0 : 0xffff);}
+\DoxyCodeLine{132         \textcolor{keywordflow}{return} (uint16\_t) (shifted | (((repeat << 3) | (repeat >> 3)) \& mask));}
+\DoxyCodeLine{133     \}}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{136     \textcolor{keyword}{static} uint16\_t \mbox{\hyperlink{structuniversal__midi__packets_1_1_conversion_aae7cafa7d0554a45a14a23b30664d457}{scaleTo16}} (uint16\_t word14Bit)}
+\DoxyCodeLine{137     \{}
+\DoxyCodeLine{138         \textcolor{keyword}{const} \textcolor{keyword}{auto} shifted = (uint16\_t) (word14Bit << 0x2);}
+\DoxyCodeLine{139         \textcolor{keyword}{const} \textcolor{keyword}{auto} repeat = (uint16\_t) (word14Bit \& 0x1fff);}
+\DoxyCodeLine{140         \textcolor{keyword}{const} \textcolor{keyword}{auto} mask = (uint16\_t) (word14Bit <= 0x2000 ? 0x0 : 0xffff);}
+\DoxyCodeLine{141         \textcolor{keywordflow}{return} (uint16\_t) (shifted | ((repeat >> 11) \& mask));}
+\DoxyCodeLine{142     \}}
+\DoxyCodeLine{143 }
+\DoxyCodeLine{145     \textcolor{keyword}{static} uint32\_t \mbox{\hyperlink{structuniversal__midi__packets_1_1_conversion_a4a890bab1bf93bd6d714fe119cecd857}{scaleTo32}} (uint8\_t word7Bit)}
+\DoxyCodeLine{146     \{}
+\DoxyCodeLine{147         \textcolor{keyword}{const} \textcolor{keyword}{auto} shifted = (uint32\_t) (word7Bit << 0x19);}
+\DoxyCodeLine{148         \textcolor{keyword}{const} \textcolor{keyword}{auto} repeat = (uint32\_t) (word7Bit \& 0x3f);}
+\DoxyCodeLine{149         \textcolor{keyword}{const} \textcolor{keyword}{auto} mask = (uint32\_t) (word7Bit <= 0x40 ? 0x0 : 0xffffffff);}
+\DoxyCodeLine{150         \textcolor{keywordflow}{return} (uint32\_t) (shifted | (((repeat << 19)}
+\DoxyCodeLine{151                                      | (repeat << 13)}
+\DoxyCodeLine{152                                      | (repeat << 7)}
+\DoxyCodeLine{153                                      | (repeat << 1)}
+\DoxyCodeLine{154                                      | (repeat >> 5)) \& mask));}
+\DoxyCodeLine{155     \}}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{158     \textcolor{keyword}{static} uint32\_t \mbox{\hyperlink{structuniversal__midi__packets_1_1_conversion_a8d38e69e73bc2b4718a7352a7199db5d}{scaleTo32}} (uint16\_t word14Bit)}
+\DoxyCodeLine{159     \{}
+\DoxyCodeLine{160         \textcolor{keyword}{const} \textcolor{keyword}{auto} shifted = (uint32\_t) (word14Bit << 0x12);}
+\DoxyCodeLine{161         \textcolor{keyword}{const} \textcolor{keyword}{auto} repeat = (uint32\_t) (word14Bit \& 0x1fff);}
+\DoxyCodeLine{162         \textcolor{keyword}{const} \textcolor{keyword}{auto} mask = (uint32\_t) (word14Bit <= 0x2000 ? 0x0 : 0xffffffff);}
+\DoxyCodeLine{163         \textcolor{keywordflow}{return} (uint32\_t) (shifted | (((repeat << 5) | (repeat >> 8)) \& mask));}
+\DoxyCodeLine{164     \}}
+\DoxyCodeLine{165 }
+\DoxyCodeLine{167     \textcolor{keyword}{static} uint8\_t \mbox{\hyperlink{structuniversal__midi__packets_1_1_conversion_a22433a01cb7307e76c0f0cca5a6622e0}{scaleTo7}} (uint8\_t word8Bit) \{ \textcolor{keywordflow}{return} (uint8\_t) (word8Bit >> 1); \}}
+\DoxyCodeLine{168 }
+\DoxyCodeLine{170     \textcolor{keyword}{static} uint8\_t \mbox{\hyperlink{structuniversal__midi__packets_1_1_conversion_a6c3219cf5847395c33b939df3fbc7158}{scaleTo7}} (uint16\_t word16Bit) \{ \textcolor{keywordflow}{return} (uint8\_t) (word16Bit >> 9); \}}
+\DoxyCodeLine{171 }
+\DoxyCodeLine{173     \textcolor{keyword}{static} uint8\_t \mbox{\hyperlink{structuniversal__midi__packets_1_1_conversion_aa3058a86697c3744345e75d3d131d4b0}{scaleTo7}} (uint32\_t word32Bit) \{ \textcolor{keywordflow}{return} (uint8\_t) (word32Bit >> 25); \}}
+\DoxyCodeLine{174 }
+\DoxyCodeLine{176     \textcolor{keyword}{static} uint16\_t \mbox{\hyperlink{structuniversal__midi__packets_1_1_conversion_a5a47b6c7bb6bfa03fb084247bd50780c}{scaleTo14}} (uint16\_t word16Bit) \{ \textcolor{keywordflow}{return} (uint16\_t) (word16Bit >> 2); \}}
+\DoxyCodeLine{177 }
+\DoxyCodeLine{179     \textcolor{keyword}{static} uint16\_t \mbox{\hyperlink{structuniversal__midi__packets_1_1_conversion_a0be49b9fda8636bffeeff5810098365d}{scaleTo14}} (uint32\_t word32Bit) \{ \textcolor{keywordflow}{return} (uint16\_t) (word32Bit >> 18); \}}
+\DoxyCodeLine{180 }
+\DoxyCodeLine{190     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Callback>}
+\DoxyCodeLine{191     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{structuniversal__midi__packets_1_1_conversion_afcaadd5732c31c5303a1048c48751098}{midi2ToMidi1DefaultTranslation}} (\textcolor{keyword}{const} \mbox{\hyperlink{classuniversal__midi__packets_1_1_view}{View}}\& \mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}}, Callback\&\& \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}})}
+\DoxyCodeLine{192     \{}
+\DoxyCodeLine{193         \textcolor{keyword}{const} \textcolor{keyword}{auto} firstWord = \mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}}[0];}
+\DoxyCodeLine{194 }
+\DoxyCodeLine{195         \textcolor{keywordflow}{if} (\mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_aa8f83c90a4548bcb1f078f0fad117fbc}{Utils::getMessageType}} (firstWord) != 0x4)}
+\DoxyCodeLine{196         \{}
+\DoxyCodeLine{197             \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}} (\mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}});}
+\DoxyCodeLine{198             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{199         \}}
+\DoxyCodeLine{200 }
+\DoxyCodeLine{201         \textcolor{keyword}{const} \textcolor{keyword}{auto} status = \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_acd7746fa8dec805d039ed7c5f2f84ab7}{Utils::getStatus}} (firstWord);}
+\DoxyCodeLine{202         \textcolor{keyword}{const} \textcolor{keyword}{auto} typeAndGroup = (uint8\_t) ((0x2 << 0x4) | \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_af8301cd14206b11fde7a047b2aa612ff}{Utils::getGroup}} (firstWord));}
+\DoxyCodeLine{203 }
+\DoxyCodeLine{204         \textcolor{keywordflow}{switch} (status)}
+\DoxyCodeLine{205         \{}
+\DoxyCodeLine{206             \textcolor{keywordflow}{case} 0x8:   \textcolor{comment}{// note off}}
+\DoxyCodeLine{207             \textcolor{keywordflow}{case} 0x9:   \textcolor{comment}{// note on}}
+\DoxyCodeLine{208             \textcolor{keywordflow}{case} 0xa:   \textcolor{comment}{// poly pressure}}
+\DoxyCodeLine{209             \textcolor{keywordflow}{case} 0xb:   \textcolor{comment}{// control change}}
+\DoxyCodeLine{210             \{}
+\DoxyCodeLine{211                 \textcolor{keyword}{const} \textcolor{keyword}{auto} statusAndChannel = (uint8\_t) ((firstWord >> 0x10) \& 0xff);}
+\DoxyCodeLine{212                 \textcolor{keyword}{const} \textcolor{keyword}{auto} byte2 = (uint8\_t) ((firstWord >> 0x08) \& 0xff);}
+\DoxyCodeLine{213                 \textcolor{keyword}{const} \textcolor{keyword}{auto} byte3 = \mbox{\hyperlink{structuniversal__midi__packets_1_1_conversion_a22433a01cb7307e76c0f0cca5a6622e0}{scaleTo7}} (\mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}}[1]);}
+\DoxyCodeLine{214 }
+\DoxyCodeLine{215                 \textcolor{comment}{// If this is a note-\/on, and the scaled byte is 0,}}
+\DoxyCodeLine{216                 \textcolor{comment}{// the scaled velocity should be 1 instead of 0}}
+\DoxyCodeLine{217                 \textcolor{keyword}{const} \textcolor{keyword}{auto} needsCorrection = status == 0x9 \&\& byte3 == 0;}
+\DoxyCodeLine{218                 \textcolor{keyword}{const} \textcolor{keyword}{auto} correctedByte = (uint8\_t) (needsCorrection ? 1 : byte3);}
+\DoxyCodeLine{219 }
+\DoxyCodeLine{220                 \textcolor{keyword}{const} \textcolor{keyword}{auto} shouldIgnore = status == 0xb \&\& [\&]}
+\DoxyCodeLine{221                 \{}
+\DoxyCodeLine{222                     \textcolor{keywordflow}{switch} (byte2)}
+\DoxyCodeLine{223                     \{}
+\DoxyCodeLine{224                         \textcolor{keywordflow}{case} 0:}
+\DoxyCodeLine{225                         \textcolor{keywordflow}{case} 6:}
+\DoxyCodeLine{226                         \textcolor{keywordflow}{case} 32:}
+\DoxyCodeLine{227                         \textcolor{keywordflow}{case} 38:}
+\DoxyCodeLine{228                         \textcolor{keywordflow}{case} 98:}
+\DoxyCodeLine{229                         \textcolor{keywordflow}{case} 99:}
+\DoxyCodeLine{230                         \textcolor{keywordflow}{case} 100:}
+\DoxyCodeLine{231                         \textcolor{keywordflow}{case} 101:}
+\DoxyCodeLine{232                             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{233                     \}}
+\DoxyCodeLine{234 }
+\DoxyCodeLine{235                     \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{236                 \}();}
+\DoxyCodeLine{237 }
+\DoxyCodeLine{238                 \textcolor{keywordflow}{if} (shouldIgnore)}
+\DoxyCodeLine{239                     \textcolor{keywordflow}{return};}
+\DoxyCodeLine{240 }
+\DoxyCodeLine{241                 \textcolor{keyword}{const} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} packet \{ \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_a8293705cacedcccd19735f7a7abcfb78}{Utils::bytesToWord}} (typeAndGroup,}
+\DoxyCodeLine{242                                                             statusAndChannel,}
+\DoxyCodeLine{243                                                             byte2,}
+\DoxyCodeLine{244                                                             correctedByte) \};}
+\DoxyCodeLine{245                 \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}} (\mbox{\hyperlink{classuniversal__midi__packets_1_1_view}{View}} (packet.data()));}
+\DoxyCodeLine{246                 \textcolor{keywordflow}{return};}
+\DoxyCodeLine{247             \}}
+\DoxyCodeLine{248 }
+\DoxyCodeLine{249             \textcolor{keywordflow}{case} 0xd: \textcolor{comment}{// channel pressure}}
+\DoxyCodeLine{250             \{}
+\DoxyCodeLine{251                 \textcolor{keyword}{const} \textcolor{keyword}{auto} statusAndChannel = (uint8\_t) ((firstWord >> 0x10) \& 0xff);}
+\DoxyCodeLine{252                 \textcolor{keyword}{const} \textcolor{keyword}{auto} byte2 = \mbox{\hyperlink{structuniversal__midi__packets_1_1_conversion_a22433a01cb7307e76c0f0cca5a6622e0}{scaleTo7}} (\mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}}[1]);}
+\DoxyCodeLine{253 }
+\DoxyCodeLine{254                 \textcolor{keyword}{const} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} packet \{ \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_a8293705cacedcccd19735f7a7abcfb78}{Utils::bytesToWord}} (typeAndGroup,}
+\DoxyCodeLine{255                                                             statusAndChannel,}
+\DoxyCodeLine{256                                                             byte2,}
+\DoxyCodeLine{257                                                             0) \};}
+\DoxyCodeLine{258                 \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}} (\mbox{\hyperlink{classuniversal__midi__packets_1_1_view}{View}} (packet.data()));}
+\DoxyCodeLine{259                 \textcolor{keywordflow}{return};}
+\DoxyCodeLine{260             \}}
+\DoxyCodeLine{261 }
+\DoxyCodeLine{262             \textcolor{keywordflow}{case} 0x2:   \textcolor{comment}{// rpn}}
+\DoxyCodeLine{263             \textcolor{keywordflow}{case} 0x3:   \textcolor{comment}{// nrpn}}
+\DoxyCodeLine{264             \{}
+\DoxyCodeLine{265                 \textcolor{keyword}{const} \textcolor{keyword}{auto} ccX = (uint8\_t) (status == 0x2 ? 101 : 99);}
+\DoxyCodeLine{266                 \textcolor{keyword}{const} \textcolor{keyword}{auto} ccY = (uint8\_t) (status == 0x2 ? 100 : 98);}
+\DoxyCodeLine{267                 \textcolor{keyword}{const} \textcolor{keyword}{auto} statusAndChannel = (uint8\_t) ((0xb << 0x4) | \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_a8e6b9f27194a47126a96b36650ffa12f}{Utils::getChannel}} (firstWord));}
+\DoxyCodeLine{268                 \textcolor{keyword}{const} \textcolor{keyword}{auto} \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}} = \mbox{\hyperlink{structuniversal__midi__packets_1_1_conversion_a5a47b6c7bb6bfa03fb084247bd50780c}{scaleTo14}} (\mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}}[1]);}
+\DoxyCodeLine{269 }
+\DoxyCodeLine{270                 \textcolor{keyword}{const} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} packets[]}
+\DoxyCodeLine{271                 \{}
+\DoxyCodeLine{272                     \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} \{ \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_a8293705cacedcccd19735f7a7abcfb78}{Utils::bytesToWord}} (typeAndGroup, statusAndChannel, ccX, (uint8\_t) ((firstWord >> 0x8) \& 0x7f)) \},}
+\DoxyCodeLine{273                     \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} \{ \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_a8293705cacedcccd19735f7a7abcfb78}{Utils::bytesToWord}} (typeAndGroup, statusAndChannel, ccY, (uint8\_t) ((firstWord >> 0x0) \& 0x7f)) \},}
+\DoxyCodeLine{274                     \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} \{ \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_a8293705cacedcccd19735f7a7abcfb78}{Utils::bytesToWord}} (typeAndGroup, statusAndChannel, 6,   (uint8\_t) ((\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}} >> 0x7) \& 0x7f)) \},}
+\DoxyCodeLine{275                     \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} \{ \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_a8293705cacedcccd19735f7a7abcfb78}{Utils::bytesToWord}} (typeAndGroup, statusAndChannel, 38,  (uint8\_t) ((\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}} >> 0x0) \& 0x7f)) \},}
+\DoxyCodeLine{276                 \};}
+\DoxyCodeLine{277 }
+\DoxyCodeLine{278                 \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto}\& packet : packets)}
+\DoxyCodeLine{279                     \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}} (\mbox{\hyperlink{classuniversal__midi__packets_1_1_view}{View}} (packet.data()));}
+\DoxyCodeLine{280 }
+\DoxyCodeLine{281                 \textcolor{keywordflow}{return};}
+\DoxyCodeLine{282             \}}
+\DoxyCodeLine{283 }
+\DoxyCodeLine{284             \textcolor{keywordflow}{case} 0xc: \textcolor{comment}{// program change / bank select}}
+\DoxyCodeLine{285             \{}
+\DoxyCodeLine{286                 \textcolor{keywordflow}{if} (firstWord \& 1)}
+\DoxyCodeLine{287                 \{}
+\DoxyCodeLine{288                     \textcolor{keyword}{const} \textcolor{keyword}{auto} statusAndChannel = (uint8\_t) ((0xb << 0x4) | \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_a8e6b9f27194a47126a96b36650ffa12f}{Utils::getChannel}} (firstWord));}
+\DoxyCodeLine{289                     \textcolor{keyword}{const} \textcolor{keyword}{auto} secondWord = \mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}}[1];}
+\DoxyCodeLine{290 }
+\DoxyCodeLine{291                     \textcolor{keyword}{const} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} packets[]}
+\DoxyCodeLine{292                     \{}
+\DoxyCodeLine{293                         \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} \{ \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_a8293705cacedcccd19735f7a7abcfb78}{Utils::bytesToWord}} (typeAndGroup, statusAndChannel, 0,  (uint8\_t) ((secondWord >> 0x8) \& 0x7f)) \},}
+\DoxyCodeLine{294                         \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} \{ \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_a8293705cacedcccd19735f7a7abcfb78}{Utils::bytesToWord}} (typeAndGroup, statusAndChannel, 32, (uint8\_t) ((secondWord >> 0x0) \& 0x7f)) \},}
+\DoxyCodeLine{295                     \};}
+\DoxyCodeLine{296 }
+\DoxyCodeLine{297                     \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto}\& packet : packets)}
+\DoxyCodeLine{298                         \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}} (\mbox{\hyperlink{classuniversal__midi__packets_1_1_view}{View}} (packet.data()));}
+\DoxyCodeLine{299                 \}}
+\DoxyCodeLine{300 }
+\DoxyCodeLine{301                 \textcolor{keyword}{const} \textcolor{keyword}{auto} statusAndChannel = (uint8\_t) ((0xc << 0x4) | \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_a8e6b9f27194a47126a96b36650ffa12f}{Utils::getChannel}} (firstWord));}
+\DoxyCodeLine{302                 \textcolor{keyword}{const} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} packet \{ \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_a8293705cacedcccd19735f7a7abcfb78}{Utils::bytesToWord}} (typeAndGroup,}
+\DoxyCodeLine{303                                                             statusAndChannel,}
+\DoxyCodeLine{304                                                             (uint8\_t) ((\mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}}[1] >> 0x18) \& 0x7f),}
+\DoxyCodeLine{305                                                             0) \};}
+\DoxyCodeLine{306                 \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}} (\mbox{\hyperlink{classuniversal__midi__packets_1_1_view}{View}} (packet.data()));}
+\DoxyCodeLine{307                 \textcolor{keywordflow}{return};}
+\DoxyCodeLine{308             \}}
+\DoxyCodeLine{309 }
+\DoxyCodeLine{310             \textcolor{keywordflow}{case} 0xe: \textcolor{comment}{// pitch bend}}
+\DoxyCodeLine{311             \{}
+\DoxyCodeLine{312                 \textcolor{keyword}{const} \textcolor{keyword}{auto} \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}} = \mbox{\hyperlink{structuniversal__midi__packets_1_1_conversion_a5a47b6c7bb6bfa03fb084247bd50780c}{scaleTo14}} (\mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}}[1]);}
+\DoxyCodeLine{313                 \textcolor{keyword}{const} \textcolor{keyword}{auto} statusAndChannel = (uint8\_t) ((firstWord >> 0x10) \& 0xff);}
+\DoxyCodeLine{314                 \textcolor{keyword}{const} \mbox{\hyperlink{classuniversal__midi__packets_1_1_packet}{PacketX1}} packet \{ \mbox{\hyperlink{structuniversal__midi__packets_1_1_utils_a8293705cacedcccd19735f7a7abcfb78}{Utils::bytesToWord}} (typeAndGroup,}
+\DoxyCodeLine{315                                                             statusAndChannel,}
+\DoxyCodeLine{316                                                             (uint8\_t) (\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}} \& 0x7f),}
+\DoxyCodeLine{317                                                             (uint8\_t) ((\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}} >> 7) \& 0x7f)) \};}
+\DoxyCodeLine{318                 \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}} (\mbox{\hyperlink{classuniversal__midi__packets_1_1_view}{View}} (packet.data()));}
+\DoxyCodeLine{319                 \textcolor{keywordflow}{return};}
+\DoxyCodeLine{320             \}}
+\DoxyCodeLine{321 }
+\DoxyCodeLine{322             \textcolor{keywordflow}{default}: \textcolor{comment}{// other message types do not translate}}
+\DoxyCodeLine{323                 \textcolor{keywordflow}{return};}
+\DoxyCodeLine{324         \}}
+\DoxyCodeLine{325     \}}
+\DoxyCodeLine{326 \};}
+\DoxyCodeLine{327 }
+\DoxyCodeLine{328 \}}
+\DoxyCodeLine{329 }
+\DoxyCodeLine{330 }
+\DoxyCodeLine{331 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{332 }
+
+\end{DoxyCode}

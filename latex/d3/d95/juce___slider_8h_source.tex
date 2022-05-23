@@ -1,0 +1,445 @@
+\hypertarget{juce___slider_8h_source}{}\doxysection{juce\+\_\+\+Slider.\+h}
+\label{juce___slider_8h_source}\index{build/juce\_gui\_basics/widgets/juce\_Slider.h@{build/juce\_gui\_basics/widgets/juce\_Slider.h}}
+\mbox{\hyperlink{juce___slider_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{53 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_slider}{Slider}}  : \textcolor{keyword}{public} \mbox{\hyperlink{class_component}{Component}},}
+\DoxyCodeLine{54                           \textcolor{keyword}{public} \mbox{\hyperlink{class_settable_tooltip_client}{SettableTooltipClient}}}
+\DoxyCodeLine{55 \{}
+\DoxyCodeLine{56 \textcolor{keyword}{public}:}
+\DoxyCodeLine{57     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{62 \textcolor{comment}{}    \textcolor{keyword}{enum} \mbox{\hyperlink{class_slider_af1caee82552143dd9ff0fc9f0cdc0888}{SliderStyle}}}
+\DoxyCodeLine{63     \{}
+\DoxyCodeLine{64         \mbox{\hyperlink{class_slider_af1caee82552143dd9ff0fc9f0cdc0888a0fa5cefcd508c8f26ac9a458272844f9}{LinearHorizontal}},               }
+\DoxyCodeLine{65         \mbox{\hyperlink{class_slider_af1caee82552143dd9ff0fc9f0cdc0888a31f9134048fa90fbc4a72b69c6f553d5}{LinearVertical}},                 }
+\DoxyCodeLine{66         \mbox{\hyperlink{class_slider_af1caee82552143dd9ff0fc9f0cdc0888a0092c810419dab80d4692363d9564c5d}{LinearBar}},                      }
+\DoxyCodeLine{67         \mbox{\hyperlink{class_slider_af1caee82552143dd9ff0fc9f0cdc0888a8a942813d4d457e0344e725bd9faffc5}{LinearBarVertical}},              }
+\DoxyCodeLine{68         Rotary,                         }
+\DoxyCodeLine{70         RotaryHorizontalDrag,           }
+\DoxyCodeLine{72         RotaryVerticalDrag,             }
+\DoxyCodeLine{74         RotaryHorizontalVerticalDrag,   }
+\DoxyCodeLine{76         \mbox{\hyperlink{class_slider_af1caee82552143dd9ff0fc9f0cdc0888adcb7bc12a443e3c6cdf598ab3c5e2171}{IncDecButtons}},                  }
+\DoxyCodeLine{78         TwoValueHorizontal,             }
+\DoxyCodeLine{80         TwoValueVertical,               }
+\DoxyCodeLine{83         ThreeValueHorizontal,           }
+\DoxyCodeLine{86         ThreeValueVertical              }
+\DoxyCodeLine{89     \};}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{94     \textcolor{keyword}{enum} \mbox{\hyperlink{class_slider_ab6d7dff67151c029b9cb53fc40b4412f}{TextEntryBoxPosition}}}
+\DoxyCodeLine{95     \{}
+\DoxyCodeLine{96         \mbox{\hyperlink{class_slider_ab6d7dff67151c029b9cb53fc40b4412fad0badf0233a956017621f284e3e30fc2}{NoTextBox}},              }
+\DoxyCodeLine{97         \mbox{\hyperlink{class_slider_ab6d7dff67151c029b9cb53fc40b4412fa66ab77e721cd147f54097b8bed8c6d35}{TextBoxLeft}},            }
+\DoxyCodeLine{98         \mbox{\hyperlink{class_slider_ab6d7dff67151c029b9cb53fc40b4412fae50f30d7062c602b8f8b465346f79a3f}{TextBoxRight}},           }
+\DoxyCodeLine{99         \mbox{\hyperlink{class_slider_ab6d7dff67151c029b9cb53fc40b4412fa382d14dbd222edf95fdf2836acc33fe9}{TextBoxAbove}},           }
+\DoxyCodeLine{100         TextBoxBelow            }
+\DoxyCodeLine{101     \};}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{106     \textcolor{keyword}{enum} \mbox{\hyperlink{class_slider_a42fd96ac0f5dca7e6942022c9a75cbde}{DragMode}}}
+\DoxyCodeLine{107     \{}
+\DoxyCodeLine{108         \mbox{\hyperlink{class_slider_a42fd96ac0f5dca7e6942022c9a75cbdea4ac7f9448a8823e0537588615cf71271}{notDragging}},            }
+\DoxyCodeLine{109         \mbox{\hyperlink{class_slider_a42fd96ac0f5dca7e6942022c9a75cbdead37417ff73089a45f77534d75e1a1647}{absoluteDrag}},           }
+\DoxyCodeLine{110         velocityDrag            }
+\DoxyCodeLine{111     \};}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{117 \textcolor{comment}{}    \mbox{\hyperlink{class_slider_a535033fada8e25ef7291d2a52e6e437b}{Slider}}();}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{122     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_slider_ae2c907adc5de6f127138f3f869f683ae}{Slider}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& componentName);}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{125     \mbox{\hyperlink{class_slider_ad0d654d54372b23671bfc28f179c339d}{Slider}} (\mbox{\hyperlink{class_slider_af1caee82552143dd9ff0fc9f0cdc0888}{SliderStyle}} style, \mbox{\hyperlink{class_slider_ab6d7dff67151c029b9cb53fc40b4412f}{TextEntryBoxPosition}} textBoxPosition);}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{128     \mbox{\hyperlink{class_slider_a498c0067130d6617b0f8e552a71be507}{\string~Slider}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{130     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{136 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_a6b6917dd3753c7552778977733f0b9ef}{setSliderStyle}} (\mbox{\hyperlink{class_slider_af1caee82552143dd9ff0fc9f0cdc0888}{SliderStyle}} newStyle);}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{141     \mbox{\hyperlink{class_slider_af1caee82552143dd9ff0fc9f0cdc0888}{SliderStyle}} \mbox{\hyperlink{class_slider_a5fe7b4917ead20eb9c180de81c46b41f}{getSliderStyle}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{143     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{145 \textcolor{comment}{}    struct \mbox{\hyperlink{struct_slider_1_1_rotary_parameters}{RotaryParameters}}}
+\DoxyCodeLine{146     \{}
+\DoxyCodeLine{150         \textcolor{keywordtype}{float} \mbox{\hyperlink{struct_slider_1_1_rotary_parameters_a1b4090a3f77b0183b1c847525f4edb8a}{startAngleRadians}};}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{156         \textcolor{keywordtype}{float} \mbox{\hyperlink{struct_slider_1_1_rotary_parameters_a4d099642ed3116c61391839b2a79bd49}{endAngleRadians}};}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{164         \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_slider_1_1_rotary_parameters_a2e705ed5eb148f3f3eb1e89a72ff634f}{stopAtEnd}};}
+\DoxyCodeLine{165     \};}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{168     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_a37d0dd9e0149ecb63c10d8bbb64d7188}{setRotaryParameters}} (\mbox{\hyperlink{struct_slider_1_1_rotary_parameters}{RotaryParameters}} newParameters) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{169 }
+\DoxyCodeLine{171     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_a19ec1c1f7564884be94ecde8dc56f0ab}{setRotaryParameters}} (\textcolor{keywordtype}{float} startAngleRadians,}
+\DoxyCodeLine{172                               \textcolor{keywordtype}{float} endAngleRadians,}
+\DoxyCodeLine{173                               \textcolor{keywordtype}{bool} stopAtEnd) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{174 }
+\DoxyCodeLine{176     \mbox{\hyperlink{struct_slider_1_1_rotary_parameters}{RotaryParameters}} \mbox{\hyperlink{class_slider_ac72f9e6603bb35fd94fdba5f8536827c}{getRotaryParameters}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{177 }
+\DoxyCodeLine{184     \textcolor{keywordtype}{void} setMouseDragSensitivity (\textcolor{keywordtype}{int} distanceForFullScaleDrag);}
+\DoxyCodeLine{185 }
+\DoxyCodeLine{187     \textcolor{keywordtype}{int} getMouseDragSensitivity() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{188 }
+\DoxyCodeLine{189     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{198 \textcolor{comment}{}    \textcolor{keywordtype}{void} setVelocityBasedMode (\textcolor{keywordtype}{bool} isVelocityBased);}
+\DoxyCodeLine{199 }
+\DoxyCodeLine{203     \textcolor{keywordtype}{bool} getVelocityBasedMode() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{204 }
+\DoxyCodeLine{220     \textcolor{keywordtype}{void} setVelocityModeParameters (\textcolor{keywordtype}{double} sensitivity = 1.0,}
+\DoxyCodeLine{221                                     \textcolor{keywordtype}{int} threshold = 1,}
+\DoxyCodeLine{222                                     \textcolor{keywordtype}{double} \mbox{\hyperlink{namespacegl_aa4212fe83465b750077176bdbad74288}{offset}} = 0.0,}
+\DoxyCodeLine{223                                     \textcolor{keywordtype}{bool} userCanPressKeyToSwapMode = \mbox{\hyperlink{ordinals_8h_a41f9c5fb8b08eb5dc3edce4dcb37fee7}{true}},}
+\DoxyCodeLine{224                                     \mbox{\hyperlink{class_modifier_keys}{ModifierKeys}}::Flags modifiersToSwapModes = \mbox{\hyperlink{class_modifier_keys}{ModifierKeys}}::ctrlAltCommandModifiers);}
+\DoxyCodeLine{225 }
+\DoxyCodeLine{229     \textcolor{keywordtype}{double} getVelocitySensitivity() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{230 }
+\DoxyCodeLine{234     \textcolor{keywordtype}{int} getVelocityThreshold() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{235 }
+\DoxyCodeLine{239     \textcolor{keywordtype}{double} getVelocityOffset() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{240 }
+\DoxyCodeLine{244     \textcolor{keywordtype}{bool} getVelocityModeIsSwappable() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{245 }
+\DoxyCodeLine{246     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{265 \textcolor{comment}{}    \textcolor{keywordtype}{void} setSkewFactor (\textcolor{keywordtype}{double} factor, \textcolor{keywordtype}{bool} symmetricSkew = \mbox{\hyperlink{ordinals_8h_a65e9886d74aaee76545e83dd09011727}{false}});}
+\DoxyCodeLine{266 }
+\DoxyCodeLine{274     \textcolor{keywordtype}{void} setSkewFactorFromMidPoint (\textcolor{keywordtype}{double} sliderValueToShowAtMidPoint);}
+\DoxyCodeLine{275 }
+\DoxyCodeLine{280     \textcolor{keywordtype}{double} getSkewFactor() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{281 }
+\DoxyCodeLine{286     \textcolor{keywordtype}{bool} isSymmetricSkew() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{287 }
+\DoxyCodeLine{288     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{291 \textcolor{comment}{}    enum \mbox{\hyperlink{class_slider_a0ceaddd29269b6ec5a41f35bbb2ff74a}{IncDecButtonMode}}}
+\DoxyCodeLine{292     \{}
+\DoxyCodeLine{293         \mbox{\hyperlink{class_slider_a0ceaddd29269b6ec5a41f35bbb2ff74aabc5b1657cd94c709c9086a463b1d7094}{incDecButtonsNotDraggable}},}
+\DoxyCodeLine{294         \mbox{\hyperlink{class_slider_a0ceaddd29269b6ec5a41f35bbb2ff74aa4877104d807899962ee036571ca93f52}{incDecButtonsDraggable\_AutoDirection}},}
+\DoxyCodeLine{295         \mbox{\hyperlink{class_slider_a0ceaddd29269b6ec5a41f35bbb2ff74aa19d0b1bdc13c1c673e382045c023868b}{incDecButtonsDraggable\_Horizontal}},}
+\DoxyCodeLine{296         incDecButtonsDraggable\_Vertical}
+\DoxyCodeLine{297     \};}
+\DoxyCodeLine{298 }
+\DoxyCodeLine{309     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_a188fa57db0d90f931529dc367e76b9f5}{setIncDecButtonsMode}} (\mbox{\hyperlink{class_slider_a0ceaddd29269b6ec5a41f35bbb2ff74a}{IncDecButtonMode}} \mbox{\hyperlink{png_8h_a3eabae3e1e65723a7ec3445646cb7795}{mode}});}
+\DoxyCodeLine{310 }
+\DoxyCodeLine{311     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{323 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_a5bc748a21e72fe14153bc9fe5ac03e77}{setTextBoxStyle}} (\mbox{\hyperlink{class_slider_ab6d7dff67151c029b9cb53fc40b4412f}{TextEntryBoxPosition}} newPosition,}
+\DoxyCodeLine{324                           \textcolor{keywordtype}{bool} isReadOnly,}
+\DoxyCodeLine{325                           \textcolor{keywordtype}{int} textEntryBoxWidth,}
+\DoxyCodeLine{326                           \textcolor{keywordtype}{int} textEntryBoxHeight);}
+\DoxyCodeLine{327 }
+\DoxyCodeLine{331     \mbox{\hyperlink{class_slider_ab6d7dff67151c029b9cb53fc40b4412f}{TextEntryBoxPosition}} \mbox{\hyperlink{class_slider_a6910e59cbc2aa25a8499a9c7e6593bb1}{getTextBoxPosition}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{332 }
+\DoxyCodeLine{336     \textcolor{keywordtype}{int} getTextBoxWidth() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{337 }
+\DoxyCodeLine{341     \textcolor{keywordtype}{int} getTextBoxHeight() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{342 }
+\DoxyCodeLine{350     \textcolor{keywordtype}{void} setTextBoxIsEditable (\textcolor{keywordtype}{bool} shouldBeEditable);}
+\DoxyCodeLine{351 }
+\DoxyCodeLine{355     \textcolor{keywordtype}{bool} isTextBoxEditable() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{356 }
+\DoxyCodeLine{361     \textcolor{keywordtype}{void} showTextBox();}
+\DoxyCodeLine{362 }
+\DoxyCodeLine{371     \textcolor{keywordtype}{void} hideTextBox (\textcolor{keywordtype}{bool} discardCurrentEditorContents);}
+\DoxyCodeLine{372 }
+\DoxyCodeLine{373 }
+\DoxyCodeLine{374     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{389 \textcolor{comment}{}    \textcolor{keywordtype}{void} setValue (\textcolor{keywordtype}{double} newValue, \mbox{\hyperlink{group__juce__events-messages_ga25a31a4bdc02a0d0adb743e26dd14ba9}{NotificationType}} notification = \mbox{\hyperlink{group__juce__events-messages_gga25a31a4bdc02a0d0adb743e26dd14ba9aa70e4499b93d1738b0ee53de03f7a9c4}{sendNotificationAsync}});}
+\DoxyCodeLine{390 }
+\DoxyCodeLine{392     \textcolor{keywordtype}{double} getValue() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{393 }
+\DoxyCodeLine{400     \mbox{\hyperlink{class_value}{Value}}\& getValueObject() noexcept;}
+\DoxyCodeLine{401 }
+\DoxyCodeLine{402     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{410 \textcolor{comment}{}    \textcolor{keywordtype}{void} setRange (\textcolor{keywordtype}{double} newMinimum,}
+\DoxyCodeLine{411                    \textcolor{keywordtype}{double} newMaximum,}
+\DoxyCodeLine{412                    \textcolor{keywordtype}{double} newInterval = 0);}
+\DoxyCodeLine{413 }
+\DoxyCodeLine{420     \textcolor{keywordtype}{void} setRange (\mbox{\hyperlink{class_range}{Range}}<\textcolor{keywordtype}{double}> newRange, \textcolor{keywordtype}{double} newInterval);}
+\DoxyCodeLine{421 }
+\DoxyCodeLine{426     \textcolor{keywordtype}{void} setNormalisableRange (\mbox{\hyperlink{class_normalisable_range}{NormalisableRange}}<\textcolor{keywordtype}{double}> newNormalisableRange);}
+\DoxyCodeLine{427 }
+\DoxyCodeLine{429     \mbox{\hyperlink{class_range}{Range}}<\textcolor{keywordtype}{double}> getRange() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{430 }
+\DoxyCodeLine{434     \textcolor{keywordtype}{double} getMaximum() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{435 }
+\DoxyCodeLine{439     \textcolor{keywordtype}{double} getMinimum() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{440 }
+\DoxyCodeLine{444     \textcolor{keywordtype}{double} getInterval() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{445 }
+\DoxyCodeLine{446     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{455 \textcolor{comment}{}    \textcolor{keywordtype}{double} getMinValue() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{456 }
+\DoxyCodeLine{463     \mbox{\hyperlink{class_value}{Value}}\& getMinValueObject() noexcept;}
+\DoxyCodeLine{464 }
+\DoxyCodeLine{484     \textcolor{keywordtype}{void} setMinValue (\textcolor{keywordtype}{double} newValue,}
+\DoxyCodeLine{485                       \mbox{\hyperlink{group__juce__events-messages_ga25a31a4bdc02a0d0adb743e26dd14ba9}{NotificationType}} notification = \mbox{\hyperlink{group__juce__events-messages_gga25a31a4bdc02a0d0adb743e26dd14ba9aa70e4499b93d1738b0ee53de03f7a9c4}{sendNotificationAsync}},}
+\DoxyCodeLine{486                       \textcolor{keywordtype}{bool} allowNudgingOfOtherValues = \mbox{\hyperlink{ordinals_8h_a65e9886d74aaee76545e83dd09011727}{false}});}
+\DoxyCodeLine{487 }
+\DoxyCodeLine{496     \textcolor{keywordtype}{double} getMaxValue() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{497 }
+\DoxyCodeLine{504     \mbox{\hyperlink{class_value}{Value}}\& getMaxValueObject() noexcept;}
+\DoxyCodeLine{505 }
+\DoxyCodeLine{525     \textcolor{keywordtype}{void} setMaxValue (\textcolor{keywordtype}{double} newValue,}
+\DoxyCodeLine{526                       \mbox{\hyperlink{group__juce__events-messages_ga25a31a4bdc02a0d0adb743e26dd14ba9}{NotificationType}} notification = \mbox{\hyperlink{group__juce__events-messages_gga25a31a4bdc02a0d0adb743e26dd14ba9aa70e4499b93d1738b0ee53de03f7a9c4}{sendNotificationAsync}},}
+\DoxyCodeLine{527                       \textcolor{keywordtype}{bool} allowNudgingOfOtherValues = \mbox{\hyperlink{ordinals_8h_a65e9886d74aaee76545e83dd09011727}{false}});}
+\DoxyCodeLine{528 }
+\DoxyCodeLine{545     \textcolor{keywordtype}{void} setMinAndMaxValues (\textcolor{keywordtype}{double} newMinValue, \textcolor{keywordtype}{double} newMaxValue,}
+\DoxyCodeLine{546                              \mbox{\hyperlink{group__juce__events-messages_ga25a31a4bdc02a0d0adb743e26dd14ba9}{NotificationType}} notification = \mbox{\hyperlink{group__juce__events-messages_gga25a31a4bdc02a0d0adb743e26dd14ba9aa70e4499b93d1738b0ee53de03f7a9c4}{sendNotificationAsync}});}
+\DoxyCodeLine{547 }
+\DoxyCodeLine{548     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{556 \textcolor{comment}{}    class \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_slider_1_1_listener}{Listener}}}
+\DoxyCodeLine{557     \{}
+\DoxyCodeLine{558     \textcolor{keyword}{public}:}
+\DoxyCodeLine{559         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{561 \textcolor{comment}{}        \textcolor{keyword}{virtual} \mbox{\hyperlink{class_slider_1_1_listener_aeff31595e18ef67e35c1bdd4b74b33e2}{\string~Listener}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{562 }
+\DoxyCodeLine{563         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{573 \textcolor{comment}{}        \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_1_1_listener_a127bfe68835dc3e584cf3c2a427a27e5}{sliderValueChanged}} (\mbox{\hyperlink{class_slider}{Slider}}* \mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca10bf08f0bbd6689475be65b4ae441bd9}{slider}}) = 0;}
+\DoxyCodeLine{574 }
+\DoxyCodeLine{575         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{584 \textcolor{comment}{}        \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_1_1_listener_a47d244924786c6a047c81c1a05f21dc0}{sliderDragStarted}} (\mbox{\hyperlink{class_slider}{Slider}}*) \{\}}
+\DoxyCodeLine{585 }
+\DoxyCodeLine{589         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_1_1_listener_a39fd22d0de8881350b786c98f70efe57}{sliderDragEnded}} (\mbox{\hyperlink{class_slider}{Slider}}*) \{\}}
+\DoxyCodeLine{590     \};}
+\DoxyCodeLine{591 }
+\DoxyCodeLine{593     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_a261f4886ed27ab0f94b1cfb6e9f44011}{addListener}} (\mbox{\hyperlink{class_slider_1_1_listener}{Listener}}* listener);}
+\DoxyCodeLine{594 }
+\DoxyCodeLine{596     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_a846b68f0fe1624563399e540e38b4609}{removeListener}} (\mbox{\hyperlink{class_slider_1_1_listener}{Listener}}* listener);}
+\DoxyCodeLine{597 }
+\DoxyCodeLine{598     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{600 \textcolor{comment}{}    \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}}()> \mbox{\hyperlink{class_slider_a680d007f6a824a28a60aa05b4045e794}{onValueChange}};}
+\DoxyCodeLine{601 }
+\DoxyCodeLine{603     \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}}()> \mbox{\hyperlink{class_slider_ae455ecfcc65e0644d59ae405c9ca2562}{onDragStart}};}
+\DoxyCodeLine{604 }
+\DoxyCodeLine{606     \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}}()> \mbox{\hyperlink{class_slider_a9834a68453371d28a70cb9388529ab11}{onDragEnd}};}
+\DoxyCodeLine{607 }
+\DoxyCodeLine{609     \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<double (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\&)> \mbox{\hyperlink{class_slider_a43c8424888dca4599d52304cb7496118}{valueFromTextFunction}};}
+\DoxyCodeLine{610 }
+\DoxyCodeLine{612     \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\mbox{\hyperlink{class_string}{String}} (\textcolor{keywordtype}{double})> \mbox{\hyperlink{class_slider_adb57f6910241e21118926bfe87a1fa31}{textFromValueFunction}};}
+\DoxyCodeLine{613 }
+\DoxyCodeLine{614     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{625 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_a5fa32203d061a831c34a930d8084e550}{setDoubleClickReturnValue}} (\textcolor{keywordtype}{bool} shouldDoubleClickBeEnabled,}
+\DoxyCodeLine{626                                     \textcolor{keywordtype}{double} valueToSetOnDoubleClick,}
+\DoxyCodeLine{627                                     \mbox{\hyperlink{class_modifier_keys}{ModifierKeys}} singleClickModifiers = \mbox{\hyperlink{class_modifier_keys_acdd2a85defa6a705d74e1a63d193678ba06a1a39ebe788d01c5d421f8f472347d}{ModifierKeys::altModifier}});}
+\DoxyCodeLine{628 }
+\DoxyCodeLine{632     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_slider_accd2423167e9b726cb006848b96ab351}{getDoubleClickReturnValue}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{633 }
+\DoxyCodeLine{637     \textcolor{keywordtype}{bool} isDoubleClickReturnEnabled() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{638 }
+\DoxyCodeLine{639     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{648 \textcolor{comment}{}    \textcolor{keywordtype}{void} setChangeNotificationOnlyOnRelease (\textcolor{keywordtype}{bool} onlyNotifyOnRelease);}
+\DoxyCodeLine{649 }
+\DoxyCodeLine{659     \textcolor{keywordtype}{void} setSliderSnapsToMousePosition (\textcolor{keywordtype}{bool} shouldSnapToMouse);}
+\DoxyCodeLine{660 }
+\DoxyCodeLine{662     \textcolor{keywordtype}{bool} getSliderSnapsToMousePosition() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{663 }
+\DoxyCodeLine{680     \textcolor{keywordtype}{void} setPopupDisplayEnabled (\textcolor{keywordtype}{bool} shouldShowOnMouseDrag,}
+\DoxyCodeLine{681                                  \textcolor{keywordtype}{bool} shouldShowOnMouseHover,}
+\DoxyCodeLine{682                                  \mbox{\hyperlink{class_component}{Component}}* parentComponentToUse,}
+\DoxyCodeLine{683                                  \textcolor{keywordtype}{int} hoverTimeout = 2000);}
+\DoxyCodeLine{684 }
+\DoxyCodeLine{689     \mbox{\hyperlink{class_component}{Component}}* getCurrentPopupDisplay() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{690 }
+\DoxyCodeLine{698     \textcolor{keywordtype}{void} setPopupMenuEnabled (\textcolor{keywordtype}{bool} menuEnabled);}
+\DoxyCodeLine{699 }
+\DoxyCodeLine{703     \textcolor{keywordtype}{void} setScrollWheelEnabled (\textcolor{keywordtype}{bool} \mbox{\hyperlink{namespacegl_a6dfcb2772a382ca14a671d9869edce40}{enabled}});}
+\DoxyCodeLine{704 }
+\DoxyCodeLine{706     \textcolor{keywordtype}{bool} isScrollWheelEnabled() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{707 }
+\DoxyCodeLine{713     \textcolor{keywordtype}{int} getThumbBeingDragged() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{714 }
+\DoxyCodeLine{715     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{719 \textcolor{comment}{}    virtual \textcolor{keywordtype}{void} startedDragging();}
+\DoxyCodeLine{720 }
+\DoxyCodeLine{724     virtual \textcolor{keywordtype}{void} stoppedDragging();}
+\DoxyCodeLine{725 }
+\DoxyCodeLine{729     virtual \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaefa5337f5ce957a9403e2eb59d591ffca0e58a4fa4b8e6bc7353a97f4761f776f}{valueChanged}}();}
+\DoxyCodeLine{730 }
+\DoxyCodeLine{731     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{740 \textcolor{comment}{}    virtual \textcolor{keywordtype}{double} getValueFromText (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}}\& text);}
+\DoxyCodeLine{741 }
+\DoxyCodeLine{752     virtual \mbox{\hyperlink{class_string}{String}} getTextFromValue (\textcolor{keywordtype}{double} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}});}
+\DoxyCodeLine{753 }
+\DoxyCodeLine{761     \textcolor{keywordtype}{void} setTextValueSuffix (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}}\& suffix);}
+\DoxyCodeLine{762 }
+\DoxyCodeLine{764     \mbox{\hyperlink{class_string}{String}} getTextValueSuffix() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{765 }
+\DoxyCodeLine{773     \textcolor{keywordtype}{int} getNumDecimalPlacesToDisplay() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{774 }
+\DoxyCodeLine{780     \textcolor{keywordtype}{void} setNumDecimalPlacesToDisplay (\textcolor{keywordtype}{int} decimalPlacesToDisplay);}
+\DoxyCodeLine{781 }
+\DoxyCodeLine{782     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{794 \textcolor{comment}{}    virtual \textcolor{keywordtype}{double} proportionOfLengthToValue (\textcolor{keywordtype}{double} proportion);}
+\DoxyCodeLine{795 }
+\DoxyCodeLine{809     virtual \textcolor{keywordtype}{double} valueToProportionOfLength (\textcolor{keywordtype}{double} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}});}
+\DoxyCodeLine{810 }
+\DoxyCodeLine{820     \textcolor{keywordtype}{float} getPositionOfValue (\textcolor{keywordtype}{double} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{821 }
+\DoxyCodeLine{822     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{835 \textcolor{comment}{}    virtual \textcolor{keywordtype}{double} snapValue (\textcolor{keywordtype}{double} attemptedValue, \mbox{\hyperlink{class_slider_a42fd96ac0f5dca7e6942022c9a75cbde}{DragMode}} dragMode);}
+\DoxyCodeLine{836 }
+\DoxyCodeLine{837 }
+\DoxyCodeLine{838     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{842 \textcolor{comment}{}    \textcolor{keywordtype}{void} updateText();}
+\DoxyCodeLine{843 }
+\DoxyCodeLine{845     \textcolor{keywordtype}{bool} isHorizontal() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{847     \textcolor{keywordtype}{bool} isVertical() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{849     \textcolor{keywordtype}{bool} isRotary() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{851     \textcolor{keywordtype}{bool} isBar() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{853     \textcolor{keywordtype}{bool} isTwoValue() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{855     \textcolor{keywordtype}{bool} isThreeValue() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{856 }
+\DoxyCodeLine{857     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{865 \textcolor{comment}{}    enum \mbox{\hyperlink{class_slider_a1012002c53381ccc7c1fe7e604a75f44}{ColourIds}}}
+\DoxyCodeLine{866     \{}
+\DoxyCodeLine{867         backgroundColourId          = 0x1001200,  }
+\DoxyCodeLine{868         thumbColourId               = 0x1001300,  }
+\DoxyCodeLine{870         trackColourId               = 0x1001310,  }
+\DoxyCodeLine{871         rotarySliderFillColourId    = 0x1001311,  }
+\DoxyCodeLine{872         rotarySliderOutlineColourId = 0x1001312,  }
+\DoxyCodeLine{874         textBoxTextColourId         = 0x1001400,  }
+\DoxyCodeLine{875         textBoxBackgroundColourId   = 0x1001500,  }
+\DoxyCodeLine{876         textBoxHighlightColourId    = 0x1001600,  }
+\DoxyCodeLine{877         textBoxOutlineColourId      = 0x1001700   }
+\DoxyCodeLine{878     \};}
+\DoxyCodeLine{879 }
+\DoxyCodeLine{880     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{884 \textcolor{comment}{}    \textcolor{keyword}{struct }\mbox{\hyperlink{struct_slider_1_1_slider_layout}{SliderLayout}}}
+\DoxyCodeLine{885     \{}
+\DoxyCodeLine{886         \mbox{\hyperlink{class_rectangle}{Rectangle<int>}} \mbox{\hyperlink{struct_slider_1_1_slider_layout_a40ee690d7af050cd1d59b75142234817}{sliderBounds}};}
+\DoxyCodeLine{887         \mbox{\hyperlink{class_rectangle}{Rectangle<int>}} \mbox{\hyperlink{struct_slider_1_1_slider_layout_ac5d776afbb9146ffd43a15f48aedaf24}{textBoxBounds}};}
+\DoxyCodeLine{888     \};}
+\DoxyCodeLine{889 }
+\DoxyCodeLine{890     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{898 \textcolor{comment}{}    \textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_slider_1_1_scoped_drag_notification}{ScopedDragNotification}}}
+\DoxyCodeLine{899     \{}
+\DoxyCodeLine{900     \textcolor{keyword}{public}:}
+\DoxyCodeLine{901         \textcolor{keyword}{explicit} \mbox{\hyperlink{class_slider_1_1_scoped_drag_notification}{ScopedDragNotification}} (\mbox{\hyperlink{class_slider}{Slider}}\&);}
+\DoxyCodeLine{902         \mbox{\hyperlink{class_slider_1_1_scoped_drag_notification}{\string~ScopedDragNotification}}();}
+\DoxyCodeLine{903 }
+\DoxyCodeLine{904     \textcolor{keyword}{private}:}
+\DoxyCodeLine{905         \mbox{\hyperlink{class_slider}{Slider}}\& sliderBeingDragged;}
+\DoxyCodeLine{906 }
+\DoxyCodeLine{907         \mbox{\hyperlink{group__juce__core-system_ga599c5e38096f3427fea328a9deb3fde7}{JUCE\_DECLARE\_NON\_MOVEABLE}} (\mbox{\hyperlink{class_slider_1_1_scoped_drag_notification}{ScopedDragNotification}})}
+\DoxyCodeLine{908         \mbox{\hyperlink{group__juce__core-system_ga6ab7a603bf4435c7cb286b1744366eb2}{JUCE\_DECLARE\_NON\_COPYABLE}} (\mbox{\hyperlink{class_slider_1_1_scoped_drag_notification}{ScopedDragNotification}})}
+\DoxyCodeLine{909     \};}
+\DoxyCodeLine{910 }
+\DoxyCodeLine{911     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{915 \textcolor{comment}{}    \textcolor{keyword}{struct }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{struct_slider_1_1_look_and_feel_methods}{LookAndFeelMethods}}}
+\DoxyCodeLine{916     \{}
+\DoxyCodeLine{917         \textcolor{keyword}{virtual} \mbox{\hyperlink{struct_slider_1_1_look_and_feel_methods_a8f665bb72b9feaccae15fbbb62b50cb1}{\string~LookAndFeelMethods}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{918 }
+\DoxyCodeLine{919         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{920         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_slider_1_1_look_and_feel_methods_a92784d178fa74a9bce8223f248362f60}{drawLinearSlider}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&,}
+\DoxyCodeLine{921                                        \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}},}
+\DoxyCodeLine{922                                        \textcolor{keywordtype}{float} sliderPos,}
+\DoxyCodeLine{923                                        \textcolor{keywordtype}{float} minSliderPos,}
+\DoxyCodeLine{924                                        \textcolor{keywordtype}{float} maxSliderPos,}
+\DoxyCodeLine{925                                        \textcolor{keyword}{const} \mbox{\hyperlink{class_slider_af1caee82552143dd9ff0fc9f0cdc0888}{Slider::SliderStyle}},}
+\DoxyCodeLine{926                                        \mbox{\hyperlink{class_slider}{Slider}}\&) = 0;}
+\DoxyCodeLine{927 }
+\DoxyCodeLine{928         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_slider_1_1_look_and_feel_methods_a7aafae027e7ee643180231f86d0fe71d}{drawLinearSliderBackground}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&,}
+\DoxyCodeLine{929                                                  \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}},}
+\DoxyCodeLine{930                                                  \textcolor{keywordtype}{float} sliderPos,}
+\DoxyCodeLine{931                                                  \textcolor{keywordtype}{float} minSliderPos,}
+\DoxyCodeLine{932                                                  \textcolor{keywordtype}{float} maxSliderPos,}
+\DoxyCodeLine{933                                                  \textcolor{keyword}{const} \mbox{\hyperlink{class_slider_af1caee82552143dd9ff0fc9f0cdc0888}{Slider::SliderStyle}} style,}
+\DoxyCodeLine{934                                                  \mbox{\hyperlink{class_slider}{Slider}}\&) = 0;}
+\DoxyCodeLine{935 }
+\DoxyCodeLine{936         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_slider_1_1_look_and_feel_methods_a471ede4b5797371acf26638f135acc3a}{drawLinearSliderThumb}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&,}
+\DoxyCodeLine{937                                             \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}},}
+\DoxyCodeLine{938                                             \textcolor{keywordtype}{float} sliderPos,}
+\DoxyCodeLine{939                                             \textcolor{keywordtype}{float} minSliderPos,}
+\DoxyCodeLine{940                                             \textcolor{keywordtype}{float} maxSliderPos,}
+\DoxyCodeLine{941                                             \textcolor{keyword}{const} \mbox{\hyperlink{class_slider_af1caee82552143dd9ff0fc9f0cdc0888}{Slider::SliderStyle}},}
+\DoxyCodeLine{942                                             \mbox{\hyperlink{class_slider}{Slider}}\&) = 0;}
+\DoxyCodeLine{943 }
+\DoxyCodeLine{944         \textcolor{keyword}{virtual} \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_slider_1_1_look_and_feel_methods_a71905c89182698a67da8929077e768f8}{getSliderThumbRadius}} (\mbox{\hyperlink{class_slider}{Slider}}\&) = 0;}
+\DoxyCodeLine{945 }
+\DoxyCodeLine{946         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_slider_1_1_look_and_feel_methods_ae63a9d8adce084cd5dbe02b960c73a9a}{drawRotarySlider}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&,}
+\DoxyCodeLine{947                                        \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}},}
+\DoxyCodeLine{948                                        \textcolor{keywordtype}{float} sliderPosProportional,}
+\DoxyCodeLine{949                                        \textcolor{keywordtype}{float} rotaryStartAngle,}
+\DoxyCodeLine{950                                        \textcolor{keywordtype}{float} rotaryEndAngle,}
+\DoxyCodeLine{951                                        \mbox{\hyperlink{class_slider}{Slider}}\&) = 0;}
+\DoxyCodeLine{952 }
+\DoxyCodeLine{953         \textcolor{keyword}{virtual} \mbox{\hyperlink{class_button}{Button}}* \mbox{\hyperlink{struct_slider_1_1_look_and_feel_methods_a4416a9b6c88c9f6c3ee46a94e23f0db9}{createSliderButton}} (\mbox{\hyperlink{class_slider}{Slider}}\&, \textcolor{keywordtype}{bool} isIncrement) = 0;}
+\DoxyCodeLine{954         \textcolor{keyword}{virtual} \mbox{\hyperlink{class_label}{Label}}* \mbox{\hyperlink{struct_slider_1_1_look_and_feel_methods_aac9271843d1d6cf6962e979676eaa486}{createSliderTextBox}} (\mbox{\hyperlink{class_slider}{Slider}}\&) = 0;}
+\DoxyCodeLine{955 }
+\DoxyCodeLine{956         \textcolor{keyword}{virtual} \mbox{\hyperlink{class_image_effect_filter}{ImageEffectFilter}}* \mbox{\hyperlink{struct_slider_1_1_look_and_feel_methods_ad0593d8855b90b1692cd6fa3a84e1c00}{getSliderEffect}} (\mbox{\hyperlink{class_slider}{Slider}}\&) = 0;}
+\DoxyCodeLine{957 }
+\DoxyCodeLine{958         \textcolor{keyword}{virtual} \mbox{\hyperlink{class_font}{Font}} \mbox{\hyperlink{struct_slider_1_1_look_and_feel_methods_a9545cdf02ae98a209d7fc0f3c94014ca}{getSliderPopupFont}} (\mbox{\hyperlink{class_slider}{Slider}}\&) = 0;}
+\DoxyCodeLine{959         \textcolor{keyword}{virtual} \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_slider_1_1_look_and_feel_methods_a26a4070f7f7bff420aac6116d02f44ae}{getSliderPopupPlacement}} (\mbox{\hyperlink{class_slider}{Slider}}\&) = 0;}
+\DoxyCodeLine{960 }
+\DoxyCodeLine{961         \textcolor{keyword}{virtual} \mbox{\hyperlink{struct_slider_1_1_slider_layout}{SliderLayout}} \mbox{\hyperlink{struct_slider_1_1_look_and_feel_methods_afba725a1d8fff70b63fa51775c556d3a}{getSliderLayout}} (\mbox{\hyperlink{class_slider}{Slider}}\&) = 0;}
+\DoxyCodeLine{962     \};}
+\DoxyCodeLine{963 }
+\DoxyCodeLine{964     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{966 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_a443749317634c0080d522d090ae991a5}{paint}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{968     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_a1aaa7af33f6f90a40fbf70a2bbdebc6d}{resized}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{970     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_a66f2c67d6de570fa0d123ae2b9b394f7}{mouseDown}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_mouse_event}{MouseEvent}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{972     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_a064b6ee8d376cbce87b940b9d17c2254}{mouseUp}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_mouse_event}{MouseEvent}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{974     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_a6e117b6ba93f9a1954c52be4b4dfc873}{mouseDrag}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_mouse_event}{MouseEvent}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{976     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_a51130e5125d8483fc45fe32c958bf0cc}{mouseDoubleClick}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_mouse_event}{MouseEvent}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{978     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_a9b7ee511b24ee74065f92820423f0c46}{mouseWheelMove}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_mouse_event}{MouseEvent}}\&, \textcolor{keyword}{const} \mbox{\hyperlink{struct_mouse_wheel_details}{MouseWheelDetails}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{980     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_a50bfc1f4bc764cd7db7d25abed9e0198}{modifierKeysChanged}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_modifier_keys}{ModifierKeys}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{982     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_a70afdb08e7efc4a15e9a6969fae77a63}{lookAndFeelChanged}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{984     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_a5d5dddfd7d8f254d9097724493878cc1}{enablementChanged}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{986     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_a23002c35f14b921ec01069536c0aaef3}{focusOfChildComponentChanged}} (\mbox{\hyperlink{class_component_a7fd775ea6b1190d5d694fdffa539dfac}{FocusChangeType}}) \textcolor{keyword}{override};}
+\DoxyCodeLine{988     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_a35de5e477dd21199f8ed3eb9c0b05f72}{colourChanged}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{990     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_a8bde451e3f93c5fcc62df99505f831ec}{mouseMove}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_mouse_event}{MouseEvent}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{992     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_a7da34fe608f318b409b60baf3439e472}{mouseExit}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_mouse_event}{MouseEvent}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{994     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_a04dd1258945e2106b4e95647a0a2fc22}{mouseEnter}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_mouse_event}{MouseEvent}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{995 }
+\DoxyCodeLine{996     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{997 \textcolor{preprocessor}{   \#ifndef DOXYGEN}}
+\DoxyCodeLine{998     \textcolor{comment}{// These methods' bool parameters have changed: see the new method signature.}}
+\DoxyCodeLine{999     [[deprecated]] \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_a4d04c930d8c0c607d7ddc572b847ddef}{setValue}} (\textcolor{keywordtype}{double}, \textcolor{keywordtype}{bool});}
+\DoxyCodeLine{1000     [[deprecated]] \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_af278673e3335269563821f74ea2b62ce}{setValue}} (\textcolor{keywordtype}{double}, \textcolor{keywordtype}{bool}, \textcolor{keywordtype}{bool});}
+\DoxyCodeLine{1001     [[deprecated]] \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_abcf5a0fdae0f57bd9f7cf36287ce2116}{setMinValue}} (\textcolor{keywordtype}{double}, \textcolor{keywordtype}{bool}, \textcolor{keywordtype}{bool}, \textcolor{keywordtype}{bool});}
+\DoxyCodeLine{1002     [[deprecated]] \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_aef2033d1a490b1dffdb29ee8d24c16ac}{setMinValue}} (\textcolor{keywordtype}{double}, \textcolor{keywordtype}{bool}, \textcolor{keywordtype}{bool});}
+\DoxyCodeLine{1003     [[deprecated]] \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_ac656b15f35edcfb6a0d650fbe6be7ed5}{setMinValue}} (\textcolor{keywordtype}{double}, \textcolor{keywordtype}{bool});}
+\DoxyCodeLine{1004     [[deprecated]] \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_a26bc23a092be3cf7fcba9e59daea4200}{setMaxValue}} (\textcolor{keywordtype}{double}, \textcolor{keywordtype}{bool}, \textcolor{keywordtype}{bool}, \textcolor{keywordtype}{bool});}
+\DoxyCodeLine{1005     [[deprecated]] \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_a0b759725dd4b4031cbd7fb9a05d8cf31}{setMaxValue}} (\textcolor{keywordtype}{double}, \textcolor{keywordtype}{bool}, \textcolor{keywordtype}{bool});}
+\DoxyCodeLine{1006     [[deprecated]] \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_a8ac57fd6c9a3b4a836f6ecc37ad63136}{setMaxValue}} (\textcolor{keywordtype}{double}, \textcolor{keywordtype}{bool});}
+\DoxyCodeLine{1007     [[deprecated]] \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_ac29095be2ece6ab21aadf3fd67623cce}{setMinAndMaxValues}} (\textcolor{keywordtype}{double}, \textcolor{keywordtype}{double}, \textcolor{keywordtype}{bool}, \textcolor{keywordtype}{bool});}
+\DoxyCodeLine{1008     [[deprecated]] \textcolor{keywordtype}{void} \mbox{\hyperlink{class_slider_ab5e0c0d0b4b6399afe86d01e1b245f11}{setMinAndMaxValues}} (\textcolor{keywordtype}{double}, \textcolor{keywordtype}{double}, \textcolor{keywordtype}{bool});}
+\DoxyCodeLine{1009 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{1010 }
+\DoxyCodeLine{1011 \textcolor{keyword}{private}:}
+\DoxyCodeLine{1012     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1013     \mbox{\hyperlink{group__juce__core-system_ga8d339dd1e85e6fbefaf7638692d085c2}{JUCE\_PUBLIC\_IN\_DLL\_BUILD}} (\textcolor{keyword}{class} Pimpl)}
+\DoxyCodeLine{1014     std::unique\_ptr<Pimpl> pimpl;}
+\DoxyCodeLine{1015 }
+\DoxyCodeLine{1016     std::unique\_ptr<AccessibilityHandler> createAccessibilityHandler() \textcolor{keyword}{override};}
+\DoxyCodeLine{1017     \textcolor{keywordtype}{void} init (\mbox{\hyperlink{class_slider_af1caee82552143dd9ff0fc9f0cdc0888}{SliderStyle}}, \mbox{\hyperlink{class_slider_ab6d7dff67151c029b9cb53fc40b4412f}{TextEntryBoxPosition}});}
+\DoxyCodeLine{1018 }
+\DoxyCodeLine{1019     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_slider}{Slider}})}
+\DoxyCodeLine{1020 \};}
+\DoxyCodeLine{1021 }
+\DoxyCodeLine{1022 }
+\DoxyCodeLine{1023  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{1024 }
+
+\end{DoxyCode}

@@ -1,0 +1,823 @@
+\hypertarget{juce__mac___video_8h_source}{}\doxysection{juce\+\_\+mac\+\_\+\+Video.\+h}
+\label{juce__mac___video_8h_source}\index{build/juce\_video/native/juce\_mac\_Video.h@{build/juce\_video/native/juce\_mac\_Video.h}}
+\mbox{\hyperlink{juce__mac___video_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{5 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{6 \textcolor{comment}{}}
+\DoxyCodeLine{7 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{8 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{9 \textcolor{comment}{}}
+\DoxyCodeLine{10 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{11 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{12 \textcolor{comment}{}}
+\DoxyCodeLine{13 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{14 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{15 \textcolor{comment}{}}
+\DoxyCodeLine{16 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{17 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{18 \textcolor{comment}{}}
+\DoxyCodeLine{19 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{20 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{21 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{24 \textcolor{comment}{*/}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#if JUCE\_MAC}}
+\DoxyCodeLine{27 \textcolor{keyword}{using} \mbox{\hyperlink{juce__mac___video_8h_ab8f3006ffd15453e8934ac2f988a4c2b}{Base}} = NSViewComponent;}
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{29 \textcolor{keyword}{using} \mbox{\hyperlink{juce__mac___video_8h_ab8f3006ffd15453e8934ac2f988a4c2b}{Base}} = UIViewComponent;}
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_video_component_1_1_pimpl}{VideoComponent::Pimpl}}   : \textcolor{keyword}{public} \mbox{\hyperlink{juce__mac___video_8h_ab8f3006ffd15453e8934ac2f988a4c2b}{Base}}}
+\DoxyCodeLine{33 \{}
+\DoxyCodeLine{34     \mbox{\hyperlink{struct_video_component_1_1_pimpl_a42c0e5b0d8c9dfa66972690920de3eb1}{Pimpl}} (\mbox{\hyperlink{class_video_component}{VideoComponent}}\& ownerToUse, \textcolor{keywordtype}{bool} useNativeControlsIfAvailable)}
+\DoxyCodeLine{35         : owner (ownerToUse),}
+\DoxyCodeLine{36           playerController (*this, useNativeControlsIfAvailable)}
+\DoxyCodeLine{37     \{}
+\DoxyCodeLine{38         \mbox{\hyperlink{class_component_ac8483af6fe4dc3254e7176df0d8e9f7a}{setVisible}} (\textcolor{keyword}{true});}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40         \textcolor{keyword}{auto}* view = playerController.getView();}
+\DoxyCodeLine{41         setView (view);}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43 \textcolor{preprocessor}{       \#if JUCE\_MAC}}
+\DoxyCodeLine{44         [view setNextResponder: [view superview]];}
+\DoxyCodeLine{45         [view setWantsLayer: YES];}
+\DoxyCodeLine{46 \textcolor{preprocessor}{       \#endif}}
+\DoxyCodeLine{47     \}}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49     \mbox{\hyperlink{struct_video_component_1_1_pimpl_aeb4230092894dc25ea0702705dfcb058}{\string~Pimpl}}()}
+\DoxyCodeLine{50     \{}
+\DoxyCodeLine{51         \mbox{\hyperlink{struct_video_component_1_1_pimpl_a57ed4d8dd7b190f44719e042ef101cba}{close}}();}
+\DoxyCodeLine{52         setView (nil);}
+\DoxyCodeLine{53     \}}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55     \mbox{\hyperlink{class_result}{Result}} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a239cbe367565ec31ca4c3b9a71c68595}{load}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& file)}
+\DoxyCodeLine{56     \{}
+\DoxyCodeLine{57         \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}} = \mbox{\hyperlink{struct_video_component_1_1_pimpl_a239cbe367565ec31ca4c3b9a71c68595}{load}} (\mbox{\hyperlink{namespacejuce_a2b866db1760192d8951943ae845be95a}{createNSURLFromFile}} (file));}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59         \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}}.wasOk())}
+\DoxyCodeLine{60             \mbox{\hyperlink{struct_video_component_1_1_pimpl_af56d094c7a0a45f8ddd0c1e11d861f0a}{currentFile}} = file;}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}};}
+\DoxyCodeLine{63     \}}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65     \mbox{\hyperlink{class_result}{Result}} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a5a8437eff8f1099b1cc693709c32869f}{load}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_u_r_l}{URL}}\& url)}
+\DoxyCodeLine{66     \{}
+\DoxyCodeLine{67         \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}} = \mbox{\hyperlink{struct_video_component_1_1_pimpl_a239cbe367565ec31ca4c3b9a71c68595}{load}} ([NSURL URLWithString: \mbox{\hyperlink{namespacejuce_aad733be42bb4bbaddc08213b864faf9c}{juceStringToNS}} (url.\mbox{\hyperlink{class_u_r_l_a4f8b7e5a18bc152daaad5192c8d0b003}{toString}} (\textcolor{keyword}{true}))]);}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69         \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}}.wasOk())}
+\DoxyCodeLine{70             \mbox{\hyperlink{struct_video_component_1_1_pimpl_a66ef9a9d2fcfac60a19436f489d12d14}{currentURL}} = url;}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}};}
+\DoxyCodeLine{73     \}}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75     \mbox{\hyperlink{class_result}{Result}} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a34a04ea2c4edc6c80edb6078507246a0}{load}} (NSURL* url)}
+\DoxyCodeLine{76     \{}
+\DoxyCodeLine{77         \textcolor{keywordflow}{if} (url != nil)}
+\DoxyCodeLine{78         \{}
+\DoxyCodeLine{79             \mbox{\hyperlink{struct_video_component_1_1_pimpl_a57ed4d8dd7b190f44719e042ef101cba}{close}}();}
+\DoxyCodeLine{80             \textcolor{keywordflow}{return} playerController.load (url);}
+\DoxyCodeLine{81         \}}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_result_a2b51de8f6f8c27c3de29f9da5cce8f75}{Result::fail}} (\textcolor{stringliteral}{"{}Couldn't open movie"{}});}
+\DoxyCodeLine{84     \}}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a9ef59ce888292e13332107b41acb5d6e}{loadAsync}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_u_r_l}{URL}}\& url, \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\textcolor{keywordtype}{void} (\textcolor{keyword}{const} \mbox{\hyperlink{class_u_r_l}{URL}}\&, \mbox{\hyperlink{class_result}{Result}})> \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}})}
+\DoxyCodeLine{87     \{}
+\DoxyCodeLine{88         \textcolor{keywordflow}{if} (url.\mbox{\hyperlink{class_u_r_l_a2c4969b6498c3323b02977218ca03989}{isEmpty}}())}
+\DoxyCodeLine{89         \{}
+\DoxyCodeLine{90             \mbox{\hyperlink{group__juce__core-system_gadc044ce5efecbecf2f5a44cd00db67b3}{jassertfalse}};}
+\DoxyCodeLine{91             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{92         \}}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{94         \mbox{\hyperlink{struct_video_component_1_1_pimpl_a66ef9a9d2fcfac60a19436f489d12d14}{currentURL}} = url;}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{96         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (\mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}} != \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98         loadFinishedCallback = \mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (\mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}});}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100         playerController.loadAsync (url);}
+\DoxyCodeLine{101     \}}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a57ed4d8dd7b190f44719e042ef101cba}{close}}()}
+\DoxyCodeLine{104     \{}
+\DoxyCodeLine{105         \mbox{\hyperlink{struct_video_component_1_1_pimpl_aab986910175fd243e55ea209ef28f4cf}{stop}}();}
+\DoxyCodeLine{106         playerController.close();}
+\DoxyCodeLine{107         \mbox{\hyperlink{struct_video_component_1_1_pimpl_af56d094c7a0a45f8ddd0c1e11d861f0a}{currentFile}} = \mbox{\hyperlink{class_file}{File}}();}
+\DoxyCodeLine{108         \mbox{\hyperlink{struct_video_component_1_1_pimpl_a66ef9a9d2fcfac60a19436f489d12d14}{currentURL}} = \{\};}
+\DoxyCodeLine{109     \}}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111     \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_video_component_1_1_pimpl_ae4196459a308062879eed776c0282fb3}{isOpen}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept        \{ \textcolor{keywordflow}{return} playerController.getPlayer() != nil; \}}
+\DoxyCodeLine{112     \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a5bb75c9361b7eb71d97935bf60481166}{isPlaying}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept     \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a75b9306bb106c987fe662e52329bb3c9}{getSpeed}}() != 0; \}}
+\DoxyCodeLine{113 }
+\DoxyCodeLine{114     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a32bd04d67e5cd6dabbe0c8b5f1dae917}{play}}() noexcept                \{ [playerController.getPlayer() \mbox{\hyperlink{struct_video_component_1_1_pimpl_a32bd04d67e5cd6dabbe0c8b5f1dae917}{play}}]; \mbox{\hyperlink{struct_video_component_1_1_pimpl_a26d540a1d9a8d40ae650af25c3b7fa64}{setSpeed}} (playSpeedMult); \}}
+\DoxyCodeLine{115     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_component_1_1_pimpl_afd92d0e2efac5024883c7b191820ad81}{stop}}() noexcept                \{ [playerController.getPlayer() pause]; \}}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_component_1_1_pimpl_aad13ce8cdf4ddc2c816abc2cffd72a09}{setPosition}} (\textcolor{keywordtype}{double} newPosition)}
+\DoxyCodeLine{118     \{}
+\DoxyCodeLine{119         \textcolor{keywordflow}{if} (\textcolor{keyword}{auto}* \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}} = playerController.getPlayer())}
+\DoxyCodeLine{120         \{}
+\DoxyCodeLine{121             CMTime \mbox{\hyperlink{namespacegl_ad0bd70fc9115453f6f5f5ac53accea65}{t}} = \{ (CMTimeValue) (100000.0 * newPosition),}
+\DoxyCodeLine{122                          (CMTimeScale) 100000, kCMTimeFlags\_Valid, \{\} \};}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{124             [\mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}} seekToTime: \mbox{\hyperlink{namespacegl_ad0bd70fc9115453f6f5f5ac53accea65}{t}}}
+\DoxyCodeLine{125           toleranceBefore: kCMTimeZero}
+\DoxyCodeLine{126            toleranceAfter: kCMTimeZero];}
+\DoxyCodeLine{127         \}}
+\DoxyCodeLine{128     \}}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{130     \textcolor{keywordtype}{double} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a1b5c6aaa840823f6cb69a2ad349c4009}{getPosition}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{131 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{132         \textcolor{keywordflow}{if} (\textcolor{keyword}{auto}* \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}} = playerController.getPlayer())}
+\DoxyCodeLine{133             \textcolor{keywordflow}{return} toSeconds ([\mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}} currentTime]);}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135         \textcolor{keywordflow}{return} 0.0;}
+\DoxyCodeLine{136     \}}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{138     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a26d540a1d9a8d40ae650af25c3b7fa64}{setSpeed}} (\textcolor{keywordtype}{double} newSpeed)}
+\DoxyCodeLine{139     \{}
+\DoxyCodeLine{140         playSpeedMult = newSpeed;}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{142         \textcolor{comment}{// Calling non 0.0 speed on a paused player would start it...}}
+\DoxyCodeLine{143         \textcolor{keywordflow}{if} (\mbox{\hyperlink{struct_video_component_1_1_pimpl_a5bb75c9361b7eb71d97935bf60481166}{isPlaying}}())}
+\DoxyCodeLine{144             [playerController.getPlayer() setRate: (float) playSpeedMult];}
+\DoxyCodeLine{145     \}}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{147     \textcolor{keywordtype}{double} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a75b9306bb106c987fe662e52329bb3c9}{getSpeed}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{148 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{149         \textcolor{keywordflow}{if} (\textcolor{keyword}{auto}* \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}} = playerController.getPlayer())}
+\DoxyCodeLine{150             \textcolor{keywordflow}{return} [\mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}} \mbox{\hyperlink{namespacegl_a56ad46db01833cbc116c53b445f5668b}{rate}}];}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{152         \textcolor{keywordflow}{return} 0.0;}
+\DoxyCodeLine{153     \}}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{155     \mbox{\hyperlink{class_rectangle}{Rectangle<int>}} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a6072baa038c7c5bbb5d4fc1e0db94ded}{getNativeSize}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{156 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{157         \textcolor{keywordflow}{if} (\textcolor{keyword}{auto}* \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}} = playerController.getPlayer())}
+\DoxyCodeLine{158         \{}
+\DoxyCodeLine{159             \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}} = [[\mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}} currentItem] presentationSize];}
+\DoxyCodeLine{160             \textcolor{keywordflow}{return} \{ (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}) \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}}.width, (\textcolor{keywordtype}{int}) \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}}.height \};}
+\DoxyCodeLine{161         \}}
+\DoxyCodeLine{162 }
+\DoxyCodeLine{163         \textcolor{keywordflow}{return} \{\};}
+\DoxyCodeLine{164     \}}
+\DoxyCodeLine{165 }
+\DoxyCodeLine{166     \textcolor{keywordtype}{double} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a53f30af1fe6d9fba92655dc9cbbbf387}{getDuration}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{167 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{168         \textcolor{keywordflow}{if} (\textcolor{keyword}{auto}* \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}} = playerController.getPlayer())}
+\DoxyCodeLine{169             \textcolor{keywordflow}{return} toSeconds ([[\mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}} currentItem] duration]);}
+\DoxyCodeLine{170 }
+\DoxyCodeLine{171         \textcolor{keywordflow}{return} 0.0;}
+\DoxyCodeLine{172     \}}
+\DoxyCodeLine{173 }
+\DoxyCodeLine{174     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a821b3c879008a719797b62e498cf2f18}{setVolume}} (\textcolor{keywordtype}{float} newVolume)}
+\DoxyCodeLine{175     \{}
+\DoxyCodeLine{176         [playerController.getPlayer() \mbox{\hyperlink{struct_video_component_1_1_pimpl_a821b3c879008a719797b62e498cf2f18}{setVolume}}: newVolume];}
+\DoxyCodeLine{177     \}}
+\DoxyCodeLine{178 }
+\DoxyCodeLine{179     \textcolor{keywordtype}{float} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a2c0b3eaa8fc5e364dc5086486ac517d5}{getVolume}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{180 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{181         \textcolor{keywordflow}{if} (\textcolor{keyword}{auto}* \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}} = playerController.getPlayer())}
+\DoxyCodeLine{182             \textcolor{keywordflow}{return} [\mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}} volume];}
+\DoxyCodeLine{183 }
+\DoxyCodeLine{184         \textcolor{keywordflow}{return} 0.0f;}
+\DoxyCodeLine{185     \}}
+\DoxyCodeLine{186 }
+\DoxyCodeLine{187     \mbox{\hyperlink{class_file}{File}} \mbox{\hyperlink{struct_video_component_1_1_pimpl_af56d094c7a0a45f8ddd0c1e11d861f0a}{currentFile}};}
+\DoxyCodeLine{188     \mbox{\hyperlink{class_u_r_l}{URL}} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a66ef9a9d2fcfac60a19436f489d12d14}{currentURL}};}
+\DoxyCodeLine{189 }
+\DoxyCodeLine{190 \textcolor{keyword}{private}:}
+\DoxyCodeLine{191     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{192     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Derived>}
+\DoxyCodeLine{193     \textcolor{keyword}{class }PlayerControllerBase}
+\DoxyCodeLine{194     \{}
+\DoxyCodeLine{195     \textcolor{keyword}{public}:}
+\DoxyCodeLine{196         \string~PlayerControllerBase()}
+\DoxyCodeLine{197         \{}
+\DoxyCodeLine{198             detachPlayerStatusObserver();}
+\DoxyCodeLine{199             detachPlaybackObserver();}
+\DoxyCodeLine{200         \}}
+\DoxyCodeLine{201 }
+\DoxyCodeLine{202     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{203         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{204         \textcolor{keyword}{struct }\mbox{\hyperlink{struct_video_component_1_1_pimpl_1_1_player_controller_base_1_1_juce_player_status_observer_class}{JucePlayerStatusObserverClass}} : \textcolor{keyword}{public} ObjCClass<NSObject>}
+\DoxyCodeLine{205         \{}
+\DoxyCodeLine{206             \mbox{\hyperlink{struct_video_component_1_1_pimpl_1_1_player_controller_base_1_1_juce_player_status_observer_class_ae2e9c9386eb2d027a8c5c0304c07ba6b}{JucePlayerStatusObserverClass}}()    : \mbox{\hyperlink{structjuce_1_1_obj_c_class_a28cf8c5e159f3b4d63ec52c85cc2c6c1}{ObjCClass}}<NSObject> (\textcolor{stringliteral}{"{}JucePlayerStatusObserverClass\_"{}})}
+\DoxyCodeLine{207             \{}
+\DoxyCodeLine{208                 \mbox{\hyperlink{group__juce__core-system_ga0112339834a6548e4123e394b9ed95e2}{JUCE\_BEGIN\_IGNORE\_WARNINGS\_GCC\_LIKE}} (\textcolor{stringliteral}{"{}-\/Wundeclared-\/selector"{}})}
+\DoxyCodeLine{209                 \mbox{\hyperlink{structjuce_1_1_obj_c_class_a87199297ae8cce686453812b04c45549}{addMethod}} (\textcolor{keyword}{@selector} (observeValueForKeyPath:ofObject:change:context:), valueChanged);}
+\DoxyCodeLine{210                 \mbox{\hyperlink{group__juce__core-system_ga157f2229764b17137d8814bec95df109}{JUCE\_END\_IGNORE\_WARNINGS\_GCC\_LIKE}}}
+\DoxyCodeLine{211 }
+\DoxyCodeLine{212                 addIvar<PlayerAsyncInitialiser*> (\textcolor{stringliteral}{"{}owner"{}});}
+\DoxyCodeLine{213 }
+\DoxyCodeLine{214                 \mbox{\hyperlink{structjuce_1_1_obj_c_class_aade5ce23c37ad6d3e9d163006628fe03}{registerClass}}();}
+\DoxyCodeLine{215             \}}
+\DoxyCodeLine{216 }
+\DoxyCodeLine{217             \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{218             \textcolor{keyword}{static} PlayerControllerBase\& \mbox{\hyperlink{struct_video_component_1_1_pimpl_1_1_player_controller_base_1_1_juce_player_status_observer_class_a57a724439d47357eb02109ee4d244e2e}{getOwner}} (\textcolor{keywordtype}{id} \textcolor{keyword}{self}) \{ \textcolor{keywordflow}{return} *getIvar<PlayerControllerBase*> (\textcolor{keyword}{self}, \textcolor{stringliteral}{"{}owner"{}}); \}}
+\DoxyCodeLine{219             \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_component_1_1_pimpl_1_1_player_controller_base_1_1_juce_player_status_observer_class_a972c1f23499dffd74dd69ba6c4cd101e}{setOwner}} (\textcolor{keywordtype}{id} \textcolor{keyword}{self}, PlayerControllerBase* \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}}) \{ object\_setInstanceVariable (\textcolor{keyword}{self}, \textcolor{stringliteral}{"{}owner"{}}, \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}}); \}}
+\DoxyCodeLine{220 }
+\DoxyCodeLine{221         \textcolor{keyword}{private}:}
+\DoxyCodeLine{222             \textcolor{keyword}{static} \textcolor{keywordtype}{void} valueChanged (\textcolor{keywordtype}{id} \textcolor{keyword}{self}, \textcolor{keywordtype}{SEL}, NSString* keyPath, \textcolor{keywordtype}{id},}
+\DoxyCodeLine{223                                       NSDictionary<NSString*, id>* change, \textcolor{keywordtype}{void}*)}
+\DoxyCodeLine{224             \{}
+\DoxyCodeLine{225                 \textcolor{keyword}{auto}\& owner = \mbox{\hyperlink{struct_video_component_1_1_pimpl_1_1_player_controller_base_1_1_juce_player_status_observer_class_a57a724439d47357eb02109ee4d244e2e}{getOwner}} (\textcolor{keyword}{self});}
+\DoxyCodeLine{226 }
+\DoxyCodeLine{227                 \textcolor{keywordflow}{if} ([keyPath isEqualToString: \mbox{\hyperlink{namespacejuce_a1c4165db87a8e39c71774976207a824f}{nsStringLiteral}} (\textcolor{stringliteral}{"{}rate"{}})])}
+\DoxyCodeLine{228                 \{}
+\DoxyCodeLine{229                     \textcolor{keyword}{auto} oldRate = [change[NSKeyValueChangeOldKey] floatValue];}
+\DoxyCodeLine{230                     \textcolor{keyword}{auto} newRate = [change[NSKeyValueChangeNewKey] floatValue];}
+\DoxyCodeLine{231 }
+\DoxyCodeLine{232                     \textcolor{keywordflow}{if} (oldRate == 0 \&\& newRate != 0)}
+\DoxyCodeLine{233                         owner.playbackStarted();}
+\DoxyCodeLine{234                     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (oldRate != 0 \&\& newRate == 0)}
+\DoxyCodeLine{235                         owner.playbackStopped();}
+\DoxyCodeLine{236                 \}}
+\DoxyCodeLine{237                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ([keyPath isEqualToString: \mbox{\hyperlink{namespacejuce_a1c4165db87a8e39c71774976207a824f}{nsStringLiteral}} (\textcolor{stringliteral}{"{}status"{}})])}
+\DoxyCodeLine{238                 \{}
+\DoxyCodeLine{239                     \textcolor{keyword}{auto} status = [change[NSKeyValueChangeNewKey] intValue];}
+\DoxyCodeLine{240 }
+\DoxyCodeLine{241                     \textcolor{keywordflow}{if} (status == AVPlayerStatusFailed)}
+\DoxyCodeLine{242                         owner.errorOccurred();}
+\DoxyCodeLine{243                 \}}
+\DoxyCodeLine{244             \}}
+\DoxyCodeLine{245         \};}
+\DoxyCodeLine{246 }
+\DoxyCodeLine{247         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{248         \textcolor{keyword}{struct }\mbox{\hyperlink{struct_video_component_1_1_pimpl_1_1_player_controller_base_1_1_juce_player_item_playback_status_observer_class}{JucePlayerItemPlaybackStatusObserverClass}} : \textcolor{keyword}{public} ObjCClass<NSObject>}
+\DoxyCodeLine{249         \{}
+\DoxyCodeLine{250             \mbox{\hyperlink{struct_video_component_1_1_pimpl_1_1_player_controller_base_1_1_juce_player_item_playback_status_observer_class_ab8b8640bbf2997887a1b3678650fc4e0}{JucePlayerItemPlaybackStatusObserverClass}}()    : \mbox{\hyperlink{structjuce_1_1_obj_c_class_a28cf8c5e159f3b4d63ec52c85cc2c6c1}{ObjCClass}}<NSObject> (\textcolor{stringliteral}{"{}JucePlayerItemPlaybackStatusObserverClass\_"{}})}
+\DoxyCodeLine{251             \{}
+\DoxyCodeLine{252                 \mbox{\hyperlink{group__juce__core-system_ga0112339834a6548e4123e394b9ed95e2}{JUCE\_BEGIN\_IGNORE\_WARNINGS\_GCC\_LIKE}} (\textcolor{stringliteral}{"{}-\/Wundeclared-\/selector"{}})}
+\DoxyCodeLine{253                 \mbox{\hyperlink{structjuce_1_1_obj_c_class_a87199297ae8cce686453812b04c45549}{addMethod}} (\textcolor{keyword}{@selector} (processNotification:), notificationReceived);}
+\DoxyCodeLine{254                 \mbox{\hyperlink{group__juce__core-system_ga157f2229764b17137d8814bec95df109}{JUCE\_END\_IGNORE\_WARNINGS\_GCC\_LIKE}}}
+\DoxyCodeLine{255 }
+\DoxyCodeLine{256                 addIvar<PlayerControllerBase*> (\textcolor{stringliteral}{"{}owner"{}});}
+\DoxyCodeLine{257 }
+\DoxyCodeLine{258                 \mbox{\hyperlink{structjuce_1_1_obj_c_class_aade5ce23c37ad6d3e9d163006628fe03}{registerClass}}();}
+\DoxyCodeLine{259             \}}
+\DoxyCodeLine{260 }
+\DoxyCodeLine{261             \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{262             \textcolor{keyword}{static} PlayerControllerBase\& \mbox{\hyperlink{struct_video_component_1_1_pimpl_1_1_player_controller_base_1_1_juce_player_item_playback_status_observer_class_a5770a2ed672426b7c7b1b44723502bc5}{getOwner}} (\textcolor{keywordtype}{id} \textcolor{keyword}{self}) \{ \textcolor{keywordflow}{return} *getIvar<PlayerControllerBase*> (\textcolor{keyword}{self}, \textcolor{stringliteral}{"{}owner"{}}); \}}
+\DoxyCodeLine{263             \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_component_1_1_pimpl_1_1_player_controller_base_1_1_juce_player_item_playback_status_observer_class_ae9b593dc91fb041d0f73eaa91c7209f7}{setOwner}} (\textcolor{keywordtype}{id} \textcolor{keyword}{self}, PlayerControllerBase* \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}}) \{ object\_setInstanceVariable (\textcolor{keyword}{self}, \textcolor{stringliteral}{"{}owner"{}}, \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}}); \}}
+\DoxyCodeLine{264 }
+\DoxyCodeLine{265         \textcolor{keyword}{private}:}
+\DoxyCodeLine{266             \textcolor{keyword}{static} \textcolor{keywordtype}{void} notificationReceived (\textcolor{keywordtype}{id} \textcolor{keyword}{self}, \textcolor{keywordtype}{SEL}, NSNotification* notification)}
+\DoxyCodeLine{267             \{}
+\DoxyCodeLine{268                 \textcolor{keywordflow}{if} ([notification.name isEqualToString: AVPlayerItemDidPlayToEndTimeNotification])}
+\DoxyCodeLine{269                     \mbox{\hyperlink{struct_video_component_1_1_pimpl_1_1_player_controller_base_1_1_juce_player_item_playback_status_observer_class_a5770a2ed672426b7c7b1b44723502bc5}{getOwner}} (\textcolor{keyword}{self}).playbackReachedEndTime();}
+\DoxyCodeLine{270             \}}
+\DoxyCodeLine{271         \};}
+\DoxyCodeLine{272 }
+\DoxyCodeLine{273         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{274         \textcolor{keyword}{class }\mbox{\hyperlink{class_video_component_1_1_pimpl_1_1_player_controller_base_1_1_player_async_initialiser}{PlayerAsyncInitialiser}}}
+\DoxyCodeLine{275         \{}
+\DoxyCodeLine{276         \textcolor{keyword}{public}:}
+\DoxyCodeLine{277             \mbox{\hyperlink{class_video_component_1_1_pimpl_1_1_player_controller_base_1_1_player_async_initialiser}{PlayerAsyncInitialiser}} (PlayerControllerBase\& ownerToUse)}
+\DoxyCodeLine{278                 : owner (ownerToUse),}
+\DoxyCodeLine{279                   assetKeys ([[NSArray alloc] initWithObjects: \mbox{\hyperlink{namespacejuce_a1c4165db87a8e39c71774976207a824f}{nsStringLiteral}} (\textcolor{stringliteral}{"{}duration"{}}), \mbox{\hyperlink{namespacejuce_a1c4165db87a8e39c71774976207a824f}{nsStringLiteral}} (\textcolor{stringliteral}{"{}tracks"{}}),}
+\DoxyCodeLine{280                                                                \mbox{\hyperlink{namespacejuce_a1c4165db87a8e39c71774976207a824f}{nsStringLiteral}} (\textcolor{stringliteral}{"{}playable"{}}), nil])}
+\DoxyCodeLine{281             \{}
+\DoxyCodeLine{282                 \textcolor{keyword}{static} JucePlayerItemPreparationStatusObserverClass cls;}
+\DoxyCodeLine{283                 playerItemPreparationStatusObserver.reset ([cls.createInstance() init]);}
+\DoxyCodeLine{284                 JucePlayerItemPreparationStatusObserverClass::setOwner (playerItemPreparationStatusObserver.get(), \textcolor{keyword}{this});}
+\DoxyCodeLine{285             \}}
+\DoxyCodeLine{286 }
+\DoxyCodeLine{287             \mbox{\hyperlink{class_video_component_1_1_pimpl_1_1_player_controller_base_1_1_player_async_initialiser}{\string~PlayerAsyncInitialiser}}()}
+\DoxyCodeLine{288             \{}
+\DoxyCodeLine{289                 detachPreparationStatusObserver();}
+\DoxyCodeLine{290             \}}
+\DoxyCodeLine{291 }
+\DoxyCodeLine{292             \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a9ef59ce888292e13332107b41acb5d6e}{loadAsync}} (\mbox{\hyperlink{class_u_r_l}{URL}} url)}
+\DoxyCodeLine{293             \{}
+\DoxyCodeLine{294                 \textcolor{keyword}{auto} nsUrl = [NSURL URLWithString: \mbox{\hyperlink{namespacejuce_aad733be42bb4bbaddc08213b864faf9c}{juceStringToNS}} (url.\mbox{\hyperlink{class_u_r_l_a4f8b7e5a18bc152daaad5192c8d0b003}{toString}} (\textcolor{keyword}{true}))];}
+\DoxyCodeLine{295                 asset.reset ([[AVURLAsset alloc] initWithURL: nsUrl options: nil]);}
+\DoxyCodeLine{296 }
+\DoxyCodeLine{297                 [asset.get() loadValuesAsynchronouslyForKeys: assetKeys.get()}
+\DoxyCodeLine{298                                            completionHandler: \string^() \{ checkAllKeysReadyFor (asset.get(), url); \}];}
+\DoxyCodeLine{299             \}}
+\DoxyCodeLine{300 }
+\DoxyCodeLine{301         \textcolor{keyword}{private}:}
+\DoxyCodeLine{302             \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{303             \textcolor{keyword}{struct }JucePlayerItemPreparationStatusObserverClass : \textcolor{keyword}{public} ObjCClass<NSObject>}
+\DoxyCodeLine{304             \{}
+\DoxyCodeLine{305                 JucePlayerItemPreparationStatusObserverClass()    : ObjCClass<NSObject> (\textcolor{stringliteral}{"{}JucePlayerItemStatusObserverClass\_"{}})}
+\DoxyCodeLine{306                 \{}
+\DoxyCodeLine{307                     \mbox{\hyperlink{group__juce__core-system_ga0112339834a6548e4123e394b9ed95e2}{JUCE\_BEGIN\_IGNORE\_WARNINGS\_GCC\_LIKE}} (\textcolor{stringliteral}{"{}-\/Wundeclared-\/selector"{}})}
+\DoxyCodeLine{308                     addMethod (\textcolor{keyword}{@selector} (observeValueForKeyPath:ofObject:change:context:), \mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaefa5337f5ce957a9403e2eb59d591ffca0e58a4fa4b8e6bc7353a97f4761f776f}{valueChanged}});}
+\DoxyCodeLine{309                     \mbox{\hyperlink{group__juce__core-system_ga157f2229764b17137d8814bec95df109}{JUCE\_END\_IGNORE\_WARNINGS\_GCC\_LIKE}}}
+\DoxyCodeLine{310 }
+\DoxyCodeLine{311                     addIvar<PlayerAsyncInitialiser*> (\textcolor{stringliteral}{"{}owner"{}});}
+\DoxyCodeLine{312 }
+\DoxyCodeLine{313                     registerClass();}
+\DoxyCodeLine{314                 \}}
+\DoxyCodeLine{315 }
+\DoxyCodeLine{316                 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{317                 \textcolor{keyword}{static} \mbox{\hyperlink{class_video_component_1_1_pimpl_1_1_player_controller_base_1_1_player_async_initialiser}{PlayerAsyncInitialiser}}\& getOwner (\textcolor{keywordtype}{id} \textcolor{keyword}{self}) \{ \textcolor{keywordflow}{return} *getIvar<PlayerAsyncInitialiser*> (\textcolor{keyword}{self}, \textcolor{stringliteral}{"{}owner"{}}); \}}
+\DoxyCodeLine{318                 \textcolor{keyword}{static} \textcolor{keywordtype}{void} setOwner (\textcolor{keywordtype}{id} \textcolor{keyword}{self}, \mbox{\hyperlink{class_video_component_1_1_pimpl_1_1_player_controller_base_1_1_player_async_initialiser}{PlayerAsyncInitialiser}}* \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}}) \{ object\_setInstanceVariable (\textcolor{keyword}{self}, \textcolor{stringliteral}{"{}owner"{}}, \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}}); \}}
+\DoxyCodeLine{319 }
+\DoxyCodeLine{320             \textcolor{keyword}{private}:}
+\DoxyCodeLine{321                 \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaefa5337f5ce957a9403e2eb59d591ffca0e58a4fa4b8e6bc7353a97f4761f776f}{valueChanged}} (\textcolor{keywordtype}{id} \textcolor{keyword}{self}, \textcolor{keywordtype}{SEL}, NSString*, \textcolor{keywordtype}{id} \textcolor{keywordtype}{object},}
+\DoxyCodeLine{322                                           NSDictionary<NSString*, id>* change, \textcolor{keywordtype}{void}* context)}
+\DoxyCodeLine{323                 \{}
+\DoxyCodeLine{324                     \textcolor{keyword}{auto}\& owner = getOwner (\textcolor{keyword}{self});}
+\DoxyCodeLine{325 }
+\DoxyCodeLine{326                     \textcolor{keywordflow}{if} (context == \&owner)}
+\DoxyCodeLine{327                     \{}
+\DoxyCodeLine{328                         \textcolor{keyword}{auto}* playerItem = (AVPlayerItem*) \textcolor{keywordtype}{object};}
+\DoxyCodeLine{329                         \textcolor{keyword}{auto}* urlAsset = (AVURLAsset*) playerItem.asset;}
+\DoxyCodeLine{330 }
+\DoxyCodeLine{331                         \mbox{\hyperlink{class_u_r_l}{URL}} url (\mbox{\hyperlink{namespacejuce_a42e5f26f6fd7b644c5f6f44728b0c03b}{nsStringToJuce}} (urlAsset.URL.absoluteString));}
+\DoxyCodeLine{332                         \textcolor{keyword}{auto} oldStatus = [change[NSKeyValueChangeOldKey] intValue];}
+\DoxyCodeLine{333                         \textcolor{keyword}{auto} newStatus = [change[NSKeyValueChangeNewKey] intValue];}
+\DoxyCodeLine{334 }
+\DoxyCodeLine{335                         \textcolor{comment}{// Ignore spurious notifications}}
+\DoxyCodeLine{336                         \textcolor{keywordflow}{if} (oldStatus == newStatus)}
+\DoxyCodeLine{337                             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{338 }
+\DoxyCodeLine{339                         \textcolor{keywordflow}{if} (newStatus == AVPlayerItemStatusFailed)}
+\DoxyCodeLine{340                         \{}
+\DoxyCodeLine{341                             \textcolor{keyword}{auto} errorMessage = playerItem.error != nil}
+\DoxyCodeLine{342                                               ? \mbox{\hyperlink{namespacejuce_a42e5f26f6fd7b644c5f6f44728b0c03b}{nsStringToJuce}} (playerItem.error.localizedDescription)}
+\DoxyCodeLine{343                                               : \mbox{\hyperlink{class_string}{String}}();}
+\DoxyCodeLine{344 }
+\DoxyCodeLine{345                             owner.notifyOwnerPreparationFinished (url, \mbox{\hyperlink{class_result_a2b51de8f6f8c27c3de29f9da5cce8f75}{Result::fail}} (errorMessage), \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{346                         \}}
+\DoxyCodeLine{347                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (newStatus == AVPlayerItemStatusReadyToPlay)}
+\DoxyCodeLine{348                         \{}
+\DoxyCodeLine{349                             owner.notifyOwnerPreparationFinished (url, \mbox{\hyperlink{class_result_af20c96ffa94adac90e10a8395d8c8852}{Result::ok}}(), owner.player.get());}
+\DoxyCodeLine{350                         \}}
+\DoxyCodeLine{351                         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{352                         \{}
+\DoxyCodeLine{353                             \mbox{\hyperlink{group__juce__core-system_gadc044ce5efecbecf2f5a44cd00db67b3}{jassertfalse}};}
+\DoxyCodeLine{354                         \}}
+\DoxyCodeLine{355                     \}}
+\DoxyCodeLine{356                 \}}
+\DoxyCodeLine{357             \};}
+\DoxyCodeLine{358 }
+\DoxyCodeLine{359             \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{360             PlayerControllerBase\& owner;}
+\DoxyCodeLine{361 }
+\DoxyCodeLine{362             std::unique\_ptr<AVURLAsset, NSObjectDeleter> asset;}
+\DoxyCodeLine{363             std::unique\_ptr<NSArray<NSString*>, NSObjectDeleter> assetKeys;}
+\DoxyCodeLine{364             std::unique\_ptr<AVPlayerItem, NSObjectDeleter> playerItem;}
+\DoxyCodeLine{365             std::unique\_ptr<NSObject, NSObjectDeleter> playerItemPreparationStatusObserver;}
+\DoxyCodeLine{366             std::unique\_ptr<AVPlayer, NSObjectDeleter> player;}
+\DoxyCodeLine{367 }
+\DoxyCodeLine{368             \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{369             \textcolor{keywordtype}{void} checkAllKeysReadyFor (AVAsset* assetToCheck, \textcolor{keyword}{const} \mbox{\hyperlink{class_u_r_l}{URL}}\& url)}
+\DoxyCodeLine{370             \{}
+\DoxyCodeLine{371                 NSError* \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_af44443f87d7b66dff07b3d884445dca1}{error}} = nil;}
+\DoxyCodeLine{372 }
+\DoxyCodeLine{373                 \textcolor{keywordtype}{int} successCount = 0;}
+\DoxyCodeLine{374 }
+\DoxyCodeLine{375                 \textcolor{keywordflow}{for} (NSString* \mbox{\hyperlink{namespacegl_a45e4cfc4b70136c9a7e0000e34f4ed4e}{key}} : assetKeys.get())}
+\DoxyCodeLine{376                 \{}
+\DoxyCodeLine{377                     \textcolor{keywordflow}{switch} ([assetToCheck statusOfValueForKey: \mbox{\hyperlink{namespacegl_a45e4cfc4b70136c9a7e0000e34f4ed4e}{key}} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_af44443f87d7b66dff07b3d884445dca1}{error}}: \&\mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_af44443f87d7b66dff07b3d884445dca1}{error}}])}
+\DoxyCodeLine{378                     \{}
+\DoxyCodeLine{379                         \textcolor{keywordflow}{case} AVKeyValueStatusLoaded:}
+\DoxyCodeLine{380                         \{}
+\DoxyCodeLine{381                             ++successCount;}
+\DoxyCodeLine{382                             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{383                         \}}
+\DoxyCodeLine{384                         \textcolor{keywordflow}{case} AVKeyValueStatusCancelled:}
+\DoxyCodeLine{385                         \{}
+\DoxyCodeLine{386                             notifyOwnerPreparationFinished (url, \mbox{\hyperlink{class_result_a2b51de8f6f8c27c3de29f9da5cce8f75}{Result::fail}} (\textcolor{stringliteral}{"{}Loading cancelled"{}}), \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{387                             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{388                         \}}
+\DoxyCodeLine{389                         \textcolor{keywordflow}{case} AVKeyValueStatusFailed:}
+\DoxyCodeLine{390                         \{}
+\DoxyCodeLine{391                             \textcolor{keyword}{auto} errorMessage = \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_af44443f87d7b66dff07b3d884445dca1}{error}} != nil ? \mbox{\hyperlink{namespacejuce_a42e5f26f6fd7b644c5f6f44728b0c03b}{nsStringToJuce}} (\mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_af44443f87d7b66dff07b3d884445dca1}{error}}.localizedDescription) : \mbox{\hyperlink{class_string}{String}}();}
+\DoxyCodeLine{392                             notifyOwnerPreparationFinished (url, \mbox{\hyperlink{class_result_a2b51de8f6f8c27c3de29f9da5cce8f75}{Result::fail}} (errorMessage), \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{393                             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{394                         \}}
+\DoxyCodeLine{395 }
+\DoxyCodeLine{396                         \textcolor{keywordflow}{case} AVKeyValueStatusUnknown:}
+\DoxyCodeLine{397                         \textcolor{keywordflow}{case} AVKeyValueStatusLoading:}
+\DoxyCodeLine{398                         \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{399                             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{400                     \}}
+\DoxyCodeLine{401                 \}}
+\DoxyCodeLine{402 }
+\DoxyCodeLine{403                 \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (successCount == (\textcolor{keywordtype}{int}) [assetKeys.get() \mbox{\hyperlink{namespacegl_ad51b1b50b16ae6a9961a1632cb21be63}{count}}]);}
+\DoxyCodeLine{404                 preparePlayerItem();}
+\DoxyCodeLine{405             \}}
+\DoxyCodeLine{406 }
+\DoxyCodeLine{407             \textcolor{keywordtype}{void} preparePlayerItem()}
+\DoxyCodeLine{408             \{}
+\DoxyCodeLine{409                 playerItem.reset ([[AVPlayerItem alloc] initWithAsset: asset.get()]);}
+\DoxyCodeLine{410 }
+\DoxyCodeLine{411                 attachPreparationStatusObserver();}
+\DoxyCodeLine{412 }
+\DoxyCodeLine{413                 player.reset ([[AVPlayer alloc] initWithPlayerItem: playerItem.get()]);}
+\DoxyCodeLine{414             \}}
+\DoxyCodeLine{415 }
+\DoxyCodeLine{416             \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{417             \textcolor{keywordtype}{void} attachPreparationStatusObserver()}
+\DoxyCodeLine{418             \{}
+\DoxyCodeLine{419                 [playerItem.get() addObserver: playerItemPreparationStatusObserver.get()}
+\DoxyCodeLine{420                                    forKeyPath: \mbox{\hyperlink{namespacejuce_a1c4165db87a8e39c71774976207a824f}{nsStringLiteral}} (\textcolor{stringliteral}{"{}status"{}})}
+\DoxyCodeLine{421                                       options: NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew}
+\DoxyCodeLine{422                                       context: \textcolor{keyword}{this}];}
+\DoxyCodeLine{423             \}}
+\DoxyCodeLine{424 }
+\DoxyCodeLine{425             \textcolor{keywordtype}{void} detachPreparationStatusObserver()}
+\DoxyCodeLine{426             \{}
+\DoxyCodeLine{427                 \textcolor{keywordflow}{if} (playerItem != \textcolor{keyword}{nullptr} \&\& playerItemPreparationStatusObserver != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{428                 \{}
+\DoxyCodeLine{429                     [playerItem.get() removeObserver: playerItemPreparationStatusObserver.get()}
+\DoxyCodeLine{430                                           forKeyPath: \mbox{\hyperlink{namespacejuce_a1c4165db87a8e39c71774976207a824f}{nsStringLiteral}} (\textcolor{stringliteral}{"{}status"{}})}
+\DoxyCodeLine{431                                              context: \textcolor{keyword}{this}];}
+\DoxyCodeLine{432                 \}}
+\DoxyCodeLine{433             \}}
+\DoxyCodeLine{434 }
+\DoxyCodeLine{435             \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{436             \textcolor{keywordtype}{void} notifyOwnerPreparationFinished (\textcolor{keyword}{const} \mbox{\hyperlink{class_u_r_l}{URL}}\& url, \mbox{\hyperlink{class_result}{Result}} \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}}, AVPlayer* preparedPlayer)}
+\DoxyCodeLine{437             \{}
+\DoxyCodeLine{438                 \mbox{\hyperlink{class_message_manager_acfe6da5271c2ab76fdb0414b235ed095}{MessageManager::callAsync}} ([url, preparedPlayer, \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}},}
+\DoxyCodeLine{439                                             safeThis = \mbox{\hyperlink{class_weak_reference}{WeakReference<PlayerAsyncInitialiser>}} \{ \textcolor{keyword}{this} \}]() \textcolor{keyword}{mutable}}
+\DoxyCodeLine{440                 \{}
+\DoxyCodeLine{441                     \textcolor{keywordflow}{if} (safeThis != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{442                         safeThis-\/>owner.playerPreparationFinished (url, \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}}, preparedPlayer);}
+\DoxyCodeLine{443                 \});}
+\DoxyCodeLine{444             \}}
+\DoxyCodeLine{445 }
+\DoxyCodeLine{446             \mbox{\hyperlink{group__juce__core-memory_ga557fa9dbf924a150e27f0cf0dad368b0}{JUCE\_DECLARE\_WEAK\_REFERENCEABLE}} (\mbox{\hyperlink{class_video_component_1_1_pimpl_1_1_player_controller_base_1_1_player_async_initialiser}{PlayerAsyncInitialiser}})}
+\DoxyCodeLine{447         \};}
+\DoxyCodeLine{448 }
+\DoxyCodeLine{449         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{450         \mbox{\hyperlink{struct_video_component_1_1_pimpl}{Pimpl}}\& owner;}
+\DoxyCodeLine{451         \textcolor{keywordtype}{bool} useNativeControls;}
+\DoxyCodeLine{452 }
+\DoxyCodeLine{453         \mbox{\hyperlink{class_video_component_1_1_pimpl_1_1_player_controller_base_1_1_player_async_initialiser}{PlayerAsyncInitialiser}} playerAsyncInitialiser;}
+\DoxyCodeLine{454         std::unique\_ptr<NSObject, NSObjectDeleter> playerStatusObserver;}
+\DoxyCodeLine{455         std::unique\_ptr<NSObject, NSObjectDeleter> playerItemPlaybackStatusObserver;}
+\DoxyCodeLine{456 }
+\DoxyCodeLine{457         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{458         PlayerControllerBase (\mbox{\hyperlink{struct_video_component_1_1_pimpl}{Pimpl}}\& ownerToUse, \textcolor{keywordtype}{bool} useNativeControlsIfAvailable)}
+\DoxyCodeLine{459             : owner (ownerToUse),}
+\DoxyCodeLine{460               useNativeControls (useNativeControlsIfAvailable),}
+\DoxyCodeLine{461               playerAsyncInitialiser (*this)}
+\DoxyCodeLine{462         \{}
+\DoxyCodeLine{463             \textcolor{keyword}{static} \mbox{\hyperlink{struct_video_component_1_1_pimpl_1_1_player_controller_base_1_1_juce_player_status_observer_class}{JucePlayerStatusObserverClass}} playerObserverClass;}
+\DoxyCodeLine{464             playerStatusObserver.reset ([playerObserverClass.\mbox{\hyperlink{structjuce_1_1_obj_c_class_a963470486a706eeab84a5248e83df93d}{createInstance}}() init]);}
+\DoxyCodeLine{465             \mbox{\hyperlink{struct_video_component_1_1_pimpl_1_1_player_controller_base_1_1_juce_player_status_observer_class_a972c1f23499dffd74dd69ba6c4cd101e}{JucePlayerStatusObserverClass::setOwner}} (playerStatusObserver.get(), \textcolor{keyword}{this});}
+\DoxyCodeLine{466 }
+\DoxyCodeLine{467             \textcolor{keyword}{static} \mbox{\hyperlink{struct_video_component_1_1_pimpl_1_1_player_controller_base_1_1_juce_player_item_playback_status_observer_class}{JucePlayerItemPlaybackStatusObserverClass}} itemObserverClass;}
+\DoxyCodeLine{468             playerItemPlaybackStatusObserver.reset ([itemObserverClass.\mbox{\hyperlink{structjuce_1_1_obj_c_class_a963470486a706eeab84a5248e83df93d}{createInstance}}() init]);}
+\DoxyCodeLine{469             \mbox{\hyperlink{struct_video_component_1_1_pimpl_1_1_player_controller_base_1_1_juce_player_item_playback_status_observer_class_ae9b593dc91fb041d0f73eaa91c7209f7}{JucePlayerItemPlaybackStatusObserverClass::setOwner}} (playerItemPlaybackStatusObserver.get(), \textcolor{keyword}{this});}
+\DoxyCodeLine{470         \}}
+\DoxyCodeLine{471 }
+\DoxyCodeLine{472         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{473         \textcolor{keywordtype}{void} attachPlayerStatusObserver()}
+\DoxyCodeLine{474         \{}
+\DoxyCodeLine{475             [crtp().getPlayer() addObserver: playerStatusObserver.get()}
+\DoxyCodeLine{476                                  forKeyPath: \mbox{\hyperlink{namespacejuce_a1c4165db87a8e39c71774976207a824f}{nsStringLiteral}} (\textcolor{stringliteral}{"{}rate"{}})}
+\DoxyCodeLine{477                                     options: NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew}
+\DoxyCodeLine{478                                     context: this];}
+\DoxyCodeLine{479 }
+\DoxyCodeLine{480             [crtp().getPlayer() addObserver: playerStatusObserver.\mbox{\hyperlink{namespacedsp_ab70e205bff92b09aa297e479676b5bc8}{get}}()}
+\DoxyCodeLine{481                                  forKeyPath: \mbox{\hyperlink{namespacejuce_a1c4165db87a8e39c71774976207a824f}{nsStringLiteral}} ("{}status"{})}
+\DoxyCodeLine{482                                     options: NSKeyValueObservingOptionNew}
+\DoxyCodeLine{483                                     context: this];}
+\DoxyCodeLine{484         \}}
+\DoxyCodeLine{485 }
+\DoxyCodeLine{486         \textcolor{keywordtype}{void} detachPlayerStatusObserver()}
+\DoxyCodeLine{487         \{}
+\DoxyCodeLine{488             \textcolor{keywordflow}{if} (crtp().getPlayer() != \textcolor{keyword}{nullptr} \&\& playerStatusObserver != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{489             \{}
+\DoxyCodeLine{490                 [crtp().getPlayer() removeObserver: playerStatusObserver.get()}
+\DoxyCodeLine{491                                         forKeyPath: \mbox{\hyperlink{namespacejuce_a1c4165db87a8e39c71774976207a824f}{nsStringLiteral}} (\textcolor{stringliteral}{"{}rate"{}})}
+\DoxyCodeLine{492                                            context: this];}
+\DoxyCodeLine{493 }
+\DoxyCodeLine{494                 [crtp().getPlayer() removeObserver: playerStatusObserver.\mbox{\hyperlink{namespacedsp_ab70e205bff92b09aa297e479676b5bc8}{get}}()}
+\DoxyCodeLine{495                                         forKeyPath: \mbox{\hyperlink{namespacejuce_a1c4165db87a8e39c71774976207a824f}{nsStringLiteral}} ("{}status"{})}
+\DoxyCodeLine{496                                            context: this];}
+\DoxyCodeLine{497             \}}
+\DoxyCodeLine{498         \}}
+\DoxyCodeLine{499 }
+\DoxyCodeLine{500         \textcolor{keywordtype}{void} attachPlaybackObserver()}
+\DoxyCodeLine{501         \{}
+\DoxyCodeLine{502             \mbox{\hyperlink{group__juce__core-system_ga0112339834a6548e4123e394b9ed95e2}{JUCE\_BEGIN\_IGNORE\_WARNINGS\_GCC\_LIKE}} (\textcolor{stringliteral}{"{}-\/Wundeclared-\/selector"{}})}
+\DoxyCodeLine{503             [[NSNotificationCenter defaultCenter] addObserver: playerItemPlaybackStatusObserver.get()}
+\DoxyCodeLine{504                                                      selector: \textcolor{keyword}{@selector} (processNotification:)}
+\DoxyCodeLine{505                                                          \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}: AVPlayerItemDidPlayToEndTimeNotification}
+\DoxyCodeLine{506                                                        \textcolor{keywordtype}{object}: [crtp().getPlayer() currentItem]];}
+\DoxyCodeLine{507             \mbox{\hyperlink{group__juce__core-system_ga157f2229764b17137d8814bec95df109}{JUCE\_END\_IGNORE\_WARNINGS\_GCC\_LIKE}}}
+\DoxyCodeLine{508         \}}
+\DoxyCodeLine{509 }
+\DoxyCodeLine{510         \textcolor{keywordtype}{void} detachPlaybackObserver()}
+\DoxyCodeLine{511         \{}
+\DoxyCodeLine{512             \mbox{\hyperlink{group__juce__core-system_ga0112339834a6548e4123e394b9ed95e2}{JUCE\_BEGIN\_IGNORE\_WARNINGS\_GCC\_LIKE}} (\textcolor{stringliteral}{"{}-\/Wundeclared-\/selector"{}})}
+\DoxyCodeLine{513             [[NSNotificationCenter defaultCenter] removeObserver: playerItemPlaybackStatusObserver.get()];}
+\DoxyCodeLine{514             \mbox{\hyperlink{group__juce__core-system_ga157f2229764b17137d8814bec95df109}{JUCE\_END\_IGNORE\_WARNINGS\_GCC\_LIKE}}}
+\DoxyCodeLine{515         \}}
+\DoxyCodeLine{516 }
+\DoxyCodeLine{517     \textcolor{keyword}{private}:}
+\DoxyCodeLine{518         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{519         Derived\& crtp() \{ \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}Derived\&\textcolor{keyword}{>} (*this); \}}
+\DoxyCodeLine{520 }
+\DoxyCodeLine{521         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{522         \textcolor{keywordtype}{void} playerPreparationFinished (\textcolor{keyword}{const} \mbox{\hyperlink{class_u_r_l}{URL}}\& url, \mbox{\hyperlink{class_result}{Result}} \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}}, AVPlayer* preparedPlayer)}
+\DoxyCodeLine{523         \{}
+\DoxyCodeLine{524             \textcolor{keywordflow}{if} (preparedPlayer != nil)}
+\DoxyCodeLine{525                 crtp().setPlayer (preparedPlayer);}
+\DoxyCodeLine{526 }
+\DoxyCodeLine{527             owner.playerPreparationFinished (url, \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}});}
+\DoxyCodeLine{528         \}}
+\DoxyCodeLine{529 }
+\DoxyCodeLine{530         \textcolor{keywordtype}{void} playbackReachedEndTime()}
+\DoxyCodeLine{531         \{}
+\DoxyCodeLine{532             \mbox{\hyperlink{class_message_manager_acfe6da5271c2ab76fdb0414b235ed095}{MessageManager::callAsync}} ([safeThis = \mbox{\hyperlink{class_weak_reference}{WeakReference<PlayerControllerBase>}} \{ \textcolor{keyword}{this} \}]() \textcolor{keyword}{mutable}}
+\DoxyCodeLine{533                                        \{}
+\DoxyCodeLine{534                                            \textcolor{keywordflow}{if} (safeThis != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{535                                                safeThis-\/>owner.playbackReachedEndTime();}
+\DoxyCodeLine{536                                        \});}
+\DoxyCodeLine{537         \}}
+\DoxyCodeLine{538 }
+\DoxyCodeLine{539         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{540         \textcolor{keywordtype}{void} errorOccurred()}
+\DoxyCodeLine{541         \{}
+\DoxyCodeLine{542             \textcolor{keyword}{auto} errorMessage = (crtp().getPlayer() != nil \&\& crtp().getPlayer().error != nil)}
+\DoxyCodeLine{543                               ? \mbox{\hyperlink{namespacejuce_a42e5f26f6fd7b644c5f6f44728b0c03b}{nsStringToJuce}} (crtp().getPlayer().error.localizedDescription)}
+\DoxyCodeLine{544                               : \mbox{\hyperlink{class_string}{String}}();}
+\DoxyCodeLine{545 }
+\DoxyCodeLine{546             owner.errorOccurred (errorMessage);}
+\DoxyCodeLine{547         \}}
+\DoxyCodeLine{548 }
+\DoxyCodeLine{549         \textcolor{keywordtype}{void} playbackStarted()}
+\DoxyCodeLine{550         \{}
+\DoxyCodeLine{551             owner.playbackStarted();}
+\DoxyCodeLine{552         \}}
+\DoxyCodeLine{553 }
+\DoxyCodeLine{554         \textcolor{keywordtype}{void} playbackStopped()}
+\DoxyCodeLine{555         \{}
+\DoxyCodeLine{556             owner.playbackStopped();}
+\DoxyCodeLine{557         \}}
+\DoxyCodeLine{558 }
+\DoxyCodeLine{559         \mbox{\hyperlink{group__juce__core-memory_ga557fa9dbf924a150e27f0cf0dad368b0}{JUCE\_DECLARE\_WEAK\_REFERENCEABLE}} (PlayerControllerBase)}
+\DoxyCodeLine{560     \};}
+\DoxyCodeLine{561 }
+\DoxyCodeLine{562 \textcolor{preprocessor}{   \#if JUCE\_MAC}}
+\DoxyCodeLine{563     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{564     \textcolor{keyword}{class }PlayerController  : \textcolor{keyword}{public} PlayerControllerBase<PlayerController>}
+\DoxyCodeLine{565     \{}
+\DoxyCodeLine{566     \textcolor{keyword}{public}:}
+\DoxyCodeLine{567         PlayerController (\mbox{\hyperlink{struct_video_component_1_1_pimpl_aa84bfd6ad60b925ac1266e1202816911}{Pimpl}}\& ownerToUse, \textcolor{keywordtype}{bool} useNativeControlsIfAvailable)}
+\DoxyCodeLine{568             : PlayerControllerBase (ownerToUse, useNativeControlsIfAvailable)}
+\DoxyCodeLine{569         \{}
+\DoxyCodeLine{570 \textcolor{preprocessor}{           \#if JUCE\_32BIT}}
+\DoxyCodeLine{571             \textcolor{comment}{// 32-\/bit builds don't have AVPlayerView, so need to use a layer}}
+\DoxyCodeLine{572             useNativeControls = \textcolor{keyword}{false};}
+\DoxyCodeLine{573 \textcolor{preprocessor}{           \#endif}}
+\DoxyCodeLine{574 }
+\DoxyCodeLine{575             \textcolor{keywordflow}{if} (useNativeControls)}
+\DoxyCodeLine{576             \{}
+\DoxyCodeLine{577 \textcolor{preprocessor}{               \#if ! JUCE\_32BIT}}
+\DoxyCodeLine{578                 playerView = [[AVPlayerView alloc] init];}
+\DoxyCodeLine{579 \textcolor{preprocessor}{               \#endif}}
+\DoxyCodeLine{580             \}}
+\DoxyCodeLine{581             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{582             \{}
+\DoxyCodeLine{583                 view = [[NSView alloc] init];}
+\DoxyCodeLine{584                 playerLayer = [[AVPlayerLayer alloc] init];}
+\DoxyCodeLine{585                 [view setLayer: playerLayer];}
+\DoxyCodeLine{586             \}}
+\DoxyCodeLine{587         \}}
+\DoxyCodeLine{588 }
+\DoxyCodeLine{589         \string~PlayerController()}
+\DoxyCodeLine{590         \{}
+\DoxyCodeLine{591 \textcolor{preprocessor}{           \#if JUCE\_32BIT}}
+\DoxyCodeLine{592             [view release];}
+\DoxyCodeLine{593             [playerLayer release];}
+\DoxyCodeLine{594 \textcolor{preprocessor}{           \#else}}
+\DoxyCodeLine{595             [playerView release];}
+\DoxyCodeLine{596 \textcolor{preprocessor}{           \#endif}}
+\DoxyCodeLine{597         \}}
+\DoxyCodeLine{598 }
+\DoxyCodeLine{599         NSView* getView()}
+\DoxyCodeLine{600         \{}
+\DoxyCodeLine{601 \textcolor{preprocessor}{           \#if ! JUCE\_32BIT}}
+\DoxyCodeLine{602             \textcolor{keywordflow}{if} (useNativeControls)}
+\DoxyCodeLine{603                 \textcolor{keywordflow}{return} playerView;}
+\DoxyCodeLine{604 \textcolor{preprocessor}{           \#endif}}
+\DoxyCodeLine{605 }
+\DoxyCodeLine{606             \textcolor{keywordflow}{return} view;}
+\DoxyCodeLine{607         \}}
+\DoxyCodeLine{608 }
+\DoxyCodeLine{609         \mbox{\hyperlink{class_result}{Result}} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a239cbe367565ec31ca4c3b9a71c68595}{load}} (NSURL* url)}
+\DoxyCodeLine{610         \{}
+\DoxyCodeLine{611             \textcolor{keywordflow}{if} (\textcolor{keyword}{auto} player = [AVPlayer playerWithURL: url])}
+\DoxyCodeLine{612             \{}
+\DoxyCodeLine{613                 setPlayer (player);}
+\DoxyCodeLine{614                 \textcolor{keywordflow}{return} \mbox{\hyperlink{class_result_af20c96ffa94adac90e10a8395d8c8852}{Result::ok}}();}
+\DoxyCodeLine{615             \}}
+\DoxyCodeLine{616 }
+\DoxyCodeLine{617             \textcolor{keywordflow}{return} \mbox{\hyperlink{class_result_a2b51de8f6f8c27c3de29f9da5cce8f75}{Result::fail}} (\textcolor{stringliteral}{"{}Couldn't open movie"{}});}
+\DoxyCodeLine{618         \}}
+\DoxyCodeLine{619 }
+\DoxyCodeLine{620         \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a9ef59ce888292e13332107b41acb5d6e}{loadAsync}} (\mbox{\hyperlink{class_u_r_l}{URL}} url)}
+\DoxyCodeLine{621         \{}
+\DoxyCodeLine{622             playerAsyncInitialiser.loadAsync (url);}
+\DoxyCodeLine{623         \}}
+\DoxyCodeLine{624 }
+\DoxyCodeLine{625         \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a57ed4d8dd7b190f44719e042ef101cba}{close}}() \{ setPlayer (nil); \}}
+\DoxyCodeLine{626 }
+\DoxyCodeLine{627         \textcolor{keywordtype}{void} setPlayer (AVPlayer* player)}
+\DoxyCodeLine{628         \{}
+\DoxyCodeLine{629             detachPlayerStatusObserver();}
+\DoxyCodeLine{630             detachPlaybackObserver();}
+\DoxyCodeLine{631 }
+\DoxyCodeLine{632 \textcolor{preprocessor}{           \#if ! JUCE\_32BIT}}
+\DoxyCodeLine{633             \textcolor{keywordflow}{if} (useNativeControls)}
+\DoxyCodeLine{634                 [playerView setPlayer: player];}
+\DoxyCodeLine{635             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{636 \textcolor{preprocessor}{           \#endif}}
+\DoxyCodeLine{637                 [playerLayer setPlayer: player];}
+\DoxyCodeLine{638 }
+\DoxyCodeLine{639             \textcolor{keywordflow}{if} (player != nil)}
+\DoxyCodeLine{640             \{}
+\DoxyCodeLine{641                 attachPlayerStatusObserver();}
+\DoxyCodeLine{642                 attachPlaybackObserver();}
+\DoxyCodeLine{643             \}}
+\DoxyCodeLine{644         \}}
+\DoxyCodeLine{645 }
+\DoxyCodeLine{646         AVPlayer* getPlayer()\textcolor{keyword}{ const}}
+\DoxyCodeLine{647 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{648 \textcolor{preprocessor}{           \#if ! JUCE\_32BIT}}
+\DoxyCodeLine{649             \textcolor{keywordflow}{if} (useNativeControls)}
+\DoxyCodeLine{650                 \textcolor{keywordflow}{return} [playerView player];}
+\DoxyCodeLine{651 \textcolor{preprocessor}{           \#endif}}
+\DoxyCodeLine{652 }
+\DoxyCodeLine{653             \textcolor{keywordflow}{return} [playerLayer player];}
+\DoxyCodeLine{654         \}}
+\DoxyCodeLine{655 }
+\DoxyCodeLine{656     \textcolor{keyword}{private}:}
+\DoxyCodeLine{657         NSView* view = nil;}
+\DoxyCodeLine{658         AVPlayerLayer* playerLayer = nil;}
+\DoxyCodeLine{659 \textcolor{preprocessor}{       \#if ! JUCE\_32BIT}}
+\DoxyCodeLine{660         \textcolor{comment}{// 32-\/bit builds don't have AVPlayerView}}
+\DoxyCodeLine{661         AVPlayerView* playerView = nil;}
+\DoxyCodeLine{662 \textcolor{preprocessor}{       \#endif}}
+\DoxyCodeLine{663     \};}
+\DoxyCodeLine{664 \textcolor{preprocessor}{   \#else}}
+\DoxyCodeLine{665     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{666     \textcolor{keyword}{class }PlayerController  : \textcolor{keyword}{public} PlayerControllerBase<PlayerController>}
+\DoxyCodeLine{667     \{}
+\DoxyCodeLine{668     \textcolor{keyword}{public}:}
+\DoxyCodeLine{669         PlayerController (\mbox{\hyperlink{struct_video_component_1_1_pimpl_aa84bfd6ad60b925ac1266e1202816911}{Pimpl}}\& ownerToUse, \textcolor{keywordtype}{bool} useNativeControlsIfAvailable)}
+\DoxyCodeLine{670             : PlayerControllerBase (ownerToUse, useNativeControlsIfAvailable)}
+\DoxyCodeLine{671         \{}
+\DoxyCodeLine{672             \textcolor{keywordflow}{if} (useNativeControls)}
+\DoxyCodeLine{673             \{}
+\DoxyCodeLine{674                 playerViewController.reset ([[AVPlayerViewController alloc] init]);}
+\DoxyCodeLine{675             \}}
+\DoxyCodeLine{676             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{677             \{}
+\DoxyCodeLine{678                 \textcolor{keyword}{static} JuceVideoViewerClass cls;}
+\DoxyCodeLine{679                 playerView.reset ([cls.createInstance() init]);}
+\DoxyCodeLine{680 }
+\DoxyCodeLine{681                 playerLayer.reset ([[AVPlayerLayer alloc] init]);}
+\DoxyCodeLine{682                 [playerView.get().layer addSublayer: playerLayer.get()];}
+\DoxyCodeLine{683             \}}
+\DoxyCodeLine{684         \}}
+\DoxyCodeLine{685 }
+\DoxyCodeLine{686         UIView* getView()}
+\DoxyCodeLine{687         \{}
+\DoxyCodeLine{688             \textcolor{keywordflow}{if} (useNativeControls)}
+\DoxyCodeLine{689                 \textcolor{keywordflow}{return} [playerViewController.get() view];}
+\DoxyCodeLine{690 }
+\DoxyCodeLine{691             \textcolor{comment}{// Should call getView() only once.}}
+\DoxyCodeLine{692             \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (playerView != nil);}
+\DoxyCodeLine{693             \textcolor{keywordflow}{return} playerView.release();}
+\DoxyCodeLine{694         \}}
+\DoxyCodeLine{695 }
+\DoxyCodeLine{696         \mbox{\hyperlink{class_result}{Result}} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a239cbe367565ec31ca4c3b9a71c68595}{load}} (NSURL*)}
+\DoxyCodeLine{697         \{}
+\DoxyCodeLine{698             \mbox{\hyperlink{group__juce__core-system_gadc044ce5efecbecf2f5a44cd00db67b3}{jassertfalse}};}
+\DoxyCodeLine{699             \textcolor{keywordflow}{return} \mbox{\hyperlink{class_result_a2b51de8f6f8c27c3de29f9da5cce8f75}{Result::fail}} (\textcolor{stringliteral}{"{}Synchronous loading is not supported on iOS, use loadAsync()"{}});}
+\DoxyCodeLine{700         \}}
+\DoxyCodeLine{701 }
+\DoxyCodeLine{702         \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a9ef59ce888292e13332107b41acb5d6e}{loadAsync}} (\mbox{\hyperlink{class_u_r_l}{URL}} url)}
+\DoxyCodeLine{703         \{}
+\DoxyCodeLine{704             playerAsyncInitialiser.loadAsync (url);}
+\DoxyCodeLine{705         \}}
+\DoxyCodeLine{706 }
+\DoxyCodeLine{707         \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_video_component_1_1_pimpl_a57ed4d8dd7b190f44719e042ef101cba}{close}}() \{ setPlayer (nil); \}}
+\DoxyCodeLine{708 }
+\DoxyCodeLine{709         AVPlayer* getPlayer()\textcolor{keyword}{ const}}
+\DoxyCodeLine{710 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{711             \textcolor{keywordflow}{if} (useNativeControls)}
+\DoxyCodeLine{712                 \textcolor{keywordflow}{return} [playerViewController.get() player];}
+\DoxyCodeLine{713 }
+\DoxyCodeLine{714             \textcolor{keywordflow}{return} [playerLayer.get() player];}
+\DoxyCodeLine{715         \}}
+\DoxyCodeLine{716 }
+\DoxyCodeLine{717         \textcolor{keywordtype}{void} setPlayer (AVPlayer* playerToUse)}
+\DoxyCodeLine{718         \{}
+\DoxyCodeLine{719             \textcolor{keywordflow}{if} (useNativeControls)}
+\DoxyCodeLine{720                 [playerViewController.get() setPlayer: playerToUse];}
+\DoxyCodeLine{721             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{722                 [playerLayer.get() setPlayer: playerToUse];}
+\DoxyCodeLine{723 }
+\DoxyCodeLine{724             attachPlayerStatusObserver();}
+\DoxyCodeLine{725             attachPlaybackObserver();}
+\DoxyCodeLine{726         \}}
+\DoxyCodeLine{727 }
+\DoxyCodeLine{728     \textcolor{keyword}{private}:}
+\DoxyCodeLine{729         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{730         \textcolor{keyword}{struct }JuceVideoViewerClass    : \textcolor{keyword}{public} ObjCClass<UIView>}
+\DoxyCodeLine{731         \{}
+\DoxyCodeLine{732             JuceVideoViewerClass()  : ObjCClass<UIView> (\textcolor{stringliteral}{"{}JuceVideoViewerClass\_"{}})}
+\DoxyCodeLine{733             \{}
+\DoxyCodeLine{734                 addMethod (\textcolor{keyword}{@selector} (layoutSubviews), layoutSubviews);}
+\DoxyCodeLine{735 }
+\DoxyCodeLine{736                 registerClass();}
+\DoxyCodeLine{737             \}}
+\DoxyCodeLine{738 }
+\DoxyCodeLine{739         \textcolor{keyword}{private}:}
+\DoxyCodeLine{740             \textcolor{keyword}{static} \textcolor{keywordtype}{void} layoutSubviews (\textcolor{keywordtype}{id} \textcolor{keyword}{self}, \textcolor{keywordtype}{SEL})}
+\DoxyCodeLine{741             \{}
+\DoxyCodeLine{742                 sendSuperclassMessage<void> (\textcolor{keyword}{self}, \textcolor{keyword}{@selector} (layoutSubviews));}
+\DoxyCodeLine{743 }
+\DoxyCodeLine{744                 UIView* asUIView = (UIView*) \textcolor{keyword}{self};}
+\DoxyCodeLine{745 }
+\DoxyCodeLine{746                 \textcolor{keywordflow}{if} (\textcolor{keyword}{auto}* previewLayer = getPreviewLayer (\textcolor{keyword}{self}))}
+\DoxyCodeLine{747                     previewLayer.frame = asUIView.bounds;}
+\DoxyCodeLine{748             \}}
+\DoxyCodeLine{749 }
+\DoxyCodeLine{750             \textcolor{keyword}{static} AVPlayerLayer* getPreviewLayer (\textcolor{keywordtype}{id} \textcolor{keyword}{self})}
+\DoxyCodeLine{751             \{}
+\DoxyCodeLine{752                 UIView* asUIView = (UIView*) \textcolor{keyword}{self};}
+\DoxyCodeLine{753 }
+\DoxyCodeLine{754                 \textcolor{keywordflow}{if} (asUIView.layer.sublayers != nil \&\& [asUIView.layer.sublayers \mbox{\hyperlink{namespacegl_ad51b1b50b16ae6a9961a1632cb21be63}{count}}] > 0)}
+\DoxyCodeLine{755                     \textcolor{keywordflow}{if} ([asUIView.layer.sublayers[0] isKindOfClass: [AVPlayerLayer \textcolor{keyword}{class}]])}
+\DoxyCodeLine{756                         \textcolor{keywordflow}{return} (AVPlayerLayer*) asUIView.layer.sublayers[0];}
+\DoxyCodeLine{757 }
+\DoxyCodeLine{758                 \textcolor{keywordflow}{return} nil;}
+\DoxyCodeLine{759             \}}
+\DoxyCodeLine{760         \};}
+\DoxyCodeLine{761 }
+\DoxyCodeLine{762         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{763         std::unique\_ptr<AVPlayerViewController, NSObjectDeleter> playerViewController;}
+\DoxyCodeLine{764 }
+\DoxyCodeLine{765         std::unique\_ptr<UIView, NSObjectDeleter> playerView;}
+\DoxyCodeLine{766         std::unique\_ptr<AVPlayerLayer, NSObjectDeleter> playerLayer;}
+\DoxyCodeLine{767     \};}
+\DoxyCodeLine{768 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{769 }
+\DoxyCodeLine{770     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{771     \mbox{\hyperlink{class_video_component}{VideoComponent}}\& owner;}
+\DoxyCodeLine{772 }
+\DoxyCodeLine{773     PlayerController playerController;}
+\DoxyCodeLine{774 }
+\DoxyCodeLine{775     \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_u_r_l}{URL}}\&, \mbox{\hyperlink{class_result}{Result}})> loadFinishedCallback;}
+\DoxyCodeLine{776 }
+\DoxyCodeLine{777     \textcolor{keywordtype}{double} playSpeedMult = 1.0;}
+\DoxyCodeLine{778 }
+\DoxyCodeLine{779     \textcolor{keyword}{static} \textcolor{keywordtype}{double} toSeconds (\textcolor{keyword}{const} CMTime\& \mbox{\hyperlink{namespacegl_ad0bd70fc9115453f6f5f5ac53accea65}{t}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{780     \{}
+\DoxyCodeLine{781         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_ad0bd70fc9115453f6f5f5ac53accea65}{t}}.timescale != 0 ? (\mbox{\hyperlink{namespacegl_ad0bd70fc9115453f6f5f5ac53accea65}{t}}.value / (double) \mbox{\hyperlink{namespacegl_ad0bd70fc9115453f6f5f5ac53accea65}{t}}.timescale) : 0.0;}
+\DoxyCodeLine{782     \}}
+\DoxyCodeLine{783 }
+\DoxyCodeLine{784     \textcolor{keywordtype}{void} playerPreparationFinished (\textcolor{keyword}{const} \mbox{\hyperlink{class_u_r_l}{URL}}\& url, \mbox{\hyperlink{class_result}{Result}} \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}})}
+\DoxyCodeLine{785     \{}
+\DoxyCodeLine{786         owner.resized();}
+\DoxyCodeLine{787 }
+\DoxyCodeLine{788         loadFinishedCallback (url, \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}});}
+\DoxyCodeLine{789         loadFinishedCallback = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{790     \}}
+\DoxyCodeLine{791 }
+\DoxyCodeLine{792     \textcolor{keywordtype}{void} errorOccurred (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& errorMessage)}
+\DoxyCodeLine{793     \{}
+\DoxyCodeLine{794         \textcolor{keywordflow}{if} (owner.\mbox{\hyperlink{class_video_component_a7f9bdd9fc7925b2cb804bc44352da62c}{onErrorOccurred}} != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{795             owner.\mbox{\hyperlink{class_video_component_a7f9bdd9fc7925b2cb804bc44352da62c}{onErrorOccurred}} (errorMessage);}
+\DoxyCodeLine{796     \}}
+\DoxyCodeLine{797 }
+\DoxyCodeLine{798     \textcolor{keywordtype}{void} playbackStarted()}
+\DoxyCodeLine{799     \{}
+\DoxyCodeLine{800         \textcolor{keywordflow}{if} (owner.\mbox{\hyperlink{class_video_component_a50b3c539d0356679af9aa797c767fe12}{onPlaybackStarted}} != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{801             owner.\mbox{\hyperlink{class_video_component_a50b3c539d0356679af9aa797c767fe12}{onPlaybackStarted}}();}
+\DoxyCodeLine{802     \}}
+\DoxyCodeLine{803 }
+\DoxyCodeLine{804     \textcolor{keywordtype}{void} playbackStopped()}
+\DoxyCodeLine{805     \{}
+\DoxyCodeLine{806         \textcolor{keywordflow}{if} (owner.\mbox{\hyperlink{class_video_component_a79612bf6c51b83026eafcf1587307b3f}{onPlaybackStopped}} != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{807             owner.\mbox{\hyperlink{class_video_component_a79612bf6c51b83026eafcf1587307b3f}{onPlaybackStopped}}();}
+\DoxyCodeLine{808     \}}
+\DoxyCodeLine{809 }
+\DoxyCodeLine{810     \textcolor{keywordtype}{void} playbackReachedEndTime()}
+\DoxyCodeLine{811     \{}
+\DoxyCodeLine{812         \mbox{\hyperlink{struct_video_component_1_1_pimpl_aab986910175fd243e55ea209ef28f4cf}{stop}}();}
+\DoxyCodeLine{813         \mbox{\hyperlink{struct_video_component_1_1_pimpl_aad13ce8cdf4ddc2c816abc2cffd72a09}{setPosition}} (0.0);}
+\DoxyCodeLine{814     \}}
+\DoxyCodeLine{815 }
+\DoxyCodeLine{816     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{struct_video_component_1_1_pimpl_aa84bfd6ad60b925ac1266e1202816911}{Pimpl}})}
+\DoxyCodeLine{817 \};}
+
+\end{DoxyCode}

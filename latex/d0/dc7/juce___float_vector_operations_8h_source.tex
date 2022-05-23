@@ -1,0 +1,178 @@
+\hypertarget{juce___float_vector_operations_8h_source}{}\doxysection{juce\+\_\+\+Float\+Vector\+Operations.\+h}
+\label{juce___float_vector_operations_8h_source}\index{build/juce\_audio\_basics/buffers/juce\_FloatVectorOperations.h@{build/juce\_audio\_basics/buffers/juce\_FloatVectorOperations.h}}
+\mbox{\hyperlink{juce___float_vector_operations_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#ifndef JUCE\_SNAP\_TO\_ZERO}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{ \#if JUCE\_INTEL}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{  \#define JUCE\_SNAP\_TO\_ZERO(n)    if (! (n < -\/1.0e-\/8f || n > 1.0e-\/8f)) n = 0;}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{ \#else}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{  \#define JUCE\_SNAP\_TO\_ZERO(n)    ignoreUnused (n)}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{ \#endif}}
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{34 \textcolor{keyword}{class }\mbox{\hyperlink{class_scoped_no_denormals}{ScopedNoDenormals}};}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#if ! DOXYGEN}}
+\DoxyCodeLine{37 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacedetail}{detail}}}
+\DoxyCodeLine{38 \{}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40 \textcolor{keyword}{template} <\textcolor{keyword}{typename} FloatType, \textcolor{keyword}{typename} CountType>}
+\DoxyCodeLine{41 \textcolor{keyword}{struct }\mbox{\hyperlink{structdetail_1_1_float_vector_operations_base}{FloatVectorOperationsBase}}}
+\DoxyCodeLine{42 \{}
+\DoxyCodeLine{43     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{structdetail_1_1_float_vector_operations_base_ac529679759b567aa059fcd72a6b39a8d}{clear}} (FloatType* dest, CountType numValues) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{44     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{structdetail_1_1_float_vector_operations_base_a0fe25f08b2d47172da7ae310c1a74a3a}{fill}} (FloatType* dest, FloatType valueToFill, CountType numValues) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{45     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{structdetail_1_1_float_vector_operations_base_a2201e4eeba68dd46d785d7b7629c3fd0}{copy}} (FloatType* dest, \textcolor{keyword}{const} FloatType* \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, CountType numValues) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{46     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{structdetail_1_1_float_vector_operations_base_aec4bcaf5522206a9fcc6e8fb330e5f45}{copyWithMultiply}} (FloatType* dest, \textcolor{keyword}{const} FloatType* \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, FloatType multiplier, CountType numValues) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{47     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{structdetail_1_1_float_vector_operations_base_ad0e3ea9f7173fd87f7feda1bf7d08210}{add}} (FloatType* dest, FloatType amountToAdd, CountType numValues) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{48     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{structdetail_1_1_float_vector_operations_base_aa407a87cc6f4d5ddc22d1236a0320bb6}{add}} (FloatType* dest, \textcolor{keyword}{const} FloatType* \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, FloatType amount, CountType numValues) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{49     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{structdetail_1_1_float_vector_operations_base_a7af19be34f6754e9d573943b8629f53d}{add}} (FloatType* dest, \textcolor{keyword}{const} FloatType* \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, CountType numValues) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{50     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{structdetail_1_1_float_vector_operations_base_a70dd340b25dd1a910591264b9fa8cdc4}{add}} (FloatType* dest, \textcolor{keyword}{const} FloatType* src1, \textcolor{keyword}{const} FloatType* \mbox{\hyperlink{namespacegl_ab220dadababba14bc78b64ace5a42731}{src2}}, CountType \mbox{\hyperlink{namespacegl_aaed5c28b6e2fe572794fada7bfb4862c}{num}}) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{51     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{structdetail_1_1_float_vector_operations_base_ad311d11de0960fce36d7ab0b39dc70a6}{subtract}} (FloatType* dest, \textcolor{keyword}{const} FloatType* \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, CountType numValues) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{52     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{structdetail_1_1_float_vector_operations_base_a4f639cc68facbab20b2aca4f0071cfdf}{subtract}} (FloatType* dest, \textcolor{keyword}{const} FloatType* src1, \textcolor{keyword}{const} FloatType* \mbox{\hyperlink{namespacegl_ab220dadababba14bc78b64ace5a42731}{src2}}, CountType \mbox{\hyperlink{namespacegl_aaed5c28b6e2fe572794fada7bfb4862c}{num}}) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{53     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{structdetail_1_1_float_vector_operations_base_abd759991c1b926b07834b9febee5fafa}{addWithMultiply}} (FloatType* dest, \textcolor{keyword}{const} FloatType* \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, FloatType multiplier, CountType numValues) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{54     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{structdetail_1_1_float_vector_operations_base_a7bfb30b3115372714bcbf5b68cc453ee}{addWithMultiply}} (FloatType* dest, \textcolor{keyword}{const} FloatType* src1, \textcolor{keyword}{const} FloatType* \mbox{\hyperlink{namespacegl_ab220dadababba14bc78b64ace5a42731}{src2}}, CountType \mbox{\hyperlink{namespacegl_aaed5c28b6e2fe572794fada7bfb4862c}{num}}) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{55     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{structdetail_1_1_float_vector_operations_base_ac098ad0b7d7a9f91a4f8bf3af652c643}{subtractWithMultiply}} (FloatType* dest, \textcolor{keyword}{const} FloatType* \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, FloatType multiplier, CountType numValues) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{56     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{structdetail_1_1_float_vector_operations_base_af85dc1df46e7763d7dcd19d66e8120c4}{subtractWithMultiply}} (FloatType* dest, \textcolor{keyword}{const} FloatType* src1, \textcolor{keyword}{const} FloatType* \mbox{\hyperlink{namespacegl_ab220dadababba14bc78b64ace5a42731}{src2}}, CountType \mbox{\hyperlink{namespacegl_aaed5c28b6e2fe572794fada7bfb4862c}{num}}) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{57     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{structdetail_1_1_float_vector_operations_base_aa70e6e089703e41c8022b96cfc1cc278}{multiply}} (FloatType* dest, \textcolor{keyword}{const} FloatType* \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, CountType numValues) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{58     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{structdetail_1_1_float_vector_operations_base_a187aa685598f901155f76759747113bf}{multiply}} (FloatType* dest, \textcolor{keyword}{const} FloatType* src1, \textcolor{keyword}{const} FloatType* \mbox{\hyperlink{namespacegl_ab220dadababba14bc78b64ace5a42731}{src2}}, CountType numValues) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{59     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{structdetail_1_1_float_vector_operations_base_a9bb92fcd2a1c5cd57364c87863257b14}{multiply}} (FloatType* dest, FloatType multiplier, CountType numValues) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{60     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{structdetail_1_1_float_vector_operations_base_a80feb1b5ab0c844f59ce8a8d85aef234}{multiply}} (FloatType* dest, \textcolor{keyword}{const} FloatType* \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, FloatType multiplier, CountType \mbox{\hyperlink{namespacegl_aaed5c28b6e2fe572794fada7bfb4862c}{num}}) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{61     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{structdetail_1_1_float_vector_operations_base_a1702ee217746a143a4cd19b6558fac95}{negate}} (FloatType* dest, \textcolor{keyword}{const} FloatType* \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, CountType numValues) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{62     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{structdetail_1_1_float_vector_operations_base_a202df1edb938fefe7d06c85a62802b87}{abs}} (FloatType* dest, \textcolor{keyword}{const} FloatType* \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, CountType numValues) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{63     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{structdetail_1_1_float_vector_operations_base_a975071ae228ede512994255192684285}{min}} (FloatType* dest, \textcolor{keyword}{const} FloatType* \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, FloatType comp, CountType \mbox{\hyperlink{namespacegl_aaed5c28b6e2fe572794fada7bfb4862c}{num}}) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{64     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{structdetail_1_1_float_vector_operations_base_a6698186835a95a19f4689e450de1ad2a}{min}} (FloatType* dest, \textcolor{keyword}{const} FloatType* src1, \textcolor{keyword}{const} FloatType* \mbox{\hyperlink{namespacegl_ab220dadababba14bc78b64ace5a42731}{src2}}, CountType \mbox{\hyperlink{namespacegl_aaed5c28b6e2fe572794fada7bfb4862c}{num}}) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{65     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{structdetail_1_1_float_vector_operations_base_ac47e742c631cbf407f186e8d557fa20e}{max}} (FloatType* dest, \textcolor{keyword}{const} FloatType* \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, FloatType comp, CountType \mbox{\hyperlink{namespacegl_aaed5c28b6e2fe572794fada7bfb4862c}{num}}) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{66     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{structdetail_1_1_float_vector_operations_base_a0caf1b288ce16e154d1fd379403e1716}{max}} (FloatType* dest, \textcolor{keyword}{const} FloatType* src1, \textcolor{keyword}{const} FloatType* \mbox{\hyperlink{namespacegl_ab220dadababba14bc78b64ace5a42731}{src2}}, CountType \mbox{\hyperlink{namespacegl_aaed5c28b6e2fe572794fada7bfb4862c}{num}}) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{67     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{structdetail_1_1_float_vector_operations_base_ad694fa8977bb23b195e3f7cfd9402fbc}{clip}} (FloatType* dest, \textcolor{keyword}{const} FloatType* \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, FloatType low, FloatType high, CountType \mbox{\hyperlink{namespacegl_aaed5c28b6e2fe572794fada7bfb4862c}{num}}) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{68     \textcolor{keyword}{static} \mbox{\hyperlink{class_range}{Range<FloatType>}} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{structdetail_1_1_float_vector_operations_base_a6b9d236ddbabe2654b0e8e4078146ee7}{findMinAndMax}} (\textcolor{keyword}{const} FloatType* \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, CountType numValues) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{69     \textcolor{keyword}{static} FloatType \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{structdetail_1_1_float_vector_operations_base_a925ab052ba7a46d10673122d088266a6}{findMinimum}} (\textcolor{keyword}{const} FloatType* \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, CountType numValues) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{70     \textcolor{keyword}{static} FloatType \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} \mbox{\hyperlink{structdetail_1_1_float_vector_operations_base_ad5e87e4e40ace461ead484201c9eb20e}{findMaximum}} (\textcolor{keyword}{const} FloatType* \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, CountType numValues) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{71 \};}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73 \textcolor{keyword}{template} <\textcolor{keyword}{typename}...>}
+\DoxyCodeLine{74 \textcolor{keyword}{struct }\mbox{\hyperlink{structdetail_1_1_name_forwarder}{NameForwarder}};}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Head>}
+\DoxyCodeLine{77 \textcolor{keyword}{struct }\mbox{\hyperlink{structdetail_1_1_name_forwarder_3_01_head_01_4}{NameForwarder<Head>}} : Head \{\};}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Head, \textcolor{keyword}{typename}... Tail>}
+\DoxyCodeLine{80 \textcolor{keyword}{struct }\mbox{\hyperlink{structdetail_1_1_name_forwarder}{NameForwarder}}<Head, Tail...> : Head, \mbox{\hyperlink{structdetail_1_1_name_forwarder}{NameForwarder}}<Tail...>}
+\DoxyCodeLine{81 \{}
+\DoxyCodeLine{82     \textcolor{keyword}{using} \mbox{\hyperlink{namespacedsp_1_1detail_a953fbe1bf6236c0f3a95d12aad7ffffb}{Head::clear}};}
+\DoxyCodeLine{83     \textcolor{keyword}{using} \mbox{\hyperlink{structdetail_1_1_name_forwarder}{NameForwarder}}<Tail...>\mbox{\hyperlink{namespacedsp_1_1detail_a953fbe1bf6236c0f3a95d12aad7ffffb}{::clear}};}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85     \textcolor{keyword}{using} Head::fill;}
+\DoxyCodeLine{86     \textcolor{keyword}{using} \mbox{\hyperlink{structdetail_1_1_name_forwarder}{NameForwarder}}<Tail...>::fill;}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88     \textcolor{keyword}{using} \mbox{\hyperlink{namespace_standard_application_command_i_ds_a994fb4dfda21935c7dfd723144b38778a3584c202667823072c928fd699725466}{Head::copy}};}
+\DoxyCodeLine{89     \textcolor{keyword}{using} \mbox{\hyperlink{structdetail_1_1_name_forwarder}{NameForwarder}}<Tail...>\mbox{\hyperlink{namespace_standard_application_command_i_ds_a994fb4dfda21935c7dfd723144b38778a3584c202667823072c928fd699725466}{::copy}};}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91     \textcolor{keyword}{using} Head::copyWithMultiply;}
+\DoxyCodeLine{92     \textcolor{keyword}{using} \mbox{\hyperlink{structdetail_1_1_name_forwarder}{NameForwarder}}<Tail...>::copyWithMultiply;}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{94     \textcolor{keyword}{using} Head::add;}
+\DoxyCodeLine{95     \textcolor{keyword}{using} \mbox{\hyperlink{structdetail_1_1_name_forwarder}{NameForwarder}}<Tail...>::add;}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97     \textcolor{keyword}{using} Head::subtract;}
+\DoxyCodeLine{98     \textcolor{keyword}{using} \mbox{\hyperlink{structdetail_1_1_name_forwarder}{NameForwarder}}<Tail...>::subtract;}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100     \textcolor{keyword}{using} Head::addWithMultiply;}
+\DoxyCodeLine{101     \textcolor{keyword}{using} \mbox{\hyperlink{structdetail_1_1_name_forwarder}{NameForwarder}}<Tail...>::addWithMultiply;}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103     \textcolor{keyword}{using} Head::subtractWithMultiply;}
+\DoxyCodeLine{104     \textcolor{keyword}{using} \mbox{\hyperlink{structdetail_1_1_name_forwarder}{NameForwarder}}<Tail...>::subtractWithMultiply;}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{106     \textcolor{keyword}{using} Head::multiply;}
+\DoxyCodeLine{107     \textcolor{keyword}{using} \mbox{\hyperlink{structdetail_1_1_name_forwarder}{NameForwarder}}<Tail...>::multiply;}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109     \textcolor{keyword}{using} Head::negate;}
+\DoxyCodeLine{110     \textcolor{keyword}{using} \mbox{\hyperlink{structdetail_1_1_name_forwarder}{NameForwarder}}<Tail...>::negate;}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112     \textcolor{keyword}{using} Head::abs;}
+\DoxyCodeLine{113     \textcolor{keyword}{using} \mbox{\hyperlink{structdetail_1_1_name_forwarder}{NameForwarder}}<Tail...>::abs;}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115     \textcolor{keyword}{using} \mbox{\hyperlink{os_8h_abb702d8b501669a23aa0ab3b281b9384}{Head::min}};}
+\DoxyCodeLine{116     \textcolor{keyword}{using} \mbox{\hyperlink{structdetail_1_1_name_forwarder}{NameForwarder}}<Tail...>\mbox{\hyperlink{os_8h_abb702d8b501669a23aa0ab3b281b9384}{::min}};}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118     \textcolor{keyword}{using} \mbox{\hyperlink{os_8h_ac39d9cef6a5e030ba8d9e11121054268}{Head::max}};}
+\DoxyCodeLine{119     \textcolor{keyword}{using} \mbox{\hyperlink{structdetail_1_1_name_forwarder}{NameForwarder}}<Tail...>\mbox{\hyperlink{os_8h_ac39d9cef6a5e030ba8d9e11121054268}{::max}};}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{121     \textcolor{keyword}{using} Head::clip;}
+\DoxyCodeLine{122     \textcolor{keyword}{using} \mbox{\hyperlink{structdetail_1_1_name_forwarder}{NameForwarder}}<Tail...>::clip;}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{124     \textcolor{keyword}{using} \mbox{\hyperlink{group__juce__core-maths_ga8b2e19439406e1608c876bd8a44a7cb8}{Head::findMinAndMax}};}
+\DoxyCodeLine{125     \textcolor{keyword}{using} \mbox{\hyperlink{structdetail_1_1_name_forwarder}{NameForwarder}}<Tail...>\mbox{\hyperlink{group__juce__core-maths_ga8b2e19439406e1608c876bd8a44a7cb8}{::findMinAndMax}};}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{127     \textcolor{keyword}{using} \mbox{\hyperlink{group__juce__core-maths_ga6bd6f580ca6e05e0b6c1b0f202dbb9b2}{Head::findMinimum}};}
+\DoxyCodeLine{128     \textcolor{keyword}{using} \mbox{\hyperlink{structdetail_1_1_name_forwarder}{NameForwarder}}<Tail...>\mbox{\hyperlink{group__juce__core-maths_ga6bd6f580ca6e05e0b6c1b0f202dbb9b2}{::findMinimum}};}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{130     \textcolor{keyword}{using} \mbox{\hyperlink{group__juce__core-maths_gade8104e135fee3c8b6924180e0c5c58d}{Head::findMaximum}};}
+\DoxyCodeLine{131     \textcolor{keyword}{using} \mbox{\hyperlink{structdetail_1_1_name_forwarder}{NameForwarder}}<Tail...>\mbox{\hyperlink{group__juce__core-maths_gade8104e135fee3c8b6924180e0c5c58d}{::findMaximum}};}
+\DoxyCodeLine{132 \};}
+\DoxyCodeLine{133 }
+\DoxyCodeLine{134 \} \textcolor{comment}{// namespace detail}}
+\DoxyCodeLine{135 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{137 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{144 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_float_vector_operations}{FloatVectorOperations}} : \textcolor{keyword}{public} \mbox{\hyperlink{structdetail_1_1_name_forwarder}{detail::NameForwarder}}<detail::FloatVectorOperationsBase<float, int>,}
+\DoxyCodeLine{145                                                                      detail::FloatVectorOperationsBase<float, size\_t>,}
+\DoxyCodeLine{146                                                                      detail::FloatVectorOperationsBase<double, int>,}
+\DoxyCodeLine{147                                                                      detail::FloatVectorOperationsBase<double, size\_t>>}
+\DoxyCodeLine{148 \{}
+\DoxyCodeLine{149 \textcolor{keyword}{public}:}
+\DoxyCodeLine{150     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} convertFixedToFloat (\textcolor{keywordtype}{float}* dest, \textcolor{keyword}{const} \textcolor{keywordtype}{int}* \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, \textcolor{keywordtype}{float} multiplier, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_aaed5c28b6e2fe572794fada7bfb4862c}{num}}) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{152     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} convertFixedToFloat (\textcolor{keywordtype}{float}* dest, \textcolor{keyword}{const} \textcolor{keywordtype}{int}* \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}, \textcolor{keywordtype}{float} multiplier, \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegl_aaed5c28b6e2fe572794fada7bfb4862c}{num}}) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{155     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} enableFlushToZeroMode (\textcolor{keywordtype}{bool} shouldEnable) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{163     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} disableDenormalisedNumberSupport (\textcolor{keywordtype}{bool} shouldDisable = \textcolor{keyword}{true}) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{164 }
+\DoxyCodeLine{166     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} areDenormalsDisabled() \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{167 }
+\DoxyCodeLine{168 \textcolor{keyword}{private}:}
+\DoxyCodeLine{169     \textcolor{keyword}{friend} \mbox{\hyperlink{class_scoped_no_denormals}{ScopedNoDenormals}};}
+\DoxyCodeLine{170 }
+\DoxyCodeLine{171     \textcolor{keyword}{static} intptr\_t \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} getFpStatusRegister() \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{172     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-system_gaf0b3f78ca801d88a7912f4c6bbf50e58}{JUCE\_CALLTYPE}} setFpStatusRegister (intptr\_t) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{173 \};}
+\DoxyCodeLine{174 }
+\DoxyCodeLine{175 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{182 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{class_scoped_no_denormals}{ScopedNoDenormals}}}
+\DoxyCodeLine{183 \{}
+\DoxyCodeLine{184 \textcolor{keyword}{public}:}
+\DoxyCodeLine{185     \mbox{\hyperlink{class_scoped_no_denormals_a0dfeecf6d33cfcf45922520df550a021}{ScopedNoDenormals}}() \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{186     \mbox{\hyperlink{class_scoped_no_denormals_a4abedd6fe49dbbeae8f2e3f6664f7c18}{\string~ScopedNoDenormals}}() \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{187 }
+\DoxyCodeLine{188 \textcolor{keyword}{private}:}
+\DoxyCodeLine{189 \textcolor{preprocessor}{  \#if JUCE\_USE\_SSE\_INTRINSICS || (JUCE\_USE\_ARM\_NEON || defined (\_\_arm64\_\_) || defined (\_\_aarch64\_\_))}}
+\DoxyCodeLine{190     intptr\_t fpsr;}
+\DoxyCodeLine{191 \textcolor{preprocessor}{  \#endif}}
+\DoxyCodeLine{192 \};}
+\DoxyCodeLine{193 }
+\DoxyCodeLine{194  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{195 }
+
+\end{DoxyCode}

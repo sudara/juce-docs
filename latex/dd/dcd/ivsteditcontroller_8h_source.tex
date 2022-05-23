@@ -1,0 +1,277 @@
+\hypertarget{ivsteditcontroller_8h_source}{}\doxysection{ivsteditcontroller.\+h}
+\label{ivsteditcontroller_8h_source}\index{build/juce\_audio\_processors/format\_types/VST3\_SDK/pluginterfaces/vst/ivsteditcontroller.h@{build/juce\_audio\_processors/format\_types/VST3\_SDK/pluginterfaces/vst/ivsteditcontroller.h}}
+\mbox{\hyperlink{ivsteditcontroller_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{2 \textcolor{comment}{// Project     : VST SDK}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 \textcolor{comment}{// Category    : Interfaces}}
+\DoxyCodeLine{5 \textcolor{comment}{// Filename    : pluginterfaces/vst/ivsteditcontroller.h}}
+\DoxyCodeLine{6 \textcolor{comment}{// Created by  : Steinberg, 09/2005}}
+\DoxyCodeLine{7 \textcolor{comment}{// Description : VST Edit Controller Interfaces}}
+\DoxyCodeLine{8 \textcolor{comment}{//}}
+\DoxyCodeLine{9 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{10 \textcolor{comment}{// This file is part of a Steinberg SDK. It is subject to the license terms}}
+\DoxyCodeLine{11 \textcolor{comment}{// in the LICENSE file found in the top-\/level directory of this distribution}}
+\DoxyCodeLine{12 \textcolor{comment}{// and at www.steinberg.net/sdklicenses. }}
+\DoxyCodeLine{13 \textcolor{comment}{// No part of the SDK, including this file, may be copied, modified, propagated,}}
+\DoxyCodeLine{14 \textcolor{comment}{// or distributed except according to the terms contained in the LICENSE file.}}
+\DoxyCodeLine{15 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{ipluginbase_8h}{pluginterfaces/base/ipluginbase.h}}"{}}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{vsttypes_8h}{pluginterfaces/vst/vsttypes.h}}"{}}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{falignpush_8h}{pluginterfaces/base/falignpush.h}}"{}}}
+\DoxyCodeLine{24 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{28 \textcolor{comment}{}\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#ifndef kVstComponentControllerClass}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#define kVstComponentControllerClass "{}Component Controller Class"{}}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{34 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespace_steinberg}{Steinberg}} \{}
+\DoxyCodeLine{35 \textcolor{keyword}{class }IPlugView;}
+\DoxyCodeLine{36 \textcolor{keyword}{class }IBStream;}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{39 \textcolor{keyword}{namespace }Vst \{}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{46 \textcolor{comment}{}\textcolor{keyword}{struct }\mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_parameter_info}{ParameterInfo}}}
+\DoxyCodeLine{47 \{}
+\DoxyCodeLine{48 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{49     \mbox{\hyperlink{namespace_steinberg_1_1_vst_a280d91906cce82932a36c0a92bcbeae0}{ParamID}} \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_parameter_info_a1c85d534c84547f6ebd8b512ade4486e}{id}};                }
+\DoxyCodeLine{50     \mbox{\hyperlink{namespace_steinberg_1_1_vst_a3304fa8513f23d66819bee647e6cb29c}{String128}} \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_parameter_info_a213f3de127f7880ff82b8349f3ed5644}{title}};      }
+\DoxyCodeLine{51     \mbox{\hyperlink{namespace_steinberg_1_1_vst_a3304fa8513f23d66819bee647e6cb29c}{String128}} \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_parameter_info_a3c57853a10baaf5e4f133d38d88d5e46}{shortTitle}};    }
+\DoxyCodeLine{52     \mbox{\hyperlink{namespace_steinberg_1_1_vst_a3304fa8513f23d66819bee647e6cb29c}{String128}} \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_parameter_info_a29de18b23f89af4e7be011a7ff0a5feb}{units}};      }
+\DoxyCodeLine{53     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{int32}} \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_parameter_info_abde6e9f052756a16bbd19388fabae26a}{stepCount}};      }
+\DoxyCodeLine{55     \mbox{\hyperlink{namespace_steinberg_1_1_vst_a4db0796162b8b9751ae472df998f8736}{ParamValue}} \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_parameter_info_a537c03b24c259c00724235b0ff48a5b4}{defaultNormalizedValue}};  }
+\DoxyCodeLine{56     \mbox{\hyperlink{namespace_steinberg_1_1_vst_aebdb3f2c48a3693ee76feb85a514e067}{UnitID}} \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_parameter_info_ac9eff1cdf63d7eaa8e177ed3f25acb00}{unitId}};          }
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{int32}} \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_parameter_info_a066dc9404243cc751484c604dc33635a}{flags}};          }
+\DoxyCodeLine{59     \textcolor{keyword}{enum} \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_parameter_info_ad83679a80f1e89f853cfec09c6c19f87}{ParameterFlags}}}
+\DoxyCodeLine{60     \{}
+\DoxyCodeLine{61         \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_parameter_info_ad83679a80f1e89f853cfec09c6c19f87afef1cad7d2c8739f862e90977180e9e6}{kNoFlags}}         = 0,       }
+\DoxyCodeLine{62         \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_parameter_info_ad83679a80f1e89f853cfec09c6c19f87a460fd3f07459267485e6e42915b98257}{kCanAutomate}}     = 1 << 0,  }
+\DoxyCodeLine{63         \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_parameter_info_ad83679a80f1e89f853cfec09c6c19f87ab477442e492fcbd122f1b2ffb71e452c}{kIsReadOnly}}       = 1 << 1,  }
+\DoxyCodeLine{64         \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_parameter_info_ad83679a80f1e89f853cfec09c6c19f87adfcbad81dd162712944f9e540b7da600}{kIsWrapAround}}   = 1 << 2,  }
+\DoxyCodeLine{65         \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_parameter_info_ad83679a80f1e89f853cfec09c6c19f87a24de61378d6b1666e152302b36784492}{kIsList}}           = 1 << 3,  }
+\DoxyCodeLine{66         \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_parameter_info_ad83679a80f1e89f853cfec09c6c19f87aeedf9ba4dcf3a625e5ac32ab4a765040}{kIsHidden}}       = 1 << 4,  }
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69         \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_parameter_info_ad83679a80f1e89f853cfec09c6c19f87a57576fdd3e9c647fdd877b20007c9bb3}{kIsProgramChange}} = 1 << 15, }
+\DoxyCodeLine{71         \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_parameter_info_ad83679a80f1e89f853cfec09c6c19f87ad0b58aef5a6ea7feb0a2c1e2df72e281}{kIsBypass}}       = 1 << 16  }
+\DoxyCodeLine{73     \};}
+\DoxyCodeLine{74 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{75 \};}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{79 \textcolor{comment}{}\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{80 \textcolor{keyword}{namespace }ViewType \{}
+\DoxyCodeLine{81 \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_1_1_vst_aed169c4ba8b8000d30bc649a82e068ef}{CString}} \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_view_type_adc85fbc7de43ee838201d9917cc312b2}{kEditor}} = \textcolor{stringliteral}{"{}editor"{}};}
+\DoxyCodeLine{82 \}}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{86 \textcolor{comment}{}\textcolor{keyword}{enum} \mbox{\hyperlink{namespace_steinberg_1_1_vst_a7efda02ae38d57d5cff658320ebf6149}{RestartFlags}}}
+\DoxyCodeLine{87 \{}
+\DoxyCodeLine{91     \mbox{\hyperlink{namespace_steinberg_1_1_vst_a7efda02ae38d57d5cff658320ebf6149ac3a0829aea6e30f6f0a11e23690536df}{kReloadComponent}}            = 1 << 0,}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{98     \mbox{\hyperlink{namespace_steinberg_1_1_vst_a7efda02ae38d57d5cff658320ebf6149aa5efa012cdaf59ba0c3d272120ad62a6}{kIoChanged}}                    = 1 << 1,}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{103     \mbox{\hyperlink{namespace_steinberg_1_1_vst_a7efda02ae38d57d5cff658320ebf6149ae2f8b4478a9040a7d9540b523a675ddb}{kParamValuesChanged}}          = 1 << 2,}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{110     \mbox{\hyperlink{namespace_steinberg_1_1_vst_a7efda02ae38d57d5cff658320ebf6149a33e6f2395d00071482b19a9531aaa20b}{kLatencyChanged}}              = 1 << 3,}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{115     \mbox{\hyperlink{namespace_steinberg_1_1_vst_a7efda02ae38d57d5cff658320ebf6149a0c28a64c0b35b1f3c0027c25a58f4bed}{kParamTitlesChanged}}          = 1 << 4,}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{123     \mbox{\hyperlink{namespace_steinberg_1_1_vst_a7efda02ae38d57d5cff658320ebf6149a7002c4145ebefbdaad8e3806a3e14919}{kMidiCCAssignmentChanged}}    = 1 << 5,}
+\DoxyCodeLine{124     }
+\DoxyCodeLine{130     \mbox{\hyperlink{namespace_steinberg_1_1_vst_a7efda02ae38d57d5cff658320ebf6149a3820e0c70bb05044337d98038a435f70}{kNoteExpressionChanged}}        = 1 << 6,}
+\DoxyCodeLine{131     }
+\DoxyCodeLine{135     \mbox{\hyperlink{namespace_steinberg_1_1_vst_a7efda02ae38d57d5cff658320ebf6149a8a0aaf317e961a928c32e67404a4bb5d}{kIoTitlesChanged}}            = 1 << 7,}
+\DoxyCodeLine{136     }
+\DoxyCodeLine{142     \mbox{\hyperlink{namespace_steinberg_1_1_vst_a7efda02ae38d57d5cff658320ebf6149af8daa1748fcd3fb69546099e790896cf}{kPrefetchableSupportChanged}} = 1 << 8,}
+\DoxyCodeLine{143 }
+\DoxyCodeLine{149     \mbox{\hyperlink{namespace_steinberg_1_1_vst_a7efda02ae38d57d5cff658320ebf6149a12c9d282be9e05a7c390b9da716faf44}{kRoutingInfoChanged}}          = 1 << 9}
+\DoxyCodeLine{150 \};}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{152 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{164 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_component_handler}{IComponentHandler}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_steinberg_1_1_f_unknown}{FUnknown}}}
+\DoxyCodeLine{165 \{}
+\DoxyCodeLine{166 \textcolor{keyword}{public}:}
+\DoxyCodeLine{167 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{170 \textcolor{comment}{}    \textcolor{keyword}{virtual} \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_component_handler_adb54ddee9c7937386de45bc15f98e7da}{beginEdit}} (\mbox{\hyperlink{namespace_steinberg_1_1_vst_a280d91906cce82932a36c0a92bcbeae0}{ParamID}} \textcolor{keywordtype}{id}) = 0;}
+\DoxyCodeLine{171 }
+\DoxyCodeLine{174     \textcolor{keyword}{virtual} \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_component_handler_afe59eb77360c51a5b4bea157a41bb107}{performEdit}} (\mbox{\hyperlink{namespace_steinberg_1_1_vst_a280d91906cce82932a36c0a92bcbeae0}{ParamID}} \textcolor{keywordtype}{id}, \mbox{\hyperlink{namespace_steinberg_1_1_vst_a4db0796162b8b9751ae472df998f8736}{ParamValue}} valueNormalized) = 0;}
+\DoxyCodeLine{175 }
+\DoxyCodeLine{178     \textcolor{keyword}{virtual} \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_component_handler_ae50c7fa7245712f3134ed4506e9f434f}{endEdit}} (\mbox{\hyperlink{namespace_steinberg_1_1_vst_a280d91906cce82932a36c0a92bcbeae0}{ParamID}} \textcolor{keywordtype}{id}) = 0;}
+\DoxyCodeLine{179 }
+\DoxyCodeLine{182     \textcolor{keyword}{virtual} \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_component_handler_a65e162e3686dbcd5f2739b6481f69186}{restartComponent}} (\mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{int32}} \mbox{\hyperlink{namespacejuce_a848bbbcf606d6a8175b2c2712055d209}{flags}}) = 0;}
+\DoxyCodeLine{183 }
+\DoxyCodeLine{184 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{185     \textcolor{keyword}{static} \textcolor{keyword}{const} \mbox{\hyperlink{class_steinberg_1_1_f_u_i_d}{FUID}} \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_component_handler_ac37204dc2e4b5ea06921f4f0d6455e3c}{iid}};}
+\DoxyCodeLine{186 \};}
+\DoxyCodeLine{187 }
+\DoxyCodeLine{188 \mbox{\hyperlink{funknown_8h_aae92a855975a91bb846f6e0f906745f1}{DECLARE\_CLASS\_IID}} (\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_component_handler}{IComponentHandler}}, 0x93A0BEA3, 0x0BD045DB, 0x8E890B0C, 0xC1E46AC6)}
+\DoxyCodeLine{189 }
+\DoxyCodeLine{190 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{248 \textcolor{comment}{}class \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_component_handler2}{IComponentHandler2}} : public \mbox{\hyperlink{class_steinberg_1_1_f_unknown}{FUnknown}}}
+\DoxyCodeLine{249 \{}
+\DoxyCodeLine{250 \textcolor{keyword}{public}:}
+\DoxyCodeLine{251     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{254 \textcolor{comment}{}    \textcolor{keyword}{virtual} \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_component_handler2_a40c1430e00cf782040ba25fff4a2bbc1}{setDirty}} (\mbox{\hyperlink{namespace_steinberg_aa89abbc5b931de8ef6ef03ec0f342375}{TBool}} state) = 0;}
+\DoxyCodeLine{255 }
+\DoxyCodeLine{258     \textcolor{keyword}{virtual} \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_component_handler2_a6c85364b8da1d2084e6bc315dfe0389e}{requestOpenEditor}} (\mbox{\hyperlink{namespace_steinberg_a6ca68110b739e9a9bec4fe884cad394a}{FIDString}} \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}} = \mbox{\hyperlink{namespace_steinberg_1_1_vst_1_1_view_type_adc85fbc7de43ee838201d9917cc312b2}{ViewType::kEditor}}) = 0;}
+\DoxyCodeLine{259 }
+\DoxyCodeLine{260     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{264 \textcolor{comment}{}    \textcolor{keyword}{virtual} \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_component_handler2_a59e256348aab5fe8cea2961a3b40facf}{startGroupEdit}} () = 0;}
+\DoxyCodeLine{265 }
+\DoxyCodeLine{267     \textcolor{keyword}{virtual} \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_component_handler2_ab68547f58bc510619730dfe573a2615c}{finishGroupEdit}} () = 0;}
+\DoxyCodeLine{268 }
+\DoxyCodeLine{269     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{270     \textcolor{keyword}{static} \textcolor{keyword}{const} \mbox{\hyperlink{class_steinberg_1_1_f_u_i_d}{FUID}} \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_component_handler2_a4f7de722cbd2b40daa9ff1ecc7d39a4a}{iid}};}
+\DoxyCodeLine{271 \};}
+\DoxyCodeLine{272 }
+\DoxyCodeLine{273 \mbox{\hyperlink{funknown_8h_aae92a855975a91bb846f6e0f906745f1}{DECLARE\_CLASS\_IID}} (\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_component_handler2}{IComponentHandler2}}, 0xF040B4B3, 0xA36045EC, 0xABCDC045, 0xB4D5A2CC)}
+\DoxyCodeLine{274 }
+\DoxyCodeLine{275 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{299 \textcolor{comment}{}class \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_component_handler_bus_activation}{IComponentHandlerBusActivation}} : public \mbox{\hyperlink{class_steinberg_1_1_f_unknown}{FUnknown}}}
+\DoxyCodeLine{300 \{}
+\DoxyCodeLine{301 \textcolor{keyword}{public}:}
+\DoxyCodeLine{302 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{304 \textcolor{comment}{}    \textcolor{keyword}{virtual} \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_component_handler_bus_activation_aa924adc1c6ebeb1c6ec29b1c1cf4a181}{requestBusActivation}} (\mbox{\hyperlink{namespace_steinberg_1_1_vst_af32ccd03779e5cbfd4a348a61edd474f}{MediaType}} \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}}, \mbox{\hyperlink{namespace_steinberg_1_1_vst_ab6726c6370253c99cb4f6cc939870b02}{BusDirection}} dir, \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{int32}} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}},}
+\DoxyCodeLine{305                                                      \mbox{\hyperlink{namespace_steinberg_aa89abbc5b931de8ef6ef03ec0f342375}{TBool}} state) = 0;}
+\DoxyCodeLine{306 }
+\DoxyCodeLine{307 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{308     \textcolor{keyword}{static} \textcolor{keyword}{const} \mbox{\hyperlink{class_steinberg_1_1_f_u_i_d}{FUID}} \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_component_handler_bus_activation_a9ee32b00b8a2d579eea9b3dbef6e98f7}{iid}};}
+\DoxyCodeLine{309 \};}
+\DoxyCodeLine{310 }
+\DoxyCodeLine{311 \mbox{\hyperlink{funknown_8h_aae92a855975a91bb846f6e0f906745f1}{DECLARE\_CLASS\_IID}} (\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_component_handler_bus_activation}{IComponentHandlerBusActivation}}, 0x067D02C1, 0x5B4E274D, 0xA92D90FD, 0x6EAF7240)}
+\DoxyCodeLine{312 }
+\DoxyCodeLine{313 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{354 \textcolor{comment}{}class \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_progress}{IProgress}} : public \mbox{\hyperlink{class_steinberg_1_1_f_unknown}{FUnknown}}}
+\DoxyCodeLine{355 \{}
+\DoxyCodeLine{356 \textcolor{keyword}{public}:}
+\DoxyCodeLine{357     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{358     \textcolor{keyword}{enum} \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_progress_a4897b0b12dc3787c47e173d4b68ff416}{ProgressType}} : \mbox{\hyperlink{namespace_steinberg_af4518d725547bee20d4e185e8d3f1965}{uint32}}}
+\DoxyCodeLine{359     \{}
+\DoxyCodeLine{360         AsyncStateRestoration = 0,  }
+\DoxyCodeLine{361         UIBackgroundTask            }
+\DoxyCodeLine{362     \};}
+\DoxyCodeLine{363 }
+\DoxyCodeLine{364     \textcolor{keyword}{using} \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_progress_a2fd5519962f12bf960d3f62ff1b07471}{ID}} = \mbox{\hyperlink{namespace_steinberg_a04d83e9fd2cf38c5ca71f1359271476f}{uint64}};}
+\DoxyCodeLine{365 }
+\DoxyCodeLine{368     \textcolor{keyword}{virtual} \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_progress_a757cbd05f891631f39e2d1b386ab89b6}{start}} (\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_progress_a4897b0b12dc3787c47e173d4b68ff416}{ProgressType}} \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}}, \textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_aa659520e55d6fadd25b885790651c044}{tchar}}* optionalDescription,}
+\DoxyCodeLine{369                                       \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_progress_a2fd5519962f12bf960d3f62ff1b07471}{ID}}\& outID) = 0;}
+\DoxyCodeLine{371     \textcolor{keyword}{virtual} \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_progress_a0039d61d1139a4aa3d7e7fe9dd71e2d9}{update}} (\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_progress_a2fd5519962f12bf960d3f62ff1b07471}{ID}} \textcolor{keywordtype}{id}, \mbox{\hyperlink{namespace_steinberg_1_1_vst_a4db0796162b8b9751ae472df998f8736}{ParamValue}} normValue) = 0;}
+\DoxyCodeLine{373     \textcolor{keyword}{virtual} \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_progress_aa834a8c9026fa477e93e3c1c120e10b9}{finish}} (\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_progress_a2fd5519962f12bf960d3f62ff1b07471}{ID}} \textcolor{keywordtype}{id}) = 0;}
+\DoxyCodeLine{374 }
+\DoxyCodeLine{375 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{376     \textcolor{keyword}{static} \textcolor{keyword}{const} \mbox{\hyperlink{class_steinberg_1_1_f_u_i_d}{FUID}} \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_progress_a0f8a9f311ea56cbd68cc115b43c34b91}{iid}};}
+\DoxyCodeLine{377 \};}
+\DoxyCodeLine{378 }
+\DoxyCodeLine{379 \mbox{\hyperlink{funknown_8h_aae92a855975a91bb846f6e0f906745f1}{DECLARE\_CLASS\_IID}} (\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_progress}{IProgress}}, 0x00C9DC5B, 0x9D904254, 0x91A388C8, 0xB4E91B69)}
+\DoxyCodeLine{380 }
+\DoxyCodeLine{381 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{391 \textcolor{comment}{}class \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_edit_controller}{IEditController}} : public \mbox{\hyperlink{class_steinberg_1_1_i_plugin_base}{IPluginBase}}}
+\DoxyCodeLine{392 \{}
+\DoxyCodeLine{393 \textcolor{keyword}{public}:}
+\DoxyCodeLine{394 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{396 \textcolor{comment}{}    \textcolor{keyword}{virtual} \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_edit_controller_aaf69d189e7b5e6e38b0ad0a9cbd8eed1}{setComponentState}} (\mbox{\hyperlink{class_steinberg_1_1_i_b_stream}{IBStream}}* state) = 0;}
+\DoxyCodeLine{397 }
+\DoxyCodeLine{399     \textcolor{keyword}{virtual} \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_edit_controller_a1d329579b4de2c661ed911b0d75ad0e8}{setState}} (\mbox{\hyperlink{class_steinberg_1_1_i_b_stream}{IBStream}}* state) = 0;}
+\DoxyCodeLine{400 }
+\DoxyCodeLine{402     \textcolor{keyword}{virtual} \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_edit_controller_a55edb4ee11fe2408e5fa2658ad53c264}{getState}} (\mbox{\hyperlink{class_steinberg_1_1_i_b_stream}{IBStream}}* state) = 0;}
+\DoxyCodeLine{403 }
+\DoxyCodeLine{404     \textcolor{comment}{// parameters -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{406 \textcolor{comment}{}    \textcolor{keyword}{virtual} \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{int32}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_edit_controller_adadbd236fe20c3607ed84748cbb1a188}{getParameterCount}} () = 0;}
+\DoxyCodeLine{408     \textcolor{keyword}{virtual} \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_edit_controller_a4e261e570ae446779d14f53ac816f362}{getParameterInfo}} (\mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{int32}} paramIndex, \mbox{\hyperlink{struct_steinberg_1_1_vst_1_1_parameter_info}{ParameterInfo}}\& \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}} \textcolor{comment}{/*out*/}) = 0;}
+\DoxyCodeLine{409 }
+\DoxyCodeLine{411     \textcolor{keyword}{virtual} \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_edit_controller_aee574a78354018c921d55904166dac26}{getParamStringByValue}} (\mbox{\hyperlink{namespace_steinberg_1_1_vst_a280d91906cce82932a36c0a92bcbeae0}{ParamID}} \textcolor{keywordtype}{id}, \mbox{\hyperlink{namespace_steinberg_1_1_vst_a4db0796162b8b9751ae472df998f8736}{ParamValue}} valueNormalized \textcolor{comment}{/*in*/}, \mbox{\hyperlink{namespace_steinberg_1_1_vst_a3304fa8513f23d66819bee647e6cb29c}{String128}} \textcolor{keywordtype}{string} \textcolor{comment}{/*out*/}) = 0;}
+\DoxyCodeLine{413     \textcolor{keyword}{virtual} \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_edit_controller_a6cae4fa8b8e06ec8ed936b5459de2b73}{getParamValueByString}} (\mbox{\hyperlink{namespace_steinberg_1_1_vst_a280d91906cce82932a36c0a92bcbeae0}{ParamID}} \textcolor{keywordtype}{id}, \mbox{\hyperlink{namespace_steinberg_1_1_vst_a3598b6ccf094d9d65342935206000b3a}{TChar}}* \textcolor{keywordtype}{string} \textcolor{comment}{/*in*/}, \mbox{\hyperlink{namespace_steinberg_1_1_vst_a4db0796162b8b9751ae472df998f8736}{ParamValue}}\& valueNormalized \textcolor{comment}{/*out*/}) = 0;}
+\DoxyCodeLine{414 }
+\DoxyCodeLine{417     \textcolor{keyword}{virtual} \mbox{\hyperlink{namespace_steinberg_1_1_vst_a4db0796162b8b9751ae472df998f8736}{ParamValue}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_edit_controller_ab359d3429a9a48d25f94d32ecd22011c}{normalizedParamToPlain}} (\mbox{\hyperlink{namespace_steinberg_1_1_vst_a280d91906cce82932a36c0a92bcbeae0}{ParamID}} \textcolor{keywordtype}{id}, \mbox{\hyperlink{namespace_steinberg_1_1_vst_a4db0796162b8b9751ae472df998f8736}{ParamValue}} valueNormalized) = 0;}
+\DoxyCodeLine{419     \textcolor{keyword}{virtual} \mbox{\hyperlink{namespace_steinberg_1_1_vst_a4db0796162b8b9751ae472df998f8736}{ParamValue}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_edit_controller_acba553303a3b34bb61d60c363ddebdd6}{plainParamToNormalized}} (\mbox{\hyperlink{namespace_steinberg_1_1_vst_a280d91906cce82932a36c0a92bcbeae0}{ParamID}} \textcolor{keywordtype}{id}, \mbox{\hyperlink{namespace_steinberg_1_1_vst_a4db0796162b8b9751ae472df998f8736}{ParamValue}} plainValue) = 0;}
+\DoxyCodeLine{420 }
+\DoxyCodeLine{422     \textcolor{keyword}{virtual} \mbox{\hyperlink{namespace_steinberg_1_1_vst_a4db0796162b8b9751ae472df998f8736}{ParamValue}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_edit_controller_aac3efe3aaf83215fc03fd0c25c04a395}{getParamNormalized}} (\mbox{\hyperlink{namespace_steinberg_1_1_vst_a280d91906cce82932a36c0a92bcbeae0}{ParamID}} \textcolor{keywordtype}{id}) = 0;}
+\DoxyCodeLine{426     \textcolor{keyword}{virtual} \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_edit_controller_a90d1c322b87e26cf7893c76e9c58ac8a}{setParamNormalized}} (\mbox{\hyperlink{namespace_steinberg_1_1_vst_a280d91906cce82932a36c0a92bcbeae0}{ParamID}} \textcolor{keywordtype}{id}, \mbox{\hyperlink{namespace_steinberg_1_1_vst_a4db0796162b8b9751ae472df998f8736}{ParamValue}} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}) = 0;}
+\DoxyCodeLine{427 }
+\DoxyCodeLine{428     \textcolor{comment}{// handler -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{431 \textcolor{comment}{}    \textcolor{keyword}{virtual} \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_edit_controller_a51bee1951cb6544913ee016200a3114a}{setComponentHandler}} (\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_component_handler}{IComponentHandler}}* handler) = 0;}
+\DoxyCodeLine{432 }
+\DoxyCodeLine{433     \textcolor{comment}{// view -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{436 \textcolor{comment}{}    \textcolor{keyword}{virtual} \mbox{\hyperlink{class_steinberg_1_1_i_plug_view}{IPlugView}}* PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_edit_controller_aed134aacb178ac887384e980aec5a0da}{createView}} (\mbox{\hyperlink{namespace_steinberg_a6ca68110b739e9a9bec4fe884cad394a}{FIDString}} \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}) = 0;}
+\DoxyCodeLine{437 }
+\DoxyCodeLine{438 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{439     \textcolor{keyword}{static} \textcolor{keyword}{const} \mbox{\hyperlink{class_steinberg_1_1_f_u_i_d}{FUID}} \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_edit_controller_ad38f0828283cfcbcf7a8d89f4598a120}{iid}};}
+\DoxyCodeLine{440 \};}
+\DoxyCodeLine{441 }
+\DoxyCodeLine{442 \mbox{\hyperlink{funknown_8h_aae92a855975a91bb846f6e0f906745f1}{DECLARE\_CLASS\_IID}} (\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_edit_controller}{IEditController}}, 0xDCD7BBE3, 0x7742448D, 0xA874AACC, 0x979C759E)}
+\DoxyCodeLine{443 }
+\DoxyCodeLine{444 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{446 \textcolor{comment}{}enum \mbox{\hyperlink{namespace_steinberg_1_1_vst_afaa87ac0212690a13e6a9784492822be}{KnobModes}}}
+\DoxyCodeLine{447 \{}
+\DoxyCodeLine{448     \mbox{\hyperlink{namespace_steinberg_1_1_vst_afaa87ac0212690a13e6a9784492822bea15042d95bd5264b5bedec9747168f991}{kCircularMode}} = 0,     }
+\DoxyCodeLine{449     \mbox{\hyperlink{namespace_steinberg_1_1_vst_afaa87ac0212690a13e6a9784492822beaede3bf78fcc4f9650d44d7505e52e562}{kRelativCircularMode}},   }
+\DoxyCodeLine{450     \mbox{\hyperlink{namespace_steinberg_1_1_vst_afaa87ac0212690a13e6a9784492822bea3ffa8294e116cea1b782c9480ae113be}{kLinearMode}}              }
+\DoxyCodeLine{451 \};}
+\DoxyCodeLine{452 }
+\DoxyCodeLine{453 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{456 \textcolor{comment}{}\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{458 \textcolor{comment}{}\textcolor{keyword}{typedef} \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{int32}} \mbox{\hyperlink{namespace_steinberg_1_1_vst_a172ece08cf751b8dc9e6c86731d8ba9b}{KnobMode}};    }
+\DoxyCodeLine{461 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{474 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_edit_controller2}{IEditController2}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_steinberg_1_1_f_unknown}{FUnknown}}}
+\DoxyCodeLine{475 \{}
+\DoxyCodeLine{476 \textcolor{keyword}{public}:}
+\DoxyCodeLine{478     \textcolor{keyword}{virtual} \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_edit_controller2_a17fc6b1da550f09d77053564b934b19c}{setKnobMode}} (\mbox{\hyperlink{namespace_steinberg_1_1_vst_a172ece08cf751b8dc9e6c86731d8ba9b}{KnobMode}} \mbox{\hyperlink{png_8h_a3eabae3e1e65723a7ec3445646cb7795}{mode}}) = 0;}
+\DoxyCodeLine{479 }
+\DoxyCodeLine{483     \textcolor{keyword}{virtual} \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_edit_controller2_a9a12f3f48c7a902b0d5f9bccf36c4c14}{openHelp}} (\mbox{\hyperlink{namespace_steinberg_aa89abbc5b931de8ef6ef03ec0f342375}{TBool}} onlyCheck) = 0;}
+\DoxyCodeLine{484 }
+\DoxyCodeLine{488     \textcolor{keyword}{virtual} \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_edit_controller2_a3f2cdbce3355e2c7cbe80c2cf0acc049}{openAboutBox}} (\mbox{\hyperlink{namespace_steinberg_aa89abbc5b931de8ef6ef03ec0f342375}{TBool}} onlyCheck) = 0;}
+\DoxyCodeLine{489 }
+\DoxyCodeLine{490     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{491     \textcolor{keyword}{static} \textcolor{keyword}{const} \mbox{\hyperlink{class_steinberg_1_1_f_u_i_d}{FUID}} \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_edit_controller2_a1b82ab82c28c76e32bd72663439a5c31}{iid}};}
+\DoxyCodeLine{492 \};}
+\DoxyCodeLine{493 }
+\DoxyCodeLine{494 \mbox{\hyperlink{funknown_8h_aae92a855975a91bb846f6e0f906745f1}{DECLARE\_CLASS\_IID}} (\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_edit_controller2}{IEditController2}}, 0x7F4EFE59, 0xF3204967, 0xAC27A3AE, 0xAFB63038)}
+\DoxyCodeLine{495 }
+\DoxyCodeLine{496 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{550 \textcolor{comment}{}class \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_midi_mapping}{IMidiMapping}} : public \mbox{\hyperlink{class_steinberg_1_1_f_unknown}{FUnknown}}}
+\DoxyCodeLine{551 \{}
+\DoxyCodeLine{552 \textcolor{keyword}{public}:}
+\DoxyCodeLine{559     \textcolor{keyword}{virtual} \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_midi_mapping_ac21e6d3ca3c512aaedc22626ede97314}{getMidiControllerAssignment}} (\mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{int32}} busIndex, \mbox{\hyperlink{namespace_steinberg_a091b21d361005029928d1a49e59f1fd9}{int16}} channel,}
+\DoxyCodeLine{560                                                             \mbox{\hyperlink{namespace_steinberg_1_1_vst_a7cdcbf3982dea195392fe7949ba70d26}{CtrlNumber}} midiControllerNumber, \mbox{\hyperlink{namespace_steinberg_1_1_vst_a280d91906cce82932a36c0a92bcbeae0}{ParamID}}\& \textcolor{keywordtype}{id}\textcolor{comment}{/*out*/}) = 0;}
+\DoxyCodeLine{561 }
+\DoxyCodeLine{562     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{563     \textcolor{keyword}{static} \textcolor{keyword}{const} \mbox{\hyperlink{class_steinberg_1_1_f_u_i_d}{FUID}} \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_midi_mapping_a9aeac557f46b72d2313f53c423e56971}{iid}};}
+\DoxyCodeLine{564 \};}
+\DoxyCodeLine{565 }
+\DoxyCodeLine{566 \mbox{\hyperlink{funknown_8h_aae92a855975a91bb846f6e0f906745f1}{DECLARE\_CLASS\_IID}} (\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_midi_mapping}{IMidiMapping}}, 0xDF0FF9F7, 0x49B74669, 0xB63AB732, 0x7ADBF5E5)}
+\DoxyCodeLine{567 }
+\DoxyCodeLine{568 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{594 \textcolor{comment}{}class \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_edit_controller_host_editing}{IEditControllerHostEditing}} : public \mbox{\hyperlink{class_steinberg_1_1_f_unknown}{FUnknown}}}
+\DoxyCodeLine{595 \{}
+\DoxyCodeLine{596 \textcolor{keyword}{public}:}
+\DoxyCodeLine{598     \textcolor{keyword}{virtual} \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_edit_controller_host_editing_a4c2105b4432e4c78bc0a1ed03a5827fc}{beginEditFromHost}} (\mbox{\hyperlink{namespace_steinberg_1_1_vst_a280d91906cce82932a36c0a92bcbeae0}{ParamID}} paramID) = 0;}
+\DoxyCodeLine{599 }
+\DoxyCodeLine{601     \textcolor{keyword}{virtual} \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\_API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_edit_controller_host_editing_af1e96a56f05040f30645b080930b978e}{endEditFromHost}} (\mbox{\hyperlink{namespace_steinberg_1_1_vst_a280d91906cce82932a36c0a92bcbeae0}{ParamID}} paramID) = 0;}
+\DoxyCodeLine{602 }
+\DoxyCodeLine{603     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{604     \textcolor{keyword}{static} \textcolor{keyword}{const} \mbox{\hyperlink{class_steinberg_1_1_f_u_i_d}{FUID}} \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_edit_controller_host_editing_ac6cf319171e81a2ba481c48de623001d}{iid}};}
+\DoxyCodeLine{605 \};}
+\DoxyCodeLine{606 }
+\DoxyCodeLine{607 \mbox{\hyperlink{funknown_8h_aae92a855975a91bb846f6e0f906745f1}{DECLARE\_CLASS\_IID}} (\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_edit_controller_host_editing}{IEditControllerHostEditing}}, 0xC1271208, 0x70594098, 0xB9DD34B3, 0x6BB0195E)}
+\DoxyCodeLine{608 }
+\DoxyCodeLine{609 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{610 \} \textcolor{comment}{// namespace Vst}}
+\DoxyCodeLine{611 \} \textcolor{comment}{// namespace Steinberg}}
+\DoxyCodeLine{612 }
+\DoxyCodeLine{613 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{614 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{falignpop_8h}{pluginterfaces/base/falignpop.h}}"{}}}
+\DoxyCodeLine{615 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+
+\end{DoxyCode}

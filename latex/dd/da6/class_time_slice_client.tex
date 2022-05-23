@@ -1,0 +1,81 @@
+\hypertarget{class_time_slice_client}{}\doxysection{Time\+Slice\+Client Class Reference}
+\label{class_time_slice_client}\index{TimeSliceClient@{TimeSliceClient}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Time\+Slice\+Thread.\+h$>$}
+
+Inheritance diagram for Time\+Slice\+Client\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=0.549828cm]{dd/da6/class_time_slice_client}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_time_slice_client_aedd0f68e061de085ae7014629aee9d16}{$\sim$\+Time\+Slice\+Client}} ()=default
+\item 
+virtual \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{class_time_slice_client_a272b0868c9bd0b5c281cf09dbaa69a9c}{use\+Time\+Slice}} ()=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_time_slice_client_ae2223f00bdb9eb1f9893305bac3bb600}{Time\+Slice\+Thread}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Used by the \mbox{\hyperlink{class_time_slice_thread}{Time\+Slice\+Thread}} class.
+
+To register your class with a \mbox{\hyperlink{class_time_slice_thread}{Time\+Slice\+Thread}}, derive from this class and use the \mbox{\hyperlink{class_time_slice_thread_a32774664744aed47f22d255889fd50f2}{Time\+Slice\+Thread\+::add\+Time\+Slice\+Client()}} method to add it to the list.
+
+Make sure you always call \mbox{\hyperlink{class_time_slice_thread_a63268fd875e85e7bf705fd608e2988cf}{Time\+Slice\+Thread\+::remove\+Time\+Slice\+Client()}} before deleting your client!
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_time_slice_thread}{Time\+Slice\+Thread}}
+\end{DoxySeeAlso}
+@tags\{Core\} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_time_slice_client_aedd0f68e061de085ae7014629aee9d16}\label{class_time_slice_client_aedd0f68e061de085ae7014629aee9d16}} 
+\index{TimeSliceClient@{TimeSliceClient}!````~TimeSliceClient@{$\sim$TimeSliceClient}}
+\index{````~TimeSliceClient@{$\sim$TimeSliceClient}!TimeSliceClient@{TimeSliceClient}}
+\doxysubsubsection{\texorpdfstring{$\sim$TimeSliceClient()}{~TimeSliceClient()}}
+{\footnotesize\ttfamily virtual Time\+Slice\+Client\+::$\sim$\+Time\+Slice\+Client (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+Destructor. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_time_slice_client_a272b0868c9bd0b5c281cf09dbaa69a9c}\label{class_time_slice_client_a272b0868c9bd0b5c281cf09dbaa69a9c}} 
+\index{TimeSliceClient@{TimeSliceClient}!useTimeSlice@{useTimeSlice}}
+\index{useTimeSlice@{useTimeSlice}!TimeSliceClient@{TimeSliceClient}}
+\doxysubsubsection{\texorpdfstring{useTimeSlice()}{useTimeSlice()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} Time\+Slice\+Client\+::use\+Time\+Slice (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Called back by a \mbox{\hyperlink{class_time_slice_thread}{Time\+Slice\+Thread}}.
+
+When you register this class with it, a \mbox{\hyperlink{class_time_slice_thread}{Time\+Slice\+Thread}} will repeatedly call this method.
+
+The implementation of this method should use its time-\/slice to do something that\textquotesingle{}s quick -\/ never block for longer than absolutely necessary.
+
+\begin{DoxyReturn}{Returns}
+Your method should return the number of milliseconds which it would like to wait before being called again. Returning 0 will make the thread call again as soon as possible (after possibly servicing other busy clients). If you return a value below zero, your client will be removed from the list of clients, and won\textquotesingle{}t be called again. The value you specify isn\textquotesingle{}t a guarantee, and is only used as a hint by the thread -\/ the actual time before the next callback may be more or less than specified. You can force the \mbox{\hyperlink{class_time_slice_thread}{Time\+Slice\+Thread}} to wake up and poll again immediately by calling its notify() method. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classjuce_1_1_audio_format_writer_1_1_threaded_writer_1_1_buffer_a3b4208262967cde0d91e18295ee6e503}{juce\+::\+Audio\+Format\+Writer\+::\+Threaded\+Writer\+::\+Buffer}}, \mbox{\hyperlink{classjuce_1_1_audio_thumbnail_1_1_level_data_source_a8b40776cbfd56520f2a72f02c23f7197}{juce\+::\+Audio\+Thumbnail\+::\+Level\+Data\+Source}}, \mbox{\hyperlink{classjuce_1_1_file_list_component_1_1_item_component_a3824133ee83ffe425e2c50436d8bd469}{juce\+::\+File\+List\+Component\+::\+Item\+Component}}, and \mbox{\hyperlink{classjuce_1_1_file_list_tree_item_ab0cf48a8c7b7919962699d19a68b9021}{juce\+::\+File\+List\+Tree\+Item}}.
+
+
+
+\doxysubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{class_time_slice_client_ae2223f00bdb9eb1f9893305bac3bb600}\label{class_time_slice_client_ae2223f00bdb9eb1f9893305bac3bb600}} 
+\index{TimeSliceClient@{TimeSliceClient}!TimeSliceThread@{TimeSliceThread}}
+\index{TimeSliceThread@{TimeSliceThread}!TimeSliceClient@{TimeSliceClient}}
+\doxysubsubsection{\texorpdfstring{TimeSliceThread}{TimeSliceThread}}
+{\footnotesize\ttfamily friend class \mbox{\hyperlink{class_time_slice_thread}{Time\+Slice\+Thread}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+core/threads/\mbox{\hyperlink{juce___time_slice_thread_8h}{juce\+\_\+\+Time\+Slice\+Thread.\+h}}\end{DoxyCompactItemize}

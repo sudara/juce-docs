@@ -1,0 +1,149 @@
+\hypertarget{juce___log_ramped_value_8h_source}{}\doxysection{juce\+\_\+\+Log\+Ramped\+Value.\+h}
+\label{juce___log_ramped_value_8h_source}\index{build/juce\_dsp/maths/juce\_LogRampedValue.h@{build/juce\_dsp/maths/juce\_LogRampedValue.h}}
+\mbox{\hyperlink{juce___log_ramped_value_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacedsp}{dsp}}}
+\DoxyCodeLine{30 \{}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{47 \textcolor{comment}{}\textcolor{keyword}{template} <\textcolor{keyword}{typename} FloatType>}
+\DoxyCodeLine{48 \textcolor{keyword}{class }\mbox{\hyperlink{classdsp_1_1_log_ramped_value}{LogRampedValue}}   : \textcolor{keyword}{public} \mbox{\hyperlink{class_smoothed_value_base}{SmoothedValueBase}} <LogRampedValue <FloatType>>}
+\DoxyCodeLine{49 \{}
+\DoxyCodeLine{50 \textcolor{keyword}{public}:}
+\DoxyCodeLine{51     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{53 \textcolor{comment}{}    \mbox{\hyperlink{classdsp_1_1_log_ramped_value_a4a5f0b7d4e14ae27c1e8920705afee43}{LogRampedValue}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{56     \mbox{\hyperlink{classdsp_1_1_log_ramped_value_a067c6355f52351db6bfbb3ce8ca94940}{LogRampedValue}} (\mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{FloatType}} initialValue) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{57     \{}
+\DoxyCodeLine{58         \textcolor{comment}{// Visual Studio can't handle base class initialisation with CRTP}}
+\DoxyCodeLine{59         this-\/>\mbox{\hyperlink{class_smoothed_value_base_a89801c30d19e4a627976d49f43c0a97e}{currentValue}} = initialValue;}
+\DoxyCodeLine{60         this-\/>\mbox{\hyperlink{class_smoothed_value_base_a902690d2718e09c2b34effad5980fe3b}{target}} = initialValue;}
+\DoxyCodeLine{61     \}}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{74 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_log_ramped_value_a952fc8a88b07a6e46dbb24d676a697bd}{setLogParameters}} (\mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{FloatType}} midPointAmplitudedB, \textcolor{keywordtype}{bool} rateOfChangeShouldIncrease) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{75     \{}
+\DoxyCodeLine{76         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (midPointAmplitudedB < (\mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{FloatType}}) 0.0);}
+\DoxyCodeLine{77         B = \mbox{\hyperlink{class_decibels_aa8114cb97adb33d7723e8a5bc6f67c18}{Decibels::decibelsToGain}} (midPointAmplitudedB);}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79         increasingRateOfChange = rateOfChangeShouldIncrease;}
+\DoxyCodeLine{80     \}}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{87 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_log_ramped_value_a2a2a2fa806e92829c0d6d1938cc83e04}{reset}} (\textcolor{keywordtype}{double} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}}, \textcolor{keywordtype}{double} rampLengthInSeconds) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{88     \{}
+\DoxyCodeLine{89         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (\mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}} > 0 \&\& rampLengthInSeconds >= 0);}
+\DoxyCodeLine{90         \mbox{\hyperlink{classdsp_1_1_log_ramped_value_a2a2a2fa806e92829c0d6d1938cc83e04}{reset}} ((\textcolor{keywordtype}{int}) std::floor (rampLengthInSeconds * \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}}));}
+\DoxyCodeLine{91     \}}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{96     \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_log_ramped_value_a8d8bc9cf08dc1d1a41db9d02b15fb003}{reset}} (\textcolor{keywordtype}{int} numSteps) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{97     \{}
+\DoxyCodeLine{98         stepsToTarget = numSteps;}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100         this-\/>\mbox{\hyperlink{class_smoothed_value_base_a9f3508cf2b6c49f5f17bfaad6c42e153}{setCurrentAndTargetValue}} (this-\/>\mbox{\hyperlink{class_smoothed_value_base_a902690d2718e09c2b34effad5980fe3b}{target}});}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{102         updateRampParameters();}
+\DoxyCodeLine{103     \}}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{110 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_log_ramped_value_ad2e62858a261126746459fdd43c0aff4}{setTargetValue}} (\mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{FloatType}} newValue) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{111     \{}
+\DoxyCodeLine{112         \textcolor{keywordflow}{if} (newValue == this-\/>\mbox{\hyperlink{class_smoothed_value_base_a902690d2718e09c2b34effad5980fe3b}{target}})}
+\DoxyCodeLine{113             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115         \textcolor{keywordflow}{if} (stepsToTarget <= 0)}
+\DoxyCodeLine{116         \{}
+\DoxyCodeLine{117             this-\/>\mbox{\hyperlink{class_smoothed_value_base_a9f3508cf2b6c49f5f17bfaad6c42e153}{setCurrentAndTargetValue}} (newValue);}
+\DoxyCodeLine{118             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{119         \}}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{121         this-\/>\mbox{\hyperlink{class_smoothed_value_base_a902690d2718e09c2b34effad5980fe3b}{target}} = newValue;}
+\DoxyCodeLine{122         this-\/>\mbox{\hyperlink{class_smoothed_value_base_a5428962e91e7745e9e4089bffe97852b}{countdown}} = stepsToTarget;}
+\DoxyCodeLine{123         source = this-\/>\mbox{\hyperlink{class_smoothed_value_base_a89801c30d19e4a627976d49f43c0a97e}{currentValue}};}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{125         updateRampParameters();}
+\DoxyCodeLine{126     \}}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{128     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{132 \textcolor{comment}{}    \mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{FloatType}} \mbox{\hyperlink{classdsp_1_1_log_ramped_value_a73368a95c9d0d3949153cdd2737edda4}{getNextValue}}() noexcept}
+\DoxyCodeLine{133     \{}
+\DoxyCodeLine{134         \textcolor{keywordflow}{if} (! this-\/>\mbox{\hyperlink{class_smoothed_value_base_afadc1bbe590e1fe7e3d06ae17cb95d53}{isSmoothing}}())}
+\DoxyCodeLine{135             \textcolor{keywordflow}{return} this-\/>\mbox{\hyperlink{class_smoothed_value_base_a902690d2718e09c2b34effad5980fe3b}{target}};}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{137         -\/-\/(this-\/>\mbox{\hyperlink{class_smoothed_value_base_a5428962e91e7745e9e4089bffe97852b}{countdown}});}
+\DoxyCodeLine{138 }
+\DoxyCodeLine{139         temp *= r; temp += d;}
+\DoxyCodeLine{140         this-\/>\mbox{\hyperlink{class_smoothed_value_base_a89801c30d19e4a627976d49f43c0a97e}{currentValue}} = \mbox{\hyperlink{group__juce__core-maths_ga53851e83e8f5c5faeb5dbc64196bb329}{jmap}} (temp, source, this-\/>\mbox{\hyperlink{class_smoothed_value_base_a902690d2718e09c2b34effad5980fe3b}{target}});}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{142         \textcolor{keywordflow}{return} this-\/>\mbox{\hyperlink{class_smoothed_value_base_a89801c30d19e4a627976d49f43c0a97e}{currentValue}};}
+\DoxyCodeLine{143     \}}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{151 \textcolor{comment}{}    \mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{FloatType}} \mbox{\hyperlink{classdsp_1_1_log_ramped_value_a04d8b85a6c5f29c12185c2dbce04124a}{skip}} (\textcolor{keywordtype}{int} numSamples) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{152     \{}
+\DoxyCodeLine{153         \textcolor{keywordflow}{if} (numSamples >= this-\/>\mbox{\hyperlink{class_smoothed_value_base_a5428962e91e7745e9e4089bffe97852b}{countdown}})}
+\DoxyCodeLine{154         \{}
+\DoxyCodeLine{155             this-\/>\mbox{\hyperlink{class_smoothed_value_base_a9f3508cf2b6c49f5f17bfaad6c42e153}{setCurrentAndTargetValue}} (this-\/>\mbox{\hyperlink{class_smoothed_value_base_a902690d2718e09c2b34effad5980fe3b}{target}});}
+\DoxyCodeLine{156             \textcolor{keywordflow}{return} this-\/>\mbox{\hyperlink{class_smoothed_value_base_a902690d2718e09c2b34effad5980fe3b}{target}};}
+\DoxyCodeLine{157         \}}
+\DoxyCodeLine{158 }
+\DoxyCodeLine{159         this-\/>\mbox{\hyperlink{class_smoothed_value_base_a5428962e91e7745e9e4089bffe97852b}{countdown}} -\/= numSamples;}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161         \textcolor{keyword}{auto} rN = (\mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{FloatType}}) std::pow (r, numSamples);}
+\DoxyCodeLine{162         temp *= rN;}
+\DoxyCodeLine{163         temp += d * (rN -\/ (\mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{FloatType}}) 1) / (r -\/ (\mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{FloatType}}) 1);}
+\DoxyCodeLine{164 }
+\DoxyCodeLine{165         this-\/>\mbox{\hyperlink{class_smoothed_value_base_a89801c30d19e4a627976d49f43c0a97e}{currentValue}} = \mbox{\hyperlink{group__juce__core-maths_ga53851e83e8f5c5faeb5dbc64196bb329}{jmap}} (temp, source, this-\/>\mbox{\hyperlink{class_smoothed_value_base_a902690d2718e09c2b34effad5980fe3b}{target}});}
+\DoxyCodeLine{166         \textcolor{keywordflow}{return} this-\/>\mbox{\hyperlink{class_smoothed_value_base_a89801c30d19e4a627976d49f43c0a97e}{currentValue}};}
+\DoxyCodeLine{167     \}}
+\DoxyCodeLine{168 }
+\DoxyCodeLine{169 \textcolor{keyword}{private}:}
+\DoxyCodeLine{170     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{171     \textcolor{keywordtype}{void} updateRampParameters()}
+\DoxyCodeLine{172     \{}
+\DoxyCodeLine{173         \textcolor{keyword}{auto} D = increasingRateOfChange ? B : (\mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{FloatType}}) 1 -\/ B;}
+\DoxyCodeLine{174         \textcolor{keyword}{auto} base = ((\mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{FloatType}}) 1 / D) -\/ (\mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{FloatType}}) 1;}
+\DoxyCodeLine{175         r = std::pow (base, (\mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{FloatType}}) 2 / (\mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{FloatType}}) stepsToTarget);}
+\DoxyCodeLine{176         \textcolor{keyword}{auto} rN = std::pow (r, (\mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{FloatType}}) stepsToTarget);}
+\DoxyCodeLine{177         d = (r -\/ (\mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{FloatType}}) 1) / (rN -\/ (\mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{FloatType}}) 1);}
+\DoxyCodeLine{178         temp = 0;}
+\DoxyCodeLine{179     \}}
+\DoxyCodeLine{180 }
+\DoxyCodeLine{181     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{182     \textcolor{keywordtype}{bool} increasingRateOfChange = \textcolor{keyword}{true};}
+\DoxyCodeLine{183     \mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{FloatType}} B = \mbox{\hyperlink{class_decibels_aa8114cb97adb33d7723e8a5bc6f67c18}{Decibels::decibelsToGain}} ((\mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{FloatType}}) -\/40);}
+\DoxyCodeLine{184 }
+\DoxyCodeLine{185     \textcolor{keywordtype}{int} stepsToTarget = 0;}
+\DoxyCodeLine{186     \mbox{\hyperlink{class_smoothed_value_base_a331eba8c0333698d8bb470b1311d49e4}{FloatType}} temp = 0, source = 0, r = 0, d = 1;}
+\DoxyCodeLine{187 \};}
+\DoxyCodeLine{188 }
+\DoxyCodeLine{189 \} \textcolor{comment}{// namespace dsp}}
+\DoxyCodeLine{190  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{191 }
+
+\end{DoxyCode}

@@ -1,0 +1,20 @@
+\hypertarget{structdetail_1_1_type}{}\doxysection{detail\+::Type\texorpdfstring{$<$}{<} typename \texorpdfstring{$>$}{>} Struct Template Reference}
+\label{structdetail_1_1_type}\index{detail::Type$<$ typename $>$@{detail::Type$<$ typename $>$}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Audio\+Sample\+Buffer.\+h$>$}
+
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename$>$\newline
+struct detail\+::\+Type$<$ typename $>$}
+On i\+OS/arm7 the alignment of {\ttfamily double} is greater than the alignment of {\ttfamily std\+::max\+\_\+align\+\_\+t}, so we can\textquotesingle{}t trust max\+\_\+align\+\_\+t. Instead, we query lots of primitive types and use the maximum alignment of all of them.
+
+We\textquotesingle{}re putting this stuff outside \mbox{\hyperlink{class_audio_buffer}{Audio\+Buffer}} itself to avoid creating unnecessary copies for each distinct template instantiation of \mbox{\hyperlink{class_audio_buffer}{Audio\+Buffer}}.
+
+MSVC 2015 doesn\textquotesingle{}t like when we write get\+Max\+Alignment as a loop which accumulates the max alignment (declarations not allowed in constexpr function body) so instead we use this recursive version which instantiates a zillion templates. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+audio\+\_\+basics/buffers/\mbox{\hyperlink{juce___audio_sample_buffer_8h}{juce\+\_\+\+Audio\+Sample\+Buffer.\+h}}\end{DoxyCompactItemize}

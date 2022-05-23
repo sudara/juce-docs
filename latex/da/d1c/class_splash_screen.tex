@@ -1,0 +1,164 @@
+\hypertarget{class_splash_screen}{}\doxysection{Splash\+Screen Class Reference}
+\label{class_splash_screen}\index{SplashScreen@{SplashScreen}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Splash\+Screen.\+h$>$}
+
+Inheritance diagram for Splash\+Screen\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{da/d1c/class_splash_screen}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_splash_screen_a17f618da1f7495a592d8d346ab1a92e3}{Splash\+Screen}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&title, \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_image}{Image}} \&background\+Image, bool use\+Drop\+Shadow)
+\item 
+\mbox{\hyperlink{class_splash_screen_a387aca505b949adf7ea37ddba338b50d}{$\sim$\+Splash\+Screen}} () override
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_splash_screen_ac16029be83bfde8317f47138fc830013}{delete\+After\+Delay}} (\mbox{\hyperlink{class_relative_time}{Relative\+Time}} minimum\+Total\+Time\+To\+Display\+For, bool remove\+On\+Mouse\+Click)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_splash_screen_ab59228753c7b524e47f673063d7487e6}{Splash\+Screen}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&title, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} height, bool use\+Drop\+Shadow)
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_splash_screen_a2928536a464778d08d42b1bdc571899d}{paint}} (\mbox{\hyperlink{class_graphics}{Graphics}} \&) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+A component for showing a splash screen while your app starts up.
+
+This will automatically position itself, and can be told to delete itself after being on-\/screen for a minimum length of time.
+
+To use it, just create one of these in your \mbox{\hyperlink{class_j_u_c_e_application_base_ad584bed05116674a1e68f60a1ac546f5}{JUCEApplication\+Base\+::initialise()}} method, and when your initialisation tasks have finished running, call its \mbox{\hyperlink{class_splash_screen_ac16029be83bfde8317f47138fc830013}{delete\+After\+Delay()}} method to make it automatically get rid of itself.
+
+Note that although you could call \mbox{\hyperlink{class_splash_screen_ac16029be83bfde8317f47138fc830013}{delete\+After\+Delay()}} as soon as you create the \mbox{\hyperlink{class_splash_screen}{Splash\+Screen}} object, if you\textquotesingle{}ve got a long initialisation procedure, you probably don\textquotesingle{}t want the splash to time-\/out and disappear before the initialisation has finished, which is why it makes sense to not call this method until the end of your init tasks.
+
+E.\+g. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} MyApp::initialise (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& commandLine)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    splash = \textcolor{keyword}{new} \mbox{\hyperlink{class_splash_screen_a17f618da1f7495a592d8d346ab1a92e3}{SplashScreen}} (\textcolor{stringliteral}{"{}Welcome to my app!"{}},}
+\DoxyCodeLine{                               \mbox{\hyperlink{class_image_file_format_aa5cf7b6f03682432ae93df3c3defc2b7}{ImageFileFormat::loadFrom}} (\mbox{\hyperlink{class_file}{File}} (\textcolor{stringliteral}{"{}/foobar/splash.jpg"{}})),}
+\DoxyCodeLine{                               \textcolor{keyword}{true});}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{comment}{// now kick off your initialisation work on some kind of thread or task, and}}
+\DoxyCodeLine{    launchBackgroundInitialisationThread();}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void} MyApp::myInitialisationWorkFinished()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{comment}{// ..assuming this is some kind of callback method that is triggered when}}
+\DoxyCodeLine{    \textcolor{comment}{// your background initialisation threads have finished, and it's time to open}}
+\DoxyCodeLine{    \textcolor{comment}{// your main window, etc..}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    splash-\/>deleteAfterDelay (\mbox{\hyperlink{class_relative_time_ae8f10e8d1ca94b422cfe9a7f4b2f05ba}{RelativeTime::seconds}} (4), \textcolor{keyword}{false});}
+\DoxyCodeLine{}
+\DoxyCodeLine{    ...etc...}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+@tags\{GUI\} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_splash_screen_a17f618da1f7495a592d8d346ab1a92e3}\label{class_splash_screen_a17f618da1f7495a592d8d346ab1a92e3}} 
+\index{SplashScreen@{SplashScreen}!SplashScreen@{SplashScreen}}
+\index{SplashScreen@{SplashScreen}!SplashScreen@{SplashScreen}}
+\doxysubsubsection{\texorpdfstring{SplashScreen()}{SplashScreen()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Splash\+Screen\+::\+Splash\+Screen (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&}]{title,  }\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_image}{Image}} \&}]{background\+Image,  }\item[{bool}]{use\+Drop\+Shadow }\end{DoxyParamCaption})}
+
+Creates a \mbox{\hyperlink{class_splash_screen}{Splash\+Screen}} object.
+
+When called, the constructor will position the \mbox{\hyperlink{class_splash_screen}{Splash\+Screen}} in the centre of the display, and after the time specified, it will automatically delete itself.
+
+Bear in mind that if you call this during your \mbox{\hyperlink{class_j_u_c_e_application_base_ad584bed05116674a1e68f60a1ac546f5}{JUCEApplication\+Base\+::initialise()}} method and then block the message thread by performing some kind of task, then obviously neither your splash screen nor any other GUI will appear until you allow the message thread to resume and do its work. So if you have time-\/consuming tasks to do during startup, use a background thread for them.
+
+After creating one of these (or your subclass of it), you should do your app\textquotesingle{}s initialisation work, and then call the \mbox{\hyperlink{class_splash_screen_ac16029be83bfde8317f47138fc830013}{delete\+After\+Delay()}} method to tell this object to delete itself after the user has had chance to get a good look at it.
+
+If you\textquotesingle{}re writing a custom splash screen class, there\textquotesingle{}s another protected constructor that your subclass can call, which doesn\textquotesingle{}t take an image.
+
+
+\begin{DoxyParams}{Parameters}
+{\em title} & the name to give the component \\
+\hline
+{\em background\+Image} & an image to draw on the component. The component\textquotesingle{}s size will be set to the size of this image, and if the image is semi-\/transparent, the component will be made non-\/opaque \\
+\hline
+{\em use\+Drop\+Shadow} & if true, the window will have a drop shadow \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_splash_screen_a387aca505b949adf7ea37ddba338b50d}\label{class_splash_screen_a387aca505b949adf7ea37ddba338b50d}} 
+\index{SplashScreen@{SplashScreen}!````~SplashScreen@{$\sim$SplashScreen}}
+\index{````~SplashScreen@{$\sim$SplashScreen}!SplashScreen@{SplashScreen}}
+\doxysubsubsection{\texorpdfstring{$\sim$SplashScreen()}{~SplashScreen()}}
+{\footnotesize\ttfamily Splash\+Screen\+::$\sim$\+Splash\+Screen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+Destructor. \mbox{\Hypertarget{class_splash_screen_ab59228753c7b524e47f673063d7487e6}\label{class_splash_screen_ab59228753c7b524e47f673063d7487e6}} 
+\index{SplashScreen@{SplashScreen}!SplashScreen@{SplashScreen}}
+\index{SplashScreen@{SplashScreen}!SplashScreen@{SplashScreen}}
+\doxysubsubsection{\texorpdfstring{SplashScreen()}{SplashScreen()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Splash\+Screen\+::\+Splash\+Screen (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&}]{title,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{width,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{height,  }\item[{bool}]{use\+Drop\+Shadow }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+This constructor is for use by custom sub-\/classes that don\textquotesingle{}t want to provide an image. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_splash_screen_ac16029be83bfde8317f47138fc830013}\label{class_splash_screen_ac16029be83bfde8317f47138fc830013}} 
+\index{SplashScreen@{SplashScreen}!deleteAfterDelay@{deleteAfterDelay}}
+\index{deleteAfterDelay@{deleteAfterDelay}!SplashScreen@{SplashScreen}}
+\doxysubsubsection{\texorpdfstring{deleteAfterDelay()}{deleteAfterDelay()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Splash\+Screen\+::delete\+After\+Delay (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_relative_time}{Relative\+Time}}}]{minimum\+Total\+Time\+To\+Display\+For,  }\item[{bool}]{remove\+On\+Mouse\+Click }\end{DoxyParamCaption})}
+
+Tells the component to auto-\/delete itself after a timeout period, or when the mouse is clicked.
+
+You should call this after finishing your app\textquotesingle{}s initialisation work.
+
+Note that although you could call \mbox{\hyperlink{class_splash_screen_ac16029be83bfde8317f47138fc830013}{delete\+After\+Delay()}} as soon as you create the \mbox{\hyperlink{class_splash_screen}{Splash\+Screen}} object, if you\textquotesingle{}ve got a long initialisation procedure, you probably don\textquotesingle{}t want the splash to time-\/out and disappear before your initialisation has finished, which is why it makes sense to not call this method and start the self-\/delete timer until you\textquotesingle{}re ready.
+
+It\textquotesingle{}s safe to call this method from a non-\/\+GUI thread as long as there\textquotesingle{}s no danger that the object may be being deleted at the same time.
+
+
+\begin{DoxyParams}{Parameters}
+{\em minimum\+Total\+Time\+To\+Display\+For} & how long the splash screen should stay visible for. Note that this time is measured from the construction-\/time of this object, not from the time that the \mbox{\hyperlink{class_splash_screen_ac16029be83bfde8317f47138fc830013}{delete\+After\+Delay()}} method is called, so if you call this method after a long initialisation period, it may be deleted without any further delay. \\
+\hline
+{\em remove\+On\+Mouse\+Click} & if true, the window will be deleted as soon as the user clicks the mouse (anywhere) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_splash_screen_a2928536a464778d08d42b1bdc571899d}\label{class_splash_screen_a2928536a464778d08d42b1bdc571899d}} 
+\index{SplashScreen@{SplashScreen}!paint@{paint}}
+\index{paint@{paint}!SplashScreen@{SplashScreen}}
+\doxysubsubsection{\texorpdfstring{paint()}{paint()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Splash\+Screen\+::paint (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graphics}{Graphics}} \&}]{g }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+Components can override this method to draw their content.
+
+The \mbox{\hyperlink{class_splash_screen_a2928536a464778d08d42b1bdc571899d}{paint()}} method gets called when a region of a component needs redrawing, either because the component\textquotesingle{}s \mbox{\hyperlink{class_component_af3ab3eabec93dd60faf983370f3a1206}{repaint()}} method has been called, or because something has happened on the screen that means a section of a window needs to be redrawn.
+
+Any child components will draw themselves over whatever this method draws. If you need to paint over the top of your child components, you can also implement the \mbox{\hyperlink{class_component_aa15dc77c06b5a0a4192090b4a323f79c}{paint\+Over\+Children()}} method to do this.
+
+If you want to cause a component to redraw itself, this is done asynchronously -\/ calling the \mbox{\hyperlink{class_component_af3ab3eabec93dd60faf983370f3a1206}{repaint()}} method marks a region of the component as \char`\"{}dirty\char`\"{}, and the \mbox{\hyperlink{class_splash_screen_a2928536a464778d08d42b1bdc571899d}{paint()}} method will automatically be called sometime later, by the message thread, to paint any bits that need refreshing. In JUCE (and almost all modern UI frameworks), you never redraw something synchronously.
+
+You should never need to call this method directly -\/ to take a snapshot of the component you could use \mbox{\hyperlink{class_component_a275e46e5a8147f89c142c91ba5c793a5}{create\+Component\+Snapshot()}} or \mbox{\hyperlink{class_component_a2c960bd5ec5ac76d18e82b6883096714}{paint\+Entire\+Component()}}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & the graphics context that must be used to do the drawing operations. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_component_af3ab3eabec93dd60faf983370f3a1206}{repaint}}, \mbox{\hyperlink{class_component_aa15dc77c06b5a0a4192090b4a323f79c}{paint\+Over\+Children}}, \mbox{\hyperlink{class_graphics}{Graphics}} 
+\end{DoxySeeAlso}
+
+
+Reimplemented from \mbox{\hyperlink{class_component_a7cf1862f4af5909ea72827898114a182}{Component}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+gui\+\_\+extra/misc/\mbox{\hyperlink{juce___splash_screen_8h}{juce\+\_\+\+Splash\+Screen.\+h}}\item 
+build/juce\+\_\+gui\+\_\+extra/misc/\mbox{\hyperlink{juce___splash_screen_8cpp}{juce\+\_\+\+Splash\+Screen.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,166 @@
+\hypertarget{juce__win32___windows_u_i_a_wrapper_8h_source}{}\doxysection{juce\+\_\+win32\+\_\+\+Windows\+UIAWrapper.\+h}
+\label{juce__win32___windows_u_i_a_wrapper_8h_source}\index{build/juce\_gui\_basics/native/accessibility/juce\_win32\_WindowsUIAWrapper.h@{build/juce\_gui\_basics/native/accessibility/juce\_win32\_WindowsUIAWrapper.h}}
+\mbox{\hyperlink{juce__win32___windows_u_i_a_wrapper_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{5 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{6 \textcolor{comment}{}}
+\DoxyCodeLine{7 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{8 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{9 \textcolor{comment}{}}
+\DoxyCodeLine{10 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{11 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{12 \textcolor{comment}{}}
+\DoxyCodeLine{13 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{14 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{15 \textcolor{comment}{}}
+\DoxyCodeLine{16 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{17 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{18 \textcolor{comment}{}}
+\DoxyCodeLine{19 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{20 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{21 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{24 \textcolor{comment}{*/}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacejuce}{juce}}}
+\DoxyCodeLine{27 \{}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29 \textcolor{keyword}{class }\mbox{\hyperlink{classjuce_1_1_windows_u_i_a_wrapper}{WindowsUIAWrapper}}  : \textcolor{keyword}{public} \mbox{\hyperlink{class_deleted_at_shutdown}{DeletedAtShutdown}}}
+\DoxyCodeLine{30 \{}
+\DoxyCodeLine{31 \textcolor{keyword}{public}:}
+\DoxyCodeLine{32     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classjuce_1_1_windows_u_i_a_wrapper_ad2cdb96ce3eeb722a6872fc52f1c0e34}{isLoaded}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{33     \{}
+\DoxyCodeLine{34         \textcolor{keywordflow}{return} uiaReturnRawElementProvider            != \textcolor{keyword}{nullptr}}
+\DoxyCodeLine{35             \&\& uiaHostProviderFromHwnd                != \textcolor{keyword}{nullptr}}
+\DoxyCodeLine{36             \&\& uiaRaiseAutomationPropertyChangedEvent != \textcolor{keyword}{nullptr}}
+\DoxyCodeLine{37             \&\& uiaRaiseAutomationEvent                != \textcolor{keyword}{nullptr}}
+\DoxyCodeLine{38             \&\& uiaClientsAreListening                 != \textcolor{keyword}{nullptr}}
+\DoxyCodeLine{39             \&\& uiaDisconnectProvider                  != \textcolor{keyword}{nullptr}}
+\DoxyCodeLine{40             \&\& uiaDisconnectAllProviders              != \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{41     \}}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{44     LRESULT \mbox{\hyperlink{classjuce_1_1_windows_u_i_a_wrapper_a85c5e1c662127843aac268b3bbcc96a9}{returnRawElementProvider}} (\mbox{\hyperlink{namespacejuce_a1b3c3cf7cdbe394e401d5db42e094ac5}{HWND}} hwnd, WPARAM wParam, LPARAM lParam, IRawElementProviderSimple* provider)}
+\DoxyCodeLine{45     \{}
+\DoxyCodeLine{46         \textcolor{keywordflow}{return} uiaReturnRawElementProvider != \textcolor{keyword}{nullptr} ? uiaReturnRawElementProvider (hwnd, wParam, lParam, provider)}
+\DoxyCodeLine{47                                                       : (LRESULT) \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{48     \}}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_adf7ea5b8ae4dd1bb0ef1193c5c758eba}{JUCE\_COMRESULT}} \mbox{\hyperlink{classjuce_1_1_windows_u_i_a_wrapper_af56288d0a0ed7437647892029f9ee276}{hostProviderFromHwnd}} (\mbox{\hyperlink{namespacejuce_a1b3c3cf7cdbe394e401d5db42e094ac5}{HWND}} hwnd, IRawElementProviderSimple** provider)}
+\DoxyCodeLine{51     \{}
+\DoxyCodeLine{52         \textcolor{keywordflow}{return} uiaHostProviderFromHwnd != \textcolor{keyword}{nullptr} ? uiaHostProviderFromHwnd (hwnd, provider)}
+\DoxyCodeLine{53                                                   : (HRESULT) UIA\_E\_NOTSUPPORTED;}
+\DoxyCodeLine{54     \}}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_adf7ea5b8ae4dd1bb0ef1193c5c758eba}{JUCE\_COMRESULT}} \mbox{\hyperlink{classjuce_1_1_windows_u_i_a_wrapper_a1ce948aa8aec27c470b5adfb293253b3}{raiseAutomationPropertyChangedEvent}} (IRawElementProviderSimple* provider, PROPERTYID propID, VARIANT oldValue, VARIANT newValue)}
+\DoxyCodeLine{57     \{}
+\DoxyCodeLine{58         \textcolor{keywordflow}{return} uiaRaiseAutomationPropertyChangedEvent != \textcolor{keyword}{nullptr} ? uiaRaiseAutomationPropertyChangedEvent (provider, propID, oldValue, newValue)}
+\DoxyCodeLine{59                                                                  : (HRESULT) UIA\_E\_NOTSUPPORTED;}
+\DoxyCodeLine{60     \}}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_adf7ea5b8ae4dd1bb0ef1193c5c758eba}{JUCE\_COMRESULT}} \mbox{\hyperlink{classjuce_1_1_windows_u_i_a_wrapper_a2b1d1246989c28ebe00156d9367171ce}{raiseAutomationEvent}} (IRawElementProviderSimple* provider, EVENTID eventID)}
+\DoxyCodeLine{63     \{}
+\DoxyCodeLine{64         \textcolor{keywordflow}{return} uiaRaiseAutomationEvent != \textcolor{keyword}{nullptr} ? uiaRaiseAutomationEvent (provider, eventID)}
+\DoxyCodeLine{65                                                   : (HRESULT) UIA\_E\_NOTSUPPORTED;}
+\DoxyCodeLine{66     \}}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68     BOOL \mbox{\hyperlink{classjuce_1_1_windows_u_i_a_wrapper_a5236b5673242381e02dfc4996be4a4cd}{clientsAreListening}}()}
+\DoxyCodeLine{69     \{}
+\DoxyCodeLine{70         \textcolor{keywordflow}{return} uiaClientsAreListening != \textcolor{keyword}{nullptr} ? uiaClientsAreListening()}
+\DoxyCodeLine{71                                                  : \textcolor{keyword}{false};}
+\DoxyCodeLine{72     \}}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_adf7ea5b8ae4dd1bb0ef1193c5c758eba}{JUCE\_COMRESULT}} \mbox{\hyperlink{classjuce_1_1_windows_u_i_a_wrapper_af26436e74cf776c471071abd1dfdfc39}{disconnectProvider}} (IRawElementProviderSimple* provider)}
+\DoxyCodeLine{75     \{}
+\DoxyCodeLine{76         \textcolor{keywordflow}{if} (uiaDisconnectProvider != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{77         \{}
+\DoxyCodeLine{78             \textcolor{keyword}{const} \mbox{\hyperlink{class_scoped_value_setter}{ScopedValueSetter<IRawElementProviderSimple*>}} disconnectingProviderSetter (disconnectingProvider, provider);}
+\DoxyCodeLine{79             \textcolor{keywordflow}{return} uiaDisconnectProvider (provider);}
+\DoxyCodeLine{80         \}}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82         \textcolor{keywordflow}{return} (HRESULT) UIA\_E\_NOTSUPPORTED;}
+\DoxyCodeLine{83     \}}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85     \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_adf7ea5b8ae4dd1bb0ef1193c5c758eba}{JUCE\_COMRESULT}} \mbox{\hyperlink{classjuce_1_1_windows_u_i_a_wrapper_a0c6528284541f6b3eeecd23ba8f43db7}{disconnectAllProviders}}()}
+\DoxyCodeLine{86     \{}
+\DoxyCodeLine{87         \textcolor{keywordflow}{if} (uiaDisconnectAllProviders != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{88         \{}
+\DoxyCodeLine{89             \textcolor{keyword}{const} \mbox{\hyperlink{class_scoped_value_setter}{ScopedValueSetter<bool>}} disconnectingAllProvidersSetter (disconnectingAllProviders, \textcolor{keyword}{true});}
+\DoxyCodeLine{90             \textcolor{keywordflow}{return} uiaDisconnectAllProviders();}
+\DoxyCodeLine{91         \}}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93         \textcolor{keywordflow}{return} (HRESULT) UIA\_E\_NOTSUPPORTED;}
+\DoxyCodeLine{94     \}}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{96     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{97     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classjuce_1_1_windows_u_i_a_wrapper_aeb702d606111eb920ffcc70f9c92e854}{isProviderDisconnecting}} (IRawElementProviderSimple* provider)}
+\DoxyCodeLine{98     \{}
+\DoxyCodeLine{99         \textcolor{keywordflow}{return} disconnectingProvider == provider || disconnectingAllProviders;}
+\DoxyCodeLine{100     \}}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{102     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{103     \mbox{\hyperlink{group__juce__core-memory_gaf86c4799059ea3f12feb2c9a90abc5d1}{JUCE\_DECLARE\_SINGLETON\_SINGLETHREADED\_MINIMAL}} (\mbox{\hyperlink{classjuce_1_1_windows_u_i_a_wrapper}{WindowsUIAWrapper}})}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105 \textcolor{keyword}{private}:}
+\DoxyCodeLine{106     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{107     \mbox{\hyperlink{classjuce_1_1_windows_u_i_a_wrapper}{WindowsUIAWrapper}}()}
+\DoxyCodeLine{108     \{}
+\DoxyCodeLine{109         \textcolor{comment}{// force UIA COM library initialisation here to prevent an exception when calling methods from SendMessage()}}
+\DoxyCodeLine{110         \textcolor{keywordflow}{if} (\mbox{\hyperlink{classjuce_1_1_windows_u_i_a_wrapper_ad2cdb96ce3eeb722a6872fc52f1c0e34}{isLoaded}}())}
+\DoxyCodeLine{111             \mbox{\hyperlink{classjuce_1_1_windows_u_i_a_wrapper_a85c5e1c662127843aac268b3bbcc96a9}{returnRawElementProvider}} (\textcolor{keyword}{nullptr}, 0, 0, \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{112         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{113             \mbox{\hyperlink{group__juce__core-system_gadc044ce5efecbecf2f5a44cd00db67b3}{jassertfalse}}; \textcolor{comment}{// UIAutomationCore could not be loaded!}}
+\DoxyCodeLine{114     \}}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{116     \string~WindowsUIAWrapper()}
+\DoxyCodeLine{117     \{}
+\DoxyCodeLine{118         \mbox{\hyperlink{classjuce_1_1_windows_u_i_a_wrapper_a0c6528284541f6b3eeecd23ba8f43db7}{disconnectAllProviders}}();}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120         \textcolor{keywordflow}{if} (uiaHandle != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{121             ::FreeLibrary (uiaHandle);}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{123         clearSingletonInstance();}
+\DoxyCodeLine{124     \}}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{127     \textcolor{keyword}{template} <\textcolor{keyword}{typename} FuncType>}
+\DoxyCodeLine{128     \textcolor{keyword}{static} FuncType getUiaFunction (HMODULE module, LPCSTR funcName)}
+\DoxyCodeLine{129     \{}
+\DoxyCodeLine{130         \mbox{\hyperlink{group__juce__core-system_ga0112339834a6548e4123e394b9ed95e2}{JUCE\_BEGIN\_IGNORE\_WARNINGS\_GCC\_LIKE}} (\textcolor{stringliteral}{"{}-\/Wcast-\/function-\/type"{}})}
+\DoxyCodeLine{131         return (FuncType) GetProcAddress (module, funcName);}
+\DoxyCodeLine{132         \mbox{\hyperlink{group__juce__core-system_ga157f2229764b17137d8814bec95df109}{JUCE\_END\_IGNORE\_WARNINGS\_GCC\_LIKE}}}
+\DoxyCodeLine{133     \}}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{136     using UiaReturnRawElementProviderFunc            = LRESULT (WINAPI*) (\mbox{\hyperlink{namespacejuce_a1b3c3cf7cdbe394e401d5db42e094ac5}{HWND}}, WPARAM, LPARAM, IRawElementProviderSimple*);}
+\DoxyCodeLine{137     using UiaHostProviderFromHwndFunc                = HRESULT (WINAPI*) (\mbox{\hyperlink{namespacejuce_a1b3c3cf7cdbe394e401d5db42e094ac5}{HWND}}, IRawElementProviderSimple**);}
+\DoxyCodeLine{138     using UiaRaiseAutomationPropertyChangedEventFunc = HRESULT (WINAPI*) (IRawElementProviderSimple*, PROPERTYID, VARIANT, VARIANT);}
+\DoxyCodeLine{139     using UiaRaiseAutomationEventFunc                = HRESULT (WINAPI*) (IRawElementProviderSimple*, EVENTID);}
+\DoxyCodeLine{140     using UiaClientsAreListeningFunc                 = BOOL    (WINAPI*) ();}
+\DoxyCodeLine{141     using UiaDisconnectProviderFunc                  = HRESULT (WINAPI*) (IRawElementProviderSimple*);}
+\DoxyCodeLine{142     using UiaDisconnectAllProvidersFunc              = HRESULT (WINAPI*) ();}
+\DoxyCodeLine{143 }
+\DoxyCodeLine{144     HMODULE uiaHandle = ::LoadLibraryA ("{}UIAutomationCore.dll"{});}
+\DoxyCodeLine{145     UiaReturnRawElementProviderFunc            uiaReturnRawElementProvider            = getUiaFunction<UiaReturnRawElementProviderFunc>            (uiaHandle, "{}UiaReturnRawElementProvider"{});}
+\DoxyCodeLine{146     UiaHostProviderFromHwndFunc                uiaHostProviderFromHwnd                = getUiaFunction<UiaHostProviderFromHwndFunc>                (uiaHandle, "{}UiaHostProviderFromHwnd"{});}
+\DoxyCodeLine{147     UiaRaiseAutomationPropertyChangedEventFunc uiaRaiseAutomationPropertyChangedEvent = getUiaFunction<UiaRaiseAutomationPropertyChangedEventFunc> (uiaHandle, "{}UiaRaiseAutomationPropertyChangedEvent"{});}
+\DoxyCodeLine{148     UiaRaiseAutomationEventFunc                uiaRaiseAutomationEvent                = getUiaFunction<UiaRaiseAutomationEventFunc>                (uiaHandle, "{}UiaRaiseAutomationEvent"{});}
+\DoxyCodeLine{149     UiaClientsAreListeningFunc                 uiaClientsAreListening                 = getUiaFunction<UiaClientsAreListeningFunc>                 (uiaHandle, "{}UiaClientsAreListening"{});}
+\DoxyCodeLine{150     UiaDisconnectProviderFunc                  uiaDisconnectProvider                  = getUiaFunction<UiaDisconnectProviderFunc>                  (uiaHandle, "{}UiaDisconnectProvider"{});}
+\DoxyCodeLine{151     UiaDisconnectAllProvidersFunc              uiaDisconnectAllProviders              = getUiaFunction<UiaDisconnectAllProvidersFunc>              (uiaHandle, "{}UiaDisconnectAllProviders"{});}
+\DoxyCodeLine{152 }
+\DoxyCodeLine{153     IRawElementProviderSimple* disconnectingProvider = \textcolor{keywordtype}{nullptr};}
+\DoxyCodeLine{154     \textcolor{keywordtype}{bool} disconnectingAllProviders = \mbox{\hyperlink{ordinals_8h_a65e9886d74aaee76545e83dd09011727}{false}};}
+\DoxyCodeLine{155 }
+\DoxyCodeLine{156     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{157     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (WindowsUIAWrapper)}
+\DoxyCodeLine{158 \};}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160 \} \textcolor{comment}{// namespace juce}}
+
+\end{DoxyCode}

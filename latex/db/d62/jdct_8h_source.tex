@@ -1,0 +1,188 @@
+\hypertarget{jdct_8h_source}{}\doxysection{jdct.\+h}
+\label{jdct_8h_source}\index{build/juce\_graphics/image\_formats/jpglib/jdct.h@{build/juce\_graphics/image\_formats/jpglib/jdct.h}}
+\mbox{\hyperlink{jdct_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{ * jdct.h}}
+\DoxyCodeLine{3 \textcolor{comment}{ *}}
+\DoxyCodeLine{4 \textcolor{comment}{ * Copyright (C) 1994-\/1996, Thomas G. Lane.}}
+\DoxyCodeLine{5 \textcolor{comment}{ * This file is part of the Independent JPEG Group's software.}}
+\DoxyCodeLine{6 \textcolor{comment}{ * For conditions of distribution and use, see the accompanying README file.}}
+\DoxyCodeLine{7 \textcolor{comment}{ *}}
+\DoxyCodeLine{8 \textcolor{comment}{ * This include file contains common declarations for the forward and}}
+\DoxyCodeLine{9 \textcolor{comment}{ * inverse DCT modules.  These declarations are private to the DCT managers}}
+\DoxyCodeLine{10 \textcolor{comment}{ * (jcdctmgr.c, jddctmgr.c) and the individual DCT algorithms.}}
+\DoxyCodeLine{11 \textcolor{comment}{ * The individual DCT algorithms are kept in separate files to ease}}
+\DoxyCodeLine{12 \textcolor{comment}{ * machine-\/dependent tuning (e.g., assembly coding).}}
+\DoxyCodeLine{13 \textcolor{comment}{ */}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{comment}{/*}}
+\DoxyCodeLine{17 \textcolor{comment}{ * A forward DCT routine is given a pointer to a work area of type DCTELEM[];}}
+\DoxyCodeLine{18 \textcolor{comment}{ * the DCT is to be performed in-\/place in that buffer.  Type DCTELEM is int}}
+\DoxyCodeLine{19 \textcolor{comment}{ * for 8-\/bit samples, INT32 for 12-\/bit samples.  (NOTE: Floating-\/point DCT}}
+\DoxyCodeLine{20 \textcolor{comment}{ * implementations use an array of type FAST\_FLOAT, instead.)}}
+\DoxyCodeLine{21 \textcolor{comment}{ * The DCT inputs are expected to be signed (range +-\/CENTERJSAMPLE).}}
+\DoxyCodeLine{22 \textcolor{comment}{ * The DCT outputs are returned scaled up by a factor of 8; they therefore}}
+\DoxyCodeLine{23 \textcolor{comment}{ * have a range of +-\/8K for 8-\/bit data, +-\/128K for 12-\/bit data.  This}}
+\DoxyCodeLine{24 \textcolor{comment}{ * convention improves accuracy in integer implementations and saves some}}
+\DoxyCodeLine{25 \textcolor{comment}{ * work in floating-\/point ones.}}
+\DoxyCodeLine{26 \textcolor{comment}{ * Quantization of the output coefficients is done by jcdctmgr.c.}}
+\DoxyCodeLine{27 \textcolor{comment}{ */}}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#ifndef \_\_jdct\_h\_\_}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#define \_\_jdct\_h\_\_}}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#if BITS\_IN\_JSAMPLE == 8}}
+\DoxyCodeLine{33 \textcolor{keyword}{typedef} \textcolor{keywordtype}{int} \mbox{\hyperlink{jdct_8h_a00460e5dc80a70f254891b5a8abe739f}{DCTELEM}};     \textcolor{comment}{/* 16 or 32 bits is fine */}}
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{35 \textcolor{keyword}{typedef} \mbox{\hyperlink{jmorecfg_8h_a0cb58e7e6f0bad369840a52e54a56ae0}{INT32}} \mbox{\hyperlink{jdct_8h_a00460e5dc80a70f254891b5a8abe739f}{DCTELEM}};      \textcolor{comment}{/* must have 32 bits */}}
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38 \textcolor{keyword}{typedef} \mbox{\hyperlink{jdct_8h_a04d3946b6b56c66c2aaecb7da28e4fce}{JMETHOD}}(\textcolor{keywordtype}{void}, forward\_DCT\_method\_ptr, (\mbox{\hyperlink{jdct_8h_a00460e5dc80a70f254891b5a8abe739f}{DCTELEM}} * \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}));}
+\DoxyCodeLine{39 \textcolor{keyword}{typedef} \mbox{\hyperlink{jdct_8h_a04d3946b6b56c66c2aaecb7da28e4fce}{JMETHOD}}(\textcolor{keywordtype}{void}, float\_DCT\_method\_ptr, (FAST\_FLOAT * \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}));}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42 \textcolor{comment}{/*}}
+\DoxyCodeLine{43 \textcolor{comment}{ * An inverse DCT routine is given a pointer to the input JBLOCK and a pointer}}
+\DoxyCodeLine{44 \textcolor{comment}{ * to an output sample array.  The routine must dequantize the input data as}}
+\DoxyCodeLine{45 \textcolor{comment}{ * well as perform the IDCT; for dequantization, it uses the multiplier table}}
+\DoxyCodeLine{46 \textcolor{comment}{ * pointed to by compptr-\/>dct\_table.  The output data is to be placed into the}}
+\DoxyCodeLine{47 \textcolor{comment}{ * sample array starting at a specified column.  (Any row offset needed will}}
+\DoxyCodeLine{48 \textcolor{comment}{ * be applied to the array pointer before it is passed to the IDCT code.)}}
+\DoxyCodeLine{49 \textcolor{comment}{ * Note that the number of samples emitted by the IDCT routine is}}
+\DoxyCodeLine{50 \textcolor{comment}{ * DCT\_scaled\_size * DCT\_scaled\_size.}}
+\DoxyCodeLine{51 \textcolor{comment}{ */}}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53 \textcolor{comment}{/* typedef inverse\_DCT\_method\_ptr is declared in jpegint.h */}}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55 \textcolor{comment}{/*}}
+\DoxyCodeLine{56 \textcolor{comment}{ * Each IDCT routine has its own ideas about the best dct\_table element type.}}
+\DoxyCodeLine{57 \textcolor{comment}{ */}}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59 \textcolor{keyword}{typedef} MULTIPLIER \mbox{\hyperlink{jdct_8h_a057ec4d475bf55bf8e28a146c8d9bce1}{ISLOW\_MULT\_TYPE}}; \textcolor{comment}{/* short or int, whichever is faster */}}
+\DoxyCodeLine{60 \textcolor{preprocessor}{\#if BITS\_IN\_JSAMPLE == 8}}
+\DoxyCodeLine{61 \textcolor{keyword}{typedef} MULTIPLIER \mbox{\hyperlink{jdct_8h_a2ce5dea49d73b718b055db4d04b4a5a3}{IFAST\_MULT\_TYPE}}; \textcolor{comment}{/* 16 bits is OK, use short if faster */}}
+\DoxyCodeLine{62 \textcolor{preprocessor}{\#define IFAST\_SCALE\_BITS  2 }\textcolor{comment}{/* fractional bits in scale factors */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{63 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{64 \textcolor{keyword}{typedef} \mbox{\hyperlink{jmorecfg_8h_a0cb58e7e6f0bad369840a52e54a56ae0}{INT32}} \mbox{\hyperlink{jdct_8h_a2ce5dea49d73b718b055db4d04b4a5a3}{IFAST\_MULT\_TYPE}};  \textcolor{comment}{/* need 32 bits for scaled quantizers */}}
+\DoxyCodeLine{65 \textcolor{preprocessor}{\#define IFAST\_SCALE\_BITS  13    }\textcolor{comment}{/* fractional bits in scale factors */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{66 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{67 \textcolor{keyword}{typedef} FAST\_FLOAT \mbox{\hyperlink{jdct_8h_ac3f02a81c5cd0fca588c66be99b42691}{FLOAT\_MULT\_TYPE}}; \textcolor{comment}{/* preferred floating type */}}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70 \textcolor{comment}{/*}}
+\DoxyCodeLine{71 \textcolor{comment}{ * Each IDCT routine is responsible for range-\/limiting its results and}}
+\DoxyCodeLine{72 \textcolor{comment}{ * converting them to unsigned form (0..MAXJSAMPLE).  The raw outputs could}}
+\DoxyCodeLine{73 \textcolor{comment}{ * be quite far out of range if the input data is corrupt, so a bulletproof}}
+\DoxyCodeLine{74 \textcolor{comment}{ * range-\/limiting step is required.  We use a mask-\/and-\/table-\/lookup method}}
+\DoxyCodeLine{75 \textcolor{comment}{ * to do the combined operations quickly.  See the comments with}}
+\DoxyCodeLine{76 \textcolor{comment}{ * prepare\_range\_limit\_table (in jdmaster.c) for more info.}}
+\DoxyCodeLine{77 \textcolor{comment}{ */}}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79 \textcolor{preprocessor}{\#define IDCT\_range\_limit(cinfo)  ((cinfo)-\/>sample\_range\_limit + CENTERJSAMPLE)}}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81 \textcolor{preprocessor}{\#define RANGE\_MASK  (MAXJSAMPLE * 4 + 3) }\textcolor{comment}{/* 2 bits wider than legal samples */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84 \textcolor{comment}{/* Short forms of external names for systems with brain-\/damaged linkers. */}}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86 \textcolor{preprocessor}{\#ifdef NEED\_SHORT\_EXTERNAL\_NAMES}}
+\DoxyCodeLine{87 \textcolor{preprocessor}{\#define jpeg\_fdct\_islow     jFDislow}}
+\DoxyCodeLine{88 \textcolor{preprocessor}{\#define jpeg\_fdct\_ifast     jFDifast}}
+\DoxyCodeLine{89 \textcolor{preprocessor}{\#define jpeg\_fdct\_float     jFDfloat}}
+\DoxyCodeLine{90 \textcolor{preprocessor}{\#define jpeg\_idct\_islow     jRDislow}}
+\DoxyCodeLine{91 \textcolor{preprocessor}{\#define jpeg\_idct\_ifast     jRDifast}}
+\DoxyCodeLine{92 \textcolor{preprocessor}{\#define jpeg\_idct\_float     jRDfloat}}
+\DoxyCodeLine{93 \textcolor{preprocessor}{\#define jpeg\_idct\_4x4       jRD4x4}}
+\DoxyCodeLine{94 \textcolor{preprocessor}{\#define jpeg\_idct\_2x2       jRD2x2}}
+\DoxyCodeLine{95 \textcolor{preprocessor}{\#define jpeg\_idct\_1x1       jRD1x1}}
+\DoxyCodeLine{96 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* NEED\_SHORT\_EXTERNAL\_NAMES */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98 \textcolor{comment}{/* Extern declarations for the forward and inverse DCT routines. */}}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100 \mbox{\hyperlink{jdct_8h_a27f01175122b446908c8a9ba78ff3699}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jfdctint_8c_a1898e6e6b050575edba077b0d0e67856}{jpeg\_fdct\_islow}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{jdct_8h_a00460e5dc80a70f254891b5a8abe739f}{DCTELEM}} * \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}));}
+\DoxyCodeLine{101 \mbox{\hyperlink{jdct_8h_a27f01175122b446908c8a9ba78ff3699}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jfdctfst_8c_a89e5405156aba0f85a00d350cc85992a}{jpeg\_fdct\_ifast}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{jdct_8h_a00460e5dc80a70f254891b5a8abe739f}{DCTELEM}} * \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}));}
+\DoxyCodeLine{102 \mbox{\hyperlink{jdct_8h_a27f01175122b446908c8a9ba78ff3699}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jfdctflt_8c_a06cb4e9c7b000344cb5dcbe971bcdbda}{jpeg\_fdct\_float}} \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((FAST\_FLOAT * \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}));}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104 \mbox{\hyperlink{jdct_8h_a27f01175122b446908c8a9ba78ff3699}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jidctint_8c_a744cd9ce29e044d436c454996bf1f6b6}{jpeg\_idct\_islow}}}
+\DoxyCodeLine{105     \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo, \mbox{\hyperlink{structjpeg__component__info}{jpeg\_component\_info}} * \mbox{\hyperlink{jdct_8h_ab5cf547b55e97e8dd207d5dad37cb9fc}{compptr}},}
+\DoxyCodeLine{106      \mbox{\hyperlink{jpeglib_8h_a7cffaee4be349c90c1d541f480aa62e3}{JCOEFPTR}} \mbox{\hyperlink{jdct_8h_a17b8d6b81a334819558a865f13b9d062}{coef\_block}}, \mbox{\hyperlink{jpeglib_8h_ac9d5d1b829ed51769db69a37271a7e91}{JSAMPARRAY}} \mbox{\hyperlink{jdct_8h_ad7e4660a191b1a791748dd44d5a7a0ec}{output\_buf}}, \mbox{\hyperlink{jmorecfg_8h_a04ed4674f6f1d0d50ec241531e38274f}{JDIMENSION}} \mbox{\hyperlink{jdct_8h_a55430fe3b344cb676b3da8f1f46c0279}{output\_col}}));}
+\DoxyCodeLine{107 \mbox{\hyperlink{jdct_8h_a27f01175122b446908c8a9ba78ff3699}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jidctfst_8c_a07c33cfab3e6e41831ecbcd883a38998}{jpeg\_idct\_ifast}}}
+\DoxyCodeLine{108     \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo, \mbox{\hyperlink{structjpeg__component__info}{jpeg\_component\_info}} * \mbox{\hyperlink{jdct_8h_ab5cf547b55e97e8dd207d5dad37cb9fc}{compptr}},}
+\DoxyCodeLine{109      \mbox{\hyperlink{jpeglib_8h_a7cffaee4be349c90c1d541f480aa62e3}{JCOEFPTR}} \mbox{\hyperlink{jdct_8h_a17b8d6b81a334819558a865f13b9d062}{coef\_block}}, \mbox{\hyperlink{jpeglib_8h_ac9d5d1b829ed51769db69a37271a7e91}{JSAMPARRAY}} \mbox{\hyperlink{jdct_8h_ad7e4660a191b1a791748dd44d5a7a0ec}{output\_buf}}, \mbox{\hyperlink{jmorecfg_8h_a04ed4674f6f1d0d50ec241531e38274f}{JDIMENSION}} \mbox{\hyperlink{jdct_8h_a55430fe3b344cb676b3da8f1f46c0279}{output\_col}}));}
+\DoxyCodeLine{110 \mbox{\hyperlink{jdct_8h_a27f01175122b446908c8a9ba78ff3699}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jidctflt_8c_a38adfd755f3c9aa80b84fe0f62306229}{jpeg\_idct\_float}}}
+\DoxyCodeLine{111     \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo, \mbox{\hyperlink{structjpeg__component__info}{jpeg\_component\_info}} * \mbox{\hyperlink{jdct_8h_ab5cf547b55e97e8dd207d5dad37cb9fc}{compptr}},}
+\DoxyCodeLine{112      \mbox{\hyperlink{jpeglib_8h_a7cffaee4be349c90c1d541f480aa62e3}{JCOEFPTR}} \mbox{\hyperlink{jdct_8h_a17b8d6b81a334819558a865f13b9d062}{coef\_block}}, \mbox{\hyperlink{jpeglib_8h_ac9d5d1b829ed51769db69a37271a7e91}{JSAMPARRAY}} \mbox{\hyperlink{jdct_8h_ad7e4660a191b1a791748dd44d5a7a0ec}{output\_buf}}, \mbox{\hyperlink{jmorecfg_8h_a04ed4674f6f1d0d50ec241531e38274f}{JDIMENSION}} \mbox{\hyperlink{jdct_8h_a55430fe3b344cb676b3da8f1f46c0279}{output\_col}}));}
+\DoxyCodeLine{113 \mbox{\hyperlink{jdct_8h_a27f01175122b446908c8a9ba78ff3699}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jidctred_8c_a8fa3fcc5db2609416230cde10a9423d3}{jpeg\_idct\_4x4}}}
+\DoxyCodeLine{114     \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo, \mbox{\hyperlink{structjpeg__component__info}{jpeg\_component\_info}} * \mbox{\hyperlink{jdct_8h_ab5cf547b55e97e8dd207d5dad37cb9fc}{compptr}},}
+\DoxyCodeLine{115      \mbox{\hyperlink{jpeglib_8h_a7cffaee4be349c90c1d541f480aa62e3}{JCOEFPTR}} \mbox{\hyperlink{jdct_8h_a17b8d6b81a334819558a865f13b9d062}{coef\_block}}, \mbox{\hyperlink{jpeglib_8h_ac9d5d1b829ed51769db69a37271a7e91}{JSAMPARRAY}} \mbox{\hyperlink{jdct_8h_ad7e4660a191b1a791748dd44d5a7a0ec}{output\_buf}}, \mbox{\hyperlink{jmorecfg_8h_a04ed4674f6f1d0d50ec241531e38274f}{JDIMENSION}} \mbox{\hyperlink{jdct_8h_a55430fe3b344cb676b3da8f1f46c0279}{output\_col}}));}
+\DoxyCodeLine{116 \mbox{\hyperlink{jdct_8h_a27f01175122b446908c8a9ba78ff3699}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jidctred_8c_a5b1d86f9a273e76c234cf68d21c1dc3d}{jpeg\_idct\_2x2}}}
+\DoxyCodeLine{117     \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo, \mbox{\hyperlink{structjpeg__component__info}{jpeg\_component\_info}} * \mbox{\hyperlink{jdct_8h_ab5cf547b55e97e8dd207d5dad37cb9fc}{compptr}},}
+\DoxyCodeLine{118      \mbox{\hyperlink{jpeglib_8h_a7cffaee4be349c90c1d541f480aa62e3}{JCOEFPTR}} \mbox{\hyperlink{jdct_8h_a17b8d6b81a334819558a865f13b9d062}{coef\_block}}, \mbox{\hyperlink{jpeglib_8h_ac9d5d1b829ed51769db69a37271a7e91}{JSAMPARRAY}} \mbox{\hyperlink{jdct_8h_ad7e4660a191b1a791748dd44d5a7a0ec}{output\_buf}}, \mbox{\hyperlink{jmorecfg_8h_a04ed4674f6f1d0d50ec241531e38274f}{JDIMENSION}} \mbox{\hyperlink{jdct_8h_a55430fe3b344cb676b3da8f1f46c0279}{output\_col}}));}
+\DoxyCodeLine{119 \mbox{\hyperlink{jdct_8h_a27f01175122b446908c8a9ba78ff3699}{EXTERN}}(\textcolor{keywordtype}{void}) \mbox{\hyperlink{jidctred_8c_af9a63c07412baa2e94f4d39166ef6e3a}{jpeg\_idct\_1x1}}}
+\DoxyCodeLine{120     \mbox{\hyperlink{jpeglib_8h_a23b024b75224315b901cd9ade03b4cab}{JPP}}((\mbox{\hyperlink{structjpeg__decompress__struct}{j\_decompress\_ptr}} cinfo, \mbox{\hyperlink{structjpeg__component__info}{jpeg\_component\_info}} * \mbox{\hyperlink{jdct_8h_ab5cf547b55e97e8dd207d5dad37cb9fc}{compptr}},}
+\DoxyCodeLine{121      \mbox{\hyperlink{jpeglib_8h_a7cffaee4be349c90c1d541f480aa62e3}{JCOEFPTR}} \mbox{\hyperlink{jdct_8h_a17b8d6b81a334819558a865f13b9d062}{coef\_block}}, \mbox{\hyperlink{jpeglib_8h_ac9d5d1b829ed51769db69a37271a7e91}{JSAMPARRAY}} \mbox{\hyperlink{jdct_8h_ad7e4660a191b1a791748dd44d5a7a0ec}{output\_buf}}, \mbox{\hyperlink{jmorecfg_8h_a04ed4674f6f1d0d50ec241531e38274f}{JDIMENSION}} \mbox{\hyperlink{jdct_8h_a55430fe3b344cb676b3da8f1f46c0279}{output\_col}}));}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{123 }
+\DoxyCodeLine{124 \textcolor{comment}{/*}}
+\DoxyCodeLine{125 \textcolor{comment}{ * Macros for handling fixed-\/point arithmetic; these are used by many}}
+\DoxyCodeLine{126 \textcolor{comment}{ * but not all of the DCT/IDCT modules.}}
+\DoxyCodeLine{127 \textcolor{comment}{ *}}
+\DoxyCodeLine{128 \textcolor{comment}{ * All values are expected to be of type INT32.}}
+\DoxyCodeLine{129 \textcolor{comment}{ * Fractional constants are scaled left by CONST\_BITS bits.}}
+\DoxyCodeLine{130 \textcolor{comment}{ * CONST\_BITS is defined within each module using these macros,}}
+\DoxyCodeLine{131 \textcolor{comment}{ * and may differ from one module to the next.}}
+\DoxyCodeLine{132 \textcolor{comment}{ */}}
+\DoxyCodeLine{133 }
+\DoxyCodeLine{134 \textcolor{preprocessor}{\#define ONE ((INT32) 1)}}
+\DoxyCodeLine{135 \textcolor{preprocessor}{\#define CONST\_SCALE (ONE << CONST\_BITS)}}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{137 \textcolor{comment}{/* Convert a positive real constant to an integer scaled by CONST\_SCALE.}}
+\DoxyCodeLine{138 \textcolor{comment}{ * Caution: some C compilers fail to reduce "{}FIX(constant)"{} at compile time,}}
+\DoxyCodeLine{139 \textcolor{comment}{ * thus causing a lot of useless floating-\/point operations at run time.}}
+\DoxyCodeLine{140 \textcolor{comment}{ */}}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{142 \textcolor{preprocessor}{\#define FIX(x)  ((INT32) ((x) * CONST\_SCALE + 0.5))}}
+\DoxyCodeLine{143 }
+\DoxyCodeLine{144 \textcolor{comment}{/* Descale and correctly round an INT32 value that's scaled by N bits.}}
+\DoxyCodeLine{145 \textcolor{comment}{ * We assume RIGHT\_SHIFT rounds towards minus infinity, so adding}}
+\DoxyCodeLine{146 \textcolor{comment}{ * the fudge factor is correct for either sign of X.}}
+\DoxyCodeLine{147 \textcolor{comment}{ */}}
+\DoxyCodeLine{148 }
+\DoxyCodeLine{149 \textcolor{preprocessor}{\#define DESCALE(x,n)  RIGHT\_SHIFT((x) + (ONE << ((n)-\/1)), n)}}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{151 \textcolor{comment}{/* Multiply an INT32 variable by an INT32 constant to yield an INT32 result.}}
+\DoxyCodeLine{152 \textcolor{comment}{ * This macro is used only when the two inputs will actually be no more than}}
+\DoxyCodeLine{153 \textcolor{comment}{ * 16 bits wide, so that a 16x16-\/>32 bit multiply can be used instead of a}}
+\DoxyCodeLine{154 \textcolor{comment}{ * full 32x32 multiply.  This provides a useful speedup on many machines.}}
+\DoxyCodeLine{155 \textcolor{comment}{ * Unfortunately there is no way to specify a 16x16-\/>32 multiply portably}}
+\DoxyCodeLine{156 \textcolor{comment}{ * in C, but some C compilers will do the right thing if you provide the}}
+\DoxyCodeLine{157 \textcolor{comment}{ * correct combination of casts.}}
+\DoxyCodeLine{158 \textcolor{comment}{ */}}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160 \textcolor{preprocessor}{\#ifdef SHORTxSHORT\_32       }\textcolor{comment}{/* may work if 'int' is 32 bits */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{161 \textcolor{preprocessor}{\#define MULTIPLY16C16(var,const)  (((INT16) (var)) * ((INT16) (const)))}}
+\DoxyCodeLine{162 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{163 \textcolor{preprocessor}{\#ifdef SHORTxLCONST\_32      }\textcolor{comment}{/* known to work with Microsoft C 6.0 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{164 \textcolor{preprocessor}{\#define MULTIPLY16C16(var,const)  (((INT16) (var)) * ((INT32) (const)))}}
+\DoxyCodeLine{165 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{167 \textcolor{preprocessor}{\#ifndef MULTIPLY16C16       }\textcolor{comment}{/* default definition */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{168 \textcolor{preprocessor}{\#define MULTIPLY16C16(var,const)  ((var) * (const))}}
+\DoxyCodeLine{169 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{170 }
+\DoxyCodeLine{171 \textcolor{comment}{/* Same except both inputs are variables. */}}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{173 \textcolor{preprocessor}{\#ifdef SHORTxSHORT\_32       }\textcolor{comment}{/* may work if 'int' is 32 bits */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{174 \textcolor{preprocessor}{\#define MULTIPLY16V16(var1,var2)  (((INT16) (var1)) * ((INT16) (var2)))}}
+\DoxyCodeLine{175 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{176 }
+\DoxyCodeLine{177 \textcolor{preprocessor}{\#ifndef MULTIPLY16V16       }\textcolor{comment}{/* default definition */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{178 \textcolor{preprocessor}{\#define MULTIPLY16V16(var1,var2)  ((var1) * (var2))}}
+\DoxyCodeLine{179 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{180 }
+\DoxyCodeLine{181 }
+\DoxyCodeLine{182 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

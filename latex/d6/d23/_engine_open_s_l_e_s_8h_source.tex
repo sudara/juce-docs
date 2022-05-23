@@ -1,0 +1,68 @@
+\hypertarget{_engine_open_s_l_e_s_8h_source}{}\doxysection{Engine\+Open\+SLES.\+h}
+\label{_engine_open_s_l_e_s_8h_source}\index{build/juce\_audio\_devices/native/oboe/src/opensles/EngineOpenSLES.h@{build/juce\_audio\_devices/native/oboe/src/opensles/EngineOpenSLES.h}}
+\mbox{\hyperlink{_engine_open_s_l_e_s_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{ * Copyright 2017 The Android Open Source Project}}
+\DoxyCodeLine{3 \textcolor{comment}{ *}}
+\DoxyCodeLine{4 \textcolor{comment}{ * Licensed under the Apache License, Version 2.0 (the "{}License"{});}}
+\DoxyCodeLine{5 \textcolor{comment}{ * you may not use this file except in compliance with the License.}}
+\DoxyCodeLine{6 \textcolor{comment}{ * You may obtain a copy of the License at}}
+\DoxyCodeLine{7 \textcolor{comment}{ *}}
+\DoxyCodeLine{8 \textcolor{comment}{ *      http://www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{9 \textcolor{comment}{ *}}
+\DoxyCodeLine{10 \textcolor{comment}{ * Unless required by applicable law or agreed to in writing, software}}
+\DoxyCodeLine{11 \textcolor{comment}{ * distributed under the License is distributed on an "{}AS IS"{} BASIS,}}
+\DoxyCodeLine{12 \textcolor{comment}{ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.}}
+\DoxyCodeLine{13 \textcolor{comment}{ * See the License for the specific language governing permissions and}}
+\DoxyCodeLine{14 \textcolor{comment}{ * limitations under the License.}}
+\DoxyCodeLine{15 \textcolor{comment}{ */}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#ifndef OBOE\_ENGINE\_OPENSLES\_H}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#define OBOE\_ENGINE\_OPENSLES\_H}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#include <atomic>}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#include <mutex>}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#include <SLES/OpenSLES.h>}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#include <SLES/OpenSLES\_Android.h>}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceoboe}{oboe}} \{}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{31 \textcolor{keyword}{class }\mbox{\hyperlink{classoboe_1_1_engine_open_s_l_e_s}{EngineOpenSLES}} \{}
+\DoxyCodeLine{32 \textcolor{keyword}{public}:}
+\DoxyCodeLine{33     \textcolor{keyword}{static} \mbox{\hyperlink{classoboe_1_1_engine_open_s_l_e_s}{EngineOpenSLES}} \&\mbox{\hyperlink{classoboe_1_1_engine_open_s_l_e_s_a6cf093e5ee234d1068d5f3d172e150ce}{getInstance}}();}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35     SLresult \mbox{\hyperlink{classoboe_1_1_engine_open_s_l_e_s_ad2bf45c6291d50a193da0f77f2136a3a}{open}}();}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37     \textcolor{keywordtype}{void} \mbox{\hyperlink{classoboe_1_1_engine_open_s_l_e_s_af2658d9244e8636ca8ad96930de3e174}{close}}();}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39     SLresult \mbox{\hyperlink{classoboe_1_1_engine_open_s_l_e_s_a7da90cb57fb6e5be92abb5a59a7d8f70}{createOutputMix}}(SLObjectItf *objectItf);}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41     SLresult \mbox{\hyperlink{classoboe_1_1_engine_open_s_l_e_s_a4d4f1e0702543047e0a611afbcc59c12}{createAudioPlayer}}(SLObjectItf *objectItf,}
+\DoxyCodeLine{42                                SLDataSource *audioSource,}
+\DoxyCodeLine{43                                SLDataSink *audioSink);}
+\DoxyCodeLine{44     SLresult \mbox{\hyperlink{classoboe_1_1_engine_open_s_l_e_s_ac57c25532cb75113bdc2027076ed171d}{createAudioRecorder}}(SLObjectItf *objectItf,}
+\DoxyCodeLine{45                                  SLDataSource *audioSource,}
+\DoxyCodeLine{46                                  SLDataSink *audioSink);}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48 \textcolor{keyword}{private}:}
+\DoxyCodeLine{49     \textcolor{comment}{// Make this a safe Singleton}}
+\DoxyCodeLine{50     \mbox{\hyperlink{classoboe_1_1_engine_open_s_l_e_s}{EngineOpenSLES}}()= \textcolor{keywordflow}{default};}
+\DoxyCodeLine{51     \mbox{\hyperlink{classoboe_1_1_engine_open_s_l_e_s}{\string~EngineOpenSLES}}()= \textcolor{keywordflow}{default};}
+\DoxyCodeLine{52     \mbox{\hyperlink{classoboe_1_1_engine_open_s_l_e_s}{EngineOpenSLES}}(\textcolor{keyword}{const} \mbox{\hyperlink{classoboe_1_1_engine_open_s_l_e_s}{EngineOpenSLES}}\&)= \textcolor{keyword}{delete};}
+\DoxyCodeLine{53     \mbox{\hyperlink{classoboe_1_1_engine_open_s_l_e_s}{EngineOpenSLES}}\& operator=(\textcolor{keyword}{const} \mbox{\hyperlink{classoboe_1_1_engine_open_s_l_e_s}{EngineOpenSLES}}\&)= \textcolor{keyword}{delete};}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55     std::mutex             mLock;}
+\DoxyCodeLine{56     int32\_t                mOpenCount = 0;}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58     SLObjectItf            mEngineObject = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{59     SLEngineItf            mEngineInterface = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{60 \};}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62 \} \textcolor{comment}{// namespace oboe}}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//OBOE\_ENGINE\_OPENSLES\_H}}
+
+\end{DoxyCode}

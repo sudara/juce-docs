@@ -1,0 +1,98 @@
+\hypertarget{juce___limiter_8h_source}{}\doxysection{juce\+\_\+\+Limiter.\+h}
+\label{juce___limiter_8h_source}\index{build/juce\_dsp/widgets/juce\_Limiter.h@{build/juce\_dsp/widgets/juce\_Limiter.h}}
+\mbox{\hyperlink{juce___limiter_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacedsp}{dsp}}}
+\DoxyCodeLine{30 \{}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{38 \textcolor{keyword}{template} <\textcolor{keyword}{typename} SampleType>}
+\DoxyCodeLine{39 \textcolor{keyword}{class }\mbox{\hyperlink{classdsp_1_1_limiter}{Limiter}}}
+\DoxyCodeLine{40 \{}
+\DoxyCodeLine{41 \textcolor{keyword}{public}:}
+\DoxyCodeLine{42     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{44 \textcolor{comment}{}    \mbox{\hyperlink{classdsp_1_1_limiter_a08eafc8cff263dda3f51e164b889d767}{Limiter}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{48 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_limiter_ad84e2dc39207d304876a8c8f716a2864}{setThreshold}} (SampleType newThreshold);}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{51     \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_limiter_adba098c18de7a6785d4835a95e92648f}{setRelease}} (SampleType newRelease);}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{55 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_limiter_aa87503e92904f075749a06dda75b9ebd}{prepare}} (\textcolor{keyword}{const} \mbox{\hyperlink{structdsp_1_1_process_spec}{ProcessSpec}}\& spec);}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{58     \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_limiter_a7445b7d953bd43fee4498cf497f7a3f2}{reset}}();}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{62 \textcolor{comment}{}    \textcolor{keyword}{template} <\textcolor{keyword}{typename} ProcessContext>}
+\DoxyCodeLine{63     \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_limiter_a277fc9394da17767e33f257cd23614f3}{process}} (\textcolor{keyword}{const} ProcessContext\& context) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{64     \{}
+\DoxyCodeLine{65         \textcolor{keyword}{const} \textcolor{keyword}{auto}\& inputBlock = context.getInputBlock();}
+\DoxyCodeLine{66         \textcolor{keyword}{auto}\& outputBlock      = context.getOutputBlock();}
+\DoxyCodeLine{67         \textcolor{keyword}{const} \textcolor{keyword}{auto} numChannels = outputBlock.getNumChannels();}
+\DoxyCodeLine{68         \textcolor{keyword}{const} \textcolor{keyword}{auto} numSamples  = outputBlock.getNumSamples();}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (inputBlock.getNumChannels() == numChannels);}
+\DoxyCodeLine{71         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (inputBlock.getNumSamples()  == numSamples);}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73         \textcolor{keywordflow}{if} (context.isBypassed)}
+\DoxyCodeLine{74         \{}
+\DoxyCodeLine{75             outputBlock.copyFrom (inputBlock);}
+\DoxyCodeLine{76             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{77         \}}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79         firstStageCompressor.process (context);}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81         \textcolor{keyword}{auto} secondContext = \mbox{\hyperlink{structdsp_1_1_process_context_replacing}{ProcessContextReplacing<SampleType>}} (outputBlock);}
+\DoxyCodeLine{82         secondStageCompressor.process (secondContext);}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84         outputBlock.multiplyBy (outputVolume);}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} channel = 0; channel < numChannels; ++channel)}
+\DoxyCodeLine{87         \{}
+\DoxyCodeLine{88             FloatVectorOperations::clip (outputBlock.getChannelPointer (channel), outputBlock.getChannelPointer (channel),}
+\DoxyCodeLine{89                                          (SampleType) -\/1.0, (SampleType) 1.0, (\textcolor{keywordtype}{int}) numSamples);}
+\DoxyCodeLine{90         \}}
+\DoxyCodeLine{91     \}}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93 \textcolor{keyword}{private}:}
+\DoxyCodeLine{94     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{95     \textcolor{keywordtype}{void} update();}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{98     \mbox{\hyperlink{classdsp_1_1_compressor}{Compressor<SampleType>}} firstStageCompressor, secondStageCompressor;}
+\DoxyCodeLine{99     \mbox{\hyperlink{class_smoothed_value}{SmoothedValue<SampleType, ValueSmoothingTypes::Linear>}} outputVolume;}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101     \textcolor{keywordtype}{double} sampleRate = 44100.0;}
+\DoxyCodeLine{102     SampleType thresholddB = -\/10.0, releaseTime = 100.0;}
+\DoxyCodeLine{103 \};}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105 \} \textcolor{comment}{// namespace dsp}}
+\DoxyCodeLine{106  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{107 }
+
+\end{DoxyCode}

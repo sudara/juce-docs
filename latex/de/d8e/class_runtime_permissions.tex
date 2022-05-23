@@ -1,0 +1,144 @@
+\hypertarget{class_runtime_permissions}{}\doxysection{Runtime\+Permissions Class Reference}
+\label{class_runtime_permissions}\index{RuntimePermissions@{RuntimePermissions}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Runtime\+Permissions.\+h$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_runtime_permissions_ae35d63b8c00dab34a1546fd1eef90878}{Permission\+ID}} \{ \newline
+\mbox{\hyperlink{class_runtime_permissions_ae35d63b8c00dab34a1546fd1eef90878a56b38b114bf52a5b212b87b4a5c9b535}{record\+Audio}} = 1
+, \mbox{\hyperlink{class_runtime_permissions_ae35d63b8c00dab34a1546fd1eef90878af9db427de56e5cc282cea35e58f47959}{bluetooth\+Midi}} = 2
+, \mbox{\hyperlink{class_runtime_permissions_ae35d63b8c00dab34a1546fd1eef90878a9ff6c2449be1b1755540bce8f20dc1ce}{read\+External\+Storage}} = 3
+, \mbox{\hyperlink{class_runtime_permissions_ae35d63b8c00dab34a1546fd1eef90878a4d086e9600ef7245a13bb7dd3c6d0687}{write\+External\+Storage}} = 4
+, \newline
+\mbox{\hyperlink{class_runtime_permissions_ae35d63b8c00dab34a1546fd1eef90878afa0b39e22fde29c5810ac23f0ea5c95c}{camera}} = 5
+ \}
+\item 
+using \mbox{\hyperlink{class_runtime_permissions_ab43b3b89ad2cb7e7f41f0fe4a4a9c2a1}{Callback}} = std\+::function$<$ \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}}(bool)$>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_runtime_permissions_a3f2cbc9cdf2bdd520ba7a864da2998e5}{request}} (\mbox{\hyperlink{class_runtime_permissions_ae35d63b8c00dab34a1546fd1eef90878}{Permission\+ID}} permission, \mbox{\hyperlink{class_runtime_permissions_ab43b3b89ad2cb7e7f41f0fe4a4a9c2a1}{Callback}} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}})
+\item 
+static bool \mbox{\hyperlink{class_runtime_permissions_a87411260cccd07461ab3732faae0066a}{is\+Required}} (\mbox{\hyperlink{class_runtime_permissions_ae35d63b8c00dab34a1546fd1eef90878}{Permission\+ID}} permission)
+\item 
+static bool \mbox{\hyperlink{class_runtime_permissions_a605c9a54f09d6c6c9c9d21f92f30ab4c}{is\+Granted}} (\mbox{\hyperlink{class_runtime_permissions_ae35d63b8c00dab34a1546fd1eef90878}{Permission\+ID}} permission)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Class to handle app runtime permissions for certain functionality on some platforms.
+
+The use of this class is currently only required if the app should run on
+Android API level 23 and higher.
+
+On lower API levels, the permissions are specified in the app manifest. On iOS,
+runtime permission requests are handled automatically by the Apple APIs and not
+manually in the app code. On Windows, OS X, and Linux, runtime permissions are not
+used at all. In all these cases, request() will simply call through to the
+callback with no overhead and pass true (making it safe to use on all platforms).
+
+For example, to enable audio recording on Android in your cross-platform app,
+you could modify your code as follows:
+
+Old code:
+
+    audioDeviceManager.initialise (2, 2, nullptr, true, String(), nullptr);
+
+New code:
+
+    RuntimePermissions::request (
+        RuntimePermissions::audioRecording,
+        [this] (bool wasGranted)
+        {
+             if (! wasGranted)
+             {
+\end{DoxyVerb}
+ e.\+g. display an error or initialise with 0 input channels return; \}
+
+audio\+Device\+Manager.\+initialise (2, 2, nullptr, true, \mbox{\hyperlink{class_string}{String()}}, nullptr); \} );
+
+@tags\{Core\} 
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{class_runtime_permissions_ab43b3b89ad2cb7e7f41f0fe4a4a9c2a1}\label{class_runtime_permissions_ab43b3b89ad2cb7e7f41f0fe4a4a9c2a1}} 
+\index{RuntimePermissions@{RuntimePermissions}!Callback@{Callback}}
+\index{Callback@{Callback}!RuntimePermissions@{RuntimePermissions}}
+\doxysubsubsection{\texorpdfstring{Callback}{Callback}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{class_runtime_permissions_ab43b3b89ad2cb7e7f41f0fe4a4a9c2a1}{Runtime\+Permissions\+::\+Callback}} =  std\+::function$<$\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} (bool)$>$}
+
+Function type of runtime permission request callbacks. 
+
+\doxysubsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{class_runtime_permissions_ae35d63b8c00dab34a1546fd1eef90878}\label{class_runtime_permissions_ae35d63b8c00dab34a1546fd1eef90878}} 
+\index{RuntimePermissions@{RuntimePermissions}!PermissionID@{PermissionID}}
+\index{PermissionID@{PermissionID}!RuntimePermissions@{RuntimePermissions}}
+\doxysubsubsection{\texorpdfstring{PermissionID}{PermissionID}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{class_runtime_permissions_ae35d63b8c00dab34a1546fd1eef90878}{Runtime\+Permissions\+::\+Permission\+ID}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{recordAudio@{recordAudio}!RuntimePermissions@{RuntimePermissions}}\index{RuntimePermissions@{RuntimePermissions}!recordAudio@{recordAudio}}}\mbox{\Hypertarget{class_runtime_permissions_ae35d63b8c00dab34a1546fd1eef90878a56b38b114bf52a5b212b87b4a5c9b535}\label{class_runtime_permissions_ae35d63b8c00dab34a1546fd1eef90878a56b38b114bf52a5b212b87b4a5c9b535}} 
+record\+Audio&Permission to access the microphone (required on Android). You need to request this, for example, to initialise an \mbox{\hyperlink{class_audio_device_manager}{Audio\+Device\+Manager}} with a non-\/zero number of input channels, and to open the default audio input device. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{bluetoothMidi@{bluetoothMidi}!RuntimePermissions@{RuntimePermissions}}\index{RuntimePermissions@{RuntimePermissions}!bluetoothMidi@{bluetoothMidi}}}\mbox{\Hypertarget{class_runtime_permissions_ae35d63b8c00dab34a1546fd1eef90878af9db427de56e5cc282cea35e58f47959}\label{class_runtime_permissions_ae35d63b8c00dab34a1546fd1eef90878af9db427de56e5cc282cea35e58f47959}} 
+bluetooth\+Midi&Permission to scan for and pair to Bluetooth MIDI devices (required on Android). You need to request this before calling \mbox{\hyperlink{class_bluetooth_midi_device_pairing_dialogue_a271b58bf58b218872f2c219390ee0a05}{Bluetooth\+Midi\+Device\+Pairing\+Dialogue\+::open()}}, otherwise no devices will be found. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{readExternalStorage@{readExternalStorage}!RuntimePermissions@{RuntimePermissions}}\index{RuntimePermissions@{RuntimePermissions}!readExternalStorage@{readExternalStorage}}}\mbox{\Hypertarget{class_runtime_permissions_ae35d63b8c00dab34a1546fd1eef90878a9ff6c2449be1b1755540bce8f20dc1ce}\label{class_runtime_permissions_ae35d63b8c00dab34a1546fd1eef90878a9ff6c2449be1b1755540bce8f20dc1ce}} 
+read\+External\+Storage&Permission to read from external storage such as SD cards \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{writeExternalStorage@{writeExternalStorage}!RuntimePermissions@{RuntimePermissions}}\index{RuntimePermissions@{RuntimePermissions}!writeExternalStorage@{writeExternalStorage}}}\mbox{\Hypertarget{class_runtime_permissions_ae35d63b8c00dab34a1546fd1eef90878a4d086e9600ef7245a13bb7dd3c6d0687}\label{class_runtime_permissions_ae35d63b8c00dab34a1546fd1eef90878a4d086e9600ef7245a13bb7dd3c6d0687}} 
+write\+External\+Storage&Permission to write to external storage such as SD cards \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{camera@{camera}!RuntimePermissions@{RuntimePermissions}}\index{RuntimePermissions@{RuntimePermissions}!camera@{camera}}}\mbox{\Hypertarget{class_runtime_permissions_ae35d63b8c00dab34a1546fd1eef90878afa0b39e22fde29c5810ac23f0ea5c95c}\label{class_runtime_permissions_ae35d63b8c00dab34a1546fd1eef90878afa0b39e22fde29c5810ac23f0ea5c95c}} 
+camera&Permission to use camera \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_runtime_permissions_a605c9a54f09d6c6c9c9d21f92f30ab4c}\label{class_runtime_permissions_a605c9a54f09d6c6c9c9d21f92f30ab4c}} 
+\index{RuntimePermissions@{RuntimePermissions}!isGranted@{isGranted}}
+\index{isGranted@{isGranted}!RuntimePermissions@{RuntimePermissions}}
+\doxysubsubsection{\texorpdfstring{isGranted()}{isGranted()}}
+{\footnotesize\ttfamily bool Runtime\+Permissions\+::is\+Granted (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_runtime_permissions_ae35d63b8c00dab34a1546fd1eef90878}{Permission\+ID}}}]{permission }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Returns true if the app has been already granted this permission, either via a previous runtime request or otherwise, or no permission is necessary.
+
+Note that this can be false even if is\+Required returns false. In this case, the permission can not be obtained at all at runtime. \mbox{\Hypertarget{class_runtime_permissions_a87411260cccd07461ab3732faae0066a}\label{class_runtime_permissions_a87411260cccd07461ab3732faae0066a}} 
+\index{RuntimePermissions@{RuntimePermissions}!isRequired@{isRequired}}
+\index{isRequired@{isRequired}!RuntimePermissions@{RuntimePermissions}}
+\doxysubsubsection{\texorpdfstring{isRequired()}{isRequired()}}
+{\footnotesize\ttfamily bool Runtime\+Permissions\+::is\+Required (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_runtime_permissions_ae35d63b8c00dab34a1546fd1eef90878}{Permission\+ID}}}]{permission }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Returns whether a runtime request is required to obtain the permission on the current platform. \mbox{\Hypertarget{class_runtime_permissions_a3f2cbc9cdf2bdd520ba7a864da2998e5}\label{class_runtime_permissions_a3f2cbc9cdf2bdd520ba7a864da2998e5}} 
+\index{RuntimePermissions@{RuntimePermissions}!request@{request}}
+\index{request@{request}!RuntimePermissions@{RuntimePermissions}}
+\doxysubsubsection{\texorpdfstring{request()}{request()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Runtime\+Permissions\+::request (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_runtime_permissions_ae35d63b8c00dab34a1546fd1eef90878}{Permission\+ID}}}]{permission,  }\item[{\mbox{\hyperlink{class_runtime_permissions_ab43b3b89ad2cb7e7f41f0fe4a4a9c2a1}{Callback}}}]{callback }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Call this method to request a runtime permission.
+
+
+\begin{DoxyParams}{Parameters}
+{\em permission} & The Permission\+ID of the permission you want to request.\\
+\hline
+{\em callback} & The callback to be called after the request has been granted or denied; the argument passed will be true if the permission has been granted and false otherwise.\\
+\hline
+\end{DoxyParams}
+If no runtime request is required or possible to obtain the permission, the callback will be called immediately. The argument passed in will be true if the permission is granted or no permission is required on this platform, and false otherwise.
+
+If a runtime request is required to obtain the permission, the callback will be called asynchronously after the OS has granted or denied the requested permission (typically by displaying a dialog box to the user and waiting until the user has responded). 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+core/misc/\mbox{\hyperlink{juce___runtime_permissions_8h}{juce\+\_\+\+Runtime\+Permissions.\+h}}\item 
+build/juce\+\_\+core/misc/\mbox{\hyperlink{juce___runtime_permissions_8cpp}{juce\+\_\+\+Runtime\+Permissions.\+cpp}}\item 
+build/juce\+\_\+core/native/\mbox{\hyperlink{juce__android___runtime_permissions_8cpp}{juce\+\_\+android\+\_\+\+Runtime\+Permissions.\+cpp}}\end{DoxyCompactItemize}

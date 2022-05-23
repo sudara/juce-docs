@@ -1,0 +1,192 @@
+\hypertarget{juce___matrix_8h_source}{}\doxysection{juce\+\_\+\+Matrix.\+h}
+\label{juce___matrix_8h_source}\index{build/juce\_dsp/maths/juce\_Matrix.h@{build/juce\_dsp/maths/juce\_Matrix.h}}
+\mbox{\hyperlink{juce___matrix_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacedsp}{dsp}}}
+\DoxyCodeLine{30 \{}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{40 \textcolor{keyword}{template} <\textcolor{keyword}{typename} ElementType>}
+\DoxyCodeLine{41 \textcolor{keyword}{class }\mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}}}
+\DoxyCodeLine{42 \{}
+\DoxyCodeLine{43 \textcolor{keyword}{public}:}
+\DoxyCodeLine{44     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{46 \textcolor{comment}{}    \mbox{\hyperlink{classdsp_1_1_matrix_a15fec210f798ce3f9dbbdc21fe6fb292}{Matrix}} (\textcolor{keywordtype}{size\_t} numRows, \textcolor{keywordtype}{size\_t} numColumns)}
+\DoxyCodeLine{47         : rows (numRows), columns (numColumns)}
+\DoxyCodeLine{48     \{}
+\DoxyCodeLine{49         resize();}
+\DoxyCodeLine{50         \mbox{\hyperlink{classdsp_1_1_matrix_a19b184947e5fe50a829ee217560554db}{clear}}();}
+\DoxyCodeLine{51     \}}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{56     \mbox{\hyperlink{classdsp_1_1_matrix_a932029cf030054691d46f6f8905ca124}{Matrix}} (\textcolor{keywordtype}{size\_t} numRows, \textcolor{keywordtype}{size\_t} numColumns, \textcolor{keyword}{const} ElementType* dataPointer)}
+\DoxyCodeLine{57         : rows (numRows), columns (numColumns)}
+\DoxyCodeLine{58     \{}
+\DoxyCodeLine{59         resize();}
+\DoxyCodeLine{60         memcpy (data.getRawDataPointer(), dataPointer, rows * columns * sizeof (ElementType));}
+\DoxyCodeLine{61     \}}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{64     \mbox{\hyperlink{classdsp_1_1_matrix_a5b8cd9bf7e89f90f18a813b0cebdba02}{Matrix}} (\textcolor{keyword}{const} \mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}}\&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{67     \mbox{\hyperlink{classdsp_1_1_matrix_aa02600b659e682352a4515e396a611c4}{Matrix}} (\mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}}\&\&) noexcept = default;}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{70     \mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}}\& operator= (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}}\&) = default;}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{73     \mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}}\& operator= (\mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}}\&\&) noexcept = default;}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{77 \textcolor{comment}{}    static \mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}} \mbox{\hyperlink{classdsp_1_1_matrix_acb3b1e9b9b1304e6c86452398ffacef1}{identity}} (\textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}});}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{80     static \mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}} \mbox{\hyperlink{classdsp_1_1_matrix_ae18a17096b11fc8247764cb7f6a12876}{toeplitz}} (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}}\& vector, \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}});}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{89     static \mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}} \mbox{\hyperlink{classdsp_1_1_matrix_a727e3ed12da0adaf8e1b8687e412cc21}{hankel}} (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}}\& vector, \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}}, \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegl_aa4212fe83465b750077176bdbad74288}{offset}} = 0);}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{93 \textcolor{comment}{}    \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{classdsp_1_1_matrix_abeb1ac5d0c3ed3373074f0514172f08e}{getNumRows}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                 \{ \textcolor{keywordflow}{return} rows; \}}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{96     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{classdsp_1_1_matrix_aaa3ee739f8598cabff9c3d8770686c1f}{getNumColumns}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept              \{ \textcolor{keywordflow}{return} columns; \}}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{101     \mbox{\hyperlink{class_array}{Array<size\_t>}} \mbox{\hyperlink{classdsp_1_1_matrix_a980f4675057071210d35ab06e844eea6}{getSize}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept             \{ \textcolor{keywordflow}{return} \{ rows, columns \}; \}}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{104     \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_matrix_a19b184947e5fe50a829ee217560554db}{clear}}() noexcept                              \{ \mbox{\hyperlink{group__juce__core-memory_ga48fb9b158a3767e6573d27a8160956ea}{zeromem}} (data.begin(), (\textcolor{keywordtype}{size\_t}) data.size() * sizeof (ElementType)); \}}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{106     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{108 \textcolor{comment}{}    \mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}}\& \mbox{\hyperlink{classdsp_1_1_matrix_a77bf72d704bb8a8eaea7f1bbc3098d9e}{swapRows}} (\textcolor{keywordtype}{size\_t} rowOne, \textcolor{keywordtype}{size\_t} rowTwo) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{111     \mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}}\& \mbox{\hyperlink{classdsp_1_1_matrix_a59f3b4f78434219bc92f9444cc035729}{swapColumns}} (\textcolor{keywordtype}{size\_t} columnOne, \textcolor{keywordtype}{size\_t} columnTwo) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{115 \textcolor{comment}{}    \textcolor{keyword}{inline} ElementType \mbox{\hyperlink{classdsp_1_1_matrix_a394d1f2f900e20a269e9da25ca4532fb}{operator() }}(\textcolor{keywordtype}{size\_t} row, \textcolor{keywordtype}{size\_t} column) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{116     \{}
+\DoxyCodeLine{117         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (row < rows \&\& column < columns);}
+\DoxyCodeLine{118         \textcolor{keywordflow}{return} data.getReference (\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>} (dataAcceleration.getReference (\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>} (row))) + \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>} (column));}
+\DoxyCodeLine{119     \}}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{122     \textcolor{keyword}{inline} ElementType\& \mbox{\hyperlink{classdsp_1_1_matrix_a394d1f2f900e20a269e9da25ca4532fb}{operator() }}(\textcolor{keywordtype}{size\_t} row, \textcolor{keywordtype}{size\_t} column) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{123     \{}
+\DoxyCodeLine{124         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (row < rows \&\& column < columns);}
+\DoxyCodeLine{125         \textcolor{keywordflow}{return} data.getReference (\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>} (dataAcceleration.getReference (\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>} (row))) + \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>} (column));}
+\DoxyCodeLine{126     \}}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{131     \textcolor{keyword}{inline} ElementType* \mbox{\hyperlink{classdsp_1_1_matrix_a545744a6a6f756933a88638013a74814}{getRawDataPointer}}() noexcept                    \{ \textcolor{keywordflow}{return} data.getRawDataPointer(); \}}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{136     \textcolor{keyword}{inline} \textcolor{keyword}{const} ElementType* \mbox{\hyperlink{classdsp_1_1_matrix_af382bbef632a4a30ef70851b1210212f}{getRawDataPointer}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept        \{ \textcolor{keywordflow}{return} data.begin(); \}}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{138     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{140 \textcolor{comment}{}    \textcolor{keyword}{inline} \mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}}\& \mbox{\hyperlink{classdsp_1_1_matrix_a75852019ee9457c2c57086b76664f1a4}{operator+= }}(\textcolor{keyword}{const} \mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}}\& other) \textcolor{keyword}{noexcept}            \{ \textcolor{keywordflow}{return} apply (other, [] (ElementType \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, ElementType \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} + \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}; \} ); \}}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{143     \textcolor{keyword}{inline} \mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}}\& \mbox{\hyperlink{classdsp_1_1_matrix_ab1dc62c4fcfdc32d26d685b8a45fc516}{operator-\/= }}(\textcolor{keyword}{const} \mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}}\& other) \textcolor{keyword}{noexcept}            \{ \textcolor{keywordflow}{return} apply (other, [] (ElementType \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, ElementType \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} -\/ \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}; \} ); \}}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{146     \textcolor{keyword}{inline} \mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}}\& \mbox{\hyperlink{classdsp_1_1_matrix_aa2420bac92a39156966e5a9a2553010f}{operator*= }}(ElementType scalar) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{147     \{}
+\DoxyCodeLine{148         std::for\_each (\mbox{\hyperlink{classdsp_1_1_matrix_a81542d1e51768db566ccba6511078051}{begin}}(), \mbox{\hyperlink{classdsp_1_1_matrix_a50d1e5203349ef3a934a8cf43848e77d}{end}}(), [scalar] (ElementType\& \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}) \{ \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}} *= scalar; \});}
+\DoxyCodeLine{149         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{150     \}}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{153     \textcolor{keyword}{inline} \mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}} \mbox{\hyperlink{classdsp_1_1_matrix_ab18f4893f2fc400d1d73866beeec677a}{operator+ }}(\textcolor{keyword}{const} \mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}}\& other)\textcolor{keyword}{ const                 }\{ \mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} (*\textcolor{keyword}{this}); \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} += other;  \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}; \}}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{156     \textcolor{keyword}{inline} \mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}} \mbox{\hyperlink{classdsp_1_1_matrix_a7a2f2415b770eb221e807072474ba5a2}{operator-\/ }}(\textcolor{keyword}{const} \mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}}\& other)\textcolor{keyword}{ const                 }\{ \mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} (*\textcolor{keyword}{this}); \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} -\/= other;  \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}; \}}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{159     \textcolor{keyword}{inline} \mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}} \mbox{\hyperlink{classdsp_1_1_matrix_a8ef4bf274b07d8ba5470bb3532958930}{operator* }}(ElementType scalar)\textcolor{keyword}{ const                  }\{ \mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} (*\textcolor{keyword}{this}); \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} *= scalar; \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}; \}}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{162     \mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}} \mbox{\hyperlink{classdsp_1_1_matrix_a8ef4bf274b07d8ba5470bb3532958930}{operator* }}(\textcolor{keyword}{const} \mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}}\& other) \textcolor{keyword}{const};}
+\DoxyCodeLine{163 }
+\DoxyCodeLine{165     \textcolor{keyword}{inline} \mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}}\& \mbox{\hyperlink{classdsp_1_1_matrix_ae81ba2ce83f715cd09aa696ae66cbca0}{hadarmard}} (\textcolor{keyword}{const} \mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}}\& other) \textcolor{keyword}{noexcept}             \{ \textcolor{keywordflow}{return} apply (other, [] (ElementType \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, ElementType \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} * \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}; \} ); \}}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{168     \textcolor{keyword}{static} \mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}} \mbox{\hyperlink{classdsp_1_1_matrix_acc9b3f2466eadff9729f52cb2fa64cae}{hadarmard}} (\textcolor{keyword}{const} \mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}}\& \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \textcolor{keyword}{const} \mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}}\& \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}})          \{ \mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} (\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}); \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}.hadarmard (\mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}); \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}; \}}
+\DoxyCodeLine{169 }
+\DoxyCodeLine{170     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{172 \textcolor{comment}{}    \textcolor{keyword}{static} \textcolor{keywordtype}{bool} \mbox{\hyperlink{classdsp_1_1_matrix_a379ec9d1d4bd4fe9798fed306e9d9026}{compare}} (\textcolor{keyword}{const} \mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}}\& \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \textcolor{keyword}{const} \mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}}\& \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}, ElementType tolerance = 0) noexcept;}
+\DoxyCodeLine{173 }
+\DoxyCodeLine{174     \textcolor{comment}{/* Comparison operator */}}
+\DoxyCodeLine{175     inline \textcolor{keywordtype}{bool} operator== (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}}\& other) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept      \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classdsp_1_1_matrix_a379ec9d1d4bd4fe9798fed306e9d9026}{compare}} (*\textcolor{keyword}{this}, other); \}}
+\DoxyCodeLine{176 }
+\DoxyCodeLine{177     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{179 \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{classdsp_1_1_matrix_a9a0826c6f69bb951744ba9057477445a}{isSquare}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                                   \{ \textcolor{keywordflow}{return} rows == columns; \}}
+\DoxyCodeLine{180 }
+\DoxyCodeLine{182     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classdsp_1_1_matrix_afb1f062ad78f801ad8e65617ff01ce05}{isVector}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                                   \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classdsp_1_1_matrix_a74e7767f39c14ffa6451f752c5b55277}{isOneColumnVector}}() || \mbox{\hyperlink{classdsp_1_1_matrix_aa9c53cbd01dbed1b5233ed5d03170e17}{isOneRowVector}}(); \}}
+\DoxyCodeLine{183 }
+\DoxyCodeLine{185     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classdsp_1_1_matrix_a74e7767f39c14ffa6451f752c5b55277}{isOneColumnVector}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                          \{ \textcolor{keywordflow}{return} columns == 1; \}}
+\DoxyCodeLine{186 }
+\DoxyCodeLine{188     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classdsp_1_1_matrix_aa9c53cbd01dbed1b5233ed5d03170e17}{isOneRowVector}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                             \{ \textcolor{keywordflow}{return} rows == 1; \}}
+\DoxyCodeLine{189 }
+\DoxyCodeLine{191     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classdsp_1_1_matrix_abbda1d8e9afbec61ed85adc0befda9d4}{isNullMatrix}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                               \{ \textcolor{keywordflow}{return} rows == 0 || columns == 0; \}}
+\DoxyCodeLine{192 }
+\DoxyCodeLine{193     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{203 \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{classdsp_1_1_matrix_a4e1c7edcad13c68bb19113284c8de545}{solve}} (\mbox{\hyperlink{classdsp_1_1_matrix}{Matrix}}\& \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{204 }
+\DoxyCodeLine{205     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{207 \textcolor{comment}{}    \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{classdsp_1_1_matrix_af17a47fbee4acbcd97cc28bca79d2653}{toString}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{208 }
+\DoxyCodeLine{209     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{210     ElementType* \mbox{\hyperlink{classdsp_1_1_matrix_a81542d1e51768db566ccba6511078051}{begin}}() noexcept                   \{ \textcolor{keywordflow}{return} data.begin(); \}}
+\DoxyCodeLine{211     ElementType* \mbox{\hyperlink{classdsp_1_1_matrix_a50d1e5203349ef3a934a8cf43848e77d}{end}}() noexcept                     \{ \textcolor{keywordflow}{return} data.end(); \}}
+\DoxyCodeLine{212 }
+\DoxyCodeLine{213     \textcolor{keyword}{const} ElementType* \mbox{\hyperlink{classdsp_1_1_matrix_af6d153f6ecba4bdadbbbe9acc157533b}{begin}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept       \{ \textcolor{keywordflow}{return} \&data.getReference (0); \}}
+\DoxyCodeLine{214     \textcolor{keyword}{const} ElementType* \mbox{\hyperlink{classdsp_1_1_matrix_a2c5eef55f7ac5465c3ee9e4325eef85d}{end}}()   \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept       \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classdsp_1_1_matrix_a81542d1e51768db566ccba6511078051}{begin}}() + data.size(); \}}
+\DoxyCodeLine{215 }
+\DoxyCodeLine{216 \textcolor{keyword}{private}:}
+\DoxyCodeLine{217     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{219 \textcolor{comment}{}    \textcolor{keywordtype}{void} resize()}
+\DoxyCodeLine{220     \{}
+\DoxyCodeLine{221         data.resize (\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>} (columns * rows));}
+\DoxyCodeLine{222         dataAcceleration.resize (\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>} (rows));}
+\DoxyCodeLine{223 }
+\DoxyCodeLine{224         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < rows; ++i)}
+\DoxyCodeLine{225             dataAcceleration.setUnchecked (\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>} (i), i * columns);}
+\DoxyCodeLine{226     \}}
+\DoxyCodeLine{227 }
+\DoxyCodeLine{228     \textcolor{keyword}{template} <\textcolor{keyword}{typename} BinaryOperation>}
+\DoxyCodeLine{229     \mbox{\hyperlink{classdsp_1_1_matrix_a15fec210f798ce3f9dbbdc21fe6fb292}{Matrix}}\& apply (\textcolor{keyword}{const} \mbox{\hyperlink{classdsp_1_1_matrix_a15fec210f798ce3f9dbbdc21fe6fb292}{Matrix}}\& other, BinaryOperation binaryOp)}
+\DoxyCodeLine{230     \{}
+\DoxyCodeLine{231         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (rows == other.rows \&\& columns == other.columns);}
+\DoxyCodeLine{232 }
+\DoxyCodeLine{233         \textcolor{keyword}{auto}* \mbox{\hyperlink{namespacegl_a174f1a72ee763b6703711da180ac5d79}{dst}} = \mbox{\hyperlink{classdsp_1_1_matrix_a545744a6a6f756933a88638013a74814}{getRawDataPointer}}();}
+\DoxyCodeLine{234 }
+\DoxyCodeLine{235         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}} : other)}
+\DoxyCodeLine{236         \{}
+\DoxyCodeLine{237             *\mbox{\hyperlink{namespacegl_a174f1a72ee763b6703711da180ac5d79}{dst}} = binaryOp (*\mbox{\hyperlink{namespacegl_a174f1a72ee763b6703711da180ac5d79}{dst}}, \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}});}
+\DoxyCodeLine{238             ++\mbox{\hyperlink{namespacegl_a174f1a72ee763b6703711da180ac5d79}{dst}};}
+\DoxyCodeLine{239         \}}
+\DoxyCodeLine{240 }
+\DoxyCodeLine{241         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{242     \}}
+\DoxyCodeLine{243 }
+\DoxyCodeLine{244     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{245     \mbox{\hyperlink{class_array}{Array<ElementType>}} data;}
+\DoxyCodeLine{246     \mbox{\hyperlink{class_array}{Array<size\_t>}} dataAcceleration;}
+\DoxyCodeLine{247 }
+\DoxyCodeLine{248     \textcolor{keywordtype}{size\_t} rows, columns;}
+\DoxyCodeLine{249 }
+\DoxyCodeLine{250     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{251     \mbox{\hyperlink{group__juce__core-memory_gab3639a79598b35f2116f4572af0d93f1}{JUCE\_LEAK\_DETECTOR}} (\mbox{\hyperlink{classdsp_1_1_matrix_a15fec210f798ce3f9dbbdc21fe6fb292}{Matrix}})}
+\DoxyCodeLine{252 \};}
+\DoxyCodeLine{253 }
+\DoxyCodeLine{254 \} \textcolor{comment}{// namespace dsp}}
+\DoxyCodeLine{255  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{256 }
+
+\end{DoxyCode}

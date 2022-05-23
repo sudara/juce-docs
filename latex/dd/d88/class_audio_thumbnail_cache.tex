@@ -1,0 +1,127 @@
+\hypertarget{class_audio_thumbnail_cache}{}\doxysection{Audio\+Thumbnail\+Cache Class Reference}
+\label{class_audio_thumbnail_cache}\index{AudioThumbnailCache@{AudioThumbnailCache}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Audio\+Thumbnail\+Cache.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_audio_thumbnail_cache_a8b337276f3ec8979475e1884e9dde170}{Audio\+Thumbnail\+Cache}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} max\+Num\+Thumbs\+To\+Store)
+\item 
+virtual \mbox{\hyperlink{class_audio_thumbnail_cache_a8064df47de6982ee3629e2f849542c1b}{$\sim$\+Audio\+Thumbnail\+Cache}} ()
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_audio_thumbnail_cache_a52c8490b5df7c750822d9c15ca829dc2}{clear}} ()
+\item 
+bool \mbox{\hyperlink{class_audio_thumbnail_cache_a0c02c3ed2e7868c20e9d77c16915d818}{load\+Thumb}} (\mbox{\hyperlink{class_audio_thumbnail_base}{Audio\+Thumbnail\+Base}} \&thumb, \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} hash\+Code)
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_audio_thumbnail_cache_a04e1fc8084a07fb926e22bbc62bfe4c4}{store\+Thumb}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_audio_thumbnail_base}{Audio\+Thumbnail\+Base}} \&thumb, \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} hash\+Code)
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_audio_thumbnail_cache_afd26c87085118697efd805fd57b26b99}{remove\+Thumb}} (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} hash\+Code)
+\item 
+bool \mbox{\hyperlink{class_audio_thumbnail_cache_a4964efe9a66ded88c1224e2c0946c5e9}{read\+From\+Stream}} (\mbox{\hyperlink{class_input_stream}{Input\+Stream}} \&source)
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_audio_thumbnail_cache_ae752aabe2829fb344c4e619d2819a3d7}{write\+To\+Stream}} (\mbox{\hyperlink{class_output_stream}{Output\+Stream}} \&stream)
+\item 
+\mbox{\hyperlink{class_time_slice_thread}{Time\+Slice\+Thread}} \& \mbox{\hyperlink{class_audio_thumbnail_cache_a6493e1db78b3d66e4c2b33b6ba67f7f3}{get\+Time\+Slice\+Thread}} () noexcept
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_audio_thumbnail_cache_a2b314d8449a4387722f83f1771aab200}{save\+Newly\+Finished\+Thumbnail}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_audio_thumbnail_base}{Audio\+Thumbnail\+Base}} \&, \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} hash\+Code)
+\item 
+virtual bool \mbox{\hyperlink{class_audio_thumbnail_cache_a70a034bb9341604fe41b7bcfe613ba12}{load\+New\+Thumb}} (\mbox{\hyperlink{class_audio_thumbnail_base}{Audio\+Thumbnail\+Base}} \&, \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} hash\+Code)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+An instance of this class is used to manage multiple \mbox{\hyperlink{class_audio_thumbnail}{Audio\+Thumbnail}} objects.
+
+The cache runs a single background thread that is shared by all the thumbnails that need it, and it maintains a set of low-\/res previews in memory, to avoid having to re-\/scan audio files too often.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_audio_thumbnail}{Audio\+Thumbnail}}
+\end{DoxySeeAlso}
+@tags\{Audio\} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_audio_thumbnail_cache_a8b337276f3ec8979475e1884e9dde170}\label{class_audio_thumbnail_cache_a8b337276f3ec8979475e1884e9dde170}} 
+\index{AudioThumbnailCache@{AudioThumbnailCache}!AudioThumbnailCache@{AudioThumbnailCache}}
+\index{AudioThumbnailCache@{AudioThumbnailCache}!AudioThumbnailCache@{AudioThumbnailCache}}
+\doxysubsubsection{\texorpdfstring{AudioThumbnailCache()}{AudioThumbnailCache()}}
+{\footnotesize\ttfamily Audio\+Thumbnail\+Cache\+::\+Audio\+Thumbnail\+Cache (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{max\+Num\+Thumbs\+To\+Store }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+Creates a cache object.
+
+The max\+Num\+Thumbs\+To\+Store parameter lets you specify how many previews should be kept in memory at once. \mbox{\Hypertarget{class_audio_thumbnail_cache_a8064df47de6982ee3629e2f849542c1b}\label{class_audio_thumbnail_cache_a8064df47de6982ee3629e2f849542c1b}} 
+\index{AudioThumbnailCache@{AudioThumbnailCache}!````~AudioThumbnailCache@{$\sim$AudioThumbnailCache}}
+\index{````~AudioThumbnailCache@{$\sim$AudioThumbnailCache}!AudioThumbnailCache@{AudioThumbnailCache}}
+\doxysubsubsection{\texorpdfstring{$\sim$AudioThumbnailCache()}{~AudioThumbnailCache()}}
+{\footnotesize\ttfamily virtual Audio\+Thumbnail\+Cache\+::$\sim$\+Audio\+Thumbnail\+Cache (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Destructor. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_audio_thumbnail_cache_a52c8490b5df7c750822d9c15ca829dc2}\label{class_audio_thumbnail_cache_a52c8490b5df7c750822d9c15ca829dc2}} 
+\index{AudioThumbnailCache@{AudioThumbnailCache}!clear@{clear}}
+\index{clear@{clear}!AudioThumbnailCache@{AudioThumbnailCache}}
+\doxysubsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Audio\+Thumbnail\+Cache\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Clears out any stored thumbnails. \mbox{\Hypertarget{class_audio_thumbnail_cache_a6493e1db78b3d66e4c2b33b6ba67f7f3}\label{class_audio_thumbnail_cache_a6493e1db78b3d66e4c2b33b6ba67f7f3}} 
+\index{AudioThumbnailCache@{AudioThumbnailCache}!getTimeSliceThread@{getTimeSliceThread}}
+\index{getTimeSliceThread@{getTimeSliceThread}!AudioThumbnailCache@{AudioThumbnailCache}}
+\doxysubsubsection{\texorpdfstring{getTimeSliceThread()}{getTimeSliceThread()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_time_slice_thread}{Time\+Slice\+Thread}} \& Audio\+Thumbnail\+Cache\+::get\+Time\+Slice\+Thread (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Returns the thread that client thumbnails can use. \mbox{\Hypertarget{class_audio_thumbnail_cache_a70a034bb9341604fe41b7bcfe613ba12}\label{class_audio_thumbnail_cache_a70a034bb9341604fe41b7bcfe613ba12}} 
+\index{AudioThumbnailCache@{AudioThumbnailCache}!loadNewThumb@{loadNewThumb}}
+\index{loadNewThumb@{loadNewThumb}!AudioThumbnailCache@{AudioThumbnailCache}}
+\doxysubsubsection{\texorpdfstring{loadNewThumb()}{loadNewThumb()}}
+{\footnotesize\ttfamily virtual bool Audio\+Thumbnail\+Cache\+::load\+New\+Thumb (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_audio_thumbnail_base}{Audio\+Thumbnail\+Base}} \&}]{,  }\item[{\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}}]{hash\+Code }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+This can be overridden to provide a custom callback for loading thumbnails from pre-\/saved files to save the cache the trouble of having to create them. \mbox{\Hypertarget{class_audio_thumbnail_cache_a0c02c3ed2e7868c20e9d77c16915d818}\label{class_audio_thumbnail_cache_a0c02c3ed2e7868c20e9d77c16915d818}} 
+\index{AudioThumbnailCache@{AudioThumbnailCache}!loadThumb@{loadThumb}}
+\index{loadThumb@{loadThumb}!AudioThumbnailCache@{AudioThumbnailCache}}
+\doxysubsubsection{\texorpdfstring{loadThumb()}{loadThumb()}}
+{\footnotesize\ttfamily bool Audio\+Thumbnail\+Cache\+::load\+Thumb (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_audio_thumbnail_base}{Audio\+Thumbnail\+Base}} \&}]{thumb,  }\item[{\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}}]{hash\+Code }\end{DoxyParamCaption})}
+
+Reloads the specified thumb if this cache contains the appropriate stored data.
+
+This is called automatically by the \mbox{\hyperlink{class_audio_thumbnail}{Audio\+Thumbnail}} class, so you shouldn\textquotesingle{}t normally need to call it directly. \mbox{\Hypertarget{class_audio_thumbnail_cache_a4964efe9a66ded88c1224e2c0946c5e9}\label{class_audio_thumbnail_cache_a4964efe9a66ded88c1224e2c0946c5e9}} 
+\index{AudioThumbnailCache@{AudioThumbnailCache}!readFromStream@{readFromStream}}
+\index{readFromStream@{readFromStream}!AudioThumbnailCache@{AudioThumbnailCache}}
+\doxysubsubsection{\texorpdfstring{readFromStream()}{readFromStream()}}
+{\footnotesize\ttfamily bool Audio\+Thumbnail\+Cache\+::read\+From\+Stream (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_input_stream}{Input\+Stream}} \&}]{source }\end{DoxyParamCaption})}
+
+Attempts to re-\/load a saved cache of thumbnails from a stream. The cache data must have been written by the \mbox{\hyperlink{class_audio_thumbnail_cache_ae752aabe2829fb344c4e619d2819a3d7}{write\+To\+Stream()}} method. This will replace all currently-\/loaded thumbnails with the new data. \mbox{\Hypertarget{class_audio_thumbnail_cache_afd26c87085118697efd805fd57b26b99}\label{class_audio_thumbnail_cache_afd26c87085118697efd805fd57b26b99}} 
+\index{AudioThumbnailCache@{AudioThumbnailCache}!removeThumb@{removeThumb}}
+\index{removeThumb@{removeThumb}!AudioThumbnailCache@{AudioThumbnailCache}}
+\doxysubsubsection{\texorpdfstring{removeThumb()}{removeThumb()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Audio\+Thumbnail\+Cache\+::remove\+Thumb (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}}]{hash\+Code }\end{DoxyParamCaption})}
+
+Tells the cache to forget about the thumb with the given hashcode. \mbox{\Hypertarget{class_audio_thumbnail_cache_a2b314d8449a4387722f83f1771aab200}\label{class_audio_thumbnail_cache_a2b314d8449a4387722f83f1771aab200}} 
+\index{AudioThumbnailCache@{AudioThumbnailCache}!saveNewlyFinishedThumbnail@{saveNewlyFinishedThumbnail}}
+\index{saveNewlyFinishedThumbnail@{saveNewlyFinishedThumbnail}!AudioThumbnailCache@{AudioThumbnailCache}}
+\doxysubsubsection{\texorpdfstring{saveNewlyFinishedThumbnail()}{saveNewlyFinishedThumbnail()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Audio\+Thumbnail\+Cache\+::save\+Newly\+Finished\+Thumbnail (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_audio_thumbnail_base}{Audio\+Thumbnail\+Base}} \&}]{,  }\item[{\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}}]{hash\+Code }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+This can be overridden to provide a custom callback for saving thumbnails once they have finished being loaded. \mbox{\Hypertarget{class_audio_thumbnail_cache_a04e1fc8084a07fb926e22bbc62bfe4c4}\label{class_audio_thumbnail_cache_a04e1fc8084a07fb926e22bbc62bfe4c4}} 
+\index{AudioThumbnailCache@{AudioThumbnailCache}!storeThumb@{storeThumb}}
+\index{storeThumb@{storeThumb}!AudioThumbnailCache@{AudioThumbnailCache}}
+\doxysubsubsection{\texorpdfstring{storeThumb()}{storeThumb()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Audio\+Thumbnail\+Cache\+::store\+Thumb (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_audio_thumbnail_base}{Audio\+Thumbnail\+Base}} \&}]{thumb,  }\item[{\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}}]{hash\+Code }\end{DoxyParamCaption})}
+
+Stores the cacheable data from the specified thumb in this cache.
+
+This is called automatically by the \mbox{\hyperlink{class_audio_thumbnail}{Audio\+Thumbnail}} class, so you shouldn\textquotesingle{}t normally need to call it directly. \mbox{\Hypertarget{class_audio_thumbnail_cache_ae752aabe2829fb344c4e619d2819a3d7}\label{class_audio_thumbnail_cache_ae752aabe2829fb344c4e619d2819a3d7}} 
+\index{AudioThumbnailCache@{AudioThumbnailCache}!writeToStream@{writeToStream}}
+\index{writeToStream@{writeToStream}!AudioThumbnailCache@{AudioThumbnailCache}}
+\doxysubsubsection{\texorpdfstring{writeToStream()}{writeToStream()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Audio\+Thumbnail\+Cache\+::write\+To\+Stream (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_output_stream}{Output\+Stream}} \&}]{stream }\end{DoxyParamCaption})}
+
+Writes all currently-\/loaded cache data to a stream. The resulting data can be re-\/loaded with \mbox{\hyperlink{class_audio_thumbnail_cache_a4964efe9a66ded88c1224e2c0946c5e9}{read\+From\+Stream()}}. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+audio\+\_\+utils/gui/\mbox{\hyperlink{juce___audio_thumbnail_cache_8h}{juce\+\_\+\+Audio\+Thumbnail\+Cache.\+h}}\end{DoxyCompactItemize}

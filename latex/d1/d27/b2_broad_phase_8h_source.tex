@@ -1,0 +1,227 @@
+\hypertarget{b2_broad_phase_8h_source}{}\doxysection{b2\+Broad\+Phase.\+h}
+\label{b2_broad_phase_8h_source}\index{build/juce\_box2d/box2d/Collision/b2BroadPhase.h@{build/juce\_box2d/box2d/Collision/b2BroadPhase.h}}
+\mbox{\hyperlink{b2_broad_phase_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{* Copyright (c) 2006-\/2009 Erin Catto http://www.box2d.org}}
+\DoxyCodeLine{3 \textcolor{comment}{*}}
+\DoxyCodeLine{4 \textcolor{comment}{* This software is provided 'as-\/is', without any express or implied}}
+\DoxyCodeLine{5 \textcolor{comment}{* warranty.  In no event will the authors be held liable for any damages}}
+\DoxyCodeLine{6 \textcolor{comment}{* arising from the use of this software.}}
+\DoxyCodeLine{7 \textcolor{comment}{* Permission is granted to anyone to use this software for any purpose,}}
+\DoxyCodeLine{8 \textcolor{comment}{* including commercial applications, and to alter it and redistribute it}}
+\DoxyCodeLine{9 \textcolor{comment}{* freely, subject to the following restrictions:}}
+\DoxyCodeLine{10 \textcolor{comment}{* 1. The origin of this software must not be misrepresented; you must not}}
+\DoxyCodeLine{11 \textcolor{comment}{* claim that you wrote the original software. If you use this software}}
+\DoxyCodeLine{12 \textcolor{comment}{* in a product, an acknowledgment in the product documentation would be}}
+\DoxyCodeLine{13 \textcolor{comment}{* appreciated but is not required.}}
+\DoxyCodeLine{14 \textcolor{comment}{* 2. Altered source versions must be plainly marked as such, and must not be}}
+\DoxyCodeLine{15 \textcolor{comment}{* misrepresented as being the original software.}}
+\DoxyCodeLine{16 \textcolor{comment}{* 3. This notice may not be removed or altered from any source distribution.}}
+\DoxyCodeLine{17 \textcolor{comment}{*/}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#ifndef B2\_BROAD\_PHASE\_H}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#define B2\_BROAD\_PHASE\_H}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#include "{}../Common/b2Settings.h"{}}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{b2_collision_8h}{b2Collision.h}}"{}}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{b2_dynamic_tree_8h}{b2DynamicTree.h}}"{}}}
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#include <algorithm>}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{keyword}{struct }\mbox{\hyperlink{structb2_pair}{b2Pair}}}
+\DoxyCodeLine{28 \{}
+\DoxyCodeLine{29     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} \mbox{\hyperlink{structb2_pair_a4f8dc68e093b54f865bd4d9836680790}{proxyIdA}};}
+\DoxyCodeLine{30     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} \mbox{\hyperlink{structb2_pair_ae8c818c51a2ea2ab49e23a1d1ef60da0}{proxyIdB}};}
+\DoxyCodeLine{31     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} \mbox{\hyperlink{structb2_pair_ab460cabf2866f4ce4e571786b37acbd8}{next}};}
+\DoxyCodeLine{32 \};}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{37 \textcolor{keyword}{class }\mbox{\hyperlink{classb2_broad_phase}{b2BroadPhase}}}
+\DoxyCodeLine{38 \{}
+\DoxyCodeLine{39 \textcolor{keyword}{public}:}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41     \textcolor{keyword}{enum}}
+\DoxyCodeLine{42     \{}
+\DoxyCodeLine{43         \mbox{\hyperlink{classb2_broad_phase_a2e49dd8c33db36e26bb0e9c163e22ad6a8a4f9965a5b0bbb13a35c20a37fef0ad}{e\_nullProxy}} = -\/1}
+\DoxyCodeLine{44     \};}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46     \mbox{\hyperlink{classb2_broad_phase_ac58820d4cb10df81a33923c7c75d8f85}{b2BroadPhase}}();}
+\DoxyCodeLine{47     \mbox{\hyperlink{classb2_broad_phase_a40cebf62f00ebfa7ca373ad96f76661f}{\string~b2BroadPhase}}();}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{51     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} \mbox{\hyperlink{classb2_broad_phase_ae2f7af756bc55ece45221466c5af449c}{CreateProxy}}(\textcolor{keyword}{const} \mbox{\hyperlink{structb2_a_a_b_b}{b2AABB}}\& aabb, \textcolor{keywordtype}{void}* userData);}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{54     \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_broad_phase_a0c74c8887c6055af70c2dc408db5b132}{DestroyProxy}}(\mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} proxyId);}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{58     \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_broad_phase_a3c2c1b6fa3394879d7ee96f6420bb7af}{MoveProxy}}(\mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} proxyId, \textcolor{keyword}{const} \mbox{\hyperlink{structb2_a_a_b_b}{b2AABB}}\& aabb, \textcolor{keyword}{const} \mbox{\hyperlink{structb2_vec2}{b2Vec2}}\& displacement);}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{61     \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_broad_phase_a96f2d4d7733696dbd6cd079a45b05108}{TouchProxy}}(\mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} proxyId);}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{64     \textcolor{keyword}{const} \mbox{\hyperlink{structb2_a_a_b_b}{b2AABB}}\& \mbox{\hyperlink{classb2_broad_phase_ae35dd485b5855a103fcd45ca40fcdbc5}{GetFatAABB}}(\mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} proxyId) \textcolor{keyword}{const};}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{67     \textcolor{keywordtype}{void}* \mbox{\hyperlink{classb2_broad_phase_ad4b59aaae62b4e50e6cb4ff6b395bb86}{GetUserData}}(\mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} proxyId) \textcolor{keyword}{const};}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{70     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classb2_broad_phase_ac734e372321934f87a595259f856631a}{TestOverlap}}(\mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} proxyIdA, \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} proxyIdB) \textcolor{keyword}{const};}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{73     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} \mbox{\hyperlink{classb2_broad_phase_a6aebfcc38e73d77d02714c08b629b00a}{GetProxyCount}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{76     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{77     \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_broad_phase_a0a1acd693466b997700242ae00784c20}{UpdatePairs}}(T* \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}});}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{81     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{82     \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_broad_phase_a187586ea98b9d16e5ef6e12fa31f8de2}{Query}}(T* \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}}, \textcolor{keyword}{const} \mbox{\hyperlink{structb2_a_a_b_b}{b2AABB}}\& aabb) \textcolor{keyword}{const};}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{91     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{92     \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_broad_phase_ae65392ea91c7d0839ed5312f78b2837a}{RayCast}}(T* \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}}, \textcolor{keyword}{const} \mbox{\hyperlink{structb2_ray_cast_input}{b2RayCastInput}}\& \mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{95     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} \mbox{\hyperlink{classb2_broad_phase_a111773fbb5855d2ca63eebec3f4fc05b}{GetTreeHeight}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{98     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} \mbox{\hyperlink{classb2_broad_phase_ac3c0d75759e6d014fa879efe4667435b}{GetTreeBalance}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{101     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_broad_phase_a4e7d2f5d16ac100b18511e6a42e758bf}{GetTreeQuality}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103 \textcolor{keyword}{private}:}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{classb2_dynamic_tree}{b2DynamicTree}};}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{107     \textcolor{keywordtype}{void} BufferMove(\mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} proxyId);}
+\DoxyCodeLine{108     \textcolor{keywordtype}{void} UnBufferMove(\mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} proxyId);}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110     \textcolor{keywordtype}{bool} QueryCallback(\mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} proxyId);}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112     \mbox{\hyperlink{classb2_dynamic_tree}{b2DynamicTree}} m\_tree;}
+\DoxyCodeLine{113 }
+\DoxyCodeLine{114     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} m\_proxyCount;}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{116     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}}* m\_moveBuffer;}
+\DoxyCodeLine{117     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} m\_moveCapacity;}
+\DoxyCodeLine{118     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} m\_moveCount;}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120     \mbox{\hyperlink{structb2_pair}{b2Pair}}* m\_pairBuffer;}
+\DoxyCodeLine{121     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} m\_pairCapacity;}
+\DoxyCodeLine{122     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} m\_pairCount;}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{124     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} m\_queryProxyId;}
+\DoxyCodeLine{125 \};}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{128 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{b2_broad_phase_8h_ad6d75f0819dcf1b88933300ae0430934}{b2PairLessThan}}(\textcolor{keyword}{const} \mbox{\hyperlink{structb2_pair}{b2Pair}}\& pair1, \textcolor{keyword}{const} \mbox{\hyperlink{structb2_pair}{b2Pair}}\& pair2)}
+\DoxyCodeLine{129 \{}
+\DoxyCodeLine{130     \textcolor{keywordflow}{if} (pair1.\mbox{\hyperlink{structb2_pair_a4f8dc68e093b54f865bd4d9836680790}{proxyIdA}} < pair2.\mbox{\hyperlink{structb2_pair_a4f8dc68e093b54f865bd4d9836680790}{proxyIdA}})}
+\DoxyCodeLine{131     \{}
+\DoxyCodeLine{132         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{133     \}}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135     \textcolor{keywordflow}{if} (pair1.\mbox{\hyperlink{structb2_pair_a4f8dc68e093b54f865bd4d9836680790}{proxyIdA}} == pair2.\mbox{\hyperlink{structb2_pair_a4f8dc68e093b54f865bd4d9836680790}{proxyIdA}})}
+\DoxyCodeLine{136     \{}
+\DoxyCodeLine{137         \textcolor{keywordflow}{return} pair1.\mbox{\hyperlink{structb2_pair_ae8c818c51a2ea2ab49e23a1d1ef60da0}{proxyIdB}} < pair2.\mbox{\hyperlink{structb2_pair_ae8c818c51a2ea2ab49e23a1d1ef60da0}{proxyIdB}};}
+\DoxyCodeLine{138     \}}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140     \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{141 \}}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{143 \textcolor{keyword}{inline} \textcolor{keywordtype}{void}* \mbox{\hyperlink{classb2_broad_phase_ad4b59aaae62b4e50e6cb4ff6b395bb86}{b2BroadPhase::GetUserData}}(\mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} proxyId)\textcolor{keyword}{ const}}
+\DoxyCodeLine{144 \textcolor{keyword}{}\{}
+\DoxyCodeLine{145     \textcolor{keywordflow}{return} m\_tree.\mbox{\hyperlink{classb2_dynamic_tree_a87a0af38e156b5fefb94b38472918a1e}{GetUserData}}(proxyId);}
+\DoxyCodeLine{146 \}}
+\DoxyCodeLine{147 }
+\DoxyCodeLine{148 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{classb2_broad_phase_ac734e372321934f87a595259f856631a}{b2BroadPhase::TestOverlap}}(\mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} proxyIdA, \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} proxyIdB)\textcolor{keyword}{ const}}
+\DoxyCodeLine{149 \textcolor{keyword}{}\{}
+\DoxyCodeLine{150     \textcolor{keyword}{const} \mbox{\hyperlink{structb2_a_a_b_b}{b2AABB}}\& aabbA = m\_tree.\mbox{\hyperlink{classb2_dynamic_tree_ae7f0f4489966ee6a5502d595ca21ce74}{GetFatAABB}}(proxyIdA);}
+\DoxyCodeLine{151     \textcolor{keyword}{const} \mbox{\hyperlink{structb2_a_a_b_b}{b2AABB}}\& aabbB = m\_tree.\mbox{\hyperlink{classb2_dynamic_tree_ae7f0f4489966ee6a5502d595ca21ce74}{GetFatAABB}}(proxyIdB);}
+\DoxyCodeLine{152     \textcolor{keywordflow}{return} \mbox{\hyperlink{b2_collision_8cpp_ae7601420d0b42c1ee494e879dd2009a5}{b2TestOverlap}}(aabbA, aabbB);}
+\DoxyCodeLine{153 \}}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{155 \textcolor{keyword}{inline} \textcolor{keyword}{const} \mbox{\hyperlink{structb2_a_a_b_b}{b2AABB}}\& \mbox{\hyperlink{classb2_broad_phase_ae35dd485b5855a103fcd45ca40fcdbc5}{b2BroadPhase::GetFatAABB}}(\mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} proxyId)\textcolor{keyword}{ const}}
+\DoxyCodeLine{156 \textcolor{keyword}{}\{}
+\DoxyCodeLine{157     \textcolor{keywordflow}{return} m\_tree.\mbox{\hyperlink{classb2_dynamic_tree_ae7f0f4489966ee6a5502d595ca21ce74}{GetFatAABB}}(proxyId);}
+\DoxyCodeLine{158 \}}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160 \textcolor{keyword}{inline} \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} \mbox{\hyperlink{classb2_broad_phase_a6aebfcc38e73d77d02714c08b629b00a}{b2BroadPhase::GetProxyCount}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{161 \textcolor{keyword}{}\{}
+\DoxyCodeLine{162     \textcolor{keywordflow}{return} m\_proxyCount;}
+\DoxyCodeLine{163 \}}
+\DoxyCodeLine{164 }
+\DoxyCodeLine{165 \textcolor{keyword}{inline} \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} \mbox{\hyperlink{classb2_broad_phase_a111773fbb5855d2ca63eebec3f4fc05b}{b2BroadPhase::GetTreeHeight}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{166 \textcolor{keyword}{}\{}
+\DoxyCodeLine{167     \textcolor{keywordflow}{return} m\_tree.\mbox{\hyperlink{classb2_dynamic_tree_ae3c7dc771d596f1f95fd3a3d7f2f3e97}{GetHeight}}();}
+\DoxyCodeLine{168 \}}
+\DoxyCodeLine{169 }
+\DoxyCodeLine{170 \textcolor{keyword}{inline} \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} \mbox{\hyperlink{classb2_broad_phase_ac3c0d75759e6d014fa879efe4667435b}{b2BroadPhase::GetTreeBalance}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{171 \textcolor{keyword}{}\{}
+\DoxyCodeLine{172     \textcolor{keywordflow}{return} m\_tree.\mbox{\hyperlink{classb2_dynamic_tree_a3feab170229e0acd17f6a4ad3fca406e}{GetMaxBalance}}();}
+\DoxyCodeLine{173 \}}
+\DoxyCodeLine{174 }
+\DoxyCodeLine{175 \textcolor{keyword}{inline} \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{classb2_broad_phase_a4e7d2f5d16ac100b18511e6a42e758bf}{b2BroadPhase::GetTreeQuality}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{176 \textcolor{keyword}{}\{}
+\DoxyCodeLine{177     \textcolor{keywordflow}{return} m\_tree.\mbox{\hyperlink{classb2_dynamic_tree_a87da9819c4f190faec38f7fe4608caae}{GetAreaRatio}}();}
+\DoxyCodeLine{178 \}}
+\DoxyCodeLine{179 }
+\DoxyCodeLine{180 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{181 \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_broad_phase_a0a1acd693466b997700242ae00784c20}{b2BroadPhase::UpdatePairs}}(T* \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}})}
+\DoxyCodeLine{182 \{}
+\DoxyCodeLine{183     \textcolor{comment}{// Reset pair buffer}}
+\DoxyCodeLine{184     m\_pairCount = 0;}
+\DoxyCodeLine{185 }
+\DoxyCodeLine{186     \textcolor{comment}{// Perform tree queries for all moving proxies.}}
+\DoxyCodeLine{187     \textcolor{keywordflow}{for} (\mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} i = 0; i < m\_moveCount; ++i)}
+\DoxyCodeLine{188     \{}
+\DoxyCodeLine{189         m\_queryProxyId = m\_moveBuffer[i];}
+\DoxyCodeLine{190         \textcolor{keywordflow}{if} (m\_queryProxyId == \mbox{\hyperlink{classb2_broad_phase_a2e49dd8c33db36e26bb0e9c163e22ad6a8a4f9965a5b0bbb13a35c20a37fef0ad}{e\_nullProxy}})}
+\DoxyCodeLine{191         \{}
+\DoxyCodeLine{192             \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{193         \}}
+\DoxyCodeLine{194 }
+\DoxyCodeLine{195         \textcolor{comment}{// We have to query the tree with the fat AABB so that}}
+\DoxyCodeLine{196         \textcolor{comment}{// we don't fail to create a pair that may touch later.}}
+\DoxyCodeLine{197         \textcolor{keyword}{const} \mbox{\hyperlink{structb2_a_a_b_b}{b2AABB}}\& fatAABB = m\_tree.\mbox{\hyperlink{classb2_dynamic_tree_ae7f0f4489966ee6a5502d595ca21ce74}{GetFatAABB}}(m\_queryProxyId);}
+\DoxyCodeLine{198 }
+\DoxyCodeLine{199         \textcolor{comment}{// Query tree, create pairs and add them pair buffer.}}
+\DoxyCodeLine{200         m\_tree.\mbox{\hyperlink{classb2_dynamic_tree_a324df3eb65dfc22d3dcdca387737b193}{Query}}(\textcolor{keyword}{this}, fatAABB);}
+\DoxyCodeLine{201     \}}
+\DoxyCodeLine{202 }
+\DoxyCodeLine{203     \textcolor{comment}{// Reset move buffer}}
+\DoxyCodeLine{204     m\_moveCount = 0;}
+\DoxyCodeLine{205 }
+\DoxyCodeLine{206     \textcolor{comment}{// Sort the pair buffer to expose duplicates.}}
+\DoxyCodeLine{207     std::sort(m\_pairBuffer, m\_pairBuffer + m\_pairCount, \mbox{\hyperlink{b2_broad_phase_8h_ad6d75f0819dcf1b88933300ae0430934}{b2PairLessThan}});}
+\DoxyCodeLine{208 }
+\DoxyCodeLine{209     \textcolor{comment}{// Send the pairs back to the client.}}
+\DoxyCodeLine{210     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{juce::int32}} i = 0;}
+\DoxyCodeLine{211     \textcolor{keywordflow}{while} (i < m\_pairCount)}
+\DoxyCodeLine{212     \{}
+\DoxyCodeLine{213         \mbox{\hyperlink{structb2_pair}{b2Pair}}* primaryPair = m\_pairBuffer + i;}
+\DoxyCodeLine{214         \textcolor{keywordtype}{void}* userDataA = m\_tree.\mbox{\hyperlink{classb2_dynamic_tree_a87a0af38e156b5fefb94b38472918a1e}{GetUserData}}(primaryPair-\/>\mbox{\hyperlink{structb2_pair_a4f8dc68e093b54f865bd4d9836680790}{proxyIdA}});}
+\DoxyCodeLine{215         \textcolor{keywordtype}{void}* userDataB = m\_tree.\mbox{\hyperlink{classb2_dynamic_tree_a87a0af38e156b5fefb94b38472918a1e}{GetUserData}}(primaryPair-\/>\mbox{\hyperlink{structb2_pair_ae8c818c51a2ea2ab49e23a1d1ef60da0}{proxyIdB}});}
+\DoxyCodeLine{216 }
+\DoxyCodeLine{217         \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}}-\/>AddPair(userDataA, userDataB);}
+\DoxyCodeLine{218         ++i;}
+\DoxyCodeLine{219 }
+\DoxyCodeLine{220         \textcolor{comment}{// Skip any duplicate pairs.}}
+\DoxyCodeLine{221         \textcolor{keywordflow}{while} (i < m\_pairCount)}
+\DoxyCodeLine{222         \{}
+\DoxyCodeLine{223             \mbox{\hyperlink{structb2_pair}{b2Pair}}* pair = m\_pairBuffer + i;}
+\DoxyCodeLine{224             \textcolor{keywordflow}{if} (pair-\/>\mbox{\hyperlink{structb2_pair_a4f8dc68e093b54f865bd4d9836680790}{proxyIdA}} != primaryPair-\/>\mbox{\hyperlink{structb2_pair_a4f8dc68e093b54f865bd4d9836680790}{proxyIdA}} || pair-\/>\mbox{\hyperlink{structb2_pair_ae8c818c51a2ea2ab49e23a1d1ef60da0}{proxyIdB}} != primaryPair-\/>\mbox{\hyperlink{structb2_pair_ae8c818c51a2ea2ab49e23a1d1ef60da0}{proxyIdB}})}
+\DoxyCodeLine{225             \{}
+\DoxyCodeLine{226                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{227             \}}
+\DoxyCodeLine{228             ++i;}
+\DoxyCodeLine{229         \}}
+\DoxyCodeLine{230     \}}
+\DoxyCodeLine{231 }
+\DoxyCodeLine{232     \textcolor{comment}{// Try to keep the tree balanced.}}
+\DoxyCodeLine{233     \textcolor{comment}{//m\_tree.Rebalance(4);}}
+\DoxyCodeLine{234 \}}
+\DoxyCodeLine{235 }
+\DoxyCodeLine{236 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{237 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_broad_phase_a187586ea98b9d16e5ef6e12fa31f8de2}{b2BroadPhase::Query}}(T* \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}}, \textcolor{keyword}{const} \mbox{\hyperlink{structb2_a_a_b_b}{b2AABB}}\& aabb)\textcolor{keyword}{ const}}
+\DoxyCodeLine{238 \textcolor{keyword}{}\{}
+\DoxyCodeLine{239     m\_tree.\mbox{\hyperlink{classb2_dynamic_tree_a324df3eb65dfc22d3dcdca387737b193}{Query}}(\mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}}, aabb);}
+\DoxyCodeLine{240 \}}
+\DoxyCodeLine{241 }
+\DoxyCodeLine{242 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{243 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_broad_phase_ae65392ea91c7d0839ed5312f78b2837a}{b2BroadPhase::RayCast}}(T* \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}}, \textcolor{keyword}{const} \mbox{\hyperlink{structb2_ray_cast_input}{b2RayCastInput}}\& \mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}})\textcolor{keyword}{ const}}
+\DoxyCodeLine{244 \textcolor{keyword}{}\{}
+\DoxyCodeLine{245     m\_tree.\mbox{\hyperlink{classb2_dynamic_tree_aebd2dc6ee462e0cd0763a5f472243a13}{RayCast}}(\mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}}, \mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}});}
+\DoxyCodeLine{246 \}}
+\DoxyCodeLine{247 }
+\DoxyCodeLine{248 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

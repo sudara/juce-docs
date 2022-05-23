@@ -1,0 +1,589 @@
+\hypertarget{juce___array_base_8h_source}{}\doxysection{juce\+\_\+\+Array\+Base.\+h}
+\label{juce___array_base_8h_source}\index{build/juce\_core/containers/juce\_ArrayBase.h@{build/juce\_core/containers/juce\_ArrayBase.h}}
+\mbox{\hyperlink{juce___array_base_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{40 \textcolor{keyword}{template} <\textcolor{keyword}{class} ElementType, \textcolor{keyword}{class} TypeOfCriticalSectionToUse>}
+\DoxyCodeLine{41 \textcolor{keyword}{class }\mbox{\hyperlink{class_array_base}{ArrayBase}}  : \textcolor{keyword}{public} TypeOfCriticalSectionToUse}
+\DoxyCodeLine{42 \{}
+\DoxyCodeLine{43 \textcolor{keyword}{private}:}
+\DoxyCodeLine{44     \textcolor{keyword}{using} ParameterType = \textcolor{keyword}{typename} \mbox{\hyperlink{struct_type_helpers_1_1_parameter_type_ad57e75d9eb3f3f675b9156c3850636a6}{TypeHelpers::ParameterType<ElementType>::type}};}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46     \textcolor{keyword}{template} <\textcolor{keyword}{class} OtherElementType, \textcolor{keyword}{class} OtherCriticalSection>}
+\DoxyCodeLine{47     \textcolor{keyword}{using} AllowConversion = \textcolor{keyword}{typename} std::enable\_if<! std::is\_same<std::tuple<ElementType, TypeOfCriticalSectionToUse>,}
+\DoxyCodeLine{48                                                                    std::tuple<OtherElementType, OtherCriticalSection>>\mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{::value}}>\mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{::type}};}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50 \textcolor{keyword}{public}:}
+\DoxyCodeLine{51     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{52     \mbox{\hyperlink{class_array_base_a2b3cfd750addb52f1faef4ff45cba7c8}{ArrayBase}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54     \mbox{\hyperlink{class_array_base_a3a6e02cef0062fbf71e978aea3c14b95}{\string~ArrayBase}}()}
+\DoxyCodeLine{55     \{}
+\DoxyCodeLine{56         \mbox{\hyperlink{class_array_base_a72cf74a57dea5756bd9f5ca4ad367f26}{clear}}();}
+\DoxyCodeLine{57     \}}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59     \mbox{\hyperlink{class_array_base_a92323fdd01e6a249440adbca3bae5032}{ArrayBase}} (\mbox{\hyperlink{class_array_base}{ArrayBase}}\&\& other) noexcept}
+\DoxyCodeLine{60         : elements (\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (other.elements)),}
+\DoxyCodeLine{61           numAllocated (other.numAllocated),}
+\DoxyCodeLine{62           numUsed (other.numUsed)}
+\DoxyCodeLine{63     \{}
+\DoxyCodeLine{64         other.numAllocated = 0;}
+\DoxyCodeLine{65         other.numUsed = 0;}
+\DoxyCodeLine{66     \}}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68     \mbox{\hyperlink{class_array_base}{ArrayBase}}\& \mbox{\hyperlink{class_array_base_a1be16cd4ecb324ae9af500e25071d4db}{operator= }}(\mbox{\hyperlink{class_array_base}{ArrayBase}}\&\& other) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{69     \{}
+\DoxyCodeLine{70         \textcolor{keywordflow}{if} (\textcolor{keyword}{this} != \&other)}
+\DoxyCodeLine{71         \{}
+\DoxyCodeLine{72             \textcolor{keyword}{auto} tmp (\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (other));}
+\DoxyCodeLine{73             \mbox{\hyperlink{class_array_base_a883e6d3a41f1781f02dd0e83733abe87}{swapWith}} (tmp);}
+\DoxyCodeLine{74         \}}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{77     \}}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{84     \textcolor{keyword}{template} <\textcolor{keyword}{class }OtherElementType,}
+\DoxyCodeLine{85               \textcolor{keyword}{class }OtherCriticalSection,}
+\DoxyCodeLine{86               \textcolor{keyword}{typename} = AllowConversion<OtherElementType, OtherCriticalSection>>}
+\DoxyCodeLine{87     \mbox{\hyperlink{class_array_base_ac351030cf1c52513a19bba92eaf92c2e}{ArrayBase}} (\mbox{\hyperlink{class_array_base}{ArrayBase<OtherElementType, OtherCriticalSection>}}\&\& other) noexcept}
+\DoxyCodeLine{88         : elements (\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (other.elements)),}
+\DoxyCodeLine{89           numAllocated (other.numAllocated),}
+\DoxyCodeLine{90           numUsed (other.numUsed)}
+\DoxyCodeLine{91     \{}
+\DoxyCodeLine{92         other.numAllocated = 0;}
+\DoxyCodeLine{93         other.numUsed = 0;}
+\DoxyCodeLine{94     \}}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{101     \textcolor{keyword}{template} <\textcolor{keyword}{class }OtherElementType,}
+\DoxyCodeLine{102               \textcolor{keyword}{class }OtherCriticalSection,}
+\DoxyCodeLine{103               \textcolor{keyword}{typename} = AllowConversion<OtherElementType, OtherCriticalSection>>}
+\DoxyCodeLine{104     \mbox{\hyperlink{class_array_base}{ArrayBase}}\& \mbox{\hyperlink{class_array_base_a1be16cd4ecb324ae9af500e25071d4db}{operator= }}(\mbox{\hyperlink{class_array_base}{ArrayBase<OtherElementType, OtherCriticalSection>}}\&\& other) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{105     \{}
+\DoxyCodeLine{106         \textcolor{comment}{// No need to worry about assignment to *this, because 'other' must be of a different type.}}
+\DoxyCodeLine{107         elements = \mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (other.elements);}
+\DoxyCodeLine{108         numAllocated = other.numAllocated;}
+\DoxyCodeLine{109         numUsed = other.numUsed;}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111         other.numAllocated = 0;}
+\DoxyCodeLine{112         other.numUsed = 0;}
+\DoxyCodeLine{113 }
+\DoxyCodeLine{114         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{115     \}}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{118     \textcolor{keyword}{template} <\textcolor{keyword}{class} OtherArrayType>}
+\DoxyCodeLine{119     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_array_base_a1786df1dde4ba890d9a1fc7d1e7d51f9}{operator== }}(\textcolor{keyword}{const} OtherArrayType\& other) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{120     \{}
+\DoxyCodeLine{121         \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_array_base_a1bd426f07cc477260125424de0aeee9d}{size}}() != (\textcolor{keywordtype}{int}) other.size())}
+\DoxyCodeLine{122             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{124         \textcolor{keyword}{auto}* e = \mbox{\hyperlink{class_array_base_ae37cb150831fd96546aac373ccc0b957}{begin}}();}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}\& o : other)}
+\DoxyCodeLine{127             \textcolor{keywordflow}{if} (! (*e++ == o))}
+\DoxyCodeLine{128                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{130         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{131     \}}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{133     \textcolor{keyword}{template} <\textcolor{keyword}{class} OtherArrayType>}
+\DoxyCodeLine{134     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_array_base_a2172851972148fb0d9fca3664e0ec872}{operator!= }}(\textcolor{keyword}{const} OtherArrayType\& other) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{135     \{}
+\DoxyCodeLine{136         \textcolor{keywordflow}{return} ! \mbox{\hyperlink{class_array_base_a1786df1dde4ba890d9a1fc7d1e7d51f9}{operator== }}(other);}
+\DoxyCodeLine{137     \}}
+\DoxyCodeLine{138 }
+\DoxyCodeLine{139     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{140     \textcolor{keyword}{inline} ElementType\& \mbox{\hyperlink{class_array_base_a8858b591c108f2bccc5bfa5ce29f7a55}{operator[] }}(\textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{141     \{}
+\DoxyCodeLine{142         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (elements != \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{143         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (\mbox{\hyperlink{group__juce__core-maths_ga5762396fe2a5aa4c39b68ee5b70a96f8}{isPositiveAndBelow}} (\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}, numUsed));}
+\DoxyCodeLine{144         \textcolor{keywordflow}{return} elements[\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}];}
+\DoxyCodeLine{145     \}}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{147     \textcolor{keyword}{inline} \textcolor{keyword}{const} ElementType\& \mbox{\hyperlink{class_array_base_a8858b591c108f2bccc5bfa5ce29f7a55}{operator[] }}(\textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{148     \{}
+\DoxyCodeLine{149         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (elements != \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{150         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (\mbox{\hyperlink{group__juce__core-maths_ga5762396fe2a5aa4c39b68ee5b70a96f8}{isPositiveAndBelow}} (\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}, numUsed));}
+\DoxyCodeLine{151         \textcolor{keywordflow}{return} elements[\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}];}
+\DoxyCodeLine{152     \}}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154     \textcolor{keyword}{inline} ElementType \mbox{\hyperlink{class_array_base_a586f84d64a89b5ec495d08ebb056baf3}{getValueWithDefault}} (\textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{155     \{}
+\DoxyCodeLine{156         \textcolor{keywordflow}{return} \mbox{\hyperlink{group__juce__core-maths_ga5762396fe2a5aa4c39b68ee5b70a96f8}{isPositiveAndBelow}} (\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}, numUsed) ? elements[\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}] : ElementType();}
+\DoxyCodeLine{157     \}}
+\DoxyCodeLine{158 }
+\DoxyCodeLine{159     \textcolor{keyword}{inline} ElementType \mbox{\hyperlink{class_array_base_a72c3f61f98ae3e1db630caf99f18dce3}{getFirst}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{160     \{}
+\DoxyCodeLine{161         \textcolor{keywordflow}{return} numUsed > 0 ? elements[0] : ElementType();}
+\DoxyCodeLine{162     \}}
+\DoxyCodeLine{163 }
+\DoxyCodeLine{164     \textcolor{keyword}{inline} ElementType \mbox{\hyperlink{class_array_base_a9c002448ff0cb0656c8953b4b10fe18d}{getLast}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{165     \{}
+\DoxyCodeLine{166         \textcolor{keywordflow}{return} numUsed > 0 ? elements[numUsed -\/ 1] : ElementType();}
+\DoxyCodeLine{167     \}}
+\DoxyCodeLine{168 }
+\DoxyCodeLine{169     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{170     \textcolor{keyword}{inline} ElementType* \mbox{\hyperlink{class_array_base_ae37cb150831fd96546aac373ccc0b957}{begin}}() noexcept}
+\DoxyCodeLine{171     \{}
+\DoxyCodeLine{172         \textcolor{keywordflow}{return} elements;}
+\DoxyCodeLine{173     \}}
+\DoxyCodeLine{174 }
+\DoxyCodeLine{175     \textcolor{keyword}{inline} \textcolor{keyword}{const} ElementType* \mbox{\hyperlink{class_array_base_a3ae4c309675b9e40df213b0d2525bc07}{begin}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{176     \{}
+\DoxyCodeLine{177         \textcolor{keywordflow}{return} elements;}
+\DoxyCodeLine{178     \}}
+\DoxyCodeLine{179 }
+\DoxyCodeLine{180     \textcolor{keyword}{inline} ElementType* \mbox{\hyperlink{class_array_base_a533054f6aacf967d2bf2beef3661fa9e}{end}}() noexcept}
+\DoxyCodeLine{181     \{}
+\DoxyCodeLine{182         \textcolor{keywordflow}{return} elements + numUsed;}
+\DoxyCodeLine{183     \}}
+\DoxyCodeLine{184 }
+\DoxyCodeLine{185     \textcolor{keyword}{inline} \textcolor{keyword}{const} ElementType* \mbox{\hyperlink{class_array_base_afc156b032bb26b66c56e223c48332d76}{end}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{186     \{}
+\DoxyCodeLine{187         \textcolor{keywordflow}{return} elements + numUsed;}
+\DoxyCodeLine{188     \}}
+\DoxyCodeLine{189 }
+\DoxyCodeLine{190     \textcolor{keyword}{inline} ElementType* \mbox{\hyperlink{class_array_base_a15ebdf54666f6b5775439f2c3ac7d513}{data}}() noexcept}
+\DoxyCodeLine{191     \{}
+\DoxyCodeLine{192         \textcolor{keywordflow}{return} elements;}
+\DoxyCodeLine{193     \}}
+\DoxyCodeLine{194 }
+\DoxyCodeLine{195     \textcolor{keyword}{inline} \textcolor{keyword}{const} ElementType* \mbox{\hyperlink{class_array_base_a46540efcf0621aa18f33dc27b3394f32}{data}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{196     \{}
+\DoxyCodeLine{197         \textcolor{keywordflow}{return} elements;}
+\DoxyCodeLine{198     \}}
+\DoxyCodeLine{199 }
+\DoxyCodeLine{200     \textcolor{keyword}{inline} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_array_base_a1bd426f07cc477260125424de0aeee9d}{size}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{201     \{}
+\DoxyCodeLine{202         \textcolor{keywordflow}{return} numUsed;}
+\DoxyCodeLine{203     \}}
+\DoxyCodeLine{204 }
+\DoxyCodeLine{205     \textcolor{keyword}{inline} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_array_base_af2370b3bfff4d633bd8d110d9105451f}{capacity}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept}
+\DoxyCodeLine{206     \{}
+\DoxyCodeLine{207         \textcolor{keywordflow}{return} numAllocated;}
+\DoxyCodeLine{208     \}}
+\DoxyCodeLine{209 }
+\DoxyCodeLine{210     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{211     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_base_a544fc146c48234ec85ae3be38e5c9049}{setAllocatedSize}} (\textcolor{keywordtype}{int} numElements)}
+\DoxyCodeLine{212     \{}
+\DoxyCodeLine{213         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (numElements >= numUsed);}
+\DoxyCodeLine{214 }
+\DoxyCodeLine{215         \textcolor{keywordflow}{if} (numAllocated != numElements)}
+\DoxyCodeLine{216         \{}
+\DoxyCodeLine{217             \textcolor{keywordflow}{if} (numElements > 0)}
+\DoxyCodeLine{218                 setAllocatedSizeInternal (numElements);}
+\DoxyCodeLine{219             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{220                 elements.free();}
+\DoxyCodeLine{221         \}}
+\DoxyCodeLine{222 }
+\DoxyCodeLine{223         numAllocated = numElements;}
+\DoxyCodeLine{224     \}}
+\DoxyCodeLine{225 }
+\DoxyCodeLine{226     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_base_a4ec6f8e697ce1bdadc5b4265778b80d8}{ensureAllocatedSize}} (\textcolor{keywordtype}{int} minNumElements)}
+\DoxyCodeLine{227     \{}
+\DoxyCodeLine{228         \textcolor{keywordflow}{if} (minNumElements > numAllocated)}
+\DoxyCodeLine{229             \mbox{\hyperlink{class_array_base_a544fc146c48234ec85ae3be38e5c9049}{setAllocatedSize}} ((minNumElements + minNumElements / 2 + 8) \& \string~7);}
+\DoxyCodeLine{230 }
+\DoxyCodeLine{231         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (numAllocated <= 0 || elements != \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{232     \}}
+\DoxyCodeLine{233 }
+\DoxyCodeLine{234     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_base_a247baefdd024acb33c13a6e4d8e28159}{shrinkToNoMoreThan}} (\textcolor{keywordtype}{int} maxNumElements)}
+\DoxyCodeLine{235     \{}
+\DoxyCodeLine{236         \textcolor{keywordflow}{if} (maxNumElements < numAllocated)}
+\DoxyCodeLine{237             \mbox{\hyperlink{class_array_base_a544fc146c48234ec85ae3be38e5c9049}{setAllocatedSize}} (maxNumElements);}
+\DoxyCodeLine{238     \}}
+\DoxyCodeLine{239 }
+\DoxyCodeLine{240     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_base_a72cf74a57dea5756bd9f5ca4ad367f26}{clear}}()}
+\DoxyCodeLine{241     \{}
+\DoxyCodeLine{242         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < numUsed; ++i)}
+\DoxyCodeLine{243             elements[i].\string~ElementType();}
+\DoxyCodeLine{244 }
+\DoxyCodeLine{245         numUsed = 0;}
+\DoxyCodeLine{246     \}}
+\DoxyCodeLine{247 }
+\DoxyCodeLine{248     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{249     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_base_a883e6d3a41f1781f02dd0e83733abe87}{swapWith}} (\mbox{\hyperlink{class_array_base}{ArrayBase}}\& other) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{250     \{}
+\DoxyCodeLine{251         elements.swapWith (other.elements);}
+\DoxyCodeLine{252         std::swap (numAllocated, other.numAllocated);}
+\DoxyCodeLine{253         std::swap (numUsed,      other.numUsed);}
+\DoxyCodeLine{254     \}}
+\DoxyCodeLine{255 }
+\DoxyCodeLine{256     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{257     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_base_aa289f08b150cdc09f4542746745a3bfa}{add}} (\textcolor{keyword}{const} ElementType\& newElement)}
+\DoxyCodeLine{258     \{}
+\DoxyCodeLine{259         addImpl (newElement);}
+\DoxyCodeLine{260     \}}
+\DoxyCodeLine{261 }
+\DoxyCodeLine{262     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_base_ac3421e63485e895c54fd99cd83edd1d5}{add}} (ElementType\&\& newElement)}
+\DoxyCodeLine{263     \{}
+\DoxyCodeLine{264         addImpl (\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (newElement));}
+\DoxyCodeLine{265     \}}
+\DoxyCodeLine{266 }
+\DoxyCodeLine{267     \textcolor{keyword}{template} <\textcolor{keyword}{typename}... OtherElements>}
+\DoxyCodeLine{268     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_base_a30bb0e6eea76671e56ad8493a580e13f}{add}} (\textcolor{keyword}{const} ElementType\& firstNewElement, OtherElements\&\&... otherElements)}
+\DoxyCodeLine{269     \{}
+\DoxyCodeLine{270         addImpl (firstNewElement, std::forward<OtherElements> (otherElements)...);}
+\DoxyCodeLine{271     \}}
+\DoxyCodeLine{272 }
+\DoxyCodeLine{273     \textcolor{keyword}{template} <\textcolor{keyword}{typename}... OtherElements>}
+\DoxyCodeLine{274     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_base_aab800cf78c1369e63c0eb6c68a90def4}{add}} (ElementType\&\& firstNewElement, OtherElements\&\&... otherElements)}
+\DoxyCodeLine{275     \{}
+\DoxyCodeLine{276         addImpl (\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (firstNewElement), std::forward<OtherElements> (otherElements)...);}
+\DoxyCodeLine{277     \}}
+\DoxyCodeLine{278 }
+\DoxyCodeLine{279     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{280     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type>}
+\DoxyCodeLine{281     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_base_a3c588eaa5b661287f2bdffa98d249cfe}{addArray}} (\textcolor{keyword}{const} Type* elementsToAdd, \textcolor{keywordtype}{int} numElementsToAdd)}
+\DoxyCodeLine{282     \{}
+\DoxyCodeLine{283         \mbox{\hyperlink{class_array_base_a4ec6f8e697ce1bdadc5b4265778b80d8}{ensureAllocatedSize}} (numUsed + numElementsToAdd);}
+\DoxyCodeLine{284         addArrayInternal (elementsToAdd, numElementsToAdd);}
+\DoxyCodeLine{285         numUsed += numElementsToAdd;}
+\DoxyCodeLine{286     \}}
+\DoxyCodeLine{287 }
+\DoxyCodeLine{288     \textcolor{keyword}{template} <\textcolor{keyword}{typename} TypeToCreateFrom>}
+\DoxyCodeLine{289     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_base_a4c9d5af681802638665cff05ba778dfb}{addArray}} (\textcolor{keyword}{const} std::initializer\_list<TypeToCreateFrom>\& items)}
+\DoxyCodeLine{290     \{}
+\DoxyCodeLine{291         \mbox{\hyperlink{class_array_base_a4ec6f8e697ce1bdadc5b4265778b80d8}{ensureAllocatedSize}} (numUsed + (\textcolor{keywordtype}{int}) items.size());}
+\DoxyCodeLine{292 }
+\DoxyCodeLine{293         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}\& item : items)}
+\DoxyCodeLine{294             \textcolor{keyword}{new} (elements + numUsed++) ElementType (item);}
+\DoxyCodeLine{295     \}}
+\DoxyCodeLine{296 }
+\DoxyCodeLine{297     \textcolor{keyword}{template} <\textcolor{keyword}{class} OtherArrayType>}
+\DoxyCodeLine{298     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_base_a6a0092abffaf16352bf7b62179b291bc}{addArray}} (\textcolor{keyword}{const} OtherArrayType\& arrayToAddFrom)}
+\DoxyCodeLine{299     \{}
+\DoxyCodeLine{300         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} ((\textcolor{keyword}{const} \textcolor{keywordtype}{void}*) \textcolor{keyword}{this} != (\textcolor{keyword}{const} \textcolor{keywordtype}{void}*) \&arrayToAddFrom); \textcolor{comment}{// can't add from our own elements!}}
+\DoxyCodeLine{301         \mbox{\hyperlink{class_array_base_a4ec6f8e697ce1bdadc5b4265778b80d8}{ensureAllocatedSize}} (numUsed + (\textcolor{keywordtype}{int}) arrayToAddFrom.size());}
+\DoxyCodeLine{302 }
+\DoxyCodeLine{303         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}\& e : arrayToAddFrom)}
+\DoxyCodeLine{304             addAssumingCapacityIsReady (e);}
+\DoxyCodeLine{305     \}}
+\DoxyCodeLine{306 }
+\DoxyCodeLine{307     \textcolor{keyword}{template} <\textcolor{keyword}{class} OtherArrayType>}
+\DoxyCodeLine{308     \textcolor{keyword}{typename} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{std::enable\_if<! std::is\_pointer<OtherArrayType>::value}}, \textcolor{keywordtype}{int}>\mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{::type}}}
+\DoxyCodeLine{309     \mbox{\hyperlink{class_array_base_afcf0baa19ba8709cac695b3f92997f75}{addArray}} (\textcolor{keyword}{const} OtherArrayType\& arrayToAddFrom,}
+\DoxyCodeLine{310               \textcolor{keywordtype}{int} startIndex, \textcolor{keywordtype}{int} numElementsToAdd = -\/1)}
+\DoxyCodeLine{311     \{}
+\DoxyCodeLine{312         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} ((\textcolor{keyword}{const} \textcolor{keywordtype}{void}*) \textcolor{keyword}{this} != (\textcolor{keyword}{const} \textcolor{keywordtype}{void}*) \&arrayToAddFrom); \textcolor{comment}{// can't add from our own elements!}}
+\DoxyCodeLine{313 }
+\DoxyCodeLine{314         \textcolor{keywordflow}{if} (startIndex < 0)}
+\DoxyCodeLine{315         \{}
+\DoxyCodeLine{316             \mbox{\hyperlink{group__juce__core-system_gadc044ce5efecbecf2f5a44cd00db67b3}{jassertfalse}};}
+\DoxyCodeLine{317             startIndex = 0;}
+\DoxyCodeLine{318         \}}
+\DoxyCodeLine{319 }
+\DoxyCodeLine{320         \textcolor{keywordflow}{if} (numElementsToAdd < 0 || startIndex + numElementsToAdd > (\textcolor{keywordtype}{int}) arrayToAddFrom.size())}
+\DoxyCodeLine{321             numElementsToAdd = (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}) arrayToAddFrom.size() -\/ startIndex;}
+\DoxyCodeLine{322 }
+\DoxyCodeLine{323         \mbox{\hyperlink{class_array_base_a3c588eaa5b661287f2bdffa98d249cfe}{addArray}} (arrayToAddFrom.data() + startIndex, numElementsToAdd);}
+\DoxyCodeLine{324 }
+\DoxyCodeLine{325         \textcolor{keywordflow}{return} numElementsToAdd;}
+\DoxyCodeLine{326     \}}
+\DoxyCodeLine{327 }
+\DoxyCodeLine{328     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{329     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_base_a95ac143a709690dff1dae7908fd10741}{insert}} (\textcolor{keywordtype}{int} indexToInsertAt, ParameterType newElement, \textcolor{keywordtype}{int} numberOfTimesToInsertIt)}
+\DoxyCodeLine{330     \{}
+\DoxyCodeLine{331         checkSourceIsNotAMember (newElement);}
+\DoxyCodeLine{332         \textcolor{keyword}{auto}* space = createInsertSpace (indexToInsertAt, numberOfTimesToInsertIt);}
+\DoxyCodeLine{333 }
+\DoxyCodeLine{334         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < numberOfTimesToInsertIt; ++i)}
+\DoxyCodeLine{335             \textcolor{keyword}{new} (space++) ElementType (newElement);}
+\DoxyCodeLine{336 }
+\DoxyCodeLine{337         numUsed += numberOfTimesToInsertIt;}
+\DoxyCodeLine{338     \}}
+\DoxyCodeLine{339 }
+\DoxyCodeLine{340     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_base_afec49c6bb0276840657af1e036105c94}{insertArray}} (\textcolor{keywordtype}{int} indexToInsertAt, \textcolor{keyword}{const} ElementType* newElements, \textcolor{keywordtype}{int} numberOfElements)}
+\DoxyCodeLine{341     \{}
+\DoxyCodeLine{342         \textcolor{keyword}{auto}* space = createInsertSpace (indexToInsertAt, numberOfElements);}
+\DoxyCodeLine{343 }
+\DoxyCodeLine{344         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < numberOfElements; ++i)}
+\DoxyCodeLine{345             \textcolor{keyword}{new} (space++) ElementType (*(newElements++));}
+\DoxyCodeLine{346 }
+\DoxyCodeLine{347         numUsed += numberOfElements;}
+\DoxyCodeLine{348     \}}
+\DoxyCodeLine{349 }
+\DoxyCodeLine{350     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{351     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_base_a6c3b53d5ffeb135b33919aa4d48bf254}{removeElements}} (\textcolor{keywordtype}{int} indexToRemoveAt, \textcolor{keywordtype}{int} numElementsToRemove)}
+\DoxyCodeLine{352     \{}
+\DoxyCodeLine{353         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (indexToRemoveAt >= 0);}
+\DoxyCodeLine{354         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (numElementsToRemove >= 0);}
+\DoxyCodeLine{355         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (indexToRemoveAt + numElementsToRemove <= numUsed);}
+\DoxyCodeLine{356 }
+\DoxyCodeLine{357         \textcolor{keywordflow}{if} (numElementsToRemove > 0)}
+\DoxyCodeLine{358         \{}
+\DoxyCodeLine{359             removeElementsInternal (indexToRemoveAt, numElementsToRemove);}
+\DoxyCodeLine{360             numUsed -\/= numElementsToRemove;}
+\DoxyCodeLine{361         \}}
+\DoxyCodeLine{362     \}}
+\DoxyCodeLine{363 }
+\DoxyCodeLine{364     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{365     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_base_ad5c6e12391c6c0a7e8b296dbf769f973}{swap}} (\textcolor{keywordtype}{int} index1, \textcolor{keywordtype}{int} index2)}
+\DoxyCodeLine{366     \{}
+\DoxyCodeLine{367         \textcolor{keywordflow}{if} (\mbox{\hyperlink{group__juce__core-maths_ga5762396fe2a5aa4c39b68ee5b70a96f8}{isPositiveAndBelow}} (index1, numUsed)}
+\DoxyCodeLine{368          \&\& \mbox{\hyperlink{group__juce__core-maths_ga5762396fe2a5aa4c39b68ee5b70a96f8}{isPositiveAndBelow}} (index2, numUsed))}
+\DoxyCodeLine{369         \{}
+\DoxyCodeLine{370             std::swap (elements[index1],}
+\DoxyCodeLine{371                        elements[index2]);}
+\DoxyCodeLine{372         \}}
+\DoxyCodeLine{373     \}}
+\DoxyCodeLine{374 }
+\DoxyCodeLine{375     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{376     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array_base_a40e4d62f38a502b829865cc94cbcf049}{move}} (\textcolor{keywordtype}{int} currentIndex, \textcolor{keywordtype}{int} newIndex) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{377     \{}
+\DoxyCodeLine{378         \textcolor{keywordflow}{if} (\mbox{\hyperlink{group__juce__core-maths_ga5762396fe2a5aa4c39b68ee5b70a96f8}{isPositiveAndBelow}} (currentIndex, numUsed))}
+\DoxyCodeLine{379         \{}
+\DoxyCodeLine{380             \textcolor{keywordflow}{if} (! \mbox{\hyperlink{group__juce__core-maths_ga5762396fe2a5aa4c39b68ee5b70a96f8}{isPositiveAndBelow}} (newIndex, numUsed))}
+\DoxyCodeLine{381                 newIndex = numUsed -\/ 1;}
+\DoxyCodeLine{382 }
+\DoxyCodeLine{383             moveInternal (currentIndex, newIndex);}
+\DoxyCodeLine{384         \}}
+\DoxyCodeLine{385     \}}
+\DoxyCodeLine{386 }
+\DoxyCodeLine{387 \textcolor{keyword}{private}:}
+\DoxyCodeLine{388     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{389     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{390 \textcolor{preprocessor}{   \#if defined(\_\_GNUC\_\_) \&\& \_\_GNUC\_\_ < 5 \&\& ! defined(\_\_clang\_\_)}}
+\DoxyCodeLine{391     \textcolor{keyword}{using} IsTriviallyCopyable = std::is\_scalar<T>;}
+\DoxyCodeLine{392 \textcolor{preprocessor}{   \#else}}
+\DoxyCodeLine{393     \textcolor{keyword}{using} IsTriviallyCopyable = std::is\_trivially\_copyable<T>;}
+\DoxyCodeLine{394 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{395 }
+\DoxyCodeLine{396     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{397     \textcolor{keyword}{using} TriviallyCopyableVoid = \textcolor{keyword}{typename} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{std::enable\_if<IsTriviallyCopyable<T>::value}}, \textcolor{keywordtype}{void}>\mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{::type}};}
+\DoxyCodeLine{398 }
+\DoxyCodeLine{399     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{400     \textcolor{keyword}{using} NonTriviallyCopyableVoid = \textcolor{keyword}{typename} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{std::enable\_if<! IsTriviallyCopyable<T>::value}}, \textcolor{keywordtype}{void}>\mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{::type}};}
+\DoxyCodeLine{401 }
+\DoxyCodeLine{402     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{403     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T = ElementType>}
+\DoxyCodeLine{404     TriviallyCopyableVoid<T> addArrayInternal (\textcolor{keyword}{const} ElementType* otherElements, \textcolor{keywordtype}{int} numElements)}
+\DoxyCodeLine{405     \{}
+\DoxyCodeLine{406         \textcolor{keywordflow}{if} (numElements > 0)}
+\DoxyCodeLine{407             memcpy (elements + numUsed, otherElements, (\textcolor{keywordtype}{size\_t}) numElements * \textcolor{keyword}{sizeof} (ElementType));}
+\DoxyCodeLine{408     \}}
+\DoxyCodeLine{409 }
+\DoxyCodeLine{410     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type, \textcolor{keyword}{typename} T = ElementType>}
+\DoxyCodeLine{411     TriviallyCopyableVoid<T> addArrayInternal (\textcolor{keyword}{const} Type* otherElements, \textcolor{keywordtype}{int} numElements)}
+\DoxyCodeLine{412     \{}
+\DoxyCodeLine{413         \textcolor{keyword}{auto}* \mbox{\hyperlink{namespacegl_adad3a3824fbe72fb0b01074bb01ebe75}{start}} = elements + numUsed;}
+\DoxyCodeLine{414 }
+\DoxyCodeLine{415         \textcolor{keywordflow}{while} (-\/-\/numElements >= 0)}
+\DoxyCodeLine{416             \textcolor{keyword}{new} (\mbox{\hyperlink{namespacegl_adad3a3824fbe72fb0b01074bb01ebe75}{start}}++) ElementType (*(otherElements++));}
+\DoxyCodeLine{417     \}}
+\DoxyCodeLine{418 }
+\DoxyCodeLine{419     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type, \textcolor{keyword}{typename} T = ElementType>}
+\DoxyCodeLine{420     NonTriviallyCopyableVoid<T> addArrayInternal (\textcolor{keyword}{const} Type* otherElements, \textcolor{keywordtype}{int} numElements)}
+\DoxyCodeLine{421     \{}
+\DoxyCodeLine{422         \textcolor{keyword}{auto}* \mbox{\hyperlink{namespacegl_adad3a3824fbe72fb0b01074bb01ebe75}{start}} = elements + numUsed;}
+\DoxyCodeLine{423 }
+\DoxyCodeLine{424         \textcolor{keywordflow}{while} (-\/-\/numElements >= 0)}
+\DoxyCodeLine{425             \textcolor{keyword}{new} (\mbox{\hyperlink{namespacegl_adad3a3824fbe72fb0b01074bb01ebe75}{start}}++) ElementType (*(otherElements++));}
+\DoxyCodeLine{426     \}}
+\DoxyCodeLine{427 }
+\DoxyCodeLine{428     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{429     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T = ElementType>}
+\DoxyCodeLine{430     TriviallyCopyableVoid<T> setAllocatedSizeInternal (\textcolor{keywordtype}{int} numElements)}
+\DoxyCodeLine{431     \{}
+\DoxyCodeLine{432         elements.realloc ((\textcolor{keywordtype}{size\_t}) numElements);}
+\DoxyCodeLine{433     \}}
+\DoxyCodeLine{434 }
+\DoxyCodeLine{435     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T = ElementType>}
+\DoxyCodeLine{436     NonTriviallyCopyableVoid<T> setAllocatedSizeInternal (\textcolor{keywordtype}{int} numElements)}
+\DoxyCodeLine{437     \{}
+\DoxyCodeLine{438         \mbox{\hyperlink{class_heap_block}{HeapBlock<ElementType>}} newElements (numElements);}
+\DoxyCodeLine{439 }
+\DoxyCodeLine{440         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < numUsed; ++i)}
+\DoxyCodeLine{441         \{}
+\DoxyCodeLine{442             \textcolor{keyword}{new} (newElements + i) ElementType (\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (elements[i]));}
+\DoxyCodeLine{443             elements[i].\string~ElementType();}
+\DoxyCodeLine{444         \}}
+\DoxyCodeLine{445 }
+\DoxyCodeLine{446         elements = \mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (newElements);}
+\DoxyCodeLine{447     \}}
+\DoxyCodeLine{448 }
+\DoxyCodeLine{449     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{450     ElementType* createInsertSpace (\textcolor{keywordtype}{int} indexToInsertAt, \textcolor{keywordtype}{int} numElements)}
+\DoxyCodeLine{451     \{}
+\DoxyCodeLine{452         \mbox{\hyperlink{class_array_base_a4ec6f8e697ce1bdadc5b4265778b80d8}{ensureAllocatedSize}} (numUsed + numElements);}
+\DoxyCodeLine{453 }
+\DoxyCodeLine{454         \textcolor{keywordflow}{if} (! \mbox{\hyperlink{group__juce__core-maths_ga5762396fe2a5aa4c39b68ee5b70a96f8}{isPositiveAndBelow}} (indexToInsertAt, numUsed))}
+\DoxyCodeLine{455             \textcolor{keywordflow}{return} elements + numUsed;}
+\DoxyCodeLine{456 }
+\DoxyCodeLine{457         createInsertSpaceInternal (indexToInsertAt, numElements);}
+\DoxyCodeLine{458 }
+\DoxyCodeLine{459         \textcolor{keywordflow}{return} elements + indexToInsertAt;}
+\DoxyCodeLine{460     \}}
+\DoxyCodeLine{461 }
+\DoxyCodeLine{462     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T = ElementType>}
+\DoxyCodeLine{463     TriviallyCopyableVoid<T> createInsertSpaceInternal (\textcolor{keywordtype}{int} indexToInsertAt, \textcolor{keywordtype}{int} numElements)}
+\DoxyCodeLine{464     \{}
+\DoxyCodeLine{465         \textcolor{keyword}{auto}* \mbox{\hyperlink{namespacegl_adad3a3824fbe72fb0b01074bb01ebe75}{start}} = elements + indexToInsertAt;}
+\DoxyCodeLine{466         \textcolor{keyword}{auto} numElementsToShift = numUsed -\/ indexToInsertAt;}
+\DoxyCodeLine{467         memmove (\mbox{\hyperlink{namespacegl_adad3a3824fbe72fb0b01074bb01ebe75}{start}} + numElements, \mbox{\hyperlink{namespacegl_adad3a3824fbe72fb0b01074bb01ebe75}{start}}, (\textcolor{keywordtype}{size\_t}) numElementsToShift * \textcolor{keyword}{sizeof} (ElementType));}
+\DoxyCodeLine{468     \}}
+\DoxyCodeLine{469 }
+\DoxyCodeLine{470     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T = ElementType>}
+\DoxyCodeLine{471     NonTriviallyCopyableVoid<T> createInsertSpaceInternal (\textcolor{keywordtype}{int} indexToInsertAt, \textcolor{keywordtype}{int} numElements)}
+\DoxyCodeLine{472     \{}
+\DoxyCodeLine{473         \textcolor{keyword}{auto}* \mbox{\hyperlink{class_array_base_a533054f6aacf967d2bf2beef3661fa9e}{end}} = elements + numUsed;}
+\DoxyCodeLine{474         \textcolor{keyword}{auto}* newEnd = \mbox{\hyperlink{class_array_base_a533054f6aacf967d2bf2beef3661fa9e}{end}} + numElements;}
+\DoxyCodeLine{475         \textcolor{keyword}{auto} numElementsToShift = numUsed -\/ indexToInsertAt;}
+\DoxyCodeLine{476 }
+\DoxyCodeLine{477         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < numElementsToShift; ++i)}
+\DoxyCodeLine{478         \{}
+\DoxyCodeLine{479             \textcolor{keyword}{new} (-\/-\/newEnd) ElementType (\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (*(-\/-\/\mbox{\hyperlink{class_array_base_a533054f6aacf967d2bf2beef3661fa9e}{end}})));}
+\DoxyCodeLine{480             \mbox{\hyperlink{class_array_base_a533054f6aacf967d2bf2beef3661fa9e}{end}}-\/>\string~ElementType();}
+\DoxyCodeLine{481         \}}
+\DoxyCodeLine{482     \}}
+\DoxyCodeLine{483 }
+\DoxyCodeLine{484     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{485     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T = ElementType>}
+\DoxyCodeLine{486     TriviallyCopyableVoid<T> removeElementsInternal (\textcolor{keywordtype}{int} indexToRemoveAt, \textcolor{keywordtype}{int} numElementsToRemove)}
+\DoxyCodeLine{487     \{}
+\DoxyCodeLine{488         \textcolor{keyword}{auto}* \mbox{\hyperlink{namespacegl_adad3a3824fbe72fb0b01074bb01ebe75}{start}} = elements + indexToRemoveAt;}
+\DoxyCodeLine{489         \textcolor{keyword}{auto} numElementsToShift = numUsed -\/ (indexToRemoveAt + numElementsToRemove);}
+\DoxyCodeLine{490         memmove (\mbox{\hyperlink{namespacegl_adad3a3824fbe72fb0b01074bb01ebe75}{start}}, \mbox{\hyperlink{namespacegl_adad3a3824fbe72fb0b01074bb01ebe75}{start}} + numElementsToRemove, (\textcolor{keywordtype}{size\_t}) numElementsToShift * \textcolor{keyword}{sizeof} (ElementType));}
+\DoxyCodeLine{491     \}}
+\DoxyCodeLine{492 }
+\DoxyCodeLine{493     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T = ElementType>}
+\DoxyCodeLine{494     NonTriviallyCopyableVoid<T> removeElementsInternal (\textcolor{keywordtype}{int} indexToRemoveAt, \textcolor{keywordtype}{int} numElementsToRemove)}
+\DoxyCodeLine{495     \{}
+\DoxyCodeLine{496         \textcolor{keyword}{auto} numElementsToShift = numUsed -\/ (indexToRemoveAt + numElementsToRemove);}
+\DoxyCodeLine{497         \textcolor{keyword}{auto}* destination = elements + indexToRemoveAt;}
+\DoxyCodeLine{498         \textcolor{keyword}{auto}* \mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}} = destination + numElementsToRemove;}
+\DoxyCodeLine{499 }
+\DoxyCodeLine{500         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < numElementsToShift; ++i)}
+\DoxyCodeLine{501             moveAssignElement (destination++, \mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (*(\mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}}++)));}
+\DoxyCodeLine{502 }
+\DoxyCodeLine{503         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < numElementsToRemove; ++i)}
+\DoxyCodeLine{504             (destination++)-\/>\string~ElementType();}
+\DoxyCodeLine{505     \}}
+\DoxyCodeLine{506 }
+\DoxyCodeLine{507     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{508     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T = ElementType>}
+\DoxyCodeLine{509     TriviallyCopyableVoid<T> moveInternal (\textcolor{keywordtype}{int} currentIndex, \textcolor{keywordtype}{int} newIndex) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{510     \{}
+\DoxyCodeLine{511         \textcolor{keywordtype}{char} tempCopy[\textcolor{keyword}{sizeof} (ElementType)];}
+\DoxyCodeLine{512         memcpy (tempCopy, elements + currentIndex, \textcolor{keyword}{sizeof} (ElementType));}
+\DoxyCodeLine{513 }
+\DoxyCodeLine{514         \textcolor{keywordflow}{if} (newIndex > currentIndex)}
+\DoxyCodeLine{515         \{}
+\DoxyCodeLine{516             memmove (elements + currentIndex,}
+\DoxyCodeLine{517                      elements + currentIndex + 1,}
+\DoxyCodeLine{518                      (\textcolor{keywordtype}{size\_t}) (newIndex -\/ currentIndex) * \textcolor{keyword}{sizeof} (ElementType));}
+\DoxyCodeLine{519         \}}
+\DoxyCodeLine{520         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{521         \{}
+\DoxyCodeLine{522             memmove (elements + newIndex + 1,}
+\DoxyCodeLine{523                      elements + newIndex,}
+\DoxyCodeLine{524                      (\textcolor{keywordtype}{size\_t}) (currentIndex -\/ newIndex) * \textcolor{keyword}{sizeof} (ElementType));}
+\DoxyCodeLine{525         \}}
+\DoxyCodeLine{526 }
+\DoxyCodeLine{527         memcpy (elements + newIndex, tempCopy, \textcolor{keyword}{sizeof} (ElementType));}
+\DoxyCodeLine{528     \}}
+\DoxyCodeLine{529 }
+\DoxyCodeLine{530     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T = ElementType>}
+\DoxyCodeLine{531     NonTriviallyCopyableVoid<T> moveInternal (\textcolor{keywordtype}{int} currentIndex, \textcolor{keywordtype}{int} newIndex) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{532     \{}
+\DoxyCodeLine{533         \textcolor{keyword}{auto}* e = elements + currentIndex;}
+\DoxyCodeLine{534         ElementType tempCopy (\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (*e));}
+\DoxyCodeLine{535         \textcolor{keyword}{auto} delta = newIndex -\/ currentIndex;}
+\DoxyCodeLine{536 }
+\DoxyCodeLine{537         \textcolor{keywordflow}{if} (delta > 0)}
+\DoxyCodeLine{538         \{}
+\DoxyCodeLine{539             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < delta; ++i)}
+\DoxyCodeLine{540             \{}
+\DoxyCodeLine{541                 moveAssignElement (e, \mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (*(e + 1)));}
+\DoxyCodeLine{542                 ++e;}
+\DoxyCodeLine{543             \}}
+\DoxyCodeLine{544         \}}
+\DoxyCodeLine{545         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{546         \{}
+\DoxyCodeLine{547             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < -\/delta; ++i)}
+\DoxyCodeLine{548             \{}
+\DoxyCodeLine{549                 moveAssignElement (e, \mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (*(e -\/ 1)));}
+\DoxyCodeLine{550                 -\/-\/e;}
+\DoxyCodeLine{551             \}}
+\DoxyCodeLine{552         \}}
+\DoxyCodeLine{553 }
+\DoxyCodeLine{554         moveAssignElement (e, \mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (tempCopy));}
+\DoxyCodeLine{555     \}}
+\DoxyCodeLine{556 }
+\DoxyCodeLine{557     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{558     \textcolor{keyword}{template} <\textcolor{keyword}{typename}... Elements>}
+\DoxyCodeLine{559     \textcolor{keywordtype}{void} addImpl (Elements\&\&... toAdd)}
+\DoxyCodeLine{560     \{}
+\DoxyCodeLine{561         \mbox{\hyperlink{group__juce__core-maths_ga5158e6e8faa5553204f90af596fafaf5}{ignoreUnused}} (std::initializer\_list<int> \{ (((\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}}) checkSourceIsNotAMember (toAdd)), 0)... \});}
+\DoxyCodeLine{562         \mbox{\hyperlink{class_array_base_a4ec6f8e697ce1bdadc5b4265778b80d8}{ensureAllocatedSize}} (numUsed + (\textcolor{keywordtype}{int}) \textcolor{keyword}{sizeof}... (toAdd));}
+\DoxyCodeLine{563         addAssumingCapacityIsReady (std::forward<Elements> (toAdd)...);}
+\DoxyCodeLine{564     \}}
+\DoxyCodeLine{565 }
+\DoxyCodeLine{566     \textcolor{keyword}{template} <\textcolor{keyword}{typename}... Elements>}
+\DoxyCodeLine{567     \textcolor{keywordtype}{void} addAssumingCapacityIsReady (Elements\&\&... toAdd)}
+\DoxyCodeLine{568     \{}
+\DoxyCodeLine{569         \mbox{\hyperlink{group__juce__core-maths_ga5158e6e8faa5553204f90af596fafaf5}{ignoreUnused}} (std::initializer\_list<int> \{ ((\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}}) (\textcolor{keyword}{new} (elements + numUsed++) ElementType (std::forward<Elements> (toAdd))), 0)... \});}
+\DoxyCodeLine{570     \}}
+\DoxyCodeLine{571 }
+\DoxyCodeLine{572     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{573     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T = ElementType>}
+\DoxyCodeLine{574     \textcolor{keyword}{typename} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{std::enable\_if<std::is\_move\_assignable<T>::value}}, \textcolor{keywordtype}{void}>\mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{::type}}}
+\DoxyCodeLine{575     moveAssignElement (ElementType* destination, ElementType\&\& \mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}})}
+\DoxyCodeLine{576     \{}
+\DoxyCodeLine{577         *destination = \mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (\mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}});}
+\DoxyCodeLine{578     \}}
+\DoxyCodeLine{579 }
+\DoxyCodeLine{580     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T = ElementType>}
+\DoxyCodeLine{581     \textcolor{keyword}{typename} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{std::enable\_if<! std::is\_move\_assignable<T>::value}}, \textcolor{keywordtype}{void}>\mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{::type}}}
+\DoxyCodeLine{582     moveAssignElement (ElementType* destination, ElementType\&\& \mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}})}
+\DoxyCodeLine{583     \{}
+\DoxyCodeLine{584         destination-\/>\string~ElementType();}
+\DoxyCodeLine{585         \textcolor{keyword}{new} (destination) ElementType (\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (\mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}}));}
+\DoxyCodeLine{586     \}}
+\DoxyCodeLine{587 }
+\DoxyCodeLine{588     \textcolor{keywordtype}{void} checkSourceIsNotAMember (\textcolor{keyword}{const} ElementType\& element)}
+\DoxyCodeLine{589     \{}
+\DoxyCodeLine{590         \textcolor{comment}{// when you pass a reference to an existing element into a method like add() which}}
+\DoxyCodeLine{591         \textcolor{comment}{// may need to reallocate the array to make more space, the incoming reference may}}
+\DoxyCodeLine{592         \textcolor{comment}{// be deleted indirectly during the reallocation operation! To work around this,}}
+\DoxyCodeLine{593         \textcolor{comment}{// make a local copy of the item you're trying to add (and maybe use std::move to}}
+\DoxyCodeLine{594         \textcolor{comment}{// move it into the add() method to avoid any extra overhead)}}
+\DoxyCodeLine{595         \mbox{\hyperlink{group__juce__core-system_ga61fbc12f0f914e38d0d26e6b4f3ee760}{jassertquiet}} (std::addressof (element) < \mbox{\hyperlink{class_array_base_ae37cb150831fd96546aac373ccc0b957}{begin}}() || \mbox{\hyperlink{class_array_base_a533054f6aacf967d2bf2beef3661fa9e}{end}}() <= std::addressof (element));}
+\DoxyCodeLine{596     \}}
+\DoxyCodeLine{597 }
+\DoxyCodeLine{598     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{599     \mbox{\hyperlink{class_heap_block}{HeapBlock<ElementType>}} elements;}
+\DoxyCodeLine{600     \textcolor{keywordtype}{int} numAllocated = 0, numUsed = 0;}
+\DoxyCodeLine{601 }
+\DoxyCodeLine{602     \textcolor{keyword}{template} <\textcolor{keyword}{class} OtherElementType, \textcolor{keyword}{class} OtherCriticalSection>}
+\DoxyCodeLine{603     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{class_array_base}{ArrayBase}};}
+\DoxyCodeLine{604 }
+\DoxyCodeLine{605     \mbox{\hyperlink{group__juce__core-system_ga6ab7a603bf4435c7cb286b1744366eb2}{JUCE\_DECLARE\_NON\_COPYABLE}} (\mbox{\hyperlink{class_array_base}{ArrayBase}})}
+\DoxyCodeLine{606 \};}
+\DoxyCodeLine{607 }
+\DoxyCodeLine{608  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{609 }
+
+\end{DoxyCode}

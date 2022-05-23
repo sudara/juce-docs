@@ -1,0 +1,96 @@
+\hypertarget{juce___property_set_8h_source}{}\doxysection{juce\+\_\+\+Property\+Set.\+h}
+\label{juce___property_set_8h_source}\index{build/juce\_core/containers/juce\_PropertySet.h@{build/juce\_core/containers/juce\_PropertySet.h}}
+\mbox{\hyperlink{juce___property_set_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{39 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_property_set}{PropertySet}}}
+\DoxyCodeLine{40 \{}
+\DoxyCodeLine{41 \textcolor{keyword}{public}:}
+\DoxyCodeLine{42     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{47 \textcolor{comment}{}    \mbox{\hyperlink{class_property_set}{PropertySet}} (\textcolor{keywordtype}{bool} ignoreCaseOfKeyNames = \textcolor{keyword}{false});}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{50     \mbox{\hyperlink{class_property_set}{PropertySet}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_property_set}{PropertySet}}\& other);}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{53     \mbox{\hyperlink{class_property_set}{PropertySet}}\& operator= (\textcolor{keyword}{const} \mbox{\hyperlink{class_property_set}{PropertySet}}\& other);}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{56     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_property_set}{\string~PropertySet}}();}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{68 \textcolor{comment}{}    \mbox{\hyperlink{class_string}{String}} getValue (\mbox{\hyperlink{class_string_ref}{StringRef}} keyName, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& defaultReturnValue = \mbox{\hyperlink{class_string}{String}}()) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{79     \textcolor{keywordtype}{int} getIntValue (\mbox{\hyperlink{class_string_ref}{StringRef}} keyName, \textcolor{keywordtype}{int} defaultReturnValue = 0) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{90     \textcolor{keywordtype}{double} getDoubleValue (\mbox{\hyperlink{class_string_ref}{StringRef}} keyName, \textcolor{keywordtype}{double} defaultReturnValue = 0.0) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{104     \textcolor{keywordtype}{bool} getBoolValue (\mbox{\hyperlink{class_string_ref}{StringRef}} keyName, \textcolor{keywordtype}{bool} defaultReturnValue = \textcolor{keyword}{false}) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{117     std::unique\_ptr<XmlElement> getXmlValue (\mbox{\hyperlink{class_string_ref}{StringRef}} keyName) \textcolor{keyword}{const};}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{119     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{125 \textcolor{comment}{}    \textcolor{keywordtype}{void} setValue (\mbox{\hyperlink{class_string_ref}{StringRef}} keyName, \textcolor{keyword}{const} \mbox{\hyperlink{classvar}{var}}\& \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}});}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{134     \textcolor{keywordtype}{void} setValue (\mbox{\hyperlink{class_string_ref}{StringRef}} keyName, \textcolor{keyword}{const} \mbox{\hyperlink{class_xml_element}{XmlElement}}* xml);}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{139     \textcolor{keywordtype}{void} addAllPropertiesFrom (\textcolor{keyword}{const} \mbox{\hyperlink{class_property_set}{PropertySet}}\& \mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}});}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{141     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{145 \textcolor{comment}{}    \textcolor{keywordtype}{void} removeValue (\mbox{\hyperlink{class_string_ref}{StringRef}} keyName);}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{148     \textcolor{keywordtype}{bool} containsKey (\mbox{\hyperlink{class_string_ref}{StringRef}} keyName) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{149 }
+\DoxyCodeLine{151     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacedsp_1_1detail_a953fbe1bf6236c0f3a95d12aad7ffffb}{clear}}();}
+\DoxyCodeLine{152 }
+\DoxyCodeLine{153     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{155 \textcolor{comment}{}    \mbox{\hyperlink{class_string_pair_array}{StringPairArray}}\& \mbox{\hyperlink{class_property_set_abb8b3c224dbac910cc484e37c46334ee}{getAllProperties}}() noexcept                        \{ \textcolor{keywordflow}{return} properties; \}}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{158     \textcolor{keyword}{const} \mbox{\hyperlink{class_critical_section}{CriticalSection}}\& \mbox{\hyperlink{class_property_set_a466d4470be80dd0843033ee0d997a3be}{getLock}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                     \{ \textcolor{keywordflow}{return} lock; \}}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{165 \textcolor{comment}{}    std::unique\_ptr<XmlElement> createXml (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& nodeName) \textcolor{keyword}{const};}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{171     \textcolor{keywordtype}{void} restoreFromXml (\textcolor{keyword}{const} \mbox{\hyperlink{class_xml_element}{XmlElement}}\& xml);}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{173     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{186 \textcolor{comment}{}    \textcolor{keywordtype}{void} setFallbackPropertySet (\mbox{\hyperlink{class_property_set}{PropertySet}}* fallbackProperties) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{187 }
+\DoxyCodeLine{191     \mbox{\hyperlink{class_property_set}{PropertySet}}* \mbox{\hyperlink{class_property_set_a98df87fa1071272c077fc5679f8838a3}{getFallbackPropertySet}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                \{ \textcolor{keywordflow}{return} fallbackProperties; \}}
+\DoxyCodeLine{192 }
+\DoxyCodeLine{193 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{195     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacejuce_1_1_value_tree_synchroniser_helpers_ad5d9292cc7c516a478aa0e53e6e303b2af2838857392a3efc835e688f81ada5e4}{propertyChanged}}();}
+\DoxyCodeLine{196 }
+\DoxyCodeLine{197 \textcolor{keyword}{private}:}
+\DoxyCodeLine{198     \mbox{\hyperlink{class_string_pair_array}{StringPairArray}} properties;}
+\DoxyCodeLine{199     \mbox{\hyperlink{class_property_set}{PropertySet}}* fallbackProperties;}
+\DoxyCodeLine{200     \mbox{\hyperlink{class_critical_section}{CriticalSection}} lock;}
+\DoxyCodeLine{201     \textcolor{keywordtype}{bool} ignoreCaseOfKeys;}
+\DoxyCodeLine{202 }
+\DoxyCodeLine{203     \mbox{\hyperlink{group__juce__core-memory_gab3639a79598b35f2116f4572af0d93f1}{JUCE\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_property_set}{PropertySet}})}
+\DoxyCodeLine{204 \};}
+\DoxyCodeLine{205 }
+\DoxyCodeLine{206  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{207 }
+
+\end{DoxyCode}

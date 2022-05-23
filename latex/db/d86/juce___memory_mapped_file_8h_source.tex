@@ -1,0 +1,72 @@
+\hypertarget{juce___memory_mapped_file_8h_source}{}\doxysection{juce\+\_\+\+Memory\+Mapped\+File.\+h}
+\label{juce___memory_mapped_file_8h_source}\index{build/juce\_core/files/juce\_MemoryMappedFile.h@{build/juce\_core/files/juce\_MemoryMappedFile.h}}
+\mbox{\hyperlink{juce___memory_mapped_file_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{33 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_memory_mapped_file}{MemoryMappedFile}}}
+\DoxyCodeLine{34 \{}
+\DoxyCodeLine{35 \textcolor{keyword}{public}:}
+\DoxyCodeLine{37     \textcolor{keyword}{enum} \mbox{\hyperlink{class_memory_mapped_file_a1fb6563237aaf7bd02f4b30f13b0e2d0}{AccessMode}}}
+\DoxyCodeLine{38     \{}
+\DoxyCodeLine{39         \mbox{\hyperlink{class_memory_mapped_file_a1fb6563237aaf7bd02f4b30f13b0e2d0adcfba7d8c4095759d308001cd11cbdc4}{readOnly}},   }
+\DoxyCodeLine{40         readWrite   }
+\DoxyCodeLine{42     \};}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{61     \mbox{\hyperlink{class_memory_mapped_file}{MemoryMappedFile}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& file, AccessMode \mbox{\hyperlink{png_8h_a3eabae3e1e65723a7ec3445646cb7795}{mode}}, \textcolor{keywordtype}{bool} exclusive = \textcolor{keyword}{false});}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{79     \mbox{\hyperlink{class_memory_mapped_file}{MemoryMappedFile}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& file,}
+\DoxyCodeLine{80                       \textcolor{keyword}{const} \mbox{\hyperlink{class_range}{Range<int64>}}\& fileRange,}
+\DoxyCodeLine{81                       AccessMode \mbox{\hyperlink{png_8h_a3eabae3e1e65723a7ec3445646cb7795}{mode}},}
+\DoxyCodeLine{82                       \textcolor{keywordtype}{bool} exclusive = \textcolor{keyword}{false});}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{85     \mbox{\hyperlink{class_memory_mapped_file}{\string~MemoryMappedFile}}();}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{90     \textcolor{keywordtype}{void}* \mbox{\hyperlink{class_memory_mapped_file_a0855b3adec7d0b893a3e42c542b229a4}{getData}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept              \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a806bc647401f0b1530e579b97b65de84}{address}}; \}}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{95     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_memory_mapped_file_a98d9f4380b1343520779570fbe5bf2b0}{getSize}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept             \{ \textcolor{keywordflow}{return} (\textcolor{keywordtype}{size\_t}) \mbox{\hyperlink{namespacegl_ae32af3c263eaecc21093939cdb44aaf3}{range}}.getLength(); \}}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{98     \mbox{\hyperlink{class_range}{Range<int64>}} \mbox{\hyperlink{class_memory_mapped_file_af02af3af1c9c9b1140de4e31c05c375c}{getRange}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept      \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_ae32af3c263eaecc21093939cdb44aaf3}{range}}; \}}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100 \textcolor{keyword}{private}:}
+\DoxyCodeLine{101     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{102     \textcolor{keywordtype}{void}* \mbox{\hyperlink{namespacegl_a806bc647401f0b1530e579b97b65de84}{address}} = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{103     \mbox{\hyperlink{class_range}{Range<int64>}} \mbox{\hyperlink{namespacegl_ae32af3c263eaecc21093939cdb44aaf3}{range}};}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105 \textcolor{preprocessor}{   \#if JUCE\_WINDOWS}}
+\DoxyCodeLine{106     \textcolor{keywordtype}{void}* fileHandle = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{107 \textcolor{preprocessor}{   \#else}}
+\DoxyCodeLine{108     \textcolor{keywordtype}{int} fileHandle = 0;}
+\DoxyCodeLine{109 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111     \textcolor{keywordtype}{void} openInternal (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\&, AccessMode, \textcolor{keywordtype}{bool});}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_memory_mapped_file}{MemoryMappedFile}})}
+\DoxyCodeLine{114 \};}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{116  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{117 }
+
+\end{DoxyCode}

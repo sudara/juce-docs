@@ -1,0 +1,107 @@
+\hypertarget{juce___critical_section_8h_source}{}\doxysection{juce\+\_\+\+Critical\+Section.\+h}
+\label{juce___critical_section_8h_source}\index{build/juce\_core/threads/juce\_CriticalSection.h@{build/juce\_core/threads/juce\_CriticalSection.h}}
+\mbox{\hyperlink{juce___critical_section_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{43 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_critical_section}{CriticalSection}}}
+\DoxyCodeLine{44 \{}
+\DoxyCodeLine{45 \textcolor{keyword}{public}:}
+\DoxyCodeLine{46     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{48 \textcolor{comment}{}    \mbox{\hyperlink{class_critical_section}{CriticalSection}}() \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{54     \mbox{\hyperlink{class_critical_section}{\string~CriticalSection}}() \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{67 \textcolor{comment}{}    \textcolor{keywordtype}{void} enter() \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{77     \textcolor{keywordtype}{bool} tryEnter() \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{89     \textcolor{keywordtype}{void} exit() \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{94 \textcolor{comment}{}    \textcolor{keyword}{using} \mbox{\hyperlink{class_generic_scoped_lock}{ScopedLockType}} = \mbox{\hyperlink{class_generic_scoped_lock}{GenericScopedLock<CriticalSection>}};}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{97     \textcolor{keyword}{using} \mbox{\hyperlink{class_generic_scoped_unlock}{ScopedUnlockType}} = \mbox{\hyperlink{class_generic_scoped_unlock}{GenericScopedUnlock<CriticalSection>}};}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{100     \textcolor{keyword}{using} \mbox{\hyperlink{class_generic_scoped_try_lock}{ScopedTryLockType}} = \mbox{\hyperlink{class_generic_scoped_try_lock}{GenericScopedTryLock<CriticalSection>}};}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103 \textcolor{keyword}{private}:}
+\DoxyCodeLine{104     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{105 \textcolor{preprocessor}{   \#if JUCE\_WINDOWS}}
+\DoxyCodeLine{106     \textcolor{comment}{// To avoid including windows.h in the public JUCE headers, we'll just allocate}}
+\DoxyCodeLine{107     \textcolor{comment}{// a block of memory here that's big enough to be used internally as a windows}}
+\DoxyCodeLine{108     \textcolor{comment}{// CRITICAL\_SECTION structure.}}
+\DoxyCodeLine{109 \textcolor{preprocessor}{    \#if JUCE\_64BIT}}
+\DoxyCodeLine{110      \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{std::aligned\_storage<44, 8>::type}} lock;}
+\DoxyCodeLine{111 \textcolor{preprocessor}{    \#else}}
+\DoxyCodeLine{112      \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{std::aligned\_storage<24, 8>::type}} lock;}
+\DoxyCodeLine{113 \textcolor{preprocessor}{    \#endif}}
+\DoxyCodeLine{114 \textcolor{preprocessor}{   \#else}}
+\DoxyCodeLine{115     \textcolor{keyword}{mutable} pthread\_mutex\_t lock;}
+\DoxyCodeLine{116 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118     \mbox{\hyperlink{group__juce__core-system_ga6ab7a603bf4435c7cb286b1744366eb2}{JUCE\_DECLARE\_NON\_COPYABLE}} (\mbox{\hyperlink{class_critical_section}{CriticalSection}})}
+\DoxyCodeLine{119 \};}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{121 }
+\DoxyCodeLine{122 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{134 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_dummy_critical_section}{DummyCriticalSection}}}
+\DoxyCodeLine{135 \{}
+\DoxyCodeLine{136 \textcolor{keyword}{public}:}
+\DoxyCodeLine{137     \textcolor{keyword}{inline} \mbox{\hyperlink{class_dummy_critical_section_a1666af47d955cebe96b4cf603dd0f636}{DummyCriticalSection}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{138     \textcolor{keyword}{inline} \mbox{\hyperlink{class_dummy_critical_section_a253e10606cf08917005c85e9b43c37b4}{\string~DummyCriticalSection}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_dummy_critical_section_a3511e9f002535174e24aa2e0983b60d9}{enter}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept          \{\}}
+\DoxyCodeLine{141     \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_dummy_critical_section_a55f19ff3a0b0f91a1d025939d1c03a3c}{tryEnter}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept       \{ \textcolor{keywordflow}{return} \textcolor{keyword}{true}; \}}
+\DoxyCodeLine{142     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_dummy_critical_section_a00630497a7c9a449eca4630abf115fa6}{exit}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept           \{\}}
+\DoxyCodeLine{143 }
+\DoxyCodeLine{144     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{146 \textcolor{comment}{}    \textcolor{keyword}{struct }\mbox{\hyperlink{struct_dummy_critical_section_1_1_scoped_lock_type}{ScopedLockType}}}
+\DoxyCodeLine{147     \{}
+\DoxyCodeLine{148         \mbox{\hyperlink{struct_dummy_critical_section_1_1_scoped_lock_type_af14a852a564837bcd71ad5592dec3b2d}{ScopedLockType}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_dummy_critical_section}{DummyCriticalSection}}\&) \textcolor{keyword}{noexcept} \{\}}
+\DoxyCodeLine{149     \};}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{152     \textcolor{keyword}{using} \mbox{\hyperlink{struct_dummy_critical_section_1_1_scoped_lock_type}{ScopedUnlockType}} = \mbox{\hyperlink{struct_dummy_critical_section_1_1_scoped_lock_type}{ScopedLockType}};}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154 \textcolor{keyword}{private}:}
+\DoxyCodeLine{155     \mbox{\hyperlink{group__juce__core-system_ga6ab7a603bf4435c7cb286b1744366eb2}{JUCE\_DECLARE\_NON\_COPYABLE}} (\mbox{\hyperlink{class_dummy_critical_section}{DummyCriticalSection}})}
+\DoxyCodeLine{156 \};}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{158 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{187 \textcolor{comment}{}\textcolor{keyword}{using} \mbox{\hyperlink{class_generic_scoped_lock}{ScopedLock}} = \mbox{\hyperlink{class_critical_section_a4d398019b977a4c2151c6f1e2a06210b}{CriticalSection::ScopedLockType}};}
+\DoxyCodeLine{188 }
+\DoxyCodeLine{189 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{227 \textcolor{comment}{}\textcolor{keyword}{using} \mbox{\hyperlink{class_generic_scoped_unlock}{ScopedUnlock}} = \mbox{\hyperlink{class_critical_section_afc7e83573aaf997f40d3c61a02823ea4}{CriticalSection::ScopedUnlockType}};}
+\DoxyCodeLine{228 }
+\DoxyCodeLine{229 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{261 \textcolor{comment}{}\textcolor{keyword}{using} \mbox{\hyperlink{class_generic_scoped_try_lock}{ScopedTryLock}} = \mbox{\hyperlink{class_critical_section_aa51ba226e571a585af348e6d51a46c0d}{CriticalSection::ScopedTryLockType}};}
+\DoxyCodeLine{262 }
+\DoxyCodeLine{263  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{264 }
+
+\end{DoxyCode}

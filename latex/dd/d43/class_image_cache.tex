@@ -1,0 +1,153 @@
+\hypertarget{class_image_cache}{}\doxysection{Image\+Cache Class Reference}
+\label{class_image_cache}\index{ImageCache@{ImageCache}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Image\+Cache.\+h$>$}
+
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_image}{Image}} \mbox{\hyperlink{class_image_cache_acc266a65cf61dd0a2f68e68840b4a5c4}{get\+From\+File}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_file}{File}} \&file)
+\item 
+static \mbox{\hyperlink{class_image}{Image}} \mbox{\hyperlink{class_image_cache_ac3e80d35b973c3cb47a031185ff56c06}{get\+From\+Memory}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} $\ast$image\+Data, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} data\+Size)
+\item 
+static \mbox{\hyperlink{class_image}{Image}} \mbox{\hyperlink{class_image_cache_a4ebcfbc2287268f4312c8137a913bca4}{get\+From\+Hash\+Code}} (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} hash\+Code)
+\item 
+static \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_image_cache_aba7b8b9196a99296dc3900fb6d01f04a}{add\+Image\+To\+Cache}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_image}{Image}} \&\mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca78805a221a988e79ef3f42d7c5bfd418}{image}}, \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} hash\+Code)
+\item 
+static \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_image_cache_a7e8f2a2260acf7ca4f4a62c36ce99332}{set\+Cache\+Timeout}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} millisecs)
+\item 
+static \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_image_cache_a59842f582bd240a820fb5e44b956b121}{release\+Unused\+Images}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{class_image_cache_a99a661342f099388418fa5a6db23842c}{Pimpl}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A global cache of images that have been loaded from files or memory.
+
+If you\textquotesingle{}re loading an image and may need to use the image in more than one place, this is used to allow the same image to be shared rather than loading multiple copies into memory.
+
+Another advantage is that after images are released, they will be kept in memory for a few seconds before it is actually deleted, so if you\textquotesingle{}re repeatedly loading/deleting the same image, it\textquotesingle{}ll reduce the chances of having to reload it each time.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_image}{Image}}, \mbox{\hyperlink{class_image_file_format}{Image\+File\+Format}}
+\end{DoxySeeAlso}
+@tags\{\mbox{\hyperlink{class_graphics}{Graphics}}\} 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_image_cache_aba7b8b9196a99296dc3900fb6d01f04a}\label{class_image_cache_aba7b8b9196a99296dc3900fb6d01f04a}} 
+\index{ImageCache@{ImageCache}!addImageToCache@{addImageToCache}}
+\index{addImageToCache@{addImageToCache}!ImageCache@{ImageCache}}
+\doxysubsubsection{\texorpdfstring{addImageToCache()}{addImageToCache()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Image\+Cache\+::add\+Image\+To\+Cache (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_image}{Image}} \&}]{image,  }\item[{\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}}]{hash\+Code }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Adds an image to the cache with a user-\/defined hash-\/code.
+
+The image passed-\/in will be referenced (not copied) by the cache, so it\textquotesingle{}s probably a good idea not to draw into it after adding it, otherwise this will affect all instances of it that may be in use.
+
+
+\begin{DoxyParams}{Parameters}
+{\em image} & the image to add \\
+\hline
+{\em hash\+Code} & the hash-\/code to associate with it \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_image_cache_a4ebcfbc2287268f4312c8137a913bca4}{get\+From\+Hash\+Code}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_image_cache_acc266a65cf61dd0a2f68e68840b4a5c4}\label{class_image_cache_acc266a65cf61dd0a2f68e68840b4a5c4}} 
+\index{ImageCache@{ImageCache}!getFromFile@{getFromFile}}
+\index{getFromFile@{getFromFile}!ImageCache@{ImageCache}}
+\doxysubsubsection{\texorpdfstring{getFromFile()}{getFromFile()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_image}{Image}} Image\+Cache\+::get\+From\+File (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_file}{File}} \&}]{file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Loads an image from a file, (or just returns the image if it\textquotesingle{}s already cached).
+
+If the cache already contains an image that was loaded from this file, that image will be returned. Otherwise, this method will try to load the file, add it to the cache, and return it.
+
+Remember that the image returned is shared, so drawing into it might affect other things that are using it! If you want to draw on it, first call \mbox{\hyperlink{class_image_ad995cd253234063d22b604984e83489d}{Image\+::duplicate\+If\+Shared()}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em file} & the file to try to load \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the image, or null if it there was an error loading it 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_image_cache_ac3e80d35b973c3cb47a031185ff56c06}{get\+From\+Memory}}, get\+From\+Cache, \mbox{\hyperlink{class_image_file_format_aa5cf7b6f03682432ae93df3c3defc2b7}{Image\+File\+Format\+::load\+From}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_image_cache_a4ebcfbc2287268f4312c8137a913bca4}\label{class_image_cache_a4ebcfbc2287268f4312c8137a913bca4}} 
+\index{ImageCache@{ImageCache}!getFromHashCode@{getFromHashCode}}
+\index{getFromHashCode@{getFromHashCode}!ImageCache@{ImageCache}}
+\doxysubsubsection{\texorpdfstring{getFromHashCode()}{getFromHashCode()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_image}{Image}} Image\+Cache\+::get\+From\+Hash\+Code (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}}]{hash\+Code }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Checks the cache for an image with a particular hashcode.
+
+If there\textquotesingle{}s an image in the cache with this hashcode, it will be returned, otherwise it will return an invalid image.
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash\+Code} & the hash code that was associated with the image by \mbox{\hyperlink{class_image_cache_aba7b8b9196a99296dc3900fb6d01f04a}{add\+Image\+To\+Cache()}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_image_cache_aba7b8b9196a99296dc3900fb6d01f04a}{add\+Image\+To\+Cache}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_image_cache_ac3e80d35b973c3cb47a031185ff56c06}\label{class_image_cache_ac3e80d35b973c3cb47a031185ff56c06}} 
+\index{ImageCache@{ImageCache}!getFromMemory@{getFromMemory}}
+\index{getFromMemory@{getFromMemory}!ImageCache@{ImageCache}}
+\doxysubsubsection{\texorpdfstring{getFromMemory()}{getFromMemory()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_image}{Image}} Image\+Cache\+::get\+From\+Memory (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} $\ast$}]{image\+Data,  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{data\+Size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Loads an image from an in-\/memory image file, (or just returns the image if it\textquotesingle{}s already cached).
+
+If the cache already contains an image that was loaded from this block of memory, that image will be returned. Otherwise, this method will try to load the file, add it to the cache, and return it.
+
+Remember that the image returned is shared, so drawing into it might affect other things that are using it! If you want to draw on it, first call \mbox{\hyperlink{class_image_ad995cd253234063d22b604984e83489d}{Image\+::duplicate\+If\+Shared()}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em image\+Data} & the block of memory containing the image data \\
+\hline
+{\em data\+Size} & the data size in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the image, or an invalid image if it there was an error loading it 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_image_cache_ac3e80d35b973c3cb47a031185ff56c06}{get\+From\+Memory}}, get\+From\+Cache, \mbox{\hyperlink{class_image_file_format_aa5cf7b6f03682432ae93df3c3defc2b7}{Image\+File\+Format\+::load\+From}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_image_cache_a59842f582bd240a820fb5e44b956b121}\label{class_image_cache_a59842f582bd240a820fb5e44b956b121}} 
+\index{ImageCache@{ImageCache}!releaseUnusedImages@{releaseUnusedImages}}
+\index{releaseUnusedImages@{releaseUnusedImages}!ImageCache@{ImageCache}}
+\doxysubsubsection{\texorpdfstring{releaseUnusedImages()}{releaseUnusedImages()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Image\+Cache\+::release\+Unused\+Images (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Releases any images in the cache that aren\textquotesingle{}t being referenced by active \mbox{\hyperlink{class_image}{Image}} objects. \mbox{\Hypertarget{class_image_cache_a7e8f2a2260acf7ca4f4a62c36ce99332}\label{class_image_cache_a7e8f2a2260acf7ca4f4a62c36ce99332}} 
+\index{ImageCache@{ImageCache}!setCacheTimeout@{setCacheTimeout}}
+\index{setCacheTimeout@{setCacheTimeout}!ImageCache@{ImageCache}}
+\doxysubsubsection{\texorpdfstring{setCacheTimeout()}{setCacheTimeout()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Image\+Cache\+::set\+Cache\+Timeout (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{millisecs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Changes the amount of time before an unused image will be removed from the cache. By default this is about 5 seconds. 
+
+\doxysubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{class_image_cache_a99a661342f099388418fa5a6db23842c}\label{class_image_cache_a99a661342f099388418fa5a6db23842c}} 
+\index{ImageCache@{ImageCache}!Pimpl@{Pimpl}}
+\index{Pimpl@{Pimpl}!ImageCache@{ImageCache}}
+\doxysubsubsection{\texorpdfstring{Pimpl}{Pimpl}}
+{\footnotesize\ttfamily friend struct Pimpl\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+graphics/images/\mbox{\hyperlink{juce___image_cache_8h}{juce\+\_\+\+Image\+Cache.\+h}}\end{DoxyCompactItemize}

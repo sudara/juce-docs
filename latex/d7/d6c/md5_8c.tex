@@ -1,0 +1,107 @@
+\hypertarget{md5_8c}{}\doxysection{build/juce\+\_\+audio\+\_\+formats/codecs/flac/lib\+FLAC/md5.c File Reference}
+\label{md5_8c}\index{build/juce\_audio\_formats/codecs/flac/libFLAC/md5.c@{build/juce\_audio\_formats/codecs/flac/libFLAC/md5.c}}
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}include/private/md5.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../alloc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../endswap.\+h\char`\"{}}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{md5_8c_a3c2b6b2959faadfcf644757cb570b734}{F1}}(x,  y,  z)~(z $^\wedge$ (x \& (y $^\wedge$ z)))
+\item 
+\#define \mbox{\hyperlink{md5_8c_ae131b09a86bdafd00f48095647e80a00}{F2}}(x,  y,  z)~\mbox{\hyperlink{md5_8c_a3c2b6b2959faadfcf644757cb570b734}{F1}}(z, x, y)
+\item 
+\#define \mbox{\hyperlink{md5_8c_a8f6625b749e5fe36981ee2d149229b98}{F3}}(x,  y,  z)~(x $^\wedge$ y $^\wedge$ z)
+\item 
+\#define \mbox{\hyperlink{md5_8c_a61cdb7eca418cc9b37e33601c1b08868}{F4}}(x,  y,  z)~(y $^\wedge$ (x $\vert$ $\sim$z))
+\item 
+\#define \mbox{\hyperlink{md5_8c_ac73d2be8c5c464c7566f290300d2d756}{MD5\+STEP}}(f,  w,  x,  y,  z,  in,  s)~  (w += f(x,y,z) + in, w = (w$<$$<$s $\vert$ w$>$$>$(32-\/s)) + x)
+\item 
+\#define \mbox{\hyperlink{md5_8c_a3969d7536c2e252315e1a64e743f1e61}{byte\+Swap}}(buf,  words)
+\item 
+\#define \mbox{\hyperlink{md5_8c_acf06240c647f529b124699a5c9b2580b}{byte\+Swap\+X16}}(buf)
+\item 
+\#define \mbox{\hyperlink{md5_8c_ab919e86d9b74c5d8bd6edb3480f2de36}{BYTES\+\_\+\+CHANNEL\+\_\+\+SELECTOR}}(bytes,  channels)~(bytes $\ast$ 100 + channels)
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{md5_8c_a43eb00026e4f2922c9fe50a9bf441b18}{FLAC\+\_\+\+\_\+\+MD5\+Init}} (\mbox{\hyperlink{struct_f_l_a_c_____m_d5_context}{FLAC\+\_\+\+\_\+\+MD5\+Context}} $\ast$ctx)
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{md5_8c_a781bfae03659b2cf0048cfc838fcaf9d}{FLAC\+\_\+\+\_\+\+MD5\+Final}} (\mbox{\hyperlink{ordinals_8h_a5eb569b12d5b047cdacada4d57924ee3}{FLAC\+\_\+\+\_\+byte}} digest\mbox{[}16\mbox{]}, \mbox{\hyperlink{struct_f_l_a_c_____m_d5_context}{FLAC\+\_\+\+\_\+\+MD5\+Context}} $\ast$ctx)
+\item 
+\mbox{\hyperlink{ordinals_8h_a95103469f1cbd78b8cf250194985b34e}{FLAC\+\_\+\+\_\+bool}} \mbox{\hyperlink{md5_8c_a4a033952afe9bdb80eb200d86edccae9}{FLAC\+\_\+\+\_\+\+MD5\+Accumulate}} (\mbox{\hyperlink{struct_f_l_a_c_____m_d5_context}{FLAC\+\_\+\+\_\+\+MD5\+Context}} $\ast$ctx, \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\+\_\+\+\_\+int32}} $\ast$\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} signal\mbox{[}$\,$\mbox{]}, unsigned channels, unsigned samples, unsigned bytes\+\_\+per\+\_\+sample)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{md5_8c_ab919e86d9b74c5d8bd6edb3480f2de36}\label{md5_8c_ab919e86d9b74c5d8bd6edb3480f2de36}} 
+\index{md5.c@{md5.c}!BYTES\_CHANNEL\_SELECTOR@{BYTES\_CHANNEL\_SELECTOR}}
+\index{BYTES\_CHANNEL\_SELECTOR@{BYTES\_CHANNEL\_SELECTOR}!md5.c@{md5.c}}
+\doxysubsubsection{\texorpdfstring{BYTES\_CHANNEL\_SELECTOR}{BYTES\_CHANNEL\_SELECTOR}}
+{\footnotesize\ttfamily \#define BYTES\+\_\+\+CHANNEL\+\_\+\+SELECTOR(\begin{DoxyParamCaption}\item[{}]{bytes,  }\item[{}]{channels }\end{DoxyParamCaption})~(bytes $\ast$ 100 + channels)}
+
+\mbox{\Hypertarget{md5_8c_a3969d7536c2e252315e1a64e743f1e61}\label{md5_8c_a3969d7536c2e252315e1a64e743f1e61}} 
+\index{md5.c@{md5.c}!byteSwap@{byteSwap}}
+\index{byteSwap@{byteSwap}!md5.c@{md5.c}}
+\doxysubsubsection{\texorpdfstring{byteSwap}{byteSwap}}
+{\footnotesize\ttfamily \#define byte\+Swap(\begin{DoxyParamCaption}\item[{}]{buf,  }\item[{}]{words }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{md5_8c_acf06240c647f529b124699a5c9b2580b}\label{md5_8c_acf06240c647f529b124699a5c9b2580b}} 
+\index{md5.c@{md5.c}!byteSwapX16@{byteSwapX16}}
+\index{byteSwapX16@{byteSwapX16}!md5.c@{md5.c}}
+\doxysubsubsection{\texorpdfstring{byteSwapX16}{byteSwapX16}}
+{\footnotesize\ttfamily \#define byte\+Swap\+X16(\begin{DoxyParamCaption}\item[{}]{buf }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{md5_8c_a3c2b6b2959faadfcf644757cb570b734}\label{md5_8c_a3c2b6b2959faadfcf644757cb570b734}} 
+\index{md5.c@{md5.c}!F1@{F1}}
+\index{F1@{F1}!md5.c@{md5.c}}
+\doxysubsubsection{\texorpdfstring{F1}{F1}}
+{\footnotesize\ttfamily \#define F1(\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y,  }\item[{}]{z }\end{DoxyParamCaption})~(z $^\wedge$ (x \& (y $^\wedge$ z)))}
+
+\mbox{\Hypertarget{md5_8c_ae131b09a86bdafd00f48095647e80a00}\label{md5_8c_ae131b09a86bdafd00f48095647e80a00}} 
+\index{md5.c@{md5.c}!F2@{F2}}
+\index{F2@{F2}!md5.c@{md5.c}}
+\doxysubsubsection{\texorpdfstring{F2}{F2}}
+{\footnotesize\ttfamily \#define F2(\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y,  }\item[{}]{z }\end{DoxyParamCaption})~\mbox{\hyperlink{md5_8c_a3c2b6b2959faadfcf644757cb570b734}{F1}}(z, x, y)}
+
+\mbox{\Hypertarget{md5_8c_a8f6625b749e5fe36981ee2d149229b98}\label{md5_8c_a8f6625b749e5fe36981ee2d149229b98}} 
+\index{md5.c@{md5.c}!F3@{F3}}
+\index{F3@{F3}!md5.c@{md5.c}}
+\doxysubsubsection{\texorpdfstring{F3}{F3}}
+{\footnotesize\ttfamily \#define F3(\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y,  }\item[{}]{z }\end{DoxyParamCaption})~(x $^\wedge$ y $^\wedge$ z)}
+
+\mbox{\Hypertarget{md5_8c_a61cdb7eca418cc9b37e33601c1b08868}\label{md5_8c_a61cdb7eca418cc9b37e33601c1b08868}} 
+\index{md5.c@{md5.c}!F4@{F4}}
+\index{F4@{F4}!md5.c@{md5.c}}
+\doxysubsubsection{\texorpdfstring{F4}{F4}}
+{\footnotesize\ttfamily \#define F4(\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y,  }\item[{}]{z }\end{DoxyParamCaption})~(y $^\wedge$ (x $\vert$ $\sim$z))}
+
+\mbox{\Hypertarget{md5_8c_ac73d2be8c5c464c7566f290300d2d756}\label{md5_8c_ac73d2be8c5c464c7566f290300d2d756}} 
+\index{md5.c@{md5.c}!MD5STEP@{MD5STEP}}
+\index{MD5STEP@{MD5STEP}!md5.c@{md5.c}}
+\doxysubsubsection{\texorpdfstring{MD5STEP}{MD5STEP}}
+{\footnotesize\ttfamily \#define MD5\+STEP(\begin{DoxyParamCaption}\item[{}]{f,  }\item[{}]{w,  }\item[{}]{x,  }\item[{}]{y,  }\item[{}]{z,  }\item[{}]{in,  }\item[{}]{s }\end{DoxyParamCaption})~  (w += f(x,y,z) + in, w = (w$<$$<$s $\vert$ w$>$$>$(32-\/s)) + x)}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{md5_8c_a4a033952afe9bdb80eb200d86edccae9}\label{md5_8c_a4a033952afe9bdb80eb200d86edccae9}} 
+\index{md5.c@{md5.c}!FLAC\_\_MD5Accumulate@{FLAC\_\_MD5Accumulate}}
+\index{FLAC\_\_MD5Accumulate@{FLAC\_\_MD5Accumulate}!md5.c@{md5.c}}
+\doxysubsubsection{\texorpdfstring{FLAC\_\_MD5Accumulate()}{FLAC\_\_MD5Accumulate()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{ordinals_8h_a95103469f1cbd78b8cf250194985b34e}{FLAC\+\_\+\+\_\+bool}} FLAC\+\_\+\+\_\+\+MD5\+Accumulate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_f_l_a_c_____m_d5_context}{FLAC\+\_\+\+\_\+\+MD5\+Context}} $\ast$}]{ctx,  }\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{ordinals_8h_a33fd77bfe6d685541a0c034a75deccdc}{FLAC\+\_\+\+\_\+int32}} $\ast$\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}}}]{signal\mbox{[}$\,$\mbox{]},  }\item[{unsigned}]{channels,  }\item[{unsigned}]{samples,  }\item[{unsigned}]{bytes\+\_\+per\+\_\+sample }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{md5_8c_a781bfae03659b2cf0048cfc838fcaf9d}\label{md5_8c_a781bfae03659b2cf0048cfc838fcaf9d}} 
+\index{md5.c@{md5.c}!FLAC\_\_MD5Final@{FLAC\_\_MD5Final}}
+\index{FLAC\_\_MD5Final@{FLAC\_\_MD5Final}!md5.c@{md5.c}}
+\doxysubsubsection{\texorpdfstring{FLAC\_\_MD5Final()}{FLAC\_\_MD5Final()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} FLAC\+\_\+\+\_\+\+MD5\+Final (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ordinals_8h_a5eb569b12d5b047cdacada4d57924ee3}{FLAC\+\_\+\+\_\+byte}}}]{digest\mbox{[}16\mbox{]},  }\item[{\mbox{\hyperlink{struct_f_l_a_c_____m_d5_context}{FLAC\+\_\+\+\_\+\+MD5\+Context}} $\ast$}]{ctx }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{md5_8c_a43eb00026e4f2922c9fe50a9bf441b18}\label{md5_8c_a43eb00026e4f2922c9fe50a9bf441b18}} 
+\index{md5.c@{md5.c}!FLAC\_\_MD5Init@{FLAC\_\_MD5Init}}
+\index{FLAC\_\_MD5Init@{FLAC\_\_MD5Init}!md5.c@{md5.c}}
+\doxysubsubsection{\texorpdfstring{FLAC\_\_MD5Init()}{FLAC\_\_MD5Init()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} FLAC\+\_\+\+\_\+\+MD5\+Init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_f_l_a_c_____m_d5_context}{FLAC\+\_\+\+\_\+\+MD5\+Context}} $\ast$}]{ctx }\end{DoxyParamCaption})}
+

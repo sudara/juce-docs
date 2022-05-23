@@ -1,0 +1,250 @@
+\hypertarget{juce___audio_device_manager_8h_source}{}\doxysection{juce\+\_\+\+Audio\+Device\+Manager.\+h}
+\label{juce___audio_device_manager_8h_source}\index{build/juce\_audio\_devices/audio\_io/juce\_AudioDeviceManager.h@{build/juce\_audio\_devices/audio\_io/juce\_AudioDeviceManager.h}}
+\mbox{\hyperlink{juce___audio_device_manager_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{67 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_audio_device_manager}{AudioDeviceManager}}  : \textcolor{keyword}{public} \mbox{\hyperlink{class_change_broadcaster}{ChangeBroadcaster}}}
+\DoxyCodeLine{68 \{}
+\DoxyCodeLine{69 \textcolor{keyword}{public}:}
+\DoxyCodeLine{70     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{77 \textcolor{comment}{}    \mbox{\hyperlink{class_audio_device_manager_accab16a03e809121d56e8b272125f3ea}{AudioDeviceManager}}();}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{80     \mbox{\hyperlink{class_audio_device_manager_aead8866dfe453e42d94db582851fec4f}{\string~AudioDeviceManager}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{91 \textcolor{comment}{}    \textcolor{keyword}{struct }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{struct_audio_device_manager_1_1_audio_device_setup}{AudioDeviceSetup}}}
+\DoxyCodeLine{92     \{}
+\DoxyCodeLine{98         \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{struct_audio_device_manager_1_1_audio_device_setup_a5112cd247e403671a6977344c6764e7d}{outputDeviceName}};}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{103         \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{struct_audio_device_manager_1_1_audio_device_setup_af1c134f5280bec722facace7c9fa0f1d}{inputDeviceName}};}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{110         \textcolor{keywordtype}{double} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}} = 0;}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{116         \textcolor{keywordtype}{int} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8556d19b129aa550f5b2819ed0320e83}{bufferSize}} = 0;}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{123         \mbox{\hyperlink{class_big_integer}{BigInteger}} \mbox{\hyperlink{struct_audio_device_manager_1_1_audio_device_setup_a9365767334c0819bb45754100c743fae}{inputChannels}};}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{129         \textcolor{keywordtype}{bool} useDefaultInputChannels = \textcolor{keyword}{true};}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{136         \mbox{\hyperlink{class_big_integer}{BigInteger}} \mbox{\hyperlink{struct_audio_device_manager_1_1_audio_device_setup_ab95916f70e697107288dc0c44af25aab}{outputChannels}};}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{142         \textcolor{keywordtype}{bool} useDefaultOutputChannels = \textcolor{keyword}{true};}
+\DoxyCodeLine{143 }
+\DoxyCodeLine{144         \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_audio_channel_layout_8cpp_ad569fbf0e2ce80e9b92caaf1cbb3c257}{operator== }}(\textcolor{keyword}{const} \mbox{\hyperlink{struct_audio_device_manager_1_1_audio_device_setup}{AudioDeviceSetup}}\&) \textcolor{keyword}{const};}
+\DoxyCodeLine{145         \textcolor{keywordtype}{bool} \mbox{\hyperlink{_c_a_audio_channel_layout_8cpp_aa4ad43821a0285a3d7a5c840173f03ac}{operator!= }}(\textcolor{keyword}{const} \mbox{\hyperlink{struct_audio_device_manager_1_1_audio_device_setup}{AudioDeviceSetup}}\&) \textcolor{keyword}{const};}
+\DoxyCodeLine{146     \};}
+\DoxyCodeLine{147 }
+\DoxyCodeLine{148 }
+\DoxyCodeLine{149     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{183 \textcolor{comment}{}    \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{class_audio_device_manager_a4c6d8a76a270a6e4ca0537093f447b44}{initialise}} (\textcolor{keywordtype}{int} numInputChannelsNeeded,}
+\DoxyCodeLine{184                        \textcolor{keywordtype}{int} numOutputChannelsNeeded,}
+\DoxyCodeLine{185                        \textcolor{keyword}{const} \mbox{\hyperlink{class_xml_element}{XmlElement}}* savedState,}
+\DoxyCodeLine{186                        \textcolor{keywordtype}{bool} selectDefaultDeviceOnFailure,}
+\DoxyCodeLine{187                        \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& preferredDefaultDeviceName = \mbox{\hyperlink{class_string}{String}}(),}
+\DoxyCodeLine{188                        \textcolor{keyword}{const} \mbox{\hyperlink{struct_audio_device_manager_1_1_audio_device_setup}{AudioDeviceSetup}}* preferredSetupOptions = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{189 }
+\DoxyCodeLine{191     \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{class_audio_device_manager_aed646db44c76466d8d0e288d56e50691}{initialiseWithDefaultDevices}} (\textcolor{keywordtype}{int} numInputChannelsNeeded,}
+\DoxyCodeLine{192                                          \textcolor{keywordtype}{int} numOutputChannelsNeeded);}
+\DoxyCodeLine{193 }
+\DoxyCodeLine{202     std::unique\_ptr<XmlElement> \mbox{\hyperlink{class_audio_device_manager_a9c3182f8d7f1615a3b7426529cfb0a12}{createStateXml}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{203 }
+\DoxyCodeLine{204     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{208 \textcolor{comment}{}    \mbox{\hyperlink{struct_audio_device_manager_1_1_audio_device_setup}{AudioDeviceSetup}} \mbox{\hyperlink{class_audio_device_manager_a84855d2826ebd28f1bb61fb77005fb7a}{getAudioDeviceSetup}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{209 }
+\DoxyCodeLine{215     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_device_manager_ac67ef90034c2980f264951f18f86fbcb}{getAudioDeviceSetup}} (\mbox{\hyperlink{struct_audio_device_manager_1_1_audio_device_setup}{AudioDeviceSetup}}\& \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{216 }
+\DoxyCodeLine{240     \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{class_audio_device_manager_aef0249d178aa5448ad2e949ae059c461}{setAudioDeviceSetup}} (\textcolor{keyword}{const} \mbox{\hyperlink{struct_audio_device_manager_1_1_audio_device_setup}{AudioDeviceSetup}}\& newSetup, \textcolor{keywordtype}{bool} treatAsChosenDevice);}
+\DoxyCodeLine{241 }
+\DoxyCodeLine{242 }
+\DoxyCodeLine{244     \mbox{\hyperlink{class_audio_i_o_device}{AudioIODevice}}* \mbox{\hyperlink{class_audio_device_manager_a2d5cb58587d6658d03c088d47e416636}{getCurrentAudioDevice}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept               \{ \textcolor{keywordflow}{return} currentAudioDevice.get(); \}}
+\DoxyCodeLine{245 }
+\DoxyCodeLine{249     \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{class_audio_device_manager_aa685f7ecd5e85c243ec69d969b370532}{getCurrentAudioDeviceType}}()\textcolor{keyword}{ const                            }\{ \textcolor{keywordflow}{return} currentDeviceType; \}}
+\DoxyCodeLine{250 }
+\DoxyCodeLine{255     \mbox{\hyperlink{class_audio_i_o_device_type}{AudioIODeviceType}}* \mbox{\hyperlink{class_audio_device_manager_a86dc2e1927b5535925aadc4f9b620f5c}{getCurrentDeviceTypeObject}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{256 }
+\DoxyCodeLine{264     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_device_manager_a49e34c1ed60dafcebefc55d12f9175ad}{setCurrentAudioDeviceType}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{namespacegl_aeba9cad8d6b4f72e1da983fe48c14132}{type}}, \textcolor{keywordtype}{bool} treatAsChosenDevice);}
+\DoxyCodeLine{265 }
+\DoxyCodeLine{270     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_device_manager_af9829fcacafb4a395d084b34cdb8391c}{closeAudioDevice}}();}
+\DoxyCodeLine{271 }
+\DoxyCodeLine{280     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_device_manager_ac46693f5b78c06357b16bf5e95560605}{restartLastAudioDevice}}();}
+\DoxyCodeLine{281 }
+\DoxyCodeLine{282     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{295 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_device_manager_acf3977dcc83f22b7f51091d7ff7b8aff}{addAudioCallback}} (\mbox{\hyperlink{class_audio_i_o_device_callback}{AudioIODeviceCallback}}* newCallback);}
+\DoxyCodeLine{296 }
+\DoxyCodeLine{304     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_device_manager_af6d672043bfc5ca423ea0ca41b5ad2d1}{removeAudioCallback}} (\mbox{\hyperlink{class_audio_i_o_device_callback}{AudioIODeviceCallback}}* \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}});}
+\DoxyCodeLine{305 }
+\DoxyCodeLine{306     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{311 \textcolor{comment}{}    \textcolor{keywordtype}{double} \mbox{\hyperlink{class_audio_device_manager_a79563c9d2cc87d059d8b101515e8dee1}{getCpuUsage}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{312 }
+\DoxyCodeLine{313     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{333 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_device_manager_a48784fb8fea871e4496fa69241bcd833}{setMidiInputDeviceEnabled}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& deviceIdentifier, \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespacegl_a6dfcb2772a382ca14a671d9869edce40}{enabled}});}
+\DoxyCodeLine{334 }
+\DoxyCodeLine{339     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_device_manager_ab56d935d666f2ec76b693df5f7fdef42}{isMidiInputDeviceEnabled}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& deviceIdentifier) \textcolor{keyword}{const};}
+\DoxyCodeLine{340 }
+\DoxyCodeLine{351     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_device_manager_a3d3cabde443512bedcb868091a23a8ee}{addMidiInputDeviceCallback}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& deviceIdentifier,}
+\DoxyCodeLine{352                                      \mbox{\hyperlink{class_midi_input_callback}{MidiInputCallback}}* \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}});}
+\DoxyCodeLine{353 }
+\DoxyCodeLine{355     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_device_manager_a4885aec0ecf1a49fbad82907be55e2ae}{removeMidiInputDeviceCallback}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& deviceIdentifier,}
+\DoxyCodeLine{356                                         \mbox{\hyperlink{class_midi_input_callback}{MidiInputCallback}}* \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}});}
+\DoxyCodeLine{357 }
+\DoxyCodeLine{358     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{371 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_device_manager_a4bb95a3b78dee680a0798787b616441d}{setDefaultMidiOutputDevice}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& deviceIdentifier);}
+\DoxyCodeLine{372 }
+\DoxyCodeLine{377     \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{class_audio_device_manager_a187f49ea2c293413175525dac7643e6f}{getDefaultMidiOutputIdentifier}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept   \{ \textcolor{keywordflow}{return} defaultMidiOutputDeviceInfo.identifier; \}}
+\DoxyCodeLine{378 }
+\DoxyCodeLine{384     \mbox{\hyperlink{class_midi_output}{MidiOutput}}* \mbox{\hyperlink{class_audio_device_manager_a672718fceedbabd4889c664561ef7371}{getDefaultMidiOutput}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept               \{ \textcolor{keywordflow}{return} defaultMidiOutput.get(); \}}
+\DoxyCodeLine{385 }
+\DoxyCodeLine{386     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{388 \textcolor{comment}{}    \textcolor{keyword}{const} \mbox{\hyperlink{class_owned_array}{OwnedArray<AudioIODeviceType>}}\& \mbox{\hyperlink{class_audio_device_manager_ad1661fd701888c3eae34746b82e5b9df}{getAvailableDeviceTypes}}();}
+\DoxyCodeLine{389 }
+\DoxyCodeLine{398     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_device_manager_ad7d7e0e64926665b12b62a53082caecc}{createAudioDeviceTypes}} (\mbox{\hyperlink{class_owned_array}{OwnedArray<AudioIODeviceType>}}\& types);}
+\DoxyCodeLine{399 }
+\DoxyCodeLine{401     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_device_manager_a8d041500471ca44261d58f01df875367}{addAudioDeviceType}} (std::unique\_ptr<AudioIODeviceType> newDeviceType);}
+\DoxyCodeLine{402 }
+\DoxyCodeLine{404     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_device_manager_afad82d8864eb332a8c6eb7dc626b156d}{removeAudioDeviceType}} (\mbox{\hyperlink{class_audio_i_o_device_type}{AudioIODeviceType}}* deviceTypeToRemove);}
+\DoxyCodeLine{405 }
+\DoxyCodeLine{406     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{412 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_device_manager_ab32b74d9dda550d70d47c0cca76fdd25}{playTestSound}}();}
+\DoxyCodeLine{413 }
+\DoxyCodeLine{414     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{424 \textcolor{comment}{}    \textcolor{keyword}{struct }\mbox{\hyperlink{struct_audio_device_manager_1_1_level_meter}{LevelMeter}}    : \textcolor{keyword}{public} \mbox{\hyperlink{class_reference_counted_object}{ReferenceCountedObject}}}
+\DoxyCodeLine{425     \{}
+\DoxyCodeLine{426         \mbox{\hyperlink{struct_audio_device_manager_1_1_level_meter}{LevelMeter}}() \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{427         \textcolor{keywordtype}{double} getCurrentLevel() \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{428 }
+\DoxyCodeLine{429         \textcolor{keyword}{using} \mbox{\hyperlink{class_reference_counted_object_ptr}{Ptr}} = \mbox{\hyperlink{class_reference_counted_object_ptr}{ReferenceCountedObjectPtr<LevelMeter>}};}
+\DoxyCodeLine{430 }
+\DoxyCodeLine{431     \textcolor{keyword}{private}:}
+\DoxyCodeLine{432         \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{class_audio_device_manager}{AudioDeviceManager}};}
+\DoxyCodeLine{433 }
+\DoxyCodeLine{434         \mbox{\hyperlink{struct_atomic}{Atomic<float>}} \mbox{\hyperlink{namespacegl_a3037cfec75442657d7a3f8830cb97c34}{level}} \{ 0 \};}
+\DoxyCodeLine{435         \textcolor{keywordtype}{void} updateLevel (\textcolor{keyword}{const} \textcolor{keywordtype}{float}* \textcolor{keyword}{const}*, \textcolor{keywordtype}{int} numChannels, \textcolor{keywordtype}{int} numSamples) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{436     \};}
+\DoxyCodeLine{437 }
+\DoxyCodeLine{443     \mbox{\hyperlink{class_reference_counted_object_ptr}{LevelMeter::Ptr}} \mbox{\hyperlink{class_audio_device_manager_ac3655731cf4275be1b8909be161f2d1f}{getInputLevelGetter}}() noexcept          \{ \textcolor{keywordflow}{return} inputLevelGetter; \}}
+\DoxyCodeLine{444 }
+\DoxyCodeLine{450     \mbox{\hyperlink{class_reference_counted_object_ptr}{LevelMeter::Ptr}} \mbox{\hyperlink{class_audio_device_manager_ae6becaa71cf916260faad6b772f00450}{getOutputLevelGetter}}() noexcept         \{ \textcolor{keywordflow}{return} outputLevelGetter; \}}
+\DoxyCodeLine{451 }
+\DoxyCodeLine{452     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{457 \textcolor{comment}{}    \mbox{\hyperlink{class_critical_section}{CriticalSection}}\& \mbox{\hyperlink{class_audio_device_manager_a5c0392d3b51f189db3c50c58c2cdc083}{getAudioCallbackLock}}() noexcept        \{ \textcolor{keywordflow}{return} audioCallbackLock; \}}
+\DoxyCodeLine{458 }
+\DoxyCodeLine{463     \mbox{\hyperlink{class_critical_section}{CriticalSection}}\& \mbox{\hyperlink{class_audio_device_manager_a77f0eccc534b7056ddd417f8bba70353}{getMidiCallbackLock}}() noexcept         \{ \textcolor{keywordflow}{return} midiCallbackLock; \}}
+\DoxyCodeLine{464 }
+\DoxyCodeLine{465     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{472 \textcolor{comment}{}    \textcolor{keywordtype}{int} \mbox{\hyperlink{class_audio_device_manager_a12bf766acfb9bf1825418a9058a74318}{getXRunCount}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{473 }
+\DoxyCodeLine{474     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{475    \textcolor{preprocessor}{\#ifndef DOXYGEN}}
+\DoxyCodeLine{476     [[deprecated (\textcolor{stringliteral}{"{}Use setMidiInputDeviceEnabled instead."{}})]]}
+\DoxyCodeLine{477     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_device_manager_a25feb28ada13c5293b69f58e0187999c}{setMidiInputEnabled}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\&, \textcolor{keywordtype}{bool});}
+\DoxyCodeLine{478     [[deprecated (\textcolor{stringliteral}{"{}Use isMidiInputDeviceEnabled instead."{}})]]}
+\DoxyCodeLine{479     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_device_manager_afd9c3ee72427a5bdb52fdbfde091843e}{isMidiInputEnabled}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\&) \textcolor{keyword}{const};}
+\DoxyCodeLine{480     [[deprecated (\textcolor{stringliteral}{"{}Use addMidiInputDeviceCallback instead."{}})]]}
+\DoxyCodeLine{481     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_device_manager_acee3576b768f34be9dc59be5a11ff92b}{addMidiInputCallback}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\&, \mbox{\hyperlink{class_midi_input_callback}{MidiInputCallback}}*);}
+\DoxyCodeLine{482     [[deprecated (\textcolor{stringliteral}{"{}Use removeMidiInputDeviceCallback instead."{}})]]}
+\DoxyCodeLine{483     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_device_manager_a90e1f2607fef7e6591bd3819c975bb06}{removeMidiInputCallback}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\&, \mbox{\hyperlink{class_midi_input_callback}{MidiInputCallback}}*);}
+\DoxyCodeLine{484     [[deprecated (\textcolor{stringliteral}{"{}Use setDefaultMidiOutputDevice instead."{}})]]}
+\DoxyCodeLine{485     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_device_manager_aaf1b12582c565a5c4b98d8aa99fd57b6}{setDefaultMidiOutput}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\&);}
+\DoxyCodeLine{486     [[deprecated (\textcolor{stringliteral}{"{}Use getDefaultMidiOutputIdentifier instead."{}})]]}
+\DoxyCodeLine{487     \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{class_audio_device_manager_a6078d12f667690457a73535ef61779e7}{getDefaultMidiOutputName}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept  \{ \textcolor{keywordflow}{return} defaultMidiOutputDeviceInfo.name; \}}
+\DoxyCodeLine{488 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{489 }
+\DoxyCodeLine{490 \textcolor{keyword}{private}:}
+\DoxyCodeLine{491     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{492     \mbox{\hyperlink{class_owned_array}{OwnedArray<AudioIODeviceType>}} availableDeviceTypes;}
+\DoxyCodeLine{493     \mbox{\hyperlink{class_owned_array}{OwnedArray<AudioDeviceSetup>}} lastDeviceTypeConfigs;}
+\DoxyCodeLine{494 }
+\DoxyCodeLine{495     AudioDeviceSetup currentSetup;}
+\DoxyCodeLine{496     std::unique\_ptr<AudioIODevice> currentAudioDevice;}
+\DoxyCodeLine{497     \mbox{\hyperlink{class_array}{Array<AudioIODeviceCallback*>}} callbacks;}
+\DoxyCodeLine{498     \textcolor{keywordtype}{int} numInputChansNeeded = 0, numOutputChansNeeded = 2;}
+\DoxyCodeLine{499     \mbox{\hyperlink{class_string}{String}} preferredDeviceName, currentDeviceType;}
+\DoxyCodeLine{500     std::unique\_ptr<XmlElement> lastExplicitSettings;}
+\DoxyCodeLine{501     \textcolor{keyword}{mutable} \textcolor{keywordtype}{bool} listNeedsScanning = \textcolor{keyword}{true};}
+\DoxyCodeLine{502     \mbox{\hyperlink{class_audio_buffer}{AudioBuffer<float>}} tempBuffer;}
+\DoxyCodeLine{503 }
+\DoxyCodeLine{504     \textcolor{keyword}{struct }MidiCallbackInfo}
+\DoxyCodeLine{505     \{}
+\DoxyCodeLine{506         \mbox{\hyperlink{class_string}{String}} deviceIdentifier;}
+\DoxyCodeLine{507         \mbox{\hyperlink{class_midi_input_callback}{MidiInputCallback}}* \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}};}
+\DoxyCodeLine{508     \};}
+\DoxyCodeLine{509 }
+\DoxyCodeLine{510     \mbox{\hyperlink{class_array}{Array<MidiDeviceInfo>}} midiDeviceInfosFromXml;}
+\DoxyCodeLine{511     std::vector<std::unique\_ptr<MidiInput>> enabledMidiInputs;}
+\DoxyCodeLine{512     \mbox{\hyperlink{class_array}{Array<MidiCallbackInfo>}} midiCallbacks;}
+\DoxyCodeLine{513 }
+\DoxyCodeLine{514     \mbox{\hyperlink{struct_midi_device_info}{MidiDeviceInfo}} defaultMidiOutputDeviceInfo;}
+\DoxyCodeLine{515     std::unique\_ptr<MidiOutput> defaultMidiOutput;}
+\DoxyCodeLine{516     \mbox{\hyperlink{class_critical_section}{CriticalSection}} audioCallbackLock, midiCallbackLock;}
+\DoxyCodeLine{517 }
+\DoxyCodeLine{518     std::unique\_ptr<AudioBuffer<float>> testSound;}
+\DoxyCodeLine{519     \textcolor{keywordtype}{int} testSoundPosition = 0;}
+\DoxyCodeLine{520 }
+\DoxyCodeLine{521     \mbox{\hyperlink{class_audio_process_load_measurer}{AudioProcessLoadMeasurer}} loadMeasurer;}
+\DoxyCodeLine{522 }
+\DoxyCodeLine{523     LevelMeter::Ptr inputLevelGetter   \{ \textcolor{keyword}{new} LevelMeter() \},}
+\DoxyCodeLine{524                     outputLevelGetter  \{ \textcolor{keyword}{new} LevelMeter() \};}
+\DoxyCodeLine{525 }
+\DoxyCodeLine{526     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{527     \textcolor{keyword}{class }CallbackHandler;}
+\DoxyCodeLine{528     std::unique\_ptr<CallbackHandler> callbackHandler;}
+\DoxyCodeLine{529 }
+\DoxyCodeLine{530     \textcolor{keywordtype}{void} audioDeviceIOCallbackInt (\textcolor{keyword}{const} \textcolor{keywordtype}{float}** inputChannelData, \textcolor{keywordtype}{int} totalNumInputChannels,}
+\DoxyCodeLine{531                                    \textcolor{keywordtype}{float}** outputChannelData, \textcolor{keywordtype}{int} totalNumOutputChannels, \textcolor{keywordtype}{int} numSamples);}
+\DoxyCodeLine{532     \textcolor{keywordtype}{void} audioDeviceAboutToStartInt (\mbox{\hyperlink{class_audio_i_o_device}{AudioIODevice}}*);}
+\DoxyCodeLine{533     \textcolor{keywordtype}{void} audioDeviceStoppedInt();}
+\DoxyCodeLine{534     \textcolor{keywordtype}{void} audioDeviceErrorInt (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\&);}
+\DoxyCodeLine{535     \textcolor{keywordtype}{void} handleIncomingMidiMessageInt (\mbox{\hyperlink{class_midi_input}{MidiInput}}*, \textcolor{keyword}{const} \mbox{\hyperlink{class_midi_message}{MidiMessage}}\&);}
+\DoxyCodeLine{536     \textcolor{keywordtype}{void} audioDeviceListChanged();}
+\DoxyCodeLine{537 }
+\DoxyCodeLine{538     \mbox{\hyperlink{class_string}{String}} restartDevice (\textcolor{keywordtype}{int} blockSizeToUse, \textcolor{keywordtype}{double} sampleRateToUse,}
+\DoxyCodeLine{539                           \textcolor{keyword}{const} \mbox{\hyperlink{class_big_integer}{BigInteger}}\& ins, \textcolor{keyword}{const} \mbox{\hyperlink{class_big_integer}{BigInteger}}\& outs);}
+\DoxyCodeLine{540     \textcolor{keywordtype}{void} stopDevice();}
+\DoxyCodeLine{541 }
+\DoxyCodeLine{542     \textcolor{keywordtype}{void} updateXml();}
+\DoxyCodeLine{543 }
+\DoxyCodeLine{544     \textcolor{keywordtype}{void} updateCurrentSetup();}
+\DoxyCodeLine{545     \textcolor{keywordtype}{void} createDeviceTypesIfNeeded();}
+\DoxyCodeLine{546     \textcolor{keywordtype}{void} scanDevicesIfNeeded();}
+\DoxyCodeLine{547     \textcolor{keywordtype}{void} deleteCurrentDevice();}
+\DoxyCodeLine{548     \textcolor{keywordtype}{double} chooseBestSampleRate (\textcolor{keywordtype}{double} preferred) \textcolor{keyword}{const};}
+\DoxyCodeLine{549     \textcolor{keywordtype}{int} chooseBestBufferSize (\textcolor{keywordtype}{int} preferred) \textcolor{keyword}{const};}
+\DoxyCodeLine{550     \textcolor{keywordtype}{void} insertDefaultDeviceNames (AudioDeviceSetup\&) \textcolor{keyword}{const};}
+\DoxyCodeLine{551     \mbox{\hyperlink{class_string}{String}} initialiseDefault (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& preferredDefaultDeviceName, \textcolor{keyword}{const} AudioDeviceSetup*);}
+\DoxyCodeLine{552     \mbox{\hyperlink{class_string}{String}} initialiseFromXML (\textcolor{keyword}{const} \mbox{\hyperlink{class_xml_element}{XmlElement}}\&, \textcolor{keywordtype}{bool} selectDefaultDeviceOnFailure,}
+\DoxyCodeLine{553                               \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& preferredDefaultDeviceName, \textcolor{keyword}{const} AudioDeviceSetup*);}
+\DoxyCodeLine{554 }
+\DoxyCodeLine{555     \mbox{\hyperlink{class_audio_i_o_device_type}{AudioIODeviceType}}* findType (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& inputName, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& outputName);}
+\DoxyCodeLine{556     \mbox{\hyperlink{class_audio_i_o_device_type}{AudioIODeviceType}}* findType (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& typeName);}
+\DoxyCodeLine{557     \textcolor{keywordtype}{void} pickCurrentDeviceTypeWithDevices();}
+\DoxyCodeLine{558 }
+\DoxyCodeLine{559     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_audio_device_manager}{AudioDeviceManager}})}
+\DoxyCodeLine{560 \};}
+\DoxyCodeLine{561 }
+\DoxyCodeLine{562  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{563 }
+
+\end{DoxyCode}

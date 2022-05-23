@@ -1,0 +1,221 @@
+\hypertarget{juce___selected_item_set_8h_source}{}\doxysection{juce\+\_\+\+Selected\+Item\+Set.\+h}
+\label{juce___selected_item_set_8h_source}\index{build/juce\_gui\_basics/mouse/juce\_SelectedItemSet.h@{build/juce\_gui\_basics/mouse/juce\_SelectedItemSet.h}}
+\mbox{\hyperlink{juce___selected_item_set_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{45 \textcolor{comment}{}\textcolor{keyword}{template} <\textcolor{keyword}{class} SelectableItemType>}
+\DoxyCodeLine{46 \textcolor{keyword}{class }\mbox{\hyperlink{class_selected_item_set}{SelectedItemSet}}   : \textcolor{keyword}{public} \mbox{\hyperlink{class_change_broadcaster}{ChangeBroadcaster}}}
+\DoxyCodeLine{47 \{}
+\DoxyCodeLine{48 \textcolor{keyword}{public}:}
+\DoxyCodeLine{49     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{50     \textcolor{keyword}{using} \mbox{\hyperlink{class_selected_item_set_a1dad4b2a3e66ffff6fcf3c69af454e7f}{ItemType}} = SelectableItemType;}
+\DoxyCodeLine{51     \textcolor{keyword}{using} \mbox{\hyperlink{class_array}{ItemArray}} = \mbox{\hyperlink{class_array}{Array<SelectableItemType>}};}
+\DoxyCodeLine{52     \textcolor{keyword}{using} \mbox{\hyperlink{class_selected_item_set_aaef16f09fe4a27976cc212869b6fd32f}{ParameterType}} = \textcolor{keyword}{typename} \mbox{\hyperlink{struct_type_helpers_1_1_parameter_type_ad57e75d9eb3f3f675b9156c3850636a6}{TypeHelpers::ParameterType<SelectableItemType>::type}};}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{56 \textcolor{comment}{}    \mbox{\hyperlink{class_selected_item_set_a378b549f17353e74ed60ee50515ca512}{SelectedItemSet}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{59     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_selected_item_set_aff33ba55b517ab7f38e51714d104bcb1}{SelectedItemSet}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_array}{ItemArray}}\& items)}
+\DoxyCodeLine{60         : selectedItems (items)}
+\DoxyCodeLine{61     \{}
+\DoxyCodeLine{62     \}}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{65     \mbox{\hyperlink{class_selected_item_set_a2f5056970053b0153c5661629e254ab5}{SelectedItemSet}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_selected_item_set}{SelectedItemSet}}\& other)}
+\DoxyCodeLine{66         : \mbox{\hyperlink{class_change_broadcaster}{ChangeBroadcaster}}(), selectedItems (other.selectedItems)}
+\DoxyCodeLine{67     \{}
+\DoxyCodeLine{68     \}}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{71     \mbox{\hyperlink{class_selected_item_set}{SelectedItemSet}}\& \mbox{\hyperlink{class_selected_item_set_ae5ea81eea29ba06f2bcc27a9180114e9}{operator= }}(\textcolor{keyword}{const} \mbox{\hyperlink{class_selected_item_set}{SelectedItemSet}}\& other)}
+\DoxyCodeLine{72     \{}
+\DoxyCodeLine{73         \textcolor{keywordflow}{if} (selectedItems != other.selectedItems)}
+\DoxyCodeLine{74         \{}
+\DoxyCodeLine{75             \mbox{\hyperlink{class_selected_item_set_ab9120f4e10142aadbeecb2347b0eb62f}{changed}}();}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = selectedItems.\mbox{\hyperlink{class_array_ae79ec3b32d0c9a80dfff8ffbc41f8523}{size}}(); -\/-\/i >= 0;)}
+\DoxyCodeLine{78                 \textcolor{keywordflow}{if} (! other.\mbox{\hyperlink{class_selected_item_set_a431e7bbc3d316e1822596563b49adc73}{isSelected}} (selectedItems.\mbox{\hyperlink{class_array_a56b441ad9d0ea576318120cd0088d2f2}{getReference}} (i)))}
+\DoxyCodeLine{79                     \mbox{\hyperlink{class_selected_item_set_aba708cd0efbae505c9be92c5179c2007}{itemDeselected}} (selectedItems.\mbox{\hyperlink{class_array_a1db30bedb108c88d145cf9e13457c65a}{removeAndReturn}} (i));}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}\& i : other.selectedItems)}
+\DoxyCodeLine{82             \{}
+\DoxyCodeLine{83                 \textcolor{keywordflow}{if} (! \mbox{\hyperlink{class_selected_item_set_a431e7bbc3d316e1822596563b49adc73}{isSelected}} (i))}
+\DoxyCodeLine{84                 \{}
+\DoxyCodeLine{85                     selectedItems.\mbox{\hyperlink{class_array_a52da22e285e44171b6d6fa785a7d536a}{add}} (i);}
+\DoxyCodeLine{86                     \mbox{\hyperlink{class_selected_item_set_a251fa7c411d226f354f9aa8153d20d4d}{itemSelected}} (i);}
+\DoxyCodeLine{87                 \}}
+\DoxyCodeLine{88             \}}
+\DoxyCodeLine{89         \}}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{92     \}}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{94     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{102 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_selected_item_set_a5c989a8cd1483b655b948aee86fb768c}{selectOnly}} (\mbox{\hyperlink{class_selected_item_set_aaef16f09fe4a27976cc212869b6fd32f}{ParameterType}} item)}
+\DoxyCodeLine{103     \{}
+\DoxyCodeLine{104         \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_selected_item_set_a431e7bbc3d316e1822596563b49adc73}{isSelected}} (item))}
+\DoxyCodeLine{105         \{}
+\DoxyCodeLine{106             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = selectedItems.\mbox{\hyperlink{class_array_ae79ec3b32d0c9a80dfff8ffbc41f8523}{size}}(); -\/-\/i >= 0;)}
+\DoxyCodeLine{107             \{}
+\DoxyCodeLine{108                 \textcolor{keywordflow}{if} (selectedItems.\mbox{\hyperlink{class_array_a0e36fd4f8eda27d10a7044a8fa8a2ae4}{getUnchecked}}(i) != item)}
+\DoxyCodeLine{109                 \{}
+\DoxyCodeLine{110                     \mbox{\hyperlink{class_selected_item_set_a657dd4d8aa7604f795c0d0d3962b410c}{deselect}} (selectedItems.\mbox{\hyperlink{class_array_a0e36fd4f8eda27d10a7044a8fa8a2ae4}{getUnchecked}}(i));}
+\DoxyCodeLine{111                     i = \mbox{\hyperlink{group__juce__core-maths_gae8394cdf11279b266f4aa741758c1669}{jmin}} (i, selectedItems.\mbox{\hyperlink{class_array_ae79ec3b32d0c9a80dfff8ffbc41f8523}{size}}());}
+\DoxyCodeLine{112                 \}}
+\DoxyCodeLine{113             \}}
+\DoxyCodeLine{114         \}}
+\DoxyCodeLine{115         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{116         \{}
+\DoxyCodeLine{117             \mbox{\hyperlink{class_selected_item_set_ab9120f4e10142aadbeecb2347b0eb62f}{changed}}();}
+\DoxyCodeLine{118             \mbox{\hyperlink{class_selected_item_set_a2d8c179287d5afa7e4ef0318ce779813}{deselectAll}}();}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120             selectedItems.\mbox{\hyperlink{class_array_a52da22e285e44171b6d6fa785a7d536a}{add}} (item);}
+\DoxyCodeLine{121             \mbox{\hyperlink{class_selected_item_set_a251fa7c411d226f354f9aa8153d20d4d}{itemSelected}} (item);}
+\DoxyCodeLine{122         \}}
+\DoxyCodeLine{123     \}}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{129     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_selected_item_set_a8ec6de21f75ccfa083cd702ab027f778}{addToSelection}} (\mbox{\hyperlink{class_selected_item_set_aaef16f09fe4a27976cc212869b6fd32f}{ParameterType}} item)}
+\DoxyCodeLine{130     \{}
+\DoxyCodeLine{131         \textcolor{keywordflow}{if} (! \mbox{\hyperlink{class_selected_item_set_a431e7bbc3d316e1822596563b49adc73}{isSelected}} (item))}
+\DoxyCodeLine{132         \{}
+\DoxyCodeLine{133             \mbox{\hyperlink{class_selected_item_set_ab9120f4e10142aadbeecb2347b0eb62f}{changed}}();}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135             selectedItems.\mbox{\hyperlink{class_array_a52da22e285e44171b6d6fa785a7d536a}{add}} (item);}
+\DoxyCodeLine{136             \mbox{\hyperlink{class_selected_item_set_a251fa7c411d226f354f9aa8153d20d4d}{itemSelected}} (item);}
+\DoxyCodeLine{137         \}}
+\DoxyCodeLine{138     \}}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{161     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_selected_item_set_a1fe56a0bfb26c133d824cecf49961537}{addToSelectionBasedOnModifiers}} (\mbox{\hyperlink{class_selected_item_set_aaef16f09fe4a27976cc212869b6fd32f}{ParameterType}} item,}
+\DoxyCodeLine{162                                          \mbox{\hyperlink{class_modifier_keys}{ModifierKeys}} modifiers)}
+\DoxyCodeLine{163     \{}
+\DoxyCodeLine{164         \textcolor{keywordflow}{if} (modifiers.\mbox{\hyperlink{class_modifier_keys_afd9f4558046eccad2c3a3366c6bcf6b0}{isShiftDown}}())}
+\DoxyCodeLine{165         \{}
+\DoxyCodeLine{166             \mbox{\hyperlink{class_selected_item_set_a8ec6de21f75ccfa083cd702ab027f778}{addToSelection}} (item);}
+\DoxyCodeLine{167         \}}
+\DoxyCodeLine{168         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (modifiers.\mbox{\hyperlink{class_modifier_keys_a88f9e02beb40f6461d6ed8b655b7ebb3}{isCommandDown}}())}
+\DoxyCodeLine{169         \{}
+\DoxyCodeLine{170             \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_selected_item_set_a431e7bbc3d316e1822596563b49adc73}{isSelected}} (item))}
+\DoxyCodeLine{171                 \mbox{\hyperlink{class_selected_item_set_a657dd4d8aa7604f795c0d0d3962b410c}{deselect}} (item);}
+\DoxyCodeLine{172             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{173                 \mbox{\hyperlink{class_selected_item_set_a8ec6de21f75ccfa083cd702ab027f778}{addToSelection}} (item);}
+\DoxyCodeLine{174         \}}
+\DoxyCodeLine{175         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{176         \{}
+\DoxyCodeLine{177             \mbox{\hyperlink{class_selected_item_set_a5c989a8cd1483b655b948aee86fb768c}{selectOnly}} (item);}
+\DoxyCodeLine{178         \}}
+\DoxyCodeLine{179     \}}
+\DoxyCodeLine{180 }
+\DoxyCodeLine{198     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_selected_item_set_ab37144a1dbc919d2fef3b3e496217b03}{addToSelectionOnMouseDown}} (\mbox{\hyperlink{class_selected_item_set_aaef16f09fe4a27976cc212869b6fd32f}{ParameterType}} item,}
+\DoxyCodeLine{199                                     \mbox{\hyperlink{class_modifier_keys}{ModifierKeys}} modifiers)}
+\DoxyCodeLine{200     \{}
+\DoxyCodeLine{201         \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_selected_item_set_a431e7bbc3d316e1822596563b49adc73}{isSelected}} (item))}
+\DoxyCodeLine{202             \textcolor{keywordflow}{return} ! modifiers.\mbox{\hyperlink{class_modifier_keys_aedd7b0f26fdc0a2355947aadb7ecc650}{isPopupMenu}}();}
+\DoxyCodeLine{203 }
+\DoxyCodeLine{204         \mbox{\hyperlink{class_selected_item_set_a1fe56a0bfb26c133d824cecf49961537}{addToSelectionBasedOnModifiers}} (item, modifiers);}
+\DoxyCodeLine{205         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{206     \}}
+\DoxyCodeLine{207 }
+\DoxyCodeLine{222     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_selected_item_set_a1347c76b84176da73807d6d9883e2cbf}{addToSelectionOnMouseUp}} (\mbox{\hyperlink{class_selected_item_set_aaef16f09fe4a27976cc212869b6fd32f}{ParameterType}} item,}
+\DoxyCodeLine{223                                   \mbox{\hyperlink{class_modifier_keys}{ModifierKeys}} modifiers,}
+\DoxyCodeLine{224                                   \textcolor{keyword}{const} \textcolor{keywordtype}{bool} wasItemDragged,}
+\DoxyCodeLine{225                                   \textcolor{keyword}{const} \textcolor{keywordtype}{bool} resultOfMouseDownSelectMethod)}
+\DoxyCodeLine{226     \{}
+\DoxyCodeLine{227         \textcolor{keywordflow}{if} (resultOfMouseDownSelectMethod \&\& ! wasItemDragged)}
+\DoxyCodeLine{228             \mbox{\hyperlink{class_selected_item_set_a1fe56a0bfb26c133d824cecf49961537}{addToSelectionBasedOnModifiers}} (item, modifiers);}
+\DoxyCodeLine{229     \}}
+\DoxyCodeLine{230 }
+\DoxyCodeLine{232     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_selected_item_set_a657dd4d8aa7604f795c0d0d3962b410c}{deselect}} (\mbox{\hyperlink{class_selected_item_set_aaef16f09fe4a27976cc212869b6fd32f}{ParameterType}} item)}
+\DoxyCodeLine{233     \{}
+\DoxyCodeLine{234         \textcolor{keyword}{const} \textcolor{keywordtype}{int} i = selectedItems.\mbox{\hyperlink{class_array_a77dd097ed2af62ac2663d90fdb2d71d6}{indexOf}} (item);}
+\DoxyCodeLine{235 }
+\DoxyCodeLine{236         \textcolor{keywordflow}{if} (i >= 0)}
+\DoxyCodeLine{237         \{}
+\DoxyCodeLine{238             \mbox{\hyperlink{class_selected_item_set_ab9120f4e10142aadbeecb2347b0eb62f}{changed}}();}
+\DoxyCodeLine{239             \mbox{\hyperlink{class_selected_item_set_aba708cd0efbae505c9be92c5179c2007}{itemDeselected}} (selectedItems.\mbox{\hyperlink{class_array_a1db30bedb108c88d145cf9e13457c65a}{removeAndReturn}} (i));}
+\DoxyCodeLine{240         \}}
+\DoxyCodeLine{241     \}}
+\DoxyCodeLine{242 }
+\DoxyCodeLine{244     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_selected_item_set_a2d8c179287d5afa7e4ef0318ce779813}{deselectAll}}()}
+\DoxyCodeLine{245     \{}
+\DoxyCodeLine{246         \textcolor{keywordflow}{if} (selectedItems.\mbox{\hyperlink{class_array_ae79ec3b32d0c9a80dfff8ffbc41f8523}{size}}() > 0)}
+\DoxyCodeLine{247         \{}
+\DoxyCodeLine{248             \mbox{\hyperlink{class_selected_item_set_ab9120f4e10142aadbeecb2347b0eb62f}{changed}}();}
+\DoxyCodeLine{249 }
+\DoxyCodeLine{250             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = selectedItems.\mbox{\hyperlink{class_array_ae79ec3b32d0c9a80dfff8ffbc41f8523}{size}}(); -\/-\/i >= 0;)}
+\DoxyCodeLine{251             \{}
+\DoxyCodeLine{252                 \mbox{\hyperlink{class_selected_item_set_aba708cd0efbae505c9be92c5179c2007}{itemDeselected}} (selectedItems.\mbox{\hyperlink{class_array_a1db30bedb108c88d145cf9e13457c65a}{removeAndReturn}} (i));}
+\DoxyCodeLine{253                 i = \mbox{\hyperlink{group__juce__core-maths_gae8394cdf11279b266f4aa741758c1669}{jmin}} (i, selectedItems.\mbox{\hyperlink{class_array_ae79ec3b32d0c9a80dfff8ffbc41f8523}{size}}());}
+\DoxyCodeLine{254             \}}
+\DoxyCodeLine{255         \}}
+\DoxyCodeLine{256     \}}
+\DoxyCodeLine{257 }
+\DoxyCodeLine{258     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{262 \textcolor{comment}{}    \textcolor{keywordtype}{int} \mbox{\hyperlink{class_selected_item_set_adaf7fb93ca30bc24a130c7601cb83c49}{getNumSelected}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                         \{ \textcolor{keywordflow}{return} selectedItems.\mbox{\hyperlink{class_array_ae79ec3b32d0c9a80dfff8ffbc41f8523}{size}}(); \}}
+\DoxyCodeLine{263 }
+\DoxyCodeLine{268     SelectableItemType \mbox{\hyperlink{class_selected_item_set_aad4be0f39cca11a94cce733a2f228849}{getSelectedItem}} (\textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}})\textcolor{keyword}{ const  }\{ \textcolor{keywordflow}{return} selectedItems [\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}]; \}}
+\DoxyCodeLine{269 }
+\DoxyCodeLine{271     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_selected_item_set_a431e7bbc3d316e1822596563b49adc73}{isSelected}} (\mbox{\hyperlink{class_selected_item_set_aaef16f09fe4a27976cc212869b6fd32f}{ParameterType}} item) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}         \{ \textcolor{keywordflow}{return} selectedItems.\mbox{\hyperlink{class_array_a947c542225413c51e06b46cd300bcd9a}{contains}} (item); \}}
+\DoxyCodeLine{272 }
+\DoxyCodeLine{274     \textcolor{keyword}{const} \mbox{\hyperlink{class_array}{ItemArray}}\& \mbox{\hyperlink{class_selected_item_set_aa8700cd8405bd4b70507349f96784a3f}{getItemArray}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept              \{ \textcolor{keywordflow}{return} selectedItems; \}}
+\DoxyCodeLine{275 }
+\DoxyCodeLine{277     SelectableItemType* \mbox{\hyperlink{class_selected_item_set_a2e2176c473b709ae8b25711bfb290721}{begin}}() noexcept                        \{ \textcolor{keywordflow}{return} selectedItems.\mbox{\hyperlink{class_array_a8183087614c341bce3903a2f425d2557}{begin}}(); \}}
+\DoxyCodeLine{278 }
+\DoxyCodeLine{279     \textcolor{keyword}{const} SelectableItemType* \mbox{\hyperlink{class_selected_item_set_a76d6e9039c588762426ffd945162a2dd}{begin}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept            \{ \textcolor{keywordflow}{return} selectedItems.\mbox{\hyperlink{class_array_a8183087614c341bce3903a2f425d2557}{begin}}(); \}}
+\DoxyCodeLine{280 }
+\DoxyCodeLine{282     SelectableItemType* \mbox{\hyperlink{class_selected_item_set_ad3f6c28c32a8c0577865f08082b99f9e}{end}}() noexcept                          \{ \textcolor{keywordflow}{return} selectedItems.\mbox{\hyperlink{class_array_a27e3dcdc4f936e0cc3d7290dbfd25a5c}{end}}(); \}}
+\DoxyCodeLine{283 }
+\DoxyCodeLine{285     \textcolor{keyword}{const} SelectableItemType* \mbox{\hyperlink{class_selected_item_set_a8c093b5524e014fcef8e7c9cff1cc223}{end}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept              \{ \textcolor{keywordflow}{return} selectedItems.\mbox{\hyperlink{class_array_a27e3dcdc4f936e0cc3d7290dbfd25a5c}{end}}(); \}}
+\DoxyCodeLine{286 }
+\DoxyCodeLine{287     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{293 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_selected_item_set_a251fa7c411d226f354f9aa8153d20d4d}{itemSelected}} (SelectableItemType)              \{\}}
+\DoxyCodeLine{294 }
+\DoxyCodeLine{300     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_selected_item_set_aba708cd0efbae505c9be92c5179c2007}{itemDeselected}} (SelectableItemType)            \{\}}
+\DoxyCodeLine{301 }
+\DoxyCodeLine{305     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_selected_item_set_ab9120f4e10142aadbeecb2347b0eb62f}{changed}}()}
+\DoxyCodeLine{306     \{}
+\DoxyCodeLine{307         \mbox{\hyperlink{class_change_broadcaster_a10f01d1c0a7fde85355321985a682cbd}{sendChangeMessage}}();}
+\DoxyCodeLine{308     \}}
+\DoxyCodeLine{309 }
+\DoxyCodeLine{313     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_selected_item_set_a76ded0d9f2a1d292879462c867c36228}{changed}} (\textcolor{keyword}{const} \textcolor{keywordtype}{bool} synchronous)}
+\DoxyCodeLine{314     \{}
+\DoxyCodeLine{315         \textcolor{keywordflow}{if} (synchronous)}
+\DoxyCodeLine{316             \mbox{\hyperlink{class_change_broadcaster_a5d16cd01b9af4bacb1716530af17f77b}{sendSynchronousChangeMessage}}();}
+\DoxyCodeLine{317         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{318             \mbox{\hyperlink{class_change_broadcaster_a10f01d1c0a7fde85355321985a682cbd}{sendChangeMessage}}();}
+\DoxyCodeLine{319     \}}
+\DoxyCodeLine{320 }
+\DoxyCodeLine{321 \textcolor{keyword}{private}:}
+\DoxyCodeLine{322     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{323     \mbox{\hyperlink{class_selected_item_set_a67f40ad01b47d146529311d005f36b18}{ItemArray}} selectedItems;}
+\DoxyCodeLine{324 }
+\DoxyCodeLine{325     \mbox{\hyperlink{group__juce__core-memory_gab3639a79598b35f2116f4572af0d93f1}{JUCE\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_selected_item_set}{SelectedItemSet<SelectableItemType>}})}
+\DoxyCodeLine{326 \};}
+\DoxyCodeLine{327 }
+\DoxyCodeLine{328  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{329 }
+
+\end{DoxyCode}

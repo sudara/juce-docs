@@ -1,0 +1,315 @@
+\hypertarget{juce___audio_processor_value_tree_state_8h_source}{}\doxysection{juce\+\_\+\+Audio\+Processor\+Value\+Tree\+State.\+h}
+\label{juce___audio_processor_value_tree_state_8h_source}\index{build/juce\_audio\_processors/utilities/juce\_AudioProcessorValueTreeState.h@{build/juce\_audio\_processors/utilities/juce\_AudioProcessorValueTreeState.h}}
+\mbox{\hyperlink{juce___audio_processor_value_tree_state_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{55 \textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \mbox{\hyperlink{class_audio_processor_value_tree_state}{AudioProcessorValueTreeState}}   : \textcolor{keyword}{private} \mbox{\hyperlink{class_timer}{Timer}},}
+\DoxyCodeLine{56                                                 \textcolor{keyword}{private} \mbox{\hyperlink{class_value_tree_1_1_listener}{ValueTree::Listener}}}
+\DoxyCodeLine{57 \{}
+\DoxyCodeLine{58 \textcolor{keyword}{public}:}
+\DoxyCodeLine{59     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{66 \textcolor{comment}{}    \textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \mbox{\hyperlink{class_audio_processor_value_tree_state_1_1_parameter_layout}{ParameterLayout}} final}
+\DoxyCodeLine{67     \{}
+\DoxyCodeLine{68     \textcolor{keyword}{private}:}
+\DoxyCodeLine{69         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{70         \textcolor{keyword}{template} <\textcolor{keyword}{typename} It>}
+\DoxyCodeLine{71         \textcolor{keyword}{using} ValidIfIterator = \textcolor{keyword}{decltype} (std::next (std::declval<It>()));}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73     \textcolor{keyword}{public}:}
+\DoxyCodeLine{74         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{75         \textcolor{keyword}{template} <\textcolor{keyword}{typename}... Items>}
+\DoxyCodeLine{76         \mbox{\hyperlink{class_audio_processor_value_tree_state_1_1_parameter_layout_ac9b11520178f81332ed548321c92d68b}{ParameterLayout}} (std::unique\_ptr<Items>... items) \{ add (\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (items)...); \}}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78         \textcolor{keyword}{template} <\textcolor{keyword}{typename} It, \textcolor{keyword}{typename} = Val\textcolor{keywordtype}{id}IfIterator<It>>}
+\DoxyCodeLine{79         \mbox{\hyperlink{class_audio_processor_value_tree_state_1_1_parameter_layout_af90ef65dd76d816ca989a3f1dbc0476c}{ParameterLayout}} (It \mbox{\hyperlink{group__juce__core-files_ga3b8789907a46172ef0bdc8f656d6e355}{begin}}, It \mbox{\hyperlink{group__juce__core-files_ga4a3194f4f741f9bd653f28733358f62c}{end}}) \{ add (\mbox{\hyperlink{group__juce__core-files_ga3b8789907a46172ef0bdc8f656d6e355}{begin}}, \mbox{\hyperlink{group__juce__core-files_ga4a3194f4f741f9bd653f28733358f62c}{end}}); \}}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81         \textcolor{keyword}{template} <\textcolor{keyword}{typename}... Items>}
+\DoxyCodeLine{82         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_processor_value_tree_state_1_1_parameter_layout_a02a9c6a1e8697cd8120e429195e7456a}{add}} (std::unique\_ptr<Items>... items)}
+\DoxyCodeLine{83         \{}
+\DoxyCodeLine{84             parameters.reserve (parameters.size() + \textcolor{keyword}{sizeof}... (items));}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86             \textcolor{comment}{// We can replace this with some nicer code once generic lambdas become available. A}}
+\DoxyCodeLine{87             \textcolor{comment}{// sequential context like an array initialiser is required to ensure we get the correct}}
+\DoxyCodeLine{88             \textcolor{comment}{// order from the parameter pack.}}
+\DoxyCodeLine{89             \textcolor{keywordtype}{int} unused[] \{ (parameters.emplace\_back (MakeContents() (\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (items))), 0)... \};}
+\DoxyCodeLine{90             \mbox{\hyperlink{group__juce__core-maths_ga5158e6e8faa5553204f90af596fafaf5}{ignoreUnused}} (unused);}
+\DoxyCodeLine{91         \}}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93         \textcolor{keyword}{template} <\textcolor{keyword}{typename} It, \textcolor{keyword}{typename} = Val\textcolor{keywordtype}{id}IfIterator<It>>}
+\DoxyCodeLine{94         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_processor_value_tree_state_1_1_parameter_layout_aaea608542ba21000f850a7f33ae6d04e}{add}} (It \mbox{\hyperlink{group__juce__core-files_ga3b8789907a46172ef0bdc8f656d6e355}{begin}}, It \mbox{\hyperlink{group__juce__core-files_ga4a3194f4f741f9bd653f28733358f62c}{end}})}
+\DoxyCodeLine{95         \{}
+\DoxyCodeLine{96             parameters.reserve (parameters.size() + std::size\_t (\mbox{\hyperlink{namespacegl_a183930cfb90912db497a30515e33eb70}{std::distance}} (\mbox{\hyperlink{group__juce__core-files_ga3b8789907a46172ef0bdc8f656d6e355}{begin}}, \mbox{\hyperlink{group__juce__core-files_ga4a3194f4f741f9bd653f28733358f62c}{end}})));}
+\DoxyCodeLine{97             \mbox{\hyperlink{namespacegl_afb5567981d8120d47c7dccb93e2c4db2}{std::transform}} (std::make\_move\_iterator (\mbox{\hyperlink{group__juce__core-files_ga3b8789907a46172ef0bdc8f656d6e355}{begin}}),}
+\DoxyCodeLine{98                             std::make\_move\_iterator (\mbox{\hyperlink{group__juce__core-files_ga4a3194f4f741f9bd653f28733358f62c}{end}}),}
+\DoxyCodeLine{99                             std::back\_inserter (parameters),}
+\DoxyCodeLine{100                             MakeContents());}
+\DoxyCodeLine{101         \}}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103         \mbox{\hyperlink{class_audio_processor_value_tree_state_1_1_parameter_layout_a49a27bf0d8fedf9c9f7b81e7fbd5a6ee}{ParameterLayout}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_audio_processor_value_tree_state_1_1_parameter_layout}{ParameterLayout}}\& other) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{104         \mbox{\hyperlink{class_audio_processor_value_tree_state_1_1_parameter_layout_a3f9d58d385af385786f3b69085c42442}{ParameterLayout}} (\mbox{\hyperlink{class_audio_processor_value_tree_state_1_1_parameter_layout}{ParameterLayout}}\&\& other) \textcolor{keyword}{noexcept} \{ swap (other); \}}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{106         \mbox{\hyperlink{class_audio_processor_value_tree_state_1_1_parameter_layout}{ParameterLayout}}\& \mbox{\hyperlink{class_value_tree_a5bd845c0536dacdd292f171f1c158c57}{operator= }}(\textcolor{keyword}{const} \mbox{\hyperlink{class_audio_processor_value_tree_state_1_1_parameter_layout}{ParameterLayout}}\& other) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{107         \mbox{\hyperlink{class_audio_processor_value_tree_state_1_1_parameter_layout}{ParameterLayout}}\& \mbox{\hyperlink{class_value_tree_a5bd845c0536dacdd292f171f1c158c57}{operator= }}(\mbox{\hyperlink{class_audio_processor_value_tree_state_1_1_parameter_layout}{ParameterLayout}}\&\& other) \textcolor{keyword}{noexcept} \{ swap (other); \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_processor_value_tree_state_1_1_parameter_layout_a787cf51071ed675f2bdb528b22c1bf8b}{swap}} (\mbox{\hyperlink{class_audio_processor_value_tree_state_1_1_parameter_layout}{ParameterLayout}}\& other) \textcolor{keyword}{noexcept} \{ std::swap (other.parameters, parameters); \}}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111     \textcolor{keyword}{private}:}
+\DoxyCodeLine{112         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{113         \textcolor{keyword}{struct }Visitor}
+\DoxyCodeLine{114         \{}
+\DoxyCodeLine{115             \textcolor{keyword}{virtual} \string~Visitor() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117             \textcolor{comment}{// If you have a compiler error telling you that there is no matching}}
+\DoxyCodeLine{118             \textcolor{comment}{// member function to call for 'visit', then you are probably attempting}}
+\DoxyCodeLine{119             \textcolor{comment}{// to add a parameter that is not derived from RangedAudioParameter to}}
+\DoxyCodeLine{120             \textcolor{comment}{// the AudioProcessorValueTreeState.}}
+\DoxyCodeLine{121             \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} visit (std::unique\_ptr<RangedAudioParameter>) \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{122             \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} visit (std::unique\_ptr<AudioProcessorParameterGroup>) \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{123         \};}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{125         \textcolor{keyword}{struct }ParameterStorageBase}
+\DoxyCodeLine{126         \{}
+\DoxyCodeLine{127             \textcolor{keyword}{virtual} \string~ParameterStorageBase() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{128             \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} accept (\textcolor{keyword}{const} Visitor\& visitor) = 0;}
+\DoxyCodeLine{129         \};}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{131         \textcolor{keyword}{template} <\textcolor{keyword}{typename} Contents>}
+\DoxyCodeLine{132         \textcolor{keyword}{struct }ParameterStorage : ParameterStorageBase}
+\DoxyCodeLine{133         \{}
+\DoxyCodeLine{134             \textcolor{keyword}{explicit} ParameterStorage (std::unique\_ptr<Contents> \mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}}) : contents (\mbox{\hyperlink{namespacestd}{std}}::\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{move}} (\mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}})) \{\}}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{136             \textcolor{keywordtype}{void} accept (\textcolor{keyword}{const} Visitor\& visitor)\textcolor{keyword}{ override   }\{ visitor.visit (\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (contents)); \}}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{138             std::unique\_ptr<Contents> contents;}
+\DoxyCodeLine{139         \};}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{141         \textcolor{keyword}{struct }MakeContents final}
+\DoxyCodeLine{142         \{}
+\DoxyCodeLine{143             \textcolor{keyword}{template} <\textcolor{keyword}{typename} Item>}
+\DoxyCodeLine{144             std::unique\_ptr<ParameterStorageBase> operator() (std::unique\_ptr<Item> item)\textcolor{keyword}{ const}}
+\DoxyCodeLine{145 \textcolor{keyword}{            }\{}
+\DoxyCodeLine{146                 \textcolor{keywordflow}{return} std::unique\_ptr<ParameterStorageBase> (\textcolor{keyword}{new} ParameterStorage<Item> (\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (item)));}
+\DoxyCodeLine{147             \}}
+\DoxyCodeLine{148         \};}
+\DoxyCodeLine{149 }
+\DoxyCodeLine{150         \textcolor{keywordtype}{void} add() \{\}}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{152         \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{class_audio_processor_value_tree_state}{AudioProcessorValueTreeState}};}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154         std::vector<std::unique\_ptr<ParameterStorageBase>> parameters;}
+\DoxyCodeLine{155     \};}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{157     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{205 \textcolor{comment}{}    \mbox{\hyperlink{class_audio_processor_value_tree_state_acca3c6aca19e89d2781f0d1314d639e8}{AudioProcessorValueTreeState}} (\mbox{\hyperlink{class_audio_processor}{AudioProcessor}}\& processorToConnectTo,}
+\DoxyCodeLine{206                                   \mbox{\hyperlink{class_undo_manager}{UndoManager}}* undoManagerToUse,}
+\DoxyCodeLine{207                                   \textcolor{keyword}{const} \mbox{\hyperlink{class_identifier}{Identifier}}\& valueTreeType,}
+\DoxyCodeLine{208                                   \mbox{\hyperlink{class_audio_processor_value_tree_state_1_1_parameter_layout}{ParameterLayout}} parameterLayout);}
+\DoxyCodeLine{209 }
+\DoxyCodeLine{220     \mbox{\hyperlink{class_audio_processor_value_tree_state_a9bbdefeccca98cec191c7fe4811a9610}{AudioProcessorValueTreeState}} (\mbox{\hyperlink{class_audio_processor}{AudioProcessor}}\& processorToConnectTo, \mbox{\hyperlink{class_undo_manager}{UndoManager}}* undoManagerToUse);}
+\DoxyCodeLine{221 }
+\DoxyCodeLine{223     \mbox{\hyperlink{class_audio_processor_value_tree_state_afcfe465d88f862036a06d4811dd51d6c}{\string~AudioProcessorValueTreeState}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{224 }
+\DoxyCodeLine{225     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{226 \textcolor{preprocessor}{   \#ifndef DOXYGEN}}
+\DoxyCodeLine{259     [[deprecated (\textcolor{stringliteral}{"{}This function is deprecated and will be removed in a future version of JUCE! "{}}}
+\DoxyCodeLine{260                  \textcolor{stringliteral}{"{}See the method docs for a code example of the replacement methods."{}})]]}
+\DoxyCodeLine{261     \mbox{\hyperlink{class_ranged_audio_parameter}{RangedAudioParameter}}* \mbox{\hyperlink{class_audio_processor_value_tree_state_af43f4eabc224eddfe8a7fb39e23681f7}{createAndAddParameter}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& parameterID,}
+\DoxyCodeLine{262                                                  \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& parameterName,}
+\DoxyCodeLine{263                                                  \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& labelText,}
+\DoxyCodeLine{264                                                  \mbox{\hyperlink{class_normalisable_range}{NormalisableRange<float>}} valueRange,}
+\DoxyCodeLine{265                                                  \textcolor{keywordtype}{float} defaultValue,}
+\DoxyCodeLine{266                                                  \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\mbox{\hyperlink{class_string}{String}} (\textcolor{keywordtype}{float})> valueToTextFunction,}
+\DoxyCodeLine{267                                                  \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\textcolor{keywordtype}{float} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\&)> textToValueFunction,}
+\DoxyCodeLine{268                                                  \textcolor{keywordtype}{bool} isMetaParameter = \textcolor{keyword}{false},}
+\DoxyCodeLine{269                                                  \textcolor{keywordtype}{bool} isAutomatableParameter = \textcolor{keyword}{true},}
+\DoxyCodeLine{270                                                  \textcolor{keywordtype}{bool} isDiscrete = \textcolor{keyword}{false},}
+\DoxyCodeLine{271                                                  \mbox{\hyperlink{class_audio_processor_parameter_aef73dff71cb1abfdadd5b6f3649d7db2}{AudioProcessorParameter::Category}} parameterCategory = \mbox{\hyperlink{class_audio_processor_parameter_aef73dff71cb1abfdadd5b6f3649d7db2ac86017a29081bfb3405d7d5a4ed2c370}{AudioProcessorParameter::genericParameter}},}
+\DoxyCodeLine{272                                                  \textcolor{keywordtype}{bool} isBoolean = \textcolor{keyword}{false});}
+\DoxyCodeLine{273 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{274 }
+\DoxyCodeLine{278     \mbox{\hyperlink{class_ranged_audio_parameter}{RangedAudioParameter}}* \mbox{\hyperlink{class_audio_processor_value_tree_state_abd4140d542f9d3366e23394effdb5b2f}{createAndAddParameter}} (std::unique\_ptr<RangedAudioParameter> parameter);}
+\DoxyCodeLine{279 }
+\DoxyCodeLine{280     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{282 \textcolor{comment}{}    \mbox{\hyperlink{class_ranged_audio_parameter}{RangedAudioParameter}}* \mbox{\hyperlink{class_audio_processor_value_tree_state_a1f4daee2af4de07db54d53ada539b7f9}{getParameter}} (\mbox{\hyperlink{class_string_ref}{StringRef}} parameterID) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{283 }
+\DoxyCodeLine{290     std::atomic<float>* \mbox{\hyperlink{class_audio_processor_value_tree_state_a645123ccd146258f28d77b6095169c91}{getRawParameterValue}} (\mbox{\hyperlink{class_string_ref}{StringRef}} parameterID) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{291 }
+\DoxyCodeLine{292     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{296 \textcolor{comment}{}    \textcolor{keyword}{struct }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{struct_audio_processor_value_tree_state_1_1_listener}{Listener}}}
+\DoxyCodeLine{297     \{}
+\DoxyCodeLine{298         \textcolor{keyword}{virtual} \mbox{\hyperlink{struct_audio_processor_value_tree_state_1_1_listener_a21ac9e48ca96cfcb608e6222d30b0693}{\string~Listener}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{299 }
+\DoxyCodeLine{306         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_audio_processor_value_tree_state_1_1_listener_a2716fa16ef99141f599ffd7c93682552}{parameterChanged}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& parameterID, \textcolor{keywordtype}{float} newValue) = 0;}
+\DoxyCodeLine{307     \};}
+\DoxyCodeLine{308 }
+\DoxyCodeLine{310     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_processor_value_tree_state_a350478cad727aa6ceac20e1c933446fc}{addParameterListener}} (\mbox{\hyperlink{class_string_ref}{StringRef}} parameterID, \mbox{\hyperlink{struct_audio_processor_value_tree_state_1_1_listener}{Listener}}* listener);}
+\DoxyCodeLine{311 }
+\DoxyCodeLine{313     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_processor_value_tree_state_a89b3ccdb853514ce5cd4ee363b71ef80}{removeParameterListener}} (\mbox{\hyperlink{class_string_ref}{StringRef}} parameterID, \mbox{\hyperlink{struct_audio_processor_value_tree_state_1_1_listener}{Listener}}* listener);}
+\DoxyCodeLine{314 }
+\DoxyCodeLine{315     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{317 \textcolor{comment}{}    \mbox{\hyperlink{class_value}{Value}} \mbox{\hyperlink{class_audio_processor_value_tree_state_ae5e957008fef2fd920be6737ae520538}{getParameterAsValue}} (\mbox{\hyperlink{class_string_ref}{StringRef}} parameterID) \textcolor{keyword}{const};}
+\DoxyCodeLine{318 }
+\DoxyCodeLine{320     \mbox{\hyperlink{class_normalisable_range}{NormalisableRange<float>}} \mbox{\hyperlink{class_audio_processor_value_tree_state_a37ffc6ce307b57ff23420885c7285a06}{getParameterRange}} (\mbox{\hyperlink{class_string_ref}{StringRef}} parameterID) \textcolor{keyword}{const} \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{321 }
+\DoxyCodeLine{322     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{335 \textcolor{comment}{}    \mbox{\hyperlink{class_value_tree}{ValueTree}} \mbox{\hyperlink{class_audio_processor_value_tree_state_a2e8c24940157ec6032da68c3abebab27}{copyState}}();}
+\DoxyCodeLine{336 }
+\DoxyCodeLine{348     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_audio_processor_value_tree_state_afabb748808e24bdc2fa06dba23bf6bb3}{replaceState}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_value_tree}{ValueTree}}\& newState);}
+\DoxyCodeLine{349 }
+\DoxyCodeLine{350     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{352 \textcolor{comment}{}    \mbox{\hyperlink{class_audio_processor}{AudioProcessor}}\& \mbox{\hyperlink{class_audio_processor_value_tree_state_aa50efe71cc5b2c9bf0b5c661d0b36c54}{processor}};}
+\DoxyCodeLine{353 }
+\DoxyCodeLine{361     \mbox{\hyperlink{class_value_tree}{ValueTree}} \mbox{\hyperlink{class_audio_processor_value_tree_state_ad7de02052d045956f56018e009dc50c6}{state}};}
+\DoxyCodeLine{362 }
+\DoxyCodeLine{364     \mbox{\hyperlink{class_undo_manager}{UndoManager}}* \textcolor{keyword}{const} \mbox{\hyperlink{class_audio_processor_value_tree_state_a1dbe64c2074c51b19f54d55dc4292e07}{undoManager}};}
+\DoxyCodeLine{365 }
+\DoxyCodeLine{366 \textcolor{keyword}{private}:}
+\DoxyCodeLine{367     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{368     \textcolor{keyword}{class }ParameterAdapter;}
+\DoxyCodeLine{369 }
+\DoxyCodeLine{370 \textcolor{keyword}{public}:}
+\DoxyCodeLine{371     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{399 \textcolor{comment}{}    \textcolor{keyword}{class }\mbox{\hyperlink{class_audio_processor_value_tree_state_1_1_parameter}{Parameter}} final  : \textcolor{keyword}{public} \mbox{\hyperlink{class_audio_parameter_float}{AudioParameterFloat}}}
+\DoxyCodeLine{400     \{}
+\DoxyCodeLine{401     \textcolor{keyword}{public}:}
+\DoxyCodeLine{402         \mbox{\hyperlink{class_audio_processor_value_tree_state_1_1_parameter_affb9980e7d45aebd9f829cc32840eb1c}{Parameter}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& parameterID,}
+\DoxyCodeLine{403                    \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& parameterName,}
+\DoxyCodeLine{404                    \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& labelText,}
+\DoxyCodeLine{405                    \mbox{\hyperlink{class_normalisable_range}{NormalisableRange<float>}} valueRange,}
+\DoxyCodeLine{406                    \textcolor{keywordtype}{float} defaultValue,}
+\DoxyCodeLine{407                    \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\mbox{\hyperlink{class_string}{String}} (\textcolor{keywordtype}{float})> valueToTextFunction,}
+\DoxyCodeLine{408                    \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\textcolor{keywordtype}{float} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\&)> textToValueFunction,}
+\DoxyCodeLine{409                    \textcolor{keywordtype}{bool} isMetaParameter = \textcolor{keyword}{false},}
+\DoxyCodeLine{410                    \textcolor{keywordtype}{bool} isAutomatableParameter = \textcolor{keyword}{true},}
+\DoxyCodeLine{411                    \textcolor{keywordtype}{bool} isDiscrete = \textcolor{keyword}{false},}
+\DoxyCodeLine{412                    \mbox{\hyperlink{class_audio_processor_parameter_aef73dff71cb1abfdadd5b6f3649d7db2}{AudioProcessorParameter::Category}} parameterCategory = \mbox{\hyperlink{class_audio_processor_parameter_aef73dff71cb1abfdadd5b6f3649d7db2ac86017a29081bfb3405d7d5a4ed2c370}{AudioProcessorParameter::genericParameter}},}
+\DoxyCodeLine{413                    \textcolor{keywordtype}{bool} isBoolean = \textcolor{keyword}{false});}
+\DoxyCodeLine{414 }
+\DoxyCodeLine{415         \textcolor{keywordtype}{float} getDefaultValue() \textcolor{keyword}{const override};}
+\DoxyCodeLine{416         \textcolor{keywordtype}{int} getNumSteps() \textcolor{keyword}{const override};}
+\DoxyCodeLine{417 }
+\DoxyCodeLine{418         \textcolor{keywordtype}{bool} isMetaParameter() \textcolor{keyword}{const override};}
+\DoxyCodeLine{419         \textcolor{keywordtype}{bool} isAutomatable() \textcolor{keyword}{const override};}
+\DoxyCodeLine{420         \textcolor{keywordtype}{bool} isDiscrete() \textcolor{keyword}{const override};}
+\DoxyCodeLine{421         \textcolor{keywordtype}{bool} isBoolean() \textcolor{keyword}{const override};}
+\DoxyCodeLine{422 }
+\DoxyCodeLine{423     \textcolor{keyword}{private}:}
+\DoxyCodeLine{424         \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaefa5337f5ce957a9403e2eb59d591ffca0e58a4fa4b8e6bc7353a97f4761f776f}{valueChanged}} (\textcolor{keywordtype}{float}) \textcolor{keyword}{override};}
+\DoxyCodeLine{425 }
+\DoxyCodeLine{426         \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}}()> onValueChanged;}
+\DoxyCodeLine{427 }
+\DoxyCodeLine{428         \textcolor{keyword}{const} \textcolor{keywordtype}{float} unsnappedDefault;}
+\DoxyCodeLine{429         \textcolor{keyword}{const} \textcolor{keywordtype}{bool} metaParameter, automatable, discrete, \mbox{\hyperlink{jconfig_8h_a7670a4e8a07d9ebb00411948b0bbf86d}{boolean}};}
+\DoxyCodeLine{430         std::atomic<float> lastValue \{ -\/1.0f \};}
+\DoxyCodeLine{431 }
+\DoxyCodeLine{432         \textcolor{keyword}{friend} \textcolor{keyword}{class }AudioProcessorValueTreeState::ParameterAdapter;}
+\DoxyCodeLine{433     \};}
+\DoxyCodeLine{434 }
+\DoxyCodeLine{435     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{444 \textcolor{comment}{}    \textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_audio_processor_value_tree_state_1_1_slider_attachment}{SliderAttachment}}}
+\DoxyCodeLine{445     \{}
+\DoxyCodeLine{446     \textcolor{keyword}{public}:}
+\DoxyCodeLine{447         \mbox{\hyperlink{class_audio_processor_value_tree_state_1_1_slider_attachment}{SliderAttachment}} (\mbox{\hyperlink{class_audio_processor_value_tree_state}{AudioProcessorValueTreeState}}\& stateToUse,}
+\DoxyCodeLine{448                           \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& parameterID,}
+\DoxyCodeLine{449                           \mbox{\hyperlink{class_slider}{Slider}}\& \mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682ca10bf08f0bbd6689475be65b4ae441bd9}{slider}});}
+\DoxyCodeLine{450 }
+\DoxyCodeLine{451     \textcolor{keyword}{private}:}
+\DoxyCodeLine{452         std::unique\_ptr<SliderParameterAttachment> \mbox{\hyperlink{namespacegl_a615196c077c98494b2df490a49aa6e5b}{attachment}};}
+\DoxyCodeLine{453         \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_audio_processor_value_tree_state_1_1_slider_attachment}{SliderAttachment}})}
+\DoxyCodeLine{454     \};}
+\DoxyCodeLine{455 }
+\DoxyCodeLine{456     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{470 \textcolor{comment}{}    \textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_audio_processor_value_tree_state_1_1_combo_box_attachment}{ComboBoxAttachment}}}
+\DoxyCodeLine{471     \{}
+\DoxyCodeLine{472     \textcolor{keyword}{public}:}
+\DoxyCodeLine{473         \mbox{\hyperlink{class_audio_processor_value_tree_state_1_1_combo_box_attachment}{ComboBoxAttachment}} (\mbox{\hyperlink{class_audio_processor_value_tree_state}{AudioProcessorValueTreeState}}\& stateToUse,}
+\DoxyCodeLine{474                             \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& parameterID,}
+\DoxyCodeLine{475                             \mbox{\hyperlink{class_combo_box}{ComboBox}}\& combo);}
+\DoxyCodeLine{476 }
+\DoxyCodeLine{477     \textcolor{keyword}{private}:}
+\DoxyCodeLine{478         std::unique\_ptr<ComboBoxParameterAttachment> \mbox{\hyperlink{namespacegl_a615196c077c98494b2df490a49aa6e5b}{attachment}};}
+\DoxyCodeLine{479         \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_audio_processor_value_tree_state_1_1_combo_box_attachment}{ComboBoxAttachment}})}
+\DoxyCodeLine{480     \};}
+\DoxyCodeLine{481 }
+\DoxyCodeLine{482     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{491 \textcolor{comment}{}    \textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_audio_processor_value_tree_state_1_1_button_attachment}{ButtonAttachment}}}
+\DoxyCodeLine{492     \{}
+\DoxyCodeLine{493     \textcolor{keyword}{public}:}
+\DoxyCodeLine{494         \mbox{\hyperlink{class_audio_processor_value_tree_state_1_1_button_attachment}{ButtonAttachment}} (\mbox{\hyperlink{class_audio_processor_value_tree_state}{AudioProcessorValueTreeState}}\& stateToUse,}
+\DoxyCodeLine{495                           \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& parameterID,}
+\DoxyCodeLine{496                           \mbox{\hyperlink{class_button}{Button}}\& \mbox{\hyperlink{group__juce__gui__basics-accessibility_ggaf1349587ab6cac7e882cd63e1976682cace50a09343724eb82df11390e2c1de18}{button}});}
+\DoxyCodeLine{497 }
+\DoxyCodeLine{498     \textcolor{keyword}{private}:}
+\DoxyCodeLine{499         std::unique\_ptr<ButtonParameterAttachment> \mbox{\hyperlink{namespacegl_a615196c077c98494b2df490a49aa6e5b}{attachment}};}
+\DoxyCodeLine{500         \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_audio_processor_value_tree_state_1_1_button_attachment}{ButtonAttachment}})}
+\DoxyCodeLine{501     \};}
+\DoxyCodeLine{502 }
+\DoxyCodeLine{503 \textcolor{keyword}{private}:}
+\DoxyCodeLine{504     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{526 \textcolor{comment}{}    [[deprecated (\textcolor{stringliteral}{"{}This method was introduced to allow you to use AudioProcessorValueTreeState parameters in "{}}}
+\DoxyCodeLine{527                  \textcolor{stringliteral}{"{}an AudioProcessorParameterGroup, but there is now a much nicer way to achieve this. See the "{}}}
+\DoxyCodeLine{528                  \textcolor{stringliteral}{"{}method docs for a code example."{}})]]}
+\DoxyCodeLine{529     std::unique\_ptr<RangedAudioParameter> createParameter (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\&, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\&, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\&, \mbox{\hyperlink{class_normalisable_range}{NormalisableRange<float>}},}
+\DoxyCodeLine{530                                                            \textcolor{keywordtype}{float}, \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\mbox{\hyperlink{class_string}{String}} (\textcolor{keywordtype}{float})>, \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\textcolor{keywordtype}{float} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\&)>,}
+\DoxyCodeLine{531                                                            \textcolor{keywordtype}{bool}, \textcolor{keywordtype}{bool}, \textcolor{keywordtype}{bool}, \mbox{\hyperlink{class_audio_processor_parameter_aef73dff71cb1abfdadd5b6f3649d7db2}{AudioProcessorParameter::Category}}, \textcolor{keywordtype}{bool});}
+\DoxyCodeLine{532 }
+\DoxyCodeLine{533     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{534 \textcolor{preprocessor}{   \#if JUCE\_UNIT\_TESTS}}
+\DoxyCodeLine{535     \textcolor{keyword}{friend} \textcolor{keyword}{struct }ParameterAdapterTests;}
+\DoxyCodeLine{536 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{537 }
+\DoxyCodeLine{538     \textcolor{keywordtype}{void} addParameterAdapter (\mbox{\hyperlink{class_ranged_audio_parameter}{RangedAudioParameter}}\&);}
+\DoxyCodeLine{539     ParameterAdapter* getParameterAdapter (\mbox{\hyperlink{class_string_ref}{StringRef}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{540 }
+\DoxyCodeLine{541     \textcolor{keywordtype}{bool} flushParameterValuesToValueTree();}
+\DoxyCodeLine{542     \textcolor{keywordtype}{void} setNewState (\mbox{\hyperlink{class_value_tree}{ValueTree}});}
+\DoxyCodeLine{543     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_timer_a8adc40ca0fb4170737ba12e30481b9d8}{timerCallback}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{544 }
+\DoxyCodeLine{545     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_value_tree_1_1_listener_acb50ea91d11a3f46564b117ccdfcf6ac}{valueTreePropertyChanged}} (\mbox{\hyperlink{class_value_tree}{ValueTree}}\&, \textcolor{keyword}{const} \mbox{\hyperlink{class_identifier}{Identifier}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{546     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_value_tree_1_1_listener_ad68ed8d6c8a0aa041f3365bb2a70e51c}{valueTreeChildAdded}} (\mbox{\hyperlink{class_value_tree}{ValueTree}}\&, \mbox{\hyperlink{class_value_tree}{ValueTree}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{547     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_value_tree_1_1_listener_a32b5c6d553f3320bbf764ad52ecbb9df}{valueTreeRedirected}} (\mbox{\hyperlink{class_value_tree}{ValueTree}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{548     \textcolor{keywordtype}{void} updateParameterConnectionsToChildTrees();}
+\DoxyCodeLine{549 }
+\DoxyCodeLine{550     \textcolor{keyword}{const} \mbox{\hyperlink{class_identifier}{Identifier}} valueType \{ \textcolor{stringliteral}{"{}PARAM"{}} \}, valuePropertyID \{ \textcolor{stringliteral}{"{}value"{}} \}, idPropertyID \{ \textcolor{stringliteral}{"{}id"{}} \};}
+\DoxyCodeLine{551 }
+\DoxyCodeLine{552     \textcolor{keyword}{struct }StringRefLessThan final}
+\DoxyCodeLine{553     \{}
+\DoxyCodeLine{554         \textcolor{keywordtype}{bool} operator() (\mbox{\hyperlink{class_string_ref}{StringRef}} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \mbox{\hyperlink{class_string_ref}{StringRef}} \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}) \textcolor{keyword}{const} \textcolor{keyword}{noexcept} \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}.text.compare (\mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}.text) < 0; \}}
+\DoxyCodeLine{555     \};}
+\DoxyCodeLine{556 }
+\DoxyCodeLine{557     std::map<StringRef, std::unique\_ptr<ParameterAdapter>, StringRefLessThan> adapterTable;}
+\DoxyCodeLine{558 }
+\DoxyCodeLine{559     \mbox{\hyperlink{class_critical_section}{CriticalSection}} valueTreeChanging;}
+\DoxyCodeLine{560 }
+\DoxyCodeLine{561     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_audio_processor_value_tree_state}{AudioProcessorValueTreeState}})}
+\DoxyCodeLine{562 \};}
+\DoxyCodeLine{563 }
+\DoxyCodeLine{564  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{565 }
+
+\end{DoxyCode}

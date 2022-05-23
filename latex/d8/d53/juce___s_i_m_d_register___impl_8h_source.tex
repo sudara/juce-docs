@@ -1,0 +1,183 @@
+\hypertarget{juce___s_i_m_d_register___impl_8h_source}{}\doxysection{juce\+\_\+\+SIMDRegister\+\_\+\+Impl.\+h}
+\label{juce___s_i_m_d_register___impl_8h_source}\index{build/juce\_dsp/containers/juce\_SIMDRegister\_Impl.h@{build/juce\_dsp/containers/juce\_SIMDRegister\_Impl.h}}
+\mbox{\hyperlink{juce___s_i_m_d_register___impl_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacedsp}{dsp}}}
+\DoxyCodeLine{30 \{}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{34 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type>}
+\DoxyCodeLine{35 \textcolor{keyword}{struct }\mbox{\hyperlink{structdsp_1_1_s_i_m_d_register}{SIMDRegister}}<Type>::\mbox{\hyperlink{structdsp_1_1_s_i_m_d_register_1_1_element_access}{ElementAccess}}}
+\DoxyCodeLine{36 \{}
+\DoxyCodeLine{37     \mbox{\hyperlink{structdsp_1_1_s_i_m_d_register_1_1_element_access_a15c1b742b51df159fab8837d5cf29327}{ElementAccess}} (\textcolor{keyword}{const} \mbox{\hyperlink{structdsp_1_1_s_i_m_d_register_1_1_element_access}{ElementAccess}}\&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{38     \textcolor{keyword}{operator} Type()\textcolor{keyword}{ const                                       }\{ \textcolor{keywordflow}{return} simd.get (idx); \}}
+\DoxyCodeLine{39     \mbox{\hyperlink{structdsp_1_1_s_i_m_d_register_1_1_element_access}{ElementAccess}}\& \mbox{\hyperlink{structdsp_1_1_s_i_m_d_register_a3c3fcf230b8e1fb06a1033cbeef5f1a6}{operator= }}(Type scalar) \textcolor{keyword}{noexcept}             \{ simd.\mbox{\hyperlink{structdsp_1_1_s_i_m_d_register_aa0cde136213a1613da278250ca4e801e}{set}} (idx, scalar); \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{40     \mbox{\hyperlink{structdsp_1_1_s_i_m_d_register_1_1_element_access}{ElementAccess}}\& \mbox{\hyperlink{structdsp_1_1_s_i_m_d_register_a3c3fcf230b8e1fb06a1033cbeef5f1a6}{operator= }}(\textcolor{keyword}{const} \mbox{\hyperlink{structdsp_1_1_s_i_m_d_register_1_1_element_access}{ElementAccess}}\& o) \textcolor{keyword}{noexcept}  \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{structdsp_1_1_s_i_m_d_register_a3c3fcf230b8e1fb06a1033cbeef5f1a6}{operator= }}((Type) o); \}}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42 \textcolor{keyword}{private}:}
+\DoxyCodeLine{43     \textcolor{keyword}{friend} \textcolor{keyword}{struct }\mbox{\hyperlink{structdsp_1_1_s_i_m_d_register}{SIMDRegister}};}
+\DoxyCodeLine{44     \mbox{\hyperlink{structdsp_1_1_s_i_m_d_register_1_1_element_access}{ElementAccess}} (\mbox{\hyperlink{structdsp_1_1_s_i_m_d_register}{SIMDRegister}}\& owner, \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) noexcept : simd (owner), idx (\mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}}) \{\}}
+\DoxyCodeLine{45     \mbox{\hyperlink{structdsp_1_1_s_i_m_d_register}{SIMDRegister}}\& simd;}
+\DoxyCodeLine{46     \textcolor{keywordtype}{size\_t} idx;}
+\DoxyCodeLine{47 \};}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49 \textcolor{preprocessor}{\#ifndef DOXYGEN}}
+\DoxyCodeLine{50 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{51 \textcolor{comment}{/* This class is used internally by SIMDRegister to abstract away differences}}
+\DoxyCodeLine{52 \textcolor{comment}{   in operations which are different for complex and pure floating point types. */}}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54 \textcolor{comment}{// the pure floating-\/point version}}
+\DoxyCodeLine{55 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Scalar>}
+\DoxyCodeLine{56 \textcolor{keyword}{struct }\mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops}{CmplxSIMDOps}}}
+\DoxyCodeLine{57 \{}
+\DoxyCodeLine{58     \textcolor{keyword}{using} \mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_a6fec85d7e08a1b233656b7f6702d3cca}{vSIMDType}} = \textcolor{keyword}{typename} SIMDNativeOps<Scalar>::vSIMDType;}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60     \textcolor{keyword}{static} \mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_a6fec85d7e08a1b233656b7f6702d3cca}{vSIMDType}} JUCE\_VECTOR\_CALLTYPE \mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_a3d42454e96ba78b0eae4816a989f829c}{load}} (\textcolor{keyword}{const} Scalar* \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{61     \{}
+\DoxyCodeLine{62         \textcolor{keywordflow}{return} SIMDNativeOps<Scalar>::load (\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}});}
+\DoxyCodeLine{63     \}}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65     \textcolor{keyword}{static} \textcolor{keywordtype}{void} JUCE\_VECTOR\_CALLTYPE \mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_ae0e674b4e042a15ec7e8179a9dcde361}{store}} (\mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_a6fec85d7e08a1b233656b7f6702d3cca}{vSIMDType}} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}, Scalar* dest) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{66     \{}
+\DoxyCodeLine{67         SIMDNativeOps<Scalar>::store (\mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}, dest);}
+\DoxyCodeLine{68     \}}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70     \textcolor{keyword}{static} \mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_a6fec85d7e08a1b233656b7f6702d3cca}{vSIMDType}} JUCE\_VECTOR\_CALLTYPE \mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_ad805fafd17f0fbb9fb2ad0554f4d63f9}{expand}} (Scalar \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{71     \{}
+\DoxyCodeLine{72         \textcolor{keywordflow}{return} SIMDNativeOps<Scalar>::expand (\mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}});}
+\DoxyCodeLine{73     \}}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75     \textcolor{keyword}{static} Scalar JUCE\_VECTOR\_CALLTYPE \mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_ac61dc63c1b2d7624abd8675ad4998c0a}{get}} (\mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_a6fec85d7e08a1b233656b7f6702d3cca}{vSIMDType}} \mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}}, std::size\_t i) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{76     \{}
+\DoxyCodeLine{77         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacedsp_ab70e205bff92b09aa297e479676b5bc8}{SIMDNativeOps<Scalar>::get}} (\mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}}, i);}
+\DoxyCodeLine{78     \}}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80     \textcolor{keyword}{static} \mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_a6fec85d7e08a1b233656b7f6702d3cca}{vSIMDType}} JUCE\_VECTOR\_CALLTYPE \mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_aec1cf35391c14e0ba0cf15a6e6484ada}{set}} (\mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_a6fec85d7e08a1b233656b7f6702d3cca}{vSIMDType}} \mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}}, std::size\_t i, Scalar \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{81     \{}
+\DoxyCodeLine{82         \textcolor{keywordflow}{return} SIMDNativeOps<Scalar>::set (\mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}}, i, \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}});}
+\DoxyCodeLine{83     \}}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85     \textcolor{keyword}{static} Scalar JUCE\_VECTOR\_CALLTYPE \mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_abda1b0133cb6569f74da9bf77df937f4}{sum}} (\mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_a6fec85d7e08a1b233656b7f6702d3cca}{vSIMDType}} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}})  \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{86     \{}
+\DoxyCodeLine{87         \textcolor{keywordflow}{return} SIMDNativeOps<Scalar>::sum (\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}});}
+\DoxyCodeLine{88     \}}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90     \textcolor{keyword}{static} \mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_a6fec85d7e08a1b233656b7f6702d3cca}{vSIMDType}} JUCE\_VECTOR\_CALLTYPE \mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_abf84de263a37a8b889109072d21c6ba4}{mul}} (\mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_a6fec85d7e08a1b233656b7f6702d3cca}{vSIMDType}} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_a6fec85d7e08a1b233656b7f6702d3cca}{vSIMDType}} \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{91     \{}
+\DoxyCodeLine{92         \textcolor{keywordflow}{return} SIMDNativeOps<Scalar>::mul (\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}});}
+\DoxyCodeLine{93     \}}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95     \textcolor{keyword}{static} \mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_a6fec85d7e08a1b233656b7f6702d3cca}{vSIMDType}} JUCE\_VECTOR\_CALLTYPE \mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_a04f916dcc1efe1d361ffd7636ec4768a}{muladd}} (\mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_a6fec85d7e08a1b233656b7f6702d3cca}{vSIMDType}} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_a6fec85d7e08a1b233656b7f6702d3cca}{vSIMDType}} \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}, \mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_a6fec85d7e08a1b233656b7f6702d3cca}{vSIMDType}} \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{96     \{}
+\DoxyCodeLine{97         \textcolor{keywordflow}{return} SIMDNativeOps<Scalar>::multiplyAdd (\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}, \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}});}
+\DoxyCodeLine{98     \}}
+\DoxyCodeLine{99 \};}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101 \textcolor{comment}{// The pure complex version}}
+\DoxyCodeLine{102 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Scalar>}
+\DoxyCodeLine{103 \textcolor{keyword}{struct }\mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops}{CmplxSIMDOps}}<\mbox{\hyperlink{namespacestd}{std}}::complex<Scalar>>}
+\DoxyCodeLine{104 \{}
+\DoxyCodeLine{105     \textcolor{keyword}{using} \mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_3_01std_1_1complex_3_01_scalar_01_4_01_4_a65fa36ceed02875a0ae6e19c3c3095f1}{vSIMDType}} = \textcolor{keyword}{typename} SIMDNativeOps<Scalar>::vSIMDType;}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{107     \textcolor{keyword}{static} \mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_3_01std_1_1complex_3_01_scalar_01_4_01_4_a65fa36ceed02875a0ae6e19c3c3095f1}{vSIMDType}} JUCE\_VECTOR\_CALLTYPE \mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_3_01std_1_1complex_3_01_scalar_01_4_01_4_ac3df01f308f75096a6dd85579e70134f}{load}} (\textcolor{keyword}{const} std::complex<Scalar>* \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{108     \{}
+\DoxyCodeLine{109         \textcolor{keywordflow}{return} SIMDNativeOps<Scalar>::load (\textcolor{keyword}{reinterpret\_cast<}\textcolor{keyword}{const }Scalar*\textcolor{keyword}{>} (\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}));}
+\DoxyCodeLine{110     \}}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112     \textcolor{keyword}{static} \textcolor{keywordtype}{void} JUCE\_VECTOR\_CALLTYPE \mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_3_01std_1_1complex_3_01_scalar_01_4_01_4_ac3819548dd8845becd50dc19e57e55d3}{store}} (\mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_3_01std_1_1complex_3_01_scalar_01_4_01_4_a65fa36ceed02875a0ae6e19c3c3095f1}{vSIMDType}} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}, std::complex<Scalar>* dest) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{113     \{}
+\DoxyCodeLine{114         SIMDNativeOps<Scalar>::store (\mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}, \textcolor{keyword}{reinterpret\_cast<}Scalar*\textcolor{keyword}{>} (dest));}
+\DoxyCodeLine{115     \}}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117     \textcolor{keyword}{static} \mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_3_01std_1_1complex_3_01_scalar_01_4_01_4_a65fa36ceed02875a0ae6e19c3c3095f1}{vSIMDType}} JUCE\_VECTOR\_CALLTYPE \mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_3_01std_1_1complex_3_01_scalar_01_4_01_4_aa60b031cd5b113829a055c5ccb112037}{expand}} (std::complex<Scalar> \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{118     \{}
+\DoxyCodeLine{119         \textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}} = \textcolor{keyword}{sizeof} (\mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_a6fec85d7e08a1b233656b7f6702d3cca}{vSIMDType}}) / \textcolor{keyword}{sizeof} (Scalar);}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{121         \textcolor{keyword}{union}}
+\DoxyCodeLine{122         \{}
+\DoxyCodeLine{123             \mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_3_01std_1_1complex_3_01_scalar_01_4_01_4_a65fa36ceed02875a0ae6e19c3c3095f1}{vSIMDType}} \mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}};}
+\DoxyCodeLine{124             Scalar floats[(size\_t) \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}}];}
+\DoxyCodeLine{125         \} u;}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{127         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}}; ++i)}
+\DoxyCodeLine{128             u.floats[i] = (i \& 1) == 0 ? \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}}.real() : \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}}.imag();}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{130         \textcolor{keywordflow}{return} u.v;}
+\DoxyCodeLine{131     \}}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{133     \textcolor{keyword}{static} std::complex<Scalar> JUCE\_VECTOR\_CALLTYPE \mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_3_01std_1_1complex_3_01_scalar_01_4_01_4_a07a217512e8a909ae313b74b3a3a6205}{get}} (\mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_3_01std_1_1complex_3_01_scalar_01_4_01_4_a65fa36ceed02875a0ae6e19c3c3095f1}{vSIMDType}} \mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}}, std::size\_t i) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{134     \{}
+\DoxyCodeLine{135         \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}} = i << 1;}
+\DoxyCodeLine{136         \textcolor{keywordflow}{return} std::complex<Scalar> (\mbox{\hyperlink{namespacedsp_ab70e205bff92b09aa297e479676b5bc8}{SIMDNativeOps<Scalar>::get}} (\mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}}, \mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}}), \mbox{\hyperlink{namespacedsp_ab70e205bff92b09aa297e479676b5bc8}{SIMDNativeOps<Scalar>::get}} (\mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}}, \mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}} + 1));}
+\DoxyCodeLine{137     \}}
+\DoxyCodeLine{138 }
+\DoxyCodeLine{139     \textcolor{keyword}{static} \mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_3_01std_1_1complex_3_01_scalar_01_4_01_4_a65fa36ceed02875a0ae6e19c3c3095f1}{vSIMDType}} JUCE\_VECTOR\_CALLTYPE \mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_3_01std_1_1complex_3_01_scalar_01_4_01_4_ac122ef90e5ef455512b9fa02fbed20b2}{set}} (\mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_3_01std_1_1complex_3_01_scalar_01_4_01_4_a65fa36ceed02875a0ae6e19c3c3095f1}{vSIMDType}} \mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}}, std::size\_t i, std::complex<Scalar> \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{140     \{}
+\DoxyCodeLine{141         \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}} = i << 1;}
+\DoxyCodeLine{142         \textcolor{keywordflow}{return} SIMDNativeOps<Scalar>::set (SIMDNativeOps<Scalar>::set (\mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}}, \mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}}, \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}}.real()), \mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}} + 1, \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}}.imag());}
+\DoxyCodeLine{143     \}}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145     \textcolor{keyword}{static} std::complex<Scalar> JUCE\_VECTOR\_CALLTYPE \mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_3_01std_1_1complex_3_01_scalar_01_4_01_4_af8521296e9b50c3a345d50224269f467}{sum}} (\mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_3_01std_1_1complex_3_01_scalar_01_4_01_4_a65fa36ceed02875a0ae6e19c3c3095f1}{vSIMDType}} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}})  \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{146     \{}
+\DoxyCodeLine{147         \mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_3_01std_1_1complex_3_01_scalar_01_4_01_4_a65fa36ceed02875a0ae6e19c3c3095f1}{vSIMDType}} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = SIMDNativeOps<Scalar>::oddevensum (\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}});}
+\DoxyCodeLine{148         \textcolor{keyword}{auto}* \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}} = \textcolor{keyword}{reinterpret\_cast<}\textcolor{keyword}{const }Scalar*\textcolor{keyword}{>} (\&\mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}});}
+\DoxyCodeLine{149         \textcolor{keywordflow}{return} std::complex<Scalar> (\mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}}[0], \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}}[1]);}
+\DoxyCodeLine{150     \}}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{152     \textcolor{keyword}{static} \mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_3_01std_1_1complex_3_01_scalar_01_4_01_4_a65fa36ceed02875a0ae6e19c3c3095f1}{vSIMDType}} JUCE\_VECTOR\_CALLTYPE \mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_3_01std_1_1complex_3_01_scalar_01_4_01_4_ac6eac5c591f286798302d7f26161a8ee}{mul}} (\mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_3_01std_1_1complex_3_01_scalar_01_4_01_4_a65fa36ceed02875a0ae6e19c3c3095f1}{vSIMDType}} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_3_01std_1_1complex_3_01_scalar_01_4_01_4_a65fa36ceed02875a0ae6e19c3c3095f1}{vSIMDType}} \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}})  \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{153     \{}
+\DoxyCodeLine{154         \textcolor{keywordflow}{return} SIMDNativeOps<Scalar>::cmplxmul (\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}});}
+\DoxyCodeLine{155     \}}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{157     \textcolor{keyword}{static} \mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_3_01std_1_1complex_3_01_scalar_01_4_01_4_a65fa36ceed02875a0ae6e19c3c3095f1}{vSIMDType}} JUCE\_VECTOR\_CALLTYPE \mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_3_01std_1_1complex_3_01_scalar_01_4_01_4_acfaa69880db84def37d8d1d1bb398138}{muladd}} (\mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_3_01std_1_1complex_3_01_scalar_01_4_01_4_a65fa36ceed02875a0ae6e19c3c3095f1}{vSIMDType}} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_3_01std_1_1complex_3_01_scalar_01_4_01_4_a65fa36ceed02875a0ae6e19c3c3095f1}{vSIMDType}} \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}, \mbox{\hyperlink{structdsp_1_1_cmplx_s_i_m_d_ops_3_01std_1_1complex_3_01_scalar_01_4_01_4_a65fa36ceed02875a0ae6e19c3c3095f1}{vSIMDType}} \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{158     \{}
+\DoxyCodeLine{159         \textcolor{keywordflow}{return} SIMDNativeOps<Scalar>::add (\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, SIMDNativeOps<Scalar>::cmplxmul (\mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}, \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}));}
+\DoxyCodeLine{160     \}}
+\DoxyCodeLine{161 \};}
+\DoxyCodeLine{162 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{163 }
+\DoxyCodeLine{164 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{165  \textcolor{keyword}{namespace }util}
+\DoxyCodeLine{166  \{}
+\DoxyCodeLine{167      \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type>}
+\DoxyCodeLine{168      \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacedsp_1_1util_ac915069228ddc3448c5385c71bfe4728}{snapToZero}} (\mbox{\hyperlink{structdsp_1_1_s_i_m_d_register}{SIMDRegister<Type>}}\&) \textcolor{keyword}{noexcept}      \{\}}
+\DoxyCodeLine{169  \}}
+\DoxyCodeLine{170 }
+\DoxyCodeLine{171 \} \textcolor{comment}{// namespace dsp}}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{173 \textcolor{comment}{// Extend some common used global functions to SIMDRegister types}}
+\DoxyCodeLine{174 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type>}
+\DoxyCodeLine{175 \textcolor{keyword}{inline} \mbox{\hyperlink{structdsp_1_1_s_i_m_d_register}{dsp::SIMDRegister<Type>}} JUCE\_VECTOR\_CALLTYPE \mbox{\hyperlink{group__juce__dsp-containers_ga64228e0d540d59f320a4520ae20b5561}{jmin}} (\mbox{\hyperlink{structdsp_1_1_s_i_m_d_register}{dsp::SIMDRegister<Type>}} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \mbox{\hyperlink{structdsp_1_1_s_i_m_d_register}{dsp::SIMDRegister<Type>}} \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{structdsp_1_1_s_i_m_d_register_a09ea16bcfe66fc7f884b4e7a9936f65b}{dsp::SIMDRegister<Type>::min}} (\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}); \}}
+\DoxyCodeLine{176 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type>}
+\DoxyCodeLine{177 \textcolor{keyword}{inline} \mbox{\hyperlink{structdsp_1_1_s_i_m_d_register}{dsp::SIMDRegister<Type>}} JUCE\_VECTOR\_CALLTYPE \mbox{\hyperlink{group__juce__dsp-containers_ga685ae6632195356cde2ae72b631eb855}{jmax}} (\mbox{\hyperlink{structdsp_1_1_s_i_m_d_register}{dsp::SIMDRegister<Type>}} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \mbox{\hyperlink{structdsp_1_1_s_i_m_d_register}{dsp::SIMDRegister<Type>}} \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{structdsp_1_1_s_i_m_d_register_a61d1dce7761dfd623fb39d9af76d21e5}{dsp::SIMDRegister<Type>::max}} (\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}); \}}
+\DoxyCodeLine{178 }
+\DoxyCodeLine{179  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{180 }
+
+\end{DoxyCode}

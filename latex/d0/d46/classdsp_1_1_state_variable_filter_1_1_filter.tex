@@ -1,0 +1,154 @@
+\hypertarget{classdsp_1_1_state_variable_filter_1_1_filter}{}\doxysection{dsp\+::State\+Variable\+Filter\+::Filter\texorpdfstring{$<$}{<} Sample\+Type \texorpdfstring{$>$}{>} Class Template Reference}
+\label{classdsp_1_1_state_variable_filter_1_1_filter}\index{dsp::StateVariableFilter::Filter$<$ SampleType $>$@{dsp::StateVariableFilter::Filter$<$ SampleType $>$}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+State\+Variable\+Filter.\+h$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_aaeb54a3b0b57c6edd7ea6d7abe354b59}{Numeric\+Type}} = typename \mbox{\hyperlink{structdsp_1_1_sample_type_helpers_1_1_element_type}{Sample\+Type\+Helpers\+::\+Element\+Type}}$<$ Sample\+Type $>$\+::Type
+\item 
+using \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_a8df3f28abd45dd5d01c24c38ebfa0ae7}{Parameters\+Ptr}} = typename \mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters}{Parameters}}$<$ \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_aaeb54a3b0b57c6edd7ea6d7abe354b59}{Numeric\+Type}} $>$\+::Ptr
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_a4006a169d271867d8ef4ecfc33f5a622}{Filter}} ()
+\item 
+\mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_a3724e17901e1b333945d2194aa53a81f}{Filter}} (\mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_a8df3f28abd45dd5d01c24c38ebfa0ae7}{Parameters\+Ptr}} parameters\+To\+Use)
+\item 
+\mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_ab5315128bf35efc1b9361e93f2d9f3ba}{Filter}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter}{Filter}} \&)=default
+\item 
+\mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_a58b5886ef09a00c4e77be32028f6ee7b}{Filter}} (\mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter}{Filter}} \&\&)=default
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_a8a27c5f7e6331e78bffe637f6429cf9a}{prepare}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{structdsp_1_1_process_spec}{Process\+Spec}} \&) noexcept
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_ab42720fdd6ec1b33af82d05ba73117a1}{reset}} () noexcept
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_a50a83728541c4c4d88de9b5393352514}{snap\+To\+Zero}} () noexcept
+\item 
+{\footnotesize template$<$typename Process\+Context $>$ }\\\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_a0aadffe10e8c312b7cc06b688cc35ec4}{process}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} Process\+Context \&context) noexcept
+\item 
+Sample\+Type JUCE\+\_\+\+VECTOR\+\_\+\+CALLTYPE \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_acc775af15e580f28d2fb45e4a34016fc}{process\+Sample}} (Sample\+Type sample) noexcept
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters}{Parameters}}$<$ \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_aaeb54a3b0b57c6edd7ea6d7abe354b59}{Numeric\+Type}} $>$\+::Ptr \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_a126f873f372d6a07eac8b9e11e415218}{parameters}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Sample\+Type$>$\newline
+class dsp\+::\+State\+Variable\+Filter\+::\+Filter$<$ Sample\+Type $>$}
+An \mbox{\hyperlink{namespacedsp_1_1_i_i_r}{IIR}} filter that can perform low, band and high-\/pass filtering on an audio signal, with 12 dB of attenuation per octave, using a TPT structure, designed for fast modulation (see Vadim Zavalishin\textquotesingle{}s documentation about TPT structures for more information). Its behaviour is based on the analog state variable filter circuit.
+
+Note\+: The bandpass here is not the one in the RBJ Cook\+Book as its gain can be higher than 0 dB. For the classic 0 dB bandpass, we need to multiply the result by R2.
+
+Note 2\+: Using this class prevents some loud audio artefacts commonly encountered when changing the cutoff frequency using other filter simulation structures and \mbox{\hyperlink{namespacedsp_1_1_i_i_r}{IIR}} filter classes. However, this class may still require additional smoothing for cutoff frequency changes.
+
+see \mbox{\hyperlink{class_i_i_r_filter}{IIRFilter}}, \mbox{\hyperlink{class_smoothed_value}{Smoothed\+Value}}
+
+@tags\{DSP\} 
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{classdsp_1_1_state_variable_filter_1_1_filter_aaeb54a3b0b57c6edd7ea6d7abe354b59}\label{classdsp_1_1_state_variable_filter_1_1_filter_aaeb54a3b0b57c6edd7ea6d7abe354b59}} 
+\index{dsp::StateVariableFilter::Filter$<$ SampleType $>$@{dsp::StateVariableFilter::Filter$<$ SampleType $>$}!NumericType@{NumericType}}
+\index{NumericType@{NumericType}!dsp::StateVariableFilter::Filter$<$ SampleType $>$@{dsp::StateVariableFilter::Filter$<$ SampleType $>$}}
+\doxysubsubsection{\texorpdfstring{NumericType}{NumericType}}
+{\footnotesize\ttfamily template$<$typename Sample\+Type $>$ \\
+using \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter}{dsp\+::\+State\+Variable\+Filter\+::\+Filter}}$<$ Sample\+Type $>$\+::\mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_aaeb54a3b0b57c6edd7ea6d7abe354b59}{Numeric\+Type}} =  typename \mbox{\hyperlink{structdsp_1_1_sample_type_helpers_1_1_element_type}{Sample\+Type\+Helpers\+::\+Element\+Type}}$<$Sample\+Type$>$\+::Type}
+
+The Numeric\+Type is the underlying primitive type used by the Sample\+Type (which could be either a primitive or vector) \mbox{\Hypertarget{classdsp_1_1_state_variable_filter_1_1_filter_a8df3f28abd45dd5d01c24c38ebfa0ae7}\label{classdsp_1_1_state_variable_filter_1_1_filter_a8df3f28abd45dd5d01c24c38ebfa0ae7}} 
+\index{dsp::StateVariableFilter::Filter$<$ SampleType $>$@{dsp::StateVariableFilter::Filter$<$ SampleType $>$}!ParametersPtr@{ParametersPtr}}
+\index{ParametersPtr@{ParametersPtr}!dsp::StateVariableFilter::Filter$<$ SampleType $>$@{dsp::StateVariableFilter::Filter$<$ SampleType $>$}}
+\doxysubsubsection{\texorpdfstring{ParametersPtr}{ParametersPtr}}
+{\footnotesize\ttfamily template$<$typename Sample\+Type $>$ \\
+using \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter}{dsp\+::\+State\+Variable\+Filter\+::\+Filter}}$<$ Sample\+Type $>$\+::\mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_a8df3f28abd45dd5d01c24c38ebfa0ae7}{Parameters\+Ptr}} =  typename \mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters}{Parameters}}$<$\mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_aaeb54a3b0b57c6edd7ea6d7abe354b59}{Numeric\+Type}}$>$\+::Ptr}
+
+A typedef for a ref-\/counted pointer to the coefficients object 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classdsp_1_1_state_variable_filter_1_1_filter_a4006a169d271867d8ef4ecfc33f5a622}\label{classdsp_1_1_state_variable_filter_1_1_filter_a4006a169d271867d8ef4ecfc33f5a622}} 
+\index{dsp::StateVariableFilter::Filter$<$ SampleType $>$@{dsp::StateVariableFilter::Filter$<$ SampleType $>$}!Filter@{Filter}}
+\index{Filter@{Filter}!dsp::StateVariableFilter::Filter$<$ SampleType $>$@{dsp::StateVariableFilter::Filter$<$ SampleType $>$}}
+\doxysubsubsection{\texorpdfstring{Filter()}{Filter()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$typename Sample\+Type $>$ \\
+\mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter}{dsp\+::\+State\+Variable\+Filter\+::\+Filter}}$<$ Sample\+Type $>$\+::\mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter}{Filter}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Creates a filter with default parameters. \mbox{\Hypertarget{classdsp_1_1_state_variable_filter_1_1_filter_a3724e17901e1b333945d2194aa53a81f}\label{classdsp_1_1_state_variable_filter_1_1_filter_a3724e17901e1b333945d2194aa53a81f}} 
+\index{dsp::StateVariableFilter::Filter$<$ SampleType $>$@{dsp::StateVariableFilter::Filter$<$ SampleType $>$}!Filter@{Filter}}
+\index{Filter@{Filter}!dsp::StateVariableFilter::Filter$<$ SampleType $>$@{dsp::StateVariableFilter::Filter$<$ SampleType $>$}}
+\doxysubsubsection{\texorpdfstring{Filter()}{Filter()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$typename Sample\+Type $>$ \\
+\mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter}{dsp\+::\+State\+Variable\+Filter\+::\+Filter}}$<$ Sample\+Type $>$\+::\mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter}{Filter}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_a8df3f28abd45dd5d01c24c38ebfa0ae7}{Parameters\+Ptr}}}]{parameters\+To\+Use }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Creates a filter using some parameters. \mbox{\Hypertarget{classdsp_1_1_state_variable_filter_1_1_filter_ab5315128bf35efc1b9361e93f2d9f3ba}\label{classdsp_1_1_state_variable_filter_1_1_filter_ab5315128bf35efc1b9361e93f2d9f3ba}} 
+\index{dsp::StateVariableFilter::Filter$<$ SampleType $>$@{dsp::StateVariableFilter::Filter$<$ SampleType $>$}!Filter@{Filter}}
+\index{Filter@{Filter}!dsp::StateVariableFilter::Filter$<$ SampleType $>$@{dsp::StateVariableFilter::Filter$<$ SampleType $>$}}
+\doxysubsubsection{\texorpdfstring{Filter()}{Filter()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$typename Sample\+Type $>$ \\
+\mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter}{dsp\+::\+State\+Variable\+Filter\+::\+Filter}}$<$ Sample\+Type $>$\+::\mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter}{Filter}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter}{Filter}}$<$ Sample\+Type $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+Creates a copy of another filter. \mbox{\Hypertarget{classdsp_1_1_state_variable_filter_1_1_filter_a58b5886ef09a00c4e77be32028f6ee7b}\label{classdsp_1_1_state_variable_filter_1_1_filter_a58b5886ef09a00c4e77be32028f6ee7b}} 
+\index{dsp::StateVariableFilter::Filter$<$ SampleType $>$@{dsp::StateVariableFilter::Filter$<$ SampleType $>$}!Filter@{Filter}}
+\index{Filter@{Filter}!dsp::StateVariableFilter::Filter$<$ SampleType $>$@{dsp::StateVariableFilter::Filter$<$ SampleType $>$}}
+\doxysubsubsection{\texorpdfstring{Filter()}{Filter()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$typename Sample\+Type $>$ \\
+\mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter}{dsp\+::\+State\+Variable\+Filter\+::\+Filter}}$<$ Sample\+Type $>$\+::\mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter}{Filter}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter}{Filter}}$<$ Sample\+Type $>$ \&\&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+Move constructor 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classdsp_1_1_state_variable_filter_1_1_filter_a8a27c5f7e6331e78bffe637f6429cf9a}\label{classdsp_1_1_state_variable_filter_1_1_filter_a8a27c5f7e6331e78bffe637f6429cf9a}} 
+\index{dsp::StateVariableFilter::Filter$<$ SampleType $>$@{dsp::StateVariableFilter::Filter$<$ SampleType $>$}!prepare@{prepare}}
+\index{prepare@{prepare}!dsp::StateVariableFilter::Filter$<$ SampleType $>$@{dsp::StateVariableFilter::Filter$<$ SampleType $>$}}
+\doxysubsubsection{\texorpdfstring{prepare()}{prepare()}}
+{\footnotesize\ttfamily template$<$typename Sample\+Type $>$ \\
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter}{dsp\+::\+State\+Variable\+Filter\+::\+Filter}}$<$ Sample\+Type $>$\+::prepare (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{structdsp_1_1_process_spec}{Process\+Spec}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Initialization of the filter \mbox{\Hypertarget{classdsp_1_1_state_variable_filter_1_1_filter_a0aadffe10e8c312b7cc06b688cc35ec4}\label{classdsp_1_1_state_variable_filter_1_1_filter_a0aadffe10e8c312b7cc06b688cc35ec4}} 
+\index{dsp::StateVariableFilter::Filter$<$ SampleType $>$@{dsp::StateVariableFilter::Filter$<$ SampleType $>$}!process@{process}}
+\index{process@{process}!dsp::StateVariableFilter::Filter$<$ SampleType $>$@{dsp::StateVariableFilter::Filter$<$ SampleType $>$}}
+\doxysubsubsection{\texorpdfstring{process()}{process()}}
+{\footnotesize\ttfamily template$<$typename Sample\+Type $>$ \\
+template$<$typename Process\+Context $>$ \\
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter}{dsp\+::\+State\+Variable\+Filter\+::\+Filter}}$<$ Sample\+Type $>$\+::process (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} Process\+Context \&}]{context }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+\mbox{\Hypertarget{classdsp_1_1_state_variable_filter_1_1_filter_acc775af15e580f28d2fb45e4a34016fc}\label{classdsp_1_1_state_variable_filter_1_1_filter_acc775af15e580f28d2fb45e4a34016fc}} 
+\index{dsp::StateVariableFilter::Filter$<$ SampleType $>$@{dsp::StateVariableFilter::Filter$<$ SampleType $>$}!processSample@{processSample}}
+\index{processSample@{processSample}!dsp::StateVariableFilter::Filter$<$ SampleType $>$@{dsp::StateVariableFilter::Filter$<$ SampleType $>$}}
+\doxysubsubsection{\texorpdfstring{processSample()}{processSample()}}
+{\footnotesize\ttfamily template$<$typename Sample\+Type $>$ \\
+Sample\+Type JUCE\+\_\+\+VECTOR\+\_\+\+CALLTYPE \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter}{dsp\+::\+State\+Variable\+Filter\+::\+Filter}}$<$ Sample\+Type $>$\+::process\+Sample (\begin{DoxyParamCaption}\item[{Sample\+Type}]{sample }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Processes a single sample, without any locking or checking. Use this if you need processing of a single value. \mbox{\Hypertarget{classdsp_1_1_state_variable_filter_1_1_filter_ab42720fdd6ec1b33af82d05ba73117a1}\label{classdsp_1_1_state_variable_filter_1_1_filter_ab42720fdd6ec1b33af82d05ba73117a1}} 
+\index{dsp::StateVariableFilter::Filter$<$ SampleType $>$@{dsp::StateVariableFilter::Filter$<$ SampleType $>$}!reset@{reset}}
+\index{reset@{reset}!dsp::StateVariableFilter::Filter$<$ SampleType $>$@{dsp::StateVariableFilter::Filter$<$ SampleType $>$}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily template$<$typename Sample\+Type $>$ \\
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter}{dsp\+::\+State\+Variable\+Filter\+::\+Filter}}$<$ Sample\+Type $>$\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Resets the filter\textquotesingle{}s processing pipeline. \mbox{\Hypertarget{classdsp_1_1_state_variable_filter_1_1_filter_a50a83728541c4c4d88de9b5393352514}\label{classdsp_1_1_state_variable_filter_1_1_filter_a50a83728541c4c4d88de9b5393352514}} 
+\index{dsp::StateVariableFilter::Filter$<$ SampleType $>$@{dsp::StateVariableFilter::Filter$<$ SampleType $>$}!snapToZero@{snapToZero}}
+\index{snapToZero@{snapToZero}!dsp::StateVariableFilter::Filter$<$ SampleType $>$@{dsp::StateVariableFilter::Filter$<$ SampleType $>$}}
+\doxysubsubsection{\texorpdfstring{snapToZero()}{snapToZero()}}
+{\footnotesize\ttfamily template$<$typename Sample\+Type $>$ \\
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter}{dsp\+::\+State\+Variable\+Filter\+::\+Filter}}$<$ Sample\+Type $>$\+::snap\+To\+Zero (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Ensure that the state variables are rounded to zero if the state variables are denormals. This is only needed if you are doing sample by sample processing. 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classdsp_1_1_state_variable_filter_1_1_filter_a126f873f372d6a07eac8b9e11e415218}\label{classdsp_1_1_state_variable_filter_1_1_filter_a126f873f372d6a07eac8b9e11e415218}} 
+\index{dsp::StateVariableFilter::Filter$<$ SampleType $>$@{dsp::StateVariableFilter::Filter$<$ SampleType $>$}!parameters@{parameters}}
+\index{parameters@{parameters}!dsp::StateVariableFilter::Filter$<$ SampleType $>$@{dsp::StateVariableFilter::Filter$<$ SampleType $>$}}
+\doxysubsubsection{\texorpdfstring{parameters}{parameters}}
+{\footnotesize\ttfamily template$<$typename Sample\+Type $>$ \\
+\mbox{\hyperlink{structdsp_1_1_state_variable_filter_1_1_parameters}{Parameters}}$<$\mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter_aaeb54a3b0b57c6edd7ea6d7abe354b59}{Numeric\+Type}}$>$\+::Ptr \mbox{\hyperlink{classdsp_1_1_state_variable_filter_1_1_filter}{dsp\+::\+State\+Variable\+Filter\+::\+Filter}}$<$ Sample\+Type $>$\+::parameters}
+
+The parameters of the state variable filter. It\textquotesingle{}s up to the caller to ensure that these parameters are modified in a thread-\/safe way. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+dsp/processors/\mbox{\hyperlink{juce___state_variable_filter_8h}{juce\+\_\+\+State\+Variable\+Filter.\+h}}\end{DoxyCompactItemize}

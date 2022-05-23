@@ -1,0 +1,60 @@
+\hypertarget{_hyperbolic_cosine_window_8h_source}{}\doxysection{Hyperbolic\+Cosine\+Window.\+h}
+\label{_hyperbolic_cosine_window_8h_source}\index{build/juce\_audio\_devices/native/oboe/src/flowgraph/resampler/HyperbolicCosineWindow.h@{build/juce\_audio\_devices/native/oboe/src/flowgraph/resampler/HyperbolicCosineWindow.h}}
+\mbox{\hyperlink{_hyperbolic_cosine_window_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{ * Copyright 2019 The Android Open Source Project}}
+\DoxyCodeLine{3 \textcolor{comment}{ *}}
+\DoxyCodeLine{4 \textcolor{comment}{ * Licensed under the Apache License, Version 2.0 (the "{}License"{});}}
+\DoxyCodeLine{5 \textcolor{comment}{ * you may not use this file except in compliance with the License.}}
+\DoxyCodeLine{6 \textcolor{comment}{ * You may obtain a copy of the License at}}
+\DoxyCodeLine{7 \textcolor{comment}{ *}}
+\DoxyCodeLine{8 \textcolor{comment}{ *      http://www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{9 \textcolor{comment}{ *}}
+\DoxyCodeLine{10 \textcolor{comment}{ * Unless required by applicable law or agreed to in writing, software}}
+\DoxyCodeLine{11 \textcolor{comment}{ * distributed under the License is distributed on an "{}AS IS"{} BASIS,}}
+\DoxyCodeLine{12 \textcolor{comment}{ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.}}
+\DoxyCodeLine{13 \textcolor{comment}{ * See the License for the specific language governing permissions and}}
+\DoxyCodeLine{14 \textcolor{comment}{ * limitations under the License.}}
+\DoxyCodeLine{15 \textcolor{comment}{ */}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#ifndef RESAMPLER\_HYPERBOLIC\_COSINE\_WINDOW\_H}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#define RESAMPLER\_HYPERBOLIC\_COSINE\_WINDOW\_H}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#include <math.h>}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceresampler}{resampler}} \{}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{31 \textcolor{keyword}{class }\mbox{\hyperlink{classresampler_1_1_hyperbolic_cosine_window}{HyperbolicCosineWindow}} \{}
+\DoxyCodeLine{32 \textcolor{keyword}{public}:}
+\DoxyCodeLine{33     \mbox{\hyperlink{classresampler_1_1_hyperbolic_cosine_window_a7d756509ca484851f6e03d35a906bd81}{HyperbolicCosineWindow}}() \{}
+\DoxyCodeLine{34         \mbox{\hyperlink{classresampler_1_1_hyperbolic_cosine_window_adb0a372bf9d9825bb93763b3000cbd59}{setStopBandAttenuation}}(60);}
+\DoxyCodeLine{35     \}}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{41     \textcolor{keywordtype}{double} \mbox{\hyperlink{classresampler_1_1_hyperbolic_cosine_window_adb0a372bf9d9825bb93763b3000cbd59}{setStopBandAttenuation}}(\textcolor{keywordtype}{double} attenuation) \{}
+\DoxyCodeLine{42         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespacegl_a63bc6ce06ecbc516b6e22d01f9f4dd09}{alpha}} = ((-\/325.1e-\/6 * attenuation + 0.1677) * attenuation) -\/ 3.149;}
+\DoxyCodeLine{43         \mbox{\hyperlink{classresampler_1_1_hyperbolic_cosine_window_a12d9e0e955e1d53d8179536dd20f5c1b}{setAlpha}}(\mbox{\hyperlink{namespacegl_a63bc6ce06ecbc516b6e22d01f9f4dd09}{alpha}});}
+\DoxyCodeLine{44         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a63bc6ce06ecbc516b6e22d01f9f4dd09}{alpha}};}
+\DoxyCodeLine{45     \}}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47     \textcolor{keywordtype}{void} \mbox{\hyperlink{classresampler_1_1_hyperbolic_cosine_window_a12d9e0e955e1d53d8179536dd20f5c1b}{setAlpha}}(\textcolor{keywordtype}{double} \mbox{\hyperlink{namespacegl_a63bc6ce06ecbc516b6e22d01f9f4dd09}{alpha}}) \{}
+\DoxyCodeLine{48         mAlpha = \mbox{\hyperlink{namespacegl_a63bc6ce06ecbc516b6e22d01f9f4dd09}{alpha}};}
+\DoxyCodeLine{49         mInverseCoshAlpha = 1.0 / cosh(\mbox{\hyperlink{namespacegl_a63bc6ce06ecbc516b6e22d01f9f4dd09}{alpha}});}
+\DoxyCodeLine{50     \}}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{55     \textcolor{keywordtype}{double} \mbox{\hyperlink{classresampler_1_1_hyperbolic_cosine_window_a0af34b781678f813d6eb2e10360d60dc}{operator()}}(\textcolor{keywordtype}{double} \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}) \{}
+\DoxyCodeLine{56         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespacegl_a95978d40e4513069cd0bd5b5c77d2023}{x2}} = \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}} * \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}};}
+\DoxyCodeLine{57         \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a95978d40e4513069cd0bd5b5c77d2023}{x2}} >= 1.0) \textcolor{keywordflow}{return} 0.0;}
+\DoxyCodeLine{58         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespacegl_a4a17fbf5c7c6ae1f233cf4944a70237d}{w}} = mAlpha * sqrt(1.0 -\/ \mbox{\hyperlink{namespacegl_a95978d40e4513069cd0bd5b5c77d2023}{x2}});}
+\DoxyCodeLine{59         \textcolor{keywordflow}{return} cosh(\mbox{\hyperlink{namespacegl_a4a17fbf5c7c6ae1f233cf4944a70237d}{w}}) * mInverseCoshAlpha;}
+\DoxyCodeLine{60     \}}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62 \textcolor{keyword}{private}:}
+\DoxyCodeLine{63     \textcolor{keywordtype}{double} mAlpha = 0.0;}
+\DoxyCodeLine{64     \textcolor{keywordtype}{double} mInverseCoshAlpha = 1.0;}
+\DoxyCodeLine{65 \};}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67 \} \textcolor{comment}{// namespace resampler}}
+\DoxyCodeLine{68 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//RESAMPLER\_HYPERBOLIC\_COSINE\_WINDOW\_H}}
+
+\end{DoxyCode}

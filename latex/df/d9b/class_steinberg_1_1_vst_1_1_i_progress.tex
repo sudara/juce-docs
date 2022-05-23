@@ -1,0 +1,139 @@
+\hypertarget{class_steinberg_1_1_vst_1_1_i_progress}{}\doxysection{Steinberg\+::Vst\+::IProgress Class Reference}
+\label{class_steinberg_1_1_vst_1_1_i_progress}\index{Steinberg::Vst::IProgress@{Steinberg::Vst::IProgress}}
+
+
+{\ttfamily \#include $<$ivsteditcontroller.\+h$>$}
+
+Inheritance diagram for Steinberg\+::Vst\+::IProgress\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{df/d9b/class_steinberg_1_1_vst_1_1_i_progress}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_progress_a4897b0b12dc3787c47e173d4b68ff416}{Progress\+Type}} \+: uint32 \{ \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_progress_a4897b0b12dc3787c47e173d4b68ff416a9b35963d77a0b7d5a1dc764f3beda22e}{Async\+State\+Restoration}} = 0
+, \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_progress_a4897b0b12dc3787c47e173d4b68ff416a3c3fc4e4fcc7d9f9ae53208906113abb}{UIBackground\+Task}}
+ \}
+\item 
+using \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_progress_a2fd5519962f12bf960d3f62ff1b07471}{ID}} = \mbox{\hyperlink{namespace_steinberg_a04d83e9fd2cf38c5ca71f1359271476f}{uint64}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\+\_\+\+API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_progress_a757cbd05f891631f39e2d1b386ab89b6}{start}} (\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_progress_a4897b0b12dc3787c47e173d4b68ff416}{Progress\+Type}} type, \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{namespace_steinberg_aa659520e55d6fadd25b885790651c044}{tchar}} $\ast$optional\+Description, \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_progress_a2fd5519962f12bf960d3f62ff1b07471}{ID}} \&out\+ID)=0
+\item 
+virtual \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\+\_\+\+API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_progress_a0039d61d1139a4aa3d7e7fe9dd71e2d9}{update}} (\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_progress_a2fd5519962f12bf960d3f62ff1b07471}{ID}} id, \mbox{\hyperlink{namespace_steinberg_1_1_vst_a4db0796162b8b9751ae472df998f8736}{Param\+Value}} norm\+Value)=0
+\item 
+virtual \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\+\_\+\+API \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_progress_aa834a8c9026fa477e93e3c1c120e10b9}{finish}} (\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_progress_a2fd5519962f12bf960d3f62ff1b07471}{ID}} id)=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_steinberg_1_1_f_u_i_d}{FUID}} \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_progress_a0f8a9f311ea56cbd68cc115b43c34b91}{iid}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Extended host callback interface for an edit controller\+: \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_progress}{Vst\+::\+IProgress}}
+
+
+\begin{DoxyItemize}
+\item \mbox{[}host imp\mbox{]}
+\item \mbox{[}extends \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_component_handler}{IComponent\+Handler}}\mbox{]}
+\item \mbox{[}released\+: 3.\+7.\+0\mbox{]}
+\item \mbox{[}optional\mbox{]}
+\end{DoxyItemize}
+
+Allows the plug-\/in to request the host to create a progress for some specific tasks which take some time. The host can visualize the progress as read-\/only UI elements. For example, after loading a project where a plug-\/in needs to load extra data (e.\+g. samples) in a background thread, this enables the host to get and visualize the current status of the loading progress and to inform the user when the loading is finished. Note\+: During the progress, the host can unload the plug-\/in at any time. Make sure that the plug-\/in supports this use case.\hypertarget{class_steinberg_1_1_vst_1_1_i_progress_IProgressExample}{}\doxysubsection{Example}\label{class_steinberg_1_1_vst_1_1_i_progress_IProgressExample}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\textcolor{comment}{// we are in the editcontroller:}}
+\DoxyCodeLine{\textcolor{comment}{// as member: IProgress::ID mProgressID;}}
+\DoxyCodeLine{}
+\DoxyCodeLine{FUnknownPtr<IProgress> progress (componentHandler);}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (progress)}
+\DoxyCodeLine{    progress-\/>start (IProgress::ProgressType::UIBackgroundTask, \mbox{\hyperlink{fstrdefs_8h_a18d295a837ac71add5578860b55e5502}{STR}} (\textcolor{stringliteral}{"{}Load Samples..."{}}), mProgressID);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// ...}}
+\DoxyCodeLine{myProgressValue += incProgressStep;}
+\DoxyCodeLine{FUnknownPtr<IProgress> progress (componentHandler);}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (progress)}
+\DoxyCodeLine{    progress-\/>update (mProgressID, myProgressValue);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// ...}}
+\DoxyCodeLine{FUnknownPtr<IProgress> progress (componentHandler);}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (progress)}
+\DoxyCodeLine{    progress-\/>finish (mProgressID);}
+
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_component_handler}{IComponent\+Handler}} 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{class_steinberg_1_1_vst_1_1_i_progress_a2fd5519962f12bf960d3f62ff1b07471}\label{class_steinberg_1_1_vst_1_1_i_progress_a2fd5519962f12bf960d3f62ff1b07471}} 
+\index{Steinberg::Vst::IProgress@{Steinberg::Vst::IProgress}!ID@{ID}}
+\index{ID@{ID}!Steinberg::Vst::IProgress@{Steinberg::Vst::IProgress}}
+\doxysubsubsection{\texorpdfstring{ID}{ID}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_progress_a2fd5519962f12bf960d3f62ff1b07471}{Steinberg\+::\+Vst\+::\+IProgress\+::\+ID}} =  \mbox{\hyperlink{namespace_steinberg_a04d83e9fd2cf38c5ca71f1359271476f}{uint64}}}
+
+
+
+\doxysubsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{class_steinberg_1_1_vst_1_1_i_progress_a4897b0b12dc3787c47e173d4b68ff416}\label{class_steinberg_1_1_vst_1_1_i_progress_a4897b0b12dc3787c47e173d4b68ff416}} 
+\index{Steinberg::Vst::IProgress@{Steinberg::Vst::IProgress}!ProgressType@{ProgressType}}
+\index{ProgressType@{ProgressType}!Steinberg::Vst::IProgress@{Steinberg::Vst::IProgress}}
+\doxysubsubsection{\texorpdfstring{ProgressType}{ProgressType}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_progress_a4897b0b12dc3787c47e173d4b68ff416}{Steinberg\+::\+Vst\+::\+IProgress\+::\+Progress\+Type}} \+: \mbox{\hyperlink{namespace_steinberg_af4518d725547bee20d4e185e8d3f1965}{uint32}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AsyncStateRestoration@{AsyncStateRestoration}!Steinberg::Vst::IProgress@{Steinberg::Vst::IProgress}}\index{Steinberg::Vst::IProgress@{Steinberg::Vst::IProgress}!AsyncStateRestoration@{AsyncStateRestoration}}}\mbox{\Hypertarget{class_steinberg_1_1_vst_1_1_i_progress_a4897b0b12dc3787c47e173d4b68ff416a9b35963d77a0b7d5a1dc764f3beda22e}\label{class_steinberg_1_1_vst_1_1_i_progress_a4897b0b12dc3787c47e173d4b68ff416a9b35963d77a0b7d5a1dc764f3beda22e}} 
+Async\+State\+Restoration&plug-\/in state is restored async (in a background \mbox{\hyperlink{class_thread}{Thread}}) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UIBackgroundTask@{UIBackgroundTask}!Steinberg::Vst::IProgress@{Steinberg::Vst::IProgress}}\index{Steinberg::Vst::IProgress@{Steinberg::Vst::IProgress}!UIBackgroundTask@{UIBackgroundTask}}}\mbox{\Hypertarget{class_steinberg_1_1_vst_1_1_i_progress_a4897b0b12dc3787c47e173d4b68ff416a3c3fc4e4fcc7d9f9ae53208906113abb}\label{class_steinberg_1_1_vst_1_1_i_progress_a4897b0b12dc3787c47e173d4b68ff416a3c3fc4e4fcc7d9f9ae53208906113abb}} 
+UIBackground\+Task&a plug-\/in task triggered by a UI action \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_steinberg_1_1_vst_1_1_i_progress_aa834a8c9026fa477e93e3c1c120e10b9}\label{class_steinberg_1_1_vst_1_1_i_progress_aa834a8c9026fa477e93e3c1c120e10b9}} 
+\index{Steinberg::Vst::IProgress@{Steinberg::Vst::IProgress}!finish@{finish}}
+\index{finish@{finish}!Steinberg::Vst::IProgress@{Steinberg::Vst::IProgress}}
+\doxysubsubsection{\texorpdfstring{finish()}{finish()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\+\_\+\+API Steinberg\+::\+Vst\+::\+IProgress\+::finish (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_progress_a2fd5519962f12bf960d3f62ff1b07471}{ID}}}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Finish the progress associated to the given id \mbox{\Hypertarget{class_steinberg_1_1_vst_1_1_i_progress_a757cbd05f891631f39e2d1b386ab89b6}\label{class_steinberg_1_1_vst_1_1_i_progress_a757cbd05f891631f39e2d1b386ab89b6}} 
+\index{Steinberg::Vst::IProgress@{Steinberg::Vst::IProgress}!start@{start}}
+\index{start@{start}!Steinberg::Vst::IProgress@{Steinberg::Vst::IProgress}}
+\doxysubsubsection{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\+\_\+\+API Steinberg\+::\+Vst\+::\+IProgress\+::start (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_progress_a4897b0b12dc3787c47e173d4b68ff416}{Progress\+Type}}}]{type,  }\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{namespace_steinberg_aa659520e55d6fadd25b885790651c044}{tchar}} $\ast$}]{optional\+Description,  }\item[{\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_progress_a2fd5519962f12bf960d3f62ff1b07471}{ID}} \&}]{out\+ID }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Start a new progress of a given type and optional Description. out\+ID is as ID created by the host to identify this newly created progress (for update and finish method) \mbox{\Hypertarget{class_steinberg_1_1_vst_1_1_i_progress_a0039d61d1139a4aa3d7e7fe9dd71e2d9}\label{class_steinberg_1_1_vst_1_1_i_progress_a0039d61d1139a4aa3d7e7fe9dd71e2d9}} 
+\index{Steinberg::Vst::IProgress@{Steinberg::Vst::IProgress}!update@{update}}
+\index{update@{update}!Steinberg::Vst::IProgress@{Steinberg::Vst::IProgress}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\+\_\+\+API Steinberg\+::\+Vst\+::\+IProgress\+::update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_steinberg_1_1_vst_1_1_i_progress_a2fd5519962f12bf960d3f62ff1b07471}{ID}}}]{id,  }\item[{\mbox{\hyperlink{namespace_steinberg_1_1_vst_a4db0796162b8b9751ae472df998f8736}{Param\+Value}}}]{norm\+Value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+\mbox{\hyperlink{namespace_steinberg_1_1_update}{Update}} the progress value (norm\+Value between \mbox{[}0, 1\mbox{]}) associated to the given id 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_steinberg_1_1_vst_1_1_i_progress_a0f8a9f311ea56cbd68cc115b43c34b91}\label{class_steinberg_1_1_vst_1_1_i_progress_a0f8a9f311ea56cbd68cc115b43c34b91}} 
+\index{Steinberg::Vst::IProgress@{Steinberg::Vst::IProgress}!iid@{iid}}
+\index{iid@{iid}!Steinberg::Vst::IProgress@{Steinberg::Vst::IProgress}}
+\doxysubsubsection{\texorpdfstring{iid}{iid}}
+{\footnotesize\ttfamily \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_steinberg_1_1_f_u_i_d}{FUID}} Steinberg\+::\+Vst\+::\+IProgress\+::iid\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+audio\+\_\+processors/format\+\_\+types/\+VST3\+\_\+\+SDK/pluginterfaces/vst/\mbox{\hyperlink{ivsteditcontroller_8h}{ivsteditcontroller.\+h}}\end{DoxyCompactItemize}

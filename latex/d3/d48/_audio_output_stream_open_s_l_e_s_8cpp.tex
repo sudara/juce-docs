@@ -1,0 +1,67 @@
+\hypertarget{_audio_output_stream_open_s_l_e_s_8cpp}{}\doxysection{build/juce\+\_\+audio\+\_\+devices/native/oboe/src/opensles/\+Audio\+Output\+Stream\+Open\+SLES.cpp File Reference}
+\label{_audio_output_stream_open_s_l_e_s_8cpp}\index{build/juce\_audio\_devices/native/oboe/src/opensles/AudioOutputStreamOpenSLES.cpp@{build/juce\_audio\_devices/native/oboe/src/opensles/AudioOutputStreamOpenSLES.cpp}}
+{\ttfamily \#include $<$cassert$>$}\newline
+{\ttfamily \#include $<$SLES/\+Open\+SLES.\+h$>$}\newline
+{\ttfamily \#include $<$SLES/\+Open\+SLES\+\_\+\+Android.\+h$>$}\newline
+{\ttfamily \#include $<$common/\+Audio\+Clock.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}oboe/\+Audio\+Stream\+Builder.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Audio\+Output\+Stream\+Open\+SLES.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Audio\+Stream\+Open\+SLES.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Open\+SLESUtilities.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Output\+Mixer\+Open\+SLES.\+h\char`\"{}}\newline
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+constexpr \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{_audio_output_stream_open_s_l_e_s_8cpp_ab1bcbd12654bcc8948f257a67ae82e92}{SL\+\_\+\+ANDROID\+\_\+\+SPEAKER\+\_\+\+STEREO}} = (SL\+\_\+\+SPEAKER\+\_\+\+FRONT\+\_\+\+LEFT $\vert$ SL\+\_\+\+SPEAKER\+\_\+\+FRONT\+\_\+\+RIGHT)
+\item 
+constexpr \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{_audio_output_stream_open_s_l_e_s_8cpp_aa926a0b21bd24922ce8c8f2097fc09c8}{SL\+\_\+\+ANDROID\+\_\+\+SPEAKER\+\_\+\+QUAD}}
+\item 
+constexpr \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{_audio_output_stream_open_s_l_e_s_8cpp_a74595dccd567b617998601db7f3689bf}{SL\+\_\+\+ANDROID\+\_\+\+SPEAKER\+\_\+5\+DOT1}}
+\item 
+constexpr \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{_audio_output_stream_open_s_l_e_s_8cpp_aae924ef97d9647f00a9000e91ea16d4f}{SL\+\_\+\+ANDROID\+\_\+\+SPEAKER\+\_\+7\+DOT1}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{_audio_output_stream_open_s_l_e_s_8cpp_a74595dccd567b617998601db7f3689bf}\label{_audio_output_stream_open_s_l_e_s_8cpp_a74595dccd567b617998601db7f3689bf}} 
+\index{AudioOutputStreamOpenSLES.cpp@{AudioOutputStreamOpenSLES.cpp}!SL\_ANDROID\_SPEAKER\_5DOT1@{SL\_ANDROID\_SPEAKER\_5DOT1}}
+\index{SL\_ANDROID\_SPEAKER\_5DOT1@{SL\_ANDROID\_SPEAKER\_5DOT1}!AudioOutputStreamOpenSLES.cpp@{AudioOutputStreamOpenSLES.cpp}}
+\doxysubsubsection{\texorpdfstring{SL\_ANDROID\_SPEAKER\_5DOT1}{SL\_ANDROID\_SPEAKER\_5DOT1}}
+{\footnotesize\ttfamily constexpr \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} SL\+\_\+\+ANDROID\+\_\+\+SPEAKER\+\_\+5\+DOT1\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= (\mbox{\hyperlink{_audio_output_stream_open_s_l_e_s_8cpp_aa926a0b21bd24922ce8c8f2097fc09c8}{SL\_ANDROID\_SPEAKER\_QUAD}}}
+\DoxyCodeLine{        | SL\_SPEAKER\_FRONT\_CENTER  | SL\_SPEAKER\_LOW\_FREQUENCY)}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{_audio_output_stream_open_s_l_e_s_8cpp_aae924ef97d9647f00a9000e91ea16d4f}\label{_audio_output_stream_open_s_l_e_s_8cpp_aae924ef97d9647f00a9000e91ea16d4f}} 
+\index{AudioOutputStreamOpenSLES.cpp@{AudioOutputStreamOpenSLES.cpp}!SL\_ANDROID\_SPEAKER\_7DOT1@{SL\_ANDROID\_SPEAKER\_7DOT1}}
+\index{SL\_ANDROID\_SPEAKER\_7DOT1@{SL\_ANDROID\_SPEAKER\_7DOT1}!AudioOutputStreamOpenSLES.cpp@{AudioOutputStreamOpenSLES.cpp}}
+\doxysubsubsection{\texorpdfstring{SL\_ANDROID\_SPEAKER\_7DOT1}{SL\_ANDROID\_SPEAKER\_7DOT1}}
+{\footnotesize\ttfamily constexpr \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} SL\+\_\+\+ANDROID\+\_\+\+SPEAKER\+\_\+7\+DOT1\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= (\mbox{\hyperlink{_audio_output_stream_open_s_l_e_s_8cpp_a74595dccd567b617998601db7f3689bf}{SL\_ANDROID\_SPEAKER\_5DOT1}} | SL\_SPEAKER\_SIDE\_LEFT}
+\DoxyCodeLine{        | SL\_SPEAKER\_SIDE\_RIGHT)}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{_audio_output_stream_open_s_l_e_s_8cpp_aa926a0b21bd24922ce8c8f2097fc09c8}\label{_audio_output_stream_open_s_l_e_s_8cpp_aa926a0b21bd24922ce8c8f2097fc09c8}} 
+\index{AudioOutputStreamOpenSLES.cpp@{AudioOutputStreamOpenSLES.cpp}!SL\_ANDROID\_SPEAKER\_QUAD@{SL\_ANDROID\_SPEAKER\_QUAD}}
+\index{SL\_ANDROID\_SPEAKER\_QUAD@{SL\_ANDROID\_SPEAKER\_QUAD}!AudioOutputStreamOpenSLES.cpp@{AudioOutputStreamOpenSLES.cpp}}
+\doxysubsubsection{\texorpdfstring{SL\_ANDROID\_SPEAKER\_QUAD}{SL\_ANDROID\_SPEAKER\_QUAD}}
+{\footnotesize\ttfamily constexpr \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} SL\+\_\+\+ANDROID\+\_\+\+SPEAKER\+\_\+\+QUAD\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= (\mbox{\hyperlink{_audio_output_stream_open_s_l_e_s_8cpp_ab1bcbd12654bcc8948f257a67ae82e92}{SL\_ANDROID\_SPEAKER\_STEREO}}}
+\DoxyCodeLine{        | SL\_SPEAKER\_BACK\_LEFT | SL\_SPEAKER\_BACK\_RIGHT)}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{_audio_output_stream_open_s_l_e_s_8cpp_ab1bcbd12654bcc8948f257a67ae82e92}\label{_audio_output_stream_open_s_l_e_s_8cpp_ab1bcbd12654bcc8948f257a67ae82e92}} 
+\index{AudioOutputStreamOpenSLES.cpp@{AudioOutputStreamOpenSLES.cpp}!SL\_ANDROID\_SPEAKER\_STEREO@{SL\_ANDROID\_SPEAKER\_STEREO}}
+\index{SL\_ANDROID\_SPEAKER\_STEREO@{SL\_ANDROID\_SPEAKER\_STEREO}!AudioOutputStreamOpenSLES.cpp@{AudioOutputStreamOpenSLES.cpp}}
+\doxysubsubsection{\texorpdfstring{SL\_ANDROID\_SPEAKER\_STEREO}{SL\_ANDROID\_SPEAKER\_STEREO}}
+{\footnotesize\ttfamily constexpr \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} SL\+\_\+\+ANDROID\+\_\+\+SPEAKER\+\_\+\+STEREO = (SL\+\_\+\+SPEAKER\+\_\+\+FRONT\+\_\+\+LEFT $\vert$ SL\+\_\+\+SPEAKER\+\_\+\+FRONT\+\_\+\+RIGHT)\hspace{0.3cm}{\ttfamily [constexpr]}}
+

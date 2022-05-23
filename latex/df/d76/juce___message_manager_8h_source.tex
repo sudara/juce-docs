@@ -1,0 +1,208 @@
+\hypertarget{juce___message_manager_8h_source}{}\doxysection{juce\+\_\+\+Message\+Manager.\+h}
+\label{juce___message_manager_8h_source}\index{build/juce\_events/messages/juce\_MessageManager.h@{build/juce\_events/messages/juce\_MessageManager.h}}
+\mbox{\hyperlink{juce___message_manager_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{keyword}{class }\mbox{\hyperlink{class_message_manager_lock}{MessageManagerLock}};}
+\DoxyCodeLine{28 \textcolor{keyword}{class }\mbox{\hyperlink{class_thread_pool_job}{ThreadPoolJob}};}
+\DoxyCodeLine{29 \textcolor{keyword}{class }\mbox{\hyperlink{class_action_listener}{ActionListener}};}
+\DoxyCodeLine{30 \textcolor{keyword}{class }\mbox{\hyperlink{class_action_broadcaster}{ActionBroadcaster}};}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{34 \textcolor{comment}{}\textcolor{keyword}{using} \mbox{\hyperlink{group__juce__events-messages_ga28828f1e64fa5a21b2ccaf64df56b863}{MessageCallbackFunction}} = \textcolor{keywordtype}{void}* (\textcolor{keywordtype}{void}* userData);}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{45 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_message_manager}{MessageManager}}  final}
+\DoxyCodeLine{46 \{}
+\DoxyCodeLine{47 \textcolor{keyword}{public}:}
+\DoxyCodeLine{48     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{50 \textcolor{comment}{}    \textcolor{keyword}{static} \mbox{\hyperlink{class_message_manager}{MessageManager}}* \mbox{\hyperlink{class_message_manager_a4367fa495f95a5562b58dde1ad0e965b}{getInstance}}();}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{53     \textcolor{keyword}{static} \mbox{\hyperlink{class_message_manager}{MessageManager}}* \mbox{\hyperlink{class_message_manager_a28b303e083ee94009ca6fe1c757e7421}{getInstanceWithoutCreating}}() noexcept;}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{58     static \textcolor{keywordtype}{void} deleteInstance();}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{68 \textcolor{comment}{}    \textcolor{keywordtype}{void} runDispatchLoop();}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{77     \textcolor{keywordtype}{void} stopDispatchLoop();}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{81     \textcolor{keywordtype}{bool} hasStopMessageBeenSent() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept        \{ \textcolor{keywordflow}{return} quitMessagePosted.get() != 0; \}}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83 \textcolor{preprocessor}{   \#if JUCE\_MODAL\_LOOPS\_PERMITTED}}
+\DoxyCodeLine{89     \textcolor{keywordtype}{bool} runDispatchLoopUntil (\textcolor{keywordtype}{int} millisecondsToRunFor);}
+\DoxyCodeLine{90 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{98 \textcolor{comment}{}    \textcolor{keyword}{static} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_message_manager_acfe6da5271c2ab76fdb0414b235ed095}{callAsync}} (\mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\textcolor{keywordtype}{void}()> functionToCall);}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{118     \textcolor{keywordtype}{void}* \mbox{\hyperlink{class_message_manager_a7dfc992326dc090f1ade02f62614bad8}{callFunctionOnMessageThread}} (\mbox{\hyperlink{group__juce__events-messages_ga28828f1e64fa5a21b2ccaf64df56b863}{MessageCallbackFunction}}* \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}}, \textcolor{keywordtype}{void}* userData);}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{121     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_message_manager_accd7b539b31d809c30685b3d49327322}{isThisTheMessageThread}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{128     \textcolor{keywordtype}{void} setCurrentThreadAsMessageThread();}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{135     \mbox{\hyperlink{class_thread}{Thread}}::ThreadID getCurrentMessageThread() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept            \{ \textcolor{keywordflow}{return} messageThreadId; \}}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{144     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_message_manager_aebd4b8896d7b6bdfa34d3cd8eb2e1777}{currentThreadHasLockedMessageManager}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{149     static \textcolor{keywordtype}{bool} existsAndIsLockedByCurrentThread() noexcept;}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{154     static \textcolor{keywordtype}{bool} existsAndIsCurrentThread() noexcept;}
+\DoxyCodeLine{155 }
+\DoxyCodeLine{156     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{163 \textcolor{comment}{}    static \textcolor{keywordtype}{void} broadcastMessage (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}}\& messageText);}
+\DoxyCodeLine{164 }
+\DoxyCodeLine{172     \textcolor{keywordtype}{void} registerBroadcastListener (\mbox{\hyperlink{class_action_listener}{ActionListener}}* listener);}
+\DoxyCodeLine{173 }
+\DoxyCodeLine{175     \textcolor{keywordtype}{void} deregisterBroadcastListener (\mbox{\hyperlink{class_action_listener}{ActionListener}}* listener);}
+\DoxyCodeLine{176 }
+\DoxyCodeLine{177     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{182 \textcolor{comment}{}    class \mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_message_manager_1_1_message_base}{MessageBase}}  : public \mbox{\hyperlink{class_reference_counted_object}{ReferenceCountedObject}}}
+\DoxyCodeLine{183     \{}
+\DoxyCodeLine{184     \textcolor{keyword}{public}:}
+\DoxyCodeLine{185         \mbox{\hyperlink{class_message_manager_1_1_message_base_a81f5568f81d18002196e5882f9d9b40a}{MessageBase}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{186         \mbox{\hyperlink{class_message_manager_1_1_message_base_a0a9ad0ca2ae9e52337755a557649c928}{\string~MessageBase}}() \textcolor{keyword}{override} = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{187 }
+\DoxyCodeLine{188         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_message_manager_1_1_message_base_a3cbc8f5a0aa7496a7653fa3c0fd49232}{messageCallback}}() = 0;}
+\DoxyCodeLine{189         \textcolor{keywordtype}{bool} post();}
+\DoxyCodeLine{190 }
+\DoxyCodeLine{191         \textcolor{keyword}{using} \mbox{\hyperlink{class_reference_counted_object_ptr}{Ptr}} = \mbox{\hyperlink{class_reference_counted_object_ptr}{ReferenceCountedObjectPtr<MessageBase>}};}
+\DoxyCodeLine{192 }
+\DoxyCodeLine{193         \mbox{\hyperlink{group__juce__core-system_ga6ab7a603bf4435c7cb286b1744366eb2}{JUCE\_DECLARE\_NON\_COPYABLE}} (\mbox{\hyperlink{class_message_manager_1_1_message_base}{MessageBase}})}
+\DoxyCodeLine{194     \};}
+\DoxyCodeLine{195 }
+\DoxyCodeLine{196     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{200 \textcolor{comment}{}    \textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_message_manager_1_1_lock}{Lock}}}
+\DoxyCodeLine{201     \{}
+\DoxyCodeLine{202     \textcolor{keyword}{public}:}
+\DoxyCodeLine{210         \mbox{\hyperlink{class_message_manager_1_1_lock_a967f5c40c7c0d139ad13d7db9ac8b671}{Lock}}();}
+\DoxyCodeLine{211 }
+\DoxyCodeLine{213         \mbox{\hyperlink{class_message_manager_1_1_lock_a3f3f0ff1d43e8805b8875e79acca8dba}{\string~Lock}}();}
+\DoxyCodeLine{214 }
+\DoxyCodeLine{227          \textcolor{keywordtype}{void} \mbox{\hyperlink{class_message_manager_1_1_lock_a922a156059b20be5002a9fcd20593a1a}{enter}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{228 }
+\DoxyCodeLine{272         \textcolor{keywordtype}{bool} tryEnter() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{273 }
+\DoxyCodeLine{277         \textcolor{keywordtype}{void} exit() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{278 }
+\DoxyCodeLine{285         \textcolor{keywordtype}{void} abort() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{286 }
+\DoxyCodeLine{287         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{289 \textcolor{comment}{}        using \mbox{\hyperlink{class_generic_scoped_lock}{ScopedLockType}} = \mbox{\hyperlink{class_generic_scoped_lock}{GenericScopedLock}}<\mbox{\hyperlink{class_message_manager_1_1_lock}{Lock}}>;}
+\DoxyCodeLine{290 }
+\DoxyCodeLine{292         using \mbox{\hyperlink{class_generic_scoped_unlock}{ScopedUnlockType}} = \mbox{\hyperlink{class_generic_scoped_unlock}{GenericScopedUnlock}}<\mbox{\hyperlink{class_message_manager_1_1_lock}{Lock}}>;}
+\DoxyCodeLine{293 }
+\DoxyCodeLine{295         using \mbox{\hyperlink{class_generic_scoped_try_lock}{ScopedTryLockType}} = \mbox{\hyperlink{class_generic_scoped_try_lock}{GenericScopedTryLock}}<\mbox{\hyperlink{class_message_manager_1_1_lock}{Lock}}>;}
+\DoxyCodeLine{296 }
+\DoxyCodeLine{297     private:}
+\DoxyCodeLine{298         struct BlockingMessage;}
+\DoxyCodeLine{299         friend class \mbox{\hyperlink{class_reference_counted_object_ptr}{ReferenceCountedObjectPtr}}<BlockingMessage>;}
+\DoxyCodeLine{300 }
+\DoxyCodeLine{301         \textcolor{keywordtype}{bool} tryAcquire (\textcolor{keywordtype}{bool}) \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{302         \textcolor{keywordtype}{void} messageCallback() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}};}
+\DoxyCodeLine{303 }
+\DoxyCodeLine{304         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{305         mutable \mbox{\hyperlink{class_reference_counted_object_ptr}{ReferenceCountedObjectPtr}}<BlockingMessage> blockingMessage;}
+\DoxyCodeLine{306         \mbox{\hyperlink{class_waitable_event}{WaitableEvent}} lockedEvent;}
+\DoxyCodeLine{307         mutable \mbox{\hyperlink{struct_atomic}{Atomic}}<\textcolor{keywordtype}{int}> abortWait, lockGained;}
+\DoxyCodeLine{308     \};}
+\DoxyCodeLine{309 }
+\DoxyCodeLine{310     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{311    \textcolor{preprocessor}{\#ifndef DOXYGEN}}
+\DoxyCodeLine{312     \textcolor{comment}{// Internal methods -\/ do not use!}}
+\DoxyCodeLine{313     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_message_manager_a869e08aec42d5fed04d5c3c0a437b302}{deliverBroadcastMessage}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\&);}
+\DoxyCodeLine{314     \mbox{\hyperlink{class_message_manager_a093838e015cf48626f6caa6465788890}{\string~MessageManager}}() noexcept;}
+\DoxyCodeLine{315    \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{316 }
+\DoxyCodeLine{317 \textcolor{keyword}{private}:}
+\DoxyCodeLine{318     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{319     \mbox{\hyperlink{class_message_manager}{MessageManager}}() noexcept;}
+\DoxyCodeLine{320 }
+\DoxyCodeLine{321     static \mbox{\hyperlink{class_message_manager}{MessageManager}}* instance;}
+\DoxyCodeLine{322 }
+\DoxyCodeLine{323     friend class \mbox{\hyperlink{class_message_manager_1_1_message_base}{MessageBase}};}
+\DoxyCodeLine{324     class QuitMessage;}
+\DoxyCodeLine{325     friend class QuitMessage;}
+\DoxyCodeLine{326     friend class \mbox{\hyperlink{class_message_manager_lock}{MessageManagerLock}};}
+\DoxyCodeLine{327 }
+\DoxyCodeLine{328     \mbox{\hyperlink{namespacestd}{std}}::unique\_ptr<\mbox{\hyperlink{class_action_broadcaster}{ActionBroadcaster}}> broadcaster;}
+\DoxyCodeLine{329     \mbox{\hyperlink{struct_atomic}{Atomic}}<\textcolor{keywordtype}{int}> quitMessagePosted \{ 0 \}, quitMessageReceived \{ 0 \};}
+\DoxyCodeLine{330     \mbox{\hyperlink{class_thread_adcf5808753df4373be08d38938880f65}{Thread::ThreadID}} messageThreadId;}
+\DoxyCodeLine{331     \mbox{\hyperlink{struct_atomic}{Atomic<Thread::ThreadID>}} threadWithLock;}
+\DoxyCodeLine{332 }
+\DoxyCodeLine{333     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} postMessageToSystemQueue (MessageBase*);}
+\DoxyCodeLine{334     \textcolor{keyword}{static} \textcolor{keywordtype}{void}* exitModalLoopCallback (\textcolor{keywordtype}{void}*);}
+\DoxyCodeLine{335     \textcolor{keyword}{static} \textcolor{keywordtype}{void} doPlatformSpecificInitialisation();}
+\DoxyCodeLine{336     \textcolor{keyword}{static} \textcolor{keywordtype}{void} doPlatformSpecificShutdown();}
+\DoxyCodeLine{337 }
+\DoxyCodeLine{338     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_message_manager}{MessageManager}})}
+\DoxyCodeLine{339 \};}
+\DoxyCodeLine{340 }
+\DoxyCodeLine{341 }
+\DoxyCodeLine{342 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{379 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}} \mbox{\hyperlink{class_message_manager_lock}{MessageManagerLock}}      : \textcolor{keyword}{private} \mbox{\hyperlink{class_thread_1_1_listener}{Thread::Listener}}}
+\DoxyCodeLine{380 \{}
+\DoxyCodeLine{381 \textcolor{keyword}{public}:}
+\DoxyCodeLine{382     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{424 \textcolor{comment}{}    \mbox{\hyperlink{class_message_manager_lock}{MessageManagerLock}} (\mbox{\hyperlink{class_thread}{Thread}}* threadToCheckForExitSignal = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{425 }
+\DoxyCodeLine{426     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{432 \textcolor{comment}{}    \mbox{\hyperlink{class_message_manager_lock}{MessageManagerLock}} (\mbox{\hyperlink{class_thread_pool_job}{ThreadPoolJob}}* jobToCheckForExitSignal);}
+\DoxyCodeLine{433 }
+\DoxyCodeLine{434     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{440 \textcolor{comment}{}    \mbox{\hyperlink{class_message_manager_lock}{\string~MessageManagerLock}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{441 }
+\DoxyCodeLine{442     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{446 \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_message_manager_lock_a5f3d8b6abc27aa324a882abc6e2d96ba}{lockWasGained}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                     \{ \textcolor{keywordflow}{return} locked; \}}
+\DoxyCodeLine{447 }
+\DoxyCodeLine{448 \textcolor{keyword}{private}:}
+\DoxyCodeLine{449     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{450     \mbox{\hyperlink{class_message_manager_1_1_lock}{MessageManager::Lock}} mmLock;}
+\DoxyCodeLine{451     \textcolor{keywordtype}{bool} locked;}
+\DoxyCodeLine{452 }
+\DoxyCodeLine{453     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{454     \textcolor{keywordtype}{bool} attemptLock (\mbox{\hyperlink{class_thread}{Thread}}*, \mbox{\hyperlink{class_thread_pool_job}{ThreadPoolJob}}*);}
+\DoxyCodeLine{455     \textcolor{keywordtype}{void} exitSignalSent() \textcolor{keyword}{override};}
+\DoxyCodeLine{456 }
+\DoxyCodeLine{457     \mbox{\hyperlink{group__juce__core-system_ga6ab7a603bf4435c7cb286b1744366eb2}{JUCE\_DECLARE\_NON\_COPYABLE}} (\mbox{\hyperlink{class_message_manager_lock}{MessageManagerLock}})}
+\DoxyCodeLine{458 \};}
+\DoxyCodeLine{459 }
+\DoxyCodeLine{460 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{466 \textcolor{comment}{}\textcolor{preprocessor}{\#define JUCE\_ASSERT\_MESSAGE\_MANAGER\_IS\_LOCKED \(\backslash\)}}
+\DoxyCodeLine{467 \textcolor{preprocessor}{    jassert (juce::MessageManager::existsAndIsLockedByCurrentThread());}}
+\DoxyCodeLine{468 }
+\DoxyCodeLine{474 \textcolor{preprocessor}{\#define JUCE\_ASSERT\_MESSAGE\_THREAD \(\backslash\)}}
+\DoxyCodeLine{475 \textcolor{preprocessor}{    jassert (juce::MessageManager::existsAndIsCurrentThread());}}
+\DoxyCodeLine{476 }
+\DoxyCodeLine{480 \textcolor{preprocessor}{\#define JUCE\_ASSERT\_MESSAGE\_MANAGER\_EXISTS \(\backslash\)}}
+\DoxyCodeLine{481 \textcolor{preprocessor}{    jassert (juce::MessageManager::getInstanceWithoutCreating() != nullptr);}}
+\DoxyCodeLine{482 }
+\DoxyCodeLine{483 }
+\DoxyCodeLine{484  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{485 }
+
+\end{DoxyCode}

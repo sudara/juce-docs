@@ -1,0 +1,123 @@
+\hypertarget{codebook_8h_source}{}\doxysection{codebook.\+h}
+\label{codebook_8h_source}\index{build/juce\_audio\_formats/codecs/oggvorbis/libvorbis-\/1.3.7/lib/codebook.h@{build/juce\_audio\_formats/codecs/oggvorbis/libvorbis-\/1.3.7/lib/codebook.h}}
+\mbox{\hyperlink{codebook_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/********************************************************************}}
+\DoxyCodeLine{2 \textcolor{comment}{ *                                                                  *}}
+\DoxyCodeLine{3 \textcolor{comment}{ * THIS FILE IS PART OF THE OggVorbis SOFTWARE CODEC SOURCE CODE.   *}}
+\DoxyCodeLine{4 \textcolor{comment}{ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *}}
+\DoxyCodeLine{5 \textcolor{comment}{ * GOVERNED BY A BSD-\/STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *}}
+\DoxyCodeLine{6 \textcolor{comment}{ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *}}
+\DoxyCodeLine{7 \textcolor{comment}{ *                                                                  *}}
+\DoxyCodeLine{8 \textcolor{comment}{ * THE OggVorbis SOURCE CODE IS (C) COPYRIGHT 1994-\/2015             *}}
+\DoxyCodeLine{9 \textcolor{comment}{ * by the Xiph.Org Foundation https://xiph.org/                     *}}
+\DoxyCodeLine{10 \textcolor{comment}{ *                                                                  *}}
+\DoxyCodeLine{11 \textcolor{comment}{ ********************************************************************}}
+\DoxyCodeLine{12 \textcolor{comment}{}}
+\DoxyCodeLine{13 \textcolor{comment}{ function: basic shared codebook operations}}
+\DoxyCodeLine{14 \textcolor{comment}{}}
+\DoxyCodeLine{15 \textcolor{comment}{ ********************************************************************/}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#ifndef \_V\_CODEBOOK\_H\_}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#define \_V\_CODEBOOK\_H\_}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#include "{}../../ogg.h"{}}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 \textcolor{comment}{/* This structure encapsulates huffman and VQ style encoding books; it}}
+\DoxyCodeLine{23 \textcolor{comment}{   doesn't do anything specific to either.}}
+\DoxyCodeLine{24 \textcolor{comment}{}}
+\DoxyCodeLine{25 \textcolor{comment}{   valuelist/quantlist are nonNULL (and q\_* significant) only if}}
+\DoxyCodeLine{26 \textcolor{comment}{   there's entry-\/>value mapping to be done.}}
+\DoxyCodeLine{27 \textcolor{comment}{}}
+\DoxyCodeLine{28 \textcolor{comment}{   If encode-\/side mapping must be done (and thus the entry needs to be}}
+\DoxyCodeLine{29 \textcolor{comment}{   hunted), the auxiliary encode pointer will point to a decision}}
+\DoxyCodeLine{30 \textcolor{comment}{   tree.  This is true of both VQ and huffman, but is mostly useful}}
+\DoxyCodeLine{31 \textcolor{comment}{   with VQ.}}
+\DoxyCodeLine{32 \textcolor{comment}{}}
+\DoxyCodeLine{33 \textcolor{comment}{*/}}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structstatic__codebook}{static\_codebook}}\{}
+\DoxyCodeLine{36   \textcolor{keywordtype}{long}   \mbox{\hyperlink{structstatic__codebook_ad054a29cfda0a663e6c20c880a247300}{dim}};           \textcolor{comment}{/* codebook dimensions (elements per vector) */}}
+\DoxyCodeLine{37   \textcolor{keywordtype}{long}   \mbox{\hyperlink{structstatic__codebook_af672cb700b32f865aa6b3a8807e6bcaf}{entries}};       \textcolor{comment}{/* codebook entries */}}
+\DoxyCodeLine{38   \textcolor{keywordtype}{char}  *\mbox{\hyperlink{structstatic__codebook_a724a2f406f6b19b450ea2493471f8a45}{lengthlist}};    \textcolor{comment}{/* codeword lengths in bits */}}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40   \textcolor{comment}{/* mapping ***************************************************************/}}
+\DoxyCodeLine{41   \textcolor{keywordtype}{int}    \mbox{\hyperlink{structstatic__codebook_a818d20b21c9c6c1d9472a09c4b063794}{maptype}};       \textcolor{comment}{/* 0=none}}
+\DoxyCodeLine{42 \textcolor{comment}{                           1=implicitly populated values from map column}}
+\DoxyCodeLine{43 \textcolor{comment}{                           2=listed arbitrary values */}}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45   \textcolor{comment}{/* The below does a linear, single monotonic sequence mapping. */}}
+\DoxyCodeLine{46   \textcolor{keywordtype}{long}     \mbox{\hyperlink{structstatic__codebook_a8f11e73cd9db46a04fb86743f078a27c}{q\_min}};       \textcolor{comment}{/* packed 32 bit float; quant value 0 maps to minval */}}
+\DoxyCodeLine{47   \textcolor{keywordtype}{long}     \mbox{\hyperlink{structstatic__codebook_a94d93723dc380cd4fe483094e133ecb4}{q\_delta}};     \textcolor{comment}{/* packed 32 bit float; val 1 -\/ val 0 == delta */}}
+\DoxyCodeLine{48   \textcolor{keywordtype}{int}      \mbox{\hyperlink{structstatic__codebook_aaf7234dd01a51b7a70e3ab06122ee7ca}{q\_quant}};     \textcolor{comment}{/* bits: 0 < quant <= 16 */}}
+\DoxyCodeLine{49   \textcolor{keywordtype}{int}      \mbox{\hyperlink{structstatic__codebook_aae1321f5435c0b33f22beb66636aa3b2}{q\_sequencep}}; \textcolor{comment}{/* bitflag */}}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51   \textcolor{keywordtype}{long}     *\mbox{\hyperlink{structstatic__codebook_a2dcab36ea3a9376db5e2772d9256e9f7}{quantlist}};  \textcolor{comment}{/* map == 1: (int)(entries\string^(1/dim)) element column map}}
+\DoxyCodeLine{52 \textcolor{comment}{                           map == 2: list of dim*entries quantized entry vals}}
+\DoxyCodeLine{53 \textcolor{comment}{                        */}}
+\DoxyCodeLine{54   \textcolor{keywordtype}{int} \mbox{\hyperlink{structstatic__codebook_a9992fc79beaacce326a6b6cc4b7f0ef9}{allocedp}};}
+\DoxyCodeLine{55 \} \mbox{\hyperlink{codebook_8h_a8072b8c8d9ef4218235616382a66d379}{static\_codebook}};}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structcodebook}{codebook}}\{}
+\DoxyCodeLine{58   \textcolor{keywordtype}{long} \mbox{\hyperlink{structcodebook_a686979784ac16e673f22201ed3c4a155}{dim}};           \textcolor{comment}{/* codebook dimensions (elements per vector) */}}
+\DoxyCodeLine{59   \textcolor{keywordtype}{long} \mbox{\hyperlink{structcodebook_ad025d4a6ebb7417a99870380bfbd1a66}{entries}};       \textcolor{comment}{/* codebook entries */}}
+\DoxyCodeLine{60   \textcolor{keywordtype}{long} \mbox{\hyperlink{structcodebook_a4ab1a61278a77046c0a213b7ddfe748c}{used\_entries}};  \textcolor{comment}{/* populated codebook entries */}}
+\DoxyCodeLine{61   \textcolor{keyword}{const} \mbox{\hyperlink{structstatic__codebook}{static\_codebook}} *\mbox{\hyperlink{structcodebook_ad3f2dd8f3ad3efffbb5f60d467133ab0}{c}};}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63   \textcolor{comment}{/* for encode, the below are entry-\/ordered, fully populated */}}
+\DoxyCodeLine{64   \textcolor{comment}{/* for decode, the below are ordered by bitreversed codeword and only}}
+\DoxyCodeLine{65 \textcolor{comment}{     used entries are populated */}}
+\DoxyCodeLine{66   \textcolor{keywordtype}{float}        *\mbox{\hyperlink{structcodebook_a88f4e3688982a2060c499f3893f7b27f}{valuelist}};  \textcolor{comment}{/* list of dim*entries actual entry values */}}
+\DoxyCodeLine{67   \mbox{\hyperlink{config__types_8h_a67ee093e22ba3e6332410383f8fa99f0}{ogg\_uint32\_t}} *\mbox{\hyperlink{structcodebook_ad9acbf54e51cd7cb68849d0d222e0d1b}{codelist}};   \textcolor{comment}{/* list of bitstream codewords for each entry */}}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69   \textcolor{keywordtype}{int}          *\mbox{\hyperlink{structcodebook_ae82fa036b73b586d1b6ffcbc07ac10b8}{dec\_index}};  \textcolor{comment}{/* only used if sparseness collapsed */}}
+\DoxyCodeLine{70   \textcolor{keywordtype}{char}         *\mbox{\hyperlink{structcodebook_abe3399fc72b9595715f82b12c0b92d5b}{dec\_codelengths}};}
+\DoxyCodeLine{71   \mbox{\hyperlink{config__types_8h_a67ee093e22ba3e6332410383f8fa99f0}{ogg\_uint32\_t}} *\mbox{\hyperlink{structcodebook_a8ca77cff8ec7bf9b40b212e1e1ca3c68}{dec\_firsttable}};}
+\DoxyCodeLine{72   \textcolor{keywordtype}{int}           \mbox{\hyperlink{structcodebook_ab3661a7669c853181bf70ca9296649c1}{dec\_firsttablen}};}
+\DoxyCodeLine{73   \textcolor{keywordtype}{int}           \mbox{\hyperlink{structcodebook_a53d70c4645254078f75ddd0420ce8e52}{dec\_maxlength}};}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75   \textcolor{comment}{/* The current encoder uses only centered, integer-\/only lattice books. */}}
+\DoxyCodeLine{76   \textcolor{keywordtype}{int}           \mbox{\hyperlink{structcodebook_a02612403c90ae6b2044d926db9764c8a}{quantvals}};}
+\DoxyCodeLine{77   \textcolor{keywordtype}{int}           \mbox{\hyperlink{structcodebook_af5e852ab410920fe29bcaae8552cd491}{minval}};}
+\DoxyCodeLine{78   \textcolor{keywordtype}{int}           \mbox{\hyperlink{structcodebook_aad494f73f5a9601fa1487bc6273a9c51}{delta}};}
+\DoxyCodeLine{79 \} \mbox{\hyperlink{codebook_8h_af43e04db7e9b7fef0d2c8d0a0c6d880e}{codebook}};}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81 \textcolor{keyword}{extern} \textcolor{keywordtype}{void} \mbox{\hyperlink{codebook_8h_a0ed7bb03c373f902d26796714fb97c5b}{vorbis\_staticbook\_destroy}}(\mbox{\hyperlink{structstatic__codebook}{static\_codebook}} *\mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}});}
+\DoxyCodeLine{82 \textcolor{keyword}{extern} \textcolor{keywordtype}{int} \mbox{\hyperlink{codebook_8h_a042a0dce77fd02c52e095c266bb0afb7}{vorbis\_book\_init\_encode}}(\mbox{\hyperlink{structcodebook}{codebook}} *dest,\textcolor{keyword}{const} \mbox{\hyperlink{structstatic__codebook}{static\_codebook}} *\mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}});}
+\DoxyCodeLine{83 \textcolor{keyword}{extern} \textcolor{keywordtype}{int} \mbox{\hyperlink{codebook_8h_ad821fef31bb1a8da7303ec63befe6006}{vorbis\_book\_init\_decode}}(\mbox{\hyperlink{structcodebook}{codebook}} *dest,\textcolor{keyword}{const} \mbox{\hyperlink{structstatic__codebook}{static\_codebook}} *\mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}});}
+\DoxyCodeLine{84 \textcolor{keyword}{extern} \textcolor{keywordtype}{void} \mbox{\hyperlink{codebook_8h_a694fd03843fc2c26272557d009f12daf}{vorbis\_book\_clear}}(\mbox{\hyperlink{structcodebook}{codebook}} *\mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}});}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86 \textcolor{keyword}{extern} \textcolor{keywordtype}{float} *\mbox{\hyperlink{codebook_8h_a94ad5cdea25a00f5c2fa0d4830c78333}{\_book\_unquantize}}(\textcolor{keyword}{const} \mbox{\hyperlink{structstatic__codebook}{static\_codebook}} *\mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}},\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}},\textcolor{keywordtype}{int} *map);}
+\DoxyCodeLine{87 \textcolor{keyword}{extern} \textcolor{keywordtype}{float} *\mbox{\hyperlink{codebook_8h_a5349ee2100562bf1222f5760d5471945}{\_book\_logdist}}(\textcolor{keyword}{const} \mbox{\hyperlink{structstatic__codebook}{static\_codebook}} *\mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}},\textcolor{keywordtype}{float} *vals);}
+\DoxyCodeLine{88 \textcolor{keyword}{extern} \textcolor{keywordtype}{float} \mbox{\hyperlink{codebook_8h_a414000078eb7696277bab0bcede52a8b}{\_float32\_unpack}}(\textcolor{keywordtype}{long} \mbox{\hyperlink{jpeglib_8h_aa0ccb5ee6d882ee3605ff47745c6467b}{val}});}
+\DoxyCodeLine{89 \textcolor{keyword}{extern} \textcolor{keywordtype}{long}   \mbox{\hyperlink{codebook_8h_a16d0b0a2056b4288ceedcef15b35d3fe}{\_float32\_pack}}(\textcolor{keywordtype}{float} \mbox{\hyperlink{jpeglib_8h_aa0ccb5ee6d882ee3605ff47745c6467b}{val}});}
+\DoxyCodeLine{90 \textcolor{keyword}{extern} \textcolor{keywordtype}{int}  \mbox{\hyperlink{codebook_8h_a929187e9ff269e642758ad1f737d7e3d}{\_best}}(\mbox{\hyperlink{structcodebook}{codebook}} *book, \textcolor{keywordtype}{float} *\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \textcolor{keywordtype}{int} step);}
+\DoxyCodeLine{91 \textcolor{keyword}{extern} \textcolor{keywordtype}{long} \mbox{\hyperlink{codebook_8h_aec05a8c0eabef16f1074fa1d596ce6e4}{\_book\_maptype1\_quantvals}}(\textcolor{keyword}{const} \mbox{\hyperlink{structstatic__codebook}{static\_codebook}} *\mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}});}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93 \textcolor{keyword}{extern} \textcolor{keywordtype}{int} \mbox{\hyperlink{codebook_8h_aa6bbd2467f16f0ce31ad363b45841bab}{vorbis\_book\_besterror}}(\mbox{\hyperlink{structcodebook}{codebook}} *book,\textcolor{keywordtype}{float} *\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}},\textcolor{keywordtype}{int} step,\textcolor{keywordtype}{int} addmul);}
+\DoxyCodeLine{94 \textcolor{keyword}{extern} \textcolor{keywordtype}{long} \mbox{\hyperlink{codebook_8h_aa0174214ae42931d39dd11e3df333f3c}{vorbis\_book\_codeword}}(\mbox{\hyperlink{structcodebook}{codebook}} *book,\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}});}
+\DoxyCodeLine{95 \textcolor{keyword}{extern} \textcolor{keywordtype}{long} \mbox{\hyperlink{codebook_8h_a19abd9f8ad7e141510d918ffd96bb91a}{vorbis\_book\_codelen}}(\mbox{\hyperlink{structcodebook}{codebook}} *book,\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a53661187014665a4739c6faf8be8ed69}{entry}});}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99 \textcolor{keyword}{extern} \textcolor{keywordtype}{int} \mbox{\hyperlink{codebook_8h_a2e4cf9084f67bbbdf68500dc850e33b2}{vorbis\_staticbook\_pack}}(\textcolor{keyword}{const} \mbox{\hyperlink{structstatic__codebook}{static\_codebook}} *\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}},\mbox{\hyperlink{structoggpack__buffer}{oggpack\_buffer}} *\mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}});}
+\DoxyCodeLine{100 \textcolor{keyword}{extern} \mbox{\hyperlink{structstatic__codebook}{static\_codebook}} *\mbox{\hyperlink{codebook_8h_a12852b59ca55cc7b8b2674582055036d}{vorbis\_staticbook\_unpack}}(\mbox{\hyperlink{structoggpack__buffer}{oggpack\_buffer}} *\mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}});}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{102 \textcolor{keyword}{extern} \textcolor{keywordtype}{int} \mbox{\hyperlink{codebook_8h_aef10100390bdb0f59f150e45c5255afa}{vorbis\_book\_encode}}(\mbox{\hyperlink{structcodebook}{codebook}} *book, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \mbox{\hyperlink{structoggpack__buffer}{oggpack\_buffer}} *\mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}});}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104 \textcolor{keyword}{extern} \textcolor{keywordtype}{long} \mbox{\hyperlink{codebook_8h_ab64c32ac3c21667daf48dff173999dd1}{vorbis\_book\_decode}}(\mbox{\hyperlink{structcodebook}{codebook}} *book, \mbox{\hyperlink{structoggpack__buffer}{oggpack\_buffer}} *\mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}});}
+\DoxyCodeLine{105 \textcolor{keyword}{extern} \textcolor{keywordtype}{long} \mbox{\hyperlink{codebook_8h_a1e21765f57f5e92dd447a2c65639ebd0}{vorbis\_book\_decodevs\_add}}(\mbox{\hyperlink{structcodebook}{codebook}} *book, \textcolor{keywordtype}{float} *\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}},}
+\DoxyCodeLine{106                                      \mbox{\hyperlink{structoggpack__buffer}{oggpack\_buffer}} *\mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}},\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}});}
+\DoxyCodeLine{107 \textcolor{keyword}{extern} \textcolor{keywordtype}{long} \mbox{\hyperlink{codebook_8h_a5c5bd9764a71f55ec58899ce5bfeeb47}{vorbis\_book\_decodev\_set}}(\mbox{\hyperlink{structcodebook}{codebook}} *book, \textcolor{keywordtype}{float} *\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}},}
+\DoxyCodeLine{108                                     \mbox{\hyperlink{structoggpack__buffer}{oggpack\_buffer}} *\mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}},\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}});}
+\DoxyCodeLine{109 \textcolor{keyword}{extern} \textcolor{keywordtype}{long} \mbox{\hyperlink{codebook_8h_ae3ec5eec5c8c323d4c928802ce0b6cb1}{vorbis\_book\_decodev\_add}}(\mbox{\hyperlink{structcodebook}{codebook}} *book, \textcolor{keywordtype}{float} *\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}},}
+\DoxyCodeLine{110                                     \mbox{\hyperlink{structoggpack__buffer}{oggpack\_buffer}} *\mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}},\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}});}
+\DoxyCodeLine{111 \textcolor{keyword}{extern} \textcolor{keywordtype}{long} \mbox{\hyperlink{codebook_8h_aac565a12a24e25e13723600d4cb16dd5}{vorbis\_book\_decodevv\_add}}(\mbox{\hyperlink{structcodebook}{codebook}} *book, \textcolor{keywordtype}{float} **\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}},}
+\DoxyCodeLine{112                                      \textcolor{keywordtype}{long} off,\textcolor{keywordtype}{int} ch,}
+\DoxyCodeLine{113                                     \mbox{\hyperlink{structoggpack__buffer}{oggpack\_buffer}} *\mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}},\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}});}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115 }
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

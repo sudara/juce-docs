@@ -1,0 +1,272 @@
+\hypertarget{juce___button_8h_source}{}\doxysection{juce\+\_\+\+Button.\+h}
+\label{juce___button_8h_source}\index{build/juce\_gui\_basics/buttons/juce\_Button.h@{build/juce\_gui\_basics/buttons/juce\_Button.h}}
+\mbox{\hyperlink{juce___button_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{42 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_button}{Button}}  : \textcolor{keyword}{public} \mbox{\hyperlink{class_component}{Component}},}
+\DoxyCodeLine{43                           \textcolor{keyword}{public} \mbox{\hyperlink{class_settable_tooltip_client}{SettableTooltipClient}}}
+\DoxyCodeLine{44 \{}
+\DoxyCodeLine{45 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{46     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{53 \textcolor{comment}{}    \textcolor{keyword}{explicit} \mbox{\hyperlink{class_button_a37f37f35bbcb27d88fc508be94dba87e}{Button}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& buttonName);}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55 \textcolor{keyword}{public}:}
+\DoxyCodeLine{57     \mbox{\hyperlink{class_button_acdf8e4ba2f771b795368bccb8e493909}{\string~Button}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{63 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_button_a96f4185a0a716d10309f1081f0af2f91}{setButtonText}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& newText);}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{68     \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{class_button_adc72841d4d7bed27b83e30987b84a460}{getButtonText}}()\textcolor{keyword}{ const               }\{ \textcolor{keywordflow}{return} text; \}}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{74 \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_button_a88a0adf236ac93613a8b2b36d7a74f9d}{isDown}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{80     \textcolor{keywordtype}{bool} isOver() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{95 \textcolor{comment}{}    \textcolor{keywordtype}{void} setToggleable (\textcolor{keywordtype}{bool} shouldBeToggleable);}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{101     \textcolor{keywordtype}{bool} isToggleable() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                          \{ \textcolor{keywordflow}{return} canBeToggled || clickTogglesState; \}}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{118     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_button_a063753c2ce6b9016456ebe353298b342}{setToggleState}} (\textcolor{keywordtype}{bool} shouldBeOn, \mbox{\hyperlink{group__juce__events-messages_ga25a31a4bdc02a0d0adb743e26dd14ba9}{NotificationType}} notification);}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{128     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_button_ae1723837340c174f0f212855d247b626}{getToggleState}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                        \{ \textcolor{keywordflow}{return} isOn.getValue(); \}}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{138     \mbox{\hyperlink{class_value}{Value}}\& \mbox{\hyperlink{class_button_a7cc6a70aa890a93240db712af5f03ce7}{getToggleStateValue}}() noexcept                       \{ \textcolor{keywordflow}{return} isOn; \}}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{148     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_button_a675d6848c16e265ff334b2d51328d8d2}{setClickingTogglesState}} (\textcolor{keywordtype}{bool} shouldAutoToggleOnClick) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{149 }
+\DoxyCodeLine{153     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_button_a8cf8327c247a9c1fa1c82c20ce69bded}{getClickingTogglesState}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept               \{ \textcolor{keywordflow}{return} clickTogglesState; \}}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{155     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{176 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_button_a29adebc6ed27829f75b69c6ba40ef958}{setRadioGroupId}} (\textcolor{keywordtype}{int} newGroupId, \mbox{\hyperlink{group__juce__events-messages_ga25a31a4bdc02a0d0adb743e26dd14ba9}{NotificationType}} notification = \mbox{\hyperlink{group__juce__events-messages_gga25a31a4bdc02a0d0adb743e26dd14ba9ad9a3eff1d1ddebf33141da7cf581be4c}{sendNotification}});}
+\DoxyCodeLine{177 }
+\DoxyCodeLine{181     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_button_aa20cdb24410a07136dd2ec603179972c}{getRadioGroupId}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                        \{ \textcolor{keywordflow}{return} radioGroupId; \}}
+\DoxyCodeLine{182 }
+\DoxyCodeLine{183     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{189 \textcolor{comment}{}    \textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_button_1_1_listener}{Listener}}}
+\DoxyCodeLine{190     \{}
+\DoxyCodeLine{191     \textcolor{keyword}{public}:}
+\DoxyCodeLine{193         \textcolor{keyword}{virtual} \mbox{\hyperlink{class_button_1_1_listener_aa1e1958d175ffce03cbc37aa65fdd909}{\string~Listener}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{194 }
+\DoxyCodeLine{196         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_button_1_1_listener_a81499cef24b7189cd0d1581fd9dc9e14}{buttonClicked}} (\mbox{\hyperlink{class_button}{Button}}*) = 0;}
+\DoxyCodeLine{197 }
+\DoxyCodeLine{199         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_button_1_1_listener_a6a83cb9405ff7e4cc0b775a5b65ce305}{buttonStateChanged}} (\mbox{\hyperlink{class_button}{Button}}*)  \{\}}
+\DoxyCodeLine{200     \};}
+\DoxyCodeLine{201 }
+\DoxyCodeLine{206     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_button_a346e474a41d9ac4a9ccabeb13e974b47}{addListener}} (\mbox{\hyperlink{class_button_1_1_listener}{Listener}}* newListener);}
+\DoxyCodeLine{207 }
+\DoxyCodeLine{211     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_button_aa7016d2e4b8ab37a12c2736057eb28de}{removeListener}} (\mbox{\hyperlink{class_button_1_1_listener}{Listener}}* listener);}
+\DoxyCodeLine{212 }
+\DoxyCodeLine{213     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{215 \textcolor{comment}{}    \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}}()> \mbox{\hyperlink{class_button_a30b76ab312dc7f66e67596ae20540ec2}{onClick}};}
+\DoxyCodeLine{216 }
+\DoxyCodeLine{218     \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}}()> \mbox{\hyperlink{class_button_a286cdacca4d6232ba0597f1bd2d48b4f}{onStateChange}};}
+\DoxyCodeLine{219 }
+\DoxyCodeLine{220     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{228 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_button_a8a6488055955fede16492a90a8967168}{triggerClick}}();}
+\DoxyCodeLine{229 }
+\DoxyCodeLine{230     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{245 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_button_a3d29d9c9ab75389a170b67a364e0cb9e}{setCommandToTrigger}} (\mbox{\hyperlink{class_application_command_manager}{ApplicationCommandManager}}* commandManagerToUse,}
+\DoxyCodeLine{246                               \mbox{\hyperlink{group__juce__gui__basics-commands_ga886f4569c2fa2b51e87775cbac89d4b8}{CommandID}} commandID,}
+\DoxyCodeLine{247                               \textcolor{keywordtype}{bool} generateTooltip);}
+\DoxyCodeLine{248 }
+\DoxyCodeLine{250     \mbox{\hyperlink{group__juce__gui__basics-commands_ga886f4569c2fa2b51e87775cbac89d4b8}{CommandID}} \mbox{\hyperlink{class_button_ae5bcb1ff0257d8c441076228549eb2a4}{getCommandID}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept             \{ \textcolor{keywordflow}{return} commandID; \}}
+\DoxyCodeLine{251 }
+\DoxyCodeLine{252     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{262 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_button_afb5d0ab1c10c5f072776ae6893f22944}{addShortcut}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_key_press}{KeyPress}}\&);}
+\DoxyCodeLine{263 }
+\DoxyCodeLine{267     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_button_aa8d27148fe4dc88ffa06eecabca9bed6}{clearShortcuts}}();}
+\DoxyCodeLine{268 }
+\DoxyCodeLine{272     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_button_acc15e6a9fcffb47e70c6ba66b87d2c8e}{isRegisteredForShortcut}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_key_press}{KeyPress}}\&) \textcolor{keyword}{const};}
+\DoxyCodeLine{273 }
+\DoxyCodeLine{274     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{288 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_button_a6110b12e2f6167dd9ac731285bad825d}{setRepeatSpeed}} (\textcolor{keywordtype}{int} initialDelayInMillisecs,}
+\DoxyCodeLine{289                          \textcolor{keywordtype}{int} repeatDelayInMillisecs,}
+\DoxyCodeLine{290                          \textcolor{keywordtype}{int} minimumDelayInMillisecs = -\/1) noexcept;}
+\DoxyCodeLine{291 }
+\DoxyCodeLine{301     \textcolor{keywordtype}{void} setTriggeredOnMouseDown (\textcolor{keywordtype}{bool} isTriggeredOnMouseDown) noexcept;}
+\DoxyCodeLine{302 }
+\DoxyCodeLine{306     \textcolor{keywordtype}{bool} getTriggeredOnMouseDown() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{307 }
+\DoxyCodeLine{311     \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} getMillisecondsSinceButtonDown() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept;}
+\DoxyCodeLine{312 }
+\DoxyCodeLine{313     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{317 \textcolor{comment}{}    \textcolor{keywordtype}{void} setTooltip (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}}\& newTooltip) override;}
+\DoxyCodeLine{318 }
+\DoxyCodeLine{319     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{321 \textcolor{comment}{}    enum \mbox{\hyperlink{class_button_aebb14d53173b13f0e98d01a02aee8e82}{ConnectedEdgeFlags}}}
+\DoxyCodeLine{322     \{}
+\DoxyCodeLine{323         ConnectedOnLeft = 1,}
+\DoxyCodeLine{324         ConnectedOnRight = 2,}
+\DoxyCodeLine{325         ConnectedOnTop = 4,}
+\DoxyCodeLine{326         ConnectedOnBottom = 8}
+\DoxyCodeLine{327     \};}
+\DoxyCodeLine{328 }
+\DoxyCodeLine{340     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_button_a17ae41254e2d68b1570ef5027d796ac3}{setConnectedEdges}} (\textcolor{keywordtype}{int} connectedEdgeFlags);}
+\DoxyCodeLine{341 }
+\DoxyCodeLine{343     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_button_a4971174bb22bb4a4172d84695fd9986e}{getConnectedEdgeFlags}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept          \{ \textcolor{keywordflow}{return} connectedEdgeFlags; \}}
+\DoxyCodeLine{344 }
+\DoxyCodeLine{348     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_button_a925cf41750a30bbd39d052af8ae37e20}{isConnectedOnLeft}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept             \{ \textcolor{keywordflow}{return} (connectedEdgeFlags \& ConnectedOnLeft) != 0; \}}
+\DoxyCodeLine{349 }
+\DoxyCodeLine{353     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_button_a90f0727a44b87224d521e3c051fc2723}{isConnectedOnRight}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept            \{ \textcolor{keywordflow}{return} (connectedEdgeFlags \& ConnectedOnRight) != 0; \}}
+\DoxyCodeLine{354 }
+\DoxyCodeLine{358     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_button_a35e58c011b632a56cd37b36c0ae10285}{isConnectedOnTop}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept              \{ \textcolor{keywordflow}{return} (connectedEdgeFlags \& ConnectedOnTop) != 0; \}}
+\DoxyCodeLine{359 }
+\DoxyCodeLine{363     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_button_a802fe07b98ca56f1e2138f306c596aa6}{isConnectedOnBottom}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept           \{ \textcolor{keywordflow}{return} (connectedEdgeFlags \& ConnectedOnBottom) != 0; \}}
+\DoxyCodeLine{364 }
+\DoxyCodeLine{365 }
+\DoxyCodeLine{366     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{368 \textcolor{comment}{}    \textcolor{keyword}{enum} \mbox{\hyperlink{class_button_ad8312db93093c21df8b1d2be74ae1957}{ButtonState}}}
+\DoxyCodeLine{369     \{}
+\DoxyCodeLine{370         \mbox{\hyperlink{class_button_ad8312db93093c21df8b1d2be74ae1957a09756d7da1b944c70299dbce2d4d85c1}{buttonNormal}},}
+\DoxyCodeLine{371         \mbox{\hyperlink{class_button_ad8312db93093c21df8b1d2be74ae1957ab1bafc26d8c989fe21ad1289d0ce11f9}{buttonOver}},}
+\DoxyCodeLine{372         buttonDown}
+\DoxyCodeLine{373     \};}
+\DoxyCodeLine{374 }
+\DoxyCodeLine{383     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_button_a75f6aee61f3803d1c38da9e47e31a892}{setState}} (\mbox{\hyperlink{class_button_ad8312db93093c21df8b1d2be74ae1957}{ButtonState}} newState);}
+\DoxyCodeLine{384 }
+\DoxyCodeLine{386     \mbox{\hyperlink{class_button_ad8312db93093c21df8b1d2be74ae1957}{ButtonState}} \mbox{\hyperlink{class_button_a2c62bbd9ae76cc3843e06c45f36d5b86}{getState}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept               \{ \textcolor{keywordflow}{return} buttonState; \}}
+\DoxyCodeLine{387 }
+\DoxyCodeLine{388     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{392 \textcolor{comment}{}    \textcolor{keyword}{struct }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{struct_button_1_1_look_and_feel_methods}{LookAndFeelMethods}}}
+\DoxyCodeLine{393     \{}
+\DoxyCodeLine{394         \textcolor{keyword}{virtual} \mbox{\hyperlink{struct_button_1_1_look_and_feel_methods_a88fd266c5d26a722abfc98fd25ab6bf2}{\string~LookAndFeelMethods}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{395 }
+\DoxyCodeLine{396         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_button_1_1_look_and_feel_methods_a06f95e4c63f74cfe3af3f21698c9107a}{drawButtonBackground}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \mbox{\hyperlink{class_button}{Button}}\&, \textcolor{keyword}{const} \mbox{\hyperlink{class_colour}{Colour}}\& backgroundColour,}
+\DoxyCodeLine{397                                            \textcolor{keywordtype}{bool} shouldDrawButtonAsHighlighted, \textcolor{keywordtype}{bool} shouldDrawButtonAsDown) = 0;}
+\DoxyCodeLine{398 }
+\DoxyCodeLine{399         \textcolor{keyword}{virtual} \mbox{\hyperlink{class_font}{Font}} \mbox{\hyperlink{struct_button_1_1_look_and_feel_methods_a6733c9a1d59cea5a0fc45054beb44b1b}{getTextButtonFont}} (\mbox{\hyperlink{class_text_button}{TextButton}}\&, \textcolor{keywordtype}{int} buttonHeight) = 0;}
+\DoxyCodeLine{400         \textcolor{keyword}{virtual} \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_button_1_1_look_and_feel_methods_a80e1caa329bc236e08955069ba6164f4}{getTextButtonWidthToFitText}} (\mbox{\hyperlink{class_text_button}{TextButton}}\&, \textcolor{keywordtype}{int} buttonHeight) = 0;}
+\DoxyCodeLine{401 }
+\DoxyCodeLine{403         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_button_1_1_look_and_feel_methods_a3c7f5449c273361a926f5b82b8547383}{drawButtonText}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \mbox{\hyperlink{class_text_button}{TextButton}}\&,}
+\DoxyCodeLine{404                                      \textcolor{keywordtype}{bool} shouldDrawButtonAsHighlighted, \textcolor{keywordtype}{bool} shouldDrawButtonAsDown) = 0;}
+\DoxyCodeLine{405 }
+\DoxyCodeLine{407         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_button_1_1_look_and_feel_methods_a8a95463595dc7aac0fa20cc5ee09805e}{drawToggleButton}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \mbox{\hyperlink{class_toggle_button}{ToggleButton}}\&,}
+\DoxyCodeLine{408                                        \textcolor{keywordtype}{bool} shouldDrawButtonAsHighlighted, \textcolor{keywordtype}{bool} shouldDrawButtonAsDown) = 0;}
+\DoxyCodeLine{409 }
+\DoxyCodeLine{410         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_button_1_1_look_and_feel_methods_a78ae999a958a78a087035752fdf4f9d3}{changeToggleButtonWidthToFitText}} (\mbox{\hyperlink{class_toggle_button}{ToggleButton}}\&) = 0;}
+\DoxyCodeLine{411 }
+\DoxyCodeLine{412         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_button_1_1_look_and_feel_methods_ae43aa53ed4d11e20a21f7bb348906d56}{drawTickBox}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \mbox{\hyperlink{class_component}{Component}}\&, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a265b83b84cf9de38094da7a6e21376ca}{x}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_aab2961b4ca1b9b2abbe4c740b4f0344f}{y}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a4a17fbf5c7c6ae1f233cf4944a70237d}{w}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_ae0306c9e6aca74fac45e19b5f64f7ba7}{h}},}
+\DoxyCodeLine{413                                   \textcolor{keywordtype}{bool} ticked, \textcolor{keywordtype}{bool} isEnabled,}
+\DoxyCodeLine{414                                   \textcolor{keywordtype}{bool} shouldDrawButtonAsHighlighted, \textcolor{keywordtype}{bool} shouldDrawButtonAsDown) = 0;}
+\DoxyCodeLine{415 }
+\DoxyCodeLine{416         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_button_1_1_look_and_feel_methods_a30bcc6cd474b6d6c5da2e92d7292dba7}{drawDrawableButton}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \mbox{\hyperlink{class_drawable_button}{DrawableButton}}\&,}
+\DoxyCodeLine{417                                          \textcolor{keywordtype}{bool} shouldDrawButtonAsHighlighted, \textcolor{keywordtype}{bool} shouldDrawButtonAsDown) = 0;}
+\DoxyCodeLine{418     \};}
+\DoxyCodeLine{419 }
+\DoxyCodeLine{420     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{421 \textcolor{preprocessor}{   \#ifndef DOXYGEN}}
+\DoxyCodeLine{422     [[deprecated (\textcolor{stringliteral}{"{}This method's parameters have changed."{}})]]}
+\DoxyCodeLine{423     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_button_a5d25c582bca0ee4917e8a2f6c102b219}{setToggleState}} (\textcolor{keywordtype}{bool}, \textcolor{keywordtype}{bool});}
+\DoxyCodeLine{424 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{425 }
+\DoxyCodeLine{426 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{427     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{435 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_button_a149ef29188b0519c3e39624c7b4d9400}{clicked}}();}
+\DoxyCodeLine{436 }
+\DoxyCodeLine{444     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_button_af57cd4eec484491dc536e05d75e556dd}{clicked}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_modifier_keys}{ModifierKeys}}\& modifiers);}
+\DoxyCodeLine{445 }
+\DoxyCodeLine{455     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_button_a5d9f37df2a5b19df32fe1c68867eafd0}{paintButton}} (\mbox{\hyperlink{class_graphics}{Graphics}}\& \mbox{\hyperlink{namespacegl_a27efffdbb9aab3859a7f9c17ea0ae26e}{g}},}
+\DoxyCodeLine{456                               \textcolor{keywordtype}{bool} shouldDrawButtonAsHighlighted,}
+\DoxyCodeLine{457                               \textcolor{keywordtype}{bool} shouldDrawButtonAsDown) = 0;}
+\DoxyCodeLine{458 }
+\DoxyCodeLine{466     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_button_aa0e5a9bb6117baa8b6df29a47db861c5}{buttonStateChanged}}();}
+\DoxyCodeLine{467 }
+\DoxyCodeLine{468     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{470 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_button_aaee88dac6fc8ca689a0bd642d7b1489d}{internalClickCallback}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_modifier_keys}{ModifierKeys}}\&);}
+\DoxyCodeLine{472     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_button_a1d4d66619c1d44412892ab73ce806c8f}{handleCommandMessage}} (\textcolor{keywordtype}{int} commandId) \textcolor{keyword}{override};}
+\DoxyCodeLine{474     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_button_a32dfa1120a4ad81620ed4a21757e374a}{mouseEnter}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_mouse_event}{MouseEvent}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{476     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_button_a5f8a73f5a0c1fba9327ff96a9fec1476}{mouseExit}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_mouse_event}{MouseEvent}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{478     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_button_af08726aab8086f766f098a61f47148bd}{mouseDown}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_mouse_event}{MouseEvent}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{480     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_button_ae18a78575c054ea19f0fa962021bacd6}{mouseDrag}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_mouse_event}{MouseEvent}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{482     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_button_a3967f9ee39205cc575980e87fa6b8406}{mouseUp}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_mouse_event}{MouseEvent}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{484     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_button_a2aa055e673435a6de2a2bf962bd28f03}{keyPressed}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_key_press}{KeyPress}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{486     \textcolor{keyword}{using} \mbox{\hyperlink{class_component_aeff4d2fdbae4d5974e43b62ab3c304f9}{Component::keyStateChanged}};}
+\DoxyCodeLine{488     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_button_a88e200a924ec0d4632274f5c035cab6f}{paint}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{490     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_button_a5e2e93c48605137096a5b9e7cc3b2ec1}{parentHierarchyChanged}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{492     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_button_a01c56c0de70053fee3baf845d6a34ddf}{visibilityChanged}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{494     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_button_ad6fd650abdea0a360808786825172ecf}{focusGained}} (\mbox{\hyperlink{class_component_a7fd775ea6b1190d5d694fdffa539dfac}{FocusChangeType}}) \textcolor{keyword}{override};}
+\DoxyCodeLine{496     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_button_aa8b314d92085377b37dda3a3494afc9f}{focusLost}} (\mbox{\hyperlink{class_component_a7fd775ea6b1190d5d694fdffa539dfac}{FocusChangeType}}) \textcolor{keyword}{override};}
+\DoxyCodeLine{498     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_button_aacc3dbdf54be71a697272d2821b86d84}{enablementChanged}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{499 }
+\DoxyCodeLine{500 \textcolor{keyword}{private}:}
+\DoxyCodeLine{501     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{502     \mbox{\hyperlink{class_array}{Array<KeyPress>}} shortcuts;}
+\DoxyCodeLine{503     \mbox{\hyperlink{class_weak_reference}{WeakReference<Component>}} keySource;}
+\DoxyCodeLine{504     \mbox{\hyperlink{class_string}{String}} text;}
+\DoxyCodeLine{505     \mbox{\hyperlink{class_listener_list}{ListenerList<Listener>}} buttonListeners;}
+\DoxyCodeLine{506 }
+\DoxyCodeLine{507     \textcolor{keyword}{struct }CallbackHelper;}
+\DoxyCodeLine{508     std::unique\_ptr<CallbackHelper> callbackHelper;}
+\DoxyCodeLine{509     \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} buttonPressTime = 0, lastRepeatTime = 0;}
+\DoxyCodeLine{510     \mbox{\hyperlink{class_application_command_manager}{ApplicationCommandManager}}* commandManagerToUse = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{511     \textcolor{keywordtype}{int} autoRepeatDelay = -\/1, autoRepeatSpeed = 0, autoRepeatMinimumDelay = -\/1;}
+\DoxyCodeLine{512     \textcolor{keywordtype}{int} radioGroupId = 0, connectedEdgeFlags = 0;}
+\DoxyCodeLine{513     \mbox{\hyperlink{group__juce__gui__basics-commands_ga886f4569c2fa2b51e87775cbac89d4b8}{CommandID}} commandID = \{\};}
+\DoxyCodeLine{514     ButtonState buttonState = buttonNormal, lastStatePainted = buttonNormal;}
+\DoxyCodeLine{515 }
+\DoxyCodeLine{516     \mbox{\hyperlink{class_value}{Value}} isOn;}
+\DoxyCodeLine{517     \textcolor{keywordtype}{bool} canBeToggled = \textcolor{keyword}{false};}
+\DoxyCodeLine{518     \textcolor{keywordtype}{bool} lastToggleState = \textcolor{keyword}{false};}
+\DoxyCodeLine{519     \textcolor{keywordtype}{bool} clickTogglesState = \textcolor{keyword}{false};}
+\DoxyCodeLine{520     \textcolor{keywordtype}{bool} needsToRelease = \textcolor{keyword}{false};}
+\DoxyCodeLine{521     \textcolor{keywordtype}{bool} needsRepainting = \textcolor{keyword}{false};}
+\DoxyCodeLine{522     \textcolor{keywordtype}{bool} isKeyDown = \textcolor{keyword}{false};}
+\DoxyCodeLine{523     \textcolor{keywordtype}{bool} triggerOnMouseDown = \textcolor{keyword}{false};}
+\DoxyCodeLine{524     \textcolor{keywordtype}{bool} generateTooltip = \textcolor{keyword}{false};}
+\DoxyCodeLine{525 }
+\DoxyCodeLine{526     std::unique\_ptr<AccessibilityHandler> createAccessibilityHandler() \textcolor{keyword}{override};}
+\DoxyCodeLine{527     \textcolor{keywordtype}{void} checkToggleableState (\textcolor{keywordtype}{bool} wasToggleable);}
+\DoxyCodeLine{528 }
+\DoxyCodeLine{529     \textcolor{keywordtype}{void} repeatTimerCallback();}
+\DoxyCodeLine{530     \textcolor{keywordtype}{bool} keyStateChangedCallback();}
+\DoxyCodeLine{531     \textcolor{keywordtype}{void} applicationCommandListChangeCallback();}
+\DoxyCodeLine{532     \textcolor{keywordtype}{void} updateAutomaticTooltip (\textcolor{keyword}{const} \mbox{\hyperlink{struct_application_command_info}{ApplicationCommandInfo}}\&);}
+\DoxyCodeLine{533 }
+\DoxyCodeLine{534     ButtonState updateState();}
+\DoxyCodeLine{535     ButtonState updateState (\textcolor{keywordtype}{bool} isOver, \textcolor{keywordtype}{bool} isDown);}
+\DoxyCodeLine{536     \textcolor{keywordtype}{bool} isShortcutPressed() \textcolor{keyword}{const};}
+\DoxyCodeLine{537     \textcolor{keywordtype}{void} turnOffOtherButtonsInGroup (\mbox{\hyperlink{group__juce__events-messages_ga25a31a4bdc02a0d0adb743e26dd14ba9}{NotificationType}} click, \mbox{\hyperlink{group__juce__events-messages_ga25a31a4bdc02a0d0adb743e26dd14ba9}{NotificationType}} state);}
+\DoxyCodeLine{538 }
+\DoxyCodeLine{539     \textcolor{keywordtype}{void} flashButtonState();}
+\DoxyCodeLine{540     \textcolor{keywordtype}{void} sendClickMessage (\textcolor{keyword}{const} \mbox{\hyperlink{class_modifier_keys}{ModifierKeys}}\&);}
+\DoxyCodeLine{541     \textcolor{keywordtype}{void} sendStateMessage();}
+\DoxyCodeLine{542     \textcolor{keywordtype}{void} setToggleState (\textcolor{keywordtype}{bool} shouldBeOn, \mbox{\hyperlink{group__juce__events-messages_ga25a31a4bdc02a0d0adb743e26dd14ba9}{NotificationType}} click, \mbox{\hyperlink{group__juce__events-messages_ga25a31a4bdc02a0d0adb743e26dd14ba9}{NotificationType}} state);}
+\DoxyCodeLine{543 }
+\DoxyCodeLine{544     \textcolor{keywordtype}{bool} isMouseSourceOver (\textcolor{keyword}{const} \mbox{\hyperlink{class_mouse_event}{MouseEvent}}\& e);}
+\DoxyCodeLine{545 }
+\DoxyCodeLine{546     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_button}{Button}})}
+\DoxyCodeLine{547 \};}
+\DoxyCodeLine{548 }
+\DoxyCodeLine{549 }
+\DoxyCodeLine{550  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{551 }
+
+\end{DoxyCode}

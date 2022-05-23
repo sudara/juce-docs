@@ -1,0 +1,369 @@
+\hypertarget{jmorecfg_8h_source}{}\doxysection{jmorecfg.\+h}
+\label{jmorecfg_8h_source}\index{build/juce\_graphics/image\_formats/jpglib/jmorecfg.h@{build/juce\_graphics/image\_formats/jpglib/jmorecfg.h}}
+\mbox{\hyperlink{jmorecfg_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{ * jmorecfg.h}}
+\DoxyCodeLine{3 \textcolor{comment}{ *}}
+\DoxyCodeLine{4 \textcolor{comment}{ * Copyright (C) 1991-\/1997, Thomas G. Lane.}}
+\DoxyCodeLine{5 \textcolor{comment}{ * This file is part of the Independent JPEG Group's software.}}
+\DoxyCodeLine{6 \textcolor{comment}{ * For conditions of distribution and use, see the accompanying README file.}}
+\DoxyCodeLine{7 \textcolor{comment}{ *}}
+\DoxyCodeLine{8 \textcolor{comment}{ * This file contains additional configuration options that customize the}}
+\DoxyCodeLine{9 \textcolor{comment}{ * JPEG software for special applications or support machine-\/dependent}}
+\DoxyCodeLine{10 \textcolor{comment}{ * optimizations.  Most users will not need to touch this file.}}
+\DoxyCodeLine{11 \textcolor{comment}{ */}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{comment}{/*}}
+\DoxyCodeLine{15 \textcolor{comment}{ * Define BITS\_IN\_JSAMPLE as either}}
+\DoxyCodeLine{16 \textcolor{comment}{ *   8   for 8-\/bit sample values (the usual setting)}}
+\DoxyCodeLine{17 \textcolor{comment}{ *   12  for 12-\/bit sample values}}
+\DoxyCodeLine{18 \textcolor{comment}{ * Only 8 and 12 are legal data precisions for lossy JPEG according to the}}
+\DoxyCodeLine{19 \textcolor{comment}{ * JPEG standard, and the IJG code does not support anything else!}}
+\DoxyCodeLine{20 \textcolor{comment}{ * We do not support run-\/time selection of data precision, sorry.}}
+\DoxyCodeLine{21 \textcolor{comment}{ */}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#define BITS\_IN\_JSAMPLE  8  }\textcolor{comment}{/* use 8 or 12 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{comment}{/*}}
+\DoxyCodeLine{27 \textcolor{comment}{ * Maximum number of components (color channels) allowed in JPEG image.}}
+\DoxyCodeLine{28 \textcolor{comment}{ * To meet the letter of the JPEG spec, set this to 255.  However, darn}}
+\DoxyCodeLine{29 \textcolor{comment}{ * few applications need more than 4 channels (maybe 5 for CMYK + alpha}}
+\DoxyCodeLine{30 \textcolor{comment}{ * mask).  We recommend 10 as a reasonable compromise; use 4 if you are}}
+\DoxyCodeLine{31 \textcolor{comment}{ * really short on memory.  (Each allowed component costs a hundred or so}}
+\DoxyCodeLine{32 \textcolor{comment}{ * bytes of storage, whether actually used in an image or not.)}}
+\DoxyCodeLine{33 \textcolor{comment}{ */}}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#define MAX\_COMPONENTS  10  }\textcolor{comment}{/* maximum number of image components */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38 \textcolor{comment}{/*}}
+\DoxyCodeLine{39 \textcolor{comment}{ * Basic data types.}}
+\DoxyCodeLine{40 \textcolor{comment}{ * You may need to change these if you have a machine with unusual data}}
+\DoxyCodeLine{41 \textcolor{comment}{ * type sizes; for example, "{}char"{} not 8 bits, "{}short"{} not 16 bits,}}
+\DoxyCodeLine{42 \textcolor{comment}{ * or "{}long"{} not 32 bits.  We don't care whether "{}int"{} is 16 or 32 bits,}}
+\DoxyCodeLine{43 \textcolor{comment}{ * but it had better be at least 16.}}
+\DoxyCodeLine{44 \textcolor{comment}{ */}}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46 \textcolor{comment}{/* Representation of a single sample (pixel element value).}}
+\DoxyCodeLine{47 \textcolor{comment}{ * We frequently allocate large arrays of these, so it's important to keep}}
+\DoxyCodeLine{48 \textcolor{comment}{ * them small.  But if you have memory to burn and access to char or short}}
+\DoxyCodeLine{49 \textcolor{comment}{ * arrays is very slow on your hardware, you might want to change these.}}
+\DoxyCodeLine{50 \textcolor{comment}{ */}}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52 \textcolor{preprocessor}{\#if BITS\_IN\_JSAMPLE == 8}}
+\DoxyCodeLine{53 \textcolor{comment}{/* JSAMPLE should be the smallest type that will hold the values 0..255.}}
+\DoxyCodeLine{54 \textcolor{comment}{ * You can use a signed char by having GETJSAMPLE mask it with 0xFF.}}
+\DoxyCodeLine{55 \textcolor{comment}{ */}}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57 \textcolor{preprocessor}{\#ifdef HAVE\_UNSIGNED\_CHAR}}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59 \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} \mbox{\hyperlink{jmorecfg_8h_a552ee7787d3fd8b5f5f5cc3e2145a647}{JSAMPLE}};}
+\DoxyCodeLine{60 \textcolor{preprocessor}{\#define GETJSAMPLE(value)  ((int) (value))}}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62 \textcolor{preprocessor}{\#else }\textcolor{comment}{/* not HAVE\_UNSIGNED\_CHAR */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64 \textcolor{keyword}{typedef} \textcolor{keywordtype}{char} \mbox{\hyperlink{jmorecfg_8h_a552ee7787d3fd8b5f5f5cc3e2145a647}{JSAMPLE}};}
+\DoxyCodeLine{65 \textcolor{preprocessor}{\#ifdef CHAR\_IS\_UNSIGNED}}
+\DoxyCodeLine{66 \textcolor{preprocessor}{\#define GETJSAMPLE(value)  ((int) (value))}}
+\DoxyCodeLine{67 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{68 \textcolor{preprocessor}{\#define GETJSAMPLE(value)  ((int) (value) \& 0xFF)}}
+\DoxyCodeLine{69 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* CHAR\_IS\_UNSIGNED */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* HAVE\_UNSIGNED\_CHAR */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73 \textcolor{preprocessor}{\#define MAXJSAMPLE  255}}
+\DoxyCodeLine{74 \textcolor{preprocessor}{\#define CENTERJSAMPLE   128}}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* BITS\_IN\_JSAMPLE == 8 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79 \textcolor{preprocessor}{\#if BITS\_IN\_JSAMPLE == 12}}
+\DoxyCodeLine{80 \textcolor{comment}{/* JSAMPLE should be the smallest type that will hold the values 0..4095.}}
+\DoxyCodeLine{81 \textcolor{comment}{ * On nearly all machines "{}short"{} will do nicely.}}
+\DoxyCodeLine{82 \textcolor{comment}{ */}}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84 \textcolor{keyword}{typedef} \textcolor{keywordtype}{short} \mbox{\hyperlink{jmorecfg_8h_a552ee7787d3fd8b5f5f5cc3e2145a647}{JSAMPLE}};}
+\DoxyCodeLine{85 \textcolor{preprocessor}{\#define GETJSAMPLE(value)  ((int) (value))}}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87 \textcolor{preprocessor}{\#define MAXJSAMPLE  4095}}
+\DoxyCodeLine{88 \textcolor{preprocessor}{\#define CENTERJSAMPLE   2048}}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* BITS\_IN\_JSAMPLE == 12 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93 \textcolor{comment}{/* Representation of a DCT frequency coefficient.}}
+\DoxyCodeLine{94 \textcolor{comment}{ * This should be a signed value of at least 16 bits; "{}short"{} is usually OK.}}
+\DoxyCodeLine{95 \textcolor{comment}{ * Again, we allocate large arrays of these, but you can change to int}}
+\DoxyCodeLine{96 \textcolor{comment}{ * if you have memory to burn and "{}short"{} is really slow.}}
+\DoxyCodeLine{97 \textcolor{comment}{ */}}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99 \textcolor{keyword}{typedef} \textcolor{keywordtype}{short} \mbox{\hyperlink{jmorecfg_8h_aea08c9c2f5affb975e4615eda7d77f6e}{JCOEF}};}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101 }
+\DoxyCodeLine{102 \textcolor{comment}{/* Compressed datastreams are represented as arrays of JOCTET.}}
+\DoxyCodeLine{103 \textcolor{comment}{ * These must be EXACTLY 8 bits wide, at least once they are written to}}
+\DoxyCodeLine{104 \textcolor{comment}{ * external storage.  Note that when using the stdio data source/destination}}
+\DoxyCodeLine{105 \textcolor{comment}{ * managers, this is also the data type passed to fread/fwrite.}}
+\DoxyCodeLine{106 \textcolor{comment}{ */}}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{108 \textcolor{preprocessor}{\#ifdef HAVE\_UNSIGNED\_CHAR}}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110 \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} \mbox{\hyperlink{jmorecfg_8h_a356ad249f20e691b520da439f92cccbc}{JOCTET}};}
+\DoxyCodeLine{111 \textcolor{preprocessor}{\#define GETJOCTET(value)  (value)}}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113 \textcolor{preprocessor}{\#else }\textcolor{comment}{/* not HAVE\_UNSIGNED\_CHAR */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115 \textcolor{keyword}{typedef} \textcolor{keywordtype}{char} \mbox{\hyperlink{jmorecfg_8h_a356ad249f20e691b520da439f92cccbc}{JOCTET}};}
+\DoxyCodeLine{116 \textcolor{preprocessor}{\#ifdef CHAR\_IS\_UNSIGNED}}
+\DoxyCodeLine{117 \textcolor{preprocessor}{\#define GETJOCTET(value)  (value)}}
+\DoxyCodeLine{118 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{119 \textcolor{preprocessor}{\#define GETJOCTET(value)  ((value) \& 0xFF)}}
+\DoxyCodeLine{120 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* CHAR\_IS\_UNSIGNED */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{122 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* HAVE\_UNSIGNED\_CHAR */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{124 }
+\DoxyCodeLine{125 \textcolor{comment}{/* These typedefs are used for various table entries and so forth.}}
+\DoxyCodeLine{126 \textcolor{comment}{ * They must be at least as wide as specified; but making them too big}}
+\DoxyCodeLine{127 \textcolor{comment}{ * won't cost a huge amount of memory, so we don't provide special}}
+\DoxyCodeLine{128 \textcolor{comment}{ * extraction code like we did for JSAMPLE.  (In other words, these}}
+\DoxyCodeLine{129 \textcolor{comment}{ * typedefs live at a different point on the speed/space tradeoff curve.)}}
+\DoxyCodeLine{130 \textcolor{comment}{ */}}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{132 \textcolor{comment}{/* UINT8 must hold at least the values 0..255. */}}
+\DoxyCodeLine{133 }
+\DoxyCodeLine{134 \textcolor{preprocessor}{\#ifdef HAVE\_UNSIGNED\_CHAR}}
+\DoxyCodeLine{135 \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} \mbox{\hyperlink{jmorecfg_8h_adfb9a8ea1dd59f151065f763e1e9acd6}{UINT8}};}
+\DoxyCodeLine{136 \textcolor{preprocessor}{\#else }\textcolor{comment}{/* not HAVE\_UNSIGNED\_CHAR */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{137 \textcolor{preprocessor}{\#ifdef CHAR\_IS\_UNSIGNED}}
+\DoxyCodeLine{138 \textcolor{keyword}{typedef} \textcolor{keywordtype}{char} \mbox{\hyperlink{jmorecfg_8h_adfb9a8ea1dd59f151065f763e1e9acd6}{UINT8}};}
+\DoxyCodeLine{139 \textcolor{preprocessor}{\#else }\textcolor{comment}{/* not CHAR\_IS\_UNSIGNED */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{140 \textcolor{keyword}{typedef} \textcolor{keywordtype}{short} \mbox{\hyperlink{jmorecfg_8h_adfb9a8ea1dd59f151065f763e1e9acd6}{UINT8}};}
+\DoxyCodeLine{141 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* CHAR\_IS\_UNSIGNED */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{142 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* HAVE\_UNSIGNED\_CHAR */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{143 }
+\DoxyCodeLine{144 \textcolor{comment}{/* UINT16 must hold at least the values 0..65535. */}}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{146 \textcolor{preprocessor}{\#ifdef HAVE\_UNSIGNED\_SHORT}}
+\DoxyCodeLine{147 \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} \mbox{\hyperlink{jmorecfg_8h_a805c2c164bdd38d72a30c46e84fb568b}{UINT16}};}
+\DoxyCodeLine{148 \textcolor{preprocessor}{\#else }\textcolor{comment}{/* not HAVE\_UNSIGNED\_SHORT */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{149 \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \mbox{\hyperlink{jmorecfg_8h_a805c2c164bdd38d72a30c46e84fb568b}{UINT16}};}
+\DoxyCodeLine{150 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* HAVE\_UNSIGNED\_SHORT */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{152 \textcolor{comment}{/* INT16 must hold at least the values -\/32768..32767. */}}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154 \textcolor{preprocessor}{\#ifndef XMD\_H           }\textcolor{comment}{/* X11/xmd.h correctly defines INT16 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{155 \textcolor{keyword}{typedef} \textcolor{keywordtype}{short} \mbox{\hyperlink{jmorecfg_8h_a57de7cb8e702b1746127a4d5137fa455}{INT16}};}
+\DoxyCodeLine{156 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{158 \textcolor{comment}{/* INT32 must hold at least signed 32-\/bit values. */}}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160 \textcolor{preprocessor}{\#ifndef XMD\_H           }\textcolor{comment}{/* X11/xmd.h correctly defines INT32 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{161 \textcolor{keyword}{typedef} \textcolor{keywordtype}{long} \mbox{\hyperlink{jmorecfg_8h_a0cb58e7e6f0bad369840a52e54a56ae0}{INT32}};}
+\DoxyCodeLine{162 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{163 }
+\DoxyCodeLine{164 \textcolor{comment}{/* Datatype used for image dimensions.  The JPEG standard only supports}}
+\DoxyCodeLine{165 \textcolor{comment}{ * images up to 64K*64K due to 16-\/bit fields in SOF markers.  Therefore}}
+\DoxyCodeLine{166 \textcolor{comment}{ * "{}unsigned int"{} is sufficient on all machines.  However, if you need to}}
+\DoxyCodeLine{167 \textcolor{comment}{ * handle larger images and you don't mind deviating from the spec, you}}
+\DoxyCodeLine{168 \textcolor{comment}{ * can change this datatype.}}
+\DoxyCodeLine{169 \textcolor{comment}{ */}}
+\DoxyCodeLine{170 }
+\DoxyCodeLine{171 \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \mbox{\hyperlink{jmorecfg_8h_a04ed4674f6f1d0d50ec241531e38274f}{JDIMENSION}};}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{173 \textcolor{preprocessor}{\#define JPEG\_MAX\_DIMENSION  65500L  }\textcolor{comment}{/* a tad under 64K to prevent overflows */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{174 }
+\DoxyCodeLine{175 }
+\DoxyCodeLine{176 \textcolor{comment}{/* These macros are used in all function definitions and extern declarations.}}
+\DoxyCodeLine{177 \textcolor{comment}{ * You could modify them if you need to change function linkage conventions;}}
+\DoxyCodeLine{178 \textcolor{comment}{ * in particular, you'll need to do that to make the library a Windows DLL.}}
+\DoxyCodeLine{179 \textcolor{comment}{ * Another application is to make all functions global for use with debuggers}}
+\DoxyCodeLine{180 \textcolor{comment}{ * or code profilers that require it.}}
+\DoxyCodeLine{181 \textcolor{comment}{ */}}
+\DoxyCodeLine{182 }
+\DoxyCodeLine{183 \textcolor{comment}{/* a function called through method pointers: */}}
+\DoxyCodeLine{184 \textcolor{preprocessor}{\#define METHODDEF(type)     static type}}
+\DoxyCodeLine{185 \textcolor{comment}{/* a function used only in its module: */}}
+\DoxyCodeLine{186 \textcolor{preprocessor}{\#define LOCAL(type)     static type}}
+\DoxyCodeLine{187 \textcolor{comment}{/* a function referenced thru EXTERNs: */}}
+\DoxyCodeLine{188 \textcolor{preprocessor}{\#define GLOBAL(type)        type}}
+\DoxyCodeLine{189 \textcolor{comment}{/* a reference to a GLOBAL function: */}}
+\DoxyCodeLine{190 \textcolor{preprocessor}{\#define EXTERN(type)        extern type}}
+\DoxyCodeLine{191 }
+\DoxyCodeLine{192 }
+\DoxyCodeLine{193 \textcolor{comment}{/* This macro is used to declare a "{}method"{}, that is, a function pointer.}}
+\DoxyCodeLine{194 \textcolor{comment}{ * We want to supply prototype parameters if the compiler can cope.}}
+\DoxyCodeLine{195 \textcolor{comment}{ * Note that the arglist parameter must be parenthesized!}}
+\DoxyCodeLine{196 \textcolor{comment}{ * Again, you can customize this if you need special linkage keywords.}}
+\DoxyCodeLine{197 \textcolor{comment}{ */}}
+\DoxyCodeLine{198 }
+\DoxyCodeLine{199 \textcolor{preprocessor}{\#ifdef HAVE\_PROTOTYPES}}
+\DoxyCodeLine{200 \textcolor{preprocessor}{\#define JMETHOD(type,methodname,arglist)  type (*methodname) arglist}}
+\DoxyCodeLine{201 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{202 \textcolor{preprocessor}{\#define JMETHOD(type,methodname,arglist)  type (*methodname) ()}}
+\DoxyCodeLine{203 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{204 }
+\DoxyCodeLine{205 }
+\DoxyCodeLine{206 \textcolor{comment}{/* Here is the pseudo-\/keyword for declaring pointers that must be "{}far"{}}}
+\DoxyCodeLine{207 \textcolor{comment}{ * on 80x86 machines.  Most of the specialized coding for 80x86 is handled}}
+\DoxyCodeLine{208 \textcolor{comment}{ * by just saying "{}FAR *"{} where such a pointer is needed.  In a few places}}
+\DoxyCodeLine{209 \textcolor{comment}{ * explicit coding is needed; see uses of the NEED\_FAR\_POINTERS symbol.}}
+\DoxyCodeLine{210 \textcolor{comment}{ */}}
+\DoxyCodeLine{211 }
+\DoxyCodeLine{212 \textcolor{preprocessor}{\#ifdef NEED\_FAR\_POINTERS}}
+\DoxyCodeLine{213 \textcolor{preprocessor}{\#define FAR  far}}
+\DoxyCodeLine{214 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{215 \textcolor{preprocessor}{\#define FAR}}
+\DoxyCodeLine{216 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{217 }
+\DoxyCodeLine{218 }
+\DoxyCodeLine{219 \textcolor{comment}{/*}}
+\DoxyCodeLine{220 \textcolor{comment}{ * On a few systems, type boolean and/or its values FALSE, TRUE may appear}}
+\DoxyCodeLine{221 \textcolor{comment}{ * in standard header files.  Or you may have conflicts with application-\/}}
+\DoxyCodeLine{222 \textcolor{comment}{ * specific header files that you want to include together with these files.}}
+\DoxyCodeLine{223 \textcolor{comment}{ * Defining HAVE\_BOOLEAN before including jpeglib.h should make it work.}}
+\DoxyCodeLine{224 \textcolor{comment}{ */}}
+\DoxyCodeLine{225 }
+\DoxyCodeLine{226 \textcolor{preprocessor}{\#ifndef HAVE\_BOOLEAN}}
+\DoxyCodeLine{227 \textcolor{keyword}{typedef} \textcolor{keywordtype}{int} \mbox{\hyperlink{jmorecfg_8h_a621c38f1f10a1c565d897e3178b16d6e}{boolean}};}
+\DoxyCodeLine{228 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{229 \textcolor{preprocessor}{\#ifndef FALSE           }\textcolor{comment}{/* in case these macros already exist */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{230 \textcolor{preprocessor}{\#define FALSE   0       }\textcolor{comment}{/* values of boolean */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{231 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{232 \textcolor{preprocessor}{\#ifndef TRUE}}
+\DoxyCodeLine{233 \textcolor{preprocessor}{\#define TRUE    1}}
+\DoxyCodeLine{234 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{235 }
+\DoxyCodeLine{236 }
+\DoxyCodeLine{237 \textcolor{comment}{/*}}
+\DoxyCodeLine{238 \textcolor{comment}{ * The remaining options affect code selection within the JPEG library,}}
+\DoxyCodeLine{239 \textcolor{comment}{ * but they don't need to be visible to most applications using the library.}}
+\DoxyCodeLine{240 \textcolor{comment}{ * To minimize application namespace pollution, the symbols won't be}}
+\DoxyCodeLine{241 \textcolor{comment}{ * defined unless JPEG\_INTERNALS or JPEG\_INTERNAL\_OPTIONS has been defined.}}
+\DoxyCodeLine{242 \textcolor{comment}{ */}}
+\DoxyCodeLine{243 }
+\DoxyCodeLine{244 \textcolor{preprocessor}{\#ifdef JPEG\_INTERNALS}}
+\DoxyCodeLine{245 \textcolor{preprocessor}{\#define JPEG\_INTERNAL\_OPTIONS}}
+\DoxyCodeLine{246 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{247 }
+\DoxyCodeLine{248 \textcolor{preprocessor}{\#ifdef JPEG\_INTERNAL\_OPTIONS}}
+\DoxyCodeLine{249 }
+\DoxyCodeLine{250 }
+\DoxyCodeLine{251 \textcolor{comment}{/*}}
+\DoxyCodeLine{252 \textcolor{comment}{ * These defines indicate whether to include various optional functions.}}
+\DoxyCodeLine{253 \textcolor{comment}{ * Undefining some of these symbols will produce a smaller but less capable}}
+\DoxyCodeLine{254 \textcolor{comment}{ * library.  Note that you can leave certain source files out of the}}
+\DoxyCodeLine{255 \textcolor{comment}{ * compilation/linking process if you've \#undef'd the corresponding symbols.}}
+\DoxyCodeLine{256 \textcolor{comment}{ * (You may HAVE to do that if your compiler doesn't like null source files.)}}
+\DoxyCodeLine{257 \textcolor{comment}{ */}}
+\DoxyCodeLine{258 }
+\DoxyCodeLine{259 \textcolor{comment}{/* Arithmetic coding is unsupported for legal reasons.  Complaints to IBM. */}}
+\DoxyCodeLine{260 }
+\DoxyCodeLine{261 \textcolor{comment}{/* Capability options common to encoder and decoder: */}}
+\DoxyCodeLine{262 }
+\DoxyCodeLine{263 \textcolor{preprocessor}{\#define DCT\_ISLOW\_SUPPORTED }\textcolor{comment}{/* slow but accurate integer algorithm */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{264 \textcolor{preprocessor}{\#define DCT\_IFAST\_SUPPORTED }\textcolor{comment}{/* faster, less accurate integer method */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{265 \textcolor{preprocessor}{\#define DCT\_FLOAT\_SUPPORTED }\textcolor{comment}{/* floating-\/point: accurate, fast on fast HW */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{266 }
+\DoxyCodeLine{267 \textcolor{comment}{/* Encoder capability options: */}}
+\DoxyCodeLine{268 }
+\DoxyCodeLine{269 \textcolor{preprocessor}{\#undef  C\_ARITH\_CODING\_SUPPORTED    }\textcolor{comment}{/* Arithmetic coding back end? */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{270 \textcolor{preprocessor}{\#define C\_MULTISCAN\_FILES\_SUPPORTED }\textcolor{comment}{/* Multiple-\/scan JPEG files? */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{271 \textcolor{preprocessor}{\#define C\_PROGRESSIVE\_SUPPORTED     }\textcolor{comment}{/* Progressive JPEG? (Requires MULTISCAN)*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{272 \textcolor{preprocessor}{\#define ENTROPY\_OPT\_SUPPORTED       }\textcolor{comment}{/* Optimization of entropy coding parms? */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{273 \textcolor{comment}{/* Note: if you selected 12-\/bit data precision, it is dangerous to turn off}}
+\DoxyCodeLine{274 \textcolor{comment}{ * ENTROPY\_OPT\_SUPPORTED.  The standard Huffman tables are only good for 8-\/bit}}
+\DoxyCodeLine{275 \textcolor{comment}{ * precision, so jchuff.c normally uses entropy optimization to compute}}
+\DoxyCodeLine{276 \textcolor{comment}{ * usable tables for higher precision.  If you don't want to do optimization,}}
+\DoxyCodeLine{277 \textcolor{comment}{ * you'll have to supply different default Huffman tables.}}
+\DoxyCodeLine{278 \textcolor{comment}{ * The exact same statements apply for progressive JPEG: the default tables}}
+\DoxyCodeLine{279 \textcolor{comment}{ * don't work for progressive mode.  (This may get fixed, however.)}}
+\DoxyCodeLine{280 \textcolor{comment}{ */}}
+\DoxyCodeLine{281 \textcolor{preprocessor}{\#define INPUT\_SMOOTHING\_SUPPORTED   }\textcolor{comment}{/* Input image smoothing option? */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{282 }
+\DoxyCodeLine{283 \textcolor{comment}{/* Decoder capability options: */}}
+\DoxyCodeLine{284 }
+\DoxyCodeLine{285 \textcolor{preprocessor}{\#undef  D\_ARITH\_CODING\_SUPPORTED    }\textcolor{comment}{/* Arithmetic coding back end? */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{286 \textcolor{preprocessor}{\#define D\_MULTISCAN\_FILES\_SUPPORTED }\textcolor{comment}{/* Multiple-\/scan JPEG files? */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{287 \textcolor{preprocessor}{\#define D\_PROGRESSIVE\_SUPPORTED     }\textcolor{comment}{/* Progressive JPEG? (Requires MULTISCAN)*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{288 \textcolor{preprocessor}{\#define SAVE\_MARKERS\_SUPPORTED      }\textcolor{comment}{/* jpeg\_save\_markers() needed? */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{289 \textcolor{preprocessor}{\#define BLOCK\_SMOOTHING\_SUPPORTED   }\textcolor{comment}{/* Block smoothing? (Progressive only) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{290 \textcolor{preprocessor}{\#define IDCT\_SCALING\_SUPPORTED      }\textcolor{comment}{/* Output rescaling via IDCT? */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{291 \textcolor{preprocessor}{\#undef  UPSAMPLE\_SCALING\_SUPPORTED  }\textcolor{comment}{/* Output rescaling at upsample stage? */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{292 \textcolor{preprocessor}{\#define UPSAMPLE\_MERGING\_SUPPORTED  }\textcolor{comment}{/* Fast path for sloppy upsampling? */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{293 \textcolor{preprocessor}{\#define QUANT\_1PASS\_SUPPORTED       }\textcolor{comment}{/* 1-\/pass color quantization? */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{294 \textcolor{preprocessor}{\#define QUANT\_2PASS\_SUPPORTED       }\textcolor{comment}{/* 2-\/pass color quantization? */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{295 }
+\DoxyCodeLine{296 \textcolor{comment}{/* more capability options later, no doubt */}}
+\DoxyCodeLine{297 }
+\DoxyCodeLine{298 }
+\DoxyCodeLine{299 \textcolor{comment}{/*}}
+\DoxyCodeLine{300 \textcolor{comment}{ * Ordering of RGB data in scanlines passed to or from the application.}}
+\DoxyCodeLine{301 \textcolor{comment}{ * If your application wants to deal with data in the order B,G,R, just}}
+\DoxyCodeLine{302 \textcolor{comment}{ * change these macros.  You can also deal with formats such as R,G,B,X}}
+\DoxyCodeLine{303 \textcolor{comment}{ * (one extra byte per pixel) by changing RGB\_PIXELSIZE.  Note that changing}}
+\DoxyCodeLine{304 \textcolor{comment}{ * the offsets will also change the order in which colormap data is organized.}}
+\DoxyCodeLine{305 \textcolor{comment}{ * RESTRICTIONS:}}
+\DoxyCodeLine{306 \textcolor{comment}{ * 1. The sample applications cjpeg,djpeg do NOT support modified RGB formats.}}
+\DoxyCodeLine{307 \textcolor{comment}{ * 2. These macros only affect RGB<=>YCbCr color conversion, so they are not}}
+\DoxyCodeLine{308 \textcolor{comment}{ *    useful if you are using JPEG color spaces other than YCbCr or grayscale.}}
+\DoxyCodeLine{309 \textcolor{comment}{ * 3. The color quantizer modules will not behave desirably if RGB\_PIXELSIZE}}
+\DoxyCodeLine{310 \textcolor{comment}{ *    is not 3 (they don't understand about dummy color components!).  So you}}
+\DoxyCodeLine{311 \textcolor{comment}{ *    can't use color quantization if you change that value.}}
+\DoxyCodeLine{312 \textcolor{comment}{ */}}
+\DoxyCodeLine{313 }
+\DoxyCodeLine{314 \textcolor{preprocessor}{\#define RGB\_RED     0   }\textcolor{comment}{/* Offset of Red in an RGB scanline element */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{315 \textcolor{preprocessor}{\#define RGB\_GREEN   1   }\textcolor{comment}{/* Offset of Green */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{316 \textcolor{preprocessor}{\#define RGB\_BLUE    2   }\textcolor{comment}{/* Offset of Blue */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{317 \textcolor{preprocessor}{\#define RGB\_PIXELSIZE   3   }\textcolor{comment}{/* JSAMPLEs per RGB scanline element */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{318 }
+\DoxyCodeLine{319 }
+\DoxyCodeLine{320 \textcolor{comment}{/* Definitions for speed-\/related optimizations. */}}
+\DoxyCodeLine{321 }
+\DoxyCodeLine{322 }
+\DoxyCodeLine{323 \textcolor{comment}{/* If your compiler supports inline functions, define INLINE}}
+\DoxyCodeLine{324 \textcolor{comment}{ * as the inline keyword; otherwise define it as empty.}}
+\DoxyCodeLine{325 \textcolor{comment}{ */}}
+\DoxyCodeLine{326 }
+\DoxyCodeLine{327 \textcolor{preprocessor}{\#ifndef INLINE}}
+\DoxyCodeLine{328 \textcolor{preprocessor}{\#ifdef \_\_GNUC\_\_         }\textcolor{comment}{/* for instance, GNU C knows about inline */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{329 \textcolor{preprocessor}{\#define INLINE \_\_inline\_\_}}
+\DoxyCodeLine{330 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{331 \textcolor{preprocessor}{\#ifndef INLINE}}
+\DoxyCodeLine{332 \textcolor{preprocessor}{\#define INLINE          }\textcolor{comment}{/* default is to define it as empty */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{333 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{334 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{335 }
+\DoxyCodeLine{336 }
+\DoxyCodeLine{337 \textcolor{comment}{/* On some machines (notably 68000 series) "{}int"{} is 32 bits, but multiplying}}
+\DoxyCodeLine{338 \textcolor{comment}{ * two 16-\/bit shorts is faster than multiplying two ints.  Define MULTIPLIER}}
+\DoxyCodeLine{339 \textcolor{comment}{ * as short on such a machine.  MULTIPLIER must be at least 16 bits wide.}}
+\DoxyCodeLine{340 \textcolor{comment}{ */}}
+\DoxyCodeLine{341 }
+\DoxyCodeLine{342 \textcolor{preprocessor}{\#ifndef MULTIPLIER}}
+\DoxyCodeLine{343 \textcolor{preprocessor}{\#define MULTIPLIER  int     }\textcolor{comment}{/* type for fastest integer multiply */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{344 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{345 }
+\DoxyCodeLine{346 }
+\DoxyCodeLine{347 \textcolor{comment}{/* FAST\_FLOAT should be either float or double, whichever is done faster}}
+\DoxyCodeLine{348 \textcolor{comment}{ * by your compiler.  (Note that this type is only used in the floating point}}
+\DoxyCodeLine{349 \textcolor{comment}{ * DCT routines, so it only matters if you've defined DCT\_FLOAT\_SUPPORTED.)}}
+\DoxyCodeLine{350 \textcolor{comment}{ * Typically, float is faster in ANSI C compilers, while double is faster in}}
+\DoxyCodeLine{351 \textcolor{comment}{ * pre-\/ANSI compilers (because they insist on converting to double anyway).}}
+\DoxyCodeLine{352 \textcolor{comment}{ * The code below therefore chooses float if we have ANSI-\/style prototypes.}}
+\DoxyCodeLine{353 \textcolor{comment}{ */}}
+\DoxyCodeLine{354 }
+\DoxyCodeLine{355 \textcolor{preprocessor}{\#ifndef FAST\_FLOAT}}
+\DoxyCodeLine{356 \textcolor{preprocessor}{\#ifdef HAVE\_PROTOTYPES}}
+\DoxyCodeLine{357 \textcolor{preprocessor}{\#define FAST\_FLOAT  float}}
+\DoxyCodeLine{358 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{359 \textcolor{preprocessor}{\#define FAST\_FLOAT  double}}
+\DoxyCodeLine{360 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{361 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{362 }
+\DoxyCodeLine{363 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* JPEG\_INTERNAL\_OPTIONS */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

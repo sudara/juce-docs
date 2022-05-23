@@ -1,0 +1,65 @@
+\hypertarget{_fifo_controller_8h_source}{}\doxysection{Fifo\+Controller.\+h}
+\label{_fifo_controller_8h_source}\index{build/juce\_audio\_devices/native/oboe/src/fifo/FifoController.h@{build/juce\_audio\_devices/native/oboe/src/fifo/FifoController.h}}
+\mbox{\hyperlink{_fifo_controller_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{ * Copyright 2015 The Android Open Source Project}}
+\DoxyCodeLine{3 \textcolor{comment}{ *}}
+\DoxyCodeLine{4 \textcolor{comment}{ * Licensed under the Apache License, Version 2.0 (the "{}License"{});}}
+\DoxyCodeLine{5 \textcolor{comment}{ * you may not use this file except in compliance with the License.}}
+\DoxyCodeLine{6 \textcolor{comment}{ * You may obtain a copy of the License at}}
+\DoxyCodeLine{7 \textcolor{comment}{ *}}
+\DoxyCodeLine{8 \textcolor{comment}{ *      http://www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{9 \textcolor{comment}{ *}}
+\DoxyCodeLine{10 \textcolor{comment}{ * Unless required by applicable law or agreed to in writing, software}}
+\DoxyCodeLine{11 \textcolor{comment}{ * distributed under the License is distributed on an "{}AS IS"{} BASIS,}}
+\DoxyCodeLine{12 \textcolor{comment}{ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.}}
+\DoxyCodeLine{13 \textcolor{comment}{ * See the License for the specific language governing permissions and}}
+\DoxyCodeLine{14 \textcolor{comment}{ * limitations under the License.}}
+\DoxyCodeLine{15 \textcolor{comment}{ */}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#ifndef NATIVEOBOE\_FIFOCONTROLLER\_H}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#define NATIVEOBOE\_FIFOCONTROLLER\_H}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#include <atomic>}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#include <stdint.h>}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_fifo_controller_base_8h}{FifoControllerBase.h}}"{}}}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceoboe}{oboe}} \{}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{30 \textcolor{keyword}{class }\mbox{\hyperlink{classoboe_1_1_fifo_controller}{FifoController}} : \textcolor{keyword}{public} \mbox{\hyperlink{classoboe_1_1_fifo_controller_base}{FifoControllerBase}}}
+\DoxyCodeLine{31 \{}
+\DoxyCodeLine{32 \textcolor{keyword}{public}:}
+\DoxyCodeLine{33     \mbox{\hyperlink{classoboe_1_1_fifo_controller_a7db886fbea64f4265ac6fde58947e460}{FifoController}}(uint32\_t \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8556d19b129aa550f5b2819ed0320e83}{bufferSize}});}
+\DoxyCodeLine{34     \textcolor{keyword}{virtual} \mbox{\hyperlink{classoboe_1_1_fifo_controller_ab4dd7998c8563e9b9ee6adda6d5a3050}{\string~FifoController}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36     \textcolor{keyword}{virtual} uint64\_t \mbox{\hyperlink{classoboe_1_1_fifo_controller_a20cb6800d8ab0c1e31c282276685c47c}{getReadCounter}}()\textcolor{keyword}{ const override }\{}
+\DoxyCodeLine{37         \textcolor{keywordflow}{return} mReadCounter.load(std::memory\_order\_acquire);}
+\DoxyCodeLine{38     \}}
+\DoxyCodeLine{39     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoboe_1_1_fifo_controller_a06c1729ed9056697dbf51b0efe9c8e98}{setReadCounter}}(uint64\_t \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}})\textcolor{keyword}{ override }\{}
+\DoxyCodeLine{40         mReadCounter.store(\mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}}, std::memory\_order\_release);}
+\DoxyCodeLine{41     \}}
+\DoxyCodeLine{42     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoboe_1_1_fifo_controller_a068da5072b457f4b09a5d1e0e2722484}{incrementReadCounter}}(uint64\_t \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}})\textcolor{keyword}{ override }\{}
+\DoxyCodeLine{43         mReadCounter.fetch\_add(\mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}}, std::memory\_order\_acq\_rel);}
+\DoxyCodeLine{44     \}}
+\DoxyCodeLine{45     \textcolor{keyword}{virtual} uint64\_t \mbox{\hyperlink{classoboe_1_1_fifo_controller_ae7865231feb0d8a1dde8fa842fe55100}{getWriteCounter}}()\textcolor{keyword}{ const override }\{}
+\DoxyCodeLine{46         \textcolor{keywordflow}{return} mWriteCounter.load(std::memory\_order\_acquire);}
+\DoxyCodeLine{47     \}}
+\DoxyCodeLine{48     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoboe_1_1_fifo_controller_abc6253f782d8ae981a805e43766aa113}{setWriteCounter}}(uint64\_t \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}})\textcolor{keyword}{ override }\{}
+\DoxyCodeLine{49         mWriteCounter.store(\mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}}, std::memory\_order\_release);}
+\DoxyCodeLine{50     \}}
+\DoxyCodeLine{51     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classoboe_1_1_fifo_controller_a54a8271146c69aeb5e4ca5e2b6f84f09}{incrementWriteCounter}}(uint64\_t \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}})\textcolor{keyword}{ override }\{}
+\DoxyCodeLine{52         mWriteCounter.fetch\_add(\mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}}, std::memory\_order\_acq\_rel);}
+\DoxyCodeLine{53     \}}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55 \textcolor{keyword}{private}:}
+\DoxyCodeLine{56     std::atomic<uint64\_t> mReadCounter\{\};}
+\DoxyCodeLine{57     std::atomic<uint64\_t> mWriteCounter\{\};}
+\DoxyCodeLine{58 \};}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60 \} \textcolor{comment}{// namespace oboe}}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//NATIVEOBOE\_FIFOCONTROLLER\_H}}
+
+\end{DoxyCode}

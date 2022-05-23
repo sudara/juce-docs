@@ -1,0 +1,89 @@
+\hypertarget{juce___progress_bar_8h_source}{}\doxysection{juce\+\_\+\+Progress\+Bar.\+h}
+\label{juce___progress_bar_8h_source}\index{build/juce\_gui\_basics/widgets/juce\_ProgressBar.h@{build/juce\_gui\_basics/widgets/juce\_ProgressBar.h}}
+\mbox{\hyperlink{juce___progress_bar_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{49 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_progress_bar}{ProgressBar}}  : \textcolor{keyword}{public} \mbox{\hyperlink{class_component}{Component}},}
+\DoxyCodeLine{50                                \textcolor{keyword}{public} \mbox{\hyperlink{class_settable_tooltip_client}{SettableTooltipClient}},}
+\DoxyCodeLine{51                                \textcolor{keyword}{private} \mbox{\hyperlink{class_timer}{Timer}}}
+\DoxyCodeLine{52 \{}
+\DoxyCodeLine{53 \textcolor{keyword}{public}:}
+\DoxyCodeLine{54     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{65 \textcolor{comment}{}    \textcolor{keyword}{explicit} \mbox{\hyperlink{class_progress_bar}{ProgressBar}} (\textcolor{keywordtype}{double}\& progress);}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{68     \mbox{\hyperlink{class_progress_bar}{\string~ProgressBar}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{76 \textcolor{comment}{}    \textcolor{keywordtype}{void} setPercentageDisplay (\textcolor{keywordtype}{bool} shouldDisplayPercentage);}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{83     \textcolor{keywordtype}{void} setTextToDisplay (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& text);}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{94 \textcolor{comment}{}    \textcolor{keyword}{enum} \mbox{\hyperlink{class_progress_bar_a3486234bde4b1095a948fea269635d42}{ColourIds}}}
+\DoxyCodeLine{95     \{}
+\DoxyCodeLine{96         backgroundColourId              = 0x1001900,    }
+\DoxyCodeLine{97         foregroundColourId              = 0x1001a00,    }
+\DoxyCodeLine{99     \};}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{103 \textcolor{comment}{}    \textcolor{keyword}{struct }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{struct_progress_bar_1_1_look_and_feel_methods}{LookAndFeelMethods}}}
+\DoxyCodeLine{104     \{}
+\DoxyCodeLine{105         \textcolor{keyword}{virtual} \mbox{\hyperlink{struct_progress_bar_1_1_look_and_feel_methods_a896ec18017ae1ee2bd5c2f6e38f54505}{\string~LookAndFeelMethods}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{115         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_progress_bar_1_1_look_and_feel_methods_a122aff7bf66df1a32b8d1f3973415e0f}{drawProgressBar}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&, \mbox{\hyperlink{class_progress_bar}{ProgressBar}}\&, \textcolor{keywordtype}{int} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}},}
+\DoxyCodeLine{116                                       \textcolor{keywordtype}{double} progress, \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& textToShow) = 0;}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118         \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_progress_bar_1_1_look_and_feel_methods_a271a4148ee2d428e5fe92e7510d84536}{isProgressBarOpaque}} (\mbox{\hyperlink{class_progress_bar}{ProgressBar}}\&) = 0;}
+\DoxyCodeLine{119     \};}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{121 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{122     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{124 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_component_a7cf1862f4af5909ea72827898114a182}{paint}} (\mbox{\hyperlink{class_graphics}{Graphics}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{126     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_component_a74af5830b815f6f985768a5673d01cf2}{lookAndFeelChanged}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{128     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_component_a3859d7aacb18fd51b2fc3e0c51680d1c}{visibilityChanged}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{130     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_component_adfab11b32c622b327a823c6565f637f4}{colourChanged}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{132 \textcolor{keyword}{private}:}
+\DoxyCodeLine{133     \textcolor{keywordtype}{double}\& progress;}
+\DoxyCodeLine{134     \textcolor{keywordtype}{double} currentValue;}
+\DoxyCodeLine{135     \textcolor{keywordtype}{bool} displayPercentage;}
+\DoxyCodeLine{136     \mbox{\hyperlink{class_string}{String}} displayedMessage, currentMessage;}
+\DoxyCodeLine{137     \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} lastCallbackTime;}
+\DoxyCodeLine{138 }
+\DoxyCodeLine{139     std::unique\_ptr<AccessibilityHandler> createAccessibilityHandler() \textcolor{keyword}{override};}
+\DoxyCodeLine{140     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_timer_a8adc40ca0fb4170737ba12e30481b9d8}{timerCallback}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{142     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_progress_bar}{ProgressBar}})}
+\DoxyCodeLine{143 \};}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{146 }
+
+\end{DoxyCode}

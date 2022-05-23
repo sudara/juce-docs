@@ -1,0 +1,103 @@
+\hypertarget{juce___menu_bar_model_8h_source}{}\doxysection{juce\+\_\+\+Menu\+Bar\+Model.\+h}
+\label{juce___menu_bar_model_8h_source}\index{build/juce\_gui\_basics/menus/juce\_MenuBarModel.h@{build/juce\_gui\_basics/menus/juce\_MenuBarModel.h}}
+\mbox{\hyperlink{juce___menu_bar_model_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{41 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_menu_bar_model}{MenuBarModel}}      : \textcolor{keyword}{private} \mbox{\hyperlink{class_async_updater}{AsyncUpdater}},}
+\DoxyCodeLine{42                                     \textcolor{keyword}{private} \mbox{\hyperlink{class_application_command_manager_listener}{ApplicationCommandManagerListener}}}
+\DoxyCodeLine{43 \{}
+\DoxyCodeLine{44 \textcolor{keyword}{public}:}
+\DoxyCodeLine{45     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{46     \mbox{\hyperlink{class_menu_bar_model}{MenuBarModel}}() \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{49     \mbox{\hyperlink{class_menu_bar_model}{\string~MenuBarModel}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{64 \textcolor{comment}{}    \textcolor{keywordtype}{void} menuItemsChanged();}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{72     \textcolor{keywordtype}{void} setApplicationCommandManagerToWatch (\mbox{\hyperlink{class_application_command_manager}{ApplicationCommandManager}}* manager);}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{79 \textcolor{comment}{}    \textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_menu_bar_model_1_1_listener}{Listener}}}
+\DoxyCodeLine{80     \{}
+\DoxyCodeLine{81     \textcolor{keyword}{public}:}
+\DoxyCodeLine{83         \textcolor{keyword}{virtual} \mbox{\hyperlink{class_menu_bar_model_1_1_listener_a43145cbb964ae31b5bfd2d7da0d5bb35}{\string~Listener}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85         \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{87 \textcolor{comment}{}        \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_menu_bar_model_1_1_listener_a32ab03020b06798d01ff472ee7305e64}{menuBarItemsChanged}} (\mbox{\hyperlink{class_menu_bar_model}{MenuBarModel}}* menuBarModel) = 0;}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{92         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_menu_bar_model_1_1_listener_a24a09292d83e8c60e34c3396060ef66a}{menuCommandInvoked}} (\mbox{\hyperlink{class_menu_bar_model}{MenuBarModel}}* menuBarModel,}
+\DoxyCodeLine{93                                          \textcolor{keyword}{const} \mbox{\hyperlink{struct_application_command_target_1_1_invocation_info}{ApplicationCommandTarget::InvocationInfo}}\& \mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}}) = 0;}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{97         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} menuBarActivated (\mbox{\hyperlink{class_menu_bar_model}{MenuBarModel}}* menuBarModel, \textcolor{keywordtype}{bool} isActive);}
+\DoxyCodeLine{98     \};}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{107     \textcolor{keywordtype}{void} addListener (\mbox{\hyperlink{class_menu_bar_model_1_1_listener}{Listener}}* listenerToAdd);}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{112     \textcolor{keywordtype}{void} removeListener (\mbox{\hyperlink{class_menu_bar_model_1_1_listener}{Listener}}* listenerToRemove);}
+\DoxyCodeLine{113 }
+\DoxyCodeLine{114     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{116 \textcolor{comment}{}    \textcolor{keyword}{virtual} \mbox{\hyperlink{class_string_array}{StringArray}} \mbox{\hyperlink{class_menu_bar_model_a2a42b27dc2d8e42b21b130d72b8d10c4}{getMenuBarNames}}() = 0;}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{123     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_popup_menu}{PopupMenu}} \mbox{\hyperlink{class_menu_bar_model_a500e3714cf915d27cd37bf13a79511f4}{getMenuForIndex}} (\textcolor{keywordtype}{int} topLevelMenuIndex,}
+\DoxyCodeLine{124                                        \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& menuName) = 0;}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{133     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_menu_bar_model_aa64b5b9bb4ea4e7bcdc49924659936cc}{menuItemSelected}} (\textcolor{keywordtype}{int} menuItemID,}
+\DoxyCodeLine{134                                    \textcolor{keywordtype}{int} topLevelMenuIndex) = 0;}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{140     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} menuBarActivated (\textcolor{keywordtype}{bool} isActive);}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{142     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{143 \textcolor{preprocessor}{   \#if JUCE\_MAC || DOXYGEN}}
+\DoxyCodeLine{161     \textcolor{keyword}{static} \textcolor{keywordtype}{void} setMacMainMenu (\mbox{\hyperlink{class_menu_bar_model}{MenuBarModel}}* newMenuBarModel,}
+\DoxyCodeLine{162                                 \textcolor{keyword}{const} \mbox{\hyperlink{class_popup_menu}{PopupMenu}}* extraAppleMenuItems = \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{163                                 \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& recentItemsMenuName = \mbox{\hyperlink{class_string}{String}}());}
+\DoxyCodeLine{164 }
+\DoxyCodeLine{168     \textcolor{keyword}{static} \mbox{\hyperlink{class_menu_bar_model}{MenuBarModel}}* getMacMainMenu();}
+\DoxyCodeLine{169 }
+\DoxyCodeLine{173     \textcolor{keyword}{static} \textcolor{keyword}{const} \mbox{\hyperlink{class_popup_menu}{PopupMenu}}* getMacExtraAppleItemsMenu();}
+\DoxyCodeLine{174 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{175 }
+\DoxyCodeLine{176     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{178 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{class_application_command_manager_listener_a254f742a826d934f8c843bd87552dadb}{applicationCommandInvoked}} (\textcolor{keyword}{const} \mbox{\hyperlink{struct_application_command_target_1_1_invocation_info}{ApplicationCommandTarget::InvocationInfo}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{180     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_application_command_manager_listener_a918fb2446acd367655fe88815d3be5fe}{applicationCommandListChanged}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{182     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_async_updater_a446f3af793131f8772329f1f8b526578}{handleAsyncUpdate}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{184     \textcolor{keywordtype}{void} handleMenuBarActivate (\textcolor{keywordtype}{bool} isActive);}
+\DoxyCodeLine{185 \textcolor{keyword}{private}:}
+\DoxyCodeLine{186     \mbox{\hyperlink{class_application_command_manager}{ApplicationCommandManager}}* manager;}
+\DoxyCodeLine{187     \mbox{\hyperlink{class_listener_list}{ListenerList<Listener>}} listeners;}
+\DoxyCodeLine{188 }
+\DoxyCodeLine{189     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_menu_bar_model}{MenuBarModel}})}
+\DoxyCodeLine{190 \};}
+\DoxyCodeLine{191 }
+\DoxyCodeLine{192 }
+\DoxyCodeLine{193  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{194 }
+
+\end{DoxyCode}

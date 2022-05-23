@@ -1,0 +1,167 @@
+\hypertarget{_component_base_8h}{}\doxysection{build/juce\+\_\+audio\+\_\+plugin\+\_\+client/\+AU/\+Core\+Audio\+Utility\+Classes/\+Component\+Base.h File Reference}
+\label{_component_base_8h}\index{build/juce\_audio\_plugin\_client/AU/CoreAudioUtilityClasses/ComponentBase.h@{build/juce\_audio\_plugin\_client/AU/CoreAudioUtilityClasses/ComponentBase.h}}
+{\ttfamily \#include $<$new$>$}\newline
+{\ttfamily \#include \char`\"{}CADebug\+Macros.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}CAXException.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$Core\+Audio/\+Core\+Audio\+Types.\+h$>$}\newline
+{\ttfamily \#include $<$Audio\+Unit/\+Audio\+Unit.\+h$>$}\newline
+{\ttfamily \#include $<$Core\+Services/../\+Frameworks/\+Carbon\+Core.\+framework/\+Headers/\+Components.\+h$>$}\newline
+{\ttfamily \#include $<$pthread.\+h$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_component_base}{Component\+Base}}
+\item 
+class \mbox{\hyperlink{class_component_init_locker}{Component\+Init\+Locker}}
+\item 
+class \mbox{\hyperlink{struct_audio_component_plug_in_instance}{Audio\+Component\+Plug\+In\+Instance}}
+\item 
+class \mbox{\hyperlink{class_a_p_factory}{APFactory$<$ APMethod\+Lookup, Implementor $>$}}
+\item 
+class \mbox{\hyperlink{class_component_entry_point}{Component\+Entry\+Point$<$ Class $>$}}
+\item 
+class \mbox{\hyperlink{class_component_registrar}{Component\+Registrar$<$ Class, Type, Subtype, Manufacturer $>$}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_component_base_8h_ab1311ba589a36a440dfb3ab9d2b2900b}{Audio\+Component\+Instance}}~Component\+Instance
+\item 
+\#define \mbox{\hyperlink{_component_base_8h_ad1e4bbe11c56c767e7406d2774abbcfd}{Audio\+Component\+Description}}~Component\+Description
+\item 
+\#define \mbox{\hyperlink{_component_base_8h_a5ac8b8900fbc118d3f5bf7d599b63cbf}{Audio\+Component}}~\mbox{\hyperlink{class_component}{Component}}
+\item 
+\#define \mbox{\hyperlink{_component_base_8h_a8f71e089229e452a810a7e0919b540c3}{COMPONENT\+\_\+\+THROW}}(throw\+\_\+err)~   throw static\+\_\+cast$<$OSStatus$>$(throw\+\_\+err)
+\item 
+\#define \mbox{\hyperlink{_component_base_8h_a0f7252a505a8e5935047dc04ca4e42e1}{COMPONENT\+\_\+\+CATCH}}
+\item 
+\#define \mbox{\hyperlink{_component_base_8h_af3a77b637c9a567cf4c657f2708f14ac}{AUDIOCOMPONENT\+\_\+\+ENTRY}}(Factory\+Type,  Class)
+\item 
+\#define \mbox{\hyperlink{_component_base_8h_a0664a36744744bc7813294773b96d703}{VIEW\+\_\+\+COMPONENT\+\_\+\+ENTRY}}(Class)
+\item 
+\#define \mbox{\hyperlink{_component_base_8h_ad4c8498d547af29d5533eb170ee08d7a}{COMPONENT\+\_\+\+REGISTER}}(Class,  Type,  Subtype,  Manufacturer)~ static \mbox{\hyperlink{class_component_registrar}{Component\+Registrar}}$<$Class, Type, Subtype, Manufacturer$>$ g\+Registrar\#\#Class
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef Float32 \mbox{\hyperlink{_component_base_8h_ad37b0f5817e3f72543294a0e2edb9c26}{Audio\+Unit\+Parameter\+Value}}
+\item 
+typedef Float32 \mbox{\hyperlink{_component_base_8h_aa226e106996913ddb8c8fe133692f495}{Audio\+Unit\+Sample\+Type}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Handle \mbox{\hyperlink{_component_base_8h_ab903001116443045daeb2778874f5db8}{CMgr\+\_\+\+Get\+Component\+Instance\+Storage}} (Component\+Instance a\+Component\+Instance)
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{_component_base_8h_a151f0a6a3ba2553f3ce5fa5bbdf19188}{CMgr\+\_\+\+Set\+Component\+Instance\+Storage}} (Component\+Instance a\+Component\+Instance, Handle the\+Storage)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{_component_base_8h_a5ac8b8900fbc118d3f5bf7d599b63cbf}\label{_component_base_8h_a5ac8b8900fbc118d3f5bf7d599b63cbf}} 
+\index{ComponentBase.h@{ComponentBase.h}!AudioComponent@{AudioComponent}}
+\index{AudioComponent@{AudioComponent}!ComponentBase.h@{ComponentBase.h}}
+\doxysubsubsection{\texorpdfstring{AudioComponent}{AudioComponent}}
+{\footnotesize\ttfamily \#define Audio\+Component~\mbox{\hyperlink{class_component}{Component}}}
+
+\mbox{\Hypertarget{_component_base_8h_af3a77b637c9a567cf4c657f2708f14ac}\label{_component_base_8h_af3a77b637c9a567cf4c657f2708f14ac}} 
+\index{ComponentBase.h@{ComponentBase.h}!AUDIOCOMPONENT\_ENTRY@{AUDIOCOMPONENT\_ENTRY}}
+\index{AUDIOCOMPONENT\_ENTRY@{AUDIOCOMPONENT\_ENTRY}!ComponentBase.h@{ComponentBase.h}}
+\doxysubsubsection{\texorpdfstring{AUDIOCOMPONENT\_ENTRY}{AUDIOCOMPONENT\_ENTRY}}
+{\footnotesize\ttfamily \#define AUDIOCOMPONENT\+\_\+\+ENTRY(\begin{DoxyParamCaption}\item[{}]{Factory\+Type,  }\item[{}]{Class }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} OSStatus Class\#\#Entry(ComponentParameters *\mbox{\hyperlink{namespacegl_a23c4f2997e7d61ec0804d763f22ee44c}{params}}, Class *\mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}}); \(\backslash\)}
+\DoxyCodeLine{    extern \textcolor{stringliteral}{"{}C"{}} OSStatus Class\#\#Entry(ComponentParameters *\mbox{\hyperlink{namespacegl_a23c4f2997e7d61ec0804d763f22ee44c}{params}}, Class *\mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}}) \{ \(\backslash\)}
+\DoxyCodeLine{        return \mbox{\hyperlink{class_component_entry_point_a07cdfbbf89f7cea753e70c135403d445}{ComponentEntryPoint<Class>::Dispatch}}(\mbox{\hyperlink{namespacegl_a23c4f2997e7d61ec0804d763f22ee44c}{params}}, \mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}}); \(\backslash\)}
+\DoxyCodeLine{    \} \(\backslash\)}
+\DoxyCodeLine{    extern \textcolor{stringliteral}{"{}C"{}} \textcolor{keywordtype}{void} * Class\#\#Factory(\textcolor{keyword}{const} \mbox{\hyperlink{_component_base_8h_ad1e4bbe11c56c767e7406d2774abbcfd}{AudioComponentDescription}} *inDesc); \(\backslash\)}
+\DoxyCodeLine{    extern \textcolor{stringliteral}{"{}C"{}} \textcolor{keywordtype}{void} * Class\#\#Factory(\textcolor{keyword}{const} \mbox{\hyperlink{_component_base_8h_ad1e4bbe11c56c767e7406d2774abbcfd}{AudioComponentDescription}} *inDesc) \{ \(\backslash\)}
+\DoxyCodeLine{        return FactoryType<Class>::Factory(inDesc); \(\backslash\)}
+\DoxyCodeLine{    \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{_component_base_8h_ad1e4bbe11c56c767e7406d2774abbcfd}\label{_component_base_8h_ad1e4bbe11c56c767e7406d2774abbcfd}} 
+\index{ComponentBase.h@{ComponentBase.h}!AudioComponentDescription@{AudioComponentDescription}}
+\index{AudioComponentDescription@{AudioComponentDescription}!ComponentBase.h@{ComponentBase.h}}
+\doxysubsubsection{\texorpdfstring{AudioComponentDescription}{AudioComponentDescription}}
+{\footnotesize\ttfamily \#define Audio\+Component\+Description~Component\+Description}
+
+\mbox{\Hypertarget{_component_base_8h_ab1311ba589a36a440dfb3ab9d2b2900b}\label{_component_base_8h_ab1311ba589a36a440dfb3ab9d2b2900b}} 
+\index{ComponentBase.h@{ComponentBase.h}!AudioComponentInstance@{AudioComponentInstance}}
+\index{AudioComponentInstance@{AudioComponentInstance}!ComponentBase.h@{ComponentBase.h}}
+\doxysubsubsection{\texorpdfstring{AudioComponentInstance}{AudioComponentInstance}}
+{\footnotesize\ttfamily \#define \mbox{\hyperlink{group__juce__audio__processors-utilities_ga8d76a4b29adb5f5b39318dd91162b8f4}{Audio\+Component\+Instance}}~Component\+Instance}
+
+\mbox{\Hypertarget{_component_base_8h_a0f7252a505a8e5935047dc04ca4e42e1}\label{_component_base_8h_a0f7252a505a8e5935047dc04ca4e42e1}} 
+\index{ComponentBase.h@{ComponentBase.h}!COMPONENT\_CATCH@{COMPONENT\_CATCH}}
+\index{COMPONENT\_CATCH@{COMPONENT\_CATCH}!ComponentBase.h@{ComponentBase.h}}
+\doxysubsubsection{\texorpdfstring{COMPONENT\_CATCH}{COMPONENT\_CATCH}}
+{\footnotesize\ttfamily \#define COMPONENT\+\_\+\+CATCH}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} \mbox{\hyperlink{class_c_a_x_exception}{CAXException}} \&ex) \{ \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = ex.\mbox{\hyperlink{class_c_a_x_exception_a0aa1e5990c717625eaa7a3506068b2a6}{mError}}; \} \(\backslash\)}
+\DoxyCodeLine{    catch (std::bad\_alloc \&) \{ \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = kAudio\_MemFullError; \} \(\backslash\)}
+\DoxyCodeLine{    catch (OSStatus catch\_err) \{ \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = catch\_err; \} \(\backslash\)}
+\DoxyCodeLine{    catch (OSErr catch\_err) \{ \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = catch\_err; \} \(\backslash\)}
+\DoxyCodeLine{    catch (...) \{ \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = -\/1; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{_component_base_8h_ad4c8498d547af29d5533eb170ee08d7a}\label{_component_base_8h_ad4c8498d547af29d5533eb170ee08d7a}} 
+\index{ComponentBase.h@{ComponentBase.h}!COMPONENT\_REGISTER@{COMPONENT\_REGISTER}}
+\index{COMPONENT\_REGISTER@{COMPONENT\_REGISTER}!ComponentBase.h@{ComponentBase.h}}
+\doxysubsubsection{\texorpdfstring{COMPONENT\_REGISTER}{COMPONENT\_REGISTER}}
+{\footnotesize\ttfamily \#define COMPONENT\+\_\+\+REGISTER(\begin{DoxyParamCaption}\item[{}]{Class,  }\item[{}]{Type,  }\item[{}]{Subtype,  }\item[{}]{Manufacturer }\end{DoxyParamCaption})~ static \mbox{\hyperlink{class_component_registrar}{Component\+Registrar}}$<$Class, Type, Subtype, Manufacturer$>$ g\+Registrar\#\#Class}
+
+\mbox{\Hypertarget{_component_base_8h_a8f71e089229e452a810a7e0919b540c3}\label{_component_base_8h_a8f71e089229e452a810a7e0919b540c3}} 
+\index{ComponentBase.h@{ComponentBase.h}!COMPONENT\_THROW@{COMPONENT\_THROW}}
+\index{COMPONENT\_THROW@{COMPONENT\_THROW}!ComponentBase.h@{ComponentBase.h}}
+\doxysubsubsection{\texorpdfstring{COMPONENT\_THROW}{COMPONENT\_THROW}}
+{\footnotesize\ttfamily \#define COMPONENT\+\_\+\+THROW(\begin{DoxyParamCaption}\item[{}]{throw\+\_\+err }\end{DoxyParamCaption})~   throw static\+\_\+cast$<$OSStatus$>$(throw\+\_\+err)}
+
+\mbox{\Hypertarget{_component_base_8h_a0664a36744744bc7813294773b96d703}\label{_component_base_8h_a0664a36744744bc7813294773b96d703}} 
+\index{ComponentBase.h@{ComponentBase.h}!VIEW\_COMPONENT\_ENTRY@{VIEW\_COMPONENT\_ENTRY}}
+\index{VIEW\_COMPONENT\_ENTRY@{VIEW\_COMPONENT\_ENTRY}!ComponentBase.h@{ComponentBase.h}}
+\doxysubsubsection{\texorpdfstring{VIEW\_COMPONENT\_ENTRY}{VIEW\_COMPONENT\_ENTRY}}
+{\footnotesize\ttfamily \#define VIEW\+\_\+\+COMPONENT\+\_\+\+ENTRY(\begin{DoxyParamCaption}\item[{}]{Class }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} OSStatus Class\#\#Entry(ComponentParameters *\mbox{\hyperlink{namespacegl_a23c4f2997e7d61ec0804d763f22ee44c}{params}}, Class *\mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}}); \(\backslash\)}
+\DoxyCodeLine{    extern \textcolor{stringliteral}{"{}C"{}} OSStatus Class\#\#Entry(ComponentParameters *\mbox{\hyperlink{namespacegl_a23c4f2997e7d61ec0804d763f22ee44c}{params}}, Class *\mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}}) \{ \(\backslash\)}
+\DoxyCodeLine{        return \mbox{\hyperlink{class_component_entry_point_a07cdfbbf89f7cea753e70c135403d445}{ComponentEntryPoint<Class>::Dispatch}}(\mbox{\hyperlink{namespacegl_a23c4f2997e7d61ec0804d763f22ee44c}{params}}, \mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}}); \(\backslash\)}
+\DoxyCodeLine{    \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{_component_base_8h_ad37b0f5817e3f72543294a0e2edb9c26}\label{_component_base_8h_ad37b0f5817e3f72543294a0e2edb9c26}} 
+\index{ComponentBase.h@{ComponentBase.h}!AudioUnitParameterValue@{AudioUnitParameterValue}}
+\index{AudioUnitParameterValue@{AudioUnitParameterValue}!ComponentBase.h@{ComponentBase.h}}
+\doxysubsubsection{\texorpdfstring{AudioUnitParameterValue}{AudioUnitParameterValue}}
+{\footnotesize\ttfamily typedef Float32 \mbox{\hyperlink{_component_base_8h_ad37b0f5817e3f72543294a0e2edb9c26}{Audio\+Unit\+Parameter\+Value}}}
+
+\mbox{\Hypertarget{_component_base_8h_aa226e106996913ddb8c8fe133692f495}\label{_component_base_8h_aa226e106996913ddb8c8fe133692f495}} 
+\index{ComponentBase.h@{ComponentBase.h}!AudioUnitSampleType@{AudioUnitSampleType}}
+\index{AudioUnitSampleType@{AudioUnitSampleType}!ComponentBase.h@{ComponentBase.h}}
+\doxysubsubsection{\texorpdfstring{AudioUnitSampleType}{AudioUnitSampleType}}
+{\footnotesize\ttfamily typedef Float32 \mbox{\hyperlink{_c_a_stream_basic_description_8h_aa226e106996913ddb8c8fe133692f495}{Audio\+Unit\+Sample\+Type}}}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_component_base_8h_ab903001116443045daeb2778874f5db8}\label{_component_base_8h_ab903001116443045daeb2778874f5db8}} 
+\index{ComponentBase.h@{ComponentBase.h}!CMgr\_GetComponentInstanceStorage@{CMgr\_GetComponentInstanceStorage}}
+\index{CMgr\_GetComponentInstanceStorage@{CMgr\_GetComponentInstanceStorage}!ComponentBase.h@{ComponentBase.h}}
+\doxysubsubsection{\texorpdfstring{CMgr\_GetComponentInstanceStorage()}{CMgr\_GetComponentInstanceStorage()}}
+{\footnotesize\ttfamily Handle CMgr\+\_\+\+Get\+Component\+Instance\+Storage (\begin{DoxyParamCaption}\item[{Component\+Instance}]{a\+Component\+Instance }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_component_base_8h_a151f0a6a3ba2553f3ce5fa5bbdf19188}\label{_component_base_8h_a151f0a6a3ba2553f3ce5fa5bbdf19188}} 
+\index{ComponentBase.h@{ComponentBase.h}!CMgr\_SetComponentInstanceStorage@{CMgr\_SetComponentInstanceStorage}}
+\index{CMgr\_SetComponentInstanceStorage@{CMgr\_SetComponentInstanceStorage}!ComponentBase.h@{ComponentBase.h}}
+\doxysubsubsection{\texorpdfstring{CMgr\_SetComponentInstanceStorage()}{CMgr\_SetComponentInstanceStorage()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} CMgr\+\_\+\+Set\+Component\+Instance\+Storage (\begin{DoxyParamCaption}\item[{Component\+Instance}]{a\+Component\+Instance,  }\item[{Handle}]{the\+Storage }\end{DoxyParamCaption})}
+

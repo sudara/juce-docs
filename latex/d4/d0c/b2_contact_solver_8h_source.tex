@@ -1,0 +1,99 @@
+\hypertarget{b2_contact_solver_8h_source}{}\doxysection{b2\+Contact\+Solver.\+h}
+\label{b2_contact_solver_8h_source}\index{build/juce\_box2d/box2d/Dynamics/Contacts/b2ContactSolver.h@{build/juce\_box2d/box2d/Dynamics/Contacts/b2ContactSolver.h}}
+\mbox{\hyperlink{b2_contact_solver_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{* Copyright (c) 2006-\/2009 Erin Catto http://www.box2d.org}}
+\DoxyCodeLine{3 \textcolor{comment}{*}}
+\DoxyCodeLine{4 \textcolor{comment}{* This software is provided 'as-\/is', without any express or implied}}
+\DoxyCodeLine{5 \textcolor{comment}{* warranty.  In no event will the authors be held liable for any damages}}
+\DoxyCodeLine{6 \textcolor{comment}{* arising from the use of this software.}}
+\DoxyCodeLine{7 \textcolor{comment}{* Permission is granted to anyone to use this software for any purpose,}}
+\DoxyCodeLine{8 \textcolor{comment}{* including commercial applications, and to alter it and redistribute it}}
+\DoxyCodeLine{9 \textcolor{comment}{* freely, subject to the following restrictions:}}
+\DoxyCodeLine{10 \textcolor{comment}{* 1. The origin of this software must not be misrepresented; you must not}}
+\DoxyCodeLine{11 \textcolor{comment}{* claim that you wrote the original software. If you use this software}}
+\DoxyCodeLine{12 \textcolor{comment}{* in a product, an acknowledgment in the product documentation would be}}
+\DoxyCodeLine{13 \textcolor{comment}{* appreciated but is not required.}}
+\DoxyCodeLine{14 \textcolor{comment}{* 2. Altered source versions must be plainly marked as such, and must not be}}
+\DoxyCodeLine{15 \textcolor{comment}{* misrepresented as being the original software.}}
+\DoxyCodeLine{16 \textcolor{comment}{* 3. This notice may not be removed or altered from any source distribution.}}
+\DoxyCodeLine{17 \textcolor{comment}{*/}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#ifndef B2\_CONTACT\_SOLVER\_H}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#define B2\_CONTACT\_SOLVER\_H}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#include "{}../../Common/b2Math.h"{}}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#include "{}../../Collision/b2Collision.h"{}}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#include "{}../b2TimeStep.h"{}}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{keyword}{class }\mbox{\hyperlink{classb2_contact}{b2Contact}};}
+\DoxyCodeLine{27 \textcolor{keyword}{class }\mbox{\hyperlink{classb2_body}{b2Body}};}
+\DoxyCodeLine{28 \textcolor{keyword}{class }\mbox{\hyperlink{classb2_stack_allocator}{b2StackAllocator}};}
+\DoxyCodeLine{29 \textcolor{keyword}{struct }\mbox{\hyperlink{structb2_contact_position_constraint}{b2ContactPositionConstraint}};}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31 \textcolor{keyword}{struct }\mbox{\hyperlink{structb2_velocity_constraint_point}{b2VelocityConstraintPoint}}}
+\DoxyCodeLine{32 \{}
+\DoxyCodeLine{33     \mbox{\hyperlink{structb2_vec2}{b2Vec2}} \mbox{\hyperlink{structb2_velocity_constraint_point_a0be704259cd5d3902d8581e186546e5e}{rA}};}
+\DoxyCodeLine{34     \mbox{\hyperlink{structb2_vec2}{b2Vec2}} \mbox{\hyperlink{structb2_velocity_constraint_point_ab5d1c98e09e2f859b71f6d0fda46c0d5}{rB}};}
+\DoxyCodeLine{35     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{structb2_velocity_constraint_point_a304653be2ca1c1daa72d7b7868b37b11}{normalImpulse}};}
+\DoxyCodeLine{36     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{structb2_velocity_constraint_point_ac3e3be335d204bb6a89a7303831cc89b}{tangentImpulse}};}
+\DoxyCodeLine{37     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{structb2_velocity_constraint_point_a5997e9781cedbd86333a84a967b59c33}{normalMass}};}
+\DoxyCodeLine{38     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{structb2_velocity_constraint_point_a029692226a637f5e687022041b25043c}{tangentMass}};}
+\DoxyCodeLine{39     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{structb2_velocity_constraint_point_a81d492345d9b1c8f51ec10154ab840f2}{velocityBias}};}
+\DoxyCodeLine{40 \};}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42 \textcolor{keyword}{struct }\mbox{\hyperlink{structb2_contact_velocity_constraint}{b2ContactVelocityConstraint}}}
+\DoxyCodeLine{43 \{}
+\DoxyCodeLine{44     \mbox{\hyperlink{structb2_velocity_constraint_point}{b2VelocityConstraintPoint}} \mbox{\hyperlink{structb2_contact_velocity_constraint_a549a4b6f915af5516234ece57b60e0dd}{points}}[\mbox{\hyperlink{b2_settings_8h_aa5f44cc9edf711433dea2b2ec94f3c42}{b2\_maxManifoldPoints}}];}
+\DoxyCodeLine{45     \mbox{\hyperlink{structb2_vec2}{b2Vec2}} \mbox{\hyperlink{structb2_contact_velocity_constraint_a1da730d689f89bd89cab06c5792f9bf3}{normal}};}
+\DoxyCodeLine{46     \mbox{\hyperlink{structb2_mat22}{b2Mat22}} \mbox{\hyperlink{structb2_contact_velocity_constraint_a0ee46cdf9b9136484e6a2ca25ac7cd4b}{normalMass}};}
+\DoxyCodeLine{47     \mbox{\hyperlink{structb2_mat22}{b2Mat22}} \mbox{\hyperlink{structb2_contact_velocity_constraint_a36c427f978d6f390552220b8ad21e1a9}{K}};}
+\DoxyCodeLine{48     \mbox{\hyperlink{juce__box2d_8cpp_a6a5a8e94340b94579afb83ab477a983c}{int32}} \mbox{\hyperlink{structb2_contact_velocity_constraint_a44a5ddedc5058c2453e873b999acd547}{indexA}};}
+\DoxyCodeLine{49     \mbox{\hyperlink{juce__box2d_8cpp_a6a5a8e94340b94579afb83ab477a983c}{int32}} \mbox{\hyperlink{structb2_contact_velocity_constraint_a55a9fd87a6e560fe83d81d6b9c14f356}{indexB}};}
+\DoxyCodeLine{50     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{structb2_contact_velocity_constraint_a529003546429532d186130ca35f2178e}{invMassA}}, \mbox{\hyperlink{structb2_contact_velocity_constraint_ac75c816e94402ed4d93f232d211d4f62}{invMassB}};}
+\DoxyCodeLine{51     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{structb2_contact_velocity_constraint_ac6c18706a9ee89c5a682dc610e86e00f}{invIA}}, \mbox{\hyperlink{structb2_contact_velocity_constraint_aae02d4fd8f60353385b9cc876dc78a81}{invIB}};}
+\DoxyCodeLine{52     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{structb2_contact_velocity_constraint_a11025786ae828eeeb60dfcd15358d934}{friction}};}
+\DoxyCodeLine{53     \mbox{\hyperlink{b2_settings_8h_aacdc525d6f7bddb3ae95d5c311bd06a1}{float32}} \mbox{\hyperlink{structb2_contact_velocity_constraint_a6734f74c1970abc64ed7dcffd8737257}{restitution}};}
+\DoxyCodeLine{54     \mbox{\hyperlink{juce__box2d_8cpp_a6a5a8e94340b94579afb83ab477a983c}{int32}} \mbox{\hyperlink{structb2_contact_velocity_constraint_a1decd7bf6a5dc61bd72d4e87b070a660}{pointCount}};}
+\DoxyCodeLine{55     \mbox{\hyperlink{juce__box2d_8cpp_a6a5a8e94340b94579afb83ab477a983c}{int32}} \mbox{\hyperlink{structb2_contact_velocity_constraint_a4c76b9292f28859e2f8c9d075e79b873}{contactIndex}};}
+\DoxyCodeLine{56 \};}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58 \textcolor{keyword}{struct }\mbox{\hyperlink{structb2_contact_solver_def}{b2ContactSolverDef}}}
+\DoxyCodeLine{59 \{}
+\DoxyCodeLine{60     \mbox{\hyperlink{structb2_time_step}{b2TimeStep}} \mbox{\hyperlink{structb2_contact_solver_def_a544604c01e6606ab54b8ccd5289a7ac7}{step}};}
+\DoxyCodeLine{61     \mbox{\hyperlink{classb2_contact}{b2Contact}}** \mbox{\hyperlink{structb2_contact_solver_def_a4b9d708e3122cab8d9dabeafefc7a9af}{contacts}};}
+\DoxyCodeLine{62     \mbox{\hyperlink{juce__box2d_8cpp_a6a5a8e94340b94579afb83ab477a983c}{int32}} \mbox{\hyperlink{structb2_contact_solver_def_ae977ea1cee4b7b9ee99210d9b66f88ea}{count}};}
+\DoxyCodeLine{63     \mbox{\hyperlink{structb2_position}{b2Position}}* \mbox{\hyperlink{structb2_contact_solver_def_aaf1432d040aa6279d91d8c9f24a4728a}{positions}};}
+\DoxyCodeLine{64     \mbox{\hyperlink{structb2_velocity}{b2Velocity}}* \mbox{\hyperlink{structb2_contact_solver_def_ae839e5c5464aa54c1ad8ce1634b49a1f}{velocities}};}
+\DoxyCodeLine{65     \mbox{\hyperlink{classb2_stack_allocator}{b2StackAllocator}}* \mbox{\hyperlink{structb2_contact_solver_def_a54198ac9886a988b9ffd06cf28c4c45c}{allocator}};}
+\DoxyCodeLine{66 \};}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68 \textcolor{keyword}{class }\mbox{\hyperlink{classb2_contact_solver}{b2ContactSolver}}}
+\DoxyCodeLine{69 \{}
+\DoxyCodeLine{70 \textcolor{keyword}{public}:}
+\DoxyCodeLine{71     \mbox{\hyperlink{classb2_contact_solver_ac89198165ed16eb6080d84f93229ea88}{b2ContactSolver}}(\mbox{\hyperlink{structb2_contact_solver_def}{b2ContactSolverDef}}* def);}
+\DoxyCodeLine{72     \mbox{\hyperlink{classb2_contact_solver_a7a0c4249a7af3bd2c990dabc75096a47}{\string~b2ContactSolver}}();}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74     \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_contact_solver_a56fc9a51a49879dc2dadd5c33ed70b0c}{InitializeVelocityConstraints}}();}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76     \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_contact_solver_aa96052cd2f709bfc416148fefb028522}{WarmStart}}();}
+\DoxyCodeLine{77     \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_contact_solver_abec74e1246fdbfddbd2236602da63e1f}{SolveVelocityConstraints}}();}
+\DoxyCodeLine{78     \textcolor{keywordtype}{void} \mbox{\hyperlink{classb2_contact_solver_aff5922a65bb5ccf473c425719bb8938d}{StoreImpulses}}();}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classb2_contact_solver_a4696834a137001bc74faec643b117031}{SolvePositionConstraints}}();}
+\DoxyCodeLine{81     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classb2_contact_solver_a6604c8fc034f89ad2e3461f4b5c20844}{SolveTOIPositionConstraints}}(\mbox{\hyperlink{juce__box2d_8cpp_a6a5a8e94340b94579afb83ab477a983c}{int32}} toiIndexA, \mbox{\hyperlink{juce__box2d_8cpp_a6a5a8e94340b94579afb83ab477a983c}{int32}} toiIndexB);}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83     \mbox{\hyperlink{structb2_time_step}{b2TimeStep}} \mbox{\hyperlink{classb2_contact_solver_aac78600ba5fd3249bac20678cbc9f101}{m\_step}};}
+\DoxyCodeLine{84     \mbox{\hyperlink{structb2_position}{b2Position}}* \mbox{\hyperlink{classb2_contact_solver_a39b973c8311e522f44cda9053dcea5a8}{m\_positions}};}
+\DoxyCodeLine{85     \mbox{\hyperlink{structb2_velocity}{b2Velocity}}* \mbox{\hyperlink{classb2_contact_solver_aae6dae9341dbbd780e7b3ec6b1b332f9}{m\_velocities}};}
+\DoxyCodeLine{86     \mbox{\hyperlink{classb2_stack_allocator}{b2StackAllocator}}* \mbox{\hyperlink{classb2_contact_solver_a6a2c9f5470a469e50d7f33f8d9095abe}{m\_allocator}};}
+\DoxyCodeLine{87     \mbox{\hyperlink{structb2_contact_position_constraint}{b2ContactPositionConstraint}}* \mbox{\hyperlink{classb2_contact_solver_ac0f4106f7cf67d185a7a4f3fd5a4e4ce}{m\_positionConstraints}};}
+\DoxyCodeLine{88     \mbox{\hyperlink{structb2_contact_velocity_constraint}{b2ContactVelocityConstraint}}* \mbox{\hyperlink{classb2_contact_solver_a616319ffa7ceb509b8189f07a070f7c7}{m\_velocityConstraints}};}
+\DoxyCodeLine{89     \mbox{\hyperlink{classb2_contact}{b2Contact}}** \mbox{\hyperlink{classb2_contact_solver_aa1c7370d1d2681f9d49a494f9b0a38c6}{m\_contacts}};}
+\DoxyCodeLine{90     \textcolor{keywordtype}{int} \mbox{\hyperlink{classb2_contact_solver_ab5b74c0fadf0d5d8997700b5ff91ea91}{m\_count}};}
+\DoxyCodeLine{91 \};}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

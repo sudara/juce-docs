@@ -1,0 +1,96 @@
+\hypertarget{juce___leaked_object_detector_8h_source}{}\doxysection{juce\+\_\+\+Leaked\+Object\+Detector.\+h}
+\label{juce___leaked_object_detector_8h_source}\index{build/juce\_core/memory/juce\_LeakedObjectDetector.h@{build/juce\_core/memory/juce\_LeakedObjectDetector.h}}
+\mbox{\hyperlink{juce___leaked_object_detector_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{42 \textcolor{comment}{}\textcolor{keyword}{template} <\textcolor{keyword}{class} OwnerClass>}
+\DoxyCodeLine{43 \textcolor{keyword}{class }\mbox{\hyperlink{class_leaked_object_detector}{LeakedObjectDetector}}}
+\DoxyCodeLine{44 \{}
+\DoxyCodeLine{45 \textcolor{keyword}{public}:}
+\DoxyCodeLine{46     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{47     \mbox{\hyperlink{class_leaked_object_detector_a33b0ca6504a300f0c321e89f28512aab}{LeakedObjectDetector}}() noexcept                                 \{ ++(getCounter().numObjects); \}}
+\DoxyCodeLine{48     \mbox{\hyperlink{class_leaked_object_detector_ab474ac40a76a5d47b39d8a68b983767f}{LeakedObjectDetector}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_leaked_object_detector}{LeakedObjectDetector}}\&) \textcolor{keyword}{noexcept}     \{ ++(getCounter().numObjects); \}}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50     \mbox{\hyperlink{class_leaked_object_detector}{LeakedObjectDetector}}\& \mbox{\hyperlink{class_leaked_object_detector_a788942d62659bf36337f2eaed0ac051f}{operator= }}(\textcolor{keyword}{const} \mbox{\hyperlink{class_leaked_object_detector}{LeakedObjectDetector}}\&) \textcolor{keyword}{noexcept} = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52     \mbox{\hyperlink{class_leaked_object_detector_a8ea749cb2c38ee245dabf0dd4876a023}{\string~LeakedObjectDetector}}()}
+\DoxyCodeLine{53     \{}
+\DoxyCodeLine{54         \textcolor{keywordflow}{if} (-\/-\/(getCounter().numObjects) < 0)}
+\DoxyCodeLine{55         \{}
+\DoxyCodeLine{56             \mbox{\hyperlink{group__juce__core-system_ga679635952a5d2eb25f3b31398f0fcc25}{DBG}} (\textcolor{stringliteral}{"{}*** Dangling pointer deletion! Class: "{}} << getLeakedObjectClassName());}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{69             \mbox{\hyperlink{group__juce__core-system_gadc044ce5efecbecf2f5a44cd00db67b3}{jassertfalse}};}
+\DoxyCodeLine{70         \}}
+\DoxyCodeLine{71     \}}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73 \textcolor{keyword}{private}:}
+\DoxyCodeLine{74     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{75     \textcolor{keyword}{class }LeakCounter}
+\DoxyCodeLine{76     \{}
+\DoxyCodeLine{77     \textcolor{keyword}{public}:}
+\DoxyCodeLine{78         LeakCounter() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80         \string~LeakCounter()}
+\DoxyCodeLine{81         \{}
+\DoxyCodeLine{82             \textcolor{keywordflow}{if} (numObjects.value > 0)}
+\DoxyCodeLine{83             \{}
+\DoxyCodeLine{84                 \mbox{\hyperlink{group__juce__core-system_ga679635952a5d2eb25f3b31398f0fcc25}{DBG}} (\textcolor{stringliteral}{"{}*** Leaked objects detected: "{}} << numObjects.value << \textcolor{stringliteral}{"{} instance(s) of class "{}} << getLeakedObjectClassName());}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{93                 \mbox{\hyperlink{group__juce__core-system_gadc044ce5efecbecf2f5a44cd00db67b3}{jassertfalse}};}
+\DoxyCodeLine{94             \}}
+\DoxyCodeLine{95         \}}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97         \mbox{\hyperlink{struct_atomic}{Atomic<int>}} numObjects;}
+\DoxyCodeLine{98     \};}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100     \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{char}* getLeakedObjectClassName()}
+\DoxyCodeLine{101     \{}
+\DoxyCodeLine{102         \textcolor{keywordflow}{return} OwnerClass::getLeakedObjectClassName();}
+\DoxyCodeLine{103     \}}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105     \textcolor{keyword}{static} LeakCounter\& getCounter() noexcept}
+\DoxyCodeLine{106     \{}
+\DoxyCodeLine{107         \textcolor{keyword}{static} LeakCounter \mbox{\hyperlink{namespacegl_a5009ba5617a3183d3e70c6ca4770cc75}{counter}};}
+\DoxyCodeLine{108         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a5009ba5617a3183d3e70c6ca4770cc75}{counter}};}
+\DoxyCodeLine{109     \}}
+\DoxyCodeLine{110 \};}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{113 \textcolor{preprocessor}{\#if DOXYGEN || ! defined (JUCE\_LEAK\_DETECTOR)}}
+\DoxyCodeLine{114 \textcolor{preprocessor}{ \#if (DOXYGEN || JUCE\_CHECK\_MEMORY\_LEAKS)}}
+\DoxyCodeLine{134 \textcolor{preprocessor}{  \#define JUCE\_LEAK\_DETECTOR(OwnerClass) \(\backslash\)}}
+\DoxyCodeLine{135 \textcolor{preprocessor}{        friend class juce::LeakedObjectDetector<OwnerClass>; \(\backslash\)}}
+\DoxyCodeLine{136 \textcolor{preprocessor}{        static const char* getLeakedObjectClassName() noexcept \{ return \#OwnerClass; \} \(\backslash\)}}
+\DoxyCodeLine{137 \textcolor{preprocessor}{        juce::LeakedObjectDetector<OwnerClass> JUCE\_JOIN\_MACRO (leakDetector, \_\_LINE\_\_);}}
+\DoxyCodeLine{138 \textcolor{preprocessor}{ \#else}}
+\DoxyCodeLine{139 \textcolor{preprocessor}{  \#define JUCE\_LEAK\_DETECTOR(OwnerClass)}}
+\DoxyCodeLine{140 \textcolor{preprocessor}{ \#endif}}
+\DoxyCodeLine{141 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{143  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{144 }
+
+\end{DoxyCode}

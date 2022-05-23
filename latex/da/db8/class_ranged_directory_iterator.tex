@@ -1,0 +1,171 @@
+\hypertarget{class_ranged_directory_iterator}{}\doxysection{Ranged\+Directory\+Iterator Class Reference}
+\label{class_ranged_directory_iterator}\index{RangedDirectoryIterator@{RangedDirectoryIterator}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Ranged\+Directory\+Iterator.\+h$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{class_ranged_directory_iterator_a5c1cdb78dc6ad8af298841dcc7024262}{difference\+\_\+type}} = std\+::ptrdiff\+\_\+t
+\item 
+using \mbox{\hyperlink{class_ranged_directory_iterator_ac16ca74b0c3a817836989bbdad7b9c8e}{value\+\_\+type}} = \mbox{\hyperlink{class_directory_entry}{Directory\+Entry}}
+\item 
+using \mbox{\hyperlink{class_ranged_directory_iterator_ac65432453645ce28c99de5d414423aeb}{reference}} = \mbox{\hyperlink{class_directory_entry}{Directory\+Entry}}
+\item 
+using \mbox{\hyperlink{class_ranged_directory_iterator_a8c1a7ab6ea8449459190620b43fd5af5}{pointer}} = \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}}
+\item 
+using \mbox{\hyperlink{class_ranged_directory_iterator_aabea4c04fc594e4aeb0a9f8c42e420f4}{iterator\+\_\+category}} = std\+::input\+\_\+iterator\+\_\+tag
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_ranged_directory_iterator_a8b2361e80df066abb5c1932d90474d03}{Ranged\+Directory\+Iterator}} ()=default
+\item 
+\mbox{\hyperlink{class_ranged_directory_iterator_aad0fff207977a7dc748013fe2c7a8b50}{Ranged\+Directory\+Iterator}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_file}{File}} \&directory, bool is\+Recursive, \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&wild\+Card=\char`\"{}$\ast$\char`\"{}, \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} what\+To\+Look\+For=\mbox{\hyperlink{class_file_a2e3d1ed8a9022434f3ddb7d34b24198ca0804ff838a8bfd66eaa300e5e0a3884a}{File\+::find\+Files}}, \mbox{\hyperlink{class_file_a0a1de7b7cf65e7502cac315b3d180aec}{File\+::\+Follow\+Symlinks}} follow\+Symlinks=\mbox{\hyperlink{class_file_a0a1de7b7cf65e7502cac315b3d180aecaa6105c0a611b41b08f1209506350279e}{File\+::\+Follow\+Symlinks\+::yes}})
+\item 
+bool \mbox{\hyperlink{class_ranged_directory_iterator_ae2d7541d407ab819a035e57e7b3176bb}{operator==}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_ranged_directory_iterator}{Ranged\+Directory\+Iterator}} \&other) \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+bool \mbox{\hyperlink{class_ranged_directory_iterator_a4d967290b143a87bc3062e0dcbaaed13}{operator!=}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_ranged_directory_iterator}{Ranged\+Directory\+Iterator}} \&other) \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_directory_entry}{Directory\+Entry}} \& \mbox{\hyperlink{class_ranged_directory_iterator_ae42fcb8d0ceed4f5c86135e639d4b20b}{operator$\ast$}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_directory_entry}{Directory\+Entry}} $\ast$ \mbox{\hyperlink{class_ranged_directory_iterator_aa1fa5d5767adeff776c68af753b3c6e6}{operator-\/$>$}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{class_ranged_directory_iterator}{Ranged\+Directory\+Iterator}} \& \mbox{\hyperlink{class_ranged_directory_iterator_ae2a3c4dcae9f5ecdd1cdeaf5dadcafe9}{operator++}} ()
+\item 
+\mbox{\hyperlink{class_directory_entry}{Directory\+Entry}} \mbox{\hyperlink{class_ranged_directory_iterator_a9c9076adba4a7a97391236d980dd2920}{operator++}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Allows iterating over files and folders using C++11 range-\/for syntax.
+
+In the following example, we recursively find all hidden files in a specific directory.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::vector<File> hiddenFiles;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{for} (\mbox{\hyperlink{class_directory_entry}{DirectoryEntry}} entry : \mbox{\hyperlink{class_ranged_directory_iterator}{RangedDirectoryIterator}} (\mbox{\hyperlink{class_file}{File}} (\textcolor{stringliteral}{"{}/path/to/folder"{}}), isRecursive))}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (entry.\mbox{\hyperlink{class_directory_entry_a46182ac676860222c86fe5d040aab8ff}{isHidden}}())}
+\DoxyCodeLine{        hiddenFiles.push\_back (entry.\mbox{\hyperlink{class_directory_entry_a4a5907f60b8954d1f9f91757d3be0e3b}{getFile}}());}
+
+\end{DoxyCode}
+
+
+@tags\{Core\} 
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{class_ranged_directory_iterator_a5c1cdb78dc6ad8af298841dcc7024262}\label{class_ranged_directory_iterator_a5c1cdb78dc6ad8af298841dcc7024262}} 
+\index{RangedDirectoryIterator@{RangedDirectoryIterator}!difference\_type@{difference\_type}}
+\index{difference\_type@{difference\_type}!RangedDirectoryIterator@{RangedDirectoryIterator}}
+\doxysubsubsection{\texorpdfstring{difference\_type}{difference\_type}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{class_ranged_directory_iterator_a5c1cdb78dc6ad8af298841dcc7024262}{Ranged\+Directory\+Iterator\+::difference\+\_\+type}} =  std\+::ptrdiff\+\_\+t}
+
+\mbox{\Hypertarget{class_ranged_directory_iterator_aabea4c04fc594e4aeb0a9f8c42e420f4}\label{class_ranged_directory_iterator_aabea4c04fc594e4aeb0a9f8c42e420f4}} 
+\index{RangedDirectoryIterator@{RangedDirectoryIterator}!iterator\_category@{iterator\_category}}
+\index{iterator\_category@{iterator\_category}!RangedDirectoryIterator@{RangedDirectoryIterator}}
+\doxysubsubsection{\texorpdfstring{iterator\_category}{iterator\_category}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{class_ranged_directory_iterator_aabea4c04fc594e4aeb0a9f8c42e420f4}{Ranged\+Directory\+Iterator\+::iterator\+\_\+category}} =  std\+::input\+\_\+iterator\+\_\+tag}
+
+\mbox{\Hypertarget{class_ranged_directory_iterator_a8c1a7ab6ea8449459190620b43fd5af5}\label{class_ranged_directory_iterator_a8c1a7ab6ea8449459190620b43fd5af5}} 
+\index{RangedDirectoryIterator@{RangedDirectoryIterator}!pointer@{pointer}}
+\index{pointer@{pointer}!RangedDirectoryIterator@{RangedDirectoryIterator}}
+\doxysubsubsection{\texorpdfstring{pointer}{pointer}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{class_ranged_directory_iterator_a8c1a7ab6ea8449459190620b43fd5af5}{Ranged\+Directory\+Iterator\+::pointer}} =  \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}}}
+
+\mbox{\Hypertarget{class_ranged_directory_iterator_ac65432453645ce28c99de5d414423aeb}\label{class_ranged_directory_iterator_ac65432453645ce28c99de5d414423aeb}} 
+\index{RangedDirectoryIterator@{RangedDirectoryIterator}!reference@{reference}}
+\index{reference@{reference}!RangedDirectoryIterator@{RangedDirectoryIterator}}
+\doxysubsubsection{\texorpdfstring{reference}{reference}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{class_ranged_directory_iterator_ac65432453645ce28c99de5d414423aeb}{Ranged\+Directory\+Iterator\+::reference}} =  \mbox{\hyperlink{class_directory_entry}{Directory\+Entry}}}
+
+\mbox{\Hypertarget{class_ranged_directory_iterator_ac16ca74b0c3a817836989bbdad7b9c8e}\label{class_ranged_directory_iterator_ac16ca74b0c3a817836989bbdad7b9c8e}} 
+\index{RangedDirectoryIterator@{RangedDirectoryIterator}!value\_type@{value\_type}}
+\index{value\_type@{value\_type}!RangedDirectoryIterator@{RangedDirectoryIterator}}
+\doxysubsubsection{\texorpdfstring{value\_type}{value\_type}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{class_ranged_directory_iterator_ac16ca74b0c3a817836989bbdad7b9c8e}{Ranged\+Directory\+Iterator\+::value\+\_\+type}} =  \mbox{\hyperlink{class_directory_entry}{Directory\+Entry}}}
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_ranged_directory_iterator_a8b2361e80df066abb5c1932d90474d03}\label{class_ranged_directory_iterator_a8b2361e80df066abb5c1932d90474d03}} 
+\index{RangedDirectoryIterator@{RangedDirectoryIterator}!RangedDirectoryIterator@{RangedDirectoryIterator}}
+\index{RangedDirectoryIterator@{RangedDirectoryIterator}!RangedDirectoryIterator@{RangedDirectoryIterator}}
+\doxysubsubsection{\texorpdfstring{RangedDirectoryIterator()}{RangedDirectoryIterator()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Ranged\+Directory\+Iterator\+::\+Ranged\+Directory\+Iterator (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+The default-\/constructed iterator acts as the \textquotesingle{}end\textquotesingle{} sentinel. \mbox{\Hypertarget{class_ranged_directory_iterator_aad0fff207977a7dc748013fe2c7a8b50}\label{class_ranged_directory_iterator_aad0fff207977a7dc748013fe2c7a8b50}} 
+\index{RangedDirectoryIterator@{RangedDirectoryIterator}!RangedDirectoryIterator@{RangedDirectoryIterator}}
+\index{RangedDirectoryIterator@{RangedDirectoryIterator}!RangedDirectoryIterator@{RangedDirectoryIterator}}
+\doxysubsubsection{\texorpdfstring{RangedDirectoryIterator()}{RangedDirectoryIterator()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Ranged\+Directory\+Iterator\+::\+Ranged\+Directory\+Iterator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_file}{File}} \&}]{directory,  }\item[{bool}]{is\+Recursive,  }\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&}]{wild\+Card = {\ttfamily \char`\"{}$\ast$\char`\"{}},  }\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{what\+To\+Look\+For = {\ttfamily \mbox{\hyperlink{class_file_a2e3d1ed8a9022434f3ddb7d34b24198ca0804ff838a8bfd66eaa300e5e0a3884a}{File\+::find\+Files}}},  }\item[{\mbox{\hyperlink{class_file_a0a1de7b7cf65e7502cac315b3d180aec}{File\+::\+Follow\+Symlinks}}}]{follow\+Symlinks = {\ttfamily \mbox{\hyperlink{class_file_a0a1de7b7cf65e7502cac315b3d180aecaa6105c0a611b41b08f1209506350279e}{File\+::\+Follow\+Symlinks\+::yes}}} }\end{DoxyParamCaption})}
+
+Creates a \mbox{\hyperlink{class_ranged_directory_iterator}{Ranged\+Directory\+Iterator}} for a given directory.
+
+The resulting iterator can be used directly in a \textquotesingle{}range-\/for\textquotesingle{} expression.
+
+
+\begin{DoxyParams}{Parameters}
+{\em directory} & the directory to search in \\
+\hline
+{\em is\+Recursive} & whether all the subdirectories should also be searched \\
+\hline
+{\em wild\+Card} & the file pattern to match. This may contain multiple patterns separated by a semi-\/colon or comma, e.\+g. \char`\"{}$\ast$.\+jpg;$\ast$.\+png\char`\"{} \\
+\hline
+{\em what\+To\+Look\+For} & a value from the \mbox{\hyperlink{class_file_a2e3d1ed8a9022434f3ddb7d34b24198c}{File\+::\+Types\+Of\+File\+To\+Find}} enum, specifying whether to look for files, directories, or both. \\
+\hline
+{\em follow\+Symlinks} & the policy to use when symlinks are encountered \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_ranged_directory_iterator_a4d967290b143a87bc3062e0dcbaaed13}\label{class_ranged_directory_iterator_a4d967290b143a87bc3062e0dcbaaed13}} 
+\index{RangedDirectoryIterator@{RangedDirectoryIterator}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!RangedDirectoryIterator@{RangedDirectoryIterator}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily bool Ranged\+Directory\+Iterator\+::operator!= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_ranged_directory_iterator}{Ranged\+Directory\+Iterator}} \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Returns the inverse of operator== \mbox{\Hypertarget{class_ranged_directory_iterator_ae42fcb8d0ceed4f5c86135e639d4b20b}\label{class_ranged_directory_iterator_ae42fcb8d0ceed4f5c86135e639d4b20b}} 
+\index{RangedDirectoryIterator@{RangedDirectoryIterator}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!RangedDirectoryIterator@{RangedDirectoryIterator}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$()}{operator*()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_directory_entry}{Directory\+Entry}} \& Ranged\+Directory\+Iterator\+::operator$\ast$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Return an object containing metadata about the file or folder to which the iterator is currently pointing. \mbox{\Hypertarget{class_ranged_directory_iterator_ae2a3c4dcae9f5ecdd1cdeaf5dadcafe9}\label{class_ranged_directory_iterator_ae2a3c4dcae9f5ecdd1cdeaf5dadcafe9}} 
+\index{RangedDirectoryIterator@{RangedDirectoryIterator}!operator++@{operator++}}
+\index{operator++@{operator++}!RangedDirectoryIterator@{RangedDirectoryIterator}}
+\doxysubsubsection{\texorpdfstring{operator++()}{operator++()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_ranged_directory_iterator}{Ranged\+Directory\+Iterator}} \& Ranged\+Directory\+Iterator\+::operator++ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Moves the iterator along to the next file. \mbox{\Hypertarget{class_ranged_directory_iterator_a9c9076adba4a7a97391236d980dd2920}\label{class_ranged_directory_iterator_a9c9076adba4a7a97391236d980dd2920}} 
+\index{RangedDirectoryIterator@{RangedDirectoryIterator}!operator++@{operator++}}
+\index{operator++@{operator++}!RangedDirectoryIterator@{RangedDirectoryIterator}}
+\doxysubsubsection{\texorpdfstring{operator++()}{operator++()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_directory_entry}{Directory\+Entry}} Ranged\+Directory\+Iterator\+::operator++ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Moves the iterator along to the next file.
+
+\begin{DoxyReturn}{Returns}
+an object containing metadata about the file or folder to to which the iterator was previously pointing. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_ranged_directory_iterator_aa1fa5d5767adeff776c68af753b3c6e6}\label{class_ranged_directory_iterator_aa1fa5d5767adeff776c68af753b3c6e6}} 
+\index{RangedDirectoryIterator@{RangedDirectoryIterator}!operator-\/$>$@{operator-\/$>$}}
+\index{operator-\/$>$@{operator-\/$>$}!RangedDirectoryIterator@{RangedDirectoryIterator}}
+\doxysubsubsection{\texorpdfstring{operator-\/$>$()}{operator->()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_directory_entry}{Directory\+Entry}} $\ast$ Ranged\+Directory\+Iterator\+::operator-\/$>$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+\mbox{\Hypertarget{class_ranged_directory_iterator_ae2d7541d407ab819a035e57e7b3176bb}\label{class_ranged_directory_iterator_ae2d7541d407ab819a035e57e7b3176bb}} 
+\index{RangedDirectoryIterator@{RangedDirectoryIterator}!operator==@{operator==}}
+\index{operator==@{operator==}!RangedDirectoryIterator@{RangedDirectoryIterator}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool Ranged\+Directory\+Iterator\+::operator== (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_ranged_directory_iterator}{Ranged\+Directory\+Iterator}} \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Returns true if both iterators are in their end/sentinel state, otherwise returns false. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+core/files/\mbox{\hyperlink{juce___ranged_directory_iterator_8h}{juce\+\_\+\+Ranged\+Directory\+Iterator.\+h}}\item 
+build/juce\+\_\+core/files/\mbox{\hyperlink{juce___ranged_directory_iterator_8cpp}{juce\+\_\+\+Ranged\+Directory\+Iterator.\+cpp}}\end{DoxyCompactItemize}

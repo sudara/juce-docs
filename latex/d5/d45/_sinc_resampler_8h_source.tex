@@ -1,0 +1,49 @@
+\hypertarget{_sinc_resampler_8h_source}{}\doxysection{Sinc\+Resampler.\+h}
+\label{_sinc_resampler_8h_source}\index{build/juce\_audio\_devices/native/oboe/src/flowgraph/resampler/SincResampler.h@{build/juce\_audio\_devices/native/oboe/src/flowgraph/resampler/SincResampler.h}}
+\mbox{\hyperlink{_sinc_resampler_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{ * Copyright 2019 The Android Open Source Project}}
+\DoxyCodeLine{3 \textcolor{comment}{ *}}
+\DoxyCodeLine{4 \textcolor{comment}{ * Licensed under the Apache License, Version 2.0 (the "{}License"{});}}
+\DoxyCodeLine{5 \textcolor{comment}{ * you may not use this file except in compliance with the License.}}
+\DoxyCodeLine{6 \textcolor{comment}{ * You may obtain a copy of the License at}}
+\DoxyCodeLine{7 \textcolor{comment}{ *}}
+\DoxyCodeLine{8 \textcolor{comment}{ *      http://www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{9 \textcolor{comment}{ *}}
+\DoxyCodeLine{10 \textcolor{comment}{ * Unless required by applicable law or agreed to in writing, software}}
+\DoxyCodeLine{11 \textcolor{comment}{ * distributed under the License is distributed on an "{}AS IS"{} BASIS,}}
+\DoxyCodeLine{12 \textcolor{comment}{ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.}}
+\DoxyCodeLine{13 \textcolor{comment}{ * See the License for the specific language governing permissions and}}
+\DoxyCodeLine{14 \textcolor{comment}{ * limitations under the License.}}
+\DoxyCodeLine{15 \textcolor{comment}{ */}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#ifndef OBOE\_SINC\_RESAMPLER\_H}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#define OBOE\_SINC\_RESAMPLER\_H}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#include <sys/types.h>}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#include <unistd.h>}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_multi_channel_resampler_8h}{MultiChannelResampler.h}}"{}}}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceresampler}{resampler}} \{}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{31 \textcolor{keyword}{class }\mbox{\hyperlink{classresampler_1_1_sinc_resampler}{SincResampler}} : \textcolor{keyword}{public} \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler}{MultiChannelResampler}} \{}
+\DoxyCodeLine{32 \textcolor{keyword}{public}:}
+\DoxyCodeLine{33     \textcolor{keyword}{explicit} \mbox{\hyperlink{classresampler_1_1_sinc_resampler_a952b46e4f2a3f9092bbee513817fe8f7}{SincResampler}}(\textcolor{keyword}{const} \mbox{\hyperlink{classresampler_1_1_multi_channel_resampler_1_1_builder}{MultiChannelResampler::Builder}} \&builder);}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35     \textcolor{keyword}{virtual} \mbox{\hyperlink{classresampler_1_1_sinc_resampler_ade0e52c60162f27cc05b0d0917fea740}{\string~SincResampler}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37     \textcolor{keywordtype}{void} \mbox{\hyperlink{classresampler_1_1_sinc_resampler_a1ca4b2034118304a45cf45edce4a76d4}{readFrame}}(\textcolor{keywordtype}{float} *frame) \textcolor{keyword}{override};}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41     std::vector<float> \mbox{\hyperlink{classresampler_1_1_sinc_resampler_a840c587c6f3a9cb18d7334d15fb53642}{mSingleFrame2}}; \textcolor{comment}{// for interpolation}}
+\DoxyCodeLine{42     int32\_t            \mbox{\hyperlink{classresampler_1_1_sinc_resampler_ab335772f45d820ce732c9465080edd57}{mNumRows}} = 0;}
+\DoxyCodeLine{43     \textcolor{keywordtype}{double}             \mbox{\hyperlink{classresampler_1_1_sinc_resampler_a4cb3e403b3092307aecbda1200d4ea03}{mPhaseScaler}} = 1.0;}
+\DoxyCodeLine{44 \};}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46 \}}
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//OBOE\_SINC\_RESAMPLER\_H}}
+
+\end{DoxyCode}

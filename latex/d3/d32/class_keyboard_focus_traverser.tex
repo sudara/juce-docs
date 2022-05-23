@@ -1,0 +1,119 @@
+\hypertarget{class_keyboard_focus_traverser}{}\doxysection{Keyboard\+Focus\+Traverser Class Reference}
+\label{class_keyboard_focus_traverser}\index{KeyboardFocusTraverser@{KeyboardFocusTraverser}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Keyboard\+Focus\+Traverser.\+h$>$}
+
+Inheritance diagram for Keyboard\+Focus\+Traverser\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{d3/d32/class_keyboard_focus_traverser}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_keyboard_focus_traverser_a127c924ddfebe2e0753f20e7ee31dece}{$\sim$\+Keyboard\+Focus\+Traverser}} () override=default
+\item 
+\mbox{\hyperlink{class_component}{Component}} $\ast$ \mbox{\hyperlink{class_keyboard_focus_traverser_a3d97b08d9bbee6422aa631fc78b3d701}{get\+Default\+Component}} (\mbox{\hyperlink{class_component}{Component}} $\ast$parent\+Component) override
+\item 
+\mbox{\hyperlink{class_component}{Component}} $\ast$ \mbox{\hyperlink{class_keyboard_focus_traverser_a03f85e6c3fea8e389f85022373ff3676}{get\+Next\+Component}} (\mbox{\hyperlink{class_component}{Component}} $\ast$current) override
+\item 
+\mbox{\hyperlink{class_component}{Component}} $\ast$ \mbox{\hyperlink{class_keyboard_focus_traverser_a5ef4e29e3c64a5d9ef1f125432769ac6}{get\+Previous\+Component}} (\mbox{\hyperlink{class_component}{Component}} $\ast$current) override
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_component}{Component}} $\ast$ $>$ \mbox{\hyperlink{class_keyboard_focus_traverser_a7300369ec0af9777d429b8fa9dde3151}{get\+All\+Components}} (\mbox{\hyperlink{class_component}{Component}} $\ast$parent\+Component) override
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Controls the order in which keyboard focus moves between components.
+
+The default behaviour of this class uses a \mbox{\hyperlink{class_focus_traverser}{Focus\+Traverser}} object internally to determine the default/next/previous component until it finds one which wants keyboard focus, as set by the \mbox{\hyperlink{class_component_a6a1f21a76b971d54870cb5c32c041055}{Component\+::set\+Wants\+Keyboard\+Focus()}} method.
+
+If you need keyboard focus traversal in a more customised way, you can create a subclass of \mbox{\hyperlink{class_component_traverser}{Component\+Traverser}} that uses your own algorithm, and use \mbox{\hyperlink{class_component_a8dc872ef83fedecd89cf814d28236cd0}{Component\+::create\+Keyboard\+Focus\+Traverser()}} to create it.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_focus_traverser}{Focus\+Traverser}}, \mbox{\hyperlink{class_component_traverser}{Component\+Traverser}}, \mbox{\hyperlink{class_component_a8dc872ef83fedecd89cf814d28236cd0}{Component\+::create\+Keyboard\+Focus\+Traverser}}
+\end{DoxySeeAlso}
+@tags\{GUI\} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_keyboard_focus_traverser_a127c924ddfebe2e0753f20e7ee31dece}\label{class_keyboard_focus_traverser_a127c924ddfebe2e0753f20e7ee31dece}} 
+\index{KeyboardFocusTraverser@{KeyboardFocusTraverser}!````~KeyboardFocusTraverser@{$\sim$KeyboardFocusTraverser}}
+\index{````~KeyboardFocusTraverser@{$\sim$KeyboardFocusTraverser}!KeyboardFocusTraverser@{KeyboardFocusTraverser}}
+\doxysubsubsection{\texorpdfstring{$\sim$KeyboardFocusTraverser()}{~KeyboardFocusTraverser()}}
+{\footnotesize\ttfamily Keyboard\+Focus\+Traverser\+::$\sim$\+Keyboard\+Focus\+Traverser (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
+
+Destructor. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_keyboard_focus_traverser_a7300369ec0af9777d429b8fa9dde3151}\label{class_keyboard_focus_traverser_a7300369ec0af9777d429b8fa9dde3151}} 
+\index{KeyboardFocusTraverser@{KeyboardFocusTraverser}!getAllComponents@{getAllComponents}}
+\index{getAllComponents@{getAllComponents}!KeyboardFocusTraverser@{KeyboardFocusTraverser}}
+\doxysubsubsection{\texorpdfstring{getAllComponents()}{getAllComponents()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{class_component}{Component}} $\ast$ $>$ Keyboard\+Focus\+Traverser\+::get\+All\+Components (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_component}{Component}} $\ast$}]{parent\+Component }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Returns all of the components that can receive keyboard focus within the given parent component in traversal order.
+
+The default implementation will return all focusable child components (as determined by \mbox{\hyperlink{class_focus_traverser}{Focus\+Traverser}}) that also wants keyboard focus. 
+
+Implements \mbox{\hyperlink{class_component_traverser_afa0b098ef0e08681d91015072119b455}{Component\+Traverser}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{classjuce_1_1_label_keyboard_focus_traverser_adcd31fdf805c95a880d78e9b5605b283}{juce\+::\+Label\+Keyboard\+Focus\+Traverser}}.
+
+\mbox{\Hypertarget{class_keyboard_focus_traverser_a3d97b08d9bbee6422aa631fc78b3d701}\label{class_keyboard_focus_traverser_a3d97b08d9bbee6422aa631fc78b3d701}} 
+\index{KeyboardFocusTraverser@{KeyboardFocusTraverser}!getDefaultComponent@{getDefaultComponent}}
+\index{getDefaultComponent@{getDefaultComponent}!KeyboardFocusTraverser@{KeyboardFocusTraverser}}
+\doxysubsubsection{\texorpdfstring{getDefaultComponent()}{getDefaultComponent()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_component}{Component}} $\ast$ Keyboard\+Focus\+Traverser\+::get\+Default\+Component (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_component}{Component}} $\ast$}]{parent\+Component }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Returns the component that should receive keyboard focus by default within the given parent component.
+
+The default implementation will return the foremost focusable component (as determined by \mbox{\hyperlink{class_focus_traverser}{Focus\+Traverser}}) that also wants keyboard focus, or nullptr if there is no suitable component. 
+
+Implements \mbox{\hyperlink{class_component_traverser_aba94a42fca848f8d0be60983fcb00cf2}{Component\+Traverser}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{classjuce_1_1_label_keyboard_focus_traverser_a2bc650fe8a85cd6af6b19013320a9432}{juce\+::\+Label\+Keyboard\+Focus\+Traverser}}.
+
+\mbox{\Hypertarget{class_keyboard_focus_traverser_a03f85e6c3fea8e389f85022373ff3676}\label{class_keyboard_focus_traverser_a03f85e6c3fea8e389f85022373ff3676}} 
+\index{KeyboardFocusTraverser@{KeyboardFocusTraverser}!getNextComponent@{getNextComponent}}
+\index{getNextComponent@{getNextComponent}!KeyboardFocusTraverser@{KeyboardFocusTraverser}}
+\doxysubsubsection{\texorpdfstring{getNextComponent()}{getNextComponent()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_component}{Component}} $\ast$ Keyboard\+Focus\+Traverser\+::get\+Next\+Component (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_component}{Component}} $\ast$}]{current }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Returns the component that should be given keyboard focus after the specified one when moving \char`\"{}forwards\char`\"{}.
+
+The default implementation will return the next focusable component (as determined by \mbox{\hyperlink{class_focus_traverser}{Focus\+Traverser}}) that also wants keyboard focus, or nullptr if there is no suitable component. 
+
+Implements \mbox{\hyperlink{class_component_traverser_a466ed63b19069dd2ce8aeeeea279726a}{Component\+Traverser}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{classjuce_1_1_label_keyboard_focus_traverser_a0ccd278eea2a1add5963e8f3082a2d1b}{juce\+::\+Label\+Keyboard\+Focus\+Traverser}}.
+
+\mbox{\Hypertarget{class_keyboard_focus_traverser_a5ef4e29e3c64a5d9ef1f125432769ac6}\label{class_keyboard_focus_traverser_a5ef4e29e3c64a5d9ef1f125432769ac6}} 
+\index{KeyboardFocusTraverser@{KeyboardFocusTraverser}!getPreviousComponent@{getPreviousComponent}}
+\index{getPreviousComponent@{getPreviousComponent}!KeyboardFocusTraverser@{KeyboardFocusTraverser}}
+\doxysubsubsection{\texorpdfstring{getPreviousComponent()}{getPreviousComponent()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_component}{Component}} $\ast$ Keyboard\+Focus\+Traverser\+::get\+Previous\+Component (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_component}{Component}} $\ast$}]{current }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Returns the component that should be given keyboard focus after the specified one when moving \char`\"{}backwards\char`\"{}.
+
+The default implementation will return the previous focusable component (as determined by \mbox{\hyperlink{class_focus_traverser}{Focus\+Traverser}}) that also wants keyboard focus, or nullptr if there is no suitable component. 
+
+Implements \mbox{\hyperlink{class_component_traverser_a76640a6d9d8538b64e669c09425356b2}{Component\+Traverser}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{classjuce_1_1_label_keyboard_focus_traverser_a15508a62462c9a01c117eb9bde1de8f4}{juce\+::\+Label\+Keyboard\+Focus\+Traverser}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+gui\+\_\+basics/keyboard/\mbox{\hyperlink{juce___keyboard_focus_traverser_8h}{juce\+\_\+\+Keyboard\+Focus\+Traverser.\+h}}\item 
+build/juce\+\_\+gui\+\_\+basics/keyboard/\mbox{\hyperlink{juce___keyboard_focus_traverser_8cpp}{juce\+\_\+\+Keyboard\+Focus\+Traverser.\+cpp}}\end{DoxyCompactItemize}

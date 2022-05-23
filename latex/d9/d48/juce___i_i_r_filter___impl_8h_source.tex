@@ -1,0 +1,250 @@
+\hypertarget{juce___i_i_r_filter___impl_8h_source}{}\doxysection{juce\+\_\+\+IIRFilter\+\_\+\+Impl.\+h}
+\label{juce___i_i_r_filter___impl_8h_source}\index{build/juce\_dsp/processors/juce\_IIRFilter\_Impl.h@{build/juce\_dsp/processors/juce\_IIRFilter\_Impl.h}}
+\mbox{\hyperlink{juce___i_i_r_filter___impl_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacedsp}{dsp}}}
+\DoxyCodeLine{30 \{}
+\DoxyCodeLine{31 \textcolor{keyword}{namespace }IIR}
+\DoxyCodeLine{32 \{}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#ifndef DOXYGEN}}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 \textcolor{keyword}{template} <\textcolor{keyword}{typename} NumericType>}
+\DoxyCodeLine{37 \textcolor{keyword}{template} <\textcolor{keywordtype}{size\_t} Num>}
+\DoxyCodeLine{38 \mbox{\hyperlink{structdsp_1_1_i_i_r_1_1_coefficients}{Coefficients<NumericType>}}\& \mbox{\hyperlink{structdsp_1_1_i_i_r_1_1_coefficients}{Coefficients<NumericType>::assignImpl}} (\textcolor{keyword}{const} NumericType* values)}
+\DoxyCodeLine{39 \{}
+\DoxyCodeLine{40     \textcolor{keyword}{static\_assert} (Num \% 2 == 0, \textcolor{stringliteral}{"{}Must supply an even number of coefficients"{}});}
+\DoxyCodeLine{41     \textcolor{keyword}{const} \textcolor{keyword}{auto} a0Index = Num / 2;}
+\DoxyCodeLine{42     \textcolor{keyword}{const} \textcolor{keyword}{auto} a0 = values[a0Index];}
+\DoxyCodeLine{43     \textcolor{keyword}{const} \textcolor{keyword}{auto} a0Inv = a0 != NumericType() ? \textcolor{keyword}{static\_cast<}NumericType\textcolor{keyword}{>} (1) / values[a0Index]}
+\DoxyCodeLine{44                                            : NumericType();}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46     coefficients.clearQuick();}
+\DoxyCodeLine{47     coefficients.ensureStorageAllocated ((\textcolor{keywordtype}{int}) \mbox{\hyperlink{group__juce__core-maths_gadfd716f36f80987d66ebc2fce819c1fe}{jmax}} ((\textcolor{keywordtype}{size\_t}) 8, Num));}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < Num; ++i)}
+\DoxyCodeLine{50         \textcolor{keywordflow}{if} (i != a0Index)}
+\DoxyCodeLine{51             coefficients.add (values[i] * a0Inv);}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{54 \}}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{57 \textcolor{keyword}{template} <\textcolor{keyword}{typename} SampleType>}
+\DoxyCodeLine{58 \mbox{\hyperlink{classdsp_1_1_i_i_r_1_1_filter_a1ae7789f7996b9c119a46860475d9d18}{Filter<SampleType>::Filter}}()}
+\DoxyCodeLine{59     : coefficients (new \mbox{\hyperlink{structdsp_1_1_i_i_r_1_1_coefficients}{Coefficients}}<typename \mbox{\hyperlink{classdsp_1_1_i_i_r_1_1_filter}{Filter}}<SampleType>::\mbox{\hyperlink{classdsp_1_1_i_i_r_1_1_filter_af592517ba8afbb6534dd645e37756101}{NumericType}}> (1, 0, 1, 0))}
+\DoxyCodeLine{60 \{}
+\DoxyCodeLine{61     \mbox{\hyperlink{classdsp_1_1_i_i_r_1_1_filter_ab54eb5792eaba1b529f0e6f95342f517}{reset}}();}
+\DoxyCodeLine{62 \}}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64 \textcolor{keyword}{template} <\textcolor{keyword}{typename} SampleType>}
+\DoxyCodeLine{65 \mbox{\hyperlink{classdsp_1_1_i_i_r_1_1_filter_a1ae7789f7996b9c119a46860475d9d18}{Filter<SampleType>::Filter}} (\mbox{\hyperlink{classdsp_1_1_i_i_r_1_1_filter_a64321e61c28e95f81006f840ca510e09}{CoefficientsPtr}} \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}})  : coefficients (\mbox{\hyperlink{namespacestd}{std}}::\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{move}} (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}))}
+\DoxyCodeLine{66 \{}
+\DoxyCodeLine{67     \mbox{\hyperlink{classdsp_1_1_i_i_r_1_1_filter_ab54eb5792eaba1b529f0e6f95342f517}{reset}}();}
+\DoxyCodeLine{68 \}}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70 \textcolor{keyword}{template} <\textcolor{keyword}{typename} SampleType>}
+\DoxyCodeLine{71 \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_i_i_r_1_1_filter_ab54eb5792eaba1b529f0e6f95342f517}{Filter<SampleType>::reset}} (SampleType resetToValue)}
+\DoxyCodeLine{72 \{}
+\DoxyCodeLine{73     \textcolor{keyword}{auto} newOrder = coefficients-\/>getFilterOrder();}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75     \textcolor{keywordflow}{if} (newOrder != \mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}})}
+\DoxyCodeLine{76     \{}
+\DoxyCodeLine{77         \mbox{\hyperlink{namespacegl_a3a5cfcada98dcfb74023a94251b8345b}{memory}}.malloc (\mbox{\hyperlink{group__juce__core-maths_gadfd716f36f80987d66ebc2fce819c1fe}{jmax}} (\mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}}, newOrder, \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>} (3)) + 1);}
+\DoxyCodeLine{78         state = \mbox{\hyperlink{group__juce__core-memory_gae3c97d720fa1e6288c70ea497aa6045d}{snapPointerToAlignment}} (\mbox{\hyperlink{namespacegl_a3a5cfcada98dcfb74023a94251b8345b}{memory}}.getData(), sizeof (SampleType));}
+\DoxyCodeLine{79         \mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}} = newOrder;}
+\DoxyCodeLine{80     \}}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < \mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}}; ++i)}
+\DoxyCodeLine{83         state[i] = resetToValue;}
+\DoxyCodeLine{84 \}}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86 \textcolor{keyword}{template} <\textcolor{keyword}{typename} SampleType>}
+\DoxyCodeLine{87 \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_i_i_r_1_1_filter_a0c6bf4ae3d6e4986f8d84d92b1914e02}{Filter<SampleType>::prepare}} (\textcolor{keyword}{const} \mbox{\hyperlink{structdsp_1_1_process_spec}{ProcessSpec}}\&) \textcolor{keyword}{noexcept}     \{ \mbox{\hyperlink{namespacegl_a3b437ea454d772211296e220c025bdd2}{reset}}(); \}}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89 \textcolor{keyword}{template} <\textcolor{keyword}{typename} SampleType>}
+\DoxyCodeLine{90 \textcolor{keyword}{template} <\textcolor{keyword}{typename} ProcessContext, \textcolor{keywordtype}{bool} bypassed>}
+\DoxyCodeLine{91 \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_i_i_r_1_1_filter}{Filter<SampleType>::processInternal}} (\textcolor{keyword}{const} ProcessContext\& context) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{92 \{}
+\DoxyCodeLine{93     \textcolor{keyword}{static\_assert} (\mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{std::is\_same<typename ProcessContext::SampleType, SampleType>::value}},}
+\DoxyCodeLine{94                    \textcolor{stringliteral}{"{}The sample-\/type of the IIR filter must match the sample-\/type supplied to this process callback"{}});}
+\DoxyCodeLine{95     \mbox{\hyperlink{namespacejuce_1_1_wasapi_classes_a5b767bd7f8dd75d748eab32c03d2b8cf}{check}}();}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97     \textcolor{keyword}{auto}\&\& inputBlock  = context.getInputBlock();}
+\DoxyCodeLine{98     \textcolor{keyword}{auto}\&\& outputBlock = context.getOutputBlock();}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100     \textcolor{comment}{// This class can only process mono signals. Use the ProcessorDuplicator class}}
+\DoxyCodeLine{101     \textcolor{comment}{// to apply this filter on a multi-\/channel audio stream.}}
+\DoxyCodeLine{102     \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (inputBlock.getNumChannels()  == 1);}
+\DoxyCodeLine{103     \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (outputBlock.getNumChannels() == 1);}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105     \textcolor{keyword}{auto} numSamples = inputBlock.getNumSamples();}
+\DoxyCodeLine{106     \textcolor{keyword}{auto}* \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}} = inputBlock .getChannelPointer (0);}
+\DoxyCodeLine{107     \textcolor{keyword}{auto}* \mbox{\hyperlink{namespacegl_a174f1a72ee763b6703711da180ac5d79}{dst}} = outputBlock.getChannelPointer (0);}
+\DoxyCodeLine{108     \textcolor{keyword}{auto}* \mbox{\hyperlink{namespacegl_a51a66b110344cb1698278cc91e67f2a4}{coeffs}} = coefficients-\/>getRawCoefficients();}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110     \textcolor{keywordflow}{switch} (\mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}})}
+\DoxyCodeLine{111     \{}
+\DoxyCodeLine{112         \textcolor{keywordflow}{case} 1:}
+\DoxyCodeLine{113         \{}
+\DoxyCodeLine{114             \textcolor{keyword}{auto} b0 = \mbox{\hyperlink{namespacegl_a51a66b110344cb1698278cc91e67f2a4}{coeffs}}[0];}
+\DoxyCodeLine{115             \textcolor{keyword}{auto} b1 = \mbox{\hyperlink{namespacegl_a51a66b110344cb1698278cc91e67f2a4}{coeffs}}[1];}
+\DoxyCodeLine{116             \textcolor{keyword}{auto} a1 = \mbox{\hyperlink{namespacegl_a51a66b110344cb1698278cc91e67f2a4}{coeffs}}[2];}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118             \textcolor{keyword}{auto} lv1 = state[0];}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < numSamples; ++i)}
+\DoxyCodeLine{121             \{}
+\DoxyCodeLine{122                 \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}} = \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}[i];}
+\DoxyCodeLine{123                 \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}} = \mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}} * b0 + lv1;}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{125                 \mbox{\hyperlink{namespacegl_a174f1a72ee763b6703711da180ac5d79}{dst}}[i] = bypassed ? \mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}} : \mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}};}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{127                 lv1 = (\mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}} * b1) -\/ (\mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}} * a1);}
+\DoxyCodeLine{128             \}}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{130             \mbox{\hyperlink{namespacedsp_1_1util_ac915069228ddc3448c5385c71bfe4728}{util::snapToZero}} (lv1); state[0] = lv1;}
+\DoxyCodeLine{131         \}}
+\DoxyCodeLine{132         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{133 }
+\DoxyCodeLine{134         \textcolor{keywordflow}{case} 2:}
+\DoxyCodeLine{135         \{}
+\DoxyCodeLine{136             \textcolor{keyword}{auto} b0 = \mbox{\hyperlink{namespacegl_a51a66b110344cb1698278cc91e67f2a4}{coeffs}}[0];}
+\DoxyCodeLine{137             \textcolor{keyword}{auto} b1 = \mbox{\hyperlink{namespacegl_a51a66b110344cb1698278cc91e67f2a4}{coeffs}}[1];}
+\DoxyCodeLine{138             \textcolor{keyword}{auto} b2 = \mbox{\hyperlink{namespacegl_a51a66b110344cb1698278cc91e67f2a4}{coeffs}}[2];}
+\DoxyCodeLine{139             \textcolor{keyword}{auto} a1 = \mbox{\hyperlink{namespacegl_a51a66b110344cb1698278cc91e67f2a4}{coeffs}}[3];}
+\DoxyCodeLine{140             \textcolor{keyword}{auto} a2 = \mbox{\hyperlink{namespacegl_a51a66b110344cb1698278cc91e67f2a4}{coeffs}}[4];}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{142             \textcolor{keyword}{auto} lv1 = state[0];}
+\DoxyCodeLine{143             \textcolor{keyword}{auto} lv2 = state[1];}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < numSamples; ++i)}
+\DoxyCodeLine{146             \{}
+\DoxyCodeLine{147                 \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}} = \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}[i];}
+\DoxyCodeLine{148                 \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}} = (\mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}} * b0) + lv1;}
+\DoxyCodeLine{149                 \mbox{\hyperlink{namespacegl_a174f1a72ee763b6703711da180ac5d79}{dst}}[i] = bypassed ? \mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}} : \mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}};}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{151                 lv1 = (\mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}} * b1) -\/ (\mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}}* a1) + lv2;}
+\DoxyCodeLine{152                 lv2 = (\mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}} * b2) -\/ (\mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}}* a2);}
+\DoxyCodeLine{153             \}}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{155             \mbox{\hyperlink{namespacedsp_1_1util_ac915069228ddc3448c5385c71bfe4728}{util::snapToZero}} (lv1); state[0] = lv1;}
+\DoxyCodeLine{156             \mbox{\hyperlink{namespacedsp_1_1util_ac915069228ddc3448c5385c71bfe4728}{util::snapToZero}} (lv2); state[1] = lv2;}
+\DoxyCodeLine{157         \}}
+\DoxyCodeLine{158         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160         \textcolor{keywordflow}{case} 3:}
+\DoxyCodeLine{161         \{}
+\DoxyCodeLine{162             \textcolor{keyword}{auto} b0 = \mbox{\hyperlink{namespacegl_a51a66b110344cb1698278cc91e67f2a4}{coeffs}}[0];}
+\DoxyCodeLine{163             \textcolor{keyword}{auto} b1 = \mbox{\hyperlink{namespacegl_a51a66b110344cb1698278cc91e67f2a4}{coeffs}}[1];}
+\DoxyCodeLine{164             \textcolor{keyword}{auto} b2 = \mbox{\hyperlink{namespacegl_a51a66b110344cb1698278cc91e67f2a4}{coeffs}}[2];}
+\DoxyCodeLine{165             \textcolor{keyword}{auto} b3 = \mbox{\hyperlink{namespacegl_a51a66b110344cb1698278cc91e67f2a4}{coeffs}}[3];}
+\DoxyCodeLine{166             \textcolor{keyword}{auto} a1 = \mbox{\hyperlink{namespacegl_a51a66b110344cb1698278cc91e67f2a4}{coeffs}}[4];}
+\DoxyCodeLine{167             \textcolor{keyword}{auto} a2 = \mbox{\hyperlink{namespacegl_a51a66b110344cb1698278cc91e67f2a4}{coeffs}}[5];}
+\DoxyCodeLine{168             \textcolor{keyword}{auto} a3 = \mbox{\hyperlink{namespacegl_a51a66b110344cb1698278cc91e67f2a4}{coeffs}}[6];}
+\DoxyCodeLine{169 }
+\DoxyCodeLine{170             \textcolor{keyword}{auto} lv1 = state[0];}
+\DoxyCodeLine{171             \textcolor{keyword}{auto} lv2 = state[1];}
+\DoxyCodeLine{172             \textcolor{keyword}{auto} lv3 = state[2];}
+\DoxyCodeLine{173 }
+\DoxyCodeLine{174             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < numSamples; ++i)}
+\DoxyCodeLine{175             \{}
+\DoxyCodeLine{176                 \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}} = \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}[i];}
+\DoxyCodeLine{177                 \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}} = (\mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}} * b0) + lv1;}
+\DoxyCodeLine{178                 \mbox{\hyperlink{namespacegl_a174f1a72ee763b6703711da180ac5d79}{dst}}[i] = bypassed ? \mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}} : \mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}};}
+\DoxyCodeLine{179 }
+\DoxyCodeLine{180                 lv1 = (\mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}} * b1) -\/ (\mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}}* a1) + lv2;}
+\DoxyCodeLine{181                 lv2 = (\mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}} * b2) -\/ (\mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}}* a2) + lv3;}
+\DoxyCodeLine{182                 lv3 = (\mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}} * b3) -\/ (\mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}}* a3);}
+\DoxyCodeLine{183             \}}
+\DoxyCodeLine{184 }
+\DoxyCodeLine{185             \mbox{\hyperlink{namespacedsp_1_1util_ac915069228ddc3448c5385c71bfe4728}{util::snapToZero}} (lv1); state[0] = lv1;}
+\DoxyCodeLine{186             \mbox{\hyperlink{namespacedsp_1_1util_ac915069228ddc3448c5385c71bfe4728}{util::snapToZero}} (lv2); state[1] = lv2;}
+\DoxyCodeLine{187             \mbox{\hyperlink{namespacedsp_1_1util_ac915069228ddc3448c5385c71bfe4728}{util::snapToZero}} (lv3); state[2] = lv3;}
+\DoxyCodeLine{188         \}}
+\DoxyCodeLine{189         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{190 }
+\DoxyCodeLine{191         \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{192         \{}
+\DoxyCodeLine{193             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < numSamples; ++i)}
+\DoxyCodeLine{194             \{}
+\DoxyCodeLine{195                 \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}} = \mbox{\hyperlink{namespacegl_a53ba192f09eb5ce0813c301689e803f8}{src}}[i];}
+\DoxyCodeLine{196                 \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}}= (\mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}} * \mbox{\hyperlink{namespacegl_a51a66b110344cb1698278cc91e67f2a4}{coeffs}}[0]) + state[0];}
+\DoxyCodeLine{197                 \mbox{\hyperlink{namespacegl_a174f1a72ee763b6703711da180ac5d79}{dst}}[i] = bypassed ? \mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}} : \mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}};}
+\DoxyCodeLine{198 }
+\DoxyCodeLine{199                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}} = 0; \mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}} < \mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}} -\/ 1; ++\mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}})}
+\DoxyCodeLine{200                     state[\mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}}] = (\mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}} * \mbox{\hyperlink{namespacegl_a51a66b110344cb1698278cc91e67f2a4}{coeffs}}[\mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}} + 1]) -\/ (\mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}}* \mbox{\hyperlink{namespacegl_a51a66b110344cb1698278cc91e67f2a4}{coeffs}}[\mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}} + \mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}} + 1]) + state[\mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}} + 1];}
+\DoxyCodeLine{201 }
+\DoxyCodeLine{202                 state[\mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}} -\/ 1] = (\mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}} * \mbox{\hyperlink{namespacegl_a51a66b110344cb1698278cc91e67f2a4}{coeffs}}[\mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}}]) -\/ (\mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}}* \mbox{\hyperlink{namespacegl_a51a66b110344cb1698278cc91e67f2a4}{coeffs}}[\mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}} * 2]);}
+\DoxyCodeLine{203             \}}
+\DoxyCodeLine{204 }
+\DoxyCodeLine{205             \mbox{\hyperlink{namespacedsp_1_1util_ac915069228ddc3448c5385c71bfe4728}{snapToZero}}();}
+\DoxyCodeLine{206         \}}
+\DoxyCodeLine{207     \}}
+\DoxyCodeLine{208 \}}
+\DoxyCodeLine{209 }
+\DoxyCodeLine{210 \textcolor{keyword}{template} <\textcolor{keyword}{typename} SampleType>}
+\DoxyCodeLine{211 SampleType JUCE\_VECTOR\_CALLTYPE \mbox{\hyperlink{classdsp_1_1_i_i_r_1_1_filter_a751edfeb3193b7739c5b2f47168c7027}{Filter<SampleType>::processSample}} (SampleType sample) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{212 \{}
+\DoxyCodeLine{213     \mbox{\hyperlink{namespacejuce_1_1_wasapi_classes_a5b767bd7f8dd75d748eab32c03d2b8cf}{check}}();}
+\DoxyCodeLine{214     \textcolor{keyword}{auto}* \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} = coefficients-\/>getRawCoefficients();}
+\DoxyCodeLine{215 }
+\DoxyCodeLine{216     \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}} = (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}[0] * sample) + state[0];}
+\DoxyCodeLine{217 }
+\DoxyCodeLine{218     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}} = 0; \mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}} < \mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}} -\/ 1; ++\mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}})}
+\DoxyCodeLine{219         state[\mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}}] = (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}[\mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}} + 1] * sample) -\/ (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}[\mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}} + \mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}} + 1] * \mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}}) + state[\mbox{\hyperlink{namespacegl_a8b29d29f83e403429c42969ab094fa9b}{j}} + 1];}
+\DoxyCodeLine{220 }
+\DoxyCodeLine{221     state[\mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}} -\/ 1] = (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}[\mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}}] * sample) -\/ (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}[\mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}} * 2] * \mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}});}
+\DoxyCodeLine{222 }
+\DoxyCodeLine{223     \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}};}
+\DoxyCodeLine{224 \}}
+\DoxyCodeLine{225 }
+\DoxyCodeLine{226 \textcolor{keyword}{template} <\textcolor{keyword}{typename} SampleType>}
+\DoxyCodeLine{227 \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_i_i_r_1_1_filter_ac7718a76aabf8ed655cc921fdcc66e9e}{Filter<SampleType>::snapToZero}}() noexcept}
+\DoxyCodeLine{228 \{}
+\DoxyCodeLine{229     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < \mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}}; ++i)}
+\DoxyCodeLine{230         \mbox{\hyperlink{namespacedsp_1_1util_ac915069228ddc3448c5385c71bfe4728}{util::snapToZero}} (state[i]);}
+\DoxyCodeLine{231 \}}
+\DoxyCodeLine{232 }
+\DoxyCodeLine{233 \textcolor{keyword}{template} <\textcolor{keyword}{typename} SampleType>}
+\DoxyCodeLine{234 \textcolor{keywordtype}{void} \mbox{\hyperlink{classdsp_1_1_i_i_r_1_1_filter}{Filter<SampleType>::check}}()}
+\DoxyCodeLine{235 \{}
+\DoxyCodeLine{236     \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (coefficients != \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{237 }
+\DoxyCodeLine{238     \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_ab9f2d0a88c9427504acdf298a49053b1}{order}} != coefficients-\/>getFilterOrder())}
+\DoxyCodeLine{239         \mbox{\hyperlink{namespacegl_a3b437ea454d772211296e220c025bdd2}{reset}}();}
+\DoxyCodeLine{240 \}}
+\DoxyCodeLine{241 }
+\DoxyCodeLine{242 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{243 }
+\DoxyCodeLine{244 \} \textcolor{comment}{// namespace IIR}}
+\DoxyCodeLine{245 \} \textcolor{comment}{// namespace dsp}}
+\DoxyCodeLine{246  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{247 }
+
+\end{DoxyCode}

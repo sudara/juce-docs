@@ -1,0 +1,221 @@
+\hypertarget{class_application_command_target}{}\doxysection{Application\+Command\+Target Class Reference}
+\label{class_application_command_target}\index{ApplicationCommandTarget@{ApplicationCommandTarget}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Application\+Command\+Target.\+h$>$}
+
+Inheritance diagram for Application\+Command\+Target\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{d5/d0e/class_application_command_target}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_application_command_target_1_1_invocation_info}{Invocation\+Info}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_application_command_target_a87a924f9667311234b74292dcd737a98}{Application\+Command\+Target}} ()
+\item 
+virtual \mbox{\hyperlink{class_application_command_target_aedcfa2f5c7f9798eaa717579d3d6e12a}{$\sim$\+Application\+Command\+Target}} ()
+\item 
+virtual \mbox{\hyperlink{class_application_command_target}{Application\+Command\+Target}} $\ast$ \mbox{\hyperlink{class_application_command_target_a8def2ea10aad1a34d37f9afe1675b06d}{get\+Next\+Command\+Target}} ()=0
+\item 
+virtual \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_application_command_target_a12b1c7a6abe2e5a5f27fda4a292fe33d}{get\+All\+Commands}} (\mbox{\hyperlink{class_array}{Array}}$<$ \mbox{\hyperlink{group__juce__gui__basics-commands_ga886f4569c2fa2b51e87775cbac89d4b8}{Command\+ID}} $>$ \&commands)=0
+\item 
+virtual \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_application_command_target_a54171f3ee599f0b508fed08e647edf89}{get\+Command\+Info}} (\mbox{\hyperlink{group__juce__gui__basics-commands_ga886f4569c2fa2b51e87775cbac89d4b8}{Command\+ID}} command\+ID, \mbox{\hyperlink{struct_application_command_info}{Application\+Command\+Info}} \&result)=0
+\item 
+virtual bool \mbox{\hyperlink{class_application_command_target_a0e8f962cda82e8aa1207d38361ff96f9}{perform}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{struct_application_command_target_1_1_invocation_info}{Invocation\+Info}} \&\mbox{\hyperlink{jmemsys_8h_ab47f8d689440d67514fd99471da2d74d}{info}})=0
+\item 
+bool \mbox{\hyperlink{class_application_command_target_aeffaac3af6c4922240e1e5e03ad0a1b5}{invoke}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{struct_application_command_target_1_1_invocation_info}{Invocation\+Info}} \&invocation\+Info, \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} bool asynchronously)
+\item 
+bool \mbox{\hyperlink{class_application_command_target_a93daac13c40f226ccab1e92a390ad61a}{invoke\+Directly}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{group__juce__gui__basics-commands_ga886f4569c2fa2b51e87775cbac89d4b8}{Command\+ID}} command\+ID, \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} bool asynchronously)
+\item 
+\mbox{\hyperlink{class_application_command_target}{Application\+Command\+Target}} $\ast$ \mbox{\hyperlink{class_application_command_target_a3d2ac3792b5b3fa32b231bb1f2cc3b97}{get\+Target\+For\+Command}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{group__juce__gui__basics-commands_ga886f4569c2fa2b51e87775cbac89d4b8}{Command\+ID}} command\+ID)
+\item 
+bool \mbox{\hyperlink{class_application_command_target_ab5ee995932e10bd18dc6fff111f3835e}{is\+Command\+Active}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{group__juce__gui__basics-commands_ga886f4569c2fa2b51e87775cbac89d4b8}{Command\+ID}} command\+ID)
+\item 
+\mbox{\hyperlink{class_application_command_target}{Application\+Command\+Target}} $\ast$ \mbox{\hyperlink{class_application_command_target_ae22a2eb02affb6278074067f15abb58c}{find\+First\+Target\+Parent\+Component}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_application_command_target_ab90837e21f0132bde7724aff0f46667c}{Command\+Message}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A command target publishes a list of command IDs that it can perform.
+
+An \mbox{\hyperlink{class_application_command_manager}{Application\+Command\+Manager}} despatches commands to targets, which must be able to provide information about what commands they can handle.
+
+To create a target, you\textquotesingle{}ll need to inherit from this class, implementing all of its pure virtual methods.
+
+For info about how a target is chosen to receive a command, see \mbox{\hyperlink{class_application_command_manager_af8fb9732eaddb5f8df844f3915f0e914}{Application\+Command\+Manager\+::get\+First\+Command\+Target()}}.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_application_command_manager}{Application\+Command\+Manager}}, \mbox{\hyperlink{struct_application_command_info}{Application\+Command\+Info}}
+\end{DoxySeeAlso}
+@tags\{GUI\} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_application_command_target_a87a924f9667311234b74292dcd737a98}\label{class_application_command_target_a87a924f9667311234b74292dcd737a98}} 
+\index{ApplicationCommandTarget@{ApplicationCommandTarget}!ApplicationCommandTarget@{ApplicationCommandTarget}}
+\index{ApplicationCommandTarget@{ApplicationCommandTarget}!ApplicationCommandTarget@{ApplicationCommandTarget}}
+\doxysubsubsection{\texorpdfstring{ApplicationCommandTarget()}{ApplicationCommandTarget()}}
+{\footnotesize\ttfamily Application\+Command\+Target\+::\+Application\+Command\+Target (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Creates a command target. \mbox{\Hypertarget{class_application_command_target_aedcfa2f5c7f9798eaa717579d3d6e12a}\label{class_application_command_target_aedcfa2f5c7f9798eaa717579d3d6e12a}} 
+\index{ApplicationCommandTarget@{ApplicationCommandTarget}!````~ApplicationCommandTarget@{$\sim$ApplicationCommandTarget}}
+\index{````~ApplicationCommandTarget@{$\sim$ApplicationCommandTarget}!ApplicationCommandTarget@{ApplicationCommandTarget}}
+\doxysubsubsection{\texorpdfstring{$\sim$ApplicationCommandTarget()}{~ApplicationCommandTarget()}}
+{\footnotesize\ttfamily virtual Application\+Command\+Target\+::$\sim$\+Application\+Command\+Target (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Destructor. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_application_command_target_ae22a2eb02affb6278074067f15abb58c}\label{class_application_command_target_ae22a2eb02affb6278074067f15abb58c}} 
+\index{ApplicationCommandTarget@{ApplicationCommandTarget}!findFirstTargetParentComponent@{findFirstTargetParentComponent}}
+\index{findFirstTargetParentComponent@{findFirstTargetParentComponent}!ApplicationCommandTarget@{ApplicationCommandTarget}}
+\doxysubsubsection{\texorpdfstring{findFirstTargetParentComponent()}{findFirstTargetParentComponent()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_application_command_target}{Application\+Command\+Target}} $\ast$ Application\+Command\+Target\+::find\+First\+Target\+Parent\+Component (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+If this object is a \mbox{\hyperlink{class_component}{Component}}, this method will search upwards in its current UI hierarchy for the next parent component that implements the \mbox{\hyperlink{class_application_command_target}{Application\+Command\+Target}} class.
+
+If your target is a \mbox{\hyperlink{class_component}{Component}}, this is a very handy method to use in your \mbox{\hyperlink{class_application_command_target_a8def2ea10aad1a34d37f9afe1675b06d}{get\+Next\+Command\+Target()}} implementation. \mbox{\Hypertarget{class_application_command_target_a12b1c7a6abe2e5a5f27fda4a292fe33d}\label{class_application_command_target_a12b1c7a6abe2e5a5f27fda4a292fe33d}} 
+\index{ApplicationCommandTarget@{ApplicationCommandTarget}!getAllCommands@{getAllCommands}}
+\index{getAllCommands@{getAllCommands}!ApplicationCommandTarget@{ApplicationCommandTarget}}
+\doxysubsubsection{\texorpdfstring{getAllCommands()}{getAllCommands()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Application\+Command\+Target\+::get\+All\+Commands (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_array}{Array}}$<$ \mbox{\hyperlink{group__juce__gui__basics-commands_ga886f4569c2fa2b51e87775cbac89d4b8}{Command\+ID}} $>$ \&}]{commands }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+This must return a complete list of commands that this target can handle.
+
+Your target should add all the command IDs that it handles to the array that is passed-\/in. 
+
+Implemented in \mbox{\hyperlink{class_j_u_c_e_application_a72ea0c210591a07bee0bb47a1a3a0db2}{JUCEApplication}}, and \mbox{\hyperlink{class_code_editor_component_ac37e3ec835e0672ac9fd24a574d67c87}{Code\+Editor\+Component}}.
+
+\mbox{\Hypertarget{class_application_command_target_a54171f3ee599f0b508fed08e647edf89}\label{class_application_command_target_a54171f3ee599f0b508fed08e647edf89}} 
+\index{ApplicationCommandTarget@{ApplicationCommandTarget}!getCommandInfo@{getCommandInfo}}
+\index{getCommandInfo@{getCommandInfo}!ApplicationCommandTarget@{ApplicationCommandTarget}}
+\doxysubsubsection{\texorpdfstring{getCommandInfo()}{getCommandInfo()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Application\+Command\+Target\+::get\+Command\+Info (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__gui__basics-commands_ga886f4569c2fa2b51e87775cbac89d4b8}{Command\+ID}}}]{command\+ID,  }\item[{\mbox{\hyperlink{struct_application_command_info}{Application\+Command\+Info}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+This must provide details about one of the commands that this target can perform.
+
+This will be called with one of the command IDs that the target provided in its \mbox{\hyperlink{class_application_command_target_a12b1c7a6abe2e5a5f27fda4a292fe33d}{get\+All\+Commands()}} methods.
+
+It should fill-\/in all appropriate fields of the \mbox{\hyperlink{struct_application_command_info}{Application\+Command\+Info}} structure with suitable information about the command. (The command\+ID field will already have been filled-\/in by the caller).
+
+The easiest way to set the info is using the \mbox{\hyperlink{struct_application_command_info_a3e9cd7e72fbf617a0d70d6be3d513b82}{Application\+Command\+Info\+::set\+Info()}} method to set all the fields at once.
+
+If the command is currently inactive for some reason, this method must use \mbox{\hyperlink{struct_application_command_info_a68a043a95e058beeeddfba2441ee7306}{Application\+Command\+Info\+::set\+Active()}} to make that clear, (or it should set the is\+Disabled bit of the \mbox{\hyperlink{struct_application_command_info_a45fa351a09f7a6df3e76fe466c476905}{Application\+Command\+Info\+::flags}} field).
+
+Any default key-\/presses for the command should be appended to the \mbox{\hyperlink{struct_application_command_info_acae1903bdfd8214162adb8326d1ee9da}{Application\+Command\+Info\+::default\+Keypresses}} field.
+
+Note that if you change something that affects the status of the commands that would be returned by this method (e.\+g. something that makes some commands active or inactive), you should call \mbox{\hyperlink{class_application_command_manager_a91fef61705d98da881276733e304e7af}{Application\+Command\+Manager\+::command\+Status\+Changed()}} to cause the manager to refresh its status. 
+
+Implemented in \mbox{\hyperlink{class_j_u_c_e_application_ae3222d0245de1d1baf346addf9d00f2e}{JUCEApplication}}, and \mbox{\hyperlink{class_code_editor_component_a9454244abc456d67d191c4f294858ad8}{Code\+Editor\+Component}}.
+
+\mbox{\Hypertarget{class_application_command_target_a8def2ea10aad1a34d37f9afe1675b06d}\label{class_application_command_target_a8def2ea10aad1a34d37f9afe1675b06d}} 
+\index{ApplicationCommandTarget@{ApplicationCommandTarget}!getNextCommandTarget@{getNextCommandTarget}}
+\index{getNextCommandTarget@{getNextCommandTarget}!ApplicationCommandTarget@{ApplicationCommandTarget}}
+\doxysubsubsection{\texorpdfstring{getNextCommandTarget()}{getNextCommandTarget()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{class_application_command_target}{Application\+Command\+Target}} $\ast$ Application\+Command\+Target\+::get\+Next\+Command\+Target (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+This must return the next target to try after this one.
+
+When a command is being sent, and the first target can\textquotesingle{}t handle that command, this method is used to determine the next target that should be tried.
+
+It may return nullptr if it doesn\textquotesingle{}t know of another target.
+
+If your target is a \mbox{\hyperlink{class_component}{Component}}, you would usually use the \mbox{\hyperlink{class_application_command_target_ae22a2eb02affb6278074067f15abb58c}{find\+First\+Target\+Parent\+Component()}} method to return a parent component that might want to handle it.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_application_command_target_aeffaac3af6c4922240e1e5e03ad0a1b5}{invoke}} 
+\end{DoxySeeAlso}
+
+
+Implemented in \mbox{\hyperlink{class_j_u_c_e_application_a7ffe9acb498fc00be15df73520bebeb2}{JUCEApplication}}, and \mbox{\hyperlink{class_code_editor_component_a6b784e30c6566c56457ca870baafb58e}{Code\+Editor\+Component}}.
+
+\mbox{\Hypertarget{class_application_command_target_a3d2ac3792b5b3fa32b231bb1f2cc3b97}\label{class_application_command_target_a3d2ac3792b5b3fa32b231bb1f2cc3b97}} 
+\index{ApplicationCommandTarget@{ApplicationCommandTarget}!getTargetForCommand@{getTargetForCommand}}
+\index{getTargetForCommand@{getTargetForCommand}!ApplicationCommandTarget@{ApplicationCommandTarget}}
+\doxysubsubsection{\texorpdfstring{getTargetForCommand()}{getTargetForCommand()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_application_command_target}{Application\+Command\+Target}} $\ast$ Application\+Command\+Target\+::get\+Target\+For\+Command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{group__juce__gui__basics-commands_ga886f4569c2fa2b51e87775cbac89d4b8}{Command\+ID}}}]{command\+ID }\end{DoxyParamCaption})}
+
+Searches this target and all subsequent ones for the first one that can handle the specified command.
+
+This will use \mbox{\hyperlink{class_application_command_target_a8def2ea10aad1a34d37f9afe1675b06d}{get\+Next\+Command\+Target()}} to determine the chain of targets to try after this one. \mbox{\Hypertarget{class_application_command_target_aeffaac3af6c4922240e1e5e03ad0a1b5}\label{class_application_command_target_aeffaac3af6c4922240e1e5e03ad0a1b5}} 
+\index{ApplicationCommandTarget@{ApplicationCommandTarget}!invoke@{invoke}}
+\index{invoke@{invoke}!ApplicationCommandTarget@{ApplicationCommandTarget}}
+\doxysubsubsection{\texorpdfstring{invoke()}{invoke()}}
+{\footnotesize\ttfamily bool Application\+Command\+Target\+::invoke (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{struct_application_command_target_1_1_invocation_info}{Invocation\+Info}} \&}]{invocation\+Info,  }\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} bool}]{asynchronously }\end{DoxyParamCaption})}
+
+Makes this target invoke a command.
+
+Your code can call this method to invoke a command on this target, but normally you\textquotesingle{}d call it indirectly via \mbox{\hyperlink{class_application_command_manager_a6b506331c1cfb3d07b2925ac16b8141e}{Application\+Command\+Manager\+::invoke()}} or \mbox{\hyperlink{class_application_command_manager_a55f04432929174c2de6d622cb2d23c67}{Application\+Command\+Manager\+::invoke\+Directly()}}.
+
+If this target can perform the given command, it will call its \mbox{\hyperlink{class_application_command_target_a0e8f962cda82e8aa1207d38361ff96f9}{perform()}} method to do so. If not, then \mbox{\hyperlink{class_application_command_target_a8def2ea10aad1a34d37f9afe1675b06d}{get\+Next\+Command\+Target()}} will be used to determine the next target to try, and the command will be passed along to it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em invocation\+Info} & this must be correctly filled-\/in, describing the context for the invocation. \\
+\hline
+{\em asynchronously} & if false, the command will be performed before this method returns. If true, a message will be posted so that the command will be performed later on the message thread, and this method will return immediately. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_application_command_target_a0e8f962cda82e8aa1207d38361ff96f9}{perform}}, \mbox{\hyperlink{class_application_command_manager_a6b506331c1cfb3d07b2925ac16b8141e}{Application\+Command\+Manager\+::invoke}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_application_command_target_a93daac13c40f226ccab1e92a390ad61a}\label{class_application_command_target_a93daac13c40f226ccab1e92a390ad61a}} 
+\index{ApplicationCommandTarget@{ApplicationCommandTarget}!invokeDirectly@{invokeDirectly}}
+\index{invokeDirectly@{invokeDirectly}!ApplicationCommandTarget@{ApplicationCommandTarget}}
+\doxysubsubsection{\texorpdfstring{invokeDirectly()}{invokeDirectly()}}
+{\footnotesize\ttfamily bool Application\+Command\+Target\+::invoke\+Directly (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{group__juce__gui__basics-commands_ga886f4569c2fa2b51e87775cbac89d4b8}{Command\+ID}}}]{command\+ID,  }\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} bool}]{asynchronously }\end{DoxyParamCaption})}
+
+Invokes a given command directly on this target.
+
+This is just an easy way to call \mbox{\hyperlink{class_application_command_target_aeffaac3af6c4922240e1e5e03ad0a1b5}{invoke()}} without having to fill out the \mbox{\hyperlink{struct_application_command_target_1_1_invocation_info}{Invocation\+Info}} structure. \mbox{\Hypertarget{class_application_command_target_ab5ee995932e10bd18dc6fff111f3835e}\label{class_application_command_target_ab5ee995932e10bd18dc6fff111f3835e}} 
+\index{ApplicationCommandTarget@{ApplicationCommandTarget}!isCommandActive@{isCommandActive}}
+\index{isCommandActive@{isCommandActive}!ApplicationCommandTarget@{ApplicationCommandTarget}}
+\doxysubsubsection{\texorpdfstring{isCommandActive()}{isCommandActive()}}
+{\footnotesize\ttfamily bool Application\+Command\+Target\+::is\+Command\+Active (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{group__juce__gui__basics-commands_ga886f4569c2fa2b51e87775cbac89d4b8}{Command\+ID}}}]{command\+ID }\end{DoxyParamCaption})}
+
+Checks whether this command can currently be performed by this target.
+
+This will return true only if a call to \mbox{\hyperlink{class_application_command_target_a54171f3ee599f0b508fed08e647edf89}{get\+Command\+Info()}} doesn\textquotesingle{}t set the is\+Disabled flag to indicate that the command is inactive. \mbox{\Hypertarget{class_application_command_target_a0e8f962cda82e8aa1207d38361ff96f9}\label{class_application_command_target_a0e8f962cda82e8aa1207d38361ff96f9}} 
+\index{ApplicationCommandTarget@{ApplicationCommandTarget}!perform@{perform}}
+\index{perform@{perform}!ApplicationCommandTarget@{ApplicationCommandTarget}}
+\doxysubsubsection{\texorpdfstring{perform()}{perform()}}
+{\footnotesize\ttfamily virtual bool Application\+Command\+Target\+::perform (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{struct_application_command_target_1_1_invocation_info}{Invocation\+Info}} \&}]{info }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+This must actually perform the specified command.
+
+If this target is able to perform the command specified by the command\+ID field of the \mbox{\hyperlink{struct_application_command_target_1_1_invocation_info}{Invocation\+Info}} structure, then it should do so, and must return true.
+
+If it can\textquotesingle{}t handle this command, it should return false, which tells the caller to pass the command on to the next target in line.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_application_command_target_aeffaac3af6c4922240e1e5e03ad0a1b5}{invoke}}, \mbox{\hyperlink{class_application_command_manager_a6b506331c1cfb3d07b2925ac16b8141e}{Application\+Command\+Manager\+::invoke}} 
+\end{DoxySeeAlso}
+
+
+Implemented in \mbox{\hyperlink{class_j_u_c_e_application_a039df30ba3fa0291a8d0c0cde1e80312}{JUCEApplication}}, and \mbox{\hyperlink{class_code_editor_component_ae46081c4bb11e732058659d10aa9ef8c}{Code\+Editor\+Component}}.
+
+
+
+\doxysubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{class_application_command_target_ab90837e21f0132bde7724aff0f46667c}\label{class_application_command_target_ab90837e21f0132bde7724aff0f46667c}} 
+\index{ApplicationCommandTarget@{ApplicationCommandTarget}!CommandMessage@{CommandMessage}}
+\index{CommandMessage@{CommandMessage}!ApplicationCommandTarget@{ApplicationCommandTarget}}
+\doxysubsubsection{\texorpdfstring{CommandMessage}{CommandMessage}}
+{\footnotesize\ttfamily friend class Command\+Message\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+gui\+\_\+basics/commands/\mbox{\hyperlink{juce___application_command_target_8h}{juce\+\_\+\+Application\+Command\+Target.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,173 @@
+\hypertarget{compat_8h_source}{}\doxysection{compat.\+h}
+\label{compat_8h_source}\index{build/juce\_audio\_formats/codecs/flac/compat.h@{build/juce\_audio\_formats/codecs/flac/compat.h}}
+\mbox{\hyperlink{compat_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/* libFLAC -\/ Free Lossless Audio Codec library}}
+\DoxyCodeLine{2 \textcolor{comment}{ * Copyright (C) 2012-\/2014  Xiph.org Foundation}}
+\DoxyCodeLine{3 \textcolor{comment}{ *}}
+\DoxyCodeLine{4 \textcolor{comment}{ * Redistribution and use in source and binary forms, with or without}}
+\DoxyCodeLine{5 \textcolor{comment}{ * modification, are permitted provided that the following conditions}}
+\DoxyCodeLine{6 \textcolor{comment}{ * are met:}}
+\DoxyCodeLine{7 \textcolor{comment}{ *}}
+\DoxyCodeLine{8 \textcolor{comment}{ * -\/ Redistributions of source code must retain the above copyright}}
+\DoxyCodeLine{9 \textcolor{comment}{ * notice, this list of conditions and the following disclaimer.}}
+\DoxyCodeLine{10 \textcolor{comment}{ *}}
+\DoxyCodeLine{11 \textcolor{comment}{ * -\/ Redistributions in binary form must reproduce the above copyright}}
+\DoxyCodeLine{12 \textcolor{comment}{ * notice, this list of conditions and the following disclaimer in the}}
+\DoxyCodeLine{13 \textcolor{comment}{ * documentation and/or other materials provided with the distribution.}}
+\DoxyCodeLine{14 \textcolor{comment}{ *}}
+\DoxyCodeLine{15 \textcolor{comment}{ * -\/ Neither the name of the Xiph.org Foundation nor the names of its}}
+\DoxyCodeLine{16 \textcolor{comment}{ * contributors may be used to endorse or promote products derived from}}
+\DoxyCodeLine{17 \textcolor{comment}{ * this software without specific prior written permission.}}
+\DoxyCodeLine{18 \textcolor{comment}{ *}}
+\DoxyCodeLine{19 \textcolor{comment}{ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS}}
+\DoxyCodeLine{20 \textcolor{comment}{ * ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT}}
+\DoxyCodeLine{21 \textcolor{comment}{ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR}}
+\DoxyCodeLine{22 \textcolor{comment}{ * A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE FOUNDATION OR}}
+\DoxyCodeLine{23 \textcolor{comment}{ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,}}
+\DoxyCodeLine{24 \textcolor{comment}{ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,}}
+\DoxyCodeLine{25 \textcolor{comment}{ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR}}
+\DoxyCodeLine{26 \textcolor{comment}{ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF}}
+\DoxyCodeLine{27 \textcolor{comment}{ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING}}
+\DoxyCodeLine{28 \textcolor{comment}{ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS}}
+\DoxyCodeLine{29 \textcolor{comment}{ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.}}
+\DoxyCodeLine{30 \textcolor{comment}{ */}}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \textcolor{comment}{/* This is the prefered location of all CPP hackery to make \$random\_compiler}}
+\DoxyCodeLine{33 \textcolor{comment}{ * work like something approaching a C99 (or maybe more accurately GNU99)}}
+\DoxyCodeLine{34 \textcolor{comment}{ * compiler.}}
+\DoxyCodeLine{35 \textcolor{comment}{ *}}
+\DoxyCodeLine{36 \textcolor{comment}{ * It is assumed that this header will be included after "{}config.h"{}.}}
+\DoxyCodeLine{37 \textcolor{comment}{ */}}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 \textcolor{preprocessor}{\#ifndef FLAC\_\_SHARE\_\_COMPAT\_H}}
+\DoxyCodeLine{40 \textcolor{preprocessor}{\#define FLAC\_\_SHARE\_\_COMPAT\_H}}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42 \textcolor{preprocessor}{\#if defined \_MSC\_VER || defined \_\_BORLANDC\_\_ || defined \_\_MINGW32\_\_}}
+\DoxyCodeLine{43 \textcolor{preprocessor}{\#define FLAC\_\_off\_t \_\_int64 }\textcolor{comment}{/* use this instead of off\_t to fix the 2 GB limit */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#if !defined \_\_MINGW32\_\_}}
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#define fseeko \_fseeki64}}
+\DoxyCodeLine{46 \textcolor{preprocessor}{\#define ftello \_ftelli64}}
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#else }\textcolor{comment}{/* MinGW */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{48 \textcolor{preprocessor}{\#if !defined(HAVE\_FSEEKO)}}
+\DoxyCodeLine{49 \textcolor{preprocessor}{\#define fseeko fseeko64}}
+\DoxyCodeLine{50 \textcolor{preprocessor}{\#define ftello ftello64}}
+\DoxyCodeLine{51 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{52 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{53 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{54 \textcolor{preprocessor}{\#define FLAC\_\_off\_t off\_t}}
+\DoxyCodeLine{55 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57 \textcolor{preprocessor}{\#if defined(\_MSC\_VER)}}
+\DoxyCodeLine{58 \textcolor{preprocessor}{\#define strtoll \_strtoi64}}
+\DoxyCodeLine{59 \textcolor{preprocessor}{\#define strtoull \_strtoui64}}
+\DoxyCodeLine{60 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62 \textcolor{preprocessor}{\#if defined(\_MSC\_VER)}}
+\DoxyCodeLine{63 \textcolor{preprocessor}{\#define inline \_\_inline}}
+\DoxyCodeLine{64 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66 \textcolor{preprocessor}{\#if defined \_\_INTEL\_COMPILER || (defined \_MSC\_VER \&\& defined \_WIN64)}}
+\DoxyCodeLine{67 \textcolor{comment}{/* MSVS generates VERY slow 32-\/bit code with \_\_restrict */}}
+\DoxyCodeLine{68 \textcolor{preprocessor}{\#define flac\_restrict \_\_restrict}}
+\DoxyCodeLine{69 \textcolor{preprocessor}{\#elif defined \_\_GNUC\_\_}}
+\DoxyCodeLine{70 \textcolor{preprocessor}{\#define flac\_restrict \_\_restrict\_\_}}
+\DoxyCodeLine{71 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{72 \textcolor{preprocessor}{\#define flac\_restrict}}
+\DoxyCodeLine{73 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75 \textcolor{preprocessor}{\#define FLAC\_\_U64L(x) x\#\#ULL}}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77 \textcolor{preprocessor}{\#if defined \_MSC\_VER || defined \_\_BORLANDC\_\_ || defined \_\_MINGW32\_\_}}
+\DoxyCodeLine{78 \textcolor{preprocessor}{\#define FLAC\_\_STRCASECMP stricmp}}
+\DoxyCodeLine{79 \textcolor{preprocessor}{\#define FLAC\_\_STRNCASECMP strnicmp}}
+\DoxyCodeLine{80 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{81 \textcolor{preprocessor}{\#define FLAC\_\_STRCASECMP strcasecmp}}
+\DoxyCodeLine{82 \textcolor{preprocessor}{\#define FLAC\_\_STRNCASECMP strncasecmp}}
+\DoxyCodeLine{83 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85 \textcolor{preprocessor}{\#if defined \_MSC\_VER}}
+\DoxyCodeLine{86 \textcolor{preprocessor}{\#  if \_MSC\_VER >= 1600}}
+\DoxyCodeLine{87 \textcolor{comment}{/* Visual Studio 2010 has decent C99 support */}}
+\DoxyCodeLine{88 \textcolor{preprocessor}{\#    define PRIu64 "{}llu"{}}}
+\DoxyCodeLine{89 \textcolor{preprocessor}{\#    define PRId64 "{}lld"{}}}
+\DoxyCodeLine{90 \textcolor{preprocessor}{\#    define PRIx64 "{}llx"{}}}
+\DoxyCodeLine{91 \textcolor{preprocessor}{\#  else}}
+\DoxyCodeLine{92 \textcolor{preprocessor}{\#    ifndef UINT32\_MAX}}
+\DoxyCodeLine{93 \textcolor{preprocessor}{\#      define UINT32\_MAX \_UI32\_MAX}}
+\DoxyCodeLine{94 \textcolor{preprocessor}{\#    endif}}
+\DoxyCodeLine{95      \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \_\_int64 uint64\_t;}
+\DoxyCodeLine{96      \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \_\_int32 uint32\_t;}
+\DoxyCodeLine{97      \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \_\_int16 uint16\_t;}
+\DoxyCodeLine{98      \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \_\_int8 uint8\_t;}
+\DoxyCodeLine{99      \textcolor{keyword}{typedef} \_\_int64 int64\_t;}
+\DoxyCodeLine{100      \textcolor{keyword}{typedef} \_\_int32 int32\_t;}
+\DoxyCodeLine{101      \textcolor{keyword}{typedef} \_\_int16 int16\_t;}
+\DoxyCodeLine{102      \textcolor{keyword}{typedef} \_\_int8  int8\_t;}
+\DoxyCodeLine{103 \textcolor{preprocessor}{\#    define PRIu64 "{}I64u"{}}}
+\DoxyCodeLine{104 \textcolor{preprocessor}{\#    define PRId64 "{}I64d"{}}}
+\DoxyCodeLine{105 \textcolor{preprocessor}{\#    define PRIx64 "{}I64x"{}}}
+\DoxyCodeLine{106 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{107 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* defined \_MSC\_VER */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{110 \textcolor{comment}{/* All char* strings are in UTF-\/8 format. Added to support Unicode files on Windows */}}
+\DoxyCodeLine{111 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{win__utf8__io_8h}{win\_utf8\_io.h}}"{}}}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113 \textcolor{preprocessor}{\#define flac\_printf printf\_utf8}}
+\DoxyCodeLine{114 \textcolor{preprocessor}{\#define flac\_fprintf fprintf\_utf8}}
+\DoxyCodeLine{115 \textcolor{preprocessor}{\#define flac\_vfprintf vfprintf\_utf8}}
+\DoxyCodeLine{116 \textcolor{preprocessor}{\#define flac\_fopen fopen\_utf8}}
+\DoxyCodeLine{117 \textcolor{preprocessor}{\#define flac\_chmod chmod\_utf8}}
+\DoxyCodeLine{118 \textcolor{preprocessor}{\#define flac\_utime utime\_utf8}}
+\DoxyCodeLine{119 \textcolor{preprocessor}{\#define flac\_unlink unlink\_utf8}}
+\DoxyCodeLine{120 \textcolor{preprocessor}{\#define flac\_rename rename\_utf8}}
+\DoxyCodeLine{121 \textcolor{preprocessor}{\#define flac\_stat \_stat64\_utf8}}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{123 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{125 \textcolor{preprocessor}{\#define flac\_printf printf}}
+\DoxyCodeLine{126 \textcolor{preprocessor}{\#define flac\_fprintf fprintf}}
+\DoxyCodeLine{127 \textcolor{preprocessor}{\#define flac\_vfprintf vfprintf}}
+\DoxyCodeLine{128 \textcolor{preprocessor}{\#define flac\_fopen fopen}}
+\DoxyCodeLine{129 \textcolor{preprocessor}{\#define flac\_chmod chmod}}
+\DoxyCodeLine{130 \textcolor{preprocessor}{\#define flac\_utime utime}}
+\DoxyCodeLine{131 \textcolor{preprocessor}{\#define flac\_unlink unlink}}
+\DoxyCodeLine{132 \textcolor{preprocessor}{\#define flac\_rename rename}}
+\DoxyCodeLine{133 \textcolor{preprocessor}{\#define flac\_stat stat}}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{137 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{138 \textcolor{preprocessor}{\#define flac\_stat\_s \_\_stat64 }\textcolor{comment}{/* stat struct */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{139 \textcolor{preprocessor}{\#define flac\_fstat \_fstat64}}
+\DoxyCodeLine{140 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{141 \textcolor{preprocessor}{\#define flac\_stat\_s stat }\textcolor{comment}{/* stat struct */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{142 \textcolor{preprocessor}{\#define flac\_fstat fstat}}
+\DoxyCodeLine{143 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145 \textcolor{preprocessor}{\#ifndef M\_LN2}}
+\DoxyCodeLine{146 \textcolor{preprocessor}{\#define M\_LN2 0.69314718055994530942}}
+\DoxyCodeLine{147 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{148 \textcolor{preprocessor}{\#ifndef M\_PI}}
+\DoxyCodeLine{149 \textcolor{preprocessor}{\#define M\_PI 3.14159265358979323846}}
+\DoxyCodeLine{150 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{152 \textcolor{comment}{/* FLAC needs to compile and work correctly on systems with a normal ISO C99}}
+\DoxyCodeLine{153 \textcolor{comment}{ * snprintf as well as Microsoft Visual Studio which has an non-\/standards}}
+\DoxyCodeLine{154 \textcolor{comment}{ * conformant snprint\_s function.}}
+\DoxyCodeLine{155 \textcolor{comment}{ *}}
+\DoxyCodeLine{156 \textcolor{comment}{ * This function wraps the MS version to behave more like the the ISO version.}}
+\DoxyCodeLine{157 \textcolor{comment}{ */}}
+\DoxyCodeLine{158 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{159 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{160 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{161 \textcolor{keywordtype}{int} \mbox{\hyperlink{compat_8h_ad0951fbd933a14c7250eb08992cfd516}{flac\_snprintf}}(\textcolor{keywordtype}{char} *str, \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}}, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *fmt, ...);}
+\DoxyCodeLine{162 \textcolor{keywordtype}{int} \mbox{\hyperlink{compat_8h_abae9ccedfd96bafc997fbeca60c6db39}{flac\_vsnprintf}}(\textcolor{keywordtype}{char} *str, \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}}, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *fmt, va\_list va);}
+\DoxyCodeLine{163 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{164 \}}
+\DoxyCodeLine{165 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{167 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* FLAC\_\_SHARE\_\_COMPAT\_H */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

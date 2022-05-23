@@ -1,0 +1,111 @@
+\hypertarget{juce___interprocess_connection_8h_source}{}\doxysection{juce\+\_\+\+Interprocess\+Connection.\+h}
+\label{juce___interprocess_connection_8h_source}\index{build/juce\_events/interprocess/juce\_InterprocessConnection.h@{build/juce\_events/interprocess/juce\_InterprocessConnection.h}}
+\mbox{\hyperlink{juce___interprocess_connection_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{keyword}{class }\mbox{\hyperlink{class_interprocess_connection_server}{InterprocessConnectionServer}};}
+\DoxyCodeLine{28 \textcolor{keyword}{class }\mbox{\hyperlink{class_memory_block}{MemoryBlock}};}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{54 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_interprocess_connection}{InterprocessConnection}}}
+\DoxyCodeLine{55 \{}
+\DoxyCodeLine{56 \textcolor{keyword}{public}:}
+\DoxyCodeLine{57     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{74 \textcolor{comment}{}    \mbox{\hyperlink{class_interprocess_connection_a31dc05e077ee562d5ca96ecea09c3663}{InterprocessConnection}} (\textcolor{keywordtype}{bool} callbacksOnMessageThread = \textcolor{keyword}{true},}
+\DoxyCodeLine{75                             \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} magicMessageHeaderNumber = 0xf2b49e2c);}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{78     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_interprocess_connection_a04a6ad194ee3b4a4aaac4fcd531f2a6d}{\string~InterprocessConnection}}();}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{92 \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_interprocess_connection_a007450a6ca6dc60bb48d384479d9a49d}{connectToSocket}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& hostName,}
+\DoxyCodeLine{93                           \textcolor{keywordtype}{int} portNumber,}
+\DoxyCodeLine{94                           \textcolor{keywordtype}{int} timeOutMillisecs);}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{108     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_interprocess_connection_abafb2228ed136a2b34e2de03709eb9a7}{connectToPipe}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& pipeName, \textcolor{keywordtype}{int} pipeReceiveMessageTimeoutMs);}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{122     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_interprocess_connection_a0e073a6609a68de2e4fcc892c1d003c0}{createPipe}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& pipeName, \textcolor{keywordtype}{int} pipeReceiveMessageTimeoutMs, \textcolor{keywordtype}{bool} mustNotExist = \textcolor{keyword}{false});}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{125     \textcolor{keyword}{enum class} \mbox{\hyperlink{class_interprocess_connection_a0db8c0f7c18e8f83c03d6d7b905a5adc}{Notify}} \{ no, yes \};}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{135     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_interprocess_connection_ad6e4ecb016866a33d25154bf8bb08716}{disconnect}} (\textcolor{keywordtype}{int} timeoutMs = -\/1, \mbox{\hyperlink{class_interprocess_connection_a0db8c0f7c18e8f83c03d6d7b905a5adc}{Notify}} notify = Notify::yes);}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{138     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_interprocess_connection_a7573d93baabda5ddc4bcae463040c895}{isConnected}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{141     \mbox{\hyperlink{class_streaming_socket}{StreamingSocket}}* \mbox{\hyperlink{class_interprocess_connection_a59375d2e7be2c85ed835f70633ede1f3}{getSocket}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                 \{ \textcolor{keywordflow}{return} socket.get(); \}}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{144     \mbox{\hyperlink{class_named_pipe}{NamedPipe}}* \mbox{\hyperlink{class_interprocess_connection_afc25c757cf82edc152187cf113f01ea0}{getPipe}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept                         \{ \textcolor{keywordflow}{return} pipe.get(); \}}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{149     \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{class_interprocess_connection_a7ae0f80ddafe4bf281b97c28b0247b84}{getConnectedHostName}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{151     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{160 \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_interprocess_connection_a6fc9e7b55c25eac48baebd131ded9d4f}{sendMessage}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_memory_block}{MemoryBlock}}\& \mbox{\hyperlink{namespacegl_a1243e1c99f08a099c7a70cc1a258034a}{message}});}
+\DoxyCodeLine{161 }
+\DoxyCodeLine{162     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{169 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_interprocess_connection_a6491a1c39849ecbdb6093965cfd47b03}{connectionMade}}() = 0;}
+\DoxyCodeLine{170 }
+\DoxyCodeLine{177     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_interprocess_connection_a83bf2f27d14ea3a9c7e1a88e18e31351}{connectionLost}}() = 0;}
+\DoxyCodeLine{178 }
+\DoxyCodeLine{190     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_interprocess_connection_a69549dd1bda0584d212940d3faf7457a}{messageReceived}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_memory_block}{MemoryBlock}}\& \mbox{\hyperlink{namespacegl_a1243e1c99f08a099c7a70cc1a258034a}{message}}) = 0;}
+\DoxyCodeLine{191 }
+\DoxyCodeLine{192 }
+\DoxyCodeLine{193 \textcolor{keyword}{private}:}
+\DoxyCodeLine{194     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{195     \mbox{\hyperlink{class_read_write_lock}{ReadWriteLock}} pipeAndSocketLock;}
+\DoxyCodeLine{196     std::unique\_ptr<StreamingSocket> socket;}
+\DoxyCodeLine{197     std::unique\_ptr<NamedPipe> pipe;}
+\DoxyCodeLine{198     \textcolor{keywordtype}{bool} callbackConnectionState = \textcolor{keyword}{false};}
+\DoxyCodeLine{199     \textcolor{keyword}{const} \textcolor{keywordtype}{bool} useMessageThread;}
+\DoxyCodeLine{200     \textcolor{keyword}{const} \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} magicMessageHeader;}
+\DoxyCodeLine{201     \textcolor{keywordtype}{int} pipeReceiveMessageTimeout = -\/1;}
+\DoxyCodeLine{202 }
+\DoxyCodeLine{203     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{class_interprocess_connection_server}{InterprocessConnectionServer}};}
+\DoxyCodeLine{204     \textcolor{keywordtype}{void} initialise();}
+\DoxyCodeLine{205     \textcolor{keywordtype}{void} initialiseWithSocket (std::unique\_ptr<StreamingSocket>);}
+\DoxyCodeLine{206     \textcolor{keywordtype}{void} initialiseWithPipe (std::unique\_ptr<NamedPipe>);}
+\DoxyCodeLine{207     \textcolor{keywordtype}{void} deletePipeAndSocket();}
+\DoxyCodeLine{208     \textcolor{keywordtype}{void} connectionMadeInt();}
+\DoxyCodeLine{209     \textcolor{keywordtype}{void} connectionLostInt();}
+\DoxyCodeLine{210     \textcolor{keywordtype}{void} deliverDataInt (\textcolor{keyword}{const} \mbox{\hyperlink{class_memory_block}{MemoryBlock}}\&);}
+\DoxyCodeLine{211     \textcolor{keywordtype}{bool} readNextMessage();}
+\DoxyCodeLine{212     \textcolor{keywordtype}{int} readData (\textcolor{keywordtype}{void}*, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{213 }
+\DoxyCodeLine{214     \textcolor{keyword}{struct }ConnectionThread;}
+\DoxyCodeLine{215     std::unique\_ptr<ConnectionThread> thread;}
+\DoxyCodeLine{216     std::atomic<bool> threadIsRunning \{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{217 }
+\DoxyCodeLine{218     \textcolor{keyword}{class }SafeAction;}
+\DoxyCodeLine{219     std::shared\_ptr<SafeAction> safeAction;}
+\DoxyCodeLine{220 }
+\DoxyCodeLine{221     \textcolor{keywordtype}{void} runThread();}
+\DoxyCodeLine{222     \textcolor{keywordtype}{int} writeData (\textcolor{keywordtype}{void}*, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{223 }
+\DoxyCodeLine{224     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_interprocess_connection}{InterprocessConnection}})}
+\DoxyCodeLine{225 \};}
+\DoxyCodeLine{226 }
+\DoxyCodeLine{227  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{228 }
+
+\end{DoxyCode}

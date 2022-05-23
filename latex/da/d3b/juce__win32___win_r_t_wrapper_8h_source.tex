@@ -1,0 +1,118 @@
+\hypertarget{juce__win32___win_r_t_wrapper_8h_source}{}\doxysection{juce\+\_\+win32\+\_\+\+Win\+RTWrapper.\+h}
+\label{juce__win32___win_r_t_wrapper_8h_source}\index{build/juce\_events/native/juce\_win32\_WinRTWrapper.h@{build/juce\_events/native/juce\_win32\_WinRTWrapper.h}}
+\mbox{\hyperlink{juce__win32___win_r_t_wrapper_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{5 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{6 \textcolor{comment}{}}
+\DoxyCodeLine{7 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{8 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{9 \textcolor{comment}{}}
+\DoxyCodeLine{10 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{11 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{12 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{13 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{14 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{15 \textcolor{comment}{}}
+\DoxyCodeLine{16 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{17 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{18 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{21 \textcolor{comment}{*/}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacejuce}{juce}}}
+\DoxyCodeLine{24 \{}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{keyword}{class }\mbox{\hyperlink{classjuce_1_1_win_r_t_wrapper}{WinRTWrapper}} :   \textcolor{keyword}{public} \mbox{\hyperlink{class_deleted_at_shutdown}{DeletedAtShutdown}}}
+\DoxyCodeLine{27 \{}
+\DoxyCodeLine{28 \textcolor{keyword}{public}:}
+\DoxyCodeLine{29     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{30     \mbox{\hyperlink{classjuce_1_1_win_r_t_wrapper_a6e6ed9811f1467a0753a6be3d51650ce}{\string~WinRTWrapper}}();}
+\DoxyCodeLine{31     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classjuce_1_1_win_r_t_wrapper_a14b46be76df33b6e582a87cb50d9f4b3}{isInitialised}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept  \{ \textcolor{keywordflow}{return} initialised; \}}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33     \mbox{\hyperlink{group__juce__core-memory_gacd79c49d860c4386b12231ca141a41b9}{JUCE\_DECLARE\_SINGLETON}} (\mbox{\hyperlink{classjuce_1_1_win_r_t_wrapper}{WinRTWrapper}}, \textcolor{keyword}{true})}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{36     template <class ComClass>}
+\DoxyCodeLine{37     \mbox{\hyperlink{classjuce_1_1_com_smart_ptr}{ComSmartPtr}}<ComClass> \mbox{\hyperlink{classjuce_1_1_win_r_t_wrapper_ae647a1413a0aa17244c8136b5aacd043}{activateInstance}} (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \textcolor{keywordtype}{wchar\_t}* runtimeClassID, REFCLSID classUUID)}
+\DoxyCodeLine{38     \{}
+\DoxyCodeLine{39         \mbox{\hyperlink{classjuce_1_1_com_smart_ptr}{ComSmartPtr<ComClass>}} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}};}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41         \textcolor{keywordflow}{if} (\mbox{\hyperlink{classjuce_1_1_win_r_t_wrapper_a14b46be76df33b6e582a87cb50d9f4b3}{isInitialised}}())}
+\DoxyCodeLine{42         \{}
+\DoxyCodeLine{43             \mbox{\hyperlink{classjuce_1_1_com_smart_ptr}{ComSmartPtr<IInspectable>}} inspectable;}
+\DoxyCodeLine{44             \mbox{\hyperlink{classjuce_1_1_win_r_t_wrapper_1_1_scoped_h_string}{ScopedHString}} runtimeClass (runtimeClassID);}
+\DoxyCodeLine{45             \textcolor{keyword}{auto} hr = roActivateInstance (runtimeClass.\mbox{\hyperlink{classjuce_1_1_win_r_t_wrapper_1_1_scoped_h_string_a64b2aefaec3b4e9fd00ba3e49cf4454c}{get}}(), inspectable.\mbox{\hyperlink{classjuce_1_1_com_smart_ptr_a719b6e40223f6be85c0ca699feefe66d}{resetAndGetPointerAddress}}());}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47             \textcolor{keywordflow}{if} (SUCCEEDED (hr))}
+\DoxyCodeLine{48                 inspectable-\/>\mbox{\hyperlink{classjuce_1_1_com_smart_ptr_ad0628fe8c8859799c224b07719eaaf23}{QueryInterface}} (classUUID, (\textcolor{keywordtype}{void}**) \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}.resetAndGetPointerAddress());}
+\DoxyCodeLine{49         \}}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}};}
+\DoxyCodeLine{52     \}}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54     \textcolor{keyword}{template} <\textcolor{keyword}{class} ComClass>}
+\DoxyCodeLine{55     \mbox{\hyperlink{classjuce_1_1_com_smart_ptr}{ComSmartPtr<ComClass>}} \mbox{\hyperlink{classjuce_1_1_win_r_t_wrapper_a4c5d7996c196a0cf0822a39424fdc5c5}{getWRLFactory}} (\textcolor{keyword}{const} \textcolor{keywordtype}{wchar\_t}* runtimeClassID)}
+\DoxyCodeLine{56     \{}
+\DoxyCodeLine{57         \mbox{\hyperlink{classjuce_1_1_com_smart_ptr}{ComSmartPtr<ComClass>}} comPtr;}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59         \textcolor{keywordflow}{if} (\mbox{\hyperlink{classjuce_1_1_win_r_t_wrapper_a14b46be76df33b6e582a87cb50d9f4b3}{isInitialised}}())}
+\DoxyCodeLine{60         \{}
+\DoxyCodeLine{61             \mbox{\hyperlink{classjuce_1_1_win_r_t_wrapper_1_1_scoped_h_string}{ScopedHString}} classID (runtimeClassID);}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63             \textcolor{keywordflow}{if} (classID.\mbox{\hyperlink{classjuce_1_1_win_r_t_wrapper_1_1_scoped_h_string_a64b2aefaec3b4e9fd00ba3e49cf4454c}{get}}() != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{64                 roGetActivationFactory (classID.\mbox{\hyperlink{classjuce_1_1_win_r_t_wrapper_1_1_scoped_h_string_a64b2aefaec3b4e9fd00ba3e49cf4454c}{get}}(), \mbox{\hyperlink{juce__win32___com_smart_ptr_8h_ae3b9af23b20d9586ee6bd9297ad38b73}{\_\_uuidof}} (ComClass), (\textcolor{keywordtype}{void}**) comPtr.\mbox{\hyperlink{classjuce_1_1_com_smart_ptr_a719b6e40223f6be85c0ca699feefe66d}{resetAndGetPointerAddress}}());}
+\DoxyCodeLine{65         \}}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67         \textcolor{keywordflow}{return} comPtr;}
+\DoxyCodeLine{68     \}}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{71     \textcolor{keyword}{class }\mbox{\hyperlink{classjuce_1_1_win_r_t_wrapper_1_1_scoped_h_string}{ScopedHString}}}
+\DoxyCodeLine{72     \{}
+\DoxyCodeLine{73     \textcolor{keyword}{public}:}
+\DoxyCodeLine{74         \mbox{\hyperlink{classjuce_1_1_win_r_t_wrapper_1_1_scoped_h_string_a9601ca9c617847d6463bf9717052cfb3}{ScopedHString}} (\mbox{\hyperlink{class_string}{String}});}
+\DoxyCodeLine{75         \mbox{\hyperlink{classjuce_1_1_win_r_t_wrapper_1_1_scoped_h_string_af2ab9684657d49cb196a8165df8b95d0}{\string~ScopedHString}}();}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77         \mbox{\hyperlink{namespacejuce_a905beb03d3578324284c52e0a417f22c}{HSTRING}} \mbox{\hyperlink{classjuce_1_1_win_r_t_wrapper_1_1_scoped_h_string_a64b2aefaec3b4e9fd00ba3e49cf4454c}{get}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept          \{ \textcolor{keywordflow}{return} hstr; \}}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79     \textcolor{keyword}{private}:}
+\DoxyCodeLine{80         \mbox{\hyperlink{namespacejuce_a905beb03d3578324284c52e0a417f22c}{HSTRING}} hstr = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82         \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{classjuce_1_1_win_r_t_wrapper_1_1_scoped_h_string}{ScopedHString}})}
+\DoxyCodeLine{83     \};}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85     \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{classjuce_1_1_win_r_t_wrapper_a435012f616096ef58050e04d9a4c0e8e}{hStringToString}} (\mbox{\hyperlink{namespacejuce_a905beb03d3578324284c52e0a417f22c}{HSTRING}});}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87 \textcolor{keyword}{private}:}
+\DoxyCodeLine{88     \mbox{\hyperlink{classjuce_1_1_win_r_t_wrapper}{WinRTWrapper}}();}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{91     HMODULE winRTHandle = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{92     \textcolor{keywordtype}{bool} initialised = \textcolor{keyword}{false};}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{94     \textcolor{keyword}{typedef} HRESULT (WINAPI* RoInitializeFuncPtr) (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}});}
+\DoxyCodeLine{95     \textcolor{keyword}{typedef} HRESULT (WINAPI* WindowsCreateStringFuncPtr) (LPCWSTR, UINT32, \mbox{\hyperlink{namespacejuce_a905beb03d3578324284c52e0a417f22c}{HSTRING}}*);}
+\DoxyCodeLine{96     \textcolor{keyword}{typedef} HRESULT (WINAPI* WindowsDeleteStringFuncPtr) (\mbox{\hyperlink{namespacejuce_a905beb03d3578324284c52e0a417f22c}{HSTRING}});}
+\DoxyCodeLine{97     \textcolor{keyword}{typedef} PCWSTR  (WINAPI* WindowsGetStringRawBufferFuncPtr) (\mbox{\hyperlink{namespacejuce_a905beb03d3578324284c52e0a417f22c}{HSTRING}}, UINT32*);}
+\DoxyCodeLine{98     \textcolor{keyword}{typedef} HRESULT (WINAPI* RoActivateInstanceFuncPtr) (\mbox{\hyperlink{namespacejuce_a905beb03d3578324284c52e0a417f22c}{HSTRING}}, \mbox{\hyperlink{structjuce_1_1_i_inspectable}{IInspectable}}**);}
+\DoxyCodeLine{99     \textcolor{keyword}{typedef} HRESULT (WINAPI* RoGetActivationFactoryFuncPtr) (\mbox{\hyperlink{namespacejuce_a905beb03d3578324284c52e0a417f22c}{HSTRING}}, REFIID, \textcolor{keywordtype}{void}**);}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101     RoInitializeFuncPtr roInitialize = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{102     WindowsCreateStringFuncPtr createHString = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{103     WindowsDeleteStringFuncPtr deleteHString = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{104     WindowsGetStringRawBufferFuncPtr getHStringRawBuffer = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{105     RoActivateInstanceFuncPtr roActivateInstance = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{106     RoGetActivationFactoryFuncPtr roGetActivationFactory = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{108     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{109     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{classjuce_1_1_win_r_t_wrapper}{WinRTWrapper}})}
+\DoxyCodeLine{110 \};}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112 \} \textcolor{comment}{// namespace juce}}
+
+\end{DoxyCode}

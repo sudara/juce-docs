@@ -1,0 +1,71 @@
+\hypertarget{juce___drop_shadower_8h_source}{}\doxysection{juce\+\_\+\+Drop\+Shadower.\+h}
+\label{juce___drop_shadower_8h_source}\index{build/juce\_gui\_basics/misc/juce\_DropShadower.h@{build/juce\_gui\_basics/misc/juce\_DropShadower.h}}
+\mbox{\hyperlink{juce___drop_shadower_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{46 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_drop_shadower}{DropShadower}}  : \textcolor{keyword}{private} \mbox{\hyperlink{class_component_listener}{ComponentListener}}}
+\DoxyCodeLine{47 \{}
+\DoxyCodeLine{48 \textcolor{keyword}{public}:}
+\DoxyCodeLine{49     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{51 \textcolor{comment}{}    \mbox{\hyperlink{class_drop_shadower_a14c45e01c95902e0a8f5a975c1519d69}{DropShadower}} (\textcolor{keyword}{const} \mbox{\hyperlink{struct_drop_shadow}{DropShadow}}\& shadowType);}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{54     \mbox{\hyperlink{class_drop_shadower_a83cd98470b2d8c2879089b0d9d3239e0}{\string~DropShadower}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{57     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_drop_shadower_aa66afaff8ac325df14206e274589769f}{setOwner}} (\mbox{\hyperlink{class_component}{Component}}* componentToFollow);}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59 \textcolor{keyword}{private}:}
+\DoxyCodeLine{60     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{61     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_component_listener_a95adb1bc55096aefa74f9033be32aa47}{componentMovedOrResized}} (\mbox{\hyperlink{class_component}{Component}}\&, \textcolor{keywordtype}{bool}, \textcolor{keywordtype}{bool}) \textcolor{keyword}{override};}
+\DoxyCodeLine{62     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_component_listener_abba45bdeee6f4d74d59f2e969b178e6d}{componentBroughtToFront}} (\mbox{\hyperlink{class_component}{Component}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{63     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_component_listener_a6c07f1de45e6a8ac344684ab2fa9f675}{componentChildrenChanged}} (\mbox{\hyperlink{class_component}{Component}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{64     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_component_listener_a4fc4dfeec727924401e6d201b98a64fe}{componentParentHierarchyChanged}} (\mbox{\hyperlink{class_component}{Component}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{65     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_component_listener_a0ebaa9e89310c0352f996d922a79ddfa}{componentVisibilityChanged}} (\mbox{\hyperlink{class_component}{Component}}\&) \textcolor{keyword}{override};}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67     \textcolor{keywordtype}{void} updateParent();}
+\DoxyCodeLine{68     \textcolor{keywordtype}{void} updateShadows();}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70     \textcolor{keyword}{class }ShadowWindow;}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72     \mbox{\hyperlink{class_weak_reference}{WeakReference<Component>}} owner;}
+\DoxyCodeLine{73     \mbox{\hyperlink{class_owned_array}{OwnedArray<Component>}} shadowWindows;}
+\DoxyCodeLine{74     \mbox{\hyperlink{struct_drop_shadow}{DropShadow}} shadow;}
+\DoxyCodeLine{75     \textcolor{keywordtype}{bool} reentrant = \textcolor{keyword}{false};}
+\DoxyCodeLine{76     \mbox{\hyperlink{class_weak_reference}{WeakReference<Component>}} lastParentComp;}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78     \textcolor{keyword}{class }ParentVisibilityChangedListener;}
+\DoxyCodeLine{79     std::unique\_ptr<ParentVisibilityChangedListener> visibilityChangedListener;}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_drop_shadower}{DropShadower}})}
+\DoxyCodeLine{82     \mbox{\hyperlink{group__juce__core-memory_ga557fa9dbf924a150e27f0cf0dad368b0}{JUCE\_DECLARE\_WEAK\_REFERENCEABLE}} (\mbox{\hyperlink{class_drop_shadower}{DropShadower}})}
+\DoxyCodeLine{83 \};}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{86 }
+
+\end{DoxyCode}

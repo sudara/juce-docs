@@ -1,0 +1,109 @@
+\hypertarget{juce___audio_c_d_reader_8h_source}{}\doxysection{juce\+\_\+\+Audio\+CDReader.\+h}
+\label{juce___audio_c_d_reader_8h_source}\index{build/juce\_audio\_utils/audio\_cd/juce\_AudioCDReader.h@{build/juce\_audio\_utils/audio\_cd/juce\_AudioCDReader.h}}
+\mbox{\hyperlink{juce___audio_c_d_reader_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#if JUCE\_USE\_CDREADER || DOXYGEN}}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{44 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  AudioCDReader  : \textcolor{keyword}{public} \mbox{\hyperlink{class_audio_format_reader}{AudioFormatReader}}}
+\DoxyCodeLine{45 \{}
+\DoxyCodeLine{46 \textcolor{keyword}{public}:}
+\DoxyCodeLine{47     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{56 \textcolor{comment}{}    \textcolor{keyword}{static} \mbox{\hyperlink{class_string_array}{StringArray}} getAvailableCDNames();}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{65     \textcolor{keyword}{static} AudioCDReader* createReaderForCD (\textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a06a196a98fd7b17e699cbea6c66c37cb}{index}});}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{69 \textcolor{comment}{}    \string~AudioCDReader() \textcolor{keyword}{override};}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{72     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_audio_format_reader_a75d3df1c8d1b84a08fb5f1037d1754dd}{readSamples}} (\textcolor{keywordtype}{int}** destSamples, \textcolor{keywordtype}{int} numDestChannels, \textcolor{keywordtype}{int} startOffsetInDestBuffer,}
+\DoxyCodeLine{73                       \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} startSampleInFile, \textcolor{keywordtype}{int} numSamples) \textcolor{keyword}{override};}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{76     \textcolor{keywordtype}{bool} isCDStillPresent() \textcolor{keyword}{const};}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{79     \textcolor{keywordtype}{int} getNumTracks() \textcolor{keyword}{const};}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{85     \textcolor{keywordtype}{int} getPositionOfTrackStart (\textcolor{keywordtype}{int} trackNum) \textcolor{keyword}{const};}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{90     \textcolor{keywordtype}{bool} isTrackAudio (\textcolor{keywordtype}{int} trackNum) \textcolor{keyword}{const};}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{95     \textcolor{keyword}{const} \mbox{\hyperlink{class_array}{Array<int>}}\& getTrackOffsets() \textcolor{keyword}{const};}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{103     \textcolor{keywordtype}{void} refreshTrackLengths();}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{108     \textcolor{keywordtype}{void} enableIndexScanning (\textcolor{keywordtype}{bool} \mbox{\hyperlink{namespacegl_a6dfcb2772a382ca14a671d9869edce40}{enabled}});}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{123     \textcolor{keywordtype}{int} getLastIndex() \textcolor{keyword}{const};}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{130     \mbox{\hyperlink{class_array}{Array<int>}} findIndexesInTrack (\textcolor{keyword}{const} \textcolor{keywordtype}{int} trackNumber);}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{135     \textcolor{keywordtype}{int} getCDDBId();}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{140     \textcolor{keywordtype}{void} ejectDisk();}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{142     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{143     \textcolor{keyword}{enum}}
+\DoxyCodeLine{144     \{}
+\DoxyCodeLine{145         framesPerSecond = 75,}
+\DoxyCodeLine{146         \mbox{\hyperlink{namespacejuce_1_1_c_d_reader_helpers_a8957802fbeeb9dec3e009fe78676213f}{samplesPerFrame}} = 44100 / framesPerSecond}
+\DoxyCodeLine{147     \};}
+\DoxyCodeLine{148 }
+\DoxyCodeLine{149 \textcolor{keyword}{private}:}
+\DoxyCodeLine{150     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{151     \mbox{\hyperlink{class_array}{Array<int>}} trackStartSamples;}
+\DoxyCodeLine{152 }
+\DoxyCodeLine{153 \textcolor{preprocessor}{   \#if JUCE\_MAC}}
+\DoxyCodeLine{154     \mbox{\hyperlink{class_file}{File}} volumeDir;}
+\DoxyCodeLine{155     \mbox{\hyperlink{class_array}{Array<File>}} tracks;}
+\DoxyCodeLine{156     \textcolor{keywordtype}{int} currentReaderTrack;}
+\DoxyCodeLine{157     std::unique\_ptr<AudioFormatReader> reader;}
+\DoxyCodeLine{158     AudioCDReader (\textcolor{keyword}{const} \mbox{\hyperlink{class_file}{File}}\& volume);}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160 \textcolor{preprocessor}{   \#elif JUCE\_WINDOWS}}
+\DoxyCodeLine{161     \textcolor{keywordtype}{bool} audioTracks [100];}
+\DoxyCodeLine{162     \textcolor{keywordtype}{void}* \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8530736c0c7f7f4dc724c8246e301f83}{handle}};}
+\DoxyCodeLine{163     \mbox{\hyperlink{class_memory_block}{MemoryBlock}} \mbox{\hyperlink{namespacegl_af1bd5433d4e42cb8df763d053866e0a6}{buffer}};}
+\DoxyCodeLine{164     \textcolor{keywordtype}{bool} indexingEnabled;}
+\DoxyCodeLine{165     \textcolor{keywordtype}{int} lastIndex, firstFrameInBuffer, samplesInBuffer;}
+\DoxyCodeLine{166     AudioCDReader (\textcolor{keywordtype}{void}* \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a8530736c0c7f7f4dc724c8246e301f83}{handle}});}
+\DoxyCodeLine{167     \textcolor{keywordtype}{int} getIndexAt (\textcolor{keywordtype}{int} samplePos);}
+\DoxyCodeLine{168 }
+\DoxyCodeLine{169 \textcolor{preprocessor}{   \#elif JUCE\_LINUX || JUCE\_BSD}}
+\DoxyCodeLine{170     AudioCDReader();}
+\DoxyCodeLine{171 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{173     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (AudioCDReader)}
+\DoxyCodeLine{174 \};}
+\DoxyCodeLine{175 }
+\DoxyCodeLine{176 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{177 }
+\DoxyCodeLine{178  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{179 }
+
+\end{DoxyCode}

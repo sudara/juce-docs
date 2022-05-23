@@ -1,0 +1,77 @@
+\hypertarget{class_steinberg_1_1_i_persistent}{}\doxysection{Steinberg\+::IPersistent Class Reference}
+\label{class_steinberg_1_1_i_persistent}\index{Steinberg::IPersistent@{Steinberg::IPersistent}}
+
+
+{\ttfamily \#include $<$ipersistent.\+h$>$}
+
+Inheritance diagram for Steinberg\+::IPersistent\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d9/d30/class_steinberg_1_1_i_persistent}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\+\_\+\+API \mbox{\hyperlink{class_steinberg_1_1_i_persistent_a012059ddb3d9407029c9f97b6e8811d0}{get\+Class\+ID}} (\mbox{\hyperlink{namespace_steinberg_a4a83db7f2467f59f3050248287aef5fa}{char8}} $\ast$uid)=0
+\item 
+virtual \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\+\_\+\+API \mbox{\hyperlink{class_steinberg_1_1_i_persistent_a4c9a775662ccf650b9d0a6d5875644e8}{save\+Attributes}} (\mbox{\hyperlink{class_steinberg_1_1_i_attributes}{IAttributes}} $\ast$)=0
+\item 
+virtual \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\+\_\+\+API \mbox{\hyperlink{class_steinberg_1_1_i_persistent_a70d316843ff98c2c9afd24cec2d63d52}{load\+Attributes}} (\mbox{\hyperlink{class_steinberg_1_1_i_attributes}{IAttributes}} $\ast$)=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_steinberg_1_1_f_u_i_d}{FUID}} \mbox{\hyperlink{class_steinberg_1_1_i_persistent_a41619fba6c3674ea6582fe554f24480f}{iid}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Persistent Object Interface. \mbox{[}plug imp\mbox{]} ~\newline
+This interface is used to store/restore attributes of an object. An IPlug\+Controller can implement this interface to handle presets. The gui-\/xml for a preset control looks like this\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{....}
+\DoxyCodeLine{<view \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}=\textcolor{stringliteral}{"{}PresetView"{}} \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}=\textcolor{stringliteral}{"{}Preset"{}}/>}
+\DoxyCodeLine{....}
+\DoxyCodeLine{<\textcolor{keyword}{template} \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}=\textcolor{stringliteral}{"{}PresetView"{}}>}
+\DoxyCodeLine{    <view \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}=\textcolor{stringliteral}{"{}preset control"{}} \mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}}=\textcolor{stringliteral}{"{}0, 0, 100, 20"{}}/>}
+\DoxyCodeLine{    <\textcolor{keywordflow}{switch} \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}=\textcolor{stringliteral}{"{}store preset"{}} \mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}}=\textcolor{stringliteral}{"{}125,0,80,20"{}} style=\textcolor{stringliteral}{"{}push|immediate"{}} title=\textcolor{stringliteral}{"{}Store"{}}  />}
+\DoxyCodeLine{    <\textcolor{keywordflow}{switch} \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}}=\textcolor{stringliteral}{"{}remove preset"{}} \mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}}=\textcolor{stringliteral}{"{}220,0,80,20"{}} style=\textcolor{stringliteral}{"{}push|immediate"{}} title=\textcolor{stringliteral}{"{}Delete"{}}  />}
+\DoxyCodeLine{</\textcolor{keyword}{template}>}
+
+\end{DoxyCode}
+ The tag data=\char`\"{}\+Preset\char`\"{} tells the host to create a preset controller that handles the 3 values named \char`\"{}preset control\char`\"{}, \char`\"{}store preset\char`\"{}, and \char`\"{}remove preset\char`\"{}. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_steinberg_1_1_i_persistent_a012059ddb3d9407029c9f97b6e8811d0}\label{class_steinberg_1_1_i_persistent_a012059ddb3d9407029c9f97b6e8811d0}} 
+\index{Steinberg::IPersistent@{Steinberg::IPersistent}!getClassID@{getClassID}}
+\index{getClassID@{getClassID}!Steinberg::IPersistent@{Steinberg::IPersistent}}
+\doxysubsubsection{\texorpdfstring{getClassID()}{getClassID()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\+\_\+\+API Steinberg\+::\+IPersistent\+::get\+Class\+ID (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespace_steinberg_a4a83db7f2467f59f3050248287aef5fa}{char8}} $\ast$}]{uid }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+The class ID must be a 16 bytes unique id that is used to create the object. This ID is also used to identify the preset list when used with presets. \mbox{\Hypertarget{class_steinberg_1_1_i_persistent_a70d316843ff98c2c9afd24cec2d63d52}\label{class_steinberg_1_1_i_persistent_a70d316843ff98c2c9afd24cec2d63d52}} 
+\index{Steinberg::IPersistent@{Steinberg::IPersistent}!loadAttributes@{loadAttributes}}
+\index{loadAttributes@{loadAttributes}!Steinberg::IPersistent@{Steinberg::IPersistent}}
+\doxysubsubsection{\texorpdfstring{loadAttributes()}{loadAttributes()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\+\_\+\+API Steinberg\+::\+IPersistent\+::load\+Attributes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_steinberg_1_1_i_attributes}{IAttributes}} $\ast$}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Restore all members/data from the passed \mbox{\hyperlink{class_steinberg_1_1_i_attributes}{IAttributes}}. \mbox{\Hypertarget{class_steinberg_1_1_i_persistent_a4c9a775662ccf650b9d0a6d5875644e8}\label{class_steinberg_1_1_i_persistent_a4c9a775662ccf650b9d0a6d5875644e8}} 
+\index{Steinberg::IPersistent@{Steinberg::IPersistent}!saveAttributes@{saveAttributes}}
+\index{saveAttributes@{saveAttributes}!Steinberg::IPersistent@{Steinberg::IPersistent}}
+\doxysubsubsection{\texorpdfstring{saveAttributes()}{saveAttributes()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{namespace_steinberg_aea95c0544bdb23962c2e6f2d16843225}{tresult}} PLUGIN\+\_\+\+API Steinberg\+::\+IPersistent\+::save\+Attributes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_steinberg_1_1_i_attributes}{IAttributes}} $\ast$}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Store all members/data in the passed \mbox{\hyperlink{class_steinberg_1_1_i_attributes}{IAttributes}}. 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_steinberg_1_1_i_persistent_a41619fba6c3674ea6582fe554f24480f}\label{class_steinberg_1_1_i_persistent_a41619fba6c3674ea6582fe554f24480f}} 
+\index{Steinberg::IPersistent@{Steinberg::IPersistent}!iid@{iid}}
+\index{iid@{iid}!Steinberg::IPersistent@{Steinberg::IPersistent}}
+\doxysubsubsection{\texorpdfstring{iid}{iid}}
+{\footnotesize\ttfamily \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_steinberg_1_1_f_u_i_d}{FUID}} Steinberg\+::\+IPersistent\+::iid\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+audio\+\_\+processors/format\+\_\+types/\+VST3\+\_\+\+SDK/pluginterfaces/base/\mbox{\hyperlink{ipersistent_8h}{ipersistent.\+h}}\end{DoxyCompactItemize}

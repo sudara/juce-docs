@@ -1,0 +1,503 @@
+\hypertarget{juce___maths_functions_8h_source}{}\doxysection{juce\+\_\+\+Maths\+Functions.\+h}
+\label{juce___maths_functions_8h_source}\index{build/juce\_core/maths/juce\_MathsFunctions.h@{build/juce\_core/maths/juce\_MathsFunctions.h}}
+\mbox{\hyperlink{juce___maths_functions_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{/*}}
+\DoxyCodeLine{29 \textcolor{comment}{    This file sets up some handy mathematical typdefs and functions.}}
+\DoxyCodeLine{30 \textcolor{comment}{*/}}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{33 \textcolor{comment}{// Definitions for the int8, int16, int32, int64 and pointer\_sized\_int types.}}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{36 \textcolor{keyword}{using} \mbox{\hyperlink{group__juce__core-maths_ga07fb256c1077eea7a7726e948cc8ff0e}{int8}}      = \textcolor{keywordtype}{signed} char;}
+\DoxyCodeLine{38 \textcolor{keyword}{using} \mbox{\hyperlink{juce__box2d_8cpp_a4a0dc603b03692b2e16aca65cd3f7c35}{uint8}}     = \textcolor{keywordtype}{unsigned} char;}
+\DoxyCodeLine{40 \textcolor{keyword}{using} \mbox{\hyperlink{juce__box2d_8cpp_a1336d6dad274f1bead955274a953c13d}{int16}}     = \textcolor{keywordtype}{signed} short;}
+\DoxyCodeLine{42 \textcolor{keyword}{using} \mbox{\hyperlink{juce__box2d_8cpp_acc2cb9a2f3246f6f4775ef16196fd983}{uint16}}    = \textcolor{keywordtype}{unsigned} short;}
+\DoxyCodeLine{44 \textcolor{keyword}{using} \mbox{\hyperlink{juce__box2d_8cpp_a6a5a8e94340b94579afb83ab477a983c}{int32}}     = \textcolor{keywordtype}{signed} \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}};}
+\DoxyCodeLine{46 \textcolor{keyword}{using} \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}}    = \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}};}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48 \textcolor{preprocessor}{\#if JUCE\_MSVC}}
+\DoxyCodeLine{50   \textcolor{keyword}{using} \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}  = \_\_int64;}
+\DoxyCodeLine{52   \textcolor{keyword}{using} \mbox{\hyperlink{group__juce__core-maths_gaba41bf2b6f6da5945ee08fb99931aede}{uint64}} = \textcolor{keywordtype}{unsigned} \_\_int64;}
+\DoxyCodeLine{53 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{55   \textcolor{keyword}{using} \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}  = \textcolor{keywordtype}{long} long;}
+\DoxyCodeLine{57   \textcolor{keyword}{using} \mbox{\hyperlink{group__juce__core-maths_gaba41bf2b6f6da5945ee08fb99931aede}{uint64}} = \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} long;}
+\DoxyCodeLine{58 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60 \textcolor{preprocessor}{\#ifndef DOXYGEN}}
+\DoxyCodeLine{66 \textcolor{preprocessor}{ \#define literal64bit(longLiteral)     (longLiteral\#\#LL)}}
+\DoxyCodeLine{67 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69 \textcolor{preprocessor}{\#if JUCE\_64BIT}}
+\DoxyCodeLine{71   \textcolor{keyword}{using} \mbox{\hyperlink{group__juce__core-maths_ga004ecd75303f3a1653f937d35a67e41d}{pointer\_sized\_int}}  = \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}};}
+\DoxyCodeLine{73   \textcolor{keyword}{using} \mbox{\hyperlink{group__juce__core-maths_gafb24e6184dde2b29ecfb687686e8fec2}{pointer\_sized\_uint}} = \mbox{\hyperlink{group__juce__core-maths_gaba41bf2b6f6da5945ee08fb99931aede}{uint64}};}
+\DoxyCodeLine{74 \textcolor{preprocessor}{\#elif JUCE\_MSVC}}
+\DoxyCodeLine{76   \textcolor{keyword}{using} \mbox{\hyperlink{group__juce__core-maths_ga004ecd75303f3a1653f937d35a67e41d}{pointer\_sized\_int}}  = \_W64 \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}};}
+\DoxyCodeLine{78   \textcolor{keyword}{using} \mbox{\hyperlink{group__juce__core-maths_gafb24e6184dde2b29ecfb687686e8fec2}{pointer\_sized\_uint}} = \_W64 \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}};}
+\DoxyCodeLine{79 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{81   \textcolor{keyword}{using} \mbox{\hyperlink{group__juce__core-maths_ga004ecd75303f3a1653f937d35a67e41d}{pointer\_sized\_int}}  = \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}};}
+\DoxyCodeLine{83   \textcolor{keyword}{using} \mbox{\hyperlink{group__juce__core-maths_gafb24e6184dde2b29ecfb687686e8fec2}{pointer\_sized\_uint}} = \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}};}
+\DoxyCodeLine{84 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86 \textcolor{preprocessor}{\#if JUCE\_WINDOWS \&\& ! JUCE\_MINGW}}
+\DoxyCodeLine{87   \textcolor{keyword}{using} ssize\_t = \mbox{\hyperlink{group__juce__core-maths_ga004ecd75303f3a1653f937d35a67e41d}{pointer\_sized\_int}};}
+\DoxyCodeLine{88 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{91 \textcolor{comment}{// Some indispensable min/max functions}}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{94 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type>}
+\DoxyCodeLine{95 \textcolor{keyword}{constexpr} Type \mbox{\hyperlink{group__juce__core-maths_gadfd716f36f80987d66ebc2fce819c1fe}{jmax}} (Type \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, Type \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}})                                   \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} < \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} ? \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} : \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}; \}}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{98 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type>}
+\DoxyCodeLine{99 \textcolor{keyword}{constexpr} Type \mbox{\hyperlink{group__juce__core-maths_gadfd716f36f80987d66ebc2fce819c1fe}{jmax}} (Type \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, Type \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}, Type \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}})                           \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} < \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} ? (\mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} < \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} ? \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} : \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}) : (\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} < \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} ? \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} : \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}); \}}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{102 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type>}
+\DoxyCodeLine{103 \textcolor{keyword}{constexpr} Type \mbox{\hyperlink{group__juce__core-maths_gadfd716f36f80987d66ebc2fce819c1fe}{jmax}} (Type \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, Type \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}, Type \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}, Type d)                   \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{group__juce__core-maths_gadfd716f36f80987d66ebc2fce819c1fe}{jmax}} (\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \mbox{\hyperlink{group__juce__core-maths_gadfd716f36f80987d66ebc2fce819c1fe}{jmax}} (\mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}, \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}, d)); \}}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{106 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type>}
+\DoxyCodeLine{107 \textcolor{keyword}{constexpr} Type \mbox{\hyperlink{group__juce__core-maths_gae8394cdf11279b266f4aa741758c1669}{jmin}} (Type \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, Type \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}})                                   \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} < \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} ? \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} : \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}; \}}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{110 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type>}
+\DoxyCodeLine{111 \textcolor{keyword}{constexpr} Type \mbox{\hyperlink{group__juce__core-maths_gae8394cdf11279b266f4aa741758c1669}{jmin}} (Type \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, Type \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}, Type \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}})                           \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} < \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} ? (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} < \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}} ? \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} : \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}) : (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} < \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} ? \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}} : \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}); \}}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{114 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type>}
+\DoxyCodeLine{115 \textcolor{keyword}{constexpr} Type \mbox{\hyperlink{group__juce__core-maths_gae8394cdf11279b266f4aa741758c1669}{jmin}} (Type \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, Type \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}, Type \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}, Type d)                   \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{group__juce__core-maths_gae8394cdf11279b266f4aa741758c1669}{jmin}} (\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \mbox{\hyperlink{group__juce__core-maths_gae8394cdf11279b266f4aa741758c1669}{jmin}} (\mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}, \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}}, d)); \}}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{120 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type>}
+\DoxyCodeLine{121 \textcolor{keyword}{constexpr} Type \mbox{\hyperlink{group__juce__core-maths_ga53851e83e8f5c5faeb5dbc64196bb329}{jmap}} (Type value0To1, Type targetRangeMin, Type targetRangeMax)}
+\DoxyCodeLine{122 \{}
+\DoxyCodeLine{123     \textcolor{keywordflow}{return} targetRangeMin + value0To1 * (targetRangeMax -\/ targetRangeMin);}
+\DoxyCodeLine{124 \}}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{127 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type>}
+\DoxyCodeLine{128 Type \mbox{\hyperlink{group__juce__core-maths_ga53851e83e8f5c5faeb5dbc64196bb329}{jmap}} (Type sourceValue, Type sourceRangeMin, Type sourceRangeMax, Type targetRangeMin, Type targetRangeMax)}
+\DoxyCodeLine{129 \{}
+\DoxyCodeLine{130     \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (sourceRangeMax != sourceRangeMin); \textcolor{comment}{// mapping from a range of zero will produce NaN!}}
+\DoxyCodeLine{131     \textcolor{keywordflow}{return} targetRangeMin + ((targetRangeMax -\/ targetRangeMin) * (sourceValue -\/ sourceRangeMin)) / (sourceRangeMax -\/ sourceRangeMin);}
+\DoxyCodeLine{132 \}}
+\DoxyCodeLine{133 }
+\DoxyCodeLine{144 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type>}
+\DoxyCodeLine{145 Type \mbox{\hyperlink{group__juce__core-maths_ga0fb8d4f154ec362be912c96e7287e232}{mapToLog10}} (Type value0To1, Type logRangeMin, Type logRangeMax)}
+\DoxyCodeLine{146 \{}
+\DoxyCodeLine{147     \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (logRangeMin > 0);}
+\DoxyCodeLine{148     \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (logRangeMax > 0);}
+\DoxyCodeLine{149 }
+\DoxyCodeLine{150     \textcolor{keyword}{auto} logMin = std::log10 (logRangeMin);}
+\DoxyCodeLine{151     \textcolor{keyword}{auto} logMax = std::log10 (logRangeMax);}
+\DoxyCodeLine{152 }
+\DoxyCodeLine{153     \textcolor{keywordflow}{return} std::pow ((Type) 10.0, value0To1 * (logMax -\/ logMin) + logMin);}
+\DoxyCodeLine{154 \}}
+\DoxyCodeLine{155 }
+\DoxyCodeLine{166 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type>}
+\DoxyCodeLine{167 Type \mbox{\hyperlink{group__juce__core-maths_gaf4109ed290f4b1ccb5d97670f0071778}{mapFromLog10}} (Type valueInLogRange, Type logRangeMin, Type logRangeMax)}
+\DoxyCodeLine{168 \{}
+\DoxyCodeLine{169     \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (logRangeMin > 0);}
+\DoxyCodeLine{170     \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (logRangeMax > 0);}
+\DoxyCodeLine{171 }
+\DoxyCodeLine{172     \textcolor{keyword}{auto} logMin = std::log10 (logRangeMin);}
+\DoxyCodeLine{173     \textcolor{keyword}{auto} logMax = std::log10 (logRangeMax);}
+\DoxyCodeLine{174 }
+\DoxyCodeLine{175     \textcolor{keywordflow}{return} (std::log10 (valueInLogRange) -\/ logMin) / (logMax -\/ logMin);}
+\DoxyCodeLine{176 \}}
+\DoxyCodeLine{177 }
+\DoxyCodeLine{179 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type, \textcolor{keyword}{typename} Size>}
+\DoxyCodeLine{180 Type \mbox{\hyperlink{group__juce__core-maths_ga6bd6f580ca6e05e0b6c1b0f202dbb9b2}{findMinimum}} (\textcolor{keyword}{const} Type* \mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}, Size numValues)}
+\DoxyCodeLine{181 \{}
+\DoxyCodeLine{182     \textcolor{keywordflow}{if} (numValues <= 0)}
+\DoxyCodeLine{183         \textcolor{keywordflow}{return} Type (0);}
+\DoxyCodeLine{184 }
+\DoxyCodeLine{185     \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = *\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}++;}
+\DoxyCodeLine{186 }
+\DoxyCodeLine{187     \textcolor{keywordflow}{while} (-\/-\/numValues > 0) \textcolor{comment}{// (> 0 rather than >= 0 because we've already taken the first sample)}}
+\DoxyCodeLine{188     \{}
+\DoxyCodeLine{189         \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}} = *\mbox{\hyperlink{jpeglib_8h_aa379dc8ae39e55ae0c431a61a7d2f2bc}{data}}++;}
+\DoxyCodeLine{190 }
+\DoxyCodeLine{191         \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}} < \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}})}
+\DoxyCodeLine{192             \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = \mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}};}
+\DoxyCodeLine{193     \}}
+\DoxyCodeLine{194 }
+\DoxyCodeLine{195     \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}};}
+\DoxyCodeLine{196 \}}
+\DoxyCodeLine{197 }
+\DoxyCodeLine{199 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type, \textcolor{keyword}{typename} Size>}
+\DoxyCodeLine{200 Type \mbox{\hyperlink{group__juce__core-maths_gade8104e135fee3c8b6924180e0c5c58d}{findMaximum}} (\textcolor{keyword}{const} Type* values, Size numValues)}
+\DoxyCodeLine{201 \{}
+\DoxyCodeLine{202     \textcolor{keywordflow}{if} (numValues <= 0)}
+\DoxyCodeLine{203         \textcolor{keywordflow}{return} Type (0);}
+\DoxyCodeLine{204 }
+\DoxyCodeLine{205     \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = *values++;}
+\DoxyCodeLine{206 }
+\DoxyCodeLine{207     \textcolor{keywordflow}{while} (-\/-\/numValues > 0) \textcolor{comment}{// (> 0 rather than >= 0 because we've already taken the first sample)}}
+\DoxyCodeLine{208     \{}
+\DoxyCodeLine{209         \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}} = *values++;}
+\DoxyCodeLine{210 }
+\DoxyCodeLine{211         \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} < \mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}})}
+\DoxyCodeLine{212             \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = \mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}};}
+\DoxyCodeLine{213     \}}
+\DoxyCodeLine{214 }
+\DoxyCodeLine{215     \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}};}
+\DoxyCodeLine{216 \}}
+\DoxyCodeLine{217 }
+\DoxyCodeLine{219 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type>}
+\DoxyCodeLine{220 \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-maths_ga8b2e19439406e1608c876bd8a44a7cb8}{findMinAndMax}} (\textcolor{keyword}{const} Type* values, \textcolor{keywordtype}{int} numValues, Type\& lowest, Type\& highest)}
+\DoxyCodeLine{221 \{}
+\DoxyCodeLine{222     \textcolor{keywordflow}{if} (numValues <= 0)}
+\DoxyCodeLine{223     \{}
+\DoxyCodeLine{224         lowest = Type (0);}
+\DoxyCodeLine{225         highest = Type (0);}
+\DoxyCodeLine{226     \}}
+\DoxyCodeLine{227     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{228     \{}
+\DoxyCodeLine{229         \textcolor{keyword}{auto} mn = *values++;}
+\DoxyCodeLine{230         \textcolor{keyword}{auto} mx = mn;}
+\DoxyCodeLine{231 }
+\DoxyCodeLine{232         \textcolor{keywordflow}{while} (-\/-\/numValues > 0) \textcolor{comment}{// (> 0 rather than >= 0 because we've already taken the first sample)}}
+\DoxyCodeLine{233         \{}
+\DoxyCodeLine{234             \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}} = *values++;}
+\DoxyCodeLine{235 }
+\DoxyCodeLine{236             \textcolor{keywordflow}{if} (mx < \mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}})  mx = \mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}};}
+\DoxyCodeLine{237             \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}} < mn)  mn = \mbox{\hyperlink{namespacegl_a90222d5e414af4ac542dabf3b3097a7f}{v}};}
+\DoxyCodeLine{238         \}}
+\DoxyCodeLine{239 }
+\DoxyCodeLine{240         lowest = mn;}
+\DoxyCodeLine{241         highest = mx;}
+\DoxyCodeLine{242     \}}
+\DoxyCodeLine{243 \}}
+\DoxyCodeLine{244 }
+\DoxyCodeLine{245 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{262 \textcolor{comment}{}\textcolor{keyword}{template} <\textcolor{keyword}{typename} Type>}
+\DoxyCodeLine{263 Type \mbox{\hyperlink{group__juce__core-maths_gacf7cd562ab136d15d3bf5c3be047cf96}{jlimit}} (Type lowerLimit,}
+\DoxyCodeLine{264              Type upperLimit,}
+\DoxyCodeLine{265              Type valueToConstrain) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{266 \{}
+\DoxyCodeLine{267     \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (lowerLimit <= upperLimit); \textcolor{comment}{// if these are in the wrong order, results are unpredictable..}}
+\DoxyCodeLine{268 }
+\DoxyCodeLine{269     \textcolor{keywordflow}{return} valueToConstrain < lowerLimit ? lowerLimit}
+\DoxyCodeLine{270                                          : (upperLimit < valueToConstrain ? upperLimit}
+\DoxyCodeLine{271                                                                           : valueToConstrain);}
+\DoxyCodeLine{272 \}}
+\DoxyCodeLine{273 }
+\DoxyCodeLine{279 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type1, \textcolor{keyword}{typename} Type2>}
+\DoxyCodeLine{280 \textcolor{keywordtype}{bool} \mbox{\hyperlink{group__juce__core-maths_ga5762396fe2a5aa4c39b68ee5b70a96f8}{isPositiveAndBelow}} (Type1 valueToTest, Type2 upperLimit) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{281 \{}
+\DoxyCodeLine{282     \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (Type1() <= \textcolor{keyword}{static\_cast<}Type1\textcolor{keyword}{>} (upperLimit)); \textcolor{comment}{// makes no sense to call this if the upper limit is itself below zero..}}
+\DoxyCodeLine{283     \textcolor{keywordflow}{return} Type1() <= valueToTest \&\& valueToTest < static\_cast<Type1> (upperLimit);}
+\DoxyCodeLine{284 \}}
+\DoxyCodeLine{285 }
+\DoxyCodeLine{286 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type>}
+\DoxyCodeLine{287 \textcolor{keywordtype}{bool} \mbox{\hyperlink{group__juce__core-maths_ga5762396fe2a5aa4c39b68ee5b70a96f8}{isPositiveAndBelow}} (\textcolor{keywordtype}{int} valueToTest, Type upperLimit) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{288 \{}
+\DoxyCodeLine{289     \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (upperLimit >= 0); \textcolor{comment}{// makes no sense to call this if the upper limit is itself below zero..}}
+\DoxyCodeLine{290     \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}\textcolor{keyword}{>} (valueToTest) < \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}\textcolor{keyword}{>} (upperLimit);}
+\DoxyCodeLine{291 \}}
+\DoxyCodeLine{292 }
+\DoxyCodeLine{298 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type1, \textcolor{keyword}{typename} Type2>}
+\DoxyCodeLine{299 \textcolor{keywordtype}{bool} \mbox{\hyperlink{group__juce__core-maths_ga60f96a2dfcb733210bd4e5a60611ba32}{isPositiveAndNotGreaterThan}} (Type1 valueToTest, Type2 upperLimit) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{300 \{}
+\DoxyCodeLine{301     \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (Type1() <= \textcolor{keyword}{static\_cast<}Type1\textcolor{keyword}{>} (upperLimit)); \textcolor{comment}{// makes no sense to call this if the upper limit is itself below zero..}}
+\DoxyCodeLine{302     \textcolor{keywordflow}{return} Type1() <= valueToTest \&\& valueToTest <= static\_cast<Type1> (upperLimit);}
+\DoxyCodeLine{303 \}}
+\DoxyCodeLine{304 }
+\DoxyCodeLine{305 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type>}
+\DoxyCodeLine{306 \textcolor{keywordtype}{bool} \mbox{\hyperlink{group__juce__core-maths_ga60f96a2dfcb733210bd4e5a60611ba32}{isPositiveAndNotGreaterThan}} (\textcolor{keywordtype}{int} valueToTest, Type upperLimit) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{307 \{}
+\DoxyCodeLine{308     \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (upperLimit >= 0); \textcolor{comment}{// makes no sense to call this if the upper limit is itself below zero..}}
+\DoxyCodeLine{309     \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}\textcolor{keyword}{>} (valueToTest) <= \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}\textcolor{keyword}{>} (upperLimit);}
+\DoxyCodeLine{310 \}}
+\DoxyCodeLine{311 }
+\DoxyCodeLine{315 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type>}
+\DoxyCodeLine{316 \textcolor{keywordtype}{bool} \mbox{\hyperlink{group__juce__core-maths_ga4b5f32cb048248ad43eab875e2bc7cdb}{isWithin}} (Type \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, Type \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}, Type tolerance) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{317 \{}
+\DoxyCodeLine{318     \textcolor{keywordflow}{return} std::abs (\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} -\/ \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}) <= tolerance;}
+\DoxyCodeLine{319 \}}
+\DoxyCodeLine{320 }
+\DoxyCodeLine{324 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type>}
+\DoxyCodeLine{325 \textcolor{keywordtype}{bool} \mbox{\hyperlink{group__juce__core-maths_ga7a1911249b2e8ff54c8f0538a1ba0182}{approximatelyEqual}} (Type \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, Type \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{326 \{}
+\DoxyCodeLine{327     \textcolor{keywordflow}{return} std::abs (\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} -\/ \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}) <= (std::numeric\_limits<Type>::epsilon() * \mbox{\hyperlink{os_8h_ac39d9cef6a5e030ba8d9e11121054268}{std::max}} (\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}))}
+\DoxyCodeLine{328             || std::abs (\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}} -\/ \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}) < \mbox{\hyperlink{os_8h_abb702d8b501669a23aa0ab3b281b9384}{std::numeric\_limits<Type>::min}}();}
+\DoxyCodeLine{329 \}}
+\DoxyCodeLine{330 }
+\DoxyCodeLine{331 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{333 \textcolor{comment}{}\textcolor{keyword}{template} <\textcolor{keyword}{typename}... Types>}
+\DoxyCodeLine{334 \textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-maths_ga5158e6e8faa5553204f90af596fafaf5}{ignoreUnused}} (Types\&\&...) noexcept \{\}}
+\DoxyCodeLine{335 }
+\DoxyCodeLine{344 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type, \textcolor{keywordtype}{size\_t} N>}
+\DoxyCodeLine{345 \textcolor{keyword}{constexpr} \textcolor{keywordtype}{int} \mbox{\hyperlink{group__juce__core-maths_gadee9aaa20b588097567bc71e651f2f98}{numElementsInArray}} (Type (\&)[N]) \textcolor{keyword}{noexcept}     \{ \textcolor{keywordflow}{return} N; \}}
+\DoxyCodeLine{346 }
+\DoxyCodeLine{347 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{348 \textcolor{comment}{// Some useful maths functions that aren't always present with all compilers and build settings.}}
+\DoxyCodeLine{349 }
+\DoxyCodeLine{352 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type>}
+\DoxyCodeLine{353 Type \mbox{\hyperlink{group__juce__core-maths_ga18cf7a25c960a8c2b10cd4ea914eae75}{juce\_hypot}} (Type \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, Type \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{354 \{}
+\DoxyCodeLine{355 \textcolor{preprocessor}{   \#if JUCE\_MSVC}}
+\DoxyCodeLine{356     \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}Type\textcolor{keyword}{>} (\_hypot (\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}));}
+\DoxyCodeLine{357 \textcolor{preprocessor}{   \#else}}
+\DoxyCodeLine{358     \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}Type\textcolor{keyword}{>} (hypot (\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}));}
+\DoxyCodeLine{359 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{360 \}}
+\DoxyCodeLine{361 }
+\DoxyCodeLine{362 \textcolor{preprocessor}{\#ifndef DOXYGEN}}
+\DoxyCodeLine{363 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{364 \textcolor{keyword}{inline} \textcolor{keywordtype}{float} \mbox{\hyperlink{group__juce__core-maths_ga18cf7a25c960a8c2b10cd4ea914eae75}{juce\_hypot}} (\textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{365 \{}
+\DoxyCodeLine{366 \textcolor{preprocessor}{   \#if JUCE\_MSVC}}
+\DoxyCodeLine{367     \textcolor{keywordflow}{return} \_hypotf (\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}});}
+\DoxyCodeLine{368 \textcolor{preprocessor}{   \#else}}
+\DoxyCodeLine{369     \textcolor{keywordflow}{return} hypotf (\mbox{\hyperlink{namespacegl_af2753ee7944d450bb463309a8537bfc3}{a}}, \mbox{\hyperlink{jpegint_8h_af320905358fa78701e4cc60b6135601f}{b}});}
+\DoxyCodeLine{370 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{371 \}}
+\DoxyCodeLine{372 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{373 }
+\DoxyCodeLine{374 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{379 \textcolor{comment}{}\textcolor{keyword}{template} <\textcolor{keyword}{typename} FloatType>}
+\DoxyCodeLine{380 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_math_constants}{MathConstants}}}
+\DoxyCodeLine{381 \{}
+\DoxyCodeLine{383     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} FloatType \mbox{\hyperlink{struct_math_constants_aacb402350ef90fa1f4ab91a37032ba2c}{pi}} = \textcolor{keyword}{static\_cast<}FloatType\textcolor{keyword}{>} (3.141592653589793238L);}
+\DoxyCodeLine{384 }
+\DoxyCodeLine{386     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} FloatType \mbox{\hyperlink{struct_math_constants_af790e88d5300fd2abef6407557dd99d4}{twoPi}} = \textcolor{keyword}{static\_cast<}FloatType\textcolor{keyword}{>} (2 * 3.141592653589793238L);}
+\DoxyCodeLine{387 }
+\DoxyCodeLine{389     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} FloatType \mbox{\hyperlink{struct_math_constants_a56d81ce94fdc56ec4da30b1d2eef84b0}{halfPi}} = \textcolor{keyword}{static\_cast<}FloatType\textcolor{keyword}{>} (3.141592653589793238L / 2);}
+\DoxyCodeLine{390 }
+\DoxyCodeLine{392     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} FloatType \mbox{\hyperlink{struct_math_constants_aad0f4c28b767f590f82d037bdf0eae65}{euler}} = \textcolor{keyword}{static\_cast<}FloatType\textcolor{keyword}{>} (2.71828182845904523536L);}
+\DoxyCodeLine{393 }
+\DoxyCodeLine{395     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} FloatType \mbox{\hyperlink{struct_math_constants_ad5a94be39095bba9fd165df2c7435f41}{sqrt2}} = \textcolor{keyword}{static\_cast<}FloatType\textcolor{keyword}{>} (1.4142135623730950488L);}
+\DoxyCodeLine{396 \};}
+\DoxyCodeLine{397 }
+\DoxyCodeLine{398 \textcolor{preprocessor}{\#ifndef DOXYGEN}}
+\DoxyCodeLine{400 [[deprecated (\textcolor{stringliteral}{"{}This is deprecated in favour of MathConstants<double>::pi."{}})]]}
+\DoxyCodeLine{401 \textcolor{keyword}{const} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{double}  \mbox{\hyperlink{group__juce__core-maths_ga2b98c2a0169eadf6a07515027462c7b4}{double\_Pi}}  = \mbox{\hyperlink{struct_math_constants}{MathConstants<double>::pi}};}
+\DoxyCodeLine{402 }
+\DoxyCodeLine{404 [[deprecated (\textcolor{stringliteral}{"{}This is deprecated in favour of MathConstants<float>::pi."{}})]]}
+\DoxyCodeLine{405 \textcolor{keyword}{const} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{float}   \mbox{\hyperlink{group__juce__core-maths_ga6183bf7b949cc81f9eba8dfb37c64358}{float\_Pi}}   = \mbox{\hyperlink{struct_math_constants}{MathConstants<float>::pi}};}
+\DoxyCodeLine{406 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{407 }
+\DoxyCodeLine{409 \textcolor{keyword}{template} <\textcolor{keyword}{typename} FloatType>}
+\DoxyCodeLine{410 \textcolor{keyword}{constexpr} FloatType \mbox{\hyperlink{group__juce__core-maths_ga94da761a445ab247e6e34be6d9203180}{degreesToRadians}} (FloatType degrees) \textcolor{keyword}{noexcept}     \{ \textcolor{keywordflow}{return} degrees * (\mbox{\hyperlink{struct_math_constants}{MathConstants<FloatType>::pi}} / FloatType (180)); \}}
+\DoxyCodeLine{411 }
+\DoxyCodeLine{413 \textcolor{keyword}{template} <\textcolor{keyword}{typename} FloatType>}
+\DoxyCodeLine{414 \textcolor{keyword}{constexpr} FloatType \mbox{\hyperlink{group__juce__core-maths_gaf77c84b89e8d09059c28fb7b8fedaa50}{radiansToDegrees}} (FloatType radians) \textcolor{keyword}{noexcept}     \{ \textcolor{keywordflow}{return} radians * (FloatType (180) / \mbox{\hyperlink{struct_math_constants}{MathConstants<FloatType>::pi}}); \}}
+\DoxyCodeLine{415 }
+\DoxyCodeLine{416 }
+\DoxyCodeLine{417 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{421 \textcolor{comment}{}\textcolor{keyword}{template} <\textcolor{keyword}{typename} NumericType>}
+\DoxyCodeLine{422 \textcolor{keywordtype}{bool} \mbox{\hyperlink{group__juce__core-maths_ga715cf75caf01f50c8bdad7a8a919db3a}{juce\_isfinite}} (NumericType) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{423 \{}
+\DoxyCodeLine{424     \textcolor{keywordflow}{return} \textcolor{keyword}{true}; \textcolor{comment}{// Integer types are always finite}}
+\DoxyCodeLine{425 \}}
+\DoxyCodeLine{426 }
+\DoxyCodeLine{427 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{428 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{group__juce__core-maths_ga715cf75caf01f50c8bdad7a8a919db3a}{juce\_isfinite}} (\textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{429 \{}
+\DoxyCodeLine{430 \textcolor{preprocessor}{   \#if JUCE\_WINDOWS \&\& ! JUCE\_MINGW}}
+\DoxyCodeLine{431     \textcolor{keywordflow}{return} \_finite (\mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}) != 0;}
+\DoxyCodeLine{432 \textcolor{preprocessor}{   \#else}}
+\DoxyCodeLine{433     \textcolor{keywordflow}{return} std::isfinite (\mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}});}
+\DoxyCodeLine{434 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{435 \}}
+\DoxyCodeLine{436 }
+\DoxyCodeLine{437 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{438 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{group__juce__core-maths_ga715cf75caf01f50c8bdad7a8a919db3a}{juce\_isfinite}} (\textcolor{keywordtype}{double} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{439 \{}
+\DoxyCodeLine{440 \textcolor{preprocessor}{   \#if JUCE\_WINDOWS \&\& ! JUCE\_MINGW}}
+\DoxyCodeLine{441     \textcolor{keywordflow}{return} \_finite (\mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}) != 0;}
+\DoxyCodeLine{442 \textcolor{preprocessor}{   \#else}}
+\DoxyCodeLine{443     \textcolor{keywordflow}{return} std::isfinite (\mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}});}
+\DoxyCodeLine{444 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{445 \}}
+\DoxyCodeLine{446 }
+\DoxyCodeLine{447 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{448 \textcolor{preprocessor}{\#if JUCE\_MSVC}}
+\DoxyCodeLine{449 \textcolor{preprocessor}{ \#pragma optimize ("{}t"{}}, off)}
+\DoxyCodeLine{450 \textcolor{preprocessor}{ \#ifndef \_\_INTEL\_COMPILER}}
+\DoxyCodeLine{451 \textcolor{preprocessor}{  \#pragma float\_control (precise, on, push)}}
+\DoxyCodeLine{452 \textcolor{preprocessor}{ \#endif}}
+\DoxyCodeLine{453 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{454 }
+\DoxyCodeLine{465 \textcolor{keyword}{template} <\textcolor{keyword}{typename} FloatType>}
+\DoxyCodeLine{466 \textcolor{keywordtype}{int} \mbox{\hyperlink{group__juce__core-maths_gafe8eb86381d389f4ba9f9931a38e1a44}{roundToInt}} (\textcolor{keyword}{const} FloatType \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{467 \{}
+\DoxyCodeLine{468 \textcolor{preprocessor}{  \#ifdef \_\_INTEL\_COMPILER}}
+\DoxyCodeLine{469 \textcolor{preprocessor}{   \#pragma float\_control (precise, on, push)}}
+\DoxyCodeLine{470 \textcolor{preprocessor}{  \#endif}}
+\DoxyCodeLine{471 }
+\DoxyCodeLine{472     \textcolor{keyword}{union }\{ \textcolor{keywordtype}{int} asInt[2]; \textcolor{keywordtype}{double} asDouble; \} \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}};}
+\DoxyCodeLine{473     \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}}.asDouble = ((double) \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}) + 6755399441055744.0;}
+\DoxyCodeLine{474 }
+\DoxyCodeLine{475 \textcolor{preprocessor}{   \#if JUCE\_BIG\_ENDIAN}}
+\DoxyCodeLine{476     \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}}.asInt [1];}
+\DoxyCodeLine{477 \textcolor{preprocessor}{   \#else}}
+\DoxyCodeLine{478     \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}}.asInt [0];}
+\DoxyCodeLine{479 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{480 \}}
+\DoxyCodeLine{481 }
+\DoxyCodeLine{482 \textcolor{keyword}{inline} \textcolor{keywordtype}{int} \mbox{\hyperlink{group__juce__core-maths_gafe8eb86381d389f4ba9f9931a38e1a44}{roundToInt}} (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{483 \{}
+\DoxyCodeLine{484     \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}};}
+\DoxyCodeLine{485 \}}
+\DoxyCodeLine{486 }
+\DoxyCodeLine{487 \textcolor{preprocessor}{\#if JUCE\_MSVC}}
+\DoxyCodeLine{488 \textcolor{preprocessor}{ \#ifndef \_\_INTEL\_COMPILER}}
+\DoxyCodeLine{489 \textcolor{preprocessor}{  \#pragma float\_control (pop)}}
+\DoxyCodeLine{490 \textcolor{preprocessor}{ \#endif}}
+\DoxyCodeLine{491 \textcolor{preprocessor}{ \#pragma optimize ("{}"{}}, on)  \textcolor{comment}{// resets optimisations to the project defaults}}
+\DoxyCodeLine{492 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{493 }
+\DoxyCodeLine{499 \textcolor{keyword}{inline} \textcolor{keywordtype}{int} \mbox{\hyperlink{group__juce__core-maths_gaf462ba6662a564582b2f904677dad0f4}{roundToIntAccurate}} (\textcolor{keywordtype}{double} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{500 \{}
+\DoxyCodeLine{501 \textcolor{preprocessor}{   \#ifdef \_\_INTEL\_COMPILER}}
+\DoxyCodeLine{502 \textcolor{preprocessor}{    \#pragma float\_control (pop)}}
+\DoxyCodeLine{503 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{504 }
+\DoxyCodeLine{505     \textcolor{keywordflow}{return} \mbox{\hyperlink{group__juce__core-maths_gafe8eb86381d389f4ba9f9931a38e1a44}{roundToInt}} (\mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}} + 1.5e-\/8);}
+\DoxyCodeLine{506 \}}
+\DoxyCodeLine{507 }
+\DoxyCodeLine{508 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{515 \textcolor{comment}{}\textcolor{keyword}{template} <\textcolor{keyword}{typename} FloatType>}
+\DoxyCodeLine{516 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \mbox{\hyperlink{group__juce__core-maths_ga39f99e3d469c913c7e6d7f42ba5af746}{truncatePositiveToUnsignedInt}} (FloatType \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{517 \{}
+\DoxyCodeLine{518     \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (\mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}} >= \textcolor{keyword}{static\_cast<}FloatType\textcolor{keyword}{>} (0));}
+\DoxyCodeLine{519     \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (\textcolor{keyword}{static\_cast<}FloatType\textcolor{keyword}{>} (\mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}})}
+\DoxyCodeLine{520              <= \textcolor{keyword}{static\_cast<}FloatType\textcolor{keyword}{>} (\mbox{\hyperlink{os_8h_ac39d9cef6a5e030ba8d9e11121054268}{std::numeric\_limits<unsigned int>::max}}()));}
+\DoxyCodeLine{521 }
+\DoxyCodeLine{522     \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}\textcolor{keyword}{>} (\mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}});}
+\DoxyCodeLine{523 \}}
+\DoxyCodeLine{524 }
+\DoxyCodeLine{525 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{527 \textcolor{comment}{}\textcolor{keyword}{template} <\textcolor{keyword}{typename} IntegerType>}
+\DoxyCodeLine{528 \textcolor{keyword}{constexpr} \textcolor{keywordtype}{bool} \mbox{\hyperlink{group__juce__core-maths_gac442d75bab44cd364cda70eb02ec5fb9}{isPowerOfTwo}} (IntegerType \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}})}
+\DoxyCodeLine{529 \{}
+\DoxyCodeLine{530    \textcolor{keywordflow}{return} (\mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}} \& (\mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}} -\/ 1)) == 0;}
+\DoxyCodeLine{531 \}}
+\DoxyCodeLine{532 }
+\DoxyCodeLine{534 \textcolor{keyword}{inline} \textcolor{keywordtype}{int} \mbox{\hyperlink{group__juce__core-maths_ga137419534afee570f5ff25d643c77176}{nextPowerOfTwo}} (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{535 \{}
+\DoxyCodeLine{536     -\/-\/\mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}};}
+\DoxyCodeLine{537     \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}} |= (\mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}} >> 1);}
+\DoxyCodeLine{538     \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}} |= (\mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}} >> 2);}
+\DoxyCodeLine{539     \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}} |= (\mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}} >> 4);}
+\DoxyCodeLine{540     \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}} |= (\mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}} >> 8);}
+\DoxyCodeLine{541     \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}} |= (\mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}} >> 16);}
+\DoxyCodeLine{542     \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}} + 1;}
+\DoxyCodeLine{543 \}}
+\DoxyCodeLine{544 }
+\DoxyCodeLine{549 \textcolor{keywordtype}{int} \mbox{\hyperlink{group__juce__core-maths_ga3c92a997b158fd26c45bc4bf46fb36bf}{findHighestSetBit}} (\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}}) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{550 }
+\DoxyCodeLine{552 \textcolor{keyword}{inline} \textcolor{keywordtype}{int} \mbox{\hyperlink{group__juce__core-maths_gafd3358fc8d07a10a7c621f9875cfb7b9}{countNumberOfBits}} (\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{553 \{}
+\DoxyCodeLine{554     \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}} -\/= ((\mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}} >> 1) \& 0x55555555);}
+\DoxyCodeLine{555     \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}} =  (((\mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}} >> 2) \& 0x33333333) + (\mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}} \& 0x33333333));}
+\DoxyCodeLine{556     \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}} =  (((\mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}} >> 4) + \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}}) \& 0x0f0f0f0f);}
+\DoxyCodeLine{557     \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}} += (\mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}} >> 8);}
+\DoxyCodeLine{558     \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}} += (\mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}} >> 16);}
+\DoxyCodeLine{559     \textcolor{keywordflow}{return} (\textcolor{keywordtype}{int}) (\mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}} \& 0x3f);}
+\DoxyCodeLine{560 \}}
+\DoxyCodeLine{561 }
+\DoxyCodeLine{563 \textcolor{keyword}{inline} \textcolor{keywordtype}{int} \mbox{\hyperlink{group__juce__core-maths_gafd3358fc8d07a10a7c621f9875cfb7b9}{countNumberOfBits}} (\mbox{\hyperlink{group__juce__core-maths_gaba41bf2b6f6da5945ee08fb99931aede}{uint64}} \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{564 \{}
+\DoxyCodeLine{565     \textcolor{keywordflow}{return} \mbox{\hyperlink{group__juce__core-maths_gafd3358fc8d07a10a7c621f9875cfb7b9}{countNumberOfBits}} ((\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}}) \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}}) + \mbox{\hyperlink{group__juce__core-maths_gafd3358fc8d07a10a7c621f9875cfb7b9}{countNumberOfBits}} ((\mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}}) (\mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}} >> 32));}
+\DoxyCodeLine{566 \}}
+\DoxyCodeLine{567 }
+\DoxyCodeLine{571 \textcolor{keyword}{template} <\textcolor{keyword}{typename} IntegerType>}
+\DoxyCodeLine{572 IntegerType \mbox{\hyperlink{group__juce__core-maths_ga3cfa905495cba62bd9ad2b73d2dc3f1c}{negativeAwareModulo}} (IntegerType dividend, \textcolor{keyword}{const} IntegerType \mbox{\hyperlink{namespacegl_a77d5f04e0ef3d422e8edc4d88c0aa58e}{divisor}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{573 \{}
+\DoxyCodeLine{574     \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (\mbox{\hyperlink{namespacegl_a77d5f04e0ef3d422e8edc4d88c0aa58e}{divisor}} > 0);}
+\DoxyCodeLine{575     dividend \%= \mbox{\hyperlink{namespacegl_a77d5f04e0ef3d422e8edc4d88c0aa58e}{divisor}};}
+\DoxyCodeLine{576     \textcolor{keywordflow}{return} (dividend < 0) ? (dividend + \mbox{\hyperlink{namespacegl_a77d5f04e0ef3d422e8edc4d88c0aa58e}{divisor}}) : dividend;}
+\DoxyCodeLine{577 \}}
+\DoxyCodeLine{578 }
+\DoxyCodeLine{580 \textcolor{keyword}{template} <\textcolor{keyword}{typename} NumericType>}
+\DoxyCodeLine{581 \textcolor{keyword}{inline} \textcolor{keyword}{constexpr} NumericType \mbox{\hyperlink{group__juce__core-maths_ga994a56c460056505d40c2813a4c157b8}{square}} (NumericType \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{582 \{}
+\DoxyCodeLine{583     \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}} * \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}};}
+\DoxyCodeLine{584 \}}
+\DoxyCodeLine{585 }
+\DoxyCodeLine{586 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{594 \textcolor{comment}{}\textcolor{keywordtype}{void} \mbox{\hyperlink{group__juce__core-maths_gad9a739a07f27b1d47343ceacdee1a0ca}{writeLittleEndianBitsInBuffer}} (\textcolor{keywordtype}{void}* targetBuffer, \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} startBit, \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} numBits, \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{595 }
+\DoxyCodeLine{603 \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} \mbox{\hyperlink{group__juce__core-maths_ga0e647a41bfc48194af4cbc77213557b9}{readLittleEndianBitsInBuffer}} (\textcolor{keyword}{const} \textcolor{keywordtype}{void}* sourceBuffer, \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} startBit, \mbox{\hyperlink{juce__box2d_8cpp_a9a119f677d620a08be866b14a7f8f00e}{uint32}} numBits) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{604 }
+\DoxyCodeLine{605 }
+\DoxyCodeLine{606 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{607 \textcolor{preprocessor}{\#if JUCE\_INTEL || DOXYGEN}}
+\DoxyCodeLine{612 \textcolor{preprocessor}{ \#define JUCE\_UNDENORMALISE(x)   \{ (x) += 0.1f; (x) -\/= 0.1f; \}}}
+\DoxyCodeLine{613 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{614 \textcolor{preprocessor}{ \#define JUCE\_UNDENORMALISE(x)}}
+\DoxyCodeLine{615 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{616 }
+\DoxyCodeLine{617 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{620 \textcolor{comment}{}\textcolor{keyword}{namespace }\mbox{\hyperlink{namespace_type_helpers}{TypeHelpers}}}
+\DoxyCodeLine{621 \{}
+\DoxyCodeLine{633     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type> \textcolor{keyword}{struct }\mbox{\hyperlink{struct_type_helpers_1_1_parameter_type}{ParameterType}}                   \{ \textcolor{keyword}{using} \mbox{\hyperlink{struct_type_helpers_1_1_parameter_type_ad57e75d9eb3f3f675b9156c3850636a6}{type}} = \textcolor{keyword}{const} Type\&; \};}
+\DoxyCodeLine{634 }
+\DoxyCodeLine{635 \textcolor{preprocessor}{   \#ifndef DOXYGEN}}
+\DoxyCodeLine{636     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type> \textcolor{keyword}{struct }\mbox{\hyperlink{struct_type_helpers_1_1_parameter_type}{ParameterType}} <Type\&>           \{ \textcolor{keyword}{using} \mbox{\hyperlink{struct_type_helpers_1_1_parameter_type_3_01_type_01_6_01_4_a39c99269affb8eabb828198a29f8cf06}{type}} = Type\&; \};}
+\DoxyCodeLine{637     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type> \textcolor{keyword}{struct }\mbox{\hyperlink{struct_type_helpers_1_1_parameter_type}{ParameterType}} <Type*>           \{ \textcolor{keyword}{using} \mbox{\hyperlink{struct_type_helpers_1_1_parameter_type_3_01_type_01_5_01_4_acf1f9d4c5aa08f288a4c66f7e8b15a7c}{type}} = Type*; \};}
+\DoxyCodeLine{638     \textcolor{keyword}{template} <>              \textcolor{keyword}{struct }\mbox{\hyperlink{struct_type_helpers_1_1_parameter_type}{ParameterType}} <char>            \{ \textcolor{keyword}{using} \mbox{\hyperlink{struct_type_helpers_1_1_parameter_type_3_01char_01_4_a94c2afae5f4033bf8f17e37a34da08db}{type}} = char; \};}
+\DoxyCodeLine{639     \textcolor{keyword}{template} <>              \textcolor{keyword}{struct }\mbox{\hyperlink{struct_type_helpers_1_1_parameter_type}{ParameterType}} <unsigned char>   \{ \textcolor{keyword}{using} \mbox{\hyperlink{struct_type_helpers_1_1_parameter_type_3_01unsigned_01char_01_4_a287698fdcbfa5c5ec60e9440394abe94}{type}} = \textcolor{keywordtype}{unsigned} char; \};}
+\DoxyCodeLine{640     \textcolor{keyword}{template} <>              \textcolor{keyword}{struct }\mbox{\hyperlink{struct_type_helpers_1_1_parameter_type}{ParameterType}} <short>           \{ \textcolor{keyword}{using} \mbox{\hyperlink{struct_type_helpers_1_1_parameter_type_3_01short_01_4_acc923a09eb6a1958eb57939c36e3bca7}{type}} = short; \};}
+\DoxyCodeLine{641     \textcolor{keyword}{template} <>              \textcolor{keyword}{struct }\mbox{\hyperlink{struct_type_helpers_1_1_parameter_type}{ParameterType}} <unsigned short>  \{ \textcolor{keyword}{using} \mbox{\hyperlink{struct_type_helpers_1_1_parameter_type_3_01unsigned_01short_01_4_a4e45a0c98c15bd4cbdae14d36747c87c}{type}} = \textcolor{keywordtype}{unsigned} short; \};}
+\DoxyCodeLine{642     \textcolor{keyword}{template} <>              \textcolor{keyword}{struct }\mbox{\hyperlink{struct_type_helpers_1_1_parameter_type}{ParameterType}} <\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}>             \{ \textcolor{keyword}{using} \mbox{\hyperlink{struct_type_helpers_1_1_parameter_type_3_01int_01_4_a50ca46c96d629c65bb9e46f25a5a6872}{type}} = \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}; \};}
+\DoxyCodeLine{643     \textcolor{keyword}{template} <>              \textcolor{keyword}{struct }\mbox{\hyperlink{struct_type_helpers_1_1_parameter_type}{ParameterType}} <unsigned \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}>    \{ \textcolor{keyword}{using} \mbox{\hyperlink{struct_type_helpers_1_1_parameter_type_3_01unsigned_01int_01_4_a76e3d03c919f5c58dc1217a73c2af7f9}{type}} = \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}; \};}
+\DoxyCodeLine{644     \textcolor{keyword}{template} <>              \textcolor{keyword}{struct }\mbox{\hyperlink{struct_type_helpers_1_1_parameter_type}{ParameterType}} <long>            \{ \textcolor{keyword}{using} \mbox{\hyperlink{struct_type_helpers_1_1_parameter_type_3_01long_01_4_a475023e699b378c1d069318e501cbb25}{type}} = long; \};}
+\DoxyCodeLine{645     \textcolor{keyword}{template} <>              \textcolor{keyword}{struct }\mbox{\hyperlink{struct_type_helpers_1_1_parameter_type}{ParameterType}} <unsigned long>   \{ \textcolor{keyword}{using} \mbox{\hyperlink{struct_type_helpers_1_1_parameter_type_3_01unsigned_01long_01_4_ab24371587812d73516325f5741aa4923}{type}} = \textcolor{keywordtype}{unsigned} long; \};}
+\DoxyCodeLine{646     \textcolor{keyword}{template} <>              \textcolor{keyword}{struct }\mbox{\hyperlink{struct_type_helpers_1_1_parameter_type}{ParameterType}} <\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}>           \{ \textcolor{keyword}{using} \mbox{\hyperlink{struct_type_helpers_1_1_parameter_type_3_01int64_01_4_a8420dc1ef4b8d7528d2be0b39a24f0cc}{type}} = \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}}; \};}
+\DoxyCodeLine{647     \textcolor{keyword}{template} <>              \textcolor{keyword}{struct }\mbox{\hyperlink{struct_type_helpers_1_1_parameter_type}{ParameterType}} <\mbox{\hyperlink{group__juce__core-maths_gaba41bf2b6f6da5945ee08fb99931aede}{uint64}}>          \{ \textcolor{keyword}{using} \mbox{\hyperlink{struct_type_helpers_1_1_parameter_type_3_01uint64_01_4_afa4512a3d0c49c85da604214d60b926b}{type}} = \mbox{\hyperlink{group__juce__core-maths_gaba41bf2b6f6da5945ee08fb99931aede}{uint64}}; \};}
+\DoxyCodeLine{648     \textcolor{keyword}{template} <>              \textcolor{keyword}{struct }\mbox{\hyperlink{struct_type_helpers_1_1_parameter_type}{ParameterType}} <bool>            \{ \textcolor{keyword}{using} \mbox{\hyperlink{struct_type_helpers_1_1_parameter_type_3_01bool_01_4_afbcf523f75283ff91d9d2c461b775cc7}{type}} = bool; \};}
+\DoxyCodeLine{649     \textcolor{keyword}{template} <>              \textcolor{keyword}{struct }\mbox{\hyperlink{struct_type_helpers_1_1_parameter_type}{ParameterType}} <float>           \{ \textcolor{keyword}{using} \mbox{\hyperlink{struct_type_helpers_1_1_parameter_type_3_01float_01_4_ae6d9dfb7123d25e40c26b4fd19ed2550}{type}} = float; \};}
+\DoxyCodeLine{650     \textcolor{keyword}{template} <>              \textcolor{keyword}{struct }\mbox{\hyperlink{struct_type_helpers_1_1_parameter_type}{ParameterType}} <double>          \{ \textcolor{keyword}{using} \mbox{\hyperlink{struct_type_helpers_1_1_parameter_type_3_01double_01_4_afef3991f7bc297448a60cd4d2829df9c}{type}} = double; \};}
+\DoxyCodeLine{651 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{652 }
+\DoxyCodeLine{658     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type> \textcolor{keyword}{struct }\mbox{\hyperlink{struct_type_helpers_1_1_smallest_float_type}{SmallestFloatType}}               \{ \textcolor{keyword}{using} \mbox{\hyperlink{struct_type_helpers_1_1_smallest_float_type_ac0948cfa12a3ad709a373300309dad0b}{type}} = float; \};}
+\DoxyCodeLine{659 }
+\DoxyCodeLine{660 \textcolor{preprocessor}{   \#ifndef DOXYGEN}}
+\DoxyCodeLine{661     \textcolor{keyword}{template} <>              \textcolor{keyword}{struct }\mbox{\hyperlink{struct_type_helpers_1_1_smallest_float_type}{SmallestFloatType}} <double>      \{ \textcolor{keyword}{using} \mbox{\hyperlink{struct_type_helpers_1_1_smallest_float_type_3_01double_01_4_a4c463cda01164b368e7ab1ad2b55221c}{type}} = double; \};}
+\DoxyCodeLine{662 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{663 }
+\DoxyCodeLine{669     \textcolor{keyword}{template} <\textcolor{keywordtype}{int} \textcolor{keywordtype}{byte}s>     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_type_helpers_1_1_unsigned_type_with_size}{UnsignedTypeWithSize}}            \{\};}
+\DoxyCodeLine{670 }
+\DoxyCodeLine{671 \textcolor{preprocessor}{   \#ifndef DOXYGEN}}
+\DoxyCodeLine{672     \textcolor{keyword}{template} <>              \textcolor{keyword}{struct }\mbox{\hyperlink{struct_type_helpers_1_1_unsigned_type_with_size}{UnsignedTypeWithSize}}<1>         \{ \textcolor{keyword}{using} \mbox{\hyperlink{struct_type_helpers_1_1_unsigned_type_with_size_3_011_01_4_a8143a9d8c95c2e4039c0478650711b0b}{type}} = \mbox{\hyperlink{group__juce__core-maths_ga34ecedcf03a70dc91e4616212d79267d}{uint8}}; \};}
+\DoxyCodeLine{673     \textcolor{keyword}{template} <>              \textcolor{keyword}{struct }\mbox{\hyperlink{struct_type_helpers_1_1_unsigned_type_with_size}{UnsignedTypeWithSize}}<2>         \{ \textcolor{keyword}{using} \mbox{\hyperlink{struct_type_helpers_1_1_unsigned_type_with_size_3_012_01_4_aec59190e56bef15d81f04e58415bbc6d}{type}} = \mbox{\hyperlink{group__juce__core-maths_gaf6e23a20bd7abf3ca3c82295c2b323e5}{uint16}}; \};}
+\DoxyCodeLine{674     \textcolor{keyword}{template} <>              \textcolor{keyword}{struct }\mbox{\hyperlink{struct_type_helpers_1_1_unsigned_type_with_size}{UnsignedTypeWithSize}}<4>         \{ \textcolor{keyword}{using} \mbox{\hyperlink{struct_type_helpers_1_1_unsigned_type_with_size_3_014_01_4_ab502d0660a6428b6989836f488752e8d}{type}} = \mbox{\hyperlink{group__juce__core-maths_gabd01e8e67e3d94cab04ecaaf4f85ac1b}{uint32}}; \};}
+\DoxyCodeLine{675     \textcolor{keyword}{template} <>              \textcolor{keyword}{struct }\mbox{\hyperlink{struct_type_helpers_1_1_unsigned_type_with_size}{UnsignedTypeWithSize}}<8>         \{ \textcolor{keyword}{using} \mbox{\hyperlink{struct_type_helpers_1_1_unsigned_type_with_size_3_018_01_4_a840db66bf44de2c1ca2aadf710e157ab}{type}} = \mbox{\hyperlink{group__juce__core-maths_gaba41bf2b6f6da5945ee08fb99931aede}{uint64}}; \};}
+\DoxyCodeLine{676 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{677 \}}
+\DoxyCodeLine{678 }
+\DoxyCodeLine{679 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{680 \textcolor{preprocessor}{\#ifndef DOXYGEN}}
+\DoxyCodeLine{681  [[deprecated (\textcolor{stringliteral}{"{}Use roundToInt instead."{}})]] \textcolor{keyword}{inline} \textcolor{keywordtype}{int} \mbox{\hyperlink{group__juce__core-maths_gab748fdc96dfb6423e7c1f43743015743}{roundDoubleToInt}} (\textcolor{keywordtype}{double} \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}) \textcolor{keyword}{noexcept}  \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{group__juce__core-maths_gafe8eb86381d389f4ba9f9931a38e1a44}{roundToInt}} (\mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}); \}}
+\DoxyCodeLine{682  [[deprecated (\textcolor{stringliteral}{"{}Use roundToInt instead."{}})]] \textcolor{keyword}{inline} \textcolor{keywordtype}{int} \mbox{\hyperlink{group__juce__core-maths_ga1c9a00d378e3a9f86a7ed5b0e3228972}{roundFloatToInt}}  (\textcolor{keywordtype}{float}  \mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}) \textcolor{keyword}{noexcept}  \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{group__juce__core-maths_gafe8eb86381d389f4ba9f9931a38e1a44}{roundToInt}} (\mbox{\hyperlink{namespacegl_ad24be0b39bf5b7d31f7c100de8508670}{value}}); \}}
+\DoxyCodeLine{683  [[deprecated (\textcolor{stringliteral}{"{}Use std::abs() instead."{}})]] \textcolor{keyword}{inline} \mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} \mbox{\hyperlink{group__juce__core-maths_gabd2631950146694069755cabf8a486c6}{abs64}} (\mbox{\hyperlink{group__juce__core-maths_gab0e5976e1a4967e9b13e68b5f271bb44}{int64}} \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}}) \textcolor{keyword}{noexcept}                \{ \textcolor{keywordflow}{return} std::abs (\mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}}); \}}
+\DoxyCodeLine{684 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{685 }
+\DoxyCodeLine{686  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{687 }
+
+\end{DoxyCode}

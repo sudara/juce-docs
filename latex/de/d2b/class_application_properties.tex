@@ -1,0 +1,134 @@
+\hypertarget{class_application_properties}{}\doxysection{Application\+Properties Class Reference}
+\label{class_application_properties}\index{ApplicationProperties@{ApplicationProperties}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Application\+Properties.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_application_properties_a3305c21872f16e08b6e5cbcf7161339b}{Application\+Properties}} ()=default
+\item 
+\mbox{\hyperlink{class_application_properties_ad0b5bcee64fb881459536ae91f98df9f}{$\sim$\+Application\+Properties}} ()
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_application_properties_ab8f0b0ee2ece06a23d36996eaa1a7107}{set\+Storage\+Parameters}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{struct_properties_file_1_1_options}{Properties\+File\+::\+Options}} \&options)
+\item 
+\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{struct_properties_file_1_1_options}{Properties\+File\+::\+Options}} \& \mbox{\hyperlink{class_application_properties_ae6e32e06bcc8b885cf1bae35a89a725e}{get\+Storage\+Parameters}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{class_properties_file}{Properties\+File}} $\ast$ \mbox{\hyperlink{class_application_properties_acefac770672d761f5a8d0fc33e4f4d3c}{get\+User\+Settings}} ()
+\item 
+\mbox{\hyperlink{class_properties_file}{Properties\+File}} $\ast$ \mbox{\hyperlink{class_application_properties_af8ebec199c2f541fdea287f28ebc293e}{get\+Common\+Settings}} (bool return\+User\+Props\+If\+Read\+Only)
+\item 
+bool \mbox{\hyperlink{class_application_properties_aff18ff76ec1447a771769fb3bd905623}{save\+If\+Needed}} ()
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_application_properties_a5f0c75ea625bf1cca3ef8fe9f66687af}{close\+Files}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Manages a collection of properties.
+
+This is a slightly higher-\/level wrapper for managing \mbox{\hyperlink{class_properties_file}{Properties\+File}} objects.
+
+It holds two different \mbox{\hyperlink{class_properties_file}{Properties\+File}} objects internally, one for user-\/specific settings (stored in your user directory), and one for settings that are common to all users (stored in a folder accessible to all users).
+
+The class manages the creation of these files on-\/demand, allowing access via the \mbox{\hyperlink{class_application_properties_acefac770672d761f5a8d0fc33e4f4d3c}{get\+User\+Settings()}} and \mbox{\hyperlink{class_application_properties_af8ebec199c2f541fdea287f28ebc293e}{get\+Common\+Settings()}} methods.
+
+After creating an instance of an \mbox{\hyperlink{class_application_properties}{Application\+Properties}} object, you should first of all call \mbox{\hyperlink{class_application_properties_ab8f0b0ee2ece06a23d36996eaa1a7107}{set\+Storage\+Parameters()}} to tell it the parameters to use to create its files.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_properties_file}{Properties\+File}}
+\end{DoxySeeAlso}
+@tags\{Data\+Structures\} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_application_properties_a3305c21872f16e08b6e5cbcf7161339b}\label{class_application_properties_a3305c21872f16e08b6e5cbcf7161339b}} 
+\index{ApplicationProperties@{ApplicationProperties}!ApplicationProperties@{ApplicationProperties}}
+\index{ApplicationProperties@{ApplicationProperties}!ApplicationProperties@{ApplicationProperties}}
+\doxysubsubsection{\texorpdfstring{ApplicationProperties()}{ApplicationProperties()}}
+{\footnotesize\ttfamily Application\+Properties\+::\+Application\+Properties (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+Creates an \mbox{\hyperlink{class_application_properties}{Application\+Properties}} object.
+
+Before using it, you must call \mbox{\hyperlink{class_application_properties_ab8f0b0ee2ece06a23d36996eaa1a7107}{set\+Storage\+Parameters()}} to give it the info it needs to create the property files. \mbox{\Hypertarget{class_application_properties_ad0b5bcee64fb881459536ae91f98df9f}\label{class_application_properties_ad0b5bcee64fb881459536ae91f98df9f}} 
+\index{ApplicationProperties@{ApplicationProperties}!````~ApplicationProperties@{$\sim$ApplicationProperties}}
+\index{````~ApplicationProperties@{$\sim$ApplicationProperties}!ApplicationProperties@{ApplicationProperties}}
+\doxysubsubsection{\texorpdfstring{$\sim$ApplicationProperties()}{~ApplicationProperties()}}
+{\footnotesize\ttfamily Application\+Properties\+::$\sim$\+Application\+Properties (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Destructor. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_application_properties_a5f0c75ea625bf1cca3ef8fe9f66687af}\label{class_application_properties_a5f0c75ea625bf1cca3ef8fe9f66687af}} 
+\index{ApplicationProperties@{ApplicationProperties}!closeFiles@{closeFiles}}
+\index{closeFiles@{closeFiles}!ApplicationProperties@{ApplicationProperties}}
+\doxysubsubsection{\texorpdfstring{closeFiles()}{closeFiles()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Application\+Properties\+::close\+Files (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Flushes and closes both files if they are open.
+
+This flushes any pending changes to disk with \mbox{\hyperlink{class_properties_file_a61b439f35faf3f1add5cdfdd49a85d49}{Properties\+File\+::save\+If\+Needed()}} and closes both files. They will then be re-\/opened the next time \mbox{\hyperlink{class_application_properties_acefac770672d761f5a8d0fc33e4f4d3c}{get\+User\+Settings()}} or \mbox{\hyperlink{class_application_properties_af8ebec199c2f541fdea287f28ebc293e}{get\+Common\+Settings()}} is called. \mbox{\Hypertarget{class_application_properties_af8ebec199c2f541fdea287f28ebc293e}\label{class_application_properties_af8ebec199c2f541fdea287f28ebc293e}} 
+\index{ApplicationProperties@{ApplicationProperties}!getCommonSettings@{getCommonSettings}}
+\index{getCommonSettings@{getCommonSettings}!ApplicationProperties@{ApplicationProperties}}
+\doxysubsubsection{\texorpdfstring{getCommonSettings()}{getCommonSettings()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_properties_file}{Properties\+File}} $\ast$ Application\+Properties\+::get\+Common\+Settings (\begin{DoxyParamCaption}\item[{bool}]{return\+User\+Props\+If\+Read\+Only }\end{DoxyParamCaption})}
+
+Returns the common settings file.
+
+The first time this is called, it will create and load the properties file.
+
+
+\begin{DoxyParams}{Parameters}
+{\em return\+User\+Props\+If\+Read\+Only} & if this is true, and the common properties file is read-\/only (e.\+g. because the user doesn\textquotesingle{}t have permission to write to shared files), then this will return the user settings instead, (like \mbox{\hyperlink{class_application_properties_acefac770672d761f5a8d0fc33e4f4d3c}{get\+User\+Settings()}} would do). This is handy if you\textquotesingle{}d like to write a value to the common settings, but if that\textquotesingle{}s no possible, then you\textquotesingle{}d rather write to the user settings than none at all. If return\+User\+Props\+If\+Read\+Only is false, this method will always return the common settings, even if any changes to them can\textquotesingle{}t be saved. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_application_properties_acefac770672d761f5a8d0fc33e4f4d3c}{get\+User\+Settings}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_application_properties_ae6e32e06bcc8b885cf1bae35a89a725e}\label{class_application_properties_ae6e32e06bcc8b885cf1bae35a89a725e}} 
+\index{ApplicationProperties@{ApplicationProperties}!getStorageParameters@{getStorageParameters}}
+\index{getStorageParameters@{getStorageParameters}!ApplicationProperties@{ApplicationProperties}}
+\doxysubsubsection{\texorpdfstring{getStorageParameters()}{getStorageParameters()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{struct_properties_file_1_1_options}{Properties\+File\+::\+Options}} \& Application\+Properties\+::get\+Storage\+Parameters (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Returns the current storage parameters. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_application_properties_ab8f0b0ee2ece06a23d36996eaa1a7107}{set\+Storage\+Parameters}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_application_properties_acefac770672d761f5a8d0fc33e4f4d3c}\label{class_application_properties_acefac770672d761f5a8d0fc33e4f4d3c}} 
+\index{ApplicationProperties@{ApplicationProperties}!getUserSettings@{getUserSettings}}
+\index{getUserSettings@{getUserSettings}!ApplicationProperties@{ApplicationProperties}}
+\doxysubsubsection{\texorpdfstring{getUserSettings()}{getUserSettings()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_properties_file}{Properties\+File}} $\ast$ Application\+Properties\+::get\+User\+Settings (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns the user settings file.
+
+The first time this is called, it will create and load the properties file.
+
+Note that when you search the user \mbox{\hyperlink{class_properties_file}{Properties\+File}} for a value that it doesn\textquotesingle{}t contain, the common settings are used as a second-\/chance place to look. This is done via the \mbox{\hyperlink{class_property_set_a624ae2f6c294510397957dd0dc2e1bd2}{Property\+Set\+::set\+Fallback\+Property\+Set()}} method -\/ by default the common settings are set to the fallback for the user settings.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_application_properties_af8ebec199c2f541fdea287f28ebc293e}{get\+Common\+Settings}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_application_properties_aff18ff76ec1447a771769fb3bd905623}\label{class_application_properties_aff18ff76ec1447a771769fb3bd905623}} 
+\index{ApplicationProperties@{ApplicationProperties}!saveIfNeeded@{saveIfNeeded}}
+\index{saveIfNeeded@{saveIfNeeded}!ApplicationProperties@{ApplicationProperties}}
+\doxysubsubsection{\texorpdfstring{saveIfNeeded()}{saveIfNeeded()}}
+{\footnotesize\ttfamily bool Application\+Properties\+::save\+If\+Needed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Saves both files if they need to be saved.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_properties_file_a61b439f35faf3f1add5cdfdd49a85d49}{Properties\+File\+::save\+If\+Needed}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_application_properties_ab8f0b0ee2ece06a23d36996eaa1a7107}\label{class_application_properties_ab8f0b0ee2ece06a23d36996eaa1a7107}} 
+\index{ApplicationProperties@{ApplicationProperties}!setStorageParameters@{setStorageParameters}}
+\index{setStorageParameters@{setStorageParameters}!ApplicationProperties@{ApplicationProperties}}
+\doxysubsubsection{\texorpdfstring{setStorageParameters()}{setStorageParameters()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Application\+Properties\+::set\+Storage\+Parameters (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{struct_properties_file_1_1_options}{Properties\+File\+::\+Options}} \&}]{options }\end{DoxyParamCaption})}
+
+Gives the object the information it needs to create the appropriate properties files. See the \mbox{\hyperlink{struct_properties_file_1_1_options}{Properties\+File\+::\+Options}} class for details about what options you need to set. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+data\+\_\+structures/app\+\_\+properties/\mbox{\hyperlink{juce___application_properties_8h}{juce\+\_\+\+Application\+Properties.\+h}}\item 
+build/juce\+\_\+data\+\_\+structures/app\+\_\+properties/\mbox{\hyperlink{juce___application_properties_8cpp}{juce\+\_\+\+Application\+Properties.\+cpp}}\end{DoxyCompactItemize}

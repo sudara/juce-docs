@@ -1,0 +1,511 @@
+\hypertarget{_c_a_auto_disposer_8h_source}{}\doxysection{CAAuto\+Disposer.\+h}
+\label{_c_a_auto_disposer_8h_source}\index{build/juce\_audio\_plugin\_client/AU/CoreAudioUtilityClasses/CAAutoDisposer.h@{build/juce\_audio\_plugin\_client/AU/CoreAudioUtilityClasses/CAAutoDisposer.h}}
+\mbox{\hyperlink{_c_a_auto_disposer_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{     File: CAAutoDisposer.h}}
+\DoxyCodeLine{3 \textcolor{comment}{ Abstract: Part of CoreAudio Utility Classes}}
+\DoxyCodeLine{4 \textcolor{comment}{  Version: 1.1}}
+\DoxyCodeLine{5 \textcolor{comment}{}}
+\DoxyCodeLine{6 \textcolor{comment}{ Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple}}
+\DoxyCodeLine{7 \textcolor{comment}{ Inc. ("{}Apple"{}) in consideration of your agreement to the following}}
+\DoxyCodeLine{8 \textcolor{comment}{ terms, and your use, installation, modification or redistribution of}}
+\DoxyCodeLine{9 \textcolor{comment}{ this Apple software constitutes acceptance of these terms.  If you do}}
+\DoxyCodeLine{10 \textcolor{comment}{ not agree with these terms, please do not use, install, modify or}}
+\DoxyCodeLine{11 \textcolor{comment}{ redistribute this Apple software.}}
+\DoxyCodeLine{12 \textcolor{comment}{}}
+\DoxyCodeLine{13 \textcolor{comment}{ In consideration of your agreement to abide by the following terms, and}}
+\DoxyCodeLine{14 \textcolor{comment}{ subject to these terms, Apple grants you a personal, non-\/exclusive}}
+\DoxyCodeLine{15 \textcolor{comment}{ license, under Apple's copyrights in this original Apple software (the}}
+\DoxyCodeLine{16 \textcolor{comment}{ "{}Apple Software"{}), to use, reproduce, modify and redistribute the Apple}}
+\DoxyCodeLine{17 \textcolor{comment}{ Software, with or without modifications, in source and/or binary forms;}}
+\DoxyCodeLine{18 \textcolor{comment}{ provided that if you redistribute the Apple Software in its entirety and}}
+\DoxyCodeLine{19 \textcolor{comment}{ without modifications, you must retain this notice and the following}}
+\DoxyCodeLine{20 \textcolor{comment}{ text and disclaimers in all such redistributions of the Apple Software.}}
+\DoxyCodeLine{21 \textcolor{comment}{ Neither the name, trademarks, service marks or logos of Apple Inc. may}}
+\DoxyCodeLine{22 \textcolor{comment}{ be used to endorse or promote products derived from the Apple Software}}
+\DoxyCodeLine{23 \textcolor{comment}{ without specific prior written permission from Apple.  Except as}}
+\DoxyCodeLine{24 \textcolor{comment}{ expressly stated in this notice, no other rights or licenses, express or}}
+\DoxyCodeLine{25 \textcolor{comment}{ implied, are granted by Apple herein, including but not limited to any}}
+\DoxyCodeLine{26 \textcolor{comment}{ patent rights that may be infringed by your derivative works or by other}}
+\DoxyCodeLine{27 \textcolor{comment}{ works in which the Apple Software may be incorporated.}}
+\DoxyCodeLine{28 \textcolor{comment}{}}
+\DoxyCodeLine{29 \textcolor{comment}{ The Apple Software is provided by Apple on an "{}AS IS"{} basis.  APPLE}}
+\DoxyCodeLine{30 \textcolor{comment}{ MAKES NO WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION}}
+\DoxyCodeLine{31 \textcolor{comment}{ THE IMPLIED WARRANTIES OF NON-\/INFRINGEMENT, MERCHANTABILITY AND FITNESS}}
+\DoxyCodeLine{32 \textcolor{comment}{ FOR A PARTICULAR PURPOSE, REGARDING THE APPLE SOFTWARE OR ITS USE AND}}
+\DoxyCodeLine{33 \textcolor{comment}{ OPERATION ALONE OR IN COMBINATION WITH YOUR PRODUCTS.}}
+\DoxyCodeLine{34 \textcolor{comment}{}}
+\DoxyCodeLine{35 \textcolor{comment}{ IN NO EVENT SHALL APPLE BE LIABLE FOR ANY SPECIAL, INDIRECT, INCIDENTAL}}
+\DoxyCodeLine{36 \textcolor{comment}{ OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF}}
+\DoxyCodeLine{37 \textcolor{comment}{ SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS}}
+\DoxyCodeLine{38 \textcolor{comment}{ INTERRUPTION) ARISING IN ANY WAY OUT OF THE USE, REPRODUCTION,}}
+\DoxyCodeLine{39 \textcolor{comment}{ MODIFICATION AND/OR DISTRIBUTION OF THE APPLE SOFTWARE, HOWEVER CAUSED}}
+\DoxyCodeLine{40 \textcolor{comment}{ AND WHETHER UNDER THEORY OF CONTRACT, TORT (INCLUDING NEGLIGENCE),}}
+\DoxyCodeLine{41 \textcolor{comment}{ STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE}}
+\DoxyCodeLine{42 \textcolor{comment}{ POSSIBILITY OF SUCH DAMAGE.}}
+\DoxyCodeLine{43 \textcolor{comment}{}}
+\DoxyCodeLine{44 \textcolor{comment}{ Copyright (C) 2014 Apple Inc. All Rights Reserved.}}
+\DoxyCodeLine{45 \textcolor{comment}{}}
+\DoxyCodeLine{46 \textcolor{comment}{*/}}
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#if !defined(\_\_CAPtr\_h\_\_)}}
+\DoxyCodeLine{48 \textcolor{preprocessor}{\#define \_\_CAPtr\_h\_\_}}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50 \textcolor{preprocessor}{\#include <stdlib.h>}     \textcolor{comment}{// for malloc}}
+\DoxyCodeLine{51 \textcolor{preprocessor}{\#include <new>}          \textcolor{comment}{// for bad\_alloc}}
+\DoxyCodeLine{52 \textcolor{preprocessor}{\#include <string.h>}     \textcolor{comment}{// for memset}}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54 \textcolor{keyword}{inline} \textcolor{keywordtype}{void}* \mbox{\hyperlink{_c_a_auto_disposer_8h_ad4cd37505b462e48c936d1a3b8e30895}{CA\_malloc}}(\textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}})}
+\DoxyCodeLine{55 \{}
+\DoxyCodeLine{56     \textcolor{keywordtype}{void}* \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}} = malloc(\mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}});}
+\DoxyCodeLine{57     \textcolor{keywordflow}{if} (!\mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}} \&\& \mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}}) \textcolor{keywordflow}{throw} std::bad\_alloc();}
+\DoxyCodeLine{58     \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}};}
+\DoxyCodeLine{59 \}}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61 \textcolor{keyword}{inline} \textcolor{keywordtype}{void}* \mbox{\hyperlink{_c_a_auto_disposer_8h_abedc5e523e3949ea1035955078173f02}{CA\_realloc}}(\textcolor{keywordtype}{void}* old, \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}})}
+\DoxyCodeLine{62 \{}
+\DoxyCodeLine{63 \textcolor{preprocessor}{\#if TARGET\_OS\_WIN32}}
+\DoxyCodeLine{64     \textcolor{keywordtype}{void}* \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}} = realloc(old, \mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}});}
+\DoxyCodeLine{65 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{66     \textcolor{keywordtype}{void}* \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}} = reallocf(old, \mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}}); \textcolor{comment}{// reallocf ensures the old pointer is freed if memory is full (p is NULL).}}
+\DoxyCodeLine{67 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{68     \textcolor{keywordflow}{if} (!\mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}} \&\& \mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}}) \textcolor{keywordflow}{throw} std::bad\_alloc();}
+\DoxyCodeLine{69     \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}};}
+\DoxyCodeLine{70 \}}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72 \textcolor{preprocessor}{\#ifndef UINTPTR\_MAX}}
+\DoxyCodeLine{73 \textcolor{preprocessor}{\#if \_\_LP64\_\_}}
+\DoxyCodeLine{74 \textcolor{preprocessor}{\#define UINTPTR\_MAX   18446744073709551615ULL}}
+\DoxyCodeLine{75 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{76 \textcolor{preprocessor}{\#define UINTPTR\_MAX   4294967295U}}
+\DoxyCodeLine{77 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{78 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80 \textcolor{keyword}{inline} \textcolor{keywordtype}{void}* \mbox{\hyperlink{_c_a_auto_disposer_8h_ad1546aac00121cd855fa87c166efefc6}{CA\_calloc}}(\textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}}, \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}})}
+\DoxyCodeLine{81 \{}
+\DoxyCodeLine{82     \textcolor{comment}{// ensure that multiplication will not overflow}}
+\DoxyCodeLine{83     \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}} \&\& \mbox{\hyperlink{_c_a_auto_disposer_8h_ab2355300ea19395357e62d780f4dd073}{UINTPTR\_MAX}} / \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}} < \mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}}) \textcolor{keywordflow}{throw} std::bad\_alloc();}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85     \textcolor{keywordtype}{size\_t} nsize = \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}}*\mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}};}
+\DoxyCodeLine{86     \textcolor{keywordtype}{void}* \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}} = malloc(nsize);}
+\DoxyCodeLine{87     \textcolor{keywordflow}{if} (!\mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}} \&\& nsize) \textcolor{keywordflow}{throw} std::bad\_alloc();}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89     memset(\mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}}, 0, nsize);}
+\DoxyCodeLine{90     \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}};}
+\DoxyCodeLine{91 \}}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93 }
+\DoxyCodeLine{94 \textcolor{comment}{// helper class for automatic conversions}}
+\DoxyCodeLine{95 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{96 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_c_a_ptr_ref}{CAPtrRef}}}
+\DoxyCodeLine{97 \{}
+\DoxyCodeLine{98     T* \mbox{\hyperlink{struct_c_a_ptr_ref_abc1321b7db3f0c39aa98378889757dbc}{ptr\_}};}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100     \textcolor{keyword}{explicit} \mbox{\hyperlink{struct_c_a_ptr_ref_a055e786db0881beeb0bc1d42cda3f0c4}{CAPtrRef}}(T* \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}}) : \mbox{\hyperlink{struct_c_a_ptr_ref_abc1321b7db3f0c39aa98378889757dbc}{ptr\_}}(\mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}}) \{\}}
+\DoxyCodeLine{101 \};}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{104 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_a_auto_free}{CAAutoFree}}}
+\DoxyCodeLine{105 \{}
+\DoxyCodeLine{106 \textcolor{keyword}{private}:}
+\DoxyCodeLine{107     T* ptr\_;}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109 \textcolor{keyword}{public}:}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111     \mbox{\hyperlink{class_c_a_auto_free_a6facc6117842de8c81edd1f000b8ddb1}{CAAutoFree}}() : ptr\_(0) \{\}}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_c_a_auto_free_abbce86e4c24014775b3020debf893562}{CAAutoFree}}(T* \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}}) : ptr\_(\mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}}) \{\}}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115     \textcolor{keyword}{template}<\textcolor{keyword}{typename} U>}
+\DoxyCodeLine{116     \mbox{\hyperlink{class_c_a_auto_free_a0137d5199201bbb96ef5f2efaea075bb}{CAAutoFree}}(\mbox{\hyperlink{class_c_a_auto_free}{CAAutoFree<U>}}\& that) : ptr\_(that.\mbox{\hyperlink{class_c_a_auto_free_a823b00cdf4ed7f871fd0cb678febabcb}{release}}()) \{\} \textcolor{comment}{// take ownership}}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118     \textcolor{comment}{// C++ std says: a template constructor is never a copy constructor}}
+\DoxyCodeLine{119     \mbox{\hyperlink{class_c_a_auto_free_a10ee0c29e152f80910636b99752e9a7e}{CAAutoFree}}(\mbox{\hyperlink{class_c_a_auto_free}{CAAutoFree<T>}}\& that) : ptr\_(that.\mbox{\hyperlink{class_c_a_auto_free_a823b00cdf4ed7f871fd0cb678febabcb}{release}}()) \{\} \textcolor{comment}{// take ownership}}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{121     \mbox{\hyperlink{class_c_a_auto_free_ac3237df87d9725b4010515b0fe0da0ac}{CAAutoFree}}(\textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}}, \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespacedsp_1_1detail_a953fbe1bf6236c0f3a95d12aad7ffffb}{clear}} = \textcolor{keyword}{false})}
+\DoxyCodeLine{122         \textcolor{comment}{// this becomes an ambiguous call if n == 0}}
+\DoxyCodeLine{123         : ptr\_(0)}
+\DoxyCodeLine{124         \{}
+\DoxyCodeLine{125             \textcolor{keywordtype}{size\_t} maxItems = \string~size\_t(0) / \textcolor{keyword}{sizeof}(T);}
+\DoxyCodeLine{126             \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}} > maxItems)}
+\DoxyCodeLine{127                 \textcolor{keywordflow}{throw} std::bad\_alloc();}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129             ptr\_ = \textcolor{keyword}{static\_cast<}T*\textcolor{keyword}{>}(\mbox{\hyperlink{namespacedsp_1_1detail_a953fbe1bf6236c0f3a95d12aad7ffffb}{clear}} ? \mbox{\hyperlink{_c_a_auto_disposer_8h_ad1546aac00121cd855fa87c166efefc6}{CA\_calloc}}(\mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}}, \textcolor{keyword}{sizeof}(T)) : \mbox{\hyperlink{_c_a_auto_disposer_8h_ad4cd37505b462e48c936d1a3b8e30895}{CA\_malloc}}(\mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}} * \textcolor{keyword}{sizeof}(T)));}
+\DoxyCodeLine{130         \}}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{132     \mbox{\hyperlink{class_c_a_auto_free_a17e7fc0026348f049f859d1d35765447}{\string~CAAutoFree}}() \{ \mbox{\hyperlink{class_c_a_auto_free_a64a9f2ae3090de8640f1e82c56a3bcbc}{free}}(); \}}
+\DoxyCodeLine{133 }
+\DoxyCodeLine{134     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_a_auto_free_a4ebb7e241a13130b0c8f0a63595f8475}{alloc}}(\textcolor{keywordtype}{size\_t} numItems, \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespacedsp_1_1detail_a953fbe1bf6236c0f3a95d12aad7ffffb}{clear}} = \textcolor{keyword}{false})}
+\DoxyCodeLine{135     \{}
+\DoxyCodeLine{136         \textcolor{keywordtype}{size\_t} maxItems = \string~size\_t(0) / \textcolor{keyword}{sizeof}(T);}
+\DoxyCodeLine{137         \textcolor{keywordflow}{if} (numItems > maxItems) \textcolor{keywordflow}{throw} std::bad\_alloc();}
+\DoxyCodeLine{138 }
+\DoxyCodeLine{139         \mbox{\hyperlink{class_c_a_auto_free_a64a9f2ae3090de8640f1e82c56a3bcbc}{free}}();}
+\DoxyCodeLine{140         ptr\_ = \textcolor{keyword}{static\_cast<}T*\textcolor{keyword}{>}(\mbox{\hyperlink{namespacedsp_1_1detail_a953fbe1bf6236c0f3a95d12aad7ffffb}{clear}} ? \mbox{\hyperlink{_c_a_auto_disposer_8h_ad1546aac00121cd855fa87c166efefc6}{CA\_calloc}}(numItems, \textcolor{keyword}{sizeof}(T)) : \mbox{\hyperlink{_c_a_auto_disposer_8h_ad4cd37505b462e48c936d1a3b8e30895}{CA\_malloc}}(numItems * \textcolor{keyword}{sizeof}(T)));}
+\DoxyCodeLine{141     \}}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{143     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_a_auto_free_a4f87bb2ae877dd215627e150720ba68e}{allocBytes}}(\textcolor{keywordtype}{size\_t} numBytes, \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespacedsp_1_1detail_a953fbe1bf6236c0f3a95d12aad7ffffb}{clear}} = \textcolor{keyword}{false})}
+\DoxyCodeLine{144     \{}
+\DoxyCodeLine{145         \mbox{\hyperlink{class_c_a_auto_free_a64a9f2ae3090de8640f1e82c56a3bcbc}{free}}();}
+\DoxyCodeLine{146         ptr\_ = \textcolor{keyword}{static\_cast<}T*\textcolor{keyword}{>}(\mbox{\hyperlink{namespacedsp_1_1detail_a953fbe1bf6236c0f3a95d12aad7ffffb}{clear}} ? \mbox{\hyperlink{_c_a_auto_disposer_8h_ad1546aac00121cd855fa87c166efefc6}{CA\_calloc}}(1, numBytes) : \mbox{\hyperlink{_c_a_auto_disposer_8h_ad4cd37505b462e48c936d1a3b8e30895}{CA\_malloc}}(numBytes));}
+\DoxyCodeLine{147     \}}
+\DoxyCodeLine{148 }
+\DoxyCodeLine{149     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_a_auto_free_a5495afe34d97f65762cf40a743616dfa}{reallocBytes}}(\textcolor{keywordtype}{size\_t} numBytes)}
+\DoxyCodeLine{150     \{}
+\DoxyCodeLine{151         ptr\_ = \textcolor{keyword}{static\_cast<}T*\textcolor{keyword}{>}(\mbox{\hyperlink{_c_a_auto_disposer_8h_abedc5e523e3949ea1035955078173f02}{CA\_realloc}}(ptr\_, numBytes));}
+\DoxyCodeLine{152     \}}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_a_auto_free_a206c1d1a7000d4a3cb94acc3336c94e2}{reallocItems}}(\textcolor{keywordtype}{size\_t} numItems)}
+\DoxyCodeLine{155     \{}
+\DoxyCodeLine{156         \textcolor{keywordtype}{size\_t} maxItems = \string~size\_t(0) / \textcolor{keyword}{sizeof}(T);}
+\DoxyCodeLine{157         \textcolor{keywordflow}{if} (numItems > maxItems) \textcolor{keywordflow}{throw} std::bad\_alloc();}
+\DoxyCodeLine{158 }
+\DoxyCodeLine{159         ptr\_ = \textcolor{keyword}{static\_cast<}T*\textcolor{keyword}{>}(\mbox{\hyperlink{_c_a_auto_disposer_8h_abedc5e523e3949ea1035955078173f02}{CA\_realloc}}(ptr\_, numItems * \textcolor{keyword}{sizeof}(T)));}
+\DoxyCodeLine{160     \}}
+\DoxyCodeLine{161 }
+\DoxyCodeLine{162     \textcolor{keyword}{template} <\textcolor{keyword}{typename} U>}
+\DoxyCodeLine{163     \mbox{\hyperlink{class_c_a_auto_free}{CAAutoFree}}\& \mbox{\hyperlink{class_c_a_auto_free_ae2bfd28bd3be853681a44833269acbd6}{operator=}}(\mbox{\hyperlink{class_c_a_auto_free}{CAAutoFree<U>}}\& that)}
+\DoxyCodeLine{164     \{}
+\DoxyCodeLine{165         \mbox{\hyperlink{class_c_a_auto_free_aabafb138b6a932568852d98bdcd442fb}{set}}(that.\mbox{\hyperlink{class_c_a_auto_free_a823b00cdf4ed7f871fd0cb678febabcb}{release}}());  \textcolor{comment}{// take ownership}}
+\DoxyCodeLine{166         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{167     \}}
+\DoxyCodeLine{168 }
+\DoxyCodeLine{169     \mbox{\hyperlink{class_c_a_auto_free}{CAAutoFree}}\& \mbox{\hyperlink{class_c_a_auto_free_aaa3148397a09052bbb42bdeb8ebc1aa4}{operator=}}(\mbox{\hyperlink{class_c_a_auto_free}{CAAutoFree}}\& that)}
+\DoxyCodeLine{170     \{}
+\DoxyCodeLine{171         \mbox{\hyperlink{class_c_a_auto_free_aabafb138b6a932568852d98bdcd442fb}{set}}(that.\mbox{\hyperlink{class_c_a_auto_free_a823b00cdf4ed7f871fd0cb678febabcb}{release}}());  \textcolor{comment}{// take ownership}}
+\DoxyCodeLine{172         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{173     \}}
+\DoxyCodeLine{174 }
+\DoxyCodeLine{175     \mbox{\hyperlink{class_c_a_auto_free}{CAAutoFree}}\& \mbox{\hyperlink{class_c_a_auto_free_a761460c12f22b14723d6cc2b6f430db8}{operator=}}(T* \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}})}
+\DoxyCodeLine{176     \{}
+\DoxyCodeLine{177         \mbox{\hyperlink{class_c_a_auto_free_aabafb138b6a932568852d98bdcd442fb}{set}}(\mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}});}
+\DoxyCodeLine{178         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{179     \}}
+\DoxyCodeLine{180 }
+\DoxyCodeLine{181     \textcolor{keyword}{template} <\textcolor{keyword}{typename} U>}
+\DoxyCodeLine{182     \mbox{\hyperlink{class_c_a_auto_free}{CAAutoFree}}\& \mbox{\hyperlink{class_c_a_auto_free_a60d39563a38ef393fa643c69e29c1659}{operator=}}(U* \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}})}
+\DoxyCodeLine{183     \{}
+\DoxyCodeLine{184         \mbox{\hyperlink{class_c_a_auto_free_aabafb138b6a932568852d98bdcd442fb}{set}}(\mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}});}
+\DoxyCodeLine{185         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{186     \}}
+\DoxyCodeLine{187 }
+\DoxyCodeLine{188     T\& \mbox{\hyperlink{class_c_a_auto_free_a8fcbff06cd80950bfbed47685e60511d}{operator*}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} *ptr\_; \}}
+\DoxyCodeLine{189     T* \mbox{\hyperlink{class_c_a_auto_free_a6ff623c3305b866034c17a5e6ee549e0}{operator-\/>}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} ptr\_; \}}
+\DoxyCodeLine{190 }
+\DoxyCodeLine{191     T* \mbox{\hyperlink{class_c_a_auto_free_a00e1e0f1a5b394e5aae6f5a636b0e3c5}{operator()}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} ptr\_; \}}
+\DoxyCodeLine{192     T* \mbox{\hyperlink{class_c_a_auto_free_ac3a87d82b097fea2e2ee077bd77d2720}{get}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} ptr\_; \}}
+\DoxyCodeLine{193     \textcolor{keyword}{operator} T*() \textcolor{keyword}{const} \{ \textcolor{keywordflow}{return} ptr\_; \}}
+\DoxyCodeLine{194 }
+\DoxyCodeLine{195     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_a_auto_free_ae98e2a36680719244c8ba7bc7e349c13}{operator==}}(\mbox{\hyperlink{class_c_a_auto_free}{CAAutoFree}} \textcolor{keyword}{const}\& that)\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} ptr\_ == that.ptr\_; \}}
+\DoxyCodeLine{196     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_a_auto_free_a330979f229629fedd5a8e7734b510356}{operator!=}}(\mbox{\hyperlink{class_c_a_auto_free}{CAAutoFree}} \textcolor{keyword}{const}\& that)\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} ptr\_ != that.ptr\_; \}}
+\DoxyCodeLine{197     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_a_auto_free_a72835c7f21c76d6dd8902052cde717e5}{operator==}}(T* \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}})\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} ptr\_ == \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}}; \}}
+\DoxyCodeLine{198     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_a_auto_free_a2d89fd1ca5084d94853881e99a0f8b93}{operator!=}}(T* \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}})\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} ptr\_ != \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}}; \}}
+\DoxyCodeLine{199 }
+\DoxyCodeLine{200     T* \mbox{\hyperlink{class_c_a_auto_free_a823b00cdf4ed7f871fd0cb678febabcb}{release}}()}
+\DoxyCodeLine{201     \{}
+\DoxyCodeLine{202         \textcolor{comment}{// release ownership}}
+\DoxyCodeLine{203         T* \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = ptr\_;}
+\DoxyCodeLine{204         ptr\_ = 0;}
+\DoxyCodeLine{205         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}};}
+\DoxyCodeLine{206     \}}
+\DoxyCodeLine{207 }
+\DoxyCodeLine{208     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_a_auto_free_aabafb138b6a932568852d98bdcd442fb}{set}}(T* \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}})}
+\DoxyCodeLine{209     \{}
+\DoxyCodeLine{210         \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}} != ptr\_)}
+\DoxyCodeLine{211         \{}
+\DoxyCodeLine{212             \mbox{\hyperlink{class_c_a_auto_free_a64a9f2ae3090de8640f1e82c56a3bcbc}{::free}}(ptr\_);}
+\DoxyCodeLine{213             ptr\_ = \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}};}
+\DoxyCodeLine{214         \}}
+\DoxyCodeLine{215     \}}
+\DoxyCodeLine{216 }
+\DoxyCodeLine{217     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_a_auto_free_a64a9f2ae3090de8640f1e82c56a3bcbc}{free}}()}
+\DoxyCodeLine{218     \{}
+\DoxyCodeLine{219         \mbox{\hyperlink{class_c_a_auto_free_aabafb138b6a932568852d98bdcd442fb}{set}}(0);}
+\DoxyCodeLine{220     \}}
+\DoxyCodeLine{221 }
+\DoxyCodeLine{222 }
+\DoxyCodeLine{223     \textcolor{comment}{// automatic conversions to allow assignment from results of functions.}}
+\DoxyCodeLine{224     \textcolor{comment}{// hard to explain. see auto\_ptr implementation and/or Josuttis' STL book.}}
+\DoxyCodeLine{225     \mbox{\hyperlink{class_c_a_auto_free_a69965ba99d47afba4fc89f6e3095abbc}{CAAutoFree}}(\mbox{\hyperlink{struct_c_a_ptr_ref}{CAPtrRef<T>}} \mbox{\hyperlink{namespacegl_a237a6f23fb34c46ca9b58edb5b1d6013}{ref}}) : ptr\_(\mbox{\hyperlink{namespacegl_a237a6f23fb34c46ca9b58edb5b1d6013}{ref}}.ptr\_) \{ \}}
+\DoxyCodeLine{226 }
+\DoxyCodeLine{227     \mbox{\hyperlink{class_c_a_auto_free}{CAAutoFree}}\& \mbox{\hyperlink{class_c_a_auto_free_a43129d60071f1df87e301cc6dbfac699}{operator=}}(\mbox{\hyperlink{struct_c_a_ptr_ref}{CAPtrRef<T>}} \mbox{\hyperlink{namespacegl_a237a6f23fb34c46ca9b58edb5b1d6013}{ref}})}
+\DoxyCodeLine{228     \{}
+\DoxyCodeLine{229         \mbox{\hyperlink{class_c_a_auto_free_aabafb138b6a932568852d98bdcd442fb}{set}}(\mbox{\hyperlink{namespacegl_a237a6f23fb34c46ca9b58edb5b1d6013}{ref}}.ptr\_);}
+\DoxyCodeLine{230         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{231     \}}
+\DoxyCodeLine{232 }
+\DoxyCodeLine{233     \textcolor{keyword}{template}<\textcolor{keyword}{typename} U>}
+\DoxyCodeLine{234     \textcolor{keyword}{operator} \mbox{\hyperlink{struct_c_a_ptr_ref}{CAPtrRef<U>}}()}
+\DoxyCodeLine{235         \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{struct_c_a_ptr_ref}{CAPtrRef<U>}}(\mbox{\hyperlink{class_c_a_auto_free_a823b00cdf4ed7f871fd0cb678febabcb}{release}}()); \}}
+\DoxyCodeLine{236 }
+\DoxyCodeLine{237     \textcolor{keyword}{template}<\textcolor{keyword}{typename} U>}
+\DoxyCodeLine{238     \textcolor{keyword}{operator} \mbox{\hyperlink{class_c_a_auto_free}{CAAutoFree<U>}}()}
+\DoxyCodeLine{239         \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_c_a_auto_free}{CAAutoFree<U>}}(\mbox{\hyperlink{class_c_a_auto_free_a823b00cdf4ed7f871fd0cb678febabcb}{release}}()); \}}
+\DoxyCodeLine{240 }
+\DoxyCodeLine{241 \};}
+\DoxyCodeLine{242 }
+\DoxyCodeLine{243 }
+\DoxyCodeLine{244 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{245 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_a_auto_delete}{CAAutoDelete}}}
+\DoxyCodeLine{246 \{}
+\DoxyCodeLine{247 \textcolor{keyword}{private}:}
+\DoxyCodeLine{248     T* ptr\_;}
+\DoxyCodeLine{249 }
+\DoxyCodeLine{250 \textcolor{keyword}{public}:}
+\DoxyCodeLine{251     \mbox{\hyperlink{class_c_a_auto_delete_a4e497052cd7aff26ac30367b929a0bea}{CAAutoDelete}}() : ptr\_(0) \{\}}
+\DoxyCodeLine{252 }
+\DoxyCodeLine{253     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_c_a_auto_delete_a3a54500f39e30be166c52a322a8c60a8}{CAAutoDelete}}(T* \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}}) : ptr\_(\mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}}) \{\}}
+\DoxyCodeLine{254 }
+\DoxyCodeLine{255     \textcolor{keyword}{template}<\textcolor{keyword}{typename} U>}
+\DoxyCodeLine{256     \mbox{\hyperlink{class_c_a_auto_delete_a2254061586200386846f73a63262dc7e}{CAAutoDelete}}(\mbox{\hyperlink{class_c_a_auto_delete}{CAAutoDelete<U>}}\& that) : ptr\_(that.\mbox{\hyperlink{class_c_a_auto_delete_a76404c4c41a3d23b9295b7fd416ef0d2}{release}}()) \{\} \textcolor{comment}{// take ownership}}
+\DoxyCodeLine{257 }
+\DoxyCodeLine{258     \textcolor{comment}{// C++ std says: a template constructor is never a copy constructor}}
+\DoxyCodeLine{259     \mbox{\hyperlink{class_c_a_auto_delete_a12399063e281eca47dc5a6295c12d22e}{CAAutoDelete}}(\mbox{\hyperlink{class_c_a_auto_delete}{CAAutoDelete<T>}}\& that) : ptr\_(that.\mbox{\hyperlink{class_c_a_auto_delete_a76404c4c41a3d23b9295b7fd416ef0d2}{release}}()) \{\} \textcolor{comment}{// take ownership}}
+\DoxyCodeLine{260 }
+\DoxyCodeLine{261     \mbox{\hyperlink{class_c_a_auto_delete_aafa3d087d3f5c55fc75b72b6731ba69b}{\string~CAAutoDelete}}() \{ \mbox{\hyperlink{class_c_a_auto_delete_a086b2039379d89cd578b31212b1a609b}{free}}(); \}}
+\DoxyCodeLine{262 }
+\DoxyCodeLine{263     \textcolor{keyword}{template} <\textcolor{keyword}{typename} U>}
+\DoxyCodeLine{264     \mbox{\hyperlink{class_c_a_auto_delete}{CAAutoDelete}}\& \mbox{\hyperlink{class_c_a_auto_delete_a27535fde14cf3f9df58650d632c067a5}{operator=}}(\mbox{\hyperlink{class_c_a_auto_delete}{CAAutoDelete<U>}}\& that)}
+\DoxyCodeLine{265     \{}
+\DoxyCodeLine{266         \mbox{\hyperlink{class_c_a_auto_delete_ab64833170c69de0994888a9eea2a2b4e}{set}}(that.\mbox{\hyperlink{class_c_a_auto_delete_a76404c4c41a3d23b9295b7fd416ef0d2}{release}}());  \textcolor{comment}{// take ownership}}
+\DoxyCodeLine{267         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{268     \}}
+\DoxyCodeLine{269 }
+\DoxyCodeLine{270     \mbox{\hyperlink{class_c_a_auto_delete}{CAAutoDelete}}\& \mbox{\hyperlink{class_c_a_auto_delete_acecb3bc3ca83756c5f6b0649bb1576de}{operator=}}(\mbox{\hyperlink{class_c_a_auto_delete}{CAAutoDelete}}\& that)}
+\DoxyCodeLine{271     \{}
+\DoxyCodeLine{272         \mbox{\hyperlink{class_c_a_auto_delete_ab64833170c69de0994888a9eea2a2b4e}{set}}(that.\mbox{\hyperlink{class_c_a_auto_delete_a76404c4c41a3d23b9295b7fd416ef0d2}{release}}());  \textcolor{comment}{// take ownership}}
+\DoxyCodeLine{273         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{274     \}}
+\DoxyCodeLine{275 }
+\DoxyCodeLine{276     \mbox{\hyperlink{class_c_a_auto_delete}{CAAutoDelete}}\& \mbox{\hyperlink{class_c_a_auto_delete_a78424d70db4ae9af27a1fa0c6c270d78}{operator=}}(T* \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}})}
+\DoxyCodeLine{277     \{}
+\DoxyCodeLine{278         \mbox{\hyperlink{class_c_a_auto_delete_ab64833170c69de0994888a9eea2a2b4e}{set}}(\mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}});}
+\DoxyCodeLine{279         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{280     \}}
+\DoxyCodeLine{281 }
+\DoxyCodeLine{282     \textcolor{keyword}{template} <\textcolor{keyword}{typename} U>}
+\DoxyCodeLine{283     \mbox{\hyperlink{class_c_a_auto_delete}{CAAutoDelete}}\& \mbox{\hyperlink{class_c_a_auto_delete_adc8d323bf1986a36144d48d607cfcb21}{operator=}}(U* \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}})}
+\DoxyCodeLine{284     \{}
+\DoxyCodeLine{285         \mbox{\hyperlink{class_c_a_auto_delete_ab64833170c69de0994888a9eea2a2b4e}{set}}(\mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}});}
+\DoxyCodeLine{286         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{287     \}}
+\DoxyCodeLine{288 }
+\DoxyCodeLine{289     T\& \mbox{\hyperlink{class_c_a_auto_delete_a99b586a200332b8f3aa7ff1e54ed2f70}{operator*}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} *ptr\_; \}}
+\DoxyCodeLine{290     T* \mbox{\hyperlink{class_c_a_auto_delete_af042124cf7889a90a26c448db063217c}{operator-\/>}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} ptr\_; \}}
+\DoxyCodeLine{291 }
+\DoxyCodeLine{292     T* \mbox{\hyperlink{class_c_a_auto_delete_ad687ddf6db3b5cbe38cabea96967ef72}{operator()}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} ptr\_; \}}
+\DoxyCodeLine{293     T* \mbox{\hyperlink{class_c_a_auto_delete_a7bdbd051beeab9d7eaa7199c9f21c9fb}{get}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} ptr\_; \}}
+\DoxyCodeLine{294     \textcolor{keyword}{operator} T*() \textcolor{keyword}{const} \{ \textcolor{keywordflow}{return} ptr\_; \}}
+\DoxyCodeLine{295 }
+\DoxyCodeLine{296     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_a_auto_delete_adef506edd0585cd1ef4d4da9f0c322e6}{operator==}}(\mbox{\hyperlink{class_c_a_auto_delete}{CAAutoDelete}} \textcolor{keyword}{const}\& that)\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} ptr\_ == that.ptr\_; \}}
+\DoxyCodeLine{297     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_a_auto_delete_a2fb1ee8caaa5219bcd340182724f7b18}{operator!=}}(\mbox{\hyperlink{class_c_a_auto_delete}{CAAutoDelete}} \textcolor{keyword}{const}\& that)\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} ptr\_ != that.ptr\_; \}}
+\DoxyCodeLine{298     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_a_auto_delete_a477588aea549fc5e4e1447624465c44b}{operator==}}(T* \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}})\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} ptr\_ == \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}}; \}}
+\DoxyCodeLine{299     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_a_auto_delete_a2b69d01fb09f974b50e81641cbb8ee6d}{operator!=}}(T* \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}})\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} ptr\_ != \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}}; \}}
+\DoxyCodeLine{300 }
+\DoxyCodeLine{301     T* \mbox{\hyperlink{class_c_a_auto_delete_a76404c4c41a3d23b9295b7fd416ef0d2}{release}}()}
+\DoxyCodeLine{302     \{}
+\DoxyCodeLine{303         \textcolor{comment}{// release ownership}}
+\DoxyCodeLine{304         T* \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = ptr\_;}
+\DoxyCodeLine{305         ptr\_ = 0;}
+\DoxyCodeLine{306         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}};}
+\DoxyCodeLine{307     \}}
+\DoxyCodeLine{308 }
+\DoxyCodeLine{309     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_a_auto_delete_ab64833170c69de0994888a9eea2a2b4e}{set}}(T* \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}})}
+\DoxyCodeLine{310     \{}
+\DoxyCodeLine{311         \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}} != ptr\_)}
+\DoxyCodeLine{312         \{}
+\DoxyCodeLine{313             \textcolor{keyword}{delete} ptr\_;}
+\DoxyCodeLine{314             ptr\_ = \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}};}
+\DoxyCodeLine{315         \}}
+\DoxyCodeLine{316     \}}
+\DoxyCodeLine{317 }
+\DoxyCodeLine{318     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_a_auto_delete_a086b2039379d89cd578b31212b1a609b}{free}}()}
+\DoxyCodeLine{319     \{}
+\DoxyCodeLine{320         \mbox{\hyperlink{class_c_a_auto_delete_ab64833170c69de0994888a9eea2a2b4e}{set}}(0);}
+\DoxyCodeLine{321     \}}
+\DoxyCodeLine{322 }
+\DoxyCodeLine{323 }
+\DoxyCodeLine{324     \textcolor{comment}{// automatic conversions to allow assignment from results of functions.}}
+\DoxyCodeLine{325     \textcolor{comment}{// hard to explain. see auto\_ptr implementation and/or Josuttis' STL book.}}
+\DoxyCodeLine{326     \mbox{\hyperlink{class_c_a_auto_delete_a211baba6fe8cf19d1f04b1c95e5e9d5a}{CAAutoDelete}}(\mbox{\hyperlink{struct_c_a_ptr_ref}{CAPtrRef<T>}} \mbox{\hyperlink{namespacegl_a237a6f23fb34c46ca9b58edb5b1d6013}{ref}}) : ptr\_(\mbox{\hyperlink{namespacegl_a237a6f23fb34c46ca9b58edb5b1d6013}{ref}}.ptr\_) \{ \}}
+\DoxyCodeLine{327 }
+\DoxyCodeLine{328     \mbox{\hyperlink{class_c_a_auto_delete}{CAAutoDelete}}\& \mbox{\hyperlink{class_c_a_auto_delete_ab50107b6fdef36e7cd3883241e7aef6c}{operator=}}(\mbox{\hyperlink{struct_c_a_ptr_ref}{CAPtrRef<T>}} \mbox{\hyperlink{namespacegl_a237a6f23fb34c46ca9b58edb5b1d6013}{ref}})}
+\DoxyCodeLine{329     \{}
+\DoxyCodeLine{330         \mbox{\hyperlink{class_c_a_auto_delete_ab64833170c69de0994888a9eea2a2b4e}{set}}(\mbox{\hyperlink{namespacegl_a237a6f23fb34c46ca9b58edb5b1d6013}{ref}}.ptr\_);}
+\DoxyCodeLine{331         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{332     \}}
+\DoxyCodeLine{333 }
+\DoxyCodeLine{334     \textcolor{keyword}{template}<\textcolor{keyword}{typename} U>}
+\DoxyCodeLine{335     \textcolor{keyword}{operator} \mbox{\hyperlink{struct_c_a_ptr_ref}{CAPtrRef<U>}}()}
+\DoxyCodeLine{336         \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{struct_c_a_ptr_ref}{CAPtrRef<U>}}(\mbox{\hyperlink{class_c_a_auto_delete_a76404c4c41a3d23b9295b7fd416ef0d2}{release}}()); \}}
+\DoxyCodeLine{337 }
+\DoxyCodeLine{338     \textcolor{keyword}{template}<\textcolor{keyword}{typename} U>}
+\DoxyCodeLine{339     \textcolor{keyword}{operator} \mbox{\hyperlink{class_c_a_auto_free}{CAAutoFree<U>}}()}
+\DoxyCodeLine{340         \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_c_a_auto_free}{CAAutoFree<U>}}(\mbox{\hyperlink{class_c_a_auto_delete_a76404c4c41a3d23b9295b7fd416ef0d2}{release}}()); \}}
+\DoxyCodeLine{341 }
+\DoxyCodeLine{342 \};}
+\DoxyCodeLine{343 }
+\DoxyCodeLine{344 }
+\DoxyCodeLine{345 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{346 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_a_auto_array_delete}{CAAutoArrayDelete}}}
+\DoxyCodeLine{347 \{}
+\DoxyCodeLine{348 \textcolor{keyword}{private}:}
+\DoxyCodeLine{349     T* ptr\_;}
+\DoxyCodeLine{350 }
+\DoxyCodeLine{351 \textcolor{keyword}{public}:}
+\DoxyCodeLine{352     \mbox{\hyperlink{class_c_a_auto_array_delete_a00093d693144edaa5d05c71333b6527f}{CAAutoArrayDelete}}() : ptr\_(0) \{\}}
+\DoxyCodeLine{353 }
+\DoxyCodeLine{354     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_c_a_auto_array_delete_a6e47afc61f3900c0af1d28ab6e2ae5e6}{CAAutoArrayDelete}}(T* \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}}) : ptr\_(\mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}}) \{\}}
+\DoxyCodeLine{355 }
+\DoxyCodeLine{356     \textcolor{keyword}{template}<\textcolor{keyword}{typename} U>}
+\DoxyCodeLine{357     \mbox{\hyperlink{class_c_a_auto_array_delete_abf14667cc97294b07c66d6b63193cbfa}{CAAutoArrayDelete}}(\mbox{\hyperlink{class_c_a_auto_array_delete}{CAAutoArrayDelete<U>}}\& that) : ptr\_(that.\mbox{\hyperlink{class_c_a_auto_array_delete_a5ee7b647b4fa2d30857c87083a5deb55}{release}}()) \{\} \textcolor{comment}{// take ownership}}
+\DoxyCodeLine{358 }
+\DoxyCodeLine{359     \textcolor{comment}{// C++ std says: a template constructor is never a copy constructor}}
+\DoxyCodeLine{360     \mbox{\hyperlink{class_c_a_auto_array_delete_a2557cae6808afcc716f004392b546e25}{CAAutoArrayDelete}}(\mbox{\hyperlink{class_c_a_auto_array_delete}{CAAutoArrayDelete<T>}}\& that) : ptr\_(that.\mbox{\hyperlink{class_c_a_auto_array_delete_a5ee7b647b4fa2d30857c87083a5deb55}{release}}()) \{\} \textcolor{comment}{// take ownership}}
+\DoxyCodeLine{361 }
+\DoxyCodeLine{362     \textcolor{comment}{// this becomes an ambiguous call if n == 0}}
+\DoxyCodeLine{363     \mbox{\hyperlink{class_c_a_auto_array_delete_a148cf59cefd64effe751a6809df32b0e}{CAAutoArrayDelete}}(\textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}}) : ptr\_(new T[\mbox{\hyperlink{namespacegl_a1f71d238be3cdf94fc21bd0a832f074a}{n}}]) \{\}}
+\DoxyCodeLine{364 }
+\DoxyCodeLine{365     \mbox{\hyperlink{class_c_a_auto_array_delete_a0402521d319f27f8fb42feb0e6e6d0dd}{\string~CAAutoArrayDelete}}() \{ \mbox{\hyperlink{class_c_a_auto_array_delete_af0164078425c93e3ef44a8766e4b6c2f}{free}}(); \}}
+\DoxyCodeLine{366 }
+\DoxyCodeLine{367     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_a_auto_array_delete_abf9428c69ef3330a55ca139470b24304}{alloc}}(\textcolor{keywordtype}{size\_t} numItems)}
+\DoxyCodeLine{368     \{}
+\DoxyCodeLine{369         \mbox{\hyperlink{class_c_a_auto_array_delete_af0164078425c93e3ef44a8766e4b6c2f}{free}}();}
+\DoxyCodeLine{370         ptr\_ = \textcolor{keyword}{new} T [numItems];}
+\DoxyCodeLine{371     \}}
+\DoxyCodeLine{372 }
+\DoxyCodeLine{373     \textcolor{keyword}{template} <\textcolor{keyword}{typename} U>}
+\DoxyCodeLine{374     \mbox{\hyperlink{class_c_a_auto_array_delete}{CAAutoArrayDelete}}\& \mbox{\hyperlink{class_c_a_auto_array_delete_a16930355f4807a9974cfd3bfe4a62028}{operator=}}(\mbox{\hyperlink{class_c_a_auto_array_delete}{CAAutoArrayDelete<U>}}\& that)}
+\DoxyCodeLine{375     \{}
+\DoxyCodeLine{376         \mbox{\hyperlink{class_c_a_auto_array_delete_ad8caa2558c26919423e6a0022ed26653}{set}}(that.\mbox{\hyperlink{class_c_a_auto_array_delete_a5ee7b647b4fa2d30857c87083a5deb55}{release}}());  \textcolor{comment}{// take ownership}}
+\DoxyCodeLine{377         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{378     \}}
+\DoxyCodeLine{379 }
+\DoxyCodeLine{380     \mbox{\hyperlink{class_c_a_auto_array_delete}{CAAutoArrayDelete}}\& \mbox{\hyperlink{class_c_a_auto_array_delete_a16e06fed3f121378a1ab77abc32e0e81}{operator=}}(\mbox{\hyperlink{class_c_a_auto_array_delete}{CAAutoArrayDelete}}\& that)}
+\DoxyCodeLine{381     \{}
+\DoxyCodeLine{382         \mbox{\hyperlink{class_c_a_auto_array_delete_ad8caa2558c26919423e6a0022ed26653}{set}}(that.\mbox{\hyperlink{class_c_a_auto_array_delete_a5ee7b647b4fa2d30857c87083a5deb55}{release}}());  \textcolor{comment}{// take ownership}}
+\DoxyCodeLine{383         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{384     \}}
+\DoxyCodeLine{385 }
+\DoxyCodeLine{386     \mbox{\hyperlink{class_c_a_auto_array_delete}{CAAutoArrayDelete}}\& \mbox{\hyperlink{class_c_a_auto_array_delete_ac7ed878d4434b3c8b4ea5e70005209d7}{operator=}}(T* \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}})}
+\DoxyCodeLine{387     \{}
+\DoxyCodeLine{388         \mbox{\hyperlink{class_c_a_auto_array_delete_ad8caa2558c26919423e6a0022ed26653}{set}}(\mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}});}
+\DoxyCodeLine{389         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{390     \}}
+\DoxyCodeLine{391 }
+\DoxyCodeLine{392     \textcolor{keyword}{template} <\textcolor{keyword}{typename} U>}
+\DoxyCodeLine{393     \mbox{\hyperlink{class_c_a_auto_array_delete}{CAAutoArrayDelete}}\& \mbox{\hyperlink{class_c_a_auto_array_delete_a84e0210d8fb5123245711deb53c7a023}{operator=}}(U* \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}})}
+\DoxyCodeLine{394     \{}
+\DoxyCodeLine{395         \mbox{\hyperlink{class_c_a_auto_array_delete_ad8caa2558c26919423e6a0022ed26653}{set}}(\mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}});}
+\DoxyCodeLine{396         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{397     \}}
+\DoxyCodeLine{398 }
+\DoxyCodeLine{399     T\& \mbox{\hyperlink{class_c_a_auto_array_delete_aaa7bfe13cf7f5476a767479bdb20fcf7}{operator*}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} *ptr\_; \}}
+\DoxyCodeLine{400     T* \mbox{\hyperlink{class_c_a_auto_array_delete_a2218cba91d0ec21e4fe7083f2ec4bbf1}{operator-\/>}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} ptr\_; \}}
+\DoxyCodeLine{401 }
+\DoxyCodeLine{402     T* \mbox{\hyperlink{class_c_a_auto_array_delete_a0b7a85cd2a760c32ba984684f33a1040}{operator()}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} ptr\_; \}}
+\DoxyCodeLine{403     T* \mbox{\hyperlink{class_c_a_auto_array_delete_aef0a1b4f36aa3a8589e37bdaedf054b8}{get}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} ptr\_; \}}
+\DoxyCodeLine{404     \textcolor{keyword}{operator} T*() \textcolor{keyword}{const} \{ \textcolor{keywordflow}{return} ptr\_; \}}
+\DoxyCodeLine{405 }
+\DoxyCodeLine{406     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_a_auto_array_delete_ad095d75cafc274dd59b33142205c0144}{operator==}}(\mbox{\hyperlink{class_c_a_auto_array_delete}{CAAutoArrayDelete}} \textcolor{keyword}{const}\& that)\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} ptr\_ == that.ptr\_; \}}
+\DoxyCodeLine{407     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_a_auto_array_delete_a424c56b04bc885d0d1e8b3d629e11022}{operator!=}}(\mbox{\hyperlink{class_c_a_auto_array_delete}{CAAutoArrayDelete}} \textcolor{keyword}{const}\& that)\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} ptr\_ != that.ptr\_; \}}
+\DoxyCodeLine{408     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_a_auto_array_delete_a6f1e1573930c7afdf43c7af2ec05625f}{operator==}}(T* \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}})\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} ptr\_ == \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}}; \}}
+\DoxyCodeLine{409     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_a_auto_array_delete_ae249ff759628fae77d20ea245efea23d}{operator!=}}(T* \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}})\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} ptr\_ != \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}}; \}}
+\DoxyCodeLine{410 }
+\DoxyCodeLine{411     T* \mbox{\hyperlink{class_c_a_auto_array_delete_a5ee7b647b4fa2d30857c87083a5deb55}{release}}()}
+\DoxyCodeLine{412     \{}
+\DoxyCodeLine{413         \textcolor{comment}{// release ownership}}
+\DoxyCodeLine{414         T* \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} = ptr\_;}
+\DoxyCodeLine{415         ptr\_ = 0;}
+\DoxyCodeLine{416         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}};}
+\DoxyCodeLine{417     \}}
+\DoxyCodeLine{418 }
+\DoxyCodeLine{419     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_a_auto_array_delete_ad8caa2558c26919423e6a0022ed26653}{set}}(T* \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}})}
+\DoxyCodeLine{420     \{}
+\DoxyCodeLine{421         \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}} != ptr\_)}
+\DoxyCodeLine{422         \{}
+\DoxyCodeLine{423             \textcolor{keyword}{delete} [] ptr\_;}
+\DoxyCodeLine{424             ptr\_ = \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}};}
+\DoxyCodeLine{425         \}}
+\DoxyCodeLine{426     \}}
+\DoxyCodeLine{427 }
+\DoxyCodeLine{428     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_a_auto_array_delete_af0164078425c93e3ef44a8766e4b6c2f}{free}}()}
+\DoxyCodeLine{429     \{}
+\DoxyCodeLine{430         \mbox{\hyperlink{class_c_a_auto_array_delete_ad8caa2558c26919423e6a0022ed26653}{set}}(0);}
+\DoxyCodeLine{431     \}}
+\DoxyCodeLine{432 }
+\DoxyCodeLine{433 }
+\DoxyCodeLine{434     \textcolor{comment}{// automatic conversions to allow assignment from results of functions.}}
+\DoxyCodeLine{435     \textcolor{comment}{// hard to explain. see auto\_ptr implementation and/or Josuttis' STL book.}}
+\DoxyCodeLine{436     \mbox{\hyperlink{class_c_a_auto_array_delete_ace93c8d7f7c35fe09f439c69e87b41fa}{CAAutoArrayDelete}}(\mbox{\hyperlink{struct_c_a_ptr_ref}{CAPtrRef<T>}} \mbox{\hyperlink{namespacegl_a237a6f23fb34c46ca9b58edb5b1d6013}{ref}}) : ptr\_(\mbox{\hyperlink{namespacegl_a237a6f23fb34c46ca9b58edb5b1d6013}{ref}}.ptr\_) \{ \}}
+\DoxyCodeLine{437 }
+\DoxyCodeLine{438     \mbox{\hyperlink{class_c_a_auto_array_delete}{CAAutoArrayDelete}}\& \mbox{\hyperlink{class_c_a_auto_array_delete_aa96799ffca081ab1eea82f8511d07f04}{operator=}}(\mbox{\hyperlink{struct_c_a_ptr_ref}{CAPtrRef<T>}} \mbox{\hyperlink{namespacegl_a237a6f23fb34c46ca9b58edb5b1d6013}{ref}})}
+\DoxyCodeLine{439     \{}
+\DoxyCodeLine{440         \mbox{\hyperlink{class_c_a_auto_array_delete_ad8caa2558c26919423e6a0022ed26653}{set}}(\mbox{\hyperlink{namespacegl_a237a6f23fb34c46ca9b58edb5b1d6013}{ref}}.ptr\_);}
+\DoxyCodeLine{441         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{442     \}}
+\DoxyCodeLine{443 }
+\DoxyCodeLine{444     \textcolor{keyword}{template}<\textcolor{keyword}{typename} U>}
+\DoxyCodeLine{445     \textcolor{keyword}{operator} \mbox{\hyperlink{struct_c_a_ptr_ref}{CAPtrRef<U>}}()}
+\DoxyCodeLine{446         \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{struct_c_a_ptr_ref}{CAPtrRef<U>}}(\mbox{\hyperlink{class_c_a_auto_array_delete_a5ee7b647b4fa2d30857c87083a5deb55}{release}}()); \}}
+\DoxyCodeLine{447 }
+\DoxyCodeLine{448     \textcolor{keyword}{template}<\textcolor{keyword}{typename} U>}
+\DoxyCodeLine{449     \textcolor{keyword}{operator} \mbox{\hyperlink{class_c_a_auto_array_delete}{CAAutoArrayDelete<U>}}()}
+\DoxyCodeLine{450         \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_c_a_auto_free}{CAAutoFree<U>}}(\mbox{\hyperlink{class_c_a_auto_array_delete_a5ee7b647b4fa2d30857c87083a5deb55}{release}}()); \}}
+\DoxyCodeLine{451 }
+\DoxyCodeLine{452 \};}
+\DoxyCodeLine{453 }
+\DoxyCodeLine{454 }
+\DoxyCodeLine{455 }
+\DoxyCodeLine{456 }
+\DoxyCodeLine{457 }
+\DoxyCodeLine{458 \textcolor{comment}{// convenience function}}
+\DoxyCodeLine{459 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{460 \textcolor{keywordtype}{void} \mbox{\hyperlink{_c_a_auto_disposer_8h_ad6789ba73d47afb261058c686ba7089e}{free}}(\mbox{\hyperlink{class_c_a_auto_free}{CAAutoFree<T>}}\& \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}})}
+\DoxyCodeLine{461 \{}
+\DoxyCodeLine{462     \mbox{\hyperlink{namespacegl_ab8b154a639177df172c80eddeb09a533}{p}}.free();}
+\DoxyCodeLine{463 \}}
+\DoxyCodeLine{464 }
+\DoxyCodeLine{468 }
+\DoxyCodeLine{469 \textcolor{preprocessor}{\#if 0}}
+\DoxyCodeLine{470 \textcolor{comment}{// example program showing ownership transfer}}
+\DoxyCodeLine{471 }
+\DoxyCodeLine{472 \mbox{\hyperlink{class_c_a_auto_free}{CAAutoFree<char>}} \mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}}()}
+\DoxyCodeLine{473 \{}
+\DoxyCodeLine{474     \textcolor{comment}{// source allocates and returns ownership to the caller.}}
+\DoxyCodeLine{475     \textcolor{keyword}{const} \textcolor{keywordtype}{char}* str = \textcolor{stringliteral}{"{}this is a test"{}};}
+\DoxyCodeLine{476     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}} = strlen(str) + 1;}
+\DoxyCodeLine{477     \mbox{\hyperlink{class_c_a_auto_free}{CAAutoFree<char>}} captr(\mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}}, \textcolor{keyword}{false});}
+\DoxyCodeLine{478     strlcpy(captr(), str, \mbox{\hyperlink{namespacegl_a441d79156826d7dfbf89100bb934a38d}{size}});}
+\DoxyCodeLine{479     printf(\textcolor{stringliteral}{"{}source \%08X \%08X '\%s'\(\backslash\)n"{}}, \&captr, captr(), captr());}
+\DoxyCodeLine{480     \textcolor{keywordflow}{return} captr;}
+\DoxyCodeLine{481 \}}
+\DoxyCodeLine{482 }
+\DoxyCodeLine{483 \textcolor{keywordtype}{void} user(\mbox{\hyperlink{class_c_a_auto_free}{CAAutoFree<char>}} \textcolor{keyword}{const}\& captr)}
+\DoxyCodeLine{484 \{}
+\DoxyCodeLine{485     \textcolor{comment}{// passed by const reference. user can access the pointer but does not take ownership.}}
+\DoxyCodeLine{486     printf(\textcolor{stringliteral}{"{}user: \%08X \%08X '\%s'\(\backslash\)n"{}}, \&captr, captr(), captr());}
+\DoxyCodeLine{487 \}}
+\DoxyCodeLine{488 }
+\DoxyCodeLine{489 \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacegl_adf64419877a3a14f2ce4793a8d4e919d}{sink}}(\mbox{\hyperlink{class_c_a_auto_free}{CAAutoFree<char>}} captr)}
+\DoxyCodeLine{490 \{}
+\DoxyCodeLine{491     \textcolor{comment}{// passed by value. sink takes ownership and frees the pointer on return.}}
+\DoxyCodeLine{492     printf(\textcolor{stringliteral}{"{}sink: \%08X \%08X '\%s'\(\backslash\)n"{}}, \&captr, captr(), captr());}
+\DoxyCodeLine{493 \}}
+\DoxyCodeLine{494 }
+\DoxyCodeLine{495 }
+\DoxyCodeLine{496 \textcolor{keywordtype}{int} main (\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} * \textcolor{keyword}{const} argv[])}
+\DoxyCodeLine{497 \{}
+\DoxyCodeLine{498 }
+\DoxyCodeLine{499     \mbox{\hyperlink{class_c_a_auto_free}{CAAutoFree<char>}} captr(\mbox{\hyperlink{namespacegl_a3abd4558223a005891c686e9d22383df}{source}}());}
+\DoxyCodeLine{500     printf(\textcolor{stringliteral}{"{}main captr A \%08X \%08X\(\backslash\)n"{}}, \&captr, captr());}
+\DoxyCodeLine{501     user(captr);}
+\DoxyCodeLine{502     \mbox{\hyperlink{namespacegl_adf64419877a3a14f2ce4793a8d4e919d}{sink}}(captr);}
+\DoxyCodeLine{503     printf(\textcolor{stringliteral}{"{}main captr B \%08X \%08X\(\backslash\)n"{}}, \&captr, captr());}
+\DoxyCodeLine{504     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{505 \}}
+\DoxyCodeLine{506 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{507 }
+\DoxyCodeLine{508 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

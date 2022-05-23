@@ -1,0 +1,112 @@
+\hypertarget{class_high_resolution_timer}{}\doxysection{High\+Resolution\+Timer Class Reference}
+\label{class_high_resolution_timer}\index{HighResolutionTimer@{HighResolutionTimer}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+High\+Resolution\+Timer.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_high_resolution_timer_a5eb450755a308ebc74e30085af52082b}{$\sim$\+High\+Resolution\+Timer}} ()
+\item 
+virtual \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_high_resolution_timer_a38fac5960301220b28b687817e4e7598}{hi\+Res\+Timer\+Callback}} ()=0
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_high_resolution_timer_a9d3709eee45c33f0d2095ab80121a965}{start\+Timer}} (\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} interval\+In\+Milliseconds)
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_high_resolution_timer_a141251dfd58c8564709a15da52dffd3a}{stop\+Timer}} ()
+\item 
+bool \mbox{\hyperlink{class_high_resolution_timer_a628e5e8a30df147af372818baa96cf96}{is\+Timer\+Running}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\item 
+\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} \mbox{\hyperlink{class_high_resolution_timer_a96e6af2a70291b57cba40155cb4cbc01}{get\+Timer\+Interval}} () \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_high_resolution_timer_ac79eb2389b1d52cd4a387836fe9ce860}{High\+Resolution\+Timer}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A high-\/resolution periodic timer.
+
+This provides accurately-\/timed regular callbacks. Unlike the normal \mbox{\hyperlink{class_timer}{Timer}} class, this one uses a dedicated thread, not the message thread, so is far more stable and precise.
+
+You should only use this class in situations where you really need accuracy, because unlike the normal \mbox{\hyperlink{class_timer}{Timer}} class, which is very lightweight and cheap to start/stop, the \mbox{\hyperlink{class_high_resolution_timer}{High\+Resolution\+Timer}} will use far more resources, and starting/stopping it may involve launching and killing threads.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_timer}{Timer}}
+\end{DoxySeeAlso}
+@tags\{Core\} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_high_resolution_timer_ac79eb2389b1d52cd4a387836fe9ce860}\label{class_high_resolution_timer_ac79eb2389b1d52cd4a387836fe9ce860}} 
+\index{HighResolutionTimer@{HighResolutionTimer}!HighResolutionTimer@{HighResolutionTimer}}
+\index{HighResolutionTimer@{HighResolutionTimer}!HighResolutionTimer@{HighResolutionTimer}}
+\doxysubsubsection{\texorpdfstring{HighResolutionTimer()}{HighResolutionTimer()}}
+{\footnotesize\ttfamily High\+Resolution\+Timer\+::\+High\+Resolution\+Timer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Creates a \mbox{\hyperlink{class_high_resolution_timer}{High\+Resolution\+Timer}}. When created, the timer is stopped, so use \mbox{\hyperlink{class_high_resolution_timer_a9d3709eee45c33f0d2095ab80121a965}{start\+Timer()}} to get it going. \mbox{\Hypertarget{class_high_resolution_timer_a5eb450755a308ebc74e30085af52082b}\label{class_high_resolution_timer_a5eb450755a308ebc74e30085af52082b}} 
+\index{HighResolutionTimer@{HighResolutionTimer}!````~HighResolutionTimer@{$\sim$HighResolutionTimer}}
+\index{````~HighResolutionTimer@{$\sim$HighResolutionTimer}!HighResolutionTimer@{HighResolutionTimer}}
+\doxysubsubsection{\texorpdfstring{$\sim$HighResolutionTimer()}{~HighResolutionTimer()}}
+{\footnotesize\ttfamily virtual High\+Resolution\+Timer\+::$\sim$\+High\+Resolution\+Timer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Destructor. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_high_resolution_timer_a96e6af2a70291b57cba40155cb4cbc01}\label{class_high_resolution_timer_a96e6af2a70291b57cba40155cb4cbc01}} 
+\index{HighResolutionTimer@{HighResolutionTimer}!getTimerInterval@{getTimerInterval}}
+\index{getTimerInterval@{getTimerInterval}!HighResolutionTimer@{HighResolutionTimer}}
+\doxysubsubsection{\texorpdfstring{getTimerInterval()}{getTimerInterval()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}} High\+Resolution\+Timer\+::get\+Timer\+Interval (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns the timer\textquotesingle{}s interval. \begin{DoxyReturn}{Returns}
+the timer\textquotesingle{}s interval in milliseconds if it\textquotesingle{}s running, or 0 if it\textquotesingle{}s not. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_high_resolution_timer_a38fac5960301220b28b687817e4e7598}\label{class_high_resolution_timer_a38fac5960301220b28b687817e4e7598}} 
+\index{HighResolutionTimer@{HighResolutionTimer}!hiResTimerCallback@{hiResTimerCallback}}
+\index{hiResTimerCallback@{hiResTimerCallback}!HighResolutionTimer@{HighResolutionTimer}}
+\doxysubsubsection{\texorpdfstring{hiResTimerCallback()}{hiResTimerCallback()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} High\+Resolution\+Timer\+::hi\+Res\+Timer\+Callback (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+The user-\/defined callback routine that actually gets called periodically.
+
+This will be called on a dedicated timer thread, so make sure your implementation is thread-\/safe!
+
+It\textquotesingle{}s perfectly ok to call \mbox{\hyperlink{class_high_resolution_timer_a9d3709eee45c33f0d2095ab80121a965}{start\+Timer()}} or \mbox{\hyperlink{class_high_resolution_timer_a141251dfd58c8564709a15da52dffd3a}{stop\+Timer()}} from within this callback to change the subsequent intervals. \mbox{\Hypertarget{class_high_resolution_timer_a628e5e8a30df147af372818baa96cf96}\label{class_high_resolution_timer_a628e5e8a30df147af372818baa96cf96}} 
+\index{HighResolutionTimer@{HighResolutionTimer}!isTimerRunning@{isTimerRunning}}
+\index{isTimerRunning@{isTimerRunning}!HighResolutionTimer@{HighResolutionTimer}}
+\doxysubsubsection{\texorpdfstring{isTimerRunning()}{isTimerRunning()}}
+{\footnotesize\ttfamily bool High\+Resolution\+Timer\+::is\+Timer\+Running (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Checks if the timer has been started. \begin{DoxyReturn}{Returns}
+true if the timer is running. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_high_resolution_timer_a9d3709eee45c33f0d2095ab80121a965}\label{class_high_resolution_timer_a9d3709eee45c33f0d2095ab80121a965}} 
+\index{HighResolutionTimer@{HighResolutionTimer}!startTimer@{startTimer}}
+\index{startTimer@{startTimer}!HighResolutionTimer@{HighResolutionTimer}}
+\doxysubsubsection{\texorpdfstring{startTimer()}{startTimer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} High\+Resolution\+Timer\+::start\+Timer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__juce__audio__plugin__client-_unity_ga966b05a42d98c7296097e073c627dcd0}{int}}}]{interval\+In\+Milliseconds }\end{DoxyParamCaption})}
+
+Starts the timer and sets the length of interval required.
+
+If the timer is already started, this will reset its counter, so the time between calling this method and the next timer callback will not be less than the interval length passed in.
+
+
+\begin{DoxyParams}{Parameters}
+{\em interval\+In\+Milliseconds} & the interval to use (any values less than 1 will be rounded up to 1) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_high_resolution_timer_a141251dfd58c8564709a15da52dffd3a}\label{class_high_resolution_timer_a141251dfd58c8564709a15da52dffd3a}} 
+\index{HighResolutionTimer@{HighResolutionTimer}!stopTimer@{stopTimer}}
+\index{stopTimer@{stopTimer}!HighResolutionTimer@{HighResolutionTimer}}
+\doxysubsubsection{\texorpdfstring{stopTimer()}{stopTimer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} High\+Resolution\+Timer\+::stop\+Timer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Stops the timer.
+
+This method may block while it waits for pending callbacks to complete. Once it returns, no more callbacks will be made. If it is called from the timer\textquotesingle{}s own thread, it will cancel the timer after the current callback returns. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+core/threads/\mbox{\hyperlink{juce___high_resolution_timer_8h}{juce\+\_\+\+High\+Resolution\+Timer.\+h}}\end{DoxyCompactItemize}

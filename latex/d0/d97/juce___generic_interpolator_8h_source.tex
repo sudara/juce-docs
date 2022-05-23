@@ -1,0 +1,423 @@
+\hypertarget{juce___generic_interpolator_8h_source}{}\doxysection{juce\+\_\+\+Generic\+Interpolator.\+h}
+\label{juce___generic_interpolator_8h_source}\index{build/juce\_audio\_basics/utilities/juce\_GenericInterpolator.h@{build/juce\_audio\_basics/utilities/juce\_GenericInterpolator.h}}
+\mbox{\hyperlink{juce___generic_interpolator_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{43 \textcolor{keyword}{template} <\textcolor{keyword}{class} InterpolatorTraits, \textcolor{keywordtype}{int} memorySize>}
+\DoxyCodeLine{44 \textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_generic_interpolator}{GenericInterpolator}}}
+\DoxyCodeLine{45 \{}
+\DoxyCodeLine{46 \textcolor{keyword}{public}:}
+\DoxyCodeLine{47     \mbox{\hyperlink{class_generic_interpolator_a38ba35cb5508b2f88a78951b46420c7c}{GenericInterpolator}}() noexcept                        \{ \mbox{\hyperlink{namespacegl_a3b437ea454d772211296e220c025bdd2}{reset}}(); \}}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49     \mbox{\hyperlink{class_generic_interpolator_af942c71252921b161a468b45d7fd416d}{GenericInterpolator}} (\mbox{\hyperlink{class_generic_interpolator}{GenericInterpolator}}\&\&) noexcept = default;}
+\DoxyCodeLine{50     \mbox{\hyperlink{class_generic_interpolator}{GenericInterpolator}}\& operator= (\mbox{\hyperlink{class_generic_interpolator}{GenericInterpolator}}\&\&) noexcept = default;}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{57     static constexpr \textcolor{keywordtype}{float} getBaseLatency() noexcept}
+\DoxyCodeLine{58     \{}
+\DoxyCodeLine{59         \textcolor{keywordflow}{return} InterpolatorTraits::algorithmicLatency;}
+\DoxyCodeLine{60     \}}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{66     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_generic_interpolator_a44d513d729c6dd222d496fcf73bc7818}{reset}}() noexcept}
+\DoxyCodeLine{67     \{}
+\DoxyCodeLine{68         indexBuffer = 0;}
+\DoxyCodeLine{69         subSamplePos = 1.0;}
+\DoxyCodeLine{70         std::fill (\mbox{\hyperlink{group__juce__core-files_ga3b8789907a46172ef0bdc8f656d6e355}{std::begin}} (lastInputSamples), \mbox{\hyperlink{group__juce__core-files_ga4a3194f4f741f9bd653f28733358f62c}{std::end}} (lastInputSamples), 0.0f);}
+\DoxyCodeLine{71     \}}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{83     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_generic_interpolator_abd8ff09515fe1e6a7c7aac7a9f030a11}{process}} (\textcolor{keywordtype}{double} speedRatio,}
+\DoxyCodeLine{84                  \textcolor{keyword}{const} \textcolor{keywordtype}{float}* inputSamples,}
+\DoxyCodeLine{85                  \textcolor{keywordtype}{float}* outputSamples,}
+\DoxyCodeLine{86                  \textcolor{keywordtype}{int} numOutputSamplesToProduce) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{87     \{}
+\DoxyCodeLine{88         \textcolor{keywordflow}{return} interpolate (speedRatio, inputSamples, outputSamples, numOutputSamplesToProduce);}
+\DoxyCodeLine{89     \}}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{106     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_generic_interpolator_a855bab8ed515286f3424e77115320024}{process}} (\textcolor{keywordtype}{double} speedRatio,}
+\DoxyCodeLine{107                  \textcolor{keyword}{const} \textcolor{keywordtype}{float}* inputSamples,}
+\DoxyCodeLine{108                  \textcolor{keywordtype}{float}* outputSamples,}
+\DoxyCodeLine{109                  \textcolor{keywordtype}{int} numOutputSamplesToProduce,}
+\DoxyCodeLine{110                  \textcolor{keywordtype}{int} numInputSamplesAvailable,}
+\DoxyCodeLine{111                  \textcolor{keywordtype}{int} wrapAround) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{112     \{}
+\DoxyCodeLine{113         \textcolor{keywordflow}{return} interpolate (speedRatio, inputSamples, outputSamples,}
+\DoxyCodeLine{114                             numOutputSamplesToProduce, numInputSamplesAvailable, wrapAround);}
+\DoxyCodeLine{115     \}}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{132     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_generic_interpolator_a877329a8be87df360551aab3f5e9bbd1}{processAdding}} (\textcolor{keywordtype}{double} speedRatio,}
+\DoxyCodeLine{133                        \textcolor{keyword}{const} \textcolor{keywordtype}{float}* inputSamples,}
+\DoxyCodeLine{134                        \textcolor{keywordtype}{float}* outputSamples,}
+\DoxyCodeLine{135                        \textcolor{keywordtype}{int} numOutputSamplesToProduce,}
+\DoxyCodeLine{136                        \textcolor{keywordtype}{float} gain) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{137     \{}
+\DoxyCodeLine{138         \textcolor{keywordflow}{return} interpolateAdding (speedRatio, inputSamples, outputSamples, numOutputSamplesToProduce, gain);}
+\DoxyCodeLine{139     \}}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{161     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_generic_interpolator_a4772c78c11b347d67dc60e13b34aaa48}{processAdding}} (\textcolor{keywordtype}{double} speedRatio,}
+\DoxyCodeLine{162                        \textcolor{keyword}{const} \textcolor{keywordtype}{float}* inputSamples,}
+\DoxyCodeLine{163                        \textcolor{keywordtype}{float}* outputSamples,}
+\DoxyCodeLine{164                        \textcolor{keywordtype}{int} numOutputSamplesToProduce,}
+\DoxyCodeLine{165                        \textcolor{keywordtype}{int} numInputSamplesAvailable,}
+\DoxyCodeLine{166                        \textcolor{keywordtype}{int} wrapAround,}
+\DoxyCodeLine{167                        \textcolor{keywordtype}{float} gain) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{168     \{}
+\DoxyCodeLine{169         \textcolor{keywordflow}{return} interpolateAdding (speedRatio, inputSamples, outputSamples,}
+\DoxyCodeLine{170                                   numOutputSamplesToProduce, numInputSamplesAvailable, wrapAround, gain);}
+\DoxyCodeLine{171     \}}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{173 \textcolor{keyword}{private}:}
+\DoxyCodeLine{174     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{175     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} pushInterpolationSample (\textcolor{keywordtype}{float} newValue) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{176     \{}
+\DoxyCodeLine{177         lastInputSamples[indexBuffer] = newValue;}
+\DoxyCodeLine{178 }
+\DoxyCodeLine{179         \textcolor{keywordflow}{if} (++indexBuffer == memorySize)}
+\DoxyCodeLine{180             indexBuffer = 0;}
+\DoxyCodeLine{181     \}}
+\DoxyCodeLine{182 }
+\DoxyCodeLine{183     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} pushInterpolationSamples (\textcolor{keyword}{const} \textcolor{keywordtype}{float}* \mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}},}
+\DoxyCodeLine{184                                                 \textcolor{keywordtype}{int} numOutputSamplesToProduce) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{185     \{}
+\DoxyCodeLine{186         \textcolor{keywordflow}{if} (numOutputSamplesToProduce >= memorySize)}
+\DoxyCodeLine{187         \{}
+\DoxyCodeLine{188             \textcolor{keyword}{const} \textcolor{keyword}{auto}* \textcolor{keyword}{const} offsetInput = \mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}} + (numOutputSamplesToProduce -\/ memorySize);}
+\DoxyCodeLine{189 }
+\DoxyCodeLine{190             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < memorySize; ++i)}
+\DoxyCodeLine{191                 pushInterpolationSample (offsetInput[i]);}
+\DoxyCodeLine{192         \}}
+\DoxyCodeLine{193         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{194         \{}
+\DoxyCodeLine{195             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < numOutputSamplesToProduce; ++i)}
+\DoxyCodeLine{196                 pushInterpolationSample (\mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}}[i]);}
+\DoxyCodeLine{197         \}}
+\DoxyCodeLine{198     \}}
+\DoxyCodeLine{199 }
+\DoxyCodeLine{200     \mbox{\hyperlink{group__juce__core-system_gac2535cb549b141b3a96b8a08014e46cb}{forcedinline}} \textcolor{keywordtype}{void} pushInterpolationSamples (\textcolor{keyword}{const} \textcolor{keywordtype}{float}* \mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}},}
+\DoxyCodeLine{201                                                 \textcolor{keywordtype}{int} numOutputSamplesToProduce,}
+\DoxyCodeLine{202                                                 \textcolor{keywordtype}{int} numInputSamplesAvailable,}
+\DoxyCodeLine{203                                                 \textcolor{keywordtype}{int} wrapAround) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{204     \{}
+\DoxyCodeLine{205         \textcolor{keywordflow}{if} (numOutputSamplesToProduce >= memorySize)}
+\DoxyCodeLine{206         \{}
+\DoxyCodeLine{207             \textcolor{keywordflow}{if} (numInputSamplesAvailable >= memorySize)}
+\DoxyCodeLine{208             \{}
+\DoxyCodeLine{209                 pushInterpolationSamples (\mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}},}
+\DoxyCodeLine{210                                           numOutputSamplesToProduce);}
+\DoxyCodeLine{211             \}}
+\DoxyCodeLine{212             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{213             \{}
+\DoxyCodeLine{214                 pushInterpolationSamples (\mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}} + ((numOutputSamplesToProduce -\/ numInputSamplesAvailable) -\/ 1),}
+\DoxyCodeLine{215                                           numInputSamplesAvailable);}
+\DoxyCodeLine{216 }
+\DoxyCodeLine{217                 \textcolor{keywordflow}{if} (wrapAround > 0)}
+\DoxyCodeLine{218                 \{}
+\DoxyCodeLine{219                     numOutputSamplesToProduce -\/= wrapAround;}
+\DoxyCodeLine{220 }
+\DoxyCodeLine{221                     pushInterpolationSamples (\mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}} + ((numOutputSamplesToProduce -\/ (memorySize -\/ numInputSamplesAvailable)) -\/ 1),}
+\DoxyCodeLine{222                                               memorySize -\/ numInputSamplesAvailable);}
+\DoxyCodeLine{223                 \}}
+\DoxyCodeLine{224                 \textcolor{keywordflow}{else}}
+\DoxyCodeLine{225                 \{}
+\DoxyCodeLine{226                     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = numInputSamplesAvailable; i < memorySize; ++i)}
+\DoxyCodeLine{227                         pushInterpolationSample (0.0f);}
+\DoxyCodeLine{228                 \}}
+\DoxyCodeLine{229             \}}
+\DoxyCodeLine{230         \}}
+\DoxyCodeLine{231         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{232         \{}
+\DoxyCodeLine{233             \textcolor{keywordflow}{if} (numOutputSamplesToProduce > numInputSamplesAvailable)}
+\DoxyCodeLine{234             \{}
+\DoxyCodeLine{235                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < numInputSamplesAvailable; ++i)}
+\DoxyCodeLine{236                     pushInterpolationSample (\mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}}[i]);}
+\DoxyCodeLine{237 }
+\DoxyCodeLine{238                 \textcolor{keyword}{const} \textcolor{keyword}{auto} extraSamples = numOutputSamplesToProduce -\/ numInputSamplesAvailable;}
+\DoxyCodeLine{239 }
+\DoxyCodeLine{240                 \textcolor{keywordflow}{if} (wrapAround > 0)}
+\DoxyCodeLine{241                 \{}
+\DoxyCodeLine{242                     \textcolor{keyword}{const} \textcolor{keyword}{auto}* \textcolor{keyword}{const} offsetInput = \mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}} + (numInputSamplesAvailable -\/ wrapAround);}
+\DoxyCodeLine{243 }
+\DoxyCodeLine{244                     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < extraSamples; ++i)}
+\DoxyCodeLine{245                         pushInterpolationSample (offsetInput[i]);}
+\DoxyCodeLine{246                 \}}
+\DoxyCodeLine{247                 \textcolor{keywordflow}{else}}
+\DoxyCodeLine{248                 \{}
+\DoxyCodeLine{249                     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < extraSamples; ++i)}
+\DoxyCodeLine{250                         pushInterpolationSample (0.0f);}
+\DoxyCodeLine{251                 \}}
+\DoxyCodeLine{252             \}}
+\DoxyCodeLine{253             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{254             \{}
+\DoxyCodeLine{255                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < numOutputSamplesToProduce; ++i)}
+\DoxyCodeLine{256                     pushInterpolationSample (\mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}}[i]);}
+\DoxyCodeLine{257             \}}
+\DoxyCodeLine{258         \}}
+\DoxyCodeLine{259     \}}
+\DoxyCodeLine{260 }
+\DoxyCodeLine{261     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{262     \textcolor{keywordtype}{int} interpolate (\textcolor{keywordtype}{double} speedRatio,}
+\DoxyCodeLine{263                      \textcolor{keyword}{const} \textcolor{keywordtype}{float}* \mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}},}
+\DoxyCodeLine{264                      \textcolor{keywordtype}{float}* \mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}},}
+\DoxyCodeLine{265                      \textcolor{keywordtype}{int} numOutputSamplesToProduce) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{266     \{}
+\DoxyCodeLine{267         \textcolor{keyword}{auto} pos = subSamplePos;}
+\DoxyCodeLine{268         \textcolor{keywordtype}{int} numUsed = 0;}
+\DoxyCodeLine{269 }
+\DoxyCodeLine{270         \textcolor{keywordflow}{while} (numOutputSamplesToProduce > 0)}
+\DoxyCodeLine{271         \{}
+\DoxyCodeLine{272             \textcolor{keywordflow}{while} (pos >= 1.0)}
+\DoxyCodeLine{273             \{}
+\DoxyCodeLine{274                 pushInterpolationSample (\mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}}[numUsed++]);}
+\DoxyCodeLine{275                 pos -\/= 1.0;}
+\DoxyCodeLine{276             \}}
+\DoxyCodeLine{277 }
+\DoxyCodeLine{278             *\mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}}++ = InterpolatorTraits::valueAtOffset (lastInputSamples, (\textcolor{keywordtype}{float}) pos, indexBuffer);}
+\DoxyCodeLine{279             pos += speedRatio;}
+\DoxyCodeLine{280             -\/-\/numOutputSamplesToProduce;}
+\DoxyCodeLine{281         \}}
+\DoxyCodeLine{282 }
+\DoxyCodeLine{283         subSamplePos = pos;}
+\DoxyCodeLine{284         \textcolor{keywordflow}{return} numUsed;}
+\DoxyCodeLine{285     \}}
+\DoxyCodeLine{286 }
+\DoxyCodeLine{287     \textcolor{keywordtype}{int} interpolate (\textcolor{keywordtype}{double} speedRatio,}
+\DoxyCodeLine{288                      \textcolor{keyword}{const} \textcolor{keywordtype}{float}* \mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}}, \textcolor{keywordtype}{float}* \mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}},}
+\DoxyCodeLine{289                      \textcolor{keywordtype}{int} numOutputSamplesToProduce,}
+\DoxyCodeLine{290                      \textcolor{keywordtype}{int} numInputSamplesAvailable,}
+\DoxyCodeLine{291                      \textcolor{keywordtype}{int} wrap) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{292     \{}
+\DoxyCodeLine{293         \textcolor{keyword}{auto} originalIn = \mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}};}
+\DoxyCodeLine{294         \textcolor{keyword}{auto} pos = subSamplePos;}
+\DoxyCodeLine{295         \textcolor{keywordtype}{bool} exceeded = \textcolor{keyword}{false};}
+\DoxyCodeLine{296 }
+\DoxyCodeLine{297         \textcolor{keywordflow}{if} (speedRatio < 1.0)}
+\DoxyCodeLine{298         \{}
+\DoxyCodeLine{299             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = numOutputSamplesToProduce; -\/-\/i >= 0;)}
+\DoxyCodeLine{300             \{}
+\DoxyCodeLine{301                 \textcolor{keywordflow}{if} (pos >= 1.0)}
+\DoxyCodeLine{302                 \{}
+\DoxyCodeLine{303                     \textcolor{keywordflow}{if} (exceeded)}
+\DoxyCodeLine{304                     \{}
+\DoxyCodeLine{305                         pushInterpolationSample (0.0f);}
+\DoxyCodeLine{306                     \}}
+\DoxyCodeLine{307                     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{308                     \{}
+\DoxyCodeLine{309                         pushInterpolationSample (*\mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}}++);}
+\DoxyCodeLine{310 }
+\DoxyCodeLine{311                         \textcolor{keywordflow}{if} (-\/-\/numInputSamplesAvailable <= 0)}
+\DoxyCodeLine{312                         \{}
+\DoxyCodeLine{313                             \textcolor{keywordflow}{if} (wrap > 0)}
+\DoxyCodeLine{314                             \{}
+\DoxyCodeLine{315                                 \mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}} -\/= wrap;}
+\DoxyCodeLine{316                                 numInputSamplesAvailable += wrap;}
+\DoxyCodeLine{317                             \}}
+\DoxyCodeLine{318                             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{319                             \{}
+\DoxyCodeLine{320                                 exceeded = \textcolor{keyword}{true};}
+\DoxyCodeLine{321                             \}}
+\DoxyCodeLine{322                         \}}
+\DoxyCodeLine{323                     \}}
+\DoxyCodeLine{324 }
+\DoxyCodeLine{325                     pos -\/= 1.0;}
+\DoxyCodeLine{326                 \}}
+\DoxyCodeLine{327 }
+\DoxyCodeLine{328                 *\mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}}++ = InterpolatorTraits::valueAtOffset (lastInputSamples, (\textcolor{keywordtype}{float}) pos, indexBuffer);}
+\DoxyCodeLine{329                 pos += speedRatio;}
+\DoxyCodeLine{330             \}}
+\DoxyCodeLine{331         \}}
+\DoxyCodeLine{332         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{333         \{}
+\DoxyCodeLine{334             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = numOutputSamplesToProduce; -\/-\/i >= 0;)}
+\DoxyCodeLine{335             \{}
+\DoxyCodeLine{336                 \textcolor{keywordflow}{while} (pos < speedRatio)}
+\DoxyCodeLine{337                 \{}
+\DoxyCodeLine{338                     \textcolor{keywordflow}{if} (exceeded)}
+\DoxyCodeLine{339                     \{}
+\DoxyCodeLine{340                         pushInterpolationSample (0);}
+\DoxyCodeLine{341                     \}}
+\DoxyCodeLine{342                     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{343                     \{}
+\DoxyCodeLine{344                         pushInterpolationSample (*\mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}}++);}
+\DoxyCodeLine{345 }
+\DoxyCodeLine{346                         \textcolor{keywordflow}{if} (-\/-\/numInputSamplesAvailable <= 0)}
+\DoxyCodeLine{347                         \{}
+\DoxyCodeLine{348                             \textcolor{keywordflow}{if} (wrap > 0)}
+\DoxyCodeLine{349                             \{}
+\DoxyCodeLine{350                                 \mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}} -\/= wrap;}
+\DoxyCodeLine{351                                 numInputSamplesAvailable += wrap;}
+\DoxyCodeLine{352                             \}}
+\DoxyCodeLine{353                             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{354                             \{}
+\DoxyCodeLine{355                                 exceeded = \textcolor{keyword}{true};}
+\DoxyCodeLine{356                             \}}
+\DoxyCodeLine{357                         \}}
+\DoxyCodeLine{358                     \}}
+\DoxyCodeLine{359 }
+\DoxyCodeLine{360                     pos += 1.0;}
+\DoxyCodeLine{361                 \}}
+\DoxyCodeLine{362 }
+\DoxyCodeLine{363                 pos -\/= speedRatio;}
+\DoxyCodeLine{364                 *\mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}}++ = InterpolatorTraits::valueAtOffset (lastInputSamples, \mbox{\hyperlink{group__juce__core-maths_gadfd716f36f80987d66ebc2fce819c1fe}{jmax}} (0.0f, 1.0f -\/ (\textcolor{keywordtype}{float}) pos), indexBuffer);}
+\DoxyCodeLine{365             \}}
+\DoxyCodeLine{366         \}}
+\DoxyCodeLine{367 }
+\DoxyCodeLine{368         subSamplePos = pos;}
+\DoxyCodeLine{369 }
+\DoxyCodeLine{370         \textcolor{keywordflow}{if} (wrap == 0)}
+\DoxyCodeLine{371             \textcolor{keywordflow}{return} (\textcolor{keywordtype}{int}) (\mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}} -\/ originalIn);}
+\DoxyCodeLine{372 }
+\DoxyCodeLine{373         \textcolor{keywordflow}{return} ((\textcolor{keywordtype}{int}) (\mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}} -\/ originalIn) + wrap) \% wrap;}
+\DoxyCodeLine{374     \}}
+\DoxyCodeLine{375 }
+\DoxyCodeLine{376     \textcolor{keywordtype}{int} interpolateAdding (\textcolor{keywordtype}{double} speedRatio,}
+\DoxyCodeLine{377                            \textcolor{keyword}{const} \textcolor{keywordtype}{float}* \mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}},}
+\DoxyCodeLine{378                            \textcolor{keywordtype}{float}* \mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}},}
+\DoxyCodeLine{379                            \textcolor{keywordtype}{int} numOutputSamplesToProduce,}
+\DoxyCodeLine{380                            \textcolor{keywordtype}{int} numInputSamplesAvailable,}
+\DoxyCodeLine{381                            \textcolor{keywordtype}{int} wrap,}
+\DoxyCodeLine{382                            \textcolor{keywordtype}{float} gain) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{383     \{}
+\DoxyCodeLine{384         \textcolor{keyword}{auto} originalIn = \mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}};}
+\DoxyCodeLine{385         \textcolor{keyword}{auto} pos = subSamplePos;}
+\DoxyCodeLine{386         \textcolor{keywordtype}{bool} exceeded = \textcolor{keyword}{false};}
+\DoxyCodeLine{387 }
+\DoxyCodeLine{388         \textcolor{keywordflow}{if} (speedRatio < 1.0)}
+\DoxyCodeLine{389         \{}
+\DoxyCodeLine{390             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = numOutputSamplesToProduce; -\/-\/i >= 0;)}
+\DoxyCodeLine{391             \{}
+\DoxyCodeLine{392                 \textcolor{keywordflow}{if} (pos >= 1.0)}
+\DoxyCodeLine{393                 \{}
+\DoxyCodeLine{394                     \textcolor{keywordflow}{if} (exceeded)}
+\DoxyCodeLine{395                     \{}
+\DoxyCodeLine{396                         pushInterpolationSample (0.0);}
+\DoxyCodeLine{397                     \}}
+\DoxyCodeLine{398                     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{399                     \{}
+\DoxyCodeLine{400                         pushInterpolationSample (*\mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}}++);}
+\DoxyCodeLine{401 }
+\DoxyCodeLine{402                         \textcolor{keywordflow}{if} (-\/-\/numInputSamplesAvailable <= 0)}
+\DoxyCodeLine{403                         \{}
+\DoxyCodeLine{404                             \textcolor{keywordflow}{if} (wrap > 0)}
+\DoxyCodeLine{405                             \{}
+\DoxyCodeLine{406                                 \mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}} -\/= wrap;}
+\DoxyCodeLine{407                                 numInputSamplesAvailable += wrap;}
+\DoxyCodeLine{408                             \}}
+\DoxyCodeLine{409                             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{410                             \{}
+\DoxyCodeLine{411                                 numInputSamplesAvailable = \textcolor{keyword}{true};}
+\DoxyCodeLine{412                             \}}
+\DoxyCodeLine{413                         \}}
+\DoxyCodeLine{414                     \}}
+\DoxyCodeLine{415 }
+\DoxyCodeLine{416                     pos -\/= 1.0;}
+\DoxyCodeLine{417                 \}}
+\DoxyCodeLine{418 }
+\DoxyCodeLine{419                 *\mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}}++ += gain * InterpolatorTraits::valueAtOffset (lastInputSamples, (\textcolor{keywordtype}{float}) pos, indexBuffer);}
+\DoxyCodeLine{420                 pos += speedRatio;}
+\DoxyCodeLine{421             \}}
+\DoxyCodeLine{422         \}}
+\DoxyCodeLine{423         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{424         \{}
+\DoxyCodeLine{425             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = numOutputSamplesToProduce; -\/-\/i >= 0;)}
+\DoxyCodeLine{426             \{}
+\DoxyCodeLine{427                 \textcolor{keywordflow}{while} (pos < speedRatio)}
+\DoxyCodeLine{428                 \{}
+\DoxyCodeLine{429                     \textcolor{keywordflow}{if} (exceeded)}
+\DoxyCodeLine{430                     \{}
+\DoxyCodeLine{431                         pushInterpolationSample (0.0);}
+\DoxyCodeLine{432                     \}}
+\DoxyCodeLine{433                     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{434                     \{}
+\DoxyCodeLine{435                         pushInterpolationSample (*\mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}}++);}
+\DoxyCodeLine{436 }
+\DoxyCodeLine{437                         \textcolor{keywordflow}{if} (-\/-\/numInputSamplesAvailable <= 0)}
+\DoxyCodeLine{438                         \{}
+\DoxyCodeLine{439                             \textcolor{keywordflow}{if} (wrap > 0)}
+\DoxyCodeLine{440                             \{}
+\DoxyCodeLine{441                                 \mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}} -\/= wrap;}
+\DoxyCodeLine{442                                 numInputSamplesAvailable += wrap;}
+\DoxyCodeLine{443                             \}}
+\DoxyCodeLine{444                             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{445                             \{}
+\DoxyCodeLine{446                                 exceeded = \textcolor{keyword}{true};}
+\DoxyCodeLine{447                             \}}
+\DoxyCodeLine{448                         \}}
+\DoxyCodeLine{449                     \}}
+\DoxyCodeLine{450 }
+\DoxyCodeLine{451                     pos += 1.0;}
+\DoxyCodeLine{452                 \}}
+\DoxyCodeLine{453 }
+\DoxyCodeLine{454                 pos -\/= speedRatio;}
+\DoxyCodeLine{455                 *\mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}}++ += gain * InterpolatorTraits::valueAtOffset (lastInputSamples, \mbox{\hyperlink{group__juce__core-maths_gadfd716f36f80987d66ebc2fce819c1fe}{jmax}} (0.0f, 1.0f -\/ (\textcolor{keywordtype}{float}) pos), indexBuffer);}
+\DoxyCodeLine{456             \}}
+\DoxyCodeLine{457         \}}
+\DoxyCodeLine{458 }
+\DoxyCodeLine{459         subSamplePos = pos;}
+\DoxyCodeLine{460 }
+\DoxyCodeLine{461         \textcolor{keywordflow}{if} (wrap == 0)}
+\DoxyCodeLine{462             \textcolor{keywordflow}{return} (\textcolor{keywordtype}{int}) (\mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}} -\/ originalIn);}
+\DoxyCodeLine{463 }
+\DoxyCodeLine{464         \textcolor{keywordflow}{return} ((\textcolor{keywordtype}{int}) (\mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}} -\/ originalIn) + wrap) \% wrap;}
+\DoxyCodeLine{465     \}}
+\DoxyCodeLine{466 }
+\DoxyCodeLine{467     \textcolor{keywordtype}{int} interpolateAdding (\textcolor{keywordtype}{double} speedRatio,}
+\DoxyCodeLine{468                            \textcolor{keyword}{const} \textcolor{keywordtype}{float}* \mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}},}
+\DoxyCodeLine{469                            \textcolor{keywordtype}{float}* \mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}},}
+\DoxyCodeLine{470                            \textcolor{keywordtype}{int} numOutputSamplesToProduce,}
+\DoxyCodeLine{471                            \textcolor{keywordtype}{float} gain) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{472     \{}
+\DoxyCodeLine{473         \textcolor{keyword}{auto} pos = subSamplePos;}
+\DoxyCodeLine{474         \textcolor{keywordtype}{int} numUsed = 0;}
+\DoxyCodeLine{475 }
+\DoxyCodeLine{476         \textcolor{keywordflow}{while} (numOutputSamplesToProduce > 0)}
+\DoxyCodeLine{477         \{}
+\DoxyCodeLine{478             \textcolor{keywordflow}{while} (pos >= 1.0)}
+\DoxyCodeLine{479             \{}
+\DoxyCodeLine{480                 pushInterpolationSample (\mbox{\hyperlink{namespacegl_ae94d0a99dc3426b5ac5fc7d881691a61}{input}}[numUsed++]);}
+\DoxyCodeLine{481                 pos -\/= 1.0;}
+\DoxyCodeLine{482             \}}
+\DoxyCodeLine{483 }
+\DoxyCodeLine{484             *\mbox{\hyperlink{namespacegl_a6feaa3453ce5f1535f7b2709b198b7b6}{output}}++ += gain * InterpolatorTraits::valueAtOffset (lastInputSamples, (\textcolor{keywordtype}{float}) pos, indexBuffer);}
+\DoxyCodeLine{485             pos += speedRatio;}
+\DoxyCodeLine{486             -\/-\/numOutputSamplesToProduce;}
+\DoxyCodeLine{487         \}}
+\DoxyCodeLine{488 }
+\DoxyCodeLine{489         subSamplePos = pos;}
+\DoxyCodeLine{490         \textcolor{keywordflow}{return} numUsed;}
+\DoxyCodeLine{491     \}}
+\DoxyCodeLine{492 }
+\DoxyCodeLine{493     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{494     \textcolor{keywordtype}{float} lastInputSamples[(size\_t) memorySize];}
+\DoxyCodeLine{495     \textcolor{keywordtype}{double} subSamplePos = 1.0;}
+\DoxyCodeLine{496     \textcolor{keywordtype}{int} indexBuffer = 0;}
+\DoxyCodeLine{497 }
+\DoxyCodeLine{498     \mbox{\hyperlink{group__juce__core-system_ga851b02724a8158a7f746c66b5758b3dd}{JUCE\_DECLARE\_NON\_COPYABLE\_WITH\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_generic_interpolator}{GenericInterpolator}})}
+\DoxyCodeLine{499 \};}
+\DoxyCodeLine{500 }
+\DoxyCodeLine{501  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{502 }
+
+\end{DoxyCode}

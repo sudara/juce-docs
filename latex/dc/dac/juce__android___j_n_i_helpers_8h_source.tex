@@ -1,0 +1,1016 @@
+\hypertarget{juce__android___j_n_i_helpers_8h_source}{}\doxysection{juce\+\_\+android\+\_\+\+JNIHelpers.\+h}
+\label{juce__android___j_n_i_helpers_8h_source}\index{build/juce\_core/native/juce\_android\_JNIHelpers.h@{build/juce\_core/native/juce\_android\_JNIHelpers.h}}
+\mbox{\hyperlink{juce__android___j_n_i_helpers_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{5 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{6 \textcolor{comment}{}}
+\DoxyCodeLine{7 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{8 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{9 \textcolor{comment}{}}
+\DoxyCodeLine{10 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{11 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{12 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{13 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{14 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{15 \textcolor{comment}{}}
+\DoxyCodeLine{16 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{17 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{18 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{21 \textcolor{comment}{*/}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacejuce}{juce}}}
+\DoxyCodeLine{24 \{}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{27 \textcolor{keyword}{extern} JNIEnv* \mbox{\hyperlink{namespacejuce_a4f3642abf35d22b0f69c4361d90ce667}{getEnv}}() noexcept;}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{30 template <typename JavaType>}
+\DoxyCodeLine{31 class \mbox{\hyperlink{classjuce_1_1_local_ref}{LocalRef}}}
+\DoxyCodeLine{32 \{}
+\DoxyCodeLine{33 \textcolor{keyword}{public}:}
+\DoxyCodeLine{34     \textcolor{keyword}{explicit} \textcolor{keyword}{inline} \mbox{\hyperlink{classjuce_1_1_local_ref_aad012a4c9a9e2cb27ba62de031307bcd}{LocalRef}}() noexcept                 : \mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}} (\textcolor{keywordtype}{nullptr}) \{\}}
+\DoxyCodeLine{35     \textcolor{keyword}{explicit} \textcolor{keyword}{inline} \mbox{\hyperlink{classjuce_1_1_local_ref_a059d7893cd79798370d0788f46ae71a1}{LocalRef}} (JavaType o) noexcept      : \mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}} (o) \{\}}
+\DoxyCodeLine{36     \textcolor{keyword}{inline} \mbox{\hyperlink{classjuce_1_1_local_ref_ae910f71d371dda56fd7e82081663a275}{LocalRef}} (\textcolor{keyword}{const} \mbox{\hyperlink{classjuce_1_1_local_ref}{LocalRef}}\& other) noexcept    : \mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}} (retain (other.obj)) \{\}}
+\DoxyCodeLine{37     \textcolor{keyword}{inline} \mbox{\hyperlink{classjuce_1_1_local_ref_acbb40c57dc38e0ec8ee3c24b4c61d422}{LocalRef}} (\mbox{\hyperlink{classjuce_1_1_local_ref}{LocalRef}}\&\& other) noexcept         : \mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}} (\textcolor{keyword}{nullptr}) \{ std::swap (\mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}}, other.obj); \}}
+\DoxyCodeLine{38     \mbox{\hyperlink{classjuce_1_1_local_ref_a14107178cc4de70c52ca89f0b4d31c8d}{\string~LocalRef}}()                                         \{ \mbox{\hyperlink{namespacedsp_1_1detail_a953fbe1bf6236c0f3a95d12aad7ffffb}{clear}}(); \}}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40     \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_local_ref_a5c1a2b20c9663327d59eaa73330b6591}{clear}}()}
+\DoxyCodeLine{41     \{}
+\DoxyCodeLine{42         \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}} != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{43         \{}
+\DoxyCodeLine{44             \mbox{\hyperlink{namespacejuce_a4f3642abf35d22b0f69c4361d90ce667}{getEnv}}()-\/>DeleteLocalRef (\mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}});}
+\DoxyCodeLine{45             \mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}} = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{46         \}}
+\DoxyCodeLine{47     \}}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49     \mbox{\hyperlink{classjuce_1_1_local_ref}{LocalRef}}\& operator= (\textcolor{keyword}{const} \mbox{\hyperlink{classjuce_1_1_local_ref}{LocalRef}}\& other)}
+\DoxyCodeLine{50     \{}
+\DoxyCodeLine{51         JavaType newObj = retain (other.obj);}
+\DoxyCodeLine{52         \mbox{\hyperlink{namespacedsp_1_1detail_a953fbe1bf6236c0f3a95d12aad7ffffb}{clear}}();}
+\DoxyCodeLine{53         \mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}} = newObj;}
+\DoxyCodeLine{54         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{55     \}}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57     \mbox{\hyperlink{classjuce_1_1_local_ref}{LocalRef}}\& operator= (\mbox{\hyperlink{classjuce_1_1_local_ref}{LocalRef}}\&\& other)}
+\DoxyCodeLine{58     \{}
+\DoxyCodeLine{59         \mbox{\hyperlink{namespacedsp_1_1detail_a953fbe1bf6236c0f3a95d12aad7ffffb}{clear}}();}
+\DoxyCodeLine{60         std::swap (other.obj, \mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}});}
+\DoxyCodeLine{61         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{62     \}}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64     \textcolor{keyword}{inline} \textcolor{keyword}{operator} JavaType() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept   \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}}; \}}
+\DoxyCodeLine{65     \textcolor{keyword}{inline} JavaType \mbox{\hyperlink{classjuce_1_1_local_ref_aed91beb5f87833781089adc111564cc9}{get}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept        \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}}; \}}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67 \textcolor{keyword}{private}:}
+\DoxyCodeLine{68     JavaType \mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}};}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70     \textcolor{keyword}{static} JavaType retain (JavaType \mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}})}
+\DoxyCodeLine{71     \{}
+\DoxyCodeLine{72         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}} == \textcolor{keyword}{nullptr} ? nullptr : (JavaType) \mbox{\hyperlink{namespacejuce_a4f3642abf35d22b0f69c4361d90ce667}{getEnv}}()-\/>NewLocalRef (\mbox{\hyperlink{namespacegl_a5005400d1adacbeae9bca0afbc7cb101}{obj}});}
+\DoxyCodeLine{73     \}}
+\DoxyCodeLine{74 \};}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{77 \textcolor{keyword}{class }\mbox{\hyperlink{classjuce_1_1_global_ref}{GlobalRef}}}
+\DoxyCodeLine{78 \{}
+\DoxyCodeLine{79 \textcolor{keyword}{public}:}
+\DoxyCodeLine{80     \textcolor{keyword}{inline} \mbox{\hyperlink{classjuce_1_1_global_ref_a20775fd4adf53ce49106075beb6616e8}{GlobalRef}}() noexcept                             : obj (\textcolor{keywordtype}{nullptr}) \{\}}
+\DoxyCodeLine{81     \textcolor{keyword}{inline} \textcolor{keyword}{explicit} \mbox{\hyperlink{classjuce_1_1_global_ref_a88f72d6c8a191b724bd46bcaf905f92a}{GlobalRef}} (\textcolor{keyword}{const} \mbox{\hyperlink{classjuce_1_1_local_ref}{LocalRef<jobject>}}\& o)  : obj (retain (o.\mbox{\hyperlink{classjuce_1_1_global_ref_ada7aa43d14df49c4095b00d7c9e1f8bb}{get}}(), \mbox{\hyperlink{namespacejuce_a4f3642abf35d22b0f69c4361d90ce667}{getEnv}}())) \{\}}
+\DoxyCodeLine{82     \textcolor{keyword}{inline} \textcolor{keyword}{explicit} \mbox{\hyperlink{classjuce_1_1_global_ref_a469eccdc35899ba39b246d9e92f1c3b9}{GlobalRef}} (\textcolor{keyword}{const} \mbox{\hyperlink{classjuce_1_1_local_ref}{LocalRef<jobject>}}\& o, JNIEnv* env)  : obj (retain (o.\mbox{\hyperlink{classjuce_1_1_global_ref_ada7aa43d14df49c4095b00d7c9e1f8bb}{get}}(), env)) \{\}}
+\DoxyCodeLine{83     \textcolor{keyword}{inline} \mbox{\hyperlink{classjuce_1_1_global_ref_a28dfb26aa87bbfc913ee641e7961a3b3}{GlobalRef}} (\textcolor{keyword}{const} \mbox{\hyperlink{classjuce_1_1_global_ref}{GlobalRef}}\& other)           : obj (retain (other.obj, \mbox{\hyperlink{namespacejuce_a4f3642abf35d22b0f69c4361d90ce667}{getEnv}}())) \{\}}
+\DoxyCodeLine{84     \textcolor{keyword}{inline} \mbox{\hyperlink{classjuce_1_1_global_ref_a900185718ce3bab1573896d2c4f0f45a}{GlobalRef}} (\mbox{\hyperlink{classjuce_1_1_global_ref}{GlobalRef}} \&\& other) noexcept      : obj (\textcolor{keyword}{nullptr}) \{ std::swap (other.obj, obj); \}}
+\DoxyCodeLine{85     \mbox{\hyperlink{classjuce_1_1_global_ref_a7d09bcbd00559415a9cb7f9f42511c1a}{\string~GlobalRef}}()                                             \{ \mbox{\hyperlink{classjuce_1_1_global_ref_a07bd5d6c3851ba204a96bc47352051c5}{clear}}(); \}}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_global_ref_a07bd5d6c3851ba204a96bc47352051c5}{clear}}()                                 \{ \textcolor{keywordflow}{if} (obj != \textcolor{keyword}{nullptr}) \mbox{\hyperlink{classjuce_1_1_global_ref_a07bd5d6c3851ba204a96bc47352051c5}{clear}} (\mbox{\hyperlink{namespacejuce_a4f3642abf35d22b0f69c4361d90ce667}{getEnv}}()); \}}
+\DoxyCodeLine{89     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_global_ref_a5be7e2a955b4d15a6f19baabeb5549b9}{clear}} (JNIEnv* env)}
+\DoxyCodeLine{90     \{}
+\DoxyCodeLine{91         \textcolor{keywordflow}{if} (obj != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{92         \{}
+\DoxyCodeLine{93             env-\/>DeleteGlobalRef (obj);}
+\DoxyCodeLine{94             obj = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{95         \}}
+\DoxyCodeLine{96     \}}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98     \textcolor{keyword}{inline} \mbox{\hyperlink{classjuce_1_1_global_ref}{GlobalRef}}\& \mbox{\hyperlink{classjuce_1_1_global_ref_ae0c73db387a851267aac785b59b03d17}{operator= }}(\textcolor{keyword}{const} \mbox{\hyperlink{classjuce_1_1_global_ref}{GlobalRef}}\& other)}
+\DoxyCodeLine{99     \{}
+\DoxyCodeLine{100         jobject newObj = retain (other.obj, \mbox{\hyperlink{namespacejuce_a4f3642abf35d22b0f69c4361d90ce667}{getEnv}}());}
+\DoxyCodeLine{101         \mbox{\hyperlink{classjuce_1_1_global_ref_a07bd5d6c3851ba204a96bc47352051c5}{clear}}();}
+\DoxyCodeLine{102         obj = newObj;}
+\DoxyCodeLine{103         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{104     \}}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{106     \textcolor{keyword}{inline} \mbox{\hyperlink{classjuce_1_1_global_ref}{GlobalRef}}\& \mbox{\hyperlink{classjuce_1_1_global_ref_ae0c73db387a851267aac785b59b03d17}{operator= }}(\mbox{\hyperlink{classjuce_1_1_global_ref}{GlobalRef}}\&\& other)}
+\DoxyCodeLine{107     \{}
+\DoxyCodeLine{108         \mbox{\hyperlink{classjuce_1_1_global_ref_a07bd5d6c3851ba204a96bc47352051c5}{clear}}();}
+\DoxyCodeLine{109         std::swap (obj, other.obj);}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{112     \}}
+\DoxyCodeLine{113 }
+\DoxyCodeLine{114     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{115     \textcolor{keyword}{inline} \textcolor{keyword}{operator} jobject() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept    \{ \textcolor{keywordflow}{return} obj; \}}
+\DoxyCodeLine{116     \textcolor{keyword}{inline} jobject \mbox{\hyperlink{classjuce_1_1_global_ref_ada7aa43d14df49c4095b00d7c9e1f8bb}{get}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept         \{ \textcolor{keywordflow}{return} obj; \}}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{119 \textcolor{preprocessor}{    \#define DECLARE\_CALL\_TYPE\_METHOD(returnType, typeName) \(\backslash\)}}
+\DoxyCodeLine{120 \textcolor{preprocessor}{        returnType call\#\#typeName\#\#Method (jmethodID methodID, ... ) const \(\backslash\)}}
+\DoxyCodeLine{121 \textcolor{preprocessor}{        \{ \(\backslash\)}}
+\DoxyCodeLine{122 \textcolor{preprocessor}{            va\_list args; \(\backslash\)}}
+\DoxyCodeLine{123 \textcolor{preprocessor}{            va\_start (args, methodID); \(\backslash\)}}
+\DoxyCodeLine{124 \textcolor{preprocessor}{            returnType result = getEnv()-\/>Call\#\#typeName\#\#MethodV (obj, methodID, args); \(\backslash\)}}
+\DoxyCodeLine{125 \textcolor{preprocessor}{            va\_end (args); \(\backslash\)}}
+\DoxyCodeLine{126 \textcolor{preprocessor}{            return result; \(\backslash\)}}
+\DoxyCodeLine{127 \textcolor{preprocessor}{        \}}}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129     \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a96cc76c2bd035da4323580c31fcf8152}{DECLARE\_CALL\_TYPE\_METHOD}} (jobject, Object)}
+\DoxyCodeLine{130     \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a96cc76c2bd035da4323580c31fcf8152}{DECLARE\_CALL\_TYPE\_METHOD}} (jboolean, Boolean)}
+\DoxyCodeLine{131     \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a96cc76c2bd035da4323580c31fcf8152}{DECLARE\_CALL\_TYPE\_METHOD}} (jbyte, \mbox{\hyperlink{zconf_8h_ae3a497195d617519e5353ea7b417940f}{Byte}})}
+\DoxyCodeLine{132     \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a96cc76c2bd035da4323580c31fcf8152}{DECLARE\_CALL\_TYPE\_METHOD}} (jchar, Char)}
+\DoxyCodeLine{133     \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a96cc76c2bd035da4323580c31fcf8152}{DECLARE\_CALL\_TYPE\_METHOD}} (jshort, Short)}
+\DoxyCodeLine{134     \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a96cc76c2bd035da4323580c31fcf8152}{DECLARE\_CALL\_TYPE\_METHOD}} (jint, Int)}
+\DoxyCodeLine{135     \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a96cc76c2bd035da4323580c31fcf8152}{DECLARE\_CALL\_TYPE\_METHOD}} (jlong, Long)}
+\DoxyCodeLine{136     \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a96cc76c2bd035da4323580c31fcf8152}{DECLARE\_CALL\_TYPE\_METHOD}} (jfloat, Float)}
+\DoxyCodeLine{137     \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a96cc76c2bd035da4323580c31fcf8152}{DECLARE\_CALL\_TYPE\_METHOD}} (jdouble, Double)}
+\DoxyCodeLine{138     \textcolor{preprocessor}{\#undef DECLARE\_CALL\_TYPE\_METHOD}}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140     \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_global_ref_a452470d18d97ff84c3e16072d4cf93ea}{callVoidMethod}} (jmethodID methodID, ... )\textcolor{keyword}{ const}}
+\DoxyCodeLine{141 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{142         va\_list args;}
+\DoxyCodeLine{143         va\_start (args, methodID);}
+\DoxyCodeLine{144         \mbox{\hyperlink{namespacejuce_a4f3642abf35d22b0f69c4361d90ce667}{getEnv}}()-\/>CallVoidMethodV (obj, methodID, args);}
+\DoxyCodeLine{145         va\_end (args);}
+\DoxyCodeLine{146     \}}
+\DoxyCodeLine{147 }
+\DoxyCodeLine{148 \textcolor{keyword}{private}:}
+\DoxyCodeLine{149     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{150     jobject obj = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{152     \textcolor{keyword}{static} jobject retain (jobject obj, JNIEnv* env)}
+\DoxyCodeLine{153     \{}
+\DoxyCodeLine{154         \textcolor{keywordflow}{return} obj == \textcolor{keyword}{nullptr} ? nullptr : env-\/>NewGlobalRef (obj);}
+\DoxyCodeLine{155     \}}
+\DoxyCodeLine{156 \};}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{158 }
+\DoxyCodeLine{159 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{160 \textcolor{keyword}{extern} LocalRef<jobject> \mbox{\hyperlink{namespacejuce_ae270c2dd4b358c3482f8950a283a36af}{getAppContext}}() noexcept;}
+\DoxyCodeLine{161 extern LocalRef<jobject> \mbox{\hyperlink{namespacejuce_a4ddd0805ae69f3d2ebf3b146c2dc5228}{getCurrentActivity}}() noexcept;}
+\DoxyCodeLine{162 extern LocalRef<jobject> \mbox{\hyperlink{namespacejuce_a546f15e25468c79fd7c195372c45b2b5}{getMainActivity}}() noexcept;}
+\DoxyCodeLine{163 }
+\DoxyCodeLine{164 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{165 struct SystemJavaClassComparator;}
+\DoxyCodeLine{166 class \mbox{\hyperlink{classjuce_1_1_j_n_i_class_base}{JNIClassBase}}}
+\DoxyCodeLine{167 \{}
+\DoxyCodeLine{168 \textcolor{keyword}{public}:}
+\DoxyCodeLine{169     \textcolor{keyword}{explicit} \mbox{\hyperlink{classjuce_1_1_j_n_i_class_base}{JNIClassBase}} (\textcolor{keyword}{const} \textcolor{keywordtype}{char}* classPath, \textcolor{keywordtype}{int} minSDK, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* byteCode, \textcolor{keywordtype}{size\_t} byteCodeSize);}
+\DoxyCodeLine{170     \textcolor{keyword}{virtual} \mbox{\hyperlink{classjuce_1_1_j_n_i_class_base}{\string~JNIClassBase}}();}
+\DoxyCodeLine{171 }
+\DoxyCodeLine{172     \textcolor{keyword}{inline} \textcolor{keyword}{operator} jclass() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept  \{ \textcolor{keywordflow}{return} classRef; \}}
+\DoxyCodeLine{173 }
+\DoxyCodeLine{174     \textcolor{keyword}{static} \textcolor{keywordtype}{void} initialiseAllClasses (JNIEnv*);}
+\DoxyCodeLine{175     \textcolor{keyword}{static} \textcolor{keywordtype}{void} releaseAllClasses (JNIEnv*);}
+\DoxyCodeLine{176 }
+\DoxyCodeLine{177     \textcolor{keyword}{inline} \textcolor{keyword}{const} \textcolor{keywordtype}{char}* \mbox{\hyperlink{classjuce_1_1_j_n_i_class_base_aca03cd9d97a677e5e199cf35578cff2e}{getClassPath}}() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept \{ \textcolor{keywordflow}{return} classPath; \}}
+\DoxyCodeLine{178 }
+\DoxyCodeLine{179 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{180     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_j_n_i_class_base_a91ad367aa063498ccce4b02b7dbb1cc1}{initialiseFields}} (JNIEnv*) = 0;}
+\DoxyCodeLine{181 }
+\DoxyCodeLine{182     jmethodID resolveMethod (JNIEnv*, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* methodName, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* \mbox{\hyperlink{namespacegl_a23c4f2997e7d61ec0804d763f22ee44c}{params}});}
+\DoxyCodeLine{183     jmethodID resolveStaticMethod (JNIEnv*, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* methodName, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* \mbox{\hyperlink{namespacegl_a23c4f2997e7d61ec0804d763f22ee44c}{params}});}
+\DoxyCodeLine{184     jfieldID resolveField (JNIEnv*, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* fieldName, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* signature);}
+\DoxyCodeLine{185     jfieldID resolveStaticField (JNIEnv*, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* fieldName, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* signature);}
+\DoxyCodeLine{186     \textcolor{keywordtype}{void} resolveCallbacks (JNIEnv*, \textcolor{keyword}{const} \mbox{\hyperlink{class_array}{Array<JNINativeMethod>}}\&);}
+\DoxyCodeLine{187 }
+\DoxyCodeLine{188 \textcolor{keyword}{private}:}
+\DoxyCodeLine{189     \textcolor{keyword}{friend} \textcolor{keyword}{struct }\mbox{\hyperlink{structjuce_1_1_system_java_class_comparator}{SystemJavaClassComparator}};}
+\DoxyCodeLine{190 }
+\DoxyCodeLine{191     \textcolor{keyword}{const} \textcolor{keywordtype}{char}* \textcolor{keyword}{const} classPath;}
+\DoxyCodeLine{192     \textcolor{keyword}{const} \textcolor{keywordtype}{void}* byteCode;}
+\DoxyCodeLine{193     \textcolor{keywordtype}{size\_t} byteCodeSize;}
+\DoxyCodeLine{194 }
+\DoxyCodeLine{195     \textcolor{keywordtype}{int} minSDK;}
+\DoxyCodeLine{196     jclass classRef = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{197 }
+\DoxyCodeLine{198     \textcolor{keyword}{static} \mbox{\hyperlink{class_array}{Array<JNIClassBase*>}}\& getClasses();}
+\DoxyCodeLine{199     \textcolor{keywordtype}{void} initialise (JNIEnv*);}
+\DoxyCodeLine{200     \textcolor{keywordtype}{void} release (JNIEnv*);}
+\DoxyCodeLine{201     \textcolor{keywordtype}{void} tryLoadingClassWithClassLoader (JNIEnv* env, jobject classLoader);}
+\DoxyCodeLine{202 }
+\DoxyCodeLine{203     \mbox{\hyperlink{group__juce__core-system_ga6ab7a603bf4435c7cb286b1744366eb2}{JUCE\_DECLARE\_NON\_COPYABLE}} (\mbox{\hyperlink{classjuce_1_1_j_n_i_class_base}{JNIClassBase}})}
+\DoxyCodeLine{204 \};}
+\DoxyCodeLine{205 }
+\DoxyCodeLine{206 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{207 \textcolor{preprocessor}{\#define CREATE\_JNI\_METHOD(methodID, stringName, params)          methodID = resolveMethod (env, stringName, params);}}
+\DoxyCodeLine{208 \textcolor{preprocessor}{\#define CREATE\_JNI\_STATICMETHOD(methodID, stringName, params)    methodID = resolveStaticMethod (env, stringName, params);}}
+\DoxyCodeLine{209 \textcolor{preprocessor}{\#define CREATE\_JNI\_FIELD(fieldID, stringName, signature)         fieldID  = resolveField (env, stringName, signature);}}
+\DoxyCodeLine{210 \textcolor{preprocessor}{\#define CREATE\_JNI\_STATICFIELD(fieldID, stringName, signature)   fieldID  = resolveStaticField (env, stringName, signature);}}
+\DoxyCodeLine{211 \textcolor{preprocessor}{\#define CREATE\_JNI\_CALLBACK(callbackName, stringName, signature) callbacks.add (\{stringName, signature, (void*) callbackName\});}}
+\DoxyCodeLine{212 \textcolor{preprocessor}{\#define DECLARE\_JNI\_METHOD(methodID, stringName, params)         jmethodID methodID;}}
+\DoxyCodeLine{213 \textcolor{preprocessor}{\#define DECLARE\_JNI\_FIELD(fieldID, stringName, signature)        jfieldID  fieldID;}}
+\DoxyCodeLine{214 \textcolor{preprocessor}{\#define DECLARE\_JNI\_CALLBACK(fieldID, stringName, signature)}}
+\DoxyCodeLine{215 }
+\DoxyCodeLine{216 \textcolor{preprocessor}{\#define DECLARE\_JNI\_CLASS\_WITH\_BYTECODE(CppClassName, javaPath, minSDK, byteCodeData, byteCodeSize) \(\backslash\)}}
+\DoxyCodeLine{217 \textcolor{preprocessor}{    class CppClassName \#\# \_Class   : public JNIClassBase \(\backslash\)}}
+\DoxyCodeLine{218 \textcolor{preprocessor}{    \{ \(\backslash\)}}
+\DoxyCodeLine{219 \textcolor{preprocessor}{    public: \(\backslash\)}}
+\DoxyCodeLine{220 \textcolor{preprocessor}{        CppClassName \#\# \_Class() : JNIClassBase (javaPath, minSDK, byteCodeData, byteCodeSize) \{\} \(\backslash\)}}
+\DoxyCodeLine{221 \textcolor{preprocessor}{    \(\backslash\)}}
+\DoxyCodeLine{222 \textcolor{preprocessor}{        void initialiseFields (JNIEnv* env) \(\backslash\)}}
+\DoxyCodeLine{223 \textcolor{preprocessor}{        \{ \(\backslash\)}}
+\DoxyCodeLine{224 \textcolor{preprocessor}{            Array<JNINativeMethod> callbacks; \(\backslash\)}}
+\DoxyCodeLine{225 \textcolor{preprocessor}{            JNI\_CLASS\_MEMBERS (CREATE\_JNI\_METHOD, CREATE\_JNI\_STATICMETHOD, CREATE\_JNI\_FIELD, CREATE\_JNI\_STATICFIELD, CREATE\_JNI\_CALLBACK); \(\backslash\)}}
+\DoxyCodeLine{226 \textcolor{preprocessor}{            resolveCallbacks (env, callbacks); \(\backslash\)}}
+\DoxyCodeLine{227 \textcolor{preprocessor}{        \} \(\backslash\)}}
+\DoxyCodeLine{228 \textcolor{preprocessor}{    \(\backslash\)}}
+\DoxyCodeLine{229 \textcolor{preprocessor}{        JNI\_CLASS\_MEMBERS (DECLARE\_JNI\_METHOD, DECLARE\_JNI\_METHOD, DECLARE\_JNI\_FIELD, DECLARE\_JNI\_FIELD, DECLARE\_JNI\_CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{230 \textcolor{preprocessor}{    \}; \(\backslash\)}}
+\DoxyCodeLine{231 \textcolor{preprocessor}{    static CppClassName \#\# \_Class CppClassName;}}
+\DoxyCodeLine{232 }
+\DoxyCodeLine{233 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{234 \textcolor{preprocessor}{\#define DECLARE\_JNI\_CLASS\_WITH\_MIN\_SDK(CppClassName, javaPath, minSDK) \(\backslash\)}}
+\DoxyCodeLine{235 \textcolor{preprocessor}{    DECLARE\_JNI\_CLASS\_WITH\_BYTECODE (CppClassName, javaPath, minSDK, nullptr, 0)}}
+\DoxyCodeLine{236 }
+\DoxyCodeLine{237 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{238 \textcolor{preprocessor}{\#define DECLARE\_JNI\_CLASS(CppClassName, javaPath) \(\backslash\)}}
+\DoxyCodeLine{239 \textcolor{preprocessor}{    DECLARE\_JNI\_CLASS\_WITH\_MIN\_SDK (CppClassName, javaPath, 16)}}
+\DoxyCodeLine{240 }
+\DoxyCodeLine{241 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{242 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{243 \textcolor{preprocessor}{ METHOD (getAssets,                            "{}getAssets"{}},                       "{}()Landroid/content/res/AssetManager;"{}) \(\backslash\)}
+\DoxyCodeLine{244  METHOD (getSystemService,                     "{}getSystemService"{},                "{}(Ljava/lang/String;)Ljava/lang/Object;"{}) \(\backslash\)}
+\DoxyCodeLine{245  METHOD (getPackageManager,                    "{}getPackageManager"{},               "{}()Landroid/content/pm/PackageManager;"{}) \(\backslash\)}
+\DoxyCodeLine{246  METHOD (getPackageName,                       "{}getPackageName"{},                  "{}()Ljava/lang/String;"{}) \(\backslash\)}
+\DoxyCodeLine{247  METHOD (getResources,                         "{}getResources"{},                    "{}()Landroid/content/res/Resources;"{}) \(\backslash\)}
+\DoxyCodeLine{248  METHOD (bindService,                          "{}bindService"{},                     "{}(Landroid/content/Intent;Landroid/content/ServiceConnection;I)Z"{}) \(\backslash\)}
+\DoxyCodeLine{249  METHOD (unbindService,                        "{}unbindService"{},                   "{}(Landroid/content/ServiceConnection;)V"{}) \(\backslash\)}
+\DoxyCodeLine{250  METHOD (startActivity,                        "{}startActivity"{},                   "{}(Landroid/content/Intent;)V"{}) \(\backslash\)}
+\DoxyCodeLine{251  METHOD (getContentResolver,                   "{}getContentResolver"{},              "{}()Landroid/content/ContentResolver;"{}) \(\backslash\)}
+\DoxyCodeLine{252  METHOD (getApplicationContext,                "{}getApplicationContext"{},           "{}()Landroid/content/Context;"{}) \(\backslash\)}
+\DoxyCodeLine{253  METHOD (getApplicationInfo,                   "{}getApplicationInfo"{},              "{}()Landroid/content/pm/ApplicationInfo;"{}) \(\backslash\)}
+\DoxyCodeLine{254  METHOD (checkCallingOrSelfPermission,         "{}checkCallingOrSelfPermission"{},    "{}(Ljava/lang/String;)I"{}) \(\backslash\)}
+\DoxyCodeLine{255  METHOD (getCacheDir,                          "{}getCacheDir"{},                     "{}()Ljava/io/File;"{})}
+\DoxyCodeLine{256 }
+\DoxyCodeLine{257 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (AndroidContext, \textcolor{stringliteral}{"{}android/content/Context"{}})}
+\DoxyCodeLine{258 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{259 }
+\DoxyCodeLine{260 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{261 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{262 \textcolor{preprocessor}{ METHOD (finish,                               "{}finish"{}},                          "{}()V"{}) \(\backslash\)}
+\DoxyCodeLine{263  METHOD (getWindowManager,                     "{}getWindowManager"{},                "{}()Landroid/view/WindowManager;"{}) \(\backslash\)}
+\DoxyCodeLine{264  METHOD (setRequestedOrientation,              "{}setRequestedOrientation"{},         "{}(I)V"{}) \(\backslash\)}
+\DoxyCodeLine{265  METHOD (startIntentSenderForResult,           "{}startIntentSenderForResult"{},      "{}(Landroid/content/IntentSender;ILandroid/content/Intent;III)V"{}) \(\backslash\)}
+\DoxyCodeLine{266  METHOD (moveTaskToBack,                       "{}moveTaskToBack"{},                  "{}(Z)Z"{}) \(\backslash\)}
+\DoxyCodeLine{267  METHOD (startActivityForResult,               "{}startActivityForResult"{},          "{}(Landroid/content/Intent;I)V"{}) \(\backslash\)}
+\DoxyCodeLine{268  METHOD (getFragmentManager,                   "{}getFragmentManager"{},              "{}()Landroid/app/FragmentManager;"{}) \(\backslash\)}
+\DoxyCodeLine{269  METHOD (setContentView,                       "{}setContentView"{},                  "{}(Landroid/view/View;)V"{}) \(\backslash\)}
+\DoxyCodeLine{270  METHOD (getWindow,                            "{}getWindow"{},                       "{}()Landroid/view/Window;"{})}
+\DoxyCodeLine{271 }
+\DoxyCodeLine{272 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (AndroidActivity, \textcolor{stringliteral}{"{}android/app/Activity"{}})}
+\DoxyCodeLine{273 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{274 }
+\DoxyCodeLine{275 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{276 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{277 \textcolor{preprocessor}{ METHOD (startActivityForResult,               "{}startActivityForResult"{}},          "{}(Landroid/content/Intent;I)V"{}) \(\backslash\)}
+\DoxyCodeLine{278  METHOD (setArguments,                         "{}setArguments"{},                    "{}(Landroid/os/Bundle;)V"{})}
+\DoxyCodeLine{279 }
+\DoxyCodeLine{280 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_aee2899905ecbbb12e9c3d56d31289078}{DECLARE\_JNI\_CLASS\_WITH\_MIN\_SDK}} (AndroidFragment, \textcolor{stringliteral}{"{}android/app/Fragment"{}}, 11)}
+\DoxyCodeLine{281 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{282 }
+\DoxyCodeLine{283 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{284 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{285 \textcolor{preprocessor}{  METHOD (build,          "{}build"{}},          "{}()Landroid/media/AudioAttributes;"{}) \(\backslash\)}
+\DoxyCodeLine{286   METHOD (constructor,    "{}<init>"{},         "{}()V"{}) \(\backslash\)}
+\DoxyCodeLine{287   METHOD (setContentType, "{}setContentType"{}, "{}(I)Landroid/media/AudioAttributes\$Builder;"{}) \(\backslash\)}
+\DoxyCodeLine{288   METHOD (setUsage,       "{}setUsage"{},       "{}(I)Landroid/media/AudioAttributes\$Builder;"{})}
+\DoxyCodeLine{289 }
+\DoxyCodeLine{290 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_aee2899905ecbbb12e9c3d56d31289078}{DECLARE\_JNI\_CLASS\_WITH\_MIN\_SDK}} (AndroidAudioAttributesBuilder, \textcolor{stringliteral}{"{}android/media/AudioAttributes\$Builder"{}}, 21)}
+\DoxyCodeLine{291 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{292 }
+\DoxyCodeLine{293 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{294 \textcolor{preprocessor}{  METHOD (abandonAudioFocus, "{}abandonAudioFocus"{}}, "{}(Landroid/media/AudioManager\$OnAudioFocusChangeListener;)I"{}) \(\backslash\)}
+\DoxyCodeLine{295   METHOD (requestAudioFocus, "{}requestAudioFocus"{}, "{}(Landroid/media/AudioManager\$OnAudioFocusChangeListener;II)I"{})}
+\DoxyCodeLine{296 }
+\DoxyCodeLine{297 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (AndroidAudioManager, \textcolor{stringliteral}{"{}android/media/AudioManager"{}})}
+\DoxyCodeLine{298 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{299 }
+\DoxyCodeLine{300 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{301 \textcolor{preprocessor}{  STATICMETHOD (createBitmap,     "{}createBitmap"{}}, "{}(IILandroid/graphics/Bitmap\$Config;)Landroid/graphics/Bitmap;"{}) \(\backslash\)}
+\DoxyCodeLine{302   STATICMETHOD (createBitmapFrom, "{}createBitmap"{}, "{}(Landroid/graphics/Bitmap;IIIILandroid/graphics/Matrix;Z)Landroid/graphics/Bitmap;"{}) \(\backslash\)}
+\DoxyCodeLine{303   METHOD (compress,  "{}compress"{},  "{}(Landroid/graphics/Bitmap\$CompressFormat;ILjava/io/OutputStream;)Z"{}) \(\backslash\)}
+\DoxyCodeLine{304   METHOD (getHeight, "{}getHeight"{}, "{}()I"{}) \(\backslash\)}
+\DoxyCodeLine{305   METHOD (getWidth,  "{}getWidth"{},  "{}()I"{}) \(\backslash\)}
+\DoxyCodeLine{306   METHOD (recycle,   "{}recycle"{},   "{}()V"{}) \(\backslash\)}
+\DoxyCodeLine{307   METHOD (setPixel,  "{}setPixel"{},  "{}(III)V"{}) \(\backslash\)}
+\DoxyCodeLine{308   METHOD (getPixels, "{}getPixels"{},  "{}([IIIIIII)V"{})}
+\DoxyCodeLine{309 }
+\DoxyCodeLine{310 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (AndroidBitmap, \textcolor{stringliteral}{"{}android/graphics/Bitmap"{}})}
+\DoxyCodeLine{311 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{312 }
+\DoxyCodeLine{313 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{314 \textcolor{preprocessor}{  STATICMETHOD (valueOf, "{}valueOf"{}}, "{}(Ljava/lang/String;)Landroid/graphics/Bitmap\$Config;"{})}
+\DoxyCodeLine{315 }
+\DoxyCodeLine{316 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (AndroidBitmapConfig, \textcolor{stringliteral}{"{}android/graphics/Bitmap\$Config"{}})}
+\DoxyCodeLine{317 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{318 }
+\DoxyCodeLine{319 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{320 \textcolor{preprocessor}{  STATICMETHOD (decodeByteArray, "{}decodeByteArray"{}}, "{}([BII)Landroid/graphics/Bitmap;"{})}
+\DoxyCodeLine{321 }
+\DoxyCodeLine{322 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (AndroidBitmapFactory, \textcolor{stringliteral}{"{}android/graphics/BitmapFactory"{}})}
+\DoxyCodeLine{323 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{324 }
+\DoxyCodeLine{325 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK)    \(\backslash\)}}
+\DoxyCodeLine{326 \textcolor{preprocessor}{  METHOD (constructor,        "{}<init>"{}},             "{}()V"{}) \(\backslash\)}
+\DoxyCodeLine{327   METHOD (containsKey,        "{}containsKey"{},        "{}(Ljava/lang/String;)Z"{}) \(\backslash\)}
+\DoxyCodeLine{328   METHOD (get,                "{}get"{},                "{}(Ljava/lang/String;)Ljava/lang/Object;"{}) \(\backslash\)}
+\DoxyCodeLine{329   METHOD (getBoolean,         "{}getBoolean"{},         "{}(Ljava/lang/String;)Z"{}) \(\backslash\)}
+\DoxyCodeLine{330   METHOD (getBundle,          "{}getBundle"{},          "{}(Ljava/lang/String;)Landroid/os/Bundle;"{}) \(\backslash\)}
+\DoxyCodeLine{331   METHOD (getCharSequence,    "{}getCharSequence"{},    "{}(Ljava/lang/String;)Ljava/lang/CharSequence;"{}) \(\backslash\)}
+\DoxyCodeLine{332   METHOD (getInt,             "{}getInt"{},             "{}(Ljava/lang/String;)I"{}) \(\backslash\)}
+\DoxyCodeLine{333   METHOD (getLong,            "{}getLong"{},            "{}(Ljava/lang/String;)J"{}) \(\backslash\)}
+\DoxyCodeLine{334   METHOD (getLongArray,       "{}getLongArray"{},       "{}(Ljava/lang/String;)[J"{}) \(\backslash\)}
+\DoxyCodeLine{335   METHOD (getParcelable,      "{}getParcelable"{},      "{}(Ljava/lang/String;)Landroid/os/Parcelable;"{}) \(\backslash\)}
+\DoxyCodeLine{336   METHOD (getString,          "{}getString"{},          "{}(Ljava/lang/String;)Ljava/lang/String;"{}) \(\backslash\)}
+\DoxyCodeLine{337   METHOD (getStringArrayList, "{}getStringArrayList"{}, "{}(Ljava/lang/String;)Ljava/util/ArrayList;"{}) \(\backslash\)}
+\DoxyCodeLine{338   METHOD (keySet,             "{}keySet"{},             "{}()Ljava/util/Set;"{}) \(\backslash\)}
+\DoxyCodeLine{339   METHOD (putBoolean,         "{}putBoolean"{},         "{}(Ljava/lang/String;Z)V"{}) \(\backslash\)}
+\DoxyCodeLine{340   METHOD (putBundle,          "{}putBundle"{},          "{}(Ljava/lang/String;Landroid/os/Bundle;)V"{}) \(\backslash\)}
+\DoxyCodeLine{341   METHOD (putFloat,           "{}putFloat"{},           "{}(Ljava/lang/String;F)V"{}) \(\backslash\)}
+\DoxyCodeLine{342   METHOD (putInt,             "{}putInt"{},             "{}(Ljava/lang/String;I)V"{}) \(\backslash\)}
+\DoxyCodeLine{343   METHOD (putLong,            "{}putLong"{},            "{}(Ljava/lang/String;J)V"{}) \(\backslash\)}
+\DoxyCodeLine{344   METHOD (putLongArray,       "{}putLongArray"{},       "{}(Ljava/lang/String;[J)V"{}) \(\backslash\)}
+\DoxyCodeLine{345   METHOD (putString,          "{}putString"{},          "{}(Ljava/lang/String;Ljava/lang/String;)V"{}) \(\backslash\)}
+\DoxyCodeLine{346   METHOD (putStringArrayList, "{}putStringArrayList"{}, "{}(Ljava/lang/String;Ljava/util/ArrayList;)V"{})}
+\DoxyCodeLine{347 }
+\DoxyCodeLine{348 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (AndroidBundle, \textcolor{stringliteral}{"{}android/os/Bundle"{}})}
+\DoxyCodeLine{349 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{350 }
+\DoxyCodeLine{351 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{352 \textcolor{preprocessor}{  STATICMETHOD (dumpReferenceTables, "{}dumpReferenceTables"{}}, "{}()V"{})}
+\DoxyCodeLine{353 }
+\DoxyCodeLine{354   \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (AndroidDebug, \textcolor{stringliteral}{"{}android/os/Debug"{}})}
+\DoxyCodeLine{355 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{356 }
+\DoxyCodeLine{357 \textcolor{preprocessor}{\#define JUCE\_LOG\_JNI\_REFERENCES\_TABLE getEnv()-\/>CallStaticVoidMethod (AndroidDebug, AndroidDebug.dumpReferenceTables);}}
+\DoxyCodeLine{358 }
+\DoxyCodeLine{359 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{360 \textcolor{preprocessor}{ METHOD (getRotation, "{}getRotation"{}}, "{}()I"{}) \(\backslash\)}
+\DoxyCodeLine{361  METHOD (getMetrics,  "{}getMetrics"{},  "{}(Landroid/util/DisplayMetrics;)V"{} ) \(\backslash\)}
+\DoxyCodeLine{362  METHOD (getSize,     "{}getSize"{},     "{}(Landroid/graphics/Point;)V"{} )}
+\DoxyCodeLine{363 }
+\DoxyCodeLine{364 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (AndroidDisplay, \textcolor{stringliteral}{"{}android/view/Display"{}})}
+\DoxyCodeLine{365 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{366 }
+\DoxyCodeLine{367 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{368 \textcolor{preprocessor}{  METHOD (constructor,           "{}<init>"{}},      "{}()V"{}) \(\backslash\)}
+\DoxyCodeLine{369   METHOD (constructorWithLooper, "{}<init>"{},      "{}(Landroid/os/Looper;)V"{}) \(\backslash\)}
+\DoxyCodeLine{370   METHOD (post,                  "{}post"{},        "{}(Ljava/lang/Runnable;)Z"{}) \(\backslash\)}
+\DoxyCodeLine{371   METHOD (postDelayed,           "{}postDelayed"{}, "{}(Ljava/lang/Runnable;J)Z"{}) \(\backslash\)}
+\DoxyCodeLine{372 }
+\DoxyCodeLine{373 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (AndroidHandler, \textcolor{stringliteral}{"{}android/os/Handler"{}})}
+\DoxyCodeLine{374 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{375 }
+\DoxyCodeLine{376 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{377 \textcolor{preprocessor}{  METHOD (constructor, "{}<init>"{}},     "{}(Ljava/lang/String;)V"{}) \(\backslash\)}
+\DoxyCodeLine{378   METHOD (getLooper,   "{}getLooper"{},  "{}()Landroid/os/Looper;"{}) \(\backslash\)}
+\DoxyCodeLine{379   METHOD (join,        "{}join"{},       "{}()V"{}) \(\backslash\)}
+\DoxyCodeLine{380   METHOD (start,       "{}start"{},      "{}()V"{})}
+\DoxyCodeLine{381 }
+\DoxyCodeLine{382 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (AndroidHandlerThread, \textcolor{stringliteral}{"{}android/os/HandlerThread"{}})}
+\DoxyCodeLine{383 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{384 }
+\DoxyCodeLine{385 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{386 \textcolor{preprocessor}{  STATICMETHOD (createChooser, "{}createChooser"{}}, "{}(Landroid/content/Intent;Ljava/lang/CharSequence;)Landroid/content/Intent;"{}) \(\backslash\)}
+\DoxyCodeLine{387   METHOD (addCategory,                    "{}addCategory"{},    "{}(Ljava/lang/String;)Landroid/content/Intent;"{}) \(\backslash\)}
+\DoxyCodeLine{388   METHOD (constructor,                    "{}<init>"{},         "{}()V"{}) \(\backslash\)}
+\DoxyCodeLine{389   METHOD (constructorWithContextAndClass, "{}<init>"{},         "{}(Landroid/content/Context;Ljava/lang/Class;)V"{}) \(\backslash\)}
+\DoxyCodeLine{390   METHOD (constructWithString,            "{}<init>"{},         "{}(Ljava/lang/String;)V"{}) \(\backslash\)}
+\DoxyCodeLine{391   METHOD (constructWithUri,               "{}<init>"{},         "{}(Ljava/lang/String;Landroid/net/Uri;)V"{}) \(\backslash\)}
+\DoxyCodeLine{392   METHOD (getAction,                      "{}getAction"{},      "{}()Ljava/lang/String;"{}) \(\backslash\)}
+\DoxyCodeLine{393   METHOD (getCategories,                  "{}getCategories"{},  "{}()Ljava/util/Set;"{}) \(\backslash\)}
+\DoxyCodeLine{394   METHOD (getData,                        "{}getData"{},        "{}()Landroid/net/Uri;"{}) \(\backslash\)}
+\DoxyCodeLine{395   METHOD (getExtras,                      "{}getExtras"{},      "{}()Landroid/os/Bundle;"{}) \(\backslash\)}
+\DoxyCodeLine{396   METHOD (getIntExtra,                    "{}getIntExtra"{},    "{}(Ljava/lang/String;I)I"{}) \(\backslash\)}
+\DoxyCodeLine{397   METHOD (getStringExtra,                 "{}getStringExtra"{}, "{}(Ljava/lang/String;)Ljava/lang/String;"{}) \(\backslash\)}
+\DoxyCodeLine{398   METHOD (putExtra,                       "{}putExtra"{},       "{}(Ljava/lang/String;Ljava/lang/CharSequence;)Landroid/content/Intent;"{}) \(\backslash\)}
+\DoxyCodeLine{399   METHOD (putExtras,                      "{}putExtras"{},      "{}(Landroid/os/Bundle;)Landroid/content/Intent;"{}) \(\backslash\)}
+\DoxyCodeLine{400   METHOD (putExtraString,                 "{}putExtra"{},       "{}(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;"{}) \(\backslash\)}
+\DoxyCodeLine{401   METHOD (putExtraStrings,                "{}putExtra"{},       "{}(Ljava/lang/String;[Ljava/lang/String;)Landroid/content/Intent;"{}) \(\backslash\)}
+\DoxyCodeLine{402   METHOD (putExtraParcelable,             "{}putExtra"{},       "{}(Ljava/lang/String;Landroid/os/Parcelable;)Landroid/content/Intent;"{}) \(\backslash\)}
+\DoxyCodeLine{403   METHOD (putParcelableArrayListExtra,    "{}putParcelableArrayListExtra"{}, "{}(Ljava/lang/String;Ljava/util/ArrayList;)Landroid/content/Intent;"{}) \(\backslash\)}
+\DoxyCodeLine{404   METHOD (setAction,                      "{}setAction"{},      "{}(Ljava/lang/String;)Landroid/content/Intent;"{}) \(\backslash\)}
+\DoxyCodeLine{405   METHOD (setFlags,                       "{}setFlags"{},       "{}(I)Landroid/content/Intent;"{}) \(\backslash\)}
+\DoxyCodeLine{406   METHOD (setPackage,                     "{}setPackage"{},     "{}(Ljava/lang/String;)Landroid/content/Intent;"{}) \(\backslash\)}
+\DoxyCodeLine{407   METHOD (setType,                        "{}setType"{},        "{}(Ljava/lang/String;)Landroid/content/Intent;"{}) \(\backslash\)}
+\DoxyCodeLine{408 }
+\DoxyCodeLine{409 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (AndroidIntent, \textcolor{stringliteral}{"{}android/content/Intent"{}})}
+\DoxyCodeLine{410 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{411 }
+\DoxyCodeLine{412 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{413 \textcolor{preprocessor}{ METHOD (constructor,    "{}<init>"{}},        "{}()V"{}) \(\backslash\)}
+\DoxyCodeLine{414  METHOD (postRotate,     "{}postRotate"{},    "{}(FFF)Z"{}) \(\backslash\)}
+\DoxyCodeLine{415  METHOD (postScale,      "{}postScale"{},     "{}(FFFF)Z"{}) \(\backslash\)}
+\DoxyCodeLine{416  METHOD (postTranslate,  "{}postTranslate"{}, "{}(FF)Z"{}) \(\backslash\)}
+\DoxyCodeLine{417  METHOD (setValues,      "{}setValues"{},     "{}([F)V"{}) \(\backslash\)}
+\DoxyCodeLine{418  METHOD (mapRect,        "{}mapRect"{},       "{}(Landroid/graphics/RectF;)Z"{})}
+\DoxyCodeLine{419 }
+\DoxyCodeLine{420 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (AndroidMatrix, \textcolor{stringliteral}{"{}android/graphics/Matrix"{}})}
+\DoxyCodeLine{421 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{422 }
+\DoxyCodeLine{423 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{424 \textcolor{preprocessor}{ METHOD (getPackageInfo, "{}getPackageInfo"{}}, "{}(Ljava/lang/String;I)Landroid/content/pm/PackageInfo;"{}) \(\backslash\)}
+\DoxyCodeLine{425  METHOD (resolveActivity, "{}resolveActivity"{}, "{}(Landroid/content/Intent;I)Landroid/content/pm/ResolveInfo;"{}) \(\backslash\)}
+\DoxyCodeLine{426  METHOD (hasSystemFeature, "{}hasSystemFeature"{}, "{}(Ljava/lang/String;)Z"{})}
+\DoxyCodeLine{427 }
+\DoxyCodeLine{428 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (AndroidPackageManager, \textcolor{stringliteral}{"{}android/content/pm/PackageManager"{}})}
+\DoxyCodeLine{429 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{430 }
+\DoxyCodeLine{431 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{432 \textcolor{preprocessor}{ FIELD (requestedPermissions,   "{}requestedPermissions"{}},   "{}[Ljava/lang/String;"{}) \(\backslash\)}
+\DoxyCodeLine{433  FIELD (activities,             "{}activities"{},             "{}[Landroid/content/pm/ActivityInfo;"{}) \(\backslash\)}
+\DoxyCodeLine{434  FIELD (providers,              "{}providers"{},              "{}[Landroid/content/pm/ProviderInfo;"{})}
+\DoxyCodeLine{435 }
+\DoxyCodeLine{436  \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (AndroidPackageInfo, \textcolor{stringliteral}{"{}android/content/pm/PackageInfo"{}})}
+\DoxyCodeLine{437 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{438 }
+\DoxyCodeLine{439 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{440 \textcolor{preprocessor}{ FIELD (name,        "{}name"{}},        "{}Ljava/lang/String;"{}) \(\backslash\)}
+\DoxyCodeLine{441  FIELD (packageName, "{}packageName"{}, "{}Ljava/lang/String;"{})}
+\DoxyCodeLine{442 }
+\DoxyCodeLine{443  \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (AndroidPackageItemInfo, \textcolor{stringliteral}{"{}android/content/pm/PackageItemInfo"{}})}
+\DoxyCodeLine{444 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{445 }
+\DoxyCodeLine{446 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{447 \textcolor{preprocessor}{ METHOD (constructor,   "{}<init>"{}},           "{}(I)V"{}) \(\backslash\)}
+\DoxyCodeLine{448  METHOD (setColor,      "{}setColor"{},         "{}(I)V"{}) \(\backslash\)}
+\DoxyCodeLine{449  METHOD (setAlpha,      "{}setAlpha"{},         "{}(I)V"{}) \(\backslash\)}
+\DoxyCodeLine{450  METHOD (setTypeface,   "{}setTypeface"{},      "{}(Landroid/graphics/Typeface;)Landroid/graphics/Typeface;"{}) \(\backslash\)}
+\DoxyCodeLine{451  METHOD (ascent,        "{}ascent"{},           "{}()F"{}) \(\backslash\)}
+\DoxyCodeLine{452  METHOD (descent,       "{}descent"{},          "{}()F"{}) \(\backslash\)}
+\DoxyCodeLine{453  METHOD (setTextSize,   "{}setTextSize"{},      "{}(F)V"{}) \(\backslash\)}
+\DoxyCodeLine{454  METHOD (getTextWidths, "{}getTextWidths"{},    "{}(Ljava/lang/String;[F)I"{}) \(\backslash\)}
+\DoxyCodeLine{455  METHOD (setTextScaleX, "{}setTextScaleX"{},    "{}(F)V"{}) \(\backslash\)}
+\DoxyCodeLine{456  METHOD (getTextPath,   "{}getTextPath"{},      "{}(Ljava/lang/String;IIFFLandroid/graphics/Path;)V"{}) \(\backslash\)}
+\DoxyCodeLine{457  METHOD (getCharsPath,  "{}getTextPath"{},      "{}([CIIFFLandroid/graphics/Path;)V"{}) \(\backslash\)}
+\DoxyCodeLine{458  METHOD (setShader,     "{}setShader"{},        "{}(Landroid/graphics/Shader;)Landroid/graphics/Shader;"{}) \(\backslash\)}
+\DoxyCodeLine{459 }
+\DoxyCodeLine{460 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (AndroidPaint, \textcolor{stringliteral}{"{}android/graphics/Paint"{}})}
+\DoxyCodeLine{461 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{462 }
+\DoxyCodeLine{463 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{464 \textcolor{preprocessor}{ METHOD (create,          "{}<init>"{}},           "{}(Landroid/graphics/Bitmap;)V"{}) \(\backslash\)}
+\DoxyCodeLine{465  METHOD (setMatrix,       "{}setMatrix"{},        "{}(Landroid/graphics/Matrix;)V"{}) \(\backslash\)}
+\DoxyCodeLine{466  METHOD (drawPath,        "{}drawPath"{},         "{}(Landroid/graphics/Path;Landroid/graphics/Paint;)V"{}) \(\backslash\)}
+\DoxyCodeLine{467  METHOD (drawBitmap,      "{}drawBitmap"{},       "{}([IIIFFIIZLandroid/graphics/Paint;)V"{}) \(\backslash\)}
+\DoxyCodeLine{468  METHOD (getClipBounds,   "{}getClipBounds"{},    "{}()Landroid/graphics/Rect;"{})}
+\DoxyCodeLine{469 }
+\DoxyCodeLine{470  \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (AndroidCanvas, \textcolor{stringliteral}{"{}android/graphics/Canvas"{}})}
+\DoxyCodeLine{471 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{472 }
+\DoxyCodeLine{473 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{474 \textcolor{preprocessor}{  STATICMETHOD (getActivity, "{}getActivity"{}}, "{}(Landroid/content/Context;ILandroid/content/Intent;I)Landroid/app/PendingIntent;"{}) \(\backslash\)}
+\DoxyCodeLine{475   METHOD (getIntentSender, "{}getIntentSender"{}, "{}()Landroid/content/IntentSender;"{})}
+\DoxyCodeLine{476 }
+\DoxyCodeLine{477 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (AndroidPendingIntent, \textcolor{stringliteral}{"{}android/app/PendingIntent"{}})}
+\DoxyCodeLine{478 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{479 }
+\DoxyCodeLine{480 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{481 \textcolor{preprocessor}{  METHOD (toString, "{}toString"{}}, "{}()Ljava/lang/String;"{})}
+\DoxyCodeLine{482 }
+\DoxyCodeLine{483 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_aee2899905ecbbb12e9c3d56d31289078}{DECLARE\_JNI\_CLASS\_WITH\_MIN\_SDK}} (AndroidRange, \textcolor{stringliteral}{"{}android/util/Range"{}}, 21)}
+\DoxyCodeLine{484 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{485 }
+\DoxyCodeLine{486 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{487 \textcolor{preprocessor}{ METHOD (create,   "{}<init>"{}},   "{}(II)V"{}) \(\backslash\)}
+\DoxyCodeLine{488  FIELD  (x,        "{}x"{},        "{}I"{}) \(\backslash\)}
+\DoxyCodeLine{489  FIELD  (y,        "{}y"{},        "{}I"{})}
+\DoxyCodeLine{490 }
+\DoxyCodeLine{491 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (AndroidPoint, \textcolor{stringliteral}{"{}android/graphics/Point"{}})}
+\DoxyCodeLine{492 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{493 }
+\DoxyCodeLine{494 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{495 \textcolor{preprocessor}{ METHOD (constructor,   "{}<init>"{}},   "{}(IIII)V"{}) \(\backslash\)}
+\DoxyCodeLine{496  FIELD (left,           "{}left"{},     "{}I"{}) \(\backslash\)}
+\DoxyCodeLine{497  FIELD (right,          "{}right"{},    "{}I"{}) \(\backslash\)}
+\DoxyCodeLine{498  FIELD (top,            "{}top"{},      "{}I"{}) \(\backslash\)}
+\DoxyCodeLine{499  FIELD (bottom,         "{}bottom"{},   "{}I"{})}
+\DoxyCodeLine{500 }
+\DoxyCodeLine{501 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (AndroidRect, \textcolor{stringliteral}{"{}android/graphics/Rect"{}})}
+\DoxyCodeLine{502 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{503 }
+\DoxyCodeLine{504 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{505 \textcolor{preprocessor}{  METHOD (getIdentifier,     "{}getIdentifier"{}},     "{}(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I"{}) \(\backslash\)}
+\DoxyCodeLine{506   METHOD (openRawResourceFd, "{}openRawResourceFd"{}, "{}(I)Landroid/content/res/AssetFileDescriptor;"{}) \(\backslash\)}
+\DoxyCodeLine{507   METHOD (getConfiguration,  "{}getConfiguration"{},  "{}()Landroid/content/res/Configuration;"{})}
+\DoxyCodeLine{508 }
+\DoxyCodeLine{509 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (AndroidResources, \textcolor{stringliteral}{"{}android/content/res/Resources"{}})}
+\DoxyCodeLine{510 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{511 }
+\DoxyCodeLine{512 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{513 \textcolor{preprocessor}{  FIELD  (uiMode, "{}uiMode"{}}, "{}I"{}) \(\backslash\)}
+\DoxyCodeLine{514 }
+\DoxyCodeLine{515 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (AndroidConfiguration, \textcolor{stringliteral}{"{}android/content/res/Configuration"{}})}
+\DoxyCodeLine{516 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{517 }
+\DoxyCodeLine{518 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{519 \textcolor{preprocessor}{  METHOD (getHeight, "{}getHeight"{}}, "{}()I"{}) \(\backslash\)}
+\DoxyCodeLine{520   METHOD (getWidth,  "{}getWidth"{},  "{}()I"{})}
+\DoxyCodeLine{521 }
+\DoxyCodeLine{522 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_aee2899905ecbbb12e9c3d56d31289078}{DECLARE\_JNI\_CLASS\_WITH\_MIN\_SDK}} (AndroidSize, \textcolor{stringliteral}{"{}android/util/Size"{}}, 21)}
+\DoxyCodeLine{523 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{524 }
+\DoxyCodeLine{525 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{526 \textcolor{preprocessor}{  STATICMETHOD (parse, "{}parse"{}}, "{}(Ljava/lang/String;)Landroid/net/Uri;"{}) \(\backslash\)}
+\DoxyCodeLine{527   METHOD (toString, "{}toString"{}, "{}()Ljava/lang/String;"{})}
+\DoxyCodeLine{528 }
+\DoxyCodeLine{529 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (AndroidUri, \textcolor{stringliteral}{"{}android/net/Uri"{}})}
+\DoxyCodeLine{530 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{531 }
+\DoxyCodeLine{532 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{533 \textcolor{preprocessor}{ METHOD (construct,                 "{}<init>"{}},                    "{}(Landroid/content/Context;)V"{}) \(\backslash\)}
+\DoxyCodeLine{534  METHOD (layout,                    "{}layout"{},                    "{}(IIII)V"{}) \(\backslash\)}
+\DoxyCodeLine{535  METHOD (getLeft,                   "{}getLeft"{},                   "{}()I"{}) \(\backslash\)}
+\DoxyCodeLine{536  METHOD (getTop,                    "{}getTop"{},                    "{}()I"{}) \(\backslash\)}
+\DoxyCodeLine{537  METHOD (getWidth,                  "{}getWidth"{},                  "{}()I"{}) \(\backslash\)}
+\DoxyCodeLine{538  METHOD (getHeight,                 "{}getHeight"{},                 "{}()I"{}) \(\backslash\)}
+\DoxyCodeLine{539  METHOD (getLocationOnScreen,       "{}getLocationOnScreen"{},       "{}([I)V"{}) \(\backslash\)}
+\DoxyCodeLine{540  METHOD (getParent,                 "{}getParent"{},                 "{}()Landroid/view/ViewParent;"{}) \(\backslash\)}
+\DoxyCodeLine{541  METHOD (bringToFront,              "{}bringToFront"{},              "{}()V"{}) \(\backslash\)}
+\DoxyCodeLine{542  METHOD (requestFocus,              "{}requestFocus"{},              "{}()Z"{}) \(\backslash\)}
+\DoxyCodeLine{543  METHOD (hasFocus,                  "{}hasFocus"{},                  "{}()Z"{}) \(\backslash\)}
+\DoxyCodeLine{544  METHOD (invalidate,                "{}invalidate"{},                "{}(IIII)V"{}) \(\backslash\)}
+\DoxyCodeLine{545  METHOD (setVisibility,             "{}setVisibility"{},             "{}(I)V"{}) \(\backslash\)}
+\DoxyCodeLine{546  METHOD (setLayoutParams,           "{}setLayoutParams"{},           "{}(Landroid/view/ViewGroup\$LayoutParams;)V"{}) \(\backslash\)}
+\DoxyCodeLine{547  METHOD (setSystemUiVisibility,     "{}setSystemUiVisibility"{},     "{}(I)V"{}) \(\backslash\)}
+\DoxyCodeLine{548  METHOD (findViewById,              "{}findViewById"{},              "{}(I)Landroid/view/View;"{}) \(\backslash\)}
+\DoxyCodeLine{549  METHOD (getRootView,               "{}getRootView"{},               "{}()Landroid/view/View;"{}) \(\backslash\)}
+\DoxyCodeLine{550  METHOD (addOnLayoutChangeListener, "{}addOnLayoutChangeListener"{}, "{}(Landroid/view/View\$OnLayoutChangeListener;)V"{}) \(\backslash\)}
+\DoxyCodeLine{551  METHOD (announceForAccessibility,  "{}announceForAccessibility"{},  "{}(Ljava/lang/CharSequence;)V"{}) \(\backslash\)}
+\DoxyCodeLine{552 }
+\DoxyCodeLine{553 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (AndroidView, \textcolor{stringliteral}{"{}android/view/View"{}})}
+\DoxyCodeLine{554 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{555 }
+\DoxyCodeLine{556 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{557 \textcolor{preprocessor}{ METHOD (addView,                       "{}addView"{}},                       "{}(Landroid/view/View;)V"{}) \(\backslash\)}
+\DoxyCodeLine{558  METHOD (removeView,                    "{}removeView"{},                    "{}(Landroid/view/View;)V"{}) \(\backslash\)}
+\DoxyCodeLine{559  METHOD (requestSendAccessibilityEvent, "{}requestSendAccessibilityEvent"{}, "{}(Landroid/view/View;Landroid/view/accessibility/AccessibilityEvent;)Z"{}) \(\backslash\)}
+\DoxyCodeLine{560 }
+\DoxyCodeLine{561 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (AndroidViewGroup, \textcolor{stringliteral}{"{}android/view/ViewGroup"{}})}
+\DoxyCodeLine{562 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{563 }
+\DoxyCodeLine{564 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{565 \textcolor{preprocessor}{ METHOD (getDecorView, "{}getDecorView"{}},       "{}()Landroid/view/View;"{}) \(\backslash\)}
+\DoxyCodeLine{566  METHOD (setFlags,     "{}setFlags"{},           "{}(II)V"{}) \(\backslash\)}
+\DoxyCodeLine{567  METHOD (clearFlags,   "{}clearFlags"{},         "{}(I)V"{})}
+\DoxyCodeLine{568 }
+\DoxyCodeLine{569 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (AndroidWindow, \textcolor{stringliteral}{"{}android/view/Window"{}})}
+\DoxyCodeLine{570 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{571 }
+\DoxyCodeLine{572 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{573 \textcolor{preprocessor}{ METHOD (getDefaultDisplay, "{}getDefaultDisplay"{}}, "{}()Landroid/view/Display;"{})}
+\DoxyCodeLine{574 }
+\DoxyCodeLine{575 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (AndroidWindowManager, \textcolor{stringliteral}{"{}android/view/WindowManager"{}})}
+\DoxyCodeLine{576 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{577 }
+\DoxyCodeLine{578 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{579 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{580 \textcolor{preprocessor}{  METHOD (constructor, "{}<init>"{}},   "{}(I)V"{}) \(\backslash\)}
+\DoxyCodeLine{581   METHOD (add,         "{}add"{},      "{}(Ljava/lang/Object;)Z"{}) \(\backslash\)}
+\DoxyCodeLine{582   METHOD (iterator,    "{}iterator"{}, "{}()Ljava/util/Iterator;"{}) \(\backslash\)}
+\DoxyCodeLine{583   METHOD (get,         "{}get"{},      "{}(I)Ljava/lang/Object;"{}) \(\backslash\)}
+\DoxyCodeLine{584   METHOD (size,        "{}size"{},     "{}()I"{})}
+\DoxyCodeLine{585 }
+\DoxyCodeLine{586 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (JavaArrayList, \textcolor{stringliteral}{"{}java/util/ArrayList"{}})}
+\DoxyCodeLine{587 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{588 }
+\DoxyCodeLine{589 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{590 \textcolor{preprocessor}{  STATICMETHOD (valueOf, "{}valueOf"{}}, "{}(Z)Ljava/lang/Boolean;"{}) \(\backslash\)}
+\DoxyCodeLine{591   METHOD (booleanValue, "{}booleanValue"{}, "{}()Z"{})}
+\DoxyCodeLine{592 }
+\DoxyCodeLine{593 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (JavaBoolean, \textcolor{stringliteral}{"{}java/lang/Boolean"{}})}
+\DoxyCodeLine{594 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{595 }
+\DoxyCodeLine{596 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{597 \textcolor{preprocessor}{  METHOD (get,        "{}get"{}},       "{}([B)Ljava/nio/ByteBuffer;"{}) \(\backslash\)}
+\DoxyCodeLine{598   METHOD (remaining,  "{}remaining"{}, "{}()I"{}) \(\backslash\)}
+\DoxyCodeLine{599   STATICMETHOD (wrap, "{}wrap"{},      "{}([B)Ljava/nio/ByteBuffer;"{})}
+\DoxyCodeLine{600 }
+\DoxyCodeLine{601 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (JavaByteBuffer, \textcolor{stringliteral}{"{}java/nio/ByteBuffer"{}})}
+\DoxyCodeLine{602 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{603 }
+\DoxyCodeLine{604 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{605 \textcolor{preprocessor}{  METHOD (toString, "{}toString"{}}, "{}()Ljava/lang/String;"{})}
+\DoxyCodeLine{606 }
+\DoxyCodeLine{607 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (JavaCharSequence, \textcolor{stringliteral}{"{}java/lang/CharSequence"{}})}
+\DoxyCodeLine{608 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{609 }
+\DoxyCodeLine{610 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{611 \textcolor{preprocessor}{  STATICMETHOD (forName, "{}forName"{}}, "{}(Ljava/lang/String;)Ljava/lang/Class;"{}) \(\backslash\)}
+\DoxyCodeLine{612   METHOD (getName,           "{}getName"{},           "{}()Ljava/lang/String;"{}) \(\backslash\)}
+\DoxyCodeLine{613   METHOD (getModifiers,      "{}getModifiers"{},      "{}()I"{})            \(\backslash\)}
+\DoxyCodeLine{614   METHOD (isAnnotation,      "{}isAnnotation"{},      "{}()Z"{}) \(\backslash\)}
+\DoxyCodeLine{615   METHOD (isAnonymousClass,  "{}isAnonymousClass"{},  "{}()Z"{}) \(\backslash\)}
+\DoxyCodeLine{616   METHOD (isArray,           "{}isArray"{},           "{}()Z"{}) \(\backslash\)}
+\DoxyCodeLine{617   METHOD (isEnum,            "{}isEnum"{},            "{}()Z"{}) \(\backslash\)}
+\DoxyCodeLine{618   METHOD (isInterface,       "{}isInterface"{},       "{}()Z"{}) \(\backslash\)}
+\DoxyCodeLine{619   METHOD (isLocalClass,      "{}isLocalClass"{},      "{}()Z"{}) \(\backslash\)}
+\DoxyCodeLine{620   METHOD (isMemberClass,     "{}isMemberClass"{},     "{}()Z"{}) \(\backslash\)}
+\DoxyCodeLine{621   METHOD (isPrimitive,       "{}isPrimitive"{},       "{}()Z"{}) \(\backslash\)}
+\DoxyCodeLine{622   METHOD (isSynthetic,       "{}isSynthetic"{},       "{}()Z"{}) \(\backslash\)}
+\DoxyCodeLine{623   METHOD (getComponentType,  "{}getComponentType"{},  "{}()Ljava/lang/Class;"{}) \(\backslash\)}
+\DoxyCodeLine{624   METHOD (getSuperclass,     "{}getSuperclass"{},     "{}()Ljava/lang/Class;"{}) \(\backslash\)}
+\DoxyCodeLine{625   METHOD (getClassLoader,    "{}getClassLoader"{},    "{}()Ljava/lang/ClassLoader;"{}) \(\backslash\)}
+\DoxyCodeLine{626 }
+\DoxyCodeLine{627 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (JavaClass, \textcolor{stringliteral}{"{}java/lang/Class"{}})}
+\DoxyCodeLine{628 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{629 }
+\DoxyCodeLine{630 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{631 \textcolor{preprocessor}{  METHOD (toString, "{}toString"{}}, "{}()Ljava/lang/String;"{})}
+\DoxyCodeLine{632 }
+\DoxyCodeLine{633 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (JavaEnum, \textcolor{stringliteral}{"{}java/lang/Enum"{}})}
+\DoxyCodeLine{634 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{635 }
+\DoxyCodeLine{636 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{637 \textcolor{preprocessor}{ METHOD (constructor,     "{}<init>"{}},          "{}(Ljava/lang/String;)V"{}) \(\backslash\)}
+\DoxyCodeLine{638  METHOD (getAbsolutePath, "{}getAbsolutePath"{}, "{}()Ljava/lang/String;"{}) \(\backslash\)}
+\DoxyCodeLine{639  METHOD (length,          "{}length"{},          "{}()J"{})}
+\DoxyCodeLine{640 }
+\DoxyCodeLine{641 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (JavaFile, \textcolor{stringliteral}{"{}java/io/File"{}})}
+\DoxyCodeLine{642 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{643 }
+\DoxyCodeLine{644 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{645 \textcolor{preprocessor}{ METHOD (constructor, "{}<init>"{}}, "{}(Ljava/lang/String;)V"{}) \(\backslash\)}
+\DoxyCodeLine{646  METHOD (close,       "{}close"{},  "{}()V"{}) \(\backslash\)}
+\DoxyCodeLine{647  METHOD (read,        "{}read"{},   "{}([B)I"{})}
+\DoxyCodeLine{648 }
+\DoxyCodeLine{649 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (JavaFileInputStream, \textcolor{stringliteral}{"{}java/io/FileInputStream"{}})}
+\DoxyCodeLine{650 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{651 }
+\DoxyCodeLine{652 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{653 \textcolor{preprocessor}{ METHOD (constructor, "{}<init>"{}}, "{}(Ljava/lang/String;)V"{}) \(\backslash\)}
+\DoxyCodeLine{654  METHOD (close,       "{}close"{},  "{}()V"{}) \(\backslash\)}
+\DoxyCodeLine{655  METHOD (write,       "{}write"{},  "{}([BII)V"{})}
+\DoxyCodeLine{656 }
+\DoxyCodeLine{657 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (JavaFileOutputStream, \textcolor{stringliteral}{"{}java/io/FileOutputStream"{}})}
+\DoxyCodeLine{658 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{659 }
+\DoxyCodeLine{660 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{661 \textcolor{preprocessor}{  METHOD (constructor,             "{}<init>"{}}, "{}()V"{}) \(\backslash\)}
+\DoxyCodeLine{662   METHOD (constructorWithCapacity, "{}<init>"{}, "{}(I)V"{})}
+\DoxyCodeLine{663 }
+\DoxyCodeLine{664 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (JavaHashMap, \textcolor{stringliteral}{"{}java/util/HashMap"{}})}
+\DoxyCodeLine{665 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{666 }
+\DoxyCodeLine{667 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{668 \textcolor{preprocessor}{  STATICMETHOD (parseInt, "{}parseInt"{}}, "{}(Ljava/lang/String;I)I"{}) \(\backslash\)}
+\DoxyCodeLine{669   STATICMETHOD (valueOf,  "{}valueOf"{},  "{}(I)Ljava/lang/Integer;"{}) \(\backslash\)}
+\DoxyCodeLine{670   METHOD (constructor, "{}<init>"{},   "{}(I)V"{}) \(\backslash\)}
+\DoxyCodeLine{671   METHOD (intValue,    "{}intValue"{}, "{}()I"{})}
+\DoxyCodeLine{672 }
+\DoxyCodeLine{673 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (JavaInteger, \textcolor{stringliteral}{"{}java/lang/Integer"{}})}
+\DoxyCodeLine{674 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{675 }
+\DoxyCodeLine{676 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{677 \textcolor{preprocessor}{  METHOD (hasNext, "{}hasNext"{}}, "{}()Z"{}) \(\backslash\)}
+\DoxyCodeLine{678   METHOD (next,    "{}next"{},    "{}()Ljava/lang/Object;"{})}
+\DoxyCodeLine{679 }
+\DoxyCodeLine{680 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (JavaIterator, \textcolor{stringliteral}{"{}java/util/Iterator"{}})}
+\DoxyCodeLine{681 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{682 }
+\DoxyCodeLine{683 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{684 \textcolor{preprocessor}{  METHOD (get,  "{}get"{}},  "{}(I)Ljava/lang/Object;"{}) \(\backslash\)}
+\DoxyCodeLine{685   METHOD (size, "{}size"{}, "{}()I"{})}
+\DoxyCodeLine{686 }
+\DoxyCodeLine{687 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (JavaList, \textcolor{stringliteral}{"{}java/util/List"{}})}
+\DoxyCodeLine{688 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{689 }
+\DoxyCodeLine{690 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{691 \textcolor{preprocessor}{  METHOD (constructor, "{}<init>"{}}, "{}(J)V"{})}
+\DoxyCodeLine{692 }
+\DoxyCodeLine{693 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (JavaLong, \textcolor{stringliteral}{"{}java/lang/Long"{}})}
+\DoxyCodeLine{694 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{695 }
+\DoxyCodeLine{696 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{697 \textcolor{preprocessor}{  METHOD (get,    "{}get"{}},    "{}(Ljava/lang/Object;)Ljava/lang/Object;"{}) \(\backslash\)}
+\DoxyCodeLine{698   METHOD (keySet, "{}keySet"{}, "{}()Ljava/util/Set;"{}) \(\backslash\)}
+\DoxyCodeLine{699   METHOD (put,    "{}put"{},    "{}(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;"{})}
+\DoxyCodeLine{700 }
+\DoxyCodeLine{701 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (JavaMap, \textcolor{stringliteral}{"{}java/util/Map"{}})}
+\DoxyCodeLine{702 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{703 }
+\DoxyCodeLine{704 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{705 \textcolor{preprocessor}{  METHOD (getName,           "{}getName"{}},           "{}()Ljava/lang/String;"{}) \(\backslash\)}
+\DoxyCodeLine{706   METHOD (getModifiers,      "{}getModifiers"{},      "{}()I"{})            \(\backslash\)}
+\DoxyCodeLine{707   METHOD (getParameterTypes, "{}getParameterTypes"{}, "{}()[Ljava/lang/Class;"{}) \(\backslash\)}
+\DoxyCodeLine{708   METHOD (getReturnType,     "{}getReturnType"{},     "{}()Ljava/lang/Class;"{}) \(\backslash\)}
+\DoxyCodeLine{709   METHOD (invoke,            "{}invoke"{},            "{}(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;"{}) \(\backslash\)}
+\DoxyCodeLine{710   METHOD (hashCode,          "{}hashCode"{},          "{}()I"{}) \(\backslash\)}
+\DoxyCodeLine{711   METHOD (equals,            "{}equals"{},            "{}(Ljava/lang/Object;)Z"{}) \(\backslash\)}
+\DoxyCodeLine{712 }
+\DoxyCodeLine{713 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (JavaMethod, \textcolor{stringliteral}{"{}java/lang/reflect/Method"{}})}
+\DoxyCodeLine{714 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{715 }
+\DoxyCodeLine{716 }
+\DoxyCodeLine{717 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{718 \textcolor{preprocessor}{  METHOD (constructor, "{}<init>"{}}, "{}()V"{}) \(\backslash\)}
+\DoxyCodeLine{719   METHOD (getClass, "{}getClass"{}, "{}()Ljava/lang/Class;"{}) \(\backslash\)}
+\DoxyCodeLine{720   METHOD (toString, "{}toString"{}, "{}()Ljava/lang/String;"{})}
+\DoxyCodeLine{721 }
+\DoxyCodeLine{722 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (JavaObject, \textcolor{stringliteral}{"{}java/lang/Object"{}})}
+\DoxyCodeLine{723 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{724 }
+\DoxyCodeLine{725 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{726 \textcolor{preprocessor}{  METHOD (contains, "{}contains"{}}, "{}(Ljava/lang/Object;)Z"{}) \(\backslash\)}
+\DoxyCodeLine{727   METHOD (iterator, "{}iterator"{}, "{}()Ljava/util/Iterator;"{}) \(\backslash\)}
+\DoxyCodeLine{728   METHOD (size,     "{}size"{},     "{}()I"{})}
+\DoxyCodeLine{729 }
+\DoxyCodeLine{730 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (JavaSet, \textcolor{stringliteral}{"{}java/util/Set"{}})}
+\DoxyCodeLine{731 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{732 }
+\DoxyCodeLine{733 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{734 \textcolor{preprocessor}{  METHOD (concat,   "{}concat"{}},   "{}(Ljava/lang/String;)Ljava/lang/String;"{}) \(\backslash\)}
+\DoxyCodeLine{735   METHOD (getBytes, "{}getBytes"{}, "{}()[B"{})}
+\DoxyCodeLine{736 }
+\DoxyCodeLine{737 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (JavaString, \textcolor{stringliteral}{"{}java/lang/String"{}})}
+\DoxyCodeLine{738 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{739 }
+\DoxyCodeLine{740 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK)}}
+\DoxyCodeLine{741 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (AndroidBuild, \textcolor{stringliteral}{"{}android/os/Build"{}})}
+\DoxyCodeLine{742 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{743 }
+\DoxyCodeLine{744 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK)}}
+\DoxyCodeLine{745 \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (AndroidBuildVersion, \textcolor{stringliteral}{"{}android/os/Build\$VERSION"{}})}
+\DoxyCodeLine{746 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{747 }
+\DoxyCodeLine{748 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{749 \textcolor{preprocessor}{ METHOD (registerActivityLifecycleCallbacks,   "{}registerActivityLifecycleCallbacks"{}},   "{}(Landroid/app/Application\$ActivityLifecycleCallbacks;)V"{}) \(\backslash\)}
+\DoxyCodeLine{750  METHOD (unregisterActivityLifecycleCallbacks, "{}unregisterActivityLifecycleCallbacks"{}, "{}(Landroid/app/Application\$ActivityLifecycleCallbacks;)V"{})}
+\DoxyCodeLine{751 }
+\DoxyCodeLine{752  \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (AndroidApplication, \textcolor{stringliteral}{"{}android/app/Application"{}})}
+\DoxyCodeLine{753 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{754 }
+\DoxyCodeLine{755 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{756 \textcolor{preprocessor}{ METHOD (constructor,     "{}<init>"{}},          "{}(Landroid/content/Context;)V"{}) \(\backslash\)}
+\DoxyCodeLine{757  METHOD (getHolder,       "{}getHolder"{},       "{}()Landroid/view/SurfaceHolder;"{}) \(\backslash\)}
+\DoxyCodeLine{758  METHOD (getParent,       "{}getParent"{},       "{}()Landroid/view/ViewParent;"{})}
+\DoxyCodeLine{759 }
+\DoxyCodeLine{760  \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (AndroidSurfaceView, \textcolor{stringliteral}{"{}android/view/SurfaceView"{}})}
+\DoxyCodeLine{761 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{762 }
+\DoxyCodeLine{763 }
+\DoxyCodeLine{764 \textcolor{preprocessor}{\#define JNI\_CLASS\_MEMBERS(METHOD, STATICMETHOD, FIELD, STATICFIELD, CALLBACK) \(\backslash\)}}
+\DoxyCodeLine{765 \textcolor{preprocessor}{ METHOD (getSurface,     "{}getSurface"{}},     "{}()Landroid/view/Surface;"{}) \(\backslash\)}
+\DoxyCodeLine{766  METHOD (addCallback,    "{}addCallback"{},    "{}(Landroid/view/SurfaceHolder\$Callback;)V"{}) \(\backslash\)}
+\DoxyCodeLine{767  METHOD (removeCallback, "{}removeCallback"{}, "{}(Landroid/view/SurfaceHolder\$Callback;)V"{})}
+\DoxyCodeLine{768 }
+\DoxyCodeLine{769  \mbox{\hyperlink{juce__android___j_n_i_helpers_8h_a325a1e95dfd471f60239b51a86ca51a4}{DECLARE\_JNI\_CLASS}} (AndroidSurfaceHolder, \textcolor{stringliteral}{"{}android/view/SurfaceHolder"{}})}
+\DoxyCodeLine{770 \textcolor{preprocessor}{\#undef JNI\_CLASS\_MEMBERS}}
+\DoxyCodeLine{771 }
+\DoxyCodeLine{772 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{773 \textcolor{keyword}{namespace}}
+\DoxyCodeLine{774 \{}
+\DoxyCodeLine{775     \textcolor{keyword}{inline} \mbox{\hyperlink{class_string}{String}} juceString (JNIEnv* env, jstring \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}})}
+\DoxyCodeLine{776     \{}
+\DoxyCodeLine{777         \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}} == \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{778             \textcolor{keywordflow}{return} \{\};}
+\DoxyCodeLine{779 }
+\DoxyCodeLine{780         \textcolor{keyword}{const} \textcolor{keywordtype}{char}* \textcolor{keyword}{const} utf8 = env-\/>GetStringUTFChars (\mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}}, \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{781         \mbox{\hyperlink{class_char_pointer___u_t_f8}{CharPointer\_UTF8}} utf8CP (utf8);}
+\DoxyCodeLine{782         \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} (utf8CP);}
+\DoxyCodeLine{783         env-\/>ReleaseStringUTFChars (\mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}}, utf8);}
+\DoxyCodeLine{784         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}};}
+\DoxyCodeLine{785     \}}
+\DoxyCodeLine{786 }
+\DoxyCodeLine{787     \textcolor{keyword}{inline} \mbox{\hyperlink{class_string}{String}} juceString (jstring \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}})}
+\DoxyCodeLine{788     \{}
+\DoxyCodeLine{789         \textcolor{keywordflow}{return} juceString (\mbox{\hyperlink{namespacejuce_a4f3642abf35d22b0f69c4361d90ce667}{getEnv}}(), \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}});}
+\DoxyCodeLine{790     \}}
+\DoxyCodeLine{791 }
+\DoxyCodeLine{792     \textcolor{keyword}{inline} LocalRef<jstring> javaString (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& \mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}})}
+\DoxyCodeLine{793     \{}
+\DoxyCodeLine{794         \textcolor{keywordflow}{return} LocalRef<jstring> (\mbox{\hyperlink{namespacejuce_a4f3642abf35d22b0f69c4361d90ce667}{getEnv}}()-\/>NewStringUTF (\mbox{\hyperlink{namespacegl_aeadf274ee1110e01be53f496f9ca200c}{s}}.toUTF8()));}
+\DoxyCodeLine{795     \}}
+\DoxyCodeLine{796 }
+\DoxyCodeLine{797     \textcolor{keyword}{inline} LocalRef<jstring> javaStringFromChar (\textcolor{keyword}{const} \mbox{\hyperlink{group__juce__core-text_ga2a608c21a2526b019789478433c3742e}{juce\_wchar}} \mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}})}
+\DoxyCodeLine{798     \{}
+\DoxyCodeLine{799         \textcolor{keywordtype}{char} utf8[8] = \{ 0 \};}
+\DoxyCodeLine{800         \mbox{\hyperlink{class_char_pointer___u_t_f8}{CharPointer\_UTF8}} (utf8).\mbox{\hyperlink{class_char_pointer___u_t_f8_af477c8305e8299286dca56a9ca75d433}{write}} (\mbox{\hyperlink{namespacegl_a1bde49b4e268a18d021f931060e1cbb1}{c}});}
+\DoxyCodeLine{801         \textcolor{keywordflow}{return} LocalRef<jstring> (\mbox{\hyperlink{namespacejuce_a4f3642abf35d22b0f69c4361d90ce667}{getEnv}}()-\/>NewStringUTF (utf8));}
+\DoxyCodeLine{802     \}}
+\DoxyCodeLine{803 }
+\DoxyCodeLine{804     \textcolor{keyword}{inline} LocalRef<jobjectArray> juceStringArrayToJava (\textcolor{keyword}{const} \mbox{\hyperlink{class_string_array}{StringArray}}\& juceArray)}
+\DoxyCodeLine{805     \{}
+\DoxyCodeLine{806         \textcolor{keyword}{auto}* env = \mbox{\hyperlink{namespacejuce_a4f3642abf35d22b0f69c4361d90ce667}{getEnv}}();}
+\DoxyCodeLine{807 }
+\DoxyCodeLine{808         LocalRef<jobjectArray> \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}} (env-\/>NewObjectArray ((jsize) juceArray.\mbox{\hyperlink{class_string_array_af1eb48dd90938eb34d9f43cf7d81510b}{size}}(),}
+\DoxyCodeLine{809                                                             JavaString,}
+\DoxyCodeLine{810                                                             javaString (\textcolor{stringliteral}{"{}"{}}).\mbox{\hyperlink{namespacedsp_ab70e205bff92b09aa297e479676b5bc8}{get}}()));}
+\DoxyCodeLine{811 }
+\DoxyCodeLine{812         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < juceArray.\mbox{\hyperlink{class_string_array_af1eb48dd90938eb34d9f43cf7d81510b}{size}}(); ++i)}
+\DoxyCodeLine{813             env-\/>SetObjectArrayElement (\mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}, i, javaString (juceArray [i]).\mbox{\hyperlink{namespacedsp_ab70e205bff92b09aa297e479676b5bc8}{get}}());}
+\DoxyCodeLine{814 }
+\DoxyCodeLine{815         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}};}
+\DoxyCodeLine{816     \}}
+\DoxyCodeLine{817 }
+\DoxyCodeLine{818     \textcolor{keyword}{inline} \mbox{\hyperlink{class_string_array}{StringArray}} javaStringArrayToJuce (\textcolor{keyword}{const} LocalRef<jobjectArray>\& javaArray)}
+\DoxyCodeLine{819     \{}
+\DoxyCodeLine{820         \textcolor{keywordflow}{if} (javaArray.get() == \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{821             \textcolor{keywordflow}{return} \{\};}
+\DoxyCodeLine{822 }
+\DoxyCodeLine{823         \textcolor{keyword}{auto}* env = \mbox{\hyperlink{namespacejuce_a4f3642abf35d22b0f69c4361d90ce667}{getEnv}}();}
+\DoxyCodeLine{824 }
+\DoxyCodeLine{825         \mbox{\hyperlink{class_string_array}{StringArray}} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}};}
+\DoxyCodeLine{826 }
+\DoxyCodeLine{827         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < env-\/>GetArrayLength (javaArray.get()); ++i)}
+\DoxyCodeLine{828         \{}
+\DoxyCodeLine{829             LocalRef<jstring> javaString ((jstring) env-\/>GetObjectArrayElement (javaArray.get(), i));}
+\DoxyCodeLine{830             \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}}.add (juceString (javaString.get()));}
+\DoxyCodeLine{831         \}}
+\DoxyCodeLine{832 }
+\DoxyCodeLine{833         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a7cb1126dbc1cb105bcce082cff5ae633}{result}};}
+\DoxyCodeLine{834     \}}
+\DoxyCodeLine{835 }
+\DoxyCodeLine{836     \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} jniCheckHasExceptionOccurredAndClear()}
+\DoxyCodeLine{837     \{}
+\DoxyCodeLine{838         \textcolor{keyword}{auto}* env = \mbox{\hyperlink{namespacejuce_a4f3642abf35d22b0f69c4361d90ce667}{getEnv}}();}
+\DoxyCodeLine{839 }
+\DoxyCodeLine{840         LocalRef<jobject> exception (env-\/>ExceptionOccurred());}
+\DoxyCodeLine{841 }
+\DoxyCodeLine{842         \textcolor{keywordflow}{if} (exception != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{843         \{}
+\DoxyCodeLine{844             env-\/>ExceptionClear();}
+\DoxyCodeLine{845             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{846         \}}
+\DoxyCodeLine{847 }
+\DoxyCodeLine{848         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{849     \}}
+\DoxyCodeLine{850 \}}
+\DoxyCodeLine{851 }
+\DoxyCodeLine{852 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{853 \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacejuce_a5f3f814b10a0af4c725415ceacdfde7c}{getAndroidSDKVersion}}();}
+\DoxyCodeLine{854 \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespacejuce_a4bab58551279d2a4c452951edb71f673}{isPermissionDeclaredInManifest}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& requestedPermission);}
+\DoxyCodeLine{855 }
+\DoxyCodeLine{856 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{857 \textcolor{keyword}{class }AndroidInterfaceImplementer;}
+\DoxyCodeLine{858 }
+\DoxyCodeLine{859 \textcolor{comment}{// This function takes ownership of the implementer. When the returned GlobalRef}}
+\DoxyCodeLine{860 \textcolor{comment}{// goes out of scope (and no other Java routine has a reference on the return-\/value)}}
+\DoxyCodeLine{861 \textcolor{comment}{// then the implementer will be deleted as well.}}
+\DoxyCodeLine{862 LocalRef<jobject> \mbox{\hyperlink{namespacejuce_aa5d43f5b68766ba8c811e4e17df96a3e}{CreateJavaInterface}} (AndroidInterfaceImplementer* implementer,}
+\DoxyCodeLine{863                                        \textcolor{keyword}{const} \mbox{\hyperlink{class_string_array}{StringArray}}\& interfaceNames,}
+\DoxyCodeLine{864                                        LocalRef<jobject> subclass);}
+\DoxyCodeLine{865 }
+\DoxyCodeLine{866 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{867 jobject \mbox{\hyperlink{namespacejuce_acc54eb2fdb5b09e0a72390ca17d6dac1}{juce\_invokeImplementer}} (JNIEnv*, jobject, jlong, jobject, jobject, jobjectArray);}
+\DoxyCodeLine{868 \textcolor{keywordtype}{void}    \mbox{\hyperlink{namespacejuce_ab5e0b6c87f79d5fd7dd9df4fed27d8d7}{juce\_dispatchDelete}}    (JNIEnv*, jobject, jlong);}
+\DoxyCodeLine{869 }
+\DoxyCodeLine{870 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{871 \textcolor{keyword}{class }\mbox{\hyperlink{classjuce_1_1_android_interface_implementer}{AndroidInterfaceImplementer}}}
+\DoxyCodeLine{872 \{}
+\DoxyCodeLine{873 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{874     \textcolor{keyword}{virtual} \mbox{\hyperlink{classjuce_1_1_android_interface_implementer_ab66a971a20498ad3a9138dc3d3822047}{\string~AndroidInterfaceImplementer}}();}
+\DoxyCodeLine{875     \textcolor{keyword}{virtual} jobject \mbox{\hyperlink{classjuce_1_1_android_interface_implementer_af7e2526f8f3975699ded7e6f99ac3dfa}{invoke}} (jobject proxy, jobject method, jobjectArray args);}
+\DoxyCodeLine{876     \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_android_interface_implementer_a1030636014b454164a13507ab65ccbd8}{clear}}();}
+\DoxyCodeLine{877 }
+\DoxyCodeLine{878     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{879     \textcolor{keyword}{friend} \mbox{\hyperlink{classjuce_1_1_local_ref}{LocalRef<jobject>}} \mbox{\hyperlink{classjuce_1_1_android_interface_implementer_afd4d509224bf47dcd8e21c7db1fa8356}{CreateJavaInterface}} (\mbox{\hyperlink{classjuce_1_1_android_interface_implementer}{AndroidInterfaceImplementer}}*, \textcolor{keyword}{const} \mbox{\hyperlink{class_string_array}{StringArray}}\&, \mbox{\hyperlink{classjuce_1_1_local_ref}{LocalRef<jobject>}});}
+\DoxyCodeLine{880     \textcolor{keyword}{friend} jobject \mbox{\hyperlink{classjuce_1_1_android_interface_implementer_ab6f6d1466b539fdca974322f5f9434dd}{juce\_invokeImplementer}} (JNIEnv*, jobject, jlong, jobject, jobject, jobjectArray);}
+\DoxyCodeLine{881     \textcolor{keyword}{friend} \textcolor{keywordtype}{void}    \mbox{\hyperlink{classjuce_1_1_android_interface_implementer_ace7e692f1c592c2903c6da38b11acf14}{juce\_dispatchDelete}}    (JNIEnv*, jobject, jlong);}
+\DoxyCodeLine{882 \textcolor{keyword}{private}:}
+\DoxyCodeLine{883     \mbox{\hyperlink{classjuce_1_1_global_ref}{GlobalRef}} javaSubClass;}
+\DoxyCodeLine{884     \mbox{\hyperlink{classjuce_1_1_global_ref}{GlobalRef}} invocationHandler;}
+\DoxyCodeLine{885 \};}
+\DoxyCodeLine{886 }
+\DoxyCodeLine{887 \mbox{\hyperlink{classjuce_1_1_local_ref}{LocalRef<jobject>}} \mbox{\hyperlink{namespacejuce_aa5d43f5b68766ba8c811e4e17df96a3e}{CreateJavaInterface}} (\mbox{\hyperlink{classjuce_1_1_android_interface_implementer}{AndroidInterfaceImplementer}}* implementer,}
+\DoxyCodeLine{888                                        \textcolor{keyword}{const} \mbox{\hyperlink{class_string_array}{StringArray}}\& interfaceNames);}
+\DoxyCodeLine{889 \mbox{\hyperlink{classjuce_1_1_local_ref}{LocalRef<jobject>}} \mbox{\hyperlink{namespacejuce_aa5d43f5b68766ba8c811e4e17df96a3e}{CreateJavaInterface}} (\mbox{\hyperlink{classjuce_1_1_android_interface_implementer}{AndroidInterfaceImplementer}}* implementer,}
+\DoxyCodeLine{890                                        \textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& interfaceName);}
+\DoxyCodeLine{891 }
+\DoxyCodeLine{892 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{893 \textcolor{keyword}{class }\mbox{\hyperlink{classjuce_1_1_activity_lifecycle_callbacks}{ActivityLifecycleCallbacks}}     : \textcolor{keyword}{public} \mbox{\hyperlink{classjuce_1_1_android_interface_implementer}{AndroidInterfaceImplementer}}}
+\DoxyCodeLine{894 \{}
+\DoxyCodeLine{895 \textcolor{keyword}{public}:}
+\DoxyCodeLine{896     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_activity_lifecycle_callbacks_a8123a43b0c7025971b5aef11fcd44427}{onActivityPreCreated}}            (jobject \textcolor{comment}{/*activity*/}, jobject \textcolor{comment}{/*bundle*/})  \{\}}
+\DoxyCodeLine{897     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_activity_lifecycle_callbacks_aa89fec079543107a1e3bd525bc733176}{onActivityPreDestroyed}}          (jobject \textcolor{comment}{/*activity*/})                      \{\}}
+\DoxyCodeLine{898     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_activity_lifecycle_callbacks_a4666f0d657037e9d39d2a0c6d63473cb}{onActivityPrePaused}}             (jobject \textcolor{comment}{/*activity*/})                      \{\}}
+\DoxyCodeLine{899     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_activity_lifecycle_callbacks_a09ad1cdd4fea0e9130b8203dc08ff370}{onActivityPreResumed}}            (jobject \textcolor{comment}{/*activity*/})                      \{\}}
+\DoxyCodeLine{900     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_activity_lifecycle_callbacks_a11a8ff0a8141d87d7477c12b9ca8d554}{onActivityPreSaveInstanceState}}  (jobject \textcolor{comment}{/*activity*/}, jobject \textcolor{comment}{/*bundle*/})  \{\}}
+\DoxyCodeLine{901     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_activity_lifecycle_callbacks_ae4e82148457cb768c7329394774c6083}{onActivityPreStarted}}            (jobject \textcolor{comment}{/*activity*/})                      \{\}}
+\DoxyCodeLine{902     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_activity_lifecycle_callbacks_af5fceee6ab91509afb5301cd4b5b754c}{onActivityPreStopped}}            (jobject \textcolor{comment}{/*activity*/})                      \{\}}
+\DoxyCodeLine{903 }
+\DoxyCodeLine{904     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_activity_lifecycle_callbacks_af10740e377e2e862dd72d8b78e738c71}{onActivityCreated}}               (jobject \textcolor{comment}{/*activity*/}, jobject \textcolor{comment}{/*bundle*/})  \{\}}
+\DoxyCodeLine{905     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_activity_lifecycle_callbacks_a3226d5c0151499a55ab8188481d4d7a8}{onActivityDestroyed}}             (jobject \textcolor{comment}{/*activity*/})                      \{\}}
+\DoxyCodeLine{906     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_activity_lifecycle_callbacks_a2b1d839e5329da67267b604e9f10a5fe}{onActivityPaused}}                (jobject \textcolor{comment}{/*activity*/})                      \{\}}
+\DoxyCodeLine{907     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_activity_lifecycle_callbacks_ae55f73cfae127a1c343d4f867a1a794d}{onActivityResumed}}               (jobject \textcolor{comment}{/*activity*/})                      \{\}}
+\DoxyCodeLine{908     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_activity_lifecycle_callbacks_ad436fb22b53027a2c925459bb6b38aad}{onActivitySaveInstanceState}}     (jobject \textcolor{comment}{/*activity*/}, jobject \textcolor{comment}{/*bundle*/})  \{\}}
+\DoxyCodeLine{909     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_activity_lifecycle_callbacks_a77bca9ce508721776f2bd0d28dd26be9}{onActivityStarted}}               (jobject \textcolor{comment}{/*activity*/})                      \{\}}
+\DoxyCodeLine{910     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_activity_lifecycle_callbacks_a78428086adc660e15f8af241300cfa8c}{onActivityStopped}}               (jobject \textcolor{comment}{/*activity*/})                      \{\}}
+\DoxyCodeLine{911 }
+\DoxyCodeLine{912     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_activity_lifecycle_callbacks_a9bb72b4e5ffc1ed7d3c7904273e5b1d9}{onActivityPostCreated}}           (jobject \textcolor{comment}{/*activity*/}, jobject \textcolor{comment}{/*bundle*/})  \{\}}
+\DoxyCodeLine{913     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_activity_lifecycle_callbacks_ac9068630df3674e0da0aafca41609e5f}{onActivityPostDestroyed}}         (jobject \textcolor{comment}{/*activity*/})                      \{\}}
+\DoxyCodeLine{914     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_activity_lifecycle_callbacks_a486eebbebf76453601e06fa10bb36935}{onActivityPostPaused}}            (jobject \textcolor{comment}{/*activity*/})                      \{\}}
+\DoxyCodeLine{915     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_activity_lifecycle_callbacks_a775cbc88e24c85779d5c2cef62512ce6}{onActivityPostResumed}}           (jobject \textcolor{comment}{/*activity*/})                      \{\}}
+\DoxyCodeLine{916     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_activity_lifecycle_callbacks_a0f30d6707b5f0732d22d906c7761f580}{onActivityPostSaveInstanceState}} (jobject \textcolor{comment}{/*activity*/}, jobject \textcolor{comment}{/*bundle*/})  \{\}}
+\DoxyCodeLine{917     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_activity_lifecycle_callbacks_a2d66c8645a5443389a29133d3a717a9b}{onActivityPostStarted}}           (jobject \textcolor{comment}{/*activity*/})                      \{\}}
+\DoxyCodeLine{918     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_activity_lifecycle_callbacks_a54095b69d269bae621824f84e614ea52}{onActivityPostStopped}}           (jobject \textcolor{comment}{/*activity*/})                      \{\}}
+\DoxyCodeLine{919 }
+\DoxyCodeLine{920 \textcolor{keyword}{private}:}
+\DoxyCodeLine{921     jobject invoke (jobject, jobject, jobjectArray) \textcolor{keyword}{override};}
+\DoxyCodeLine{922 \};}
+\DoxyCodeLine{923 }
+\DoxyCodeLine{924 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{925 \textcolor{keyword}{struct }\mbox{\hyperlink{structjuce_1_1_surface_holder_callback}{SurfaceHolderCallback}}    : \mbox{\hyperlink{classjuce_1_1_android_interface_implementer}{AndroidInterfaceImplementer}}}
+\DoxyCodeLine{926 \{}
+\DoxyCodeLine{927     \textcolor{keyword}{virtual} \mbox{\hyperlink{structjuce_1_1_surface_holder_callback_a6b9e8d25bce62031411aab4d151c4ec8}{\string~SurfaceHolderCallback}}() \textcolor{keyword}{override} = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{928 }
+\DoxyCodeLine{929     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{structjuce_1_1_surface_holder_callback_ac5ec18acd533c0498a2541fcd88ef847}{surfaceChanged}} (\mbox{\hyperlink{classjuce_1_1_local_ref}{LocalRef<jobject>}} holder, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a597b77c61fc6d444d2bfc6bf69dee277}{format}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{png_8h_ad46179dbe9c68fdcea52b34c3480ec0f}{width}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_a33074d1196a1300c7cee5c0e42fa5cf8}{height}}) = 0;}
+\DoxyCodeLine{930     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{structjuce_1_1_surface_holder_callback_a13b7b224f72819050b067a729ad74d9d}{surfaceCreated}} (\mbox{\hyperlink{classjuce_1_1_local_ref}{LocalRef<jobject>}} holder) = 0;}
+\DoxyCodeLine{931     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{structjuce_1_1_surface_holder_callback_ad9fa21e21efe13f1d91391caaf41c640}{surfaceDestroyed}} (\mbox{\hyperlink{classjuce_1_1_local_ref}{LocalRef<jobject>}} holder) = 0;}
+\DoxyCodeLine{932 }
+\DoxyCodeLine{933 \textcolor{keyword}{private}:}
+\DoxyCodeLine{934     jobject invoke (jobject proxy, jobject method, jobjectArray args)\textcolor{keyword}{ override}}
+\DoxyCodeLine{935 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{936         \textcolor{keyword}{auto}* env = \mbox{\hyperlink{namespacejuce_a4f3642abf35d22b0f69c4361d90ce667}{getEnv}}();}
+\DoxyCodeLine{937         \textcolor{keyword}{auto} methodName = juceString ((jstring) env-\/>CallObjectMethod (method, JavaMethod.getName));}
+\DoxyCodeLine{938         \mbox{\hyperlink{classjuce_1_1_local_ref}{LocalRef<jobject>}} holder (env-\/>GetArrayLength (args) > 0 ? env-\/>GetObjectArrayElement (args, 0) : (jobject) \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{939 }
+\DoxyCodeLine{940         \textcolor{keywordflow}{if} (methodName == \textcolor{stringliteral}{"{}surfaceChanged"{}})}
+\DoxyCodeLine{941         \{}
+\DoxyCodeLine{942             \textcolor{keywordtype}{int} intArgs[3];}
+\DoxyCodeLine{943 }
+\DoxyCodeLine{944             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 3; ++i)}
+\DoxyCodeLine{945             \{}
+\DoxyCodeLine{946                 \mbox{\hyperlink{classjuce_1_1_local_ref}{LocalRef<jobject>}} boxedType (env-\/>GetObjectArrayElement (args, 1 + i));}
+\DoxyCodeLine{947                 intArgs[i] = env-\/>CallIntMethod (boxedType.\mbox{\hyperlink{classjuce_1_1_local_ref_aed91beb5f87833781089adc111564cc9}{get}}(), JavaInteger.intValue);}
+\DoxyCodeLine{948             \}}
+\DoxyCodeLine{949 }
+\DoxyCodeLine{950             \mbox{\hyperlink{structjuce_1_1_surface_holder_callback_ac5ec18acd533c0498a2541fcd88ef847}{surfaceChanged}} (\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (holder), intArgs[0], intArgs[1], intArgs[2]);}
+\DoxyCodeLine{951         \}}
+\DoxyCodeLine{952         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (methodName == \textcolor{stringliteral}{"{}surfaceCreated"{}})}
+\DoxyCodeLine{953         \{}
+\DoxyCodeLine{954             \mbox{\hyperlink{structjuce_1_1_surface_holder_callback_a13b7b224f72819050b067a729ad74d9d}{surfaceCreated}} (\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (holder));}
+\DoxyCodeLine{955         \}}
+\DoxyCodeLine{956         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (methodName == \textcolor{stringliteral}{"{}surfaceDestroyed"{}})}
+\DoxyCodeLine{957         \{}
+\DoxyCodeLine{958             \mbox{\hyperlink{structjuce_1_1_surface_holder_callback_ad9fa21e21efe13f1d91391caaf41c640}{surfaceDestroyed}} (\mbox{\hyperlink{namespacedsp_1_1detail_afe40dd96c3100ef2d29a2c0ab7947423}{std::move}} (holder));}
+\DoxyCodeLine{959         \}}
+\DoxyCodeLine{960         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{961         \{}
+\DoxyCodeLine{962             \textcolor{keywordflow}{return} \mbox{\hyperlink{classjuce_1_1_android_interface_implementer_af7e2526f8f3975699ded7e6f99ac3dfa}{AndroidInterfaceImplementer::invoke}} (proxy, method, args);}
+\DoxyCodeLine{963         \}}
+\DoxyCodeLine{964 }
+\DoxyCodeLine{965         \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{966     \}}
+\DoxyCodeLine{967 \};}
+\DoxyCodeLine{968 }
+\DoxyCodeLine{969 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{970 \textcolor{keyword}{class }\mbox{\hyperlink{classjuce_1_1_fragment_overlay}{FragmentOverlay}}}
+\DoxyCodeLine{971 \{}
+\DoxyCodeLine{972 \textcolor{keyword}{public}:}
+\DoxyCodeLine{973     \mbox{\hyperlink{classjuce_1_1_fragment_overlay_ae5f95a9488844c44478fabae0da5f7c5}{FragmentOverlay}}();}
+\DoxyCodeLine{974     \textcolor{keyword}{virtual} \mbox{\hyperlink{classjuce_1_1_fragment_overlay_a6ad95e1e6a4f5a39f80b9aae8001ad26}{\string~FragmentOverlay}}();}
+\DoxyCodeLine{975 }
+\DoxyCodeLine{976     \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_fragment_overlay_a87e9003ab6100ab27ccef007cc5b0cc8}{open}}();}
+\DoxyCodeLine{977 }
+\DoxyCodeLine{978     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_fragment_overlay_a4428d58834715dcfc1c45cc098cf43a2}{onCreated}} (\mbox{\hyperlink{classjuce_1_1_local_ref}{LocalRef<jobject>}} \textcolor{comment}{/*bundle*/}) \{\}}
+\DoxyCodeLine{979     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_fragment_overlay_ab738c65b3ee01d5f5af0b876e2f4b209}{onStart}}() \{\}}
+\DoxyCodeLine{980     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_fragment_overlay_a2bb60f4c23a90ecd28736da221e983b1}{onRequestPermissionsResult}} (\textcolor{keywordtype}{int} \textcolor{comment}{/*requestCode*/},}
+\DoxyCodeLine{981                                              \textcolor{keyword}{const} \mbox{\hyperlink{class_string_array}{StringArray}}\& \textcolor{comment}{/*permissions*/},}
+\DoxyCodeLine{982                                              \textcolor{keyword}{const} \mbox{\hyperlink{class_array}{Array<int>}}\& \textcolor{comment}{/*grantResults*/}) \{\}}
+\DoxyCodeLine{983     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_fragment_overlay_a90cb88e3e7006648f2bebadaa799f1ff}{onActivityResult}} (\textcolor{keywordtype}{int} \textcolor{comment}{/*requestCode*/}, \textcolor{keywordtype}{int} \textcolor{comment}{/*resultCode*/}, \mbox{\hyperlink{classjuce_1_1_local_ref}{LocalRef<jobject>}} \textcolor{comment}{/*data*/}) \{\}}
+\DoxyCodeLine{984 }
+\DoxyCodeLine{985 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{986     jobject \mbox{\hyperlink{classjuce_1_1_fragment_overlay_acba236c1af4a82848fdba4bcb4bb98f0}{getNativeHandle}}();}
+\DoxyCodeLine{987 }
+\DoxyCodeLine{988 \textcolor{keyword}{private}:}
+\DoxyCodeLine{989 }
+\DoxyCodeLine{990     \mbox{\hyperlink{classjuce_1_1_global_ref}{GlobalRef}} native;}
+\DoxyCodeLine{991 }
+\DoxyCodeLine{992 \textcolor{keyword}{public}:}
+\DoxyCodeLine{993     \textcolor{comment}{/* internal: do not use */}}
+\DoxyCodeLine{994     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_fragment_overlay_ad1255161c190072253672d40524d13c6}{onActivityResultNative}} (JNIEnv*, jobject, jlong, jint, jint, jobject);}
+\DoxyCodeLine{995     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_fragment_overlay_a57f70e34424cc2c39f7d9b1b787ce3ce}{onCreateNative}} (JNIEnv*, jobject, jlong, jobject);}
+\DoxyCodeLine{996     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_fragment_overlay_a627d9dd0843d40851d5ae91eda2cd5e1}{onStartNative}} (JNIEnv*, jobject, jlong);}
+\DoxyCodeLine{997     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjuce_1_1_fragment_overlay_a79fea118424bcfaad97b8ecb5e02b12d}{onRequestPermissionsResultNative}} (JNIEnv*, jobject, jlong, jint,}
+\DoxyCodeLine{998                                                   jobjectArray, jintArray);}
+\DoxyCodeLine{999 \};}
+\DoxyCodeLine{1000 }
+\DoxyCodeLine{1001 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1002 \textcolor{comment}{// Allows you to start an activity without requiring to have an activity}}
+\DoxyCodeLine{1003 \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacejuce_a721e65b3cf32258f22da9332a03d0e49}{startAndroidActivityForResult}} (\textcolor{keyword}{const} LocalRef<jobject>\& \mbox{\hyperlink{png_8c_af16e6218a294ac7ac307270a301512e2}{intent}}, \textcolor{keywordtype}{int} requestCode,}
+\DoxyCodeLine{1004                                     \mbox{\hyperlink{namespacejuce_a7959b0b488fde11032d8151bf10669a4}{std::function}}<\textcolor{keywordtype}{void} (\textcolor{keywordtype}{int}, \textcolor{keywordtype}{int}, LocalRef<jobject>)> \&\& \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a7d161ccbd94169c2108f6a40711e3a76}{callback}});}
+\DoxyCodeLine{1005 }
+\DoxyCodeLine{1006 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{1007 \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespacejuce_adc2f96dcc8556f828acdb0b50ee6ef41}{androidHasSystemFeature}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& property);}
+\DoxyCodeLine{1008 \mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{namespacejuce_a17bb9d32711d88dcf7a48c3728b37b08}{audioManagerGetProperty}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_string}{String}}\& property);}
+\DoxyCodeLine{1009 }
+\DoxyCodeLine{1010 \} \textcolor{comment}{// namespace juce}}
+
+\end{DoxyCode}

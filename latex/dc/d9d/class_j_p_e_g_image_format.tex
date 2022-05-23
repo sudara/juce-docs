@@ -1,0 +1,160 @@
+\hypertarget{class_j_p_e_g_image_format}{}\doxysection{JPEGImage\+Format Class Reference}
+\label{class_j_p_e_g_image_format}\index{JPEGImageFormat@{JPEGImageFormat}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Image\+File\+Format.\+h$>$}
+
+Inheritance diagram for JPEGImage\+Format\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{dc/d9d/class_j_p_e_g_image_format}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_j_p_e_g_image_format_a3e000b303a2a2d90dca7be44ace102c3}{JPEGImage\+Format}} ()
+\item 
+\mbox{\hyperlink{class_j_p_e_g_image_format_a9f343187ffbabd894874f9cbd349f4e1}{$\sim$\+JPEGImage\+Format}} () override
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_j_p_e_g_image_format_ad4388095c291a86f073d511ddfa8607e}{set\+Quality}} (float new\+Quality)
+\item 
+\mbox{\hyperlink{class_string}{String}} \mbox{\hyperlink{class_j_p_e_g_image_format_a580438021f8ee14513a972e3b0e8acee}{get\+Format\+Name}} () override
+\item 
+bool \mbox{\hyperlink{class_j_p_e_g_image_format_af1222e40615be2b2b4a0aafa0c0f2e63}{uses\+File\+Extension}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_file}{File}} \&) override
+\item 
+bool \mbox{\hyperlink{class_j_p_e_g_image_format_a46d7cc60e66d9dbbd1f49e13fff643d8}{can\+Understand}} (\mbox{\hyperlink{class_input_stream}{Input\+Stream}} \&) override
+\item 
+\mbox{\hyperlink{class_image}{Image}} \mbox{\hyperlink{class_j_p_e_g_image_format_a5e8ca3478c69a084e03ec544ce6dfd46}{decode\+Image}} (\mbox{\hyperlink{class_input_stream}{Input\+Stream}} \&) override
+\item 
+bool \mbox{\hyperlink{class_j_p_e_g_image_format_a6f21e23fcacb223986c35e6d30e78d1b}{write\+Image\+To\+Stream}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_image}{Image}} \&, \mbox{\hyperlink{class_output_stream}{Output\+Stream}} \&) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+A subclass of \mbox{\hyperlink{class_image_file_format}{Image\+File\+Format}} for reading and writing JPEG files.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_image_file_format}{Image\+File\+Format}}, \mbox{\hyperlink{class_p_n_g_image_format}{PNGImage\+Format}}
+\end{DoxySeeAlso}
+@tags\{\mbox{\hyperlink{class_graphics}{Graphics}}\} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_j_p_e_g_image_format_a3e000b303a2a2d90dca7be44ace102c3}\label{class_j_p_e_g_image_format_a3e000b303a2a2d90dca7be44ace102c3}} 
+\index{JPEGImageFormat@{JPEGImageFormat}!JPEGImageFormat@{JPEGImageFormat}}
+\index{JPEGImageFormat@{JPEGImageFormat}!JPEGImageFormat@{JPEGImageFormat}}
+\doxysubsubsection{\texorpdfstring{JPEGImageFormat()}{JPEGImageFormat()}}
+{\footnotesize\ttfamily JPEGImage\+Format\+::\+JPEGImage\+Format (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_j_p_e_g_image_format_a9f343187ffbabd894874f9cbd349f4e1}\label{class_j_p_e_g_image_format_a9f343187ffbabd894874f9cbd349f4e1}} 
+\index{JPEGImageFormat@{JPEGImageFormat}!````~JPEGImageFormat@{$\sim$JPEGImageFormat}}
+\index{````~JPEGImageFormat@{$\sim$JPEGImageFormat}!JPEGImageFormat@{JPEGImageFormat}}
+\doxysubsubsection{\texorpdfstring{$\sim$JPEGImageFormat()}{~JPEGImageFormat()}}
+{\footnotesize\ttfamily JPEGImage\+Format\+::$\sim$\+JPEGImage\+Format (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_j_p_e_g_image_format_a46d7cc60e66d9dbbd1f49e13fff643d8}\label{class_j_p_e_g_image_format_a46d7cc60e66d9dbbd1f49e13fff643d8}} 
+\index{JPEGImageFormat@{JPEGImageFormat}!canUnderstand@{canUnderstand}}
+\index{canUnderstand@{canUnderstand}!JPEGImageFormat@{JPEGImageFormat}}
+\doxysubsubsection{\texorpdfstring{canUnderstand()}{canUnderstand()}}
+{\footnotesize\ttfamily bool JPEGImage\+Format\+::can\+Understand (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_input_stream}{Input\+Stream}} \&}]{input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Returns true if the given stream seems to contain data that this format understands.
+
+The format class should only read the first few bytes of the stream and sniff for header bytes that it understands.
+
+Note that this will advance the stream and leave it in a new position, so if you\textquotesingle{}re planning on re-\/using it, you may want to rewind it after calling this method.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_j_p_e_g_image_format_a5e8ca3478c69a084e03ec544ce6dfd46}{decode\+Image}} 
+\end{DoxySeeAlso}
+
+
+Implements \mbox{\hyperlink{class_image_file_format_a5ff3f240860ae444a7eaafb708b563e2}{Image\+File\+Format}}.
+
+\mbox{\Hypertarget{class_j_p_e_g_image_format_a5e8ca3478c69a084e03ec544ce6dfd46}\label{class_j_p_e_g_image_format_a5e8ca3478c69a084e03ec544ce6dfd46}} 
+\index{JPEGImageFormat@{JPEGImageFormat}!decodeImage@{decodeImage}}
+\index{decodeImage@{decodeImage}!JPEGImageFormat@{JPEGImageFormat}}
+\doxysubsubsection{\texorpdfstring{decodeImage()}{decodeImage()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_image}{Image}} JPEGImage\+Format\+::decode\+Image (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_input_stream}{Input\+Stream}} \&}]{input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Tries to decode and return an image from the given stream.
+
+This will be called for an image format after calling its can\+Under\+Stand() method to see if it can handle the stream.
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & the stream to read the data from. The stream will be positioned at the start of the image data (but this may not necessarily be position 0) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the image that was decoded, or an invalid image if it fails. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_image_file_format_aa5cf7b6f03682432ae93df3c3defc2b7}{load\+From}} 
+\end{DoxySeeAlso}
+
+
+Implements \mbox{\hyperlink{class_image_file_format_a7ece13108d27014ff96e67ce80dd4092}{Image\+File\+Format}}.
+
+\mbox{\Hypertarget{class_j_p_e_g_image_format_a580438021f8ee14513a972e3b0e8acee}\label{class_j_p_e_g_image_format_a580438021f8ee14513a972e3b0e8acee}} 
+\index{JPEGImageFormat@{JPEGImageFormat}!getFormatName@{getFormatName}}
+\index{getFormatName@{getFormatName}!JPEGImageFormat@{JPEGImageFormat}}
+\doxysubsubsection{\texorpdfstring{getFormatName()}{getFormatName()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_string}{String}} JPEGImage\+Format\+::get\+Format\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Returns a description of this file format.
+
+E.\+g. \char`\"{}\+JPEG\char`\"{}, \char`\"{}\+PNG\char`\"{} 
+
+Implements \mbox{\hyperlink{class_image_file_format_a141e61162c688d5497e1b6391970fa7a}{Image\+File\+Format}}.
+
+\mbox{\Hypertarget{class_j_p_e_g_image_format_ad4388095c291a86f073d511ddfa8607e}\label{class_j_p_e_g_image_format_ad4388095c291a86f073d511ddfa8607e}} 
+\index{JPEGImageFormat@{JPEGImageFormat}!setQuality@{setQuality}}
+\index{setQuality@{setQuality}!JPEGImageFormat@{JPEGImageFormat}}
+\doxysubsubsection{\texorpdfstring{setQuality()}{setQuality()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} JPEGImage\+Format\+::set\+Quality (\begin{DoxyParamCaption}\item[{float}]{new\+Quality }\end{DoxyParamCaption})}
+
+Specifies the quality to be used when writing a JPEG file.
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Quality} & a value 0 to 1.\+0, where 0 is low quality, 1.\+0 is best, or any negative value is \char`\"{}default\char`\"{} quality \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_j_p_e_g_image_format_af1222e40615be2b2b4a0aafa0c0f2e63}\label{class_j_p_e_g_image_format_af1222e40615be2b2b4a0aafa0c0f2e63}} 
+\index{JPEGImageFormat@{JPEGImageFormat}!usesFileExtension@{usesFileExtension}}
+\index{usesFileExtension@{usesFileExtension}!JPEGImageFormat@{JPEGImageFormat}}
+\doxysubsubsection{\texorpdfstring{usesFileExtension()}{usesFileExtension()}}
+{\footnotesize\ttfamily bool JPEGImage\+Format\+::uses\+File\+Extension (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_file}{File}} \&}]{possible\+File }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Returns true if this format uses the file extension of the given file. 
+
+Implements \mbox{\hyperlink{class_image_file_format_a9eb5f897a01aa14b136944eee2c7f684}{Image\+File\+Format}}.
+
+\mbox{\Hypertarget{class_j_p_e_g_image_format_a6f21e23fcacb223986c35e6d30e78d1b}\label{class_j_p_e_g_image_format_a6f21e23fcacb223986c35e6d30e78d1b}} 
+\index{JPEGImageFormat@{JPEGImageFormat}!writeImageToStream@{writeImageToStream}}
+\index{writeImageToStream@{writeImageToStream}!JPEGImageFormat@{JPEGImageFormat}}
+\doxysubsubsection{\texorpdfstring{writeImageToStream()}{writeImageToStream()}}
+{\footnotesize\ttfamily bool JPEGImage\+Format\+::write\+Image\+To\+Stream (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_image}{Image}} \&}]{source\+Image,  }\item[{\mbox{\hyperlink{class_output_stream}{Output\+Stream}} \&}]{dest\+Stream }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Attempts to write an image to a stream.
+
+To specify extra information like encoding quality, there will be appropriate parameters in the subclasses of the specific file types.
+
+\begin{DoxyReturn}{Returns}
+true if it nothing went wrong. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_image_file_format_af70bdf60c3cea3a6806d225706670a63}{Image\+File\+Format}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+graphics/images/\mbox{\hyperlink{juce___image_file_format_8h}{juce\+\_\+\+Image\+File\+Format.\+h}}\item 
+build/juce\+\_\+graphics/image\+\_\+formats/\mbox{\hyperlink{juce___j_p_e_g_loader_8cpp}{juce\+\_\+\+JPEGLoader.\+cpp}}\end{DoxyCompactItemize}

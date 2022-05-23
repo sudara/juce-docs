@@ -1,0 +1,92 @@
+\hypertarget{class_drop_shadow_effect}{}\doxysection{Drop\+Shadow\+Effect Class Reference}
+\label{class_drop_shadow_effect}\index{DropShadowEffect@{DropShadowEffect}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+Drop\+Shadow\+Effect.\+h$>$}
+
+Inheritance diagram for Drop\+Shadow\+Effect\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{df/dec/class_drop_shadow_effect}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_drop_shadow_effect_a385d398423cf81f8e073195ea84473b2}{Drop\+Shadow\+Effect}} ()
+\item 
+\mbox{\hyperlink{class_drop_shadow_effect_a872dbaa0d4e34eee2dca1a7a23810221}{$\sim$\+Drop\+Shadow\+Effect}} () override
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_drop_shadow_effect_acf199925c902f335d7751eb568715b84}{set\+Shadow\+Properties}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{struct_drop_shadow}{Drop\+Shadow}} \&new\+Shadow)
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_drop_shadow_effect_a279a71d78cde938ef199077732b15aad}{apply\+Effect}} (\mbox{\hyperlink{class_image}{Image}} \&source\+Image, \mbox{\hyperlink{class_graphics}{Graphics}} \&dest\+Context, float scale\+Factor, float alpha) override
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+An effect filter that adds a drop-\/shadow behind the image\textquotesingle{}s content.
+
+(This will only work on images/components that aren\textquotesingle{}t opaque, of course).
+
+When added to a component, this effect will draw a soft-\/edged shadow based on what gets drawn inside it. The shadow will also be applied to the component\textquotesingle{}s children.
+
+For speed, this doesn\textquotesingle{}t use a proper gaussian blur, but cheats by using a simple bilinear filter. If you need a really high-\/quality shadow, check out \mbox{\hyperlink{class_image_convolution_kernel_a622a69a6e139de9ccc3bf8f15b841dfe}{Image\+Convolution\+Kernel\+::create\+Gaussian\+Blur()}}
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_component_a06800d0a55016e738c55078d82ef49fd}{Component\+::set\+Component\+Effect}}
+\end{DoxySeeAlso}
+@tags\{\mbox{\hyperlink{class_graphics}{Graphics}}\} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_drop_shadow_effect_a385d398423cf81f8e073195ea84473b2}\label{class_drop_shadow_effect_a385d398423cf81f8e073195ea84473b2}} 
+\index{DropShadowEffect@{DropShadowEffect}!DropShadowEffect@{DropShadowEffect}}
+\index{DropShadowEffect@{DropShadowEffect}!DropShadowEffect@{DropShadowEffect}}
+\doxysubsubsection{\texorpdfstring{DropShadowEffect()}{DropShadowEffect()}}
+{\footnotesize\ttfamily Drop\+Shadow\+Effect\+::\+Drop\+Shadow\+Effect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Creates a default drop-\/shadow effect. To customise the shadow\textquotesingle{}s appearance, use the \mbox{\hyperlink{class_drop_shadow_effect_acf199925c902f335d7751eb568715b84}{set\+Shadow\+Properties()}} method. \mbox{\Hypertarget{class_drop_shadow_effect_a872dbaa0d4e34eee2dca1a7a23810221}\label{class_drop_shadow_effect_a872dbaa0d4e34eee2dca1a7a23810221}} 
+\index{DropShadowEffect@{DropShadowEffect}!````~DropShadowEffect@{$\sim$DropShadowEffect}}
+\index{````~DropShadowEffect@{$\sim$DropShadowEffect}!DropShadowEffect@{DropShadowEffect}}
+\doxysubsubsection{\texorpdfstring{$\sim$DropShadowEffect()}{~DropShadowEffect()}}
+{\footnotesize\ttfamily Drop\+Shadow\+Effect\+::$\sim$\+Drop\+Shadow\+Effect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+Destructor. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_drop_shadow_effect_a279a71d78cde938ef199077732b15aad}\label{class_drop_shadow_effect_a279a71d78cde938ef199077732b15aad}} 
+\index{DropShadowEffect@{DropShadowEffect}!applyEffect@{applyEffect}}
+\index{applyEffect@{applyEffect}!DropShadowEffect@{DropShadowEffect}}
+\doxysubsubsection{\texorpdfstring{applyEffect()}{applyEffect()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Drop\+Shadow\+Effect\+::apply\+Effect (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_image}{Image}} \&}]{source\+Image,  }\item[{\mbox{\hyperlink{class_graphics}{Graphics}} \&}]{dest\+Context,  }\item[{float}]{scale\+Factor,  }\item[{float}]{alpha }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Overridden to render the effect.
+
+The implementation of this method must use the image that is passed in as its source, and should render its output to the graphics context passed in.
+
+
+\begin{DoxyParams}{Parameters}
+{\em source\+Image} & the image that the source component has just rendered with its paint() method. The image may or may not have an alpha channel, depending on whether the component is opaque. \\
+\hline
+{\em dest\+Context} & the graphics context to use to draw the resultant image. \\
+\hline
+{\em scale\+Factor} & a scale factor that has been applied to the image -\/ e.\+g. if this is 2, then the image is actually scaled-\/up to twice the original resolution \\
+\hline
+{\em alpha} & the alpha with which to draw the resultant image to the target context \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_image_effect_filter_afcdcb809146e0774b8d7ca24591771ad}{Image\+Effect\+Filter}}.
+
+\mbox{\Hypertarget{class_drop_shadow_effect_acf199925c902f335d7751eb568715b84}\label{class_drop_shadow_effect_acf199925c902f335d7751eb568715b84}} 
+\index{DropShadowEffect@{DropShadowEffect}!setShadowProperties@{setShadowProperties}}
+\index{setShadowProperties@{setShadowProperties}!DropShadowEffect@{DropShadowEffect}}
+\doxysubsubsection{\texorpdfstring{setShadowProperties()}{setShadowProperties()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} Drop\+Shadow\+Effect\+::set\+Shadow\+Properties (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{struct_drop_shadow}{Drop\+Shadow}} \&}]{new\+Shadow }\end{DoxyParamCaption})}
+
+Sets up parameters affecting the shadow\textquotesingle{}s appearance. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+graphics/effects/\mbox{\hyperlink{juce___drop_shadow_effect_8h}{juce\+\_\+\+Drop\+Shadow\+Effect.\+h}}\item 
+build/juce\+\_\+graphics/effects/\mbox{\hyperlink{juce___drop_shadow_effect_8cpp}{juce\+\_\+\+Drop\+Shadow\+Effect.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,154 @@
+\hypertarget{juce__audio__basics_2utilities_2juce___i_i_r_filter_8h_source}{}\doxysection{juce\+\_\+\+IIRFilter.\+h}
+\label{juce__audio__basics_2utilities_2juce___i_i_r_filter_8h_source}\index{build/juce\_audio\_basics/utilities/juce\_IIRFilter.h@{build/juce\_audio\_basics/utilities/juce\_IIRFilter.h}}
+\mbox{\hyperlink{juce__audio__basics_2utilities_2juce___i_i_r_filter_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{keyword}{class }\mbox{\hyperlink{class_i_i_r_filter}{IIRFilter}};}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{37 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_i_i_r_coefficients}{IIRCoefficients}}}
+\DoxyCodeLine{38 \{}
+\DoxyCodeLine{39 \textcolor{keyword}{public}:}
+\DoxyCodeLine{40     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{42 \textcolor{comment}{}    \mbox{\hyperlink{class_i_i_r_coefficients}{IIRCoefficients}}() \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{49     \mbox{\hyperlink{class_i_i_r_coefficients}{IIRCoefficients}} (\textcolor{keywordtype}{double} c1, \textcolor{keywordtype}{double} c2, \textcolor{keywordtype}{double} c3,}
+\DoxyCodeLine{50                      \textcolor{keywordtype}{double} c4, \textcolor{keywordtype}{double} c5, \textcolor{keywordtype}{double} c6) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{53     \mbox{\hyperlink{class_i_i_r_coefficients}{IIRCoefficients}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_i_i_r_coefficients}{IIRCoefficients}}\&) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{55     \mbox{\hyperlink{class_i_i_r_coefficients}{IIRCoefficients}}\& operator= (\textcolor{keyword}{const} \mbox{\hyperlink{class_i_i_r_coefficients}{IIRCoefficients}}\&) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{57     \mbox{\hyperlink{class_i_i_r_coefficients}{\string~IIRCoefficients}}() \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{61 \textcolor{comment}{}    \textcolor{keyword}{static} \mbox{\hyperlink{class_i_i_r_coefficients}{IIRCoefficients}} makeLowPass (\textcolor{keywordtype}{double} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}},}
+\DoxyCodeLine{62                                         \textcolor{keywordtype}{double} frequency) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{65     \textcolor{keyword}{static} \mbox{\hyperlink{class_i_i_r_coefficients}{IIRCoefficients}} makeLowPass (\textcolor{keywordtype}{double} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}},}
+\DoxyCodeLine{66                                         \textcolor{keywordtype}{double} frequency,}
+\DoxyCodeLine{67                                         \textcolor{keywordtype}{double} Q) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{71 \textcolor{comment}{}    \textcolor{keyword}{static} \mbox{\hyperlink{class_i_i_r_coefficients}{IIRCoefficients}} makeHighPass (\textcolor{keywordtype}{double} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}},}
+\DoxyCodeLine{72                                          \textcolor{keywordtype}{double} frequency) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{75     \textcolor{keyword}{static} \mbox{\hyperlink{class_i_i_r_coefficients}{IIRCoefficients}} makeHighPass (\textcolor{keywordtype}{double} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}},}
+\DoxyCodeLine{76                                          \textcolor{keywordtype}{double} frequency,}
+\DoxyCodeLine{77                                          \textcolor{keywordtype}{double} Q) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{81 \textcolor{comment}{}    \textcolor{keyword}{static} \mbox{\hyperlink{class_i_i_r_coefficients}{IIRCoefficients}} makeBandPass (\textcolor{keywordtype}{double} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}}, \textcolor{keywordtype}{double} frequency) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{84     \textcolor{keyword}{static} \mbox{\hyperlink{class_i_i_r_coefficients}{IIRCoefficients}} makeBandPass (\textcolor{keywordtype}{double} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}},}
+\DoxyCodeLine{85                                          \textcolor{keywordtype}{double} frequency,}
+\DoxyCodeLine{86                                          \textcolor{keywordtype}{double} Q) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{90 \textcolor{comment}{}    \textcolor{keyword}{static} \mbox{\hyperlink{class_i_i_r_coefficients}{IIRCoefficients}} makeNotchFilter (\textcolor{keywordtype}{double} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}}, \textcolor{keywordtype}{double} frequency) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{93     \textcolor{keyword}{static} \mbox{\hyperlink{class_i_i_r_coefficients}{IIRCoefficients}} makeNotchFilter (\textcolor{keywordtype}{double} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}},}
+\DoxyCodeLine{94                                             \textcolor{keywordtype}{double} frequency,}
+\DoxyCodeLine{95                                             \textcolor{keywordtype}{double} Q) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{99 \textcolor{comment}{}    \textcolor{keyword}{static} \mbox{\hyperlink{class_i_i_r_coefficients}{IIRCoefficients}} makeAllPass (\textcolor{keywordtype}{double} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}}, \textcolor{keywordtype}{double} frequency) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{102     \textcolor{keyword}{static} \mbox{\hyperlink{class_i_i_r_coefficients}{IIRCoefficients}} makeAllPass (\textcolor{keywordtype}{double} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}},}
+\DoxyCodeLine{103                                         \textcolor{keywordtype}{double} frequency,}
+\DoxyCodeLine{104                                         \textcolor{keywordtype}{double} Q) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{106     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{113 \textcolor{comment}{}    \textcolor{keyword}{static} \mbox{\hyperlink{class_i_i_r_coefficients}{IIRCoefficients}} makeLowShelf (\textcolor{keywordtype}{double} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}},}
+\DoxyCodeLine{114                                          \textcolor{keywordtype}{double} cutOffFrequency,}
+\DoxyCodeLine{115                                          \textcolor{keywordtype}{double} Q,}
+\DoxyCodeLine{116                                          \textcolor{keywordtype}{float} gainFactor) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{124     \textcolor{keyword}{static} \mbox{\hyperlink{class_i_i_r_coefficients}{IIRCoefficients}} makeHighShelf (\textcolor{keywordtype}{double} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}},}
+\DoxyCodeLine{125                                           \textcolor{keywordtype}{double} cutOffFrequency,}
+\DoxyCodeLine{126                                           \textcolor{keywordtype}{double} Q,}
+\DoxyCodeLine{127                                           \textcolor{keywordtype}{float} gainFactor) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{136     \textcolor{keyword}{static} \mbox{\hyperlink{class_i_i_r_coefficients}{IIRCoefficients}} makePeakFilter (\textcolor{keywordtype}{double} \mbox{\hyperlink{juce__linux___a_l_s_a_8cpp_a2bd79d2ab2dfb6aeaf75c2878ad30e1f}{sampleRate}},}
+\DoxyCodeLine{137                                            \textcolor{keywordtype}{double} centreFrequency,}
+\DoxyCodeLine{138                                            \textcolor{keywordtype}{double} Q,}
+\DoxyCodeLine{139                                            \textcolor{keywordtype}{float} gainFactor) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{141     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{145 \textcolor{comment}{}    \textcolor{keywordtype}{float} coefficients[5];}
+\DoxyCodeLine{146 \};}
+\DoxyCodeLine{147 }
+\DoxyCodeLine{148 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{157 \textcolor{comment}{}\textcolor{keyword}{template} <\textcolor{keyword}{typename} Mutex>}
+\DoxyCodeLine{158 \textcolor{keyword}{class }\mbox{\hyperlink{group__juce__core-system_ga65961b3bfbda0ffb83750d914cee38fb}{JUCE\_API}}  \mbox{\hyperlink{class_i_i_r_filter_base}{IIRFilterBase}}}
+\DoxyCodeLine{159 \{}
+\DoxyCodeLine{160 \textcolor{keyword}{public}:}
+\DoxyCodeLine{161     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{168 \textcolor{comment}{}    \mbox{\hyperlink{class_i_i_r_filter_base_a8106251f2a2aeaf7f39335db9a91cedd}{IIRFilterBase}}() noexcept;}
+\DoxyCodeLine{169 }
+\DoxyCodeLine{171     \mbox{\hyperlink{class_i_i_r_filter_base}{IIRFilterBase}} (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_i_i_r_filter_base}{IIRFilterBase}}\&) noexcept;}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{173     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{175 \textcolor{comment}{}    \textcolor{keywordtype}{void} makeInactive() noexcept;}
+\DoxyCodeLine{176 }
+\DoxyCodeLine{178     \textcolor{keywordtype}{void} setCoefficients (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_i_i_r_coefficients}{IIRCoefficients}}\& newCoefficients) noexcept;}
+\DoxyCodeLine{179 }
+\DoxyCodeLine{181     \mbox{\hyperlink{class_i_i_r_coefficients}{IIRCoefficients}} getCoefficients() \mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} noexcept    \{ \textcolor{keywordflow}{return} coefficients; \}}
+\DoxyCodeLine{182 }
+\DoxyCodeLine{183     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{190 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacegl_a3b437ea454d772211296e220c025bdd2}{reset}}() noexcept;}
+\DoxyCodeLine{191 }
+\DoxyCodeLine{193     \textcolor{keywordtype}{void} processSamples (\textcolor{keywordtype}{float}* \mbox{\hyperlink{namespacegl_a86d4caaead9cc2b5ad0ad5e23ae0568d}{samples}}, \textcolor{keywordtype}{int} numSamples) noexcept;}
+\DoxyCodeLine{194 }
+\DoxyCodeLine{200     \textcolor{keywordtype}{float} processSingleSampleRaw (\textcolor{keywordtype}{float} sample) noexcept;}
+\DoxyCodeLine{201 }
+\DoxyCodeLine{202 protected:}
+\DoxyCodeLine{203     \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{204     Mutex processLock;}
+\DoxyCodeLine{205     \mbox{\hyperlink{class_i_i_r_coefficients}{IIRCoefficients}} coefficients;}
+\DoxyCodeLine{206     \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a44088692d4a50831b9cf4cf4faa2bdae}{v1}} = 0, \mbox{\hyperlink{namespacegl_a3d720ecdc957cee0d59defa8efcfe234}{v2}} = 0;}
+\DoxyCodeLine{207     \textcolor{keywordtype}{bool} active = \mbox{\hyperlink{ordinals_8h_a65e9886d74aaee76545e83dd09011727}{false}};}
+\DoxyCodeLine{208 }
+\DoxyCodeLine{209     \textcolor{comment}{// The exact meaning of an assignment operator would be ambiguous since the filters are}}
+\DoxyCodeLine{210     \textcolor{comment}{// stateful. If you want to copy the coefficients, then just use setCoefficients().}}
+\DoxyCodeLine{211     \mbox{\hyperlink{class_i_i_r_filter}{IIRFilter}}\& operator= (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_i_i_r_filter}{IIRFilter}}\&) = delete;}
+\DoxyCodeLine{212 }
+\DoxyCodeLine{213     \mbox{\hyperlink{group__juce__core-memory_gab3639a79598b35f2116f4572af0d93f1}{JUCE\_LEAK\_DETECTOR}} (\mbox{\hyperlink{class_i_i_r_filter}{IIRFilter}})}
+\DoxyCodeLine{214 \};}
+\DoxyCodeLine{215 }
+\DoxyCodeLine{232 class \mbox{\hyperlink{class_i_i_r_filter}{IIRFilter}} : public \mbox{\hyperlink{class_i_i_r_filter_base}{IIRFilterBase}}<\mbox{\hyperlink{class_spin_lock}{SpinLock}}>}
+\DoxyCodeLine{233 \{}
+\DoxyCodeLine{234 \textcolor{keyword}{public}:}
+\DoxyCodeLine{235     \textcolor{keyword}{using} \mbox{\hyperlink{class_i_i_r_filter_base_a8106251f2a2aeaf7f39335db9a91cedd}{IIRFilterBase::IIRFilterBase}};}
+\DoxyCodeLine{236 \};}
+\DoxyCodeLine{237 }
+\DoxyCodeLine{249 \textcolor{keyword}{class }\mbox{\hyperlink{class_single_threaded_i_i_r_filter}{SingleThreadedIIRFilter}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_i_i_r_filter_base}{IIRFilterBase}}<DummyCriticalSection>}
+\DoxyCodeLine{250 \{}
+\DoxyCodeLine{251 \textcolor{keyword}{public}:}
+\DoxyCodeLine{252     \textcolor{keyword}{using} \mbox{\hyperlink{class_i_i_r_filter_base_a8106251f2a2aeaf7f39335db9a91cedd}{IIRFilterBase::IIRFilterBase}};}
+\DoxyCodeLine{253 \};}
+\DoxyCodeLine{254 }
+\DoxyCodeLine{255  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{256 }
+
+\end{DoxyCode}

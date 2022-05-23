@@ -1,0 +1,161 @@
+\hypertarget{flock_8h_source}{}\doxysection{flock.\+h}
+\label{flock_8h_source}\index{build/juce\_audio\_processors/format\_types/VST3\_SDK/base/thread/include/flock.h@{build/juce\_audio\_processors/format\_types/VST3\_SDK/base/thread/include/flock.h}}
+\mbox{\hyperlink{flock_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{2 \textcolor{comment}{// Project     : SDK Base}}
+\DoxyCodeLine{3 \textcolor{comment}{// Version     : 1.0}}
+\DoxyCodeLine{4 \textcolor{comment}{//}}
+\DoxyCodeLine{5 \textcolor{comment}{// Category    : Helpers}}
+\DoxyCodeLine{6 \textcolor{comment}{// Filename    : base/thread/include/flock.h}}
+\DoxyCodeLine{7 \textcolor{comment}{// Created by  : Steinberg, 1995}}
+\DoxyCodeLine{8 \textcolor{comment}{// Description : locks}}
+\DoxyCodeLine{9 \textcolor{comment}{//}}
+\DoxyCodeLine{10 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{11 \textcolor{comment}{// LICENSE}}
+\DoxyCodeLine{12 \textcolor{comment}{// (c) 2021, Steinberg Media Technologies GmbH, All Rights Reserved}}
+\DoxyCodeLine{13 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{14 \textcolor{comment}{// Redistribution and use in source and binary forms, with or without modification,}}
+\DoxyCodeLine{15 \textcolor{comment}{// are permitted provided that the following conditions are met:}}
+\DoxyCodeLine{16 \textcolor{comment}{// }}
+\DoxyCodeLine{17 \textcolor{comment}{//   * Redistributions of source code must retain the above copyright notice, }}
+\DoxyCodeLine{18 \textcolor{comment}{//     this list of conditions and the following disclaimer.}}
+\DoxyCodeLine{19 \textcolor{comment}{//   * Redistributions in binary form must reproduce the above copyright notice,}}
+\DoxyCodeLine{20 \textcolor{comment}{//     this list of conditions and the following disclaimer in the documentation }}
+\DoxyCodeLine{21 \textcolor{comment}{//     and/or other materials provided with the distribution.}}
+\DoxyCodeLine{22 \textcolor{comment}{//   * Neither the name of the Steinberg Media Technologies nor the names of its}}
+\DoxyCodeLine{23 \textcolor{comment}{//     contributors may be used to endorse or promote products derived from this }}
+\DoxyCodeLine{24 \textcolor{comment}{//     software without specific prior written permission.}}
+\DoxyCodeLine{25 \textcolor{comment}{// }}
+\DoxyCodeLine{26 \textcolor{comment}{// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "{}AS IS"{} AND}}
+\DoxyCodeLine{27 \textcolor{comment}{// ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED }}
+\DoxyCodeLine{28 \textcolor{comment}{// WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. }}
+\DoxyCodeLine{29 \textcolor{comment}{// IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, }}
+\DoxyCodeLine{30 \textcolor{comment}{// INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, }}
+\DoxyCodeLine{31 \textcolor{comment}{// BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, }}
+\DoxyCodeLine{32 \textcolor{comment}{// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF }}
+\DoxyCodeLine{33 \textcolor{comment}{// LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE }}
+\DoxyCodeLine{34 \textcolor{comment}{// OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE  OF THIS SOFTWARE, EVEN IF ADVISED}}
+\DoxyCodeLine{35 \textcolor{comment}{// OF THE POSSIBILITY OF SUCH DAMAGE.}}
+\DoxyCodeLine{36 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{42 \textcolor{comment}{}\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{43 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{fobject_8h}{base/source/fobject.h}}"{}}}
+\DoxyCodeLine{46 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{ftypes_8h}{pluginterfaces/base/ftypes.h}}"{}}}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48 \textcolor{preprocessor}{\#if SMTG\_PTHREADS}}
+\DoxyCodeLine{49 \textcolor{preprocessor}{\#include <pthread.h>}}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51 \textcolor{preprocessor}{\#elif SMTG\_OS\_WINDOWS}}
+\DoxyCodeLine{52 \textcolor{keyword}{struct }CRITSECT                         \textcolor{comment}{// CRITICAL\_SECTION}}
+\DoxyCodeLine{53 \{}
+\DoxyCodeLine{54     \textcolor{keywordtype}{void}* DebugInfo;                    \textcolor{comment}{// PRTL\_CRITICAL\_SECTION\_DEBUG DebugInfo;}}
+\DoxyCodeLine{55     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{Steinberg::int32}} LockCount;         \textcolor{comment}{// LONG LockCount;}}
+\DoxyCodeLine{56     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{Steinberg::int32}} RecursionCount;    \textcolor{comment}{// LONG RecursionCount;}}
+\DoxyCodeLine{57     \textcolor{keywordtype}{void}* OwningThread;                 \textcolor{comment}{// HANDLE OwningThread}}
+\DoxyCodeLine{58     \textcolor{keywordtype}{void}* LockSemaphore;                \textcolor{comment}{// HANDLE LockSemaphore}}
+\DoxyCodeLine{59     \mbox{\hyperlink{namespace_steinberg_a2ea05679b0aa73e249c6bd7e83f41f05}{Steinberg::int32}} SpinCount;         \textcolor{comment}{// ULONG\_PTR SpinCount}}
+\DoxyCodeLine{60 \};}
+\DoxyCodeLine{61 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespace_steinberg}{Steinberg}} \{}
+\DoxyCodeLine{64 \textcolor{keyword}{namespace }\mbox{\hyperlink{juce__mac___video_8h_ab8f3006ffd15453e8934ac2f988a4c2b}{Base}} \{}
+\DoxyCodeLine{65 \textcolor{keyword}{namespace }\mbox{\hyperlink{class_thread}{Thread}} \{}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{70 \textcolor{comment}{}\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{71 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_steinberg_1_1_base_1_1_thread_1_1_i_lock}{ILock}}}
+\DoxyCodeLine{72 \{}
+\DoxyCodeLine{73 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{74     \textcolor{keyword}{virtual} \mbox{\hyperlink{struct_steinberg_1_1_base_1_1_thread_1_1_i_lock_a545e25227cbf1a2bf220332bf600a886}{\string~ILock}} () \{\}}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{77     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_steinberg_1_1_base_1_1_thread_1_1_i_lock_a57b7e73336f41293fe5fae284554c05a}{lock}} () = 0;}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{80     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_steinberg_1_1_base_1_1_thread_1_1_i_lock_a71d7be20931f88adaf08294338823a73}{unlock}} () = 0;}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{83     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_steinberg_1_1_base_1_1_thread_1_1_i_lock_ad9924659eb0de41c8821b75272a8fcbb}{trylock}} () = 0;}
+\DoxyCodeLine{84 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{85 \};}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{90 \textcolor{comment}{}\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{91 \textcolor{keyword}{class }\mbox{\hyperlink{class_steinberg_1_1_base_1_1_thread_1_1_f_lock}{FLock}} : \textcolor{keyword}{public} \mbox{\hyperlink{struct_steinberg_1_1_base_1_1_thread_1_1_i_lock}{ILock}}}
+\DoxyCodeLine{92 \{}
+\DoxyCodeLine{93 \textcolor{keyword}{public}:}
+\DoxyCodeLine{94 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{99     \mbox{\hyperlink{class_steinberg_1_1_base_1_1_thread_1_1_f_lock_a3759ceef9693ce087b64049f2f064f64}{FLock}} (\textcolor{keyword}{const} \mbox{\hyperlink{namespace_steinberg_a4a83db7f2467f59f3050248287aef5fa}{char8}}* \mbox{\hyperlink{namespacegl_a23f4d6c2fb3e8fdfb824894be7a695c2}{name}} = \textcolor{stringliteral}{"{}FLock"{}});}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{102     \mbox{\hyperlink{class_steinberg_1_1_base_1_1_thread_1_1_f_lock_a148e7c269db44bc99ae08b7a6ea20702}{\string~FLock}} ();}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104     \textcolor{comment}{//-\/-\/ ILock -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{105     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_steinberg_1_1_base_1_1_thread_1_1_f_lock_af8d0d1fe4dafa1a0ddd958992e932ce6}{lock}} () \mbox{\hyperlink{fplatform_8h_a3c5f727b2149b22fddea9edf2add04a8}{SMTG\_OVERRIDE}};}
+\DoxyCodeLine{106     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_steinberg_1_1_base_1_1_thread_1_1_f_lock_a3fb50697b037711c5f347ab72f5b12a2}{unlock}} () \mbox{\hyperlink{fplatform_8h_a3c5f727b2149b22fddea9edf2add04a8}{SMTG\_OVERRIDE}};}
+\DoxyCodeLine{107     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_steinberg_1_1_base_1_1_thread_1_1_f_lock_a5f21bbaa39715a55edcb0019deba47ed}{trylock}} () \mbox{\hyperlink{fplatform_8h_a3c5f727b2149b22fddea9edf2add04a8}{SMTG\_OVERRIDE}};}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{110 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{111 \textcolor{preprocessor}{\#if SMTG\_PTHREADS}}
+\DoxyCodeLine{112     pthread\_mutex\_t mutex; }
+\DoxyCodeLine{113 }
+\DoxyCodeLine{114 \textcolor{preprocessor}{\#elif SMTG\_OS\_WINDOWS}}
+\DoxyCodeLine{115     CRITSECT section; }
+\DoxyCodeLine{116 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{117 \};}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{119 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{122 \textcolor{comment}{}\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{123 \textcolor{keyword}{class }\mbox{\hyperlink{class_steinberg_1_1_base_1_1_thread_1_1_f_lock_object}{FLockObject}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_steinberg_1_1_f_object}{FObject}}, \textcolor{keyword}{public} \mbox{\hyperlink{class_steinberg_1_1_base_1_1_thread_1_1_f_lock}{FLock}}}
+\DoxyCodeLine{124 \{}
+\DoxyCodeLine{125 \textcolor{keyword}{public}:}
+\DoxyCodeLine{126     \mbox{\hyperlink{fobject_8h_a5a6e2365f969f95aee286638cf6164c7}{OBJ\_METHODS}} (\mbox{\hyperlink{class_steinberg_1_1_base_1_1_thread_1_1_f_lock_object}{FLockObject}}, \mbox{\hyperlink{class_steinberg_1_1_f_object}{FObject}})}
+\DoxyCodeLine{127 \};}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{132 \textcolor{comment}{}\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{133 \textcolor{keyword}{class }\mbox{\hyperlink{class_steinberg_1_1_base_1_1_thread_1_1_f_guard}{FGuard}}}
+\DoxyCodeLine{134 \{}
+\DoxyCodeLine{135 \textcolor{keyword}{public}:}
+\DoxyCodeLine{136 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{141     \mbox{\hyperlink{class_steinberg_1_1_base_1_1_thread_1_1_f_guard_a9fa6b6daf945353409314b8a12d61cbe}{FGuard}} (\mbox{\hyperlink{struct_steinberg_1_1_base_1_1_thread_1_1_i_lock}{ILock}}\& \_lock) : lock (\_lock) \{ lock.\mbox{\hyperlink{struct_steinberg_1_1_base_1_1_thread_1_1_i_lock_a57b7e73336f41293fe5fae284554c05a}{lock}} (); \}}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{144     \mbox{\hyperlink{class_steinberg_1_1_base_1_1_thread_1_1_f_guard_a78d4ef7fad5b17b1abb03e1fe85d5368}{\string~FGuard}} () \{ lock.\mbox{\hyperlink{struct_steinberg_1_1_base_1_1_thread_1_1_i_lock_a71d7be20931f88adaf08294338823a73}{unlock}} (); \}}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{146 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{147 \textcolor{keyword}{private}:}
+\DoxyCodeLine{148     \mbox{\hyperlink{struct_steinberg_1_1_base_1_1_thread_1_1_i_lock}{ILock}}\& lock; }
+\DoxyCodeLine{149 \};}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{151 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{154 \textcolor{comment}{}\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{155 \textcolor{keyword}{class }\mbox{\hyperlink{class_steinberg_1_1_base_1_1_thread_1_1_f_conditional_guard}{FConditionalGuard}}}
+\DoxyCodeLine{156 \{}
+\DoxyCodeLine{157 \textcolor{keyword}{public}:}
+\DoxyCodeLine{158 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{163     \mbox{\hyperlink{class_steinberg_1_1_base_1_1_thread_1_1_f_conditional_guard_a8a3c2670e77483195512ffd7e87c87c5}{FConditionalGuard}} (\mbox{\hyperlink{class_steinberg_1_1_base_1_1_thread_1_1_f_lock}{FLock}}* \_lock) : lock (\_lock)}
+\DoxyCodeLine{164     \{}
+\DoxyCodeLine{165         \textcolor{keywordflow}{if} (lock)}
+\DoxyCodeLine{166             lock-\/>\mbox{\hyperlink{class_steinberg_1_1_base_1_1_thread_1_1_f_lock_af8d0d1fe4dafa1a0ddd958992e932ce6}{lock}} ();}
+\DoxyCodeLine{167     \}}
+\DoxyCodeLine{168 }
+\DoxyCodeLine{170     \mbox{\hyperlink{class_steinberg_1_1_base_1_1_thread_1_1_f_conditional_guard_af7e0a3cdec4dbe16a85ede0a39154712}{\string~FConditionalGuard}} ()}
+\DoxyCodeLine{171     \{}
+\DoxyCodeLine{172         \textcolor{keywordflow}{if} (lock)}
+\DoxyCodeLine{173             lock-\/>\mbox{\hyperlink{class_steinberg_1_1_base_1_1_thread_1_1_f_lock_a3fb50697b037711c5f347ab72f5b12a2}{unlock}} ();}
+\DoxyCodeLine{174     \}}
+\DoxyCodeLine{175 }
+\DoxyCodeLine{176 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{177 \textcolor{keyword}{private}:}
+\DoxyCodeLine{178     \mbox{\hyperlink{class_steinberg_1_1_base_1_1_thread_1_1_f_lock}{FLock}}* lock; }
+\DoxyCodeLine{179 \};}
+\DoxyCodeLine{180 }
+\DoxyCodeLine{181 \} \textcolor{comment}{// Thread}}
+\DoxyCodeLine{182 \} \textcolor{comment}{// Base}}
+\DoxyCodeLine{183 \} \textcolor{comment}{// Steinberg}}
+
+\end{DoxyCode}

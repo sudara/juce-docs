@@ -1,0 +1,53 @@
+\hypertarget{_flowgraph_utilities_8h_source}{}\doxysection{Flowgraph\+Utilities.\+h}
+\label{_flowgraph_utilities_8h_source}\index{build/juce\_audio\_devices/native/oboe/src/flowgraph/FlowgraphUtilities.h@{build/juce\_audio\_devices/native/oboe/src/flowgraph/FlowgraphUtilities.h}}
+\mbox{\hyperlink{_flowgraph_utilities_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{ * Copyright 2020 The Android Open Source Project}}
+\DoxyCodeLine{3 \textcolor{comment}{ *}}
+\DoxyCodeLine{4 \textcolor{comment}{ * Licensed under the Apache License, Version 2.0 (the "{}License"{});}}
+\DoxyCodeLine{5 \textcolor{comment}{ * you may not use this file except in compliance with the License.}}
+\DoxyCodeLine{6 \textcolor{comment}{ * You may obtain a copy of the License at}}
+\DoxyCodeLine{7 \textcolor{comment}{ *}}
+\DoxyCodeLine{8 \textcolor{comment}{ *      http://www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{9 \textcolor{comment}{ *}}
+\DoxyCodeLine{10 \textcolor{comment}{ * Unless required by applicable law or agreed to in writing, software}}
+\DoxyCodeLine{11 \textcolor{comment}{ * distributed under the License is distributed on an "{}AS IS"{} BASIS,}}
+\DoxyCodeLine{12 \textcolor{comment}{ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.}}
+\DoxyCodeLine{13 \textcolor{comment}{ * See the License for the specific language governing permissions and}}
+\DoxyCodeLine{14 \textcolor{comment}{ * limitations under the License.}}
+\DoxyCodeLine{15 \textcolor{comment}{ */}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#ifndef FLOWGRAPH\_UTILITIES\_H}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#define FLOWGRAPH\_UTILITIES\_H}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#include <unistd.h>}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 \textcolor{keyword}{using namespace }\mbox{\hyperlink{namespace_f_l_o_w_g_r_a_p_h___o_u_t_e_r___n_a_m_e_s_p_a_c_e_1_1flowgraph}{FLOWGRAPH\_OUTER\_NAMESPACE::flowgraph}};}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{keyword}{class }\mbox{\hyperlink{class_flowgraph_utilities}{FlowgraphUtilities}} \{}
+\DoxyCodeLine{25 \textcolor{keyword}{public}:}
+\DoxyCodeLine{26 \textcolor{comment}{// This was copied from audio\_utils/primitives.h}}
+\DoxyCodeLine{35 \textcolor{comment}{}\textcolor{keyword}{static} int32\_t \mbox{\hyperlink{class_flowgraph_utilities_a1e21c2871dc8d3686e0a71bc487e8dd1}{clamp32FromFloat}}(\textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}})}
+\DoxyCodeLine{36 \{}
+\DoxyCodeLine{37     \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegl_a4f27436ebaceab481939dc1f71b047dc}{scale}} = (float)(1UL << 31);}
+\DoxyCodeLine{38     \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{float} limpos = 1.;}
+\DoxyCodeLine{39     \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{float} limneg = -\/1.;}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41     \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}} <= limneg) \{}
+\DoxyCodeLine{42         \textcolor{keywordflow}{return} -\/0x80000000; \textcolor{comment}{/* or 0x80000000 */}}
+\DoxyCodeLine{43     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}} >= limpos) \{}
+\DoxyCodeLine{44         \textcolor{keywordflow}{return} 0x7fffffff;}
+\DoxyCodeLine{45     \}}
+\DoxyCodeLine{46     \mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}} *= \mbox{\hyperlink{namespacegl_a4f27436ebaceab481939dc1f71b047dc}{scale}};}
+\DoxyCodeLine{47     \textcolor{comment}{/* integer conversion is through truncation (though int to float is not).}}
+\DoxyCodeLine{48 \textcolor{comment}{     * ensure that we round to nearest, ties away from 0.}}
+\DoxyCodeLine{49 \textcolor{comment}{     */}}
+\DoxyCodeLine{50     \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}} > 0 ? \mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}} + 0.5 : \mbox{\hyperlink{namespacegl_a36f31b2741707f905f4a62d054da4931}{f}} -\/ 0.5;}
+\DoxyCodeLine{51 \}}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53 \};}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// FLOWGRAPH\_UTILITIES\_H}}
+
+\end{DoxyCode}

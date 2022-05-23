@@ -1,0 +1,169 @@
+\hypertarget{_c_a_mutex_8h_source}{}\doxysection{CAMutex.\+h}
+\label{_c_a_mutex_8h_source}\index{build/juce\_audio\_plugin\_client/AU/CoreAudioUtilityClasses/CAMutex.h@{build/juce\_audio\_plugin\_client/AU/CoreAudioUtilityClasses/CAMutex.h}}
+\mbox{\hyperlink{_c_a_mutex_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{     File: CAMutex.h}}
+\DoxyCodeLine{3 \textcolor{comment}{ Abstract: Part of CoreAudio Utility Classes}}
+\DoxyCodeLine{4 \textcolor{comment}{  Version: 1.1}}
+\DoxyCodeLine{5 \textcolor{comment}{}}
+\DoxyCodeLine{6 \textcolor{comment}{ Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple}}
+\DoxyCodeLine{7 \textcolor{comment}{ Inc. ("{}Apple"{}) in consideration of your agreement to the following}}
+\DoxyCodeLine{8 \textcolor{comment}{ terms, and your use, installation, modification or redistribution of}}
+\DoxyCodeLine{9 \textcolor{comment}{ this Apple software constitutes acceptance of these terms.  If you do}}
+\DoxyCodeLine{10 \textcolor{comment}{ not agree with these terms, please do not use, install, modify or}}
+\DoxyCodeLine{11 \textcolor{comment}{ redistribute this Apple software.}}
+\DoxyCodeLine{12 \textcolor{comment}{}}
+\DoxyCodeLine{13 \textcolor{comment}{ In consideration of your agreement to abide by the following terms, and}}
+\DoxyCodeLine{14 \textcolor{comment}{ subject to these terms, Apple grants you a personal, non-\/exclusive}}
+\DoxyCodeLine{15 \textcolor{comment}{ license, under Apple's copyrights in this original Apple software (the}}
+\DoxyCodeLine{16 \textcolor{comment}{ "{}Apple Software"{}), to use, reproduce, modify and redistribute the Apple}}
+\DoxyCodeLine{17 \textcolor{comment}{ Software, with or without modifications, in source and/or binary forms;}}
+\DoxyCodeLine{18 \textcolor{comment}{ provided that if you redistribute the Apple Software in its entirety and}}
+\DoxyCodeLine{19 \textcolor{comment}{ without modifications, you must retain this notice and the following}}
+\DoxyCodeLine{20 \textcolor{comment}{ text and disclaimers in all such redistributions of the Apple Software.}}
+\DoxyCodeLine{21 \textcolor{comment}{ Neither the name, trademarks, service marks or logos of Apple Inc. may}}
+\DoxyCodeLine{22 \textcolor{comment}{ be used to endorse or promote products derived from the Apple Software}}
+\DoxyCodeLine{23 \textcolor{comment}{ without specific prior written permission from Apple.  Except as}}
+\DoxyCodeLine{24 \textcolor{comment}{ expressly stated in this notice, no other rights or licenses, express or}}
+\DoxyCodeLine{25 \textcolor{comment}{ implied, are granted by Apple herein, including but not limited to any}}
+\DoxyCodeLine{26 \textcolor{comment}{ patent rights that may be infringed by your derivative works or by other}}
+\DoxyCodeLine{27 \textcolor{comment}{ works in which the Apple Software may be incorporated.}}
+\DoxyCodeLine{28 \textcolor{comment}{}}
+\DoxyCodeLine{29 \textcolor{comment}{ The Apple Software is provided by Apple on an "{}AS IS"{} basis.  APPLE}}
+\DoxyCodeLine{30 \textcolor{comment}{ MAKES NO WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION}}
+\DoxyCodeLine{31 \textcolor{comment}{ THE IMPLIED WARRANTIES OF NON-\/INFRINGEMENT, MERCHANTABILITY AND FITNESS}}
+\DoxyCodeLine{32 \textcolor{comment}{ FOR A PARTICULAR PURPOSE, REGARDING THE APPLE SOFTWARE OR ITS USE AND}}
+\DoxyCodeLine{33 \textcolor{comment}{ OPERATION ALONE OR IN COMBINATION WITH YOUR PRODUCTS.}}
+\DoxyCodeLine{34 \textcolor{comment}{}}
+\DoxyCodeLine{35 \textcolor{comment}{ IN NO EVENT SHALL APPLE BE LIABLE FOR ANY SPECIAL, INDIRECT, INCIDENTAL}}
+\DoxyCodeLine{36 \textcolor{comment}{ OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF}}
+\DoxyCodeLine{37 \textcolor{comment}{ SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS}}
+\DoxyCodeLine{38 \textcolor{comment}{ INTERRUPTION) ARISING IN ANY WAY OUT OF THE USE, REPRODUCTION,}}
+\DoxyCodeLine{39 \textcolor{comment}{ MODIFICATION AND/OR DISTRIBUTION OF THE APPLE SOFTWARE, HOWEVER CAUSED}}
+\DoxyCodeLine{40 \textcolor{comment}{ AND WHETHER UNDER THEORY OF CONTRACT, TORT (INCLUDING NEGLIGENCE),}}
+\DoxyCodeLine{41 \textcolor{comment}{ STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE}}
+\DoxyCodeLine{42 \textcolor{comment}{ POSSIBILITY OF SUCH DAMAGE.}}
+\DoxyCodeLine{43 \textcolor{comment}{}}
+\DoxyCodeLine{44 \textcolor{comment}{ Copyright (C) 2014 Apple Inc. All Rights Reserved.}}
+\DoxyCodeLine{45 \textcolor{comment}{}}
+\DoxyCodeLine{46 \textcolor{comment}{*/}}
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#ifndef \_\_CAMutex\_h\_\_}}
+\DoxyCodeLine{48 \textcolor{preprocessor}{\#define \_\_CAMutex\_h\_\_}}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50 \textcolor{comment}{//==================================================================================================}}
+\DoxyCodeLine{51 \textcolor{comment}{//  Includes}}
+\DoxyCodeLine{52 \textcolor{comment}{//==================================================================================================}}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54 \textcolor{comment}{//  System Includes}}
+\DoxyCodeLine{55 \textcolor{preprocessor}{\#if !defined(\_\_COREAUDIO\_USE\_FLAT\_INCLUDES\_\_)}}
+\DoxyCodeLine{56 \textcolor{preprocessor}{    \#include <CoreAudio/CoreAudioTypes.h>}}
+\DoxyCodeLine{57 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{58 \textcolor{preprocessor}{    \#include <CoreAudioTypes.h>}}
+\DoxyCodeLine{59 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61 \textcolor{preprocessor}{\#if TARGET\_OS\_MAC}}
+\DoxyCodeLine{62 \textcolor{preprocessor}{    \#include <pthread.h>}}
+\DoxyCodeLine{63 \textcolor{preprocessor}{\#elif TARGET\_OS\_WIN32}}
+\DoxyCodeLine{64 \textcolor{preprocessor}{    \#include <windows.h>}}
+\DoxyCodeLine{65 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{66 \textcolor{preprocessor}{    \#error  Unsupported operating system}}
+\DoxyCodeLine{67 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69 \textcolor{comment}{//==================================================================================================}}
+\DoxyCodeLine{70 \textcolor{comment}{//  A recursive mutex.}}
+\DoxyCodeLine{71 \textcolor{comment}{//==================================================================================================}}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73 \textcolor{keyword}{class   }\mbox{\hyperlink{class_c_a_mutex}{CAMutex}}}
+\DoxyCodeLine{74 \{}
+\DoxyCodeLine{75 \textcolor{comment}{//  Construction/Destruction}}
+\DoxyCodeLine{76 \textcolor{keyword}{public}:}
+\DoxyCodeLine{77                     \mbox{\hyperlink{class_c_a_mutex_a122a6b3f7893f1c3912ea4843245a2a8}{CAMutex}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char}* inName);}
+\DoxyCodeLine{78     \textcolor{keyword}{virtual}         \mbox{\hyperlink{class_c_a_mutex_ab1b087d683cf69f978cb585c63757398}{\string~CAMutex}}();}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80 \textcolor{comment}{//  Actions}}
+\DoxyCodeLine{81 \textcolor{keyword}{public}:}
+\DoxyCodeLine{82     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool}    \mbox{\hyperlink{class_c_a_mutex_a1dc2600dd06923eefe648383c020407d}{Lock}}();}
+\DoxyCodeLine{83     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void}    \mbox{\hyperlink{class_c_a_mutex_ae9fa7168c90d8bbce8c14c8f52f07f61}{Unlock}}();}
+\DoxyCodeLine{84     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool}    \mbox{\hyperlink{class_c_a_mutex_aed66c3f45999ba8fa4cfa6bac6ce0b08}{Try}}(\textcolor{keywordtype}{bool}\& outWasLocked); \textcolor{comment}{// returns true if lock is free, false if not}}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool}    \mbox{\hyperlink{class_c_a_mutex_a2b8db82d43a3b283dbb3c338b866fc81}{IsFree}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{87     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool}    \mbox{\hyperlink{class_c_a_mutex_a2899dae1217afa9d8eb2b396f7cd0e4c}{IsOwnedByCurrentThread}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89 \textcolor{comment}{//  Implementation}}
+\DoxyCodeLine{90 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{91     \textcolor{keyword}{const} \textcolor{keywordtype}{char}*     \mbox{\hyperlink{class_c_a_mutex_ab9dfa1aef9769fe06a174d2e0db4f0fc}{mName}};}
+\DoxyCodeLine{92 \textcolor{preprocessor}{\#if TARGET\_OS\_MAC}}
+\DoxyCodeLine{93     pthread\_t       mOwner;}
+\DoxyCodeLine{94     pthread\_mutex\_t mMutex;}
+\DoxyCodeLine{95 \textcolor{preprocessor}{\#elif TARGET\_OS\_WIN32}}
+\DoxyCodeLine{96     UInt32          mOwner;}
+\DoxyCodeLine{97     HANDLE          mMutex;}
+\DoxyCodeLine{98 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100 \textcolor{comment}{//  Helper class to manage taking and releasing recursively}}
+\DoxyCodeLine{101 \textcolor{keyword}{public}:}
+\DoxyCodeLine{102     \textcolor{keyword}{class           }\mbox{\hyperlink{class_c_a_mutex_1_1_locker}{Locker}}}
+\DoxyCodeLine{103     \{}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105     \textcolor{comment}{//  Construction/Destruction}}
+\DoxyCodeLine{106     \textcolor{keyword}{public}:}
+\DoxyCodeLine{107                     \mbox{\hyperlink{class_c_a_mutex_1_1_locker_a0394ed7264deac943839483015a4958b}{Locker}}(\mbox{\hyperlink{class_c_a_mutex}{CAMutex}}\& inMutex) : mMutex(\&inMutex), mNeedsRelease(\mbox{\hyperlink{ordinals_8h_a65e9886d74aaee76545e83dd09011727}{false}}) \{ mNeedsRelease = mMutex-\/>Lock(); \}}
+\DoxyCodeLine{108                     \mbox{\hyperlink{class_c_a_mutex_1_1_locker_a23c0483a3a602688c98274e01e40d8df}{Locker}}(\mbox{\hyperlink{class_c_a_mutex}{CAMutex}}* inMutex) : mMutex(inMutex), mNeedsRelease(\mbox{\hyperlink{ordinals_8h_a65e9886d74aaee76545e83dd09011727}{false}}) \{ mNeedsRelease = (mMutex != NULL \&\& mMutex-\/>Lock()); \}}
+\DoxyCodeLine{109                         \textcolor{comment}{// in this case the mutex can be null}}
+\DoxyCodeLine{110                     \mbox{\hyperlink{class_c_a_mutex_1_1_locker_a3acb1cf031de8cda03c4de242cb9562b}{\string~Locker}}() \{ \textcolor{keywordflow}{if}(mNeedsRelease) \{ mMutex-\/>Unlock(); \} \}}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113     \textcolor{keyword}{private}:}
+\DoxyCodeLine{114                     \mbox{\hyperlink{class_c_a_mutex_1_1_locker_a0394ed7264deac943839483015a4958b}{Locker}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_c_a_mutex_1_1_locker}{Locker}}\&);}
+\DoxyCodeLine{115         \mbox{\hyperlink{class_c_a_mutex_1_1_locker}{Locker}}\&       operator=(\textcolor{keyword}{const} \mbox{\hyperlink{class_c_a_mutex_1_1_locker}{Locker}}\&);}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117     \textcolor{comment}{//  Implementation}}
+\DoxyCodeLine{118     \textcolor{keyword}{private}:}
+\DoxyCodeLine{119         \mbox{\hyperlink{class_c_a_mutex}{CAMutex}}* mMutex;}
+\DoxyCodeLine{120         \textcolor{keywordtype}{bool}        mNeedsRelease;}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{122     \};}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{124 \textcolor{comment}{// Unlocker}}
+\DoxyCodeLine{125     \textcolor{keyword}{class }\mbox{\hyperlink{class_c_a_mutex_1_1_unlocker}{Unlocker}}}
+\DoxyCodeLine{126     \{}
+\DoxyCodeLine{127     \textcolor{keyword}{public}:}
+\DoxyCodeLine{128                         \mbox{\hyperlink{class_c_a_mutex_1_1_unlocker_ad27f135fdd307d430d84cdebd462f3d4}{Unlocker}}(\mbox{\hyperlink{class_c_a_mutex}{CAMutex}}\& inMutex);}
+\DoxyCodeLine{129                         \mbox{\hyperlink{class_c_a_mutex_1_1_unlocker_aeb003cef10c92a2ae61dd4c665bd932f}{\string~Unlocker}}();}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{131     \textcolor{keyword}{private}:}
+\DoxyCodeLine{132         \mbox{\hyperlink{class_c_a_mutex}{CAMutex}}\& mMutex;}
+\DoxyCodeLine{133         \textcolor{keywordtype}{bool}        mNeedsLock;}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135         \textcolor{comment}{// Hidden definitions of copy ctor, assignment operator}}
+\DoxyCodeLine{136         \mbox{\hyperlink{class_c_a_mutex_1_1_unlocker_ad27f135fdd307d430d84cdebd462f3d4}{Unlocker}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_c_a_mutex_1_1_unlocker}{Unlocker}}\& \mbox{\hyperlink{namespace_standard_application_command_i_ds_a994fb4dfda21935c7dfd723144b38778a3584c202667823072c928fd699725466}{copy}});             \textcolor{comment}{// Not implemented}}
+\DoxyCodeLine{137         \mbox{\hyperlink{class_c_a_mutex_1_1_unlocker}{Unlocker}}\& operator=(\textcolor{keyword}{const} \mbox{\hyperlink{class_c_a_mutex_1_1_unlocker}{Unlocker}}\& \mbox{\hyperlink{namespace_standard_application_command_i_ds_a994fb4dfda21935c7dfd723144b38778a3584c202667823072c928fd699725466}{copy}});  \textcolor{comment}{// Not implemented}}
+\DoxyCodeLine{138     \};}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140 \textcolor{comment}{// you can use this with Try -\/ if you take the lock in try, pass in the outWasLocked var}}
+\DoxyCodeLine{141     \textcolor{keyword}{class }\mbox{\hyperlink{class_c_a_mutex_1_1_tryer}{Tryer}} \{}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{143     \textcolor{comment}{//  Construction/Destruction}}
+\DoxyCodeLine{144     \textcolor{keyword}{public}:}
+\DoxyCodeLine{145         \mbox{\hyperlink{class_c_a_mutex_1_1_tryer_ac3cc76ed692cc4905fda6924487cde03}{Tryer}} (\mbox{\hyperlink{class_c_a_mutex}{CAMutex}} \&mutex) : mMutex(mutex), mNeedsRelease(\mbox{\hyperlink{ordinals_8h_a65e9886d74aaee76545e83dd09011727}{false}}), mHasLock(\mbox{\hyperlink{ordinals_8h_a65e9886d74aaee76545e83dd09011727}{false}}) \{ mHasLock = mMutex.Try (mNeedsRelease); \}}
+\DoxyCodeLine{146         \mbox{\hyperlink{class_c_a_mutex_1_1_tryer_a61dbfd419224bb8bb8f57cfa2131bf30}{\string~Tryer}} () \{ \textcolor{keywordflow}{if} (mNeedsRelease) mMutex.Unlock(); \}}
+\DoxyCodeLine{147 }
+\DoxyCodeLine{148         \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_a_mutex_1_1_tryer_a2c1602e2466f2915c3e67d8735829515}{HasLock}} ()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} mHasLock; \}}
+\DoxyCodeLine{149 }
+\DoxyCodeLine{150     \textcolor{keyword}{private}:}
+\DoxyCodeLine{151                     \mbox{\hyperlink{class_c_a_mutex_1_1_tryer_ac3cc76ed692cc4905fda6924487cde03}{Tryer}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_c_a_mutex_1_1_tryer}{Tryer}}\&);}
+\DoxyCodeLine{152         \mbox{\hyperlink{class_c_a_mutex_1_1_tryer}{Tryer}}\&     operator=(\textcolor{keyword}{const} \mbox{\hyperlink{class_c_a_mutex_1_1_tryer}{Tryer}}\&);}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154     \textcolor{comment}{//  Implementation}}
+\DoxyCodeLine{155     \textcolor{keyword}{private}:}
+\DoxyCodeLine{156         \mbox{\hyperlink{class_c_a_mutex}{CAMutex}} \&        mMutex;}
+\DoxyCodeLine{157         \textcolor{keywordtype}{bool}            mNeedsRelease;}
+\DoxyCodeLine{158         \textcolor{keywordtype}{bool}            mHasLock;}
+\DoxyCodeLine{159     \};}
+\DoxyCodeLine{160 \};}
+\DoxyCodeLine{161 }
+\DoxyCodeLine{162 }
+\DoxyCodeLine{163 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// \_\_CAMutex\_h\_\_}}
+
+\end{DoxyCode}

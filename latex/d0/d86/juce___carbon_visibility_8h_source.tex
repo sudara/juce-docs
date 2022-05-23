@@ -1,0 +1,85 @@
+\hypertarget{juce___carbon_visibility_8h_source}{}\doxysection{juce\+\_\+\+Carbon\+Visibility.\+h}
+\label{juce___carbon_visibility_8h_source}\index{build/juce\_audio\_plugin\_client/utility/juce\_CarbonVisibility.h@{build/juce\_audio\_plugin\_client/utility/juce\_CarbonVisibility.h}}
+\mbox{\hyperlink{juce___carbon_visibility_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   By using JUCE, you agree to the terms of both the JUCE 6 End-\/User License}}
+\DoxyCodeLine{15 \textcolor{comment}{   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).}}
+\DoxyCodeLine{16 \textcolor{comment}{}}
+\DoxyCodeLine{17 \textcolor{comment}{   End User License Agreement: www.juce.com/juce-\/6-\/licence}}
+\DoxyCodeLine{18 \textcolor{comment}{   Privacy Policy: www.juce.com/juce-\/privacy-\/policy}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   Or: You may also use this code under the terms of the GPL v3 (see}}
+\DoxyCodeLine{21 \textcolor{comment}{   www.gnu.org/licenses).}}
+\DoxyCodeLine{22 \textcolor{comment}{}}
+\DoxyCodeLine{23 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{24 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{25 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{26 \textcolor{comment}{}}
+\DoxyCodeLine{27 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{28 \textcolor{comment}{*/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#if JUCE\_SUPPORT\_CARBON \&\& JUCE\_MAC\_WINDOW\_VISIBITY\_BODGE}}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 \textcolor{comment}{/* When you wrap a WindowRef as an NSWindow, it seems to bugger up the HideWindow}}
+\DoxyCodeLine{34 \textcolor{comment}{   function, so when the host tries (and fails) to hide the window, this stuff catches}}
+\DoxyCodeLine{35 \textcolor{comment}{   the event and forces it to update.}}
+\DoxyCodeLine{36 \textcolor{comment}{*/}}
+\DoxyCodeLine{37 \textcolor{keyword}{static} pascal OSStatus windowVisibilityBodge (EventHandlerCallRef, EventRef e, \textcolor{keywordtype}{void}* user)}
+\DoxyCodeLine{38 \{}
+\DoxyCodeLine{39     NSWindow* hostWindow = (NSWindow*) user;}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41     \textcolor{keywordflow}{switch} (GetEventKind (e))}
+\DoxyCodeLine{42     \{}
+\DoxyCodeLine{43         \textcolor{keywordflow}{case} kEventWindowInit:    [hostWindow display]; \textcolor{keywordflow}{break};}
+\DoxyCodeLine{44         \textcolor{keywordflow}{case} kEventWindowShown:   [hostWindow orderFront: nil]; \textcolor{keywordflow}{break};}
+\DoxyCodeLine{45         \textcolor{keywordflow}{case} kEventWindowHidden:  [hostWindow orderOut: nil]; \textcolor{keywordflow}{break};}
+\DoxyCodeLine{46     \}}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48     \textcolor{keywordflow}{return} eventNotHandledErr;}
+\DoxyCodeLine{49 \}}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} attachWindowHidingHooks (\mbox{\hyperlink{class_component}{Component}}* comp, \textcolor{keywordtype}{void}* hostWindowRef, NSWindow* nsWindow)}
+\DoxyCodeLine{52 \{}
+\DoxyCodeLine{53     \textcolor{keyword}{const} EventTypeSpec eventsToCatch[] =}
+\DoxyCodeLine{54     \{}
+\DoxyCodeLine{55         \{ kEventClassWindow, kEventWindowInit \},}
+\DoxyCodeLine{56         \{ kEventClassWindow, kEventWindowShown \},}
+\DoxyCodeLine{57         \{ kEventClassWindow, kEventWindowHidden \}}
+\DoxyCodeLine{58     \};}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60     EventHandlerRef \mbox{\hyperlink{namespacegl_a237a6f23fb34c46ca9b58edb5b1d6013}{ref}};}
+\DoxyCodeLine{61     InstallWindowEventHandler ((WindowRef) hostWindowRef,}
+\DoxyCodeLine{62                                NewEventHandlerUPP (windowVisibilityBodge),}
+\DoxyCodeLine{63                                GetEventTypeCount (eventsToCatch), eventsToCatch,}
+\DoxyCodeLine{64                                (\textcolor{keywordtype}{void}*) nsWindow, \&\mbox{\hyperlink{namespacegl_a237a6f23fb34c46ca9b58edb5b1d6013}{ref}});}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66     comp-\/>\mbox{\hyperlink{class_component_a04cd1e6d4f004b98e0079c2a29ea0e0f}{getProperties}}().\mbox{\hyperlink{class_named_value_set_a84ff59604170b019e51bb1342cc87374}{set}} (\textcolor{stringliteral}{"{}carbonEventRef"{}}, \mbox{\hyperlink{class_string_aab501daf0fa0bbba1479218447d1f936}{String::toHexString}} ((\mbox{\hyperlink{group__juce__core-maths_ga004ecd75303f3a1653f937d35a67e41d}{pointer\_sized\_int}}) (\textcolor{keywordtype}{void}*) \mbox{\hyperlink{namespacegl_a237a6f23fb34c46ca9b58edb5b1d6013}{ref}}));}
+\DoxyCodeLine{67 \}}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} removeWindowHidingHooks (\mbox{\hyperlink{class_component}{Component}}* comp)}
+\DoxyCodeLine{70 \{}
+\DoxyCodeLine{71     \textcolor{keywordflow}{if} (comp != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{72         RemoveEventHandler ((EventHandlerRef) (\textcolor{keywordtype}{void}*) (\mbox{\hyperlink{group__juce__core-maths_ga004ecd75303f3a1653f937d35a67e41d}{pointer\_sized\_int}})}
+\DoxyCodeLine{73                               comp-\/>\mbox{\hyperlink{class_component_a04cd1e6d4f004b98e0079c2a29ea0e0f}{getProperties}}() [\textcolor{stringliteral}{"{}carbonEventRef"{}}].toString().getHexValue64());}
+\DoxyCodeLine{74 \}}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76 \textcolor{preprocessor}{\#elif JUCE\_MAC}}
+\DoxyCodeLine{77  \textcolor{keyword}{inline} \textcolor{keywordtype}{void} attachWindowHidingHooks (\textcolor{keywordtype}{void}*, \textcolor{keywordtype}{void}*, \textcolor{keywordtype}{void}*) \{\}}
+\DoxyCodeLine{78  \textcolor{keyword}{inline} \textcolor{keywordtype}{void} removeWindowHidingHooks (\textcolor{keywordtype}{void}*) \{\}}
+\DoxyCodeLine{79 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{82 }
+
+\end{DoxyCode}

@@ -1,0 +1,103 @@
+\hypertarget{juce___u_m_p_iterator_8h_source}{}\doxysection{juce\+\_\+\+UMPIterator.\+h}
+\label{juce___u_m_p_iterator_8h_source}\index{build/juce\_audio\_basics/midi/ump/juce\_UMPIterator.h@{build/juce\_audio\_basics/midi/ump/juce\_UMPIterator.h}}
+\mbox{\hyperlink{juce___u_m_p_iterator_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#ifndef DOXYGEN}}
+\DoxyCodeLine{28 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceuniversal__midi__packets}{universal\_midi\_packets}}}
+\DoxyCodeLine{29 \{}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{40 \textcolor{keyword}{class }\mbox{\hyperlink{classuniversal__midi__packets_1_1_iterator}{Iterator}}}
+\DoxyCodeLine{41 \{}
+\DoxyCodeLine{42 \textcolor{keyword}{public}:}
+\DoxyCodeLine{44     \mbox{\hyperlink{classuniversal__midi__packets_1_1_iterator_a5759e28b2bb184e483c5e49883ccb7a9}{Iterator}}() noexcept = default;}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{47     explicit \mbox{\hyperlink{classuniversal__midi__packets_1_1_iterator}{Iterator}} (\mbox{\hyperlink{zconf_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} uint32\_t* \mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}}, \textcolor{keywordtype}{size\_t} bytes) noexcept}
+\DoxyCodeLine{48         : view (\mbox{\hyperlink{namespacejuce_ae427f5199e2d1a5f8091defa1a86f1fc}{ptr}})}
+\DoxyCodeLine{49        \textcolor{preprocessor}{\#if JUCE\_DEBUG}}
+\DoxyCodeLine{50         , bytesRemaining (bytes)}
+\DoxyCodeLine{51        \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{52     \{}
+\DoxyCodeLine{53         \mbox{\hyperlink{group__juce__core-maths_ga5158e6e8faa5553204f90af596fafaf5}{ignoreUnused}} (bytes);}
+\DoxyCodeLine{54     \}}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56     \textcolor{keyword}{using} \mbox{\hyperlink{classuniversal__midi__packets_1_1_iterator_a4c3d3ccb718a9ac53045fccaa4b0c4df}{difference\_type}}    = std::iterator\_traits<const uint32\_t*>::difference\_type;}
+\DoxyCodeLine{57     \textcolor{keyword}{using} \mbox{\hyperlink{classuniversal__midi__packets_1_1_view}{value\_type}}         = \mbox{\hyperlink{classuniversal__midi__packets_1_1_view}{View}};}
+\DoxyCodeLine{58     \textcolor{keyword}{using} \mbox{\hyperlink{classuniversal__midi__packets_1_1_view}{reference}}          = \textcolor{keyword}{const} \mbox{\hyperlink{classuniversal__midi__packets_1_1_view}{View}}\&;}
+\DoxyCodeLine{59     \textcolor{keyword}{using} \mbox{\hyperlink{classuniversal__midi__packets_1_1_view}{pointer}}            = \textcolor{keyword}{const} \mbox{\hyperlink{classuniversal__midi__packets_1_1_view}{View}}*;}
+\DoxyCodeLine{60     \textcolor{keyword}{using} \mbox{\hyperlink{classuniversal__midi__packets_1_1_iterator_acf617668b0cea16ad76bc552bc56e594}{iterator\_category}}  = std::forward\_iterator\_tag;}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{63     \mbox{\hyperlink{classuniversal__midi__packets_1_1_iterator}{Iterator}}\& \mbox{\hyperlink{classuniversal__midi__packets_1_1_iterator_abf4fdf5e09f90ad6b7c08b19bf34b47b}{operator++}}() noexcept}
+\DoxyCodeLine{64     \{}
+\DoxyCodeLine{65         \textcolor{keyword}{const} \textcolor{keyword}{auto} increment = view.\mbox{\hyperlink{classuniversal__midi__packets_1_1_view_a3a2f852c4d57056eafd03105c5283ef3}{size}}();}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67 \textcolor{preprocessor}{       \#if JUCE\_DEBUG}}
+\DoxyCodeLine{68         \textcolor{comment}{// If you hit this, the memory region contained a truncated or otherwise}}
+\DoxyCodeLine{69         \textcolor{comment}{// malformed Universal MIDI Packet.}}
+\DoxyCodeLine{70         \textcolor{comment}{// The Iterator can only be used on regions containing complete packets!}}
+\DoxyCodeLine{71         \mbox{\hyperlink{group__juce__core-system_ga1f96ab6751237979b907a54f52a7296a}{jassert}} (increment <= bytesRemaining);}
+\DoxyCodeLine{72         bytesRemaining -\/= increment;}
+\DoxyCodeLine{73 \textcolor{preprocessor}{       \#endif}}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75         view = \mbox{\hyperlink{classuniversal__midi__packets_1_1_view}{View}} (view.\mbox{\hyperlink{classuniversal__midi__packets_1_1_view_a6194325c6240fd4a8f3f84731a185493}{data}}() + increment);}
+\DoxyCodeLine{76         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{77     \}}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{83     \mbox{\hyperlink{classuniversal__midi__packets_1_1_iterator}{Iterator}} \mbox{\hyperlink{classuniversal__midi__packets_1_1_iterator_abf4fdf5e09f90ad6b7c08b19bf34b47b}{operator++ }}(\textcolor{keywordtype}{int}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{84     \{}
+\DoxyCodeLine{85         \textcolor{keyword}{auto} \mbox{\hyperlink{namespace_standard_application_command_i_ds_a994fb4dfda21935c7dfd723144b38778a3584c202667823072c928fd699725466}{copy}} = *\textcolor{keyword}{this};}
+\DoxyCodeLine{86         ++(*this);}
+\DoxyCodeLine{87         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespace_standard_application_command_i_ds_a994fb4dfda21935c7dfd723144b38778a3584c202667823072c928fd699725466}{copy}};}
+\DoxyCodeLine{88     \}}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{93     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classuniversal__midi__packets_1_1_iterator_a4a66300b4318a48e8ffa68cd22486755}{operator== }}(\textcolor{keyword}{const} \mbox{\hyperlink{classuniversal__midi__packets_1_1_iterator}{Iterator}}\& other) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{94     \{}
+\DoxyCodeLine{95         \textcolor{keywordflow}{return} view == other.view;}
+\DoxyCodeLine{96     \}}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{101     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classuniversal__midi__packets_1_1_iterator_a42b4441102a6a58b8042d2bcae9d8b95}{operator!= }}(\textcolor{keyword}{const} \mbox{\hyperlink{classuniversal__midi__packets_1_1_iterator}{Iterator}}\& other) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{102     \{}
+\DoxyCodeLine{103         \textcolor{keywordflow}{return} ! \mbox{\hyperlink{classuniversal__midi__packets_1_1_iterator_a4a66300b4318a48e8ffa68cd22486755}{operator== }}(other);}
+\DoxyCodeLine{104     \}}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{111     \mbox{\hyperlink{classuniversal__midi__packets_1_1_view}{reference}} \mbox{\hyperlink{classuniversal__midi__packets_1_1_iterator_a463857c006fecac50c131501ea1e7df1}{operator*}}() noexcept \{ \textcolor{keywordflow}{return} view; \}}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{118     \mbox{\hyperlink{classuniversal__midi__packets_1_1_view}{pointer}} \mbox{\hyperlink{classuniversal__midi__packets_1_1_iterator_a7d8e799e2d508faad0d53f937976a747}{operator-\/>}}() noexcept \{ \textcolor{keywordflow}{return} \&view; \}}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120 \textcolor{keyword}{private}:}
+\DoxyCodeLine{121     \mbox{\hyperlink{classuniversal__midi__packets_1_1_view}{View}} view;}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{123 \textcolor{preprocessor}{   \#if JUCE\_DEBUG}}
+\DoxyCodeLine{124     \textcolor{keywordtype}{size\_t} bytesRemaining = 0;}
+\DoxyCodeLine{125 \textcolor{preprocessor}{   \#endif}}
+\DoxyCodeLine{126 \};}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{128 \}}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{130 }
+\DoxyCodeLine{131 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{132 }
+
+\end{DoxyCode}

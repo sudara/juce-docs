@@ -1,0 +1,143 @@
+\hypertarget{class_file_chooser_dialog_box}{}\doxysection{File\+Chooser\+Dialog\+Box Class Reference}
+\label{class_file_chooser_dialog_box}\index{FileChooserDialogBox@{FileChooserDialogBox}}
+
+
+{\ttfamily \#include $<$juce\+\_\+\+File\+Chooser\+Dialog\+Box.\+h$>$}
+
+Inheritance diagram for File\+Chooser\+Dialog\+Box\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=5.000000cm]{dc/d78/class_file_chooser_dialog_box}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_file_chooser_dialog_box_aec403ffe26c5b7e34b6811cfb063df75}{Colour\+Ids}} \{ \mbox{\hyperlink{class_file_chooser_dialog_box_aec403ffe26c5b7e34b6811cfb063df75acafefa55a6db4bba4a908e5ea63b3a1f}{title\+Text\+Colour\+Id}} = 0x1000850
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_file_chooser_dialog_box_aa5d03550266909c8898495cc4a639219}{File\+Chooser\+Dialog\+Box}} (\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&title, \mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&instructions, \mbox{\hyperlink{class_file_browser_component}{File\+Browser\+Component}} \&browser\+Component, bool warn\+About\+Overwriting\+Existing\+Files, \mbox{\hyperlink{class_colour}{Colour}} background\+Colour, \mbox{\hyperlink{class_component}{Component}} $\ast$parent\+Component=nullptr)
+\item 
+\mbox{\hyperlink{class_file_chooser_dialog_box_a7e0a5748d5446a9f7f604d6597375d5f}{$\sim$\+File\+Chooser\+Dialog\+Box}} () override
+\item 
+\mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} \mbox{\hyperlink{class_file_chooser_dialog_box_adc36f20b224f7fd0d399a83394a83d0f}{centre\+With\+Default\+Size}} (\mbox{\hyperlink{class_component}{Component}} $\ast$component\+To\+Centre\+Around=nullptr)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+A file open/save dialog box.
+
+This is a Juce-\/based file dialog box; to use a native file chooser, see the \mbox{\hyperlink{class_file_chooser}{File\+Chooser}} class.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    wildcardFilter = std::make\_unique<WildcardFileFilter> (\textcolor{stringliteral}{"{}*.foo"{}}, \mbox{\hyperlink{class_string}{String}}(), \textcolor{stringliteral}{"{}Foo files"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{    browser = std::make\_unique<FileBrowserComponent> (\mbox{\hyperlink{class_file_browser_component_a32888a950cc0e51c8e1350f53bea43d6a07878819a9559235bff2789c1fdbd8e9}{FileBrowserComponent::canSelectFiles}},}
+\DoxyCodeLine{                                                      \mbox{\hyperlink{class_file}{File}}(),}
+\DoxyCodeLine{                                                      wildcardFilter.get(),}
+\DoxyCodeLine{                                                      \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{}
+\DoxyCodeLine{    dialogBox = std::make\_unique<FileChooserDialogBox> (\textcolor{stringliteral}{"{}Open some kind of file"{}},}
+\DoxyCodeLine{                                                        \textcolor{stringliteral}{"{}Please choose some kind of file that you want to open..."{}},}
+\DoxyCodeLine{                                                        *browser,}
+\DoxyCodeLine{                                                        \textcolor{keyword}{false},}
+\DoxyCodeLine{                                                        \mbox{\hyperlink{namespace_colours_a47f250277502112af4e9ac55a26d51fc}{Colours::lightgrey}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{auto} onFileSelected = [\textcolor{keyword}{this}] (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}})}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        modalStateFinished (\mbox{\hyperlink{namespacegl_aaa813f59532257ed092c4fad1b443fa5}{r}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{keyword}{auto} selectedFile = browser-\/>getSelectedFile (0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        ...etc...}
+\DoxyCodeLine{    \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{    dialogBox-\/>centreWithDefaultSize (\textcolor{keyword}{nullptr});}
+\DoxyCodeLine{    dialogBox-\/>enterModalState (\textcolor{keyword}{true},}
+\DoxyCodeLine{                                \mbox{\hyperlink{class_modal_callback_function_a628dd5f75f470b04b62e121196ffb4d9}{ModalCallbackFunction::create}} (onFileSelected),}
+\DoxyCodeLine{                                \textcolor{keyword}{true});}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_file_chooser}{File\+Chooser}}
+\end{DoxySeeAlso}
+@tags\{GUI\} 
+
+\doxysubsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{class_file_chooser_dialog_box_aec403ffe26c5b7e34b6811cfb063df75}\label{class_file_chooser_dialog_box_aec403ffe26c5b7e34b6811cfb063df75}} 
+\index{FileChooserDialogBox@{FileChooserDialogBox}!ColourIds@{ColourIds}}
+\index{ColourIds@{ColourIds}!FileChooserDialogBox@{FileChooserDialogBox}}
+\doxysubsubsection{\texorpdfstring{ColourIds}{ColourIds}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{class_file_chooser_dialog_box_aec403ffe26c5b7e34b6811cfb063df75}{File\+Chooser\+Dialog\+Box\+::\+Colour\+Ids}}}
+
+A set of colour IDs to use to change the colour of various aspects of the box.
+
+These constants can be used either via the \mbox{\hyperlink{class_component_aad68f45fb458d0cac645c0910193142d}{Component\+::set\+Colour()}}, or \mbox{\hyperlink{class_look_and_feel_a167a1e914771f32e433a0d45aaba45e3}{Look\+And\+Feel\+::set\+Colour()}} methods.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_component_aad68f45fb458d0cac645c0910193142d}{Component\+::set\+Colour}}, \mbox{\hyperlink{class_component_a743504b7a85b697404bf9aab17324265}{Component\+::find\+Colour}}, \mbox{\hyperlink{class_look_and_feel_a167a1e914771f32e433a0d45aaba45e3}{Look\+And\+Feel\+::set\+Colour}}, \mbox{\hyperlink{class_look_and_feel_aa7f9faa480c9ec9d61b66672425f380b}{Look\+And\+Feel\+::find\+Colour}} 
+\end{DoxySeeAlso}
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{titleTextColourId@{titleTextColourId}!FileChooserDialogBox@{FileChooserDialogBox}}\index{FileChooserDialogBox@{FileChooserDialogBox}!titleTextColourId@{titleTextColourId}}}\mbox{\Hypertarget{class_file_chooser_dialog_box_aec403ffe26c5b7e34b6811cfb063df75acafefa55a6db4bba4a908e5ea63b3a1f}\label{class_file_chooser_dialog_box_aec403ffe26c5b7e34b6811cfb063df75acafefa55a6db4bba4a908e5ea63b3a1f}} 
+title\+Text\+Colour\+Id&The colour to use to draw the box\textquotesingle{}s title. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_file_chooser_dialog_box_aa5d03550266909c8898495cc4a639219}\label{class_file_chooser_dialog_box_aa5d03550266909c8898495cc4a639219}} 
+\index{FileChooserDialogBox@{FileChooserDialogBox}!FileChooserDialogBox@{FileChooserDialogBox}}
+\index{FileChooserDialogBox@{FileChooserDialogBox}!FileChooserDialogBox@{FileChooserDialogBox}}
+\doxysubsubsection{\texorpdfstring{FileChooserDialogBox()}{FileChooserDialogBox()}}
+{\footnotesize\ttfamily File\+Chooser\+Dialog\+Box\+::\+File\+Chooser\+Dialog\+Box (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&}]{title,  }\item[{\mbox{\hyperlink{zconf_8in_8h_a2c212835823e3c54a8ab6d95c652660e}{const}} \mbox{\hyperlink{class_string}{String}} \&}]{instructions,  }\item[{\mbox{\hyperlink{class_file_browser_component}{File\+Browser\+Component}} \&}]{browser\+Component,  }\item[{bool}]{warn\+About\+Overwriting\+Existing\+Files,  }\item[{\mbox{\hyperlink{class_colour}{Colour}}}]{background\+Colour,  }\item[{\mbox{\hyperlink{class_component}{Component}} $\ast$}]{parent\+Component = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+Creates a file chooser box.
+
+
+\begin{DoxyParams}{Parameters}
+{\em title} & the main title to show at the top of the box \\
+\hline
+{\em instructions} & an optional longer piece of text to show below the title in a smaller font, describing in more detail what\textquotesingle{}s required. \\
+\hline
+{\em browser\+Component} & a \mbox{\hyperlink{class_file_browser_component}{File\+Browser\+Component}} that will be shown inside this dialog box. Make sure you delete this after (but not before!) the dialog box has been deleted. \\
+\hline
+{\em warn\+About\+Overwriting\+Existing\+Files} & if true, then the user will be asked to confirm if they try to select a file that already exists. (This flag is only used when saving files) \\
+\hline
+{\em background\+Colour} & the background colour for the top level window \\
+\hline
+{\em parent\+Component} & an optional component which should be the parent for the file chooser. If this is a nullptr then the dialog box will be a top-\/level window. AUv3s on i\+OS must specify this parameter as opening a top-\/level window in an AUv3 is forbidden due to sandbox restrictions.\\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_file_browser_component}{File\+Browser\+Component}}, \mbox{\hyperlink{class_file_preview_component}{File\+Preview\+Component}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{class_file_chooser_dialog_box_a7e0a5748d5446a9f7f604d6597375d5f}\label{class_file_chooser_dialog_box_a7e0a5748d5446a9f7f604d6597375d5f}} 
+\index{FileChooserDialogBox@{FileChooserDialogBox}!````~FileChooserDialogBox@{$\sim$FileChooserDialogBox}}
+\index{````~FileChooserDialogBox@{$\sim$FileChooserDialogBox}!FileChooserDialogBox@{FileChooserDialogBox}}
+\doxysubsubsection{\texorpdfstring{$\sim$FileChooserDialogBox()}{~FileChooserDialogBox()}}
+{\footnotesize\ttfamily File\+Chooser\+Dialog\+Box\+::$\sim$\+File\+Chooser\+Dialog\+Box (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+Destructor. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_file_chooser_dialog_box_adc36f20b224f7fd0d399a83394a83d0f}\label{class_file_chooser_dialog_box_adc36f20b224f7fd0d399a83394a83d0f}} 
+\index{FileChooserDialogBox@{FileChooserDialogBox}!centreWithDefaultSize@{centreWithDefaultSize}}
+\index{centreWithDefaultSize@{centreWithDefaultSize}!FileChooserDialogBox@{FileChooserDialogBox}}
+\doxysubsubsection{\texorpdfstring{centreWithDefaultSize()}{centreWithDefaultSize()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{png_8h_aa8c59027f9ab2769342f248709d68d17}{void}} File\+Chooser\+Dialog\+Box\+::centre\+With\+Default\+Size (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_component}{Component}} $\ast$}]{component\+To\+Centre\+Around = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+Sets the size of this dialog box to its default and positions it either in the centre of the screen, or centred around a component that is provided. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/juce\+\_\+gui\+\_\+basics/filebrowser/\mbox{\hyperlink{juce___file_chooser_dialog_box_8h}{juce\+\_\+\+File\+Chooser\+Dialog\+Box.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,51 @@
+\hypertarget{juce___container_delete_policy_8h_source}{}\doxysection{juce\+\_\+\+Container\+Delete\+Policy.\+h}
+\label{juce___container_delete_policy_8h_source}\index{build/juce\_core/memory/juce\_ContainerDeletePolicy.h@{build/juce\_core/memory/juce\_ContainerDeletePolicy.h}}
+\mbox{\hyperlink{juce___container_delete_policy_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{5 \textcolor{comment}{/*}}
+\DoxyCodeLine{6 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{   This file is part of the JUCE library.}}
+\DoxyCodeLine{9 \textcolor{comment}{   Copyright (c) 2020 -\/ Raw Material Software Limited}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{   JUCE is an open source library subject to commercial or open-\/source}}
+\DoxyCodeLine{12 \textcolor{comment}{   licensing.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{   The code included in this file is provided under the terms of the ISC license}}
+\DoxyCodeLine{15 \textcolor{comment}{   http://www.isc.org/downloads/software-\/support-\/policy/isc-\/license. Permission}}
+\DoxyCodeLine{16 \textcolor{comment}{   To use, copy, modify, and/or distribute this software for any purpose with or}}
+\DoxyCodeLine{17 \textcolor{comment}{   without fee is hereby granted provided that the above copyright notice and}}
+\DoxyCodeLine{18 \textcolor{comment}{   this permission notice appear in all copies.}}
+\DoxyCodeLine{19 \textcolor{comment}{}}
+\DoxyCodeLine{20 \textcolor{comment}{   JUCE IS PROVIDED "{}AS IS"{} WITHOUT ANY WARRANTY, AND ALL WARRANTIES, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{   EXPRESSED OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR PURPOSE, ARE}}
+\DoxyCodeLine{22 \textcolor{comment}{   DISCLAIMED.}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{24 \textcolor{comment}{  ==============================================================================}}
+\DoxyCodeLine{25 \textcolor{comment}{*/}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{40 \textcolor{comment}{}\textcolor{keyword}{template} <\textcolor{keyword}{typename} ObjectType>}
+\DoxyCodeLine{41 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_container_delete_policy}{ContainerDeletePolicy}}}
+\DoxyCodeLine{42 \{}
+\DoxyCodeLine{43     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_container_delete_policy_adff767e9533d0e7bdd8bc914d21eb01a}{destroy}} (ObjectType* \textcolor{keywordtype}{object})}
+\DoxyCodeLine{44     \{}
+\DoxyCodeLine{45         \textcolor{comment}{// If the line below triggers a compiler error, it means that you are using}}
+\DoxyCodeLine{46         \textcolor{comment}{// an incomplete type for ObjectType (for example, a type that is declared}}
+\DoxyCodeLine{47         \textcolor{comment}{// but not defined). This is a problem because then the following delete is}}
+\DoxyCodeLine{48         \textcolor{comment}{// undefined behaviour. The purpose of the sizeof is to capture this situation.}}
+\DoxyCodeLine{49         \textcolor{comment}{// If this was caused by a OwnedArray of a forward-\/declared type, move the}}
+\DoxyCodeLine{50         \textcolor{comment}{// implementation of all methods trying to use the OwnedArray (e.g. the destructor}}
+\DoxyCodeLine{51         \textcolor{comment}{// of the class owning it) into cpp files where they can see to the definition}}
+\DoxyCodeLine{52         \textcolor{comment}{// of ObjectType. This should fix the error.}}
+\DoxyCodeLine{53         \mbox{\hyperlink{group__juce__core-maths_ga5158e6e8faa5553204f90af596fafaf5}{ignoreUnused}} (\textcolor{keyword}{sizeof} (ObjectType));}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55         \textcolor{keyword}{delete} \mbox{\hyperlink{jmemsys_8h_a77e1d3f325098324c3925e8faf6ae5cf}{object}};}
+\DoxyCodeLine{56     \}}
+\DoxyCodeLine{57 \};}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59  \textcolor{comment}{// namespace juce}}
+\DoxyCodeLine{60 }
+
+\end{DoxyCode}
