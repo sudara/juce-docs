@@ -240,7 +240,7 @@ var searchData=
   ['juce_5fhwndcomponent_2eh_237',['juce_HWNDComponent.h',['../dc/d86/juce___h_w_n_d_component_8h.html',1,'']]],
   ['juce_5fhyperlinkbutton_2eh_238',['juce_HyperlinkButton.h',['../d1/d4e/juce___hyperlink_button_8h.html',1,'']]],
   ['juce_5fidentifier_2eh_239',['juce_Identifier.h',['../d4/d62/juce___identifier_8h.html',1,'']]],
-  ['juce_5fiirfilter_2eh_240',['juce_IIRFilter.h',['../d2/d97/juce__dsp_2processors_2juce___i_i_r_filter_8h.html',1,'(Global Namespace)'],['../dc/d2d/juce__audio__basics_2utilities_2juce___i_i_r_filter_8h.html',1,'(Global Namespace)']]],
+  ['juce_5fiirfilter_2eh_240',['juce_IIRFilter.h',['../dc/d2d/juce__audio__basics_2utilities_2juce___i_i_r_filter_8h.html',1,'(Global Namespace)'],['../d2/d97/juce__dsp_2processors_2juce___i_i_r_filter_8h.html',1,'(Global Namespace)']]],
   ['juce_5fiirfilter_5fimpl_2eh_241',['juce_IIRFilter_Impl.h',['../d9/d48/juce___i_i_r_filter___impl_8h.html',1,'']]],
   ['juce_5fiirfilteraudiosource_2eh_242',['juce_IIRFilterAudioSource.h',['../d0/d8b/juce___i_i_r_filter_audio_source_8h.html',1,'']]],
   ['juce_5fimage_2eh_243',['juce_Image.h',['../d6/d3d/juce___image_8h.html',1,'']]],
